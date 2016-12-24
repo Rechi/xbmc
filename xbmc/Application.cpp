@@ -2946,12 +2946,8 @@ void CApplication::Stop(int exitCode)
     StopServices();
 
 #ifdef HAS_ZEROCONF
-    if(CZeroconfBrowser::IsInstantiated())
-    {
-      CLog::Log(LOGNOTICE, "stop zeroconf browser");
-      CZeroconfBrowser::GetInstance()->Stop();
-      CZeroconfBrowser::ReleaseInstance();
-    }
+    CLog::Log(LOGNOTICE, "stop zeroconf browser");
+    CZeroconfBrowser::GetInstance()->Stop();
 #endif
 
     CLog::Log(LOGNOTICE, "clean cached files!");
