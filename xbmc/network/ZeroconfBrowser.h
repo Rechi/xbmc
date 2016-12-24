@@ -26,12 +26,11 @@
 #include <vector>
 #include <map>
 
+#include "threads/CriticalSection.h"
+
 #ifdef TARGET_WINDOWS
 #undef SetPort // WIN32INCLUDES this is defined as SetPortA in WinSpool.h which is being included _somewhere_
 #endif
-
-//forwards
-class CCriticalSection;
 
 /// this class provides support for zeroconf browsing
 class CZeroconfBrowser
@@ -121,10 +120,6 @@ public:
   // if zeroconf is disabled (!HAS_ZEROCONF), this will return a dummy implementation that
   // just does nothings, otherwise the platform specific one
   static CZeroconfBrowser* GetInstance();
-  // release the singleton; (save to call multiple times)
-  static void ReleaseInstance();
-  // returns false if ReleaseInstance() was called befores
-  static bool IsInstantiated() { return  smp_instance != 0; }
 
   virtual void ProcessResults() {}
 
@@ -159,14 +154,11 @@ private:
   };
 
   //protects data
-  CCriticalSection* mp_crit_sec;
+  CCriticalSection mp_crit_sec;
   typedef std::set<std::string> tServices;
   tServices m_services;
   bool m_started;
 
-  //protects singleton creation/destruction
-  static std::atomic_flag sm_singleton_guard;
-  static CZeroconfBrowser* smp_instance;
 };
 #include <iostream>
 

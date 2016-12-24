@@ -32,9 +32,7 @@
 #include "mdns/ZeroconfBrowserMDNS.h"
 #endif
 
-#include "threads/CriticalSection.h"
 #include "threads/SingleLock.h"
-#include "threads/Atomics.h"
 
 #if !defined(HAS_ZEROCONF)
 //dummy implementation used if no zeroconf is present
@@ -48,10 +46,8 @@ class CZeroconfBrowserDummy : public CZeroconfBrowser
 };
 #endif
 
-std::atomic_flag CZeroconfBrowser::sm_singleton_guard = ATOMIC_FLAG_INIT;
-CZeroconfBrowser* CZeroconfBrowser::smp_instance = 0;
-
-CZeroconfBrowser::CZeroconfBrowser():mp_crit_sec(new CCriticalSection),m_started(false)
+CZeroconfBrowser::CZeroconfBrowser()
+  : m_started(false)
 {
 #ifdef HAS_FILESYSTEM_SMB
   AddServiceType("_smb._tcp.");
@@ -64,14 +60,9 @@ CZeroconfBrowser::CZeroconfBrowser():mp_crit_sec(new CCriticalSection),m_started
   AddServiceType("_sftp-ssh._tcp.");
 }
 
-CZeroconfBrowser::~CZeroconfBrowser()
-{
-  delete mp_crit_sec;
-}
-
 void CZeroconfBrowser::Start()
 {
-  CSingleLock lock(*mp_crit_sec);
+  CSingleLock lock(mp_crit_sec);
   if(m_started)
     return;
   m_started = true;
@@ -81,7 +72,7 @@ void CZeroconfBrowser::Start()
 
 void CZeroconfBrowser::Stop()
 {
-  CSingleLock lock(*mp_crit_sec);
+  CSingleLock lock(mp_crit_sec);
   if(!m_started)
     return;
   for(tServices::iterator it = m_services.begin(); it != m_services.end(); ++it)
@@ -91,7 +82,7 @@ void CZeroconfBrowser::Stop()
 
 bool CZeroconfBrowser::AddServiceType(const std::string& fcr_service_type /*const std::string& domain*/ )
 {
-  CSingleLock lock(*mp_crit_sec);
+  CSingleLock lock(mp_crit_sec);
   std::pair<tServices::iterator, bool> ret = m_services.insert(fcr_service_type);
   if(!ret.second)
   {
@@ -106,7 +97,7 @@ bool CZeroconfBrowser::AddServiceType(const std::string& fcr_service_type /*cons
 
 bool CZeroconfBrowser::RemoveServiceType(const std::string& fcr_service_type)
 {
-  CSingleLock lock(*mp_crit_sec);
+  CSingleLock lock(mp_crit_sec);
   tServices::iterator ret = m_services.find(fcr_service_type);
   if(ret == m_services.end())
     return false;
@@ -118,7 +109,7 @@ bool CZeroconfBrowser::RemoveServiceType(const std::string& fcr_service_type)
 
 std::vector<CZeroconfBrowser::ZeroconfService> CZeroconfBrowser::GetFoundServices()
 {
-  CSingleLock lock(*mp_crit_sec);
+  CSingleLock lock(mp_crit_sec);
   if(m_started)
     return doGetFoundServices();
   else
@@ -130,7 +121,7 @@ std::vector<CZeroconfBrowser::ZeroconfService> CZeroconfBrowser::GetFoundService
 
 bool CZeroconfBrowser::ResolveService(ZeroconfService& fr_service, double f_timeout)
 {
-  CSingleLock lock(*mp_crit_sec);
+  CSingleLock lock(mp_crit_sec);
   if(m_started)
   {
     return doResolveService(fr_service, f_timeout);
@@ -141,38 +132,25 @@ bool CZeroconfBrowser::ResolveService(ZeroconfService& fr_service, double f_time
 
 CZeroconfBrowser*  CZeroconfBrowser::GetInstance()
 {
-  if(!smp_instance)
-  {
-    //use double checked locking
-    CAtomicSpinLock lock(sm_singleton_guard);
-    if(!smp_instance)
-    {
-#if !defined(HAS_ZEROCONF)
-      smp_instance = new CZeroconfBrowserDummy;
+#ifndef HAS_ZEROCONF
+  static CZeroconfBrowserDummy smp_instance;
 #else
 #if defined(TARGET_DARWIN)
-      smp_instance = new CZeroconfBrowserOSX;
+  static CZeroconfBrowserOSX smp_instance;
 #elif defined(HAS_AVAHI)
-      smp_instance  = new CZeroconfBrowserAvahi;
+  static CZeroconfBrowserAvahi smp_instance;
 #elif defined(HAS_MDNS)
-      smp_instance  = new CZeroconfBrowserMDNS;
+  static CZeroconfBrowserMDNS smp_instance;
 #endif
 #endif
-    }
-  }
-  assert(smp_instance);
-  return smp_instance;
+
+  return &smp_instance;
 }
 
-void CZeroconfBrowser::ReleaseInstance()
+CZeroconfBrowser::ZeroconfService::ZeroconfService()
+  : m_port(0)
 {
-  CAtomicSpinLock lock(sm_singleton_guard);
-  delete smp_instance;
-  smp_instance = 0;
 }
-
-
-CZeroconfBrowser::ZeroconfService::ZeroconfService():m_port(0){}
 
 CZeroconfBrowser::ZeroconfService::ZeroconfService(const std::string& fcr_name, const std::string& fcr_type, const std::string& fcr_domain):
   m_name(fcr_name),

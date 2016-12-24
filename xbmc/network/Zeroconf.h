@@ -26,9 +26,9 @@
 #include <utility>
 #include <vector>
 
+#include "threads/CriticalSection.h"
 #include "utils/Job.h"
 
-class CCriticalSection;
 /// this class provides support for zeroconf
 /// while the different zeroconf implementations have asynchronous APIs
 /// this class hides it and provides only few ways to interact
@@ -84,10 +84,6 @@ public:
   // if zeroconf is disabled (!HAS_ZEROCONF), this will return a dummy implementation that
   // just does nothings, otherwise the platform specific one
   static CZeroconf* GetInstance();
-  // release the singleton; (save to call multiple times)
-  static void   ReleaseInstance();
-  // returns false if ReleaseInstance() was called befores
-  static bool   IsInstantiated() { return  smp_instance != 0; }
   // win32: process results from the bonjour daemon
   virtual void  ProcessResults() {}
   // returns if the service is started and services are announced
@@ -130,14 +126,10 @@ private:
   };
 
   //protects data
-  CCriticalSection* mp_crit_sec;
+  CCriticalSection mp_crit_sec;
   typedef std::map<std::string, PublishInfo> tServiceMap;
   tServiceMap m_service_map;
   bool m_started;
-
-  //protects singleton creation/destruction
-  static std::atomic_flag sm_singleton_guard;
-  static CZeroconf* smp_instance;
 
   class CPublish : public CJob
   {
