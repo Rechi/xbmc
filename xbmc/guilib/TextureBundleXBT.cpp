@@ -26,8 +26,10 @@
 #ifdef TARGET_WINDOWS_DESKTOP
 #ifdef NDEBUG
 #pragma comment(lib,"lzo2.lib")
-#else
+#elif defined _WIN64
 #pragma comment(lib, "lzo2d.lib")
+#else
+#pragma comment(lib, "lzo2-no_idb.lib")
 #endif
 #endif
 

@@ -16,9 +16,15 @@
 find_path(GIF_INCLUDE_DIR gif_lib.h)
 
 include(FindPackageHandleStandardArgs)
-find_library(GIF_LIBRARY NAMES gif)
-find_package_handle_standard_args(GIF
-                                  REQUIRED_VARS GIF_LIBRARY GIF_INCLUDE_DIR)
+if(NOT WIN32)
+  find_library(GIF_LIBRARY NAMES gif)
+  find_package_handle_standard_args(GIF
+                                    REQUIRED_VARS GIF_LIBRARY GIF_INCLUDE_DIR)
+else()
+  # Dynamically loaded DLL
+  find_package_handle_standard_args(GIF
+                                    REQUIRED_VARS GIF_INCLUDE_DIR)
+endif()
 
 if(GIF_FOUND)
   set(GIF_LIBRARIES ${GIF_LIBRARY})
