@@ -13,7 +13,7 @@ DEPENDS = \
 	python3 libshairplay libfmt \
 	libplist libcec libbluray tinyxml \
 	taglib libusb libnfs \
-	pythonmodule-pil pythonmodule-pycryptodome pythonmodule-setuptools \
+	pythonmodule-pil pythonmodule-pycryptodome \
 	libxslt ffmpeg crossguid \
 	libdvdread libdvdnav libdvdcss p8-platform flatbuffers
 
@@ -103,9 +103,8 @@ libpng: $(ZLIB)
 openssl: $(ZLIB)
 gnutls: nettle $(ZLIB)
 nettle: gmp
-pythonmodule-pycryptodome: $(PYMODULE_DEPS) python3 pythonmodule-setuptools
-pythonmodule-pil: bzip2 $(PYMODULE_DEPS) $(ZLIB) libjpeg-turbo libpng freetype2 python3 pythonmodule-setuptools
-pythonmodule-setuptools: $(PYMODULE_DEPS) python3
+pythonmodule-pycryptodome: $(PYMODULE_DEPS) python3
+pythonmodule-pil: bzip2 $(PYMODULE_DEPS) $(ZLIB) libjpeg-turbo libpng freetype2 python3
 libxslt: libgcrypt libxml2
 ffmpeg: $(ICONV) $(ZLIB) bzip2 $(FFMPEG_DEPENDS)
 libcec: p8-platform
