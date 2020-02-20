@@ -3,13 +3,13 @@ DEPS= ../../Makefile.include Makefile
 
 # lib name, version
 LIBNAME=libass
-VERSION=0.13.4
+VERSION=0.14.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
-          ./configure --prefix=$(PREFIX) --disable-enca
+          ./configure --prefix=$(PREFIX) --disable-shared
 
 LIBDYLIB=$(PLATFORM)/$(LIBNAME)/.libs/$(LIBNAME).a
 
@@ -37,4 +37,3 @@ clean:
 
 distclean::
 	rm -rf $(PLATFORM) .installed-$(PLATFORM)
-
