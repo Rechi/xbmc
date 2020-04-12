@@ -23,6 +23,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+
 #include <sys/types.h>
 #ifdef _WIN32
 #include <winsock.h>
@@ -32,10 +33,10 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #endif
-#include <vector>
-#include <iostream>
-#include <fstream>
 #include <ctime>
+#include <fstream>
+#include <iostream>
+#include <vector>
 
 #define STD_PORT       9777
 

@@ -9,14 +9,14 @@
 #pragma once
 
 #include "cores/AudioEngine/Interfaces/AESink.h"
-#include "cores/AudioEngine/Utils/AEDeviceInfo.h"
 #include "cores/AudioEngine/Sinks/alsa/ALSADeviceMonitor.h"
 #include "cores/AudioEngine/Sinks/alsa/ALSAHControlMonitor.h"
+#include "cores/AudioEngine/Utils/AEDeviceInfo.h"
+#include "threads/CriticalSection.h"
+
 #include <cstdint>
 
 #include <alsa/asoundlib.h>
-
-#include "threads/CriticalSection.h"
 
 // ARGH... this is apparently needed to avoid FDEventMonitor
 // being destructed before CALSA*Monitor below.

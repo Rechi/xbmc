@@ -8,13 +8,13 @@
 
 #pragma once
 
-#include <string>
-#include <cstdint>
-#include <vector>
-
-#include "utils/auto_buffer.h"
 #include "utils/Color.h"
 #include "utils/Geometry.h"
+#include "utils/auto_buffer.h"
+
+#include <cstdint>
+#include <string>
+#include <vector>
 
 #ifdef HAS_DX
 #include <DirectXMath.h>

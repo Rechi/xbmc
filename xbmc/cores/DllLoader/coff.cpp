@@ -6,10 +6,12 @@
  *  See LICENSES/README.md for more information.
  */
 
+#include "coff.h"
+
+#include "coffldr.h"
+
 #include <cstdlib>
 #include <cstring>
-#include "coff.h"
-#include "coffldr.h"
 
 //#define DUMPING_DATA 1
 

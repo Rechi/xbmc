@@ -13,8 +13,8 @@
 
 #include "dxerr.h"
 
-#include <cstdio>
 #include <algorithm>
+#include <cstdio>
 
 #if !defined(WINAPI_FAMILY) || (WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
 #include <ddraw.h>

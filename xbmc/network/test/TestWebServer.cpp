@@ -10,17 +10,13 @@
 #  include <windows.h>
 #endif
 
-#include <cerrno>
-#include <cstdlib>
-
-#include <gtest/gtest.h>
 #include "URL.h"
 #include "filesystem/CurlFile.h"
 #include "filesystem/File.h"
 #include "interfaces/json-rpc/JSONRPC.h"
 #include "network/WebServer.h"
-#include "network/httprequesthandler/HTTPVfsHandler.h"
 #include "network/httprequesthandler/HTTPJsonRpcHandler.h"
+#include "network/httprequesthandler/HTTPVfsHandler.h"
 #include "settings/MediaSourceSettings.h"
 #include "test/TestUtils.h"
 #include "utils/JSONVariantParser.h"
@@ -28,7 +24,11 @@
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
 
+#include <cerrno>
+#include <cstdlib>
 #include <random>
+
+#include <gtest/gtest.h>
 
 using namespace XFILE;
 

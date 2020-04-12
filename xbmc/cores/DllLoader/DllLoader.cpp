@@ -6,16 +6,17 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <cstdlib>
-#include <algorithm>
-
 #include "DllLoader.h"
+
 #include "DllLoaderContainer.h"
-#include "filesystem/SpecialProtocol.h"
 #include "dll_tracker.h"
 #include "dll_util.h"
-#include <limits>
+#include "filesystem/SpecialProtocol.h"
 #include "utils/log.h"
+
+#include <algorithm>
+#include <cstdlib>
+#include <limits>
 
 #ifdef TARGET_WINDOWS
 extern "C" FILE *fopen_utf8(const char *_Filename, const char *_Mode);

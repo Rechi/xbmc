@@ -7,8 +7,10 @@
  */
 
 #include "PosixInterfaceForCLog.h"
+
 #include <cstdio>
 #include <ctime>
+
 #include <sys/time.h>
 
 #if defined(TARGET_DARWIN)

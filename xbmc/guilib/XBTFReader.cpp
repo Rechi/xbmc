@@ -6,14 +6,16 @@
  *  See LICENSES/README.md for more information.
  */
 
+#include "XBTFReader.h"
+
+#include "guilib/XBTF.h"
+#include "utils/EndianSwap.h"
+
 #include <cinttypes>
 #include <cstdio>
 #include <cstring>
-#include <sys/stat.h>
 
-#include "XBTFReader.h"
-#include "guilib/XBTF.h"
-#include "utils/EndianSwap.h"
+#include <sys/stat.h>
 
 #ifdef TARGET_WINDOWS
 #include "filesystem/SpecialProtocol.h"

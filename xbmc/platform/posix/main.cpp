@@ -7,9 +7,9 @@
  */
 
 #include <csignal>
-#include <sys/resource.h>
-
 #include <cstring>
+
+#include <sys/resource.h>
 
 #if defined(TARGET_DARWIN_OSX) || defined(TARGET_FREEBSD)
   #include "Util.h"

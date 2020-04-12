@@ -8,34 +8,34 @@
 
 #include "DisplaySettings.h"
 
-#include <cstdlib>
-#include <cfloat>
-#include <algorithm>
-#include <string>
-#include <utility>
-#include <vector>
-
 #include "ServiceBroker.h"
 #include "cores/VideoPlayer/VideoRenderers/ColorManager.h"
 #include "dialogs/GUIDialogFileBrowser.h"
-#include "windowing/GraphicContext.h"
 #include "guilib/GUIComponent.h"
 #include "guilib/LocalizeStrings.h"
 #include "guilib/StereoscopicsManager.h"
 #include "messaging/helpers/DialogHelper.h"
+#include "rendering/RenderSystem.h"
 #include "settings/AdvancedSettings.h"
-#include "settings/lib/Setting.h"
-#include "settings/lib/SettingDefinitions.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
+#include "settings/lib/Setting.h"
+#include "settings/lib/SettingDefinitions.h"
 #include "storage/MediaManager.h"
 #include "threads/SingleLock.h"
-#include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
 #include "utils/XMLUtils.h"
-#include "rendering/RenderSystem.h"
+#include "utils/log.h"
+#include "windowing/GraphicContext.h"
 #include "windowing/WinSystem.h"
+
+#include <algorithm>
+#include <cfloat>
+#include <cstdlib>
+#include <string>
+#include <utility>
+#include <vector>
 
 #if defined(HAVE_X11)
 #define WIN_SYSTEM_CLASS CWinSystemX11

@@ -7,10 +7,12 @@
  */
 
 #include "dll_tracker_file.h"
-#include "dll_tracker.h"
+
 #include "DllLoader.h"
+#include "dll_tracker.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"
+
 #include <cstdlib>
 
 #ifdef TARGET_POSIX

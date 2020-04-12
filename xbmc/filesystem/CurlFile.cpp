@@ -8,8 +8,10 @@
 
 #include "CurlFile.h"
 
+#include "DllLibCurl.h"
 #include "File.h"
 #include "ServiceBroker.h"
+#include "ShoutcastFile.h"
 #include "URL.h"
 #include "Util.h"
 #include "settings/AdvancedSettings.h"
@@ -17,24 +19,24 @@
 #include "settings/SettingsComponent.h"
 #include "threads/SystemClock.h"
 #include "utils/Base64.h"
+#include "utils/CharsetConverter.h"
+#include "utils/StringUtils.h"
 #include "utils/XTimeUtils.h"
+#include "utils/log.h"
+
+#ifdef TARGET_POSIX
+#include "platform/posix/ConvUtils.h"
+#include "platform/posix/XFileUtils.h"
+#endif
 
 #include <algorithm>
 #include <cassert>
-#include <climits>
-#include <vector>
-
-#ifdef TARGET_POSIX
+#if defined(TARGET_POSIX)
 #include <cerrno>
 #include <cinttypes>
-#include "platform/posix/ConvUtils.h"
 #endif
-
-#include "DllLibCurl.h"
-#include "ShoutcastFile.h"
-#include "utils/CharsetConverter.h"
-#include "utils/log.h"
-#include "utils/StringUtils.h"
+#include <climits>
+#include <vector>
 
 using namespace XFILE;
 using namespace XCURL;

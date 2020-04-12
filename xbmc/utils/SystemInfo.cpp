@@ -6,10 +6,11 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <climits>
+#include "SystemInfo.h"
 
 #include "threads/SystemClock.h"
-#include "SystemInfo.h"
+
+#include <climits>
 #ifndef TARGET_POSIX
 #include <conio.h>
 #else

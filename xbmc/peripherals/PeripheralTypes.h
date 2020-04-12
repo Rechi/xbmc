@@ -9,10 +9,10 @@
 #pragma once
 
 #include <algorithm>
+#include <cstdio>
 #include <map>
 #include <memory>
 #include <string>
-#include <cstdio>
 #include <vector>
 #ifdef TARGET_WINDOWS
 #include "PlatformDefs.h"

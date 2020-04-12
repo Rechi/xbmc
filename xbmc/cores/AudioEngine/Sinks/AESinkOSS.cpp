@@ -7,18 +7,19 @@
  */
 
 #include "AESinkOSS.h"
-#include <cstdint>
-#include <climits>
-#include <unistd.h>
 
 #include "cores/AudioEngine/AESinkFactory.h"
 #include "cores/AudioEngine/Utils/AEUtil.h"
-#include "utils/log.h"
 #include "threads/SingleLock.h"
+#include "utils/log.h"
+
+#include <climits>
+#include <cstdint>
 #include <sstream>
 
-#include <sys/ioctl.h>
 #include <sys/fcntl.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
 
 #if defined(OSS4) || defined(TARGET_FREEBSD)
   #include <sys/soundcard.h>

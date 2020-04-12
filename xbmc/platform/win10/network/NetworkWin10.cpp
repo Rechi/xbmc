@@ -7,22 +7,24 @@
  */
 
 #include "NetworkWin10.h"
+
 #include "filesystem/SpecialProtocol.h"
-#include "platform/win10/AsyncHelpers.h"
-#include "platform/win32/WIN32Util.h"
 #include "settings/Settings.h"
 #include "threads/SingleLock.h"
-#include "utils/log.h"
 #include "utils/StringUtils.h"
+#include "utils/log.h"
+
+#include "platform/win10/AsyncHelpers.h"
+#include "platform/win32/WIN32Util.h"
 
 #include <cerrno>
-#include <iphlpapi.h>
-#include <ppltasks.h>
 #include <cstring>
-#include <Ws2tcpip.h>
-#include <ws2ipdef.h>
 
 #include <Ipexport.h>
+#include <Ws2tcpip.h>
+#include <iphlpapi.h>
+#include <ppltasks.h>
+#include <ws2ipdef.h>
 #ifndef IP_STATUS_BASE
 
 // --- c&p from Ipexport.h ----------------

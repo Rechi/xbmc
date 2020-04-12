@@ -6,20 +6,21 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "GUIFont.h"
 #include "GUIFontTTF.h"
+
+#include "GUIFont.h"
 #include "GUIFontManager.h"
-#include "Texture.h"
-#include "windowing/GraphicContext.h"
 #include "ServiceBroker.h"
-#include "filesystem/SpecialProtocol.h"
-#include "utils/MathUtils.h"
-#include "utils/log.h"
-#include "rendering/RenderSystem.h"
-#include "windowing/WinSystem.h"
+#include "Texture.h"
 #include "URL.h"
 #include "filesystem/File.h"
+#include "filesystem/SpecialProtocol.h"
+#include "rendering/RenderSystem.h"
 #include "threads/SystemClock.h"
+#include "utils/MathUtils.h"
+#include "utils/log.h"
+#include "windowing/GraphicContext.h"
+#include "windowing/WinSystem.h"
 
 #include <cmath>
 #include <memory>

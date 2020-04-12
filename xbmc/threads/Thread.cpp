@@ -11,8 +11,8 @@
 #define __STDC_FORMAT_MACROS
 
 #include "Thread.h"
-#include "IRunnable.h"
 
+#include "IRunnable.h"
 #include "commons/Exception.h"
 #include "threads/SingleLock.h"
 #include "threads/SystemClock.h"

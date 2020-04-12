@@ -13,6 +13,9 @@
 #include "CompileInfo.h"
 #include "FileItem.h"
 #include "ServiceBroker.h"
+#define id _id
+#include "TextureCache.h"
+#undef id
 #include "Util.h"
 #include "filesystem/SpecialProtocol.h"
 #include "guilib/GUIControl.h"
@@ -40,10 +43,6 @@
 #import "platform/darwin/ios/IOSEAGLView.h"
 #import "platform/darwin/ios/IOSScreenManager.h"
 #import "platform/darwin/ios/XBMCApplication.h"
-
-#define id _id
-#include "TextureCache.h"
-#undef id
 
 #include <cmath>
 #include <csignal>

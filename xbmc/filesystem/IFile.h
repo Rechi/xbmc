@@ -14,13 +14,14 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "PlatformDefs.h" // for __stat64, ssize_t
-
-#include <cstdio>
 #include <cstdint>
-#include <sys/stat.h>
+#include <cstdio>
 #include <string>
 #include <vector>
+
+#include <sys/stat.h>
+
+#include "PlatformDefs.h" // for __stat64, ssize_t
 
 #if !defined(SIZE_MAX) || !defined(SSIZE_MAX)
 #include <climits>

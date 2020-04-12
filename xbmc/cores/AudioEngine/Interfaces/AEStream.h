@@ -9,6 +9,7 @@
 #pragma once
 
 #include "cores/AudioEngine/Utils/AEAudioFormat.h"
+
 #include <cstdint>
 
 extern "C" {

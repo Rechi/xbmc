@@ -8,23 +8,23 @@
 
 #include "Addon.h"
 
+#include "AddonManager.h"
+#include "RepositoryUpdater.h"
+#include "ServiceBroker.h"
+#include "addons/settings/AddonSettings.h"
+#include "filesystem/Directory.h"
+#include "filesystem/File.h"
+#include "settings/Settings.h"
+#include "utils/StringUtils.h"
+#include "utils/URIUtils.h"
+#include "utils/XMLUtils.h"
+#include "utils/log.h"
+
 #include <algorithm>
 #include <cstring>
 #include <ostream>
 #include <utility>
 #include <vector>
-
-#include "AddonManager.h"
-#include "addons/settings/AddonSettings.h"
-#include "filesystem/Directory.h"
-#include "filesystem/File.h"
-#include "RepositoryUpdater.h"
-#include "settings/Settings.h"
-#include "ServiceBroker.h"
-#include "utils/log.h"
-#include "utils/StringUtils.h"
-#include "utils/URIUtils.h"
-#include "utils/XMLUtils.h"
 
 #ifdef HAS_PYTHON
 #include "interfaces/python/XBPython.h"

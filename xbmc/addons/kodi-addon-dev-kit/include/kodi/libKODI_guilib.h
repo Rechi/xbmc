@@ -8,12 +8,13 @@
 
 #pragma once
 
+#include "libXBMC_addon.h"
+
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <string>
 #include <vector>
-#include <cstring>
-#include <cstdlib>
-#include <cstdio>
-#include "libXBMC_addon.h"
 
 typedef void* GUIHANDLE;
 

@@ -8,15 +8,15 @@
 
 #pragma once
 
+#include "versions.h"
+
+#include <cstdarg>
+#include <cstdint>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <string>
 #include <vector>
-#include <cstring>
-#include <cstdlib>
-#include <cstdio>
-#include <cstdint>
-#include <cstdarg>
-
-#include "versions.h"
 #if defined(BUILD_KODI_ADDON)
 #include "IFileTypes.h"
 #else

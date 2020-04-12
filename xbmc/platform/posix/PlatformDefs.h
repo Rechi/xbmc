@@ -8,16 +8,18 @@
 
 #pragma once
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <pthread.h>
 #include <cstring>
+
+#include <fcntl.h>
+#include <pthread.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 #if defined(TARGET_DARWIN)
 #include <cstdio>
-#include <sched.h>
+
 #include <AvailabilityMacros.h>
+#include <sched.h>
 #ifndef __STDC_FORMAT_MACROS
   #define __STDC_FORMAT_MACROS
 #endif
@@ -34,8 +36,9 @@
 #include <sys/sysinfo.h>
 #endif
 
-#include <sys/time.h>
 #include <ctime>
+
+#include <sys/time.h>
 
 #if defined(__ppc__) || defined(__powerpc__)
 #define PIXEL_ASHIFT 0

@@ -10,21 +10,21 @@
 #ifdef TARGET_ANDROID
 #include "platform/android/bionic_supplement/bionic_supplement.h"
 #endif
-#include "PlatformDefs.h"
 #include "PosixTimezone.h"
-#include "utils/SystemInfo.h"
-
 #include "ServiceBroker.h"
 #include "Util.h"
-#include "utils/StringUtils.h"
 #include "XBDateTime.h"
-#include "settings/lib/Setting.h"
-#include "settings/lib/SettingDefinitions.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
-#include <cstdlib>
+#include "settings/lib/Setting.h"
+#include "settings/lib/SettingDefinitions.h"
+#include "utils/StringUtils.h"
+#include "utils/SystemInfo.h"
 
 #include <algorithm>
+#include <cstdlib>
+
+#include "PlatformDefs.h"
 
 CPosixTimezone::CPosixTimezone()
 {

@@ -12,15 +12,17 @@
 #else
 #include <sys/syscall.h>
 #endif
-#include <sys/resource.h>
 #include <cstring>
+
+#include <sys/resource.h>
 #ifdef TARGET_FREEBSD
 #include <sys/param.h>
 #include <pthread_np.h>
 #endif
 
-#include <csignal>
 #include "utils/log.h"
+
+#include <csignal>
 
 namespace XbmcThreads
 {

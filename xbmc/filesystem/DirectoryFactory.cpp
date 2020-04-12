@@ -6,25 +6,27 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <cstdlib>
-#include "network/Network.h"
 #include "DirectoryFactory.h"
-#include "SpecialProtocolDirectory.h"
-#include "MultiPathDirectory.h"
-#include "StackDirectory.h"
+
+#include "AddonsDirectory.h"
+#include "DAVDirectory.h"
+#include "EventsDirectory.h"
+#include "FTPDirectory.h"
+#include "FavouritesDirectory.h"
 #include "FileDirectoryFactory.h"
-#include "PlaylistDirectory.h"
+#include "HTTPDirectory.h"
+#include "LibraryDirectory.h"
+#include "MultiPathDirectory.h"
 #include "MusicDatabaseDirectory.h"
 #include "MusicSearchDirectory.h"
-#include "VideoDatabaseDirectory.h"
-#include "FavouritesDirectory.h"
-#include "LibraryDirectory.h"
-#include "EventsDirectory.h"
-#include "AddonsDirectory.h"
+#include "PlaylistDirectory.h"
 #include "SourcesDirectory.h"
-#include "FTPDirectory.h"
-#include "HTTPDirectory.h"
-#include "DAVDirectory.h"
+#include "SpecialProtocolDirectory.h"
+#include "StackDirectory.h"
+#include "VideoDatabaseDirectory.h"
+#include "network/Network.h"
+
+#include <cstdlib>
 #if defined(HAS_UDF)
 #include "UDFDirectory.h"
 #endif

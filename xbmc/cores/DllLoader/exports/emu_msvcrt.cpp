@@ -6,15 +6,16 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <cstdlib>
-#include <cstdio>
-#include <cstdarg>
 #include <cmath>
+#include <cstdarg>
+#include <cstdio>
+#include <cstdlib>
 #ifndef TARGET_POSIX
-#include <io.h>
-#include <direct.h>
-#include <process.h>
 #include <cerrno>
+
+#include <direct.h>
+#include <io.h>
+#include <process.h>
 #else
 #if !defined(TARGET_DARWIN) && !defined(TARGET_FREEBSD)
 #include <mntent.h>
@@ -35,9 +36,10 @@
     #endif
   #endif
 #endif
-#include <fcntl.h>
-#include <ctime>
 #include <csignal>
+#include <ctime>
+
+#include <fcntl.h>
 #ifdef TARGET_POSIX
 #include "PlatformDefs.h" // for __stat64
 #endif

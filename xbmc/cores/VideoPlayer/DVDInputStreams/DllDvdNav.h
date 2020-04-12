@@ -10,25 +10,25 @@
 
 extern "C" {
 #define DVDNAV_COMPILE
- #include <cstdint>
+#include "dvdnav/dvdnav.h"
 
- #include "dvdnav/dvdnav.h"
+#include <cstdint>
 
- #ifndef WIN32
- #define WIN32
- #endif // WIN32
+#ifndef WIN32
+#define WIN32
+#endif // WIN32
 
- #ifndef HAVE_CONFIG_H
- #define HAVE_CONFIG_H
- #endif
+#ifndef HAVE_CONFIG_H
+#define HAVE_CONFIG_H
+#endif
 
- #include "dvdnav/dvdnav_internal.h"
- #include "dvdnav/vm.h"
- #include "dvdnav/dvd_types.h"
+#include "dvdnav/dvd_types.h"
+#include "dvdnav/dvdnav_internal.h"
+#include "dvdnav/vm.h"
 
- #ifdef WIN32 // WIN32INCLUDES
- #undef HAVE_CONFIG_H
- #endif
+#ifdef WIN32 // WIN32INCLUDES
+#undef HAVE_CONFIG_H
+#endif
 }
 #include "DynamicDll.h"
 

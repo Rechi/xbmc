@@ -10,13 +10,15 @@
 #define DTS_ENCODE_BITRATE 1411200
 
 #include "cores/AudioEngine/Encoders/AEEncoderFFmpeg.h"
-#include "cores/AudioEngine/Utils/AEUtil.h"
+
 #include "ServiceBroker.h"
-#include "utils/log.h"
+#include "cores/AudioEngine/Utils/AEUtil.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
-#include <cstring>
+#include "utils/log.h"
+
 #include <cassert>
+#include <cstring>
 
 CAEEncoderFFmpeg::CAEEncoderFFmpeg():
   m_CodecCtx      (NULL ),

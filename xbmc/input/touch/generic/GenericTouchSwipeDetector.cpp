@@ -9,10 +9,10 @@
 #ifndef _USE_MATH_DEFINES
 #define _USE_MATH_DEFINES
 #endif
+#include "GenericTouchSwipeDetector.h"
+
 #include <cmath>
 #include <cstdlib>
-
-#include "GenericTouchSwipeDetector.h"
 
 // maximum time between touch down and up (in nanoseconds)
 #define SWIPE_MAX_TIME            500000000

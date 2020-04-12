@@ -23,9 +23,9 @@
 #include "platform/linux/RBP.h"
 #endif
 
-#include <sstream>
-#include <iomanip>
 #include <cmath>
+#include <iomanip>
+#include <sstream>
 
 class CDVDMsgAudioCodecChange : public CDVDMsg
 {

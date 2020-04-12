@@ -8,10 +8,10 @@
 
 #pragma once
 
-#include <cstdint>
 #include <cassert>
 #include <climits>
 #include <cmath>
+#include <cstdint>
 
 #if defined(HAVE_SSE2) && defined(__SSE2__)
 #include <emmintrin.h>

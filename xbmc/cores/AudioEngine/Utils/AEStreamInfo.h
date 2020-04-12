@@ -8,8 +8,9 @@
 
 #pragma once
 
-#include "AEPackIEC61937.h"
 #include "AEChannelInfo.h"
+#include "AEPackIEC61937.h"
+
 #include <cstdint>
 
 /* ffmpeg re-defines this, so undef it to squash the warning */

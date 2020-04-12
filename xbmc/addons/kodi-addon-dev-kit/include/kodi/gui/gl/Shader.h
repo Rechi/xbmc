@@ -11,8 +11,8 @@
 #include "GL.h"
 
 #include <cstdio>
-#include <vector>
 #include <string>
+#include <vector>
 
 #include <kodi/AddonBase.h>
 #include <kodi/Filesystem.h>

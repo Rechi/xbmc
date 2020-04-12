@@ -30,19 +30,19 @@
 #include "platform/android/activity/XBMCApp.h"
 #include "CompileInfo.h"
 #endif
-#include <cstdlib>
-#include <algorithm>
-#include <array>
-
-#include "addons/VFSEntry.h"
 #include "ServiceBroker.h"
 #include "Util.h"
-#include "filesystem/PVRDirectory.h"
+#include "addons/VFSEntry.h"
 #include "filesystem/Directory.h"
-#include "filesystem/StackDirectory.h"
 #include "filesystem/MultiPathDirectory.h"
-#include "filesystem/SpecialProtocol.h"
+#include "filesystem/PVRDirectory.h"
 #include "filesystem/RSSDirectory.h"
+#include "filesystem/SpecialProtocol.h"
+#include "filesystem/StackDirectory.h"
+
+#include <algorithm>
+#include <array>
+#include <cstdlib>
 #ifdef HAS_UPNP
 #include "filesystem/UPnPDirectory.h"
 #endif

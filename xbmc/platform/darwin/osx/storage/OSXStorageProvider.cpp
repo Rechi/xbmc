@@ -6,17 +6,20 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <cstdlib>
 #include "OSXStorageProvider.h"
-#include "utils/RegExp.h"
+
 #include "Util.h"
 #include "guilib/LocalizeStrings.h"
+#include "utils/RegExp.h"
 
-#include <sys/mount.h>
+#include "platform/darwin/osx/CocoaInterface.h"
+
+#include <cstdlib>
+
 #include <DiskArbitration/DiskArbitration.h>
 #include <IOKit/storage/IOCDMedia.h>
 #include <IOKit/storage/IODVDMedia.h>
-#include "platform/darwin/osx/CocoaInterface.h"
+#include <sys/mount.h>
 
 std::vector<std::pair<std::string, std::string>> COSXStorageProvider::m_mountsToNotify;
 std::vector<std::pair<std::string, std::string>> COSXStorageProvider::m_unmountsToNotify;

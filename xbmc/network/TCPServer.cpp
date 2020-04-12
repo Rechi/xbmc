@@ -7,21 +7,23 @@
  */
 
 #include "TCPServer.h"
-#include <cstdio>
-#include <cstdlib>
-#include <memory.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
 
+#include "Network.h"
+#include "interfaces/AnnouncementManager.h"
+#include "interfaces/json-rpc/JSONRPC.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/SettingsComponent.h"
-#include "interfaces/json-rpc/JSONRPC.h"
-#include "interfaces/AnnouncementManager.h"
-#include "utils/log.h"
-#include "utils/Variant.h"
 #include "threads/SingleLock.h"
+#include "utils/Variant.h"
+#include "utils/log.h"
 #include "websocket/WebSocketManager.h"
-#include "Network.h"
+
+#include <cstdio>
+#include <cstdlib>
+
+#include <arpa/inet.h>
+#include <memory.h>
+#include <netinet/in.h>
 
 #if defined(TARGET_WINDOWS) || defined(HAVE_LIBBLUETOOTH)
 static const char     bt_service_name[] = "XBMC JSON-RPC";

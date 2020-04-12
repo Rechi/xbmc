@@ -8,19 +8,26 @@
 
 #include "XBMCApp.h"
 
-#include <sstream>
-#include <unistd.h>
-#include <cstdlib>
-#include <dlfcn.h>
-#include <cstring>
+#include "AndroidKey.h"
+#include "AppParamParser.h"
+#include "Application.h"
+#include "CompileInfo.h"
+#include "guilib/GUIWindowManager.h"
+#include "interfaces/AnnouncementManager.h"
+#include "messaging/ApplicationMessenger.h"
+#include "settings/AdvancedSettings.h"
+#include "settings/DisplaySettings.h"
+#include "windowing/GraphicContext.h"
 
-#include <jni.h>
-#include <android/configuration.h>
+#include <cstdlib>
+#include <cstring>
+#include <sstream>
+
 #include <android/bitmap.h>
+#include <android/configuration.h>
 #include <android/log.h>
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
-
 #include <androidjni/ActivityManager.h>
 #include <androidjni/ApplicationInfo.h>
 #include <androidjni/BitmapFactory.h>
@@ -52,17 +59,9 @@
 #include <androidjni/WakeLock.h>
 #include <androidjni/Window.h>
 #include <androidjni/WindowManager.h>
-
-#include "AndroidKey.h"
-#include "settings/AdvancedSettings.h"
-#include "interfaces/AnnouncementManager.h"
-#include "Application.h"
-#include "AppParamParser.h"
-#include "messaging/ApplicationMessenger.h"
-#include "CompileInfo.h"
-#include "settings/DisplaySettings.h"
-#include "windowing/GraphicContext.h"
-#include "guilib/GUIWindowManager.h"
+#include <dlfcn.h>
+#include <jni.h>
+#include <unistd.h>
 // Audio Engine includes for Factory and interfaces
 #include "GUIInfoManager.h"
 #include "ServiceBroker.h"
@@ -524,6 +523,7 @@ int CXBMCApp::SetBuffersGeometry(int width, int height, int format)
 }
 
 #include "threads/Event.h"
+
 #include <ctime>
 
 void CXBMCApp::SetRefreshRateCallback(CVariant* rateVariant)

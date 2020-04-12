@@ -13,9 +13,9 @@
 #include "config.h"
 #endif
 
-#include <cstdlib>
-#include <cstdio>
 #include <climits>
+#include <cstdio>
+#include <cstdlib>
 #include <cstring>
 
 #ifdef TARGET_WINDOWS

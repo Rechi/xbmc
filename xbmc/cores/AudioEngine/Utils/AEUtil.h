@@ -9,8 +9,10 @@
 #pragma once
 
 #include "AEAudioFormat.h"
-#include "PlatformDefs.h"
+
 #include <cmath>
+
+#include "PlatformDefs.h"
 
 extern "C" {
 #include <libavutil/samplefmt.h>

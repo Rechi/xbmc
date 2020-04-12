@@ -24,8 +24,9 @@
 
 using namespace XFILE;
 #include <climits>
-#include <nfsc/libnfs.h>
+
 #include <nfsc/libnfs-raw-nfs.h>
+#include <nfsc/libnfs.h>
 
 #if defined(TARGET_WINDOWS)
 #define S_IFLNK 0120000

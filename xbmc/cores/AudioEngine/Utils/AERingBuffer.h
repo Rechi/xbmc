@@ -15,8 +15,8 @@
 
 //#define AE_RING_BUFFER_DEBUG
 
-#include "utils/log.h"
 #include "utils/MemUtils.h"
+#include "utils/log.h"
 
 #include <cstring>
 

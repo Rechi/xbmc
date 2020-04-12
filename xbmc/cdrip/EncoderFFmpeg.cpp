@@ -12,16 +12,17 @@
 #ifndef __STDC_LIMIT_MACROS
 #define __STDC_LIMIT_MACROS
 #endif
-#include <cstdint>
-
 #include "EncoderFFmpeg.h"
+
 #include "ServiceBroker.h"
-#include "utils/log.h"
+#include "addons/AddonManager.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "utils/SystemInfo.h"
 #include "utils/URIUtils.h"
-#include "addons/AddonManager.h"
+#include "utils/log.h"
+
+#include <cstdint>
 
 /* AV_PKT_FLAG_KEY was named PKT_FLAG_KEY in older versions of libavcodec */
 #ifndef AV_PKT_FLAG_KEY

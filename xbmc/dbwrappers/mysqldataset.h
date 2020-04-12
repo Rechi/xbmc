@@ -8,8 +8,9 @@
 
 #pragma once
 
-#include <cstdio>
 #include "dataset.h"
+
+#include <cstdio>
 #ifdef HAS_MYSQL
 #include <mysql/mysql.h>
 #elif defined(HAS_MARIADB)

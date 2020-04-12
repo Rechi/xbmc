@@ -8,12 +8,11 @@
 
 #pragma once
 
+#include <cstdint>
 #include <ctime>
 #include <map>
 #include <string>
 #include <vector>
-
-#include <cstdint>
 
 static const std::string XBTF_MAGIC = "XBTF";
 static const std::string XBTF_VERSION = "2";
