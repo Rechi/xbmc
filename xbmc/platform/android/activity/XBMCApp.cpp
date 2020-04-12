@@ -93,6 +93,8 @@
 #include "platform/android/network/NetworkAndroid.h"
 #include "platform/android/powermanagement/AndroidPowerSyscall.h"
 
+#include <memory>
+
 #define GIGABYTES       1073741824
 
 #define ACTION_XBMC_RESUME "android.intent.XBMC_RESUME"
@@ -153,7 +155,7 @@ CXBMCApp::CXBMCApp(ANativeActivity* nativeActivity, IInputHandler& inputHandler)
     exit(1);
     return;
   }
-  m_mainView.reset(new CJNIXBMCMainView(this));
+  m_mainView = std::make_unique<CJNIXBMCMainView>(this);
   m_firstrun = true;
   m_exiting = false;
   m_hdmiSource = CJNISystemProperties::get("ro.hdmi.device_type", "") == "4";
@@ -226,7 +228,7 @@ void CXBMCApp::onStart()
     intentFilter.addAction("android.intent.action.SCREEN_OFF");
     intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
     registerReceiver(*this, intentFilter);
-    m_mediaSession.reset(new CJNIXBMCMediaSession());
+    m_mediaSession = std::make_unique<CJNIXBMCMediaSession>();
   }
 }
 
@@ -371,7 +373,8 @@ void CXBMCApp::Initialize()
 {
   CServiceBroker::GetAnnouncementManager()->AddAnnouncer(CXBMCApp::get());
   runNativeOnUiThread(RegisterDisplayListener, nullptr);
-  m_activityManager.reset(new CJNIActivityManager(getSystemService(CJNIContext::ACTIVITY_SERVICE)));
+  m_activityManager =
+      std::make_unique<CJNIActivityManager>(getSystemService(CJNIContext::ACTIVITY_SERVICE));
   m_inputHandler.setDPI(GetDPI());
 }
 

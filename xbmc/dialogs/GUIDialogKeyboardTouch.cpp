@@ -11,6 +11,8 @@
 #include "platform/darwin/ios-common/DarwinEmbedKeyboard.h"
 #endif
 
+#include <memory>
+
 CGUIDialogKeyboardTouch::CGUIDialogKeyboardTouch()
 : CGUIDialog(WINDOW_DIALOG_KEYBOARD_TOUCH, "")
 , CGUIKeyboard()
@@ -22,7 +24,7 @@ CGUIDialogKeyboardTouch::CGUIDialogKeyboardTouch()
 bool CGUIDialogKeyboardTouch::ShowAndGetInput(char_callback_t pCallback, const std::string &initialString, std::string &typedString, const std::string &heading, bool bHiddenInput)
 {
 #if defined(TARGET_DARWIN_EMBEDDED)
-  m_keyboard.reset(new CDarwinEmbedKeyboard());
+  m_keyboard = std::make_unique<CDarwinEmbedKeyboard>();
 #endif
 
   if (!m_keyboard)

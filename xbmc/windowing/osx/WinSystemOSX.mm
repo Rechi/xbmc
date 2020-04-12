@@ -46,6 +46,7 @@
 #include "platform/darwin/osx/powermanagement/CocoaPowerSyscall.h"
 
 #include <cstdlib>
+#include <memory>
 #include <signal.h>
 
 #import <Cocoa/Cocoa.h>
@@ -665,7 +666,7 @@ CWinSystemOSX::CWinSystemOSX()
   m_refreshRate = 0.0;
   m_delayDispReset = false;
 
-  m_winEvents.reset(new CWinEventsOSX());
+  m_winEvents = std::make_unique<CWinEventsOSX>();
 
   AE::CAESinkFactory::ClearSinks();
   CAESinkDARWINOSX::Register();

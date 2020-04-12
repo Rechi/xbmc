@@ -49,6 +49,7 @@
 
 #include <algorithm>
 #include <limits>
+#include <memory>
 #include <numeric>
 
 #if defined(HAS_DBUS)
@@ -176,7 +177,7 @@ CWinSystemWayland::CWinSystemWayland()
       }
     }
   }
-  m_winEvents.reset(new CWinEventsWayland());
+  m_winEvents = std::make_unique<CWinEventsWayland>();
   CLinuxPowerSyscall::Register();
   m_lirc.reset(OPTIONALS::LircRegister());
 }
@@ -197,8 +198,8 @@ bool CWinSystemWayland::InitWindowSystem()
   RETRO::CRPProcessInfoWayland::Register();
 
   CLog::LogF(LOGINFO, "Connecting to Wayland server");
-  m_connection.reset(new CConnection);
-  m_registry.reset(new CRegistry{*m_connection});
+  m_connection = std::make_unique<CConnection>();
+  m_registry = std::make_unique<CRegistry>(*m_connection);
 
   m_registry->RequestSingleton(m_compositor, 1, 4);
   m_registry->RequestSingleton(m_shm, 1, 1);
@@ -304,10 +305,10 @@ bool CWinSystemWayland::CreateNewWindow(const std::string& name,
     }
   };
 
-  m_windowDecorator.reset(new CWindowDecorator(*this, *m_connection, m_surface));
+  m_windowDecorator = std::make_unique<CWindowDecorator>(*this, *m_connection, m_surface);
 
-  m_seatInputProcessing.reset(new CSeatInputProcessing(m_surface, *this));
-  m_seatRegistry.reset(new CRegistry{*m_connection});
+  m_seatInputProcessing = std::make_unique<CSeatInputProcessing>(m_surface, *this);
+  m_seatRegistry = std::make_unique<CRegistry>(*m_connection);
   // version 2 adds name event -> optional
   // version 4 adds wl_keyboard repeat_info -> optional
   // version 5 adds discrete axis events in wl_pointer -> unused
@@ -339,8 +340,8 @@ bool CWinSystemWayland::CreateNewWindow(const std::string& name,
   if (!m_shellSurface)
   {
     CLog::LogF(LOGWARNING, "Compositor does not support xdg_shell protocol (stable or unstable v6) - falling back to wl_shell, not all features might work");
-    m_shellSurface.reset(new CShellSurfaceWlShell(*this, *m_connection, m_surface, name,
-                                                  std::string(CCompileInfo::GetAppName())));
+    m_shellSurface = std::make_unique<CShellSurfaceWlShell>(
+        *this, *m_connection, m_surface, name, std::string(CCompileInfo::GetAppName()));
   }
 
   if (fullScreen)

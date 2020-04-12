@@ -27,6 +27,8 @@
 #include "platform/posix/ConvUtils.h"
 #endif
 
+#include <memory>
+
 using namespace dbiplus;
 
 #define MAX_COMPRESS_COUNT 20
@@ -491,12 +493,12 @@ bool CDatabase::Connect(const std::string &dbName, const DatabaseSettings &dbSet
   // create the appropriate database structure
   if (dbSettings.type == "sqlite3")
   {
-    m_pDB.reset( new SqliteDatabase() ) ;
+    m_pDB = std::make_unique<SqliteDatabase>();
   }
 #if defined(HAS_MYSQL) || defined(HAS_MARIADB)
   else if (dbSettings.type == "mysql")
   {
-    m_pDB.reset( new MysqlDatabase() ) ;
+    m_pDB = std::make_unique<MysqlDatabase>();
   }
 #endif
   else

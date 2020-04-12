@@ -8,6 +8,8 @@
 
 #include "RenderBufferGuiTexture.h"
 
+#include <memory>
+
 using namespace KODI;
 using namespace RETRO;
 
@@ -24,7 +26,7 @@ bool CRenderBufferGuiTexture::Allocate(AVPixelFormat format, unsigned int width,
 
   if (m_format != AV_PIX_FMT_NONE)
   {
-    m_texture.reset(new CTexture(width, height, m_textureFormat));
+    m_texture = std::make_unique<CTexture>(width, height, m_textureFormat);
     m_texture->SetScalingMethod(TranslateScalingMethod(m_scalingMethod));
     m_texture->SetCacheMemory(true);
 

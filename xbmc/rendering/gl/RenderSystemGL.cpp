@@ -21,6 +21,8 @@
 #include "utils/log.h"
 #include "windowing/GraphicContext.h"
 
+#include <memory>
+
 CRenderSystemGL::CRenderSystemGL() : CRenderSystemBase()
 {
 }
@@ -603,7 +605,8 @@ void CRenderSystemGL::InitialiseShaders()
     defines += "#define KODI_LIMITED_RANGE 1\n";
   }
 
-  m_pShader[SM_DEFAULT].reset(new CGLShader("gl_shader_vert_default.glsl", "gl_shader_frag_default.glsl", defines));
+  m_pShader[SM_DEFAULT] = std::make_unique<CGLShader>("gl_shader_vert_default.glsl",
+                                                      "gl_shader_frag_default.glsl", defines);
   if (!m_pShader[SM_DEFAULT]->CompileAndLink())
   {
     m_pShader[SM_DEFAULT]->Free();
@@ -611,7 +614,7 @@ void CRenderSystemGL::InitialiseShaders()
     CLog::Log(LOGERROR, "GUI Shader gl_shader_frag_default.glsl - compile and link failed");
   }
 
-  m_pShader[SM_TEXTURE].reset(new CGLShader("gl_shader_frag_texture.glsl", defines));
+  m_pShader[SM_TEXTURE] = std::make_unique<CGLShader>("gl_shader_frag_texture.glsl", defines);
   if (!m_pShader[SM_TEXTURE]->CompileAndLink())
   {
     m_pShader[SM_TEXTURE]->Free();
@@ -619,7 +622,8 @@ void CRenderSystemGL::InitialiseShaders()
     CLog::Log(LOGERROR, "GUI Shader gl_shader_frag_texture.glsl - compile and link failed");
   }
 
-  m_pShader[SM_TEXTURE_LIM].reset(new CGLShader("gl_shader_frag_texture_lim.glsl", defines));
+  m_pShader[SM_TEXTURE_LIM] =
+      std::make_unique<CGLShader>("gl_shader_frag_texture_lim.glsl", defines);
   if (!m_pShader[SM_TEXTURE_LIM]->CompileAndLink())
   {
     m_pShader[SM_TEXTURE_LIM]->Free();
@@ -627,7 +631,7 @@ void CRenderSystemGL::InitialiseShaders()
     CLog::Log(LOGERROR, "GUI Shader gl_shader_frag_texture_lim.glsl - compile and link failed");
   }
 
-  m_pShader[SM_MULTI].reset(new CGLShader("gl_shader_frag_multi.glsl", defines));
+  m_pShader[SM_MULTI] = std::make_unique<CGLShader>("gl_shader_frag_multi.glsl", defines);
   if (!m_pShader[SM_MULTI]->CompileAndLink())
   {
     m_pShader[SM_MULTI]->Free();
@@ -635,7 +639,7 @@ void CRenderSystemGL::InitialiseShaders()
     CLog::Log(LOGERROR, "GUI Shader gl_shader_frag_multi.glsl - compile and link failed");
   }
 
-  m_pShader[SM_FONTS].reset(new CGLShader("gl_shader_frag_fonts.glsl", defines));
+  m_pShader[SM_FONTS] = std::make_unique<CGLShader>("gl_shader_frag_fonts.glsl", defines);
   if (!m_pShader[SM_FONTS]->CompileAndLink())
   {
     m_pShader[SM_FONTS]->Free();
@@ -643,7 +647,8 @@ void CRenderSystemGL::InitialiseShaders()
     CLog::Log(LOGERROR, "GUI Shader gl_shader_frag_fonts.glsl - compile and link failed");
   }
 
-  m_pShader[SM_TEXTURE_NOBLEND].reset(new CGLShader("gl_shader_frag_texture_noblend.glsl", defines));
+  m_pShader[SM_TEXTURE_NOBLEND] =
+      std::make_unique<CGLShader>("gl_shader_frag_texture_noblend.glsl", defines);
   if (!m_pShader[SM_TEXTURE_NOBLEND]->CompileAndLink())
   {
     m_pShader[SM_TEXTURE_NOBLEND]->Free();
@@ -651,7 +656,8 @@ void CRenderSystemGL::InitialiseShaders()
     CLog::Log(LOGERROR, "GUI Shader gl_shader_frag_texture_noblend.glsl - compile and link failed");
   }
 
-  m_pShader[SM_MULTI_BLENDCOLOR].reset(new CGLShader("gl_shader_frag_multi_blendcolor.glsl", defines));
+  m_pShader[SM_MULTI_BLENDCOLOR] =
+      std::make_unique<CGLShader>("gl_shader_frag_multi_blendcolor.glsl", defines);
   if (!m_pShader[SM_MULTI_BLENDCOLOR]->CompileAndLink())
   {
     m_pShader[SM_MULTI_BLENDCOLOR]->Free();

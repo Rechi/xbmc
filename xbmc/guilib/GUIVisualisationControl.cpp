@@ -25,6 +25,8 @@
 #include "utils/URIUtils.h"
 #include "utils/log.h"
 
+#include <memory>
+
 using namespace ADDON;
 
 #define LABEL_ROW1 10
@@ -263,7 +265,7 @@ void CGUIVisualisationControl::OnAudioData(const float* audioData, unsigned int 
     const float *psAudioData = ptrAudioBuffer->Get();
 
     if (!m_transform)
-      m_transform.reset(new RFFT(AUDIO_BUFFER_SIZE/2, false)); // half due to stereo
+      m_transform = std::make_unique<RFFT>(AUDIO_BUFFER_SIZE / 2, false); // half due to stereo
 
     m_transform->calc(psAudioData, m_freq);
 

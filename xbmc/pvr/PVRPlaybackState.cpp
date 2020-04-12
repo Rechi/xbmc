@@ -25,6 +25,8 @@
 #include "settings/SettingsComponent.h"
 #include "threads/Timer.h"
 
+#include <memory>
+
 using namespace PVR;
 
 class CPVRPlaybackState::CLastWatchedUpdateTimer : public CTimer, private ITimerCallback
@@ -85,7 +87,8 @@ void CPVRPlaybackState::OnPlaybackStarted(const std::shared_ptr<CFileItem> item)
       if (m_lastWatchedUpdateTimer)
         m_lastWatchedUpdateTimer->Stop(true);
 
-      m_lastWatchedUpdateTimer.reset(new CLastWatchedUpdateTimer(*this, channel, CDateTime::GetUTCDateTime()));
+      m_lastWatchedUpdateTimer =
+          std::make_unique<CLastWatchedUpdateTimer>(*this, channel, CDateTime::GetUTCDateTime());
       m_lastWatchedUpdateTimer->Start(iLastWatchedDelay);
     }
     else

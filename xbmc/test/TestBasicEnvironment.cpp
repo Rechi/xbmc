@@ -28,6 +28,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <climits>
+#include <memory>
 #include <system_error>
 
 namespace fs = KODI::PLATFORM::FILESYSTEM;
@@ -38,7 +39,7 @@ void TestBasicEnvironment::SetUp()
 {
   CAppParamParser params;
   params.m_platformDirectories = false;
-  m_pSettingsComponent.reset(new CSettingsComponent());
+  m_pSettingsComponent = std::make_unique<CSettingsComponent>();
   m_pSettingsComponent->Init(params);
 
   XFILE::CFile *f;

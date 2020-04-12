@@ -12,12 +12,13 @@
 
 #include <algorithm>
 #include <limits>
+#include <memory>
 
 void CEvent::addGroup(XbmcThreads::CEventGroup* group)
 {
   CSingleLock lock(groupListMutex);
   if (!groups)
-    groups.reset(new std::vector<XbmcThreads::CEventGroup*>);
+    groups = std::make_unique<std::vector<XbmcThreads::CEventGroup*>>();
 
   groups->push_back(group);
 }

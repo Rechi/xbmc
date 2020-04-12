@@ -367,7 +367,7 @@ bool CApplication::Create(const CAppParamParser &params)
 
   CServiceBroker::RegisterCPUInfo(CCPUInfo::GetCPUInfo());
 
-  m_pSettingsComponent.reset(new CSettingsComponent());
+  m_pSettingsComponent = std::make_unique<CSettingsComponent>();
   m_pSettingsComponent->Init(params);
 
   // Announement service
@@ -375,7 +375,7 @@ bool CApplication::Create(const CAppParamParser &params)
   m_pAnnouncementManager->Start();
   CServiceBroker::RegisterAnnouncementManager(m_pAnnouncementManager);
 
-  m_ServiceManager.reset(new CServiceManager());
+  m_ServiceManager = std::make_unique<CServiceManager>();
 
   if (!m_ServiceManager->InitStageOne())
   {
@@ -571,7 +571,7 @@ bool CApplication::Create(const CAppParamParser &params)
     return false;
   }
 
-  m_pActiveAE.reset(new ActiveAE::CActiveAE());
+  m_pActiveAE = std::make_unique<ActiveAE::CActiveAE>();
   m_pActiveAE->Start();
   CServiceBroker::RegisterAE(m_pActiveAE.get());
 
@@ -668,7 +668,7 @@ bool CApplication::CreateGUI()
   if (sav_res)
     CDisplaySettings::GetInstance().SetCurrentResolution(RES_DESKTOP, true);
 
-  m_pGUI.reset(new CGUIComponent());
+  m_pGUI = std::make_unique<CGUIComponent>();
   m_pGUI->Init();
 
   // Splash requires gui component!!

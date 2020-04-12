@@ -34,6 +34,8 @@
 #include "utils/log.h"
 #include "weather/WeatherManager.h"
 
+#include <memory>
+
 using namespace KODI;
 
 CServiceManager::CServiceManager() = default;
@@ -50,12 +52,12 @@ CServiceManager::~CServiceManager()
 
 bool CServiceManager::InitForTesting()
 {
-  m_network.reset(new CNetwork());
+  m_network = std::make_unique<CNetwork>();
 
-  m_databaseManager.reset(new CDatabaseManager);
+  m_databaseManager = std::make_unique<CDatabaseManager>();
 
-  m_binaryAddonManager.reset(new ADDON::CBinaryAddonManager());
-  m_addonMgr.reset(new ADDON::CAddonMgr());
+  m_binaryAddonManager = std::make_unique<ADDON::CBinaryAddonManager>();
+  m_addonMgr = std::make_unique<ADDON::CAddonMgr>();
   if (!m_addonMgr->Init())
   {
     CLog::Log(LOGFATAL, "CServiceManager::%s: Unable to start CAddonMgr", __FUNCTION__);
@@ -68,8 +70,8 @@ bool CServiceManager::InitForTesting()
     return false;
   }
 
-  m_fileExtensionProvider.reset(new CFileExtensionProvider(*m_addonMgr,
-                                                           *m_binaryAddonManager));
+  m_fileExtensionProvider =
+      std::make_unique<CFileExtensionProvider>(*m_addonMgr, *m_binaryAddonManager);
 
   init_level = 1;
   return true;
@@ -91,13 +93,13 @@ bool CServiceManager::InitStageOne()
   m_Platform->Init();
 
 #ifdef HAS_PYTHON
-  m_XBPython.reset(new XBPython());
+  m_XBPython = std::make_unique<XBPython>();
   CScriptInvocationManager::GetInstance().RegisterLanguageInvocationHandler(m_XBPython.get(), ".py");
 #endif
 
-  m_playlistPlayer.reset(new PLAYLIST::CPlayListPlayer());
+  m_playlistPlayer = std::make_unique<PLAYLIST::CPlayListPlayer>();
 
-  m_network.reset(new CNetwork());
+  m_network = std::make_unique<CNetwork>();
 
   init_level = 1;
   return true;
@@ -106,10 +108,12 @@ bool CServiceManager::InitStageOne()
 bool CServiceManager::InitStageTwo(const CAppParamParser &params, const std::string& profilesUserDataFolder)
 {
   // Initialize the addon database (must be before the addon manager is init'd)
-  m_databaseManager.reset(new CDatabaseManager);
+  m_databaseManager = std::make_unique<CDatabaseManager>();
 
-  m_binaryAddonManager.reset(new ADDON::CBinaryAddonManager()); /* Need to constructed before, GetRunningInstance() of binary CAddonDll need to call them */
-  m_addonMgr.reset(new ADDON::CAddonMgr());
+  m_binaryAddonManager = std::make_unique<
+      ADDON::
+          CBinaryAddonManager>(); /* Need to constructed before, GetRunningInstance() of binary CAddonDll need to call them */
+  m_addonMgr = std::make_unique<ADDON::CAddonMgr>();
   if (!m_addonMgr->Init())
   {
     CLog::Log(LOGFATAL, "CServiceManager::%s: Unable to start CAddonMgr", __FUNCTION__);
@@ -122,43 +126,43 @@ bool CServiceManager::InitStageTwo(const CAppParamParser &params, const std::str
     return false;
   }
 
-  m_repositoryUpdater.reset(new ADDON::CRepositoryUpdater(*m_addonMgr));
+  m_repositoryUpdater = std::make_unique<ADDON::CRepositoryUpdater>(*m_addonMgr);
 
-  m_vfsAddonCache.reset(new ADDON::CVFSAddonCache());
+  m_vfsAddonCache = std::make_unique<ADDON::CVFSAddonCache>();
   m_vfsAddonCache->Init();
 
-  m_PVRManager.reset(new PVR::CPVRManager());
+  m_PVRManager = std::make_unique<PVR::CPVRManager>();
 
   m_dataCacheCore.reset(new CDataCacheCore());
 
-  m_binaryAddonCache.reset( new ADDON::CBinaryAddonCache());
+  m_binaryAddonCache = std::make_unique<ADDON::CBinaryAddonCache>();
   m_binaryAddonCache->Init();
 
   m_favouritesService.reset(new CFavouritesService(profilesUserDataFolder));
 
-  m_serviceAddons.reset(new ADDON::CServiceAddonManager(*m_addonMgr));
+  m_serviceAddons = std::make_unique<ADDON::CServiceAddonManager>(*m_addonMgr);
 
   m_contextMenuManager.reset(new CContextMenuManager(*m_addonMgr));
 
-  m_gameControllerManager.reset(new GAME::CControllerManager);
-  m_inputManager.reset(new CInputManager(params));
+  m_gameControllerManager = std::make_unique<GAME::CControllerManager>();
+  m_inputManager = std::make_unique<CInputManager>(params);
   m_inputManager->InitializeInputs();
 
-  m_peripherals.reset(new PERIPHERALS::CPeripherals(*m_inputManager,
-                                                    *m_gameControllerManager));
+  m_peripherals =
+      std::make_unique<PERIPHERALS::CPeripherals>(*m_inputManager, *m_gameControllerManager);
 
-  m_gameRenderManager.reset(new RETRO::CGUIGameRenderManager);
+  m_gameRenderManager = std::make_unique<RETRO::CGUIGameRenderManager>();
 
-  m_fileExtensionProvider.reset(new CFileExtensionProvider(*m_addonMgr,
-                                                           *m_binaryAddonManager));
+  m_fileExtensionProvider =
+      std::make_unique<CFileExtensionProvider>(*m_addonMgr, *m_binaryAddonManager);
 
-  m_powerManager.reset(new CPowerManager());
+  m_powerManager = std::make_unique<CPowerManager>();
   m_powerManager->Initialize();
   m_powerManager->SetDefaults();
 
-  m_weatherManager.reset(new CWeatherManager());
+  m_weatherManager = std::make_unique<CWeatherManager>();
 
-  m_mediaManager.reset(new CMediaManager());
+  m_mediaManager = std::make_unique<CMediaManager>();
   m_mediaManager->Initialize();
 
   init_level = 2;
@@ -171,15 +175,13 @@ bool CServiceManager::InitStageThree(const std::shared_ptr<CProfileManager>& pro
   // Peripherals depends on strings being loaded before stage 3
   m_peripherals->Initialise();
 
-  m_gameServices.reset(new GAME::CGameServices(*m_gameControllerManager,
-    *m_gameRenderManager,
-    *m_peripherals,
-    *profileManager));
+  m_gameServices = std::make_unique<GAME::CGameServices>(
+      *m_gameControllerManager, *m_gameRenderManager, *m_peripherals, *profileManager);
 
   m_contextMenuManager->Init();
   m_PVRManager->Init();
 
-  m_playerCoreFactory.reset(new CPlayerCoreFactory(*profileManager));
+  m_playerCoreFactory = std::make_unique<CPlayerCoreFactory>(*profileManager);
 
   init_level = 3;
   return true;

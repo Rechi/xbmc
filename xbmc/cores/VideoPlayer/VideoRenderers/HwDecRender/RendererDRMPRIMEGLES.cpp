@@ -19,6 +19,8 @@
 #include "utils/log.h"
 #include "windowing/gbm/WinSystemGbmEGLContext.h"
 
+#include <memory>
+
 using namespace KODI::WINDOWING::GBM;
 using namespace KODI::UTILS::EGL;
 
@@ -72,7 +74,7 @@ bool CRendererDRMPRIMEGLES::Configure(const VideoPicture& picture,
     if (!buf.fence)
     {
       buf.texture.Init(eglDisplay);
-      buf.fence.reset(new CEGLFence(eglDisplay));
+      buf.fence = std::make_unique<CEGLFence>(eglDisplay);
     }
   }
 

@@ -32,6 +32,8 @@
 #include "utils/XMLUtils.h"
 #include "utils/Variant.h"
 
+#include <memory>
+
 #define XML_SETTINGS      "settings"
 #define XML_SETTING       "setting"
 #define XML_ATTR_TYPE     "type"
@@ -151,7 +153,7 @@ CSkinInfo::CSkinInfo(
       m_effectsSlowDown(1.f),
       m_debugging(false)
   {
-    m_settingsUpdateHandler.reset(new CSkinSettingUpdateHandler(*this));
+    m_settingsUpdateHandler = std::make_unique<CSkinSettingUpdateHandler>(*this);
   }
 
 CSkinInfo::CSkinInfo(const AddonInfoPtr& addonInfo) : CAddon(addonInfo, ADDON_SKIN)
@@ -187,7 +189,7 @@ CSkinInfo::CSkinInfo(const AddonInfoPtr& addonInfo) : CAddon(addonInfo, ADDON_SK
 
   m_debugging = Type(ADDON_SKIN)->GetValue("@debugging").asBoolean();
 
-  m_settingsUpdateHandler.reset(new CSkinSettingUpdateHandler(*this));
+  m_settingsUpdateHandler = std::make_unique<CSkinSettingUpdateHandler>(*this);
   LoadStartupWindows(addonInfo);
 }
 

@@ -29,6 +29,7 @@
 
 #include "platform/linux/powermanagement/LinuxPowerSyscall.h"
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -482,7 +483,7 @@ std::unique_ptr<IOSScreenSaver> CWinSystemX11::GetOSScreenSaverImpl()
   std::unique_ptr<IOSScreenSaver> ret;
   if (m_dpy)
   {
-    ret.reset(new COSScreenSaverX11(m_dpy));
+    ret = std::make_unique<COSScreenSaverX11>(m_dpy);
   }
   return ret;
 }

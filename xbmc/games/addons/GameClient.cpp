@@ -39,6 +39,7 @@
 #include <algorithm>
 #include <cstring>
 #include <iterator>
+#include <memory>
 #include <utility>
 
 using namespace KODI;
@@ -287,7 +288,7 @@ bool CGameClient::InitializeGameplay(const std::string& gamePath, RETRO::IStream
     m_gamePath        = gamePath;
     m_input           = input;
 
-    m_inGameSaves.reset(new CGameClientInGameSaves(this, &m_struct));
+    m_inGameSaves = std::make_unique<CGameClientInGameSaves>(this, &m_struct);
     m_inGameSaves->Load();
 
     return true;

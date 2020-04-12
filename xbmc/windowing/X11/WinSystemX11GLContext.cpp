@@ -29,6 +29,7 @@
 #include "platform/freebsd/OptionalsReg.h"
 #include "platform/linux/OptionalsReg.h"
 
+#include <memory>
 #include <vector>
 
 #include <X11/Xlib.h>
@@ -338,7 +339,7 @@ std::unique_ptr<CVideoSync> CWinSystemX11GLContext::GetVideoSync(void *clock)
 
   if (dynamic_cast<CGLContextEGL*>(m_pGLContext))
   {
-    pVSync.reset(new CVideoSyncOML(clock, *this));
+    pVSync = std::make_unique<CVideoSyncOML>(clock, *this);
   }
   else
   {

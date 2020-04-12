@@ -8,6 +8,8 @@
 
 #include "ConversionMatrix.h"
 
+#include <memory>
+
 //------------------------------------------------------------------------------
 // constants for primaries and transfers functions and color models
 //------------------------------------------------------------------------------
@@ -415,7 +417,7 @@ void CConvertMatrix::SetColPrimaries(AVColorPrimaries dst, AVColorPrimaries src)
     PrimaryToRGB toRGB(primToRGB.primaries, primToRGB.whitepoint);
 
     CMatrix<3> tmp = toRGB*toXYZ;
-    m_pMatPrim.reset(new CMatrix<3>(tmp));
+    m_pMatPrim = std::make_unique<CMatrix<3>>(tmp);
   }
   else
   {
@@ -456,7 +458,7 @@ void CConvertMatrix::GenMat()
 
   ConversionToRGB mConvRGB(convYCbCr.Kr, convYCbCr.Kb);
 
-  m_pMat.reset(new CGlMatrix(mConvRGB.Get()));
+  m_pMat = std::make_unique<CGlMatrix>(mConvRGB.Get());
 
   CTranslate trans(0, -0.5, -0.5);
   *m_pMat *= trans;

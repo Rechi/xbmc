@@ -10,11 +10,13 @@
 
 #include "utils/log.h"
 
+#include <memory>
+
 using namespace DRMPRIME;
 
 void CDRMPRIMETexture::Init(EGLDisplay eglDisplay)
 {
-  m_eglImage.reset(new CEGLImage(eglDisplay));
+  m_eglImage = std::make_unique<CEGLImage>(eglDisplay);
 }
 
 bool CDRMPRIMETexture::Map(CVideoBufferDRMPRIME* buffer)

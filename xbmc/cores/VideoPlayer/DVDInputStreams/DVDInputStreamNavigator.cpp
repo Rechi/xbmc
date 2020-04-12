@@ -28,6 +28,8 @@
 #include "platform/Environment.h"
 #endif
 
+#include <memory>
+
 #define HOLDMODE_NONE 0
 #define HOLDMODE_HELD 1 /* set internally when we wish to flush demuxer */
 #define HOLDMODE_SKIP 2 /* set by inputstream user, when they wish to skip the held mode */
@@ -109,7 +111,8 @@ bool CDVDInputStreamNavigator::Open()
   if (m_item.IsDiscImage())
   {
     // if dvd image file (ISO or alike) open using libdvdnav stream callback functions
-    m_pstream.reset(new CDVDInputStreamFile(m_item, XFILE::READ_TRUNCATED | XFILE::READ_BITRATE | XFILE::READ_CHUNKED));
+    m_pstream = std::make_unique<CDVDInputStreamFile>(
+        m_item, XFILE::READ_TRUNCATED | XFILE::READ_BITRATE | XFILE::READ_CHUNKED);
     if (!m_pstream->Open() || m_dll.dvdnav_open_stream(&m_dvdnav, m_pstream.get(), &m_dvdnav_stream_cb) != DVDNAV_STATUS_OK)
     {
       CLog::Log(LOGERROR, "Error opening image file or Error on dvdnav_open_stream\n");
