@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include <cstring>
 #include <cstdint>
+#include <cstring>
 
 class CAEDeviceInfo;
 

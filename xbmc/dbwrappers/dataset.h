@@ -14,10 +14,10 @@
 
 #include "qry_dat.h"
 
+#include <cstdarg>
 #include <cstdio>
 #include <list>
 #include <map>
-#include <cstdarg>
 #include <string>
 #include <vector>
 

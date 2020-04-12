@@ -20,8 +20,8 @@
 #include "threads/Event.h"
 #include "utils/Geometry.h"
 
-#include <map>
 #include <cmath>
+#include <map>
 #include <memory>
 #include <string>
 #include <vector>

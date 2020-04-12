@@ -10,8 +10,8 @@
 
 #include "IMemoryStream.h"
 
-#include <memory>
 #include <cstdint>
+#include <memory>
 
 namespace KODI
 {

@@ -9,7 +9,7 @@
 #pragma once
 
 #include <cassert> /* assert */
-#include <cstdarg>     /* va_list, va_start, va_arg, va_end */
+#include <cstdarg> /* va_list, va_start, va_arg, va_end */
 #include <cstdlib>
 #include <cstring>
 #include <ctime>

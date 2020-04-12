@@ -16,8 +16,8 @@
 #include "threads/SharedSection.h"
 #include "utils/ILocalizer.h"
 
-#include <map>
 #include <cstdint>
+#include <map>
 #include <string>
 
 /*!

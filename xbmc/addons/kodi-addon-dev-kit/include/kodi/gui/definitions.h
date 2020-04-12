@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include <string>
 #include <ctime>
+#include <string>
 
 /*
  * Internal Structures to have "C"-Style data transfer

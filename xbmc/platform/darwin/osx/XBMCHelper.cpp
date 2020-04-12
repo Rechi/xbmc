@@ -24,8 +24,8 @@
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
 
-#include <fstream>
 #include <csignal>
+#include <fstream>
 #include <sstream>
 
 #include <mach-o/dyld.h>

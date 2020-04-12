@@ -11,8 +11,8 @@
 #include "AEChannelInfo.h"
 #include "AEPackIEC61937.h"
 
-#include <list>
 #include <cstdint>
+#include <list>
 
 class CAEStreamInfo;
 

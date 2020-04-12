@@ -11,9 +11,9 @@
 #include "guilib/ISliderCallback.h"
 #include "utils/ILocalizer.h"
 
+#include <cstdlib>
 #include <functional>
 #include <memory>
-#include <cstdlib>
 #include <string>
 
 class CGUIControl;

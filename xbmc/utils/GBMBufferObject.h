@@ -10,8 +10,8 @@
 
 #include "utils/BufferObject.h"
 
-#include <memory>
 #include <cstdint>
+#include <memory>
 
 struct gbm_bo;
 struct gbm_device;

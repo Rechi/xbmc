@@ -12,9 +12,9 @@
 
 #pragma once
 
+#include <cstdint>
 #include <iostream>
 #include <map>
-#include <cstdint>
 #include <string>
 #include <vector>
 

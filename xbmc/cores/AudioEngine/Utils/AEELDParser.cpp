@@ -12,9 +12,9 @@
 #include "utils/EndianSwap.h"
 
 #include <algorithm>
-#include <functional>
 #include <cstdio>
 #include <cstring>
+#include <functional>
 
 #define GRAB_BITS(buf, byte, lowbit, bits) ((buf[byte] >> (lowbit)) & ((1 << (bits)) - 1))
 

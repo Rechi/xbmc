@@ -10,8 +10,8 @@
 
 #include <algorithm>
 #include <cassert>
-#include <limits>
 #include <cstring>
+#include <limits>
 
 CAEChannelInfo::CAEChannelInfo()
 {

@@ -30,8 +30,8 @@
 #include "video/VideoInfoTag.h"
 #include "video/VideoThumbLoader.h"
 
-#include <map>
 #include <cstring>
+#include <map>
 
 using namespace MUSIC_INFO;
 using namespace JSONRPC;

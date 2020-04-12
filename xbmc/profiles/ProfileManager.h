@@ -13,8 +13,8 @@
 #include "settings/lib/ISettingsHandler.h"
 #include "threads/CriticalSection.h"
 
-#include <memory>
 #include <cstdint>
+#include <memory>
 #include <vector>
 
 class CEventLog;

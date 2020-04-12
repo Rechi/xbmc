@@ -11,8 +11,8 @@
 #include "Utils/AEAudioFormat.h"
 #include "Utils/AEDeviceInfo.h"
 
-#include <map>
 #include <cstdint>
+#include <map>
 #include <string>
 #include <vector>
 

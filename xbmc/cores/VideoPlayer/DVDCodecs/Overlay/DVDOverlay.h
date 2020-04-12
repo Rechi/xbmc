@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include <cassert>
 #include <atomic>
+#include <cassert>
 #include <vector>
 
 enum DVDOverlayType

@@ -10,9 +10,9 @@
 
 #include "IEncoder.h"
 
-#include <memory>
 #include <cstdint>
 #include <cstdio>
+#include <memory>
 #include <string>
 
 #define WRITEBUFFER_SIZE 131072 // 128k buffer

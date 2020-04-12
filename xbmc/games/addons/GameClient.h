@@ -14,9 +14,9 @@
 #include "threads/CriticalSection.h"
 
 #include <atomic>
+#include <cstdint>
 #include <memory>
 #include <set>
-#include <cstdint>
 #include <string>
 
 class CFileItem;

@@ -22,9 +22,9 @@
 
 #include <algorithm>
 #include <climits>
+#include <cstdint>
 #include <set>
 #include <sstream>
-#include <cstdint>
 #include <string>
 
 #include <sys/utsname.h>

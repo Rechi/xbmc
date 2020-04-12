@@ -20,8 +20,8 @@
 
 #include <atomic>
 #include <cinttypes>
-#include <iostream>
 #include <cstdlib>
+#include <iostream>
 
 static thread_local CThread* currentThread;
 

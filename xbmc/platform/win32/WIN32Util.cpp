@@ -636,10 +636,10 @@ extern "C" {
 
   typedef unsigned char u_char;
   typedef unsigned int uint;
-  #include <cctype>
-  #include <clocale>
-  #include <cstring>
-  #include <ctime>
+#include <cctype>
+#include <clocale>
+#include <cstring>
+#include <ctime>
 
   #ifdef __weak_alias
   __weak_alias(strptime,_strptime)

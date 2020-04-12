@@ -45,8 +45,8 @@
 #include "platform/darwin/osx/XBMCHelper.h"
 #include "platform/darwin/osx/powermanagement/CocoaPowerSyscall.h"
 
-#include <cstdlib>
 #include <csignal>
+#include <cstdlib>
 
 #import <Cocoa/Cocoa.h>
 #import <IOKit/graphics/IOGraphicsLib.h>

@@ -8,8 +8,8 @@
 
 #include "auto_buffer.h"
 
-#include <new> // for std::bad_alloc
 #include <cstdlib> // for malloc(), realloc() and free()
+#include <new> // for std::bad_alloc
 
 using namespace XUTILS;
 

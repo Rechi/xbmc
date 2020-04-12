@@ -19,9 +19,9 @@
 #include <algorithm>
 #include <cassert>
 #include <cstddef>
+#include <cstdint>
 #include <cstring>
 #include <memory>
-#include <cstdint>
 #include <vector>
 
 #define FONT_CACHE_TIME_LIMIT (1000)

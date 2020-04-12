@@ -10,8 +10,8 @@
 
 #pragma once
 
-#include <map>
 #include <cstring>
+#include <map>
 #include <vector>
 
 #include <arpa/inet.h>

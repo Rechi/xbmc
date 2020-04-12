@@ -24,8 +24,8 @@
 #include "video/VideoInfoTag.h"
 
 #include <cassert>
-#include <cstdlib>
 #include <cinttypes>
+#include <cstdlib>
 
 using namespace MUSIC_INFO;
 

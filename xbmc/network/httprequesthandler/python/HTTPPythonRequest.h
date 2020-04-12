@@ -11,8 +11,8 @@
 #include "XBDateTime.h"
 #include "network/httprequesthandler/IHTTPRequestHandler.h"
 
-#include <map>
 #include <cstdint>
+#include <map>
 #include <string>
 
 typedef struct HTTPPythonRequest

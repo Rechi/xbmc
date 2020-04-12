@@ -9,8 +9,8 @@
 #pragma once
 
 #include <cstdint>
-#include <string>
 #include <ctime>
+#include <string>
 
 class CDateTime;
 

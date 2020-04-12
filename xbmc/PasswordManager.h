@@ -10,8 +10,8 @@
 
 #include "threads/CriticalSection.h"
 
-#include <map>
 #include <cstdint>
+#include <map>
 #include <string>
 
 class CURL;

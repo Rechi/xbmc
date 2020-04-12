@@ -13,9 +13,9 @@
 #include "threads/CriticalSection.h"
 #include "utils/Observer.h"
 
-#include <memory>
 #include <cstddef>
 #include <cstdint>
+#include <memory>
 
 namespace KODI
 {

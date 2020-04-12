@@ -10,8 +10,8 @@
 #include "threads/IRunnable.h"
 #include "threads/test/TestHelpers.h"
 
-#include <memory>
 #include <cstdio>
+#include <memory>
 
 using namespace XbmcThreads;
 

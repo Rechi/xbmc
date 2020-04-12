@@ -16,8 +16,8 @@
 #include "utils/log.h"
 
 #include <algorithm>
-#include <map>
 #include <cstring>
+#include <map>
 
 #include <fcntl.h>
 #include <linux/input.h>

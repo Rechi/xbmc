@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include <ctime>
 #include <cstdint>
+#include <ctime>
 #include <string>
 
 class CFTPParse

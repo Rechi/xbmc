@@ -10,8 +10,8 @@
 
 #include "XBTF.h"
 
-#include <memory>
 #include <cstdint>
+#include <memory>
 #include <string>
 #include <vector>
 

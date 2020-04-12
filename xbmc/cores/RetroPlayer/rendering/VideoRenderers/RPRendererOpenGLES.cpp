@@ -15,8 +15,8 @@
 #include "utils/GLUtils.h"
 #include "utils/log.h"
 
-#include <cstring>
 #include <cstddef>
+#include <cstring>
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 

@@ -9,9 +9,9 @@
 #include "utils/MemUtils.h"
 
 #include <array>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <cstdio>
 
 #include <unistd.h> /* FreeBSD can't write standalone headers */
 #include <sys/sysctl.h> /* FreeBSD can't write standalone headers */

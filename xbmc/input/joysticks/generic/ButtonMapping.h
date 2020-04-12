@@ -15,9 +15,9 @@
 #include "input/mouse/MouseTypes.h"
 #include "input/mouse/interfaces/IMouseDriverHandler.h"
 
+#include <cstdint>
 #include <map>
 #include <memory>
-#include <cstdint>
 
 class IKeymap;
 

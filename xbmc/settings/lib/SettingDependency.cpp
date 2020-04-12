@@ -15,9 +15,9 @@
 #include "utils/XBMCTinyXML.h"
 #include "utils/log.h"
 
+#include <cstdlib>
 #include <memory>
 #include <set>
-#include <cstdlib>
 #include <string>
 
 CSettingDependencyCondition::CSettingDependencyCondition(CSettingsManager *settingsManager /* = nullptr */)

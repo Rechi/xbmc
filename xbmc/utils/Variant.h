@@ -8,11 +8,11 @@
 
 #pragma once
 
-#include <map>
 #include <cstdint>
+#include <cwchar>
+#include <map>
 #include <string>
 #include <vector>
-#include <cwchar>
 
 int64_t str2int64(const std::string &str, int64_t fallback = 0);
 int64_t str2int64(const std::wstring &str, int64_t fallback = 0);

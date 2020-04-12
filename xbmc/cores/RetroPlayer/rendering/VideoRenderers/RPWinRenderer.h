@@ -13,8 +13,8 @@
 #include "cores/RetroPlayer/buffers/video/RenderBufferSysMem.h"
 #include "cores/RetroPlayer/process/RPProcessInfo.h"
 
-#include <memory>
 #include <cstdint>
+#include <memory>
 #include <vector>
 
 #include <dxgi.h>

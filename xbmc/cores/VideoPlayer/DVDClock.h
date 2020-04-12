@@ -10,8 +10,8 @@
 
 #include "threads/CriticalSection.h"
 
-#include <memory>
 #include <cstdint>
+#include <memory>
 
 class CVideoReferenceClock;
 

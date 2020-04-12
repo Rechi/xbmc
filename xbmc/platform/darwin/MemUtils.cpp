@@ -9,9 +9,9 @@
 #include "utils/MemUtils.h"
 
 #include <array>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <cstdio>
 
 #include <mach/mach.h>
 #include <sys/sysctl.h>

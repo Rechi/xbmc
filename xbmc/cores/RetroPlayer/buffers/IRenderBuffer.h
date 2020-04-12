@@ -12,8 +12,8 @@ extern "C" {
 #include <libavutil/pixfmt.h>
 }
 
-#include <memory>
 #include <cstdint>
+#include <memory>
 
 namespace KODI
 {

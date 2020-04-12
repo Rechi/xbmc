@@ -11,9 +11,9 @@
 #include "JSONRPCUtils.h"
 #include "JSONServiceDescription.h"
 
+#include <cstdio>
 #include <iostream>
 #include <map>
-#include <cstdio>
 #include <string>
 
 class CVariant;
