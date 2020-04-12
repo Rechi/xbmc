@@ -20,6 +20,7 @@
 #include "commons/Exception.h"
 
 #include <map>
+#include <memory>
 #include <vector>
 
 
@@ -86,7 +87,7 @@ namespace XBMCAddon
       static inline AddonClass::Ref<ListItem> fromString(const String& str)
       {
         AddonClass::Ref<ListItem> ret = AddonClass::Ref<ListItem>(new ListItem());
-        ret->item.reset(new CFileItem(str));
+        ret->item = std::make_shared<CFileItem>(str);
         return ret;
       }
 #endif

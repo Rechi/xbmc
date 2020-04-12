@@ -320,7 +320,7 @@ int CPVRDatabase::Get(CPVRChannelGroup& results, bool bCompressDB)
     {
       while (!m_pDS->eof())
       {
-        std::shared_ptr<CPVRChannel> channel = std::shared_ptr<CPVRChannel>(new CPVRChannel());
+        std::shared_ptr<CPVRChannel> channel = std::make_shared<CPVRChannel>();
 
         channel->m_iChannelId = m_pDS->fv("idChannel").get_asInt();
         channel->m_iUniqueId = m_pDS->fv("iUniqueId").get_asInt();

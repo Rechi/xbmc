@@ -28,6 +28,8 @@
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
 
+#include <memory>
+
 using namespace MUSIC_INFO;
 using namespace JSONRPC;
 using namespace XFILE;
@@ -465,7 +467,7 @@ JSONRPC_STATUS CAudioLibrary::GetSongDetails(const std::string &method, ITranspo
     return InvalidParams;
 
   CFileItemList items;
-  CFileItemPtr item = CFileItemPtr(new CFileItem(song));
+  CFileItemPtr item = std::make_shared<CFileItem>(song);
   FillItemArtistIDs(song.GetArtistIDArray(), item);
   items.Add(item);
 
@@ -1033,7 +1035,7 @@ bool CAudioLibrary::FillFileItemList(const CVariant &parameterObject, CFileItemL
     CSong song;
     if (musicdatabase.GetSong(songID, song))
     {
-      list.Add(CFileItemPtr(new CFileItem(song)));
+      list.Add(std::make_shared<CFileItem>(song));
       success = true;
     }
   }
@@ -1069,7 +1071,7 @@ void CAudioLibrary::FillItemArtistIDs(const std::vector<int> artistids, CFileIte
 
 void CAudioLibrary::FillAlbumItem(const CAlbum &album, const std::string &path, CFileItemPtr &item)
 {
-  item = CFileItemPtr(new CFileItem(path, album));
+  item = std::make_shared<CFileItem>(path, album);
   // Add album artistIds as separate property as not part of CMusicInfoTag
   std::vector<int> artistids = album.GetArtistIDArray();
   FillItemArtistIDs(artistids, item);

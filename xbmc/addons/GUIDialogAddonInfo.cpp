@@ -39,6 +39,7 @@
 #include "utils/log.h"
 
 #include <functional>
+#include <memory>
 #include <sstream>
 #include <utility>
 
@@ -59,7 +60,7 @@ using namespace KODI::MESSAGING;
 CGUIDialogAddonInfo::CGUIDialogAddonInfo(void)
   : CGUIDialog(WINDOW_DIALOG_ADDON_INFO, "DialogAddonInfo.xml")
 {
-  m_item = CFileItemPtr(new CFileItem);
+  m_item = std::make_shared<CFileItem>();
   m_loadType = KEEP_IN_MEMORY;
 }
 
@@ -533,7 +534,7 @@ bool CGUIDialogAddonInfo::ShowDependencyList(const std::vector<ADDON::Dependency
       if (CServiceBroker::GetAddonMgr().FindInstallableById(addon_id, dep_addon))
       {
         Close();
-        ShowForItem(CFileItemPtr(new CFileItem(dep_addon)));
+        ShowForItem(std::make_shared<CFileItem>(dep_addon));
       }
     }
     else

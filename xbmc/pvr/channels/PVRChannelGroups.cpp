@@ -78,7 +78,8 @@ bool CPVRChannelGroups::Update(const CPVRChannelGroup& group, bool bUpdateFromCl
     {
       // create a new group if none was found. Copy the properties immediately
       // so the group doesn't get flagged as "changed" further down.
-      updateGroup.reset(new CPVRChannelGroup(CPVRChannelsPath(group.IsRadio(), group.GroupName()), group.GroupID(), GetGroupAll()));
+      updateGroup = std::make_shared<CPVRChannelGroup>(
+          CPVRChannelsPath(group.IsRadio(), group.GroupName()), group.GroupID(), GetGroupAll());
       m_groups.push_back(updateGroup);
     }
 

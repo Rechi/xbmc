@@ -31,6 +31,7 @@
 #include "video/VideoInfoTag.h"
 
 #include <algorithm>
+#include <memory>
 
 #include <Platinum/Source/Platinum/Platinum.h>
 
@@ -1113,7 +1114,7 @@ CFileItemPtr GetFileItem(const NPT_String& uri, const NPT_String& meta)
         item->SetPath((const char*)uri);
         GetResource(object, *item);
     } else {
-        item.reset(new CFileItem((const char*)uri, false));
+        item = std::make_shared<CFileItem>((const char*)uri, false);
     }
     return item;
 }

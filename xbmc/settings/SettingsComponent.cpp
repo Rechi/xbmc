@@ -30,11 +30,13 @@
 #include "win32util.h"
 #endif
 
+#include <memory>
+
 CSettingsComponent::CSettingsComponent()
 {
-  m_advancedSettings.reset(new CAdvancedSettings());
-  m_settings.reset(new CSettings());
-  m_profileManager.reset(new CProfileManager());
+  m_advancedSettings = std::make_shared<CAdvancedSettings>();
+  m_settings = std::make_shared<CSettings>();
+  m_profileManager = std::make_shared<CProfileManager>();
 }
 
 CSettingsComponent::~CSettingsComponent()

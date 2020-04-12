@@ -20,6 +20,8 @@
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 
+#include <memory>
+
 CInputStreamProvider::CInputStreamProvider(ADDON::BinaryAddonBasePtr addonBase,
                                            KODI_HANDLE parentInstance)
   : m_addonBase(addonBase), m_parentInstance(parentInstance)
@@ -158,7 +160,8 @@ bool CInputStreamAddon::Open()
     m_caps = { 0 };
     m_struct.toAddon.get_capabilities(&m_struct, &m_caps);
 
-    m_subAddonProvider = std::shared_ptr<CInputStreamProvider>(new CInputStreamProvider(GetAddonBase(), m_struct.toAddon.addonInstance));
+    m_subAddonProvider =
+        std::make_shared<CInputStreamProvider>(GetAddonBase(), m_struct.toAddon.addonInstance);
   }
   return ret;
 }
@@ -391,7 +394,7 @@ CDemuxStream* CInputStreamAddon::GetStream(int streamId) const
 
       if (stream.m_masteringMetadata)
       {
-        videoStream->masteringMetaData = std::shared_ptr<AVMasteringDisplayMetadata>(new AVMasteringDisplayMetadata);
+        videoStream->masteringMetaData = std::make_shared<AVMasteringDisplayMetadata>();
         videoStream->masteringMetaData->display_primaries[0][0] = av_d2q(stream.m_masteringMetadata->primary_r_chromaticity_x, INT_MAX);
         videoStream->masteringMetaData->display_primaries[0][1] = av_d2q(stream.m_masteringMetadata->primary_r_chromaticity_y, INT_MAX);
         videoStream->masteringMetaData->display_primaries[1][0] = av_d2q(stream.m_masteringMetadata->primary_g_chromaticity_x, INT_MAX);
@@ -407,7 +410,7 @@ CDemuxStream* CInputStreamAddon::GetStream(int streamId) const
 
       if (stream.m_contentLightMetadata)
       {
-        videoStream->contentLightMetaData = std::shared_ptr<AVContentLightMetadata>(new AVContentLightMetadata);
+        videoStream->contentLightMetaData = std::make_shared<AVContentLightMetadata>();
         videoStream->contentLightMetaData->MaxCLL = static_cast<unsigned>(stream.m_contentLightMetadata->max_cll);
         videoStream->contentLightMetaData->MaxFALL = static_cast<unsigned>(stream.m_contentLightMetadata->max_fall);
       }
@@ -464,8 +467,9 @@ CDemuxStream* CInputStreamAddon::GetStream(int streamId) const
         CRYPTO_SESSION_SYSTEM_PLAYREADY,
         CRYPTO_SESSION_SYSTEM_WISEPLAY,
     };
-    demuxStream->cryptoSession = std::shared_ptr<DemuxCryptoSession>(new DemuxCryptoSession(
-      map[stream.m_cryptoInfo.m_CryptoKeySystem], stream.m_cryptoInfo.m_CryptoSessionIdSize, stream.m_cryptoInfo.m_CryptoSessionId, stream.m_cryptoInfo.flags));
+    demuxStream->cryptoSession = std::make_shared<DemuxCryptoSession>(
+        map[stream.m_cryptoInfo.m_CryptoKeySystem], stream.m_cryptoInfo.m_CryptoSessionIdSize,
+        stream.m_cryptoInfo.m_CryptoSessionId, stream.m_cryptoInfo.flags);
 
     if ((stream.m_features & INPUTSTREAM_INFO::FEATURE_DECODE) != 0)
       demuxStream->externalInterfaces = m_subAddonProvider;

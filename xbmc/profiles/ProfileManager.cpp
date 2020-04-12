@@ -59,6 +59,8 @@
 #include "ContextMenuManager.h" //! @todo Remove me
 #include "PlayListPlayer.h" //! @todo Remove me
 
+#include <memory>
+
 //! @todo
 //! eventually the profile should dictate where special://masterprofile/ is
 //! but for now it makes sense to leave all the profile settings in a user
@@ -498,7 +500,8 @@ bool CProfileManager::DeleteProfile(unsigned int index)
     m_settings->Save();
   }
 
-  CFileItemPtr item = CFileItemPtr(new CFileItem(URIUtils::AddFileToFolder(GetUserDataFolder(), strDirectory)));
+  CFileItemPtr item =
+      std::make_shared<CFileItem>(URIUtils::AddFileToFolder(GetUserDataFolder(), strDirectory));
   item->SetPath(URIUtils::AddFileToFolder(GetUserDataFolder(), strDirectory + "/"));
   item->m_bIsFolder = true;
   item->Select(true);

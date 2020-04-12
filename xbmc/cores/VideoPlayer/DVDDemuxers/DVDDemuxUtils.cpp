@@ -11,6 +11,8 @@
 #include "utils/log.h"
 #include "utils/MemUtils.h"
 
+#include <memory>
+
 extern "C" {
 #include <libavcodec/avcodec.h>
 }
@@ -66,7 +68,7 @@ DemuxPacket* CDVDDemuxUtils::AllocateDemuxPacket(unsigned int iDataSize, unsigne
 {
   DemuxPacket *ret(AllocateDemuxPacket(iDataSize));
   if (ret && encryptedSubsampleCount > 0)
-    ret->cryptoInfo = std::shared_ptr<DemuxCryptoInfo>(new DemuxCryptoInfo(encryptedSubsampleCount));
+    ret->cryptoInfo = std::make_shared<DemuxCryptoInfo>(encryptedSubsampleCount);
   return ret;
 }
 

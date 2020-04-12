@@ -15,6 +15,7 @@
 #include "utils/GLUtils.h"
 #include "utils/log.h"
 
+#include <memory>
 #include <sstream>
 #include <string>
 
@@ -60,7 +61,7 @@ BaseYUV2RGBGLSLShader::BaseYUV2RGBGLSLShader(EShaderFormat format, AVColorPrimar
 
   CLog::Log(LOGDEBUG, "GLES: BaseYUV2RGBGLSLShader: defines:\n%s", m_defines.c_str());
 
-  m_pConvMatrix.reset(new CConvertMatrix());
+  m_pConvMatrix = std::make_shared<CConvertMatrix>();
   m_pConvMatrix->SetColPrimaries(dstPrimaries, srcPrimaries);
 }
 

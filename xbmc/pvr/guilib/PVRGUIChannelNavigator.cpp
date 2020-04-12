@@ -23,6 +23,8 @@
 #include "utils/JobManager.h"
 #include "utils/XTimeUtils.h"
 
+#include <memory>
+
 namespace
 {
 class CPVRChannelTimeoutJobBase : public CJob, public IJobCallback
@@ -171,7 +173,7 @@ namespace PVR
         m_iChannelEntryJobId = -1;
       }
 
-      item.reset(new CFileItem(m_currentChannel));
+      item = std::make_shared<CFileItem>(m_currentChannel);
     }
 
     if (item)
@@ -237,7 +239,7 @@ namespace PVR
       {
         m_currentChannel = m_playingChannel;
         if (m_playingChannel)
-          item.reset(new CFileItem(m_playingChannel));
+          item = std::make_shared<CFileItem>(m_playingChannel);
       }
     }
 
@@ -266,7 +268,7 @@ namespace PVR
       {
         m_currentChannel = m_playingChannel;
         if (m_playingChannel)
-          item.reset(new CFileItem(m_playingChannel));
+          item = std::make_shared<CFileItem>(m_playingChannel);
       }
     }
 

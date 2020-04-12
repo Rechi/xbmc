@@ -18,6 +18,8 @@
 #include "video/VideoDatabase.h"
 #include "video/VideoDbUrl.h"
 
+#include <memory>
+
 using namespace XFILE::VIDEODATABASEDIRECTORY;
 
 bool CVideoFileItemListModifier::CanModify(const CFileItemList &items) const
@@ -65,7 +67,7 @@ void CVideoFileItemListModifier::AddQueuingFolder(CFileItemList& items)
   case NODE_TYPE_SEASONS:
   {
     std::string strLabel = g_localizeStrings.Get(20366);
-    pItem.reset(new CFileItem(strLabel));  // "All Seasons"
+    pItem = std::make_shared<CFileItem>(strLabel); // "All Seasons"
     videoUrl.AppendPath("-1/");
     pItem->SetPath(videoUrl.ToString());
     // set the number of watched and unwatched items accordingly
@@ -99,7 +101,7 @@ void CVideoFileItemListModifier::AddQueuingFolder(CFileItemList& items)
   }
   break;
   case NODE_TYPE_MUSICVIDEOS_ALBUM:
-    pItem.reset(new CFileItem(g_localizeStrings.Get(15102)));  // "All Albums"
+    pItem = std::make_shared<CFileItem>(g_localizeStrings.Get(15102)); // "All Albums"
     videoUrl.AppendPath("-1/");
     pItem->SetPath(videoUrl.ToString());
     break;

@@ -327,13 +327,13 @@ void CPVRManager::ResetProperties()
   CSingleLock lock(m_critSection);
   Clear();
 
-  m_database.reset(new CPVRDatabase);
-  m_channelGroups.reset(new CPVRChannelGroupsContainer);
-  m_recordings.reset(new CPVRRecordings);
-  m_timers.reset(new CPVRTimers);
+  m_database = std::make_shared<CPVRDatabase>();
+  m_channelGroups = std::make_shared<CPVRChannelGroupsContainer>();
+  m_recordings = std::make_shared<CPVRRecordings>();
+  m_timers = std::make_shared<CPVRTimers>();
   m_guiInfo.reset(new CPVRGUIInfo);
   m_parentalTimer.reset(new CStopWatch);
-  m_playbackState.reset(new CPVRPlaybackState);
+  m_playbackState = std::make_shared<CPVRPlaybackState>();
 }
 
 void CPVRManager::Init()
