@@ -19,9 +19,9 @@
 #include "utils/log.h"
 
 #include <atomic>
-#include <inttypes.h>
+#include <cinttypes>
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
 
 static thread_local CThread* currentThread;
 

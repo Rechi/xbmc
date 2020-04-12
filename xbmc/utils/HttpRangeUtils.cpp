@@ -16,7 +16,7 @@
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
 
-#include <inttypes.h>
+#include <cinttypes>
 
 #define HEADER_NEWLINE        "\r\n"
 #define HEADER_SEPARATOR      HEADER_NEWLINE HEADER_NEWLINE

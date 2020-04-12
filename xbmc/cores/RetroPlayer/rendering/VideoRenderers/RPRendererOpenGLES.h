@@ -15,7 +15,7 @@
 #include "cores/RetroPlayer/process/RPProcessInfo.h"
 
 #include <atomic>
-#include <stdint.h>
+#include <cstdint>
 #include <vector>
 
 #include "system_gl.h"

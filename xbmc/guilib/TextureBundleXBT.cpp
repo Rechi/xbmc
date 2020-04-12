@@ -21,7 +21,7 @@
 #include "utils/log.h"
 #include "windowing/GraphicContext.h"
 
-#include <inttypes.h>
+#include <cinttypes>
 
 #include <lzo/lzo1x.h>
 

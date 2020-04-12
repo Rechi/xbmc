@@ -10,11 +10,11 @@
 
 #include <string>
 #include <vector>
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <stdarg.h>
+#include <cstring>
+#include <cstdlib>
+#include <cstdio>
+#include <cstdint>
+#include <cstdarg>
 
 #include "versions.h"
 #if defined(BUILD_KODI_ADDON)

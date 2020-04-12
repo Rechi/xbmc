@@ -17,7 +17,7 @@
 
 #include <memory>
 #include <set>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string>
 
 CSettingDependencyCondition::CSettingDependencyCondition(CSettingsManager *settingsManager /* = nullptr */)

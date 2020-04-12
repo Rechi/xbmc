@@ -13,7 +13,7 @@
 #include "platform/linux/RBP.h"
 
 #include <cassert>
-#include <math.h>
+#include <cmath>
 
 #include <sys/time.h>
 

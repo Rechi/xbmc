@@ -8,7 +8,7 @@
 
 #include "Vector.h"
 
-#include <math.h>
+#include <cmath>
 
 CVector& CVector::operator+=(const CVector &other)
 {

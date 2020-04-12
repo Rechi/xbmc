@@ -14,7 +14,7 @@
 #else
 #include "cores/AudioEngine/Utils/AEChannelData.h"
 #endif
-#include <stdint.h>
+#include <cstdint>
 
 namespace kodi
 {

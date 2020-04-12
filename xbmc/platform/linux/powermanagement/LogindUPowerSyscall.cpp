@@ -11,7 +11,7 @@
 
 #include "utils/log.h"
 
-#include <string.h>
+#include <cstring>
 
 #include <unistd.h>
 

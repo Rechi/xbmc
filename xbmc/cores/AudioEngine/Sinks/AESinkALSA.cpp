@@ -21,10 +21,10 @@
 #include "utils/log.h"
 
 #include <algorithm>
-#include <limits.h>
+#include <climits>
 #include <set>
 #include <sstream>
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 #include <sys/utsname.h>

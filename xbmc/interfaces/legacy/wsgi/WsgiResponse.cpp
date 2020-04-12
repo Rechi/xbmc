@@ -11,7 +11,7 @@
 #include "utils/StringUtils.h"
 #include "utils/log.h"
 
-#include <inttypes.h>
+#include <cinttypes>
 #include <utility>
 
 namespace XBMCAddon

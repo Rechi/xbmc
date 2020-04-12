@@ -15,7 +15,7 @@
 
 #include "XBMC_keysym.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 /* Keysym structure
    - The scancode is hardware dependent, and should not be used by general

@@ -23,7 +23,7 @@
 #endif
 
 using namespace XFILE;
-#include <limits.h>
+#include <climits>
 #include <nfsc/libnfs.h>
 #include <nfsc/libnfs-raw-nfs.h>
 

@@ -20,7 +20,7 @@
 #include "windowing/WinSystem.h"
 #include "windowing/ios/WinSystemIOS.h"
 
-#include <signal.h>
+#include <csignal>
 
 #import <Foundation/Foundation.h>
 #include <objc/runtime.h>

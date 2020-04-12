@@ -11,7 +11,7 @@
 #include "input/touch/ITouchInputHandling.h"
 
 #include <atomic>
-#include <stdint.h>
+#include <cstdint>
 
 /*!
  * \ingroup touch

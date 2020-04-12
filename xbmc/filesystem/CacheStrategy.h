@@ -10,7 +10,7 @@
 
 #include "threads/Event.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 namespace XFILE {

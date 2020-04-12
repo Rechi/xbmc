@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 
 class BitstreamStats final
 {

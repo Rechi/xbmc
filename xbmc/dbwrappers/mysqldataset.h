@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <stdio.h>
+#include <cstdio>
 #include "dataset.h"
 #ifdef HAS_MYSQL
 #include <mysql/mysql.h>

@@ -12,7 +12,7 @@
 #include "interfaces/legacy/Exception.h"
 #include "interfaces/legacy/Window.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 #include <typeindex>
 

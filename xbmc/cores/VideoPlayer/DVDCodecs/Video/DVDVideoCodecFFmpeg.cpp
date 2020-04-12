@@ -39,7 +39,7 @@ extern "C" {
 #ifndef TARGET_POSIX
 #define RINT(x) ((x) >= 0 ? ((int)((x) + 0.5)) : ((int)((x) - 0.5)))
 #else
-#include <math.h>
+#include <cmath>
 #define RINT lrint
 #endif
 

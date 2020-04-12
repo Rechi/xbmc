@@ -16,7 +16,7 @@
 
 #include "Environment.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 
 // --------------------- Main Functions ---------------------

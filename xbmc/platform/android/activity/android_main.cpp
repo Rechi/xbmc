@@ -24,8 +24,8 @@
 #include "platform/android/activity/JNIXBMCSurfaceTextureOnFrameAvailableListener.h"
 #include "platform/android/activity/JNIXBMCVideoView.h"
 
-#include <errno.h>
-#include <stdlib.h>
+#include <cerrno>
+#include <cstdlib>
 
 #include <android_native_app_glue.h>
 #include <androidjni/SurfaceTexture.h>

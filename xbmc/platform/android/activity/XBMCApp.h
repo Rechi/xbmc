@@ -21,7 +21,7 @@
 #include "utils/Geometry.h"
 
 #include <map>
-#include <math.h>
+#include <cmath>
 #include <memory>
 #include <string>
 #include <vector>

@@ -6,9 +6,9 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <inttypes.h>
-#include <stdio.h>
-#include <string.h>
+#include <cinttypes>
+#include <cstdio>
+#include <cstring>
 #include <sys/stat.h>
 
 #include "XBTFReader.h"

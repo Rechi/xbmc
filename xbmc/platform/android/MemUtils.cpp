@@ -10,7 +10,7 @@
 
 #include "platform/android/activity/XBMCApp.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 namespace KODI
 {

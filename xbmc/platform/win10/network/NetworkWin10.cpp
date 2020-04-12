@@ -15,10 +15,10 @@
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 
-#include <errno.h>
+#include <cerrno>
 #include <iphlpapi.h>
 #include <ppltasks.h>
-#include <string.h>
+#include <cstring>
 #include <Ws2tcpip.h>
 #include <ws2ipdef.h>
 

@@ -10,7 +10,7 @@
 
 #include "cores/RetroPlayer/buffers/BaseRenderBuffer.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <vector>
 
 extern "C" {

@@ -10,7 +10,7 @@
 
 #include "VideoSettings.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 class CFileItem;
 class CBookmark;

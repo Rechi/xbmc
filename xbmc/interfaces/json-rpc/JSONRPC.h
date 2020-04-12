@@ -13,7 +13,7 @@
 
 #include <iostream>
 #include <map>
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 
 class CVariant;

@@ -14,7 +14,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "utils/CharsetConverter.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 static std::map<std::string, std::wstring> codemap =
 {

@@ -36,7 +36,7 @@
 #endif
 #include "FFmpegImage.h"
 
-#include <inttypes.h>
+#include <cinttypes>
 
 /************************************************************************/
 /*                                                                      */

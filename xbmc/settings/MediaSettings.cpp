@@ -30,7 +30,7 @@
 #include "utils/log.h"
 #include "video/VideoDatabase.h"
 
-#include <limits.h>
+#include <climits>
 #include <string>
 
 using namespace KODI;

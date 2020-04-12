@@ -11,7 +11,7 @@
  /* Endian_SwapXX functions taken from SDL (SDL_endian.h) */
 
 #ifdef TARGET_POSIX
-#include <inttypes.h>
+#include <cinttypes>
 #elif TARGET_WINDOWS
 #define __inline__ __inline
 #include <stdint.h>

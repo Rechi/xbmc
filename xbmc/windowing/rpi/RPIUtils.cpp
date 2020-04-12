@@ -22,7 +22,7 @@
 #include "platform/linux/RBP.h"
 
 #include <cassert>
-#include <math.h>
+#include <cmath>
 
 #ifndef __VIDEOCORE4__
 #define __VIDEOCORE4__

@@ -24,7 +24,7 @@
 #include "utils/log.h"
 #include "video/VideoInfoScanner.h"
 
-#include <limits.h>
+#include <climits>
 #include <map>
 #include <memory>
 #include <string>

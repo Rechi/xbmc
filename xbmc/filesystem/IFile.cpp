@@ -13,7 +13,7 @@
 #include "URL.h"
 
 #include <cstring>
-#include <errno.h>
+#include <cerrno>
 
 using namespace XFILE;
 

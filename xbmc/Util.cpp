@@ -30,7 +30,7 @@
 #include "platform/android/activity/XBMCApp.h"
 #include "CompileInfo.h"
 #endif
-#include <stdlib.h>
+#include <cstdlib>
 #include <algorithm>
 #include <array>
 

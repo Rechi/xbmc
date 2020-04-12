@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include <stdint.h>
-#include <assert.h>
+#include <cstdint>
+#include <cassert>
 #include <climits>
 #include <cmath>
 

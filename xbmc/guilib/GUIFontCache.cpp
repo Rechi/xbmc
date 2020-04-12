@@ -9,7 +9,7 @@
 #include "GUIFontTTF.h"
 #include "windowing/GraphicContext.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <vector>
 
 template<class Position, class Value>

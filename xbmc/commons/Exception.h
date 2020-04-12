@@ -14,7 +14,7 @@
 // a header.
 #include "utils/StringUtils.h"
 //---------------------------------------------------------
-#include <stdarg.h>
+#include <cstdarg>
 
 
 #ifdef __GNUC__

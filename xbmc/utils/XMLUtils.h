@@ -10,7 +10,7 @@
 
 #include "utils/XBMCTinyXML.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 #include <vector>
 

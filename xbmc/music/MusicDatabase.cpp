@@ -60,7 +60,7 @@
 #include "utils/XMLUtils.h"
 #include "utils/log.h"
 
-#include <inttypes.h>
+#include <cinttypes>
 
 using namespace XFILE;
 using namespace MUSICDATABASEDIRECTORY;

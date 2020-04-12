@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 
 static const int dither_size = 64;
 static const int dither_size2 = 4096;

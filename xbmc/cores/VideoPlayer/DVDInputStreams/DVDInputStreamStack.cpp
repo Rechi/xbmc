@@ -13,7 +13,7 @@
 #include "filesystem/StackDirectory.h"
 #include "utils/log.h"
 
-#include <limits.h>
+#include <climits>
 
 using namespace XFILE;
 

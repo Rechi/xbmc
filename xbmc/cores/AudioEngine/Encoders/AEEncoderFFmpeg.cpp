@@ -15,7 +15,7 @@
 #include "utils/log.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
-#include <string.h>
+#include <cstring>
 #include <cassert>
 
 CAEEncoderFFmpeg::CAEEncoderFFmpeg():

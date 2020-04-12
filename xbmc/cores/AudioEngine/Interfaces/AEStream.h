@@ -9,7 +9,7 @@
 #pragma once
 
 #include "cores/AudioEngine/Utils/AEAudioFormat.h"
-#include <stdint.h>
+#include <cstdint>
 
 extern "C" {
 #include <libavcodec/avcodec.h>

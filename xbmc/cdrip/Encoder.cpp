@@ -11,7 +11,7 @@
 #include "filesystem/File.h"
 #include "utils/log.h"
 
-#include <string.h>
+#include <cstring>
 
 CEncoder::CEncoder(std::shared_ptr<IEncoder> encoder)
 {

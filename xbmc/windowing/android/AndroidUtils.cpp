@@ -19,7 +19,7 @@
 #include "platform/android/activity/XBMCApp.h"
 
 #include <cmath>
-#include <stdlib.h>
+#include <cstdlib>
 
 #include <EGL/egl.h>
 #include <androidjni/Build.h>

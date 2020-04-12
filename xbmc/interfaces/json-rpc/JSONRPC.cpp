@@ -24,7 +24,7 @@
 #include "utils/Variant.h"
 #include "utils/log.h"
 
-#include <string.h>
+#include <cstring>
 
 using namespace JSONRPC;
 

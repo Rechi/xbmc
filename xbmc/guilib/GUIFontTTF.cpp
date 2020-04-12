@@ -21,7 +21,7 @@
 #include "filesystem/File.h"
 #include "threads/SystemClock.h"
 
-#include <math.h>
+#include <cmath>
 #include <memory>
 #include <queue>
 

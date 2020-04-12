@@ -10,7 +10,7 @@
 
 #include "utils/StringUtils.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 static bool TypeIsValid(ReplayGain::Type aType)
 {

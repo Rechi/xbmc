@@ -10,7 +10,7 @@
 
 #include "DVDOverlay.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <string>
 
 class CDVDOverlayText : public CDVDOverlay

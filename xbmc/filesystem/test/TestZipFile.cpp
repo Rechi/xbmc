@@ -18,7 +18,7 @@
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 
-#include <errno.h>
+#include <cerrno>
 
 #include <gtest/gtest.h>
 

@@ -12,7 +12,7 @@
 #include "cores/AudioEngine/Utils/AEDeviceInfo.h"
 #include "threads/CriticalSection.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 class CAESinkOSS : public IAESink
 {

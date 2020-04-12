@@ -12,7 +12,7 @@
 #include "input/keyboard/KeyboardTypes.h"
 #include "input/mouse/MouseTypes.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 namespace KODI
 {

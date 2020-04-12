@@ -31,7 +31,7 @@
 #include "pvr/channels/PVRChannel.h"
 #include "pvr/recordings/PVRRecording.h"
 
-#include <math.h>
+#include <cmath>
 
 #ifdef HAS_DVD_DRIVE
 #include "Autorun.h"

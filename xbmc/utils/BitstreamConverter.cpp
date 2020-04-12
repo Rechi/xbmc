@@ -8,7 +8,7 @@
 
 #include "utils/log.h"
 
-#include <assert.h>
+#include <cassert>
 
 #ifndef UINT16_MAX
 #define UINT16_MAX             (65535U)

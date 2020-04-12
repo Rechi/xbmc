@@ -10,7 +10,7 @@
 
 #include "utils/StringUtils.h"
 
-#include <wctype.h>
+#include <cwctype>
 
 using namespace HTML;
 

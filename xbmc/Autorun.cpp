@@ -8,7 +8,7 @@
 
 #include "Autorun.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 #include "Application.h"
 #include "GUIPassword.h"

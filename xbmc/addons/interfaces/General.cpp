@@ -32,7 +32,7 @@
 #include "utils/URIUtils.h"
 #include "utils/log.h"
 
-#include <string.h>
+#include <cstring>
 
 using namespace kodi; // addon-dev-kit namespace
 using KODI::UTILITY::CDigest;

@@ -17,9 +17,9 @@
 
 #include "qry_dat.h"
 
-#include <inttypes.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cinttypes>
+#include <cstdio>
+#include <cstdlib>
 
 #ifndef __GNUC__
 #pragma warning (disable:4800)

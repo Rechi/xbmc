@@ -32,7 +32,7 @@
 #include "guilib/guiinfo/GUIInfoLabels.h"
 #include "video/ViewModeSettings.h"
 
-#include <stdio.h>
+#include <cstdio>
 #include <algorithm>
 #if defined(TARGET_DARWIN)
 #include "platform/posix/PosixResourceCounter.h"

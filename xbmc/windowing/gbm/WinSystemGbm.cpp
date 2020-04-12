@@ -27,7 +27,7 @@
 #include "platform/linux/OptionalsReg.h"
 #include "platform/linux/powermanagement/LinuxPowerSyscall.h"
 
-#include <string.h>
+#include <cstring>
 
 using namespace KODI::WINDOWING::GBM;
 

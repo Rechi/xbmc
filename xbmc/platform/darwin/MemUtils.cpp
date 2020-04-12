@@ -11,7 +11,7 @@
 #include <array>
 #include <cstdlib>
 #include <cstring>
-#include <stdio.h>
+#include <cstdio>
 
 #include <mach/mach.h>
 #include <sys/sysctl.h>

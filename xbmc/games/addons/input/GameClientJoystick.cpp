@@ -15,7 +15,7 @@
 #include "input/joysticks/interfaces/IInputReceiver.h"
 #include "utils/log.h"
 
-#include <assert.h>
+#include <cassert>
 
 using namespace KODI;
 using namespace GAME;

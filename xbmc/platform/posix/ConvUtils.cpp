@@ -6,9 +6,9 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <ctype.h>
-#include <errno.h>
-#include <stdio.h>
+#include <cctype>
+#include <cerrno>
+#include <cstdio>
 
 #include "PlatformDefs.h"
 

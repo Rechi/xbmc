@@ -18,7 +18,7 @@
 #include "utils/log.h"
 #include "utils/MemUtils.h"
 
-#include <string.h>
+#include <cstring>
 
 /**
  * This buffer can be used by one read and one write thread at any one time

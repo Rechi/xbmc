@@ -20,9 +20,9 @@
 
 #pragma once
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <sys/types.h>
 #ifdef _WIN32
 #include <winsock.h>
@@ -35,7 +35,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <time.h>
+#include <ctime>
 
 #define STD_PORT       9777
 

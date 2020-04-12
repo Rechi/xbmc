@@ -19,7 +19,7 @@
 
 #include "guilib/XBTF.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 class DllGraphicBuffer;
 

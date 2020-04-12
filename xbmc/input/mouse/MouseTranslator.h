@@ -10,7 +10,7 @@
 
 #include "MouseTypes.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 class TiXmlElement;
 

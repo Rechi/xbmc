@@ -24,7 +24,7 @@
 #include "platform/win32/CharsetConverter.h"
 
 #include <algorithm>
-#include <stdint.h>
+#include <cstdint>
 
 #include <ksmedia.h>
 #include <mfapi.h>

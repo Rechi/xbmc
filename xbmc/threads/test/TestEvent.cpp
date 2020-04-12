@@ -11,7 +11,7 @@
 #include "threads/test/TestHelpers.h"
 
 #include <memory>
-#include <stdio.h>
+#include <cstdio>
 
 using namespace XbmcThreads;
 

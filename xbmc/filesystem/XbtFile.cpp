@@ -16,7 +16,7 @@
 #include "utils/StringUtils.h"
 
 #include <algorithm>
-#include <string.h>
+#include <cstring>
 
 #include <lzo/lzo1x.h>
 

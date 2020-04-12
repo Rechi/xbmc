@@ -10,7 +10,7 @@
 
 #include "utils/TimeUtils.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 namespace XbmcThreads
 {

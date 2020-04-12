@@ -10,7 +10,7 @@
 
 #include "dll_tracker.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 extern "C" void tracker_file_track(uintptr_t caller, uintptr_t handle, TrackedFileType type, const char* sFile = "");
 extern "C" void tracker_file_free(uintptr_t caller, uintptr_t handle, TrackedFileType type);

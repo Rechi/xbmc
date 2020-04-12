@@ -17,7 +17,7 @@
 #include "threads/Thread.h"
 #include "utils/StringUtils.h"
 
-#include <inttypes.h>
+#include <cinttypes>
 
 #if defined(TARGET_POSIX)
 #include "platform/posix/utils/PosixInterfaceForCLog.h"

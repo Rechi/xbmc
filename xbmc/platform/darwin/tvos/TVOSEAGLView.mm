@@ -15,8 +15,8 @@
 #import "platform/darwin/DarwinUtils.h"
 #import "platform/darwin/tvos/XBMCController.h"
 
-#import <signal.h>
-#import <stdio.h>
+#import <csignal>
+#import <cstdio>
 
 #import "system.h"
 

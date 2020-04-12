@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <stdlib.h>
+#include <cstdlib>
 #include "network/Network.h"
 #include "DirectoryFactory.h"
 #include "SpecialProtocolDirectory.h"

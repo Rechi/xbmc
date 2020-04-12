@@ -15,7 +15,7 @@
 #include "utils/GLUtils.h"
 #include "utils/log.h"
 
-#include <math.h>
+#include <cmath>
 #include <string>
 
 #define TEXTARGET GL_TEXTURE_1D

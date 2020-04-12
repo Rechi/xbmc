@@ -10,7 +10,7 @@
 
 #include "AEPackIEC61937.h"
 #include "AEChannelInfo.h"
-#include <stdint.h>
+#include <cstdint>
 
 /* ffmpeg re-defines this, so undef it to squash the warning */
 #undef restrict

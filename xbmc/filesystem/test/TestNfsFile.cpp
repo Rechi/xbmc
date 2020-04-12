@@ -10,7 +10,7 @@
 #include "filesystem/NFSFile.h"
 #include "test/TestUtils.h"
 
-#include <errno.h>
+#include <cerrno>
 #include <string>
 
 #include <gtest/gtest.h>

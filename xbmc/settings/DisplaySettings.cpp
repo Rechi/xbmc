@@ -9,7 +9,7 @@
 #include "DisplaySettings.h"
 
 #include <cstdlib>
-#include <float.h>
+#include <cfloat>
 #include <algorithm>
 #include <string>
 #include <utility>

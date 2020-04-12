@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 
 #define FLAG_BOLD   0
 #define FLAG_ITALIC 1

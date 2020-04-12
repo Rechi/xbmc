@@ -12,7 +12,7 @@
 #include "cores/AudioEngine/Utils/AEDeviceInfo.h"
 #include "threads/CriticalSection.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 #include <mmsystem.h> /* Microsoft can't write standalone headers */
 #include <DSound.h> /* Microsoft can't write standalone headers */

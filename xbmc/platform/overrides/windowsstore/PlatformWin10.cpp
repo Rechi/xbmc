@@ -11,7 +11,7 @@
 #include "filesystem/SpecialProtocol.h"
 #include "platform/Environment.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 CPlatform* CPlatform::CreateInstance()
 {

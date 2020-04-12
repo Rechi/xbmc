@@ -15,7 +15,7 @@
 #include "utils/LangCodeExpander.h"
 #include "utils/Variant.h"
 
-#include <math.h>
+#include <cmath>
 
 const float VIDEOASPECT_EPSILON = 0.025f;
 

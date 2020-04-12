@@ -10,8 +10,8 @@
 
 #include "DVDOverlay.h"
 
-#include <stdint.h>
-#include <string.h>
+#include <cstdint>
+#include <cstring>
 
 class CDVDOverlaySpu : public CDVDOverlay
 {

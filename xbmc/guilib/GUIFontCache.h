@@ -21,7 +21,7 @@
 #include <cstddef>
 #include <cstring>
 #include <memory>
-#include <stdint.h>
+#include <cstdint>
 #include <vector>
 
 #define FONT_CACHE_TIME_LIMIT (1000)

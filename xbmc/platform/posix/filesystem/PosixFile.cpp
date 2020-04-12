@@ -14,9 +14,9 @@
 #include "utils/log.h"
 
 #include <algorithm>
-#include <assert.h>
-#include <errno.h>
-#include <limits.h>
+#include <cassert>
+#include <cerrno>
+#include <climits>
 #include <string>
 
 #include <fcntl.h>

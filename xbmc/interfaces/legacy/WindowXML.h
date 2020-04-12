@@ -13,7 +13,7 @@
 #include "swighelper.h"
 #include "windows/GUIMediaWindow.h"
 
-#include <limits.h>
+#include <climits>
 #include <vector>
 
 namespace XBMCAddon

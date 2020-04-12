@@ -24,7 +24,7 @@
 #include "utils/log.h"
 
 #include <algorithm>
-#include <string.h>
+#include <cstring>
 #include <utility>
 
 using namespace KODI;

@@ -16,7 +16,7 @@
 #include "utils/log.h"
 
 #include <cstring>
-#include <stddef.h>
+#include <cstddef>
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 

@@ -19,7 +19,7 @@
 #include "input/joysticks/interfaces/IKeyHandler.h"
 
 #include <algorithm>
-#include <assert.h>
+#include <cassert>
 #include <cmath>
 #include <utility>
 

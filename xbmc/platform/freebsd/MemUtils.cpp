@@ -11,7 +11,7 @@
 #include <array>
 #include <cstdlib>
 #include <cstring>
-#include <stdio.h>
+#include <cstdio>
 
 #include <unistd.h> /* FreeBSD can't write standalone headers */
 #include <sys/sysctl.h> /* FreeBSD can't write standalone headers */

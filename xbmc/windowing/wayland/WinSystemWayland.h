@@ -28,7 +28,7 @@
 #include <list>
 #include <map>
 #include <set>
-#include <time.h>
+#include <ctime>
 
 #include <wayland-client.hpp>
 #include <wayland-cursor.hpp>

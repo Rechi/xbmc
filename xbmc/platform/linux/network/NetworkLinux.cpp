@@ -11,7 +11,7 @@
 #include "utils/StringUtils.h"
 #include "utils/log.h"
 
-#include <errno.h>
+#include <cerrno>
 
 #include <arpa/inet.h>
 #include <net/if.h>

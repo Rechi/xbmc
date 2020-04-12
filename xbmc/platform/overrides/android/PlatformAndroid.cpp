@@ -10,7 +10,7 @@
 
 #include "filesystem/SpecialProtocol.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 CPlatform* CPlatform::CreateInstance()
 {

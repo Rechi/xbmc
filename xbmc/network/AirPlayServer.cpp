@@ -36,7 +36,7 @@
 #include "network/Zeroconf.h"
 #endif // HAS_ZEROCONF
 
-#include <inttypes.h>
+#include <cinttypes>
 
 #include <plist/plist.h>
 

@@ -11,7 +11,7 @@
 //#pragma message("including coffldr.h")
 #include "coff.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 class CoffLoader
 {

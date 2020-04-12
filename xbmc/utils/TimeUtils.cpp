@@ -17,7 +17,7 @@
 #elif defined(TARGET_WINDOWS)
 #include <windows.h>
 #else
-#include <time.h>
+#include <ctime>
 #endif
 
 int64_t CurrentHostCounter(void)

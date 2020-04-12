@@ -13,7 +13,7 @@
 #include "cores/IPlayer.h"
 
 #include <atomic>
-#include <string.h>
+#include <cstring>
 #include <string>
 
 struct DemuxPacket;

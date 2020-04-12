@@ -22,7 +22,7 @@
 #include "utils/URIUtils.h"
 #include "video/VideoDatabase.h"
 
-#include <math.h>
+#include <cmath>
 
 #define PROPERTY_PATH_DB            "path.db"
 #define PROPERTY_SORT_ORDER         "sort.order"

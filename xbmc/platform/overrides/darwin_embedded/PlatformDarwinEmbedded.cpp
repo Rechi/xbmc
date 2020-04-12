@@ -10,7 +10,7 @@
 
 #include "platform/darwin/PlatformDarwin.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 CPlatform* CPlatform::CreateInstance()
 {

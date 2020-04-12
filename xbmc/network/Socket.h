@@ -11,7 +11,7 @@
 #pragma once
 
 #include <map>
-#include <string.h>
+#include <cstring>
 #include <vector>
 
 #include <arpa/inet.h>

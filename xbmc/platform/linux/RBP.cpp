@@ -16,7 +16,7 @@
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
 
-#include <assert.h>
+#include <cassert>
 
 #include <interface/mmal/mmal.h>
 #include <sys/ioctl.h>

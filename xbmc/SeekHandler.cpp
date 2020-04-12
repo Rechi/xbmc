@@ -27,7 +27,7 @@
 #include "windowing/GraphicContext.h"
 
 #include <cmath>
-#include <stdlib.h>
+#include <cstdlib>
 
 CSeekHandler::~CSeekHandler()
 {

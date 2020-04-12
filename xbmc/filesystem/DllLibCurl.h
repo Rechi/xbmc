@@ -10,7 +10,7 @@
 
 #include "threads/CriticalSection.h"
 
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 #include <sys/time.h>
 #include <sys/types.h>

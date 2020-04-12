@@ -26,7 +26,7 @@
 #include "utils/URIUtils.h"
 #include "utils/log.h"
 
-#include <limits.h>
+#include <climits>
 #include <map>
 #include <memory>
 #include <string>

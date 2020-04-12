@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include <inttypes.h>
-#include <string.h>
+#include <cinttypes>
+#include <cstring>
 
 //CryptoSession is usually obtained once per stream, but could change if an key expires
 

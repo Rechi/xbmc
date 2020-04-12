@@ -15,7 +15,7 @@
 #include "utils/SystemInfo.h"
 #include "utils/log.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 CAppParamParser::CAppParamParser()
 : m_logLevel(LOG_LEVEL_NORMAL),

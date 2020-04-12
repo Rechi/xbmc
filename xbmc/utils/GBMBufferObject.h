@@ -11,7 +11,7 @@
 #include "utils/BufferObject.h"
 
 #include <memory>
-#include <stdint.h>
+#include <cstdint>
 
 struct gbm_bo;
 struct gbm_device;

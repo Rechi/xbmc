@@ -32,7 +32,7 @@
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
 
-#include <inttypes.h>
+#include <cinttypes>
 
 #include <Platinum/Source/Platinum/Platinum.h>
 

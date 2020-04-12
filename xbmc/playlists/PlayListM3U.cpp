@@ -17,7 +17,7 @@
 #include "utils/log.h"
 #include "video/VideoInfoTag.h"
 
-#include <inttypes.h>
+#include <cinttypes>
 
 using namespace PLAYLIST;
 using namespace XFILE;

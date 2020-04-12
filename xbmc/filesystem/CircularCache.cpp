@@ -12,7 +12,7 @@
 #include "threads/SystemClock.h"
 
 #include <algorithm>
-#include <string.h>
+#include <cstring>
 
 using namespace XFILE;
 

@@ -10,7 +10,7 @@
 
 #include "threads/SingleLock.h"
 
-#include <string.h>
+#include <cstring>
 
 //-----------------------------------------------------------------------------
 // CVideoBuffer

@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <signal.h>
+#include <csignal>
 #include <sys/resource.h>
 
 #include <cstring>
@@ -32,7 +32,7 @@
 #include "platform/linux/input/LIRC.h"
 #endif
 
-#include <locale.h>
+#include <clocale>
 
 namespace
 {

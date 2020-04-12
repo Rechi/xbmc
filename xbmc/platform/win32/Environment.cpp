@@ -15,7 +15,7 @@
 
 #include "platform/win32/CharsetConverter.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 #include <Windows.h>
 

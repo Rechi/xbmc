@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 
 struct ANativeWindow;
 typedef struct ANativeWindow ANativeWindow;

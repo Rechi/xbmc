@@ -59,7 +59,7 @@
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
 #include "view/GUIViewState.h"
-#include <inttypes.h>
+#include <cinttypes>
 
 #define CONTROL_BTNVIEWASICONS       2
 #define CONTROL_BTNSORTBY            3

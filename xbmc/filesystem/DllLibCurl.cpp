@@ -12,7 +12,7 @@
 #include "threads/SystemClock.h"
 #include "utils/log.h"
 
-#include <assert.h>
+#include <cassert>
 
 namespace XCURL
 {

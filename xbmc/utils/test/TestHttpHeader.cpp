@@ -8,7 +8,7 @@
 
 #include "utils/HttpHeader.h"
 
-#include <string.h>
+#include <cstring>
 
 #include <gtest/gtest.h>
 

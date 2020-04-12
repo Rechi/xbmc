@@ -14,7 +14,7 @@
 
 #include "platform/win32/WIN32Util.h"
 
-#include <errno.h>
+#include <cerrno>
 
 #include <IcmpAPI.h>
 #include <Mstcpip.h>

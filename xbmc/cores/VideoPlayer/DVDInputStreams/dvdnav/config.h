@@ -14,7 +14,7 @@
 #else
 #include <windows.h>
 #endif
-#include <stdio.h>
+#include <cstdio>
 
 //#define HAVE_DLFCN_H 1
 #define HAVE_DVDCSS_DVDCSS_H 1

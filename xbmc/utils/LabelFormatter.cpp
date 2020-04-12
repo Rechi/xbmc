@@ -25,7 +25,7 @@
 
 #include <cassert>
 #include <cstdlib>
-#include <inttypes.h>
+#include <cinttypes>
 
 using namespace MUSIC_INFO;
 

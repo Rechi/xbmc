@@ -10,7 +10,7 @@
 
 #include "CompileInfo.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 void CMessagePrinter::DisplayMessage(const std::string& message)
 {

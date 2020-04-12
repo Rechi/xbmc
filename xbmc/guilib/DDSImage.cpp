@@ -13,7 +13,7 @@
 #include "utils/log.h"
 
 #include <algorithm>
-#include <string.h>
+#include <cstring>
 using namespace XFILE;
 
 CDDSImage::CDDSImage()

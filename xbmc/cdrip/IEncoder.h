@@ -10,7 +10,7 @@
 
 #include "addons/kodi-addon-dev-kit/include/kodi/addon-instance/AudioEncoder.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 class IEncoder

@@ -15,7 +15,7 @@
 #include "utils/XTimeUtils.h"
 #include "utils/log.h"
 
-#include <string.h>
+#include <cstring>
 
 #include <sys/wait.h>
 

@@ -14,7 +14,7 @@
 #include "settings/SettingsComponent.h"
 #include "utils/log.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 CDirtyRegionTracker::CDirtyRegionTracker(int buffering)
 {

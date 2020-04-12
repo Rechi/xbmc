@@ -10,7 +10,7 @@
 
 #include "input/touch/ITouchActionHandler.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 /*!
  * \ingroup touch

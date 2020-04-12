@@ -12,7 +12,7 @@
 #include "input/Key.h"
 #include "utils/StringUtils.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 #define SPIN_BUTTON_DOWN 1
 #define SPIN_BUTTON_UP   2

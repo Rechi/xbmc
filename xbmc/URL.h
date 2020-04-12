@@ -10,7 +10,7 @@
 
 #include "utils/UrlOptions.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <string>
 
 #ifdef TARGET_WINDOWS

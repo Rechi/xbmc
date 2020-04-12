@@ -11,7 +11,7 @@
 #include "XBDateTime.h"
 #include "network/httprequesthandler/IHTTPRequestHandler.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 class CHTTPImageTransformationHandler : public IHTTPRequestHandler

@@ -34,7 +34,7 @@
 #include "video/VideoInfoTag.h"
 #include "video/VideoThumbLoader.h"
 
-#include <math.h>
+#include <cmath>
 
 using namespace KODI::GUILIB;
 using namespace KODI::GUILIB::GUIINFO;

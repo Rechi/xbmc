@@ -33,15 +33,15 @@
 
 #include <algorithm>
 #include <array>
-#include <assert.h>
+#include <cassert>
 #include <functional>
-#include <inttypes.h>
+#include <cinttypes>
 #include <iomanip>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <ctime>
 
 #include <fstrcmp.h>
 #include <memory.h>

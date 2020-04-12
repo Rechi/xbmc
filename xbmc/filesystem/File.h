@@ -19,7 +19,7 @@
 #include "utils/auto_buffer.h"
 
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 #include <vector>
 

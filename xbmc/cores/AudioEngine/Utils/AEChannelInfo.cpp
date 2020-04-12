@@ -9,9 +9,9 @@
 #include "AEChannelInfo.h"
 
 #include <algorithm>
-#include <assert.h>
+#include <cassert>
 #include <limits>
-#include <string.h>
+#include <cstring>
 
 CAEChannelInfo::CAEChannelInfo()
 {

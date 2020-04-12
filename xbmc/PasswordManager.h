@@ -11,7 +11,7 @@
 #include "threads/CriticalSection.h"
 
 #include <map>
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 class CURL;

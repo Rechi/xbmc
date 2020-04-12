@@ -15,9 +15,9 @@
 
 #include "utils/Color.h"
 
-#include <assert.h>
-#include <math.h>
-#include <stdint.h>
+#include <cassert>
+#include <cmath>
+#include <cstdint>
 #include <string>
 #include <vector>
 

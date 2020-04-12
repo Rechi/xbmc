@@ -14,8 +14,8 @@
 #include "utils/Observer.h"
 
 #include <memory>
-#include <stddef.h>
-#include <stdint.h>
+#include <cstddef>
+#include <cstdint>
 
 namespace KODI
 {

@@ -8,7 +8,7 @@
 
 #include "GUIInfo.h"
 
-#include <assert.h>
+#include <cassert>
 
 using namespace KODI::GUILIB::GUIINFO;
 

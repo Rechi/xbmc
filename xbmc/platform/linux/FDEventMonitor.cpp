@@ -10,7 +10,7 @@
 
 #include "utils/log.h"
 
-#include <errno.h>
+#include <cerrno>
 
 #include <poll.h>
 #include <sys/eventfd.h>

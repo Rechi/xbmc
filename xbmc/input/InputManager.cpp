@@ -42,7 +42,7 @@
 #include "utils/log.h"
 
 #include <algorithm>
-#include <math.h>
+#include <cmath>
 
 using EVENTSERVER::CEventServer;
 

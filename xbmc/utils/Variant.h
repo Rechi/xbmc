@@ -9,10 +9,10 @@
 #pragma once
 
 #include <map>
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 #include <vector>
-#include <wchar.h>
+#include <cwchar>
 
 int64_t str2int64(const std::string &str, int64_t fallback = 0);
 int64_t str2int64(const std::wstring &str, int64_t fallback = 0);

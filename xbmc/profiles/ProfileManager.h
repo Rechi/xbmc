@@ -14,7 +14,7 @@
 #include "threads/CriticalSection.h"
 
 #include <memory>
-#include <stdint.h>
+#include <cstdint>
 #include <vector>
 
 class CEventLog;

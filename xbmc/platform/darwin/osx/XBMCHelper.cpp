@@ -25,7 +25,7 @@
 #include "utils/log.h"
 
 #include <fstream>
-#include <signal.h>
+#include <csignal>
 #include <sstream>
 
 #include <mach-o/dyld.h>

@@ -12,7 +12,7 @@
 #include "threads/SingleLock.h"
 #include "threads/test/TestHelpers.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 //=============================================================================
 // Helper classes

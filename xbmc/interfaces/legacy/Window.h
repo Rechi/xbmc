@@ -13,7 +13,7 @@
 #include "Control.h"
 #include "swighelper.h"
 
-#include <limits.h>
+#include <climits>
 #include <vector>
 
 namespace XBMCAddon

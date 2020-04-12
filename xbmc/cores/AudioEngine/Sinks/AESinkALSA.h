@@ -12,7 +12,7 @@
 #include "cores/AudioEngine/Utils/AEDeviceInfo.h"
 #include "cores/AudioEngine/Sinks/alsa/ALSADeviceMonitor.h"
 #include "cores/AudioEngine/Sinks/alsa/ALSAHControlMonitor.h"
-#include <stdint.h>
+#include <cstdint>
 
 #include <alsa/asoundlib.h>
 

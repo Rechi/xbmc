@@ -10,7 +10,7 @@
 
 #include "network/httprequesthandler/IHTTPRequestHandler.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 class HTTPRequestHandlerUtils

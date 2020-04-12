@@ -15,7 +15,7 @@
 #include "platform/win32/WIN32Util.h"
 
 #include <cassert>
-#include <wchar.h>
+#include <cwchar>
 
 #include <Windows.h>
 #include <intsafe.h>

@@ -10,7 +10,7 @@
 
 #include "URL.h"
 
-#include <assert.h>
+#include <cassert>
 
 namespace XFILE
 {

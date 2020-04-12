@@ -11,7 +11,7 @@
 #include "cores/AudioEngine/Interfaces/AESink.h"
 #include "cores/AudioEngine/Utils/AEDeviceInfo.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 #include <mmdeviceapi.h>
 #include <ppltasks.h>

@@ -17,7 +17,7 @@
 #include "utils/ILocalizer.h"
 
 #include <map>
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 /*!

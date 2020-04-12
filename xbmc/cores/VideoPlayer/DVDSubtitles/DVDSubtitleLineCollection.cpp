@@ -8,7 +8,7 @@
 
 #include "DVDSubtitleLineCollection.h"
 
-#include <stddef.h>
+#include <cstddef>
 
 
 CDVDSubtitleLineCollection::CDVDSubtitleLineCollection()

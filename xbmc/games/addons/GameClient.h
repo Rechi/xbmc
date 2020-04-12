@@ -16,7 +16,7 @@
 #include <atomic>
 #include <memory>
 #include <set>
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 class CFileItem;

@@ -11,7 +11,7 @@
 #include "commons/Buffer.h"
 
 #include <map>
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 #include <vector>
 

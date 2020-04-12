@@ -31,7 +31,7 @@
 #include "video/VideoThumbLoader.h"
 
 #include <map>
-#include <string.h>
+#include <cstring>
 
 using namespace MUSIC_INFO;
 using namespace JSONRPC;

@@ -46,7 +46,7 @@
 #include "platform/darwin/osx/powermanagement/CocoaPowerSyscall.h"
 
 #include <cstdlib>
-#include <signal.h>
+#include <csignal>
 
 #import <Cocoa/Cocoa.h>
 #import <IOKit/graphics/IOGraphicsLib.h>

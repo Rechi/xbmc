@@ -10,7 +10,7 @@
 
 #include "AEAudioFormat.h"
 #include "PlatformDefs.h"
-#include <math.h>
+#include <cmath>
 
 extern "C" {
 #include <libavutil/samplefmt.h>

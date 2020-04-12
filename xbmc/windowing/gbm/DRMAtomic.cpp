@@ -14,8 +14,8 @@
 #include "settings/Settings.h"
 #include "utils/log.h"
 
-#include <errno.h>
-#include <string.h>
+#include <cerrno>
+#include <cstring>
 
 #include <drm_fourcc.h>
 #include <drm_mode.h>

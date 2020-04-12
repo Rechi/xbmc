@@ -6,8 +6,8 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 #include "coff.h"
 #include "coffldr.h"
 

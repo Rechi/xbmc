@@ -13,7 +13,7 @@ extern "C" {
 }
 
 #include <memory>
-#include <stdint.h>
+#include <cstdint>
 
 namespace KODI
 {

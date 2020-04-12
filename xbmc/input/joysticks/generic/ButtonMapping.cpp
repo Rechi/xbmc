@@ -24,7 +24,7 @@
 #include "utils/log.h"
 
 #include <algorithm>
-#include <assert.h>
+#include <cassert>
 #include <cmath>
 
 using namespace KODI;

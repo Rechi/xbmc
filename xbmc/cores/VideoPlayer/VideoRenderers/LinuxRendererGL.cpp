@@ -9,7 +9,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <locale.h>
+#include <clocale>
 
 #include "LinuxRendererGL.h"
 #include "Application.h"

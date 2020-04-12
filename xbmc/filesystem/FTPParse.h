@@ -9,7 +9,7 @@
 #pragma once
 
 #include <ctime>
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 class CFTPParse

@@ -36,7 +36,7 @@
 #include "utils/Variant.h"
 #include "utils/log.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 using namespace KODI::MESSAGING;
 

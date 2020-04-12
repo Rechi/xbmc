@@ -17,7 +17,7 @@
 #include "rendering/RenderSystemTypes.h"
 #include "settings/lib/ISettingCallback.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 class CAction;
 class CDataCacheCore;

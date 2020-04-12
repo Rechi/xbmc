@@ -17,7 +17,7 @@
 #include "input/actions/Action.h"
 #include "input/actions/ActionIDs.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 // Reserved 0 - 255

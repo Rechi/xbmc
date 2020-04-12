@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <assert.h>
+#include <cassert>
 #include <atomic>
 
 template<typename T> struct IDVDResourceCounted

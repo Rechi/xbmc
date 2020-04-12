@@ -10,7 +10,7 @@
 
 #include "GL.h"
 
-#include <stdio.h>
+#include <cstdio>
 #include <vector>
 #include <string>
 

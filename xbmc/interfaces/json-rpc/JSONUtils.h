@@ -17,8 +17,8 @@
 #include "utils/StringUtils.h"
 #include "utils/Variant.h"
 
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 #include <vector>
 
 namespace JSONRPC

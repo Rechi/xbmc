@@ -10,7 +10,7 @@
 #define _USE_MATH_DEFINES
 #endif
 #include <dbt.h>
-#include <math.h>
+#include <cmath>
 #include <Shlobj.h>
 #include <Windowsx.h>
 

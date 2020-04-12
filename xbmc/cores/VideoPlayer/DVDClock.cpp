@@ -15,8 +15,8 @@
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
 
-#include <inttypes.h>
-#include <math.h>
+#include <cinttypes>
+#include <cmath>
 
 CDVDClock::CDVDClock()
 {

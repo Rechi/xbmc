@@ -16,7 +16,7 @@
 /* make sure stdlib.h is included before including pcre.h inside the
    namespace; this works around stdlib.h definitions also living in
    the PCRE namespace */
-#include <stdlib.h>
+#include <cstdlib>
 
 namespace PCRE {
 struct real_pcre_jit_stack; // forward declaration for PCRE without JIT

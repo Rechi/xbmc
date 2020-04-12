@@ -14,7 +14,7 @@
 #include "threads/SingleLock.h"
 #include "utils/log.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 #ifdef _cplusplus
 extern "C"

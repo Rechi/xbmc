@@ -8,8 +8,8 @@
 
 #include "Variant.h"
 
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 #include <utility>
 
 #ifndef strtoll

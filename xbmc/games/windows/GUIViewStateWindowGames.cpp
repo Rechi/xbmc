@@ -18,7 +18,7 @@
 #include "view/ViewStateSettings.h"
 #include "windowing/GraphicContext.h" // include before ViewState.h
 
-#include <assert.h>
+#include <cassert>
 #include <set>
 
 using namespace KODI;

@@ -15,11 +15,11 @@
 #include "utils/log.h"
 #include "windowing/GraphicContext.h"
 
-#include <errno.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cerrno>
+#include <cstdint>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #include <EGL/egl.h>
 #include <drm_mode.h>

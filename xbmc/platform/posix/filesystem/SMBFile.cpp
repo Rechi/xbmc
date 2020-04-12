@@ -27,7 +27,7 @@
 #include "utils/URIUtils.h"
 #include "utils/log.h"
 
-#include <inttypes.h>
+#include <cinttypes>
 
 #include <libsmbclient.h>
 

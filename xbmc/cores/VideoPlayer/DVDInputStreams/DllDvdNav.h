@@ -10,7 +10,7 @@
 
 extern "C" {
 #define DVDNAV_COMPILE
- #include <stdint.h>
+ #include <cstdint>
 
  #include "dvdnav/dvdnav.h"
 

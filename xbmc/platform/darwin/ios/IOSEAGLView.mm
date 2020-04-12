@@ -25,8 +25,8 @@
 #import "platform/darwin/NSLogDebugHelpers.h"
 #import "platform/darwin/ios-common/AnnounceReceiver.h"
 
-#include <signal.h>
-#include <stdio.h>
+#include <csignal>
+#include <cstdio>
 
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>

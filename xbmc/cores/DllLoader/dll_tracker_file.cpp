@@ -11,7 +11,7 @@
 #include "DllLoader.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"
-#include <stdlib.h>
+#include <cstdlib>
 
 #ifdef TARGET_POSIX
 #define dll_open open

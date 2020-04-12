@@ -15,7 +15,7 @@
 #include "windowing/GraphicContext.h"
 
 #include <algorithm>
-#include <string.h>
+#include <cstring>
 
 #include <linux/input.h>
 

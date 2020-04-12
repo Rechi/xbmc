@@ -16,7 +16,7 @@
 #include "interfaces/IActionListener.h"
 
 #include <algorithm>
-#include <assert.h>
+#include <cassert>
 
 using namespace KODI;
 using namespace JOYSTICK;

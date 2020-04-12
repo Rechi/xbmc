@@ -25,7 +25,7 @@
 
 #include <sstream>
 #include <iomanip>
-#include <math.h>
+#include <cmath>
 
 class CDVDMsgAudioCodecChange : public CDVDMsg
 {

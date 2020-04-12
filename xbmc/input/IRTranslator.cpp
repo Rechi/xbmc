@@ -18,7 +18,7 @@
 #include "utils/XBMCTinyXML.h"
 #include "utils/log.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <vector>
 
 void CIRTranslator::Load(const std::string &irMapName)

@@ -14,7 +14,7 @@
 
 #include "dataset.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 #include <sqlite3.h>
 

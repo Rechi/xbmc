@@ -14,7 +14,7 @@
 #include "cores/RetroPlayer/process/RPProcessInfo.h"
 
 #include <memory>
-#include <stdint.h>
+#include <cstdint>
 #include <vector>
 
 #include <dxgi.h>

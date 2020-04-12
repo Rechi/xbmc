@@ -15,7 +15,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "utils/Variant.h"
 
-#include <math.h>
+#include <cmath>
 
 CProgressJob::CProgressJob()
   : m_progress(NULL),

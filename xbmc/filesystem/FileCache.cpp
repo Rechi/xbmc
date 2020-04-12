@@ -25,7 +25,7 @@
 
 #include <algorithm>
 #include <cassert>
-#include <inttypes.h>
+#include <cinttypes>
 #include <memory>
 
 #ifdef TARGET_POSIX

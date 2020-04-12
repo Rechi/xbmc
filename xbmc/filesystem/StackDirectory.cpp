@@ -17,7 +17,7 @@
 #include "utils/URIUtils.h"
 #include "utils/log.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 namespace XFILE
 {

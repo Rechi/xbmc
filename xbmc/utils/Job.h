@@ -10,7 +10,7 @@
 
 class CJob;
 
-#include <stddef.h>
+#include <cstddef>
 
 #define kJobTypeMediaFlags  "mediaflags"
 #define kJobTypeCacheImage  "cacheimage"

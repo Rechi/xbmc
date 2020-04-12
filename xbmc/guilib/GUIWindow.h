@@ -20,7 +20,7 @@
 
 class CFileItem; typedef std::shared_ptr<CFileItem> CFileItemPtr;
 
-#include <limits.h>
+#include <climits>
 #include <map>
 #include <vector>
 

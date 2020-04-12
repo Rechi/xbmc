@@ -13,10 +13,10 @@
 #include "config.h"
 #endif
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <limits.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstdio>
+#include <climits>
+#include <cstring>
 
 #ifdef TARGET_WINDOWS
 

@@ -17,7 +17,7 @@
 #include <cstdio>
 #include <list>
 #include <map>
-#include <stdarg.h>
+#include <cstdarg>
 #include <string>
 #include <vector>
 

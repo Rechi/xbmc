@@ -6,20 +6,20 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <limits.h>
+#include <climits>
 #if defined(TARGET_ANDROID)
 #include <unistd.h>
 #else
 #include <sys/syscall.h>
 #endif
 #include <sys/resource.h>
-#include <string.h>
+#include <cstring>
 #ifdef TARGET_FREEBSD
 #include <sys/param.h>
 #include <pthread_np.h>
 #endif
 
-#include <signal.h>
+#include <csignal>
 #include "utils/log.h"
 
 namespace XbmcThreads

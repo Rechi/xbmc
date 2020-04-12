@@ -11,9 +11,9 @@
 #include "utils/Color.h"
 
 #include <algorithm>
-#include <math.h>
+#include <cmath>
 #include <memory>
-#include <string.h>
+#include <cstring>
 
 #ifdef __GNUC__
 // under gcc, inline will only take place if optimizations are applied (-O). this will force inline even with optimizations.

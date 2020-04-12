@@ -17,7 +17,7 @@
 #include "utils/log.h"
 
 #include <algorithm>
-#include <stdint.h>
+#include <cstdint>
 
 #include <Audioclient.h>
 #include <Mmreg.h>

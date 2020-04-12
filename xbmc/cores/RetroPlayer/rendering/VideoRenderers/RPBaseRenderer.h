@@ -18,7 +18,7 @@ extern "C" {
 
 #include <array>
 #include <memory>
-#include <stdint.h>
+#include <cstdint>
 
 namespace KODI
 {

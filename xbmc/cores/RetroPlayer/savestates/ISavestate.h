@@ -11,7 +11,7 @@
 #include "SavestateTypes.h"
 #include "XBDateTime.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 #include <vector>
 

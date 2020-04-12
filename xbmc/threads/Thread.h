@@ -21,7 +21,7 @@
 #ifdef TARGET_DARWIN
 #include <mach/mach.h>
 #endif
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 #include <thread>
 

@@ -34,8 +34,8 @@
 #include "platform/android/media/drm/MediaDrmCryptoSession.h"
 #include "platform/android/powermanagement/AndroidPowerSyscall.h"
 
-#include <float.h>
-#include <string.h>
+#include <cfloat>
+#include <cstring>
 
 #include <EGL/egl.h>
 #include <EGL/eglplatform.h>

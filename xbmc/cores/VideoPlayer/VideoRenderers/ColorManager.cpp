@@ -16,7 +16,7 @@
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
 
-#include <math.h>
+#include <cmath>
 #include <vector>
 
 using namespace XFILE;

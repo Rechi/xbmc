@@ -12,7 +12,7 @@
 #include "cores/AudioEngine/Utils/AEAudioFormat.h"
 #include "cores/AudioEngine/Utils/AEUtil.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 class IAESink

@@ -10,8 +10,8 @@
 #  include <windows.h>
 #endif
 
-#include <errno.h>
-#include <stdlib.h>
+#include <cerrno>
+#include <cstdlib>
 
 #include <gtest/gtest.h>
 #include "URL.h"

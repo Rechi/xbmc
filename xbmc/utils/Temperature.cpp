@@ -11,7 +11,7 @@
 #include "utils/Archive.h"
 #include "utils/StringUtils.h"
 
-#include <assert.h>
+#include <cassert>
 
 CTemperature::CTemperature()
 {

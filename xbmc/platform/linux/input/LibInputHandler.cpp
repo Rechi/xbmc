@@ -15,7 +15,7 @@
 #include "utils/log.h"
 
 #include <algorithm>
-#include <string.h>
+#include <cstring>
 
 #include <fcntl.h>
 #include <linux/input.h>

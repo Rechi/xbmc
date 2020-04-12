@@ -9,7 +9,7 @@
 #include "AEPackIEC61937.h"
 
 #include <cassert>
-#include <string.h>
+#include <cstring>
 
 #define IEC61937_PREAMBLE1  0xF872
 #define IEC61937_PREAMBLE2  0x4E1F

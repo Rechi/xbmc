@@ -23,7 +23,7 @@
 #include <array>
 #include <cassert>
 #include <climits>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string>
 
 #include <libbluray/bluray-version.h>

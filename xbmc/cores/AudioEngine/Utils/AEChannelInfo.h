@@ -10,7 +10,7 @@
 
 #include "AEChannelData.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 #include <vector>
 

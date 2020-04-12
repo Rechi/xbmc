@@ -10,7 +10,7 @@
 
 #include "cores/VideoSettings.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 class CConvolutionKernel
 {

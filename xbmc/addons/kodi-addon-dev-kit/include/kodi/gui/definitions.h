@@ -9,7 +9,7 @@
 #pragma once
 
 #include <string>
-#include <time.h>
+#include <ctime>
 
 /*
  * Internal Structures to have "C"-Style data transfer

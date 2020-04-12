@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <limits.h>
+#include <climits>
 
 #include "threads/SystemClock.h"
 #include "SystemInfo.h"

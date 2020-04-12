@@ -18,7 +18,7 @@
 
 #include <algorithm>
 #include <cstring>
-#include <stdlib.h>
+#include <cstdlib>
 
 const CWindowTranslator::WindowMapByName CWindowTranslator::WindowMappingByName =
 {

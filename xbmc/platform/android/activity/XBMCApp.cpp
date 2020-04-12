@@ -10,9 +10,9 @@
 
 #include <sstream>
 #include <unistd.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <dlfcn.h>
-#include <string.h>
+#include <cstring>
 
 #include <jni.h>
 #include <android/configuration.h>
@@ -524,7 +524,7 @@ int CXBMCApp::SetBuffersGeometry(int width, int height, int format)
 }
 
 #include "threads/Event.h"
-#include <time.h>
+#include <ctime>
 
 void CXBMCApp::SetRefreshRateCallback(CVariant* rateVariant)
 {

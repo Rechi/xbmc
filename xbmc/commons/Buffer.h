@@ -9,7 +9,7 @@
 #pragma once
 
 #include <memory>
-#include <string.h>
+#include <cstring>
 #include <string>
 
 namespace XbmcCommons

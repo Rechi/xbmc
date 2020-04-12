@@ -26,8 +26,8 @@
 #include <cstring>
 #endif
 
-#include <math.h>
-#include <stdio.h>
+#include <cmath>
+#include <cstdio>
 
 #ifndef min
 #define min(a,b) (a)>(b)?(b):(a)

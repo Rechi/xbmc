@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <time.h>
+#include <ctime>
 
 #include <sys/resource.h>
 #include <sys/time.h>

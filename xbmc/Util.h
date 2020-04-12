@@ -13,8 +13,8 @@
 
 #include <climits>
 #include <cmath>
-#include <stdint.h>
-#include <string.h>
+#include <cstdint>
+#include <cstring>
 #include <vector>
 
 #define ARRAY_SIZE(X)         (sizeof(X)/sizeof((X)[0]))

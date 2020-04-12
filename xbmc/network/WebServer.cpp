@@ -34,7 +34,7 @@
 #include "utils/Variant.h"
 #include "utils/log.h"
 
-#include <inttypes.h>
+#include <cinttypes>
 
 #define MAX_POST_BUFFER_SIZE 2048
 

@@ -13,7 +13,7 @@
 #include "threads/SingleLock.h"
 #include "utils/log.h"
 
-#include <math.h>
+#include <cmath>
 
 CDVDMessageQueue::CDVDMessageQueue(const std::string &owner) : m_hEvent(true), m_owner(owner)
 {

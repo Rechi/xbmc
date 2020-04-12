@@ -17,7 +17,7 @@
 #include "cores/VideoPlayer/Interface/Addon/DemuxPacket.h"
 #include "cores/VideoPlayer/Interface/Addon/TimingConstants.h"
 
-#include <string.h>
+#include <cstring>
 
 CDVDDemuxVobsub::CDVDDemuxVobsub() = default;
 

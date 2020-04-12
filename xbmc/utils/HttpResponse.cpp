@@ -8,7 +8,7 @@
 
 #include "HttpResponse.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 #define SPACE     " "
 #define SEPARATOR ": "

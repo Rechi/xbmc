@@ -16,14 +16,14 @@
 
 #include "PlatformDefs.h" // for __stat64, ssize_t
 
-#include <stdio.h>
-#include <stdint.h>
+#include <cstdio>
+#include <cstdint>
 #include <sys/stat.h>
 #include <string>
 #include <vector>
 
 #if !defined(SIZE_MAX) || !defined(SSIZE_MAX)
-#include <limits.h>
+#include <climits>
 #ifndef SIZE_MAX
 #define SIZE_MAX UINTPTR_MAX
 #endif // ! SIZE_MAX

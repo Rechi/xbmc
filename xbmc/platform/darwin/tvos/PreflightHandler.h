@@ -19,7 +19,7 @@
  *
  */
 
-#include <stdint.h>
+#include <cstdint>
 
 class CPreflightHandler
 {

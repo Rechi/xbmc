@@ -10,7 +10,7 @@
 
 #include "windowing/GraphicContext.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 void CUnionDirtyRegionSolver::Solve(const CDirtyRegionList &input, CDirtyRegionList &output)
 {

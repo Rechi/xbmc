@@ -11,7 +11,7 @@
 #include "utils/log.h"
 
 #include <algorithm>
-#include <string.h>
+#include <cstring>
 
 #define DTS_PREAMBLE_14BE  0x1FFFE800
 #define DTS_PREAMBLE_14LE  0xFF1F00E8

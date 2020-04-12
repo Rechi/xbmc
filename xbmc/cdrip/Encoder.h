@@ -11,8 +11,8 @@
 #include "IEncoder.h"
 
 #include <memory>
-#include <stdint.h>
-#include <stdio.h>
+#include <cstdint>
+#include <cstdio>
 #include <string>
 
 #define WRITEBUFFER_SIZE 131072 // 128k buffer

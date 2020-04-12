@@ -7,8 +7,8 @@
  */
 
 #include "AESinkOSS.h"
-#include <stdint.h>
-#include <limits.h>
+#include <cstdint>
+#include <climits>
 #include <unistd.h>
 
 #include "cores/AudioEngine/AESinkFactory.h"

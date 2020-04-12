@@ -10,8 +10,8 @@
 
 #include "PosixTimezone.h"
 
-#include <errno.h>
-#include <time.h>
+#include <cerrno>
+#include <ctime>
 
 #include <sched.h>
 #include <sys/times.h>

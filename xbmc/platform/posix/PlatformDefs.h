@@ -13,9 +13,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <pthread.h>
-#include <string.h>
+#include <cstring>
 #if defined(TARGET_DARWIN)
-#include <stdio.h>
+#include <cstdio>
 #include <sched.h>
 #include <AvailabilityMacros.h>
 #ifndef __STDC_FORMAT_MACROS
@@ -28,14 +28,14 @@
 #endif
 
 #elif defined(TARGET_FREEBSD)
-#include <stdio.h>
+#include <cstdio>
 #include <sys/sysctl.h>
 #else
 #include <sys/sysinfo.h>
 #endif
 
 #include <sys/time.h>
-#include <time.h>
+#include <ctime>
 
 #if defined(__ppc__) || defined(__powerpc__)
 #define PIXEL_ASHIFT 0
@@ -49,7 +49,7 @@
 #define PIXEL_BSHIFT 0
 #endif
 
-#include <stdint.h>
+#include <cstdint>
 
 #define _fdopen fdopen
 #define _vsnprintf vsnprintf

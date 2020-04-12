@@ -30,7 +30,7 @@
 #ifdef TARGET_WINDOWS_DESKTOP
 #include <cassert>
 #endif
-#include <locale.h>
+#include <clocale>
 
 #include <shellapi.h>
 #include <shlobj.h>
@@ -636,10 +636,10 @@ extern "C" {
 
   typedef unsigned char u_char;
   typedef unsigned int uint;
-  #include <ctype.h>
-  #include <locale.h>
-  #include <string.h>
-  #include <time.h>
+  #include <cctype>
+  #include <clocale>
+  #include <cstring>
+  #include <ctime>
 
   #ifdef __weak_alias
   __weak_alias(strptime,_strptime)

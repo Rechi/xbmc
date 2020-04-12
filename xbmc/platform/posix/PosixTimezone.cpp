@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <time.h>
+#include <ctime>
 #ifdef TARGET_ANDROID
 #include "platform/android/bionic_supplement/bionic_supplement.h"
 #endif
@@ -22,7 +22,7 @@
 #include "settings/lib/SettingDefinitions.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
-#include <stdlib.h>
+#include <cstdlib>
 
 #include <algorithm>
 

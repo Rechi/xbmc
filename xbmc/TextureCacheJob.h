@@ -11,7 +11,7 @@
 #include "pictures/PictureScalingAlgorithm.h"
 #include "utils/Job.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 #include <vector>
 

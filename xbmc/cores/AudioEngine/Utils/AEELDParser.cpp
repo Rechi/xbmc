@@ -13,8 +13,8 @@
 
 #include <algorithm>
 #include <functional>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 
 #define GRAB_BITS(buf, byte, lowbit, bits) ((buf[byte] >> (lowbit)) & ((1 << (bits)) - 1))
 

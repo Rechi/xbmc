@@ -24,7 +24,7 @@
 #include <cinttypes>
 #define platform_stricmp _stricmp
 #else
-#include <inttypes.h>
+#include <cinttypes>
 #define platform_stricmp strcasecmp
 #endif
 #include <cerrno>

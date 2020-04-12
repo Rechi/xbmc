@@ -12,9 +12,9 @@
 #include "AEStreamInfo.h"
 #include "utils/log.h"
 
-#include <stddef.h>
-#include <stdint.h>
-#include <string.h>
+#include <cstddef>
+#include <cstdint>
+#include <cstring>
 
 #define BURST_HEADER_SIZE       8
 #define TRUEHD_FRAME_OFFSET     2560

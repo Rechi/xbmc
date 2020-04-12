@@ -45,8 +45,8 @@
 #include "TextureCache.h"
 #undef id
 
-#include <math.h>
-#include <signal.h>
+#include <cmath>
+#include <csignal>
 
 #import <AVFoundation/AVAudioSession.h>
 #include <sys/resource.h>

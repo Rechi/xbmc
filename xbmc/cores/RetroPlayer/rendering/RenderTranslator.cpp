@@ -8,7 +8,7 @@
 
 #include "RenderTranslator.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 using namespace KODI;
 using namespace RETRO;

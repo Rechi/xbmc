@@ -6,7 +6,7 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <stdlib.h>
+#include <cstdlib>
 #include "OSXStorageProvider.h"
 #include "utils/RegExp.h"
 #include "Util.h"

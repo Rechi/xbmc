@@ -19,7 +19,7 @@
 #include "utils/log.h"
 #include "video/VideoDatabase.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 #define LOOKUP_PROPERTY "database-lookup"
 

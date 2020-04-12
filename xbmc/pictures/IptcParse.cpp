@@ -21,10 +21,10 @@
 #ifdef TARGET_WINDOWS
 #include <windows.h>
 #else
-#include <string.h>
+#include <cstring>
 #endif
 
-#include <stdio.h>
+#include <cstdio>
 
 #ifndef min
 #define min(a,b) (a)>(b)?(b):(a)

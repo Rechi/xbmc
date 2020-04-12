@@ -13,7 +13,7 @@
 #include <string>
 #include <vector>
 
-#include <stdint.h>
+#include <cstdint>
 
 static const std::string XBTF_MAGIC = "XBTF";
 static const std::string XBTF_VERSION = "2";

@@ -11,7 +11,7 @@
 #include "URL.h"
 #include "filesystem/IFile.h"
 
-#include <string.h>
+#include <cstring>
 
 namespace XFILE
 {

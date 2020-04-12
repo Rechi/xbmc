@@ -4,9 +4,9 @@
 
 #include "cc_decoder708.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 /********************************************************
 256 BYTES IS ENOUGH FOR ALL THE SUPPORTED CHARACTERS IN

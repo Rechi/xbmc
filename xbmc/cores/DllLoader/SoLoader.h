@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <stdio.h>
+#include <cstdio>
 #ifdef TARGET_POSIX
 #include "PlatformDefs.h"
 #endif

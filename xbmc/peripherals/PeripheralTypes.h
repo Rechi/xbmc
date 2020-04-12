@@ -12,7 +12,7 @@
 #include <map>
 #include <memory>
 #include <string>
-#include <stdio.h>
+#include <cstdio>
 #include <vector>
 #ifdef TARGET_WINDOWS
 #include "PlatformDefs.h"

@@ -16,7 +16,7 @@
 #include "utils/Variant.h"
 
 #include <algorithm>
-#include <inttypes.h>
+#include <cinttypes>
 
 std::string ArrayToString(SortAttribute attributes, const CVariant &variant, const std::string &separator = " / ")
 {

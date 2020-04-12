@@ -20,8 +20,8 @@
 #endif
 
 #include <cstdlib>
-#include <limits.h>
-#include <string.h>
+#include <climits>
+#include <cstring>
 #include <unistd.h>
 
 namespace KODI

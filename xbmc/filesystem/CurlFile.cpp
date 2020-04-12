@@ -25,8 +25,8 @@
 #include <vector>
 
 #ifdef TARGET_POSIX
-#include <errno.h>
-#include <inttypes.h>
+#include <cerrno>
+#include <cinttypes>
 #include "platform/posix/ConvUtils.h"
 #endif
 

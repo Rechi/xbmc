@@ -17,7 +17,7 @@
 
 #include <algorithm>
 #include <map>
-#include <string.h>
+#include <cstring>
 
 #include <fcntl.h>
 #include <linux/input.h>

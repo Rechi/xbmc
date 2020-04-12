@@ -12,7 +12,7 @@
 #include "cores/AudioEngine/Sinks/windows/AESinkFactoryWin.h"
 #include "cores/AudioEngine/Utils/AEDeviceInfo.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 #include <Audioclient.h>
 #include <mmdeviceapi.h>

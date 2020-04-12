@@ -13,8 +13,8 @@
 #include "platform/win32/CharsetConverter.h"
 #include <windows.h>
 #endif
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 
 #ifdef _cplusplus
 extern "C"

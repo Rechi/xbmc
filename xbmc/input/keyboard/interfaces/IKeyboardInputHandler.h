@@ -10,7 +10,7 @@
 
 #include "input/keyboard/KeyboardTypes.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 namespace KODI

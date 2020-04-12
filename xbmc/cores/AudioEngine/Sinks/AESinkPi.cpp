@@ -19,8 +19,8 @@
 #include "platform/linux/RBP.h"
 
 #include <cassert>
-#include <limits.h>
-#include <stdint.h>
+#include <climits>
+#include <cstdint>
 
 #define CLASSNAME "CAESinkPi"
 

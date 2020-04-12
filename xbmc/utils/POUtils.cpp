@@ -12,7 +12,7 @@
 #include "filesystem/File.h"
 #include "utils/log.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 CPODocument::CPODocument()
 {

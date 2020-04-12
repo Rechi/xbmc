@@ -12,7 +12,7 @@
 #include "network/httprequesthandler/IHTTPRequestHandler.h"
 
 #include <map>
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 typedef struct HTTPPythonRequest

@@ -14,7 +14,7 @@
 #include "filesystem/XbtManager.h"
 #include "guilib/XBTF.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 namespace XFILE
 {

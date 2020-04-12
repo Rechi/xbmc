@@ -3,7 +3,7 @@
 #include "ExifParse.h"
 #include "IptcParse.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 //--------------------------------------------------------------------------
 // JPEG markers consist of one or more 0xFF bytes, followed by a marker

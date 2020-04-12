@@ -9,7 +9,7 @@
 
 #include "filesystem/File.h"
 
-#include <limits.h>
+#include <climits>
 
 #include <taglib/tiostream.h>
 

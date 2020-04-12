@@ -10,9 +10,9 @@
 
 #include <string>
 #include <vector>
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstring>
+#include <cstdlib>
+#include <cstdio>
 #include "libXBMC_addon.h"
 
 typedef void* GUIHANDLE;

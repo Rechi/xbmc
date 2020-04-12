@@ -29,7 +29,7 @@
 #include "utils/XTimeUtils.h"
 #include "utils/log.h"
 
-#include <limits.h>
+#include <climits>
 
 #include <arpa/inet.h>
 #include <netinet/in.h>

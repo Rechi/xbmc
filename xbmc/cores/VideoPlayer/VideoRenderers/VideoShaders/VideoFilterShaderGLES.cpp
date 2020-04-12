@@ -15,7 +15,7 @@
 #include "utils/GLUtils.h"
 #include "utils/log.h"
 
-#include <math.h>
+#include <cmath>
 #include <string>
 
 using namespace Shaders;

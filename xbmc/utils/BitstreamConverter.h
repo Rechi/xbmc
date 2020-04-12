@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 
 extern "C" {
 #include <libavutil/avutil.h>

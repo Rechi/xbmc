@@ -14,7 +14,7 @@
 #include "utils/log.h"
 
 #include <algorithm>
-#include <assert.h>
+#include <cassert>
 #include <vector>
 
 using namespace KODI;

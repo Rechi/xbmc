@@ -11,10 +11,10 @@
 #include "utils/StringUtils.h"
 #include "utils/log.h"
 
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cctype>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 namespace {
 // Add-on versions are used e.g. in file names and should

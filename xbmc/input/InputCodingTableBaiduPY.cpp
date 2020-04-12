@@ -16,7 +16,7 @@
 #include "utils/RegExp.h"
 #include "utils/StringUtils.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <utility>
 
 CInputCodingTableBaiduPY::CInputCodingTableBaiduPY(const std::string& strUrl) :

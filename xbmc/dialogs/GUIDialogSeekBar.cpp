@@ -14,7 +14,7 @@
 #include "guilib/GUIComponent.h"
 #include "guilib/guiinfo/GUIInfoLabels.h"
 
-#include <math.h>
+#include <cmath>
 
 #define POPUP_SEEK_PROGRESS           401
 #define POPUP_SEEK_EPG_EVENT_PROGRESS 402

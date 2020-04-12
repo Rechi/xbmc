@@ -12,7 +12,7 @@
 #include "guilib/GUIComponent.h"
 #include "guilib/GUIWindowManager.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 /*! \brief Switch to a given weather location.
  *  \param params The parameters.

@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 
 #define CC_ROWS 15
 #define CC_COLUMNS 32

@@ -12,7 +12,7 @@
 #include "AEPackIEC61937.h"
 
 #include <list>
-#include <stdint.h>
+#include <cstdint>
 
 class CAEStreamInfo;
 

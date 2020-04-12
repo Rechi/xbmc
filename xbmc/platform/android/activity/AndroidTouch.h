@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <math.h>
+#include <cmath>
 
 #include <android/input.h>
 
