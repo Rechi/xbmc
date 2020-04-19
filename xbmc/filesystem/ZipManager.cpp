@@ -13,9 +13,7 @@
 
 #include "File.h"
 #include "URL.h"
-#if defined(TARGET_POSIX)
 #include "PlatformDefs.h"
-#endif
 #include "utils/CharsetConverter.h"
 #include "utils/EndianSwap.h"
 #include "utils/log.h"
