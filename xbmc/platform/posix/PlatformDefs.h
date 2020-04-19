@@ -138,16 +138,3 @@ struct _stati64 {
 #define _S_IFREG  S_IFREG
 #define _S_IFDIR  S_IFDIR
 #define MAX_PATH PATH_MAX
-
-// CreateFile defines
-#define FILE_FLAG_NO_BUFFERING          0x20000000
-#define FILE_FLAG_DELETE_ON_CLOSE       0x04000000
-
-#define CREATE_NEW          1
-#define CREATE_ALWAYS       2
-#define OPEN_EXISTING       3
-#define OPEN_ALWAYS         4
-#define TRUNCATE_EXISTING   5
-
-#define FILE_READ_DATA   ( 0x0001 )
-#define FILE_WRITE_DATA  ( 0x0002 )
