@@ -113,6 +113,7 @@
 #include "music/infoscanner/MusicInfoScanner.h"
 #include "music/MusicUtils.h"
 #include "music/MusicThumbLoader.h"
+#include "pictures/PictureInfoScanner.h"
 
 // Windows includes
 #include "guilib/GUIWindowManager.h"
@@ -202,6 +203,7 @@ using namespace MEDIA_DETECT;
 using namespace PLAYLIST;
 using namespace VIDEO;
 using namespace MUSIC_INFO;
+using namespace PICTURE;
 using namespace EVENTSERVER;
 using namespace JSONRPC;
 using namespace PVR;
@@ -4648,6 +4650,13 @@ void CApplication::UpdateLibraries()
     CLog::LogF(LOGNOTICE, "Starting music library startup scan");
     StartMusicScan("", !settings->GetBool(CSettings::SETTING_MUSICLIBRARY_BACKGROUNDUPDATE));
   }
+
+  if (m_ServiceManager->GetSettings().GetBool(CSettings::SETTING_PICTURELIBRARY_UPDATEONSTARTUP))
+  {
+    CLog::LogF(LOGNOTICE, "Starting picture library startup scan");
+    StartPictureScan("", !m_ServiceManager->GetSettings().GetBool(
+                             CSettings::SETTING_PICTURELIBRARY_BACKGROUNDUPDATE));
+  }
 }
 
 void CApplication::UpdateCurrentPlayArt()
@@ -4672,6 +4681,11 @@ bool CApplication::IsMusicScanning() const
   return CMusicLibraryQueue::GetInstance().IsScanningLibrary();
 }
 
+bool CApplication::IsPictureScanning() const
+{
+  return m_pictureInfoScanner->IsScanning();
+}
+
 void CApplication::StopVideoScan()
 {
   CVideoLibraryQueue::GetInstance().StopLibraryScanning();
@@ -4680,6 +4694,12 @@ void CApplication::StopVideoScan()
 void CApplication::StopMusicScan()
 {
   CMusicLibraryQueue::GetInstance().StopLibraryScanning();
+}
+
+void CApplication::StopPicturecScan()
+{
+  if (m_pictureInfoScanner->IsScanning())
+    m_pictureInfoScanner->Stop();
 }
 
 void CApplication::StartVideoCleanup(bool userInitiated /* = true */,
@@ -4771,6 +4791,16 @@ void CApplication::StartMusicArtistScan(const std::string& strDirectory,
     return;
 
   CMusicLibraryQueue::GetInstance().StartArtistScan(strDirectory, refresh);
+}
+
+void CApplication::StartPictureScan(const std::string& strDirectory, bool refresh)
+{
+  if (m_pictureInfoScanner->IsScanning())
+    return;
+
+  m_pictureInfoScanner->ShowDialog(true);
+
+  m_pictureInfoScanner->Start(strDirectory, refresh);
 }
 
 bool CApplication::ProcessAndStartPlaylist(const std::string& strPlayList, CPlayList& playlist, int iPlaylist, int track)

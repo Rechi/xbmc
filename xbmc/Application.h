@@ -92,6 +92,11 @@ namespace MUSIC_INFO
   class CMusicInfoScanner;
 }
 
+namespace PICTURE
+{
+class CPictureInfoScanner;
+}
+
 #define VOLUME_MINIMUM 0.0f        // -60dB
 #define VOLUME_MAXIMUM 1.0f        // 0dB
 #define VOLUME_DYNAMIC_RANGE 90.0f // 60dB
@@ -251,8 +256,10 @@ public:
 
   void StopVideoScan();
   void StopMusicScan();
+  void StopPicturecScan();
   bool IsMusicScanning() const;
   bool IsVideoScanning() const;
+  bool IsPictureScanning() const;
 
   /*!
    \brief Starts a video library cleanup.
@@ -284,6 +291,7 @@ public:
   void StartMusicScan(const std::string &path, bool userInitiated = true, int flags = 0);
   void StartMusicAlbumScan(const std::string& strDirectory, bool refresh = false);
   void StartMusicArtistScan(const std::string& strDirectory, bool refresh = false);
+  void StartPictureScan(const std::string& strDirectory, bool refresh = false);
 
   void UpdateLibraries();
 
@@ -448,6 +456,7 @@ protected:
   bool m_bSystemScreenSaverEnable = false;
 
   std::unique_ptr<MUSIC_INFO::CMusicInfoScanner> m_musicInfoScanner;
+  PICTURE::CPictureInfoScanner* m_pictureInfoScanner;
 
   bool m_muted = false;
   float m_volumeLevel = VOLUME_MAXIMUM;

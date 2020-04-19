@@ -276,6 +276,13 @@ static int UpdateLibrary(const std::vector<std::string>& params)
     else
       g_application.StartMusicScan(params.size() > 1 ? params[1] : "", userInitiated);
   }
+  else if (StringUtils::EqualsNoCase(params[0], "picture"))
+  {
+    if (g_application.IsPictureScanning())
+      g_application.StopPicturecScan();
+    else
+      g_application.StartPictureScan(params.size() > 1 ? params[1] : "", userInitiated);
+  }
   else if (StringUtils::EqualsNoCase(params[0], "video"))
   {
     if (g_application.IsVideoScanning())

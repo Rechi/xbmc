@@ -11,8 +11,10 @@
 #include "Application.h"
 #include "Autorun.h"
 #include "GUIDialogPictureInfo.h"
+#include "GUIInfoManager.h"
 #include "GUIPassword.h"
 #include "GUIWindowSlideShow.h"
+#include "PictureDatabase.h"
 #include "PictureInfoLoader.h"
 #include "PlayListPlayer.h"
 #include "ServiceBroker.h"
@@ -21,6 +23,7 @@
 #include "addons/GUIDialogAddonInfo.h"
 #include "dialogs/GUIDialogMediaSource.h"
 #include "dialogs/GUIDialogProgress.h"
+#include "dialogs/GUIDialogYesNo.h"
 #include "guilib/GUIComponent.h"
 #include "guilib/GUIWindowManager.h"
 #include "interfaces/AnnouncementManager.h"
@@ -254,6 +257,18 @@ bool CGUIWindowPictures::Update(const std::string &strDirectory, bool updateFilt
   return true;
 }
 
+void CGUIWindowPictures::OnRemoveSource(int iItem)
+{
+  bool bCanceled;
+  if (CGUIDialogYesNo::ShowAndGetInput(CVariant{522}, CVariant{20340}, bCanceled, CVariant{""},
+                                       CVariant{""}, CGUIDialogYesNo::NO_TIMEOUT))
+  {
+    CPictureDatabase database;
+    database.Open();
+    g_infoManager.ResetLibraryBools();
+  }
+}
+
 bool CGUIWindowPictures::OnClick(int iItem, const std::string &player)
 {
   if ( iItem < 0 || iItem >= m_vecItems->Size() ) return true;
@@ -274,6 +289,38 @@ bool CGUIWindowPictures::OnClick(int iItem, const std::string &player)
     return true;
 
   return false;
+}
+
+void CGUIWindowPictures::OnScan(int iItem)
+{
+  std::string strPath;
+  if (iItem < 0 || iItem >= m_vecItems->Size())
+    strPath = m_vecItems->GetPath();
+  else if (m_vecItems->Get(iItem)->m_bIsFolder)
+    strPath = m_vecItems->Get(iItem)->GetPath();
+  else
+  { // TODO: PICTUREDB - should we allow scanning a single item into the database?
+    //       This will require changes to the info scanner, which assumes we're running on a folder
+    strPath = m_vecItems->GetPath();
+  }
+  DoScan(strPath);
+}
+
+void CGUIWindowPictures::DoScan(const std::string& strPath)
+{
+  if (g_application.IsPictureScanning())
+  {
+    g_application.StopPicturecScan();
+    return;
+  }
+
+  // Start background loader
+  int iControl = GetFocusedControlID();
+  g_application.StartPictureScan(strPath);
+  SET_CONTROL_FOCUS(iControl, 0);
+  UpdateButtons();
+
+  return;
 }
 
 bool CGUIWindowPictures::GetDirectory(const std::string &strDirectory, CFileItemList& items)
@@ -511,6 +558,9 @@ bool CGUIWindowPictures::OnContextButton(int itemNumber, CONTEXT_BUTTON button)
     return true;
   case CONTEXT_BUTTON_SWITCH_MEDIA:
     CGUIDialogContextMenu::SwitchMedia("pictures", m_vecItems->GetPath());
+    return true;
+  case CONTEXT_BUTTON_SCAN:
+    OnScan(itemNumber);
     return true;
   default:
     break;

@@ -262,6 +262,8 @@ class CAdvancedSettings : public ISettingCallback, public ISettingsHandler
     bool m_bVideoScannerIgnoreErrors;
     int m_iVideoLibraryDateAdded;
 
+    bool m_bPictureLibraryCleanOnUpdate;
+
     std::set<std::string> m_vecTokens;
 
     int m_iEpgUpdateCheckInterval;  // seconds

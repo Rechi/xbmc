@@ -418,6 +418,10 @@ const std::string CSettings::SETTING_GENERAL_ADDONBROKENFILTER = "general.addonb
 const std::string CSettings::SETTING_SOURCE_VIDEOS = "source.videos";
 const std::string CSettings::SETTING_SOURCE_MUSIC = "source.music";
 const std::string CSettings::SETTING_SOURCE_PICTURES = "source.pictures";
+const std::string CSettings::SETTING_PICTURELIBRARY_BACKGROUNDUPDATE =
+    "picturelibrary.backgroundupdate";
+const std::string CSettings::SETTING_PICTURELIBRARY_UPDATEONSTARTUP =
+    "picturelibrary.updateonstartup";
 
 bool CSettings::Initialize()
 {

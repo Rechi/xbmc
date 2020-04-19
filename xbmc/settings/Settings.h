@@ -382,6 +382,8 @@ public:
   static const std::string SETTING_SOURCE_VIDEOS;
   static const std::string SETTING_SOURCE_MUSIC;
   static const std::string SETTING_SOURCE_PICTURES;
+  static const std::string SETTING_PICTURELIBRARY_BACKGROUNDUPDATE;
+  static const std::string SETTING_PICTURELIBRARY_UPDATEONSTARTUP;
   // values for SETTING_VIDEOLIBRARY_SHOWUNWATCHEDPLOTS
   static const int VIDEOLIBRARY_PLOTS_SHOW_UNWATCHED_MOVIES = 0;
   static const int VIDEOLIBRARY_PLOTS_SHOW_UNWATCHED_TVSHOWEPISODES = 1;

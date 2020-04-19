@@ -441,6 +441,9 @@ void CProfileManager::LogOff()
   if (g_application.IsMusicScanning())
     g_application.StopMusicScan();
 
+  if (g_application.IsPictureScanning())
+    g_application.StopPicturecScan();
+
   if (CVideoLibraryQueue::GetInstance().IsRunning())
     CVideoLibraryQueue::GetInstance().CancelAllJobs();
 

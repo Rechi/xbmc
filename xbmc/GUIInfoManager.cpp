@@ -9587,6 +9587,8 @@ int CGUIInfoManager::TranslateSingleString(const std::string &strCondition, bool
         return LIBRARY_IS_SCANNING_VIDEO; //! @todo change to IsScanning(Video)
       else if (prop.name == "isscanningmusic")
         return LIBRARY_IS_SCANNING_MUSIC;
+      else if (prop.name == "isscanningpictures")
+        return LIBRARY_IS_SCANNING_PICTURES;
       else if (prop.name == "hascontent" && prop.num_params())
       {
         std::string cat = prop.param(0);
