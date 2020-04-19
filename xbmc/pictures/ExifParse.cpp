@@ -26,15 +26,9 @@
 #include <cstring>
 #endif
 
+#include <algorithm>
 #include <math.h>
 #include <stdio.h>
-
-#ifndef min
-#define min(a,b) (a)>(b)?(b):(a)
-#endif
-#ifndef max
-#define max(a,b) (a)<(b)?(b):(a)
-#endif
 
 
 // Prototypes for exif utility functions.
@@ -400,8 +394,8 @@ void CExifParse::ProcessDir(const unsigned char* const DirStart,
     {
       case TAG_DESCRIPTION:
       {
-        int length = max(ByteCount, 0);
-        length = min(length, MAX_COMMENT);
+        int length = std::max(ByteCount, 0);
+        length = std::min(length, MAX_COMMENT);
         strncpy(m_ExifInfo->Description, (char *)ValuePtr, length);
         m_ExifInfo->Description[length] = '\0';
         break;
@@ -488,7 +482,7 @@ void CExifParse::ProcessDir(const unsigned char* const DirStart,
             m_ExifInfo->CommentsCharset = EXIF_COMMENT_CHARSET_JIS;
 
           int length = ByteCount - EXIF_COMMENT_CHARSET_LENGTH;
-          length = min(length, MAX_COMMENT);
+          length = std::min(length, MAX_COMMENT);
           memcpy(m_ExifInfo->Comments, ValuePtr + EXIF_COMMENT_CHARSET_LENGTH, length);
           m_ExifInfo->Comments[length] = '\0';
 //          FixComment(comment);                          // Ensure comment is printable
@@ -500,7 +494,7 @@ void CExifParse::ProcessDir(const unsigned char* const DirStart,
       {
         // The XP user comment field is always unicode (UCS-2) encoded
         m_ExifInfo->XPCommentsCharset = EXIF_COMMENT_CHARSET_UNICODE;
-        size_t length = min(ByteCount, MAX_COMMENT);
+        size_t length = std::min(ByteCount, MAX_COMMENT);
         memcpy(m_ExifInfo->XPComment, ValuePtr, length);
         m_ExifInfo->XPComment[length] = '\0';
       }

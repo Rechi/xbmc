@@ -24,11 +24,8 @@
 #include <string.h>
 #endif
 
+#include <algorithm>
 #include <stdio.h>
-
-#ifndef min
-#define min(a,b) (a)>(b)?(b):(a)
-#endif
 
 // Supported IPTC entry types
 #define IPTC_RECORD_VERSION         0x00
@@ -187,8 +184,8 @@ bool CIptcParse::Process (const unsigned char* const Data, const unsigned short 
     {
       if (type != IPTC_KEYWORDS || *tag == 0)
       {
-        strncpy(tag, pos, min(length, MAX_IPTC_STRING - 1));
-        tag[min(length, MAX_IPTC_STRING - 1)] = 0;
+        strncpy(tag, pos, std::min<int>(length, MAX_IPTC_STRING - 1));
+        tag[std::min<int>(length, MAX_IPTC_STRING - 1)] = 0;
       }
       else if (type == IPTC_KEYWORDS)
       {
@@ -197,7 +194,7 @@ bool CIptcParse::Process (const unsigned char* const Data, const unsigned short 
         if (maxLen > 2)
         {
           strcat(tag, ", ");
-          strncat(tag, pos, min(length, maxLen - 3));
+          strncat(tag, pos, std::min<size_t>(length, maxLen - 3));
         }
       }
 /*      if (id == SLIDESHOW_IPTC_CAPTION)
