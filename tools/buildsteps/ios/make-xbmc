@@ -2,4 +2,4 @@ WORKSPACE=${WORKSPACE:-$( cd $(dirname $0)/../../.. ; pwd -P )}
 XBMC_PLATFORM_DIR=ios
 . $WORKSPACE/tools/buildsteps/defaultenv
 
-cd $WORKSPACE/build;xcodebuild -configuration $Configuration build -jobs $BUILDTHREADS
+cd $WORKSPACE/build;xcodebuild -configuration $Configuration build -jobs $BUILDTHREADS -IDEBuildingContinueBuildingAfterErrors=YES || xcodebuild -configuration $Configuration build -jobs 1 -IDEBuildingContinueBuildingAfterErrors=YES
