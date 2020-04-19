@@ -155,155 +155,167 @@ bool CDirectory::GetDirectory(const CURL& url, CFileItemList &items, const CHint
   return CDirectory::GetDirectory(url, pDirectory, items, hints);
 }
 
-bool CDirectory::GetDirectory(const CURL& url, std::shared_ptr<IDirectory> pDirectory,
-                              CFileItemList &items, const CHints &hints)
+bool CDirectory::GetDirectory(const CURL& url, std::shared_ptr<IDirectory> pDirectory, CFileItemList& items, const CHints& hints)
 {
-  try
+  std::vector<CURL> urlAlternatives = URIUtils::AlternativePaths(url);
+  for (std::vector<CURL>::const_iterator it = urlAlternatives.begin(); it != urlAlternatives.end(); ++it)
   {
-    CURL realURL = URIUtils::SubstitutePath(url);
-    if (!pDirectory)
-      return false;
-
-    // check our cache for this path
-    if (g_directoryCache.GetDirectory(realURL.Get(), items, (hints.flags & DIR_FLAG_READ_CACHE) == DIR_FLAG_READ_CACHE))
-      items.SetURL(url);
-    else
+    try
     {
-      // need to clear the cache (in case the directory fetch fails)
-      // and (re)fetch the folder
-      if (!(hints.flags & DIR_FLAG_BYPASS_CACHE))
-        g_directoryCache.ClearDirectory(realURL.Get());
+      CURL realURL = URIUtils::SubstitutePath(*it);
+      if (!pDirectory)
+        return false;
 
-      pDirectory->SetFlags(hints.flags);
-
-      bool result = false, cancel = false;
-      CURL authUrl = realURL;
-
-      while (!result && !cancel)
-      {
-        const std::string pathToUrl(url.Get());
-
-        // don't change auth if it's set explicitly
-        if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
-          CPasswordManager::GetInstance().AuthenticateURL(authUrl);
-
+      // check our cache for this path
+      if (g_directoryCache.GetDirectory(realURL.Get(), items, (hints.flags & DIR_FLAG_READ_CACHE) == DIR_FLAG_READ_CACHE))
         items.SetURL(url);
-        result = pDirectory->GetDirectory(authUrl, items);
+      else
+      {
+        // need to clear the cache (in case the directory fetch fails)
+        // and (re)fetch the folder
+        if (!(hints.flags & DIR_FLAG_BYPASS_CACHE))
+          g_directoryCache.ClearDirectory(realURL.Get());
 
-        if (!result)
+        pDirectory->SetFlags(hints.flags);
+
+        bool result = false, cancel = false, continueNextAlternative = false;
+        CURL authUrl = realURL;
+
+        while (!result && !cancel)
         {
-          if (!cancel)
+          const std::string pathToUrl(url.Get());
+
+          // don't change auth if it's set explicitly
+          if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
+            CPasswordManager::GetInstance().AuthenticateURL(authUrl);
+
+          items.SetURL(url);
+          result = pDirectory->GetDirectory(authUrl, items);
+
+          if (!result)
           {
-            // @TODO ProcessRequirements() can bring up the keyboard input dialog
-            // filesystem must not depend on GUI
-            if (g_application.IsCurrentThread() && pDirectory->ProcessRequirements())
+            if (!cancel)
             {
-              authUrl.SetDomain("");
-              authUrl.SetUserName("");
-              authUrl.SetPassword("");
-              continue;
+              // @TODO ProcessRequirements() can bring up the keyboard input dialog
+              // filesystem must not depend on GUI
+              if (g_application.IsCurrentThread() && pDirectory->ProcessRequirements())
+              {
+                authUrl.SetDomain("");
+                authUrl.SetUserName("");
+                authUrl.SetPassword("");
+                continue;
+              }
+            }
+            if (it == urlAlternatives.end())
+            {
+              CLog::Log(LOGERROR, "%s - Error getting %s", __FUNCTION__, url.GetRedacted().c_str());
+              return false;
+            }
+            continueNextAlternative = true;
+            break;
+          }
+        }
+
+        if (continueNextAlternative)
+          continue;
+
+        // hide credentials if necessary
+        if (CPasswordManager::GetInstance().IsURLSupported(realURL))
+        {
+          bool hide = false;
+          // for explicitly credentials
+          if (!realURL.GetUserName().empty())
+          {
+            // credentials was changed i.e. were stored in the password
+            // manager, in this case we can hide them from an item URL,
+            // otherwise we have to keep credentials in an item URL
+            if (realURL.GetUserName() != authUrl.GetUserName()
+              || realURL.GetPassWord() != authUrl.GetPassWord()
+              || realURL.GetDomain() != authUrl.GetDomain())
+            {
+              hide = true;
             }
           }
-          CLog::Log(LOGERROR, "%s - Error getting %s", __FUNCTION__, url.GetRedacted().c_str());
-          return false;
-        }
-      }
-
-      // hide credentials if necessary
-      if (CPasswordManager::GetInstance().IsURLSupported(realURL))
-      {
-        bool hide = false;
-        // for explicitly credentials
-        if (!realURL.GetUserName().empty())
-        {
-          // credentials was changed i.e. were stored in the password
-          // manager, in this case we can hide them from an item URL,
-          // otherwise we have to keep credentials in an item URL
-          if ( realURL.GetUserName() != authUrl.GetUserName()
-            || realURL.GetPassWord() != authUrl.GetPassWord()
-            || realURL.GetDomain() != authUrl.GetDomain())
+          else
           {
+            // hide credentials in any other cases
             hide = true;
           }
-        }
-        else
-        {
-          // hide credentials in any other cases
-          hide = true;
+
+          if (hide)
+          {
+            for (int i = 0; i < items.Size(); ++i)
+            {
+              CFileItemPtr item = items[i];
+              CURL itemUrl = item->GetURL();
+              itemUrl.SetDomain("");
+              itemUrl.SetUserName("");
+              itemUrl.SetPassword("");
+              item->SetPath(itemUrl.Get());
+            }
+          }
         }
 
-        if (hide)
+        // cache the directory, if necessary
+        if (!(hints.flags & DIR_FLAG_BYPASS_CACHE))
+          g_directoryCache.SetDirectory(realURL.Get(), items, pDirectory->GetCacheType(url));
+      }
+
+      // now filter for allowed files
+      if (!pDirectory->AllowAll())
+      {
+        pDirectory->SetMask(hints.mask);
+        for (int i = 0; i < items.Size(); ++i)
         {
-          for (int i = 0; i < items.Size(); ++i)
+          CFileItemPtr item = items[i];
+          if (!item->m_bIsFolder && !pDirectory->IsAllowed(item->GetURL()))
           {
-            CFileItemPtr item = items[i];
-            CURL itemUrl = item->GetURL();
-            itemUrl.SetDomain("");
-            itemUrl.SetUserName("");
-            itemUrl.SetPassword("");
-            item->SetPath(itemUrl.Get());
+            items.Remove(i);
+            i--; // don't confuse loop
+          }
+        }
+      }
+      // filter hidden files
+      //! @todo we shouldn't be checking the gui setting here, callers should use getHidden instead
+      if (!CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_FILELISTS_SHOWHIDDEN) && !(hints.flags & DIR_FLAG_GET_HIDDEN))
+      {
+        for (int i = 0; i < items.Size(); ++i)
+        {
+          if (items[i]->GetProperty("file:hidden").asBoolean())
+          {
+            items.Remove(i);
+            i--; // don't confuse loop
           }
         }
       }
 
-      // cache the directory, if necessary
-      if (!(hints.flags & DIR_FLAG_BYPASS_CACHE))
-        g_directoryCache.SetDirectory(realURL.Get(), items, pDirectory->GetCacheType(url));
-    }
+      //  Should any of the files we read be treated as a directory?
+      //  Disable for database folders, as they already contain the extracted items
+      if (!(hints.flags & DIR_FLAG_NO_FILE_DIRS) && !items.IsMusicDb() && !items.IsVideoDb() && !items.IsSmartPlayList())
+        FilterFileDirectories(items, hints.mask);
 
-    // now filter for allowed files
-    if (!pDirectory->AllowAll())
-    {
-      pDirectory->SetMask(hints.mask);
-      for (int i = 0; i < items.Size(); ++i)
+      // Correct items for path substitution
+      const std::string pathToUrl(url.Get());
+      const std::string pathToUrl2(realURL.Get());
+      if (pathToUrl != pathToUrl2)
       {
-        CFileItemPtr item = items[i];
-        if (!item->m_bIsFolder && !pDirectory->IsAllowed(item->GetURL()))
+        for (int i = 0; i < items.Size(); ++i)
         {
-          items.Remove(i);
-          i--; // don't confuse loop
+          CFileItemPtr item = items[i];
+          std::string strSubPathAndFileName = item->GetPath().substr(pathToUrl2.size());
+          item->SetPath(URIUtils::ChangeBasePath(url.Get(), strSubPathAndFileName, pathToUrl).c_str());
         }
       }
+
+      return true;
     }
-    // filter hidden files
-    //! @todo we shouldn't be checking the gui setting here, callers should use getHidden instead
-    if (!CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_FILELISTS_SHOWHIDDEN) && !(hints.flags & DIR_FLAG_GET_HIDDEN))
+    XBMCCOMMONS_HANDLE_UNCHECKED
+    catch (...)
     {
-      for (int i = 0; i < items.Size(); ++i)
-      {
-        if (items[i]->GetProperty("file:hidden").asBoolean())
-        {
-          items.Remove(i);
-          i--; // don't confuse loop
-        }
-      }
+      CLog::Log(LOGERROR, "%s - Unhandled exception", __FUNCTION__);
     }
-
-    //  Should any of the files we read be treated as a directory?
-    //  Disable for database folders, as they already contain the extracted items
-    if (!(hints.flags & DIR_FLAG_NO_FILE_DIRS) && !items.IsMusicDb() && !items.IsVideoDb() && !items.IsSmartPlayList())
-      FilterFileDirectories(items, hints.mask);
-
-    // Correct items for path substitution
-    const std::string pathToUrl(url.Get());
-    const std::string pathToUrl2(realURL.Get());
-    if (pathToUrl != pathToUrl2)
-    {
-      for (int i = 0; i < items.Size(); ++i)
-      {
-        CFileItemPtr item = items[i];
-        item->SetPath(URIUtils::SubstitutePath(item->GetPath(), true));
-      }
-    }
-
-    return true;
+    CLog::Log(LOGERROR, "%s - Error getting %s", __FUNCTION__, url.GetRedacted().c_str());
   }
-  XBMCCOMMONS_HANDLE_UNCHECKED
-  catch (...)
-  {
-    CLog::Log(LOGERROR, "%s - Unhandled exception", __FUNCTION__);
-  }
-  CLog::Log(LOGERROR, "%s - Error getting %s", __FUNCTION__, url.GetRedacted().c_str());
   return false;
 }
 
