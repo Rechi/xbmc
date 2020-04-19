@@ -525,6 +525,41 @@ std::string URIUtils::SubstitutePath(const std::string& strPath, bool reverse /*
   return strPath;
 }
 
+std::vector<CURL> URIUtils::AlternativePaths(const CURL& url)
+{
+  std::vector<CURL> paths;
+  std::vector<std::string> alternatives = AlternativePaths(url.Get());
+  for (std::vector<std::string>::const_iterator it = alternatives.begin(); it != alternatives.end(); ++it)
+  {
+    CURL url(*it);
+    paths.push_back(url);
+  }
+  return paths;
+}
+
+std::vector<std::string> URIUtils::AlternativePaths(const std::string& strPath)
+{
+  std::vector<std::string> paths;
+  paths.push_back(strPath);
+  for (CAdvancedSettings::StringMapping::iterator i = g_advancedSettings.m_pathAlternatives.begin(); i != g_advancedSettings.m_pathAlternatives.end(); ++i)
+  {
+    std::string fromPath = i->first; // Fake path;
+    std::string toPath = i->second; // Real path;
+
+    if (strncmp(strPath.c_str(), fromPath.c_str(), HasSlashAtEnd(fromPath) ? fromPath.size() - 1 : fromPath.size()) == 0)
+    {
+      if (strPath.size() > fromPath.size())
+      {
+        std::string strSubPathAndFileName = strPath.substr(fromPath.size());
+        paths.push_back(ChangeBasePath(fromPath, strSubPathAndFileName, toPath)); // Fix encoding + slash direction
+      }
+      else
+        paths.push_back(toPath);
+    }
+  }
+  return paths;
+}
+
 bool URIUtils::IsProtocol(const std::string& url, const std::string &type)
 {
   return StringUtils::StartsWithNoCase(url, type + "://");
