@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2002 Frodo
+ *      Copyright (c) 2002 Frodo
  *      Portions Copyright (c) by the authors of ffmpeg and xvid
  *  Copyright (C) 2002-2018 Team Kodi
  *  This file is part of Kodi - https://kodi.tv
@@ -262,119 +262,124 @@ bool CFile::Open(const CURL& file, const unsigned int flags)
     }
     else
     {
+      CLog::Log(LOGFATAL, "%s:%d", __PRETTY_FUNCTION__, __LINE__);
       return m_pFile->ReOpen(URIUtils::SubstitutePath(file));
     }
   }
 
   m_flags = flags;
-  try
+  std::vector<CURL> fileAlternatives = URIUtils::AlternativePaths(file);
+  for (std::vector<CURL>::const_iterator it = fileAlternatives.begin(); it != fileAlternatives.end(); ++it)
   {
-    bool bPathInCache;
-
-    CURL url(URIUtils::SubstitutePath(file)), url2(url);
-
-    if (url2.IsProtocol("apk") || url2.IsProtocol("zip") )
-      url2.SetOptions("");
-
-    if (!g_directoryCache.FileExists(url2.Get(), bPathInCache) )
-    {
-      if (bPathInCache)
-        return false;
-    }
-
-    if (!(m_flags & READ_NO_CACHE))
-    {
-      const std::string pathToUrl(url.Get());
-      if (URIUtils::IsInternetStream(url, true) && !CUtil::IsPicture(pathToUrl) )
-        m_flags |= READ_CACHED;
-
-      if (m_flags & READ_CACHED)
-      {
-        // for internet stream, if it contains multiple stream, file cache need handle it specially.
-        m_pFile = new CFileCache(m_flags);
-
-        if (!m_pFile)
-          return false;
-
-        return m_pFile->Open(url);
-      }
-    }
-    m_pFile = CFileFactory::CreateLoader(url);
-
-    if (!m_pFile)
-      return false;
-
-    CURL authUrl(url);
-    if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
-      CPasswordManager::GetInstance().AuthenticateURL(authUrl);
-
     try
     {
-      if (!m_pFile->Open(authUrl))
+      bool bPathInCache;
+
+      CURL url(URIUtils::SubstitutePath(*it)), url2(url);
+
+      if (url2.IsProtocol("apk") || url2.IsProtocol("zip"))
+        url2.SetOptions("");
+
+      if (!g_directoryCache.FileExists(url2.Get(), bPathInCache))
       {
+        if (bPathInCache)
+          return false;
+      }
+
+      if (!(m_flags & READ_NO_CACHE))
+      {
+        const std::string pathToUrl(url.Get());
+        if (URIUtils::IsInternetStream(url, true) && !CUtil::IsPicture(pathToUrl))
+          m_flags |= READ_CACHED;
+
+        if (m_flags & READ_CACHED)
+        {
+          // for internet stream, if it contains multiple stream, file cache need handle it specially.
+          m_pFile = new CFileCache(m_flags);
+
+          if (!m_pFile)
+            return false;
+
+          return m_pFile->Open(url);
+        }
+      }
+      m_pFile = CFileFactory::CreateLoader(url);
+
+      if (!m_pFile)
+        return false;
+
+      CURL authUrl(url);
+      if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
+        CPasswordManager::GetInstance().AuthenticateURL(authUrl);
+
+      try
+      {
+        if (!m_pFile->Open(authUrl))
+        {
+          SAFE_DELETE(m_pFile);
+          continue;
+        }
+      }
+      catch (CRedirectException* pRedirectEx)
+      {
+        // the file implementation decided this item should use a different implementation.
+        // the exception will contain the new implementation.
+        CLog::Log(LOGDEBUG, "File::Open - redirecting implementation for %s", file.GetRedacted().c_str());
+        SAFE_DELETE(m_pFile);
+        if (pRedirectEx && pRedirectEx->m_pNewFileImp)
+        {
+          std::unique_ptr<CURL> pNewUrl(pRedirectEx->m_pNewUrl);
+          m_pFile = pRedirectEx->m_pNewFileImp;
+          delete pRedirectEx;
+
+          if (pNewUrl)
+          {
+            CURL newAuthUrl(*pNewUrl);
+            if (CPasswordManager::GetInstance().IsURLSupported(newAuthUrl) && newAuthUrl.GetUserName().empty())
+              CPasswordManager::GetInstance().AuthenticateURL(newAuthUrl);
+
+            if (!m_pFile->Open(newAuthUrl))
+            {
+              SAFE_DELETE(m_pFile);
+              return false;
+            }
+          }
+          else
+          {
+            if (!m_pFile->Open(authUrl))
+            {
+              SAFE_DELETE(m_pFile);
+              return false;
+            }
+          }
+        }
+      }
+      catch (...)
+      {
+        CLog::Log(LOGERROR, "File::Open - unknown exception when opening %s", file.GetRedacted().c_str());
         SAFE_DELETE(m_pFile);
         return false;
       }
-    }
-    catch (CRedirectException *pRedirectEx)
-    {
-      // the file implementation decided this item should use a different implementation.
-      // the exception will contain the new implementation.
-      CLog::Log(LOGDEBUG,"File::Open - redirecting implementation for %s", file.GetRedacted().c_str());
-      SAFE_DELETE(m_pFile);
-      if (pRedirectEx && pRedirectEx->m_pNewFileImp)
+
+      if (m_pFile->GetChunkSize() && !(m_flags & READ_CHUNKED))
       {
-        std::unique_ptr<CURL> pNewUrl(pRedirectEx->m_pNewUrl);
-        m_pFile = pRedirectEx->m_pNewFileImp;
-        delete pRedirectEx;
-
-        if (pNewUrl)
-        {
-          CURL newAuthUrl(*pNewUrl);
-          if (CPasswordManager::GetInstance().IsURLSupported(newAuthUrl) && newAuthUrl.GetUserName().empty())
-            CPasswordManager::GetInstance().AuthenticateURL(newAuthUrl);
-
-          if (!m_pFile->Open(newAuthUrl))
-          {
-            SAFE_DELETE(m_pFile);
-            return false;
-          }
-        }
-        else
-        {
-          if (!m_pFile->Open(authUrl))
-          {
-            SAFE_DELETE(m_pFile);
-            return false;
-          }
-        }
+        m_pBuffer = new CFileStreamBuffer(0);
+        m_pBuffer->Attach(m_pFile);
       }
+
+      if (m_flags & READ_BITRATE)
+      {
+        m_bitStreamStats = new BitstreamStats();
+        m_bitStreamStats->Start();
+      }
+
+      return true;
     }
+    XBMCCOMMONS_HANDLE_UNCHECKED
     catch (...)
     {
-      CLog::Log(LOGERROR, "File::Open - unknown exception when opening %s", file.GetRedacted().c_str());
-      SAFE_DELETE(m_pFile);
-      return false;
+      CLog::Log(LOGERROR, "%s - Unhandled exception", __FUNCTION__);
     }
-
-    if (m_pFile->GetChunkSize() && !(m_flags & READ_CHUNKED))
-    {
-      m_pBuffer = new CFileStreamBuffer(0);
-      m_pBuffer->Attach(m_pFile);
-    }
-
-    if (m_flags & READ_BITRATE)
-    {
-      m_bitStreamStats = new BitstreamStats();
-      m_bitStreamStats->Start();
-    }
-
-    return true;
-  }
-  XBMCCOMMONS_HANDLE_UNCHECKED
-  catch(...)
-  {
-    CLog::Log(LOGERROR, "%s - Unhandled exception", __FUNCTION__);
   }
   CLog::Log(LOGERROR, "%s - Error opening %s", __FUNCTION__, file.GetRedacted().c_str());
   return false;
@@ -390,6 +395,7 @@ bool CFile::OpenForWrite(const CURL& file, bool bOverWrite)
 {
   try
   {
+    CLog::Log(LOGFATAL, "%s:%d", __FUNCTION__, __LINE__);
     CURL url = URIUtils::SubstitutePath(file);
     CURL authUrl = url;
     if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
@@ -429,6 +435,7 @@ bool CFile::Exists(const std::string& strFileName, bool bUseCache /* = true */)
 
 bool CFile::Exists(const CURL& file, bool bUseCache /* = true */)
 {
+  CLog::Log(LOGFATAL, "%s:%d", __FUNCTION__, __LINE__);
   CURL url(URIUtils::SubstitutePath(file));
   CURL authUrl = url;
   if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
@@ -522,6 +529,7 @@ int CFile::Stat(const CURL& file, struct __stat64* buffer)
   if (!buffer)
     return -1;
 
+  CLog::Log(LOGFATAL, "%s:%d", __FUNCTION__, __LINE__);
   CURL url(URIUtils::SubstitutePath(file));
   CURL authUrl = url;
   if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
@@ -870,6 +878,7 @@ bool CFile::Delete(const CURL& file)
 {
   try
   {
+    CLog::Log(LOGFATAL, "%s:%d", __FUNCTION__, __LINE__);
     CURL url(URIUtils::SubstitutePath(file));
     CURL authUrl = url;
     if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
@@ -906,6 +915,7 @@ bool CFile::Rename(const CURL& file, const CURL& newFile)
 {
   try
   {
+    CLog::Log(LOGFATAL, "%s:%d", __FUNCTION__, __LINE__);
     CURL url(URIUtils::SubstitutePath(file));
     CURL urlnew(URIUtils::SubstitutePath(newFile));
 
@@ -946,6 +956,7 @@ bool CFile::SetHidden(const CURL& file, bool hidden)
 {
   try
   {
+    CLog::Log(LOGFATAL, "%s:%d", __FUNCTION__, __LINE__);
     CURL url(URIUtils::SubstitutePath(file));
     CURL authUrl = url;
     if (CPasswordManager::GetInstance().IsURLSupported(authUrl) && authUrl.GetUserName().empty())
@@ -1227,6 +1238,7 @@ bool CFileStream::Open(const CURL& filename)
 {
   Close();
 
+  CLog::Log(LOGFATAL, "%s:%d", __FUNCTION__, __LINE__);
   CURL url(URIUtils::SubstitutePath(filename));
   m_file = CFileFactory::CreateLoader(url);
 
