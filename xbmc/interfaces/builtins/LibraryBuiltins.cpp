@@ -19,6 +19,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "messaging/helpers/DialogHelper.h"
 #include "music/MusicLibraryQueue.h"
+#include "pictures/PictureDatabase.h"
 #include "settings/LibExportSettings.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
