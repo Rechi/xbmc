@@ -141,6 +141,12 @@ endif()
 
 if(NOT MSVC)
   add_options(ALL_LANGUAGES ALL_BUILDS "-Wall")
+  add_options(ALL_LANGUAGES ALL_BUILDS "-Wextra" "-Wno-missing-field-initializers" "-Wno-unused-parameter")
+  add_options(CXX ALL_BUILDS "-Werror=write-strings")
+  if(CMAKE_COMPILER_IS_GNUCXX)
+    add_options(CXX ALL_BUILDS "-Wuseless-cast")
+  endif()
+  add_options(CXX ALL_BUILDS "-Wcast-qual")
   add_options(ALL_LANGUAGES DEBUG "-g" "-D_DEBUG")
 endif()
 
