@@ -17,6 +17,7 @@
 #include "MusicDatabaseDirectory.h"
 #include "MusicSearchDirectory.h"
 #include "VideoDatabaseDirectory.h"
+#include "PictureDatabaseDirectory.h"
 #include "FavouritesDirectory.h"
 #include "LibraryDirectory.h"
 #include "EventsDirectory.h"

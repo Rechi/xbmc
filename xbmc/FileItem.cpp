@@ -1282,6 +1282,11 @@ bool CFileItem::IsVideoDb() const
   return URIUtils::IsVideoDb(m_strPath);
 }
 
+bool CFileItem::IsPictureDb() const
+{
+  return URIUtils::IsPictureDb(m_strPath);
+}
+
 bool CFileItem::IsVirtualDirectoryRoot() const
 {
   return (m_bIsFolder && m_strPath.empty());

@@ -136,6 +136,7 @@ public:
   static bool IsOnDVD(const std::string& strFile);
   static bool IsOnLAN(const std::string& strFile);
   static bool IsHostOnLAN(const std::string& hostName, bool offLineCheck = false);
+  static bool IsPictureDb(const std::string& strFile);
   static bool IsPlugin(const std::string& strFile);
   static bool IsScript(const std::string& strFile);
   static bool IsRAR(const std::string& strFile);
