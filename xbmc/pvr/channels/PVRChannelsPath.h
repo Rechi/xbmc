@@ -58,7 +58,7 @@ namespace PVR
     };
 
     Kind m_kind = Kind::INVALID;
-    bool m_bRadio = false;;
+    bool m_bRadio = false;
     std::string m_path;
     std::string m_group;
     std::string m_clientID;

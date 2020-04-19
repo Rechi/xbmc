@@ -49,7 +49,7 @@ CWebSocket* CWebSocketManager::Handle(const char* data, unsigned int length, std
   {
     CLog::Log(LOGINFO, "WebSocket: missing Sec-WebSocket-Version");
     CHttpResponse httpResponse(HTTP::Get, HTTP::BadRequest, HTTP::Version1_1);
-    response = response = httpResponse.Create();;
+    response = response = httpResponse.Create();
 
     return NULL;
   }
