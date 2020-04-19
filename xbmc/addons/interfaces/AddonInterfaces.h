@@ -39,12 +39,12 @@ namespace ADDON
     \*/
     static void*        AddOnLib_RegisterMe            (void* addonData);
     static void         AddOnLib_UnRegisterMe          (void* addonData, void* cbTable);
-    void*               AddOnLib_GetHelper()          { return m_helperAddOn; }
+    void* AddOnLib_GetHelper() const { return m_helperAddOn; }
     /*\_________________________________________________________________________
     \*/
     static void*        GUILib_RegisterMe              (void* addonData);
     static void         GUILib_UnRegisterMe            (void* addonData, void* cbTable);
-    void*               GUILib_GetHelper()            { return m_helperGUI; }
+    void* GUILib_GetHelper() const { return m_helperGUI; }
     /*\_________________________________________________________________________
     \*/
     static void*        PVRLib_RegisterMe              (void* addonData);
