@@ -82,3 +82,6 @@ Kodi is **[GPLv2 licensed](LICENSE.md)**. You may use, distribute and copy it un
 <a href="https://github.com/xbmc/xbmc"><img src="https://forthebadge.com/images/badges/approved-by-george-costanza.svg" height="25"></a>
 <a href="https://kodi.tv/download"><img src="https://forthebadge.com/images/badges/check-it-out.svg" height="25"></a>
 <a href="https://github.com/xbmc/xbmc"><img src="https://forthebadge.com/images/badges/winter-is-coming.svg" height="25"></a>
+
+
+[![Build status](https://ci.appveyor.com/api/projects/status/vfcdd706si01syl9/branch/master?svg=true)](https://ci.appveyor.com/project/I-Cat/xbmc/branch/master)
