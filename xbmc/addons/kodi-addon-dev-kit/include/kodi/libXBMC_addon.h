@@ -149,7 +149,7 @@ namespace ADDON
     {
       m_Handle = static_cast<AddonCB*>(handle);
       if (m_Handle)
-        m_Callbacks = (KodiAPI::AddOn::CB_AddOnLib*)m_Handle->AddOnLib_RegisterMe(m_Handle->addonData);
+        m_Callbacks = static_cast<KodiAPI::AddOn::CB_AddOnLib*>(m_Handle->AddOnLib_RegisterMe(m_Handle->addonData));
       if (!m_Callbacks)
         fprintf(stderr, "libXBMC_addon-ERROR: AddOnLib_RegisterMe can't get callback table from Kodi !!!\n");
 

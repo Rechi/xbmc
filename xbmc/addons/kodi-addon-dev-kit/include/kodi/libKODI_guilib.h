@@ -903,7 +903,7 @@ public:
   {
     m_Handle = static_cast<AddonCB*>(handle);
     if (m_Handle)
-      m_Callbacks = (KodiAPI::GUI::CB_GUILib*)m_Handle->GUILib_RegisterMe(m_Handle->addonData);
+      m_Callbacks = static_cast<KodiAPI::GUI::CB_GUILib*>(m_Handle->GUILib_RegisterMe(m_Handle->addonData));
     if (!m_Callbacks)
       fprintf(stderr, "libKODI_guilib-ERROR: GUILib_RegisterMe can't get callback table from Kodi !!!\n");
 

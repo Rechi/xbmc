@@ -90,7 +90,7 @@ CAddonCallbacksAddon::~CAddonCallbacksAddon()
 
 void CAddonCallbacksAddon::AddOnLog(void *addonData, const int addonLogLevel, const char *strMessage)
 {
-  CAddonInterfaces* addon = (CAddonInterfaces*) addonData;
+  CAddonInterfaces* addon = static_cast<CAddonInterfaces*>(addonData);
   if (addon == NULL || strMessage == NULL)
   {
     CLog::Log(LOGERROR, "CAddonCallbacksAddon - %s - called with a null pointer", __FUNCTION__);
@@ -136,7 +136,7 @@ void CAddonCallbacksAddon::AddOnLog(void *addonData, const int addonLogLevel, co
 
 void CAddonCallbacksAddon::QueueNotification(void *addonData, const int type, const char *strMessage)
 {
-  CAddonInterfaces* addon = (CAddonInterfaces*) addonData;
+  CAddonInterfaces* addon = static_cast<CAddonInterfaces*>(addonData);
   if (addon == NULL || strMessage == NULL)
   {
     CLog::Log(LOGERROR, "CAddonCallbacksAddon - %s - called with a null pointer", __FUNCTION__);
@@ -180,7 +180,7 @@ bool CAddonCallbacksAddon::WakeOnLan(const char *mac)
 
 bool CAddonCallbacksAddon::GetAddonSetting(void *addonData, const char *strSettingName, void *settingValue)
 {
-  CAddonInterfaces* addon = (CAddonInterfaces*) addonData;
+  CAddonInterfaces* addon = static_cast<CAddonInterfaces*>(addonData);
   if (addon == NULL || strSettingName == NULL || settingValue == NULL)
   {
     CLog::Log(LOGERROR, "CAddonCallbacksAddon - %s - called with a null pointer", __FUNCTION__);
@@ -195,12 +195,12 @@ bool CAddonCallbacksAddon::GetAddonSetting(void *addonData, const char *strSetti
 
     if (StringUtils::CompareNoCase(strSettingName, "__addonpath__") == 0)
     {
-      strcpy((char*) settingValue, addonHelper->m_addon->Path().c_str());
+      strcpy(static_cast<char*>(settingValue), addonHelper->m_addon->Path().c_str());
       return true;
     }
     else if (StringUtils::CompareNoCase(strSettingName, "__addonname__") == 0)
     {
-      strcpy((char*)settingValue, addonHelper->m_addon->Name().c_str());
+      strcpy(static_cast<char*>(settingValue), addonHelper->m_addon->Name().c_str());
       return true;
     }
 
@@ -232,7 +232,7 @@ bool CAddonCallbacksAddon::GetAddonSetting(void *addonData, const char *strSetti
         return true;
 
       case SettingType::String:
-        strcpy((char*)settingValue, std::static_pointer_cast<CSettingString>(setting)->GetValue().c_str());
+        strcpy(static_cast<char*>(settingValue), std::static_pointer_cast<CSettingString>(setting)->GetValue().c_str());
         return true;
 
       default:
@@ -354,7 +354,7 @@ ssize_t CAddonCallbacksAddon::ReadFile(const void* addonData, void* file, void* 
   if (!helper)
     return 0;
 
-  CFile* cfile = (CFile*)file;
+  CFile* cfile = static_cast<CFile*>(file);
   if (!cfile)
     return 0;
 
@@ -367,7 +367,7 @@ bool CAddonCallbacksAddon::ReadFileString(const void* addonData, void* file, cha
   if (!helper)
     return false;
 
-  CFile* cfile = (CFile*)file;
+  CFile* cfile = static_cast<CFile*>(file);
   if (!cfile)
     return false;
 
@@ -380,7 +380,7 @@ ssize_t CAddonCallbacksAddon::WriteFile(const void* addonData, void* file, const
   if (!helper)
     return -1;
 
-  CFile* cfile = (CFile*)file;
+  CFile* cfile = static_cast<CFile*>(file);
   if (!cfile)
     return -1;
 
@@ -393,7 +393,7 @@ void CAddonCallbacksAddon::FlushFile(const void* addonData, void* file)
   if (!helper)
     return;
 
-  CFile* cfile = (CFile*)file;
+  CFile* cfile = static_cast<CFile*>(file);
   if (!cfile)
     return;
 
@@ -406,7 +406,7 @@ int64_t CAddonCallbacksAddon::SeekFile(const void* addonData, void* file, int64_
   if (!helper)
     return 0;
 
-  CFile* cfile = (CFile*)file;
+  CFile* cfile = static_cast<CFile*>(file);
   if (!cfile)
     return 0;
 
@@ -419,7 +419,7 @@ int CAddonCallbacksAddon::TruncateFile(const void* addonData, void* file, int64_
   if (!helper)
     return 0;
 
-  CFile* cfile = (CFile*)file;
+  CFile* cfile = static_cast<CFile*>(file);
   if (!cfile)
     return 0;
 
@@ -432,7 +432,7 @@ int64_t CAddonCallbacksAddon::GetFilePosition(const void* addonData, void* file)
   if (!helper)
     return 0;
 
-  CFile* cfile = (CFile*)file;
+  CFile* cfile = static_cast<CFile*>(file);
   if (!cfile)
     return 0;
 
@@ -445,7 +445,7 @@ int64_t CAddonCallbacksAddon::GetFileLength(const void* addonData, void* file)
   if (!helper)
     return 0;
 
-  CFile* cfile = (CFile*)file;
+  CFile* cfile = static_cast<CFile*>(file);
   if (!cfile)
     return 0;
 
@@ -458,7 +458,7 @@ double CAddonCallbacksAddon::GetFileDownloadSpeed(const void* addonData, void* f
   if (!helper)
     return 0.0f;
 
-  CFile* cfile = (CFile*)file;
+  CFile* cfile = static_cast<CFile*>(file);
   if (!cfile)
     return 0.0f;
 
@@ -471,7 +471,7 @@ void CAddonCallbacksAddon::CloseFile(const void* addonData, void* file)
   if (!helper)
     return;
 
-  CFile* cfile = (CFile*)file;
+  CFile* cfile = static_cast<CFile*>(file);
   if (cfile)
   {
     cfile->Close();
@@ -485,7 +485,7 @@ int CAddonCallbacksAddon::GetFileChunkSize(const void* addonData, void* file)
   if (!helper)
     return 0;
 
-  CFile* cfile = (CFile*)file;
+  CFile* cfile = static_cast<CFile*>(file);
   if (!cfile)
     return 0;
 
@@ -516,7 +516,7 @@ char *CAddonCallbacksAddon::GetFilePropertyValue(const void* addonData, void* fi
   if (!helper)
     return nullptr;
 
-  CFile* cfile = (CFile*)file;
+  CFile* cfile = static_cast<CFile*>(file);
   if (cfile)
   {
     std::vector<std::string> values = cfile->GetPropertyValues(type, name);
@@ -608,7 +608,7 @@ static void CFileItemListToVFSDirEntries(VFSDirEntry* entries,
   if (!entries)
     return;
 
-  int toCopy = std::min(num_entries, (unsigned int)items.Size());
+  int toCopy = std::min(num_entries, static_cast<unsigned int>(items.Size()));
 
   for (int i=0;i<toCopy;++i)
   {
@@ -680,7 +680,7 @@ bool CAddonCallbacksAddon::CURLAddOption(const void* addonData, void* file, XFIL
   if (!helper)
     return false;
 
-  CFile* cfile = (CFile*)file;
+  CFile* cfile = static_cast<CFile*>(file);
   if (!cfile)
     return false;
 
@@ -693,7 +693,7 @@ bool CAddonCallbacksAddon::CURLOpen(const void* addonData, void* file, unsigned 
   if (!helper)
     return false;
 
-  CFile* cfile = (CFile*)file;
+  CFile* cfile = static_cast<CFile*>(file);
   if (!cfile)
     return false;
 
