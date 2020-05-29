@@ -238,13 +238,13 @@ bool CPicture::CacheTexture(uint8_t *pixels, uint32_t width, uint32_t height, ui
     uint32_t *buffer = new uint32_t[dest_width * dest_height];
     if (buffer)
     {
-      if (ScaleImage(pixels, width, height, pitch,
-                     reinterpret_cast<uint8_t *>(buffer), dest_width, dest_height, dest_width * 4,
-                     scalingAlgorithm))
+      if (ScaleImage(pixels, width, height, pitch, reinterpret_cast<uint8_t*>(buffer), dest_width,
+                     dest_height, dest_width * 4, scalingAlgorithm))
       {
         if (!orientation || OrientateImage(buffer, dest_width, dest_height, orientation))
         {
-          success = CreateThumbnailFromSurface(reinterpret_cast<unsigned char*>(buffer), dest_width, dest_height, dest_width * 4, dest);
+          success = CreateThumbnailFromSurface(reinterpret_cast<unsigned char*>(buffer), dest_width,
+                                               dest_height, dest_width * 4, dest);
         }
       }
       delete[] buffer;
@@ -292,8 +292,9 @@ bool CPicture::CreateTiledThumb(const std::vector<std::string> &files, const std
 
       // scale appropriately
       uint32_t *scaled = new uint32_t[width * height];
-      if (ScaleImage(texture->GetPixels(), texture->GetWidth(), texture->GetHeight(), texture->GetPitch(),
-                     reinterpret_cast<uint8_t *>(scaled), width, height, width * 4))
+      if (ScaleImage(texture->GetPixels(), texture->GetWidth(), texture->GetHeight(),
+                     texture->GetPitch(), reinterpret_cast<uint8_t*>(scaled), width, height,
+                     width * 4))
       {
         if (!texture->GetOrientation() || OrientateImage(scaled, width, height, texture->GetOrientation()))
         {
@@ -317,7 +318,8 @@ bool CPicture::CreateTiledThumb(const std::vector<std::string> &files, const std
   }
   // now save to a file
   if (success)
-    success = CreateThumbnailFromSurface(reinterpret_cast<uint8_t *>(buffer), imageRes, imageRes, imageRes * 4, thumb);
+    success = CreateThumbnailFromSurface(reinterpret_cast<uint8_t*>(buffer), imageRes, imageRes,
+                                         imageRes * 4, thumb);
 
   free(buffer);
   return success;
@@ -341,9 +343,9 @@ bool CPicture::ScaleImage(uint8_t *in_pixels, unsigned int in_width, unsigned in
                                                          CPictureScalingAlgorithm::ToSwscale(scalingAlgorithm), NULL, NULL, NULL);
 
   uint8_t *src[] = { in_pixels, 0, 0, 0 };
-  int     srcStride[] = { static_cast<int>(in_pitch), 0, 0, 0 };
+  int srcStride[] = {static_cast<int>(in_pitch), 0, 0, 0};
   uint8_t *dst[] = { out_pixels , 0, 0, 0 };
-  int     dstStride[] = { static_cast<int>(out_pitch), 0, 0, 0 };
+  int dstStride[] = {static_cast<int>(out_pitch), 0, 0, 0};
 
   if (context)
   {

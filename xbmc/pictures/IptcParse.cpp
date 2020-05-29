@@ -86,8 +86,9 @@ bool CIptcParse::Process (const unsigned char* const Data, const unsigned short 
   const char IptcSignature3[] = {0x04, 0x04};
 
   // Check IPTC signatures
-  const char* pos = reinterpret_cast<const char*>(Data + sizeof(short));  // position data pointer after length field
-  const char* maxpos = reinterpret_cast<const char*>(Data+itemlen);
+  const char* pos = reinterpret_cast<const char*>(
+      Data + sizeof(short)); // position data pointer after length field
+  const char* maxpos = reinterpret_cast<const char*>(Data + itemlen);
   unsigned char headerLen = 0;
   unsigned char dataLen = 0;
   memset(info, 0, sizeof(IPTCInfo_t));
@@ -130,7 +131,7 @@ bool CIptcParse::Process (const unsigned char* const Data, const unsigned short 
   pos += 4;                                   // move data pointer to the next field
 
   // Now read IPTC data
-  while (pos < reinterpret_cast<const char*>(Data + itemlen-5))
+  while (pos < reinterpret_cast<const char*>(Data + itemlen - 5))
   {
     if (pos + 5 > maxpos) return false;
 

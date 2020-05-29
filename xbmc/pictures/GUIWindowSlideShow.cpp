@@ -104,11 +104,13 @@ void CBackgroundPicLoader::Process()
         bool bFullSize = false;
         if (texture)
         {
-          bFullSize = (static_cast<int>(texture->GetWidth()) < m_maxWidth) && (static_cast<int>(texture->GetHeight()) < m_maxHeight);
+          bFullSize = (static_cast<int>(texture->GetWidth()) < m_maxWidth) &&
+                      (static_cast<int>(texture->GetHeight()) < m_maxHeight);
           if (!bFullSize)
           {
             int iSize = texture->GetWidth() * texture->GetHeight() - MAX_PICTURE_SIZE;
-            if ((iSize + static_cast<int>(texture->GetWidth()) > 0) || (iSize + static_cast<int>(texture->GetHeight()) > 0))
+            if ((iSize + static_cast<int>(texture->GetWidth()) > 0) ||
+                (iSize + static_cast<int>(texture->GetHeight()) > 0))
               bFullSize = true;
             if (!bFullSize && texture->GetWidth() == CServiceBroker::GetRenderSystem()->GetMaxTextureSize())
               bFullSize = true;
@@ -378,7 +380,9 @@ void CGUIWindowSlideShow::Process(unsigned int currentTime, CDirtyRegionList &re
 
   // if we haven't processed yet, we should mark the whole screen
   if (!HasProcessed())
-    regions.push_back(CDirtyRegion(CRect(0.0f, 0.0f, static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth()), static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight()))));
+    regions.push_back(CDirtyRegion(CRect(
+        0.0f, 0.0f, static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth()),
+        static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight()))));
 
   if (m_iCurrentSlide < 0 || m_iCurrentSlide >= static_cast<int>(m_slides.size()))
     m_iCurrentSlide = 0;
@@ -458,7 +462,9 @@ void CGUIWindowSlideShow::Process(unsigned int currentTime, CDirtyRegionList &re
 
   if (m_bErrorMessage)
   { // hack, just mark it all
-    regions.push_back(CDirtyRegion(CRect(0.0f, 0.0f, static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth()), static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight()))));
+    regions.push_back(CDirtyRegion(CRect(
+        0.0f, 0.0f, static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth()),
+        static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight()))));
     return;
   }
 
@@ -477,8 +483,7 @@ void CGUIWindowSlideShow::Process(unsigned int currentTime, CDirtyRegionList &re
       int maxWidth, maxHeight;
 
       GetCheckedSize(static_cast<float>(res.iWidth) * m_fZoom,
-        static_cast<float>(res.iHeight) * m_fZoom,
-        maxWidth, maxHeight);
+                     static_cast<float>(res.iHeight) * m_fZoom, maxWidth, maxHeight);
       m_pBackgroundLoader->LoadPic(m_iCurrentPic, m_iCurrentSlide, picturePath, maxWidth, maxHeight);
       m_iLastFailedNextSlide = -1;
       m_bLoadNextPic = false;
@@ -503,8 +508,7 @@ void CGUIWindowSlideShow::Process(unsigned int currentTime, CDirtyRegionList &re
 
       int maxWidth, maxHeight;
       GetCheckedSize(static_cast<float>(res.iWidth) * m_fZoom,
-                     static_cast<float>(res.iHeight) * m_fZoom,
-                     maxWidth, maxHeight);
+                     static_cast<float>(res.iHeight) * m_fZoom, maxWidth, maxHeight);
       m_pBackgroundLoader->LoadPic(1 - m_iCurrentPic, m_iNextSlide, picturePath, maxWidth, maxHeight);
     }
   }
@@ -622,7 +626,9 @@ void CGUIWindowSlideShow::Process(unsigned int currentTime, CDirtyRegionList &re
     MarkDirtyRegion();
   }
   CGUIWindow::Process(currentTime, regions);
-  m_renderRegion.SetRect(0, 0, static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth()), static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight()));
+  m_renderRegion.SetRect(
+      0, 0, static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth()),
+      static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight()));
 }
 
 void CGUIWindowSlideShow::Render()
@@ -941,7 +947,9 @@ bool CGUIWindowSlideShow::OnMessage(CGUIMessage& message)
   {
   case GUI_MSG_WINDOW_INIT:
     {
-      m_Resolution = static_cast<RESOLUTION>(CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_PICTURES_DISPLAYRESOLUTION));
+      m_Resolution =
+          static_cast<RESOLUTION>(CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(
+              CSettings::SETTING_PICTURES_DISPLAYRESOLUTION));
 
       //FIXME: Use GUI resolution for now
       if (false /*m_Resolution != CDisplaySettings::GetInstance().GetCurrentResolution() && m_Resolution != INVALID && m_Resolution!=AUTORES*/)
@@ -1157,7 +1165,8 @@ void CGUIWindowSlideShow::OnLoadPic(int iPic, int iSlideNumber, const std::strin
       if (URIUtils::HasExtension(strHostName, ".cbr|.cbz"))
       {
         m_Image[iPic].m_bIsComic = true;
-        m_Image[iPic].Move(static_cast<float>(m_Image[iPic].GetOriginalWidth()),static_cast<float>(m_Image[iPic].GetOriginalHeight()));
+        m_Image[iPic].Move(static_cast<float>(m_Image[iPic].GetOriginalWidth()),
+                           static_cast<float>(m_Image[iPic].GetOriginalHeight()));
       }
     }
   }
