@@ -1778,7 +1778,7 @@ private:
     {
       if (av_codec_is_decoder(codec))
       {
-        tmp.codec_type = (xbmc_codec_type_t)codec->type;
+        tmp.codec_type = static_cast<xbmc_codec_type_t>(codec->type);
         tmp.codec_id = codec->id;
 
         std::string strUpperCodecName = codec->name;
