@@ -76,12 +76,12 @@ void GIFDecoder::FreeDecodedFrames(DecodedFrames &frames)
   {
     delete [] frames.frameList[i].rgbaImage.pixels;
   }
-  delete static_cast<GifHelper *>(frames.user);
+  delete static_cast<GifHelper*>(frames.user);
   frames.clear();
 }
 void GIFDecoder::gifDestroyFN(void* user)
 {
-  delete static_cast<GifHelper *>(user);
+  delete static_cast<GifHelper*>(user);
 }
 
 void GIFDecoder::FillSupportedExtensions()

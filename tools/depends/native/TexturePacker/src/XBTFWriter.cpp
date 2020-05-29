@@ -84,7 +84,7 @@ void CXBTFWriter::Cleanup()
 
 bool CXBTFWriter::AppendContent(unsigned char const* data, size_t length)
 {
-  unsigned char *new_data = static_cast<unsigned char *>(realloc(m_data, m_size + length));
+  unsigned char* new_data = static_cast<unsigned char*>(realloc(m_data, m_size + length));
 
   if (new_data == nullptr)
   { // OOM - cleanup and fail

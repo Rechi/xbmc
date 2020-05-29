@@ -201,7 +201,7 @@ void MD5Update(struct MD5Context *ctx, const uint8_t *buf, unsigned len)
 void MD5Final(uint8_t digest[16], struct MD5Context *ctx)
 {
 	int count = ctx->bytes[0] & 0x3f;	/* Number of bytes in ctx->in */
-	uint8_t *p = reinterpret_cast<uint8_t*>(ctx->in) + count;
+	uint8_t* p = reinterpret_cast<uint8_t*>(ctx->in) + count;
 
 	/* Set the first char of padding to 0x80.  There is always room. */
 	*p++ = 0x80;
