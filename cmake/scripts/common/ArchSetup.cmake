@@ -142,5 +142,6 @@ endif()
 if(NOT MSVC)
   add_options(ALL_LANGUAGES ALL_BUILDS "-Wall")
   add_options(ALL_LANGUAGES DEBUG "-g" "-D_DEBUG")
+  add_options(CXX DEBUG "-Wold-style-cast")
 endif()
 
