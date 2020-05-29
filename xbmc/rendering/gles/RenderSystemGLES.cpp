@@ -51,19 +51,19 @@ bool CRenderSystemGLES::InitRenderSystem()
   }
 
   // Get our driver vendor and renderer
-  const char *tmpVendor = reinterpret_cast<const char*>(glGetString(GL_VENDOR));
+  const char* tmpVendor = reinterpret_cast<const char*>(glGetString(GL_VENDOR));
   m_RenderVendor.clear();
   if (tmpVendor != NULL)
     m_RenderVendor = tmpVendor;
 
-  const char *tmpRenderer = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
+  const char* tmpRenderer = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
   m_RenderRenderer.clear();
   if (tmpRenderer != NULL)
     m_RenderRenderer = tmpRenderer;
 
   m_RenderExtensions  = " ";
 
-  const char *tmpExtensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
+  const char* tmpExtensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
   if (tmpExtensions != NULL)
   {
     m_RenderExtensions += tmpExtensions;
@@ -284,8 +284,8 @@ void CRenderSystemGLES::SetCameraPosition(const CPoint &camera, int screenWidth,
 
   CPoint offset = camera - CPoint(screenWidth*0.5f, screenHeight*0.5f);
 
-  float w = static_cast<float>(m_viewPort[2])*0.5f;
-  float h = static_cast<float>(m_viewPort[3])*0.5f;
+  float w = static_cast<float>(m_viewPort[2]) * 0.5f;
+  float h = static_cast<float>(m_viewPort[3]) * 0.5f;
 
   glMatrixModview->LoadIdentity();
   glMatrixModview->Translatef(-(w + offset.x - stereoFactor), +(h + offset.y), 0);
@@ -330,8 +330,12 @@ void CRenderSystemGLES::SetViewPort(const CRect& viewPort)
   if (!m_bRenderCreated)
     return;
 
-  glScissor(static_cast<GLint>(viewPort.x1), static_cast<GLint>(m_height - viewPort.y1 - viewPort.Height()), static_cast<GLsizei>(viewPort.Width()), static_cast<GLsizei>(viewPort.Height()));
-  glViewport(static_cast<GLint>(viewPort.x1), static_cast<GLint>(m_height - viewPort.y1 - viewPort.Height()), static_cast<GLsizei>(viewPort.Width()), static_cast<GLsizei>(viewPort.Height()));
+  glScissor(static_cast<GLint>(viewPort.x1),
+            static_cast<GLint>(m_height - viewPort.y1 - viewPort.Height()),
+            static_cast<GLsizei>(viewPort.Width()), static_cast<GLsizei>(viewPort.Height()));
+  glViewport(static_cast<GLint>(viewPort.x1),
+             static_cast<GLint>(m_height - viewPort.y1 - viewPort.Height()),
+             static_cast<GLsizei>(viewPort.Width()), static_cast<GLsizei>(viewPort.Height()));
   m_viewPort[0] = viewPort.x1;
   m_viewPort[1] = m_height - viewPort.y1 - viewPort.Height();
   m_viewPort[2] = viewPort.Width();
