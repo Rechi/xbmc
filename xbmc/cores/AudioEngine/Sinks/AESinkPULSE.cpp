@@ -951,7 +951,8 @@ bool CAESinkPULSE::Initialize(AEAudioFormat &format, std::string &device)
   if (m_passthrough)
     flags |= PA_STREAM_PASSTHROUGH;
 
-  if (pa_stream_connect_playback(m_Stream, isDefaultDevice ? NULL : device.c_str(), &buffer_attr, static_cast<pa_stream_flags>(flags), NULL, NULL) < 0)
+  if (pa_stream_connect_playback(m_Stream, isDefaultDevice ? NULL : device.c_str(), &buffer_attr,
+                                 static_cast<pa_stream_flags>(flags), NULL, NULL) < 0)
   {
     CLog::Log(LOGERROR, "PulseAudio: Failed to connect stream to output");
     pa_threaded_mainloop_unlock(m_MainLoop);

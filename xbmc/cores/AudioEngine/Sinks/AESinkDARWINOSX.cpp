@@ -235,7 +235,8 @@ bool CAESinkDARWINOSX::Initialize(AEAudioFormat &format, std::string &device)
 
     if (devEnum.IsPlanar())
     {
-      numOutputChannels = std::min(static_cast<size_t>(format.m_channelLayout.Count()), static_cast<size_t>(devEnum.GetNumPlanes()));
+      numOutputChannels = std::min(static_cast<size_t>(format.m_channelLayout.Count()),
+                                   static_cast<size_t>(devEnum.GetNumPlanes()));
       m_planes = numOutputChannels;
       CLog::Log(LOGDEBUG, "%s Found planar audio with %u channels using %u of them.", __FUNCTION__, (unsigned int)devEnum.GetNumPlanes(), (unsigned int)numOutputChannels);
     }
@@ -318,7 +319,8 @@ bool CAESinkDARWINOSX::Initialize(AEAudioFormat &format, std::string &device)
 
   unsigned int num_buffers = 4;
   m_buffer = new AERingBuffer(num_buffers * format.m_frames * m_frameSizePerPlane, m_planes);
-  CLog::Log(LOGDEBUG, "%s: using buffer size: %u (%f ms)", __FUNCTION__, m_buffer->GetMaxSize(), static_cast<float>(m_buffer->GetMaxSize()) / (m_framesPerSecond * m_frameSizePerPlane));
+  CLog::Log(LOGDEBUG, "%s: using buffer size: %u (%f ms)", __FUNCTION__, m_buffer->GetMaxSize(),
+            static_cast<float>(m_buffer->GetMaxSize()) / (m_framesPerSecond * m_frameSizePerPlane));
 
   if (!passthrough)
     format.m_dataFormat = (m_planes > 1) ? AE_FMT_FLOATP : AE_FMT_FLOAT;
@@ -392,13 +394,15 @@ void CAESinkDARWINOSX::GetDelay(AEDelayStatus& status)
 
   } while(lock.retry());
 
-  status.delay += static_cast<double>(size) / static_cast<double>(m_frameSizePerPlane) / static_cast<double>(m_framesPerSecond);
+  status.delay += static_cast<double>(size) / static_cast<double>(m_frameSizePerPlane) /
+                  static_cast<double>(m_framesPerSecond);
   status.delay += static_cast<double>(m_latentFrames) / static_cast<double>(m_framesPerSecond);
 }
 
 double CAESinkDARWINOSX::GetCacheTotal()
 {
-  return static_cast<double>(m_buffer->GetMaxSize()) / static_cast<double>(m_frameSizePerPlane * m_framesPerSecond);
+  return static_cast<double>(m_buffer->GetMaxSize()) /
+         static_cast<double>(m_frameSizePerPlane * m_framesPerSecond);
 }
 
 CCriticalSection mutex;
@@ -479,7 +483,7 @@ inline void LogLevel(unsigned int got, unsigned int wanted)
 
 OSStatus CAESinkDARWINOSX::renderCallback(AudioDeviceID inDevice, const AudioTimeStamp* inNow, const AudioBufferList* inInputData, const AudioTimeStamp* inInputTime, AudioBufferList* outOutputData, const AudioTimeStamp* inOutputTime, void* inClientData)
 {
-  CAESinkDARWINOSX *sink = static_cast<CAESinkDARWINOSX*>(inClientData);
+  CAESinkDARWINOSX* sink = static_cast<CAESinkDARWINOSX*>(inClientData);
 
   sink->m_render_locker.enter(); /* grab lock */
   sink->m_started = true;
@@ -503,10 +507,10 @@ OSStatus CAESinkDARWINOSX::renderCallback(AudioDeviceID inDevice, const AudioTim
         for (unsigned int i = startIdx; i < endIdx; i++)
         {
           int16_t src;
-          sink->m_buffer->Read(reinterpret_cast<unsigned char *>(&src), sizeof(int16_t), i);
+          sink->m_buffer->Read(reinterpret_cast<unsigned char*>(&src), sizeof(int16_t), i);
           if (i < outOutputData->mNumberBuffers && outOutputData->mBuffers[i].mData)
           {
-            float *dest = static_cast<float *>(outOutputData->mBuffers[i].mData);
+            float* dest = static_cast<float*>(outOutputData->mBuffers[i].mData);
             dest[j] = src * mul;
           }
         }
@@ -521,7 +525,8 @@ OSStatus CAESinkDARWINOSX::renderCallback(AudioDeviceID inDevice, const AudioTim
       for (unsigned int i = startIdx; i < endIdx; i++)
       {
         if (i < outOutputData->mNumberBuffers && outOutputData->mBuffers[i].mData)
-          sink->m_buffer->Read(static_cast<unsigned char *>(outOutputData->mBuffers[i].mData), bytes, i);
+          sink->m_buffer->Read(static_cast<unsigned char*>(outOutputData->mBuffers[i].mData), bytes,
+                               i);
         else
           sink->m_buffer->Read(NULL, bytes, i);
       }
@@ -532,7 +537,8 @@ OSStatus CAESinkDARWINOSX::renderCallback(AudioDeviceID inDevice, const AudioTim
     condVar.notifyAll();
   }
 
-  sink->m_render_delay = static_cast<double>(inOutputTime->mHostTime - inNow->mHostTime) / CurrentHostFrequency();
+  sink->m_render_delay =
+      static_cast<double>(inOutputTime->mHostTime - inNow->mHostTime) / CurrentHostFrequency();
   sink->m_render_tick  = inNow->mHostTime;
   sink->m_render_locker.leave();
   return noErr;

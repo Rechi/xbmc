@@ -70,7 +70,8 @@ void CEngineStats::GetDelay(AEDelayStatus& status)
   if (m_pcmOutput)
     status.delay += static_cast<double>(m_bufferedSamples) / m_sinkSampleRate;
   else
-    status.delay += static_cast<double>(m_bufferedSamples) * m_sinkFormat.m_streamInfo.GetDuration() / 1000;
+    status.delay +=
+        static_cast<double>(m_bufferedSamples) * m_sinkFormat.m_streamInfo.GetDuration() / 1000;
 }
 
 void CEngineStats::AddStream(unsigned int streamid)
@@ -121,7 +122,8 @@ void CEngineStats::UpdateStream(CActiveAEStream *stream)
       for(itBuf=stream->m_processingSamples.begin(); itBuf!=stream->m_processingSamples.end(); ++itBuf)
       {
         if (m_pcmOutput)
-          delay += static_cast<float>((*itBuf)->pkt->nb_samples) / (*itBuf)->pkt->config.sample_rate;
+          delay +=
+              static_cast<float>((*itBuf)->pkt->nb_samples) / (*itBuf)->pkt->config.sample_rate;
         else
           delay += m_sinkFormat.m_streamInfo.GetDuration() / 1000;
       }
@@ -141,7 +143,8 @@ void CEngineStats::GetDelay(AEDelayStatus& status, CActiveAEStream *stream)
   if (m_pcmOutput)
     status.delay += static_cast<double>(m_bufferedSamples) / m_sinkSampleRate;
   else
-    status.delay += static_cast<double>(m_bufferedSamples) * m_sinkFormat.m_streamInfo.GetDuration() / 1000;
+    status.delay +=
+        static_cast<double>(m_bufferedSamples) * m_sinkFormat.m_streamInfo.GetDuration() / 1000;
 
   for (auto &str : m_streamStats)
   {
@@ -164,7 +167,8 @@ void CEngineStats::GetSyncInfo(CAESyncInfo& info, CActiveAEStream *stream)
   if (m_pcmOutput)
     status.delay += static_cast<double>(m_bufferedSamples) / m_sinkSampleRate;
   else
-    status.delay += static_cast<double>(m_bufferedSamples) * m_sinkFormat.m_streamInfo.GetDuration() / 1000;
+    status.delay +=
+        static_cast<double>(m_bufferedSamples) * m_sinkFormat.m_streamInfo.GetDuration() / 1000;
 
   status.delay += m_sinkLatency;
 
@@ -1188,7 +1192,10 @@ void CActiveAE::Configure(AEAudioFormat *desiredFmt)
       double buffertime = static_cast<double>(m_sinkFormat.m_frames) / m_sinkFormat.m_sampleRate;
       if (buffertime > MAX_BUFFER_TIME)
       {
-        CLog::Log(LOGWARNING, "ActiveAE::%s - sink returned large buffer of %d ms, reducing to %d ms", __FUNCTION__, static_cast<int>(buffertime * 1000), static_cast<int>(MAX_BUFFER_TIME*1000));
+        CLog::Log(LOGWARNING,
+                  "ActiveAE::%s - sink returned large buffer of %d ms, reducing to %d ms",
+                  __FUNCTION__, static_cast<int>(buffertime * 1000),
+                  static_cast<int>(MAX_BUFFER_TIME * 1000));
         m_sinkFormat.m_frames = MAX_BUFFER_TIME * m_sinkFormat.m_sampleRate;
       }
     }
@@ -1331,7 +1338,9 @@ void CActiveAE::Configure(AEAudioFormat *desiredFmt)
       if (!(*it)->m_inputBuffers)
       {
         // align input buffers with period of sink or encoder
-        (*it)->m_format.m_frames = m_internalFormat.m_frames * (static_cast<float>((*it)->m_format.m_sampleRate) / m_internalFormat.m_sampleRate);
+        (*it)->m_format.m_frames =
+            m_internalFormat.m_frames *
+            (static_cast<float>((*it)->m_format.m_sampleRate) / m_internalFormat.m_sampleRate);
 
         // create buffer pool
         (*it)->m_inputBuffers = new CActiveAEBufferPool((*it)->m_format);
@@ -1898,7 +1907,8 @@ bool CActiveAE::RunStages()
     CSampleBuffer *buffer;
     if (!(*it)->m_drain)
     {
-      float buftime = static_cast<float>((*it)->m_inputBuffers->m_format.m_frames) / (*it)->m_inputBuffers->m_format.m_sampleRate;
+      float buftime = static_cast<float>((*it)->m_inputBuffers->m_format.m_frames) /
+                      (*it)->m_inputBuffers->m_format.m_sampleRate;
       if ((*it)->m_inputBuffers->m_format.m_dataFormat == AE_FMT_RAW)
         buftime = (*it)->m_inputBuffers->m_format.m_streamInfo.GetDuration() / 1000;
       while ((time < MAX_CACHE_LEVEL || (*it)->m_streamIsBuffering) && !(*it)->m_inputBuffers->m_freeSamples.empty())
@@ -2039,7 +2049,8 @@ bool CActiveAE::RunStages()
             // fading
             if ((*it)->m_fadingSamples == -1)
             {
-              (*it)->m_fadingSamples = m_internalFormat.m_sampleRate * static_cast<float>((*it)->m_fadingTime) / 1000.0f;
+              (*it)->m_fadingSamples =
+                  m_internalFormat.m_sampleRate * static_cast<float>((*it)->m_fadingTime) / 1000.0f;
               if ((*it)->m_fadingSamples > 0)
                 (*it)->m_volume = (*it)->m_fadingBase;
               else
@@ -2054,7 +2065,8 @@ bool CActiveAE::RunStages()
               nb_floats = out->pkt->config.channels / out->pkt->planes;
               nb_loops = out->pkt->nb_samples;
               float delta = (*it)->m_fadingTarget - (*it)->m_fadingBase;
-              int samples = m_internalFormat.m_sampleRate * static_cast<float>((*it)->m_fadingTime) / 1000.0f;
+              int samples =
+                  m_internalFormat.m_sampleRate * static_cast<float>((*it)->m_fadingTime) / 1000.0f;
               fadingStep = delta / samples;
             }
 
@@ -2086,14 +2098,17 @@ bool CActiveAE::RunStages()
               // volume for stream
               float volume = (*it)->m_volume * (*it)->m_rgain;
               if(nb_loops > 1)
-                volume *= (*it)->m_limiter.Run(reinterpret_cast<float**>(out->pkt->data), out->pkt->config.channels, i*nb_floats, out->pkt->planes > 1);
+                volume *= (*it)->m_limiter.Run(reinterpret_cast<float**>(out->pkt->data),
+                                               out->pkt->config.channels, i * nb_floats,
+                                               out->pkt->planes > 1);
 
               for(int j=0; j<out->pkt->planes; j++)
               {
 #if defined(HAVE_SSE) && defined(__SSE__)
-                CAEUtil::SSEMulArray(reinterpret_cast<float*>(out->pkt->data[j])+i*nb_floats, volume, nb_floats);
+                CAEUtil::SSEMulArray(reinterpret_cast<float*>(out->pkt->data[j]) + i * nb_floats,
+                                     volume, nb_floats);
 #else
-                float* fbuffer = reinterpret_cast<float*>(out->pkt->data[j])+i*nb_floats;
+                float* fbuffer = reinterpret_cast<float*>(out->pkt->data[j]) + i * nb_floats;
                 for (int k = 0; k < nb_floats; ++k)
                 {
                   fbuffer[k] *= volume;
@@ -2115,7 +2130,8 @@ bool CActiveAE::RunStages()
             // fading
             if ((*it)->m_fadingSamples == -1)
             {
-              (*it)->m_fadingSamples = m_internalFormat.m_sampleRate * static_cast<float>((*it)->m_fadingTime) / 1000.0f;
+              (*it)->m_fadingSamples =
+                  m_internalFormat.m_sampleRate * static_cast<float>((*it)->m_fadingTime) / 1000.0f;
               (*it)->m_volume = (*it)->m_fadingBase;
             }
             if ((*it)->m_fadingSamples > 0)
@@ -2123,7 +2139,8 @@ bool CActiveAE::RunStages()
               nb_floats = mix->pkt->config.channels / mix->pkt->planes;
               nb_loops = mix->pkt->nb_samples;
               float delta = (*it)->m_fadingTarget - (*it)->m_fadingBase;
-              int samples = m_internalFormat.m_sampleRate * static_cast<float>((*it)->m_fadingTime) / 1000.0f;
+              int samples =
+                  m_internalFormat.m_sampleRate * static_cast<float>((*it)->m_fadingTime) / 1000.0f;
               fadingStep = delta / samples;
             }
 
@@ -2153,12 +2170,14 @@ bool CActiveAE::RunStages()
               // volume for stream
               float volume = (*it)->m_volume * (*it)->m_rgain;
               if(nb_loops > 1)
-                volume *= (*it)->m_limiter.Run(reinterpret_cast<float**>(mix->pkt->data), mix->pkt->config.channels, i*nb_floats, mix->pkt->planes > 1);
+                volume *= (*it)->m_limiter.Run(reinterpret_cast<float**>(mix->pkt->data),
+                                               mix->pkt->config.channels, i * nb_floats,
+                                               mix->pkt->planes > 1);
 
               for(int j=0; j<out->pkt->planes && j<mix->pkt->planes; j++)
               {
-                float *dst = reinterpret_cast<float*>(out->pkt->data[j])+i*nb_floats;
-                float *src = reinterpret_cast<float*>(mix->pkt->data[j])+i*nb_floats;
+                float* dst = reinterpret_cast<float*>(out->pkt->data[j]) + i * nb_floats;
+                float* src = reinterpret_cast<float*>(mix->pkt->data[j]) + i * nb_floats;
 #if defined(HAVE_SSE) && defined(__SSE__)
                 CAEUtil::SSEMulAddArray(dst, src, volume, nb_floats);
                 for (int k = 0; k < nb_floats; ++k)
@@ -2484,7 +2503,8 @@ CSampleBuffer* CActiveAE::SyncStream(CActiveAEStream *stream)
           memmove(buf->pkt->data[i], buf->pkt->data[i]+bytesToSkip, buf->pkt->linesize - bytesToSkip);
         }
         buf->pkt->nb_samples -= framesToSkip;
-        stream->m_syncError.Correction(static_cast<double>(framesToSkip) * 1000 / buf->pkt->config.sample_rate);
+        stream->m_syncError.Correction(static_cast<double>(framesToSkip) * 1000 /
+                                       buf->pkt->config.sample_rate);
         error += static_cast<double>(framesToSkip) * 1000 / buf->pkt->config.sample_rate;
       }
     }
@@ -2557,7 +2577,7 @@ void CActiveAE::MixSounds(CSoundPacket &dstSample)
     {
       volume = it->sound->GetVolume();
       out = reinterpret_cast<float*>(dstSample.data[j]);
-      sample_buffer = reinterpret_cast<float*>(it->sound->GetSound(false)->data[j]+start);
+      sample_buffer = reinterpret_cast<float*>(it->sound->GetSound(false)->data[j] + start);
       int nb_floats = mix_samples * dstSample.config.channels / dstSample.planes;
 #if defined(HAVE_SSE) && defined(__SSE__)
       CAEUtil::SSEMulAddArray(out, sample_buffer, volume, nb_floats);
@@ -3291,7 +3311,7 @@ IAEStream *CActiveAE::MakeStream(AEAudioFormat &audioFormat, unsigned int option
     bool success = reply->signal == CActiveAEControlProtocol::ACC;
     if (success)
     {
-      CActiveAEStream *stream = *reinterpret_cast<CActiveAEStream**>(reply->data);
+      CActiveAEStream* stream = *reinterpret_cast<CActiveAEStream**>(reply->data);
       reply->Release();
       return stream;
     }

@@ -980,12 +980,14 @@ unsigned int CActiveAESink::OutputSamples(CSampleBuffer* samples)
           break;
         case NEED_BYTESWAP:
           if (!skipSwap)
-            Endian_Swap16_buf(reinterpret_cast<uint16_t *>(buffer[0]), reinterpret_cast<uint16_t *>(buffer[0]), size / 2);
+            Endian_Swap16_buf(reinterpret_cast<uint16_t*>(buffer[0]),
+                              reinterpret_cast<uint16_t*>(buffer[0]), size / 2);
           break;
         case CHECK_SWAP:
           SwapInit(samples);
           if (m_swapState == NEED_BYTESWAP)
-            Endian_Swap16_buf(reinterpret_cast<uint16_t *>(buffer[0]), reinterpret_cast<uint16_t *>(buffer[0]), size / 2);
+            Endian_Swap16_buf(reinterpret_cast<uint16_t*>(buffer[0]),
+                              reinterpret_cast<uint16_t*>(buffer[0]), size / 2);
           break;
         default:
           break;
@@ -1132,7 +1134,8 @@ void CActiveAESink::GenerateNoise()
                   false, false, M_SQRT1_2, nullptr, AE_QUALITY_UNKNOWN, false);
 
   resampler->Resample(m_sampleOfSilence.pkt->data, m_sampleOfSilence.pkt->max_nb_samples,
-                     reinterpret_cast<uint8_t**>(&noise), m_sampleOfSilence.pkt->max_nb_samples, 1.0);
+                      reinterpret_cast<uint8_t**>(&noise), m_sampleOfSilence.pkt->max_nb_samples,
+                      1.0);
 
   KODI::MEMORY::AlignedFree(noise);
   delete resampler;

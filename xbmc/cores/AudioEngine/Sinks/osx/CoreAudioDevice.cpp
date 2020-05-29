@@ -192,8 +192,10 @@ std::string CCoreAudioDevice::GetName() const
 
   if (ret != noErr)
   {
-    CLog::Log(LOGERROR, "CCoreAudioDevice::GetName: "
-      "Unable to get device name - id: 0x%04x. Error = %s", static_cast<uint>(m_DeviceId), GetError(ret).c_str());
+    CLog::Log(LOGERROR,
+              "CCoreAudioDevice::GetName: "
+              "Unable to get device name - id: 0x%04x. Error = %s",
+              static_cast<uint>(m_DeviceId), GetError(ret).c_str());
   }
   else
   {
@@ -275,9 +277,10 @@ UInt32 CCoreAudioDevice::GetTotalOutputChannels() const
   }
   else
   {
-    CLog::Log(LOGERROR, "CCoreAudioDevice::GetTotalOutputChannels: "
-      "Unable to get total device output channels - id: 0x%04x. Error = %s",
-      static_cast<uint>(m_DeviceId), GetError(ret).c_str());
+    CLog::Log(LOGERROR,
+              "CCoreAudioDevice::GetTotalOutputChannels: "
+              "Unable to get total device output channels - id: 0x%04x. Error = %s",
+              static_cast<uint>(m_DeviceId), GetError(ret).c_str());
   }
 
   free(pList);
@@ -311,7 +314,8 @@ UInt32 CCoreAudioDevice::GetNumChannelsOfStream(UInt32 streamIdx) const
   }
   else
   {
-    CLog::Log(LOGERROR, "CCoreAudioDevice::GetNumChannelsOfStream: "
+    CLog::Log(LOGERROR,
+              "CCoreAudioDevice::GetNumChannelsOfStream: "
               "Unable to get number of stream output channels - id: 0x%04x. Error = %s",
               static_cast<uint>(m_DeviceId), GetError(ret).c_str());
   }
@@ -738,9 +742,10 @@ bool CCoreAudioDevice::SetNominalSampleRate(Float64 sampleRate)
   OSStatus ret = AudioObjectSetPropertyData(m_DeviceId, &propertyAddress, 0, NULL, sizeof(Float64), &sampleRate);
   if (ret != noErr)
   {
-    CLog::Log(LOGERROR, "CCoreAudioDevice::SetNominalSampleRate: "
-      "Unable to set current device sample rate to %0.0f. Error = %s",
-      static_cast<float>(sampleRate), GetError(ret).c_str());
+    CLog::Log(LOGERROR,
+              "CCoreAudioDevice::SetNominalSampleRate: "
+              "Unable to set current device sample rate to %0.0f. Error = %s",
+              static_cast<float>(sampleRate), GetError(ret).c_str());
     return false;
   }
   if (m_SampleRateRestore == 0.0f)

@@ -506,8 +506,8 @@ std::string AEDeviceEnumerationOSX::getExtraDisplayNameForStream(UInt32 streamId
     extraName << startChannel + numChannels - 1;
     CLog::Log(LOGINFO,
               "%s adding stream %d as pseudo device with start channel %d and %d channels total",
-              __FUNCTION__, static_cast<unsigned int>(streamIdx), static_cast<unsigned int>(startChannel),
-              static_cast<unsigned int>(numChannels));
+              __FUNCTION__, static_cast<unsigned int>(streamIdx),
+              static_cast<unsigned int>(startChannel), static_cast<unsigned int>(numChannels));
     return extraName.str();
   }
 
@@ -635,7 +635,8 @@ bool AEDeviceEnumerationOSX::FindSuitableFormatForStream(UInt32 &streamIdx, cons
   }
 
   if (m_isPlanar)
-    outputFormat.mChannelsPerFrame = std::min(static_cast<size_t>(format.m_channelLayout.Count()), m_caStreamInfos.size());
+    outputFormat.mChannelsPerFrame =
+        std::min(static_cast<size_t>(format.m_channelLayout.Count()), m_caStreamInfos.size());
 
   return formatFound;
 }

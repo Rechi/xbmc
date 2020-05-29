@@ -198,7 +198,7 @@ bool CAEEncoderFFmpeg::Initialize(AEAudioFormat &format, bool allow_planar_input
 
   m_CurrentFormat = format;
   m_NeededFrames = format.m_frames;
-  m_OutputRatio   = static_cast<double>(m_NeededFrames) / m_OutputSize;
+  m_OutputRatio = static_cast<double>(m_NeededFrames) / m_OutputSize;
   m_SampleRateMul = 1.0 / static_cast<double>(m_CodecCtx->sample_rate);
 
   if (m_NeedConversion)
@@ -307,6 +307,7 @@ double CAEEncoderFFmpeg::GetDelay(unsigned int bufferSize)
   if (m_BufferSize)
     frames += m_NeededFrames;
 
-  return (static_cast<double>(frames) + (static_cast<double>(bufferSize) * m_OutputRatio)) * m_SampleRateMul;
+  return (static_cast<double>(frames) + (static_cast<double>(bufferSize) * m_OutputRatio)) *
+         m_SampleRateMul;
 }
 

@@ -292,7 +292,8 @@ CAEChannelInfo CAESinkALSA::ALSAchmapToAEChannelMap(snd_pcm_chmap_t* alsaMap)
 snd_pcm_chmap_t* CAESinkALSA::AEChannelMapToALSAchmap(const CAEChannelInfo& info)
 {
   int AECount = info.Count();
-  snd_pcm_chmap_t* alsaMap = static_cast<snd_pcm_chmap_t*>(malloc(sizeof(snd_pcm_chmap_t) + AECount * sizeof(int)));
+  snd_pcm_chmap_t* alsaMap =
+      static_cast<snd_pcm_chmap_t*>(malloc(sizeof(snd_pcm_chmap_t) + AECount * sizeof(int)));
 
   alsaMap->channels = AECount;
 
@@ -304,7 +305,8 @@ snd_pcm_chmap_t* CAESinkALSA::AEChannelMapToALSAchmap(const CAEChannelInfo& info
 
 snd_pcm_chmap_t* CAESinkALSA::CopyALSAchmap(snd_pcm_chmap_t* alsaMap)
 {
-  snd_pcm_chmap_t* copyMap = static_cast<snd_pcm_chmap_t*>(malloc(sizeof(snd_pcm_chmap_t) + alsaMap->channels * sizeof(int)));
+  snd_pcm_chmap_t* copyMap = static_cast<snd_pcm_chmap_t*>(
+      malloc(sizeof(snd_pcm_chmap_t) + alsaMap->channels * sizeof(int)));
 
   copyMap->channels = alsaMap->channels;
   memcpy(copyMap->pos, alsaMap->pos, alsaMap->channels * sizeof(int));
@@ -657,7 +659,8 @@ bool CAESinkALSA::InitializeHW(const ALSAConfig &inconfig, ALSAConfig &outconfig
   {
     /* if the chosen format is not supported, try each one in descending order */
     CLog::Log(LOGINFO, "CAESinkALSA::InitializeHW - Your hardware does not support %s, trying other formats", CAEUtil::DataFormatToStr(outconfig.format));
-    for (enum AEDataFormat i = AE_FMT_MAX; i > AE_FMT_INVALID; i = static_cast<enum AEDataFormat>(static_cast<int>(i) - 1))
+    for (enum AEDataFormat i = AE_FMT_MAX; i > AE_FMT_INVALID;
+         i = static_cast<enum AEDataFormat>(static_cast<int>(i) - 1))
     {
       if (i == AE_FMT_RAW || i == AE_FMT_MAX)
         continue;
@@ -715,8 +718,8 @@ bool CAESinkALSA::InitializeHW(const ALSAConfig &inconfig, ALSAConfig &outconfig
    will cause problems with menu sounds. Buffer will be increased
    after those are fixed.
   */
-  periodSize  = std::min(periodSize, static_cast<snd_pcm_uframes_t>(sampleRate) / 20);
-  bufferSize  = std::min(bufferSize, static_cast<snd_pcm_uframes_t>(sampleRate) / 5);
+  periodSize = std::min(periodSize, static_cast<snd_pcm_uframes_t>(sampleRate) / 20);
+  bufferSize = std::min(bufferSize, static_cast<snd_pcm_uframes_t>(sampleRate) / 5);
 
   /*
    According to upstream we should set buffer size first - so make sure it is always at least
@@ -794,7 +797,8 @@ bool CAESinkALSA::InitializeHW(const ALSAConfig &inconfig, ALSAConfig &outconfig
   if (periodSize < AE_MIN_PERIODSIZE)
   {
     fragments = std::ceil(static_cast<double>(AE_MIN_PERIODSIZE) / periodSize);
-    CLog::Log(LOGDEBUG, "Audio Driver reports too low periodSize %d - will use %d fragments", static_cast<int>(periodSize), static_cast<int>(fragments));
+    CLog::Log(LOGDEBUG, "Audio Driver reports too low periodSize %d - will use %d fragments",
+              static_cast<int>(periodSize), static_cast<int>(fragments));
     m_fragmented = true;
   }
 
@@ -803,7 +807,7 @@ bool CAESinkALSA::InitializeHW(const ALSAConfig &inconfig, ALSAConfig &outconfig
   outconfig.frameSize    = snd_pcm_frames_to_bytes(m_pcm, 1);
 
   m_bufferSize = static_cast<unsigned int>(bufferSize);
-  m_timeout    = std::ceil(static_cast<double>(bufferSize * 1000) / static_cast<double>(sampleRate));
+  m_timeout = std::ceil(static_cast<double>(bufferSize * 1000) / static_cast<double>(sampleRate));
 
   CLog::Log(LOGDEBUG, "CAESinkALSA::InitializeHW - Setting timeout to %d ms", m_timeout);
 
@@ -1530,7 +1534,8 @@ void CAESinkALSA::EnumerateDevice(AEDeviceInfoList &list, const std::string &dev
   info.m_channels.ResolveChannels(alsaChannels);
 
   /* detect the PCM sample formats that are available */
-  for (enum AEDataFormat i = AE_FMT_MAX; i > AE_FMT_INVALID; i = static_cast<enum AEDataFormat>(static_cast<int>(i) - 1))
+  for (enum AEDataFormat i = AE_FMT_MAX; i > AE_FMT_INVALID;
+       i = static_cast<enum AEDataFormat>(static_cast<int>(i) - 1))
   {
     if (i == AE_FMT_RAW || i == AE_FMT_MAX)
       continue;
@@ -1607,11 +1612,8 @@ bool CAESinkALSA::GetELD(snd_hctl_t *hctl, int device, CAEDeviceInfo& info, bool
   if (!dataLength)
     badHDMI = true;
   else
-    CAEELDParser::Parse(
-      static_cast<const uint8_t*>(snd_ctl_elem_value_get_bytes(control)),
-      dataLength,
-      info
-    );
+    CAEELDParser::Parse(static_cast<const uint8_t*>(snd_ctl_elem_value_get_bytes(control)),
+                        dataLength, info);
 
   info.m_deviceType = AE_DEVTYPE_HDMI;
   return true;

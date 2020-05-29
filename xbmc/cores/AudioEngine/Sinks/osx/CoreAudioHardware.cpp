@@ -78,7 +78,10 @@ void CCoreAudioHardware::ResetStream(AudioStreamID streamId)
   {
     if (desc.mFormatID == 'IAC3' || desc.mFormatID == kAudioFormat60958AC3)
     {
-      CLog::Log(LOGDEBUG, "CCoreAudioHardware::ResetStream stream 0x%x is in encoded format.. setting to LPCM", static_cast<unsigned int>(streamId));
+      CLog::Log(
+          LOGDEBUG,
+          "CCoreAudioHardware::ResetStream stream 0x%x is in encoded format.. setting to LPCM",
+          static_cast<unsigned int>(streamId));
 
       StreamFormatList availableFormats;
       if (stream.GetAvailablePhysicalFormats(&availableFormats))
@@ -113,8 +116,10 @@ AudioDeviceID CCoreAudioHardware::FindAudioDevice(const std::string &searchName)
   if (searchNameLowerCase.compare("default") == 0)
   {
     AudioDeviceID defaultDevice = GetDefaultOutputDevice();
-    CLog::Log(LOGDEBUG, "CCoreAudioHardware::FindAudioDevice: "
-      "Returning default device [0x%04x].", static_cast<uint>(defaultDevice));
+    CLog::Log(LOGDEBUG,
+              "CCoreAudioHardware::FindAudioDevice: "
+              "Returning default device [0x%04x].",
+              static_cast<uint>(defaultDevice));
     return defaultDevice;
   }
   CLog::Log(LOGDEBUG, "CCoreAudioHardware::FindAudioDevice: "
