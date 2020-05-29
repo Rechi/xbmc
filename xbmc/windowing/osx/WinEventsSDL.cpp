@@ -70,7 +70,7 @@ bool CWinEventsSDL::MessagePump()
         XBMC_Event newEvent;
         newEvent.type = XBMC_KEYDOWN;
         newEvent.key.keysym.scancode = event.key.keysym.scancode;
-        newEvent.key.keysym.sym = (XBMCKey) event.key.keysym.sym;
+        newEvent.key.keysym.sym = static_cast<XBMCKey>(event.key.keysym.sym);
         newEvent.key.keysym.unicode = event.key.keysym.unicode;
 
         // Check if the Windows keys are down because SDL doesn't flag this.
@@ -78,7 +78,7 @@ bool CWinEventsSDL::MessagePump()
         uint8_t* keystate = SDL_GetKeyState(NULL);
         if (keystate[SDLK_LSUPER] || keystate[SDLK_RSUPER])
           mod |= XBMCKMOD_LSUPER;
-        newEvent.key.keysym.mod = (XBMCMod) mod;
+        newEvent.key.keysym.mod = static_cast<XBMCMod>(mod);
 
         // don't handle any more messages in the queue until we've handled keydown,
         // if a keyup is in the queue it will reset the keypress before it is handled.
@@ -93,8 +93,8 @@ bool CWinEventsSDL::MessagePump()
         XBMC_Event newEvent;
         newEvent.type = XBMC_KEYUP;
         newEvent.key.keysym.scancode = event.key.keysym.scancode;
-        newEvent.key.keysym.sym = (XBMCKey) event.key.keysym.sym;
-        newEvent.key.keysym.mod =(XBMCMod) event.key.keysym.mod;
+        newEvent.key.keysym.sym = static_cast<XBMCKey>(event.key.keysym.sym);
+        newEvent.key.keysym.mod =static_cast<XBMCMod>(event.key.keysym.mod);
         newEvent.key.keysym.unicode = event.key.keysym.unicode;
 
         std::shared_ptr<CAppInboundProtocol> appPort = CServiceBroker::GetAppPort();

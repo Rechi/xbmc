@@ -99,7 +99,7 @@ void CVideoSyncOsx::VblankHandler(int64_t nowtime, uint32_t timebase)
 
   if (m_LastVBlankTime != 0)
   {
-    VBlankTime = (double)(nowtime - m_LastVBlankTime) / (double)timebase;
+    VBlankTime = static_cast<double>(nowtime - m_LastVBlankTime) / static_cast<double>(timebase);
     NrVBlanks = MathUtils::round_int(VBlankTime * m_fps);
 
     //update the vblank timestamp, update the clock and send a signal that we got a vblank
@@ -131,7 +131,7 @@ bool CVideoSyncOsx::InitDisplayLink()
   bool ret = true;
   CLog::Log(LOGDEBUG, "CVideoSyncOsx::%s setting up displaylink", __FUNCTION__);
 
-  if (!Cocoa_CVDisplayLinkCreate((void*)DisplayLinkCallBack, reinterpret_cast<void*>(this)))
+  if (!Cocoa_CVDisplayLinkCreate(reinterpret_cast<void*>(DisplayLinkCallBack), reinterpret_cast<void*>(this)))
   {
     CLog::Log(LOGDEBUG, "CVideoSyncOsx::%s Cocoa_CVDisplayLinkCreate failed", __FUNCTION__);
     ret = false;
