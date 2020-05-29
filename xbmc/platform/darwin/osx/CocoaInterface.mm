@@ -59,7 +59,7 @@ uint32_t Cocoa_GL_GetCurrentDisplayID(void)
     }
   }
 
-  return(static_cast<uint32_t>(display_id));
+  return (static_cast<uint32_t>(display_id));
 }
 
 bool Cocoa_CVDisplayLinkCreate(void *displayLinkcallback, void *displayLinkContext)
@@ -78,7 +78,9 @@ bool Cocoa_CVDisplayLinkCreate(void *displayLinkcallback, void *displayLinkConte
     status = CVDisplayLinkCreateWithActiveCGDisplays(&displayLink);
 
     // Set the renderer output callback function
-    status = CVDisplayLinkSetOutputCallback(displayLink, static_cast<CVDisplayLinkOutputCallback>(displayLinkcallback), displayLinkContext);
+    status = CVDisplayLinkSetOutputCallback(
+        displayLink, static_cast<CVDisplayLinkOutputCallback>(displayLinkcallback),
+        displayLinkContext);
   }
 
   if (status == kCVReturnSuccess)
@@ -182,7 +184,7 @@ char* Cocoa_MountPoint2DeviceName(char *path)
       if (!StringUtils::CompareNoCase(mntbufp[i].f_mntonname, strDVDDevice))
       {
         // Replace "/dev/" with "/dev/r"
-        path = static_cast<char*>(realloc(path, strlen(mntbufp[i].f_mntfromname) + 2 ));
+        path = static_cast<char*>(realloc(path, strlen(mntbufp[i].f_mntfromname) + 2));
         strcpy( path, "/dev/r" );
         strcat( path, mntbufp[i].f_mntfromname + strlen( "/dev/" ) );
         break;

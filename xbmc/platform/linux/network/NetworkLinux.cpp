@@ -103,10 +103,11 @@ bool CNetworkInterfaceLinux::GetHostMacAddress(unsigned long host_ip, std::strin
   }
 
   struct sockaddr* res = &areq.arp_ha;
-  mac = StringUtils::Format("%02X:%02X:%02X:%02X:%02X:%02X", static_cast<uint8_t>(res->sa_data[0]),
-                            static_cast<uint8_t>(res->sa_data[1]), static_cast<uint8_t>(res->sa_data[2]),
-                            static_cast<uint8_t>(res->sa_data[3]), static_cast<uint8_t>(res->sa_data[4]),
-                            static_cast<uint8_t>(res->sa_data[5]));
+  mac = StringUtils::Format(
+      "%02X:%02X:%02X:%02X:%02X:%02X", static_cast<uint8_t>(res->sa_data[0]),
+      static_cast<uint8_t>(res->sa_data[1]), static_cast<uint8_t>(res->sa_data[2]),
+      static_cast<uint8_t>(res->sa_data[3]), static_cast<uint8_t>(res->sa_data[4]),
+      static_cast<uint8_t>(res->sa_data[5]));
 
   for (int i = 0; i < 6; ++i)
     if (res->sa_data[i])

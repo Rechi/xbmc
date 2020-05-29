@@ -30,12 +30,11 @@ void CJNIXBMCFile::RegisterNatives(JNIEnv *env)
   jclass cClass = env->FindClass(s_className.c_str());
   if(cClass)
   {
-    JNINativeMethod methods[] =
-    {
-      {"_open", "(Ljava/lang/String;)Z", reinterpret_cast<void*>(&CJNIXBMCFile::_open)},
-      {"_close", "()V", reinterpret_cast<void*>(&CJNIXBMCFile::_close)},
-      {"_read", "()[B", reinterpret_cast<void*>(&CJNIXBMCFile::_read)},
-      {"_eof", "()Z", reinterpret_cast<void*>(&CJNIXBMCFile::_eof)},
+    JNINativeMethod methods[] = {
+        {"_open", "(Ljava/lang/String;)Z", reinterpret_cast<void*>(&CJNIXBMCFile::_open)},
+        {"_close", "()V", reinterpret_cast<void*>(&CJNIXBMCFile::_close)},
+        {"_read", "()[B", reinterpret_cast<void*>(&CJNIXBMCFile::_read)},
+        {"_eof", "()Z", reinterpret_cast<void*>(&CJNIXBMCFile::_eof)},
     };
 
     env->RegisterNatives(cClass, methods, sizeof(methods)/sizeof(methods[0]));

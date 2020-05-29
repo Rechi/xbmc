@@ -212,7 +212,7 @@ static void setupWindowMenu(void)
   char parentdir[MAXPATHLEN];
   CFURLRef url = CFBundleCopyBundleURL(CFBundleGetMainBundle());
   CFURLRef url2 = CFURLCreateCopyDeletingLastPathComponent(0, url);
-  if (CFURLGetFileSystemRepresentation(url2, true, reinterpret_cast<UInt8 *>(parentdir), MAXPATHLEN))
+  if (CFURLGetFileSystemRepresentation(url2, true, reinterpret_cast<UInt8*>(parentdir), MAXPATHLEN))
   {
     assert( chdir (parentdir) == 0 );   /* chdir to the binary app's parent */
   }
@@ -374,11 +374,11 @@ static void setupWindowMenu(void)
 
   temparg = [filename UTF8String];
   arglen = SDL_strlen(temparg) + 1;
-  arg = static_cast<char *>(SDL_malloc(arglen));
+  arg = static_cast<char*>(SDL_malloc(arglen));
   if (arg == NULL)
     return FALSE;
 
-  newargv = static_cast<char **>(realloc(gArgv, sizeof (char *) * (gArgc + 2)));
+  newargv = static_cast<char**>(realloc(gArgv, sizeof(char*) * (gArgc + 2)));
   if (newargv == NULL)
   {
     SDL_free(arg);

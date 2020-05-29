@@ -180,8 +180,10 @@ const CGFloat timeFadeSecs                    = 2.0;
   [[self view] addGestureRecognizer:doubleFingerSingleTap];
 
   //1 finger single long tab - right mouse - alternative
-  UITapGestureRecognizer *singleFingerSingleLongTap = reinterpret_cast<UITapGestureRecognizer*>([[UILongPressGestureRecognizer alloc]
-                                                        initWithTarget:self action:@selector(handleSingleFingerSingleLongTap:)]);
+  UITapGestureRecognizer* singleFingerSingleLongTap =
+      reinterpret_cast<UITapGestureRecognizer*>([[UILongPressGestureRecognizer alloc]
+          initWithTarget:self
+                  action:@selector(handleSingleFingerSingleLongTap:)]);
   singleFingerSingleLongTap.delaysTouchesBegan = YES;
   singleFingerSingleLongTap.delaysTouchesEnded = YES;
   singleFingerSingleLongTap.numberOfTouchesRequired = 1;

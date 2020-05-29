@@ -26,7 +26,8 @@ void SendKeyboardText(const char *text)
 
   CAction *action = new CAction(ACTION_INPUT_TEXT);
   action->SetText(text);
-  CApplicationMessenger::GetInstance().PostMsg(TMSG_GUI_ACTION, WINDOW_INVALID, -1, static_cast<void*>(action));
+  CApplicationMessenger::GetInstance().PostMsg(TMSG_GUI_ACTION, WINDOW_INVALID, -1,
+                                               static_cast<void*>(action));
 }
 
 void SendEditingText(const char *text, unsigned int location, unsigned int length)

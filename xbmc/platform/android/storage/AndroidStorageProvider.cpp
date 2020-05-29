@@ -84,7 +84,8 @@ std::string CAndroidStorageProvider::unescape(const std::string& str)
           uint8_t val = 0;
           for (int j=octString.length()-1; j>=0; --j)
           {
-            val += (static_cast<uint8_t>(octString[j] - '0')) * (1 << ((octString.length() - (j+1)) * 3));
+            val += (static_cast<uint8_t>(octString[j] - '0')) *
+                   (1 << ((octString.length() - (j + 1)) * 3));
           }
           retString += static_cast<char>(val);
           i -= 1;

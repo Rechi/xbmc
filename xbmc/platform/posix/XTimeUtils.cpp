@@ -136,7 +136,8 @@ int SystemTimeToFileTime(const SystemTime* systemTime, FileTime* fileTime)
 #endif
 
   LARGE_INTEGER result;
-  result.QuadPart = static_cast<long long>(t) * 10000000 + static_cast<long long>(systemTime->milliseconds) * 10000;
+  result.QuadPart = static_cast<long long>(t) * 10000000 +
+                    static_cast<long long>(systemTime->milliseconds) * 10000;
   result.QuadPart += WIN32_TIME_OFFSET;
 
   fileTime->lowDateTime = result.u.LowPart;
