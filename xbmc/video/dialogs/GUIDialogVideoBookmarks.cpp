@@ -184,7 +184,7 @@ void CGUIDialogVideoBookmarks::OnPopupMenu(int item)
 
 void CGUIDialogVideoBookmarks::Delete(int item)
 {
-  if ( item>=0 && static_cast<unsigned>(item) < m_bookmarks.size() )
+  if (item >= 0 && static_cast<unsigned>(item) < m_bookmarks.size())
   {
     CVideoDatabase videoDatabase;
     videoDatabase.Open();
@@ -249,7 +249,8 @@ void CGUIDialogVideoBookmarks::OnRefreshList()
     if (m_bookmarks[i].type == CBookmark::EPISODE)
       bookmarkTime = StringUtils::Format("%s %li %s %li", g_localizeStrings.Get(20373).c_str(), m_bookmarks[i].seasonNumber, g_localizeStrings.Get(20359).c_str(), m_bookmarks[i].episodeNumber);
     else
-      bookmarkTime = StringUtils::SecondsToTimeString(static_cast<long>(m_bookmarks[i].timeInSeconds), TIME_FORMAT_HH_MM_SS);
+      bookmarkTime = StringUtils::SecondsToTimeString(
+          static_cast<long>(m_bookmarks[i].timeInSeconds), TIME_FORMAT_HH_MM_SS);
 
     CFileItemPtr item(new CFileItem(StringUtils::Format(g_localizeStrings.Get(299).c_str(), i+1)));
     item->SetLabel2(bookmarkTime);
@@ -267,7 +268,8 @@ void CGUIDialogVideoBookmarks::OnRefreshList()
     g_application.GetAppPlayer().GetChapterName(chapterName, i);
 
     int64_t pos = g_application.GetAppPlayer().GetChapterPos(i);
-    std::string time = StringUtils::SecondsToTimeString(static_cast<long>(pos), TIME_FORMAT_HH_MM_SS);
+    std::string time =
+        StringUtils::SecondsToTimeString(static_cast<long>(pos), TIME_FORMAT_HH_MM_SS);
 
     if (chapterName.empty() ||
         StringUtils::StartsWithNoCase(chapterName, time) ||
@@ -413,7 +415,7 @@ bool CGUIDialogVideoBookmarks::AddBookmark(CVideoInfoTag* tag)
   }
 
 
-  uint8_t *pixels = static_cast<uint8_t*>(malloc(height * width * 4));
+  uint8_t* pixels = static_cast<uint8_t*>(malloc(height * width * 4));
   unsigned int captureId = g_application.GetAppPlayer().RenderCaptureAlloc();
 
   g_application.GetAppPlayer().RenderCapture(captureId, width, height, CAPTUREFLAG_IMMEDIATELY);
@@ -424,7 +426,8 @@ bool CGUIDialogVideoBookmarks::AddBookmark(CVideoInfoTag* tag)
     const std::shared_ptr<CProfileManager> profileManager = CServiceBroker::GetSettingsComponent()->GetProfileManager();
 
     auto crc = Crc32::ComputeFromLowerCase(g_application.CurrentFile());
-    bookmark.thumbNailImage = StringUtils::Format("%08x_%i.jpg", crc, static_cast<int>(bookmark.timeInSeconds));
+    bookmark.thumbNailImage =
+        StringUtils::Format("%08x_%i.jpg", crc, static_cast<int>(bookmark.timeInSeconds));
     bookmark.thumbNailImage = URIUtils::AddFileToFolder(profileManager->GetBookmarksThumbFolder(), bookmark.thumbNailImage);
 
     if (!CPicture::CreateThumbnailFromSurface(pixels, width, height, width * 4,

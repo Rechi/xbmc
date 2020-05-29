@@ -327,18 +327,17 @@ void CGUIWindowFullScreen::FrameMove()
     g_application.GetAppPlayer().GetVideoStreamInfo(CURRENT_STREAM,info);
     {
       // Splitres scaling factor
-      float xscale = static_cast<float>(res.iScreenWidth)  / static_cast<float>(res.iWidth);
+      float xscale = static_cast<float>(res.iScreenWidth) / static_cast<float>(res.iWidth);
       float yscale = static_cast<float>(res.iScreenHeight) / static_cast<float>(res.iHeight);
 
-      std::string strSizing = StringUtils::Format(g_localizeStrings.Get(245).c_str(),
-                                                 static_cast<int>(info.SrcRect.Width()),
-                                                 static_cast<int>(info.SrcRect.Height()),
-                                                 static_cast<int>(info.DestRect.Width() * xscale),
-                                                 static_cast<int>(info.DestRect.Height() * yscale),
-                                                 CDisplaySettings::GetInstance().GetZoomAmount(),
-                                                 info.videoAspectRatio*CDisplaySettings::GetInstance().GetPixelRatio(),
-                                                 CDisplaySettings::GetInstance().GetPixelRatio(),
-                                                 CDisplaySettings::GetInstance().GetVerticalShift());
+      std::string strSizing = StringUtils::Format(
+          g_localizeStrings.Get(245).c_str(), static_cast<int>(info.SrcRect.Width()),
+          static_cast<int>(info.SrcRect.Height()), static_cast<int>(info.DestRect.Width() * xscale),
+          static_cast<int>(info.DestRect.Height() * yscale),
+          CDisplaySettings::GetInstance().GetZoomAmount(),
+          info.videoAspectRatio * CDisplaySettings::GetInstance().GetPixelRatio(),
+          CDisplaySettings::GetInstance().GetPixelRatio(),
+          CDisplaySettings::GetInstance().GetVerticalShift());
       CGUIMessage msg(GUI_MSG_LABEL_SET, GetID(), LABEL_ROW2);
       msg.SetLabel(strSizing);
       OnMessage(msg);
@@ -397,7 +396,9 @@ void CGUIWindowFullScreen::Process(unsigned int currentTime, CDirtyRegionList &d
 
   //! @todo This isn't quite optimal - ideally we'd only be dirtying up the actual video render rect
   //!       which is probably the job of the renderer as it can more easily track resizing etc.
-  m_renderRegion.SetRect(0, 0, static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth()), static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight()));
+  m_renderRegion.SetRect(
+      0, 0, static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth()),
+      static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight()));
 }
 
 void CGUIWindowFullScreen::Render()

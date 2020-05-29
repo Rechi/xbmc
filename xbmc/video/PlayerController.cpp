@@ -333,7 +333,9 @@ bool CPlayerController::OnAction(const CAction &action)
           if (res_info.iSubtitles >= res_info.iHeight)
             res_info.iSubtitles = res_info.iHeight - 1;
 
-          ShowSlider(action.GetID(), 274, static_cast<float>(res_info.iHeight) - res_info.iSubtitles, 0.0f, 1.0f, static_cast<float>(res_info.iHeight));
+          ShowSlider(action.GetID(), 274,
+                     static_cast<float>(res_info.iHeight) - res_info.iSubtitles, 0.0f, 1.0f,
+                     static_cast<float>(res_info.iHeight));
         }
         else
         {
@@ -342,9 +344,12 @@ bool CPlayerController::OnAction(const CAction &action)
             res_info.iSubtitles = 0;
 
           if (subalign == SUBTITLE_ALIGN_MANUAL)
-            ShowSlider(action.GetID(), 274, static_cast<float>(res_info.iSubtitles), 0.0f, 1.0f, static_cast<float>(res_info.iHeight));
+            ShowSlider(action.GetID(), 274, static_cast<float>(res_info.iSubtitles), 0.0f, 1.0f,
+                       static_cast<float>(res_info.iHeight));
           else
-            ShowSlider(action.GetID(), 274, static_cast<float>(res_info.iSubtitles) - res_info.iHeight, static_cast<float>(-res_info.iHeight), -1.0f, 0.0f);
+            ShowSlider(action.GetID(), 274,
+                       static_cast<float>(res_info.iSubtitles) - res_info.iHeight,
+                       static_cast<float>(-res_info.iHeight), -1.0f, 0.0f);
         }
         CServiceBroker::GetWinSystem()->GetGfxContext().SetResInfo(CServiceBroker::GetWinSystem()->GetGfxContext().GetVideoResolution(), res_info);
         return true;
@@ -360,7 +365,9 @@ bool CPlayerController::OnAction(const CAction &action)
           if (res_info.iSubtitles < 0)
             res_info.iSubtitles = 0;
 
-          ShowSlider(action.GetID(), 274, static_cast<float>(res_info.iHeight) - res_info.iSubtitles, 0.0f, 1.0f, static_cast<float>(res_info.iHeight));
+          ShowSlider(action.GetID(), 274,
+                     static_cast<float>(res_info.iHeight) - res_info.iSubtitles, 0.0f, 1.0f,
+                     static_cast<float>(res_info.iHeight));
         }
         else
         {
@@ -369,9 +376,12 @@ bool CPlayerController::OnAction(const CAction &action)
             res_info.iSubtitles = res_info.iHeight - 1;
 
           if (subalign == SUBTITLE_ALIGN_MANUAL)
-            ShowSlider(action.GetID(), 274, static_cast<float>(res_info.iSubtitles), 0.0f, 1.0f, static_cast<float>(res_info.iHeight));
+            ShowSlider(action.GetID(), 274, static_cast<float>(res_info.iSubtitles), 0.0f, 1.0f,
+                       static_cast<float>(res_info.iHeight));
           else
-            ShowSlider(action.GetID(), 274, static_cast<float>(res_info.iSubtitles) - res_info.iHeight, static_cast<float>(-res_info.iHeight), -1.0f, 0.0f);
+            ShowSlider(action.GetID(), 274,
+                       static_cast<float>(res_info.iSubtitles) - res_info.iHeight,
+                       static_cast<float>(-res_info.iHeight), -1.0f, 0.0f);
         }
         CServiceBroker::GetWinSystem()->GetGfxContext().SetResInfo(CServiceBroker::GetWinSystem()->GetGfxContext().GetVideoResolution(), res_info);
         return true;
@@ -422,7 +432,8 @@ bool CPlayerController::OnAction(const CAction &action)
         vs.m_VolumeAmplification =
           std::max(std::min(vs.m_VolumeAmplification, sliderMax), sliderMin);
 
-        g_application.GetAppPlayer().SetDynamicRangeCompression(static_cast<long>(vs.m_VolumeAmplification * 100));
+        g_application.GetAppPlayer().SetDynamicRangeCompression(
+            static_cast<long>(vs.m_VolumeAmplification * 100));
 
         ShowSlider(action.GetID(), 660, vs.m_VolumeAmplification, sliderMin, 1.0f, sliderMax);
         return true;
@@ -544,7 +555,8 @@ void CPlayerController::OnSliderChange(void *data, CGUISliderControl *slider)
     }
     else if (m_sliderAction == ACTION_VOLAMP)
     {
-      g_application.GetAppPlayer().SetDynamicRangeCompression(static_cast<long>(slider->GetFloatValue() * 100));
+      g_application.GetAppPlayer().SetDynamicRangeCompression(
+          static_cast<long>(slider->GetFloatValue() * 100));
     }
   }
 }

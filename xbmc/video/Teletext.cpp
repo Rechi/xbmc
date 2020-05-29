@@ -626,8 +626,12 @@ bool CTeletextDecoder::InitDecoder()
   }
 
   /* calculate font dimensions */
-  m_RenderInfo.Width            = static_cast<int>(CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth()*CServiceBroker::GetWinSystem()->GetGfxContext().GetGUIScaleX());
-  m_RenderInfo.Height           = static_cast<int>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight()*CServiceBroker::GetWinSystem()->GetGfxContext().GetGUIScaleY());
+  m_RenderInfo.Width =
+      static_cast<int>(CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth() *
+                       CServiceBroker::GetWinSystem()->GetGfxContext().GetGUIScaleX());
+  m_RenderInfo.Height =
+      static_cast<int>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight() *
+                       CServiceBroker::GetWinSystem()->GetGfxContext().GetGUIScaleY());
   m_RenderInfo.FontHeight       = m_RenderInfo.Height / 25;
   m_RenderInfo.FontWidth_Normal = m_RenderInfo.Width  / (m_RenderInfo.Show39 ? 39 : 40);
   SetFontWidth(m_RenderInfo.FontWidth_Normal);
@@ -636,7 +640,7 @@ bool CTeletextDecoder::InitDecoder()
 
   /* center screen */
   m_TypeTTF.face_id   = (FTC_FaceID) const_cast<char*>(m_teletextFont.c_str());
-  m_TypeTTF.height    = static_cast<FT_UShort>(m_RenderInfo.FontHeight);
+  m_TypeTTF.height = static_cast<FT_UShort>(m_RenderInfo.FontHeight);
   m_TypeTTF.flags     = FT_LOAD_MONOCHROME;
   if (FTC_Manager_LookupFace(m_Manager, m_TypeTTF.face_id, &m_Face))
   {
@@ -1210,7 +1214,8 @@ void CTeletextDecoder::RenderPage()
       long now = XbmcThreads::SystemClockMillis()/1000;
       for (TextSubtitleCache_t* const subtitleCache : m_RenderInfo.SubtitleCache)
       {
-        if (subtitleCache && subtitleCache->Valid && now - subtitleCache->Timestamp >= static_cast<long>(m_RenderInfo.SubtitleDelay))
+        if (subtitleCache && subtitleCache->Valid &&
+            now - subtitleCache->Timestamp >= static_cast<long>(m_RenderInfo.SubtitleDelay))
         {
           memcpy(m_RenderInfo.PageChar, subtitleCache->PageChar, 40 * 25);
           memcpy(m_RenderInfo.PageAtrb, subtitleCache->PageAtrb, 40 * 25 * sizeof(TextPageAttr_t));
@@ -1248,7 +1253,8 @@ void CTeletextDecoder::RenderPage()
                 m_RenderInfo.PageAtrb[0].fg = TXT_ColorYellow;
                 m_RenderInfo.PageAtrb[0].bg = TXT_ColorMenu1;
               }
-              CDVDTeletextTools::Hex2Str(reinterpret_cast<char*>(m_RenderInfo.PageChar)+3, m_txtCache->Page);
+              CDVDTeletextTools::Hex2Str(reinterpret_cast<char*>(m_RenderInfo.PageChar) + 3,
+                                         m_txtCache->Page);
 
               int col;
               for (col = m_RenderInfo.nofirst; col < 7; col++) // selected page
@@ -1720,7 +1726,9 @@ void CTeletextDecoder::Showlink(int column, int linkpage)
     if (l > 9) /* smaller font, if no space for one half space at front and end */
       SetFontWidth(oldfontwidth * 10 / (l+1));
 
-    FillRect(m_TextureBuffer, m_RenderInfo.Width, m_RenderInfo.PosX, m_RenderInfo.PosY+yoffset, width+(m_RenderInfo.Width%4), m_RenderInfo.FontHeight, GetColorRGB(static_cast<enumTeletextColor>(Text_AtrTable[ATR_L250 + column].bg)));
+    FillRect(m_TextureBuffer, m_RenderInfo.Width, m_RenderInfo.PosX, m_RenderInfo.PosY + yoffset,
+             width + (m_RenderInfo.Width % 4), m_RenderInfo.FontHeight,
+             GetColorRGB(static_cast<enumTeletextColor>(Text_AtrTable[ATR_L250 + column].bg)));
     m_RenderInfo.PosX += ((width) - (l*m_RenderInfo.FontWidth+l*m_RenderInfo.FontWidth/abx))/2; /* center */
 
     for (char *p = m_txtCache->ADIPTable[linkpage]; *p; p++)
@@ -1731,7 +1739,9 @@ void CTeletextDecoder::Showlink(int column, int linkpage)
   else /* display number */
   {
     m_RenderInfo.PosX = column*width;
-    FillRect(m_TextureBuffer, m_RenderInfo.Width, m_RenderInfo.PosX, m_RenderInfo.PosY+yoffset, m_RenderInfo.Width-m_RenderInfo.PosX, m_RenderInfo.FontHeight, GetColorRGB(static_cast<enumTeletextColor>(Text_AtrTable[ATR_L250 + column].bg)));
+    FillRect(m_TextureBuffer, m_RenderInfo.Width, m_RenderInfo.PosX, m_RenderInfo.PosY + yoffset,
+             m_RenderInfo.Width - m_RenderInfo.PosX, m_RenderInfo.FontHeight,
+             GetColorRGB(static_cast<enumTeletextColor>(Text_AtrTable[ATR_L250 + column].bg)));
     if (linkpage < m_txtCache->Page)
     {
       line[6] = '<';
@@ -1884,7 +1894,7 @@ void CTeletextDecoder::SetFontWidth(int newWidth)
   if (m_RenderInfo.FontWidth != newWidth)
   {
     m_RenderInfo.FontWidth = newWidth;
-    m_TypeTTF.width       = static_cast<FT_UShort>(m_RenderInfo.FontWidth);
+    m_TypeTTF.width = static_cast<FT_UShort>(m_RenderInfo.FontWidth);
 
     for (int i = 0; i <= 12; i++)
       m_RenderInfo.axdrcs[i] = (m_RenderInfo.FontWidth * i + 6) / 12;
@@ -2767,12 +2777,12 @@ TextPageinfo_t* CTeletextDecoder::DecodePage(bool showl25,             // 1=deco
   else
   {
     memset(PageChar, ' ', 8);
-    CDVDTeletextTools::Hex2Str(reinterpret_cast<char*>(PageChar)+3, m_txtCache->Page);
+    CDVDTeletextTools::Hex2Str(reinterpret_cast<char*>(PageChar) + 3, m_txtCache->Page);
     if (m_txtCache->SubPage)
     {
       *(PageChar+4) ='/';
       *(PageChar+5) ='0';
-      CDVDTeletextTools::Hex2Str(reinterpret_cast<char*>(PageChar)+6, m_txtCache->SubPage);
+      CDVDTeletextTools::Hex2Str(reinterpret_cast<char*>(PageChar) + 6, m_txtCache->SubPage);
     }
   }
 
@@ -2832,7 +2842,7 @@ TextPageinfo_t* CTeletextDecoder::DecodePage(bool showl25,             // 1=deco
         p = PageChar + i;
         h = dehamming[*p];
         if (parityerror && h != 0xFF)  /* if no regular page (after any parity error) */
-          CDVDTeletextTools::Hex2Str(reinterpret_cast<char*>(p), h);  /* first try dehamming */
+          CDVDTeletextTools::Hex2Str(reinterpret_cast<char*>(p), h); /* first try dehamming */
         else
         {
           if (*p == ' ' || deparity[*p] != ' ') /* correct parity */
@@ -3120,7 +3130,8 @@ TextPageinfo_t* CTeletextDecoder::DecodePage(bool showl25,             // 1=deco
     {
       for (int c = 0; c < 40; c++)
       {
-        bitmask = (PageAtrb[o].bg == 0x08 ? 0x08 : 0x00) | (row == 0x08 ? 0x04 : 0x00) | (PageAtrb[o].boxwin <<1) | static_cast<int>(boxed);
+        bitmask = (PageAtrb[o].bg == 0x08 ? 0x08 : 0x00) | (row == 0x08 ? 0x04 : 0x00) |
+                  (PageAtrb[o].boxwin << 1) | static_cast<int>(boxed);
         switch (bitmask)
         {
           case 0x08:
@@ -3141,7 +3152,8 @@ TextPageinfo_t* CTeletextDecoder::DecodePage(bool showl25,             // 1=deco
             PageAtrb[o].bg = TXT_ColorTransp;
             break;
         }
-        bitmask = (PageAtrb[o].fg  == 0x08 ? 0x08 : 0x00) | (row == 0x08 ? 0x04 : 0x00) | (PageAtrb[o].boxwin <<1) | static_cast<int>(boxed);
+        bitmask = (PageAtrb[o].fg == 0x08 ? 0x08 : 0x00) | (row == 0x08 ? 0x04 : 0x00) |
+                  (PageAtrb[o].boxwin << 1) | static_cast<int>(boxed);
         switch (bitmask)
         {
           case 0x08:
@@ -3467,7 +3479,8 @@ void CTeletextDecoder::Eval_NumberedObject(int p, int s, int packet, int triplet
     iONr = idata & 0x1ff; /* triplet number of even object data */
   if (iONr <= 506)
   {
-    Eval_Object(iONr, m_txtCache->astCachetable[p][s], pAPx, pAPy, pAPx0, pAPy0, static_cast<tObjType>(triplet % 3),pagedata, PageChar, PageAtrb);
+    Eval_Object(iONr, m_txtCache->astCachetable[p][s], pAPx, pAPy, pAPx0, pAPy0,
+                static_cast<tObjType>(triplet % 3), pagedata, PageChar, PageAtrb);
   }
 }
 
@@ -3834,7 +3847,8 @@ int CTeletextDecoder::Eval_Triplet(int iOData, TextCachedPage_t *pstCachedPage,
 
         if (APx0 < 40) /* not in side panel */
         {
-          Eval_Object(13 * 23 + 13 * descode + triplet, pstCachedPage, &APx, &APy, &APx0, &APy0, static_cast<tObjType>(triplet % 3), pagedata, PageChar, PageAtrb);
+          Eval_Object(13 * 23 + 13 * descode + triplet, pstCachedPage, &APx, &APy, &APx0, &APy0,
+                      static_cast<tObjType>(triplet % 3), pagedata, PageChar, PageAtrb);
         }
       }
       break;

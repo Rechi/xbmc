@@ -383,7 +383,9 @@ bool CGUIWindowVideoNav::GetDirectory(const std::string &strDirectory, CFileItem
                         (itemsSize == 2 && iFlatten == 1 &&                                                // flatten if one season + specials
                          (items[firstIndex]->GetVideoInfoTag()->m_iSeason == 0 || items[firstIndex + 1]->GetVideoInfoTag()->m_iSeason == 0));
 
-        if (iFlatten > 0 && !bFlatten && static_cast<WatchedMode>(CMediaSettings::GetInstance().GetWatchedMode("tvshows")) == WatchedModeUnwatched)
+        if (iFlatten > 0 && !bFlatten &&
+            static_cast<WatchedMode>(CMediaSettings::GetInstance().GetWatchedMode("tvshows")) ==
+                WatchedModeUnwatched)
         {
           int count = 0;
           for(int i = 0; i < items.Size(); i++)
@@ -854,7 +856,8 @@ void CGUIWindowVideoNav::OnDeleteItem(CFileItemPtr pItem)
       CVideoDatabaseDirectory dir;
       CQueryParams params;
       dir.GetQueryParams(pItem->GetPath(), params);
-      m_database.DeleteTag(params.GetTagId(), static_cast<VIDEODB_CONTENT_TYPE>(params.GetContentType()));
+      m_database.DeleteTag(params.GetTagId(),
+                           static_cast<VIDEODB_CONTENT_TYPE>(params.GetContentType()));
     }
   }
   else if (m_vecItems->IsPath(CUtil::VideoPlaylistsLocation()) ||
@@ -1291,11 +1294,14 @@ bool CGUIWindowVideoNav::ApplyWatchedFilter(CFileItemList &items)
     if(item->HasVideoInfoTag() && (node == NODE_TYPE_TITLE_TVSHOWS || node == NODE_TYPE_SEASONS))
     {
       if (watchMode == WatchedModeUnwatched)
-        item->GetVideoInfoTag()->m_iEpisode = static_cast<int>(item->GetProperty("unwatchedepisodes").asInteger());
+        item->GetVideoInfoTag()->m_iEpisode =
+            static_cast<int>(item->GetProperty("unwatchedepisodes").asInteger());
       if (watchMode == WatchedModeWatched)
-        item->GetVideoInfoTag()->m_iEpisode = static_cast<int>(item->GetProperty("watchedepisodes").asInteger());
+        item->GetVideoInfoTag()->m_iEpisode =
+            static_cast<int>(item->GetProperty("watchedepisodes").asInteger());
       if (watchMode == WatchedModeAll)
-        item->GetVideoInfoTag()->m_iEpisode = static_cast<int>(item->GetProperty("totalepisodes").asInteger());
+        item->GetVideoInfoTag()->m_iEpisode =
+            static_cast<int>(item->GetProperty("totalepisodes").asInteger());
       item->SetProperty("numepisodes", item->GetVideoInfoTag()->m_iEpisode);
       listchanged = true;
     }
