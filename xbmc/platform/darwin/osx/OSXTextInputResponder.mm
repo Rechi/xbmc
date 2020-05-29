@@ -21,7 +21,7 @@ void SendKeyboardText(const char *text)
 //  CLog::Log(LOGDEBUG, "SendKeyboardText(%s)", text);
 
   /* Don't post text events for unprintable characters */
-  if ((unsigned char)*text < ' ' || *text == 127)
+  if (static_cast<unsigned char>(*text) < ' ' || *text == 127)
     return;
 
   CAction *action = new CAction(ACTION_INPUT_TEXT);

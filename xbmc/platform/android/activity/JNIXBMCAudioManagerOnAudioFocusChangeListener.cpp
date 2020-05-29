@@ -45,7 +45,7 @@ void CJNIXBMCAudioManagerOnAudioFocusChangeListener::RegisterNatives(JNIEnv* env
   {
     JNINativeMethod methods[] =
     {
-      {"_onAudioFocusChange", "(I)V", (void*)&CJNIXBMCAudioManagerOnAudioFocusChangeListener::_onAudioFocusChange},
+      {"_onAudioFocusChange", "(I)V", reinterpret_cast<void*>(&CJNIXBMCAudioManagerOnAudioFocusChangeListener::_onAudioFocusChange)},
     };
 
     env->RegisterNatives(cClass, methods, sizeof(methods)/sizeof(methods[0]));

@@ -212,7 +212,7 @@ static void setupWindowMenu(void)
   char parentdir[MAXPATHLEN];
   CFURLRef url = CFBundleCopyBundleURL(CFBundleGetMainBundle());
   CFURLRef url2 = CFURLCreateCopyDeletingLastPathComponent(0, url);
-  if (CFURLGetFileSystemRepresentation(url2, true, (UInt8 *)parentdir, MAXPATHLEN))
+  if (CFURLGetFileSystemRepresentation(url2, true, reinterpret_cast<UInt8 *>(parentdir), MAXPATHLEN))
   {
     assert( chdir (parentdir) == 0 );   /* chdir to the binary app's parent */
   }
@@ -374,11 +374,11 @@ static void setupWindowMenu(void)
 
   temparg = [filename UTF8String];
   arglen = SDL_strlen(temparg) + 1;
-  arg = (char *) SDL_malloc(arglen);
+  arg = static_cast<char *>(SDL_malloc(arglen));
   if (arg == NULL)
     return FALSE;
 
-  newargv = (char **) realloc(gArgv, sizeof (char *) * (gArgc + 2));
+  newargv = static_cast<char **>(realloc(gArgv, sizeof (char *) * (gArgc + 2)));
   if (newargv == NULL)
   {
     SDL_free(arg);
@@ -447,45 +447,45 @@ static void keyPress(SDLKey key)
 
 - (void)powerKeyNotification
 {
-  keyPress((SDLKey)VK_SLEEP);
+  keyPress(static_cast<SDLKey>(VK_SLEEP));
 }
 
 - (void)muteKeyNotification
 {
-  keyPress((SDLKey)VK_VOLUME_MUTE);
+  keyPress(static_cast<SDLKey>(VK_VOLUME_MUTE));
 }
 - (void)soundUpKeyNotification
 {
-  keyPress((SDLKey)VK_VOLUME_UP);
+  keyPress(static_cast<SDLKey>(VK_VOLUME_UP));
 }
 - (void)soundDownKeyNotification
 {
-  keyPress((SDLKey)VK_VOLUME_DOWN);
+  keyPress(static_cast<SDLKey>(VK_VOLUME_DOWN));
 }
 
 - (void)playPauseKeyNotification
 {
-  keyPress((SDLKey)VK_MEDIA_PLAY_PAUSE);
+  keyPress(static_cast<SDLKey>(VK_MEDIA_PLAY_PAUSE));
 }
 
 - (void)fastKeyNotification
 {
-  keyPress((SDLKey)VK_FAST_FWD);
+  keyPress(static_cast<SDLKey>(VK_FAST_FWD));
 }
 
 - (void)rewindKeyNotification
 {
-  keyPress((SDLKey)VK_REWIND);
+  keyPress(static_cast<SDLKey>(VK_REWIND));
 }
 
 - (void)nextKeyNotification
 {
-  keyPress((SDLKey)VK_MEDIA_NEXT_TRACK);
+  keyPress(static_cast<SDLKey>(VK_MEDIA_NEXT_TRACK));
 }
 
 - (void)previousKeyNotification
 {
-  keyPress((SDLKey)VK_MEDIA_PREV_TRACK);
+  keyPress(static_cast<SDLKey>(VK_MEDIA_PREV_TRACK));
 }
 
 @end
@@ -513,7 +513,7 @@ int main(int argc, char *argv[])
     /* This is passed if we are launched by double-clicking */
     if (argc >= 2 && strncmp(argv[1], "-psn", 4) == 0)
     {
-      gArgv = (char**)SDL_malloc(sizeof(char*) * 2);
+      gArgv = static_cast<char**>(SDL_malloc(sizeof(char*) * 2));
       gArgv[0] = argv[0];
       gArgv[1] = NULL;
       gArgc = 1;
@@ -521,7 +521,7 @@ int main(int argc, char *argv[])
     else
     {
       gArgc = argc;
-      gArgv = (char**)SDL_malloc(sizeof(char*) * (argc + 1));
+      gArgv = static_cast<char**>(SDL_malloc(sizeof(char*) * (argc + 1)));
       for (int i = 0; i <= argc; i++)
         gArgv[i] = argv[i];
     }

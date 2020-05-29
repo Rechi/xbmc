@@ -157,7 +157,7 @@ static CEvent screenChangeEvent;
   //if we are about to switch to current screen
   //with current mode - don't do anything
   if(screenIdx == _screenIdx &&
-    mode == (UIScreenMode *)[[[UIScreen screens] objectAtIndex:screenIdx] currentMode])
+    mode == static_cast<UIScreenMode *>([[[UIScreen screens] objectAtIndex:screenIdx] currentMode]))
     return true;
 
   //put the params into a dict

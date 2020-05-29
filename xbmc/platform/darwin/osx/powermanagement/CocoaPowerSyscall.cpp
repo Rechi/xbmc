@@ -287,7 +287,7 @@ void CCocoaPowerSyscall::OSPowerCallBack(void *refcon, io_service_t service, nat
 {
   CCocoaPowerSyscall  *ctx;
 
-  ctx = (CCocoaPowerSyscall*)refcon;
+  ctx = static_cast<CCocoaPowerSyscall*>(refcon);
 
   switch (msg_type)
   {
@@ -334,7 +334,7 @@ void CCocoaPowerSyscall::OSPowerSourceCallBack(void *refcon)
 {
   // Called whenever any power source is added, removed, or changes.
   // When on battery, we get called periodically as battery level changes.
-  CCocoaPowerSyscall  *ctx = (CCocoaPowerSyscall*)refcon;
+  CCocoaPowerSyscall  *ctx = static_cast<CCocoaPowerSyscall*>(refcon);
 
   CFTypeRef power_sources_info = IOPSCopyPowerSourcesInfo();
   CFArrayRef power_sources_list = IOPSCopyPowerSourcesList(power_sources_info);
@@ -348,12 +348,12 @@ void CCocoaPowerSyscall::OSPowerSourceCallBack(void *refcon)
 		description  = IOPSGetPowerSourceDescription(power_sources_info, power_source);
 
     // skip power sources that are not present (i.e. an absent second battery in a 2-battery machine)
-    if ((CFBooleanRef)CFDictionaryGetValue(description, CFSTR(kIOPSIsPresentKey)) == kCFBooleanFalse)
+    if (static_cast<CFBooleanRef>(CFDictionaryGetValue(description, CFSTR(kIOPSIsPresentKey))) == kCFBooleanFalse)
       continue;
 
-    if (stringsAreEqual((CFStringRef)CFDictionaryGetValue(description, CFSTR (kIOPSTransportTypeKey)), CFSTR (kIOPSInternalType)))
+    if (stringsAreEqual(static_cast<CFStringRef>(CFDictionaryGetValue(description, CFSTR (kIOPSTransportTypeKey))), CFSTR (kIOPSInternalType)))
     {
-      CFStringRef currentState = (CFStringRef)CFDictionaryGetValue(description, CFSTR (kIOPSPowerSourceStateKey));
+      CFStringRef currentState = static_cast<CFStringRef>(CFDictionaryGetValue(description, CFSTR (kIOPSPowerSourceStateKey)));
 
       if (stringsAreEqual (currentState, CFSTR (kIOPSACPowerValue)))
       {
@@ -366,14 +366,14 @@ void CCocoaPowerSyscall::OSPowerSourceCallBack(void *refcon)
         CFNumberRef cf_number_ref;
         int32_t curCapacity, maxCapacity;
 
-        cf_number_ref = (CFNumberRef)CFDictionaryGetValue(description, CFSTR(kIOPSCurrentCapacityKey));
+        cf_number_ref = static_cast<CFNumberRef>(CFDictionaryGetValue(description, CFSTR(kIOPSCurrentCapacityKey)));
         CFNumberGetValue(cf_number_ref, kCFNumberSInt32Type, &curCapacity);
 
-        cf_number_ref = (CFNumberRef)CFDictionaryGetValue(description, CFSTR(kIOPSMaxCapacityKey));
+        cf_number_ref = static_cast<CFNumberRef>(CFDictionaryGetValue(description, CFSTR(kIOPSMaxCapacityKey)));
         CFNumberGetValue(cf_number_ref, kCFNumberSInt32Type, &maxCapacity);
 
         ctx->m_OnBattery = true;
-        ctx->m_BatteryPercent = (int)((double)curCapacity/(double)maxCapacity * 100);
+        ctx->m_BatteryPercent = static_cast<int>(static_cast<double>(curCapacity)/static_cast<double>(maxCapacity) * 100);
       }
 		}
   }

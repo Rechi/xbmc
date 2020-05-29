@@ -270,7 +270,7 @@ bool CAndroidKey::onKeyboardEvent(AInputEvent *event)
         (state & AMETA_SHIFT_ON) ? "yes" : "no",
         (state & AMETA_SYM_ON) ? "yes" : "no");
 #endif
-      XBMC_Key((uint8_t)keycode, sym, modifiers, unicode, false);
+      XBMC_Key(static_cast<uint8_t>(keycode), sym, modifiers, unicode, false);
       break;
 
     case AKEY_EVENT_ACTION_UP:
@@ -281,7 +281,7 @@ bool CAndroidKey::onKeyboardEvent(AInputEvent *event)
         (state & AMETA_SHIFT_ON) ? "yes" : "no",
         (state & AMETA_SYM_ON) ? "yes" : "no");
 #endif
-      XBMC_Key((uint8_t)keycode, sym, modifiers, unicode, true);
+      XBMC_Key(static_cast<uint8_t>(keycode), sym, modifiers, unicode, true);
       break;
 
     case AKEY_EVENT_ACTION_MULTIPLE:
@@ -322,9 +322,9 @@ void CAndroidKey::XBMC_Key(uint8_t code, uint16_t key, uint16_t modifiers, uint1
   unsigned char type = up ? XBMC_KEYUP : XBMC_KEYDOWN;
   newEvent.type = type;
   newEvent.key.keysym.scancode = code;
-  newEvent.key.keysym.sym = (XBMCKey)key;
+  newEvent.key.keysym.sym = static_cast<XBMCKey>(key);
   newEvent.key.keysym.unicode = unicode;
-  newEvent.key.keysym.mod = (XBMCMod)modifiers;
+  newEvent.key.keysym.mod = static_cast<XBMCMod>(modifiers);
 
   //CXBMCApp::android_printf("XBMC_Key(%u, %u, 0x%04X, %d)", code, key, modifiers, up);
   winSystem->MessagePush(&newEvent);

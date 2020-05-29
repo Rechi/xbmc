@@ -41,7 +41,7 @@ void CEventLoop::run(IActivityHandler &activityHandler, IInputHandler &inputHand
   while (true)
   {
     // We will block forever waiting for events.
-    while ((ident = ALooper_pollAll(-1, NULL, &events, (void**)&source)) >= 0)
+    while ((ident = ALooper_pollAll(-1, NULL, &events, reinterpret_cast<void**>(&source))) >= 0)
     {
       // Process this event.
       if (source != NULL)
@@ -159,7 +159,7 @@ void CEventLoop::activityCallback(android_app* application, int32_t command)
   if (application == NULL || application->userData == NULL)
     return;
 
-  CEventLoop& eventLoop = *((CEventLoop*)application->userData);
+  CEventLoop& eventLoop = *(static_cast<CEventLoop*>(application->userData));
   eventLoop.processActivity(command);
 }
 
@@ -168,7 +168,7 @@ int32_t CEventLoop::inputCallback(android_app* application, AInputEvent* event)
   if (application == NULL || application->userData == NULL || event == NULL)
     return 0;
 
-  CEventLoop& eventLoop = *((CEventLoop*)application->userData);
+  CEventLoop& eventLoop = *(static_cast<CEventLoop*>(application->userData));
 
   return eventLoop.processInput(event);
 }

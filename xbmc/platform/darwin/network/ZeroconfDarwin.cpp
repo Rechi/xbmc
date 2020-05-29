@@ -97,7 +97,7 @@ bool CZeroconfDarwin::doPublishService(const std::string& fcr_identifier,
     CFRelease(netService);
     netService = NULL;
     CLog::Log(LOGERROR, "CZeroconfDarwin::doPublishService CFNetServiceRegister returned "
-      "(domain = %d, error = %" PRId64")", (int)error.domain, (int64_t)error.error);
+      "(domain = %d, error = %" PRId64")", static_cast<int>(error.domain), static_cast<int64_t>(error.error));
   } else
   {
     CSingleLock lock(m_data_guard);
@@ -166,7 +166,7 @@ void CZeroconfDarwin::registerCallback(CFNetServiceRef theService, CFStreamError
         break;
       default:
         CLog::Log(LOGERROR, "CZeroconfDarwin::registerCallback returned "
-          "(domain = %d, error = %" PRId64")", (int)error->domain, (int64_t)error->error);
+          "(domain = %d, error = %" PRId64")", static_cast<int>(error->domain), static_cast<int64_t>(error->error));
         break;
     }
     p_this->cancelRegistration(theService);

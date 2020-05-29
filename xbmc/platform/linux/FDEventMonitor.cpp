@@ -91,7 +91,7 @@ void CFDEventMonitor::RemoveFDs(const std::vector<int>& ids)
   {
     if (m_monitoredFDs.erase(ids[i]) != 1)
     {
-      CLog::Log(LOGERROR, "CFDEventMonitor::RemoveFDs - Tried to remove non-existing monitoredFD %d while removing %u FDs", ids[i], (unsigned)ids.size());
+      CLog::Log(LOGERROR, "CFDEventMonitor::RemoveFDs - Tried to remove non-existing monitoredFD %d while removing %u FDs", ids[i], static_cast<unsigned>(ids.size()));
     }
   }
 

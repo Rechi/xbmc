@@ -30,9 +30,9 @@ void CJNIXBMCVideoView::RegisterNatives(JNIEnv* env)
   {
     JNINativeMethod methods[] =
     {
-      {"_surfaceChanged", "(Landroid/view/SurfaceHolder;III)V", (void*)&CJNIXBMCVideoView::_surfaceChanged},
-      {"_surfaceCreated", "(Landroid/view/SurfaceHolder;)V", (void*)&CJNIXBMCVideoView::_surfaceCreated},
-      {"_surfaceDestroyed", "(Landroid/view/SurfaceHolder;)V", (void*)&CJNIXBMCVideoView::_surfaceDestroyed}
+      {"_surfaceChanged", "(Landroid/view/SurfaceHolder;III)V", reinterpret_cast<void*>(&CJNIXBMCVideoView::_surfaceChanged)},
+      {"_surfaceCreated", "(Landroid/view/SurfaceHolder;)V", reinterpret_cast<void*>(&CJNIXBMCVideoView::_surfaceCreated)},
+      {"_surfaceDestroyed", "(Landroid/view/SurfaceHolder;)V", reinterpret_cast<void*>(&CJNIXBMCVideoView::_surfaceDestroyed)}
     };
 
     env->RegisterNatives(cClass, methods, sizeof(methods)/sizeof(methods[0]));

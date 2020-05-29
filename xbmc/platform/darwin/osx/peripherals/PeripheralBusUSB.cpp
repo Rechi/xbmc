@@ -45,7 +45,7 @@ CPeripheralBusUSB::CPeripheralBusUSB(CPeripherals& manager) :
   //add a notification callback for attach event
   IOReturn result = IOServiceAddMatchingNotification(m_notify_port,
     kIOFirstMatchNotification, matching_dict,
-    (IOServiceMatchingCallback)DeviceAttachCallback, this, &m_attach_iterator);
+    reinterpret_cast<IOServiceMatchingCallback>(DeviceAttachCallback), this, &m_attach_iterator);
   if (result == kIOReturnSuccess)
   {
     //call the callback to 'arm' the notification
@@ -102,7 +102,7 @@ void CPeripheralBusUSB::DeviceDetachCallback(void *refCon, io_service_t service,
 {
   if (messageType == kIOMessageServiceIsTerminated)
   {
-    USBDevicePrivateData *privateDataRef = (USBDevicePrivateData*)refCon;
+    USBDevicePrivateData *privateDataRef = static_cast<USBDevicePrivateData*>(refCon);
 
     std::vector<PeripheralScanResult>::iterator it = privateDataRef->refCon->m_scan_results.m_results.begin();
     while(it != privateDataRef->refCon->m_scan_results.m_results.end())
@@ -148,7 +148,7 @@ void CPeripheralBusUSB::DeviceAttachCallback(CPeripheralBusUSB* refCon, io_itera
     IOUSBDeviceInterface **deviceInterface;
     // Use the plugin interface to retrieve the device interface.
     result = (*devicePlugin)->QueryInterface(devicePlugin,
-      CFUUIDGetUUIDBytes(kIOUSBDeviceInterfaceID), (LPVOID*)&deviceInterface);
+      CFUUIDGetUUIDBytes(kIOUSBDeviceInterfaceID), reinterpret_cast<LPVOID*>(&deviceInterface));
     if (result != kIOReturnSuccess)
     {
       IODestroyPlugInInterface(devicePlugin);
@@ -189,7 +189,7 @@ void CPeripheralBusUSB::DeviceAttachCallback(CPeripheralBusUSB* refCon, io_itera
       }
       IOUSBInterfaceInterface** interfaceInterface;
       result = (*interfacePlugin)->QueryInterface(interfacePlugin,
-        CFUUIDGetUUIDBytes(kIOUSBInterfaceInterfaceID), (void**)&interfaceInterface);
+        CFUUIDGetUUIDBytes(kIOUSBInterfaceInterfaceID), reinterpret_cast<void**>(&interfaceInterface));
       if (result != kIOReturnSuccess)
       {
         IODestroyPlugInInterface(interfacePlugin);
@@ -224,8 +224,8 @@ void CPeripheralBusUSB::DeviceAttachCallback(CPeripheralBusUSB* refCon, io_itera
           kresult = IORegistryEntryGetParentEntry(usbInterface, kIOServicePlane, &parent);
           if (kresult == KERN_SUCCESS)
           {
-            deviceFilePathAsCFString = (CFStringRef)IORegistryEntrySearchCFProperty(parent,
-              kIOServicePlane, CFSTR(kIOCalloutDeviceKey), kCFAllocatorDefault, kIORegistryIterateRecursively);
+            deviceFilePathAsCFString = static_cast<CFStringRef>(IORegistryEntrySearchCFProperty(parent,
+              kIOServicePlane, CFSTR(kIOCalloutDeviceKey), kCFAllocatorDefault, kIORegistryIterateRecursively));
             if (deviceFilePathAsCFString)
             {
               // Convert the path from a CFString to a std::string
@@ -253,7 +253,7 @@ void CPeripheralBusUSB::DeviceAttachCallback(CPeripheralBusUSB* refCon, io_itera
           result = IOServiceAddInterestNotification(refCon->m_notify_port,
             usbDevice,                      // service
             kIOGeneralInterest,             // interestType
-            (IOServiceInterestCallback)DeviceDetachCallback, // callback
+            static_cast<IOServiceInterestCallback>(DeviceDetachCallback), // callback
             privateDataRef,                 // refCon
             &privateDataRef->notification); // notification
 

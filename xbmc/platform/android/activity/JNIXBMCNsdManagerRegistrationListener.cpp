@@ -47,10 +47,10 @@ void CJNIXBMCNsdManagerRegistrationListener::RegisterNatives(JNIEnv* env)
   {
     JNINativeMethod methods[] =
     {
-      {"_onRegistrationFailed", "(Landroid/net/nsd/NsdServiceInfo;I)V", (void*)&CJNIXBMCNsdManagerRegistrationListener::_onRegistrationFailed},
-      {"_onServiceRegistered", "(Landroid/net/nsd/NsdServiceInfo;)V", (void*)&CJNIXBMCNsdManagerRegistrationListener::_onServiceRegistered},
-      {"_onServiceUnregistered", "(Landroid/net/nsd/NsdServiceInfo;)V", (void*)&CJNIXBMCNsdManagerRegistrationListener::_onServiceUnregistered},
-      {"_onUnregistrationFailed", "(Landroid/net/nsd/NsdServiceInfo;I)V", (void*)&CJNIXBMCNsdManagerRegistrationListener::_onUnregistrationFailed},
+      {"_onRegistrationFailed", "(Landroid/net/nsd/NsdServiceInfo;I)V", reinterpret_cast<void*>(&CJNIXBMCNsdManagerRegistrationListener::_onRegistrationFailed)},
+      {"_onServiceRegistered", "(Landroid/net/nsd/NsdServiceInfo;)V", reinterpret_cast<void*>(&CJNIXBMCNsdManagerRegistrationListener::_onServiceRegistered)},
+      {"_onServiceUnregistered", "(Landroid/net/nsd/NsdServiceInfo;)V", reinterpret_cast<void*>(&CJNIXBMCNsdManagerRegistrationListener::_onServiceUnregistered)},
+      {"_onUnregistrationFailed", "(Landroid/net/nsd/NsdServiceInfo;I)V", reinterpret_cast<void*>(&CJNIXBMCNsdManagerRegistrationListener::_onUnregistrationFailed)},
     };
 
     env->RegisterNatives(cClass, methods, sizeof(methods)/sizeof(methods[0]));
