@@ -340,7 +340,7 @@ static void GenerateMainCategoryListing(const CURL& path, const VECADDONS& addon
   std::set<TYPE> uncategorized;
   for (unsigned int i = ADDON_UNKNOWN + 1; i < ADDON_MAX - 1; ++i)
   {
-    const TYPE type = (TYPE)i;
+    const TYPE type = static_cast<TYPE>(i);
     /*
      * Check and prevent insert for this cases:
      * - By a provider, look and feel, dependency and game becomes given to

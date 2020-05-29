@@ -113,7 +113,7 @@ ssize_t CFileCDDA::Read(void* lpBuf, size_t uiBufSize)
     uiBufSize = SSIZE_MAX;
 
   // limit number of sectors that fits in buffer by m_iSectorCount
-  int iSectorCount = std::min((int)uiBufSize / CDIO_CD_FRAMESIZE_RAW, m_iSectorCount);
+  int iSectorCount = std::min(static_cast<int>(uiBufSize) / CDIO_CD_FRAMESIZE_RAW, m_iSectorCount);
 
   if (iSectorCount <= 0)
     return -1;
@@ -158,7 +158,7 @@ int64_t CFileCDDA::Seek(int64_t iFilePosition, int iWhence /*=SEEK_SET*/)
   if (!m_pCdIo)
     return -1;
 
-  lsn_t lsnPosition = (int)iFilePosition / CDIO_CD_FRAMESIZE_RAW;
+  lsn_t lsnPosition = static_cast<int>(iFilePosition) / CDIO_CD_FRAMESIZE_RAW;
 
   switch (iWhence)
   {
@@ -178,7 +178,7 @@ int64_t CFileCDDA::Seek(int64_t iFilePosition, int iWhence /*=SEEK_SET*/)
     return -1;
   }
 
-  return ((int64_t)(m_lsnCurrent -m_lsnStart)*CDIO_CD_FRAMESIZE_RAW);
+  return (static_cast<int64_t>(m_lsnCurrent -m_lsnStart)*CDIO_CD_FRAMESIZE_RAW);
 }
 
 void CFileCDDA::Close()
@@ -195,7 +195,7 @@ int64_t CFileCDDA::GetPosition()
   if (!m_pCdIo)
     return 0;
 
-  return ((int64_t)(m_lsnCurrent -m_lsnStart)*CDIO_CD_FRAMESIZE_RAW);
+  return (static_cast<int64_t>(m_lsnCurrent -m_lsnStart)*CDIO_CD_FRAMESIZE_RAW);
 }
 
 int64_t CFileCDDA::GetLength()
@@ -203,7 +203,7 @@ int64_t CFileCDDA::GetLength()
   if (!m_pCdIo)
     return 0;
 
-  return ((int64_t)(m_lsnEnd -m_lsnStart)*CDIO_CD_FRAMESIZE_RAW);
+  return (static_cast<int64_t>(m_lsnEnd -m_lsnStart)*CDIO_CD_FRAMESIZE_RAW);
 }
 
 bool CFileCDDA::IsValidFile(const CURL& url)

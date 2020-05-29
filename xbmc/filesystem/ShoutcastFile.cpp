@@ -180,7 +180,7 @@ int CShoutcastFile::IoControl(EIoControl control, void* payload)
 {
   if (control == IOCTRL_SET_CACHE && m_cacheReader == nullptr)
   {
-    m_cacheReader = (CFileCache*)payload;
+    m_cacheReader = static_cast<CFileCache*>(payload);
     Create();
   }
 

@@ -69,7 +69,7 @@ public:
     if (m_time == 0)
       return 0;
 
-    return (unsigned)(1000 * (m_size / (m_time + time_bias)));
+    return static_cast<unsigned>(1000 * (m_size / (m_time + time_bias)));
   }
 
 private:
@@ -474,11 +474,11 @@ ssize_t CFileCache::Read(void* lpBuf, size_t uiBufSize)
 
 retry:
   // attempt to read
-  iRc = m_pCache->ReadFromCache((char *)lpBuf, uiBufSize);
+  iRc = m_pCache->ReadFromCache(static_cast<char *>(lpBuf), uiBufSize);
   if (iRc > 0)
   {
     m_readPos += iRc;
-    return (int)iRc;
+    return static_cast<int>(iRc);
   }
 
   if (iRc == CACHE_RC_WOULD_BLOCK)
@@ -499,7 +499,7 @@ retry:
     return 0;
 
   // unknown error code
-  CLog::Log(LOGERROR, "%s - cache strategy returned unknown error code %d", __FUNCTION__, (int)iRc);
+  CLog::Log(LOGERROR, "%s - cache strategy returned unknown error code %d", __FUNCTION__, static_cast<int>(iRc));
   return -1;
 }
 
@@ -531,7 +531,7 @@ int64_t CFileCache::Seek(int64_t iFilePosition, int iWhence)
       return m_nSeekResult;
 
     /* never request closer to end than 2k, speeds up tag reading */
-    m_seekPos = std::min(iTarget, std::max((int64_t)0, m_fileSize - m_chunkSize));
+    m_seekPos = std::min(iTarget, std::max(static_cast<int64_t>(0), m_fileSize - m_chunkSize));
 
     m_seekEvent.Set();
     while (!m_seekEnded.WaitMSec(100))
@@ -545,7 +545,7 @@ int64_t CFileCache::Seek(int64_t iFilePosition, int iWhence)
     if(m_seekPos < iTarget)
     {
       CLog::Log(LOGDEBUG,"%s - waiting for position %" PRId64".", __FUNCTION__, iTarget);
-      if(m_pCache->WaitForData((unsigned)(iTarget - m_seekPos), 10000) < iTarget - m_seekPos)
+      if(m_pCache->WaitForData(static_cast<unsigned>(iTarget - m_seekPos), 10000) < iTarget - m_seekPos)
       {
         CLog::Log(LOGWARNING,"%s - failed to get remaining data", __FUNCTION__);
         return -1;
@@ -602,7 +602,7 @@ int CFileCache::IoControl(EIoControl request, void* param)
 {
   if (request == IOCTRL_CACHE_STATUS)
   {
-    SCacheStatus* status = (SCacheStatus*)param;
+    SCacheStatus* status = static_cast<SCacheStatus*>(param);
     status->forward = m_pCache->WaitForData(0, 0);
     status->maxrate = m_writeRate;
     status->currate = m_writeRateActual;
@@ -613,7 +613,7 @@ int CFileCache::IoControl(EIoControl request, void* param)
 
   if (request == IOCTRL_CACHE_SETRATE)
   {
-    m_writeRate = *(unsigned*)param;
+    m_writeRate = *static_cast<unsigned*>(param);
     return 0;
   }
 
