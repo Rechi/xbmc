@@ -193,7 +193,7 @@ std::string CCoreAudioDevice::GetName() const
   if (ret != noErr)
   {
     CLog::Log(LOGERROR, "CCoreAudioDevice::GetName: "
-      "Unable to get device name - id: 0x%04x. Error = %s", (uint)m_DeviceId, GetError(ret).c_str());
+      "Unable to get device name - id: 0x%04x. Error = %s", static_cast<uint>(m_DeviceId), GetError(ret).c_str());
   }
   else
   {
@@ -266,7 +266,7 @@ UInt32 CCoreAudioDevice::GetTotalOutputChannels() const
   if (ret != noErr)
     return channels;
 
-  AudioBufferList* pList = (AudioBufferList*)malloc(size);
+  AudioBufferList* pList = static_cast<AudioBufferList*>(malloc(size));
   ret = AudioObjectGetPropertyData(m_DeviceId, &propertyAddress, 0, NULL, &size, pList);
   if (ret == noErr)
   {
@@ -277,7 +277,7 @@ UInt32 CCoreAudioDevice::GetTotalOutputChannels() const
   {
     CLog::Log(LOGERROR, "CCoreAudioDevice::GetTotalOutputChannels: "
       "Unable to get total device output channels - id: 0x%04x. Error = %s",
-      (uint)m_DeviceId, GetError(ret).c_str());
+      static_cast<uint>(m_DeviceId), GetError(ret).c_str());
   }
 
   free(pList);
@@ -302,7 +302,7 @@ UInt32 CCoreAudioDevice::GetNumChannelsOfStream(UInt32 streamIdx) const
   if (ret != noErr)
     return channels;
 
-  AudioBufferList* pList = (AudioBufferList*)malloc(size);
+  AudioBufferList* pList = static_cast<AudioBufferList*>(malloc(size));
   ret = AudioObjectGetPropertyData(m_DeviceId, &propertyAddress, 0, NULL, &size, pList);
   if (ret == noErr)
   {
@@ -313,7 +313,7 @@ UInt32 CCoreAudioDevice::GetNumChannelsOfStream(UInt32 streamIdx) const
   {
     CLog::Log(LOGERROR, "CCoreAudioDevice::GetNumChannelsOfStream: "
               "Unable to get number of stream output channels - id: 0x%04x. Error = %s",
-              (uint)m_DeviceId, GetError(ret).c_str());
+              static_cast<uint>(m_DeviceId), GetError(ret).c_str());
   }
 
   free(pList);
@@ -555,7 +555,7 @@ bool CCoreAudioDevice::GetPreferredChannelLayout(CCoreAudioChannelLayout& layout
   else
   {
     // Copy the result into the caller's instance
-    layout.CopyLayout(*((AudioChannelLayout*)pBuf));
+    layout.CopyLayout(*(static_cast<AudioChannelLayout*>(pBuf)));
   }
   free(pBuf);
   return (ret == noErr);
@@ -740,7 +740,7 @@ bool CCoreAudioDevice::SetNominalSampleRate(Float64 sampleRate)
   {
     CLog::Log(LOGERROR, "CCoreAudioDevice::SetNominalSampleRate: "
       "Unable to set current device sample rate to %0.0f. Error = %s",
-      (float)sampleRate, GetError(ret).c_str());
+      static_cast<float>(sampleRate), GetError(ret).c_str());
     return false;
   }
   if (m_SampleRateRestore == 0.0f)

@@ -320,7 +320,7 @@ bool CAESinkAUDIOTRACK::Initialize(AEAudioFormat &format, std::string &device)
   {
      // prefer best match or alternatively something that divides nicely and
      // is not too far away
-     uint32_t d = std::abs((int)m_format.m_sampleRate - (int)s) + 8 * (s > m_format.m_sampleRate ? (s % m_format.m_sampleRate) : (m_format.m_sampleRate % s));
+     uint32_t d = std::abs(static_cast<int>(m_format.m_sampleRate) - static_cast<int>(s)) + 8 * (s > m_format.m_sampleRate ? (s % m_format.m_sampleRate) : (m_format.m_sampleRate % s));
      if (d < distance)
      {
        m_sink_sampleRate = s;
@@ -414,7 +414,7 @@ bool CAESinkAUDIOTRACK::Initialize(AEAudioFormat &format, std::string &device)
       return false;
     }
 
-    m_min_buffer_size = (unsigned int) min_buffer;
+    m_min_buffer_size = static_cast<unsigned int>(min_buffer);
     CLog::Log(LOGDEBUG, "Minimum size we need for stream: %u", m_min_buffer_size);
     double rawlength_in_seconds = 0.0;
     int multiplier = 1;
@@ -584,14 +584,14 @@ void CAESinkAUDIOTRACK::GetDelay(AEDelayStatus& status)
   // return a 32bit "int" that you should "interpret as unsigned."  As such,
   // for wrap safety, we need to do all ops on it in 32bit integer math.
 
-  uint32_t head_pos = (uint32_t)m_at_jni->getPlaybackHeadPosition();
+  uint32_t head_pos = static_cast<uint32_t>(m_at_jni->getPlaybackHeadPosition());
 
   // Wraparound
-  if ((uint32_t)(m_headPos & UINT64_LOWER_BYTES) > head_pos) // need to compute wraparound
+  if (static_cast<uint32_t>(m_headPos & UINT64_LOWER_BYTES) > head_pos) // need to compute wraparound
     m_headPos += (1ULL << 32); // add wraparound, e.g. 0x0000 FFFF FFFF -> 0x0001 FFFF FFFF
   // clear lower 32 bit values, e.g. 0x0001 FFFF FFFF -> 0x0001 0000 0000
   // and add head_pos which wrapped around, e.g. 0x0001 0000 0000 -> 0x0001 0000 0004
-  m_headPos = (m_headPos & UINT64_UPPER_BYTES) | (uint64_t)head_pos;
+  m_headPos = (m_headPos & UINT64_UPPER_BYTES) | static_cast<uint64_t>(head_pos);
 
   double gone = static_cast<double>(m_headPos) / m_sink_sampleRate;
 
@@ -733,7 +733,7 @@ unsigned int CAESinkAUDIOTRACK::AddPackets(uint8_t **data, unsigned int frames, 
     int size_left = size;
     while (written < size)
     {
-      loop_written = AudioTrackWrite((char*)out_buf, 0, size_left);
+      loop_written = AudioTrackWrite(reinterpret_cast<char*>(out_buf), 0, size_left);
       written += loop_written;
       size_left -= loop_written;
 
@@ -784,7 +784,7 @@ unsigned int CAESinkAUDIOTRACK::AddPackets(uint8_t **data, unsigned int frames, 
         }
       }
       else
-        m_duration_written += ((double) loop_written / m_format.m_frameSize) / m_format.m_sampleRate;
+        m_duration_written += (static_cast<double>(loop_written) / m_format.m_frameSize) / m_format.m_sampleRate;
 
       // just try again to care for fragmentation
       if (written < size)

@@ -15,7 +15,7 @@ std::string GetError(OSStatus error)
 {
   char buffer[128];
 
-  *(UInt32 *)(buffer + 1) = CFSwapInt32HostToBig(error);
+  *reinterpret_cast<UInt32 *>(buffer + 1) = CFSwapInt32HostToBig(error);
   if (isprint(buffer[1]) && isprint(buffer[2]) &&
       isprint(buffer[3]) && isprint(buffer[4]))
   {
@@ -25,7 +25,7 @@ std::string GetError(OSStatus error)
   else
   {
     // no, format it as an integer
-    sprintf(buffer, "%d", (int)error);
+    sprintf(buffer, "%d", static_cast<int>(error));
   }
 
   return std::string(buffer);
@@ -34,10 +34,10 @@ std::string GetError(OSStatus error)
 const char* StreamDescriptionToString(AudioStreamBasicDescription desc, std::string &str)
 {
   char fourCC[5] = {
-    (char)((desc.mFormatID >> 24) & 0xFF),
-    (char)((desc.mFormatID >> 16) & 0xFF),
-    (char)((desc.mFormatID >>  8) & 0xFF),
-    (char) (desc.mFormatID        & 0xFF),
+    static_cast<char>((desc.mFormatID >> 24) & 0xFF),
+    static_cast<char>((desc.mFormatID >> 16) & 0xFF),
+    static_cast<char>((desc.mFormatID >>  8) & 0xFF),
+    static_cast<char>(desc.mFormatID        & 0xFF),
     0
   };
 
@@ -58,7 +58,7 @@ const char* StreamDescriptionToString(AudioStreamBasicDescription desc, std::str
             << ((desc.mFormatFlags & kAudioFormatFlagIsFloat) ? "Floating Point " : "Signed Integer ")
             << ((desc.mFormatFlags & kAudioFormatFlagIsBigEndian) ? "BE" : "LE")
             << " ("
-            << (UInt32)desc.mSampleRate
+            << static_cast<UInt32>(desc.mSampleRate)
             << "Hz)";
       str = sstr.str();
       break;
@@ -68,7 +68,7 @@ const char* StreamDescriptionToString(AudioStreamBasicDescription desc, std::str
             << "] "
             << ((desc.mFormatFlags & kAudioFormatFlagIsBigEndian) ? "BE" : "LE")
             << " AC-3/DTS ("
-            << (UInt32)desc.mSampleRate
+            << static_cast<UInt32>(desc.mSampleRate)
             << "Hz)";
       str = sstr.str();
       break;
@@ -78,7 +78,7 @@ const char* StreamDescriptionToString(AudioStreamBasicDescription desc, std::str
             << "] AC-3/DTS for S/PDIF "
             << ((desc.mFormatFlags & kAudioFormatFlagIsBigEndian) ? "BE" : "LE")
             << " ("
-            << (UInt32)desc.mSampleRate
+            << static_cast<UInt32>(desc.mSampleRate)
             << "Hz)";
       str = sstr.str();
       break;
