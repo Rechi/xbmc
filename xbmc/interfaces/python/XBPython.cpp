@@ -115,7 +115,7 @@ void XBPython::OnPlayBackStarted(const CFileItem &file)
   for (auto& it : tmp)
   {
     if (CHECK_FOR_ENTRY(m_vecPlayerCallbackList, it))
-      ((IPlayerCallback*)it)->OnPlayBackStarted(file);
+      (static_cast<IPlayerCallback*>(it))->OnPlayBackStarted(file);
   }
 }
 
@@ -127,7 +127,7 @@ void XBPython::OnAVStarted(const CFileItem &file)
   for (auto& it : tmp)
   {
     if (CHECK_FOR_ENTRY(m_vecPlayerCallbackList, it))
-      ((IPlayerCallback*)it)->OnAVStarted(file);
+      (static_cast<IPlayerCallback*>(it))->OnAVStarted(file);
   }
 }
 
@@ -139,7 +139,7 @@ void XBPython::OnAVChange()
   for (auto& it : tmp)
   {
     if (CHECK_FOR_ENTRY(m_vecPlayerCallbackList, it))
-      ((IPlayerCallback*)it)->OnAVChange();
+      (static_cast<IPlayerCallback*>(it))->OnAVChange();
   }
 }
 
@@ -151,7 +151,7 @@ void XBPython::OnPlayBackPaused()
   for (auto& it : tmp)
   {
     if (CHECK_FOR_ENTRY(m_vecPlayerCallbackList, it))
-      ((IPlayerCallback*)it)->OnPlayBackPaused();
+      (static_cast<IPlayerCallback*>(it))->OnPlayBackPaused();
   }
 }
 
@@ -163,7 +163,7 @@ void XBPython::OnPlayBackResumed()
   for (auto& it : tmp)
   {
     if (CHECK_FOR_ENTRY(m_vecPlayerCallbackList, it))
-      ((IPlayerCallback*)it)->OnPlayBackResumed();
+      (static_cast<IPlayerCallback*>(it))->OnPlayBackResumed();
   }
 }
 
@@ -175,7 +175,7 @@ void XBPython::OnPlayBackEnded()
   for (auto& it : tmp)
   {
     if (CHECK_FOR_ENTRY(m_vecPlayerCallbackList, it))
-      ((IPlayerCallback*)it)->OnPlayBackEnded();
+      (static_cast<IPlayerCallback*>(it))->OnPlayBackEnded();
   }
 }
 
@@ -187,7 +187,7 @@ void XBPython::OnPlayBackStopped()
   for (auto& it : tmp)
   {
     if (CHECK_FOR_ENTRY(m_vecPlayerCallbackList, it))
-      ((IPlayerCallback*)it)->OnPlayBackStopped();
+      (static_cast<IPlayerCallback*>(it))->OnPlayBackStopped();
   }
 }
 
@@ -199,7 +199,7 @@ void XBPython::OnPlayBackError()
   for (auto& it : tmp)
   {
     if (CHECK_FOR_ENTRY(m_vecPlayerCallbackList, it))
-      ((IPlayerCallback*)it)->OnPlayBackError();
+      (static_cast<IPlayerCallback*>(it))->OnPlayBackError();
   }
 }
 
@@ -211,7 +211,7 @@ void XBPython::OnPlayBackSpeedChanged(int iSpeed)
   for (auto& it : tmp)
   {
     if (CHECK_FOR_ENTRY(m_vecPlayerCallbackList, it))
-      ((IPlayerCallback*)it)->OnPlayBackSpeedChanged(iSpeed);
+      (static_cast<IPlayerCallback*>(it))->OnPlayBackSpeedChanged(iSpeed);
   }
 }
 
@@ -223,7 +223,7 @@ void XBPython::OnPlayBackSeek(int64_t iTime, int64_t seekOffset)
   for (auto& it : tmp)
   {
     if (CHECK_FOR_ENTRY(m_vecPlayerCallbackList, it))
-      ((IPlayerCallback*)it)->OnPlayBackSeek(iTime, seekOffset);
+      (static_cast<IPlayerCallback*>(it))->OnPlayBackSeek(iTime, seekOffset);
   }
 }
 
@@ -235,7 +235,7 @@ void XBPython::OnPlayBackSeekChapter(int iChapter)
   for (auto& it : tmp)
   {
     if (CHECK_FOR_ENTRY(m_vecPlayerCallbackList, it))
-      ((IPlayerCallback*)it)->OnPlayBackSeekChapter(iChapter);
+      (static_cast<IPlayerCallback*>(it))->OnPlayBackSeekChapter(iChapter);
   }
 }
 
@@ -247,7 +247,7 @@ void XBPython::OnQueueNextItem()
   for (auto& it : tmp)
   {
     if (CHECK_FOR_ENTRY(m_vecPlayerCallbackList, it))
-      ((IPlayerCallback*)it)->OnQueueNextItem();
+      (static_cast<IPlayerCallback*>(it))->OnQueueNextItem();
   }
 }
 
@@ -463,7 +463,7 @@ void XBPython::Finalize()
     // set the m_bInitialized flag before releasing the lock. This will prevent
     // Other methods that rely on this flag from an incorrect interpretation.
     m_bInitialized    = false;
-    PyThreadState* curTs = (PyThreadState*)m_mainThreadState;
+    PyThreadState* curTs = static_cast<PyThreadState*>(m_mainThreadState);
     m_mainThreadState = NULL; // clear the main thread state before releasing the lock
     {
       CSingleExit exit(m_critSection);
@@ -595,7 +595,7 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
     // lock already exists and we need to lock it as PyEval_InitThreads
     // would not do that in that case.
     if (PyEval_ThreadsInitialized() && !PyGILState_Check())
-      PyEval_RestoreThread((PyThreadState*)m_mainThreadState);
+      PyEval_RestoreThread(static_cast<PyThreadState*>(m_mainThreadState));
     else
       PyEval_InitThreads();
     const wchar_t* python_argv[1] = {L""};

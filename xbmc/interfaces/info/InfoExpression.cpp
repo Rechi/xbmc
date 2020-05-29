@@ -144,7 +144,7 @@ void InfoExpression::OperatorPop(std::stack<operator_t> &operator_stack, bool &i
   {
     // At this point, it can only be OPERATOR_AND or OPERATOR_OR
     if (invert)
-      op2 = (operator_t) (OPERATOR_AND ^ OPERATOR_OR ^ op2);
+      op2 = static_cast<operator_t>(OPERATOR_AND ^ OPERATOR_OR ^ op2);
     node_type_t new_type = op2 == OPERATOR_AND ? NODE_AND : NODE_OR;
 
     InfoSubexpressionPtr right = nodes.top();
@@ -212,7 +212,7 @@ bool InfoExpression::Parse(const std::string &expression)
 
   char c;
   // Skip leading whitespace - don't want it to count as an operand if that's all there is
-  while (isspace((unsigned char)(c=*s)))
+  while (isspace(static_cast<unsigned char>(c=*s)))
     s++;
 
   while ((c = *s++) != '\0')
@@ -266,7 +266,7 @@ bool InfoExpression::Parse(const std::string &expression)
       if (c == '+' || c == '|')
         after_binaryoperator = true;
       // Skip trailing whitespace - don't want it to count as an operand if that's all there is
-      while (isspace((unsigned char)(c=*s))) s++;
+      while (isspace(static_cast<unsigned char>(c=*s))) s++;
     }
     else
     {

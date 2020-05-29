@@ -477,7 +477,7 @@ namespace XBMCAddon
     {
       XBMC_TRACE;
       DelayedCallGuard dg;
-      return g_application.StartServer((CApplication::ESERVERS)iTyp, bStart != 0, bWait != 0);
+      return g_application.StartServer(static_cast<CApplication::ESERVERS>(iTyp), bStart != 0, bWait != 0);
     }
 
     void audioSuspend()

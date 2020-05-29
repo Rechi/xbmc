@@ -334,7 +334,7 @@ namespace XBMCAddon
           else if (key == "userrating")
             videotag.m_iUserRating = strtol(value.c_str(), nullptr, 10);
           else if (key == "size")
-            item->m_dwSize = (int64_t)strtoll(value.c_str(), nullptr, 10);
+            item->m_dwSize = static_cast<int64_t>(strtoll(value.c_str(), nullptr, 10));
           else if (key == "watched") // backward compat - do we need it?
             videotag.SetPlayCount(strtol(value.c_str(), nullptr, 10));
           else if (key == "playcount")

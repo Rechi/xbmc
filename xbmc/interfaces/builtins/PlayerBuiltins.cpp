@@ -137,7 +137,7 @@ static int PlayerControl(const std::vector<std::string>& params)
 
     strFrames = params[0].substr(13);
     StringUtils::TrimRight(strFrames, ")");
-    float frames = (float) atof(strFrames.c_str());
+    float frames = static_cast<float>(atof(strFrames.c_str()));
     g_application.GetAppPlayer().FrameAdvance(frames);
   }
   else if (paramlow =="rewind" || paramlow == "forward")
@@ -219,7 +219,7 @@ static int PlayerControl(const std::vector<std::string>& params)
       // Don't bother checking the argument: an invalid arg will do seek(0)
       offset = params[0].substr(15);
       StringUtils::TrimRight(offset, ")");
-      float offsetpercent = (float) atof(offset.c_str());
+      float offsetpercent = static_cast<float>(atof(offset.c_str()));
       if (offsetpercent < 0 || offsetpercent > 100)
         CLog::Log(LOGERROR,"PlayerControl(seekpercentage(n)) argument, %f, must be 0-100", offsetpercent);
       else if (g_application.GetAppPlayer().IsPlaying())
@@ -327,7 +327,7 @@ static int PlayerControl(const std::vector<std::string>& params)
     }
 
     // send messages so now playing window can get updated
-    CGUIMessage msg(GUI_MSG_PLAYLISTPLAYER_REPEAT, 0, 0, iPlaylist, (int)state);
+    CGUIMessage msg(GUI_MSG_PLAYLISTPLAYER_REPEAT, 0, 0, iPlaylist, static_cast<int>(state));
     CServiceBroker::GetGUI()->GetWindowManager().SendThreadMessage(msg);
   }
   else if (StringUtils::StartsWithNoCase(params[0], "resumelivetv"))
