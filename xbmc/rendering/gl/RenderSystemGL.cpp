@@ -36,7 +36,7 @@ bool CRenderSystemGL::InitRenderSystem()
   // Get the GL version number
   m_RenderVersionMajor = 0;
   m_RenderVersionMinor = 0;
-  const char* ver = (const char*)glGetString(GL_VERSION);
+  const char* ver = reinterpret_cast<const char*>(glGetString(GL_VERSION));
   if (ver != 0)
   {
     sscanf(ver, "%d.%d", &m_RenderVersionMajor, &m_RenderVersionMinor);
@@ -57,14 +57,14 @@ bool CRenderSystemGL::InitRenderSystem()
       GLint i;
       for (i = 0; i < n; i++)
       {
-        m_RenderExtensions += (const char*) glGetStringi(GL_EXTENSIONS, i);
+        m_RenderExtensions += reinterpret_cast<const char*>(glGetStringi(GL_EXTENSIONS, i));
         m_RenderExtensions += " ";
       }
     }
   }
   else
   {
-    auto extensions = (const char*) glGetString(GL_EXTENSIONS);
+    auto extensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
     if (extensions)
     {
       m_RenderExtensions += extensions;
@@ -72,7 +72,7 @@ bool CRenderSystemGL::InitRenderSystem()
   }
   m_RenderExtensions += " ";
 
-  ver = (const char*)glGetString(GL_SHADING_LANGUAGE_VERSION);
+  ver = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
   if (ver)
   {
     sscanf(ver, "%d.%d", &m_glslMajor, &m_glslMinor);
@@ -86,12 +86,12 @@ bool CRenderSystemGL::InitRenderSystem()
   LogGraphicsInfo();
 
   // Get our driver vendor and renderer
-  const char* tmpVendor = (const char*) glGetString(GL_VENDOR);
+  const char* tmpVendor = reinterpret_cast<const char*>(glGetString(GL_VENDOR));
   m_RenderVendor.clear();
   if (tmpVendor != NULL)
     m_RenderVendor = tmpVendor;
 
-  const char* tmpRenderer = (const char*) glGetString(GL_RENDERER);
+  const char* tmpRenderer = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
   m_RenderRenderer.clear();
   if (tmpRenderer != NULL)
     m_RenderRenderer = tmpRenderer;
@@ -164,12 +164,12 @@ bool CRenderSystemGL::ResetRenderSystem(int width, int height)
     GLenum error = glGetError();
     if (error != GL_NO_ERROR)
     {
-      CLog::Log(LOGERROR, "ResetRenderSystem() GL_MAX_TEXTURE_IMAGE_UNITS returned error %i", (int)error);
+      CLog::Log(LOGERROR, "ResetRenderSystem() GL_MAX_TEXTURE_IMAGE_UNITS returned error %i", static_cast<int>(error));
       maxtex = 3;
     }
     else if (maxtex < 1 || maxtex > 32)
     {
-      CLog::Log(LOGERROR, "ResetRenderSystem() GL_MAX_TEXTURE_IMAGE_UNITS returned invalid value %i", (int)maxtex);
+      CLog::Log(LOGERROR, "ResetRenderSystem() GL_MAX_TEXTURE_IMAGE_UNITS returned invalid value %i", static_cast<int>(maxtex));
       maxtex = 3;
     }
 
@@ -348,8 +348,8 @@ void CRenderSystemGL::SetCameraPosition(const CPoint &camera, int screenWidth, i
   CPoint offset = camera - CPoint(screenWidth*0.5f, screenHeight*0.5f);
 
 
-  float w = (float)m_viewPort[2]*0.5f;
-  float h = (float)m_viewPort[3]*0.5f;
+  float w = static_cast<float>(m_viewPort[2])*0.5f;
+  float h = static_cast<float>(m_viewPort[3])*0.5f;
 
   glMatrixModview->LoadIdentity();
   glMatrixModview->Translatef(-(w + offset.x - stereoFactor), +(h + offset.y), 0);
@@ -420,8 +420,8 @@ void CRenderSystemGL::SetViewPort(const CRect& viewPort)
   if (!m_bRenderCreated)
     return;
 
-  glScissor((GLint) viewPort.x1, (GLint) (m_height - viewPort.y1 - viewPort.Height()), (GLsizei) viewPort.Width(), (GLsizei) viewPort.Height());
-  glViewport((GLint) viewPort.x1, (GLint) (m_height - viewPort.y1 - viewPort.Height()), (GLsizei) viewPort.Width(), (GLsizei) viewPort.Height());
+  glScissor(static_cast<GLint>(viewPort.x1), static_cast<GLint>(m_height - viewPort.y1 - viewPort.Height()), static_cast<GLsizei>(viewPort.Width()), static_cast<GLsizei>(viewPort.Height()));
+  glViewport(static_cast<GLint>(viewPort.x1), static_cast<GLint>(m_height - viewPort.y1 - viewPort.Height()), static_cast<GLsizei>(viewPort.Width()), static_cast<GLsizei>(viewPort.Height()));
   m_viewPort[0] = viewPort.x1;
   m_viewPort[1] = m_height - viewPort.y1 - viewPort.Height();
   m_viewPort[2] = viewPort.Width();
@@ -463,7 +463,7 @@ void CRenderSystemGL::SetScissors(const CRect &rect)
 
 void CRenderSystemGL::ResetScissors()
 {
-  SetScissors(CRect(0, 0, (float)m_width, (float)m_height));
+  SetScissors(CRect(0, 0, static_cast<float>(m_width), static_cast<float>(m_height)));
 }
 
 void CRenderSystemGL::GetGLSLVersion(int& major, int& minor)
