@@ -181,7 +181,8 @@ bool CPeripheral::Initialise(void)
   if (bReturn)
   {
     CLog::Log(LOGDEBUG, "%s - initialised peripheral on '%s' with %d features and %d sub devices",
-      __FUNCTION__, m_strLocation.c_str(), static_cast<int>(m_features.size()), static_cast<int>(m_subDevices.size()));
+              __FUNCTION__, m_strLocation.c_str(), static_cast<int>(m_features.size()),
+              static_cast<int>(m_subDevices.size()));
     m_bInitialised = true;
   }
 
@@ -448,7 +449,8 @@ bool CPeripheral::SetSetting(const std::string &strKey, const std::string &strVa
     else if ((*it).second.m_setting->GetType() == SettingType::Integer)
       bChanged = SetSetting(strKey, strValue.empty() ? 0 : atoi(strValue.c_str()));
     else if ((*it).second.m_setting->GetType() == SettingType::Number)
-      bChanged = SetSetting(strKey, static_cast<float>(strValue.empty() ? 0 : atof(strValue.c_str())));
+      bChanged =
+          SetSetting(strKey, static_cast<float>(strValue.empty() ? 0 : atof(strValue.c_str())));
     else if ((*it).second.m_setting->GetType() == SettingType::Boolean)
       bChanged = SetSetting(strKey, strValue == "1");
   }
