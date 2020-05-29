@@ -84,9 +84,9 @@ static void LoadTexture(GLenum target
 
   if (!alpha && !bgraSupported)
   {
-    pixelVector = static_cast<char *>(malloc(bytesPerLine * height));
+    pixelVector = static_cast<char*>(malloc(bytesPerLine * height));
 
-    const char *src = static_cast<const char*>(pixels);
+    const char* src = static_cast<const char*>(pixels);
     char *dst = pixelVector;
     for (int y = 0;y < height;++y)
     {
@@ -108,9 +108,9 @@ static void LoadTexture(GLenum target
   /** OpenGL ES does not support strided texture input. Make a copy without stride **/
   else if (stride != bytesPerLine)
   {
-    pixelVector = static_cast<char *>(malloc(bytesPerLine * height));
+    pixelVector = static_cast<char*>(malloc(bytesPerLine * height));
 
-    const char *src = static_cast<const char*>(pixels);
+    const char* src = static_cast<const char*>(pixels);
     char *dst = pixelVector;
     for (int y = 0;y < height;++y)
     {
@@ -138,16 +138,12 @@ static void LoadTexture(GLenum target
                 , pixelData);
 
   if(height < height2)
-    glTexSubImage2D( target, 0
-                   , 0, height, width, 1
-                   , externalFormat, GL_UNSIGNED_BYTE
-                   , static_cast<const unsigned char*>(pixelData) + stride * (height-1));
+    glTexSubImage2D(target, 0, 0, height, width, 1, externalFormat, GL_UNSIGNED_BYTE,
+                    static_cast<const unsigned char*>(pixelData) + stride * (height - 1));
 
   if(width  < width2)
-    glTexSubImage2D( target, 0
-                   , width, 0, 1, height
-                   , externalFormat, GL_UNSIGNED_BYTE
-                   , static_cast<const unsigned char*>(pixelData) + bytesPerPixel * (width-1));
+    glTexSubImage2D(target, 0, width, 0, 1, height, externalFormat, GL_UNSIGNED_BYTE,
+                    static_cast<const unsigned char*>(pixelData) + bytesPerPixel * (width - 1));
 
 #ifndef HAS_GLES
   glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
@@ -155,7 +151,7 @@ static void LoadTexture(GLenum target
 
   free(pixelVector);
 
-  *u = static_cast<GLfloat>(width)  / width2;
+  *u = static_cast<GLfloat>(width) / width2;
   *v = static_cast<GLfloat>(height) / height2;
 }
 
@@ -174,7 +170,7 @@ COverlayTextureGL::COverlayTextureGL(CDVDOverlayImage* o)
   else
   {
     m_pma  = false;
-    rgba   = reinterpret_cast<uint32_t*>(o->data);
+    rgba = reinterpret_cast<uint32_t*>(o->data);
     stride = o->linesize;
   }
 
@@ -209,7 +205,7 @@ COverlayTextureGL::COverlayTextureGL(CDVDOverlayImage* o)
     float center_x = (0.5f * o->width  + o->x) / o->source_width;
     float center_y = (0.5f * o->height + o->y) / o->source_height;
 
-    m_width  = static_cast<float>(o->width)  / o->source_width;
+    m_width = static_cast<float>(o->width) / o->source_width;
     m_height = static_cast<float>(o->height) / o->source_height;
     m_pos    = POSITION_RELATIVE;
 
@@ -224,9 +220,9 @@ COverlayTextureGL::COverlayTextureGL(CDVDOverlayImage* o)
   {
     m_align  = ALIGN_VIDEO;
     m_pos    = POSITION_ABSOLUTE;
-    m_x      = static_cast<float>(o->x);
-    m_y      = static_cast<float>(o->y);
-    m_width  = static_cast<float>(o->width);
+    m_x = static_cast<float>(o->x);
+    m_y = static_cast<float>(o->y);
+    m_width = static_cast<float>(o->width);
     m_height = static_cast<float>(o->height);
   }
 }
@@ -267,9 +263,9 @@ COverlayTextureGL::COverlayTextureGL(CDVDOverlaySpu* o)
 
   m_align  = ALIGN_VIDEO;
   m_pos    = POSITION_ABSOLUTE;
-  m_x      = static_cast<float>(min_x + o->x);
-  m_y      = static_cast<float>(min_y + o->y);
-  m_width  = static_cast<float>(max_x - min_x);
+  m_x = static_cast<float>(min_x + o->x);
+  m_y = static_cast<float>(min_y + o->y);
+  m_width = static_cast<float>(max_x - min_x);
   m_height = static_cast<float>(max_y - min_y);
   m_pma    = !!USE_PREMULTIPLIED_ALPHA;
 }
@@ -451,9 +447,12 @@ void COverlayGlyphGL::Render(SRenderState& state)
 
   vertices = &vecVertices[0];
 
-  glVertexAttribPointer(posLoc,  3, GL_FLOAT,         GL_FALSE, sizeof(VERTEX), reinterpret_cast<char*>(vertices) + offsetof(VERTEX, x));
-  glVertexAttribPointer(colLoc,  4, GL_UNSIGNED_BYTE, GL_TRUE,  sizeof(VERTEX), reinterpret_cast<char*>(vertices) + offsetof(VERTEX, r));
-  glVertexAttribPointer(tex0Loc, 2, GL_FLOAT,         GL_FALSE, sizeof(VERTEX), reinterpret_cast<char*>(vertices) + offsetof(VERTEX, u));
+  glVertexAttribPointer(posLoc, 3, GL_FLOAT, GL_FALSE, sizeof(VERTEX),
+                        reinterpret_cast<char*>(vertices) + offsetof(VERTEX, x));
+  glVertexAttribPointer(colLoc, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(VERTEX),
+                        reinterpret_cast<char*>(vertices) + offsetof(VERTEX, r));
+  glVertexAttribPointer(tex0Loc, 2, GL_FLOAT, GL_FALSE, sizeof(VERTEX),
+                        reinterpret_cast<char*>(vertices) + offsetof(VERTEX, u));
 
   glEnableVertexAttribArray(posLoc);
   glEnableVertexAttribArray(colLoc);

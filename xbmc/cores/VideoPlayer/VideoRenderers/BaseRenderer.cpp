@@ -362,7 +362,7 @@ void CBaseRenderer::SetViewMode(int viewMode)
 
   // get our calibrated full screen resolution
   RESOLUTION_INFO info = CServiceBroker::GetWinSystem()->GetGfxContext().GetResInfo();
-  float screenWidth  = static_cast<float>(info.Overscan.right  - info.Overscan.left);
+  float screenWidth = static_cast<float>(info.Overscan.right - info.Overscan.left);
   float screenHeight = static_cast<float>(info.Overscan.bottom - info.Overscan.top);
 
   // and the source frame ratio
@@ -372,7 +372,7 @@ void CBaseRenderer::SetViewMode(int viewMode)
               m_videoSettings.m_ViewMode == ViewModeNormal);
 
   // Splitres scaling factor
-  float xscale = static_cast<float>(info.iScreenWidth)  / static_cast<float>(info.iWidth);
+  float xscale = static_cast<float>(info.iScreenWidth) / static_cast<float>(info.iWidth);
   float yscale = static_cast<float>(info.iScreenHeight) / static_cast<float>(info.iHeight);
 
   screenWidth   *= xscale;

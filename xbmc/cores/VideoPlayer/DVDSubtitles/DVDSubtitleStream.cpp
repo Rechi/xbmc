@@ -52,7 +52,8 @@ bool CDVDSubtitleStream::Open(const std::string& strFile)
       if (totalread == buf.size())
         buf.resize(buf.size() + chunksize);
 
-      read = pInputStream->Read(reinterpret_cast<uint8_t*>(buf.get()) + totalread, static_cast<int>(buf.size() - totalread));
+      read = pInputStream->Read(reinterpret_cast<uint8_t*>(buf.get()) + totalread,
+                                static_cast<int>(buf.size() - totalread));
       if (read > 0)
         totalread += read;
     } while (read > 0);

@@ -132,7 +132,10 @@ bool CDVDDemuxCDDA::SeekTime(double time, bool backwards, double* startpts)
   int clamp_bytes = (m_stream->iBitsPerSample>>3) * m_stream->iChannels;
 
   // time is in milliseconds
-  int64_t seekPos = m_pInput->Seek(((static_cast<int64_t>(time) * bytes_per_second / 1000) / clamp_bytes ) * clamp_bytes, SEEK_SET) > 0;
+  int64_t seekPos =
+      m_pInput->Seek(((static_cast<int64_t>(time) * bytes_per_second / 1000) / clamp_bytes) *
+                         clamp_bytes,
+                     SEEK_SET) > 0;
   if (seekPos > 0)
     m_bytes = seekPos;
 

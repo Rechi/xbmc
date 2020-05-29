@@ -998,8 +998,7 @@ DemuxPacket* CDVDDemuxFFmpeg::Read()
       Flush();
     }
     // check size and stream index for being in a valid range
-    else if (m_pkt.pkt.size < 0 ||
-             m_pkt.pkt.stream_index < 0 ||
+    else if (m_pkt.pkt.size < 0 || m_pkt.pkt.stream_index < 0 ||
              m_pkt.pkt.stream_index >= static_cast<int>(m_pFormatContext->nb_streams))
     {
       // XXX, in some cases ffmpeg returns a negative packet size
@@ -1043,7 +1042,8 @@ DemuxPacket* CDVDDemuxFFmpeg::Read()
           /* check so packet belongs to selected program */
           for (unsigned int i = 0; i < m_pFormatContext->programs[m_program]->nb_stream_indexes; i++)
           {
-            if (m_pkt.pkt.stream_index == static_cast<int>(m_pFormatContext->programs[m_program]->stream_index[i]))
+            if (m_pkt.pkt.stream_index ==
+                static_cast<int>(m_pFormatContext->programs[m_program]->stream_index[i]))
             {
               pPacket = CDVDDemuxUtils::AllocateDemuxPacket(m_pkt.pkt.size);
               break;
@@ -1077,7 +1077,8 @@ DemuxPacket* CDVDDemuxFFmpeg::Read()
 
         pPacket->pts = ConvertTimestamp(m_pkt.pkt.pts, stream->time_base.den, stream->time_base.num);
         pPacket->dts = ConvertTimestamp(m_pkt.pkt.dts, stream->time_base.den, stream->time_base.num);
-        pPacket->duration =  DVD_SEC_TO_TIME(static_cast<double>(m_pkt.pkt.duration) * stream->time_base.num / stream->time_base.den);
+        pPacket->duration = DVD_SEC_TO_TIME(static_cast<double>(m_pkt.pkt.duration) *
+                                            stream->time_base.num / stream->time_base.den);
 
         CDVDDemuxUtils::StoreSideData(pPacket, &m_pkt.pkt);
 
@@ -1275,7 +1276,8 @@ bool CDVDDemuxFFmpeg::SeekTime(double time, bool backwards, double* startpts)
   if (m_currentPts == DVD_NOPTS_VALUE)
     CLog::Log(LOGDEBUG, "%s - unknown position after seek", __FUNCTION__);
   else
-    CLog::Log(LOGDEBUG, "%s - seek ended up on time %d", __FUNCTION__, static_cast<int>(m_currentPts / DVD_TIME_BASE * 1000));
+    CLog::Log(LOGDEBUG, "%s - seek ended up on time %d", __FUNCTION__,
+              static_cast<int>(m_currentPts / DVD_TIME_BASE * 1000));
 
   // in this case the start time is requested time
   if (startpts)
@@ -2146,7 +2148,8 @@ void CDVDDemuxFFmpeg::ParsePacket(AVPacket* pkt)
       int i = parser->second->m_parserCtx->parser->split(parser->second->m_codecCtx, pkt->data, pkt->size);
       if (i > 0 && i < FF_MAX_EXTRADATA_SIZE)
       {
-        st->codecpar->extradata = static_cast<uint8_t*>(av_malloc(i + AV_INPUT_BUFFER_PADDING_SIZE));
+        st->codecpar->extradata =
+            static_cast<uint8_t*>(av_malloc(i + AV_INPUT_BUFFER_PADDING_SIZE));
         if (st->codecpar->extradata)
         {
           CLog::Log(LOGDEBUG, "CDVDDemuxFFmpeg::ParsePacket() fetching extradata, extradata_size(%d)", i);

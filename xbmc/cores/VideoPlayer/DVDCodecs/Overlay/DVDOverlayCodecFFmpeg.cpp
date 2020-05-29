@@ -62,7 +62,8 @@ bool CDVDOverlayCodecFFmpeg::Open(CDVDStreamInfo &hints, CDVDCodecOptions &optio
   if( hints.extradata && hints.extrasize > 0 )
   {
     m_pCodecContext->extradata_size = hints.extrasize;
-    m_pCodecContext->extradata = static_cast<uint8_t*>(av_mallocz(hints.extrasize + AV_INPUT_BUFFER_PADDING_SIZE));
+    m_pCodecContext->extradata =
+        static_cast<uint8_t*>(av_mallocz(hints.extrasize + AV_INPUT_BUFFER_PADDING_SIZE));
     memcpy(m_pCodecContext->extradata, hints.extradata, hints.extrasize);
 
     // start parsing of extra data - create a copy to be safe and make it zero-terminating to avoid access violations!
@@ -206,7 +207,7 @@ CDVDOverlay* CDVDOverlayCodecFFmpeg::GetOverlay()
 
   if(m_Subtitle.format == 0)
   {
-    if(m_SubtitleIndex >= static_cast<int>(m_Subtitle.num_rects))
+    if (m_SubtitleIndex >= static_cast<int>(m_Subtitle.num_rects))
       return NULL;
 
     if(m_Subtitle.rects[m_SubtitleIndex] == NULL)
@@ -253,8 +254,8 @@ CDVDOverlay* CDVDOverlayCodecFFmpeg::GetOverlay()
     overlay->iPTSStopTime  = m_StopTime;
     overlay->replace  = true;
     overlay->linesize = rect.w;
-    overlay->data     = static_cast<uint8_t*>(malloc(rect.w * rect.h));
-    overlay->palette  = static_cast<uint32_t*>(malloc(rect.nb_colors*4));
+    overlay->data = static_cast<uint8_t*>(malloc(rect.w * rect.h));
+    overlay->palette = static_cast<uint32_t*>(malloc(rect.nb_colors * 4));
     overlay->palette_colors = rect.nb_colors;
     overlay->x        = rect.x;
     overlay->y        = rect.y;

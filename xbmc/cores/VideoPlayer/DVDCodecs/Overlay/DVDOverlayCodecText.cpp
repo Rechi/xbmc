@@ -61,8 +61,8 @@ int CDVDOverlayCodecText::Decode(DemuxPacket *pPacket)
 
   char *start, *end, *p;
   start = reinterpret_cast<char*>(data);
-  end   = reinterpret_cast<char*>(data) + size;
-  p     = reinterpret_cast<char*>(data);
+  end = reinterpret_cast<char*>(data) + size;
+  p = reinterpret_cast<char*>(data);
 
   if (m_bIsSSA)
   {
@@ -97,7 +97,7 @@ int CDVDOverlayCodecText::Decode(DemuxPacket *pPacket)
       while(*p != '}' && p<end)
         p++;
 
-      char* override = static_cast<char*>(malloc(p-start + 1));
+      char* override = static_cast<char*>(malloc(p - start + 1));
       memcpy(override, start, p-start);
       override[p-start] = '\0';
       CLog::Log(LOGINFO, "%s - Skipped formatting tag %s", __FUNCTION__, override);

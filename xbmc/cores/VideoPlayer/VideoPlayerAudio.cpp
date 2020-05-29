@@ -442,7 +442,8 @@ bool CVideoPlayerAudio::ProcessDecoderOutput(DVDAudioFrame &audioframe)
       m_audioClock = audioframe.pts;
     }
 
-    if (audioframe.format.m_sampleRate && m_streaminfo.samplerate != static_cast<int>(audioframe.format.m_sampleRate))
+    if (audioframe.format.m_sampleRate &&
+        m_streaminfo.samplerate != static_cast<int>(audioframe.format.m_sampleRate))
     {
       // The sample rate has changed or we just got it for the first time
       // for this stream. See if we should enable/disable passthrough due
@@ -482,7 +483,8 @@ bool CVideoPlayerAudio::ProcessDecoderOutput(DVDAudioFrame &audioframe)
       if (!m_audioSink.Create(audioframe, m_streaminfo.codec, m_synctype == SYNC_RESAMPLE))
         CLog::Log(LOGERROR, "%s - failed to create audio renderer", __FUNCTION__);
 
-      m_audioSink.SetDynamicRangeCompression(static_cast<long>(m_processInfo.GetVideoSettings().m_VolumeAmplification * 100));
+      m_audioSink.SetDynamicRangeCompression(
+          static_cast<long>(m_processInfo.GetVideoSettings().m_VolumeAmplification * 100));
 
       if (m_syncState == IDVDStreamPlayer::SYNC_INSYNC)
         m_audioSink.Resume();

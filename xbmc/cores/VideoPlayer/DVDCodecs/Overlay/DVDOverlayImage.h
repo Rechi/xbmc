@@ -35,7 +35,7 @@ public:
   CDVDOverlayImage(const CDVDOverlayImage& src)
     : CDVDOverlay(src)
   {
-    data    = static_cast<uint8_t*>(malloc(src.linesize * src.height));
+    data = static_cast<uint8_t*>(malloc(src.linesize * src.height));
     memcpy(data, src.data, src.linesize * src.height);
 
     if(src.palette)

@@ -57,14 +57,15 @@ static struct SInterlaceMapping
 {
   const EINTERLACEMETHOD     method;
   const VdpVideoMixerFeature feature;
-} g_interlace_mapping[] =
-{ {VS_INTERLACEMETHOD_VDPAU_TEMPORAL             , VDP_VIDEO_MIXER_FEATURE_DEINTERLACE_TEMPORAL}
-, {VS_INTERLACEMETHOD_VDPAU_TEMPORAL_HALF        , VDP_VIDEO_MIXER_FEATURE_DEINTERLACE_TEMPORAL}
-, {VS_INTERLACEMETHOD_VDPAU_TEMPORAL_SPATIAL     , VDP_VIDEO_MIXER_FEATURE_DEINTERLACE_TEMPORAL_SPATIAL}
-, {VS_INTERLACEMETHOD_VDPAU_TEMPORAL_SPATIAL_HALF, VDP_VIDEO_MIXER_FEATURE_DEINTERLACE_TEMPORAL_SPATIAL}
-, {VS_INTERLACEMETHOD_VDPAU_INVERSE_TELECINE     , VDP_VIDEO_MIXER_FEATURE_INVERSE_TELECINE}
-, {VS_INTERLACEMETHOD_NONE                       , static_cast<VdpVideoMixerFeature>(-1)}
-};
+} g_interlace_mapping[] = {
+    {VS_INTERLACEMETHOD_VDPAU_TEMPORAL, VDP_VIDEO_MIXER_FEATURE_DEINTERLACE_TEMPORAL},
+    {VS_INTERLACEMETHOD_VDPAU_TEMPORAL_HALF, VDP_VIDEO_MIXER_FEATURE_DEINTERLACE_TEMPORAL},
+    {VS_INTERLACEMETHOD_VDPAU_TEMPORAL_SPATIAL,
+     VDP_VIDEO_MIXER_FEATURE_DEINTERLACE_TEMPORAL_SPATIAL},
+    {VS_INTERLACEMETHOD_VDPAU_TEMPORAL_SPATIAL_HALF,
+     VDP_VIDEO_MIXER_FEATURE_DEINTERLACE_TEMPORAL_SPATIAL},
+    {VS_INTERLACEMETHOD_VDPAU_INVERSE_TELECINE, VDP_VIDEO_MIXER_FEATURE_INVERSE_TELECINE},
+    {VS_INTERLACEMETHOD_NONE, static_cast<VdpVideoMixerFeature>(-1)}};
 
 static float studioCSCKCoeffs601[3] = {0.299, 0.587, 0.114}; //BT601 {Kr, Kg, Kb}
 static float studioCSCKCoeffs709[3] = {0.2126, 0.7152, 0.0722}; //BT709 {Kr, Kg, Kb}
@@ -568,7 +569,8 @@ bool CDecoder::Open(AVCodecContext* avctx, AVCodecContext* mainctx, const enum A
         return false;
       }
 
-      if (max_width < static_cast<uint32_t>(avctx->coded_width) || max_height < static_cast<uint32_t>(avctx->coded_height))
+      if (max_width < static_cast<uint32_t>(avctx->coded_width) ||
+          max_height < static_cast<uint32_t>(avctx->coded_height))
       {
         CLog::Log(LOGWARNING,"VDPAU::Open: requested picture dimensions (%i, %i) exceed hardware capabilities ( %i, %i).",
 	                      avctx->coded_width, avctx->coded_height, max_width, max_height);
@@ -683,15 +685,21 @@ void CDecoder::SetWidthHeight(int width, int height)
   if (CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth() < width || CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight() < height || m_vdpauConfig.upscale >= 0)
   {
     //scale width to desktop size if the aspect ratio is the same or bigger than the desktop
-    if (static_cast<double>(height) * CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth() / width <= static_cast<double>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight()))
+    if (static_cast<double>(height) * CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth() /
+            width <=
+        static_cast<double>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight()))
     {
       m_vdpauConfig.outWidth = CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth();
-      m_vdpauConfig.outHeight = MathUtils::round_int(static_cast<double>(height) * CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth() / width);
+      m_vdpauConfig.outHeight =
+          MathUtils::round_int(static_cast<double>(height) *
+                               CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth() / width);
     }
     else //scale height to the desktop size if the aspect ratio is smaller than the desktop
     {
       m_vdpauConfig.outHeight = CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight();
-      m_vdpauConfig.outWidth = MathUtils::round_int(static_cast<double>(width) * CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight() / height);
+      m_vdpauConfig.outWidth = MathUtils::round_int(
+          static_cast<double>(width) * CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight() /
+          height);
     }
   }
   else
@@ -1069,7 +1077,10 @@ int CDecoder::Render(struct AVCodecContext *s, struct AVFrame *src,
 
   uint64_t diff = CurrentHostCounter() - startTime;
   if (diff*1000/CurrentHostFrequency() > 30)
-    CLog::Log(LOGDEBUG, LOGVIDEO, "CVDPAU::DrawSlice - VdpDecoderRender long decoding: %d ms, dec: %d, proc: %d, rend: %d", static_cast<int>((diff*1000)/CurrentHostFrequency()), decoded, processed, rend);
+    CLog::Log(
+        LOGDEBUG, LOGVIDEO,
+        "CVDPAU::DrawSlice - VdpDecoderRender long decoding: %d ms, dec: %d, proc: %d, rend: %d",
+        static_cast<int>((diff * 1000) / CurrentHostFrequency()), decoded, processed, rend);
 
   return 0;
 }
@@ -2040,9 +2051,10 @@ bool CMixer::GenerateStudioCSCMatrix(VdpColorStandard colorStandard, VdpCSCMatri
    studioCSCMatrix[G][Cr] = static_cast<double>(-2) * Kr * (1 - Kr) / Kg;
    studioCSCMatrix[B][Cr] = 0.0;
 
-   studioCSCMatrix[R][C] = static_cast<double>(-1) * studioCSCMatrix[R][Cr] * CDZ/EXC;
-   studioCSCMatrix[G][C] = static_cast<double>(-1) * (studioCSCMatrix[G][Cb] + studioCSCMatrix[G][Cr]) * CDZ/EXC;
-   studioCSCMatrix[B][C] = static_cast<double>(-1) * studioCSCMatrix[B][Cb] * CDZ/EXC;
+   studioCSCMatrix[R][C] = static_cast<double>(-1) * studioCSCMatrix[R][Cr] * CDZ / EXC;
+   studioCSCMatrix[G][C] =
+       static_cast<double>(-1) * (studioCSCMatrix[G][Cb] + studioCSCMatrix[G][Cr]) * CDZ / EXC;
+   studioCSCMatrix[B][C] = static_cast<double>(-1) * studioCSCMatrix[B][Cb] * CDZ / EXC;
 
    return true;
 }
@@ -2585,7 +2597,8 @@ void CMixer::InitCycle()
     m_mixerInput[1].DVDPic.iHeight = m_config.outHeight;
     if (m_SeenInterlaceFlag)
     {
-      double ratio = static_cast<double>(m_mixerInput[1].DVDPic.iDisplayHeight) / m_mixerInput[1].DVDPic.iHeight;
+      double ratio = static_cast<double>(m_mixerInput[1].DVDPic.iDisplayHeight) /
+                     m_mixerInput[1].DVDPic.iHeight;
       m_mixerInput[1].DVDPic.iDisplayHeight = lrint(ratio*(m_mixerInput[1].DVDPic.iHeight-NUM_CROP_PIX*2));
       m_processPicture.crop = true;
     }

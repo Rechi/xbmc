@@ -165,7 +165,7 @@ bool CDecoder::Open(AVCodecContext *avctx, AVCodecContext* mainctx, enum AVPixel
 
   AVBufferRef *deviceRef =  av_hwdevice_ctx_alloc(AV_HWDEVICE_TYPE_VIDEOTOOLBOX);
   AVBufferRef *framesRef = av_hwframe_ctx_alloc(deviceRef);
-  AVHWFramesContext *framesCtx = reinterpret_cast<AVHWFramesContext*>(framesRef->data);
+  AVHWFramesContext* framesCtx = reinterpret_cast<AVHWFramesContext*>(framesRef->data);
   framesCtx->format = AV_PIX_FMT_VIDEOTOOLBOX;
   framesCtx->sw_format = AV_PIX_FMT_NV12;
   avctx->hw_frames_ctx = framesRef;

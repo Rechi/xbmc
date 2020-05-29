@@ -161,7 +161,9 @@ void CVideoPlayerVideo::OpenStream(CDVDStreamInfo &hint, CDVDVideoCodec* codec)
   //reported fps is usually not completely correct
   if (hint.fpsrate && hint.fpsscale)
   {
-    m_fFrameRate = DVD_TIME_BASE / CDVDCodecUtils::NormalizeFrameduration(static_cast<double>(DVD_TIME_BASE) * hint.fpsscale / hint.fpsrate);
+    m_fFrameRate =
+        DVD_TIME_BASE / CDVDCodecUtils::NormalizeFrameduration(static_cast<double>(DVD_TIME_BASE) *
+                                                               hint.fpsscale / hint.fpsrate);
     m_bFpsInvalid = false;
     m_processInfo.SetVideoFps(static_cast<float>(m_fFrameRate));
   }
@@ -180,7 +182,10 @@ void CVideoPlayerVideo::OpenStream(CDVDStreamInfo &hint, CDVDVideoCodec* codec)
 
   if( m_fFrameRate > 120 || m_fFrameRate < 5 )
   {
-    CLog::Log(LOGERROR, "CVideoPlayerVideo::OpenStream - Invalid framerate %d, using forced 25fps and just trust timestamps", static_cast<int>(m_fFrameRate));
+    CLog::Log(LOGERROR,
+              "CVideoPlayerVideo::OpenStream - Invalid framerate %d, using forced 25fps and just "
+              "trust timestamps",
+              static_cast<int>(m_fFrameRate));
     m_fFrameRate = 25;
   }
 
@@ -934,7 +939,8 @@ std::string CVideoPlayerVideo::GetPlayerInfo()
 {
   std::ostringstream s;
   s << "vq:"   << std::setw(2) << std::min(99, m_processInfo.GetLevelVQ()) << "%";
-  s << ", Mb/s:" << std::fixed << std::setprecision(2) << static_cast<double>(GetVideoBitrate()) / (1024.0*1024.0);
+  s << ", Mb/s:" << std::fixed << std::setprecision(2)
+    << static_cast<double>(GetVideoBitrate()) / (1024.0 * 1024.0);
   s << ", fr:"     << std::fixed << std::setprecision(3) << m_fFrameRate;
   s << ", drop:" << m_iDroppedFrames;
   s << ", skip:" << m_renderManager.GetSkippedFrames();

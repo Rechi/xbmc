@@ -293,8 +293,10 @@ void CVaapi1Texture::TestInterop(VADisplay vaDpy, EGLDisplay eglDisplay, bool &g
   general = false;
   deepColor = false;
 
-  PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR = reinterpret_cast<PFNEGLCREATEIMAGEKHRPROC>(eglGetProcAddress("eglCreateImageKHR"));
-  PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR = reinterpret_cast<PFNEGLDESTROYIMAGEKHRPROC>(eglGetProcAddress("eglDestroyImageKHR"));
+  PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR =
+      reinterpret_cast<PFNEGLCREATEIMAGEKHRPROC>(eglGetProcAddress("eglCreateImageKHR"));
+  PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR =
+      reinterpret_cast<PFNEGLDESTROYIMAGEKHRPROC>(eglGetProcAddress("eglDestroyImageKHR"));
   if (!eglCreateImageKHR || !eglDestroyImageKHR)
   {
     return;
@@ -360,8 +362,10 @@ bool CVaapi1Texture::TestInteropDeepColor(VADisplay vaDpy, EGLDisplay eglDisplay
 {
   bool ret = false;
 
-  PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR = reinterpret_cast<PFNEGLCREATEIMAGEKHRPROC>(eglGetProcAddress("eglCreateImageKHR"));
-  PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR = reinterpret_cast<PFNEGLDESTROYIMAGEKHRPROC>(eglGetProcAddress("eglDestroyImageKHR"));
+  PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR =
+      reinterpret_cast<PFNEGLCREATEIMAGEKHRPROC>(eglGetProcAddress("eglCreateImageKHR"));
+  PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR =
+      reinterpret_cast<PFNEGLDESTROYIMAGEKHRPROC>(eglGetProcAddress("eglDestroyImageKHR"));
   if (!eglCreateImageKHR || !eglDestroyImageKHR)
   {
     return false;
@@ -596,8 +600,10 @@ bool CVaapi2Texture::TestEsh(VADisplay vaDpy, EGLDisplay eglDisplay, std::uint32
   int width = 1920;
   int height = 1080;
 
-  PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR = reinterpret_cast<PFNEGLCREATEIMAGEKHRPROC>(eglGetProcAddress("eglCreateImageKHR"));
-  PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR = reinterpret_cast<PFNEGLDESTROYIMAGEKHRPROC>(eglGetProcAddress("eglDestroyImageKHR"));
+  PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR =
+      reinterpret_cast<PFNEGLCREATEIMAGEKHRPROC>(eglGetProcAddress("eglCreateImageKHR"));
+  PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR =
+      reinterpret_cast<PFNEGLDESTROYIMAGEKHRPROC>(eglGetProcAddress("eglDestroyImageKHR"));
   if (!eglCreateImageKHR || !eglDestroyImageKHR)
   {
     return false;

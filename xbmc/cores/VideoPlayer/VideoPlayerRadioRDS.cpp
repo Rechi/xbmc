@@ -690,7 +690,7 @@ std::string CDVDRadioRDSData::GetRadioText(unsigned int line)
     if (line > MAX_RADIOTEXT_LISTSIZE)
       return "";
 
-    if (static_cast<int>(line)+1 > m_RT_MaxSize)
+    if (static_cast<int>(line) + 1 > m_RT_MaxSize)
     {
       m_RT_MaxSize = line+1;
       return "";
@@ -932,7 +932,9 @@ unsigned int CDVDRadioRDSData::DecodeTA_TP(uint8_t *msgElement)
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, g_localizeStrings.Get(19021), g_localizeStrings.Get(29930));
     m_TA_TP_TrafficAdvisory = true;
     m_TA_TP_TrafficVolume = g_application.GetVolumePercent();
-    float trafAdvVol = static_cast<float>(CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt("pvrplayback.trafficadvisoryvolume"));
+    float trafAdvVol =
+        static_cast<float>(CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(
+            "pvrplayback.trafficadvisoryvolume"));
     if (trafAdvVol)
       g_application.SetVolume(m_TA_TP_TrafficVolume+trafAdvVol);
 
@@ -1727,8 +1729,8 @@ void CDVDRadioRDSData::SendTMCSignal(unsigned int flags, uint8_t *data)
     msg["ident"]   = m_PI_Current;
     msg["flags"]   = flags;
     msg["x"]       = m_TMC_LastData[0];
-    msg["y"]       = static_cast<unsigned int>(m_TMC_LastData[1]<<8 | m_TMC_LastData[2]);
-    msg["z"]       = static_cast<unsigned int>(m_TMC_LastData[3]<<8 | m_TMC_LastData[4]);
+    msg["y"] = static_cast<unsigned int>(m_TMC_LastData[1] << 8 | m_TMC_LastData[2]);
+    msg["z"] = static_cast<unsigned int>(m_TMC_LastData[3] << 8 | m_TMC_LastData[4]);
 
     CServiceBroker::GetAnnouncementManager()->Announce(ANNOUNCEMENT::PVR, "xbmc", "RDSRadioTMC", msg);
   }

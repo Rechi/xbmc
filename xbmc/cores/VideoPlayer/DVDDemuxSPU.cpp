@@ -104,7 +104,8 @@ CDVDOverlaySpu* CDVDDemuxSPU::AddData(uint8_t* data, int iSize, double pts)
   // or allocate some more if 16384 bytes is not enough
   if ((pSPUData->iSize + iSize) > pSPUData->iAllocatedSize)
   {
-    uint8_t* tmpptr = static_cast<uint8_t*>(realloc(pSPUData->data, ALIGN(pSPUData->iSize + iSize, 0x4000)));
+    uint8_t* tmpptr =
+        static_cast<uint8_t*>(realloc(pSPUData->data, ALIGN(pSPUData->iSize + iSize, 0x4000)));
     if (!tmpptr)
     {
       free(pSPUData->data);
@@ -433,7 +434,7 @@ CDVDOverlaySpu* CDVDDemuxSPU::ParseRLE(CDVDOverlaySpu* pSPU, uint8_t* pUnparsedD
       /* Check we aren't overwriting our data range
          This occurs on "The Triplets of BelleVille" region 4 disk (NTSC)"
          where we use around 96k rather than 64k + 20bytes */
-      if (reinterpret_cast<uint8_t *>(p_dest) >= pSPU->result + sizeof(pSPU->result))
+      if (reinterpret_cast<uint8_t*>(p_dest) >= pSPU->result + sizeof(pSPU->result))
       {
         CLog::Log(LOGERROR, "ParseRLE: Overrunning our data range.  Need %li bytes", (long)((uint8_t *)p_dest - pSPU->result));
         pSPU->Release();
@@ -472,7 +473,7 @@ CDVDOverlaySpu* CDVDDemuxSPU::ParseRLE(CDVDOverlaySpu* pSPU, uint8_t* pUnparsedD
       /* Check we aren't overwriting our data range
          This occurs on "The Triplets of BelleVille" region 4 disk (NTSC)"
          where we use around 96k rather than 64k + 20bytes */
-      if (reinterpret_cast<uint8_t *>(p_dest) >= pSPU->result + sizeof(pSPU->result))
+      if (reinterpret_cast<uint8_t*>(p_dest) >= pSPU->result + sizeof(pSPU->result))
       {
         CLog::Log(LOGERROR, "ParseRLE: Overrunning our data range.  Need %li bytes", (long)((uint8_t *)p_dest - pSPU->result));
         pSPU->Release();

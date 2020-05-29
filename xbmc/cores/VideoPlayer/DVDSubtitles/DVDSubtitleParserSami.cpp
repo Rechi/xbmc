@@ -76,7 +76,7 @@ bool CDVDSubtitleParserSami::Open(CDVDStreamInfo &hints)
       if(pOverlay)
       {
         TagConv.ConvertLine(pOverlay, text, pos, lang);
-        pOverlay->iPTSStopTime  = static_cast<double>(atoi(start.c_str())) * DVD_TIME_BASE / 1000;
+        pOverlay->iPTSStopTime = static_cast<double>(atoi(start.c_str())) * DVD_TIME_BASE / 1000;
         pOverlay->Release();
         TagConv.CloseTag(pOverlay);
       }

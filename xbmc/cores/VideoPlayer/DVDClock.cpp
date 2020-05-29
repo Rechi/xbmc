@@ -149,7 +149,8 @@ void CDVDClock::SetSpeed(int iSpeed)
     m_pauseClock = 0;
   }
 
-  m_startClock = current - static_cast<int64_t>(static_cast<double>(current - m_startClock) * newfreq / m_systemUsed);
+  m_startClock = current - static_cast<int64_t>(static_cast<double>(current - m_startClock) *
+                                                newfreq / m_systemUsed);
   m_systemUsed = newfreq;
 }
 
@@ -297,7 +298,9 @@ double CDVDClock::SystemToPlaying(int64_t system)
   else
     current = system;
 
-  return DVD_TIME_BASE * static_cast<double>(current - m_startClock + m_systemAdjust) / m_systemUsed + m_iDisc;
+  return DVD_TIME_BASE * static_cast<double>(current - m_startClock + m_systemAdjust) /
+             m_systemUsed +
+         m_iDisc;
 }
 
 double CDVDClock::GetClockSpeed()

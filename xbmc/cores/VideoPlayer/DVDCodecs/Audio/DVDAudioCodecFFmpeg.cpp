@@ -89,7 +89,8 @@ bool CDVDAudioCodecFFmpeg::Open(CDVDStreamInfo &hints, CDVDCodecOptions &options
 
   if( hints.extradata && hints.extrasize > 0 )
   {
-    m_pCodecContext->extradata = static_cast<uint8_t*>(av_mallocz(hints.extrasize + AV_INPUT_BUFFER_PADDING_SIZE));
+    m_pCodecContext->extradata =
+        static_cast<uint8_t*>(av_mallocz(hints.extrasize + AV_INPUT_BUFFER_PADDING_SIZE));
     if(m_pCodecContext->extradata)
     {
       m_pCodecContext->extradata_size = hints.extrasize;
@@ -195,7 +196,8 @@ void CDVDAudioCodecFFmpeg::GetData(DVDAudioFrame &frame)
   frame.profile = GetProfile();
   // compute duration.
   if (frame.format.m_sampleRate)
-    frame.duration = (static_cast<double>(frame.nb_frames) * DVD_TIME_BASE) / frame.format.m_sampleRate;
+    frame.duration =
+        (static_cast<double>(frame.nb_frames) * DVD_TIME_BASE) / frame.format.m_sampleRate;
   else
     frame.duration = 0.0;
 

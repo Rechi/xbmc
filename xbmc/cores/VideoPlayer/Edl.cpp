@@ -152,7 +152,8 @@ bool CEdl::ReadEdl(const std::string& strMovie, const float fFramesPerSecond)
         std::vector<std::string> fieldParts = StringUtils::Split(strFields[i], '.');
         if (fieldParts.size() == 1) // No ms
         {
-          iCutStartEnd[i] = StringUtils::TimeStringToSeconds(fieldParts[0]) * static_cast<int64_t>(1000); // seconds to ms
+          iCutStartEnd[i] = StringUtils::TimeStringToSeconds(fieldParts[0]) *
+                            static_cast<int64_t>(1000); // seconds to ms
         }
         else if (fieldParts.size() == 2) // Has ms. Everything after the dot (.) is ms
         {
@@ -171,7 +172,9 @@ bool CEdl::ReadEdl(const std::string& strMovie, const float fFramesPerSecond)
           {
             fieldParts[1] = fieldParts[1].substr(0, 3);
           }
-          iCutStartEnd[i] = static_cast<int64_t>(StringUtils::TimeStringToSeconds(fieldParts[0])) * 1000 + atoi(fieldParts[1].c_str()); // seconds to ms
+          iCutStartEnd[i] =
+              static_cast<int64_t>(StringUtils::TimeStringToSeconds(fieldParts[0])) * 1000 +
+              atoi(fieldParts[1].c_str()); // seconds to ms
         }
         else
         {
@@ -416,7 +419,8 @@ bool CEdl::ReadVideoReDo(const std::string& strMovie)
       int iScene;
       double dSceneMarker;
       if (sscanf(szBuffer + strlen(VIDEOREDO_TAG_SCENE), " %i>%lf", &iScene, &dSceneMarker) == 2)
-        bValid = AddSceneMarker(static_cast<int64_t>(dSceneMarker / 10000)); // Times need adjusting by 1/10,000 to get ms.
+        bValid = AddSceneMarker(static_cast<int64_t>(
+            dSceneMarker / 10000)); // Times need adjusting by 1/10,000 to get ms.
       else
         bValid = false;
     }
@@ -900,7 +904,8 @@ bool CEdl::GetNextSceneMarker(bool bPlus, const int iClock, int *iSceneMarker)
 
 std::string CEdl::MillisecondsToTimeString(const int iMilliseconds)
 {
-  std::string strTimeString = StringUtils::SecondsToTimeString(static_cast<long>(iMilliseconds / 1000), TIME_FORMAT_HH_MM_SS); // milliseconds to seconds
+  std::string strTimeString = StringUtils::SecondsToTimeString(
+      static_cast<long>(iMilliseconds / 1000), TIME_FORMAT_HH_MM_SS); // milliseconds to seconds
   strTimeString += StringUtils::Format(".%03i", iMilliseconds % 1000);
   return strTimeString;
 }

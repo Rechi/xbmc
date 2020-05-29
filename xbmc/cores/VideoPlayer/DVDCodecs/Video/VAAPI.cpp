@@ -691,17 +691,18 @@ bool CDecoder::Open(AVCodecContext* avctx, AVCodecContext* mainctx, const enum A
   }
 
   AVBufferRef *deviceRef =  av_hwdevice_ctx_alloc(AV_HWDEVICE_TYPE_VAAPI);
-  AVHWDeviceContext *deviceCtx = reinterpret_cast<AVHWDeviceContext*>(deviceRef->data);
-  AVVAAPIDeviceContext *vaapiDeviceCtx = static_cast<AVVAAPIDeviceContext*>(deviceCtx->hwctx);
+  AVHWDeviceContext* deviceCtx = reinterpret_cast<AVHWDeviceContext*>(deviceRef->data);
+  AVVAAPIDeviceContext* vaapiDeviceCtx = static_cast<AVVAAPIDeviceContext*>(deviceCtx->hwctx);
   AVBufferRef *framesRef = av_hwframe_ctx_alloc(deviceRef);
-  AVHWFramesContext *framesCtx = reinterpret_cast<AVHWFramesContext*>(framesRef->data);
-  AVVAAPIFramesContext *vaapiFramesCtx = static_cast<AVVAAPIFramesContext*>(framesCtx->hwctx);
+  AVHWFramesContext* framesCtx = reinterpret_cast<AVHWFramesContext*>(framesRef->data);
+  AVVAAPIFramesContext* vaapiFramesCtx = static_cast<AVVAAPIFramesContext*>(framesCtx->hwctx);
 
   vaapiDeviceCtx->display = m_vaapiConfig.dpy;
   vaapiDeviceCtx->driver_quirks = AV_VAAPI_DRIVER_QUIRK_RENDER_PARAM_BUFFERS;
   vaapiFramesCtx->nb_attributes = 0;
   vaapiFramesCtx->nb_surfaces = m_videoSurfaces.Size();
-  VASurfaceID *surfaceIds = static_cast<VASurfaceID*>(av_malloc(vaapiFramesCtx->nb_surfaces *  sizeof(VASurfaceID)));
+  VASurfaceID* surfaceIds =
+      static_cast<VASurfaceID*>(av_malloc(vaapiFramesCtx->nb_surfaces * sizeof(VASurfaceID)));
   for (int i=0; i<vaapiFramesCtx->nb_surfaces; ++i)
     surfaceIds[i] = m_videoSurfaces.GetAtIndex(i);
   vaapiFramesCtx->surface_ids = surfaceIds;
@@ -2599,8 +2600,9 @@ bool CVppPostproc::Filter(CVaapiProcessedPicture &outPic)
   {
     return false;
   }
-  if (!CheckSuccess(vaMapBuffer(m_config.dpy, pipelineBuf, reinterpret_cast<void**>(&pipelineParams)),
-      "vaMapBuffer"))
+  if (!CheckSuccess(
+          vaMapBuffer(m_config.dpy, pipelineBuf, reinterpret_cast<void**>(&pipelineParams)),
+          "vaMapBuffer"))
   {
     return false;
   }
@@ -2647,7 +2649,8 @@ bool CVppPostproc::Filter(CVaapiProcessedPicture &outPic)
           flags |= VA_DEINTERLACING_BOTTOM_FIELD;
       }
     }
-    if (!CheckSuccess(vaMapBuffer(m_config.dpy, m_filter, reinterpret_cast<void**>(&filterParams)), "vaMapBuffer"))
+    if (!CheckSuccess(vaMapBuffer(m_config.dpy, m_filter, reinterpret_cast<void**>(&filterParams)),
+                      "vaMapBuffer"))
     {
       return false;
     }
@@ -2999,7 +3002,8 @@ bool CFFmpegPostproc::AddPicture(CVaapiDecodedPicture &inPic)
   if (!CheckSuccess(vaDeriveImage(m_config.dpy, surf, &image), "vaDeriveImage"))
     goto error;
 
-  if (!CheckSuccess(vaMapBuffer(m_config.dpy, image.buf, reinterpret_cast<void**>(&buf)), "vaMapBuffer"))
+  if (!CheckSuccess(vaMapBuffer(m_config.dpy, image.buf, reinterpret_cast<void**>(&buf)),
+                    "vaMapBuffer"))
     goto error;
 
   m_pFilterFrameIn->format = AV_PIX_FMT_NV12;

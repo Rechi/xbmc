@@ -489,7 +489,9 @@ void CDVDTeletextData::Process()
                           a1 = a; /* first non-space */
                         if (a >= 0 && l >= 2)
                         {
-                          strncpy(m_TXTCache->ADIPTable[m_TXTCache->FlofPages[m_TXTCache->CurrentPage[magazine]][l]], reinterpret_cast<const char*>(&p[a1]), 12);
+                          strncpy(m_TXTCache->ADIPTable
+                                      [m_TXTCache->FlofPages[m_TXTCache->CurrentPage[magazine]][l]],
+                                  reinterpret_cast<const char*>(&p[a1]), 12);
                           if (e-a1 < 11)
                             m_TXTCache->ADIPTable[m_TXTCache->FlofPages[m_TXTCache->CurrentPage[magazine]][l]][e-a1+1] = '\0';
                         }
@@ -505,11 +507,13 @@ void CDVDTeletextData::Process()
                   Textp27_t *p;
 
                   if (!pageinfo_thread->ext)
-                    pageinfo_thread->ext = static_cast<TextExtData_t*>(calloc(1, sizeof(TextExtData_t)));
+                    pageinfo_thread->ext =
+                        static_cast<TextExtData_t*>(calloc(1, sizeof(TextExtData_t)));
                   if (!pageinfo_thread->ext)
                     continue;
                   if (!(pageinfo_thread->ext->p27))
-                    pageinfo_thread->ext->p27 = static_cast<Textp27_t*>(calloc(4, sizeof(Textp27_t)));
+                    pageinfo_thread->ext->p27 =
+                        static_cast<Textp27_t*>(calloc(4, sizeof(Textp27_t)));
                   if (!(pageinfo_thread->ext->p27))
                     continue;
                   p = pageinfo_thread->ext->p27;
@@ -559,7 +563,8 @@ void CDVDTeletextData::Process()
                   continue;
 
                 if (!pageinfo_thread->ext)
-                  pageinfo_thread->ext = static_cast<TextExtData_t*>(calloc(1, sizeof(TextExtData_t)));
+                  pageinfo_thread->ext =
+                      static_cast<TextExtData_t*>(calloc(1, sizeof(TextExtData_t)));
                 if (!pageinfo_thread->ext)
                   continue;
                 if (!(pageinfo_thread->ext->p26[descode]))

@@ -57,8 +57,11 @@ bool CDVDSubtitleParserSubrip::Open(CDVDStreamInfo &hints)
         CDVDOverlayText* pOverlay = new CDVDOverlayText();
         pOverlay->Acquire(); // increase ref count with one so that we can hold a handle to this overlay
 
-        pOverlay->iPTSStartTime = (static_cast<double>(((hh1 * 60 + mm1) * 60) + ss1) * 1000 + ms1) * (DVD_TIME_BASE / 1000);
-        pOverlay->iPTSStopTime  = (static_cast<double>(((hh2 * 60 + mm2) * 60) + ss2) * 1000 + ms2) * (DVD_TIME_BASE / 1000);
+        pOverlay->iPTSStartTime =
+            (static_cast<double>(((hh1 * 60 + mm1) * 60) + ss1) * 1000 + ms1) *
+            (DVD_TIME_BASE / 1000);
+        pOverlay->iPTSStopTime = (static_cast<double>(((hh2 * 60 + mm2) * 60) + ss2) * 1000 + ms2) *
+                                 (DVD_TIME_BASE / 1000);
 
         while (m_pStream->ReadLine(line, sizeof(line)))
         {

@@ -79,9 +79,12 @@ bool CRendererVAAPI::Configure(const VideoPicture &picture, float fps, unsigned 
 
   InteropInfo interop;
   interop.textureTarget = GL_TEXTURE_2D;
-  interop.eglCreateImageKHR = reinterpret_cast<PFNEGLCREATEIMAGEKHRPROC>(eglGetProcAddress("eglCreateImageKHR"));
-  interop.eglDestroyImageKHR = reinterpret_cast<PFNEGLDESTROYIMAGEKHRPROC>(eglGetProcAddress("eglDestroyImageKHR"));
-  interop.glEGLImageTargetTexture2DOES = reinterpret_cast<PFNGLEGLIMAGETARGETTEXTURE2DOESPROC>(eglGetProcAddress("glEGLImageTargetTexture2DOES"));
+  interop.eglCreateImageKHR =
+      reinterpret_cast<PFNEGLCREATEIMAGEKHRPROC>(eglGetProcAddress("eglCreateImageKHR"));
+  interop.eglDestroyImageKHR =
+      reinterpret_cast<PFNEGLDESTROYIMAGEKHRPROC>(eglGetProcAddress("eglDestroyImageKHR"));
+  interop.glEGLImageTargetTexture2DOES = reinterpret_cast<PFNGLEGLIMAGETARGETTEXTURE2DOESPROC>(
+      eglGetProcAddress("glEGLImageTargetTexture2DOES"));
   interop.eglDisplay = m_pWinSystem->GetEGLDisplay();
 
   bool useVaapi2 = VAAPI::CVaapi2Texture::TestInteropGeneral(pic->vadsp, CRendererVAAPI::m_pWinSystem->GetEGLDisplay());
