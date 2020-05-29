@@ -372,7 +372,7 @@ bool CCharsetConverter::CInnerConverter::convert(iconv_t type, int multiplier, c
 
   //allocate output buffer for iconv()
   size_t      outBufSize = (strSource.length() + 1) * sizeof(typename OUTPUT::value_type) * multiplier;
-  char*       outBuf     = static_cast<char*>(malloc(outBufSize));
+  char* outBuf = static_cast<char*>(malloc(outBufSize));
   if (outBuf == NULL)
   {
     CLog::Log(LOGFATAL, "%s: malloc failed", __FUNCTION__);
@@ -399,7 +399,7 @@ bool CCharsetConverter::CInnerConverter::convert(iconv_t type, int multiplier, c
 
         //make buffer twice as big
         outBufSize   *= 2;
-        char* newBuf  = static_cast<char*>(realloc(outBuf, outBufSize));
+        char* newBuf = static_cast<char*>(realloc(outBuf, outBufSize));
         if (!newBuf)
         {
           CLog::Log(LOGFATAL, "%s realloc failed with errno=%d(%s)", __FUNCTION__, errno,
@@ -679,7 +679,8 @@ std::string CCharsetConverter::utf32ToUtf8(const std::u32string& utf32StringSrc,
 bool CCharsetConverter::utf32ToW(const std::u32string& utf32StringSrc, std::wstring& wStringDst, bool failOnBadChar /*= true*/)
 {
 #ifdef WCHAR_IS_UCS_4
-  wStringDst.assign(reinterpret_cast<const wchar_t*>(utf32StringSrc.c_str()), utf32StringSrc.length());
+  wStringDst.assign(reinterpret_cast<const wchar_t*>(utf32StringSrc.c_str()),
+                    utf32StringSrc.length());
   return true;
 #else // !WCHAR_IS_UCS_4
   return CInnerConverter::stdConvert(Utf32ToW, utf32StringSrc, wStringDst, failOnBadChar);

@@ -74,7 +74,8 @@ std::string ByLastPlayed(SortAttribute attributes, const SortItem &values)
 
 std::string ByPlaycount(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("%i %s", static_cast<int>(values.at(FieldPlaycount).asInteger()), ByLabel(attributes, values).c_str());
+  return StringUtils::Format("%i %s", static_cast<int>(values.at(FieldPlaycount).asInteger()),
+                             ByLabel(attributes, values).c_str());
 }
 
 std::string ByDate(SortAttribute attributes, const SortItem &values)
@@ -84,7 +85,8 @@ std::string ByDate(SortAttribute attributes, const SortItem &values)
 
 std::string ByDateAdded(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("%s %d", values.at(FieldDateAdded).asString().c_str(), static_cast<int>(values.at(FieldId).asInteger()));
+  return StringUtils::Format("%s %d", values.at(FieldDateAdded).asString().c_str(),
+                             static_cast<int>(values.at(FieldId).asInteger()));
 }
 
 std::string BySize(SortAttribute attributes, const SortItem &values)
@@ -94,7 +96,8 @@ std::string BySize(SortAttribute attributes, const SortItem &values)
 
 std::string ByDriveType(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("%d %s", static_cast<int>(values.at(FieldDriveType).asInteger()), ByLabel(attributes, values).c_str());
+  return StringUtils::Format("%d %s", static_cast<int>(values.at(FieldDriveType).asInteger()),
+                             ByLabel(attributes, values).c_str());
 }
 
 std::string ByTitle(SortAttribute attributes, const SortItem &values)
@@ -281,12 +284,14 @@ std::string ByUserRating(SortAttribute attributes, const SortItem &values)
 
 std::string ByVotes(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("%d %s", static_cast<int>(values.at(FieldVotes).asInteger()), ByLabel(attributes, values).c_str());
+  return StringUtils::Format("%d %s", static_cast<int>(values.at(FieldVotes).asInteger()),
+                             ByLabel(attributes, values).c_str());
 }
 
 std::string ByTop250(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("%d %s", static_cast<int>(values.at(FieldTop250).asInteger()), ByLabel(attributes, values).c_str());
+  return StringUtils::Format("%d %s", static_cast<int>(values.at(FieldTop250).asInteger()),
+                             ByLabel(attributes, values).c_str());
 }
 
 std::string ByMPAA(SortAttribute attributes, const SortItem &values)
@@ -314,9 +319,12 @@ std::string ByEpisodeNumber(SortAttribute attributes, const SortItem &values)
   const CVariant &seasonSpecial = values.at(FieldSeasonSpecialSort);
   if (!episodeSpecial.isNull() && !seasonSpecial.isNull() &&
      (episodeSpecial.asInteger() > 0 || seasonSpecial.asInteger() > 0))
-    num = (static_cast<uint64_t>(seasonSpecial.asInteger()) << 32) + (episodeSpecial.asInteger() << 16) - ((2 << 15) - values.at(FieldEpisodeNumber).asInteger());
+    num = (static_cast<uint64_t>(seasonSpecial.asInteger()) << 32) +
+          (episodeSpecial.asInteger() << 16) -
+          ((2 << 15) - values.at(FieldEpisodeNumber).asInteger());
   else
-    num = (static_cast<uint64_t>(values.at(FieldSeason).asInteger()) << 32) + (values.at(FieldEpisodeNumber).asInteger() << 16);
+    num = (static_cast<uint64_t>(values.at(FieldSeason).asInteger()) << 32) +
+          (values.at(FieldEpisodeNumber).asInteger() << 16);
 
   std::string title;
   if (values.find(FieldMediaType) != values.end() && values.at(FieldMediaType).asString() == MediaTypeMovie)
@@ -339,12 +347,16 @@ std::string BySeason(SortAttribute attributes, const SortItem &values)
 
 std::string ByNumberOfEpisodes(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("%i %s", static_cast<int>(values.at(FieldNumberOfEpisodes).asInteger()), ByLabel(attributes, values).c_str());
+  return StringUtils::Format("%i %s",
+                             static_cast<int>(values.at(FieldNumberOfEpisodes).asInteger()),
+                             ByLabel(attributes, values).c_str());
 }
 
 std::string ByNumberOfWatchedEpisodes(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("%i %s", static_cast<int>(values.at(FieldNumberOfWatchedEpisodes).asInteger()), ByLabel(attributes, values).c_str());
+  return StringUtils::Format("%i %s",
+                             static_cast<int>(values.at(FieldNumberOfWatchedEpisodes).asInteger()),
+                             ByLabel(attributes, values).c_str());
 }
 
 std::string ByTvShowStatus(SortAttribute attributes, const SortItem &values)
@@ -364,7 +376,8 @@ std::string ByProductionCode(SortAttribute attributes, const SortItem &values)
 
 std::string ByVideoResolution(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("%i %s", static_cast<int>(values.at(FieldVideoResolution).asInteger()), ByLabel(attributes, values).c_str());
+  return StringUtils::Format("%i %s", static_cast<int>(values.at(FieldVideoResolution).asInteger()),
+                             ByLabel(attributes, values).c_str());
 }
 
 std::string ByVideoCodec(SortAttribute attributes, const SortItem &values)
@@ -379,7 +392,8 @@ std::string ByVideoAspectRatio(SortAttribute attributes, const SortItem &values)
 
 std::string ByAudioChannels(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("%i %s", static_cast<int>(values.at(FieldAudioChannels).asInteger()), ByLabel(attributes, values).c_str());
+  return StringUtils::Format("%i %s", static_cast<int>(values.at(FieldAudioChannels).asInteger()),
+                             ByLabel(attributes, values).c_str());
 }
 
 std::string ByAudioCodec(SortAttribute attributes, const SortItem &values)
@@ -477,9 +491,11 @@ bool preliminarySort(const SortItem &left, const SortItem &right, bool handleFol
   SortItem::const_iterator itLeft, itRight;
   SortSpecial leftSortSpecial = SortSpecialNone;
   SortSpecial rightSortSpecial = SortSpecialNone;
-  if ((itLeft = left.find(FieldSortSpecial)) != left.end() && itLeft->second.asInteger() <= static_cast<int64_t>(SortSpecialOnBottom))
+  if ((itLeft = left.find(FieldSortSpecial)) != left.end() &&
+      itLeft->second.asInteger() <= static_cast<int64_t>(SortSpecialOnBottom))
     leftSortSpecial = static_cast<SortSpecial>(itLeft->second.asInteger());
-  if ((itRight = right.find(FieldSortSpecial)) != right.end() && itRight->second.asInteger() <= static_cast<int64_t>(SortSpecialOnBottom))
+  if ((itRight = right.find(FieldSortSpecial)) != right.end() &&
+      itRight->second.asInteger() <= static_cast<int64_t>(SortSpecialOnBottom))
     rightSortSpecial = static_cast<SortSpecial>(itRight->second.asInteger());
 
   // one has a special sort

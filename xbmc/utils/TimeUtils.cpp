@@ -23,7 +23,7 @@
 int64_t CurrentHostCounter(void)
 {
 #if defined(TARGET_DARWIN)
-  return( static_cast<int64_t>(CVGetCurrentHostTime()) );
+  return (static_cast<int64_t>(CVGetCurrentHostTime()));
 #elif defined(TARGET_WINDOWS)
   LARGE_INTEGER PerformanceCount;
   QueryPerformanceCounter(&PerformanceCount);
@@ -35,20 +35,20 @@ int64_t CurrentHostCounter(void)
 #else
   clock_gettime(CLOCK_MONOTONIC, &now);
 #endif // CLOCK_MONOTONIC_RAW && !TARGET_ANDROID
-  return( (static_cast<int64_t>(now.tv_sec) * 1000000000L) + now.tv_nsec );
+  return ((static_cast<int64_t>(now.tv_sec) * 1000000000L) + now.tv_nsec);
 #endif
 }
 
 int64_t CurrentHostFrequency(void)
 {
 #if defined(TARGET_DARWIN)
-  return( static_cast<int64_t>(CVGetHostClockFrequency()) );
+  return (static_cast<int64_t>(CVGetHostClockFrequency()));
 #elif defined(TARGET_WINDOWS)
   LARGE_INTEGER Frequency;
   QueryPerformanceFrequency(&Frequency);
   return( (int64_t)Frequency.QuadPart );
 #else
-  return( static_cast<int64_t>(1000000000L) );
+  return (static_cast<int64_t>(1000000000L));
 #endif
 }
 
@@ -60,7 +60,8 @@ void CTimeUtils::UpdateFrameTime(bool flip)
   unsigned int last = frameTime;
   while (frameTime < currentTime)
   {
-    frameTime += static_cast<unsigned int>(1000 / CServiceBroker::GetWinSystem()->GetGfxContext().GetFPS());
+    frameTime +=
+        static_cast<unsigned int>(1000 / CServiceBroker::GetWinSystem()->GetGfxContext().GetFPS());
     // observe wrap around
     if (frameTime < last)
       break;

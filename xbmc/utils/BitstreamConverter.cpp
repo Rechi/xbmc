@@ -380,7 +380,7 @@ bool CBitstreamConverter::Open(enum AVCodecID codec, uint8_t *in_extradata, int 
             // extract the avcC atom data into extradata then write it into avcCData for VDADecoder
             in_extrasize = avio_close_dyn_buf(pb, &in_extradata);
             // make a copy of extradata contents
-            m_extradata = static_cast<uint8_t *>(av_malloc(in_extrasize));
+            m_extradata = static_cast<uint8_t*>(av_malloc(in_extrasize));
             memcpy(m_extradata, in_extradata, in_extrasize);
             m_extrasize = in_extrasize;
             // done with the converted extradata, we MUST free using av_free
@@ -403,7 +403,7 @@ bool CBitstreamConverter::Open(enum AVCodecID codec, uint8_t *in_extradata, int 
             in_extradata[4] = 0xFF;
             m_convert_3byteTo4byteNALSize = true;
 
-            m_extradata = static_cast<uint8_t *>(av_malloc(in_extrasize));
+            m_extradata = static_cast<uint8_t*>(av_malloc(in_extrasize));
             memcpy(m_extradata, in_extradata, in_extrasize);
             m_extrasize = in_extrasize;
             return true;
@@ -677,7 +677,7 @@ bool CBitstreamConverter::BitstreamConvertInitAVC(void *in_extradata, int in_ext
   uint16_t unit_size;
   uint32_t total_size = 0;
   uint8_t *out = NULL, unit_nb, sps_done = 0, sps_seen = 0, pps_seen = 0;
-  const uint8_t *extradata = static_cast<uint8_t*>(in_extradata) + 4;
+  const uint8_t* extradata = static_cast<uint8_t*>(in_extradata) + 4;
   static const uint8_t nalu_header[4] = {0, 0, 0, 1};
 
   // retrieve length coded size
@@ -702,7 +702,7 @@ bool CBitstreamConverter::BitstreamConvertInitAVC(void *in_extradata, int in_ext
     total_size += unit_size + 4;
 
     if (total_size > INT_MAX - AV_INPUT_BUFFER_PADDING_SIZE ||
-      (extradata + 2 + unit_size) > (static_cast<uint8_t*>(in_extradata) + in_extrasize))
+        (extradata + 2 + unit_size) > (static_cast<uint8_t*>(in_extradata) + in_extrasize))
     {
       av_free(out);
       return false;
@@ -755,7 +755,7 @@ bool CBitstreamConverter::BitstreamConvertInitHEVC(void *in_extradata, int in_ex
   uint16_t unit_nb, unit_size;
   uint32_t total_size = 0;
   uint8_t *out = NULL, array_nb, nal_type, sps_seen = 0, pps_seen = 0;
-  const uint8_t *extradata = static_cast<uint8_t*>(in_extradata) + 21;
+  const uint8_t* extradata = static_cast<uint8_t*>(in_extradata) + 21;
   static const uint8_t nalu_header[4] = {0, 0, 0, 1};
 
   // retrieve length coded size
@@ -792,7 +792,7 @@ bool CBitstreamConverter::BitstreamConvertInitHEVC(void *in_extradata, int in_ex
       total_size += unit_size + 4;
 
       if (total_size > INT_MAX - AV_INPUT_BUFFER_PADDING_SIZE ||
-        (extradata + unit_size) > (static_cast<uint8_t*>(in_extradata) + in_extrasize))
+          (extradata + unit_size) > (static_cast<uint8_t*>(in_extradata) + in_extrasize))
       {
         av_free(out);
         return false;

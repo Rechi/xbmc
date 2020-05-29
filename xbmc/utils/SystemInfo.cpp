@@ -318,7 +318,8 @@ std::string CSysInfoJob::GetSystemUpTime(bool bTotalUptime)
   if(bTotalUptime)
   {
     //Total Uptime
-    iInputMinutes = g_sysinfo.GetTotalUptime() + (static_cast<int>(XbmcThreads::SystemClockMillis() / 60000));
+    iInputMinutes =
+        g_sysinfo.GetTotalUptime() + (static_cast<int>(XbmcThreads::SystemClockMillis() / 60000));
   }
   else
   {

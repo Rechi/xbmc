@@ -318,7 +318,8 @@ void CScraperParser::ParseExpression(const std::string& input, std::string& dest
       }
       if (bRepeat && iLen > 0)
       {
-        curInput.erase(0,i+iLen>static_cast<int>(curInput.size())?curInput.size():i+iLen);
+        curInput.erase(0,
+                       i + iLen > static_cast<int>(curInput.size()) ? curInput.size() : i + iLen);
         i = reg.RegFind(curInput.c_str());
       }
       else

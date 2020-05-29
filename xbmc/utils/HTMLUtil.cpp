@@ -216,7 +216,7 @@ void CHTMLUtil::ConvertHTMLToW(const std::wstring& strHTML, std::wstring& strStr
       iPos++;
 
     num = strStripped.substr(i, iPos-i);
-    wchar_t val = static_cast<wchar_t>(wcstol(num.c_str(),NULL,base));
+    wchar_t val = static_cast<wchar_t>(wcstol(num.c_str(), NULL, base));
     if (base == 10)
       num = StringUtils::Format(L"&#%ls;", num.c_str());
     else

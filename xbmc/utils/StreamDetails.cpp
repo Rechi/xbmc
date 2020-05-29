@@ -532,13 +532,13 @@ void CStreamDetails::DetermineBestStreams(void)
     switch (iter->m_eType)
     {
     case CStreamDetail::VIDEO:
-      champion = reinterpret_cast<const CStreamDetail **>(&m_pBestVideo);
+      champion = reinterpret_cast<const CStreamDetail**>(&m_pBestVideo);
       break;
     case CStreamDetail::AUDIO:
-      champion = reinterpret_cast<const CStreamDetail **>(&m_pBestAudio);
+      champion = reinterpret_cast<const CStreamDetail**>(&m_pBestAudio);
       break;
     case CStreamDetail::SUBTITLE:
-      champion = reinterpret_cast<const CStreamDetail **>(&m_pBestSubtitle);
+      champion = reinterpret_cast<const CStreamDetail**>(&m_pBestSubtitle);
       break;
     default:
       champion = NULL;
