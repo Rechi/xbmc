@@ -1621,7 +1621,7 @@ namespace VIDEO
       if (pDlgProgress)
       {
         pDlgProgress->SetLine(2, CVariant{20361});
-        pDlgProgress->SetPercentage((int)((float)(iCurr++)/iMax*100));
+        pDlgProgress->SetPercentage(static_cast<int>(static_cast<float>(iCurr++)/iMax*100));
         pDlgProgress->Progress();
       }
       if (m_handle)
@@ -1918,7 +1918,7 @@ namespace VIDEO
         time = buffer.st_ctime;
       if (time)
       {
-        digest.Update((unsigned char *)&time, sizeof(time));
+        digest.Update(reinterpret_cast<unsigned char *>(&time), sizeof(time));
         return digest.Finalize();
       }
     }
@@ -1956,7 +1956,7 @@ namespace VIDEO
 
     if (time)
     {
-      digest.Update((unsigned char *)&time, sizeof(time));
+      digest.Update(reinterpret_cast<unsigned char *>(&time), sizeof(time));
       return digest.Finalize();
     }
     return "";

@@ -781,7 +781,7 @@ int CVideoDatabase::AddPath(const std::string& strPath, const std::string &paren
         strSQL=PrepareSQL("insert into path (idPath, strPath, idParentPath) values (NULL, '%s', %i)", strPath1.c_str(), idParentPath);
     }
     m_pDS->exec(strSQL);
-    idPath = (int)m_pDS->lastinsertid();
+    idPath = static_cast<int>(m_pDS->lastinsertid());
     return idPath;
   }
   catch (...)
@@ -928,7 +928,7 @@ int CVideoDatabase::AddFile(const std::string& strFileNameAndPath)
 
     strSQL=PrepareSQL("insert into files (idFile, idPath, strFileName) values(NULL, %i, '%s')", idPath, strFileName.c_str());
     m_pDS->exec(strSQL);
-    idFile = (int)m_pDS->lastinsertid();
+    idFile = static_cast<int>(m_pDS->lastinsertid());
     return idFile;
   }
   catch (...)
@@ -1354,7 +1354,7 @@ int CVideoDatabase::AddMovie(const std::string& strFilenameAndPath)
       UpdateFileDateAdded(idFile, strFilenameAndPath);
       std::string strSQL=PrepareSQL("insert into movie (idMovie, idFile) values (NULL, %i)", idFile);
       m_pDS->exec(strSQL);
-      idMovie = (int)m_pDS->lastinsertid();
+      idMovie = static_cast<int>(m_pDS->lastinsertid());
     }
 
     return idMovie;
@@ -1381,7 +1381,7 @@ bool CVideoDatabase::AddPathToTvShow(int idShow, const std::string &path, const 
       {
         time_t now = time(NULL);
         // Make sure we have a valid date (i.e. not in the future)
-        if ((time_t)buffer.st_ctime <= now)
+        if (static_cast<time_t>(buffer.st_ctime) <= now)
         {
           struct tm *time;
 #ifdef HAVE_LOCALTIME_R
@@ -1408,7 +1408,7 @@ bool CVideoDatabase::AddPathToTvShow(int idShow, const std::string &path, const 
 int CVideoDatabase::AddTvShow()
 {
   if (ExecuteQuery("INSERT INTO tvshow(idShow) VALUES(NULL)"))
-    return (int)m_pDS->lastinsertid();
+    return static_cast<int>(m_pDS->lastinsertid());
   return -1;
 }
 
@@ -1429,7 +1429,7 @@ int CVideoDatabase::AddEpisode(int idShow, const std::string& strFilenameAndPath
 
     std::string strSQL=PrepareSQL("insert into episode (idEpisode, idFile, idShow) values (NULL, %i, %i)", idFile, idShow);
     m_pDS->exec(strSQL);
-    return (int)m_pDS->lastinsertid();
+    return static_cast<int>(m_pDS->lastinsertid());
   }
   catch (...)
   {
@@ -1456,7 +1456,7 @@ int CVideoDatabase::AddMusicVideo(const std::string& strFilenameAndPath)
       UpdateFileDateAdded(idFile, strFilenameAndPath);
       std::string strSQL=PrepareSQL("insert into musicvideo (idMVideo, idFile) values (NULL, %i)", idFile);
       m_pDS->exec(strSQL);
-      idMVideo = (int)m_pDS->lastinsertid();
+      idMVideo = static_cast<int>(m_pDS->lastinsertid());
     }
 
     return idMVideo;
@@ -1486,7 +1486,7 @@ int CVideoDatabase::AddToTable(const std::string& table, const std::string& firs
       // doesnt exists, add it
       strSQL = PrepareSQL("insert into %s (%s, %s) values(NULL, '%s')", table.c_str(), firstField.c_str(), secondField.c_str(), value.substr(0, 255).c_str());
       m_pDS->exec(strSQL);
-      int id = (int)m_pDS->lastinsertid();
+      int id = static_cast<int>(m_pDS->lastinsertid());
       return id;
     }
     else
@@ -1546,7 +1546,7 @@ int CVideoDatabase::AddRatings(int mediaId, const char *mediaType, const RatingM
         // doesnt exists, add it
         strSQL = PrepareSQL("INSERT INTO rating (media_id, media_type, rating_type, rating, votes) VALUES (%i, '%s', '%s', %f, %i)", mediaId, mediaType, i.first.c_str(), i.second.rating, i.second.votes);
         m_pDS->exec(strSQL);
-        id = (int)m_pDS->lastinsertid();
+        id = static_cast<int>(m_pDS->lastinsertid());
       }
       else
       {
@@ -1611,7 +1611,7 @@ int CVideoDatabase::AddUniqueIDs(int mediaId, const char *mediaType, const CVide
         // doesnt exists, add it
         strSQL = PrepareSQL("INSERT INTO uniqueid (media_id, media_type, value, type) VALUES (%i, '%s', '%s', '%s')", mediaId, mediaType, i.second.c_str(), i.first.c_str());
         m_pDS->exec(strSQL);
-        id = (int)m_pDS->lastinsertid();
+        id = static_cast<int>(m_pDS->lastinsertid());
       }
       else
       {
@@ -1699,7 +1699,7 @@ int CVideoDatabase::AddActor(const std::string& name, const std::string& thumbUR
       // doesnt exists, add it
       strSQL=PrepareSQL("insert into actor (actor_id, name, art_urls) values(NULL, '%s', '%s')", trimmedName.substr(0,255).c_str(), thumbURLs.c_str());
       m_pDS->exec(strSQL);
-      idActor = (int)m_pDS->lastinsertid();
+      idActor = static_cast<int>(m_pDS->lastinsertid());
     }
     else
     {
@@ -2321,14 +2321,14 @@ std::string CVideoDatabase::GetValueString(const CVideoInfoTag &details, int min
     switch (offsets[i].type)
     {
     case VIDEODB_TYPE_STRING:
-      conditions.emplace_back(PrepareSQL("c%02d='%s'", i, ((const std::string*)(((const char*)&details)+offsets[i].offset))->c_str()));
+      conditions.emplace_back(PrepareSQL("c%02d='%s'", i, (reinterpret_cast<const std::string*>((reinterpret_cast<const char*>(&details))+offsets[i].offset))->c_str()));
       break;
     case VIDEODB_TYPE_INT:
-      conditions.emplace_back(PrepareSQL("c%02d='%i'", i, *(const int*)(((const char*)&details)+offsets[i].offset)));
+      conditions.emplace_back(PrepareSQL("c%02d='%i'", i, *reinterpret_cast<const int*>((reinterpret_cast<const char*>(&details))+offsets[i].offset)));
       break;
     case VIDEODB_TYPE_COUNT:
       {
-        int value = *(const int*)(((const char*)&details)+offsets[i].offset);
+        int value = *reinterpret_cast<const int*>((reinterpret_cast<const char*>(&details))+offsets[i].offset);
         if (value)
           conditions.emplace_back(PrepareSQL("c%02d=%i", i, value));
         else
@@ -2336,20 +2336,20 @@ std::string CVideoDatabase::GetValueString(const CVideoInfoTag &details, int min
       }
       break;
     case VIDEODB_TYPE_BOOL:
-      conditions.emplace_back(PrepareSQL("c%02d='%s'", i, *(const bool*)(((const char*)&details)+offsets[i].offset)?"true":"false"));
+      conditions.emplace_back(PrepareSQL("c%02d='%s'", i, *reinterpret_cast<const bool*>((reinterpret_cast<const char*>(&details))+offsets[i].offset)?"true":"false"));
       break;
     case VIDEODB_TYPE_FLOAT:
-      conditions.emplace_back(PrepareSQL("c%02d='%f'", i, *(const float*)(((const char*)&details)+offsets[i].offset)));
+      conditions.emplace_back(PrepareSQL("c%02d='%f'", i, *reinterpret_cast<const float*>((reinterpret_cast<const char*>(&details))+offsets[i].offset)));
       break;
     case VIDEODB_TYPE_STRINGARRAY:
-      conditions.emplace_back(PrepareSQL("c%02d='%s'", i, StringUtils::Join(*((const std::vector<std::string>*)(((const char*)&details)+offsets[i].offset)),
+      conditions.emplace_back(PrepareSQL("c%02d='%s'", i, StringUtils::Join(*(reinterpret_cast<const std::vector<std::string>*>((reinterpret_cast<const char*>(&details))+offsets[i].offset)),
                                                                           CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_videoItemSeparator).c_str()));
       break;
     case VIDEODB_TYPE_DATE:
-      conditions.emplace_back(PrepareSQL("c%02d='%s'", i, ((const CDateTime*)(((const char*)&details)+offsets[i].offset))->GetAsDBDate().c_str()));
+      conditions.emplace_back(PrepareSQL("c%02d='%s'", i, (reinterpret_cast<const CDateTime*>((reinterpret_cast<const char*>(&details))+offsets[i].offset))->GetAsDBDate().c_str()));
       break;
     case VIDEODB_TYPE_DATETIME:
-      conditions.emplace_back(PrepareSQL("c%02d='%s'", i, ((const CDateTime*)(((const char*)&details)+offsets[i].offset))->GetAsDBDateTime().c_str()));
+      conditions.emplace_back(PrepareSQL("c%02d='%s'", i, (reinterpret_cast<const CDateTime*>((reinterpret_cast<const char*>(&details))+offsets[i].offset))->GetAsDBDateTime().c_str()));
       break;
     case VIDEODB_TYPE_UNUSED: // Skip the unused field to avoid populating unused data
       continue;
@@ -2930,7 +2930,7 @@ int CVideoDatabase::AddSeason(int showID, int season, const std::string& name /*
   if (seasonId < 0)
   {
     if (ExecuteQuery(PrepareSQL("INSERT INTO seasons (idShow, season, name) VALUES(%i, %i, '%s')", showID, season, name.c_str())))
-      seasonId = (int)m_pDS->lastinsertid();
+      seasonId = static_cast<int>(m_pDS->lastinsertid());
   }
   return seasonId;
 }
@@ -3030,7 +3030,7 @@ void CVideoDatabase::SetStreamDetailsForFileId(const CStreamDetails& details, in
       m_pDS->exec(PrepareSQL("INSERT INTO streamdetails "
         "(idFile, iStreamType, strVideoCodec, fVideoAspect, iVideoWidth, iVideoHeight, iVideoDuration, strStereoMode, strVideoLanguage) "
         "VALUES (%i,%i,'%s',%f,%i,%i,%i,'%s','%s')",
-        idFile, (int)CStreamDetail::VIDEO,
+        idFile, static_cast<int>(CStreamDetail::VIDEO),
         details.GetVideoCodec(i).c_str(), details.GetVideoAspect(i),
         details.GetVideoWidth(i), details.GetVideoHeight(i), details.GetVideoDuration(i),
         details.GetStereoMode(i).c_str(),
@@ -3041,7 +3041,7 @@ void CVideoDatabase::SetStreamDetailsForFileId(const CStreamDetails& details, in
       m_pDS->exec(PrepareSQL("INSERT INTO streamdetails "
         "(idFile, iStreamType, strAudioCodec, iAudioChannels, strAudioLanguage) "
         "VALUES (%i,%i,'%s',%i,'%s')",
-        idFile, (int)CStreamDetail::AUDIO,
+        idFile, static_cast<int>(CStreamDetail::AUDIO),
         details.GetAudioCodec(i).c_str(), details.GetAudioChannels(i),
         details.GetAudioLanguage(i).c_str()));
     }
@@ -3050,7 +3050,7 @@ void CVideoDatabase::SetStreamDetailsForFileId(const CStreamDetails& details, in
       m_pDS->exec(PrepareSQL("INSERT INTO streamdetails "
         "(idFile, iStreamType, strSubtitleLanguage) "
         "VALUES (%i,%i,'%s')",
-        idFile, (int)CStreamDetail::SUBTITLE,
+        idFile, static_cast<int>(CStreamDetail::SUBTITLE),
         details.GetSubtitleLanguage(i).c_str()));
     }
 
@@ -3146,7 +3146,7 @@ void CVideoDatabase::GetBookMarksForFile(const std::string& strFilenameAndPath, 
       if (nullptr == m_pDS)
         return;
 
-      std::string strSQL=PrepareSQL("select * from bookmark where idFile=%i and type=%i order by timeInSeconds", idFile, (int)type);
+      std::string strSQL=PrepareSQL("select * from bookmark where idFile=%i and type=%i order by timeInSeconds", idFile, static_cast<int>(type));
       m_pDS->query( strSQL );
       while (!m_pDS->eof())
       {
@@ -3284,7 +3284,7 @@ void CVideoDatabase::AddBookMarkToFile(const std::string& strFilenameAndPath, co
       /* get a bookmark within the same time as previous */
       double mintime = bookmark.timeInSeconds - 0.5f;
       double maxtime = bookmark.timeInSeconds + 0.5f;
-      strSQL=PrepareSQL("select idBookmark from bookmark where idFile=%i and type=%i and (timeInSeconds between %f and %f) and playerState='%s'", idFile, (int)type, mintime, maxtime, bookmark.playerState.c_str());
+      strSQL=PrepareSQL("select idBookmark from bookmark where idFile=%i and type=%i and (timeInSeconds between %f and %f) and playerState='%s'", idFile, static_cast<int>(type), mintime, maxtime, bookmark.playerState.c_str());
     }
 
     if (type != CBookmark::EPISODE)
@@ -3299,7 +3299,7 @@ void CVideoDatabase::AddBookMarkToFile(const std::string& strFilenameAndPath, co
     if (idBookmark >= 0 )
       strSQL=PrepareSQL("update bookmark set timeInSeconds = %f, totalTimeInSeconds = %f, thumbNailImage = '%s', player = '%s', playerState = '%s' where idBookmark = %i", bookmark.timeInSeconds, bookmark.totalTimeInSeconds, bookmark.thumbNailImage.c_str(), bookmark.player.c_str(), bookmark.playerState.c_str(), idBookmark);
     else
-      strSQL=PrepareSQL("insert into bookmark (idBookmark, idFile, timeInSeconds, totalTimeInSeconds, thumbNailImage, player, playerState, type) values(NULL,%i,%f,%f,'%s','%s','%s', %i)", idFile, bookmark.timeInSeconds, bookmark.totalTimeInSeconds, bookmark.thumbNailImage.c_str(), bookmark.player.c_str(), bookmark.playerState.c_str(), (int)type);
+      strSQL=PrepareSQL("insert into bookmark (idBookmark, idFile, timeInSeconds, totalTimeInSeconds, thumbNailImage, player, playerState, type) values(NULL,%i,%f,%f,'%s','%s','%s', %i)", idFile, bookmark.timeInSeconds, bookmark.totalTimeInSeconds, bookmark.thumbNailImage.c_str(), bookmark.player.c_str(), bookmark.playerState.c_str(), static_cast<int>(type));
 
     m_pDS->exec(strSQL);
   }
@@ -3367,7 +3367,7 @@ void CVideoDatabase::ClearBookMarksOfFile(int idFile, CBookmark::EType type /*= 
     if (nullptr == m_pDS)
       return;
 
-    std::string strSQL=PrepareSQL("delete from bookmark where idFile=%i and type=%i", idFile, (int)type);
+    std::string strSQL=PrepareSQL("delete from bookmark where idFile=%i and type=%i", idFile, static_cast<int>(type));
     m_pDS->exec(strSQL);
     if (type == CBookmark::EPISODE)
     {
@@ -3395,7 +3395,7 @@ bool CVideoDatabase::GetBookMarkForEpisode(const CVideoInfoTag& tag, CBookmark& 
       bookmark.thumbNailImage = m_pDS2->fv("thumbNailImage").get_asString();
       bookmark.playerState = m_pDS2->fv("playerState").get_asString();
       bookmark.player = m_pDS2->fv("player").get_asString();
-      bookmark.type = (CBookmark::EType)m_pDS2->fv("type").get_asInt();
+      bookmark.type = static_cast<CBookmark::EType>(m_pDS2->fv("type").get_asInt());
     }
     else
     {
@@ -3422,7 +3422,7 @@ void CVideoDatabase::AddBookMarkForEpisode(const CVideoInfoTag& tag, const CBook
     m_pDS->exec(strSQL);
 
     AddBookMarkToFile(tag.m_strFileNameAndPath, bookmark, CBookmark::EPISODE);
-    int idBookmark = (int)m_pDS->lastinsertid();
+    int idBookmark = static_cast<int>(m_pDS->lastinsertid());
     strSQL = PrepareSQL("update episode set c%02d=%i where c%02d=%i and c%02d=%i and idFile=%i", VIDEODB_ID_EPISODE_BOOKMARK, idBookmark, VIDEODB_ID_EPISODE_SEASON, tag.m_iSeason, VIDEODB_ID_EPISODE_EPISODE, tag.m_iEpisode, idFile);
     m_pDS->exec(strSQL);
   }
@@ -3775,30 +3775,30 @@ void CVideoDatabase::GetDetailsFromDB(const dbiplus::sql_record* const record, i
     switch (offsets[i].type)
     {
     case VIDEODB_TYPE_STRING:
-      *(std::string*)(((char*)&details)+offsets[i].offset) = record->at(i+idxOffset).get_asString();
+      *reinterpret_cast<std::string*>((reinterpret_cast<char*>(&details))+offsets[i].offset) = record->at(i+idxOffset).get_asString();
       break;
     case VIDEODB_TYPE_INT:
     case VIDEODB_TYPE_COUNT:
-      *(int*)(((char*)&details)+offsets[i].offset) = record->at(i+idxOffset).get_asInt();
+      *reinterpret_cast<int*>((reinterpret_cast<char*>(&details))+offsets[i].offset) = record->at(i+idxOffset).get_asInt();
       break;
     case VIDEODB_TYPE_BOOL:
-      *(bool*)(((char*)&details)+offsets[i].offset) = record->at(i+idxOffset).get_asBool();
+      *reinterpret_cast<bool*>((reinterpret_cast<char*>(&details))+offsets[i].offset) = record->at(i+idxOffset).get_asBool();
       break;
     case VIDEODB_TYPE_FLOAT:
-      *(float*)(((char*)&details)+offsets[i].offset) = record->at(i+idxOffset).get_asFloat();
+      *reinterpret_cast<float*>((reinterpret_cast<char*>(&details))+offsets[i].offset) = record->at(i+idxOffset).get_asFloat();
       break;
     case VIDEODB_TYPE_STRINGARRAY:
     {
       std::string value = record->at(i+idxOffset).get_asString();
       if (!value.empty())
-        *(std::vector<std::string>*)(((char*)&details)+offsets[i].offset) = StringUtils::Split(value, CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_videoItemSeparator);
+        *reinterpret_cast<std::vector<std::string>*>((reinterpret_cast<char*>(&details))+offsets[i].offset) = StringUtils::Split(value, CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_videoItemSeparator);
       break;
     }
     case VIDEODB_TYPE_DATE:
-      ((CDateTime*)(((char*)&details)+offsets[i].offset))->SetFromDBDate(record->at(i+idxOffset).get_asString());
+      (reinterpret_cast<CDateTime*>((reinterpret_cast<char*>(&details))+offsets[i].offset))->SetFromDBDate(record->at(i+idxOffset).get_asString());
       break;
     case VIDEODB_TYPE_DATETIME:
-      ((CDateTime*)(((char*)&details)+offsets[i].offset))->SetFromDBDateTime(record->at(i+idxOffset).get_asString());
+      (reinterpret_cast<CDateTime*>((reinterpret_cast<char*>(&details))+offsets[i].offset))->SetFromDBDateTime(record->at(i+idxOffset).get_asString());
       break;
     case VIDEODB_TYPE_UNUSED: // Skip the unused field to avoid populating unused data
       continue;
@@ -3872,7 +3872,7 @@ bool CVideoDatabase::GetStreamDetails(CVideoInfoTag& tag) const
 
     while (!pDS->eof())
     {
-      CStreamDetail::StreamType e = (CStreamDetail::StreamType)pDS->fv(1).get_asInt();
+      CStreamDetail::StreamType e = static_cast<CStreamDetail::StreamType>(pDS->fv(1).get_asInt());
       switch (e)
       {
       case CStreamDetail::VIDEO:
@@ -4434,9 +4434,9 @@ bool CVideoDatabase::GetVideoSettings(int idFile, CVideoSettings &settings)
       settings.m_SubtitleStream = m_pDS->fv("SubtitleStream").get_asInt();
       settings.m_ViewMode = m_pDS->fv("ViewMode").get_asInt();
       settings.m_ResumeTime = m_pDS->fv("ResumeTime").get_asInt();
-      settings.m_InterlaceMethod = (EINTERLACEMETHOD)m_pDS->fv("Deinterlace").get_asInt();
+      settings.m_InterlaceMethod = static_cast<EINTERLACEMETHOD>(m_pDS->fv("Deinterlace").get_asInt());
       settings.m_VolumeAmplification = m_pDS->fv("VolumeAmplification").get_asFloat();
-      settings.m_ScalingMethod = (ESCALINGMETHOD)m_pDS->fv("ScalingMethod").get_asInt();
+      settings.m_ScalingMethod = static_cast<ESCALINGMETHOD>(m_pDS->fv("ScalingMethod").get_asInt());
       settings.m_StereoMode = m_pDS->fv("StereoMode").get_asInt();
       settings.m_StereoInvert = m_pDS->fv("StereoInvert").get_asBool();
       settings.m_SubtitleCached = false;
@@ -4961,7 +4961,7 @@ void CVideoDatabase::RemoveContentForPath(const std::string& strPath, CGUIDialog
       bool bMvidsChecked=false;
       if (progress)
       {
-        progress->SetPercentage((int)((float)(iCurr++)/paths.size()*100.f));
+        progress->SetPercentage(static_cast<int>(static_cast<float>(iCurr++)/paths.size()*100.f));
         progress->Progress();
       }
 
@@ -5476,8 +5476,8 @@ void CVideoDatabase::UpdateTables(int iVersion)
     m_pDS->query(sql);
     while (!m_pDS->eof())
     {
-      m_pDS2->exec(PrepareSQL("INSERT INTO rating(media_id, media_type, rating_type, rating, votes) VALUES (%i, 'movie', 'default', %f, %i)", m_pDS->fv(0).get_asInt(), (float)strtod(m_pDS->fv(1).get_asString().c_str(), NULL), StringUtils::ReturnDigits(m_pDS->fv(2).get_asString())));
-      int idRating = (int)m_pDS2->lastinsertid();
+      m_pDS2->exec(PrepareSQL("INSERT INTO rating(media_id, media_type, rating_type, rating, votes) VALUES (%i, 'movie', 'default', %f, %i)", m_pDS->fv(0).get_asInt(), static_cast<float>(strtod(m_pDS->fv(1).get_asString().c_str(), NULL)), StringUtils::ReturnDigits(m_pDS->fv(2).get_asString())));
+      int idRating = static_cast<int>(m_pDS2->lastinsertid());
       m_pDS2->exec(PrepareSQL("UPDATE movie SET c%02d=%i WHERE idMovie=%i", VIDEODB_ID_RATING_ID, idRating, m_pDS->fv(0).get_asInt()));
       m_pDS->next();
     }
@@ -5487,8 +5487,8 @@ void CVideoDatabase::UpdateTables(int iVersion)
     m_pDS->query(sql);
     while (!m_pDS->eof())
     {
-      m_pDS2->exec(PrepareSQL("INSERT INTO rating(media_id, media_type, rating_type, rating, votes) VALUES (%i, 'tvshow', 'default', %f, %i)", m_pDS->fv(0).get_asInt(), (float)strtod(m_pDS->fv(1).get_asString().c_str(), NULL), StringUtils::ReturnDigits(m_pDS->fv(2).get_asString())));
-      int idRating = (int)m_pDS2->lastinsertid();
+      m_pDS2->exec(PrepareSQL("INSERT INTO rating(media_id, media_type, rating_type, rating, votes) VALUES (%i, 'tvshow', 'default', %f, %i)", m_pDS->fv(0).get_asInt(), static_cast<float>(strtod(m_pDS->fv(1).get_asString().c_str(), NULL)), StringUtils::ReturnDigits(m_pDS->fv(2).get_asString())));
+      int idRating = static_cast<int>(m_pDS2->lastinsertid());
       m_pDS2->exec(PrepareSQL("UPDATE tvshow SET c%02d=%i WHERE idShow=%i", VIDEODB_ID_TV_RATING_ID, idRating, m_pDS->fv(0).get_asInt()));
       m_pDS->next();
     }
@@ -5498,8 +5498,8 @@ void CVideoDatabase::UpdateTables(int iVersion)
     m_pDS->query(sql);
     while (!m_pDS->eof())
     {
-      m_pDS2->exec(PrepareSQL("INSERT INTO rating(media_id, media_type, rating_type, rating, votes) VALUES (%i, 'episode', 'default', %f, %i)", m_pDS->fv(0).get_asInt(), (float)strtod(m_pDS->fv(1).get_asString().c_str(), NULL), StringUtils::ReturnDigits(m_pDS->fv(2).get_asString())));
-      int idRating = (int)m_pDS2->lastinsertid();
+      m_pDS2->exec(PrepareSQL("INSERT INTO rating(media_id, media_type, rating_type, rating, votes) VALUES (%i, 'episode', 'default', %f, %i)", m_pDS->fv(0).get_asInt(), static_cast<float>(strtod(m_pDS->fv(1).get_asString().c_str(), NULL)), StringUtils::ReturnDigits(m_pDS->fv(2).get_asString())));
+      int idRating = static_cast<int>(m_pDS2->lastinsertid());
       m_pDS2->exec(PrepareSQL("UPDATE episode SET c%02d=%i WHERE idEpisode=%i", VIDEODB_ID_EPISODE_RATING_ID, idRating, m_pDS->fv(0).get_asInt()));
       m_pDS->next();
     }
@@ -5589,7 +5589,7 @@ void CVideoDatabase::UpdateTables(int iVersion)
             m_pDS2->exec(PrepareSQL("INSERT INTO uniqueid(media_id, media_type, type, value) VALUES (%i, '%s', 'imdb', '%s')", mediaid, mediatype.c_str(), uniqueid.c_str()));
           else
             m_pDS2->exec(PrepareSQL("INSERT INTO uniqueid(media_id, media_type, type, value) VALUES (%i, '%s', 'unknown', '%s')", mediaid, mediatype.c_str(), uniqueid.c_str()));
-          m_pDS2->exec(PrepareSQL("UPDATE %s SET c%02d='%i' WHERE %s=%i", mediatype.c_str(), columnUniqueID, (int)m_pDS2->lastinsertid(), columnID.c_str(), mediaid));
+          m_pDS2->exec(PrepareSQL("UPDATE %s SET c%02d='%i' WHERE %s=%i", mediatype.c_str(), columnUniqueID, static_cast<int>(m_pDS2->lastinsertid()), columnID.c_str(), mediaid));
         }
         pDS->next();
       }
@@ -5649,10 +5649,10 @@ void CVideoDatabase::UpdateTables(int iVersion)
           if (parentid < 0)
           {
             m_pDS2->exec(PrepareSQL("INSERT INTO path (strPath) VALUES ('%s')", parent.c_str()));
-            parentid = (int)m_pDS2->lastinsertid();
+            parentid = static_cast<int>(m_pDS2->lastinsertid());
           }
           m_pDS2->exec(PrepareSQL("INSERT INTO path (strPath, idParentPath) VALUES ('%s', %i)", path.c_str(), parentid));
-          pathid = (int)m_pDS2->lastinsertid();
+          pathid = static_cast<int>(m_pDS2->lastinsertid());
         }
         m_pDS2->query(PrepareSQL("SELECT idFile FROM files WHERE strFileName='%s' AND idPath=%i", fn.c_str(), pathid));
         bool exists = !m_pDS2->eof();
@@ -5732,7 +5732,7 @@ bool CVideoDatabase::GetPlayCounts(const std::string &strPath, CFileItemList &it
         m_pDS->query(PrepareSQL(sql +
           "INNER JOIN path ON files.idPath = path.idPath "
           "WHERE files.strFilename='%s' AND path.strPath='%s'",
-          (int)CBookmark::RESUME, filename.c_str(), path.c_str()));
+          static_cast<int>(CBookmark::RESUME), filename.c_str(), path.c_str()));
 
         if (!m_pDS->eof())
         {
@@ -5747,7 +5747,7 @@ bool CVideoDatabase::GetPlayCounts(const std::string &strPath, CFileItemList &it
     else
     {
       //! @todo also test a single query for the above and below
-      sql = PrepareSQL(sql + "WHERE files.idPath=%i", (int)CBookmark::RESUME, pathID);
+      sql = PrepareSQL(sql + "WHERE files.idPath=%i", static_cast<int>(CBookmark::RESUME), pathID);
 
       if (RunQuery(sql) <= 0)
         return false;
@@ -6965,7 +6965,7 @@ bool CVideoDatabase::GetSeasonsByWhere(const std::string& strBaseDir, const Filt
       sorting.sortBy == SortByNone &&
       (sorting.limitStart > 0 || sorting.limitEnd > 0))
     {
-      total = (int)strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10);
+      total = static_cast<int>(strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10));
       strSQLExtra += DatabaseUtils::BuildLimitClause(sorting.limitEnd, sorting.limitStart);
     }
 
@@ -7087,7 +7087,7 @@ bool CVideoDatabase::GetSortedVideos(const MediaType &mediaType, const std::stri
       sortDescription.sortBy == SortByYear ||
       sortDescription.sortBy == SortByLastPlayed ||
       sortDescription.sortBy == SortByPlaycount)
-    sorting.sortAttributes = (SortAttribute)(sortDescription.sortAttributes | SortAttributeIgnoreFolders);
+    sorting.sortAttributes = static_cast<SortAttribute>(sortDescription.sortAttributes | SortAttributeIgnoreFolders);
 
   bool success = false;
   if (mediaType == MediaTypeMovie)
@@ -7263,7 +7263,7 @@ bool CVideoDatabase::GetMoviesByWhere(const std::string& strBaseDir, const Filte
         sorting.sortBy == SortByNone &&
        (sorting.limitStart > 0 || sorting.limitEnd > 0))
     {
-      total = (int)strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10);
+      total = static_cast<int>(strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10));
       strSQLExtra += DatabaseUtils::BuildLimitClause(sorting.limitEnd, sorting.limitStart);
     }
 
@@ -7289,7 +7289,7 @@ bool CVideoDatabase::GetMoviesByWhere(const std::string& strBaseDir, const Filte
     const query_data &data = m_pDS->get_result_set().records;
     for (const auto &i : results)
     {
-      unsigned int targetRow = (unsigned int)i.at(FieldRow).asInteger();
+      unsigned int targetRow = static_cast<unsigned int>(i.at(FieldRow).asInteger());
       const dbiplus::sql_record* const record = data.at(targetRow);
 
       CVideoInfoTag movie = GetDetailsForMovie(record, getDetails);
@@ -7374,7 +7374,7 @@ bool CVideoDatabase::GetTvShowsByWhere(const std::string& strBaseDir, const Filt
         sorting.sortBy == SortByNone &&
         (sorting.limitStart > 0 || sorting.limitEnd > 0))
     {
-      total = (int)strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10);
+      total = static_cast<int>(strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10));
       strSQLExtra += DatabaseUtils::BuildLimitClause(sorting.limitEnd, sorting.limitStart);
     }
 
@@ -7399,7 +7399,7 @@ bool CVideoDatabase::GetTvShowsByWhere(const std::string& strBaseDir, const Filt
     const query_data &data = m_pDS->get_result_set().records;
     for (const auto &i : results)
     {
-      unsigned int targetRow = (unsigned int)i.at(FieldRow).asInteger();
+      unsigned int targetRow = static_cast<unsigned int>(i.at(FieldRow).asInteger());
       const dbiplus::sql_record* const record = data.at(targetRow);
 
       CFileItemPtr pItem(new CFileItem());
@@ -7502,7 +7502,7 @@ bool CVideoDatabase::GetEpisodesByWhere(const std::string& strBaseDir, const Fil
       sorting.sortBy == SortByNone &&
       (sorting.limitStart > 0 || sorting.limitEnd > 0))
     {
-      total = (int)strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10);
+      total = static_cast<int>(strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10));
       strSQLExtra += DatabaseUtils::BuildLimitClause(sorting.limitEnd, sorting.limitStart);
     }
 
@@ -7529,7 +7529,7 @@ bool CVideoDatabase::GetEpisodesByWhere(const std::string& strBaseDir, const Fil
     const query_data &data = m_pDS->get_result_set().records;
     for (const auto &i : results)
     {
-      unsigned int targetRow = (unsigned int)i.at(FieldRow).asInteger();
+      unsigned int targetRow = static_cast<unsigned int>(i.at(FieldRow).asInteger());
       const dbiplus::sql_record* const record = data.at(targetRow);
 
       CVideoInfoTag episode = GetDetailsForEpisode(record, getDetails);
@@ -8371,7 +8371,7 @@ bool CVideoDatabase::GetMusicVideosByWhere(const std::string &baseDir, const Fil
       sorting.sortBy == SortByNone &&
       (sorting.limitStart > 0 || sorting.limitEnd > 0))
     {
-      total = (int)strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10);
+      total = static_cast<int>(strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10));
       strSQLExtra += DatabaseUtils::BuildLimitClause(sorting.limitEnd, sorting.limitStart);
     }
 
@@ -8397,7 +8397,7 @@ bool CVideoDatabase::GetMusicVideosByWhere(const std::string &baseDir, const Fil
     const query_data &data = m_pDS->get_result_set().records;
     for (const auto &i : results)
     {
-      unsigned int targetRow = (unsigned int)i.at(FieldRow).asInteger();
+      unsigned int targetRow = static_cast<unsigned int>(i.at(FieldRow).asInteger());
       const dbiplus::sql_record* const record = data.at(targetRow);
 
       CVideoInfoTag musicvideo = GetDetailsForMusicVideo(record, getDetails);
@@ -9039,7 +9039,7 @@ void CVideoDatabase::CleanDatabase(CGUIDialogProgressBarHandle* handle, const st
         }
       }
       else if (handle != NULL)
-        handle->SetPercentage(current * 100 / (float)total);
+        handle->SetPercentage(current * 100 / static_cast<float>(total));
 
       m_pDS2->next();
       current++;
@@ -10463,12 +10463,12 @@ bool CVideoDatabase::GetItemsForPath(const std::string &content, const std::stri
 
 void CVideoDatabase::AppendIdLinkFilter(const char* field, const char *table, const MediaType& mediaType, const char *view, const char *viewKey, const CUrlOptions::UrlOptions& options, Filter &filter)
 {
-  auto option = options.find((std::string)field + "id");
+  auto option = options.find(std::string(field) + "id");
   if (option == options.end())
     return;
 
   filter.AppendJoin(PrepareSQL("JOIN %s_link ON %s_link.media_id=%s_view.%s AND %s_link.media_type='%s'", field, field, view, viewKey, field, mediaType.c_str()));
-  filter.AppendWhere(PrepareSQL("%s_link.%s_id = %i", field, table, (int)option->second.asInteger()));
+  filter.AppendWhere(PrepareSQL("%s_link.%s_id = %i", field, table, static_cast<int>(option->second.asInteger())));
 }
 
 void CVideoDatabase::AppendLinkFilter(const char* field, const char *table, const MediaType& mediaType, const char *view, const char *viewKey, const CUrlOptions::UrlOptions& options, Filter &filter)
@@ -10507,14 +10507,14 @@ bool CVideoDatabase::GetFilter(CDbUrl &videoUrl, Filter &filter, SortDescription
 
     auto option = options.find("year");
     if (option != options.end())
-      filter.AppendWhere(PrepareSQL("movie_view.premiered like '%i%%'", (int)option->second.asInteger()));
+      filter.AppendWhere(PrepareSQL("movie_view.premiered like '%i%%'", static_cast<int>(option->second.asInteger())));
 
     AppendIdLinkFilter("actor", "actor", "movie", "movie", "idMovie", options, filter);
     AppendLinkFilter("actor", "actor", "movie", "movie", "idMovie", options, filter);
 
     option = options.find("setid");
     if (option != options.end())
-      filter.AppendWhere(PrepareSQL("movie_view.idSet = %i", (int)option->second.asInteger()));
+      filter.AppendWhere(PrepareSQL("movie_view.idSet = %i", static_cast<int>(option->second.asInteger())));
 
     option = options.find("set");
     if (option != options.end())
@@ -10537,7 +10537,7 @@ bool CVideoDatabase::GetFilter(CDbUrl &videoUrl, Filter &filter, SortDescription
 
       auto option = options.find("year");
       if (option != options.end())
-        filter.AppendWhere(PrepareSQL("tvshow_view.c%02d like '%%%i%%'", VIDEODB_ID_TV_PREMIERED, (int)option->second.asInteger()));
+        filter.AppendWhere(PrepareSQL("tvshow_view.c%02d like '%%%i%%'", VIDEODB_ID_TV_PREMIERED, static_cast<int>(option->second.asInteger())));
 
       AppendIdLinkFilter("actor", "actor", "tvshow", "tvshow", "idShow", options, filter);
       AppendLinkFilter("actor", "actor", "tvshow", "tvshow", "idShow", options, filter);
@@ -10549,7 +10549,7 @@ bool CVideoDatabase::GetFilter(CDbUrl &videoUrl, Filter &filter, SortDescription
     {
       auto option = options.find("tvshowid");
       if (option != options.end())
-        filter.AppendWhere(PrepareSQL("season_view.idShow = %i", (int)option->second.asInteger()));
+        filter.AppendWhere(PrepareSQL("season_view.idShow = %i", static_cast<int>(option->second.asInteger())));
 
       AppendIdLinkFilter("genre", "genre", "tvshow", "season", "idShow", options, filter);
 
@@ -10557,7 +10557,7 @@ bool CVideoDatabase::GetFilter(CDbUrl &videoUrl, Filter &filter, SortDescription
 
       option = options.find("year");
       if (option != options.end())
-        filter.AppendWhere(PrepareSQL("season_view.premiered like '%%%i%%'", (int)option->second.asInteger()));
+        filter.AppendWhere(PrepareSQL("season_view.premiered like '%%%i%%'", static_cast<int>(option->second.asInteger())));
 
       AppendIdLinkFilter("actor", "actor", "tvshow", "season", "idShow", options, filter);
     }
@@ -10566,12 +10566,12 @@ bool CVideoDatabase::GetFilter(CDbUrl &videoUrl, Filter &filter, SortDescription
       int idShow = -1;
       auto option = options.find("tvshowid");
       if (option != options.end())
-        idShow = (int)option->second.asInteger();
+        idShow = static_cast<int>(option->second.asInteger());
 
       int season = -1;
       option = options.find("season");
       if (option != options.end())
-        season = (int)option->second.asInteger();
+        season = static_cast<int>(option->second.asInteger());
 
       if (idShow > -1)
       {
@@ -10587,7 +10587,7 @@ bool CVideoDatabase::GetFilter(CDbUrl &videoUrl, Filter &filter, SortDescription
         if (option != options.end())
         {
           condition = true;
-          filter.AppendWhere(PrepareSQL("episode_view.idShow = %i and episode_view.premiered like '%%%i%%'", idShow, (int)option->second.asInteger()));
+          filter.AppendWhere(PrepareSQL("episode_view.idShow = %i and episode_view.premiered like '%%%i%%'", idShow, static_cast<int>(option->second.asInteger())));
         }
 
         AppendIdLinkFilter("actor", "actor", "tvshow", "episode", "idShow", options, filter);
@@ -10609,7 +10609,7 @@ bool CVideoDatabase::GetFilter(CDbUrl &videoUrl, Filter &filter, SortDescription
       {
         option = options.find("year");
         if (option != options.end())
-          filter.AppendWhere(PrepareSQL("episode_view.premiered like '%%%i%%'", (int)option->second.asInteger()));
+          filter.AppendWhere(PrepareSQL("episode_view.premiered like '%%%i%%'", static_cast<int>(option->second.asInteger())));
 
         AppendIdLinkFilter("director", "actor", "episode", "episode", "idEpisode", options, filter);
         AppendLinkFilter("director", "actor", "episode", "episode", "idEpisode", options, filter);
@@ -10629,14 +10629,14 @@ bool CVideoDatabase::GetFilter(CDbUrl &videoUrl, Filter &filter, SortDescription
 
     auto option = options.find("year");
     if (option != options.end())
-      filter.AppendWhere(PrepareSQL("musicvideo_view.premiered like '%i%%'", (int)option->second.asInteger()));
+      filter.AppendWhere(PrepareSQL("musicvideo_view.premiered like '%i%%'", static_cast<int>(option->second.asInteger())));
 
     option = options.find("artistid");
     if (option != options.end())
     {
       if (itemType != "albums")
         filter.AppendJoin(PrepareSQL("JOIN actor_link ON actor_link.media_id=musicvideo_view.idMVideo AND actor_link.media_type='musicvideo'"));
-      filter.AppendWhere(PrepareSQL("actor_link.actor_id = %i", (int)option->second.asInteger()));
+      filter.AppendWhere(PrepareSQL("actor_link.actor_id = %i", static_cast<int>(option->second.asInteger())));
     }
 
     option = options.find("artist");
@@ -10652,7 +10652,7 @@ bool CVideoDatabase::GetFilter(CDbUrl &videoUrl, Filter &filter, SortDescription
 
     option = options.find("albumid");
     if (option != options.end())
-      filter.AppendWhere(PrepareSQL("musicvideo_view.c%02d = (select c%02d from musicvideo where idMVideo = %i)", VIDEODB_ID_MUSICVIDEO_ALBUM, VIDEODB_ID_MUSICVIDEO_ALBUM, (int)option->second.asInteger()));
+      filter.AppendWhere(PrepareSQL("musicvideo_view.c%02d = (select c%02d from musicvideo where idMVideo = %i)", VIDEODB_ID_MUSICVIDEO_ALBUM, VIDEODB_ID_MUSICVIDEO_ALBUM, static_cast<int>(option->second.asInteger())));
 
     AppendIdLinkFilter("tag", "tag", "musicvideo", "musicvideo", "idMVideo", options, filter);
     AppendLinkFilter("tag", "tag", "musicvideo", "musicvideo", "idMVideo", options, filter);

@@ -105,7 +105,7 @@ void CGUIDialogAudioSettings::OnSettingChanged(std::shared_ptr<const CSetting> s
   else if (settingId == SETTING_AUDIO_VOLUME_AMPLIFICATION)
   {
     float value = static_cast<float>(std::static_pointer_cast<const CSettingNumber>(setting)->GetValue());
-    g_application.GetAppPlayer().SetDynamicRangeCompression((long)(value * 100));
+    g_application.GetAppPlayer().SetDynamicRangeCompression(static_cast<long>(value * 100));
   }
   else if (settingId == SETTING_AUDIO_CENTERMIXLEVEL)
   {
