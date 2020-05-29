@@ -119,7 +119,7 @@ void CTCPServer::Process()
         max_fd = m_connections[i]->m_socket;
     }
 
-    int res = select(static_cast<intptr_t>(max_fd)+1, &rfds, NULL, NULL, &to);
+    int res = select(static_cast<intptr_t>(max_fd) + 1, &rfds, NULL, NULL, &to);
     if (res < 0)
     {
       CLog::Log(LOGERROR, "JSONRPC Server: Select failed");
@@ -182,7 +182,8 @@ void CTCPServer::Process()
           CLog::Log(LOGDEBUG, "JSONRPC Server: New connection detected");
           CTCPClient *newconnection = new CTCPClient();
           newconnection->m_socket =
-              accept(it, reinterpret_cast<sockaddr*>(&newconnection->m_cliaddr), &newconnection->m_addrlen);
+              accept(it, reinterpret_cast<sockaddr*>(&newconnection->m_cliaddr),
+                     &newconnection->m_addrlen);
 
           if (newconnection->m_socket == INVALID_SOCKET)
           {
@@ -670,7 +671,8 @@ void CTCPServer::CWebSocketClient::Send(const char *data, unsigned int size)
 
   std::vector<const CWebSocketFrame *> frames = msg->GetFrames();
   for (unsigned int index = 0; index < frames.size(); index++)
-    CTCPClient::Send(frames.at(index)->GetFrameData(), static_cast<unsigned int>(frames.at(index)->GetFrameLength()));
+    CTCPClient::Send(frames.at(index)->GetFrameData(),
+                     static_cast<unsigned int>(frames.at(index)->GetFrameLength()));
 }
 
 void CTCPServer::CWebSocketClient::PushBuffer(CTCPServer *host, const char *buffer, int length)
@@ -686,12 +688,14 @@ void CTCPServer::CWebSocketClient::PushBuffer(CTCPServer *host, const char *buff
       if (send)
       {
         for (unsigned int index = 0; index < frames.size(); index++)
-          Send(frames.at(index)->GetFrameData(), static_cast<unsigned int>(frames.at(index)->GetFrameLength()));
+          Send(frames.at(index)->GetFrameData(),
+               static_cast<unsigned int>(frames.at(index)->GetFrameLength()));
       }
       else
       {
         for (unsigned int index = 0; index < frames.size(); index++)
-          CTCPClient::PushBuffer(host, frames.at(index)->GetApplicationData(), static_cast<int>(frames.at(index)->GetLength()));
+          CTCPClient::PushBuffer(host, frames.at(index)->GetApplicationData(),
+                                 static_cast<int>(frames.at(index)->GetLength()));
       }
 
       delete msg;

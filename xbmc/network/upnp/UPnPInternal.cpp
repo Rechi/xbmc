@@ -731,7 +731,8 @@ CorrectAllItemsSortHack(const std::string &item)
     // correctly, they must have fake artist/album etc. information generated.
     // This looks nasty if we attempt to render it to the GUI, thus this (further)
     // workaround
-    if ((item.size() == 1 && item[0] == 0x01) || (item.size() > 1 && (static_cast<unsigned char>(item[1])) == 0xff))
+    if ((item.size() == 1 && item[0] == 0x01) ||
+        (item.size() > 1 && (static_cast<unsigned char>(item[1])) == 0xff))
         return StringUtils::Empty;
 
     return item;
@@ -941,7 +942,8 @@ CFileItemPtr BuildObject(PLT_MediaObject* entry,
                                        CResourceFinder("http-get", content), resource))) {
 
       // set metadata
-      if (resource.m_Size != static_cast<NPT_LargeSize>(-1)) {
+      if (resource.m_Size != static_cast<NPT_LargeSize>(-1))
+      {
         pItem->m_dwSize  = resource.m_Size;
       }
       res = &resource;

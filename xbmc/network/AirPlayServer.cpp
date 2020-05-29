@@ -388,7 +388,9 @@ void CAirPlayServer::Process()
         {
           CLog::Log(LOGDEBUG, "AIRPLAY Server: New connection detected");
           CTCPClient newconnection;
-          newconnection.m_socket = accept(socket, reinterpret_cast<struct sockaddr*>(&newconnection.m_cliaddr), &newconnection.m_addrlen);
+          newconnection.m_socket =
+              accept(socket, reinterpret_cast<struct sockaddr*>(&newconnection.m_cliaddr),
+                     &newconnection.m_addrlen);
           sessionCounter++;
           newconnection.m_sessionCounter = sessionCounter;
 
@@ -977,7 +979,9 @@ int CAirPlayServer::CTCPClient::ProcessRequest( std::string& responseHeader,
       if (g_application.GetAppPlayer().GetTotalTime())
       {
         float position = (static_cast<float>(g_application.GetAppPlayer().GetTime())) / 1000;
-        responseBody = StringUtils::Format("duration: %.6f\r\nposition: %.6f\r\n", static_cast<float>(g_application.GetAppPlayer().GetTotalTime()) / 1000, position);
+        responseBody = StringUtils::Format(
+            "duration: %.6f\r\nposition: %.6f\r\n",
+            static_cast<float>(g_application.GetAppPlayer().GetTotalTime()) / 1000, position);
       }
       else
       {
@@ -1076,7 +1080,9 @@ int CAirPlayServer::CTCPClient::ProcessRequest( std::string& responseHeader,
 
       if (showPhoto)
       {
-        if ((writtenBytes > 0 && static_cast<unsigned int>(writtenBytes) == m_httpParser->getContentLength()) || !receivePhoto)
+        if ((writtenBytes > 0 &&
+             static_cast<unsigned int>(writtenBytes) == m_httpParser->getContentLength()) ||
+            !receivePhoto)
         {
           if (!receivePhoto && !XFILE::CFile::Exists(tmpFileName))
           {

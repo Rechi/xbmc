@@ -273,8 +273,10 @@ bool IsJPEG(const char *buffer, unsigned int size)
   {
     ret = false;
     //check on FF D9 big + little endian on end
-    if ((buffer[size - 2] == static_cast<char>(0xd9) && buffer[size - 1] == static_cast<char>(0xff)) ||
-       (buffer[size - 1] == static_cast<char>(0xd9) && buffer[size - 2] == static_cast<char>(0xff)))
+    if ((buffer[size - 2] == static_cast<char>(0xd9) &&
+         buffer[size - 1] == static_cast<char>(0xff)) ||
+        (buffer[size - 1] == static_cast<char>(0xd9) &&
+         buffer[size - 2] == static_cast<char>(0xff)))
         ret = true;
   }
 
@@ -340,19 +342,19 @@ LAuE4Pu13aKiJnfft7hIjbK+5kyb3TysZvoyDnb3HOKvInK7vXbKuU4ISgxB2bB3HcYzQMGsz1qJ\
 
 void CAirTunesServer::AudioOutputFunctions::audio_set_metadata(void *cls, void *session, const void *buffer, int buflen)
 {
-  CAirTunesServer::SetMetadataFromBuffer(static_cast<const char *>(buffer), buflen);
+  CAirTunesServer::SetMetadataFromBuffer(static_cast<const char*>(buffer), buflen);
 }
 
 void CAirTunesServer::AudioOutputFunctions::audio_set_coverart(void *cls, void *session, const void *buffer, int buflen)
 {
-  CAirTunesServer::SetCoverArtFromBuffer(static_cast<const char *>(buffer), buflen);
+  CAirTunesServer::SetCoverArtFromBuffer(static_cast<const char*>(buffer), buflen);
 }
 
 char session[]="Kodi-AirTunes";
 
 void* CAirTunesServer::AudioOutputFunctions::audio_init(void *cls, int bits, int channels, int samplerate)
 {
-  XFILE::CPipeFile *pipe=static_cast<XFILE::CPipeFile *>(cls);
+  XFILE::CPipeFile* pipe = static_cast<XFILE::CPipeFile*>(cls);
   const CURL pathToUrl(XFILE::PipesManager::GetInstance().GetUniquePipeName());
   pipe->OpenForWrite(pathToUrl);
   pipe->SetOpenThreshold(300);
@@ -486,7 +488,7 @@ void  CAirTunesServer::AudioOutputFunctions::audio_set_volume(void *cls, void *s
 
 void  CAirTunesServer::AudioOutputFunctions::audio_process(void *cls, void *session, const void *buffer, int buflen)
 {
-  XFILE::CPipeFile *pipe=static_cast<XFILE::CPipeFile *>(cls);
+  XFILE::CPipeFile* pipe = static_cast<XFILE::CPipeFile*>(cls);
   pipe->Write(buffer, buflen);
   
   // in case there are some play times cached that are not yet sent to the player - do it here
@@ -495,7 +497,7 @@ void  CAirTunesServer::AudioOutputFunctions::audio_process(void *cls, void *sess
 
 void  CAirTunesServer::AudioOutputFunctions::audio_destroy(void *cls, void *session)
 {
-  XFILE::CPipeFile *pipe=static_cast<XFILE::CPipeFile *>(cls);
+  XFILE::CPipeFile* pipe = static_cast<XFILE::CPipeFile*>(cls);
   pipe->SetEof();
   pipe->Close();
 

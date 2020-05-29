@@ -204,15 +204,17 @@ int CPosixUDPSocket::Read(CAddress& addr, const int buffersize, void *buffer)
 {
   if (m_ipv6Socket)
     addr.SetAddress("::");
-  return static_cast<int>(recvfrom(m_iSock, static_cast<char*>(buffer), static_cast<size_t>(buffersize), 0,
-                       reinterpret_cast<struct sockaddr*>(&addr.saddr), &addr.size));
+  return static_cast<int>(recvfrom(m_iSock, static_cast<char*>(buffer),
+                                   static_cast<size_t>(buffersize), 0,
+                                   reinterpret_cast<struct sockaddr*>(&addr.saddr), &addr.size));
 }
 
 int CPosixUDPSocket::SendTo(const CAddress& addr, const int buffersize,
                           const void *buffer)
 {
-  return static_cast<int>(sendto(m_iSock, static_cast<const char *>(buffer), static_cast<size_t>(buffersize), 0,
-                     reinterpret_cast<const struct sockaddr*>(&addr.saddr), addr.size));
+  return static_cast<int>(sendto(m_iSock, static_cast<const char*>(buffer),
+                                 static_cast<size_t>(buffersize), 0,
+                                 reinterpret_cast<const struct sockaddr*>(&addr.saddr), addr.size));
 }
 
 /**********************************************************************/
@@ -300,7 +302,7 @@ CBaseSocket* CSocketListener::GetFirstReadySocket()
   if (m_iReadyCount<=0)
     return NULL;
 
-  for (int i = 0 ; i < static_cast<int>(m_sockets.size()) ; i++)
+  for (int i = 0; i < static_cast<int>(m_sockets.size()); i++)
   {
     if (FD_ISSET((m_sockets[i])->Socket(), &m_fdset))
     {
@@ -316,7 +318,7 @@ CBaseSocket* CSocketListener::GetNextReadySocket()
   if (m_iReadyCount<=0)
     return NULL;
 
-  for (int i = m_iCurrentSocket+1 ; i<static_cast<int>(m_sockets.size()) ; i++)
+  for (int i = m_iCurrentSocket + 1; i < static_cast<int>(m_sockets.size()); i++)
   {
     if (FD_ISSET(m_sockets[i]->Socket(), &m_fdset))
     {

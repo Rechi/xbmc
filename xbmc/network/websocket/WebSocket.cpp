@@ -85,7 +85,7 @@ CWebSocketFrame::CWebSocketFrame(const char* data, uint64_t length)
   int offset = 0;
   if (m_length == 126)
   {
-    m_length = static_cast<uint64_t>(Endian_SwapBE16(*(const uint16_t *)(m_data + 2)));
+    m_length = static_cast<uint64_t>(Endian_SwapBE16(*(const uint16_t*)(m_data + 2)));
     offset = 2;
   }
   else if (m_length == 127)
@@ -104,7 +104,7 @@ CWebSocketFrame::CWebSocketFrame(const char* data, uint64_t length)
   // Get the mask
   if (m_masked)
   {
-    m_mask = *reinterpret_cast<const uint32_t *>(m_data + LENGTH_MIN + offset);
+    m_mask = *reinterpret_cast<const uint32_t*>(m_data + LENGTH_MIN + offset);
     offset += 4;
   }
 
@@ -121,7 +121,8 @@ CWebSocketFrame::CWebSocketFrame(const char* data, uint64_t length)
   if (m_masked)
   {
     for (uint64_t index = 0; index < m_length; index++)
-      m_applicationData[index] = m_applicationData[index] ^ (reinterpret_cast<char *>(&m_mask))[index % 4];
+      m_applicationData[index] =
+          m_applicationData[index] ^ (reinterpret_cast<char*>(&m_mask))[index % 4];
   }
 
   m_valid = true;
@@ -195,11 +196,11 @@ CWebSocketFrame::CWebSocketFrame(WebSocketFrameOpcode opcode, const char* data /
     // Set masking key
     if (m_masked)
     {
-      buffer.append(reinterpret_cast<char *>(&m_mask), sizeof(m_mask));
+      buffer.append(reinterpret_cast<char*>(&m_mask), sizeof(m_mask));
       applicationDataOffset = buffer.size();
 
       for (uint64_t index = 0; index < m_length; index++)
-        buffer.push_back(data[index] ^ (reinterpret_cast<char *>(&m_mask))[index % 4]);
+        buffer.push_back(data[index] ^ (reinterpret_cast<char*>(&m_mask))[index % 4]);
     }
     else
     {
@@ -211,7 +212,7 @@ CWebSocketFrame::CWebSocketFrame(WebSocketFrameOpcode opcode, const char* data /
   // Get the whole data
   m_lengthFrame = buffer.size();
   m_data = new char[static_cast<uint32_t>(m_lengthFrame)];
-  memcpy(const_cast<char *>(m_data), buffer.c_str(), static_cast<uint32_t>(m_lengthFrame));
+  memcpy(const_cast<char*>(m_data), buffer.c_str(), static_cast<uint32_t>(m_lengthFrame));
 
   if (data)
   {

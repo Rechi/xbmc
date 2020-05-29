@@ -165,7 +165,7 @@ std::string Xcddb::Recv(bool wait4point)
     int lenRead;
 
     prevChar=tmpbuffer[0];
-    lenRead = recv((SOCKET)m_cddb_socket, reinterpret_cast<char*>(& tmpbuffer), 1, 0);
+    lenRead = recv((SOCKET)m_cddb_socket, reinterpret_cast<char*>(&tmpbuffer), 1, 0);
 
     //Check if there was any error reading the buffer
     if(lenRead == 0 || lenRead == SOCKET_ERROR  || WSAGetLastError() == WSAECONNRESET)
@@ -765,7 +765,8 @@ bool Xcddb::writeCacheFile( const char* pBuffer, uint32_t discid )
   XFILE::CFile file;
   if (file.OpenForWrite(GetCacheFile(discid), true))
   {
-    const bool ret = ( static_cast<size_t>(file.Write((const void*)pBuffer, strlen(pBuffer) + 1)) == strlen(pBuffer) + 1);
+    const bool ret = (static_cast<size_t>(file.Write((const void*)pBuffer, strlen(pBuffer) + 1)) ==
+                      strlen(pBuffer) + 1);
     file.Close();
     return ret;
   }
