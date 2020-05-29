@@ -241,7 +241,7 @@ bool VideoPlayerCodec::Init(const CFileItem &file, unsigned int filecache)
   m_bitRate = m_pAudioCodec->GetBitRate();
   if (!m_bitRate && m_TotalTime)
   {
-    m_bitRate = static_cast<int>(((m_pInputStream->GetLength()*1000) / m_TotalTime) * 8);
+    m_bitRate = static_cast<int>(((m_pInputStream->GetLength() * 1000) / m_TotalTime) * 8);
   }
   m_CodecName = m_pDemuxer->GetStreamCodecName(demuxerId, m_nAudioStream);
 

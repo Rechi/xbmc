@@ -244,7 +244,8 @@ bool PAPlayer::OpenFile(const CFileItem& file, const CPlayerOptions &options)
   if (m_streams.size() == 2)
   {
     //do a short crossfade on trackskip, set to max 2 seconds for these prev/next transitions
-    m_upcomingCrossfadeMS = std::min(m_defaultCrossfadeMS, static_cast<unsigned int>(MAX_SKIP_XFADE_TIME));
+    m_upcomingCrossfadeMS =
+        std::min(m_defaultCrossfadeMS, static_cast<unsigned int>(MAX_SKIP_XFADE_TIME));
 
     //start transition to next track
     StreamInfo* si = m_streams.front();
@@ -394,7 +395,9 @@ bool PAPlayer::QueueNextFileEx(const CFileItem &file, bool fadeIn)
   if(!file.IsCDDA())
   {
     if (streamTotalTime >= TIME_TO_CACHE_NEXT_FILE + m_defaultCrossfadeMS)
-      si->m_prepareNextAtFrame = static_cast<int>((streamTotalTime - TIME_TO_CACHE_NEXT_FILE - m_defaultCrossfadeMS) * si->m_audioFormat.m_sampleRate / 1000.0f);
+      si->m_prepareNextAtFrame =
+          static_cast<int>((streamTotalTime - TIME_TO_CACHE_NEXT_FILE - m_defaultCrossfadeMS) *
+                           si->m_audioFormat.m_sampleRate / 1000.0f);
   }
 
   if (m_currentStream && ((m_currentStream->m_audioFormat.m_dataFormat == AE_FMT_RAW) || (si->m_audioFormat.m_dataFormat == AE_FMT_RAW)))
@@ -442,9 +445,11 @@ void PAPlayer::UpdateStreamInfoPlayNextAtFrame(StreamInfo *si, unsigned int cros
     if (si->m_endOffset)
       streamTotalTime = si->m_endOffset - si->m_startOffset;
     if (streamTotalTime < crossFadingTime)
-      si->m_playNextAtFrame = static_cast<int>((streamTotalTime / 2) * si->m_audioFormat.m_sampleRate / 1000.0f);
+      si->m_playNextAtFrame =
+          static_cast<int>((streamTotalTime / 2) * si->m_audioFormat.m_sampleRate / 1000.0f);
     else
-      si->m_playNextAtFrame = static_cast<int>((streamTotalTime - crossFadingTime) * si->m_audioFormat.m_sampleRate / 1000.0f);
+      si->m_playNextAtFrame = static_cast<int>((streamTotalTime - crossFadingTime) *
+                                               si->m_audioFormat.m_sampleRate / 1000.0f);
   }
 }
 
@@ -743,8 +748,12 @@ inline bool PAPlayer::ProcessStream(StreamInfo *si, double &freeBufferTime)
     /* if its a direct seek */
     if (si->m_seekFrame > -1)
     {
-      time = static_cast<int64_t>(static_cast<float>(si->m_seekFrame) / static_cast<float>(si->m_audioFormat.m_sampleRate) * 1000.0f);
-      si->m_framesSent = static_cast<int>(si->m_seekFrame - (static_cast<float>(si->m_startOffset) * static_cast<float>(si->m_audioFormat.m_sampleRate)) / 1000.0f);
+      time = static_cast<int64_t>(static_cast<float>(si->m_seekFrame) /
+                                  static_cast<float>(si->m_audioFormat.m_sampleRate) * 1000.0f);
+      si->m_framesSent =
+          static_cast<int>(si->m_seekFrame - (static_cast<float>(si->m_startOffset) *
+                                              static_cast<float>(si->m_audioFormat.m_sampleRate)) /
+                                                 1000.0f);
       si->m_seekFrame  = -1;
       m_playerGUIData.m_time = time; //update for GUI
       si->m_seekNextAtFrame = 0;
@@ -755,7 +764,9 @@ inline bool PAPlayer::ProcessStream(StreamInfo *si, double &freeBufferTime)
     {
       si->m_framesSent      += si->m_audioFormat.m_sampleRate * (m_playbackSpeed  - 1);
       si->m_seekNextAtFrame  = si->m_framesSent + si->m_audioFormat.m_sampleRate / 2;
-      time = static_cast<int64_t>((static_cast<float>(si->m_framesSent) / static_cast<float>(si->m_audioFormat.m_sampleRate) * 1000.0f) + static_cast<float>(si->m_startOffset));
+      time = static_cast<int64_t>((static_cast<float>(si->m_framesSent) /
+                                   static_cast<float>(si->m_audioFormat.m_sampleRate) * 1000.0f) +
+                                  static_cast<float>(si->m_startOffset));
     }
 
     /* if we are seeking back before the start of the track start normal playback */
@@ -798,7 +809,9 @@ inline bool PAPlayer::ProcessStream(StreamInfo *si, double &freeBufferTime)
       // calculate time when to prepare next stream
       si->m_prepareNextAtFrame = 0;
       if (streamTotalTime >= TIME_TO_CACHE_NEXT_FILE + m_defaultCrossfadeMS)
-        si->m_prepareNextAtFrame = static_cast<int>((streamTotalTime - TIME_TO_CACHE_NEXT_FILE - m_defaultCrossfadeMS) * si->m_audioFormat.m_sampleRate / 1000.0f);
+        si->m_prepareNextAtFrame =
+            static_cast<int>((streamTotalTime - TIME_TO_CACHE_NEXT_FILE - m_defaultCrossfadeMS) *
+                             si->m_audioFormat.m_sampleRate / 1000.0f);
 
       si->m_prepareTriggered = false;
       si->m_playNextAtFrame = 0;
@@ -833,9 +846,11 @@ inline bool PAPlayer::ProcessStream(StreamInfo *si, double &freeBufferTime)
     {
       double free_space;
       if (si->m_audioFormat.m_dataFormat != AE_FMT_RAW)
-        free_space = static_cast<double>(si->m_stream->GetSpace() / si->m_bytesPerSample) / si->m_audioFormat.m_sampleRate;
+        free_space = static_cast<double>(si->m_stream->GetSpace() / si->m_bytesPerSample) /
+                     si->m_audioFormat.m_sampleRate;
       else
-        free_space = static_cast<double>(si->m_stream->GetSpace()) * si->m_audioFormat.m_streamInfo.GetDuration() / 1000;
+        free_space = static_cast<double>(si->m_stream->GetSpace()) *
+                     si->m_audioFormat.m_streamInfo.GetDuration() / 1000;
 
       freeBufferTime = std::max(freeBufferTime , free_space);
     }
@@ -959,7 +974,8 @@ int64_t PAPlayer::GetTimeInternal()
   if (!m_currentStream)
     return 0;
 
-  double time = (static_cast<double>(m_currentStream->m_framesSent) / static_cast<double>(m_currentStream->m_audioFormat.m_sampleRate));
+  double time = (static_cast<double>(m_currentStream->m_framesSent) /
+                 static_cast<double>(m_currentStream->m_audioFormat.m_sampleRate));
   if (m_currentStream->m_stream)
     time -= m_currentStream->m_stream->GetDelay();
   time = time * 1000.0;
@@ -1081,7 +1097,9 @@ void PAPlayer::SeekTime(int64_t iTime /*=0*/)
   if (m_playbackSpeed != 1)
     SetSpeed(1);
 
-  m_currentStream->m_seekFrame = static_cast<int>(static_cast<float>(m_currentStream->m_audioFormat.m_sampleRate) * (static_cast<float>(iTime) + static_cast<float>(m_currentStream->m_startOffset)) / 1000.0f);
+  m_currentStream->m_seekFrame = static_cast<int>(
+      static_cast<float>(m_currentStream->m_audioFormat.m_sampleRate) *
+      (static_cast<float>(iTime) + static_cast<float>(m_currentStream->m_startOffset)) / 1000.0f);
   m_callback.OnPlayBackSeek(iTime, seekOffset);
 }
 
