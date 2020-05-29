@@ -306,7 +306,7 @@ const std::string CPictureInfoTag::GetInfo(int info) const
     // Ascii, Unicode (UCS2), JIS (X208-1990), Unknown (application specific)
     if (m_exifInfo.CommentsCharset == EXIF_COMMENT_CHARSET_UNICODE)
     {
-      g_charsetConverter.ucs2ToUTF8(std::u16string((const char16_t*)m_exifInfo.Comments), value);
+      g_charsetConverter.ucs2ToUTF8(std::u16string(reinterpret_cast<const char16_t*>(m_exifInfo.Comments)), value);
     }
     else
     {
@@ -320,7 +320,7 @@ const std::string CPictureInfoTag::GetInfo(int info) const
   case SLIDESHOW_EXIF_XPCOMMENT:
     if (m_exifInfo.XPCommentsCharset == EXIF_COMMENT_CHARSET_UNICODE)
     {
-      g_charsetConverter.ucs2ToUTF8(std::u16string((const char16_t*)m_exifInfo.XPComment), value);
+      g_charsetConverter.ucs2ToUTF8(std::u16string(reinterpret_cast<const char16_t*>(m_exifInfo.XPComment)), value);
     }
     else
     {
@@ -406,7 +406,7 @@ const std::string CPictureInfoTag::GetInfo(int info) const
       else
         value = StringUtils::Format("%5.3fs", m_exifInfo.ExposureTime);
       if (m_exifInfo.ExposureTime <= 0.5)
-        value += StringUtils::Format(" (1/%d)", (int)(0.5 + 1/m_exifInfo.ExposureTime));
+        value += StringUtils::Format(" (1/%d)", static_cast<int>(0.5 + 1/m_exifInfo.ExposureTime));
     }
     break;
   case SLIDESHOW_EXIF_EXPOSURE_BIAS:
