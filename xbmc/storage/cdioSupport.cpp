@@ -454,8 +454,7 @@ int CCdIoSupport::ReadBlock(int superblock, uint32_t offset, uint8_t bufnum, tra
     return -1;
   }
 
-  ::cdio_debug("about to read sector %lu\n",
-             static_cast<long unsigned int>(offset) + superblock);
+  ::cdio_debug("about to read sector %lu\n", static_cast<long unsigned int>(offset) + superblock);
 
   if (::cdio_get_track_green(cdio, track_num))
   {
