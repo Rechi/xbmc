@@ -97,25 +97,30 @@ int CoffLoader::ParseHeaders(void* hModule)
   if (strncmp(static_cast<char*>(hModule), "MZ", 2) != 0)
     return 0;
 
-  int* Offset = reinterpret_cast<int*>(static_cast<char*>(hModule)+0x3c);
+  int* Offset = reinterpret_cast<int*>(static_cast<char*>(hModule) + 0x3c);
   if (*Offset <= 0)
     return 0;
 
-  if (strncmp(static_cast<char*>(hModule)+*Offset, "PE\0\0", 4) != 0)
+  if (strncmp(static_cast<char*>(hModule) + *Offset, "PE\0\0", 4) != 0)
     return 0;
 
   FileHeaderOffset = *Offset + 4;
 
-  CoffFileHeader = reinterpret_cast<COFF_FileHeader_t *>( static_cast<char*>(hModule) + FileHeaderOffset );
+  CoffFileHeader =
+      reinterpret_cast<COFF_FileHeader_t*>(static_cast<char*>(hModule) + FileHeaderOffset);
   NumOfSections = CoffFileHeader->NumberOfSections;
 
-  OptionHeader = reinterpret_cast<OptionHeader_t *>( reinterpret_cast<char*>(CoffFileHeader) + sizeof(COFF_FileHeader_t) );
-  WindowsHeader = reinterpret_cast<WindowsHeader_t *>( reinterpret_cast<char*>(OptionHeader) + OPTHDR_SIZE );
+  OptionHeader = reinterpret_cast<OptionHeader_t*>(reinterpret_cast<char*>(CoffFileHeader) +
+                                                   sizeof(COFF_FileHeader_t));
+  WindowsHeader =
+      reinterpret_cast<WindowsHeader_t*>(reinterpret_cast<char*>(OptionHeader) + OPTHDR_SIZE);
   EntryAddress = OptionHeader->Entry;
   NumOfDirectories = WindowsHeader->NumDirectories;
 
-  Directory = reinterpret_cast<Image_Data_Directory_t *>( reinterpret_cast<char*>(WindowsHeader) + WINHDR_SIZE);
-  SectionHeader = reinterpret_cast<SectionHeader_t *>( reinterpret_cast<char*>(Directory) + sizeof(Image_Data_Directory_t) * NumOfDirectories);
+  Directory = reinterpret_cast<Image_Data_Directory_t*>(reinterpret_cast<char*>(WindowsHeader) +
+                                                        WINHDR_SIZE);
+  SectionHeader = reinterpret_cast<SectionHeader_t*>(
+      reinterpret_cast<char*>(Directory) + sizeof(Image_Data_Directory_t) * NumOfDirectories);
 
   if (CoffFileHeader->MachineType != IMAGE_FILE_MACHINE_I386)
     return 0;
@@ -214,16 +219,21 @@ int CoffLoader::LoadCoffHModule(FILE *fp)
   if (readcount != tempWindowsHeader.SizeOfHeaders)   //file size error
     return 0;
 
-  CoffFileHeader = reinterpret_cast<COFF_FileHeader_t *>( static_cast<char*>(hModule) + FileHeaderOffset );
+  CoffFileHeader =
+      reinterpret_cast<COFF_FileHeader_t*>(static_cast<char*>(hModule) + FileHeaderOffset);
   NumOfSections = CoffFileHeader->NumberOfSections;
 
-  OptionHeader = reinterpret_cast<OptionHeader_t *>( reinterpret_cast<char*>(CoffFileHeader) + sizeof(COFF_FileHeader_t) );
-  WindowsHeader = reinterpret_cast<WindowsHeader_t *>( reinterpret_cast<char*>(OptionHeader) + OPTHDR_SIZE );
+  OptionHeader = reinterpret_cast<OptionHeader_t*>(reinterpret_cast<char*>(CoffFileHeader) +
+                                                   sizeof(COFF_FileHeader_t));
+  WindowsHeader =
+      reinterpret_cast<WindowsHeader_t*>(reinterpret_cast<char*>(OptionHeader) + OPTHDR_SIZE);
   EntryAddress = OptionHeader->Entry;
   NumOfDirectories = WindowsHeader->NumDirectories;
 
-  Directory = reinterpret_cast<Image_Data_Directory_t *>( reinterpret_cast<char*>(WindowsHeader) + WINHDR_SIZE);
-  SectionHeader = reinterpret_cast<SectionHeader_t *>( reinterpret_cast<char*>(Directory) + sizeof(Image_Data_Directory_t) * NumOfDirectories);
+  Directory = reinterpret_cast<Image_Data_Directory_t*>(reinterpret_cast<char*>(WindowsHeader) +
+                                                        WINHDR_SIZE);
+  SectionHeader = reinterpret_cast<SectionHeader_t*>(
+      reinterpret_cast<char*>(Directory) + sizeof(Image_Data_Directory_t) * NumOfDirectories);
 
   if (CoffFileHeader->MachineType != IMAGE_FILE_MACHINE_I386)
     return 0;
@@ -489,7 +499,7 @@ char *CoffLoader::GetSymbolName(SymbolTable_t *sym)
   {
     static char shortname[9];
     memset(shortname, 0, 9);
-    strncpy(shortname, reinterpret_cast<char *>(sym->Name.ShortName), 8);
+    strncpy(shortname, reinterpret_cast<char*>(sym->Name.ShortName), 8);
     return shortname;
   }
 }
@@ -724,7 +734,7 @@ void CoffLoader::PrintSection(SectionHeader_t *ScnHdr, char* data)
 {
   char SectionName[9];
 
-  strncpy(SectionName, reinterpret_cast<char *>(ScnHdr->Name), 8);
+  strncpy(SectionName, reinterpret_cast<char*>(ScnHdr->Name), 8);
   SectionName[8] = 0;
   printf("Section: %s\n", SectionName);
   printf("------------------------------------------\n\n");
@@ -983,7 +993,7 @@ void CoffLoader::PerformFixups(void)
       Fixup &= 0xfff;
       if (Type == IMAGE_REL_BASED_HIGHLOW)
       {
-        unsigned long *Off = static_cast<unsigned long*>(RVA2Data(Fixup + PageRVA));
+        unsigned long* Off = static_cast<unsigned long*>(RVA2Data(Fixup + PageRVA));
         *Off = (unsigned long)RVA2Data(*Off - WindowsHeader->ImageBase);
       }
       else if (Type == IMAGE_REL_BASED_ABSOLUTE)

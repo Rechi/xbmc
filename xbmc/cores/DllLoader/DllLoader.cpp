@@ -57,8 +57,8 @@ typedef int (APIENTRY *EntryFunc)(HINSTANCE hinstDLL, DWORD fdwReason, void* lpv
  */
 static void __attribute__((noinline)) extend_stack_for_dll_alloca(void)
 {
-    volatile int* mem =static_cast<volatile int*>(alloca(0x20000));
-    *mem=0x1234;
+  volatile int* mem = static_cast<volatile int*>(alloca(0x20000));
+  *mem = 0x1234;
 }
 #endif
 
@@ -153,10 +153,10 @@ int DllLoader::Parse()
         for (int i = 0; i < NumOfSections; ++i)
         {
           iMinAddr = std::min<uintptr_t>(iMinAddr,
-                       static_cast<uintptr_t>(SectionHeader[i].VirtualAddress));
-          iMaxAddr = std::max<uintptr_t>(iMaxAddr,
-                       static_cast<uintptr_t>(SectionHeader[i].VirtualAddress +
-                                   SectionHeader[i].VirtualSize));
+                                         static_cast<uintptr_t>(SectionHeader[i].VirtualAddress));
+          iMaxAddr =
+              std::max<uintptr_t>(iMaxAddr, static_cast<uintptr_t>(SectionHeader[i].VirtualAddress +
+                                                                   SectionHeader[i].VirtualSize));
         }
         if(iMaxAddr > iMinAddr)
         {
@@ -179,7 +179,7 @@ int DllLoader::Parse()
 
 void DllLoader::PrintImportLookupTable(unsigned long ImportLookupTable_RVA)
 {
-  unsigned long *Table = static_cast<unsigned long*>(RVA2Data(ImportLookupTable_RVA));
+  unsigned long* Table = static_cast<unsigned long*>(RVA2Data(ImportLookupTable_RVA));
 
   while (*Table)
   {
@@ -228,11 +228,14 @@ void DllLoader::PrintImportTable(ImportDirTable_t *ImportDirTable)
 
 void DllLoader::PrintExportTable(ExportDirTable_t *ExportDirTable)
 {
-  char *Name = static_cast<char*>(RVA2Data(ExportDirTable->Name_RVA));
+  char* Name = static_cast<char*>(RVA2Data(ExportDirTable->Name_RVA));
 
-  unsigned long *ExportAddressTable = static_cast<unsigned long*>(RVA2Data(ExportDirTable->ExportAddressTable_RVA));
-  unsigned long *NamePointerTable = static_cast<unsigned long*>(RVA2Data(ExportDirTable->NamePointerTable_RVA));
-  unsigned short *OrdinalTable = static_cast<unsigned short*>(RVA2Data(ExportDirTable->OrdinalTable_RVA));
+  unsigned long* ExportAddressTable =
+      static_cast<unsigned long*>(RVA2Data(ExportDirTable->ExportAddressTable_RVA));
+  unsigned long* NamePointerTable =
+      static_cast<unsigned long*>(RVA2Data(ExportDirTable->NamePointerTable_RVA));
+  unsigned short* OrdinalTable =
+      static_cast<unsigned short*>(RVA2Data(ExportDirTable->OrdinalTable_RVA));
 
 
   CLog::Log(LOGDEBUG, "Export Table for %s:", Name);
@@ -253,7 +256,7 @@ void DllLoader::PrintExportTable(ExportDirTable_t *ExportDirTable)
   CLog::Log(LOGDEBUG, "    ordinal hint RVA      name");
   for (unsigned int i = 0; i < ExportDirTable->NumNamePtrs; i++)
   {
-    char *Name = static_cast<char*>(RVA2Data(NamePointerTable[i]));
+    char* Name = static_cast<char*>(RVA2Data(NamePointerTable[i]));
 
     CLog::Log(LOGDEBUG, "          %lu", OrdinalTable[i] + ExportDirTable->OrdinalBase);
     CLog::Log(LOGDEBUG, "    %d", OrdinalTable[i]);
@@ -281,15 +284,15 @@ int DllLoader::ResolveImports(void)
             Imp->Name_RVA != 0 ||
             Imp->ImportAddressTable_RVA != 0)
     {
-      const char *Name = static_cast<const char*>(RVA2Data(Imp->Name_RVA));
+      const char* Name = static_cast<const char*>(RVA2Data(Imp->Name_RVA));
 
       const char* FileName=ResolveReferencedDll(Name);
       //  If possible use the dll name WITH path to resolve exports. We could have loaded
       //  a dll with the same name as another dll but from a different directory
       if (FileName) Name=FileName;
 
-      unsigned long *Table = static_cast<unsigned long*>(RVA2Data(Imp->ImportLookupTable_RVA));
-      unsigned long *Addr = static_cast<unsigned long*>(RVA2Data(Imp->ImportAddressTable_RVA));
+      unsigned long* Table = static_cast<unsigned long*>(RVA2Data(Imp->ImportLookupTable_RVA));
+      unsigned long* Addr = static_cast<unsigned long*>(RVA2Data(Imp->ImportAddressTable_RVA));
 
       while (*Table)
       {
@@ -313,7 +316,7 @@ int DllLoader::ResolveImports(void)
         else
         {
           // We don't handle Hint/Name tables yet!!!
-          char *ImpName = static_cast<char*>(RVA2Data(*Table + 2));
+          char* ImpName = static_cast<char*>(RVA2Data(*Table + 2));
 
           void *Fixup;
           if ( !ResolveName(Name, ImpName, &Fixup) )
@@ -374,13 +377,16 @@ int DllLoader::LoadExports()
     //! @todo Validate all pointers are valid. Is a zero RVA valid or not? I'd guess not as it would
     //! point to the coff file header, thus not right.
 
-    unsigned long *ExportAddressTable = static_cast<unsigned long*>(RVA2Data(ExportDirTable->ExportAddressTable_RVA));
-    unsigned long *NamePointerTable = static_cast<unsigned long*>(RVA2Data(ExportDirTable->NamePointerTable_RVA));
-    unsigned short *OrdinalTable = static_cast<unsigned short*>(RVA2Data(ExportDirTable->OrdinalTable_RVA));
+    unsigned long* ExportAddressTable =
+        static_cast<unsigned long*>(RVA2Data(ExportDirTable->ExportAddressTable_RVA));
+    unsigned long* NamePointerTable =
+        static_cast<unsigned long*>(RVA2Data(ExportDirTable->NamePointerTable_RVA));
+    unsigned short* OrdinalTable =
+        static_cast<unsigned short*>(RVA2Data(ExportDirTable->OrdinalTable_RVA));
 
     for (unsigned int i = 0; i < ExportDirTable->NumNamePtrs; i++)
     {
-      char *Name = static_cast<char*>(RVA2Data(NamePointerTable[i]));
+      char* Name = static_cast<char*>(RVA2Data(NamePointerTable[i]));
       void* Addr = (void*)RVA2Data(ExportAddressTable[OrdinalTable[i]]);
       AddExport(Name, OrdinalTable[i]+ExportDirTable->OrdinalBase, Addr);
     }
@@ -604,7 +610,8 @@ bool DllLoader::Load()
 #ifdef TARGET_POSIX
 	extend_stack_for_dll_alloca();
 #endif
-      initdll(static_cast<HINSTANCE>(hModule), DLL_PROCESS_ATTACH , 0); //call "DllMain" with DLL_PROCESS_ATTACH
+      initdll(static_cast<HINSTANCE>(hModule), DLL_PROCESS_ATTACH,
+              0); //call "DllMain" with DLL_PROCESS_ATTACH
 
 #ifdef LOGALL
       CLog::Log(LOGDEBUG, "EntryPoint with DLL_PROCESS_ATTACH called - Dll: %s", sName);
@@ -647,7 +654,7 @@ void DllLoader::Unload()
     if(EntryAddress)
     {
       EntryFunc initdll = (EntryFunc)EntryAddress;
-      initdll(static_cast<HINSTANCE>(hModule), DLL_PROCESS_DETACH , 0);
+      initdll(static_cast<HINSTANCE>(hModule), DLL_PROCESS_DETACH, 0);
     }
 
 #ifdef LOGALL
