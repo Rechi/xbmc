@@ -3481,7 +3481,8 @@ bool CMusicDatabase::CleanupSongs(CGUIDialogProgress* progressDialog /*= nullptr
 
     int total;
     // Count total number of songs
-    total = static_cast<int>(strtol(GetSingleValue("SELECT COUNT(1) FROM song", m_pDS).c_str(), nullptr, 10));
+    total = static_cast<int>(
+        strtol(GetSingleValue("SELECT COUNT(1) FROM song", m_pDS).c_str(), nullptr, 10));
     // No songs to clean
     if (total == 0)
       return true;
@@ -5470,7 +5471,8 @@ bool CMusicDatabase::GetSongsByWhere(const std::string &baseDir, const Filter &f
         sortDescription.sortBy == SortByNone &&
        (sortDescription.limitStart > 0 || sortDescription.limitEnd > 0))
     {
-      total = static_cast<int>(strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10));
+      total = static_cast<int>(strtol(
+          GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10));
       strSQLExtra += DatabaseUtils::BuildLimitClause(sortDescription.limitEnd, sortDescription.limitStart);
     }
 
