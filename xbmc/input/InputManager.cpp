@@ -159,14 +159,10 @@ bool CInputManager::ProcessMouse(int windowId)
     return g_application.OnAction(mouseaction);
 
   // This is a mouse action so we need to record the mouse position
-  return g_application.OnAction(CAction(mouseaction.GetID(),
-    m_Mouse.GetHold(MOUSE_LEFT_BUTTON),
-    static_cast<float>(m_Mouse.GetX()),
-    static_cast<float>(m_Mouse.GetY()),
-    static_cast<float>(m_Mouse.GetDX()),
-    static_cast<float>(m_Mouse.GetDY()),
-    0.0f, 0.0f,
-    mouseaction.GetName()));
+  return g_application.OnAction(CAction(
+      mouseaction.GetID(), m_Mouse.GetHold(MOUSE_LEFT_BUTTON), static_cast<float>(m_Mouse.GetX()),
+      static_cast<float>(m_Mouse.GetY()), static_cast<float>(m_Mouse.GetDX()),
+      static_cast<float>(m_Mouse.GetDY()), 0.0f, 0.0f, mouseaction.GetName()));
 }
 
 bool CInputManager::ProcessEventServer(int windowId, float frameTime)
