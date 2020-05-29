@@ -79,7 +79,7 @@ float CTimer::GetElapsedMilliseconds() const
   if (!IsRunning())
     return 0.0f;
 
-  return (float)(XbmcThreads::SystemClockMillis() - (m_endTime - m_timeout));
+  return static_cast<float>(XbmcThreads::SystemClockMillis() - (m_endTime - m_timeout));
 }
 
 void CTimer::Process()

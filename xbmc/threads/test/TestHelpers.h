@@ -32,7 +32,7 @@ inline static bool waitForThread(std::atomic<long>& mutex, int numWaiters, int m
   CCriticalSection sec;
   for( int i = 0; i < milliseconds; i++)
   {
-    if (mutex == (long)numWaiters)
+    if (mutex == static_cast<long>(numWaiters))
       return true;
 
     {
