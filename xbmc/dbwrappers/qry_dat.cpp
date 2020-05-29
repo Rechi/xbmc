@@ -322,7 +322,7 @@ short field_value::get_asShort() const {
        return short_value;
     }
     case ft_UShort: {
-       return static_cast<short>(ushort_value);
+      return static_cast<short>(ushort_value);
     }
     case ft_Int: {
       return static_cast<short>(int_value);
@@ -357,7 +357,7 @@ unsigned short field_value::get_asUShort() const {
       return static_cast<unsigned short>(char_value);
     }
     case ft_Short: {
-       return static_cast<unsigned short>(short_value);
+      return static_cast<unsigned short>(short_value);
     }
     case ft_UShort: {
        return ushort_value;
@@ -394,10 +394,10 @@ int field_value::get_asInt() const {
       return static_cast<int>(char_value);
     }
     case ft_Short: {
-       return static_cast<int>(short_value);
+      return static_cast<int>(short_value);
     }
     case ft_UShort: {
-       return static_cast<int>(ushort_value);
+      return static_cast<int>(ushort_value);
     }
     case ft_Int: {
       return int_value;
@@ -431,10 +431,10 @@ unsigned int field_value::get_asUInt() const {
       return static_cast<unsigned int>(char_value);
     }
     case ft_Short: {
-       return static_cast<unsigned int>(short_value);
+      return static_cast<unsigned int>(short_value);
     }
     case ft_UShort: {
-       return static_cast<unsigned int>(ushort_value);
+      return static_cast<unsigned int>(ushort_value);
     }
     case ft_Int: {
       return static_cast<unsigned int>(int_value);
@@ -468,10 +468,10 @@ float field_value::get_asFloat() const {
       return static_cast<float>(char_value);
     }
     case ft_Short: {
-       return static_cast<float>(short_value);
+      return static_cast<float>(short_value);
     }
     case ft_UShort: {
-       return static_cast<float>(ushort_value);
+      return static_cast<float>(ushort_value);
     }
     case ft_Int: {
       return static_cast<float>(int_value);
@@ -505,10 +505,10 @@ double field_value::get_asDouble() const {
       return static_cast<double>(char_value);
     }
     case ft_Short: {
-       return static_cast<double>(short_value);
+      return static_cast<double>(short_value);
     }
     case ft_UShort: {
-       return static_cast<double>(ushort_value);
+      return static_cast<double>(ushort_value);
     }
     case ft_Int: {
       return static_cast<double>(int_value);
@@ -542,10 +542,10 @@ int64_t field_value::get_asInt64() const {
       return static_cast<int64_t>(char_value);
     }
     case ft_Short: {
-       return static_cast<int64_t>(short_value);
+      return static_cast<int64_t>(short_value);
     }
     case ft_UShort: {
-       return static_cast<int64_t>(ushort_value);
+      return static_cast<int64_t>(ushort_value);
     }
     case ft_Int: {
       return static_cast<int64_t>(int_value);

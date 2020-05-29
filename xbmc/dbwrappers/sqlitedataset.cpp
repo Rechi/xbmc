@@ -698,7 +698,9 @@ void SqliteDataset::make_deletion() {
 
 void SqliteDataset::fill_fields() {
   //cout <<"rr "<<result.records.size()<<"|" << frecno <<"\n";
-  if ((db == NULL) || (result.record_header.empty()) || (result.records.size() < static_cast<unsigned int>(frecno))) return;
+  if ((db == NULL) || (result.record_header.empty()) ||
+      (result.records.size() < static_cast<unsigned int>(frecno)))
+    return;
 
   if (fields_object->size() == 0) // Filling columns name
   {
@@ -840,10 +842,10 @@ bool SqliteDataset::query(const std::string &query) {
         v.set_asDouble(sqlite3_column_double(stmt, i));
         break;
       case SQLITE_TEXT:
-        v.set_asString(reinterpret_cast<const char *>(sqlite3_column_text(stmt, i)));
+        v.set_asString(reinterpret_cast<const char*>(sqlite3_column_text(stmt, i)));
         break;
       case SQLITE_BLOB:
-        v.set_asString(reinterpret_cast<const char *>(sqlite3_column_text(stmt, i)));
+        v.set_asString(reinterpret_cast<const char*>(sqlite3_column_text(stmt, i)));
         break;
       case SQLITE_NULL:
       default:

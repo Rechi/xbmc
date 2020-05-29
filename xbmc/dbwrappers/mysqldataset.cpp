@@ -767,7 +767,8 @@ char MysqlDatabase::et_getdigit(double *val, int *cnt) {
 */
 void MysqlDatabase::appendSpace(StrAccum *pAccum, int N) {
   static const char zSpaces[] = "                             ";
-  while( N>=static_cast<int>(sizeof(zSpaces))-1 ) {
+  while (N >= static_cast<int>(sizeof(zSpaces)) - 1)
+  {
     mysqlStrAccumAppend(pAccum, zSpaces, sizeof(zSpaces)-1);
     N -= sizeof(zSpaces)-1;
   }
@@ -1027,7 +1028,7 @@ void MysqlDatabase::mysqlVXPrintf(
             longvalue = longvalue/base;
           }while( longvalue>0 );
         }
-        length = static_cast<int>(&buf[etBUFSIZE-1]-bufpt);
+        length = static_cast<int>(&buf[etBUFSIZE - 1] - bufpt);
         for(idx=precision-length; idx>0; idx--){
           *(--bufpt) = '0';                             /* Zero pad */
         }
@@ -1038,7 +1039,7 @@ void MysqlDatabase::mysqlVXPrintf(
           pre = &aPrefix[infop->prefix];
           for(; (x=(*pre))!=0; pre++) *(--bufpt) = x;
         }
-        length = static_cast<int>(&buf[etBUFSIZE-1]-bufpt);
+        length = static_cast<int>(&buf[etBUFSIZE - 1] - bufpt);
         bufpt[length] = 0;
         break;
       case etFLOAT:
@@ -1161,18 +1162,18 @@ void MysqlDatabase::mysqlVXPrintf(
             *(bufpt++) = '+';
           }
           if( exp>=100 ){
-            *(bufpt++) = static_cast<char>((exp/100)+'0');        /* 100's digit */
+            *(bufpt++) = static_cast<char>((exp / 100) + '0'); /* 100's digit */
             exp %= 100;
           }
-          *(bufpt++) = static_cast<char>(exp/10+'0');             /* 10's digit */
-          *(bufpt++) = static_cast<char>(exp%10+'0');             /* 1's digit */
+          *(bufpt++) = static_cast<char>(exp / 10 + '0'); /* 10's digit */
+          *(bufpt++) = static_cast<char>(exp % 10 + '0'); /* 1's digit */
         }
         *bufpt = 0;
 
         /* The converted number is in buf[] and zero terminated. Output it.
         ** Note that the number is in the usual order, not reversed as with
         ** integer conversions. */
-        length = static_cast<int>(bufpt-buf);
+        length = static_cast<int>(bufpt - buf);
         bufpt = buf;
 
         /* Special case:  Add leading zeros if the flag_zeropad flag is
@@ -1201,7 +1202,8 @@ void MysqlDatabase::mysqlVXPrintf(
         c = va_arg(ap,int);
         buf[0] = static_cast<char>(c);
         if( precision>=0 ){
-          for(idx=1; idx<precision; idx++) buf[idx] = static_cast<char>(c);
+          for (idx = 1; idx < precision; idx++)
+            buf[idx] = static_cast<char>(c);
           length = precision;
         }else{
           length =1;
@@ -1241,7 +1243,7 @@ void MysqlDatabase::mysqlVXPrintf(
         needQuote = !isnull && xtype==etSQLESCAPE2;
         n = i*2 + 1 + needQuote*2;
         if( n>etBUFSIZE ){
-          bufpt = zExtra = static_cast<char *>(malloc(n));
+          bufpt = zExtra = static_cast<char*>(malloc(n));
           if( bufpt==0 ){
             pAccum->mallocFailed = true;
             return;
@@ -1317,7 +1319,7 @@ bool MysqlDatabase::mysqlStrAccumAppend(StrAccum *p, const char *z, int N) {
     }else{
       p->nAlloc = szNew;
     }
-    zNew = static_cast<char *>(malloc(p->nAlloc));
+    zNew = static_cast<char*>(malloc(p->nAlloc));
     if( zNew ){
       memcpy(zNew, p->zText, p->nChar);
       mysqlStrAccumReset(p);
@@ -1352,7 +1354,7 @@ char * MysqlDatabase::mysqlStrAccumFinish(StrAccum *p){
   if( p->zText ){
     p->zText[p->nChar] = 0;
     if( p->zText==p->zBase ){
-      p->zText = static_cast<char *>(malloc(p->nChar+1));
+      p->zText = static_cast<char*>(malloc(p->nChar + 1));
       if( p->zText ){
         memcpy(p->zText, p->zBase, p->nChar+1);
       }else{
@@ -1479,7 +1481,9 @@ void MysqlDataset::make_deletion() {
 }
 
 void MysqlDataset::fill_fields() {
-  if ((db == NULL) || (result.record_header.empty()) || (result.records.size() < static_cast<unsigned int>(frecno))) return;
+  if ((db == NULL) || (result.record_header.empty()) ||
+      (result.records.size() < static_cast<unsigned int>(frecno)))
+    return;
 
   if (fields_object->size() == 0) // Filling columns name
   {
