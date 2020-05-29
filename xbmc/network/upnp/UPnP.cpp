@@ -235,12 +235,12 @@ public:
 
         if (item.GetVideoInfoTag()->GetResumePoint().timeInSeconds != bookmark.timeInSeconds) {
           s_logger->debug("Updating resume point for item {}", path);
-          long time = (long)bookmark.timeInSeconds;
+          long time = static_cast<long>(bookmark.timeInSeconds);
           if (time < 0)
             time = 0;
           curr_value.Append(
               NPT_String::Format("<upnp:lastPlaybackPosition>%ld</upnp:lastPlaybackPosition>",
-                                 (long)item.GetVideoInfoTag()->GetResumePoint().timeInSeconds));
+                                 static_cast<long>(item.GetVideoInfoTag()->GetResumePoint().timeInSeconds)));
           curr_value += "<xbmc:lastPlayerState>";
           PLT_Didl::AppendXmlEscape(curr_value,
                                     item.GetVideoInfoTag()->GetResumePoint().playerState.c_str());

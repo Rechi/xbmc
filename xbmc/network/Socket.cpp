@@ -114,7 +114,7 @@ bool CPosixUDPSocket::Bind(bool localOnly, int port, int range)
     else
       m_addr.saddr.saddr4.sin_port = htons(m_iPort);
 
-    if (bind(m_iSock, (struct sockaddr*)&m_addr.saddr, m_addr.size) != 0)
+    if (bind(m_iSock, reinterpret_cast<struct sockaddr*>(&m_addr.saddr), m_addr.size) != 0)
     {
       CLog::Log(LOGWARNING, "UDP: Error binding socket on port %d (ipv6 : %s)", m_iPort, m_ipv6Socket ? "true" : "false" );
       CLog::Log(LOGWARNING, "UDP: %s", strerror(errno));
@@ -204,15 +204,15 @@ int CPosixUDPSocket::Read(CAddress& addr, const int buffersize, void *buffer)
 {
   if (m_ipv6Socket)
     addr.SetAddress("::");
-  return (int)recvfrom(m_iSock, (char*)buffer, (size_t)buffersize, 0,
-                       (struct sockaddr*)&addr.saddr, &addr.size);
+  return static_cast<int>(recvfrom(m_iSock, static_cast<char*>(buffer), static_cast<size_t>(buffersize), 0,
+                       reinterpret_cast<struct sockaddr*>(&addr.saddr), &addr.size));
 }
 
 int CPosixUDPSocket::SendTo(const CAddress& addr, const int buffersize,
                           const void *buffer)
 {
-  return (int)sendto(m_iSock, (const char *)buffer, (size_t)buffersize, 0,
-                     (const struct sockaddr*)&addr.saddr, addr.size);
+  return static_cast<int>(sendto(m_iSock, static_cast<const char *>(buffer), static_cast<size_t>(buffersize), 0,
+                     reinterpret_cast<const struct sockaddr*>(&addr.saddr), addr.size));
 }
 
 /**********************************************************************/
@@ -300,7 +300,7 @@ CBaseSocket* CSocketListener::GetFirstReadySocket()
   if (m_iReadyCount<=0)
     return NULL;
 
-  for (int i = 0 ; i < (int)m_sockets.size() ; i++)
+  for (int i = 0 ; i < static_cast<int>(m_sockets.size()) ; i++)
   {
     if (FD_ISSET((m_sockets[i])->Socket(), &m_fdset))
     {
@@ -316,7 +316,7 @@ CBaseSocket* CSocketListener::GetNextReadySocket()
   if (m_iReadyCount<=0)
     return NULL;
 
-  for (int i = m_iCurrentSocket+1 ; i<(int)m_sockets.size() ; i++)
+  for (int i = m_iCurrentSocket+1 ; i<static_cast<int>(m_sockets.size()) ; i++)
   {
     if (FD_ISSET(m_sockets[i]->Socket(), &m_fdset))
     {
