@@ -786,7 +786,7 @@ void PLAYLIST::CPlayListPlayer::OnApplicationMessage(KODI::MESSAGING::ThreadMess
   case TMSG_PLAYLISTPLAYER_PLAY_SONG_ID:
     if (pMsg->param1 != -1)
     {
-      bool *result = (bool*)pMsg->lpVoid;
+      bool *result = static_cast<bool*>(pMsg->lpVoid);
       *result = PlaySongId(pMsg->param1);
     }
     else
@@ -834,7 +834,7 @@ void PLAYLIST::CPlayListPlayer::OnApplicationMessage(KODI::MESSAGING::ThreadMess
     break;
 
   case TMSG_PLAYLISTPLAYER_REPEAT:
-    SetRepeat(pMsg->param1, (PLAYLIST::REPEAT_STATE)pMsg->param2);
+    SetRepeat(pMsg->param1, static_cast<PLAYLIST::REPEAT_STATE>(pMsg->param2));
     break;
 
   case TMSG_PLAYLISTPLAYER_GET_ITEMS:
@@ -918,7 +918,7 @@ void PLAYLIST::CPlayListPlayer::OnApplicationMessage(KODI::MESSAGING::ThreadMess
             SetShuffle(playlist, list->GetProperty("shuffled").asBoolean(), false);
           // Handle "repeat" option if present
           if (list->HasProperty("repeat") && list->GetProperty("repeat").isInteger())
-            SetRepeat(playlist, (PLAYLIST::REPEAT_STATE)list->GetProperty("repeat").asInteger(), false);
+            SetRepeat(playlist, static_cast<PLAYLIST::REPEAT_STATE>(list->GetProperty("repeat").asInteger()), false);
 
           Add(playlist, (*list));
           Play(pMsg->param1, pMsg->strParam);

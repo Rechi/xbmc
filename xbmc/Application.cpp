@@ -1881,7 +1881,7 @@ bool CApplication::OnAction(const CAction &action)
       else if ((action.GetAmount() || m_appPlayer.GetPlaySpeed() != 1) && (action.GetID() == ACTION_ANALOG_REWIND || action.GetID() == ACTION_ANALOG_FORWARD))
       {
         // calculate the speed based on the amount the button is held down
-        int iPower = (int)(action.GetAmount() * MAX_FFWD_SPEED + 0.5f);
+        int iPower = static_cast<int>(action.GetAmount() * MAX_FFWD_SPEED + 0.5f);
         // amount can be negative, for example rewind and forward share the same axis
         iPower = std::abs(iPower);
         // returns 0 -> MAX_FFWD_SPEED
@@ -2120,7 +2120,7 @@ void CApplication::OnApplicationMessage(ThreadMessage* pMsg)
   break;
 
   case TMSG_NETWORKMESSAGE:
-    m_ServiceManager->GetNetwork().NetworkMessage((CNetwork::EMESSAGE)pMsg->param1, pMsg->param2);
+    m_ServiceManager->GetNetwork().NetworkMessage(static_cast<CNetwork::EMESSAGE>(pMsg->param1), pMsg->param2);
     break;
 
   case TMSG_SETLANGUAGE:
@@ -2581,7 +2581,7 @@ void CApplication::Stop(int exitCode)
     g_alarmClock.StopThread();
 
     CLog::Log(LOGINFO, "Storing total System Uptime");
-    g_sysinfo.SetTotalUptime(g_sysinfo.GetTotalUptime() + (int)(CTimeUtils::GetFrameTime() / 60000));
+    g_sysinfo.SetTotalUptime(g_sysinfo.GetTotalUptime() + static_cast<int>(CTimeUtils::GetFrameTime() / 60000));
 
     // Update the settings information (volume, uptime etc. need saving)
     if (CFile::Exists(CServiceBroker::GetSettingsComponent()->GetProfileManager()->GetSettingsFile()))
@@ -2725,7 +2725,7 @@ bool CApplication::PlayMedia(CFileItem& item, const std::string &player, int iPl
       {
         int track=0;
         if (item.HasProperty("playlist_starting_track"))
-          track = (int)item.GetProperty("playlist_starting_track").asInteger();
+          track = static_cast<int>(item.GetProperty("playlist_starting_track").asInteger());
         return ProcessAndStartPlaylist(item.GetPath(), *pPlayList, iPlaylist, track);
       }
       else
@@ -3267,7 +3267,7 @@ void CApplication::OnPlayBackSeek(int64_t iTime, int64_t seekOffset)
   CJSONUtils::MillisecondsToTimeObject(iTime, param["player"]["time"]);
   CJSONUtils::MillisecondsToTimeObject(seekOffset, param["player"]["seekoffset"]);
   param["player"]["playerid"] = CServiceBroker::GetPlaylistPlayer().GetCurrentPlaylist();
-  param["player"]["speed"] = (int)m_appPlayer.GetPlaySpeed();
+  param["player"]["speed"] = static_cast<int>(m_appPlayer.GetPlaySpeed());
   CServiceBroker::GetAnnouncementManager()->Announce(ANNOUNCEMENT::Player, "xbmc", "OnSeek", m_itemCurrentFile, param);
   CServiceBroker::GetGUI()->GetInfoManager().GetInfoProviders().GetPlayerInfoProvider().SetDisplayAfterSeek(2500, static_cast<int>(seekOffset));
 }
@@ -4247,7 +4247,7 @@ int CApplication::GlobalIdleTime()
 {
   if(!m_idleTimer.IsRunning())
     m_idleTimer.StartZero();
-  return (int)m_idleTimer.GetElapsedSeconds();
+  return static_cast<int>(m_idleTimer.GetElapsedSeconds());
 }
 
 float CApplication::NavigationIdleTime()
@@ -4547,14 +4547,14 @@ float CApplication::GetPercentage() const
     {
       const CMusicInfoTag& tag = *m_itemCurrentFile->GetMusicInfoTag();
       if (tag.GetDuration() > 0)
-        return (float)(GetTime() / tag.GetDuration() * 100);
+        return static_cast<float>(GetTime() / tag.GetDuration() * 100);
     }
 
     if (m_stackHelper.IsPlayingRegularStack())
     {
       double totalTime = GetTotalTime();
       if (totalTime > 0.0f)
-        return (float)(GetTime() / totalTime * 100);
+        return static_cast<float>(GetTime() / totalTime * 100);
     }
     else
       return m_appPlayer.GetPercentage();
@@ -4569,7 +4569,7 @@ float CApplication::GetCachePercentage() const
     // Note that the player returns a relative cache percentage and we want an absolute percentage
     if (m_stackHelper.IsPlayingRegularStack())
     {
-      float stackedTotalTime = (float) GetTotalTime();
+      float stackedTotalTime = static_cast<float>(GetTotalTime());
       // We need to take into account the stack's total time vs. currently playing file's total time
       if (stackedTotalTime > 0.0f)
         return std::min( 100.0f, GetPercentage() + (m_appPlayer.GetCachePercentage() * m_appPlayer.GetTotalTime() * 0.001f / stackedTotalTime ) );
