@@ -225,7 +225,8 @@ bool GUIScrollBarControl::UpdateBarSize()
     nibSize = std::max(m_guiBarFocus.GetHeight(), m_guiNibFocus.GetHeight());
 
     // and the position
-    percent = (m_numItems == m_pageSize) ? 0 : static_cast<float>(m_offset) / (m_numItems - m_pageSize);
+    percent =
+        (m_numItems == m_pageSize) ? 0 : static_cast<float>(m_offset) / (m_numItems - m_pageSize);
     float nibPos = (GetHeight() - nibSize) * percent;
     if (nibPos < 0) nibPos = 0;
     if (nibPos > GetHeight() - nibSize) nibPos = GetHeight() - nibSize;
@@ -249,7 +250,8 @@ bool GUIScrollBarControl::UpdateBarSize()
     changed |= m_guiNibFocus.SetWidth(nibSize);
 
     // and the position
-    percent = (m_numItems == m_pageSize) ? 0 : static_cast<float>(m_offset) / (m_numItems - m_pageSize);
+    percent =
+        (m_numItems == m_pageSize) ? 0 : static_cast<float>(m_offset) / (m_numItems - m_pageSize);
     float nibPos = (GetWidth() - nibSize) * percent;
     if (nibPos < 0) nibPos = 0;
     if (nibPos > GetWidth() - nibSize) nibPos = GetWidth() - nibSize;

@@ -53,7 +53,7 @@ void CGUIMoverControl::Process(unsigned int currentTime, CDirtyRegionList &dirty
       alphaChannel = 63 - (alphaCounter % 64);
 
     alphaChannel += 192;
-    if (SetAlpha( static_cast<unsigned char>(alphaChannel) ))
+    if (SetAlpha(static_cast<unsigned char>(alphaChannel)))
       MarkDirtyRegion();
     m_imgFocus.SetVisible(true);
     m_imgNoFocus.SetVisible(false);
@@ -96,7 +96,8 @@ bool CGUIMoverControl::OnAction(const CAction &action)
     //  else if (m_dwAllowedDirections == ALLOWED_DIRECTIONS_LEFTRIGHT)
     //   Move((int)(m_fAnalogSpeed*action.GetAmount()), 0);
     //  else // ALLOWED_DIRECTIONS_ALL
-    Move(static_cast<int>(m_fAnalogSpeed*action.GetAmount()), static_cast<int>( -m_fAnalogSpeed*action.GetAmount(1)));
+    Move(static_cast<int>(m_fAnalogSpeed * action.GetAmount()),
+         static_cast<int>(-m_fAnalogSpeed * action.GetAmount(1)));
     return true;
   }
   // base class
@@ -107,7 +108,7 @@ void CGUIMoverControl::OnUp()
 {
   // if (m_dwAllowedDirections == ALLOWED_DIRECTIONS_LEFTRIGHT) return;
   UpdateSpeed(DIRECTION_UP);
-  Move(0, static_cast<int>(- m_fSpeed));
+  Move(0, static_cast<int>(-m_fSpeed));
 }
 
 void CGUIMoverControl::OnDown()
@@ -121,7 +122,7 @@ void CGUIMoverControl::OnLeft()
 {
   // if (m_dwAllowedDirections == ALLOWED_DIRECTIONS_UPDOWN) return;
   UpdateSpeed(DIRECTION_LEFT);
-  Move(static_cast<int>(- m_fSpeed), 0);
+  Move(static_cast<int>(-m_fSpeed), 0);
 }
 
 void CGUIMoverControl::OnRight()

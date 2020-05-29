@@ -319,7 +319,8 @@ bool CGUIBaseContainer::OnAction(const CAction &action)
         ((m_orientation == VERTICAL && (action.GetID() == ACTION_MOVE_UP || action.GetID() == ACTION_MOVE_DOWN)) ||
          (m_orientation == HORIZONTAL && (action.GetID() == ACTION_MOVE_LEFT || action.GetID() == ACTION_MOVE_RIGHT))))
       { // action is held down - repeat a number of times
-        float speed = std::min(1.0f, static_cast<float>(action.GetHoldTime() - HOLD_TIME_START) / (HOLD_TIME_END - HOLD_TIME_START));
+        float speed = std::min(1.0f, static_cast<float>(action.GetHoldTime() - HOLD_TIME_START) /
+                                         (HOLD_TIME_END - HOLD_TIME_START));
         unsigned int frameDuration = std::min(CTimeUtils::GetFrameTime() - m_lastHoldTime, 50u); // max 20fps
 
         // maximal scroll rate is at least 30 items per second, and at most (item_rows/7) items per second
@@ -667,7 +668,8 @@ CGUIListItemPtr CGUIBaseContainer::GetListItem(int offset, unsigned int flag) co
     return CGUIListItemPtr();
   int item = GetSelectedItem() + offset;
   if (flag & INFOFLAG_LISTITEM_POSITION) // use offset from the first item displayed, taking into account scrolling
-    item = CorrectOffset(static_cast<int>(m_scroller.GetValue() / m_layout->Size(m_orientation)), offset);
+    item = CorrectOffset(static_cast<int>(m_scroller.GetValue() / m_layout->Size(m_orientation)),
+                         offset);
 
   if (flag & INFOFLAG_LISTITEM_ABSOLUTE) // use offset from the first item
     item = CorrectOffset(0, offset);
@@ -966,7 +968,9 @@ void CGUIBaseContainer::UpdateListProvider(bool forceRefresh /* = false */)
     {
       // save the current item
       int currentItem = GetSelectedItem();
-      CGUIListItem *current = (currentItem >= 0 && currentItem < static_cast<int>(m_items.size())) ? m_items[currentItem].get() : NULL;
+      CGUIListItem* current = (currentItem >= 0 && currentItem < static_cast<int>(m_items.size()))
+                                  ? m_items[currentItem].get()
+                                  : NULL;
       const std::string prevSelectedPath((current && current->IsFileItem()) ? static_cast<CFileItem *>(current)->GetPath() : "");
 
       Reset();
@@ -1032,7 +1036,10 @@ void CGUIBaseContainer::CalculateLayout()
   if (oldLayout == m_layout && oldFocusedLayout == m_focusedLayout)
     return; // nothing has changed, so don't update stuff
 
-  m_itemsPerPage = std::max(static_cast<int>((Size() - m_focusedLayout->Size(m_orientation)) / m_layout->Size(m_orientation)) + 1, 1);
+  m_itemsPerPage = std::max(static_cast<int>((Size() - m_focusedLayout->Size(m_orientation)) /
+                                             m_layout->Size(m_orientation)) +
+                                1,
+                            1);
 
   // ensure that the scroll offset is a multiple of our size
   m_scroller.SetValue(GetOffset() * m_layout->Size(m_orientation));
@@ -1136,7 +1143,8 @@ void CGUIBaseContainer::UpdateAutoScrolling(unsigned int currentTime)
   {
     if (m_lastRenderTime)
       m_autoScrollDelayTime += currentTime - m_lastRenderTime;
-    if (m_autoScrollDelayTime > static_cast<unsigned int>(m_autoScrollMoveTime) && !m_scroller.IsScrolling())
+    if (m_autoScrollDelayTime > static_cast<unsigned int>(m_autoScrollMoveTime) &&
+        !m_scroller.IsScrolling())
     { // delay is finished - start moving
       m_autoScrollDelayTime = 0;
       // Move up or down whether reversed moving is true or false
@@ -1229,7 +1237,8 @@ void CGUIBaseContainer::FreeMemory(int keepStart, int keepEnd)
   }
   else
   { // wrapping
-    for (int i = std::max(keepEnd + 1, 0); i < keepStart && i < static_cast<int>(m_items.size()); ++i)
+    for (int i = std::max(keepEnd + 1, 0); i < keepStart && i < static_cast<int>(m_items.size());
+         ++i)
       m_items[i]->FreeMemory();
   }
 }
@@ -1374,7 +1383,7 @@ std::string CGUIBaseContainer::GetLabel(int info) const
 
 int CGUIBaseContainer::GetCurrentPage() const
 {
-  if (GetOffset() + m_itemsPerPage >= static_cast<int>(GetRows()))  // last page
+  if (GetOffset() + m_itemsPerPage >= static_cast<int>(GetRows())) // last page
     return (GetRows() + m_itemsPerPage - 1) / m_itemsPerPage;
   return GetOffset() / m_itemsPerPage + 1;
 }

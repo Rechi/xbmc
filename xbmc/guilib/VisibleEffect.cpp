@@ -27,8 +27,10 @@ CAnimEffect::CAnimEffect(const TiXmlElement *node, EFFECT_TYPE effect)
   // time and delay
 
   float temp;
-  if (TIXML_SUCCESS == node->QueryFloatAttribute("time", &temp)) m_length = static_cast<unsigned int>(temp * g_SkinInfo->GetEffectsSlowdown());
-  if (TIXML_SUCCESS == node->QueryFloatAttribute("delay", &temp)) m_delay = static_cast<unsigned int>(temp * g_SkinInfo->GetEffectsSlowdown());
+  if (TIXML_SUCCESS == node->QueryFloatAttribute("time", &temp))
+    m_length = static_cast<unsigned int>(temp * g_SkinInfo->GetEffectsSlowdown());
+  if (TIXML_SUCCESS == node->QueryFloatAttribute("delay", &temp))
+    m_delay = static_cast<unsigned int>(temp * g_SkinInfo->GetEffectsSlowdown());
 
   m_pTweener = GetTweener(node);
 }
@@ -773,7 +775,8 @@ bool CScroller::Update(unsigned int time)
       m_startPosition = 0;
     }
     else
-      m_scrollValue = m_startPosition + Tween(static_cast<float>(time - m_startTime) / m_duration) * m_delta;
+      m_scrollValue =
+          m_startPosition + Tween(static_cast<float>(time - m_startTime) / m_duration) * m_delta;
     return true;
   }
   else

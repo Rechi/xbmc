@@ -58,7 +58,8 @@ void CGUIControlProfilerItem::BeginVisibility(void)
 
 void CGUIControlProfilerItem::EndVisibility(void)
 {
-  m_visTime += static_cast<unsigned int>(m_pProfiler->m_fPerfScale * (CurrentHostCounter() - m_i64VisStart));
+  m_visTime +=
+      static_cast<unsigned int>(m_pProfiler->m_fPerfScale * (CurrentHostCounter() - m_i64VisStart));
 }
 
 void CGUIControlProfilerItem::BeginRender(void)
@@ -68,7 +69,8 @@ void CGUIControlProfilerItem::BeginRender(void)
 
 void CGUIControlProfilerItem::EndRender(void)
 {
-  m_renderTime += static_cast<unsigned int>(m_pProfiler->m_fPerfScale * (CurrentHostCounter() - m_i64RenderStart));
+  m_renderTime += static_cast<unsigned int>(m_pProfiler->m_fPerfScale *
+                                            (CurrentHostCounter() - m_i64RenderStart));
 }
 
 void CGUIControlProfilerItem::SaveToXML(TiXmlElement *parent)

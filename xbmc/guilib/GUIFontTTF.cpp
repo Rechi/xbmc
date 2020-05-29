@@ -86,7 +86,8 @@ public:
       XFILE::CFile f;
       if (f.LoadFile(realFile, memoryBuf) <= 0)
         return NULL;
-      if (FT_New_Memory_Face(m_library, reinterpret_cast<const FT_Byte*>(memoryBuf.get()), memoryBuf.size(), 0, &face) != 0)
+      if (FT_New_Memory_Face(m_library, reinterpret_cast<const FT_Byte*>(memoryBuf.get()),
+                             memoryBuf.size(), 0, &face) != 0)
         return NULL;
     }
 #ifndef TARGET_WINDOWS
@@ -101,7 +102,7 @@ public:
     // we cache our characters (for rendering speed) so it's probably
     // not a good idea to allow free scaling of fonts - rather, just
     // scaling to pixel ratio on screen perhaps?
-    if (FT_Set_Char_Size( face, 0, static_cast<int>(size*64 + 0.5f), xdpi, ydpi ))
+    if (FT_Set_Char_Size(face, 0, static_cast<int>(size * 64 + 0.5f), xdpi, ydpi))
     {
       FT_Done_Face(face);
       return NULL;
@@ -775,7 +776,8 @@ bool CGUIFontTTFBase::CacheCharacter(wchar_t letter, uint32_t style, Character *
   ch->top = isEmptyGlyph ? 0 : (static_cast<float>(m_posY) + ch->offsetY);
   ch->right = ch->left + bitmap.width;
   ch->bottom = ch->top + bitmap.rows;
-  ch->advance = static_cast<float>(MathUtils::round_int( static_cast<float>(m_face->glyph->advance.x) / 64 ));
+  ch->advance =
+      static_cast<float>(MathUtils::round_int(static_cast<float>(m_face->glyph->advance.x) / 64));
 
   // we need only render if we actually have some pixels
   if (!isEmptyGlyph)
@@ -787,7 +789,9 @@ bool CGUIFontTTFBase::CacheCharacter(wchar_t letter, uint32_t style, Character *
     unsigned int y2 = std::min(y1 + bitmap.rows, m_textureHeight);
     CopyCharToTexture(bitGlyph, x1, y1, x2, y2);
 
-    m_posX += spacing_between_characters_in_texture + static_cast<unsigned short>(std::max(ch->right - ch->left + ch->offsetX, ch->advance));
+    m_posX +=
+        spacing_between_characters_in_texture +
+        static_cast<unsigned short>(std::max(ch->right - ch->left + ch->offsetX, ch->advance));
   }
   m_numChars++;
 
@@ -852,15 +856,23 @@ void CGUIFontTTFBase::RenderCharacter(float posX, float posY, const Character *c
     x[3] = rx3;
   }
 
-  y[0] = static_cast<float>(MathUtils::round_int(CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalYCoord(vertex.x1, vertex.y1)));
-  y[1] = static_cast<float>(MathUtils::round_int(CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalYCoord(vertex.x2, vertex.y1)));
-  y[2] = static_cast<float>(MathUtils::round_int(CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalYCoord(vertex.x2, vertex.y2)));
-  y[3] = static_cast<float>(MathUtils::round_int(CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalYCoord(vertex.x1, vertex.y2)));
+  y[0] = static_cast<float>(MathUtils::round_int(
+      CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalYCoord(vertex.x1, vertex.y1)));
+  y[1] = static_cast<float>(MathUtils::round_int(
+      CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalYCoord(vertex.x2, vertex.y1)));
+  y[2] = static_cast<float>(MathUtils::round_int(
+      CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalYCoord(vertex.x2, vertex.y2)));
+  y[3] = static_cast<float>(MathUtils::round_int(
+      CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalYCoord(vertex.x1, vertex.y2)));
 
-  z[0] = static_cast<float>(MathUtils::round_int(CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalZCoord(vertex.x1, vertex.y1)));
-  z[1] = static_cast<float>(MathUtils::round_int(CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalZCoord(vertex.x2, vertex.y1)));
-  z[2] = static_cast<float>(MathUtils::round_int(CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalZCoord(vertex.x2, vertex.y2)));
-  z[3] = static_cast<float>(MathUtils::round_int(CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalZCoord(vertex.x1, vertex.y2)));
+  z[0] = static_cast<float>(MathUtils::round_int(
+      CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalZCoord(vertex.x1, vertex.y1)));
+  z[1] = static_cast<float>(MathUtils::round_int(
+      CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalZCoord(vertex.x2, vertex.y1)));
+  z[2] = static_cast<float>(MathUtils::round_int(
+      CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalZCoord(vertex.x2, vertex.y2)));
+  z[3] = static_cast<float>(MathUtils::round_int(
+      CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalZCoord(vertex.x1, vertex.y2)));
 
   // tex coords converted to 0..1 range
   float tl = texture.x1 * m_textureScaleX;

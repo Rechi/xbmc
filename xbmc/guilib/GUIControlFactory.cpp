@@ -840,7 +840,8 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
   XMLUtils::GetFloat(pControlNode, "textoffsetx", labelInfo.offsetX);
   XMLUtils::GetFloat(pControlNode, "textoffsety", labelInfo.offsetY);
   int angle = 0;  // use the negative angle to compensate for our vertically flipped cartesian plane
-  if (XMLUtils::GetInt(pControlNode, "angle", angle)) labelInfo.angle = static_cast<float>(-angle);
+  if (XMLUtils::GetInt(pControlNode, "angle", angle))
+    labelInfo.angle = static_cast<float>(-angle);
   std::string strFont, strMonoFont;
   if (XMLUtils::GetString(pControlNode, "font", strFont))
     labelInfo.font = g_fontManager.GetFont(strFont);

@@ -383,7 +383,7 @@ const CTextureArray& CGUITextureManager::Load(const std::string& strTextureName,
     CFFmpegImage anim(mimeType);
 
     if (file.LoadFile(strPath, buf) <= 0 ||
-       !anim.Initialize(reinterpret_cast<uint8_t*>(buf.get()), buf.size()))
+        !anim.Initialize(reinterpret_cast<uint8_t*>(buf.get()), buf.size()))
     {
       CLog::Log(LOGERROR, "Texture manager unable to load file: %s", CURL::GetRedacted(strPath).c_str());
       file.Close();

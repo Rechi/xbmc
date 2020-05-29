@@ -68,7 +68,8 @@ struct ThumbDataManagement
 // and bufferSize -1 last data point
 static inline size_t Clamp(int64_t newPosition, size_t bufferSize)
 {
-  return std::min(std::max(static_cast<int64_t>(0), newPosition), static_cast<int64_t>(bufferSize -1));
+  return std::min(std::max(static_cast<int64_t>(0), newPosition),
+                  static_cast<int64_t>(bufferSize - 1));
 }
 
 static int mem_file_read(void *h, uint8_t* buf, int size)
@@ -634,7 +635,7 @@ bool CFFmpegImage::CreateThumbnailFromSurface(unsigned char* bufferin, unsigned 
   }
 
   uint8_t* src[] = { bufferin, NULL, NULL, NULL };
-  int srcStride[] = { static_cast<int>(pitch), 0, 0, 0};
+  int srcStride[] = {static_cast<int>(pitch), 0, 0, 0};
 
   //input size == output size which means only pix_fmt conversion
   tdm.sws = sws_getContext(width, height, AV_PIX_FMT_RGB32, width, height, jpg_output ? AV_PIX_FMT_YUV420P : AV_PIX_FMT_RGBA, 0, 0, 0, 0);

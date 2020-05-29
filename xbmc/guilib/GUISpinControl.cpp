@@ -271,7 +271,7 @@ bool CGUISpinControl::OnMessage(CGUIMessage& message)
 
         if (m_iType == SPIN_CONTROL_TYPE_TEXT)
         {
-          if ( m_iValue >= 0 && m_iValue < static_cast<int>(m_vecLabels.size()) )
+          if (m_iValue >= 0 && m_iValue < static_cast<int>(m_vecLabels.size()))
             message.SetLabel( m_vecLabels[m_iValue]);
         }
         return true;
@@ -407,11 +407,12 @@ void CGUISpinControl::Process(unsigned int currentTime, CDirtyRegionList &dirtyr
   }
   else
   {
-    if (m_iValue >= 0 && m_iValue < static_cast<int>(m_vecLabels.size()) )
+    if (m_iValue >= 0 && m_iValue < static_cast<int>(m_vecLabels.size()))
     {
       if (m_bShowRange)
       {
-        text = StringUtils::Format("(%i/%i) %s", m_iValue + 1, static_cast<int>(m_vecLabels.size()), m_vecLabels[m_iValue].c_str() );
+        text = StringUtils::Format("(%i/%i) %s", m_iValue + 1, static_cast<int>(m_vecLabels.size()),
+                                   m_vecLabels[m_iValue].c_str());
       }
       else
       {
@@ -590,7 +591,8 @@ float CGUISpinControl::GetFloatValue() const
 
 std::string CGUISpinControl::GetStringValue() const
 {
-  if (m_iType == SPIN_CONTROL_TYPE_TEXT && m_iValue >= 0 && m_iValue < static_cast<int>(m_vecLabels.size()))
+  if (m_iType == SPIN_CONTROL_TYPE_TEXT && m_iValue >= 0 &&
+      m_iValue < static_cast<int>(m_vecLabels.size()))
   {
     if (m_iValue < static_cast<int>(m_vecStrValues.size()))
       return m_vecStrValues[m_iValue];
@@ -764,7 +766,7 @@ void CGUISpinControl::PageDown()
     break;
   case SPIN_CONTROL_TYPE_TEXT:
     {
-      if (m_iValue + 10 < static_cast<int>(m_vecLabels.size()) )
+      if (m_iValue + 10 < static_cast<int>(m_vecLabels.size()))
         m_iValue += 10;
       CGUIMessage msg(GUI_MSG_CLICKED, GetID(), GetParentID());
       SendWindowMessage(msg);
@@ -863,7 +865,7 @@ void CGUISpinControl::MoveDown(bool bTestReverse)
 
   case SPIN_CONTROL_TYPE_TEXT:
     {
-      if (m_iValue + 1 < static_cast<int>(m_vecLabels.size()) )
+      if (m_iValue + 1 < static_cast<int>(m_vecLabels.size()))
         m_iValue++;
       else if (m_iValue == static_cast<int>(m_vecLabels.size()) - 1)
         m_iValue = 0;
@@ -904,7 +906,7 @@ int CGUISpinControl::GetMinimum() const
     break;
 
   case SPIN_CONTROL_TYPE_FLOAT:
-    return static_cast<int>(m_fStart*10.0f);
+    return static_cast<int>(m_fStart * 10.0f);
     break;
   }
   return 0;
@@ -925,7 +927,7 @@ int CGUISpinControl::GetMaximum() const
     break;
 
   case SPIN_CONTROL_TYPE_FLOAT:
-    return static_cast<int>(m_fEnd*10.0f);
+    return static_cast<int>(m_fEnd * 10.0f);
     break;
   }
   return 100;

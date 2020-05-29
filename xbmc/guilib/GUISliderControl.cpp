@@ -166,7 +166,7 @@ bool CGUISliderControl::OnMessage(CGUIMessage& message)
     switch (message.GetMessage())
     {
     case GUI_MSG_ITEM_SELECT:
-      SetPercentage( static_cast<float>(message.GetParam1()) );
+      SetPercentage(static_cast<float>(message.GetParam1()));
       return true;
       break;
 
@@ -465,7 +465,7 @@ void CGUISliderControl::SetFloatInterval(float fInterval)
 void CGUISliderControl::SetRange(int iStart, int iEnd)
 {
   if (m_iType == SLIDER_CONTROL_TYPE_FLOAT)
-    SetFloatRange(static_cast<float>(iStart),static_cast<float>(iEnd));
+    SetFloatRange(static_cast<float>(iStart), static_cast<float>(iEnd));
   else
   {
     m_intValues[0] = m_iStart = iStart;
@@ -564,7 +564,8 @@ void CGUISliderControl::SetFromPosition(const CPoint &point, bool guessSelector 
 
   case SLIDER_CONTROL_TYPE_INT:
     {
-      int iValue = static_cast<int>(m_iStart + static_cast<float>(m_iEnd - m_iStart) * fPercent + 0.49f);
+      int iValue =
+          static_cast<int>(m_iStart + static_cast<float>(m_iEnd - m_iStart) * fPercent + 0.49f);
       SetIntValue(iValue, m_currentSelector, true);
       break;
     }
@@ -697,7 +698,9 @@ float CGUISliderControl::GetProportion(RangeSelector selector /* = RangeSelector
   if (m_iType == SLIDER_CONTROL_TYPE_FLOAT)
     return m_fStart != m_fEnd ? (GetFloatValue(selector) - m_fStart) / (m_fEnd - m_fStart) : 0.0f;
   else if (m_iType == SLIDER_CONTROL_TYPE_INT)
-    return m_iStart != m_iEnd ? static_cast<float>(GetIntValue(selector) - m_iStart) / static_cast<float>(m_iEnd - m_iStart) : 0.0f;
+    return m_iStart != m_iEnd ? static_cast<float>(GetIntValue(selector) - m_iStart) /
+                                    static_cast<float>(m_iEnd - m_iStart)
+                              : 0.0f;
   return 0.01f * GetPercentage(selector);
 }
 

@@ -52,9 +52,11 @@ void CGUIControlGroupList::Process(unsigned int currentTime, CDirtyRegionList &d
   ValidateOffset();
   if (m_pageControl && m_lastScrollerValue != m_scroller.GetValue())
   {
-    CGUIMessage message(GUI_MSG_LABEL_RESET, GetParentID(), m_pageControl, static_cast<int>(Size()), static_cast<int>(m_totalSize));
+    CGUIMessage message(GUI_MSG_LABEL_RESET, GetParentID(), m_pageControl, static_cast<int>(Size()),
+                        static_cast<int>(m_totalSize));
     SendWindowMessage(message);
-    CGUIMessage message2(GUI_MSG_ITEM_SELECT, GetParentID(), m_pageControl, static_cast<int>(m_scroller.GetValue()));
+    CGUIMessage message2(GUI_MSG_ITEM_SELECT, GetParentID(), m_pageControl,
+                         static_cast<int>(m_scroller.GetValue()));
     SendWindowMessage(message2);
     m_lastScrollerValue = static_cast<int>(m_scroller.GetValue());
   }

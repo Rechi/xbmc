@@ -156,7 +156,7 @@ bool CGUIListItem::HasArt(const std::string &type) const
 
 void CGUIListItem::SetOverlayImage(GUIIconOverlay icon, bool bOnOff)
 {
-  GUIIconOverlay newIcon = (bOnOff) ? GUIIconOverlay(static_cast<int>(icon)+1) : icon;
+  GUIIconOverlay newIcon = (bOnOff) ? GUIIconOverlay(static_cast<int>(icon) + 1) : icon;
   if (m_overlayIcon == newIcon)
     return;
   m_overlayIcon = newIcon;

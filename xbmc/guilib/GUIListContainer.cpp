@@ -41,7 +41,8 @@ bool CGUIListContainer::OnAction(const CAction &action)
     break;
   case ACTION_PAGE_DOWN:
     {
-      if (GetOffset() == static_cast<int>(m_items.size()) - m_itemsPerPage || static_cast<int>(m_items.size()) < m_itemsPerPage)
+      if (GetOffset() == static_cast<int>(m_items.size()) - m_itemsPerPage ||
+          static_cast<int>(m_items.size()) < m_itemsPerPage)
       { // already at the last page, so move to the last item.
         SetCursor(m_items.size() - GetOffset() - 1);
       }
@@ -81,11 +82,13 @@ bool CGUIListContainer::OnAction(const CAction &action)
       {
         handled = true;
         m_analogScrollCount -= 0.4f;
-        if (GetOffset() + m_itemsPerPage < static_cast<int>(m_items.size()) && GetCursor() >= m_itemsPerPage / 2)
+        if (GetOffset() + m_itemsPerPage < static_cast<int>(m_items.size()) &&
+            GetCursor() >= m_itemsPerPage / 2)
         {
           Scroll(1);
         }
-        else if (GetCursor() < m_itemsPerPage - 1 && GetOffset() + GetCursor() < static_cast<int>(m_items.size()) - 1)
+        else if (GetCursor() < m_itemsPerPage - 1 &&
+                 GetOffset() + GetCursor() < static_cast<int>(m_items.size()) - 1)
         {
           SetCursor(GetCursor() + 1);
         }
@@ -286,7 +289,8 @@ CGUIListContainer::CGUIListContainer(int parentID, int controlID, float posX, fl
 
 bool CGUIListContainer::HasNextPage() const
 {
-  return (GetOffset() != static_cast<int>(m_items.size()) - m_itemsPerPage && static_cast<int>(m_items.size()) >= m_itemsPerPage);
+  return (GetOffset() != static_cast<int>(m_items.size()) - m_itemsPerPage &&
+          static_cast<int>(m_items.size()) >= m_itemsPerPage);
 }
 
 bool CGUIListContainer::HasPreviousPage() const
