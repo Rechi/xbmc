@@ -39,7 +39,7 @@ void CGUIWindowScreensaverDim::UpdateVisibility()
       ADDON::AddonPtr info;
       CServiceBroker::GetAddonMgr().GetAddon(usedId, info, ADDON::ADDON_SCREENSAVER);
       if (info && !info->GetSetting("level").empty())
-        m_newDimLevel = 100.0f - (float)atof(info->GetSetting("level").c_str());
+        m_newDimLevel = 100.0f - static_cast<float>(atof(info->GetSetting("level").c_str()));
       else
         m_newDimLevel = 100.0f;
       Open();
@@ -57,7 +57,7 @@ void CGUIWindowScreensaverDim::Process(unsigned int currentTime, CDirtyRegionLis
   if (m_newDimLevel != m_dimLevel && !IsAnimating(ANIM_TYPE_WINDOW_CLOSE))
     m_dimLevel = m_newDimLevel;
   CGUIDialog::Process(currentTime, dirtyregions);
-  m_renderRegion.SetRect(0, 0, (float)CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth(), (float)CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight());
+  m_renderRegion.SetRect(0, 0, static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth()), static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight()));
 }
 
 void CGUIWindowScreensaverDim::Render()
@@ -65,7 +65,7 @@ void CGUIWindowScreensaverDim::Render()
   // draw a translucent black quad - fading is handled by the window animation
   UTILS::Color color = (static_cast<UTILS::Color>(m_dimLevel * 2.55f) & 0xff) << 24;
   color = CServiceBroker::GetWinSystem()->GetGfxContext().MergeAlpha(color);
-  CRect rect(0, 0, (float)CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth(), (float)CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight());
+  CRect rect(0, 0, static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth()), static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight()));
   CGUITexture::DrawQuad(rect, color);
   CGUIDialog::Render();
 }
