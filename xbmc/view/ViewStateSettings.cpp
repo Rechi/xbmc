@@ -91,7 +91,8 @@ bool CViewStateSettings::Load(const TiXmlNode *settings)
     {
       int sortMethod;
       if (XMLUtils::GetInt(pViewState, XML_SORTMETHOD, sortMethod, SORT_METHOD_NONE, SORT_METHOD_MAX))
-        viewState->second->m_sortDescription = SortUtils::TranslateOldSortMethod(static_cast<SORT_METHOD>(sortMethod));
+        viewState->second->m_sortDescription =
+            SortUtils::TranslateOldSortMethod(static_cast<SORT_METHOD>(sortMethod));
     }
     else
     {
@@ -99,7 +100,8 @@ bool CViewStateSettings::Load(const TiXmlNode *settings)
       if (XMLUtils::GetInt(pViewState, XML_SORTMETHOD, sortMethod, SortByNone, SortByLastUsed))
         viewState->second->m_sortDescription.sortBy = static_cast<SortBy>(sortMethod);
       if (XMLUtils::GetInt(pViewState, XML_SORTATTRIBUTES, sortMethod, SortAttributeNone, SortAttributeIgnoreFolders))
-        viewState->second->m_sortDescription.sortAttributes = static_cast<SortAttribute>(sortMethod);
+        viewState->second->m_sortDescription.sortAttributes =
+            static_cast<SortAttribute>(sortMethod);
     }
 
     int sortOrder;
@@ -156,9 +158,12 @@ bool CViewStateSettings::Save(TiXmlNode *settings) const
       continue;
 
     XMLUtils::SetInt(pNewNode, XML_VIEWMODE, viewState->second->m_viewMode);
-    XMLUtils::SetInt(pNewNode, XML_SORTMETHOD, static_cast<int>(viewState->second->m_sortDescription.sortBy));
-    XMLUtils::SetInt(pNewNode, XML_SORTORDER, static_cast<int>(viewState->second->m_sortDescription.sortOrder));
-    XMLUtils::SetInt(pNewNode, XML_SORTATTRIBUTES, static_cast<int>(viewState->second->m_sortDescription.sortAttributes));
+    XMLUtils::SetInt(pNewNode, XML_SORTMETHOD,
+                     static_cast<int>(viewState->second->m_sortDescription.sortBy));
+    XMLUtils::SetInt(pNewNode, XML_SORTORDER,
+                     static_cast<int>(viewState->second->m_sortDescription.sortOrder));
+    XMLUtils::SetInt(pNewNode, XML_SORTATTRIBUTES,
+                     static_cast<int>(viewState->second->m_sortDescription.sortAttributes));
   }
 
   TiXmlNode *generalNode = settings->FirstChild(XML_GENERAL);
@@ -182,7 +187,8 @@ bool CViewStateSettings::Save(TiXmlNode *settings) const
   }
 
   XMLUtils::SetInt(eventLogNode, XML_EVENTLOG_LEVEL, static_cast<int>(m_eventLevel));
-  XMLUtils::SetBoolean(eventLogNode, XML_EVENTLOG_LEVEL_HIGHER, static_cast<int>(m_eventShowHigherLevels));
+  XMLUtils::SetBoolean(eventLogNode, XML_EVENTLOG_LEVEL_HIGHER,
+                       static_cast<int>(m_eventShowHigherLevels));
 
   return true;
 }
