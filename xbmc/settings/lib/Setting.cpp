@@ -497,7 +497,7 @@ bool CSettingList::SetValue(const SettingList &values)
   CExclusiveLock lock(m_critical);
 
   if (static_cast<int>(values.size()) < m_minimumItems ||
-     (m_maximumItems > 0 && static_cast<int>(values.size()) > m_maximumItems))
+      (m_maximumItems > 0 && static_cast<int>(values.size()) > m_maximumItems))
     return false;
 
   bool equal = values.size() == m_values.size();
@@ -594,7 +594,7 @@ bool CSettingList::fromString(const std::string &strValue, SettingList &values) 
 bool CSettingList::fromValues(const std::vector<std::string> &strValues, SettingList &values) const
 {
   if (static_cast<int>(strValues.size()) < m_minimumItems ||
-     (m_maximumItems > 0 && static_cast<int>(strValues.size()) > m_maximumItems))
+      (m_maximumItems > 0 && static_cast<int>(strValues.size()) > m_maximumItems))
     return false;
 
   bool ret = true;

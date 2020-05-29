@@ -159,11 +159,14 @@ bool CMediaSettings::Load(const TiXmlNode *settings)
   if (pElement != NULL)
   {
     int tmp;
-    if (XMLUtils::GetInt(pElement, "watchmodemovies", tmp, static_cast<int>(WatchedModeAll), static_cast<int>(WatchedModeWatched)))
+    if (XMLUtils::GetInt(pElement, "watchmodemovies", tmp, static_cast<int>(WatchedModeAll),
+                         static_cast<int>(WatchedModeWatched)))
       m_watchedModes["movies"] = static_cast<WatchedMode>(tmp);
-    if (XMLUtils::GetInt(pElement, "watchmodetvshows", tmp, static_cast<int>(WatchedModeAll), static_cast<int>(WatchedModeWatched)))
+    if (XMLUtils::GetInt(pElement, "watchmodetvshows", tmp, static_cast<int>(WatchedModeAll),
+                         static_cast<int>(WatchedModeWatched)))
       m_watchedModes["tvshows"] = static_cast<WatchedMode>(tmp);
-    if (XMLUtils::GetInt(pElement, "watchmodemusicvideos", tmp, static_cast<int>(WatchedModeAll), static_cast<int>(WatchedModeWatched)))
+    if (XMLUtils::GetInt(pElement, "watchmodemusicvideos", tmp, static_cast<int>(WatchedModeAll),
+                         static_cast<int>(WatchedModeWatched)))
       m_watchedModes["musicvideos"] = static_cast<WatchedMode>(tmp);
     if (XMLUtils::GetInt(pElement, "watchmoderecordings", tmp, static_cast<int>(WatchedModeAll), static_cast<int>(WatchedModeWatched)))
       m_watchedModes["recordings"] = static_cast<WatchedMode>(tmp);

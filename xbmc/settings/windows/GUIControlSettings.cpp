@@ -1555,8 +1555,10 @@ void CGUIControlRangeSetting::Update(bool fromControl, bool updateDisplayOnly)
       {
         valueLower = std::static_pointer_cast<CSettingNumber>(settingListValues[0])->GetValue();
         valueUpper = std::static_pointer_cast<CSettingNumber>(settingListValues[1])->GetValue();
-        m_pSlider->SetFloatValue(static_cast<float>(valueLower), CGUISliderControl::RangeSelectorLower);
-        m_pSlider->SetFloatValue(static_cast<float>(valueUpper), CGUISliderControl::RangeSelectorUpper);
+        m_pSlider->SetFloatValue(static_cast<float>(valueLower),
+                                 CGUISliderControl::RangeSelectorLower);
+        m_pSlider->SetFloatValue(static_cast<float>(valueUpper),
+                                 CGUISliderControl::RangeSelectorUpper);
       }
 
       strTextLower = StringUtils::Format(valueFormat.c_str(), valueLower);

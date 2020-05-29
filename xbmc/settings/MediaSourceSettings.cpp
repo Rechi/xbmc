@@ -399,7 +399,8 @@ bool CMediaSourceSettings::GetSource(const std::string &category, const TiXmlNod
   share.m_iBadPwdCount = 0;
   if (pLockMode)
   {
-    share.m_iLockMode = static_cast<LockType>(std::strtol(pLockMode->FirstChild()->Value(), NULL, 10));
+    share.m_iLockMode =
+        static_cast<LockType>(std::strtol(pLockMode->FirstChild()->Value(), NULL, 10));
     share.m_iHasLock = LOCK_STATE_LOCKED;
   }
 
@@ -407,7 +408,8 @@ bool CMediaSourceSettings::GetSource(const std::string &category, const TiXmlNod
     share.m_strLockCode = pLockCode->FirstChild()->Value();
 
   if (pBadPwdCount && pBadPwdCount->FirstChild())
-    share.m_iBadPwdCount = static_cast<int>(std::strtol(pBadPwdCount->FirstChild()->Value(), NULL, 10));
+    share.m_iBadPwdCount =
+        static_cast<int>(std::strtol(pBadPwdCount->FirstChild()->Value(), NULL, 10));
 
   if (pThumbnailNode && pThumbnailNode->FirstChild())
     share.m_strThumbnailImage = pThumbnailNode->FirstChild()->Value();
