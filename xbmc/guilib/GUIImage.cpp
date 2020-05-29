@@ -106,7 +106,7 @@ void CGUIImage::Process(unsigned int currentTime, CDirtyRegionList &dirtyregions
     if (m_lastRenderTime)
       frameTime = currentTime - m_lastRenderTime;
     if (!frameTime)
-      frameTime = (unsigned int)(1000 / CServiceBroker::GetWinSystem()->GetGfxContext().GetFPS());
+      frameTime = static_cast<unsigned int>(1000 / CServiceBroker::GetWinSystem()->GetGfxContext().GetFPS());
     m_lastRenderTime = currentTime;
 
     if (m_fadingTextures.size())  // have some fading images
@@ -381,7 +381,7 @@ void CGUIImage::SetInfo(const GUIINFO::CGUIInfoLabel &info)
 
 unsigned char CGUIImage::GetFadeLevel(unsigned int time) const
 {
-  float amount = (float)time / m_crossFadeTime;
+  float amount = static_cast<float>(time) / m_crossFadeTime;
   // we want a semi-transparent image, so we need to use a more complicated
   // fade technique.  Assuming a black background (not generally true, but still...)
   // we have
@@ -390,7 +390,7 @@ unsigned char CGUIImage::GetFadeLevel(unsigned int time) const
   // solving, we get
   // b(t) = [1 - (1-a)^t] / a
   const float alpha = 0.7f;
-  return (unsigned char)(255.0f * (1 - pow(1-alpha, amount))/alpha);
+  return static_cast<unsigned char>(255.0f * (1 - pow(1-alpha, amount))/alpha);
 }
 
 std::string CGUIImage::GetDescription(void) const

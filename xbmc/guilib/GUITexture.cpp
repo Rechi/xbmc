@@ -317,8 +317,8 @@ bool CGUITextureBase::AllocResources()
     m_texture = texture;
     changed = true;
   }
-  m_frameWidth = (float)m_texture.m_width;
-  m_frameHeight = (float)m_texture.m_height;
+  m_frameWidth = static_cast<float>(m_texture.m_width);
+  m_frameHeight = static_cast<float>(m_texture.m_height);
 
   // load the diffuse texture (if necessary)
   if (!m_info.diffuse.empty())
@@ -667,5 +667,5 @@ int CGUITextureBase::GetOrientation() const
                                  5, 6, 7, 4, 1, 2, 3, 0,
                                  6, 5, 4, 7, 2, 1, 0, 3,
                                  7, 4, 5, 6, 3, 0, 1, 2 };
-  return (int)orient_table[8 * m_info.orientation + m_texture.m_orientation];
+  return static_cast<int>(orient_table[8 * m_info.orientation + m_texture.m_orientation]);
 }

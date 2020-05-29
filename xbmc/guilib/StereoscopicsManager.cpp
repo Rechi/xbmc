@@ -220,7 +220,7 @@ RENDER_STEREO_MODE CStereoscopicsManager::GetStereoModeByUserChoice() const
     if (CServiceBroker::GetRenderSystem()->SupportsStereo(selectableMode))
     {
       selectableModes.push_back(selectableMode);
-      std::string label = GetLabelForStereoMode((RENDER_STEREO_MODE) i);
+      std::string label = GetLabelForStereoMode(static_cast<RENDER_STEREO_MODE>(i));
       pDlgSelect->Add( label );
       if (mode == selectableMode)
         pDlgSelect->SetSelected( label );
@@ -338,7 +338,7 @@ std::string CStereoscopicsManager::NormalizeStereoMode(const std::string &mode)
     int guiMode = ConvertStringToGuiStereoMode(mode);
 
     if (guiMode > -1)
-      return ConvertGuiStereoModeToString((RENDER_STEREO_MODE) guiMode);
+      return ConvertGuiStereoModeToString(static_cast<RENDER_STEREO_MODE>(guiMode));
     else
       return mode;
   }

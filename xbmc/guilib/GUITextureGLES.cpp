@@ -36,10 +36,10 @@ void CGUITextureGLES::Begin(UTILS::Color color)
   texture->BindToUnit(0);
 
   // Setup Colors
-  m_col[0] = (GLubyte)GET_R(color);
-  m_col[1] = (GLubyte)GET_G(color);
-  m_col[2] = (GLubyte)GET_B(color);
-  m_col[3] = (GLubyte)GET_A(color);
+  m_col[0] = static_cast<GLubyte>(GET_R(color));
+  m_col[1] = static_cast<GLubyte>(GET_G(color));
+  m_col[2] = static_cast<GLubyte>(GET_B(color));
+  m_col[3] = static_cast<GLubyte>(GET_A(color));
 
   if (CServiceBroker::GetWinSystem()->UseLimitedColor())
   {
@@ -106,12 +106,12 @@ void CGUITextureGLES::End()
 
     if(m_diffuse.size())
     {
-      glVertexAttribPointer(tex1Loc, 2, GL_FLOAT, 0, sizeof(PackedVertex), (char*)&m_packedVertices[0] + offsetof(PackedVertex, u2));
+      glVertexAttribPointer(tex1Loc, 2, GL_FLOAT, 0, sizeof(PackedVertex), reinterpret_cast<char*>(&m_packedVertices[0]) + offsetof(PackedVertex, u2));
       glEnableVertexAttribArray(tex1Loc);
     }
-    glVertexAttribPointer(posLoc, 3, GL_FLOAT, 0, sizeof(PackedVertex), (char*)&m_packedVertices[0] + offsetof(PackedVertex, x));
+    glVertexAttribPointer(posLoc, 3, GL_FLOAT, 0, sizeof(PackedVertex), reinterpret_cast<char*>(&m_packedVertices[0]) + offsetof(PackedVertex, x));
     glEnableVertexAttribArray(posLoc);
-    glVertexAttribPointer(tex0Loc, 2, GL_FLOAT, 0, sizeof(PackedVertex), (char*)&m_packedVertices[0] + offsetof(PackedVertex, u1));
+    glVertexAttribPointer(tex0Loc, 2, GL_FLOAT, 0, sizeof(PackedVertex), reinterpret_cast<char*>(&m_packedVertices[0]) + offsetof(PackedVertex, u1));
     glEnableVertexAttribArray(tex0Loc);
 
     glDrawElements(GL_TRIANGLES, m_packedVertices.size()*6 / 4, GL_UNSIGNED_SHORT, m_idx.data());
@@ -252,10 +252,10 @@ void CGUITextureGLES::DrawQuad(const CRect &rect, UTILS::Color color, CBaseTextu
     glEnableVertexAttribArray(tex0Loc);
 
   // Setup Colors
-  col[0] = (GLubyte)GET_R(color);
-  col[1] = (GLubyte)GET_G(color);
-  col[2] = (GLubyte)GET_B(color);
-  col[3] = (GLubyte)GET_A(color);
+  col[0] = static_cast<GLubyte>(GET_R(color));
+  col[1] = static_cast<GLubyte>(GET_G(color));
+  col[2] = static_cast<GLubyte>(GET_B(color));
+  col[3] = static_cast<GLubyte>(GET_A(color));
 
   glUniform4f(uniColLoc, col[0] / 255.0f, col[1] / 255.0f, col[2] / 255.0f, col[3] / 255.0f);
 

@@ -35,10 +35,10 @@ void CGUITextureGL::Begin(UTILS::Color color)
   texture->BindToUnit(0);
 
   // Setup Colors
-  m_col[0] = (GLubyte)GET_R(color);
-  m_col[1] = (GLubyte)GET_G(color);
-  m_col[2] = (GLubyte)GET_B(color);
-  m_col[3] = (GLubyte)GET_A(color);
+  m_col[0] = static_cast<GLubyte>(GET_R(color));
+  m_col[1] = static_cast<GLubyte>(GET_G(color));
+  m_col[2] = static_cast<GLubyte>(GET_B(color));
+  m_col[3] = static_cast<GLubyte>(GET_A(color));
 
   bool hasAlpha = m_texture.m_textures[m_currentFrame]->HasAlpha() || m_col[3] < 255;
 
@@ -266,10 +266,10 @@ void CGUITextureGL::DrawQuad(const CRect &rect, UTILS::Color color, CBaseTexture
   GLint uniColLoc = renderSystem->ShaderGetUniCol();
 
   // Setup Colors
-  col[0] = (GLubyte)GET_R(color);
-  col[1] = (GLubyte)GET_G(color);
-  col[2] = (GLubyte)GET_B(color);
-  col[3] = (GLubyte)GET_A(color);
+  col[0] = static_cast<GLubyte>(GET_R(color));
+  col[1] = static_cast<GLubyte>(GET_G(color));
+  col[2] = static_cast<GLubyte>(GET_B(color));
+  col[3] = static_cast<GLubyte>(GET_A(color));
 
   glUniform4f(uniColLoc, col[0] / 255.0f, col[1] / 255.0f, col[2] / 255.0f, col[3] / 255.0f);
 

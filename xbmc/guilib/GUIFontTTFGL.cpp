@@ -78,7 +78,7 @@ bool CGUIFontTTFGL::FirstBegin()
   if (m_textureStatus == TEXTURE_VOID)
   {
     // Have OpenGL generate a texture object handle for us
-    glGenTextures(1, (GLuint*) &m_nTexture);
+    glGenTextures(1, static_cast<GLuint*>(&m_nTexture));
 
     // Bind the texture object
     glBindTexture(GL_TEXTURE_2D, m_nTexture);
@@ -202,9 +202,9 @@ void CGUIFontTTFGL::LastEnd()
 
     vertices = &vecVertices[0];
 
-    glVertexAttribPointer(posLoc,  3, GL_FLOAT, GL_FALSE, sizeof(SVertex), (char*)vertices + offsetof(SVertex, x));
-    glVertexAttribPointer(colLoc,  4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(SVertex), (char*)vertices + offsetof(SVertex, r));
-    glVertexAttribPointer(tex0Loc, 2, GL_FLOAT,  GL_FALSE, sizeof(SVertex), (char*)vertices + offsetof(SVertex, u));
+    glVertexAttribPointer(posLoc,  3, GL_FLOAT, GL_FALSE, sizeof(SVertex), reinterpret_cast<char*>(vertices) + offsetof(SVertex, x));
+    glVertexAttribPointer(colLoc,  4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(SVertex), reinterpret_cast<char*>(vertices) + offsetof(SVertex, r));
+    glVertexAttribPointer(tex0Loc, 2, GL_FLOAT,  GL_FALSE, sizeof(SVertex), reinterpret_cast<char*>(vertices) + offsetof(SVertex, u));
 
     glDrawArrays(GL_TRIANGLES, 0, vecVertices.size());
   }
@@ -313,7 +313,7 @@ void CGUIFontTTFGL::DestroyVertexBuffer(CVertexBuffer &buffer) const
   if (buffer.bufferHandle != 0)
   {
     // Release the buffer name for reuse
-    glDeleteBuffers(1, (GLuint *) &buffer.bufferHandle);
+    glDeleteBuffers(1, static_cast<GLuint *>(&buffer.bufferHandle));
     buffer.bufferHandle = 0;
   }
 }

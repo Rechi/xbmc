@@ -25,7 +25,7 @@ std::string CGUIString::GetAsString() const
 {
   std::string text;
   for (unsigned int i = 0; i < m_text.size(); i++)
-    text += (char)(m_text[i] & 0xff);
+    text += static_cast<char>(m_text[i] & 0xff);
   return text;
 }
 
@@ -271,7 +271,7 @@ void CGUITextLayout::BidiTransform(std::vector<CGUIString>& lines, bool forceLTR
     // Separate the text and style for the input styled text
     for (const auto& it : line.m_text)
     {
-      logicalText.push_back((wchar_t)(it & 0xffff));
+      logicalText.push_back(static_cast<wchar_t>(it & 0xffff));
       style.push_back(it & 0xffff0000);
     }
 
@@ -331,7 +331,7 @@ void CGUITextLayout::Filter(std::string &text)
   ParseText(utf16, 0, 0xffffffff, colors, parsedText);
   utf16.clear();
   for (unsigned int i = 0; i < parsedText.size(); i++)
-    utf16 += (wchar_t)(0xffff & parsedText[i]);
+    utf16 += static_cast<wchar_t>(0xffff & parsedText[i]);
   g_charsetConverter.wToUTF8(utf16, text);
 }
 
@@ -497,7 +497,7 @@ void CGUITextLayout::WrapText(const vecText &text, float maxWidth)
   if (!m_font)
     return;
 
-  int nMaxLines = (m_maxHeight > 0 && m_font->GetLineHeight() > 0)?(int)ceilf(m_maxHeight / m_font->GetLineHeight()):-1;
+  int nMaxLines = (m_maxHeight > 0 && m_font->GetLineHeight() > 0)?static_cast<int>(ceilf(m_maxHeight / m_font->GetLineHeight())):-1;
 
   m_lines.clear();
 
@@ -526,7 +526,7 @@ void CGUITextLayout::WrapText(const vecText &text, float maxWidth)
             CGUIString string(curLine.begin(), curLine.begin() + lastSpaceInLine, false);
             m_lines.push_back(string);
             // check for exceeding our number of lines
-            if (nMaxLines > 0 && m_lines.size() >= (size_t)nMaxLines)
+            if (nMaxLines > 0 && m_lines.size() >= static_cast<size_t>(nMaxLines))
               return;
             // skip over spaces
             pos = lastSpace;
@@ -554,7 +554,7 @@ void CGUITextLayout::WrapText(const vecText &text, float maxWidth)
         CGUIString string(curLine.begin(), curLine.begin() + lastSpaceInLine, false);
         m_lines.push_back(string);
         // check for exceeding our number of lines
-        if (nMaxLines > 0 && m_lines.size() >= (size_t)nMaxLines)
+        if (nMaxLines > 0 && m_lines.size() >= static_cast<size_t>(nMaxLines))
           return;
         curLine.erase(curLine.begin(), curLine.begin() + lastSpaceInLine);
         while (curLine.size() && IsSpace(curLine.at(0)))
@@ -564,17 +564,17 @@ void CGUITextLayout::WrapText(const vecText &text, float maxWidth)
     CGUIString string(curLine.begin(), curLine.end(), true);
     m_lines.push_back(string);
     // check for exceeding our number of lines
-    if (nMaxLines > 0 && m_lines.size() >= (size_t)nMaxLines)
+    if (nMaxLines > 0 && m_lines.size() >= static_cast<size_t>(nMaxLines))
       return;
   }
 }
 
 void CGUITextLayout::LineBreakText(const vecText &text, std::vector<CGUIString> &lines)
 {
-  int nMaxLines = (m_maxHeight > 0 && m_font && m_font->GetLineHeight() > 0)?(int)ceilf(m_maxHeight / m_font->GetLineHeight()):-1;
+  int nMaxLines = (m_maxHeight > 0 && m_font && m_font->GetLineHeight() > 0)?static_cast<int>(ceilf(m_maxHeight / m_font->GetLineHeight())):-1;
   vecText::const_iterator lineStart = text.begin();
   vecText::const_iterator pos = text.begin();
-  while (pos != text.end() && (nMaxLines <= 0 || lines.size() < (size_t)nMaxLines))
+  while (pos != text.end() && (nMaxLines <= 0 || lines.size() < static_cast<size_t>(nMaxLines)))
   {
     // Get the current letter in the string
     character_t letter = *pos;
@@ -589,7 +589,7 @@ void CGUITextLayout::LineBreakText(const vecText &text, std::vector<CGUIString> 
     ++pos;
   }
   // handle the last line if non-empty
-  if (lineStart < text.end() && (nMaxLines <= 0 || lines.size() < (size_t)nMaxLines))
+  if (lineStart < text.end() && (nMaxLines <= 0 || lines.size() < static_cast<size_t>(nMaxLines)))
   {
     CGUIString string(lineStart, text.end(), true);
     lines.push_back(string);
