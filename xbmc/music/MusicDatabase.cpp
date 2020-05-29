@@ -872,7 +872,7 @@ int CMusicDatabase::AddSong(const int idAlbum,
                              iStartOffset, iEndOffset, rating, userrating, votes,
                              strComment.c_str(), strMood.c_str(), replayGain.Get().c_str());
       m_pDS->exec(strSQL);
-      idSong = (int)m_pDS->lastinsertid();
+      idSong = static_cast<int>(m_pDS->lastinsertid());
     }
     else
     {
@@ -1135,7 +1135,7 @@ int CMusicDatabase::AddAlbum(const std::string& strAlbum, const std::string& str
       strSQL += ")";
       m_pDS->exec(strSQL);
 
-      return (int)m_pDS->lastinsertid();
+      return static_cast<int>(m_pDS->lastinsertid());
     }
     else
     {
@@ -1390,7 +1390,7 @@ int CMusicDatabase::AddGenre(std::string& strGenre)
       strSQL=PrepareSQL("INSERT INTO genre (idGenre, strGenre) values( NULL, '%s' )", strGenre.c_str());
       m_pDS->exec(strSQL);
 
-      int idGenre = (int)m_pDS->lastinsertid();
+      int idGenre = static_cast<int>(m_pDS->lastinsertid());
       m_genreCache.insert(std::pair<std::string, int>(strGenre, idGenre));
       return idGenre;
     }
@@ -1576,7 +1576,7 @@ int CMusicDatabase::AddArtist(const std::string& strArtist, const std::string& s
         bScrapedMBID);
 
     m_pDS->exec(strSQL);
-    int idArtist = (int)m_pDS->lastinsertid();
+    int idArtist = static_cast<int>(m_pDS->lastinsertid());
     return idArtist;
   }
   catch (...)
@@ -2399,7 +2399,7 @@ int CMusicDatabase::AddPath(const std::string& strPath1)
       strSQL=PrepareSQL("insert into path (idPath, strPath) values( NULL, '%s' )", strPath.c_str());
       m_pDS->exec(strSQL);
 
-      int idPath = (int)m_pDS->lastinsertid();
+      int idPath = static_cast<int>(m_pDS->lastinsertid());
       m_pathCache.insert(std::pair<std::string, int>(strPath, idPath));
       return idPath;
     }
@@ -2544,7 +2544,7 @@ void CMusicDatabase::GetFileItemFromArtistCredits(VECARTISTCREDITS& artistCredit
   // When "missing tag" artist, it is the only artist when present.
   if (artistCredits.begin()->GetArtistId() == BLANKARTIST_ID)
   {
-    artistidObj.push_back((int)BLANKARTIST_ID);
+    artistidObj.push_back(static_cast<int>(BLANKARTIST_ID));
     songartists.push_back(StringUtils::Empty);
   }
   else
@@ -2701,7 +2701,7 @@ bool CMusicDatabase::GetSongByFileName(const std::string& strFileNameAndPath, CS
   if (startOffset)
     strSQL += PrepareSQL(" AND iStartOffset=%" PRIi64, startOffset);
 
-  int idSong = (int)strtol(GetSingleValue(strSQL).c_str(), NULL, 10);
+  int idSong = static_cast<int>(strtol(GetSingleValue(strSQL).c_str(), NULL, 10));
   if (idSong > 0)
     return GetSong(idSong, song);
 
@@ -3481,7 +3481,7 @@ bool CMusicDatabase::CleanupSongs(CGUIDialogProgress* progressDialog /*= nullptr
 
     int total;
     // Count total number of songs
-    total = (int)strtol(GetSingleValue("SELECT COUNT(1) FROM song", m_pDS).c_str(), nullptr, 10);
+    total = static_cast<int>(strtol(GetSingleValue("SELECT COUNT(1) FROM song", m_pDS).c_str(), nullptr, 10));
     // No songs to clean
     if (total == 0)
       return true;
@@ -4724,7 +4724,7 @@ bool CMusicDatabase::GetArtistsByWhere(const std::string& strBaseDir, const Filt
     const dbiplus::query_data &data = m_pDS->get_result_set().records;
     for (const auto &i : results)
     {
-      unsigned int targetRow = (unsigned int)i.at(FieldRow).asInteger();
+      unsigned int targetRow = static_cast<unsigned int>(i.at(FieldRow).asInteger());
       const dbiplus::sql_record* const record = data.at(targetRow);
 
       try
@@ -4942,7 +4942,7 @@ bool CMusicDatabase::GetAlbumsByWhere(const std::string &baseDir, const Filter &
     const dbiplus::query_data &data = m_pDS->get_result_set().records;
     for (const auto &i : results)
     {
-      unsigned int targetRow = (unsigned int)i.at(FieldRow).asInteger();
+      unsigned int targetRow = static_cast<unsigned int>(i.at(FieldRow).asInteger());
       const dbiplus::sql_record* const record = data.at(targetRow);
 
       try
@@ -5365,7 +5365,7 @@ bool CMusicDatabase::GetSongsFullByWhere(const std::string &baseDir, const Filte
     int count = 0;
     for (const auto &i : results)
     {
-      unsigned int targetRow = (unsigned int)i.at(FieldRow).asInteger();
+      unsigned int targetRow = static_cast<unsigned int>(i.at(FieldRow).asInteger());
       const dbiplus::sql_record* const record = data.at(targetRow);
 
       try
@@ -5470,7 +5470,7 @@ bool CMusicDatabase::GetSongsByWhere(const std::string &baseDir, const Filter &f
         sortDescription.sortBy == SortByNone &&
        (sortDescription.limitStart > 0 || sortDescription.limitEnd > 0))
     {
-      total = (int)strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10);
+      total = static_cast<int>(strtol(GetSingleValue(PrepareSQL(strSQL, "COUNT(1)") + strSQLExtra, m_pDS).c_str(), NULL, 10));
       strSQLExtra += DatabaseUtils::BuildLimitClause(sortDescription.limitEnd, sortDescription.limitStart);
     }
 
@@ -5504,7 +5504,7 @@ bool CMusicDatabase::GetSongsByWhere(const std::string &baseDir, const Filter &f
     int count = 0;
     for (const auto &i : results)
     {
-      unsigned int targetRow = (unsigned int)i.at(FieldRow).asInteger();
+      unsigned int targetRow = static_cast<unsigned int>(i.at(FieldRow).asInteger());
       const dbiplus::sql_record* const record = data.at(targetRow);
 
       try
@@ -7734,7 +7734,7 @@ void CMusicDatabase::UpdateTables(int version)
           "strImage, strFanart, lastScraped "
           "FROM artist WHERE artist.idArtist = %i", BLANKARTIST_ID);
         m_pDS->exec(strSQL);
-        int idArtist = (int)m_pDS->lastinsertid();
+        int idArtist = static_cast<int>(m_pDS->lastinsertid());
         //No triggers, so can delete artist without effecting other tables.
         strSQL = PrepareSQL("DELETE FROM artist WHERE artist.idArtist = %i", BLANKARTIST_ID);
         m_pDS->exec(strSQL);

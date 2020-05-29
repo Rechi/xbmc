@@ -301,7 +301,7 @@ long TagLibVFSStream::tell() const
   if(pos > LONG_MAX)
     return -1;
   else
-    return (long)pos;
+    return static_cast<long>(pos);
 }
 
 /*!
@@ -309,7 +309,7 @@ long TagLibVFSStream::tell() const
  */
 long TagLibVFSStream::length()
 {
-  return (long)m_file.GetLength();
+  return static_cast<long>(m_file.GetLength());
 }
 
 /*!
