@@ -224,16 +224,19 @@ int64_t CThread::GetAbsoluteUsage()
   thread_basic_info threadInfo;
   mach_msg_type_number_t threadInfoCount = THREAD_BASIC_INFO_COUNT;
 
-  kern_return_t ret = thread_info(pthread_mach_thread_np(static_cast<pthread_t>(m_thread->native_handle())),
-      THREAD_BASIC_INFO, reinterpret_cast<thread_info_t>(&threadInfo), &threadInfoCount);
+  kern_return_t ret = thread_info(
+      pthread_mach_thread_np(static_cast<pthread_t>(m_thread->native_handle())), THREAD_BASIC_INFO,
+      reinterpret_cast<thread_info_t>(&threadInfo), &threadInfoCount);
 
   if (ret == KERN_SUCCESS)
   {
     // User time.
-    time = (static_cast<int64_t>(threadInfo.user_time.seconds) * 10000000L) + threadInfo.user_time.microseconds*10L;
+    time = (static_cast<int64_t>(threadInfo.user_time.seconds) * 10000000L) +
+           threadInfo.user_time.microseconds * 10L;
 
     // System time.
-    time += ((static_cast<int64_t>(threadInfo.system_time.seconds) * 10000000L) + threadInfo.system_time.microseconds*10L);
+    time += ((static_cast<int64_t>(threadInfo.system_time.seconds) * 10000000L) +
+             threadInfo.system_time.microseconds * 10L);
   }
 
 #else
