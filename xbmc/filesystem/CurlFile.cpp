@@ -224,7 +224,8 @@ size_t CCurlFile::CReadState::WriteCallback(char *buffer, size_t size, size_t ni
   if (amount)
   {
     //! @todo Limit max. amount of the overflowbuffer
-    m_overflowBuffer = static_cast<char*>(realloc_simple(m_overflowBuffer, amount + m_overflowSize));
+    m_overflowBuffer =
+        static_cast<char*>(realloc_simple(m_overflowBuffer, amount + m_overflowSize));
     if(m_overflowBuffer == NULL)
     {
       CLog::Log(LOGWARNING, "CCurlFile::WriteCallback - Failed to grow overflow buffer from %i bytes to %i bytes", m_overflowSize, amount + m_overflowSize);
@@ -270,7 +271,7 @@ bool CCurlFile::CReadState::Seek(int64_t pos)
   if(pos == m_filePos)
     return true;
 
-  if(FITS_INT(pos - m_filePos) && m_buffer.SkipBytes(static_cast<int>(pos - m_filePos)))
+  if (FITS_INT(pos - m_filePos) && m_buffer.SkipBytes(static_cast<int>(pos - m_filePos)))
   {
     m_filePos = pos;
     return true;
@@ -290,7 +291,7 @@ bool CCurlFile::CReadState::Seek(int64_t pos)
       return false;
     }
 
-    if(!FITS_INT(pos - m_filePos) || !m_buffer.SkipBytes(static_cast<int>(pos - m_filePos)))
+    if (!FITS_INT(pos - m_filePos) || !m_buffer.SkipBytes(static_cast<int>(pos - m_filePos)))
     {
       CLog::Log(LOGERROR, "%s - Failed to skip to position after having filled buffer", __FUNCTION__);
       if(!m_buffer.SkipBytes(-len))
@@ -1560,7 +1561,7 @@ ssize_t CCurlFile::CReadState::Read(void* lpBuf, size_t uiBufSize)
   unsigned int want = std::min<unsigned int>(m_buffer.getMaxReadSize(), uiBufSize);
 
   /* xfer data to caller */
-  if (m_buffer.ReadData(static_cast<char *>(lpBuf), want))
+  if (m_buffer.ReadData(static_cast<char*>(lpBuf), want))
   {
     m_filePos += want;
     return want;
@@ -1757,7 +1758,8 @@ int8_t CCurlFile::CReadState::FillBuffer(unsigned int want)
           else
           {
             unsigned int time_left = endTime.MillisLeft();
-            struct timeval wait = { static_cast<int>(time_left) / 1000, (static_cast<int>(time_left) % 1000) * 1000 };
+            struct timeval wait = {static_cast<int>(time_left) / 1000,
+                                   (static_cast<int>(time_left) % 1000) * 1000};
             rc = select(maxfd + 1, &fdread, &fdwrite, &fdexcep, &wait);
           }
 #ifdef TARGET_WINDOWS

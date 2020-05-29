@@ -600,9 +600,10 @@ ssize_t CFile::Read(void *lpBuf, size_t uiBufSize)
   {
     if(m_flags & READ_TRUNCATED)
     {
-      const ssize_t nBytes = m_pBuffer->sgetn(
-        static_cast<char *>(lpBuf), std::min<std::streamsize>(static_cast<std::streamsize>(uiBufSize),
-                                                  m_pBuffer->in_avail()));
+      const ssize_t nBytes =
+          m_pBuffer->sgetn(static_cast<char*>(lpBuf),
+                           std::min<std::streamsize>(static_cast<std::streamsize>(uiBufSize),
+                                                     m_pBuffer->in_avail()));
       if (m_bitStreamStats && nBytes>0)
         m_bitStreamStats->AddSampleBytes(nBytes);
       return nBytes;
@@ -630,7 +631,7 @@ ssize_t CFile::Read(void *lpBuf, size_t uiBufSize)
       ssize_t done = 0;
       while((uiBufSize-done) > 0)
       {
-        const ssize_t curr = m_pFile->Read(static_cast<char*>(lpBuf)+done, uiBufSize-done);
+        const ssize_t curr = m_pFile->Read(static_cast<char*>(lpBuf) + done, uiBufSize - done);
         if (curr <= 0)
         {
           if (curr < 0 && done == 0)
@@ -1131,7 +1132,8 @@ CFileStreamBuffer::int_type CFileStreamBuffer::underflow()
   size_t backsize = 0;
   if(m_backsize)
   {
-    backsize = static_cast<size_t>(std::min<ptrdiff_t>(static_cast<ptrdiff_t>(m_backsize), egptr()-eback()));
+    backsize = static_cast<size_t>(
+        std::min<ptrdiff_t>(static_cast<ptrdiff_t>(m_backsize), egptr() - eback()));
     memmove(m_buffer, egptr()-backsize, backsize);
   }
 

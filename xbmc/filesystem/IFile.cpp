@@ -36,7 +36,7 @@ bool IFile::ReadString(char *szLine, int iLineLength)
   if(Seek(0, SEEK_CUR) < 0) return false;
 
   int64_t iFilePos = GetPosition();
-  int iBytesRead = Read( reinterpret_cast<unsigned char*>(szLine), iLineLength - 1);
+  int iBytesRead = Read(reinterpret_cast<unsigned char*>(szLine), iLineLength - 1);
   if (iBytesRead <= 0)
     return false;
 

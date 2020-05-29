@@ -474,7 +474,7 @@ ssize_t CFileCache::Read(void* lpBuf, size_t uiBufSize)
 
 retry:
   // attempt to read
-  iRc = m_pCache->ReadFromCache(static_cast<char *>(lpBuf), uiBufSize);
+  iRc = m_pCache->ReadFromCache(static_cast<char*>(lpBuf), uiBufSize);
   if (iRc > 0)
   {
     m_readPos += iRc;
@@ -499,7 +499,8 @@ retry:
     return 0;
 
   // unknown error code
-  CLog::Log(LOGERROR, "%s - cache strategy returned unknown error code %d", __FUNCTION__, static_cast<int>(iRc));
+  CLog::Log(LOGERROR, "%s - cache strategy returned unknown error code %d", __FUNCTION__,
+            static_cast<int>(iRc));
   return -1;
 }
 
@@ -545,7 +546,8 @@ int64_t CFileCache::Seek(int64_t iFilePosition, int iWhence)
     if(m_seekPos < iTarget)
     {
       CLog::Log(LOGDEBUG,"%s - waiting for position %" PRId64".", __FUNCTION__, iTarget);
-      if(m_pCache->WaitForData(static_cast<unsigned>(iTarget - m_seekPos), 10000) < iTarget - m_seekPos)
+      if (m_pCache->WaitForData(static_cast<unsigned>(iTarget - m_seekPos), 10000) <
+          iTarget - m_seekPos)
       {
         CLog::Log(LOGWARNING,"%s - failed to get remaining data", __FUNCTION__);
         return -1;

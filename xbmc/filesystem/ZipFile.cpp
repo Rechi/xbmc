@@ -296,7 +296,7 @@ ssize_t CZipFile::Read(void* lpBuf, size_t uiBufSize)
     uLong prevOut = m_ZStream.total_out;
     while ((iDecompressed < uiBufSize) && ((m_iZipFilePos < mZipItem.csize) || (m_bFlush)))
     {
-      m_ZStream.next_out = static_cast<Bytef*>(lpBuf)+iDecompressed;
+      m_ZStream.next_out = static_cast<Bytef*>(lpBuf) + iDecompressed;
       m_ZStream.avail_out = static_cast<uInt>(uiBufSize-iDecompressed);
       if (m_bFlush) // need to flush buffer !
       {
@@ -457,7 +457,8 @@ int CZipFile::UnpackFromMemory(std::string& strDest, const std::string& strInput
     else
     {
       m_ZStream.avail_in = mZipItem.csize;
-      m_ZStream.next_in = const_cast<Bytef*>(reinterpret_cast<const Bytef*>(strInput.data()))+iPos+LHDR_SIZE+mZipItem.flength+mZipItem.elength;
+      m_ZStream.next_in = const_cast<Bytef*>(reinterpret_cast<const Bytef*>(strInput.data())) +
+                          iPos + LHDR_SIZE + mZipItem.flength + mZipItem.elength;
       // init m_zipitem
       strDest.reserve(mZipItem.usize);
       temp = new char[mZipItem.usize+1];

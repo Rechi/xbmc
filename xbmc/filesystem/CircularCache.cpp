@@ -71,7 +71,7 @@ size_t CCircularCache::GetMaxWriteSize(const size_t& iRequestSize)
 {
   CSingleLock lock(m_sync);
 
-  size_t back  = static_cast<size_t>(m_cur - m_beg); // Backbuffer size
+  size_t back = static_cast<size_t>(m_cur - m_beg); // Backbuffer size
   size_t front = static_cast<size_t>(m_end - m_cur); // Frontbuffer size
   size_t limit = m_size - std::min(back, m_size_back) - front;
 
@@ -104,7 +104,7 @@ int CCircularCache::WriteToCache(const char *buf, size_t len)
 
   // where are we in the buffer
   size_t pos   = m_end % m_size;
-  size_t back  = static_cast<size_t>(m_cur - m_beg);
+  size_t back = static_cast<size_t>(m_cur - m_beg);
   size_t front = static_cast<size_t>(m_end - m_cur);
 
   size_t limit = m_size - std::min(back, m_size_back) - front;
@@ -129,7 +129,7 @@ int CCircularCache::WriteToCache(const char *buf, size_t len)
   m_end += len;
 
   // drop history that was overwritten
-  if(m_end - m_beg > static_cast<int64_t>(m_size))
+  if (m_end - m_beg > static_cast<int64_t>(m_size))
     m_beg = m_end - m_size;
 
   m_written.Set();

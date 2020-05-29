@@ -166,7 +166,7 @@ bool Pipe::Write(const char *buf, int nSize, int nWaitMillis)
   }
   else
   {
-    while ( static_cast<int>(m_buffer.getMaxWriteSize()) < nSize && m_bOpen )
+    while (static_cast<int>(m_buffer.getMaxWriteSize()) < nSize && m_bOpen)
     {
       lock.Leave();
       for (size_t l=0; l<m_listeners.size(); l++)
@@ -210,7 +210,7 @@ void Pipe::CheckStatus()
     m_readEvent.Reset();
   else
   {
-    if (!m_bReadyForRead  && static_cast<int>(m_buffer.getMaxReadSize()) >= m_nOpenThreshold)
+    if (!m_bReadyForRead && static_cast<int>(m_buffer.getMaxReadSize()) >= m_nOpenThreshold)
       m_bReadyForRead = true;
     m_readEvent.Set();
   }

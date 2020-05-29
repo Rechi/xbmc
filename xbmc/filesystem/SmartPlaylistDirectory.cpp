@@ -60,7 +60,8 @@ namespace XFILE
     sorting.sortOrder = playlist.GetOrderAscending() ? SortOrderAscending : SortOrderDescending;
     sorting.sortAttributes = playlist.GetOrderAttributes();
     if (CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_FILELISTS_IGNORETHEWHENSORTING))
-      sorting.sortAttributes = static_cast<SortAttribute>(sorting.sortAttributes | SortAttributeIgnoreArticle);
+      sorting.sortAttributes =
+          static_cast<SortAttribute>(sorting.sortAttributes | SortAttributeIgnoreArticle);
     if (playlist.IsMusicType() && CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(
                                       CSettings::SETTING_MUSICLIBRARY_USEARTISTSORTNAME))
       sorting.sortAttributes =

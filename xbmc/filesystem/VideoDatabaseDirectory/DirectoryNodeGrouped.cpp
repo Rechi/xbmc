@@ -63,7 +63,9 @@ bool CDirectoryNodeGrouped::GetContent(CFileItemList& items) const
   if (!videoUrl.FromString(BuildPath()))
     return false;
 
-  return videodatabase.GetItems(videoUrl.ToString(), static_cast<VIDEODB_CONTENT_TYPE>(params.GetContentType()), itemType, items);
+  return videodatabase.GetItems(videoUrl.ToString(),
+                                static_cast<VIDEODB_CONTENT_TYPE>(params.GetContentType()),
+                                itemType, items);
 }
 
 std::string CDirectoryNodeGrouped::GetContentType() const
