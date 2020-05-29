@@ -65,7 +65,7 @@ public:
   int ResolveOrdinal(unsigned long ordinal, void** ptr) override;
   bool HasSymbols() override { return m_bLoadSymbols && !m_bUnloadSymbols; }
   bool IsSystemDll() override { return m_bSystemDll; }
-  HMODULE GetHModule() override { return (HMODULE)hModule; }
+  HMODULE GetHModule() override { return static_cast<HMODULE>(hModule); }
 
   Export* GetExportByFunctionName(const char* sFunctionName);
   Export* GetExportByOrdinal(unsigned long ordinal);
