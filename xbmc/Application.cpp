@@ -2120,7 +2120,8 @@ void CApplication::OnApplicationMessage(ThreadMessage* pMsg)
   break;
 
   case TMSG_NETWORKMESSAGE:
-    m_ServiceManager->GetNetwork().NetworkMessage(static_cast<CNetwork::EMESSAGE>(pMsg->param1), pMsg->param2);
+    m_ServiceManager->GetNetwork().NetworkMessage(static_cast<CNetwork::EMESSAGE>(pMsg->param1),
+                                                  pMsg->param2);
     break;
 
   case TMSG_SETLANGUAGE:
@@ -2581,7 +2582,8 @@ void CApplication::Stop(int exitCode)
     g_alarmClock.StopThread();
 
     CLog::Log(LOGINFO, "Storing total System Uptime");
-    g_sysinfo.SetTotalUptime(g_sysinfo.GetTotalUptime() + static_cast<int>(CTimeUtils::GetFrameTime() / 60000));
+    g_sysinfo.SetTotalUptime(g_sysinfo.GetTotalUptime() +
+                             static_cast<int>(CTimeUtils::GetFrameTime() / 60000));
 
     // Update the settings information (volume, uptime etc. need saving)
     if (CFile::Exists(CServiceBroker::GetSettingsComponent()->GetProfileManager()->GetSettingsFile()))

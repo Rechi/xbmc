@@ -164,7 +164,8 @@ bool CAutoSwitch::ByThumbPercent(bool bHideParentDirItems, int iPercent, const C
     if (pItem->HasArt("thumb"))
     {
       iNumThumbs++;
-      float fTempPercent = ( static_cast<float>(iNumThumbs) / static_cast<float>(iNumItems) ) * static_cast<float>(100);
+      float fTempPercent = (static_cast<float>(iNumThumbs) / static_cast<float>(iNumItems)) *
+                           static_cast<float>(100);
       if (fTempPercent >= static_cast<float>(iPercent))
       {
         bThumbs = true;

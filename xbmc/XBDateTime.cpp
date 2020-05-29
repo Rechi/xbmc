@@ -181,7 +181,7 @@ int CDateTimeSpan::GetDays() const
   ULARGE_INTEGER time;
   ToULargeInt(time);
 
-  return static_cast<int>(time.QuadPart/SECONDS_TO_FILETIME)/SECONDS_PER_DAY;
+  return static_cast<int>(time.QuadPart / SECONDS_TO_FILETIME) / SECONDS_PER_DAY;
 }
 
 int CDateTimeSpan::GetHours() const
@@ -189,7 +189,8 @@ int CDateTimeSpan::GetHours() const
   ULARGE_INTEGER time;
   ToULargeInt(time);
 
-  return static_cast<int>((time.QuadPart/SECONDS_TO_FILETIME)%SECONDS_PER_DAY)/SECONDS_PER_HOUR;
+  return static_cast<int>((time.QuadPart / SECONDS_TO_FILETIME) % SECONDS_PER_DAY) /
+         SECONDS_PER_HOUR;
 }
 
 int CDateTimeSpan::GetMinutes() const
@@ -197,7 +198,9 @@ int CDateTimeSpan::GetMinutes() const
   ULARGE_INTEGER time;
   ToULargeInt(time);
 
-  return static_cast<int>((time.QuadPart/SECONDS_TO_FILETIME%SECONDS_PER_DAY)%SECONDS_PER_HOUR)/SECONDS_PER_MINUTE;
+  return static_cast<int>((time.QuadPart / SECONDS_TO_FILETIME % SECONDS_PER_DAY) %
+                          SECONDS_PER_HOUR) /
+         SECONDS_PER_MINUTE;
 }
 
 int CDateTimeSpan::GetSeconds() const
@@ -205,7 +208,10 @@ int CDateTimeSpan::GetSeconds() const
   ULARGE_INTEGER time;
   ToULargeInt(time);
 
-  return static_cast<int>(((time.QuadPart/SECONDS_TO_FILETIME%SECONDS_PER_DAY)%SECONDS_PER_HOUR)%SECONDS_PER_MINUTE)%SECONDS_PER_MINUTE;
+  return static_cast<int>(
+             ((time.QuadPart / SECONDS_TO_FILETIME % SECONDS_PER_DAY) % SECONDS_PER_HOUR) %
+             SECONDS_PER_MINUTE) %
+         SECONDS_PER_MINUTE;
 }
 
 int CDateTimeSpan::GetSecondsTotal() const
@@ -213,7 +219,7 @@ int CDateTimeSpan::GetSecondsTotal() const
   ULARGE_INTEGER time;
   ToULargeInt(time);
 
-  return static_cast<int>(time.QuadPart/SECONDS_TO_FILETIME);
+  return static_cast<int>(time.QuadPart / SECONDS_TO_FILETIME);
 }
 
 void CDateTimeSpan::SetFromPeriod(const std::string &period)
@@ -591,7 +597,7 @@ void CDateTime::Archive(CArchive& ar)
 {
   if (ar.IsStoring())
   {
-    ar<<static_cast<int>(m_state);
+    ar << static_cast<int>(m_state);
     if (m_state==valid)
     {
       KODI::TIME::SystemTime st;
@@ -812,7 +818,7 @@ void CDateTime::GetAsSystemTime(KODI::TIME::SystemTime& time) const
 void CDateTime::GetAsTime(time_t& time) const
 {
   long long ll = (static_cast<long long>(m_time.highDateTime) << 32) + m_time.lowDateTime;
-  time=static_cast<time_t>((ll - UNIX_BASE_TIME) / 10000000);
+  time = static_cast<time_t>((ll - UNIX_BASE_TIME) / 10000000);
 }
 
 void CDateTime::GetAsTm(tm& time) const

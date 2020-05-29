@@ -1628,7 +1628,7 @@ bool CUtil::Command(const std::vector<std::string>& arrArgs, bool waitExit)
     close(2);
     if (!arrArgs.empty())
     {
-      char **args = static_cast<char **>(alloca(sizeof(char *) * (arrArgs.size() + 3)));
+      char** args = static_cast<char**>(alloca(sizeof(char*) * (arrArgs.size() + 3)));
       memset(args, 0, (sizeof(char *) * (arrArgs.size() + 3)));
       for (size_t i=0; i<arrArgs.size(); i++)
         args[i] = const_cast<char *>(arrArgs[i].c_str());
@@ -2060,7 +2060,8 @@ void CUtil::ScanForExternalSubtitles(const std::string& strMovie, std::vector<st
       }
     }
   }
-  CLog::Log(LOGDEBUG, "%s: END (total time: %i ms)", __FUNCTION__, static_cast<int>(XbmcThreads::SystemClockMillis() - startTimer));
+  CLog::Log(LOGDEBUG, "%s: END (total time: %i ms)", __FUNCTION__,
+            static_cast<int>(XbmcThreads::SystemClockMillis() - startTimer));
 }
 
 ExternalStreamInfo CUtil::GetExternalStreamDetailsFromFilename(const std::string& videoPath, const std::string& associatedFile)

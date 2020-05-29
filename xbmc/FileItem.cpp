@@ -2264,7 +2264,8 @@ void CFileItemList::Sort(SortDescription sortDescription)
       sortDescription.sortBy == SortByPlaylistOrder ||
       sortDescription.sortBy == SortByLastPlayed ||
       sortDescription.sortBy == SortByPlaycount)
-    sortDescription.sortAttributes = static_cast<SortAttribute>(static_cast<int>(sortDescription.sortAttributes) | SortAttributeIgnoreFolders);
+    sortDescription.sortAttributes = static_cast<SortAttribute>(
+        static_cast<int>(sortDescription.sortAttributes) | SortAttributeIgnoreFolders);
 
   if (sortDescription.sortBy == SortByNone ||
      (m_sortDescription.sortBy == sortDescription.sortBy && m_sortDescription.sortOrder == sortDescription.sortOrder &&
@@ -2272,7 +2273,8 @@ void CFileItemList::Sort(SortDescription sortDescription)
     return;
 
   if (m_sortIgnoreFolders)
-    sortDescription.sortAttributes = static_cast<SortAttribute>(static_cast<int>(sortDescription.sortAttributes) | SortAttributeIgnoreFolders);
+    sortDescription.sortAttributes = static_cast<SortAttribute>(
+        static_cast<int>(sortDescription.sortAttributes) | SortAttributeIgnoreFolders);
 
   const Fields fields = SortUtils::GetFieldsForSorting(sortDescription.sortBy);
   SortItems sortItems(static_cast<size_t>(Size()));

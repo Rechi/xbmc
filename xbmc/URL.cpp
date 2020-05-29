@@ -665,7 +665,7 @@ std::string CURL::Decode(const std::string& strURLData)
         std::string strTmp;
         strTmp.assign(strURLData.substr(i + 1, 2));
         int dec_num=-1;
-        sscanf(strTmp.c_str(), "%x", reinterpret_cast<unsigned int *>(&dec_num));
+        sscanf(strTmp.c_str(), "%x", reinterpret_cast<unsigned int*>(&dec_num));
         if (dec_num<0 || dec_num>255)
           strResult += kar;
         else
@@ -699,7 +699,8 @@ std::string CURL::Encode(const std::string& strURLData)
     if (StringUtils::isasciialphanum(kar) || kar == '-' || kar == '.' || kar == '_' || kar == '!' || kar == '(' || kar == ')')
       strResult.push_back(kar);
     else
-      strResult += StringUtils::Format("%%%2.2x", static_cast<unsigned int>(static_cast<unsigned char>(kar)));
+      strResult += StringUtils::Format("%%%2.2x",
+                                       static_cast<unsigned int>(static_cast<unsigned char>(kar)));
   }
 
   return strResult;
