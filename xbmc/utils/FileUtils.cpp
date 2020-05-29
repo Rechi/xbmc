@@ -190,18 +190,18 @@ CDateTime CFileUtils::GetModificationDate(const std::string& strFileNameAndPath,
       // Prefer the modification time if it's valid
       if (!bUseLatestDate)
       {
-        if (buffer.st_mtime != 0 && (time_t)buffer.st_mtime <= now)
-          addedTime = (time_t)buffer.st_mtime;
+        if (buffer.st_mtime != 0 && static_cast<time_t>(buffer.st_mtime) <= now)
+          addedTime = static_cast<time_t>(buffer.st_mtime);
         else
-          addedTime = (time_t)buffer.st_ctime;
+          addedTime = static_cast<time_t>(buffer.st_ctime);
       }
       // Use the newer of the creation and modification time
       else
       {
-        addedTime = std::max((time_t)buffer.st_ctime, (time_t)buffer.st_mtime);
+        addedTime = std::max(static_cast<time_t>(buffer.st_ctime), static_cast<time_t>(buffer.st_mtime));
         // if the newer of the two dates is in the future, we try it with the older one
         if (addedTime > now)
-          addedTime = std::min((time_t)buffer.st_ctime, (time_t)buffer.st_mtime);
+          addedTime = std::min(static_cast<time_t>(buffer.st_ctime), static_cast<time_t>(buffer.st_mtime));
       }
 
       // make sure the datetime does is not in the future

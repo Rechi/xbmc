@@ -463,13 +463,13 @@ void CStreamDetails::Archive(CArchive& ar)
 {
   if (ar.IsStoring())
   {
-    ar << (int)m_vecItems.size();
+    ar << static_cast<int>(m_vecItems.size());
 
     for (auto &iter : m_vecItems)
     {
       // the type goes before the actual item.  When loading we need
       // to know the type before we can construct an instance to serialize
-      ar << (int)iter->m_eType;
+      ar << static_cast<int>(iter->m_eType);
       ar << (*iter);
     }
   }
@@ -532,13 +532,13 @@ void CStreamDetails::DetermineBestStreams(void)
     switch (iter->m_eType)
     {
     case CStreamDetail::VIDEO:
-      champion = (const CStreamDetail **)&m_pBestVideo;
+      champion = reinterpret_cast<const CStreamDetail **>(&m_pBestVideo);
       break;
     case CStreamDetail::AUDIO:
-      champion = (const CStreamDetail **)&m_pBestAudio;
+      champion = reinterpret_cast<const CStreamDetail **>(&m_pBestAudio);
       break;
     case CStreamDetail::SUBTITLE:
-      champion = (const CStreamDetail **)&m_pBestSubtitle;
+      champion = reinterpret_cast<const CStreamDetail **>(&m_pBestSubtitle);
       break;
     default:
       champion = NULL;

@@ -196,7 +196,7 @@ CVariant::CVariant(double value)
 CVariant::CVariant(float value)
 {
   m_type = VariantTypeDouble;
-  m_data.dvalue = (double)value;
+  m_data.dvalue = static_cast<double>(value);
 }
 
 CVariant::CVariant(bool boolean)
@@ -387,9 +387,9 @@ int64_t CVariant::asInteger(int64_t fallback) const
     case VariantTypeInteger:
       return m_data.integer;
     case VariantTypeUnsignedInteger:
-      return (int64_t)m_data.unsignedinteger;
+      return static_cast<int64_t>(m_data.unsignedinteger);
     case VariantTypeDouble:
-      return (int64_t)m_data.dvalue;
+      return static_cast<int64_t>(m_data.dvalue);
     case VariantTypeString:
       return str2int64(*m_data.string, fallback);
     case VariantTypeWideString:
@@ -413,9 +413,9 @@ uint64_t CVariant::asUnsignedInteger(uint64_t fallback) const
     case VariantTypeUnsignedInteger:
       return m_data.unsignedinteger;
     case VariantTypeInteger:
-      return (uint64_t)m_data.integer;
+      return static_cast<uint64_t>(m_data.integer);
     case VariantTypeDouble:
-      return (uint64_t)m_data.dvalue;
+      return static_cast<uint64_t>(m_data.dvalue);
     case VariantTypeString:
       return str2uint64(*m_data.string, fallback);
     case VariantTypeWideString:
@@ -439,9 +439,9 @@ double CVariant::asDouble(double fallback) const
     case VariantTypeDouble:
       return m_data.dvalue;
     case VariantTypeInteger:
-      return (double)m_data.integer;
+      return static_cast<double>(m_data.integer);
     case VariantTypeUnsignedInteger:
-      return (double)m_data.unsignedinteger;
+      return static_cast<double>(m_data.unsignedinteger);
     case VariantTypeString:
       return str2double(*m_data.string, fallback);
     case VariantTypeWideString:
@@ -458,15 +458,15 @@ float CVariant::asFloat(float fallback) const
   switch (m_type)
   {
     case VariantTypeDouble:
-      return (float)m_data.dvalue;
+      return static_cast<float>(m_data.dvalue);
     case VariantTypeInteger:
-      return (float)m_data.integer;
+      return static_cast<float>(m_data.integer);
     case VariantTypeUnsignedInteger:
-      return (float)m_data.unsignedinteger;
+      return static_cast<float>(m_data.unsignedinteger);
     case VariantTypeString:
-      return (float)str2double(*m_data.string, fallback);
+      return static_cast<float>(str2double(*m_data.string, fallback));
     case VariantTypeWideString:
-      return (float)str2double(*m_data.wstring, fallback);
+      return static_cast<float>(str2double(*m_data.wstring, fallback));
     default:
       return fallback;
   }
