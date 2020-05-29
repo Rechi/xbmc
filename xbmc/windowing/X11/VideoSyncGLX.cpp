@@ -135,7 +135,8 @@ bool CVideoSyncGLX::Setup(PUPDATECLOCK func)
     return false;
   }
 
-  m_glXWaitVideoSyncSGI = reinterpret_cast<int (*)(int, int, unsigned int*)>(glXGetProcAddress(reinterpret_cast<const GLubyte*>("glXWaitVideoSyncSGI")));
+  m_glXWaitVideoSyncSGI = reinterpret_cast<int (*)(int, int, unsigned int*)>(
+      glXGetProcAddress(reinterpret_cast<const GLubyte*>("glXWaitVideoSyncSGI")));
   if (!m_glXWaitVideoSyncSGI)
   {
     CLog::Log(LOGDEBUG, "CVideoReferenceClock: glXWaitVideoSyncSGI not found");
@@ -149,7 +150,8 @@ bool CVideoSyncGLX::Setup(PUPDATECLOCK func)
     return false;
   }
 
-  m_glXGetVideoSyncSGI = reinterpret_cast<int (*)(unsigned int*)>(glXGetProcAddress(reinterpret_cast<const GLubyte*>("glXGetVideoSyncSGI")));
+  m_glXGetVideoSyncSGI = reinterpret_cast<int (*)(unsigned int*)>(
+      glXGetProcAddress(reinterpret_cast<const GLubyte*>("glXGetVideoSyncSGI")));
   if (!m_glXGetVideoSyncSGI)
   {
     CLog::Log(LOGDEBUG, "CVideoReferenceClock: glXGetVideoSyncSGI not found");

@@ -131,7 +131,8 @@ bool CVideoSyncOsx::InitDisplayLink()
   bool ret = true;
   CLog::Log(LOGDEBUG, "CVideoSyncOsx::%s setting up displaylink", __FUNCTION__);
 
-  if (!Cocoa_CVDisplayLinkCreate(reinterpret_cast<void*>(DisplayLinkCallBack), reinterpret_cast<void*>(this)))
+  if (!Cocoa_CVDisplayLinkCreate(reinterpret_cast<void*>(DisplayLinkCallBack),
+                                 reinterpret_cast<void*>(this)))
   {
     CLog::Log(LOGDEBUG, "CVideoSyncOsx::%s Cocoa_CVDisplayLinkCreate failed", __FUNCTION__);
     ret = false;

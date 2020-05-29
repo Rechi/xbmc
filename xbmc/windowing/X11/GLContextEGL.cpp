@@ -35,7 +35,8 @@ CGLContextEGL::CGLContextEGL(Display *dpy, EGLint renderingApi) : CGLContext(dpy
   m_eglContext = EGL_NO_CONTEXT;
   m_eglConfig = EGL_NO_CONFIG;
 
-  m_eglGetPlatformDisplayEXT = reinterpret_cast<PFNEGLGETPLATFORMDISPLAYEXTPROC>(eglGetProcAddress("eglGetPlatformDisplayEXT"));
+  m_eglGetPlatformDisplayEXT = reinterpret_cast<PFNEGLGETPLATFORMDISPLAYEXTPROC>(
+      eglGetProcAddress("eglGetPlatformDisplayEXT"));
 
   CSettingsComponent *settings = CServiceBroker::GetSettingsComponent();
   if (settings)
@@ -82,8 +83,8 @@ bool CGLContextEGL::Refresh(bool force, int screen, Window glWindow, bool &newCo
       EGL_PLATFORM_X11_SCREEN_EXT, screen,
       EGL_NONE
     };
-    m_eglDisplay = m_eglGetPlatformDisplayEXT(EGL_PLATFORM_X11_EXT,static_cast<EGLNativeDisplayType>(m_dpy),
-                                            attribs);
+    m_eglDisplay = m_eglGetPlatformDisplayEXT(EGL_PLATFORM_X11_EXT,
+                                              static_cast<EGLNativeDisplayType>(m_dpy), attribs);
   }
   else
     m_eglDisplay = eglGetDisplay(static_cast<EGLNativeDisplayType>(m_dpy));
@@ -125,7 +126,8 @@ bool CGLContextEGL::Refresh(bool force, int screen, Window glWindow, bool &newCo
   vInfo = XGetVisualInfo(m_dpy, VisualScreenMask | VisualIDMask, &vMask, &availableVisuals);
   if (!vInfo)
   {
-    CLog::Log(LOGERROR, "Failed to get VisualInfo of visual 0x%x", static_cast<unsigned>(vMask.visualid));
+    CLog::Log(LOGERROR, "Failed to get VisualInfo of visual 0x%x",
+              static_cast<unsigned>(vMask.visualid));
     Destroy();
     return false;
   }
@@ -187,7 +189,8 @@ bool CGLContextEGL::Refresh(bool force, int screen, Window glWindow, bool &newCo
     return false;
   }
 
-  m_eglGetSyncValuesCHROMIUM = reinterpret_cast<PFNEGLGETSYNCVALUESCHROMIUMPROC>(eglGetProcAddress("eglGetSyncValuesCHROMIUM"));
+  m_eglGetSyncValuesCHROMIUM = reinterpret_cast<PFNEGLGETSYNCVALUESCHROMIUMPROC>(
+      eglGetProcAddress("eglGetSyncValuesCHROMIUM"));
 
   m_usePB = false;
   return true;
@@ -217,8 +220,8 @@ bool CGLContextEGL::CreatePB()
 
   if (m_eglGetPlatformDisplayEXT)
   {
-    m_eglDisplay = m_eglGetPlatformDisplayEXT(EGL_PLATFORM_X11_EXT,static_cast<EGLNativeDisplayType>(m_dpy),
-                                            NULL);
+    m_eglDisplay = m_eglGetPlatformDisplayEXT(EGL_PLATFORM_X11_EXT,
+                                              static_cast<EGLNativeDisplayType>(m_dpy), NULL);
   }
   else
     m_eglDisplay = eglGetDisplay(static_cast<EGLNativeDisplayType>(m_dpy));

@@ -175,13 +175,13 @@ bool CWinEventsX11::Init(Display *dpy, Window win)
   p = setlocale(LC_ALL, NULL);
   if (p)
   {
-    old_locale = static_cast<char*>(malloc(strlen(p) +1));
+    old_locale = static_cast<char*>(malloc(strlen(p) + 1));
     strcpy(old_locale, p);
   }
   p = XSetLocaleModifiers(NULL);
   if (p)
   {
-    old_modifiers = static_cast<char*>(malloc(strlen(p) +1));
+    old_modifiers = static_cast<char*>(malloc(strlen(p) + 1));
     strcpy(old_modifiers, p);
   }
 

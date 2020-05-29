@@ -393,7 +393,8 @@ void CWinSystemX11::UpdateResolutions()
       }
 
       if (mode.h > 0 && mode.w > 0 && out->hmm > 0 && out->wmm > 0)
-        res.fPixelRatio = (static_cast<float>(out->wmm)/static_cast<float>(mode.w)) / ((static_cast<float>(out->hmm)/static_cast<float>(mode.h)));
+        res.fPixelRatio = (static_cast<float>(out->wmm) / static_cast<float>(mode.w)) /
+                          ((static_cast<float>(out->hmm) / static_cast<float>(mode.h)));
       else
         res.fPixelRatio = 1.0f;
 
@@ -402,7 +403,7 @@ void CWinSystemX11::UpdateResolutions()
       res.strMode      = StringUtils::Format("%s: %s @ %.2fHz", out->name.c_str(), mode.name.c_str(), mode.hz);
       res.strOutput    = out->name;
       res.strId        = mode.id;
-      res.iSubtitles   = static_cast<int>(0.965*mode.h);
+      res.iSubtitles = static_cast<int>(0.965 * mode.h);
       res.fRefreshRate = mode.hz;
       res.bFullScreen  = true;
 
@@ -427,7 +428,8 @@ bool CWinSystemX11::HasCalibration(const RESOLUTION_INFO &resInfo)
 
   float fPixRatio;
   if (resInfo.iHeight>0 && resInfo.iWidth>0 && out->hmm>0 && out->wmm>0)
-    fPixRatio = (static_cast<float>(out->wmm)/static_cast<float>(resInfo.iWidth)) / ((static_cast<float>(out->hmm)/static_cast<float>(resInfo.iHeight)));
+    fPixRatio = (static_cast<float>(out->wmm) / static_cast<float>(resInfo.iWidth)) /
+                ((static_cast<float>(out->hmm) / static_cast<float>(resInfo.iHeight)));
   else
     fPixRatio = 1.0f;
 
@@ -441,7 +443,7 @@ bool CWinSystemX11::HasCalibration(const RESOLUTION_INFO &resInfo)
     return true;
   if (resInfo.fPixelRatio != fPixRatio)
     return true;
-  if (resInfo.iSubtitles != static_cast<int>(0.965*resInfo.iHeight))
+  if (resInfo.iSubtitles != static_cast<int>(0.965 * resInfo.iHeight))
     return true;
 
   return false;
@@ -599,7 +601,8 @@ void CWinSystemX11::RecreateWindow()
   }
 
   if (CServiceBroker::GetWinSystem()->GetGfxContext().IsFullScreenRoot())
-    CServiceBroker::GetWinSystem()->GetGfxContext().SetVideoResolution(static_cast<RESOLUTION>(i), true);
+    CServiceBroker::GetWinSystem()->GetGfxContext().SetVideoResolution(static_cast<RESOLUTION>(i),
+                                                                       true);
   else
     CServiceBroker::GetWinSystem()->GetGfxContext().SetVideoResolution(RES_WINDOW, true);
 }
@@ -634,8 +637,11 @@ int CWinSystemX11::XErrorHandler(Display* dpy, XErrorEvent* error)
 {
   char buf[1024];
   XGetErrorText(error->display, error->error_code, buf, sizeof(buf));
-  CLog::Log(LOGERROR, "CWinSystemX11::XErrorHandler: %s, type:%i, serial:%lu, error_code:%i, request_code:%i minor_code:%i",
-            buf, error->type, error->serial, static_cast<int>(error->error_code), static_cast<int>(error->request_code), static_cast<int>(error->minor_code));
+  CLog::Log(LOGERROR,
+            "CWinSystemX11::XErrorHandler: %s, type:%i, serial:%lu, error_code:%i, request_code:%i "
+            "minor_code:%i",
+            buf, error->type, error->serial, static_cast<int>(error->error_code),
+            static_cast<int>(error->request_code), static_cast<int>(error->minor_code));
 
   return 0;
 }
@@ -658,8 +664,8 @@ bool CWinSystemX11::SetWindow(int width, int height, bool fullscreen, const std:
     // we can't trust values after an xrr event
     if (m_bIsInternalXrr && m_MouseX >= 0 && m_MouseY >= 0)
     {
-      mouseX = static_cast<float>(m_MouseX)/m_nWidth;
-      mouseY = static_cast<float>(m_MouseY)/m_nHeight;
+      mouseX = static_cast<float>(m_MouseX) / m_nWidth;
+      mouseY = static_cast<float>(m_MouseY) / m_nHeight;
     }
     else if (!m_windowDirty)
     {
@@ -674,8 +680,8 @@ bool CWinSystemX11::SetWindow(int width, int height, bool fullscreen, const std:
 
       if (isInWin)
       {
-        mouseX = static_cast<float>(win_x_return)/m_nWidth;
-        mouseY = static_cast<float>(win_y_return)/m_nHeight;
+        mouseX = static_cast<float>(win_x_return) / m_nWidth;
+        mouseY = static_cast<float>(win_y_return) / m_nHeight;
       }
     }
 
@@ -744,21 +750,24 @@ bool CWinSystemX11::SetWindow(int width, int height, bool fullscreen, const std:
     if (fullscreen && hasWM)
     {
       Atom fs = XInternAtom(m_dpy, "_NET_WM_STATE_FULLSCREEN", True);
-      XChangeProperty(m_dpy, m_mainWindow, XInternAtom(m_dpy, "_NET_WM_STATE", True), XA_ATOM, 32, PropModeReplace, reinterpret_cast<unsigned char *>(&fs), 1);
+      XChangeProperty(m_dpy, m_mainWindow, XInternAtom(m_dpy, "_NET_WM_STATE", True), XA_ATOM, 32,
+                      PropModeReplace, reinterpret_cast<unsigned char*>(&fs), 1);
       // disable desktop compositing for KDE, when Kodi is in full-screen mode
       int one = 1;
       Atom composite = XInternAtom(m_dpy, "_KDE_NET_WM_BLOCK_COMPOSITING", True);
       if (composite != None)
       {
-        XChangeProperty(m_dpy, m_mainWindow, XInternAtom(m_dpy, "_KDE_NET_WM_BLOCK_COMPOSITING", True), XA_CARDINAL, 32,
-                        PropModeReplace, reinterpret_cast<unsigned char*>(&one),  1);
+        XChangeProperty(m_dpy, m_mainWindow,
+                        XInternAtom(m_dpy, "_KDE_NET_WM_BLOCK_COMPOSITING", True), XA_CARDINAL, 32,
+                        PropModeReplace, reinterpret_cast<unsigned char*>(&one), 1);
       }
       composite = XInternAtom(m_dpy, "_NET_WM_BYPASS_COMPOSITOR", True);
       if (composite != None)
       {
         // standard way for Gnome 3
-        XChangeProperty(m_dpy, m_mainWindow, XInternAtom(m_dpy, "_NET_WM_BYPASS_COMPOSITOR", True), XA_CARDINAL, 32,
-                        PropModeReplace, reinterpret_cast<unsigned char*>(&one),  1);
+        XChangeProperty(m_dpy, m_mainWindow, XInternAtom(m_dpy, "_NET_WM_BYPASS_COMPOSITOR", True),
+                        XA_CARDINAL, 32, PropModeReplace, reinterpret_cast<unsigned char*>(&one),
+                        1);
       }
     }
 
@@ -928,9 +937,8 @@ bool CWinSystemX11::CreateIconPixmap()
       ++outIndex;
     }
   }
-  img = XCreateImage(m_dpy, vis, depth,ZPixmap, 0, reinterpret_cast<char *>(newBuf),
-                     iconTexture->GetWidth(), iconTexture->GetHeight(),
-                     (depth>=24)?32:16, 0);
+  img = XCreateImage(m_dpy, vis, depth, ZPixmap, 0, reinterpret_cast<char*>(newBuf),
+                     iconTexture->GetWidth(), iconTexture->GetHeight(), (depth >= 24) ? 32 : 16, 0);
   if (!img)
   {
     CLog::Log(LOGERROR, "CWinSystemX11::CreateIconPixmap - could not create image");
@@ -1007,7 +1015,7 @@ bool CWinSystemX11::HasWindowManager()
     return false;
   }
 
-  if(wm_check != (reinterpret_cast<Window*>(data))[0])
+  if (wm_check != (reinterpret_cast<Window*>(data))[0])
   {
     XFree(data);
     return false;

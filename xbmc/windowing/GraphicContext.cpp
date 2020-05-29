@@ -224,7 +224,8 @@ bool CGraphicContext::SetViewPort(float fx, float fy, float fwidth, float fheigh
   assert(newLeft < newRight);
   assert(newTop < newBottom);
 
-  CRect newviewport(static_cast<float>(newLeft), static_cast<float>(newTop), static_cast<float>(newRight), static_cast<float>(newBottom));
+  CRect newviewport(static_cast<float>(newLeft), static_cast<float>(newTop),
+                    static_cast<float>(newRight), static_cast<float>(newBottom));
 
   m_viewStack.push(newviewport);
 
@@ -278,7 +279,8 @@ CRect CGraphicContext::StereoCorrection(const CRect &rect) const
 void CGraphicContext::SetScissors(const CRect &rect)
 {
   m_scissors = rect;
-  m_scissors.Intersect(CRect(0,0,static_cast<float>(m_iScreenWidth), static_cast<float>(m_iScreenHeight)));
+  m_scissors.Intersect(
+      CRect(0, 0, static_cast<float>(m_iScreenWidth), static_cast<float>(m_iScreenHeight)));
   CServiceBroker::GetRenderSystem()->SetScissors(StereoCorrection(m_scissors));
 }
 
@@ -372,7 +374,8 @@ void CGraphicContext::SetCalibrating(bool bOnOff)
 
 bool CGraphicContext::IsValidResolution(RESOLUTION res)
 {
-  if (res >= RES_WINDOW && static_cast<size_t>(res) < CDisplaySettings::GetInstance().ResolutionInfoSize())
+  if (res >= RES_WINDOW &&
+      static_cast<size_t>(res) < CDisplaySettings::GetInstance().ResolutionInfoSize())
   {
     return true;
   }
@@ -452,7 +455,8 @@ void CGraphicContext::SetVideoResolutionInternal(RESOLUTION res, bool forceUpdat
 
   if (switched)
   {
-    m_scissors.SetRect(0, 0, static_cast<float>(m_iScreenWidth), static_cast<float>(m_iScreenHeight));
+    m_scissors.SetRect(0, 0, static_cast<float>(m_iScreenWidth),
+                       static_cast<float>(m_iScreenHeight));
 
     // make sure all stereo stuff are correctly setup
     SetStereoView(RENDER_STEREO_VIEW_OFF);
@@ -673,7 +677,7 @@ void CGraphicContext::GetGUIScaling(const RESOLUTION_INFO &res, float &scaleX, f
   {
     // calculate necessary scalings
     RESOLUTION_INFO info = GetResInfo();
-    float fFromWidth  = static_cast<float>(res.iWidth);
+    float fFromWidth = static_cast<float>(res.iWidth);
     float fFromHeight = static_cast<float>(res.iHeight);
     auto fToPosX = info.Overscan.left + info.guiInsets.left;
     auto fToPosY = info.Overscan.top + info.guiInsets.top;
@@ -751,7 +755,8 @@ void CGraphicContext::SetStereoView(RENDER_STEREO_VIEW view)
   while(!m_viewStack.empty())
     m_viewStack.pop();
 
-  CRect viewport(0.0f, 0.0f, static_cast<float>(m_iScreenWidth), static_cast<float>(m_iScreenHeight));
+  CRect viewport(0.0f, 0.0f, static_cast<float>(m_iScreenWidth),
+                 static_cast<float>(m_iScreenHeight));
 
   m_viewStack.push(viewport);
 
@@ -1001,7 +1006,8 @@ void CGraphicContext::GetAllowedResolutions(std::vector<RESOLUTION> &res)
 
   res.push_back(RES_WINDOW);
   res.push_back(RES_DESKTOP);
-  for (size_t r = static_cast<size_t>(RES_CUSTOM); r < CDisplaySettings::GetInstance().ResolutionInfoSize(); r++)
+  for (size_t r = static_cast<size_t>(RES_CUSTOM);
+       r < CDisplaySettings::GetInstance().ResolutionInfoSize(); r++)
   {
     res.push_back(static_cast<RESOLUTION>(r));
   }

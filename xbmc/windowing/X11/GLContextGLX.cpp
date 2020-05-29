@@ -56,7 +56,8 @@ bool CGLContextGLX::Refresh(bool force, int screen, Window glWindow, bool &newCo
     vMask.visualid = XVisualIDFromVisual(winAttr.visual);
     vInfo = XGetVisualInfo(m_dpy, VisualScreenMask | VisualIDMask, &vMask, &availableVisuals);
     if (!vInfo)
-      CLog::Log(LOGWARNING, "Failed to get VisualInfo of visual 0x%x", static_cast<unsigned>(vMask.visualid));
+      CLog::Log(LOGWARNING, "Failed to get VisualInfo of visual 0x%x",
+                static_cast<unsigned>(vMask.visualid));
     else if(!IsSuitableVisual(vInfo))
     {
       CLog::Log(LOGWARNING, "Visual 0x%x of the window is not suitable, looking for another one...",
@@ -263,22 +264,26 @@ void CGLContextGLX::QueryExtensions()
   CLog::Log(LOGDEBUG, "GLX_EXTENSIONS:%s", m_extensions.c_str());
 
   if (IsExtSupported("GLX_SGI_video_sync"))
-    m_glXWaitVideoSyncSGI = reinterpret_cast<int (*)(int, int, unsigned int*)>(glXGetProcAddress(reinterpret_cast<const GLubyte*>("glXWaitVideoSyncSGI")));
+    m_glXWaitVideoSyncSGI = reinterpret_cast<int (*)(int, int, unsigned int*)>(
+        glXGetProcAddress(reinterpret_cast<const GLubyte*>("glXWaitVideoSyncSGI")));
   else
     m_glXWaitVideoSyncSGI = NULL;
 
   if (IsExtSupported("GLX_SGI_video_sync"))
-    m_glXGetVideoSyncSGI = reinterpret_cast<int (*)(unsigned int*)>(glXGetProcAddress(reinterpret_cast<const GLubyte*>("glXGetVideoSyncSGI")));
+    m_glXGetVideoSyncSGI = reinterpret_cast<int (*)(unsigned int*)>(
+        glXGetProcAddress(reinterpret_cast<const GLubyte*>("glXGetVideoSyncSGI")));
   else
     m_glXGetVideoSyncSGI = NULL;
 
   if (IsExtSupported("GLX_MESA_swap_control"))
-    m_glXSwapIntervalMESA = reinterpret_cast<int (*)(int)>(glXGetProcAddress(reinterpret_cast<const GLubyte*>("glXSwapIntervalMESA")));
+    m_glXSwapIntervalMESA = reinterpret_cast<int (*)(int)>(
+        glXGetProcAddress(reinterpret_cast<const GLubyte*>("glXSwapIntervalMESA")));
   else
     m_glXSwapIntervalMESA = NULL;
 
   if (IsExtSupported("GLX_EXT_swap_control"))
-    m_glXSwapIntervalEXT = reinterpret_cast<PFNGLXSWAPINTERVALEXTPROC>(glXGetProcAddress(reinterpret_cast<const GLubyte*>("glXSwapIntervalEXT")));
+    m_glXSwapIntervalEXT = reinterpret_cast<PFNGLXSWAPINTERVALEXTPROC>(
+        glXGetProcAddress(reinterpret_cast<const GLubyte*>("glXSwapIntervalEXT")));
   else
     m_glXSwapIntervalEXT = NULL;
 }

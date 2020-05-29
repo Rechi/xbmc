@@ -94,7 +94,7 @@ bool CWinEventsSDL::MessagePump()
         newEvent.type = XBMC_KEYUP;
         newEvent.key.keysym.scancode = event.key.keysym.scancode;
         newEvent.key.keysym.sym = static_cast<XBMCKey>(event.key.keysym.sym);
-        newEvent.key.keysym.mod =static_cast<XBMCMod>(event.key.keysym.mod);
+        newEvent.key.keysym.mod = static_cast<XBMCMod>(event.key.keysym.mod);
         newEvent.key.keysym.unicode = event.key.keysym.unicode;
 
         std::shared_ptr<CAppInboundProtocol> appPort = CServiceBroker::GetAppPort();

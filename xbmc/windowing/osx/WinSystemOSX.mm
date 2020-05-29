@@ -80,8 +80,8 @@ using namespace WINDOWING;
 }
 -  (void) windowDidMoveNotification:(NSNotification*) note
 {
-  CWinSystemOSX *winsys = static_cast<CWinSystemOSX*>(m_userdata);
-	if (!winsys)
+  CWinSystemOSX* winsys = static_cast<CWinSystemOSX*>(m_userdata);
+  if (!winsys)
     return;
 
   NSOpenGLContext* context = [NSOpenGLContext currentContext];
@@ -120,8 +120,8 @@ using namespace WINDOWING;
 }
 - (void) windowDidReSizeNotification:(NSNotification*) note
 {
-  CWinSystemOSX *winsys = static_cast<CWinSystemOSX*>(m_userdata);
-	if (!winsys)
+  CWinSystemOSX* winsys = static_cast<CWinSystemOSX*>(m_userdata);
+  if (!winsys)
     return;
 
 }
@@ -145,8 +145,8 @@ using namespace WINDOWING;
 }
 - (void) windowDidChangeScreenNotification:(NSNotification*) note
 {
-  CWinSystemOSX *winsys = static_cast<CWinSystemOSX*>(m_userdata);
-	if (!winsys)
+  CWinSystemOSX* winsys = static_cast<CWinSystemOSX*>(m_userdata);
+  if (!winsys)
     return;
   winsys->WindowChangedScreen();
 }
@@ -249,7 +249,9 @@ CFArrayRef GetAllDisplayModes(CGDirectDisplayID display)
   }
 
   CFStringRef key = kCGDisplayShowDuplicateLowResolutionModes;
-  CFDictionaryRef options = CFDictionaryCreate(kCFAllocatorDefault, reinterpret_cast<const void **>(&key), reinterpret_cast<const void **>(&number), 1, NULL, NULL);
+  CFDictionaryRef options =
+      CFDictionaryCreate(kCFAllocatorDefault, reinterpret_cast<const void**>(&key),
+                         reinterpret_cast<const void**>(&number), 1, NULL, NULL);
   CFRelease(number);
 
   if (!options)
@@ -477,7 +479,7 @@ static NSWindow *curtainWindow;
 void fadeInDisplay(NSScreen *theScreen, double fadeTime)
 {
   int     fadeSteps     = 100;
-  double  fadeInterval  = (fadeTime / static_cast<double>(fadeSteps));
+  double fadeInterval = (fadeTime / static_cast<double>(fadeSteps));
 
   if (curtainWindow != nil)
   {
@@ -499,7 +501,7 @@ void fadeInDisplay(NSScreen *theScreen, double fadeTime)
 void fadeOutDisplay(NSScreen *theScreen, double fadeTime)
 {
   int     fadeSteps     = 100;
-  double  fadeInterval  = (fadeTime / static_cast<double>(fadeSteps));
+  double fadeInterval = (fadeTime / static_cast<double>(fadeSteps));
 
   [NSCursor hide];
 
@@ -534,7 +536,7 @@ void fadeOutDisplay(NSScreen *theScreen, double fadeTime)
 // non interlaced, nonstretched, safe for hardware
 CGDisplayModeRef GetMode(int width, int height, double refreshrate, int screenIdx)
 {
-  if ( screenIdx >= static_cast<signed>([[NSScreen screens] count]))
+  if (screenIdx >= static_cast<signed>([[NSScreen screens] count]))
     return NULL;
 
   Boolean stretched;
@@ -589,7 +591,7 @@ CGDisplayModeRef GetMode(int width, int height, double refreshrate, int screenId
 static void DisplayReconfigured(CGDirectDisplayID display,
   CGDisplayChangeSummaryFlags flags, void* userData)
 {
-  CWinSystemOSX *winsys = static_cast<CWinSystemOSX*>(userData);
+  CWinSystemOSX* winsys = static_cast<CWinSystemOSX*>(userData);
   if (!winsys)
     return;
 
@@ -1207,13 +1209,9 @@ NSOpenGLContext* CreateWindowedContext(NSOpenGLContext* shareCtx)
   if (!newContext)
   {
     // bah, try again for non-accelerated renderer
-    NSOpenGLPixelFormatAttribute wattrs2[] =
-    {
-      NSOpenGLPFADoubleBuffer,
-      NSOpenGLPFANoRecovery,
-      NSOpenGLPFADepthSize, static_cast<NSOpenGLPixelFormatAttribute>(8),
-      static_cast<NSOpenGLPixelFormatAttribute>(0)
-    };
+    NSOpenGLPixelFormatAttribute wattrs2[] = {
+        NSOpenGLPFADoubleBuffer, NSOpenGLPFANoRecovery, NSOpenGLPFADepthSize,
+        static_cast<NSOpenGLPixelFormatAttribute>(8), static_cast<NSOpenGLPixelFormatAttribute>(0)};
     newContext = [[NSOpenGLContext alloc]
         initWithFormat:[[NSOpenGLPixelFormat alloc] initWithAttributes:wattrs2]
           shareContext:shareCtx];
@@ -1392,7 +1390,7 @@ void CWinSystemOSX::FillInVideoModes()
         w = CGDisplayModeGetWidth(displayMode);
         h = CGDisplayModeGetHeight(displayMode);
         refreshrate = CGDisplayModeGetRefreshRate(displayMode);
-        if (static_cast<int>(refreshrate) == 0)  // LCD display?
+        if (static_cast<int>(refreshrate) == 0) // LCD display?
         {
           // NOTE: The refresh rate will be REPORTED AS 0 for many DVI and notebook displays.
           refreshrate = 60.0;
@@ -1483,7 +1481,7 @@ bool CWinSystemOSX::IsObscured(void)
 
   CGWindowListOption opts;
   opts = kCGWindowListOptionOnScreenAboveWindow | kCGWindowListExcludeDesktopElements;
-  CFArrayRef windowIDs =CGWindowListCreate(opts, static_cast<CGWindowID>([window windowNumber]));
+  CFArrayRef windowIDs = CGWindowListCreate(opts, static_cast<CGWindowID>([window windowNumber]));
 
   if (!windowIDs)
     return m_obscured;
@@ -1509,10 +1507,12 @@ bool CWinSystemOSX::IsObscured(void)
   for (CFIndex idx=0; idx < CFArrayGetCount(windowDescs); idx++)
   {
     // walk the window list of windows that are above us and are not desktop elements
-    CFDictionaryRef windowDictionary = static_cast<CFDictionaryRef>(CFArrayGetValueAtIndex(windowDescs, idx));
+    CFDictionaryRef windowDictionary =
+        static_cast<CFDictionaryRef>(CFArrayGetValueAtIndex(windowDescs, idx));
 
     // skip the Dock window, it actually covers the entire screen.
-    CFStringRef ownerName = static_cast<CFStringRef>(CFDictionaryGetValue(windowDictionary, kCGWindowOwnerName));
+    CFStringRef ownerName =
+        static_cast<CFStringRef>(CFDictionaryGetValue(windowDictionary, kCGWindowOwnerName));
     if (CFStringCompare(ownerName, CFSTR("Dock"), 0) == kCFCompareEqualTo)
       continue;
 
@@ -1528,7 +1528,8 @@ bool CWinSystemOSX::IsObscured(void)
         CFStringCompare(ownerName, CFSTR("Window Server"), 0)     ==  kCFCompareEqualTo)
       continue;
 
-    CFDictionaryRef rectDictionary = static_cast<CFDictionaryRef>(CFDictionaryGetValue(windowDictionary, kCGWindowBounds));
+    CFDictionaryRef rectDictionary =
+        static_cast<CFDictionaryRef>(CFDictionaryGetValue(windowDictionary, kCGWindowBounds));
     if (!rectDictionary)
       continue;
 
