@@ -470,7 +470,7 @@ void CGUIDialogSmartPlaylistRule::OnField()
     if (std::get<0>(op) == std::get<0>(OperatorLabel(m_rule.m_operator)))
       isValid = true;
   if (!isValid)
-    m_rule.m_operator = (CDatabaseQueryRule::SEARCH_OPERATOR)std::get<1>(validOperators[0]);
+    m_rule.m_operator = static_cast<CDatabaseQueryRule::SEARCH_OPERATOR>(std::get<1>(validOperators[0]));
 
   m_rule.SetParameter("");
   UpdateButtons();
@@ -491,7 +491,7 @@ void CGUIDialogSmartPlaylistRule::OnOperator()
   if (!dialog->IsConfirmed() || newSelected < 0)
     return;
 
-  m_rule.m_operator = (CDatabaseQueryRule::SEARCH_OPERATOR)std::get<1>(labels[newSelected]);
+  m_rule.m_operator = static_cast<CDatabaseQueryRule::SEARCH_OPERATOR>(std::get<1>(labels[newSelected]));
   UpdateButtons();
 }
 
