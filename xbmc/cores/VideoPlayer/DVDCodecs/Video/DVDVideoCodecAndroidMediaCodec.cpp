@@ -475,7 +475,7 @@ bool CDVDVideoCodecAndroidMediaCodec::Open(CDVDStreamInfo &hints, CDVDCodecOptio
       if (m_hints.extradata && !m_hints.cryptoSession)
       {
         m_bitstream = new CBitstreamConverter;
-        if (!m_bitstream->Open(m_hints.codec, (uint8_t*)m_hints.extradata, m_hints.extrasize, true))
+        if (!m_bitstream->Open(m_hints.codec, static_cast<uint8_t*>(m_hints.extradata), m_hints.extrasize, true))
         {
           SAFE_DELETE(m_bitstream);
         }
@@ -496,7 +496,7 @@ bool CDVDVideoCodecAndroidMediaCodec::Open(CDVDStreamInfo &hints, CDVDCodecOptio
       if (m_hints.extradata && !m_hints.cryptoSession)
       {
         m_bitstream = new CBitstreamConverter;
-        if (!m_bitstream->Open(m_hints.codec, (uint8_t*)m_hints.extradata, m_hints.extrasize, true))
+        if (!m_bitstream->Open(m_hints.codec, static_cast<uint8_t*>(m_hints.extradata), m_hints.extrasize, true))
         {
           SAFE_DELETE(m_bitstream);
         }
@@ -516,15 +516,15 @@ bool CDVDVideoCodecAndroidMediaCodec::Open(CDVDStreamInfo &hints, CDVDCodecOptio
         char buf[4];
         memcpy(m_hints.extradata, annexL_hdr1, sizeof(annexL_hdr1));
         offset += sizeof(annexL_hdr1);
-        memcpy(&((char *)(m_hints.extradata))[offset], hints.extradata, 4);
+        memcpy(&(static_cast<char *>(m_hints.extradata))[offset], hints.extradata, 4);
         offset += 4;
         BS_WL32(buf, hints.height);
-        memcpy(&((char *)(m_hints.extradata))[offset], buf, 4);
+        memcpy(&(static_cast<char *>(m_hints.extradata))[offset], buf, 4);
         offset += 4;
         BS_WL32(buf, hints.width);
-        memcpy(&((char *)(m_hints.extradata))[offset], buf, 4);
+        memcpy(&(static_cast<char *>(m_hints.extradata))[offset], buf, 4);
         offset += 4;
-        memcpy(&((char *)(m_hints.extradata))[offset], annexL_hdr2, sizeof(annexL_hdr2));
+        memcpy(&(static_cast<char *>(m_hints.extradata))[offset], annexL_hdr2, sizeof(annexL_hdr2));
       }
 
       m_mime = "video/x-ms-wmv";
@@ -539,7 +539,7 @@ bool CDVDVideoCodecAndroidMediaCodec::Open(CDVDStreamInfo &hints, CDVDCodecOptio
       unsigned int seq_offset = 0;
       for (; seq_offset <= m_hints.extrasize-4; ++seq_offset)
       {
-        char *ptr = &((char*)m_hints.extradata)[seq_offset];
+        char *ptr = &(static_cast<char*>(m_hints.extradata))[seq_offset];
         if (ptr[0] == 0x00 && ptr[1] == 0x00 && ptr[2] == 0x01 && ptr[3] == 0x0f)
           break;
       }
@@ -551,7 +551,7 @@ bool CDVDVideoCodecAndroidMediaCodec::Open(CDVDStreamInfo &hints, CDVDCodecOptio
         free(m_hints.extradata);
         m_hints.extrasize -= seq_offset;
         m_hints.extradata = malloc(m_hints.extrasize);
-        memcpy(m_hints.extradata, &((char *)(hints.extradata))[seq_offset], m_hints.extrasize);
+        memcpy(m_hints.extradata, &(static_cast<char *>(hints.extradata))[seq_offset], m_hints.extrasize);
       }
 
       m_mime = "video/wvc1";
@@ -885,7 +885,7 @@ bool CDVDVideoCodecAndroidMediaCodec::AddData(const DemuxPacket &packet)
         CLog::Log(LOGERROR, "CDVDVideoCodecAndroidMediaCodec::AddData, iSize(%d) > size(%d)", iSize, out_size);
         iSize = out_size;
       }
-      uint8_t* dst_ptr = (uint8_t*)xbmc_jnienv()->GetDirectBufferAddress(buffer.get_raw());
+      uint8_t* dst_ptr = static_cast<uint8_t*>(xbmc_jnienv()->GetDirectBufferAddress(buffer.get_raw()));
 
       CJNIMediaCodecCryptoInfo* cryptoInfo(nullptr);
       if (m_crypto && packet.cryptoInfo)
@@ -1431,11 +1431,11 @@ void CDVDVideoCodecAndroidMediaCodec::ConfigureOutputFormat(CJNIMediaFormat& med
 
   if (m_hints.aspect > 1.0 && !m_hints.forced_aspect)
   {
-    m_videobuffer.iDisplayWidth  = ((int)lrint(m_videobuffer.iHeight * m_hints.aspect)) & ~3;
+    m_videobuffer.iDisplayWidth  = (static_cast<int>(lrint(m_videobuffer.iHeight * m_hints.aspect))) & ~3;
     if (m_videobuffer.iDisplayWidth > m_videobuffer.iWidth)
     {
       m_videobuffer.iDisplayWidth  = m_videobuffer.iWidth;
-      m_videobuffer.iDisplayHeight = ((int)lrint(m_videobuffer.iWidth / m_hints.aspect)) & ~3;
+      m_videobuffer.iDisplayHeight = (static_cast<int>(lrint(m_videobuffer.iWidth / m_hints.aspect))) & ~3;
     }
   }
 }

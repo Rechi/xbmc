@@ -415,7 +415,7 @@ void CDVDTeletextData::Process()
                 else
                 {
                   if (!(pageinfo_thread->p24))
-                    pageinfo_thread->p24 = (unsigned char*) calloc(2, 40);
+                    pageinfo_thread->p24 = static_cast<unsigned char*>(calloc(2, 40));
                   if (pageinfo_thread->p24)
                     p = pageinfo_thread->p24 + (packet_number - 24) * 40;
                 }
@@ -489,7 +489,7 @@ void CDVDTeletextData::Process()
                           a1 = a; /* first non-space */
                         if (a >= 0 && l >= 2)
                         {
-                          strncpy(m_TXTCache->ADIPTable[m_TXTCache->FlofPages[m_TXTCache->CurrentPage[magazine]][l]], (const char*) &p[a1], 12);
+                          strncpy(m_TXTCache->ADIPTable[m_TXTCache->FlofPages[m_TXTCache->CurrentPage[magazine]][l]], reinterpret_cast<const char*>(&p[a1]), 12);
                           if (e-a1 < 11)
                             m_TXTCache->ADIPTable[m_TXTCache->FlofPages[m_TXTCache->CurrentPage[magazine]][l]][e-a1+1] = '\0';
                         }
@@ -505,11 +505,11 @@ void CDVDTeletextData::Process()
                   Textp27_t *p;
 
                   if (!pageinfo_thread->ext)
-                    pageinfo_thread->ext = (TextExtData_t*) calloc(1, sizeof(TextExtData_t));
+                    pageinfo_thread->ext = static_cast<TextExtData_t*>(calloc(1, sizeof(TextExtData_t)));
                   if (!pageinfo_thread->ext)
                     continue;
                   if (!(pageinfo_thread->ext->p27))
-                    pageinfo_thread->ext->p27 = (Textp27_t*) calloc(4, sizeof(Textp27_t));
+                    pageinfo_thread->ext->p27 = static_cast<Textp27_t*>(calloc(4, sizeof(Textp27_t)));
                   if (!(pageinfo_thread->ext->p27))
                     continue;
                   p = pageinfo_thread->ext->p27;
@@ -559,11 +559,11 @@ void CDVDTeletextData::Process()
                   continue;
 
                 if (!pageinfo_thread->ext)
-                  pageinfo_thread->ext = (TextExtData_t*) calloc(1, sizeof(TextExtData_t));
+                  pageinfo_thread->ext = static_cast<TextExtData_t*>(calloc(1, sizeof(TextExtData_t)));
                 if (!pageinfo_thread->ext)
                   continue;
                 if (!(pageinfo_thread->ext->p26[descode]))
-                  pageinfo_thread->ext->p26[descode] = (unsigned char*) malloc(13 * 3);
+                  pageinfo_thread->ext->p26[descode] = static_cast<unsigned char*>(malloc(13 * 3));
                 if (pageinfo_thread->ext->p26[descode])
                   memcpy(pageinfo_thread->ext->p26[descode], &vtxt_row[3], 13 * 3);
               }
@@ -663,7 +663,7 @@ void CDVDTeletextData::Decode_p2829(unsigned char *vtxt_row, TextExtData_t **ptE
     return;
 
   if (!(*ptExtData))
-    (*ptExtData) = (TextExtData_t*) calloc(1, sizeof(TextExtData_t));
+    (*ptExtData) = static_cast<TextExtData_t*>(calloc(1, sizeof(TextExtData_t)));
   if (!(*ptExtData))
     return;
 

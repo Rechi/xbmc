@@ -152,7 +152,7 @@ bool CEdl::ReadEdl(const std::string& strMovie, const float fFramesPerSecond)
         std::vector<std::string> fieldParts = StringUtils::Split(strFields[i], '.');
         if (fieldParts.size() == 1) // No ms
         {
-          iCutStartEnd[i] = StringUtils::TimeStringToSeconds(fieldParts[0]) * (int64_t)1000; // seconds to ms
+          iCutStartEnd[i] = StringUtils::TimeStringToSeconds(fieldParts[0]) * static_cast<int64_t>(1000); // seconds to ms
         }
         else if (fieldParts.size() == 2) // Has ms. Everything after the dot (.) is ms
         {
@@ -171,7 +171,7 @@ bool CEdl::ReadEdl(const std::string& strMovie, const float fFramesPerSecond)
           {
             fieldParts[1] = fieldParts[1].substr(0, 3);
           }
-          iCutStartEnd[i] = (int64_t)StringUtils::TimeStringToSeconds(fieldParts[0]) * 1000 + atoi(fieldParts[1].c_str()); // seconds to ms
+          iCutStartEnd[i] = static_cast<int64_t>(StringUtils::TimeStringToSeconds(fieldParts[0])) * 1000 + atoi(fieldParts[1].c_str()); // seconds to ms
         }
         else
         {
@@ -194,7 +194,7 @@ bool CEdl::ReadEdl(const std::string& strMovie, const float fFramesPerSecond)
       }
       else // Plain old seconds in float format, e.g. 123.45
       {
-        iCutStartEnd[i] = (int64_t)(atof(strFields[i].c_str()) * 1000); // seconds to ms
+        iCutStartEnd[i] = static_cast<int64_t>(atof(strFields[i].c_str()) * 1000); // seconds to ms
       }
     }
 
@@ -326,8 +326,8 @@ bool CEdl::ReadComskip(const std::string& strMovie, const float fFramesPerSecond
     if (sscanf(szBuffer, "%lf %lf", &dStartFrame, &dEndFrame) == 2)
     {
       Cut cut;
-      cut.start = (int64_t)(dStartFrame / fFrameRate * 1000);
-      cut.end = (int64_t)(dEndFrame / fFrameRate * 1000);
+      cut.start = static_cast<int64_t>(dStartFrame / fFrameRate * 1000);
+      cut.end = static_cast<int64_t>(dEndFrame / fFrameRate * 1000);
       cut.action = Action::COMM_BREAK;
       bValid = AddCut(cut);
     }
@@ -403,8 +403,8 @@ bool CEdl::ReadVideoReDo(const std::string& strMovie)
          *  Times need adjusting by 1/10,000 to get ms.
          */
         Cut cut;
-        cut.start = (int64_t)(dStart / 10000);
-        cut.end = (int64_t)(dEnd / 10000);
+        cut.start = static_cast<int64_t>(dStart / 10000);
+        cut.end = static_cast<int64_t>(dEnd / 10000);
         cut.action = Action::CUT;
         bValid = AddCut(cut);
       }
@@ -416,7 +416,7 @@ bool CEdl::ReadVideoReDo(const std::string& strMovie)
       int iScene;
       double dSceneMarker;
       if (sscanf(szBuffer + strlen(VIDEOREDO_TAG_SCENE), " %i>%lf", &iScene, &dSceneMarker) == 2)
-        bValid = AddSceneMarker((int64_t)(dSceneMarker / 10000)); // Times need adjusting by 1/10,000 to get ms.
+        bValid = AddSceneMarker(static_cast<int64_t>(dSceneMarker / 10000)); // Times need adjusting by 1/10,000 to get ms.
       else
         bValid = false;
     }
@@ -499,8 +499,8 @@ bool CEdl::ReadBeyondTV(const std::string& strMovie)
        * atof() returns 0 if there were any problems and will subsequently be rejected in AddCut().
        */
       Cut cut;
-      cut.start = (int64_t)(atof(pStart->FirstChild()->Value()) / 10000);
-      cut.end = (int64_t)(atof(pEnd->FirstChild()->Value()) / 10000);
+      cut.start = static_cast<int64_t>(atof(pStart->FirstChild()->Value()) / 10000);
+      cut.end = static_cast<int64_t>(atof(pEnd->FirstChild()->Value()) / 10000);
       cut.action = Action::COMM_BREAK;
       bValid = AddCut(cut);
     }
@@ -606,7 +606,7 @@ bool CEdl::AddCut(const Cut& newCut)
     return false;
   }
 
-  for (int i = 0; i < (int)m_vecCuts.size(); i++)
+  for (int i = 0; i < static_cast<int>(m_vecCuts.size()); i++)
   {
     if (cut.start < m_vecCuts[i].start && cut.end > m_vecCuts[i].end)
     {
@@ -710,7 +710,7 @@ int CEdl::RemoveCutTime(int iSeek) const
    * total duration for display.
    */
   int iCutTime = 0;
-  for (int i = 0; i < (int)m_vecCuts.size(); i++)
+  for (int i = 0; i < static_cast<int>(m_vecCuts.size()); i++)
   {
     if (m_vecCuts[i].action == Action::CUT)
     {
@@ -729,7 +729,7 @@ double CEdl::RestoreCutTime(double dClock) const
     return dClock;
 
   double dSeek = dClock;
-  for (int i = 0; i < (int)m_vecCuts.size(); i++)
+  for (int i = 0; i < static_cast<int>(m_vecCuts.size()); i++)
   {
     if (m_vecCuts[i].action == Action::CUT && dSeek >= m_vecCuts[i].start)
       dSeek += static_cast<double>(m_vecCuts[i].end - m_vecCuts[i].start);
@@ -749,7 +749,7 @@ std::string CEdl::GetInfo() const
   if (HasCut())
   {
     int cutCount = 0, muteCount = 0, commBreakCount = 0;
-    for (int i = 0; i < (int)m_vecCuts.size(); i++)
+    for (int i = 0; i < static_cast<int>(m_vecCuts.size()); i++)
     {
       switch (m_vecCuts[i].action)
       {
@@ -781,7 +781,7 @@ std::string CEdl::GetInfo() const
 
 bool CEdl::InCut(const int iSeek, Cut *pCut)
 {
-  for (int i = 0; i < (int)m_vecCuts.size(); i++)
+  for (int i = 0; i < static_cast<int>(m_vecCuts.size()); i++)
   {
     if (iSeek < m_vecCuts[i].start) // Early exit if not even up to the cut start time.
       return false;
@@ -832,7 +832,7 @@ bool CEdl::GetNearestCut(bool bPlus, const int iSeek, Cut *pCut) const
   else
   {
     // Searching backwards
-    for (int i = (int)m_vecCuts.size() - 1; i >= 0; i--)
+    for (int i = static_cast<int>(m_vecCuts.size()) - 1; i >= 0; i--)
     {
       if (iSeek - 20000 >= m_vecCuts[i].start && iSeek <= m_vecCuts[i].end)
         // Inside cut. We ignore if we're closer to 20 seconds inside
@@ -864,7 +864,7 @@ bool CEdl::GetNextSceneMarker(bool bPlus, const int iClock, int *iSceneMarker)
 
   if (bPlus) // Find closest scene forwards
   {
-    for (int i = 0; i < (int)m_vecSceneMarkers.size(); i++)
+    for (int i = 0; i < static_cast<int>(m_vecSceneMarkers.size()); i++)
     {
       if ((m_vecSceneMarkers[i] > iSeek) && ((m_vecSceneMarkers[i] - iSeek) < iDiff))
       {
@@ -876,7 +876,7 @@ bool CEdl::GetNextSceneMarker(bool bPlus, const int iClock, int *iSceneMarker)
   }
   else // Find closest scene backwards
   {
-    for (int i = 0; i < (int)m_vecSceneMarkers.size(); i++)
+    for (int i = 0; i < static_cast<int>(m_vecSceneMarkers.size()); i++)
     {
       if ((m_vecSceneMarkers[i] < iSeek) && ((iSeek - m_vecSceneMarkers[i]) < iDiff))
       {
@@ -900,7 +900,7 @@ bool CEdl::GetNextSceneMarker(bool bPlus, const int iClock, int *iSceneMarker)
 
 std::string CEdl::MillisecondsToTimeString(const int iMilliseconds)
 {
-  std::string strTimeString = StringUtils::SecondsToTimeString((long)(iMilliseconds / 1000), TIME_FORMAT_HH_MM_SS); // milliseconds to seconds
+  std::string strTimeString = StringUtils::SecondsToTimeString(static_cast<long>(iMilliseconds / 1000), TIME_FORMAT_HH_MM_SS); // milliseconds to seconds
   strTimeString += StringUtils::Format(".%03i", iMilliseconds % 1000);
   return strTimeString;
 }
@@ -988,7 +988,7 @@ void CEdl::MergeShortCommBreaks()
   /*
    * Add in scene markers at the start and end of the commercial breaks.
    */
-  for (int i = 0; i < (int)m_vecCuts.size(); i++)
+  for (int i = 0; i < static_cast<int>(m_vecCuts.size()); i++)
   {
     if (m_vecCuts[i].action == Action::COMM_BREAK)
     {

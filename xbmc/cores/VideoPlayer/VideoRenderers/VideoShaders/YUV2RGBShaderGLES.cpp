@@ -104,7 +104,7 @@ bool BaseYUV2RGBGLSLShader::OnEnabled()
   m_pConvMatrix->SetParams(m_contrast, m_black, !m_convertFullRange);
   m_pConvMatrix->GetYuvMat(yuvMat);
 
-  glUniformMatrix4fv(m_hYuvMat, 1, GL_FALSE, (GLfloat*)yuvMat);
+  glUniformMatrix4fv(m_hYuvMat, 1, GL_FALSE, reinterpret_cast<GLfloat*>(yuvMat));
   glUniformMatrix4fv(m_hProj,  1, GL_FALSE, m_proj);
   glUniformMatrix4fv(m_hModel, 1, GL_FALSE, m_model);
   glUniform1f(m_hAlpha, m_alpha);
@@ -112,7 +112,7 @@ bool BaseYUV2RGBGLSLShader::OnEnabled()
   GLfloat primMat[3][3];
   if (m_pConvMatrix->GetPrimMat(primMat))
   {
-    glUniformMatrix3fv(m_hPrimMat, 1, GL_FALSE, (GLfloat*)primMat);
+    glUniformMatrix3fv(m_hPrimMat, 1, GL_FALSE, reinterpret_cast<GLfloat*>(primMat));
     glUniform1f(m_hGammaSrc, m_pConvMatrix->GetGammaSrc());
     glUniform1f(m_hGammaDstInv, 1/m_pConvMatrix->GetGammaDst());
   }
@@ -222,8 +222,8 @@ bool YUV2RGBBobShader::OnEnabled()
     return false;
 
   glUniform1i(m_hField, m_field);
-  glUniform1f(m_hStepX, 1.0f / (float)m_width);
-  glUniform1f(m_hStepY, 1.0f / (float)m_height);
+  glUniform1f(m_hStepX, 1.0f / static_cast<float>(m_width));
+  glUniform1f(m_hStepY, 1.0f / static_cast<float>(m_height));
   VerifyGLState();
   return true;
 }

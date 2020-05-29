@@ -228,7 +228,7 @@ void CVideoPlayerAudio::Process()
   while (!m_bStop)
   {
     CDVDMsg* pMsg;
-    int timeout = (int)(1000 * m_audioSink.GetCacheTime());
+    int timeout = static_cast<int>(1000 * m_audioSink.GetCacheTime());
 
     // read next packet and return -1 on error
     int priority = 1;
@@ -363,7 +363,7 @@ void CVideoPlayerAudio::Process()
       {
         m_audioSink.Pause();
       }
-      m_speed = (int)speed;
+      m_speed = static_cast<int>(speed);
     }
     else if (pMsg->IsType(CDVDMsg::GENERAL_STREAMCHANGE))
     {
@@ -442,7 +442,7 @@ bool CVideoPlayerAudio::ProcessDecoderOutput(DVDAudioFrame &audioframe)
       m_audioClock = audioframe.pts;
     }
 
-    if (audioframe.format.m_sampleRate && m_streaminfo.samplerate != (int) audioframe.format.m_sampleRate)
+    if (audioframe.format.m_sampleRate && m_streaminfo.samplerate != static_cast<int>(audioframe.format.m_sampleRate))
     {
       // The sample rate has changed or we just got it for the first time
       // for this stream. See if we should enable/disable passthrough due
@@ -482,7 +482,7 @@ bool CVideoPlayerAudio::ProcessDecoderOutput(DVDAudioFrame &audioframe)
       if (!m_audioSink.Create(audioframe, m_streaminfo.codec, m_synctype == SYNC_RESAMPLE))
         CLog::Log(LOGERROR, "%s - failed to create audio renderer", __FUNCTION__);
 
-      m_audioSink.SetDynamicRangeCompression((long)(m_processInfo.GetVideoSettings().m_VolumeAmplification * 100));
+      m_audioSink.SetDynamicRangeCompression(static_cast<long>(m_processInfo.GetVideoSettings().m_VolumeAmplification * 100));
 
       if (m_syncState == IDVDStreamPlayer::SYNC_INSYNC)
         m_audioSink.Resume();
@@ -513,7 +513,7 @@ bool CVideoPlayerAudio::ProcessDecoderOutput(DVDAudioFrame &audioframe)
   int framesOutput = m_audioSink.AddPackets(audioframe);
 
   // guess next pts
-  m_audioClock += audioframe.duration * ((double)framesOutput / audioframe.nb_frames);
+  m_audioClock += audioframe.duration * (static_cast<double>(framesOutput) / audioframe.nb_frames);
 
   audioframe.framesOut += framesOutput;
 

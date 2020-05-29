@@ -45,7 +45,7 @@ static uint32_t build_rgba(int yuv[3], int alpha, bool mergealpha)
 
 uint32_t* convert_rgba(CDVDOverlayImage* o, bool mergealpha)
 {
-  uint32_t* rgba = (uint32_t*)malloc(o->width * o->height * sizeof(uint32_t));
+  uint32_t* rgba = static_cast<uint32_t*>(malloc(o->width * o->height * sizeof(uint32_t)));
 
   if(!rgba)
     return NULL;
@@ -70,7 +70,7 @@ uint32_t* convert_rgba(CDVDOverlaySpu* o, bool mergealpha
                               , int& min_x, int& max_x
                               , int& min_y, int& max_y)
 {
-  uint32_t* rgba = (uint32_t*)malloc(o->width * o->height * sizeof(uint32_t));
+  uint32_t* rgba = static_cast<uint32_t*>(malloc(o->width * o->height * sizeof(uint32_t)));
 
   if(!rgba)
     return NULL;
@@ -107,7 +107,7 @@ uint32_t* convert_rgba(CDVDOverlaySpu* o, bool mergealpha
   max_y = 0;
 
   trg = rgba;
-  src = (uint16_t*)o->result;
+  src = reinterpret_cast<uint16_t*>(o->result);
 
   for (int y = 0; y < o->height; y++)
   {

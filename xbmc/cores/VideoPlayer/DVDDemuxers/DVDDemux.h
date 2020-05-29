@@ -74,7 +74,7 @@ public:
     uniqueId = 0;
     dvdNavId = 0;
     demuxerId = -1;
-    codec = (AVCodecID)0; // AV_CODEC_ID_NONE
+    codec = static_cast<AVCodecID>(0); // AV_CODEC_ID_NONE
     codec_fourcc = 0;
     profile = FF_PROFILE_UNKNOWN;
     level = FF_LEVEL_UNKNOWN;

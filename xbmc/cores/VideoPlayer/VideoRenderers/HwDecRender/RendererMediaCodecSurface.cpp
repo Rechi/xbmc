@@ -182,8 +182,8 @@ void CRendererMediaCodecSurface::ReorderDrawPoints()
     case 90:
     case 270:
     {
-      double scale = (double)m_surfDestRect.Height() / m_surfDestRect.Width();
-      int diff = (int) ((m_surfDestRect.Height()*scale - m_surfDestRect.Width()) / 2);
+      double scale = static_cast<double>(m_surfDestRect.Height()) / m_surfDestRect.Width();
+      int diff = static_cast<int>((m_surfDestRect.Height()*scale - m_surfDestRect.Width()) / 2);
       m_surfDestRect = CRect(m_surfDestRect.x1 - diff, m_surfDestRect.y1, m_surfDestRect.x2 + diff, m_surfDestRect.y2);
     }
     default:
