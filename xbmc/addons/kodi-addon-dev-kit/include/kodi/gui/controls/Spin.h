@@ -150,7 +150,8 @@ namespace controls
     ///
     void SetType(AddonGUISpinControlType type)
     {
-      m_interface->kodi_gui->control_spin->set_type(m_interface->kodiBase, m_controlHandle, static_cast<int>(type));
+      m_interface->kodi_gui->control_spin->set_type(m_interface->kodiBase, m_controlHandle,
+                                                    static_cast<int>(type));
     }
     //--------------------------------------------------------------------------
 

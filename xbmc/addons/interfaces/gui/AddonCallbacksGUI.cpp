@@ -1165,7 +1165,7 @@ const char* CAddonCallbacksGUI::Control_Progress_GetDescription(void *addonData,
   CGUIProgressControl *pControl = static_cast<CGUIProgressControl*>(handle);
   std::string string = pControl->GetDescription();
 
-  char *buffer = static_cast<char*>(malloc (string.length()+1));
+  char* buffer = static_cast<char*>(malloc(string.length() + 1));
   strcpy(buffer, string.c_str());
   return buffer;
 }
@@ -1206,7 +1206,7 @@ const char* CAddonCallbacksGUI::Control_Slider_GetDescription(void *addonData, G
   CGUISliderControl *pControl = static_cast<CGUISliderControl*>(handle);
   std::string string = pControl->GetDescription();
 
-  char *buffer = static_cast<char*>(malloc (string.length()+1));
+  char* buffer = static_cast<char*>(malloc(string.length() + 1));
   strcpy(buffer, string.c_str());
   return buffer;
 }
@@ -1360,7 +1360,7 @@ const char* CAddonCallbacksGUI::Control_SettingsSlider_GetDescription(void *addo
   CGUISettingsSliderControl *pControl = static_cast<CGUISettingsSliderControl*>(handle);
   std::string string = pControl->GetDescription();
 
-  char *buffer = static_cast<char*>(malloc (string.length()+1));
+  char* buffer = static_cast<char*>(malloc(string.length() + 1));
   strcpy(buffer, string.c_str());
   return buffer;
 }
@@ -1503,7 +1503,7 @@ const char* CAddonCallbacksGUI::ListItem_GetLabel(void *addonData, GUIHANDLE han
     return NULL;
 
   std::string string = static_cast<CFileItem*>(handle)->GetLabel();
-  char *buffer = static_cast<char*>(malloc (string.length()+1));
+  char* buffer = static_cast<char*>(malloc(string.length() + 1));
   strcpy(buffer, string.c_str());
   return buffer;
 }
@@ -1525,7 +1525,7 @@ const char* CAddonCallbacksGUI::ListItem_GetLabel2(void *addonData, GUIHANDLE ha
 
   std::string string = static_cast<CFileItem*>(handle)->GetLabel2();
 
-  char *buffer = static_cast<char*>(malloc (string.length()+1));
+  char* buffer = static_cast<char*>(malloc(string.length() + 1));
   strcpy(buffer, string.c_str());
   return buffer;
 }
@@ -1563,7 +1563,7 @@ const char* CAddonCallbacksGUI::ListItem_GetProperty(void *addonData, GUIHANDLE 
     return NULL;
 
   std::string string = static_cast<CFileItem*>(handle)->GetProperty(key).asString();
-  char *buffer = static_cast<char*>(malloc (string.length()+1));
+  char* buffer = static_cast<char*>(malloc(string.length() + 1));
   strcpy(buffer, string.c_str());
   return buffer;
 }

@@ -232,7 +232,8 @@ bool CAddonCallbacksAddon::GetAddonSetting(void *addonData, const char *strSetti
         return true;
 
       case SettingType::String:
-        strcpy(static_cast<char*>(settingValue), std::static_pointer_cast<CSettingString>(setting)->GetValue().c_str());
+        strcpy(static_cast<char*>(settingValue),
+               std::static_pointer_cast<CSettingString>(setting)->GetValue().c_str());
         return true;
 
       default:
