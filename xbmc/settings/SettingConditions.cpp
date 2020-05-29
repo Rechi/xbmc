@@ -170,7 +170,7 @@ bool ProfileHasVideosLocked(const std::string &condition, const std::string &val
 bool ProfileLockMode(const std::string &condition, const std::string &value, SettingConstPtr setting, void *data)
 {
   char *tmp = NULL;
-  LockType lock = (LockType)strtol(value.c_str(), &tmp, 0);
+  LockType lock = static_cast<LockType>(strtol(value.c_str(), &tmp, 0));
   if (tmp != NULL && *tmp != '\0')
     return false;
 
@@ -189,7 +189,7 @@ bool GreaterThan(const std::string &condition, const std::string &value, Setting
   char *tmp = NULL;
 
   int lhs = settingInt->GetValue();
-  int rhs = StringUtils::IsInteger(value) ? (int)strtol(value.c_str(), &tmp, 0) : 0;
+  int rhs = StringUtils::IsInteger(value) ? static_cast<int>(strtol(value.c_str(), &tmp, 0)) : 0;
 
   return lhs > rhs;
 }
@@ -206,7 +206,7 @@ bool GreaterThanOrEqual(const std::string &condition, const std::string &value, 
   char *tmp = NULL;
 
   int lhs = settingInt->GetValue();
-  int rhs = StringUtils::IsInteger(value) ? (int)strtol(value.c_str(), &tmp, 0) : 0;
+  int rhs = StringUtils::IsInteger(value) ? static_cast<int>(strtol(value.c_str(), &tmp, 0)) : 0;
 
   return lhs >= rhs;
 }
@@ -223,7 +223,7 @@ bool LessThan(const std::string &condition, const std::string &value, SettingCon
   char *tmp = NULL;
 
   int lhs = settingInt->GetValue();
-  int rhs = StringUtils::IsInteger(value) ? (int)strtol(value.c_str(), &tmp, 0) : 0;
+  int rhs = StringUtils::IsInteger(value) ? static_cast<int>(strtol(value.c_str(), &tmp, 0)) : 0;
 
   return lhs < rhs;
 }
@@ -240,7 +240,7 @@ bool LessThanOrEqual(const std::string &condition, const std::string &value, Set
   char *tmp = NULL;
 
   int lhs = settingInt->GetValue();
-  int rhs = StringUtils::IsInteger(value) ? (int)strtol(value.c_str(), &tmp, 0) : 0;
+  int rhs = StringUtils::IsInteger(value) ? static_cast<int>(strtol(value.c_str(), &tmp, 0)) : 0;
 
   return lhs <= rhs;
 }
