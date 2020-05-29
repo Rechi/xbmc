@@ -516,7 +516,8 @@ JSONRPC_STATUS CAudioLibrary::GetRecentlyAddedSongs(const std::string &method, I
     amount = 0;
 
   CFileItemList items;
-  if (!musicdatabase.GetRecentlyAddedAlbumSongs("musicdb://songs/", items, static_cast<unsigned int>(amount)))
+  if (!musicdatabase.GetRecentlyAddedAlbumSongs("musicdb://songs/", items,
+                                                static_cast<unsigned int>(amount)))
     return InternalError;
 
   JSONRPC_STATUS ret = GetAdditionalSongDetails(parameterObject, items, musicdatabase);
@@ -862,9 +863,11 @@ JSONRPC_STATUS CAudioLibrary::SetSongDetails(const std::string &method, ITranspo
   if (ParameterNotNull(parameterObject, "userrating"))
     song.userrating = parameterObject["userrating"].asInteger();
   if (ParameterNotNull(parameterObject, "track"))
-    song.iTrack = (song.iTrack & 0xffff0000) | (static_cast<int>(parameterObject["track"].asInteger()) & 0xffff);
+    song.iTrack = (song.iTrack & 0xffff0000) |
+                  (static_cast<int>(parameterObject["track"].asInteger()) & 0xffff);
   if (ParameterNotNull(parameterObject, "disc"))
-    song.iTrack = (song.iTrack & 0xffff) | (static_cast<int>(parameterObject["disc"].asInteger()) << 16);
+    song.iTrack =
+        (song.iTrack & 0xffff) | (static_cast<int>(parameterObject["disc"].asInteger()) << 16);
   if (ParameterNotNull(parameterObject, "duration"))
     song.iDuration = static_cast<int>(parameterObject["duration"].asInteger());
   if (ParameterNotNull(parameterObject, "comment"))

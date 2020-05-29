@@ -69,7 +69,7 @@ namespace JSONRPC
         size = 0;
 
       start = static_cast<int>(parameterObject["limits"]["start"].asInteger());
-      end   = static_cast<int>(parameterObject["limits"]["end"].asInteger());
+      end = static_cast<int>(parameterObject["limits"]["end"].asInteger());
       end = (end <= 0 || end > size) ? size : end;
       start = start > end ? end : start;
 

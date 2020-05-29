@@ -135,7 +135,8 @@ JSONRPC_STATUS CPVROperations::GetChannelDetails(const std::string &method, ITra
   if (!channelGroupContainer)
     return FailedToExecute;
 
-  std::shared_ptr<CPVRChannel> channel = channelGroupContainer->GetChannelById(static_cast<int>(parameterObject["channelid"].asInteger()));
+  std::shared_ptr<CPVRChannel> channel = channelGroupContainer->GetChannelById(
+      static_cast<int>(parameterObject["channelid"].asInteger()));
   if (channel == NULL)
     return InvalidParams;
 
@@ -153,7 +154,8 @@ JSONRPC_STATUS CPVROperations::GetBroadcasts(const std::string &method, ITranspo
   if (!channelGroupContainer)
     return FailedToExecute;
 
-  std::shared_ptr<CPVRChannel> channel = channelGroupContainer->GetChannelById(static_cast<int>(parameterObject["channelid"].asInteger()));
+  std::shared_ptr<CPVRChannel> channel = channelGroupContainer->GetChannelById(
+      static_cast<int>(parameterObject["channelid"].asInteger()));
   if (channel == NULL)
     return InvalidParams;
 
@@ -328,7 +330,8 @@ JSONRPC_STATUS CPVROperations::GetTimerDetails(const std::string &method, ITrans
   if (!timers)
     return FailedToExecute;
 
-  std::shared_ptr<CPVRTimerInfoTag> timer = timers->GetById(static_cast<int>(parameterObject["timerid"].asInteger()));
+  std::shared_ptr<CPVRTimerInfoTag> timer =
+      timers->GetById(static_cast<int>(parameterObject["timerid"].asInteger()));
   if (!timer)
     return InvalidParams;
 

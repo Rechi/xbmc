@@ -163,7 +163,9 @@ JSONRPC_STATUS CJSONRPC::GetConfiguration(const std::string &method, ITransportL
   int flags = client->GetAnnouncementFlags();
 
   for (int i = 1; i <= ANNOUNCEMENT::ANNOUNCE_ALL; i *= 2)
-    result["notifications"][AnnouncementFlagToString(static_cast<ANNOUNCEMENT::AnnouncementFlag>(i))] = (flags & i) == i;
+    result["notifications"]
+          [AnnouncementFlagToString(static_cast<ANNOUNCEMENT::AnnouncementFlag>(i))] =
+              (flags & i) == i;
 
   return OK;
 }

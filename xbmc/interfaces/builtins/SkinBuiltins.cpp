@@ -359,7 +359,7 @@ static int SetTheme(const std::vector<std::string>& params)
     iTheme++;
   else if (iParam == -1)
     iTheme--;
-  if (iTheme > static_cast<int>(vecTheme.size())-1)
+  if (iTheme > static_cast<int>(vecTheme.size()) - 1)
     iTheme = -1;
   if (iTheme < -1)
     iTheme = vecTheme.size()-1;

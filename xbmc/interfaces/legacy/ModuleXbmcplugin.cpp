@@ -70,7 +70,8 @@ namespace XBMCAddon
 
       // call the directory class to add the sort method.
       if (sortMethod >= SORT_METHOD_NONE && sortMethod < SORT_METHOD_MAX)
-        XFILE::CPluginDirectory::AddSortMethod(handle, static_cast<SORT_METHOD>(sortMethod), label2Mask);
+        XFILE::CPluginDirectory::AddSortMethod(handle, static_cast<SORT_METHOD>(sortMethod),
+                                               label2Mask);
     }
 
     String getSetting(int handle, const char* id)

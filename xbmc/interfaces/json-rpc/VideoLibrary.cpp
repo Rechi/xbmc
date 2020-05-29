@@ -241,7 +241,7 @@ JSONRPC_STATUS CVideoLibrary::GetEpisodes(const std::string &method, ITransportL
     return InvalidParams;
 
   int tvshowID = static_cast<int>(parameterObject["tvshowid"].asInteger());
-  int season   = static_cast<int>(parameterObject["season"].asInteger());
+  int season = static_cast<int>(parameterObject["season"].asInteger());
 
   std::string strPath = StringUtils::Format("videodb://tvshows/titles/%i/%i/", tvshowID, season);
 

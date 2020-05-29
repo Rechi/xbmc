@@ -84,17 +84,8 @@ namespace XBMCAddon
       label.textColor = label.focusedColor = textColor;
       label.align = align;
       pGUIControl = new CGUIFadeLabelControl(
-        iParentId,
-        iControlId,
-        static_cast<float>(dwPosX),
-        static_cast<float>(dwPosY),
-        static_cast<float>(dwWidth),
-        static_cast<float>(dwHeight),
-        label,
-        true,
-        0,
-        true,
-        false);
+          iParentId, iControlId, static_cast<float>(dwPosX), static_cast<float>(dwPosY),
+          static_cast<float>(dwWidth), static_cast<float>(dwHeight), label, true, 0, true, false);
 
       CGUIMessage msg(GUI_MSG_LABEL_RESET, iParentId, iControlId);
       pGUIControl->OnMessage(msg);
@@ -178,9 +169,9 @@ namespace XBMCAddon
       label.font = g_fontManager.GetFont(strFont);
       label.textColor = label.focusedColor = textColor;
 
-      pGUIControl = new CGUITextBox(iParentId, iControlId,
-           static_cast<float>(dwPosX), static_cast<float>(dwPosY), static_cast<float>(dwWidth), static_cast<float>(dwHeight),
-           label);
+      pGUIControl = new CGUITextBox(iParentId, iControlId, static_cast<float>(dwPosX),
+                                    static_cast<float>(dwPosY), static_cast<float>(dwWidth),
+                                    static_cast<float>(dwHeight), label);
 
       // reset textbox
       CGUIMessage msg(GUI_MSG_LABEL_RESET, iParentId, iControlId);
@@ -288,15 +279,9 @@ namespace XBMCAddon
       label.offsetY = static_cast<float>(textOffsetY);
       label.angle = static_cast<float>(-iAngle);
       pGUIControl = new CGUIButtonControl(
-        iParentId,
-        iControlId,
-        static_cast<float>(dwPosX),
-        static_cast<float>(dwPosY),
-        static_cast<float>(dwWidth),
-        static_cast<float>(dwHeight),
-        CTextureInfo(strTextureFocus),
-        CTextureInfo(strTextureNoFocus),
-        label);
+          iParentId, iControlId, static_cast<float>(dwPosX), static_cast<float>(dwPosY),
+          static_cast<float>(dwWidth), static_cast<float>(dwHeight), CTextureInfo(strTextureFocus),
+          CTextureInfo(strTextureNoFocus), label);
 
       CGUIButtonControl* pGuiButtonControl =
         static_cast<CGUIButtonControl*>(pGUIControl);
@@ -348,12 +333,13 @@ namespace XBMCAddon
 
     CGUIControl* ControlImage::Create()
     {
-      pGUIControl = new CGUIImage(iParentId, iControlId,
-            static_cast<float>(dwPosX), static_cast<float>(dwPosY), static_cast<float>(dwWidth), static_cast<float>(dwHeight),
-            CTextureInfo(strFileName));
+      pGUIControl = new CGUIImage(iParentId, iControlId, static_cast<float>(dwPosX),
+                                  static_cast<float>(dwPosY), static_cast<float>(dwWidth),
+                                  static_cast<float>(dwHeight), CTextureInfo(strFileName));
 
       if (pGUIControl && aspectRatio <= CAspectRatio::AR_KEEP)
-        static_cast<CGUIImage*>(pGUIControl)->SetAspectRatio(static_cast<CAspectRatio::ASPECT_RATIO>(aspectRatio));
+        static_cast<CGUIImage*>(pGUIControl)
+            ->SetAspectRatio(static_cast<CAspectRatio::ASPECT_RATIO>(aspectRatio));
 
       if (pGUIControl && colorDiffuse)
         static_cast<CGUIImage*>(pGUIControl)->SetColorDiffuse(GUILIB::GUIINFO::CGUIInfoColor(colorDiffuse));
@@ -403,12 +389,11 @@ namespace XBMCAddon
 
     CGUIControl* ControlProgress::Create()
     {
-      pGUIControl = new CGUIProgressControl(iParentId, iControlId,
-         static_cast<float>(dwPosX), static_cast<float>(dwPosY),
-         static_cast<float>(dwWidth),static_cast<float>(dwHeight),
-         CTextureInfo(strTextureBg), CTextureInfo(strTextureLeft),
-         CTextureInfo(strTextureMid), CTextureInfo(strTextureRight),
-         CTextureInfo(strTextureOverlay));
+      pGUIControl = new CGUIProgressControl(
+          iParentId, iControlId, static_cast<float>(dwPosX), static_cast<float>(dwPosY),
+          static_cast<float>(dwWidth), static_cast<float>(dwHeight), CTextureInfo(strTextureBg),
+          CTextureInfo(strTextureLeft), CTextureInfo(strTextureMid), CTextureInfo(strTextureRight),
+          CTextureInfo(strTextureOverlay));
 
       if (pGUIControl && colorDiffuse)
         static_cast<CGUIProgressControl*>(pGUIControl)->SetColorDiffuse(GUILIB::GUIINFO::CGUIInfoColor(colorDiffuse));
@@ -485,10 +470,10 @@ namespace XBMCAddon
 
     CGUIControl* ControlSlider::Create ()
     {
-      pGUIControl = new CGUISliderControl(iParentId, iControlId,static_cast<float>(dwPosX), static_cast<float>(dwPosY),
-                                          static_cast<float>(dwWidth),static_cast<float>(dwHeight),
-                                          CTextureInfo(strTextureBack),CTextureInfo(strTexture),
-                                          CTextureInfo(strTextureFoc), 0, ORIENTATION(iOrientation));
+      pGUIControl = new CGUISliderControl(
+          iParentId, iControlId, static_cast<float>(dwPosX), static_cast<float>(dwPosY),
+          static_cast<float>(dwWidth), static_cast<float>(dwHeight), CTextureInfo(strTextureBack),
+          CTextureInfo(strTexture), CTextureInfo(strTextureFoc), 0, ORIENTATION(iOrientation));
 
       return pGUIControl;
     }
@@ -507,11 +492,8 @@ namespace XBMCAddon
 
     CGUIControl* ControlGroup::Create()
     {
-      pGUIControl = new CGUIControlGroup(iParentId,
-                                         iControlId,
-                                         static_cast<float>(dwPosX),
-                                         static_cast<float>(dwPosY),
-                                         static_cast<float>(dwWidth),
+      pGUIControl = new CGUIControlGroup(iParentId, iControlId, static_cast<float>(dwPosX),
+                                         static_cast<float>(dwPosY), static_cast<float>(dwWidth),
                                          static_cast<float>(dwHeight));
       return pGUIControl;
     }
@@ -626,7 +608,9 @@ namespace XBMCAddon
       if (pGUIControl)
       {
         XBMCAddonUtils::GuiLock lock(languageHook, false);
-        static_cast<CGUIRadioButtonControl*>(pGUIControl)->SetRadioDimensions(static_cast<float>(dwPosX), static_cast<float>(dwPosY), static_cast<float>(dwWidth), static_cast<float>(dwHeight));
+        static_cast<CGUIRadioButtonControl*>(pGUIControl)
+            ->SetRadioDimensions(static_cast<float>(dwPosX), static_cast<float>(dwPosY),
+                                 static_cast<float>(dwWidth), static_cast<float>(dwHeight));
       }
     }
 
@@ -643,21 +627,12 @@ namespace XBMCAddon
       label.offsetY = static_cast<float>(textOffsetY);
       label.angle = static_cast<float>(-iAngle);
       pGUIControl = new CGUIRadioButtonControl(
-        iParentId,
-        iControlId,
-        static_cast<float>(dwPosX),
-        static_cast<float>(dwPosY),
-        static_cast<float>(dwWidth),
-        static_cast<float>(dwHeight),
-        CTextureInfo(strTextureFocus),
-        CTextureInfo(strTextureNoFocus),
-        label,
-        CTextureInfo(strTextureRadioOnFocus),
-        CTextureInfo(strTextureRadioOnNoFocus),
-        CTextureInfo(strTextureRadioOffFocus),
-        CTextureInfo(strTextureRadioOffNoFocus),
-        CTextureInfo(strTextureRadioOnDisabled),
-        CTextureInfo(strTextureRadioOffDisabled));
+          iParentId, iControlId, static_cast<float>(dwPosX), static_cast<float>(dwPosY),
+          static_cast<float>(dwWidth), static_cast<float>(dwHeight), CTextureInfo(strTextureFocus),
+          CTextureInfo(strTextureNoFocus), label, CTextureInfo(strTextureRadioOnFocus),
+          CTextureInfo(strTextureRadioOnNoFocus), CTextureInfo(strTextureRadioOffFocus),
+          CTextureInfo(strTextureRadioOffNoFocus), CTextureInfo(strTextureRadioOnDisabled),
+          CTextureInfo(strTextureRadioOffDisabled));
 
       CGUIRadioButtonControl* pGuiButtonControl =
         static_cast<CGUIRadioButtonControl*>(pGUIControl);
@@ -763,7 +738,9 @@ namespace XBMCAddon
         pRoot->InsertEndChild(pNode);
       }
 
-      const CRect animRect(static_cast<float>(dwPosX), static_cast<float>(dwPosY), static_cast<float>(dwPosX) + dwWidth, static_cast<float>(dwPosY) + dwHeight);
+      const CRect animRect(static_cast<float>(dwPosX), static_cast<float>(dwPosY),
+                           static_cast<float>(dwPosX) + dwWidth,
+                           static_cast<float>(dwPosY) + dwHeight);
       XBMCAddonUtils::GuiLock lock(languageHook, false);
       if (pGUIControl)
       {
@@ -951,16 +928,9 @@ namespace XBMCAddon
       label.disabledColor = disabledColor;
       label.align = align;
       label.angle = static_cast<float>(-iAngle);
-      pGUIControl = new CGUILabelControl(
-        iParentId,
-        iControlId,
-        static_cast<float>(dwPosX),
-        static_cast<float>(dwPosY),
-        static_cast<float>(dwWidth),
-        static_cast<float>(dwHeight),
-        label,
-        false,
-        bHasPath);
+      pGUIControl = new CGUILabelControl(iParentId, iControlId, static_cast<float>(dwPosX),
+                                         static_cast<float>(dwPosY), static_cast<float>(dwWidth),
+                                         static_cast<float>(dwHeight), label, false, bHasPath);
       static_cast<CGUILabelControl*>(pGUIControl)->SetLabel(strText);
       return pGUIControl;
     }
@@ -1014,17 +984,10 @@ namespace XBMCAddon
       label.textColor = label.focusedColor = textColor;
       label.disabledColor = disabledColor;
       label.align = align;
-      pGUIControl = new CGUIEditControl(
-        iParentId,
-        iControlId,
-        static_cast<float>(dwPosX),
-        static_cast<float>(dwPosY),
-        static_cast<float>(dwWidth),
-        static_cast<float>(dwHeight),
-        CTextureInfo(strTextureFocus),
-        CTextureInfo(strTextureNoFocus),
-        label,
-        strText);
+      pGUIControl = new CGUIEditControl(iParentId, iControlId, static_cast<float>(dwPosX),
+                                        static_cast<float>(dwPosY), static_cast<float>(dwWidth),
+                                        static_cast<float>(dwHeight), CTextureInfo(strTextureFocus),
+                                        CTextureInfo(strTextureNoFocus), label, strText);
 
       return pGUIControl;
     }
@@ -1138,18 +1101,11 @@ namespace XBMCAddon
       label2.align |= XBFONT_RIGHT;
 
       pGUIControl = new CGUIListContainer(
-        iParentId,
-        iControlId,
-        static_cast<float>(dwPosX),
-        static_cast<float>(dwPosY),
-        static_cast<float>(dwWidth),
-        static_cast<float>(dwHeight) - pControlSpin->dwHeight - 5,
-        label, label2,
-        CTextureInfo(strTextureButton),
-        CTextureInfo(strTextureButtonFocus),
-        static_cast<float>(itemHeight),
-        static_cast<float>(imageWidth), static_cast<float>(imageHeight),
-        static_cast<float>(space));
+          iParentId, iControlId, static_cast<float>(dwPosX), static_cast<float>(dwPosY),
+          static_cast<float>(dwWidth), static_cast<float>(dwHeight) - pControlSpin->dwHeight - 5,
+          label, label2, CTextureInfo(strTextureButton), CTextureInfo(strTextureButtonFocus),
+          static_cast<float>(itemHeight), static_cast<float>(imageWidth),
+          static_cast<float>(imageHeight), static_cast<float>(space));
 
       return pGUIControl;
     }

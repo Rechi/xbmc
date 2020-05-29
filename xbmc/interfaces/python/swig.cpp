@@ -19,7 +19,8 @@ namespace PythonBindings
   TypeInfo::TypeInfo(const std::type_info& ti) : swigType(NULL), parentType(NULL), typeIndex(ti)
   {
     static PyTypeObject py_type_object_header = {PyVarObject_HEAD_INIT(NULL, 0)};
-    static int size = reinterpret_cast<long*>(&(py_type_object_header.tp_name)) - reinterpret_cast<long*>(&py_type_object_header);
+    static int size = reinterpret_cast<long*>(&(py_type_object_header.tp_name)) -
+                      reinterpret_cast<long*>(&py_type_object_header);
     memcpy(&(this->pythonType), &py_type_object_header, size);
   }
 

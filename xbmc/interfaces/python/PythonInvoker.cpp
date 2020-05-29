@@ -536,7 +536,8 @@ bool CPythonInvoker::stop(bool abort)
         PyEval_RestoreThread(static_cast<PyThreadState*>(m_threadState));
       }
 
-      for (PyThreadState* state = (static_cast<PyThreadState*>(m_threadState))->interp->tstate_head; state; state = state->next)
+      for (PyThreadState* state = (static_cast<PyThreadState*>(m_threadState))->interp->tstate_head;
+           state; state = state->next)
       {
         // Raise a SystemExit exception in python threads
         Py_XDECREF(state->async_exc);
@@ -648,7 +649,7 @@ void CPythonInvoker::onPythonModuleInitialization(void* moduleDict)
   if (m_addon.get() == NULL || moduleDict == NULL)
     return;
 
-  PyObject *moduleDictionary = static_cast<PyObject *>(moduleDict);
+  PyObject* moduleDictionary = static_cast<PyObject*>(moduleDict);
 
   PyObject* pyaddonid = PyUnicode_FromString(m_addon->ID().c_str());
   PyDict_SetItemString(moduleDictionary, "__xbmcaddonid__", pyaddonid);

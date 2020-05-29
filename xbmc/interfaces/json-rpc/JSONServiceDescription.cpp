@@ -758,7 +758,8 @@ JSONRPC_STATUS JSONSchemaTypeDefinition::Check(const CVariant& value,
       // are either no more schemas in the "items"
       // array or no more elements in the value's array
       unsigned int arrayIndex;
-      for (arrayIndex = 0; arrayIndex < std::min(items.size(), static_cast<size_t>(value.size())); arrayIndex++)
+      for (arrayIndex = 0; arrayIndex < std::min(items.size(), static_cast<size_t>(value.size()));
+           arrayIndex++)
       {
         JSONRPC_STATUS status = items.at(arrayIndex)->Check(value[arrayIndex], outputValue[arrayIndex], errorData["property"]);
         if (status != OK)
@@ -936,16 +937,20 @@ JSONRPC_STATUS JSONSchemaTypeDefinition::Check(const CVariant& value,
         errorMessage = StringUtils::Format("Value between %f (%s) and %f (%s) expected but %f received",
           minimum, exclusiveMinimum ? "exclusive" : "inclusive", maximum, exclusiveMaximum ? "exclusive" : "inclusive", numberValue);
       else
-        errorMessage = StringUtils::Format("Value between %d (%s) and %d (%s) expected but %d received",
-          static_cast<int>(minimum), exclusiveMinimum ? "exclusive" : "inclusive", static_cast<int>(maximum), exclusiveMaximum ? "exclusive" : "inclusive", static_cast<int>(numberValue));
+        errorMessage = StringUtils::Format(
+            "Value between %d (%s) and %d (%s) expected but %d received", static_cast<int>(minimum),
+            exclusiveMinimum ? "exclusive" : "inclusive", static_cast<int>(maximum),
+            exclusiveMaximum ? "exclusive" : "inclusive", static_cast<int>(numberValue));
       errorData["message"] = errorMessage.c_str();
       return InvalidParams;
     }
     // Check divisibleBy
-    if ((HasType(type, IntegerValue) && divisibleBy > 0 && (static_cast<int>(numberValue) % divisibleBy) != 0))
+    if ((HasType(type, IntegerValue) && divisibleBy > 0 &&
+         (static_cast<int>(numberValue) % divisibleBy) != 0))
     {
       CLog::Log(LOGDEBUG, "JSONRPC: Value does not meet divisibleBy requirements in type %s", name.c_str());
-      errorMessage = StringUtils::Format("Value should be divisible by %d but %d received", divisibleBy, static_cast<int>(numberValue));
+      errorMessage = StringUtils::Format("Value should be divisible by %d but %d received",
+                                         divisibleBy, static_cast<int>(numberValue));
       errorData["message"] = errorMessage.c_str();
       return InvalidParams;
     }
