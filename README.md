@@ -1,5 +1,6 @@
-![Kodi Logo](https://raw.githubusercontent.com/xbmc/xbmc/master/docs/resources/banner_slim.png)
-
+<p
+[![Kodi Logo]<a href="https://github.com/xbmc/xbmc/blob/master/docs/resources/banner.png"><img alt="Kodi LOGO" src="https://raw.githubusercontent.com/xbmc/xbmc/master/docs/resources/banner_slim.png" height="25">
+</p>
 <p align="center">
   <strong>
     <a href="https://kodi.tv/">website</a>
