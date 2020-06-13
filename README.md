@@ -1,4 +1,4 @@
-![Kodi Logo](docs/resources/banner.png)
+![Kodi Logo](https://raw.githubusercontent.com/xbmc/xbmc/master/docs/resources/banner_slim.png)
 
 <p align="center">
   <strong>
