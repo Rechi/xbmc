@@ -4,14 +4,14 @@
 		version="3.2.3"
 		provider-name="Team Kodi">
   <requires>
-    <import addon="xbmc.addon" version="12.0.0"/>
+    <import addon="xbmc.addon" version="12.0.1"/>
   </requires>
 	<extension point="xbmc.addon.repository">
 		<!-- Do not forget to bump add-on version when changing paths to force a repo refresh -->
-		<info>http://mirrors.kodi.tv/addons/matrix/addons.xml.gz</info>
-		<checksum verify="sha256">http://mirrors.kodi.tv/addons/matrix/addons.xml.gz?sha256</checksum>
-		<datadir>https://mirrors.kodi.tv/addons/matrix</datadir>
-		<artdir>http://mirrors.kodi.tv/addons/matrix</artdir>
+		<info>https://mirror.its.dal.ca/xbmc/xbmc/addons/matrix/addons.xml.gz</info>
+		<checksum verify="sha256">https://mirror.its.dal.ca/xbmc/xbmc/addons/matrix/addons.xml.gz?sha256</checksum>
+		<datadir>https://mirror.its.dal.ca/xbmc/xbmc/addons/</datadir>
+		<artdir>https://mirror.its.dal.ca/xbmc/xbmc/addons/</artdir>
 		<hashes>sha256</hashes>
 	</extension>
 	<extension point="xbmc.addon.metadata">
