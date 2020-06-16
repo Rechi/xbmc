@@ -6,7 +6,7 @@
 # You can set this file as a default ignore file for blame by running
 # the following command.
 #
-# $ git: config blame.ignoreRevsFile .git-blame-ignore-revs
+# $ git config blame.ignoreRevsFile .git-blame-ignore-revs
 
 # PR 17922: Clang-format our Game/Input code for GSoC
 838cf16f17a7fcf5d49ac0b3d51d9826a9fb7a6e
