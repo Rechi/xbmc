@@ -34,4 +34,3 @@ public:
   bool CanFocus() const override;
   bool CanFocusFromPoint(const CPoint &point) const override;
 };
-

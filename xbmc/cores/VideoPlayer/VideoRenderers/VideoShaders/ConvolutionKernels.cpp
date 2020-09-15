@@ -287,4 +287,3 @@ void CConvolutionKernel::ToUint8()
     m_uint8pixels[i] = (uint8_t)value;
   }
 }
-

@@ -675,4 +675,3 @@ int CSMBFile::IoControl(EIoControl request, void* param)
 
   return -1;
 }
-

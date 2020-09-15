@@ -92,4 +92,3 @@ void CVideoSyncIos::DeinitDisplayLink()
 {
   m_winSystem.DeinitDisplayLink();
 }
-

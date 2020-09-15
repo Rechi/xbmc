@@ -17,4 +17,3 @@ class CAEELDParser {
 public:
   static void Parse(const uint8_t *data, size_t length, CAEDeviceInfo& info);
 };
-

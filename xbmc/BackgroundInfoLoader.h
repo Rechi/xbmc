@@ -59,4 +59,3 @@ protected:
   IBackgroundLoaderObserver* m_pObserver;
   IProgressCallback* m_pProgressCallback;
 };
-

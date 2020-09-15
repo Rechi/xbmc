@@ -160,4 +160,3 @@ private:
   static void AppendToUTF32(const std::wstring &utf16, character_t colStyle, vecText &utf32);
   static void ParseText(const std::wstring &text, uint32_t defaultStyle, UTILS::Color defaultColor, std::vector<UTILS::Color> &colors, vecText &parsedText);
 };
-

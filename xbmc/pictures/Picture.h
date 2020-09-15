@@ -80,4 +80,3 @@ class CThumbnailWriter : public CJob
     int            m_stride;
     std::string    m_thumbFile;
 };
-

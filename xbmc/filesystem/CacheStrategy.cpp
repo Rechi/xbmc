@@ -392,4 +392,3 @@ CCacheStrategy *CDoubleCache::CreateNew()
 {
   return new CDoubleCache(m_pCache->CreateNew());
 }
-

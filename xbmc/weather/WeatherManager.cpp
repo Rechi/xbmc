@@ -181,4 +181,3 @@ void CWeatherManager::OnSettingAction(std::shared_ptr<const CSetting> setting)
     }
   }
 }
-

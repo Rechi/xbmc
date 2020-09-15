@@ -18,4 +18,3 @@ public:
 private:
   std::atomic_flag& m_Lock;
 };
-

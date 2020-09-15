@@ -95,4 +95,3 @@ bool CDVDSubtitleParserSami::Open(CDVDStreamInfo &hints)
   m_collection.Sort();
   return true;
 }
-

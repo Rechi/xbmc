@@ -164,4 +164,3 @@ As a result, globals are pervasive and dependencies are tangled and, in the nigh
 This can daisy-chain, because a fix for your breakage can cause even more breakage. If you feel any author of downstream breakage gets undue blame, stick up for them as other devs were understanding for you.
 
 **[back to top](#table-of-contents)**
-

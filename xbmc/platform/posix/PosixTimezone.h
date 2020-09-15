@@ -49,4 +49,3 @@ private:
 };
 
 extern CPosixTimezone g_timezone;
-

@@ -62,4 +62,3 @@ private:
 
   std::unique_ptr<CProcessInfo> m_processInfo;
 };
-

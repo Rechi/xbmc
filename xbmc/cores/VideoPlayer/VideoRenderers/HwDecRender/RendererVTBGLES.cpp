@@ -266,4 +266,3 @@ bool CRendererVTB::NeedBuffer(int idx)
 
   return false;
 }
-

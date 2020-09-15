@@ -50,5 +50,3 @@ private:
   std::string m_path;
   std::shared_ptr<CXBTFReader> m_XBTFReader;
 };
-
-

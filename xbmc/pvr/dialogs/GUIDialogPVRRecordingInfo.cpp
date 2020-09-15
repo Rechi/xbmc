@@ -106,4 +106,3 @@ void CGUIDialogPVRRecordingInfo::ShowFor(const CFileItemPtr& item)
 {
   CServiceBroker::GetPVRManager().GUIActions()->ShowRecordingInfo(item);
 }
-

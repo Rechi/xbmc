@@ -24,4 +24,3 @@ extern "C"
   int track_fclose(FILE* stream);
   FILE* track_freopen(const char *path, const char *mode, FILE *stream);
 }
-

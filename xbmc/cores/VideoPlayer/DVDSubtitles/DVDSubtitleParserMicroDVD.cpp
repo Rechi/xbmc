@@ -71,4 +71,3 @@ bool CDVDSubtitleParserMicroDVD::Open(CDVDStreamInfo &hints)
 
   return true;
 }
-

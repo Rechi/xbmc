@@ -64,4 +64,3 @@ bool CDVDSubtitleParserMPL2::Open(CDVDStreamInfo &hints)
 
   return true;
 }
-

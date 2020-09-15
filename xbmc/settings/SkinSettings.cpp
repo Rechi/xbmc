@@ -162,4 +162,3 @@ void CSkinSettings::MigrateSettings(const ADDON::SkinPtr& skin)
     CServiceBroker::GetSettingsComponent()->GetSettings()->Save();
   }
 }
-

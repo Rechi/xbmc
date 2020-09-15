@@ -109,4 +109,3 @@ protected:
 
   std::shared_ptr<DX::DeviceResources> m_deviceResources;
 };
-

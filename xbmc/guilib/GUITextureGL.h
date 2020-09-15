@@ -40,4 +40,3 @@ private:
   std::vector<GLushort> m_idx;
   CRenderSystemGL *m_renderSystem;
 };
-

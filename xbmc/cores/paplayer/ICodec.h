@@ -79,4 +79,3 @@ public:
   XFILE::CFile m_file;
   AEAudioFormat m_format;
 };
-

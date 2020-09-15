@@ -133,4 +133,3 @@ float CVideoSyncD3D::GetFps()
   }
   return m_fps;
 }
-

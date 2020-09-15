@@ -9,4 +9,3 @@
 #pragma once
 
  /*** Extra's not found in the Android NDK ***/
-

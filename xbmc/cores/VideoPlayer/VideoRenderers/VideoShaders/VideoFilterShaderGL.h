@@ -98,5 +98,3 @@ namespace Shaders {
   };
 
 } // end namespace
-
-

@@ -281,4 +281,3 @@ CDVDOverlayCodec* CDVDFactoryCodec::CreateOverlayCodec( CDVDStreamInfo &hint )
 
   return nullptr;
 }
-

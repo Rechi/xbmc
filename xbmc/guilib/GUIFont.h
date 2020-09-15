@@ -161,4 +161,3 @@ protected:
 private:
   bool ClippedRegionIsEmpty(float x, float y, float width, uint32_t alignment) const;
 };
-

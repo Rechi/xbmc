@@ -88,4 +88,3 @@ protected:
  */
 XBMC_GLOBAL_REF(GUIFontManager, g_fontManager);
 #define g_fontManager XBMC_GLOBAL_USE(GUIFontManager)
-

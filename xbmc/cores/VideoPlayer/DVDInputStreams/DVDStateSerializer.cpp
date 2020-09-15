@@ -292,4 +292,3 @@ bool CDVDStateSerializer::XMLToDVDState( dvd_state_t *state, const std::string &
   }
   return true;
 }
-

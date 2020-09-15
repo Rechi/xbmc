@@ -31,4 +31,3 @@ private:
   CEvent m_lostEvent;
   int64_t m_lastUpdateTime;
 };
-

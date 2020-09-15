@@ -240,4 +240,3 @@ class DllDvdNav : public DllDynamic, DllDvdNavInterface
     RESOLVE_METHOD(dvdnav_get_video_resolution)
 END_METHOD_RESOLVE()
 };
-

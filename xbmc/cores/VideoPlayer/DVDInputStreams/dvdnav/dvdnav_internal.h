@@ -216,4 +216,3 @@ dvdnav_status_t dvdnav_set_state(dvdnav_t *self, dvd_state_t *save_state);
 #endif
 #define printerr(str) \
 	do { if (this) strncpy(this->err_str, str, MAX_ERR_LEN - 1); } while (0)
-

@@ -452,4 +452,3 @@ void CGUIFontTTFGL::DestroyStaticVertexBuffers(void)
 
 GLuint CGUIFontTTFGL::m_elementArrayHandle;
 bool CGUIFontTTFGL::m_staticVertexBufferCreated;
-

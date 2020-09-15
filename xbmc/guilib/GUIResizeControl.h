@@ -68,4 +68,3 @@ protected:
   float m_fAcceleration;
   float m_x1, m_x2, m_y1, m_y2;
 };
-

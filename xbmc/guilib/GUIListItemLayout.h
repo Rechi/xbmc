@@ -61,4 +61,3 @@ protected:
   INFO::InfoPtr m_condition;
   KODI::GUILIB::GUIINFO::CGUIInfoBool m_isPlaying;
 };
-

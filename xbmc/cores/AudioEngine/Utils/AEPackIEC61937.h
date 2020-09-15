@@ -73,4 +73,3 @@ private:
   __pragma(pack(pop))
 #endif
 };
-

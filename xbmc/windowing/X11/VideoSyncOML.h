@@ -30,4 +30,3 @@ private:
   std::atomic_bool m_abort;
   CWinSystemX11GLContext &m_winSystem;
 };
-

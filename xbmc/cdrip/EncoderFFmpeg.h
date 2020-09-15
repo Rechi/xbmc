@@ -59,4 +59,3 @@ private:
 
   bool WriteFrame();
 };
-

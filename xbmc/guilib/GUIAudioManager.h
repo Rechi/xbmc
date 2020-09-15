@@ -86,4 +86,3 @@ private:
   void      FreeSoundAllUsage(IAESound *sound);
   IAESound* LoadWindowSound(TiXmlNode* pWindowNode, const std::string& strIdentifier);
 };
-

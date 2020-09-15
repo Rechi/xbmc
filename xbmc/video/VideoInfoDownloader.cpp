@@ -257,4 +257,3 @@ void CVideoInfoDownloader::CloseThread()
   m_state = DO_NOTHING;
   m_found = 0;
 }
-

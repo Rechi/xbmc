@@ -115,4 +115,3 @@ void ff_avutil_log(void* ptr, int level, const char* format, va_list va)
   }
   buffer.erase(0, start);
 }
-

@@ -312,4 +312,3 @@ bool         PipesManager::Exists(const std::string &name)
   CSingleLock lock(m_lock);
   return (m_pipes.find(name) != m_pipes.end());
 }
-

@@ -63,4 +63,3 @@ double CDVDCodecUtils::NormalizeFrameduration(double frameduration, bool *match)
     return frameduration;
   }
 }
-

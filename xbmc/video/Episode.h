@@ -46,4 +46,3 @@ namespace VIDEO
 
   typedef std::vector<EPISODE> EPISODELIST;
 }
-

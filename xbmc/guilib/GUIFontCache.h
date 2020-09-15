@@ -248,4 +248,3 @@ inline float MatrixHashContribution(const CGUIFontCacheKey<CGUIFontCacheDynamicP
 {
   return 0;
 }
-

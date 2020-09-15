@@ -31,4 +31,3 @@ protected:
 private:
   UTILS::Color       m_col;
 };
-

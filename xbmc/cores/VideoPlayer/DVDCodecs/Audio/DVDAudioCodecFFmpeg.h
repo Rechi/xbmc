@@ -60,4 +60,3 @@ protected:
   uint64_t m_layout;
   std::string m_codecName;
 };
-

@@ -49,4 +49,3 @@ public:
   inline explicit CSingleExit(CCriticalSection& cs) : sec(cs), count(cs.exit()) { }
   inline ~CSingleExit() { sec.restore(count); }
 };
-

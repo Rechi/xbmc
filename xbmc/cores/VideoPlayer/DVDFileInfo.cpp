@@ -481,4 +481,3 @@ bool CDVDFileInfo::AddExternalSubtitleToDetails(const std::string &path, CStream
 
   return true;
 }
-

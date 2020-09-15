@@ -317,5 +317,3 @@ void CZipManager::release(const std::string& strPath)
     mZipDate.erase(it2);
   }
 }
-
-

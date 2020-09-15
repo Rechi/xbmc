@@ -36,4 +36,3 @@ private:
   IActivityHandler* m_activityHandler;
   IInputHandler* m_inputHandler;
 };
-

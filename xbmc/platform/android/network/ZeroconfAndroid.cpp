@@ -100,4 +100,3 @@ void CZeroconfAndroid::doStop()
     m_services.clear();
   }
 }
-

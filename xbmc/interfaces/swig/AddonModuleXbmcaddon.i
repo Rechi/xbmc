@@ -32,4 +32,3 @@ using namespace xbmcaddon;
 %include "interfaces/legacy/AddonString.h"
 
 %include "interfaces/legacy/Addon.h"
-

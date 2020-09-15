@@ -153,4 +153,3 @@ char* CDVDSubtitleStream::ReadLine(char* buf, int iLen)
   else
     return NULL;
 }
-

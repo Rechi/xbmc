@@ -68,4 +68,3 @@ CMediaCodecDecoderFilterManager::CMediaCodecDecoderFilterManager()
   }
   Save();
 }
-

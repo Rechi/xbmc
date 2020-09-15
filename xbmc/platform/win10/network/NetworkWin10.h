@@ -69,4 +69,3 @@ private:
 };
 
 using CNetwork = CNetworkWin10;
-

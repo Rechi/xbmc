@@ -97,4 +97,3 @@ protected:
 
   bool m_bSelected;
 };
-

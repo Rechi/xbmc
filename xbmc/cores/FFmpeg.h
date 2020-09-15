@@ -50,4 +50,3 @@ public:
   static void ClearLogLevel();
   int level;
 };
-

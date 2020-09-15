@@ -273,4 +273,3 @@ void CStorageProvider::GetDrivesByType(VECSOURCES & localDrives, Drive_Types eDr
     AddOrReplace(localDrives, share);
   }
 }
-

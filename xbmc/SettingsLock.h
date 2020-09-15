@@ -21,5 +21,3 @@ namespace LOCK_LEVEL {
     EXPERT
   };
 }
-
-

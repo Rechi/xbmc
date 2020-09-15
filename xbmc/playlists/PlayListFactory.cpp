@@ -141,4 +141,3 @@ bool CPlayListFactory::IsPlaylist(const std::string& filename)
   return URIUtils::HasExtension(filename,
                      ".m3u|.b4s|.pls|.strm|.wpl|.asx|.ram|.url|.pxml|.xspf");
 }
-

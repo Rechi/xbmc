@@ -51,4 +51,3 @@ private:
   unsigned int   m_channelCount;
   enum AEChannel m_channels[AE_CH_MAX];
 };
-

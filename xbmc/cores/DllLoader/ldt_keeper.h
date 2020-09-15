@@ -35,4 +35,3 @@ void      Restore_LDT_Keeper(ldt_fs_t* ldt_fs);
 #ifdef __cplusplus
 }
 #endif
-

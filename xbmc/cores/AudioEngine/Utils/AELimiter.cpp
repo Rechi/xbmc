@@ -72,4 +72,3 @@ float CAELimiter::Run(float* frame[AE_CH_MAX], int channels, int offset /*= 0*/,
 
   return attenuation * m_amplify;
 }
-

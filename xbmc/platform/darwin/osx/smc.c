@@ -147,4 +147,3 @@ double SMCGetTemperature(const char *key)
   // read failed
   return 0.0;
 }
-

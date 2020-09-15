@@ -20,4 +20,3 @@ public:
   static ICodec* CreateCodec(const std::string &type);
   static ICodec* CreateCodecDemux(const CFileItem& file, unsigned int filecache);
 };
-

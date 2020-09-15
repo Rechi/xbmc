@@ -2389,4 +2389,3 @@ int CUtil::GetRandomNumber()
   return rand();
 #endif
 }
-

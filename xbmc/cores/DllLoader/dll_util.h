@@ -21,4 +21,3 @@ uintptr_t get_win_function_address(const char* strDllName, const char* strFuncti
 #ifdef _cplusplus
 }
 #endif
-

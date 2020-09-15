@@ -54,4 +54,3 @@ public:
   inline void Leave() { unlock(); }
   inline void Enter() { lock(); }
 };
-

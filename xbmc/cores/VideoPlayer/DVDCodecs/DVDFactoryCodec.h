@@ -68,4 +68,3 @@ protected:
   static std::map<std::string, CreateHWAccel> m_hwAccels;
   static std::map<std::string, CreateHWAudioCodec> m_hwAudioCodecs;
 };
-

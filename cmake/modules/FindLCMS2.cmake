@@ -45,4 +45,3 @@ if(LCMS2_FOUND)
 endif()
 
 mark_as_advanced(LCMS2_INCLUDE_DIR LCMS2_LIBRARY)
-

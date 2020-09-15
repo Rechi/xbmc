@@ -832,4 +832,3 @@ unsigned int CAEStreamParser::SyncTrueHD(uint8_t *data, unsigned int size)
   m_hasSync  = false;
   return skip;
 }
-

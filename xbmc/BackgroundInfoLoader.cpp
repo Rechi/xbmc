@@ -143,4 +143,3 @@ void CBackgroundInfoLoader::SetProgressCallback(IProgressCallback* pCallback)
 {
   m_pProgressCallback = pCallback;
 }
-

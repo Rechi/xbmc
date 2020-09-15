@@ -35,4 +35,3 @@ bool CMusicInfoTagLoaderDatabase::Load(const std::string& strFileName, CMusicInf
 
   return tag.Loaded();
 }
-

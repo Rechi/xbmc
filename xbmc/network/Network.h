@@ -129,4 +129,3 @@ using CNetwork = CNetworkBase;
 //creates, binds and listens tcp sockets on the desired port. Set bindLocal to
 //true to bind to localhost only.
 std::vector<SOCKET> CreateTCPServerSocket(const int port, const bool bindLocal, const int backlog, const char *callerName);
-

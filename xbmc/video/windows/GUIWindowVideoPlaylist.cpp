@@ -553,4 +553,3 @@ void CGUIWindowVideoPlaylist::MarkPlaying()
       m_vecItems->Get(iSong)->Select(true);
   }*/
 }
-

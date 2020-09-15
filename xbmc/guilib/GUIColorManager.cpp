@@ -104,4 +104,3 @@ UTILS::Color CGUIColorManager::GetColor(const std::string &color) const
   sscanf(trimmed.c_str(), "%x", &value);
   return value;
 }
-

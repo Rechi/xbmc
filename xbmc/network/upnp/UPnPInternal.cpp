@@ -1129,4 +1129,3 @@ CFileItemPtr GetFileItem(const NPT_String& uri, const NPT_String& meta)
 }
 
 } /* namespace UPNP */
-

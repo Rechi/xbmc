@@ -41,4 +41,3 @@ struct D3DPalette
 };
 
 typedef D3DPalette* LPDIRECT3DPALETTE8;
-

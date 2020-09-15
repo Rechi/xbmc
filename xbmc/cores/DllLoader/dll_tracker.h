@@ -129,4 +129,3 @@ void tracker_dll_data_track(DllLoader* pDll, uintptr_t addr);
 extern "C" void * _ReturnAddress(void);
 #pragma intrinsic(_ReturnAddress)
 #endif
-

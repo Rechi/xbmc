@@ -65,4 +65,3 @@ bool CPlayListURL::Load(const std::string& strFileName)
   file.Close();
   return true;
 }
-

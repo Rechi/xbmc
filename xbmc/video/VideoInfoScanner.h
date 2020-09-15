@@ -248,4 +248,3 @@ namespace VIDEO
         const std::vector<std::string>& artTypes, const std::string& setTitle);
   };
 }
-

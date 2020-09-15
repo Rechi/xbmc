@@ -53,4 +53,3 @@ private:
   unsigned int  m_NeededFrames = 0;
   bool m_NeedConversion = false;
 };
-

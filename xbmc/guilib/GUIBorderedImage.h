@@ -32,4 +32,3 @@ protected:
   CGUITexture m_borderImage;
   CRect m_borderSize;
 };
-

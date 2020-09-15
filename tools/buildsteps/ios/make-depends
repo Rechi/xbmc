@@ -6,4 +6,3 @@ if [ "$(pathChanged $WORKSPACE/tools/depends)" == "1" ]
 then
   cd $WORKSPACE/tools/depends;make -j $BUILDTHREADS && tagSuccessFulBuild $WORKSPACE/tools/depends
 fi
-

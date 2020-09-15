@@ -104,4 +104,3 @@ protected:
 
   GLint      m_viewPort[4];
 };
-

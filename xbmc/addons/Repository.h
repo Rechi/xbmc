@@ -82,4 +82,3 @@ namespace ADDON
     const RepositoryPtr m_repo;
   };
 }
-

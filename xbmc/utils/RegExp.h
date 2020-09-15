@@ -162,4 +162,3 @@ private:
 };
 
 typedef std::vector<CRegExp> VECCREGEXP;
-

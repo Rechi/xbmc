@@ -586,4 +586,3 @@ void CGUIViewStateVideoEpisodes::SaveViewState()
 {
   SaveViewToDb(m_items.GetPath(), WINDOW_VIDEO_NAV, CViewStateSettings::GetInstance().Get("videonavepisodes"));
 }
-

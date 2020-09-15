@@ -319,4 +319,3 @@ int DVDUDFCacheLevel( dvd_reader_t *, int );
 #ifdef __cplusplus
 };
 #endif
-

@@ -96,4 +96,3 @@ bool CGUIDialogVideoOSD::OnMessage(CGUIMessage& message)
   }
   return CGUIDialog::OnMessage(message);
 }
-

@@ -273,4 +273,3 @@ void CThread::SetSignalHandlers()
   //sigaction (SIGABRT, &action, NULL);
   //sigaction (SIGSEGV, &action, NULL);
 }
-

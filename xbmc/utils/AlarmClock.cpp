@@ -145,4 +145,3 @@ void CAlarmClock::Process()
     CThread::Sleep(100);
   }
 }
-

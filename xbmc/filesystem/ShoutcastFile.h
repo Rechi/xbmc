@@ -56,4 +56,3 @@ protected:
   int64_t m_tagPos;
 };
 }
-

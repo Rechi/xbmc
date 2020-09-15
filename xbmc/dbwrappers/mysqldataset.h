@@ -166,4 +166,3 @@ or insert() operations default = false) */
   bool dropIndex(const char *table, const char *index) override;
 };
 } //namespace
-

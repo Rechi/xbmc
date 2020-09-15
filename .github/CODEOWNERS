@@ -27,4 +27,3 @@
 /xbmc/utils/GBMBufferObject.* @lrusak
 /xbmc/windowing/gbm/ @lrusak
 /xbmc/windowing/wayland/ @yol
-

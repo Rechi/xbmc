@@ -57,4 +57,3 @@ protected:
   uint8_t m_btWriteBuffer[WRITEBUFFER_SIZE]; // 128k buffer for writing to disc
   uint32_t m_dwWriteBufferPointer;
 };
-

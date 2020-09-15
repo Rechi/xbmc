@@ -223,4 +223,3 @@ typedef struct {
  * Once this is achieved, call dvdnav_skip_wait().
  */
 #define DVDNAV_WAIT			13
-

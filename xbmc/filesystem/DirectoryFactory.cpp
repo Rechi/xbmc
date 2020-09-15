@@ -192,4 +192,3 @@ IDirectory* CDirectoryFactory::Create(const CURL& url)
   CLog::Log(LOGWARNING, "%s - unsupported protocol(%s) in %s", __FUNCTION__, url.GetProtocol().c_str(), url.GetRedacted().c_str() );
   return NULL;
 }
-

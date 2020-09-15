@@ -86,4 +86,3 @@ unsigned int GetFlagsStereoMode(const std::string& mode)
   }
   return convert[mode];
 }
-

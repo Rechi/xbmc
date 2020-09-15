@@ -315,4 +315,3 @@ float CThread::GetRelativeUsage()
 
   return m_fLastUsage;
 }
-

@@ -381,4 +381,3 @@ void CGLSLShaderProgram::Disable()
     OnDisabled();
   }
 }
-

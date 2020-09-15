@@ -1096,5 +1096,3 @@ private:
 #endif
   }
 }
-
-

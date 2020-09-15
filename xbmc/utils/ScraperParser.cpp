@@ -613,4 +613,3 @@ void CScraperParser::AddDocument(const CXBMCTinyXML* doc)
     node = node->NextSibling();
   }
 }
-

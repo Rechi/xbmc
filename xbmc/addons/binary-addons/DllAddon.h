@@ -46,4 +46,3 @@ public:
     RESOLVE_METHOD_RENAME_OPTIONAL(ADDON_GetTypeMinVersion, GetAddonTypeMinVersion)
   END_METHOD_RESOLVE()
 };
-

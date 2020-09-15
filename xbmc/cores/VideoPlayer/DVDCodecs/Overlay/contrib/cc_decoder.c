@@ -624,4 +624,3 @@ void cc_decoder_init(void)
 #ifdef __cplusplus
 }
 #endif
-

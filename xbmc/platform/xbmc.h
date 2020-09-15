@@ -11,4 +11,3 @@
 class CAppParamParser;
 
 extern "C" int XBMC_Run(bool renderGUI, const CAppParamParser &params);
-

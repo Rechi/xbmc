@@ -86,4 +86,3 @@ void WAYLAND::VAAPIRegisterRender(CVaapiProxy *winSystem, bool &general, bool &d
 
 }
 #endif
-

@@ -197,4 +197,3 @@ private:
 #include "GUIFontTTFDX.h"
 #define CGUIFontTTF CGUIFontTTFDX
 #endif
-

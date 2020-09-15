@@ -26,4 +26,3 @@ elseif(NOT CORE_SYSTEM_NAME STREQUAL windows AND NOT CORE_SYSTEM_NAME STREQUAL w
   set_target_properties(wrapper.def PROPERTIES FOLDER "Build Utilities")
   add_dependencies(wrapper.def wrapper)
 endif()
-

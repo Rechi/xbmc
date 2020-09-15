@@ -265,4 +265,3 @@ CCacheStrategy *CCircularCache::CreateNew()
 {
   return new CCircularCache(m_size - m_size_back, m_size_back);
 }
-

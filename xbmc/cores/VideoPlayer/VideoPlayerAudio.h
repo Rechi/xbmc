@@ -105,4 +105,3 @@ protected:
   mutable CCriticalSection m_info_section;
   SInfo            m_info;
 };
-

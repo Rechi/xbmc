@@ -41,4 +41,3 @@ using namespace xbmcvfs;
 
 %rename ("delete") XBMCAddon::xbmcvfs::deleteFile;
 %include "interfaces/legacy/ModuleXbmcvfs.h"
-

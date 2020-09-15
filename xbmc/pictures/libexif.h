@@ -135,4 +135,3 @@ EXIF_EXPORT bool process_jpeg(const char *filename, ExifInfo_t *exifInfo, IPTCIn
 #ifdef __cplusplus
 }
 #endif
-

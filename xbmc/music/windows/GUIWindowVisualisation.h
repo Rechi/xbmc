@@ -28,4 +28,3 @@ protected:
   bool m_bShowPreset;
   MUSIC_INFO::CMusicInfoTag m_tag;    // current tag info, for finding when the info manager updates
 };
-

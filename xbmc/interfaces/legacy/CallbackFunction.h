@@ -167,5 +167,3 @@ namespace XBMCAddon
     void executeCallback() override { XBMC_TRACE; ((*obj).*(meth))(param1,param2,param3); }
   };
 }
-
-

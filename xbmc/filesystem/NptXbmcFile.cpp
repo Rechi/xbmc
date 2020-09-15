@@ -523,4 +523,3 @@ NPT_File::GetInfo(const char* path, NPT_FileInfo* info)
 
     return NPT_SUCCESS;
 }
-

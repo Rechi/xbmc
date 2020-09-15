@@ -97,4 +97,3 @@
 #else
 #define SWIG_IMMUTABLE(var) var
 #endif
-

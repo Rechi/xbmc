@@ -1252,4 +1252,3 @@ CUPnPServer::AddSubtitleUriForSecResponse(NPT_String movie_md5, NPT_String subti
 }
 
 } /* namespace UPNP */
-

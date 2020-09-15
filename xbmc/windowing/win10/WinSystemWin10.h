@@ -150,4 +150,3 @@ protected:
 };
 
 #pragma pack(pop)
-

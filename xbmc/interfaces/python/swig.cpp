@@ -382,4 +382,3 @@ namespace PythonBindings
     return 0;
   }
 }
-

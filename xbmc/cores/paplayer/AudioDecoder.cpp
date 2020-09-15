@@ -371,4 +371,3 @@ float CAudioDecoder::GetReplayGain(float &peakVal)
   peakVal = peak;
   return replaygain;
 }
-

@@ -394,4 +394,3 @@ void OnPostUnInstall(const AddonPtr& addon)
 }
 
 } /* namespace ADDON */
-

@@ -890,4 +890,3 @@ void CCoreAudioDevice::RegisterDefaultOutputDeviceChangedCB(bool bRegister, Audi
     else
         registered = bRegister ? 1 : 0;
 }
-

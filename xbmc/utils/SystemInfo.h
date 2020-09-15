@@ -161,4 +161,3 @@ private:
 };
 
 extern CSysInfo g_sysinfo;
-

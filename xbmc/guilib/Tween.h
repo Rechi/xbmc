@@ -383,4 +383,3 @@ protected:
     return a * pow(2.0f, -10 * (time)) * sin((time * duration-s) * (2 * M_PI) / p ) * .5f + change + start;
   }
 };
-

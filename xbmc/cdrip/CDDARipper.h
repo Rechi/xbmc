@@ -84,4 +84,3 @@ private:
    */
   std::string GetTrackName(CFileItem *item);
 };
-

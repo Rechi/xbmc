@@ -65,4 +65,3 @@ protected:
   bool m_bReveal;
   bool m_bChanged;
 };
-

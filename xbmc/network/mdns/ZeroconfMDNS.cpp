@@ -236,4 +236,3 @@ void CZeroconfMDNS::ProcessResults()
   if (err != kDNSServiceErr_NoError)
     CLog::Log(LOGERROR, "ZeroconfMDNS: DNSServiceProcessResult returned (error = %ld)", (int) err);
 }
-

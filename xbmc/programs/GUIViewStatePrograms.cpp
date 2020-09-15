@@ -70,4 +70,3 @@ VECSOURCES& CGUIViewStateWindowPrograms::GetSources()
   AddOrReplace(*programSources, CGUIViewState::GetSources());
   return *programSources;
 }
-

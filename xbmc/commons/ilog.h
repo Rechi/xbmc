@@ -57,4 +57,3 @@ namespace XbmcCommons
     virtual void log(int loglevel, IN_STRING const char* message) = 0;
   };
 }
-

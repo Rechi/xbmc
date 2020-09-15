@@ -164,4 +164,3 @@ extern "C"
 
   extern char **dll__environ;
 }
-

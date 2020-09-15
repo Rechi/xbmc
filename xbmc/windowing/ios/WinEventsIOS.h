@@ -17,4 +17,3 @@ public:
 private:
   size_t GetQueueSize();
 };
-

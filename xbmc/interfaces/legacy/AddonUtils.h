@@ -86,5 +86,3 @@ namespace XBMCAddonUtils
 #else
 #define XBMC_TRACE
 #endif
-
-

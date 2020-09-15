@@ -29,4 +29,3 @@ private:
   static Pointer m_touchPointer;
   static CGenericTouchSwipeDetector *m_touchSwipeDetector;
 };
-

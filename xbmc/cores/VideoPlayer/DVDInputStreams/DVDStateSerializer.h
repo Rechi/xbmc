@@ -20,4 +20,3 @@ public:
 
   static bool test( const dvd_state_t *state );
 };
-

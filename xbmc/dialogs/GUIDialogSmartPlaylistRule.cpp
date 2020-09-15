@@ -570,4 +570,3 @@ bool CGUIDialogSmartPlaylistRule::EditRule(CSmartPlaylistRule &rule, const std::
   rule = editor->m_rule;
   return !editor->m_cancelled;
 }
-

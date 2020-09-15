@@ -52,4 +52,3 @@ bool GetProductAndVendorId(const PeripheralType type, const std::string &strDevi
 
   return false;
 }
-

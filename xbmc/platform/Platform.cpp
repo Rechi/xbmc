@@ -29,4 +29,3 @@ CPlatform::~CPlatform() = default;
 void CPlatform::Init()
 {
 }
-

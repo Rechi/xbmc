@@ -52,4 +52,3 @@ private:
 
   static bool m_staticVertexBufferCreated;
 };
-

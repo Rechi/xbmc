@@ -81,4 +81,3 @@ protected:
   // for autosizing
   float m_minSize;
 };
-

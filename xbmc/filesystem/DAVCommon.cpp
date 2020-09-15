@@ -69,4 +69,3 @@ std::string CDAVCommon::GetStatusTag(const TiXmlElement *pElement)
 
   return "";
 }
-

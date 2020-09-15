@@ -54,4 +54,3 @@ private:
   CRegExp *m_tagOptions;
   bool m_flag[4];
 };
-

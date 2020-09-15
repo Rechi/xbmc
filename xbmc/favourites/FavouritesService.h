@@ -52,4 +52,3 @@ private:
   CEventSource<FavouritesUpdated> m_events;
   mutable CCriticalSection m_criticalSection;
 };
-

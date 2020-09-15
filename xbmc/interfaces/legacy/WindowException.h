@@ -17,5 +17,3 @@ namespace XBMCAddon
     XBMCCOMMONS_STANDARD_EXCEPTION(WindowException);
   }
 }
-
-

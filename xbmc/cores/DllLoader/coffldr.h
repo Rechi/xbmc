@@ -76,4 +76,3 @@ protected:
 
   void PerformFixups(void);
 };
-

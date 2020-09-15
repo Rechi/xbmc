@@ -56,4 +56,3 @@ void CInfoLoader::Refresh()
 {
   m_refreshTime = CTimeUtils::GetFrameTime();
 }
-

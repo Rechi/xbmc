@@ -1652,4 +1652,3 @@ CALSADeviceMonitor CAESinkALSA::m_deviceMonitor; // ARGH
 #if !defined(HAVE_X11)
 CALSAHControlMonitor CAESinkALSA::m_controlMonitor; // ARGH
 #endif
-

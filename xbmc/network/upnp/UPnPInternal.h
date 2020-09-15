@@ -120,4 +120,3 @@ namespace UPNP
   bool             GetResource(const PLT_MediaObject* entry, CFileItem& item);
   CFileItemPtr     GetFileItem(const NPT_String& uri, const NPT_String& meta);
 }
-

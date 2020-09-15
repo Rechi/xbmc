@@ -121,4 +121,3 @@ private:
   std::list<DVDMessageListItem> m_messages;
   std::list<DVDMessageListItem> m_prioMessages;
 };
-

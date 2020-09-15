@@ -47,4 +47,3 @@ private:
   std::unique_ptr<CLibInputTouch> m_touch;
   std::vector<libinput_device*> m_devices;
 };
-

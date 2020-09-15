@@ -168,4 +168,3 @@ protected:
 #include "GUITextureD3D.h"
 #define CGUITexture CGUITextureD3D
 #endif
-

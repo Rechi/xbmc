@@ -58,4 +58,3 @@ namespace ADDON
   };
 
 } /* namespace ADDON */
-

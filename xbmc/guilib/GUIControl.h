@@ -372,4 +372,3 @@ protected:
   unsigned int  m_controlDirtyState;
   CRect m_renderRegion;         // In screen coordinates
 };
-

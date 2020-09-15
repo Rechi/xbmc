@@ -353,4 +353,3 @@ bool CEncoderFFmpeg::Close()
 
   return true;
 }
-

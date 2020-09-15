@@ -96,4 +96,3 @@ void vm_print_link(link_t value);
 /* for debugging: dumps VM registers */
 void vm_print_registers( registers_t *registers );
 #endif
-

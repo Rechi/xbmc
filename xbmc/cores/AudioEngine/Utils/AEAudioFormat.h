@@ -68,4 +68,3 @@ struct AEAudioFormat
 
   AEAudioFormat& operator=(const AEAudioFormat& fmt) = default;
 };
-

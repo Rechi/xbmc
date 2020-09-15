@@ -80,4 +80,3 @@ bool DllDynamic::SetFile(const std::string& strDllName)
   m_strDllName=strDllName;
   return true;
 }
-

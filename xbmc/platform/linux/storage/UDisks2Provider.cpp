@@ -809,4 +809,3 @@ void CUDisks2Provider::AppendEmptyOptions(DBusMessageIter *argsIter)
   dbus_message_iter_open_container(argsIter, DBUS_TYPE_ARRAY, "{sv}", &dictIter);
   dbus_message_iter_close_container(argsIter, &dictIter);
 }
-

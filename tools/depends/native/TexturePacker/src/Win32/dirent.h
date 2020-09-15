@@ -50,4 +50,3 @@ void          rewinddir(DIR *);
 #ifdef __cplusplus
 }
 #endif
-

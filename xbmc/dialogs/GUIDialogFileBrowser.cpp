@@ -1015,5 +1015,3 @@ CGUIControl *CGUIDialogFileBrowser::GetFirstFocusableControl(int id)
     id = m_viewControl.GetCurrentControl();
   return CGUIWindow::GetFirstFocusableControl(id);
 }
-
-

@@ -32,4 +32,3 @@ public:
 private:
   int m_flag[3];
 };
-

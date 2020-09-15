@@ -106,4 +106,3 @@ namespace XbmcThreads
     inline void notify() { cond.notify(); }
   };
 }
-

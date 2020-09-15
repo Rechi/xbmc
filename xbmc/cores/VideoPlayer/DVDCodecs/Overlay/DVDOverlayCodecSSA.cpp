@@ -155,5 +155,3 @@ CDVDOverlay* CDVDOverlayCodecSSA::GetOverlay()
   }
   return NULL;
 }
-
-

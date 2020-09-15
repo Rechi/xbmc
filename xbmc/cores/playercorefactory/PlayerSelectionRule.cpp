@@ -196,5 +196,3 @@ void CPlayerSelectionRule::GetPlayers(const CFileItem& item, std::vector<std::st
     players.push_back(m_playerName);
   }
 }
-
-

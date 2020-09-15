@@ -90,4 +90,3 @@ getdelim (lineptr, n, terminator, stream)
   *p = '\0';
   return p - *lineptr;
 }
-

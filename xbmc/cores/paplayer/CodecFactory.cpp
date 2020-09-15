@@ -111,4 +111,3 @@ ICodec* CodecFactory::CreateCodecDemux(const CFileItem& file, unsigned int filec
   else
     return CreateCodec(urlFile.GetFileType());
 }
-

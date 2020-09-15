@@ -29,4 +29,3 @@ namespace XFILE
     static CCriticalSection m_section;
   };
 }
-

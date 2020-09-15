@@ -85,5 +85,3 @@ namespace XBMCAddon
   }
 #endif
 }
-
-

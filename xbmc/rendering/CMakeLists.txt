@@ -12,4 +12,3 @@ if(NOT CORE_SYSTEM_NAME STREQUAL windows AND NOT CORE_SYSTEM_NAME STREQUAL windo
     target_compile_options(${CORE_LIBRARY} PRIVATE -msse2)
   endif()
 endif()
-

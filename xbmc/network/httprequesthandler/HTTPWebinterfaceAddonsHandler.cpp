@@ -53,5 +53,3 @@ HttpResponseRanges CHTTPWebinterfaceAddonsHandler::GetResponseData() const
 
   return ranges;
 }
-
-

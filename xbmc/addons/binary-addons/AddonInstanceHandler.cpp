@@ -96,4 +96,3 @@ void IAddonInstanceHandler::DestroyInstance()
 }
 
 } /* namespace ADDON */
-

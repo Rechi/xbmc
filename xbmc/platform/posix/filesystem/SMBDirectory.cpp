@@ -320,4 +320,3 @@ bool CSMBDirectory::Exists(const CURL& url2)
 
   return S_ISDIR(info.st_mode);
 }
-

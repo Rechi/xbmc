@@ -176,5 +176,3 @@ private:
   std::string m_curIccProfile;
 
 };
-
-

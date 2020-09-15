@@ -1216,4 +1216,3 @@ bool CBitstreamConverter::mpeg2_sequence_header(const uint8_t *data, const uint3
 
   return changed;
 }
-

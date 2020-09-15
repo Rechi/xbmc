@@ -174,4 +174,3 @@ protected:
 
   std::map<int, std::map<int, int64_t>> m_mapTitleChapters;
 };
-

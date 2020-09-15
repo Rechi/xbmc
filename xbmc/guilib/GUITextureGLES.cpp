@@ -282,4 +282,3 @@ void CGUITextureGLES::DrawQuad(const CRect &rect, UTILS::Color color, CBaseTextu
 
   renderSystem->DisableGUIShader();
 }
-

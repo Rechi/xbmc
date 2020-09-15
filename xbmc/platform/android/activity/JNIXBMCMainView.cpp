@@ -121,4 +121,3 @@ bool CJNIXBMCMainView::isCreated() const
   return get_field<jboolean>(m_object, "mIsCreated");
 
 }
-

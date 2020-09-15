@@ -43,4 +43,3 @@ protected:
 };
 
 extern  CSectionLoader g_sectionLoader;
-

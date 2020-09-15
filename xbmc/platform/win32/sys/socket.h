@@ -42,4 +42,3 @@
 #endif
 
 typedef int socklen_t;
-

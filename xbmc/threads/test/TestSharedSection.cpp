@@ -209,4 +209,3 @@ TEST(TestMultipleSharedSection, General)
     EXPECT_TRUE(waitThread4.timed_join(MILLIS(10000)));
   }
 }
-

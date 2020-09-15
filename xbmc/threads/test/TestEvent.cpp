@@ -615,4 +615,3 @@ TEST(TestMassEvent, Polling)
   RunMassEventTest(m,false);
   delete g_event;
 }
-

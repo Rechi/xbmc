@@ -718,4 +718,3 @@ void CTCPServer::CWebSocketClient::Disconnect()
       CTCPClient::Disconnect();
   }
 }
-

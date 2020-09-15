@@ -53,4 +53,3 @@ private:
   CCriticalSection m_critSection;
   CDVDMessageQueue m_messageQueue;
 };
-

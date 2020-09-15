@@ -129,4 +129,3 @@ typedef struct XBMC_Event {
     XBMC_SetFocusEvent focus;
   };
 } XBMC_Event;
-

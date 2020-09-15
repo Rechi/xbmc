@@ -910,4 +910,3 @@ void CGUIDialogNumeric::HandleInputTime(uint32_t num)
     }
   }
 }
-

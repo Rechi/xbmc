@@ -539,4 +539,3 @@ void CAESinkOSS::EnumerateDevicesEx(AEDeviceInfoList &list, bool force)
 #endif
   close(mixerfd);
 }
-

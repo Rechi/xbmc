@@ -66,4 +66,3 @@ protected:
 
   Demux_BXA_FmtHeader m_header;
 };
-

@@ -51,4 +51,3 @@ private:
   uint8_t       m_packedBuffer[MAX_IEC61937_PACKET];
   unsigned int m_pauseDuration = 0;
 };
-

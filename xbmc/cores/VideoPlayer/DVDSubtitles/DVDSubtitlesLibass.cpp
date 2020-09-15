@@ -168,4 +168,3 @@ int CDVDSubtitlesLibass::GetNrOfEvents()
     return 0;
   return m_track->n_events;
 }
-

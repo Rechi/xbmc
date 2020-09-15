@@ -1183,4 +1183,3 @@ void CGUIWindowMusicBase::OnAssignContent(const std::string& oldName, const CMed
     g_application.StartMusicScan(source.strPath, true);
 
 }
-

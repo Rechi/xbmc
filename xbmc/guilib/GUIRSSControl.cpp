@@ -191,5 +191,3 @@ void CGUIRSSControl::OnFeedRelease()
 {
   m_pReader = NULL;
 }
-
-

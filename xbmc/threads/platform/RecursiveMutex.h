@@ -48,4 +48,3 @@ namespace XbmcThreads
   typedef std::recursive_mutex CRecursiveMutex;
 }
 #endif
-

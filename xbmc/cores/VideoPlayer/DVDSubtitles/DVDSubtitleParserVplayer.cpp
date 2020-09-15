@@ -82,4 +82,3 @@ bool CDVDSubtitleParserVplayer::Open(CDVDStreamInfo &hints)
 
   return true;
 }
-

@@ -17,4 +17,3 @@ extern "C" HMODULE __stdcall dllLoadLibraryExA(const char* lpLibFileName, HANDLE
 extern "C" int __stdcall dllFreeLibrary(HINSTANCE hLibModule);
 extern "C" intptr_t (*__stdcall dllGetProcAddress(HMODULE hModule, const char* function))(void);
 extern "C" HMODULE WINAPI dllGetModuleHandleA(const char* lpModuleName);
-

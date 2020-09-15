@@ -133,5 +133,3 @@ bool CloseHandle(HANDLE hObject) {
 
   return true;
 }
-
-

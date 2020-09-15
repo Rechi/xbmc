@@ -115,7 +115,3 @@ jboolean CJNIXBMCFile::_eof(JNIEnv *env, jobject thiz)
 
   return true;
 }
-
-
-
-

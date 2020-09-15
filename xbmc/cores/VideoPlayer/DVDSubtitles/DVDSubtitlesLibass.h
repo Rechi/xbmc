@@ -37,4 +37,3 @@ private:
   ASS_Renderer* m_renderer = nullptr;
   CCriticalSection m_section;
 };
-

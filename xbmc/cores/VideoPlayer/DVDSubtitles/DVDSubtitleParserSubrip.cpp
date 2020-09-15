@@ -78,4 +78,3 @@ bool CDVDSubtitleParserSubrip::Open(CDVDStreamInfo &hints)
   m_collection.Sort();
   return true;
 }
-

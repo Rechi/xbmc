@@ -70,6 +70,3 @@ namespace XBMCAddon
     }
   }
 }
-
-
-

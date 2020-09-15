@@ -18,4 +18,3 @@ public:
                      CBookmark& bookmark,
                      bool updatePlayCount);
 };
-

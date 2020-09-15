@@ -89,4 +89,3 @@ VECSOURCES& CGUIViewStateWindowPictures::GetSources()
 
   return *pictureSources;
 }
-

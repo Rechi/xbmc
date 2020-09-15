@@ -167,4 +167,3 @@ private:
 #ifdef TARGET_WINDOWS_STORE
 #pragma pack(pop)
 #endif
-

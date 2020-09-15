@@ -58,4 +58,3 @@ bool CAudioEncoder::Close()
 }
 
 } /*namespace ADDON*/
-

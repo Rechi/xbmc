@@ -116,4 +116,3 @@ void CDNSNameCache::Add(const std::string &strHostName, const std::string &strIp
   CSingleLock lock(m_critical);
   g_DNSCache.m_vecDNSNames.push_back(dnsName);
 }
-

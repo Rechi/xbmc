@@ -121,4 +121,3 @@ protected:
   std::vector<std::string> m_texturePaths;
   CCriticalSection m_section;
 };
-

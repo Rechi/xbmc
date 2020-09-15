@@ -90,4 +90,3 @@ private:
   int m_internalTouchscreenResolutionWidth = -1;
   int m_internalTouchscreenResolutionHeight = -1;
 };
-

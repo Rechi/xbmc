@@ -67,4 +67,3 @@ protected:
   bool m_eject; //< Should we eject tray when we are finished?
   int m_encoder; //< The audio encoder
 };
-

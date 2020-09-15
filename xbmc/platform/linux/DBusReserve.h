@@ -26,4 +26,3 @@ private:
   CDBusConnection m_conn;
   std::vector<std::string> m_devs;
 };
-

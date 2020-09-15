@@ -28,4 +28,3 @@ protected:
 private:
   ADDON::CScreenSaver* m_addon = nullptr;
 };
-

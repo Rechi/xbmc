@@ -73,4 +73,3 @@ private:
 };
 
 using CNetwork = CNetworkWin32;
-

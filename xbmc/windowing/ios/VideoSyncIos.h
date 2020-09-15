@@ -40,4 +40,3 @@ private:
   CEvent m_abortEvent;
   CWinSystemIOS &m_winSystem;
 };
-

@@ -66,4 +66,3 @@ protected:
   bool m_showOnePage;
   ORIENTATION m_orientation;
 };
-

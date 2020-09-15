@@ -58,4 +58,3 @@ namespace PVR
     XbmcThreads::EndTime m_refreshTimeout;
   };
 }
-

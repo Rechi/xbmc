@@ -43,4 +43,3 @@ private:
   CAEChannelInfo GetChannelLayout(const AEAudioFormat& format);
   std::string GetDeviceUse(const AEAudioFormat& format, const std::string &device);
 };
-
