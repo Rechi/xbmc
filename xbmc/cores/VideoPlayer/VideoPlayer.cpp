@@ -556,7 +556,7 @@ int CSelectionStreams::CountTypeOfSource(StreamType type, StreamSource source) c
 
 int CSelectionStreams::CountType(StreamType type) const
 {
-  return std::count_if(m_Streams.begin(), m_Streams.end(), 
+  return std::count_if(m_Streams.begin(), m_Streams.end(),
     [&](const SelectionStream& stream) {return stream.type == type;});
 }
 
@@ -2096,7 +2096,7 @@ void CVideoPlayer::HandlePlaySpeed()
       }
     }
   }
-  
+
   // reset tempo
   if (!m_State.cantempo)
   {

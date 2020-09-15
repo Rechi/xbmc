@@ -77,7 +77,7 @@
       <button id="3">ChannelDown</button>
       <button id="4">ChannelUp</button>
       <button id="8">noop</button>
-      <button id="9">noop</button>                                
+      <button id="9">noop</button>
       <button id="10">noop</button>
       <button id="11">noop</button>
     </customcontroller>

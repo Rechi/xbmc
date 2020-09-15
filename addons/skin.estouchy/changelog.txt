@@ -1,7 +1,7 @@
 V3.0.3
 - Add chapter indicators to the progress bar
 - Add sort method / sort order / Channel group options to the PVR sections
-- Larger progress and volume bar 
+- Larger progress and volume bar
 
 V3.0.2
 - Updated language files from Transifex

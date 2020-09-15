@@ -344,7 +344,7 @@ void CFileCache::Process()
       }
       else
       {
-        CLog::Log(LOGDEBUG, 
+        CLog::Log(LOGDEBUG,
                   "CFileCache::Process - Source read didn't return any data! Hit eof(?)");
 
         m_pCache->EndOfInput();

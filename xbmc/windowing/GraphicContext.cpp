@@ -336,7 +336,7 @@ void CGraphicContext::SetFullScreenVideo(bool bOnOff)
           bTriggerUpdateRes = true;
       }
     }
-    
+
     bool allowResolutionChangeOnStop = CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_VIDEOPLAYER_ADJUSTREFRESHRATE) != ADJUST_REFRESHRATE_ON_START;
     RESOLUTION targetResolutionOnStop = RES_DESKTOP;
     if (bTriggerUpdateRes)
@@ -345,7 +345,7 @@ void CGraphicContext::SetFullScreenVideo(bool bOnOff)
     {
       targetResolutionOnStop = CDisplaySettings::GetInstance().GetCurrentResolution();
     }
-    
+
     if (allowResolutionChangeOnStop && !bTriggerUpdateRes)
     {
       SetVideoResolution(targetResolutionOnStop, false);

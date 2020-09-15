@@ -905,7 +905,7 @@ bool CGUIWindowMusicBase::GetDirectory(const std::string &strDirectory, CFileIte
   {
     // We want to expand disc images when browsing in file view but not on library, smartplaylist
     // or node menu music windows
-    if (!items.GetPath().empty() && 
+    if (!items.GetPath().empty() &&
         !StringUtils::StartsWithNoCase(items.GetPath(), "musicdb://") &&
         !StringUtils::StartsWithNoCase(items.GetPath(), "special://") &&
         !StringUtils::StartsWithNoCase(items.GetPath(), "library://"))

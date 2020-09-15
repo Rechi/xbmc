@@ -176,7 +176,7 @@ void CRenderer::Render(int idx)
     COverlayText *text = dynamic_cast<COverlayText*>(*it);
     if (text)
     {
-      
+
       // Compute the color to be used for the overlay background (depending on the opacity)
       UTILS::Color bgcolor = bgcolors[settings->GetInt(CSettings::SETTING_SUBTITLES_BGCOLOR)];
       int bgopacity = settings->GetInt(CSettings::SETTING_SUBTITLES_BGOPACITY);
@@ -188,7 +188,7 @@ void CRenderer::Render(int idx)
       {
         bgcolor = UTILS::COLOR::NONE;
       }
-      
+
       text->PrepareRender(settings->GetString(CSettings::SETTING_SUBTITLES_FONT),
                           settings->GetInt(CSettings::SETTING_SUBTITLES_COLOR),
                           settings->GetInt(SETTING_SUBTITLES_OPACITY),

@@ -9,12 +9,12 @@ This guide has been tested with macOS 10.13.4()17E199 High Sierra and Xcode 9.3(
 3. **[Get the source code](#3-get-the-source-code)**
 4. **[Configure and build tools and dependencies](#4-configure-and-build-tools-and-dependencies)**
 5. **[Build binary add-ons](#5-build-binary-add-ons)**
-6. **[Build Kodi](#6-build-kodi)**  
-  6.1. **[Build with Xcode](#61-build-with-xcode)**  
-  6.2. **[Build with xcodebuild](#62-build-with-xcodebuild)**  
+6. **[Build Kodi](#6-build-kodi)**
+  6.1. **[Build with Xcode](#61-build-with-xcode)**
+  6.2. **[Build with xcodebuild](#62-build-with-xcodebuild)**
   6.3. **[Build with make](#63-build-with-make)**
-7. **[Run Kodi](#7-run-kodi)**  
-  7.1. **[Built with Xcode or xcodebuild](#71-built-with-xcode-or-xcodebuild)**  
+7. **[Run Kodi](#7-run-kodi)**
+  7.1. **[Built with Xcode or xcodebuild](#71-built-with-xcode-or-xcodebuild)**
   7.2. **[Built with make](#72-built-with-make)**
 8. **[Package](#8-package)**
 9. **[Install](#9-install)**
@@ -45,9 +45,9 @@ git clone -b Krypton https://github.com/xbmc/xbmc kodi
 ```
 
 Several different strategies are used to draw your attention to certain pieces of information. In order of how critical the information is, these items are marked as a note, tip, or warning. For example:
- 
-**NOTE:** Linux is user friendly... It's just very particular about who its friends are.  
-**TIP:** Algorithm is what developers call code they do not want to explain.  
+
+**NOTE:** Linux is user friendly... It's just very particular about who its friends are.
+**TIP:** Algorithm is what developers call code they do not want to explain.
 **WARNING:** Developers don't change light bulbs. It's a hardware problem.
 
 **[back to top](#table-of-contents)** | **[back to section top](#1-document-conventions)**

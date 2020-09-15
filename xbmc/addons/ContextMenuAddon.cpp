@@ -89,7 +89,7 @@ void CContextMenuAddon::ParseMenu(
 
     std::vector<std::string> args;
     args.push_back(ID());
- 
+
     std::string arg = element.second.GetValue("@args").asString();
     if (!arg.empty())
       args.push_back(arg);

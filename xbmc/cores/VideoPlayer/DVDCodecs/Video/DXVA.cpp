@@ -649,7 +649,7 @@ bool CContext::Reset()
 
     ComPtr<IDXGIDevice> ctxDevice;
     ComPtr<IDXGIAdapter> ctxAdapter;
-    if (SUCCEEDED(m_pD3D11Device.As(&ctxDevice)) && 
+    if (SUCCEEDED(m_pD3D11Device.As(&ctxDevice)) &&
       SUCCEEDED(ctxDevice->GetAdapter(&ctxAdapter)))
     {
       DXGI_ADAPTER_DESC ctxDesc = {};

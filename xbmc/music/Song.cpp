@@ -280,7 +280,7 @@ void CSong::Clear()
   iBitRate = 0;
   iSampleRate = 0;
   iChannels =  0;
-  
+
   replayGain = ReplayGain();
 }
 const std::vector<std::string> CSong::GetArtist() const

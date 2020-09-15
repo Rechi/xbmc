@@ -268,7 +268,7 @@ XVisualInfo* CWinSystemX11GLESContext::GetVisual()
     return nullptr;
   }
   int num_visuals;
-  XVisualInfo* visual = 
+  XVisualInfo* visual =
     XGetVisualInfo(m_dpy, VisualIDMask, &x11_visual_info_template, &num_visuals);
   return visual;
 }

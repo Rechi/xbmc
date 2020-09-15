@@ -397,7 +397,7 @@ bool CGUIWindowVideoBase::ShowIMDB(CFileItemPtr item, const ScraperPtr &info2, b
         item->SetPath(item->GetVideoInfoTag()->GetPath());
     }
   }
-  
+
   if (needsRefresh)
   {
     // Delete stream details (=media flags). This allows users to force

@@ -42,7 +42,7 @@ private:
   int m_delayLockShutdownFd = -1; // file descriptor for the logind powerdown delay lock
   void UpdateBatteryLevel();
   void InhibitDelayLockSleep();
-  void InhibitDelayLockShutdown();  
+  void InhibitDelayLockShutdown();
   int InhibitDelayLock(const char *what);
   void ReleaseDelayLockSleep();
   void ReleaseDelayLockShutdown();

@@ -756,7 +756,7 @@ void CConvolutionShader1Pass::Render(CD3DTexture& sourceTexture, CD3DTexture& ta
   const unsigned int sourceHeight = sourceTexture.GetHeight();
 
   PrepareParameters(sourceWidth, sourceHeight, sourceRect, destRect);
-  float texSteps[] = { 
+  float texSteps[] = {
     1.0f / static_cast<float>(sourceWidth),
     1.0f / static_cast<float>(sourceHeight)
   };
@@ -921,9 +921,9 @@ bool CConvolutionShaderSeparable::ChooseIntermediateD3DFormat()
   const D3D11_FORMAT_SUPPORT usage = D3D11_FORMAT_SUPPORT_RENDER_TARGET;
 
   // Need a float texture, as the output of the first pass can contain negative values.
-  if (DX::Windowing()->IsFormatSupport(DXGI_FORMAT_R16G16B16A16_FLOAT, usage)) 
+  if (DX::Windowing()->IsFormatSupport(DXGI_FORMAT_R16G16B16A16_FLOAT, usage))
     m_IntermediateFormat = DXGI_FORMAT_R16G16B16A16_FLOAT;
-  else if (DX::Windowing()->IsFormatSupport(DXGI_FORMAT_R32G32B32A32_FLOAT, usage)) 
+  else if (DX::Windowing()->IsFormatSupport(DXGI_FORMAT_R32G32B32A32_FLOAT, usage))
     m_IntermediateFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
   else
   {

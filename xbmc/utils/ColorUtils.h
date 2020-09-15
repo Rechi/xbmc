@@ -14,7 +14,7 @@ class ColorUtils
 {
   public:
     /*! \brief Change the opacity of a given color
-     
+
      \param color The original color
      \param opacity The opacity value as a float
      \return the original color with the changed opacity/alpha value

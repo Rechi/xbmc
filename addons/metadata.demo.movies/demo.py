@@ -19,7 +19,7 @@ def get_params():
                         splitparams=pairsofparams[i].split('=')
                         if (len(splitparams))==2:
                                 param[splitparams[0]]=splitparams[1]
-                                
+
         return param
 
 
@@ -77,7 +77,7 @@ elif action == 'getdetails':
                     {'name': 'monkey', 'role': 'orange', 'thumbnail': '/home/akva/Pictures/coffee.jpg', 'order': 1}])
         liz.addAvailableArtwork('DefaultBackFanart.png', 'banner')
         liz.addAvailableArtwork('/home/akva/Pictures/hawaii-shirt.png', 'poster')
-        liz.setAvailableFanart([{'image': 'DefaultBackFanart.png', 'preview': 'DefaultBackFanart.png'}, 
+        liz.setAvailableFanart([{'image': 'DefaultBackFanart.png', 'preview': 'DefaultBackFanart.png'},
                                 {'image': '/home/akva/Pictures/hawaii-shirt.png', 'preview': '/home/akva/Pictures/hawaii-shirt.png'}])
         xbmcplugin.setResolvedUrl(handle=int(sys.argv[1]), succeeded=True, listitem=liz)
 elif action == 'getartwork':
@@ -86,7 +86,7 @@ elif action == 'getartwork':
         liz=xbmcgui.ListItem('Demo movie 1', offscreen=True)
         liz.addAvailableArtwork('DefaultBackFanart.png', 'banner')
         liz.addAvailableArtwork('/home/akva/Pictures/hawaii-shirt.png', 'poster')
-        liz.setAvailableFanart([{'image': 'DefaultBackFanart.png', 'preview': 'DefaultBackFanart.png'}, 
+        liz.setAvailableFanart([{'image': 'DefaultBackFanart.png', 'preview': 'DefaultBackFanart.png'},
                                 {'image': '/home/akva/Pictures/hawaii-shirt.png', 'preview': '/home/akva/Pictures/hawaii-shirt.png'}])
         xbmcplugin.setResolvedUrl(handle=int(sys.argv[1]), succeeded=True, listitem=liz)
 elif action == 'nfourl':

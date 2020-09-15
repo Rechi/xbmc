@@ -1270,7 +1270,7 @@ public class XBMCJsonRPC
   {
     if(rating == null || rating.doubleValue() <= 0.0)
       return null;
-        
+
     return String.valueOf(rating / 2.0);
   }
 

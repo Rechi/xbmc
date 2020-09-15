@@ -1,6 +1,6 @@
 # CodeDocs.xyz Configuration File
 
-DOXYFILE = docs/doxygen/Doxyfile.doxy 
+DOXYFILE = docs/doxygen/Doxyfile.doxy
 
 PROJECT_LOGO = docs/doxygen/Thumbnail-symbol-whitebg-small.jpg
 

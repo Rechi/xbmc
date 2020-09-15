@@ -209,7 +209,7 @@ void CRendererBase::AddVideoPicture(const VideoPicture& picture, int index)
   }
 }
 
-void CRendererBase::Render(int index, int index2, CD3DTexture& target, const CRect& sourceRect, 
+void CRendererBase::Render(int index, int index2, CD3DTexture& target, const CRect& sourceRect,
                            const CRect& destRect, const CRect& viewRect, unsigned flags)
 {
   m_iBufferIndex = index;

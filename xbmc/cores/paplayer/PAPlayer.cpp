@@ -980,7 +980,7 @@ bool PAPlayer::SetTotalTimeInternal(int64_t time)
 
   m_currentStream->m_decoder.SetTotalTime(time);
   UpdateGUIData(m_currentStream);
-  
+
   return true;
 }
 
@@ -994,7 +994,7 @@ bool PAPlayer::SetTimeInternal(int64_t time)
 
   if (m_currentStream->m_stream)
     m_currentStream->m_framesSent += m_currentStream->m_stream->GetDelay() * m_currentStream->m_audioFormat.m_sampleRate;
-  
+
   return true;
 }
 

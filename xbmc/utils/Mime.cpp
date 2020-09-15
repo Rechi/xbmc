@@ -18,7 +18,7 @@
 
 #include <algorithm>
 
-const std::map<std::string, std::string> CMime::m_mimetypes = 
+const std::map<std::string, std::string> CMime::m_mimetypes =
     {{{"3dm",       "x-world/x-3dmf"},
       {"3dmf",      "x-world/x-3dmf"},
       {"3fr",       "image/3fr"},

@@ -169,14 +169,14 @@ void COverlayText::PrepareRender(const std::string &font, int color, int opacity
     CLog::Log(LOGERROR, "COverlayText::PrepareRender - GetFontLayout failed for font %s", font.c_str());
     return;
   }
-  
+
   m_rv = rectView;
   m_bgcolor = bgcolor;
   m_bordercolor = ColorUtils::ChangeOpacity(UTILS::COLOR::BLACK, opacity / 100.0f);
-  
+
   m_layout->Update(m_text, m_rv.Width() * 0.9f, false, true); // true to force LTR reading order (most Hebrew subs are this format)
   m_layout->GetTextExtent(m_width, m_height);
-  
+
 }
 
 void COverlayText::Render(OVERLAY::SRenderState &state)
@@ -191,7 +191,7 @@ void COverlayText::Render(OVERLAY::SRenderState &state)
   ||  m_subalign == SUBTITLE_ALIGN_BOTTOM_OUTSIDE
   ||  m_subalign == SUBTITLE_ALIGN_BOTTOM_INSIDE)
     y -= m_height;
-  
+
   // draw the overlay background
   if (m_bgcolor != UTILS::COLOR::NONE)
   {

@@ -8,12 +8,12 @@ This guide has been tested with macOS 10.13.4(17E199) High Sierra and 10.14.4(18
 2. **[Prerequisites](#2-prerequisites)**
 3. **[Get the source code](#3-get-the-source-code)**
 4. **[Configure and build tools and dependencies](#4-configure-and-build-tools-and-dependencies)**
-5. **[Build binary add-ons](#5-build-binary-add-ons)**  
-  5.1. **[Independent Add-on building](#51-Independent-Add-on-building)**  
-  5.2. **[Xcode project building](#52-Xcode-project-building)**  
-6. **[Build Kodi](#6-build-kodi)**  
-  6.1. **[Generate Project Files](#61-Generate-Project-Files)**  
-  6.2. **[Build with Xcode](#62-build)**  
+5. **[Build binary add-ons](#5-build-binary-add-ons)**
+  5.1. **[Independent Add-on building](#51-Independent-Add-on-building)**
+  5.2. **[Xcode project building](#52-Xcode-project-building)**
+6. **[Build Kodi](#6-build-kodi)**
+  6.1. **[Generate Project Files](#61-Generate-Project-Files)**
+  6.2. **[Build with Xcode](#62-build)**
 7. **[Package](#7-package)**
 8. **[Install](#8-install)**
 9. **[Gesture Handling](#9-gesture-handling)**
@@ -44,9 +44,9 @@ git clone -b Krypton https://github.com/xbmc/xbmc kodi
 ```
 
 Several different strategies are used to draw your attention to certain pieces of information. In order of how critical the information is, these items are marked as a note, tip, or warning. For example:
- 
-**NOTE:** Linux is user friendly... It's just very particular about who its friends are.  
-**TIP:** Algorithm is what developers call code they do not want to explain.  
+
+**NOTE:** Linux is user friendly... It's just very particular about who its friends are.
+**TIP:** Algorithm is what developers call code they do not want to explain.
 **WARNING:** Developers don't change light bulbs. It's a hardware problem.
 
 **[back to top](#table-of-contents)** | **[back to section top](#1-document-conventions)**
@@ -133,7 +133,7 @@ make -j$(getconf _NPROCESSORS_ONLN) -C tools/depends/target/binary-addons ADDONS
 
 ## 5.2. Xcode project building
 
-Binary addons will be built as a dependency in the Xcode project. You can choose the addons 
+Binary addons will be built as a dependency in the Xcode project. You can choose the addons
 you wish to build during the Xcode project generation step
 
 Generate Xcode project to build specific add-ons:
@@ -146,8 +146,8 @@ Generate Xcode project to build a specific group of add-ons:
 make -C tools/depends/target/cmakebuildsys CMAKE_EXTRA_ARGUMENTS="-DENABLE_XCODE_ADDONBUILD=ON -DADDONS_TO_BUILD='pvr.*'"
 ```
 
-**TIP:** When using addontype.* for -DADDONS_TO_BUILD argument, you cannot have multiple 
-addon types. ie -DADDONS_TO_BUILD='game.libretro.* peripheral.*' is not valid. You will 
+**TIP:** When using addontype.* for -DADDONS_TO_BUILD argument, you cannot have multiple
+addon types. ie -DADDONS_TO_BUILD='game.libretro.* peripheral.*' is not valid. You will
 need to individually list the addons as per the first example for specific addon building.
 
 Generate Xcode project to build all add-ons automatically:
@@ -157,8 +157,8 @@ make -C tools/depends/target/cmakebuildsys CMAKE_EXTRA_ARGUMENTS="-DENABLE_XCODE
 
 **TIP:** If you wish to not automatically build addons added to your xcode project, omit
 `-DENABLE_XCODE_ADDONBUILD=ON`. The target will be added to the project, but the dependency
- will not be set to automatically build  
-**TIP:** Binary add-ons added to the generated Xcode project can be built independently of 
+ will not be set to automatically build
+**TIP:** Binary add-ons added to the generated Xcode project can be built independently of
 the Kodi app by selecting the scheme/target `binary-addons` in the Xcode project.
 You can also build the binary-addons target via xcodebuild. This will not build the Kodi
 App, but will build any/all binary addons added for the project Generation.
@@ -202,7 +202,7 @@ You can check `Users/Shared/xbmc-depends` directory content with:
 ```
 ls -l /Users/Shared/xbmc-depends
 ```
-## 6.2 Build 
+## 6.2 Build
 
 **Start Xcode, open the Kodi project file** (`kodi.xcodeproj`) located in `$HOME/kodi-build` and hit `Build`.
 

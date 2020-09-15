@@ -48,7 +48,7 @@ TEST(TestCryptThreadingInitializer, ProducesValidThreadIds)
         CSingleLock gatheredIdsLock(gatheredIdsMutex);
         gatheredIds.push_back(myTid);
       }
-    });        
+    });
   }
 
   gate = true;

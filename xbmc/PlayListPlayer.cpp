@@ -526,7 +526,7 @@ void CPlayListPlayer::SetShuffle(int iPlaylist, bool bYesNo, bool bNotify /* = f
     }
   }
 
-  // its likely that the playlist changed   
+  // its likely that the playlist changed
   if (CServiceBroker::GetGUI() != nullptr)
   {
     CGUIMessage msg(GUI_MSG_PLAYLIST_CHANGED, 0, 0);
@@ -586,7 +586,7 @@ void CPlayListPlayer::SetRepeat(int iPlaylist, REPEAT_STATE state, bool bNotify 
     break;
   }
 
-  // its likely that the playlist changed   
+  // its likely that the playlist changed
   if (CServiceBroker::GetGUI() != nullptr)
   {
     CGUIMessage msg(GUI_MSG_PLAYLIST_CHANGED, 0, 0);

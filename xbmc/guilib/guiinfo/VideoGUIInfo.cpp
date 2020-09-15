@@ -350,7 +350,7 @@ bool CVideoGUIInfo::GetLabel(std::string& value, const CFileItem *item, int cont
         break;
       case LISTITEM_PLOT:
         {
-          std::shared_ptr<CSettingList> setting(std::dynamic_pointer_cast<CSettingList>( 
+          std::shared_ptr<CSettingList> setting(std::dynamic_pointer_cast<CSettingList>(
             CServiceBroker::GetSettingsComponent()->GetSettings()->GetSetting(CSettings::SETTING_VIDEOLIBRARY_SHOWUNWATCHEDPLOTS)));
           if (tag->m_type != MediaTypeTvShow && tag->m_type != MediaTypeVideoCollection &&
               tag->GetPlayCount() == 0 && setting &&

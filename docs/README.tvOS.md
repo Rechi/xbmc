@@ -8,21 +8,21 @@ This guide has been tested with macOS 10.13.4(17E199) High Sierra and 10.14.4(18
 2. **[Prerequisites](#2-prerequisites)**
 3. **[Get the source code](#3-get-the-source-code)**
 4. **[Configure and build tools and dependencies](#4-configure-and-build-tools-and-dependencies)**
-5. **[Generate Kodi Build files](#5-Generate-Kodi-Build-files)**  
-  5.1. **[Generate XCode Project Files](#51-Generate-Xcode-Project-Files)**  
-  5.2. **[Build with Xcode](#62-build)**  
-6. **[Build Kodi](#6-build-kodi)**  
-  6.1. **[Build with Xcode](#61-Build-with-Xcode)**  
-  6.2. **[Build with xcodebuild](#62-Build-with-xcodebuild)**  
-7. **[Packaging to distribute as deb](#7-Packaging-to-distribute-as-deb)**  
-  7.1. **[Package via Xcode](#71-Package-via-Xcode)**  
-  7.2. **[Package via Xcodebuild](#72-Package-via-Xcodebuild)**  
-8. **[Signing](#8-Signing)**  
-  8.1. **[Signing using a developer account](#81-Signing-using-a-developer-account)**  
-  8.2. **[Using iOS App Signer to install](#82-Using-iOS-App-Signer-to-install)**  
-9. **[Install](#9-Install)**  
-  9.1. **[Jailbroken devices](#91-Jailbroken-devices)**  
-  9.2. **[Using Xcode to install](#92-Using-Xcode-to-install)**  
+5. **[Generate Kodi Build files](#5-Generate-Kodi-Build-files)**
+  5.1. **[Generate XCode Project Files](#51-Generate-Xcode-Project-Files)**
+  5.2. **[Build with Xcode](#62-build)**
+6. **[Build Kodi](#6-build-kodi)**
+  6.1. **[Build with Xcode](#61-Build-with-Xcode)**
+  6.2. **[Build with xcodebuild](#62-Build-with-xcodebuild)**
+7. **[Packaging to distribute as deb](#7-Packaging-to-distribute-as-deb)**
+  7.1. **[Package via Xcode](#71-Package-via-Xcode)**
+  7.2. **[Package via Xcodebuild](#72-Package-via-Xcodebuild)**
+8. **[Signing](#8-Signing)**
+  8.1. **[Signing using a developer account](#81-Signing-using-a-developer-account)**
+  8.2. **[Using iOS App Signer to install](#82-Using-iOS-App-Signer-to-install)**
+9. **[Install](#9-Install)**
+  9.1. **[Jailbroken devices](#91-Jailbroken-devices)**
+  9.2. **[Using Xcode to install](#92-Using-Xcode-to-install)**
 
 ## 1. Document conventions
 This guide assumes you are using `terminal`, also known as `console`, `command-line` or simply `cli`. Commands need to be run at the terminal, one at a time and in the provided order.
@@ -139,10 +139,10 @@ make -C tools/depends/target/cmakebuildsys CMAKE_EXTRA_ARGUMENTS="-DPLATFORM_BUN
 ````
 Available Signing arguments
 
-PLATFORM_BUNDLE_IDENTIFIER - bundle ID (used for the app, top shelf and entitlements)  
-DEVELOPMENT_TEAM - dev team ID  **OR** CODE_SIGN_IDENTITY - certificate name  
-PROVISIONING_PROFILE_APP - provprofile name for the app  
-PROVISIONING_PROFILE_TOPSHELF - provprofile name for the top shelf  
+PLATFORM_BUNDLE_IDENTIFIER - bundle ID (used for the app, top shelf and entitlements)
+DEVELOPMENT_TEAM - dev team ID  **OR** CODE_SIGN_IDENTITY - certificate name
+PROVISIONING_PROFILE_APP - provprofile name for the app
+PROVISIONING_PROFILE_TOPSHELF - provprofile name for the top shelf
 
 ## 5.2. Add Binary Addons to Project
 

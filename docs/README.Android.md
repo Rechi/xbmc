@@ -8,11 +8,11 @@ It should work if you're using macOS. If that is the case, read **[macOS specifi
 ## Table of Contents
 1. **[Document conventions](#1-document-conventions)**
 2. **[Install the required packages](#2-install-the-required-packages)**
-3. **[Prerequisites](#3-prerequisites)**  
-  3.1. **[Extract Android SDK and NDK](#31-extract-android-sdk-and-ndk)**  
-  3.2. **[Configure Android SDK](#32-configure-android-sdk)**  
-  3.3. **[Set up the Android toolchain](#33-set-up-the-android-toolchain)**  
-  3.4. **[Create a key to sign debug APKs](#34-create-a-key-to-sign-debug-apks)**  
+3. **[Prerequisites](#3-prerequisites)**
+  3.1. **[Extract Android SDK and NDK](#31-extract-android-sdk-and-ndk)**
+  3.2. **[Configure Android SDK](#32-configure-android-sdk)**
+  3.3. **[Set up the Android toolchain](#33-set-up-the-android-toolchain)**
+  3.4. **[Create a key to sign debug APKs](#34-create-a-key-to-sign-debug-apks)**
   3.5. **[macOS specific prerequisites](#35-macos-specific-prerequisites)**
 4. **[Get the source code](#4-get-the-source-code)**
 5. **[Build tools and dependencies](#5-build-tools-and-dependencies)**
@@ -48,9 +48,9 @@ git clone -b Krypton https://github.com/xbmc/xbmc kodi
 ```
 
 Several different strategies are used to draw your attention to certain pieces of information. In order of how critical the information is, these items are marked as a note, tip, or warning. For example:
- 
-**NOTE:** Linux is user friendly... It's just very particular about who its friends are.  
-**TIP:** Algorithm is what developers call code they do not want to explain.  
+
+**NOTE:** Linux is user friendly... It's just very particular about who its friends are.
+**TIP:** Algorithm is what developers call code they do not want to explain.
 **WARNING:** Developers don't change light bulbs. It's a hardware problem.
 
 **[back to top](#table-of-contents)** | **[back to section top](#1-document-conventions)**
@@ -113,7 +113,7 @@ keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey -d
   * `open ~/android-dev.dmg`
 * Once you have your hdd image with case sensitive hfs+ file system execute all the steps inside of this filesystem. You need to adapt all paths in this guide so that they match your local environment. As an example here is a configure line that demonstrates possible paths:
   * `./configure --with-tarballs=/Users/Shared/xbmc-depends/tarballs --host=arm-linux-androideabi --with-sdk-path=/Volumes/android-dev/android/android-sdk-macosx --with-ndk-path=/Volumes/android-dev/android/android-ndk-r20 --prefix=/Volumes/android-dev/android/xbmc-depends`
-  
+
 **[back to top](#table-of-contents)** | **[back to section top](#3-prerequisites)**
 
 ## 4. Get the source code

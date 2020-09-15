@@ -189,7 +189,7 @@ typedef enum
 	newID:(SInt32)newID
 	forHardwareWithAttributes:(NSMutableDictionary *)attributes;
 
-// Notification about hardware additions/removals 
+// Notification about hardware additions/removals
 - (void)hidRemote:(HIDRemote *)hidRemote				// Invoked when new hardware was found / added to HIDRemote's pool
 	foundNewHardwareWithAttributes:(NSMutableDictionary *)attributes;
 
@@ -203,7 +203,7 @@ typedef enum
 
 // Matching of newly found receiver hardware
 - (BOOL)hidRemote:(HIDRemote *)hidRemote				// Invoked when new hardware is inspected
-	inspectNewHardwareWithService:(io_service_t)service		// 
+	inspectNewHardwareWithService:(io_service_t)service		//
 	prematchResult:(BOOL)prematchResult;				// Return YES if HIDRemote should go on with this hardware and try
 									// to use it, or NO if it should not be persued further.
 
@@ -217,7 +217,7 @@ typedef enum
 - (BOOL)hidRemote:(HIDRemote *)hidRemote
 	shouldRetryExclusiveLockWithInfo:(NSDictionary *)applicationInfo;
 
-@end 
+@end
 
 
 #pragma mark - Actual header file for class

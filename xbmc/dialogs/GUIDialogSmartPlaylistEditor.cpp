@@ -324,7 +324,7 @@ void CGUIDialogSmartPlaylistEditor::OnType()
     return;
 
   m_playlist.SetType(ConvertType(allowedTypes[newSelected]));
-  
+
   // Remove any invalid grouping left over when changing the type
   Field currentGroup = CSmartPlaylistRule::TranslateGroup(m_playlist.GetGroup().c_str());
   if (currentGroup != FieldNone && currentGroup != FieldUnknown)

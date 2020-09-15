@@ -518,7 +518,7 @@ long MysqlDatabase::nextid(const char* sname) {
       unsigned long *lengths;
       lengths = mysql_fetch_lengths(res);
       CLog::Log(LOGINFO, "Next id is [%.*s] ", (int)lengths[0], row[0]);
-      snprintf(sqlcmd, sizeof(sqlcmd), "UPDATE %s SET nextid=%d WHERE seq_name = '%s'", 
+      snprintf(sqlcmd, sizeof(sqlcmd), "UPDATE %s SET nextid=%d WHERE seq_name = '%s'",
                seq_table, id, sname);
       mysql_free_result(res);
       if ((last_err = query_with_reconnect(sqlcmd)) != 0) return DB_UNEXPECTED_RESULT;
@@ -614,7 +614,7 @@ std::string MysqlDatabase::vprepare(const char *format, va_list args)
     pos += 6;
   }
 
-  // Replace some dataypes in CAST statements: 
+  // Replace some dataypes in CAST statements:
   // before: CAST(iFoo AS TEXT), CAST(foo AS INTEGER)
   // after:  CAST(iFoo AS CHAR), CAST(foo AS SIGNED INTEGER)
   pos = strResult.find("CAST(");

@@ -165,7 +165,7 @@ bool CMusicInfoLoader::LoadItemLookup(CFileItem* pItem)
   if (m_pProgressCallback && !pItem->m_bIsFolder)
     m_pProgressCallback->SetProgressAdvance();
 
-  if ((pItem->m_bIsFolder && !pItem->IsAudio()) || 
+  if ((pItem->m_bIsFolder && !pItem->IsAudio()) ||
       pItem->IsPlayList() || pItem->IsSmartPlayList() ||
       StringUtils::StartsWithNoCase(pItem->GetPath(), "newplaylist://") ||
       StringUtils::StartsWithNoCase(pItem->GetPath(), "newsmartplaylist://") ||

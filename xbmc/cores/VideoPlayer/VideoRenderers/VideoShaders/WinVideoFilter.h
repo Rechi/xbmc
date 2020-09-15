@@ -73,7 +73,7 @@ public:
   static bool CreateLUTView(int lutSize, uint16_t* lutData, bool isRGB, ID3D11ShaderResourceView** ppLUTView);
 
 private:
-  struct Vertex 
+  struct Vertex
   {
     float x, y, z;
     float tu, tv;
@@ -110,7 +110,7 @@ public:
   explicit CYUV2RGBShader() = default;
   ~CYUV2RGBShader() = default;
 
-  bool Create(AVPixelFormat fmt, AVColorPrimaries dstPrimaries, AVColorPrimaries srcPrimaries, 
+  bool Create(AVPixelFormat fmt, AVColorPrimaries dstPrimaries, AVColorPrimaries srcPrimaries,
               const std::shared_ptr<COutputShader>& pOutShader = nullptr);
   void Render(CRect sourceRect, CPoint dest[], CRenderBuffer* videoBuffer, CD3DTexture& target);
   void SetParams(float contrast, float black, bool limited) const;

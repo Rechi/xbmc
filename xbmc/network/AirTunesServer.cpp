@@ -408,12 +408,12 @@ void CAirTunesServer::InformPlayerAboutPlayTimes()
     unsigned int position = m_cachedCurrentTime - m_cachedStartTime;
     duration /= m_sampleRate;
     position /= m_sampleRate;
-  
+
     if (g_application.GetAppPlayer().IsPlaying())
     {
       g_application.GetAppPlayer().SetTime(position * 1000);
       g_application.GetAppPlayer().SetTotalTime(duration * 1000);
-      
+
       // reset play times now that we have informed the player
       m_cachedEndTime = 0;
       m_cachedCurrentTime = 0;
@@ -488,7 +488,7 @@ void  CAirTunesServer::AudioOutputFunctions::audio_process(void *cls, void *sess
 {
   XFILE::CPipeFile *pipe=(XFILE::CPipeFile *)cls;
   pipe->Write(buffer, buflen);
-  
+
   // in case there are some play times cached that are not yet sent to the player - do it here
   InformPlayerAboutPlayTimes();
 }

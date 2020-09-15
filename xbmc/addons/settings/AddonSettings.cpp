@@ -1331,7 +1331,7 @@ bool CAddonSettings::ParseOldLabel(const TiXmlElement* element, const std::strin
   labelId = -1;
   if (element == nullptr)
     return false;
-  
+
   // label value as a string
   std::string labelString;
   element->QueryStringAttribute("label", &labelString);

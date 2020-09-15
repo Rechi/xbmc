@@ -352,7 +352,7 @@ bool CVideoThumbLoader::LoadItemCached(CFileItem* pItem)
     pItem->AppendArt(artwork);
   }
 
-  // hide thumb if episode is unwatched 
+  // hide thumb if episode is unwatched
   std::shared_ptr<CSettingList> setting(std::dynamic_pointer_cast<CSettingList>(
     CServiceBroker::GetSettingsComponent()->GetSettings()->GetSetting(CSettings::SETTING_VIDEOLIBRARY_SHOWUNWATCHEDPLOTS)));
   if (pItem->HasArt("thumb") && pItem->HasVideoInfoTag() &&

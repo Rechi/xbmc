@@ -65,7 +65,7 @@ void CRendererDXVA::GetWeight(std::map<RenderMethod, int>& weights, const VideoP
   }
 
   // prefer DXVA method for interlaced HW decoded material
-  if (av_pixel_format == AV_PIX_FMT_D3D11VA_VLD && 
+  if (av_pixel_format == AV_PIX_FMT_D3D11VA_VLD &&
     picture.iFlags & DVP_FLAG_INTERLACED)
     weight += 1000;
 
@@ -125,7 +125,7 @@ void CRendererDXVA::CheckVideoParameters()
   __super::CheckVideoParameters();
 
   CreateIntermediateTarget(
-    HasHQScaler() ? m_sourceWidth : m_viewWidth, 
+    HasHQScaler() ? m_sourceWidth : m_viewWidth,
     HasHQScaler() ? m_sourceHeight : m_viewHeight);
 }
 
@@ -143,7 +143,7 @@ void CRendererDXVA::RenderImpl(CD3DTexture& target, CRect& sourceRect, CPoint(&d
 
   m_processor->Render(src, dst, target.Get(), views,
                       flags, buf->frameIdx % UINT32_MAX, m_renderOrientation,
-                      m_videoSettings.m_Contrast, 
+                      m_videoSettings.m_Contrast,
                       m_videoSettings.m_Brightness);
 
   if (!HasHQScaler())

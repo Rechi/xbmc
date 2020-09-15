@@ -384,7 +384,7 @@ namespace ADDON
      * \brief Check whether an addon has been disabled with a special reason.
      * \param ID id of the addon
      * \param disabledReason reason we want to check for (NONE, USER, INCOMPATIBLE, PERMANENT_FAILURE)
-     * \return true or false 
+     * \return true or false
      */
     bool IsAddonDisabledWithReason(const std::string& ID, AddonDisabledReason disabledReason) const;
 

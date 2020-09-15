@@ -97,7 +97,7 @@ bool CPartyModeManager::Enable(PartyModeContext context /*= PARTYMODECONTEXT_MUS
   unsigned int songcount = 0;
   unsigned int videocount = 0;
   unsigned int time = XbmcThreads::SystemClockMillis();
-  
+
   if (StringUtils::EqualsNoCase(m_type, "songs") ||
       StringUtils::EqualsNoCase(m_type, "mixed"))
   {
@@ -169,7 +169,7 @@ bool CPartyModeManager::Enable(PartyModeContext context /*= PARTYMODECONTEXT_MUS
   // Songs and music videos are random from query, but need mixing together when have both
   if (songcount > 0 && videocount > 0 )
     KODI::UTILS::RandomShuffle(m_songIDCache.begin(), m_songIDCache.end());
- 
+
   CLog::Log(LOGINFO,"PARTY MODE MANAGER: Matching songs = {0}", m_iMatchingSongs);
   CLog::Log(LOGINFO,"PARTY MODE MANAGER: Party mode enabled!");
 
@@ -311,7 +311,7 @@ bool CPartyModeManager::AddRandomSongs()
   {
     // Limit songs fetched to remainder of songID cache
     iMissingSongs = std::min(iMissingSongs, static_cast<int>(m_songIDCache.size()) - m_iMatchingSongsPicked);
-      
+
     // Pick iMissingSongs from remaining songID cache
     std::string sqlWhereMusic = "songview.idSong IN (";
     std::string sqlWhereVideo = "idMVideo IN (";

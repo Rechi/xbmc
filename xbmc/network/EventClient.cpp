@@ -369,7 +369,7 @@ bool CEventClient::OnPacketBUTTON(CEventPacket *packet)
 
   float famount = 0;
   bool active = (flags & PTB_DOWN) ? true : false;
-  
+
   if (flags & PTB_USE_NAME)
     CLog::Log(LOGDEBUG, "EventClient: button name \"%s\" map \"%s\" %s",
               button.c_str(), map.c_str(), active ? "pressed" : "released");

@@ -248,7 +248,7 @@ int CWinLibraryDirectory::StatDirectory(const CURL& url, struct __stat64* statDa
   auto requestedProps = Wait(dir.Properties().RetrievePropertiesAsync(
       {L"System.DateAccessed", L"System.DateCreated", L"System.DateModified"}));
 
-  if (requestedProps.HasKey(L"System.DateAccessed") && 
+  if (requestedProps.HasKey(L"System.DateAccessed") &&
       requestedProps.Lookup(L"System.DateAccessed"))
   {
     auto dateAccessed = requestedProps.Lookup(L"System.DateAccessed").as<winrt::IPropertyValue>();
@@ -257,7 +257,7 @@ int CWinLibraryDirectory::StatDirectory(const CURL& url, struct __stat64* statDa
       statData->st_atime = winrt::clock::to_time_t(dateAccessed.GetDateTime());
     }
   }
-  if (requestedProps.HasKey(L"System.DateCreated") && 
+  if (requestedProps.HasKey(L"System.DateCreated") &&
       requestedProps.Lookup(L"System.DateCreated"))
   {
     auto dateCreated = requestedProps.Lookup(L"System.DateCreated").as<winrt::IPropertyValue>();
@@ -266,7 +266,7 @@ int CWinLibraryDirectory::StatDirectory(const CURL& url, struct __stat64* statDa
       statData->st_ctime = winrt::clock::to_time_t(dateCreated.GetDateTime());
     }
   }
-  if (requestedProps.HasKey(L"System.DateModified") && 
+  if (requestedProps.HasKey(L"System.DateModified") &&
       requestedProps.Lookup(L"System.DateModified"))
   {
     auto dateModified = requestedProps.Lookup(L"System.DateModified").as<winrt::IPropertyValue>();

@@ -273,7 +273,7 @@ CFArrayRef GetAllDisplayModes(CGDirectDisplayID display)
 // mimic former behavior of deprecated CGDisplayBestModeForParameters
 CGDisplayModeRef BestMatchForMode(CGDirectDisplayID display, size_t bitsPerPixel, size_t width, size_t height, boolean_t &match)
 {
-  
+
   // Get a copy of the current display mode
   CGDisplayModeRef displayMode = CGDisplayCopyDisplayMode(display);
 
@@ -1125,7 +1125,7 @@ void CWinSystemOSX::UpdateResolutions()
 
   int dispIdx = GetDisplayIndex(CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_VIDEOSCREEN_MONITOR));
   GetScreenResolution(&w, &h, &fps, dispIdx);
-  NSString *dispName = screenNameForDisplay(GetDisplayID(dispIdx));  
+  NSString *dispName = screenNameForDisplay(GetDisplayID(dispIdx));
   UpdateDesktopResolution(CDisplaySettings::GetInstance().GetResolutionInfo(RES_DESKTOP), [dispName UTF8String], w, h, fps, 0);
 
   CDisplaySettings::GetInstance().ClearCustomResolutions();
