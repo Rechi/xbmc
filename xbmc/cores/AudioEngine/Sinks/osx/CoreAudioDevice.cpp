@@ -321,7 +321,7 @@ UInt32 CCoreAudioDevice::GetNumChannelsOfStream(UInt32 streamIdx) const
   return channels;
 }
 
-bool CCoreAudioDevice::GetStreams(AudioStreamIdList* pList)
+bool CCoreAudioDevice::GetStreams(AudioStreamIdList* pList) const
 {
   if (!pList || !m_DeviceId)
     return false;
@@ -350,7 +350,7 @@ bool CCoreAudioDevice::GetStreams(AudioStreamIdList* pList)
 }
 
 
-bool CCoreAudioDevice::IsRunning()
+bool CCoreAudioDevice::IsRunning() const
 {
   AudioObjectPropertyAddress  propertyAddress;
   propertyAddress.mScope    = kAudioDevicePropertyScopeOutput;
@@ -424,7 +424,7 @@ bool CCoreAudioDevice::SetHogStatus(bool hog)
   return true;
 }
 
-pid_t CCoreAudioDevice::GetHogStatus()
+pid_t CCoreAudioDevice::GetHogStatus() const
 {
   if (!m_DeviceId)
     return false;
@@ -474,7 +474,7 @@ bool CCoreAudioDevice::SetMixingSupport(UInt32 mix)
   return true;
 }
 
-bool CCoreAudioDevice::GetMixingSupport()
+bool CCoreAudioDevice::GetMixingSupport() const
 {
   if (!m_DeviceId)
     return false;
@@ -512,7 +512,7 @@ bool CCoreAudioDevice::GetMixingSupport()
   return (mix > 0);
 }
 
-bool CCoreAudioDevice::SetCurrentVolume(Float32 vol)
+bool CCoreAudioDevice::SetCurrentVolume(Float32 vol) const
 {
   if (!m_DeviceId)
     return false;
@@ -652,7 +652,7 @@ bool CCoreAudioDevice::GetDataSource(UInt32 &dataSourceId) const
   return ret;
 }
 
-bool CCoreAudioDevice::SetDataSource(UInt32 &dataSourceId)
+bool CCoreAudioDevice::SetDataSource(UInt32& dataSourceId) const
 {
   bool ret = false;
 
@@ -699,7 +699,7 @@ bool CCoreAudioDevice::GetDataSources(CoreAudioDataSourceList* pList) const
   return (!ret);
 }
 
-Float64 CCoreAudioDevice::GetNominalSampleRate()
+Float64 CCoreAudioDevice::GetNominalSampleRate() const
 {
   if (!m_DeviceId)
     return 0.0f;
@@ -749,7 +749,7 @@ bool CCoreAudioDevice::SetNominalSampleRate(Float64 sampleRate)
   return true;
 }
 
-UInt32 CCoreAudioDevice::GetNumLatencyFrames()
+UInt32 CCoreAudioDevice::GetNumLatencyFrames() const
 {
   UInt32 num_latency_frames = 0;
   if (!m_DeviceId)
@@ -782,7 +782,7 @@ UInt32 CCoreAudioDevice::GetNumLatencyFrames()
   return (num_latency_frames);
 }
 
-UInt32 CCoreAudioDevice::GetBufferSize()
+UInt32 CCoreAudioDevice::GetBufferSize() const
 {
   if (!m_DeviceId)
     return false;
@@ -801,7 +801,7 @@ UInt32 CCoreAudioDevice::GetBufferSize()
   return size;
 }
 
-bool CCoreAudioDevice::SetBufferSize(UInt32 size)
+bool CCoreAudioDevice::SetBufferSize(UInt32 size) const
 {
   if (!m_DeviceId)
     return false;

@@ -491,7 +491,7 @@ bool CWakeOnAccess::WakeUpHost(const std::string& hostName, const std::string& c
   return true;
 }
 
-bool CWakeOnAccess::WakeUpHost(const WakeUpEntry& server)
+bool CWakeOnAccess::WakeUpHost(const WakeUpEntry& server) const
 {
   std::string heading = StringUtils::Format(LOCALIZED(13027).c_str(), server.friendlyName.c_str());
 

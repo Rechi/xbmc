@@ -172,7 +172,7 @@ const std::string& CPODocument::GetPlurMsgstr(size_t plural) const
   return m_Entry.msgStrPlural[plural].Str;
 }
 
-std::string CPODocument::UnescapeString(const std::string &strInput)
+std::string CPODocument::UnescapeString(const std::string& strInput) const
 {
   std::string strOutput;
   if (strInput.empty())
@@ -223,7 +223,7 @@ std::string CPODocument::UnescapeString(const std::string &strInput)
   return strOutput;
 }
 
-bool CPODocument::FindLineStart(const std::string &strToFind, size_t &FoundPos)
+bool CPODocument::FindLineStart(const std::string& strToFind, size_t& FoundPos) const
 {
 
   FoundPos = m_Entry.Content.find(strToFind);

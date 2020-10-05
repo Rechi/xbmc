@@ -207,7 +207,7 @@ public:
   bool deactivate();
   void updatedelay(AEDelayStatus& status);
   double buffertime();
-  unsigned int sampletrate() { return m_outputFormat.mSampleRate; };
+  unsigned int sampletrate() const { return m_outputFormat.mSampleRate; };
   unsigned int write(uint8_t* data, unsigned int frames, unsigned int framesize);
   void drain();
 

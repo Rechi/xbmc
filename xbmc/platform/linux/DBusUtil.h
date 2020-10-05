@@ -73,7 +73,6 @@ public:
   void Reset();
   // Keep because operator DBusError* would be used for if-statements on
   // non-const CDBusError instead
-  operator bool();
   operator bool() const;
   std::string Name() const;
   std::string Message() const;

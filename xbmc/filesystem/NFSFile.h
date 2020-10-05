@@ -46,8 +46,8 @@ public:
   ~CNfsConnection();
   bool Connect(const CURL &url, std::string &relativePath);
   struct nfs_context *GetNfsContext() {return m_pNfsContext;}
-  uint64_t GetMaxReadChunkSize() {return m_readChunkSize;}
-  uint64_t GetMaxWriteChunkSize() {return m_writeChunkSize;}
+  uint64_t GetMaxReadChunkSize() const { return m_readChunkSize; }
+  uint64_t GetMaxWriteChunkSize() const { return m_writeChunkSize; }
   std::list<std::string> GetExportList(const CURL &url);
   //this functions splits the url into the exportpath (feed to mount) and the rest of the path
   //relative to the mounted export

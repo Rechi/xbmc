@@ -251,12 +251,12 @@ void CGUIDialogSelect::EnableButton2(bool enable, const std::string& label)
   m_button2Label = label;
 }
 
-bool CGUIDialogSelect::IsButtonPressed()
+bool CGUIDialogSelect::IsButtonPressed() const
 {
   return m_bButtonPressed;
 }
 
-bool CGUIDialogSelect::IsButton2Pressed()
+bool CGUIDialogSelect::IsButton2Pressed() const
 {
   return m_bButton2Pressed;
 }

@@ -49,7 +49,7 @@ public:
   std::vector<CNetworkInterface*>& GetInterfaceList() override;
   CNetworkInterface* GetFirstConnectedInterface() override;
 
-  int GetSocket() { return m_sock; }
+  int GetSocket() const { return m_sock; }
 
 protected:
   std::vector<CNetworkInterface*> m_interfaces;

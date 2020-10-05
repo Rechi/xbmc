@@ -381,7 +381,7 @@ public:
 
 /* ------------ for transaction ------------------- */
   void set_autocommit(bool v) { autocommit = v; }
-  bool get_autocommit() { return autocommit; }
+  bool get_autocommit() const { return autocommit; }
 
 /* ----------------- for debug -------------------- */
   Fields *get_fields_object() {return fields_object;};

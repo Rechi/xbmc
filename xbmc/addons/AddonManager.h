@@ -77,7 +77,7 @@ namespace ADDON
                   const TYPE& type = ADDON_UNKNOWN,
                   bool enabledOnly = true) const;
 
-    bool HasType(const std::string &id, const TYPE &type);
+    bool HasType(const std::string& id, const TYPE& type) const;
 
     bool HasAddons(const TYPE &type);
 
@@ -132,7 +132,7 @@ namespace ADDON
     std::vector<std::shared_ptr<IAddon>> GetOutdatedAddons() const;
 
     /*! Returns true if there is any addon with available updates, otherwise false */
-    bool HasAvailableUpdates();
+    bool HasAvailableUpdates() const;
 
     /*! \brief Checks for new / updated add-ons
      \return True if everything went ok, false otherwise
@@ -228,12 +228,12 @@ namespace ADDON
      */
     bool CanAddonBeDisabled(const std::string& ID);
 
-    bool CanAddonBeEnabled(const std::string& id);
+    bool CanAddonBeEnabled(const std::string& id) const;
 
     /* \brief Checks whether an addon is installed.
      \param ID id of the addon
     */
-    bool IsAddonInstalled(const std::string& ID);
+    bool IsAddonInstalled(const std::string& ID) const;
 
     /* \brief Checks whether an addon is installed from a
      *        particular origin repo and version
@@ -243,12 +243,12 @@ namespace ADDON
      */
     bool IsAddonInstalled(const std::string& ID,
                           const std::string& origin,
-                          const AddonVersion& version);
+                          const AddonVersion& version) const;
 
     /* \brief Checks whether an addon can be installed. Broken addons can't be installed.
     \param addon addon to be checked
     */
-    bool CanAddonBeInstalled(const AddonPtr& addon);
+    bool CanAddonBeInstalled(const AddonPtr& addon) const;
 
     bool CanUninstall(const AddonPtr& addon);
 

@@ -38,11 +38,11 @@ public:
   CTeletextDecoder();
   virtual ~CTeletextDecoder(void);
 
-  bool NeedRendering() { return m_updateTexture; }
+  bool NeedRendering() const { return m_updateTexture; }
   void RenderingDone() { m_updateTexture = false; }
   UTILS::Color *GetTextureBuffer() { return m_TextureBuffer + (m_RenderInfo.Width*m_YOffset); }
-  int GetHeight() { return m_RenderInfo.Height; }
-  int GetWidth() { return m_RenderInfo.Width; }
+  int GetHeight() const { return m_RenderInfo.Height; }
+  int GetWidth() const { return m_RenderInfo.Width; }
   bool InitDecoder();
   void EndDecoder();
   void RenderPage();

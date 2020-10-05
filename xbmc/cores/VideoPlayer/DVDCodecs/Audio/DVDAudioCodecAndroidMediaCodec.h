@@ -46,11 +46,11 @@ public:
 
 protected:
   int GetData(uint8_t** dst);
-  int GetChannels() { return m_channels; }
-  int GetEncodedChannels() { return m_channels; }
+  int GetChannels() const { return m_channels; }
+  int GetEncodedChannels() const { return m_channels; }
   CAEChannelInfo GetChannelMap();
-  int GetSampleRate() { return m_samplerate; }
-  int GetEncodedSampleRate() { return m_samplerate; }
+  int GetSampleRate() const { return m_samplerate; }
+  int GetEncodedSampleRate() const { return m_samplerate; }
   enum AEDataFormat GetDataFormat() { return AE_FMT_S16NE; }
 
   bool ConfigureMediaCodec(void);

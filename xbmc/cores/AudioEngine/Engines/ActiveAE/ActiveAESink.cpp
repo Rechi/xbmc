@@ -1082,7 +1082,7 @@ void CActiveAESink::SwapInit(CSampleBuffer* samples)
 
 #define PI 3.1415926536f
 
-void CActiveAESink::GenerateNoise()
+void CActiveAESink::GenerateNoise() const
 {
   int nb_floats = m_sampleOfSilence.pkt->max_nb_samples;
   nb_floats *= m_sampleOfSilence.pkt->config.channels;

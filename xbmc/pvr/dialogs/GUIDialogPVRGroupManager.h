@@ -41,7 +41,7 @@ namespace PVR
     void Clear();
     void ClearSelectedGroupsThumbnail();
     void Update();
-    bool PersistChanges();
+    bool PersistChanges() const;
     bool ActionButtonOk(CGUIMessage& message);
     bool ActionButtonNewGroup(CGUIMessage& message);
     bool ActionButtonDeleteGroup(CGUIMessage& message);

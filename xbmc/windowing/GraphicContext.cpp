@@ -556,7 +556,7 @@ void CGraphicContext::ResetOverscan(RESOLUTION_INFO &res)
   res.Overscan.bottom = res.iHeight;
 }
 
-void CGraphicContext::ResetOverscan(RESOLUTION res, OVERSCAN &overscan)
+void CGraphicContext::ResetOverscan(RESOLUTION res, OVERSCAN& overscan) const
 {
   overscan.left = 0;
   overscan.top = 0;
@@ -566,7 +566,7 @@ void CGraphicContext::ResetOverscan(RESOLUTION res, OVERSCAN &overscan)
   overscan.bottom = info.iHeight;
 }
 
-void CGraphicContext::ResetScreenParameters(RESOLUTION res)
+void CGraphicContext::ResetScreenParameters(RESOLUTION res) const
 {
   RESOLUTION_INFO& info = CDisplaySettings::GetInstance().GetResolutionInfo(res);
 
@@ -950,7 +950,7 @@ bool CGraphicContext::IsFullScreenRoot () const
   return m_bFullScreenRoot;
 }
 
-void CGraphicContext::ToggleFullScreen()
+void CGraphicContext::ToggleFullScreen() const
 {
   RESOLUTION uiRes;
 

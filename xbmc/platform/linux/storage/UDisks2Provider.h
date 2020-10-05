@@ -45,7 +45,7 @@ class CUDisks2Provider : public IStorageProvider
     explicit Block(const char *object);
     ~Block() = default;
 
-    bool IsReady();
+    bool IsReady() const;
 
     std::string toString();
   };
@@ -61,15 +61,15 @@ class CUDisks2Provider : public IStorageProvider
     explicit Filesystem(const char *object);
     ~Filesystem() = default;
 
-    bool IsReady();
-    bool IsOptical();
+    bool IsReady() const;
+    bool IsOptical() const;
 
     bool Mount();
     bool Unmount();
 
-    std::string GetDisplayName();
-    CMediaSource ToMediaShare();
-    bool IsApproved();
+    std::string GetDisplayName() const;
+    CMediaSource ToMediaShare() const;
+    bool IsApproved() const;
 
     std::string toString();
   };

@@ -82,7 +82,7 @@ protected:
   /*!
    \brief Whether to automatically close the progress indicator in MarkFinished().
    */
-  bool GetAutoClose() { return m_autoClose; }
+  bool GetAutoClose() const { return m_autoClose; }
 
   /*!
    \brief Set whether to automatically close the progress indicator in MarkFinished().
@@ -92,7 +92,7 @@ protected:
   /*!
    \brief Whether to update the progress bar or not.
    */
-  bool GetUpdateProgress() { return m_updateProgress; }
+  bool GetUpdateProgress() const { return m_updateProgress; }
 
   /*!
    \brief Set whether to update the progress bar or not.
@@ -102,7 +102,7 @@ protected:
   /*!
   \brief Whether to update the progress information or not.
   */
-  bool GetUpdateInformation() { return m_updateInformation; }
+  bool GetUpdateInformation() const { return m_updateInformation; }
 
   /*!
   \brief Set whether to update the progress information or not.

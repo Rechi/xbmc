@@ -160,7 +160,7 @@ public:
     avsync = AV_SYNC_FORCE;
   }
 
-  double dts_end()
+  double dts_end() const
   {
     if(dts == DVD_NOPTS_VALUE)
       return DVD_NOPTS_VALUE;

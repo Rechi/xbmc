@@ -24,7 +24,7 @@ public:
   ~CLibInputKeyboard();
 
   void ProcessKey(libinput_event_keyboard *e);
-  void UpdateLeds(libinput_device *dev);
+  void UpdateLeds(libinput_device* dev) const;
   void GetRepeat(libinput_device *dev);
 
   bool SetKeymap(const std::string& layout);

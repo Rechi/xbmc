@@ -109,16 +109,16 @@ public:
   trackinfo GetTrackInformation( int nTrack ) { return m_ti[nTrack -1]; }
   xbmc_cdtext_t GetDiscCDTextInformation() { return m_cdtext; }
 
-  bool HasDataTracks() { return (m_nNumData > 0); }
-  bool HasAudioTracks() { return (m_nNumAudio > 0); }
-  int GetFirstTrack() { return m_nFirstTrack; }
-  int GetTrackCount() { return m_nNumTrack; }
-  int GetFirstAudioTrack() { return m_nFirstAudio; }
-  int GetFirstDataTrack() { return m_nFirstData; }
-  int GetDataTrackCount() { return m_nNumData; }
-  int GetAudioTrackCount() { return m_nNumAudio; }
-  uint32_t GetCddbDiscId() { return m_ulCddbDiscId; }
-  int GetDiscLength() { return m_nLength; }
+  bool HasDataTracks() const { return (m_nNumData > 0); }
+  bool HasAudioTracks() const { return (m_nNumAudio > 0); }
+  int GetFirstTrack() const { return m_nFirstTrack; }
+  int GetTrackCount() const { return m_nNumTrack; }
+  int GetFirstAudioTrack() const { return m_nFirstAudio; }
+  int GetFirstDataTrack() const { return m_nFirstData; }
+  int GetDataTrackCount() const { return m_nNumData; }
+  int GetAudioTrackCount() const { return m_nNumAudio; }
+  uint32_t GetCddbDiscId() const { return m_ulCddbDiscId; }
+  int GetDiscLength() const { return m_nLength; }
   std::string GetDiscLabel(){ return m_strDiscLabel; }
 
   // CD-ROM with ISO 9660 filesystem
@@ -160,7 +160,7 @@ public:
   bool Is3DO( int nTrack ) { return ((m_ti[nTrack - 1].nfsInfo & FS_MASK) == FS_3DO); }
 
   // Mixed Mode CD-ROM
-  bool IsMixedMode( int nTrack ) { return (m_nFirstData == 1 && m_nNumAudio > 0); }
+  bool IsMixedMode(int nTrack) const { return (m_nFirstData == 1 && m_nNumAudio > 0); }
 
   // CD-ROM with XA sectors
   bool IsXA( int nTrack ) { return (m_ti[nTrack - 1].nfsInfo & XA) ? false : true; }
@@ -180,7 +180,7 @@ public:
   bool IsCdTv( int nTrack ) { return (m_ti[nTrack - 1].nfsInfo & CDTV) ? false : true; }
 
   // CD-Plus/Extra
-  bool IsCDExtra( int nTrack ) { return (m_nFirstData > 1); }
+  bool IsCDExtra(int nTrack) const { return (m_nFirstData > 1); }
 
   // Bootable CD
   bool IsBootable( int nTrack ) { return (m_ti[nTrack - 1].nfsInfo & BOOTABLE) ? false : true; }
@@ -211,7 +211,7 @@ public:
 
   void SetCddbDiscId( uint32_t ulCddbDiscId ) { m_ulCddbDiscId = ulCddbDiscId; }
   void SetDiscLength( int nLength ) { m_nLength = nLength; }
-  bool HasCDDBInfo() { return m_bHasCDDBInfo; }
+  bool HasCDDBInfo() const { return m_bHasCDDBInfo; }
   void SetNoCDDBInfo() { m_bHasCDDBInfo = false; }
 
   void SetDiscLabel(const std::string& strDiscLabel){ m_strDiscLabel = strDiscLabel; }

@@ -552,7 +552,7 @@ bool CPVRTimerInfoTag::Persist()
   return false;
 }
 
-bool CPVRTimerInfoTag::DeleteFromDatabase()
+bool CPVRTimerInfoTag::DeleteFromDatabase() const
 {
   const std::shared_ptr<CPVRDatabase> database = CServiceBroker::GetPVRManager().GetTVDatabase();
   if (database)
@@ -676,7 +676,7 @@ void CPVRTimerInfoTag::ResetChildState()
   m_iRadioChildTimersErrors = 0;
 }
 
-bool CPVRTimerInfoTag::UpdateOnClient()
+bool CPVRTimerInfoTag::UpdateOnClient() const
 {
   const std::shared_ptr<CPVRClient> client = CServiceBroker::GetPVRManager().GetClient(m_iClientId);
   return client && (client->UpdateTimer(*this) == PVR_ERROR_NO_ERROR);

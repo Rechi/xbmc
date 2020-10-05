@@ -174,7 +174,7 @@ namespace
     DADiskRef GetDisk() const { return m_disk; }
 
     void Reset();
-    bool WaitForCompletion(CFTimeInterval timeout);
+    bool WaitForCompletion(CFTimeInterval timeout) const;
     void Completed(bool success);
 
     static void CompletionCallback(DADiskRef disk, DADissenterRef dissenter, void* context);
@@ -231,7 +231,7 @@ namespace
       CFRelease(m_session);
   }
 
-  bool DAOperationContext::WaitForCompletion(CFTimeInterval timeout)
+  bool DAOperationContext::WaitForCompletion(CFTimeInterval timeout) const
   {
     while (!m_completed)
     {

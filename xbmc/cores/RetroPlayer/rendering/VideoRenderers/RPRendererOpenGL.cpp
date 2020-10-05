@@ -144,7 +144,7 @@ bool CRPRendererOpenGL::SupportsScalingMethod(SCALINGMETHOD method)
   return method == SCALINGMETHOD::NEAREST || method == SCALINGMETHOD::LINEAR;
 }
 
-void CRPRendererOpenGL::ClearBackBuffer()
+void CRPRendererOpenGL::ClearBackBuffer() const
 {
   glClearColor(m_clearColour, m_clearColour, m_clearColour, 0.0f);
   glClear(GL_COLOR_BUFFER_BIT);

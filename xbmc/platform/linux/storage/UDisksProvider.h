@@ -25,11 +25,11 @@ public:
   bool Mount();
   bool UnMount();
 
-  bool IsApproved();
+  bool IsApproved() const;
 
   std::string toString();
 
-  CMediaSource ToMediaShare();
+  CMediaSource ToMediaShare() const;
 
   std::string m_UDI, m_DeviceKitUDI, m_MountPath, m_FileSystem, m_Label;
   bool m_isMounted, m_isMountedByUs, m_isRemovable, m_isPartition, m_isFileSystem, m_isSystemInternal, m_isOptical;

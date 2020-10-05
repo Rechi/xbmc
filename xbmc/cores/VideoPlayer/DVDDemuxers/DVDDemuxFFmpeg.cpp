@@ -733,7 +733,7 @@ void CDVDDemuxFFmpeg::SetSpeed(int iSpeed)
   }
 }
 
-AVDictionary* CDVDDemuxFFmpeg::GetFFMpegOptionsFromInput()
+AVDictionary* CDVDDemuxFFmpeg::GetFFMpegOptionsFromInput() const
 {
   const std::shared_ptr<CDVDInputStreamFFmpeg> input =
     std::dynamic_pointer_cast<CDVDInputStreamFFmpeg>(m_pInput);
@@ -930,7 +930,7 @@ AVDictionary* CDVDDemuxFFmpeg::GetFFMpegOptionsFromInput()
   return options;
 }
 
-double CDVDDemuxFFmpeg::ConvertTimestamp(int64_t pts, int den, int num)
+double CDVDDemuxFFmpeg::ConvertTimestamp(int64_t pts, int den, int num) const
 {
   if (pts == (int64_t)AV_NOPTS_VALUE)
     return DVD_NOPTS_VALUE;
@@ -1397,7 +1397,7 @@ void CDVDDemuxFFmpeg::SetProgram(int progId)
   m_newProgram = progId;
 }
 
-double CDVDDemuxFFmpeg::SelectAspect(AVStream* st, bool& forced)
+double CDVDDemuxFFmpeg::SelectAspect(AVStream* st, bool& forced) const
 {
   // trust matroska container
   if (m_bMatroska && st->sample_aspect_ratio.num != 0)
@@ -2015,7 +2015,7 @@ bool CDVDDemuxFFmpeg::IsProgramChange()
   return false;
 }
 
-unsigned int CDVDDemuxFFmpeg::HLSSelectProgram()
+unsigned int CDVDDemuxFFmpeg::HLSSelectProgram() const
 {
   unsigned int prog = UINT_MAX;
 
@@ -2302,7 +2302,7 @@ bool CDVDDemuxFFmpeg::IsTransportStreamReady()
   return state == TRANSPORT_STREAM_STATE::READY;
 }
 
-void CDVDDemuxFFmpeg::ResetVideoStreams()
+void CDVDDemuxFFmpeg::ResetVideoStreams() const
 {
   AVStream* st;
   for (unsigned int i = 0; i < m_pFormatContext->nb_streams; i++)
@@ -2316,7 +2316,7 @@ void CDVDDemuxFFmpeg::ResetVideoStreams()
   }
 }
 
-void CDVDDemuxFFmpeg::GetL16Parameters(int &channels, int &samplerate)
+void CDVDDemuxFFmpeg::GetL16Parameters(int& channels, int& samplerate) const
 {
   std::string content;
   if (XFILE::CCurlFile::GetContentType(m_pInput->GetURL(), content))

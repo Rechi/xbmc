@@ -84,7 +84,7 @@ public:
     ExistsSubQuery(const std::string &table, const std::string &parameter) : tablename(table), param(parameter) {};
     void AppendJoin(const std::string &strJoin);
     void AppendWhere(const std::string &strWhere, bool combineWithAnd = true);
-    bool BuildSQL(std::string &strSQL);
+    bool BuildSQL(std::string& strSQL) const;
 
     std::string tablename;
     std::string param;
@@ -95,7 +95,7 @@ public:
 
   CDatabase();
   virtual ~CDatabase(void);
-  bool IsOpen();
+  bool IsOpen() const;
   virtual void Close();
   bool Compress(bool bForce=true);
   void Interrupt();

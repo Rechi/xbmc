@@ -201,7 +201,7 @@ bool CThread::SetPriority(const int iPriority)
   return bReturn;
 }
 
-int CThread::GetPriority()
+int CThread::GetPriority() const
 {
   int iReturn;
 

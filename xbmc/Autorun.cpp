@@ -468,7 +468,7 @@ bool CAutorun::RunDisc(IDirectory* pDir, const std::string& strDrive, int& nAdde
   return bPlaying;
 }
 
-void CAutorun::HandleAutorun()
+void CAutorun::HandleAutorun() const
 {
 #ifndef TARGET_WINDOWS
   if (!m_bEnable)

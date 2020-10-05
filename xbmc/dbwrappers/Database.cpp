@@ -115,7 +115,7 @@ void CDatabase::ExistsSubQuery::AppendWhere(const std::string &strWhere, bool co
   }
 }
 
-bool CDatabase::ExistsSubQuery::BuildSQL(std::string & strSQL)
+bool CDatabase::ExistsSubQuery::BuildSQL(std::string& strSQL) const
 {
   if (tablename.empty())
     return false;
@@ -631,7 +631,7 @@ int CDatabase::GetDBVersion()
   return 0;
 }
 
-bool CDatabase::IsOpen()
+bool CDatabase::IsOpen() const
 {
   return m_openCount > 0;
 }

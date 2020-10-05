@@ -73,7 +73,7 @@ std::string CDemuxStreamAudio::GetStreamType()
   return strInfo;
 }
 
-int CDVDDemux::GetNrOfStreams(StreamType streamType)
+int CDVDDemux::GetNrOfStreams(StreamType streamType) const
 {
   int iCounter = 0;
 

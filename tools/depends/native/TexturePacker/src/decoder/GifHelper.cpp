@@ -452,7 +452,7 @@ bool GifHelper::PrepareTemplate(GifFrame &frame)
   return true;
 }
 
-void GifHelper::ClearFrameAreaToTransparency(unsigned char* dest, const GifFrame &frame)
+void GifHelper::ClearFrameAreaToTransparency(unsigned char* dest, const GifFrame& frame) const
 {
   for (unsigned int dest_y = frame.m_top, src_y = 0; src_y < frame.m_height; ++dest_y, ++src_y)
   {

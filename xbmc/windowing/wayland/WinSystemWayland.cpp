@@ -1295,7 +1295,7 @@ CWinSystemWayland::SurfaceSubmission::SurfaceSubmission(timespec const& submissi
 {
 }
 
-timespec CWinSystemWayland::GetPresentationClockTime()
+timespec CWinSystemWayland::GetPresentationClockTime() const
 {
   timespec time;
   if (clock_gettime(m_presentationClock, &time) != 0)

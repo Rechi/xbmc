@@ -110,7 +110,7 @@ public:
   CWebSocket() { m_state = WebSocketStateNotConnected; m_message = NULL; }
   virtual ~CWebSocket() { if (m_message) delete m_message; };
 
-  int GetVersion() { return m_version; }
+  int GetVersion() const { return m_version; }
   WebSocketState GetState() { return m_state; }
 
   virtual bool Handshake(const char* data, size_t length, std::string &response) = 0;

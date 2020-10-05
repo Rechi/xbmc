@@ -343,7 +343,7 @@ void CLibInputKeyboard::KeyRepeatTimeout()
     appPort->OnEvent(m_repeatEvent);
 }
 
-void CLibInputKeyboard::UpdateLeds(libinput_device *dev)
+void CLibInputKeyboard::UpdateLeds(libinput_device* dev) const
 {
   libinput_device_led_update(dev, static_cast<libinput_led>(m_leds));
 }

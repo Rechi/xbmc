@@ -88,7 +88,10 @@ namespace XBMCAddonUtils
 
   static char** spaces = getSpacesArray(256);
 
-  const char* TraceGuard::getSpaces() { return spaces[depth]; }
+  const char* TraceGuard::getSpaces() const
+  {
+    return spaces[depth];
+  }
 
   TraceGuard::TraceGuard(const char* _function) :function(_function)
   {

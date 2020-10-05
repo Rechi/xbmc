@@ -33,7 +33,7 @@ public:
   ~CBackgroundInfoLoader() override;
 
   void Load(CFileItemList& items);
-  bool IsLoading();
+  bool IsLoading() const;
   void Run() override;
   void SetObserver(IBackgroundLoaderObserver* pObserver);
   void SetProgressCallback(IProgressCallback* pCallback);

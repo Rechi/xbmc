@@ -191,8 +191,8 @@ namespace PVR
 
     int m_pageControl;
 
-    void GetChannelCacheOffsets(int& cacheBefore, int& cacheAfter);
-    void GetProgrammeCacheOffsets(int& cacheBefore, int& cacheAfter);
+    void GetChannelCacheOffsets(int& cacheBefore, int& cacheAfter) const;
+    void GetProgrammeCacheOffsets(int& cacheBefore, int& cacheAfter) const;
 
   private:
     bool OnMouseClick(int dwButton, const CPoint& point);

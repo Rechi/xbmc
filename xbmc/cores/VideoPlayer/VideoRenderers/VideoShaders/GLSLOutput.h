@@ -26,10 +26,10 @@ namespace Shaders
       bool fullrange,
       GLuint clutTex,
       int clutSize);
-    std::string GetDefines();
+    std::string GetDefines() const;
     void OnCompiledAndLinked(GLuint programHandle);
-    bool OnEnabled();
-    void OnDisabled();
+    bool OnEnabled() const;
+    void OnDisabled() const;
     void Free();
 
   private:

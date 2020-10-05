@@ -450,7 +450,7 @@ snd_pcm_chmap_t* CAESinkALSA::SelectALSAChannelMap(const CAEChannelInfo& info)
   return chmap;
 }
 
-void CAESinkALSA::GetAESParams(const AEAudioFormat& format, std::string& params)
+void CAESinkALSA::GetAESParams(const AEAudioFormat& format, std::string& params) const
 {
   if (m_passthrough)
     params = "AES0=0x06";

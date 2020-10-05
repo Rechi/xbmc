@@ -18,12 +18,12 @@ namespace XFILE
     {
     public:
       CQueryParams();
-      long GetArtistId() { return m_idArtist; }
-      long GetAlbumId() { return m_idAlbum; }
-      long GetGenreId() { return m_idGenre; }
-      long GetSongId() { return m_idSong; }
-      long GetYear() { return m_year; }
-      long GetDisc() { return m_disc; }
+      long GetArtistId() const { return m_idArtist; }
+      long GetAlbumId() const { return m_idAlbum; }
+      long GetGenreId() const { return m_idGenre; }
+      long GetSongId() const { return m_idSong; }
+      long GetYear() const { return m_year; }
+      long GetDisc() const { return m_disc; }
 
     protected:
       void SetQueryParam(NODE_TYPE NodeType, const std::string& strNodeName);

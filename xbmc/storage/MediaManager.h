@@ -111,10 +111,7 @@ private:
     std::string serial;
     std::string type;
 
-    bool empty()
-    {
-      return (name.empty() && serial.empty());
-    }
+    bool empty() const { return (name.empty() && serial.empty()); }
   };
 
   DiscInfo GetDiscInfo(const std::string& mediaPath);

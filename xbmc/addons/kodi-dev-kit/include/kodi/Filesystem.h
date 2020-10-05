@@ -645,7 +645,7 @@ public:
   ///
   /// @return The with time_t defined date and time of file
   ///
-  time_t DateTime() { return m_dateTime; }
+  time_t DateTime() const { return m_dateTime; }
   //----------------------------------------------------------------------------
 
   //============================================================================

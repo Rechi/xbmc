@@ -79,7 +79,7 @@ private:
 
   void SetStereoModeByUser(const RENDER_STEREO_MODE &mode);
 
-  void ApplyStereoMode(const RENDER_STEREO_MODE &mode, bool notify = true);
+  void ApplyStereoMode(const RENDER_STEREO_MODE& mode, bool notify = true) const;
   void OnPlaybackStopped(void);
 
   /**

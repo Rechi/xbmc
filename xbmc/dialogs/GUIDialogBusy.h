@@ -26,7 +26,7 @@ public:
    */
   void SetProgress(float progress);
 
-  bool IsCanceled() { return m_bCanceled; }
+  bool IsCanceled() const { return m_bCanceled; }
 
   /*! \brief Wait for a runnable to execute off-thread.
    Creates a thread to run the given runnable, and while waiting

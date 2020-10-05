@@ -61,7 +61,7 @@ namespace XBMCAddon
       ///
       write(...);
 #else
-      void write(const String& str);
+      void write(const String& str) const;
 #endif
 
 #ifdef DOXYGEN_SHOULD_USE_THIS
@@ -75,7 +75,7 @@ namespace XBMCAddon
       ///
       writelines(...);
 #else
-      void writelines(const std::vector<String>& seq);
+      void writelines(const std::vector<String>& seq) const;
 #endif
 
 #ifndef SWIG

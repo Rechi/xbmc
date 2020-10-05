@@ -178,7 +178,7 @@ private:
   void ProcessMessages();
   void AckConfigure(std::uint32_t serial);
 
-  timespec GetPresentationClockTime();
+  timespec GetPresentationClockTime() const;
 
   // Globals
   // -------

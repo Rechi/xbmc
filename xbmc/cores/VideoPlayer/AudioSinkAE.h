@@ -43,13 +43,13 @@ public:
   double GetCacheTotal(); // returns total time a stream can buffer
   double GetMaxDelay(); // returns total time of audio in AE for the stream
   double GetDelay(); // returns the time it takes to play a packet if we add one at this time
-  double GetSyncError();
+  double GetSyncError() const;
   void SetSyncErrorCorrection(double correction);
 
   /*!
    * \brief Returns the resample ratio, or 0.0 if unknown/invalid
    */
-  double GetResampleRatio();
+  double GetResampleRatio() const;
 
   void SetResampleMode(int mode);
   void Flush();

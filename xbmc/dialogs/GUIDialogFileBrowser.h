@@ -31,7 +31,7 @@ public:
   void FrameMove() override;
   void OnWindowLoaded() override;
   void OnWindowUnload() override;
-  bool IsConfirmed() { return m_bConfirmed; };
+  bool IsConfirmed() const { return m_bConfirmed; };
   void SetHeading(const std::string &heading);
 
   static bool ShowAndGetDirectory(const VECSOURCES &shares, const std::string &heading, std::string &path, bool bWriteOnly=false);

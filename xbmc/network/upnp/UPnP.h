@@ -45,12 +45,12 @@ public:
     // client
     void StartClient();
     void StopClient();
-    bool IsClientStarted() { return (m_MediaBrowser != NULL); }
+    bool IsClientStarted() const { return (m_MediaBrowser != NULL); }
 
     // controller
     void StartController();
     void StopController();
-    bool IsControllerStarted() { return (m_MediaController != NULL); }
+    bool IsControllerStarted() const { return (m_MediaController != NULL); }
 
     // renderer
     bool StartRenderer();

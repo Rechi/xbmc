@@ -2583,7 +2583,7 @@ void CActiveAE::MixSounds(CSoundPacket &dstSample)
   }
 }
 
-void CActiveAE::Deamplify(CSoundPacket &dstSample)
+void CActiveAE::Deamplify(CSoundPacket& dstSample) const
 {
   if (m_volumeScaled < 1.0 || m_muted)
   {

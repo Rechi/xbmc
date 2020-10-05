@@ -1323,7 +1323,7 @@ bool CWebServer::Stop()
   return true;
 }
 
-bool CWebServer::IsStarted()
+bool CWebServer::IsStarted() const
 {
   return m_running;
 }

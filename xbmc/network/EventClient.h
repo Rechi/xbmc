@@ -196,10 +196,10 @@ namespace EVENTCLIENT
     virtual bool OnPacketNOTIFICATION(EVENTPACKET::CEventPacket *packet);
     virtual bool OnPacketLOG(EVENTPACKET::CEventPacket *packet);
     virtual bool OnPacketACTION(EVENTPACKET::CEventPacket *packet);
-    bool CheckButtonRepeat(unsigned int &next);
+    bool CheckButtonRepeat(unsigned int& next) const;
 
     // returns true if the client has received the HELO packet
-    bool Greeted() { return m_bGreeted; }
+    bool Greeted() const { return m_bGreeted; }
 
     // reset the timeout counter
     void ResetTimeout()

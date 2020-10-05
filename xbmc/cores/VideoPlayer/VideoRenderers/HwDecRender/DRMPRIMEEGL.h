@@ -21,8 +21,8 @@ public:
   void Unmap();
   void Init(EGLDisplay eglDisplay);
 
-  GLuint GetTexture() { return m_texture; }
-  CSizeInt GetTextureSize() { return {m_texWidth, m_texHeight}; }
+  GLuint GetTexture() const { return m_texture; }
+  CSizeInt GetTextureSize() const { return {m_texWidth, m_texHeight}; }
 
 protected:
   CVideoBufferDRMPRIME* m_primebuffer{nullptr};

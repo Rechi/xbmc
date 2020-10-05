@@ -490,7 +490,7 @@ public:
    \param settingId Setting identifier
    \return True if the setting was successfully loaded from the given XML node, false otherwise
    */
-  bool LoadSetting(const TiXmlNode *node, const std::string &settingId);
+  bool LoadSetting(const TiXmlNode* node, const std::string& settingId) const;
 
   // overwrite (not override) from CSettingsBase
   bool GetBool(const std::string& id) const;

@@ -30,7 +30,7 @@ public:
 
   bool Start(uint16_t port, const std::string &username, const std::string &password);
   bool Stop();
-  bool IsStarted();
+  bool IsStarted() const;
   static bool WebServerSupportsSSL();
   void SetCredentials(const std::string &username, const std::string &password);
 

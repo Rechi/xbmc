@@ -59,7 +59,7 @@ public:
   static uint64_t GetCurrentThreadNativeId();
 
   // Get and set the thread's priority
-  int GetPriority(void);
+  int GetPriority(void) const;
   bool SetPriority(const int iPriority);
 
   float GetRelativeUsage();  // returns the relative cpu usage of this thread since last call

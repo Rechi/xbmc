@@ -55,7 +55,7 @@ namespace XBMCAddon
       inline void    OnNotification(const String &sender, const String &method, const String &data) { XBMC_TRACE; invokeCallback(new CallbackFunction<Monitor,const String,const String,const String>(this,&Monitor::onNotification,sender,method,data)); }
 
       inline const String& GetId() { return Id; }
-      inline long GetInvokerId() { return invokerId; }
+      inline long GetInvokerId() const { return invokerId; }
 
       /**
        * Called from XBPython to notify registered monitors that a script is aborting/ending.

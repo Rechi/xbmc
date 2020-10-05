@@ -145,7 +145,7 @@ VdpVideoMixerFeature* CVDPAUContext::GetFeatures()
   return m_vdpFeatures;
 }
 
-int CVDPAUContext::GetFeatureCount()
+int CVDPAUContext::GetFeatureCount() const
 {
   return m_featureCount;
 }
@@ -256,7 +256,7 @@ void CVDPAUContext::QueryProcs()
 #undef VDP_PROC
 }
 
-VdpDevice CVDPAUContext::GetDevice()
+VdpDevice CVDPAUContext::GetDevice() const
 {
   return m_vdpDevice;
 }
@@ -795,7 +795,7 @@ bool CDecoder::IsVDPAUFormat(AVPixelFormat format)
     return false;
 }
 
-bool CDecoder::Supports(VdpVideoMixerFeature feature)
+bool CDecoder::Supports(VdpVideoMixerFeature feature) const
 {
   return m_vdpauConfig.context->Supports(feature);
 }

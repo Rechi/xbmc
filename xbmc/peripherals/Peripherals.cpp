@@ -695,7 +695,7 @@ PeripheralPtr CPeripherals::GetByPath(const std::string& strPath) const
   return result;
 }
 
-bool CPeripherals::OnAction(const CAction& action)
+bool CPeripherals::OnAction(const CAction& action) const
 {
   if (action.GetID() == ACTION_MUTE)
   {
@@ -727,7 +727,7 @@ bool CPeripherals::OnAction(const CAction& action)
   return false;
 }
 
-bool CPeripherals::IsMuted()
+bool CPeripherals::IsMuted() const
 {
   PeripheralVector peripherals;
   if (SupportsCEC() && GetPeripheralsWithFeature(peripherals, FEATURE_CEC))
@@ -744,7 +744,7 @@ bool CPeripherals::IsMuted()
   return false;
 }
 
-bool CPeripherals::ToggleMute()
+bool CPeripherals::ToggleMute() const
 {
   PeripheralVector peripherals;
   if (SupportsCEC() && GetPeripheralsWithFeature(peripherals, FEATURE_CEC))
@@ -764,7 +764,7 @@ bool CPeripherals::ToggleMute()
   return false;
 }
 
-bool CPeripherals::ToggleDeviceState(CecStateChange mode /*= STATE_SWITCH_TOGGLE */)
+bool CPeripherals::ToggleDeviceState(CecStateChange mode /*= STATE_SWITCH_TOGGLE */) const
 {
   bool ret(false);
   PeripheralVector peripherals;
@@ -782,7 +782,7 @@ bool CPeripherals::ToggleDeviceState(CecStateChange mode /*= STATE_SWITCH_TOGGLE
   return ret;
 }
 
-bool CPeripherals::GetNextKeypress(float frameTime, CKey& key)
+bool CPeripherals::GetNextKeypress(float frameTime, CKey& key) const
 {
   PeripheralVector peripherals;
   if (SupportsCEC() && GetPeripheralsWithFeature(peripherals, FEATURE_CEC))
@@ -814,7 +814,7 @@ EventLockHandlePtr CPeripherals::RegisterEventLock()
   return m_eventScanner->RegisterLock();
 }
 
-void CPeripherals::OnUserNotification()
+void CPeripherals::OnUserNotification() const
 {
   if (!CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(
           CSettings::SETTING_INPUT_RUMBLENOTIFY))
@@ -827,7 +827,7 @@ void CPeripherals::OnUserNotification()
     peripheral->OnUserNotification();
 }
 
-void CPeripherals::TestFeature(PeripheralFeature feature)
+void CPeripherals::TestFeature(PeripheralFeature feature) const
 {
   PeripheralVector peripherals;
   GetPeripheralsWithFeature(peripherals, feature);
@@ -854,7 +854,7 @@ void CPeripherals::TestFeature(PeripheralFeature feature)
   }
 }
 
-void CPeripherals::PowerOffDevices()
+void CPeripherals::PowerOffDevices() const
 {
   TestFeature(FEATURE_POWER_OFF);
 }
@@ -883,7 +883,7 @@ void CPeripherals::EnableButtonMapping()
     bus->EnableButtonMapping();
 }
 
-PeripheralAddonPtr CPeripherals::GetAddonWithButtonMap(const CPeripheral* device)
+PeripheralAddonPtr CPeripherals::GetAddonWithButtonMap(const CPeripheral* device) const
 {
   PeripheralBusAddonPtr addonBus =
       std::static_pointer_cast<CPeripheralBusAddon>(GetBusByType(PERIPHERAL_BUS_ADDON));
@@ -897,7 +897,7 @@ PeripheralAddonPtr CPeripherals::GetAddonWithButtonMap(const CPeripheral* device
   return addon;
 }
 
-void CPeripherals::ResetButtonMaps(const std::string& controllerId)
+void CPeripherals::ResetButtonMaps(const std::string& controllerId) const
 {
   PeripheralBusAddonPtr addonBus =
       std::static_pointer_cast<CPeripheralBusAddon>(GetBusByType(PERIPHERAL_BUS_ADDON));
@@ -916,7 +916,7 @@ void CPeripherals::ResetButtonMaps(const std::string& controllerId)
   }
 }
 
-void CPeripherals::RegisterJoystickButtonMapper(IButtonMapper* mapper)
+void CPeripherals::RegisterJoystickButtonMapper(IButtonMapper* mapper) const
 {
   PeripheralVector peripherals;
   GetPeripheralsWithFeature(peripherals, FEATURE_JOYSTICK);
@@ -927,7 +927,7 @@ void CPeripherals::RegisterJoystickButtonMapper(IButtonMapper* mapper)
     peripheral->RegisterJoystickButtonMapper(mapper);
 }
 
-void CPeripherals::UnregisterJoystickButtonMapper(IButtonMapper* mapper)
+void CPeripherals::UnregisterJoystickButtonMapper(IButtonMapper* mapper) const
 {
   mapper->ResetButtonMapCallbacks();
 

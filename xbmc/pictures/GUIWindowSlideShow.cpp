@@ -146,7 +146,7 @@ CGUIWindowSlideShow::CGUIWindowSlideShow(void)
   Reset();
 }
 
-void CGUIWindowSlideShow::AnnouncePlayerPlay(const CFileItemPtr& item)
+void CGUIWindowSlideShow::AnnouncePlayerPlay(const CFileItemPtr& item) const
 {
   CVariant param;
   param["player"]["speed"] = m_bSlideShow && !m_bPause ? 1 : 0;

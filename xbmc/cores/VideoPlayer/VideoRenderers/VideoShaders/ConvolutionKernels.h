@@ -18,7 +18,7 @@ class CConvolutionKernel
     CConvolutionKernel(ESCALINGMETHOD method, int size);
     ~CConvolutionKernel();
 
-    int      GetSize()           { return m_size; }
+    int GetSize() const { return m_size; }
     float*   GetFloatPixels()    { return m_floatpixels; }
     uint8_t* GetIntFractPixels() { return m_intfractpixels; }
     uint8_t* GetUint8Pixels()    { return m_uint8pixels; }

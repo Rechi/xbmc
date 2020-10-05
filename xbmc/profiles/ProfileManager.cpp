@@ -252,7 +252,7 @@ void CProfileManager::Clear()
   m_profiles.clear();
 }
 
-void CProfileManager::PrepareLoadProfile(unsigned int profileIndex)
+void CProfileManager::PrepareLoadProfile(unsigned int profileIndex) const
 {
   CContextMenuManager &contextMenuManager = CServiceBroker::GetContextMenuManager();
   ADDON::CServiceAddonManager &serviceAddons = CServiceBroker::GetServiceAddons();
@@ -367,7 +367,7 @@ bool CProfileManager::LoadProfile(unsigned int index)
   return true;
 }
 
-void CProfileManager::FinalizeLoadProfile()
+void CProfileManager::FinalizeLoadProfile() const
 {
   CContextMenuManager &contextMenuManager = CServiceBroker::GetContextMenuManager();
   ADDON::CServiceAddonManager &serviceAddons = CServiceBroker::GetServiceAddons();
@@ -508,7 +508,7 @@ bool CProfileManager::DeleteProfile(unsigned int index)
   return Save();
 }
 
-void CProfileManager::CreateProfileFolders()
+void CProfileManager::CreateProfileFolders() const
 {
   CDirectory::Create(GetDatabaseFolder());
   CDirectory::Create(GetCDDBFolder());

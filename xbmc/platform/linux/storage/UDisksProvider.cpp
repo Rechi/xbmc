@@ -123,7 +123,7 @@ bool CUDiskDevice::UnMount()
   return false;
 }
 
-CMediaSource CUDiskDevice::ToMediaShare()
+CMediaSource CUDiskDevice::ToMediaShare() const
 {
   CMediaSource source;
   source.strPath = m_MountPath;
@@ -144,7 +144,7 @@ CMediaSource CUDiskDevice::ToMediaShare()
   return source;
 }
 
-bool CUDiskDevice::IsApproved()
+bool CUDiskDevice::IsApproved() const
 {
   return (m_isFileSystem && m_isMounted && m_UDI.length() > 0 && (m_FileSystem.length() > 0 && m_FileSystem != "swap")
       && m_MountPath != "/" && m_MountPath != "/boot") || m_isOptical;

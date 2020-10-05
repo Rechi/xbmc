@@ -69,7 +69,7 @@ public:
   std::string GetShaderPath(const std::string &filename) override;
 
   void GetGLVersion(int& major, int& minor);
-  void GetGLSLVersion(int& major, int& minor);
+  void GetGLSLVersion(int& major, int& minor) const;
 
   void ResetGLErrors();
 

@@ -173,7 +173,7 @@ public:
   virtual bool IsEOF() = 0;
   virtual BitstreamStats GetBitstreamStats() const { return m_stats; }
 
-  bool ContentLookup() { return m_contentLookup; }
+  bool ContentLookup() const { return m_contentLookup; }
 
   virtual bool IsRealtime() { return m_realtime; }
 

@@ -282,7 +282,7 @@ bool CAddonMgr::GetCompatibleVersions(
   return true;
 }
 
-bool CAddonMgr::HasAvailableUpdates()
+bool CAddonMgr::HasAvailableUpdates() const
 {
   return !GetAvailableUpdates().empty();
 }
@@ -584,7 +584,7 @@ bool CAddonMgr::GetAddon(const std::string& str,
   return false;
 }
 
-bool CAddonMgr::HasType(const std::string &id, const TYPE &type)
+bool CAddonMgr::HasType(const std::string& id, const TYPE& type) const
 {
   AddonPtr addon;
   return GetAddon(id, addon, type, false);
@@ -867,12 +867,12 @@ bool CAddonMgr::CanAddonBeDisabled(const std::string& ID)
   return true;
 }
 
-bool CAddonMgr::CanAddonBeEnabled(const std::string& id)
+bool CAddonMgr::CanAddonBeEnabled(const std::string& id) const
 {
   return !id.empty() && IsAddonInstalled(id);
 }
 
-bool CAddonMgr::IsAddonInstalled(const std::string& ID)
+bool CAddonMgr::IsAddonInstalled(const std::string& ID) const
 {
   AddonPtr tmp;
   return GetAddon(ID, tmp, ADDON_UNKNOWN, false);
@@ -880,14 +880,14 @@ bool CAddonMgr::IsAddonInstalled(const std::string& ID)
 
 bool CAddonMgr::IsAddonInstalled(const std::string& ID,
                                  const std::string& origin,
-                                 const AddonVersion& version)
+                                 const AddonVersion& version) const
 {
   AddonPtr tmp;
   return (GetAddon(ID, tmp, ADDON_UNKNOWN, false) && tmp && tmp->Origin() == origin &&
           tmp->Version() == version);
 }
 
-bool CAddonMgr::CanAddonBeInstalled(const AddonPtr& addon)
+bool CAddonMgr::CanAddonBeInstalled(const AddonPtr& addon) const
 {
   return addon != nullptr && addon->LifecycleState() != AddonLifecycleState::BROKEN &&
          !IsAddonInstalled(addon->ID());

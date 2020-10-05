@@ -294,7 +294,7 @@ namespace PVR
      * @brief Let the background thread search for missing channel icons for channels contained in the given group.
      * @param group The channel group.
      */
-    void TriggerSearchMissingChannelIcons(const std::shared_ptr<CPVRChannelGroup>& group);
+    void TriggerSearchMissingChannelIcons(const std::shared_ptr<CPVRChannelGroup>& group) const;
 
     /*!
      * @brief Check whether names are still correct after the language settings changed.

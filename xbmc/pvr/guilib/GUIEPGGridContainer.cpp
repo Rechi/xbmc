@@ -2041,7 +2041,7 @@ void CGUIEPGGridContainer::SetRenderOffset(const CPoint& offset)
   m_renderOffset = offset;
 }
 
-void CGUIEPGGridContainer::GetChannelCacheOffsets(int& cacheBefore, int& cacheAfter)
+void CGUIEPGGridContainer::GetChannelCacheOffsets(int& cacheBefore, int& cacheAfter) const
 {
   if (m_channelScrollSpeed > 0)
   {
@@ -2060,7 +2060,7 @@ void CGUIEPGGridContainer::GetChannelCacheOffsets(int& cacheBefore, int& cacheAf
   }
 }
 
-void CGUIEPGGridContainer::GetProgrammeCacheOffsets(int& cacheBefore, int& cacheAfter)
+void CGUIEPGGridContainer::GetProgrammeCacheOffsets(int& cacheBefore, int& cacheAfter) const
 {
   if (m_programmeScrollSpeed > 0)
   {

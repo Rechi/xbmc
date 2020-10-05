@@ -60,7 +60,7 @@ public:
 
   bool DeleteProfile(unsigned int index);
 
-  void CreateProfileFolders();
+  void CreateProfileFolders() const;
 
   /*! \brief Retrieve the master profile
     \return const reference to the master profile
@@ -199,8 +199,8 @@ private:
     */
   void SetCurrentProfileId(unsigned int profileId);
 
-  void PrepareLoadProfile(unsigned int profileIndex);
-  void FinalizeLoadProfile();
+  void PrepareLoadProfile(unsigned int profileIndex) const;
+  void FinalizeLoadProfile() const;
 
   // Construction parameters
   std::shared_ptr<CSettings> m_settings;

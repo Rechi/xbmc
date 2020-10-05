@@ -52,7 +52,7 @@ public:
   bool IsEnabled() const;
   void Enable();
   void Disable();
-  void HandleAutorun();
+  void HandleAutorun() const;
   static void ExecuteAutorun(const std::string& path = "", bool bypassSettings = false, bool ignoreplaying = true, bool startFromBeginning = false);
 
   static void SettingOptionAudioCdActionsFiller(std::shared_ptr<const CSetting> setting, std::vector<IntegerSettingOption> &list, int &current, void *data);

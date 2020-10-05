@@ -94,7 +94,7 @@ protected:
   virtual void Render(unsigned int flags, int index);
   virtual void RenderUpdateVideo(bool clear, unsigned int flags = 0, unsigned int alpha = 255);
 
-  int NextYV12Texture();
+  int NextYV12Texture() const;
   virtual bool ValidateRenderTarget();
   virtual void LoadShaders(int field=FIELD_FULL);
   virtual void ReleaseShaders();

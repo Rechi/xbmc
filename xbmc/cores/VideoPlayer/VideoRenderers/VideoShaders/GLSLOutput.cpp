@@ -44,7 +44,7 @@ GLSLOutput::GLSLOutput(int texunit, bool useDithering, unsigned int ditherDepth,
   m_uCLUTSize = clutSize;
 }
 
-std::string GLSLOutput::GetDefines()
+std::string GLSLOutput::GetDefines() const
 {
   std::string defines;
   if (m_dither)
@@ -105,7 +105,7 @@ void GLSLOutput::OnCompiledAndLinked(GLuint programHandle)
   VerifyGLState();
 }
 
-bool GLSLOutput::OnEnabled()
+bool GLSLOutput::OnEnabled() const
 {
 
   if (m_dither)
@@ -145,7 +145,7 @@ bool GLSLOutput::OnEnabled()
   return true;
 }
 
-void GLSLOutput::OnDisabled()
+void GLSLOutput::OnDisabled() const
 {
   // disable textures
   if (m_dither)

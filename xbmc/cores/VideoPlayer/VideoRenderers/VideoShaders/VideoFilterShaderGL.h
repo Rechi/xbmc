@@ -29,8 +29,8 @@ namespace Shaders {
     void SetNonLinStretch(float stretch) { m_stretch = stretch; }
     void SetAlpha(GLfloat alpha) { m_alpha= alpha; }
 
-    GLint GetVertexLoc() { return m_hVertex; }
-    GLint GetCoordLoc() { return m_hCoord; }
+    GLint GetVertexLoc() const { return m_hVertex; }
+    GLint GetCoordLoc() const { return m_hCoord; }
 
     void SetMatrices(const GLfloat *p, const GLfloat *m) { m_proj = p; m_model = m; }
 

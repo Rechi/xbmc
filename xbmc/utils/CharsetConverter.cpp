@@ -356,8 +356,7 @@ struct charPtrPtrAdapter
     pointer(p) { }
   operator char**()
   { return const_cast<char**>(pointer); }
-  operator const char**()
-  { return pointer; }
+  operator const char**() const { return pointer; }
 };
 
 template<class INPUT,class OUTPUT>

@@ -36,8 +36,8 @@ public:
   void EnableButton(bool enable, const std::string& label);
   void EnableButton2(bool enable, int label);
   void EnableButton2(bool enable, const std::string& label);
-  bool IsButtonPressed();
-  bool IsButton2Pressed();
+  bool IsButtonPressed() const;
+  bool IsButton2Pressed() const;
   void Sort(bool bSortOrder = true);
   void SetSelected(int iSelected);
   void SetSelected(const std::string &strSelectedLabel);

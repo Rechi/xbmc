@@ -461,10 +461,11 @@ public:
   static bool EnsureContext(CVDPAUContext **ctx);
   void Release();
   VDPAU_procs& GetProcs();
-  VdpDevice GetDevice();
+  VdpDevice GetDevice() const;
   bool Supports(VdpVideoMixerFeature feature);
   VdpVideoMixerFeature* GetFeatures();
-  int GetFeatureCount();
+  int GetFeatureCount() const;
+
 private:
   CVDPAUContext();
   void Close();
@@ -519,7 +520,7 @@ public:
   const std::string Name() override { return "vdpau"; }
   void SetCodecControl(int flags) override;
 
-  bool Supports(VdpVideoMixerFeature feature);
+  bool Supports(VdpVideoMixerFeature feature) const;
   static bool IsVDPAUFormat(AVPixelFormat fmt);
 
   static void FFReleaseBuffer(void *opaque, uint8_t *data);

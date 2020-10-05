@@ -60,7 +60,7 @@ private:
   static CAEChannelInfo GetAlternateLayoutForm(const CAEChannelInfo& info);
   snd_pcm_chmap_t* SelectALSAChannelMap(const CAEChannelInfo& info);
 
-  void GetAESParams(const AEAudioFormat& format, std::string& params);
+  void GetAESParams(const AEAudioFormat& format, std::string& params) const;
   void HandleError(const char* name, int err);
 
   std::string m_initDevice;

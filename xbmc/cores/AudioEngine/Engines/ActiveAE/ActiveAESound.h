@@ -38,14 +38,14 @@ public:
   bool StoreSound(bool orig, uint8_t **buffer, int samples, int linesize);
   CSoundPacket *GetSound(bool orig);
 
-  bool IsConverted() { return m_isConverted; }
+  bool IsConverted() const { return m_isConverted; }
   void SetConverted(bool state) { m_isConverted = state; }
 
   bool Prepare();
   void Finish();
   int GetChunkSize();
-  int GetFileSize() { return m_fileSize; }
-  bool IsSeekPossible() { return m_isSeekPossible; }
+  int GetFileSize() const { return m_fileSize; }
+  bool IsSeekPossible() const { return m_isSeekPossible; }
 
   static int Read(void *h, uint8_t* buf, int size);
   static int64_t Seek(void *h, int64_t pos, int whence);

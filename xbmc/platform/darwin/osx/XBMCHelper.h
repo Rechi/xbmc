@@ -37,7 +37,7 @@ class XBMCHelper : public ISettingCallback
   bool IsAlwaysOn() const { return m_alwaysOn; }
   int  GetMode() const { return m_mode; }
 
-  bool ErrorStarting() { return m_errorStarting; }
+  bool ErrorStarting() const { return m_errorStarting; }
 
 private:
   XBMCHelper();

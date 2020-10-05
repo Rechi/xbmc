@@ -790,7 +790,7 @@ bool CEventClient::GetMousePos(float& x, float& y)
   return false;
 }
 
-bool CEventClient::CheckButtonRepeat(unsigned int &next)
+bool CEventClient::CheckButtonRepeat(unsigned int& next) const
 {
   unsigned int now = XbmcThreads::SystemClockMillis();
 

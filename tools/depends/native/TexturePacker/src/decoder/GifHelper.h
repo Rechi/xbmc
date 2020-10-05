@@ -127,7 +127,7 @@ private:
   static void ConvertColorTable(std::vector<GifColor> &dest, ColorMapObject* src, unsigned int size);
   bool GcbToFrame(GifFrame &frame, unsigned int imgIdx);
   int ExtractFrames(unsigned int count);
-  void ClearFrameAreaToTransparency(unsigned char* dest, const GifFrame &frame);
+  void ClearFrameAreaToTransparency(unsigned char* dest, const GifFrame& frame) const;
   void ConstructFrame(GifFrame &frame, const unsigned char* src) const;
   bool PrepareTemplate(GifFrame &frame);
   void Release();

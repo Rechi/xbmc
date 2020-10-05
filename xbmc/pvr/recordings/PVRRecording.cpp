@@ -242,13 +242,13 @@ void CPVRRecording::Reset()
   CVideoInfoTag::Reset();
 }
 
-bool CPVRRecording::Delete()
+bool CPVRRecording::Delete() const
 {
   std::shared_ptr<CPVRClient> client = CServiceBroker::GetPVRManager().GetClient(m_iClientId);
   return client && (client->DeleteRecording(*this) == PVR_ERROR_NO_ERROR);
 }
 
-bool CPVRRecording::Undelete()
+bool CPVRRecording::Undelete() const
 {
   const std::shared_ptr<CPVRClient> client = CServiceBroker::GetPVRManager().GetClient(m_iClientId);
   return client && (client->UndeleteRecording(*this) == PVR_ERROR_NO_ERROR);

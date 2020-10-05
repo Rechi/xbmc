@@ -129,7 +129,7 @@ void CBackgroundInfoLoader::StopThread()
   m_bIsLoading = false;
 }
 
-bool CBackgroundInfoLoader::IsLoading()
+bool CBackgroundInfoLoader::IsLoading() const
 {
   return m_bIsLoading;
 }

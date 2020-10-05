@@ -286,7 +286,7 @@ namespace PVR
      * @brief Update this timer on the backend, transferring all local data of this timer to the backend.
      * @return True on success, false otherwise.
      */
-    bool UpdateOnClient();
+    bool UpdateOnClient() const;
 
     /*!
      * @brief Persist this timer in the local database.
@@ -298,7 +298,7 @@ namespace PVR
      * @brief Delete this timer from the local database.
      * @return True on success, false otherwise.
      */
-    bool DeleteFromDatabase();
+    bool DeleteFromDatabase() const;
 
     /*!
      * @brief Update the channel associated with this timer.

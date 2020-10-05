@@ -59,7 +59,7 @@ protected:
   /*!
    * \brief Set the entire backbuffer to black
    */
-  void ClearBackBuffer();
+  void ClearBackBuffer() const;
 
   /*!
    * \brief Draw black bars around the video quad

@@ -119,7 +119,9 @@ namespace VIDEO
      \param line1   string to set for the first line
      \return true if the user has cancelled the scanner, false otherwise
      */
-    bool ProgressCancelled(CGUIDialogProgress* progress, int heading, const std::string &line1);
+    bool ProgressCancelled(CGUIDialogProgress* progress,
+                           int heading,
+                           const std::string& line1) const;
 
     /*! \brief Find a url for the given video using the given scraper
      \param title title of the video to lookup

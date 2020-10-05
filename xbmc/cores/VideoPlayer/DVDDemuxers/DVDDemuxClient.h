@@ -47,7 +47,7 @@ public:
 protected:
   void RequestStreams();
   void SetStreamProps(CDemuxStream *stream, std::map<int, std::shared_ptr<CDemuxStream>> &map, bool forceInit);
-  bool ParsePacket(DemuxPacket* pPacket);
+  bool ParsePacket(DemuxPacket* pPacket) const;
   void DisposeStreams();
   std::shared_ptr<CDemuxStream> GetStreamInternal(int iStreamId);
   bool IsVideoReady();

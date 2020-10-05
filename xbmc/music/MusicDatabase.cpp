@@ -2956,7 +2956,9 @@ CArtist CMusicDatabase::GetArtistFromDataset(dbiplus::Dataset* pDS, int offset /
   return GetArtistFromDataset(pDS->get_sql_record(), offset, needThumb);
 }
 
-CArtist CMusicDatabase::GetArtistFromDataset(const dbiplus::sql_record* const record, int offset /* = 0 */, bool needThumb /* = true */)
+CArtist CMusicDatabase::GetArtistFromDataset(const dbiplus::sql_record* const record,
+                                             int offset /* = 0 */,
+                                             bool needThumb /* = true */) const
 {
   const std::string itemSeparator = CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_musicItemSeparator;
 

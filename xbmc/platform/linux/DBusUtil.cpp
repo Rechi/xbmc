@@ -251,11 +251,6 @@ bool CDBusError::IsSet() const
   return dbus_error_is_set(&m_error);
 }
 
-CDBusError::operator bool()
-{
-  return IsSet();
-}
-
 CDBusError::operator bool() const
 {
   return IsSet();

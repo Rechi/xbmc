@@ -161,7 +161,7 @@ public:
     , preferStereo(preferStereo)
   {
   };
-  bool operator()(const SelectionStream& lh, const SelectionStream& rh)
+  bool operator()(const SelectionStream& lh, const SelectionStream& rh) const
   {
     PREDICATE_RETURN(lh.type_index == currentAudioStream
                      , rh.type_index == currentAudioStream);
@@ -310,7 +310,7 @@ public:
   explicit PredicateVideoFilter(int videoStream) : currentVideoStream(videoStream)
   {
   };
-  bool operator()(const SelectionStream& lh, const SelectionStream& rh)
+  bool operator()(const SelectionStream& lh, const SelectionStream& rh) const
   {
     PREDICATE_RETURN(lh.type_index == currentVideoStream,
                      rh.type_index == currentVideoStream);

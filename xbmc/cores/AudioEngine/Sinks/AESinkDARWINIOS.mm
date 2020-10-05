@@ -87,14 +87,14 @@ class CAAudioUnitSink
     void         getDelay(AEDelayStatus& status);
     double       cacheSize();
     unsigned int write(uint8_t *data, unsigned int byte_count);
-    unsigned int chunkSize() { return m_bufferDuration * m_sampleRate; }
-    unsigned int getRealisedSampleRate() { return m_outputFormat.mSampleRate; }
+    unsigned int chunkSize() const { return m_bufferDuration * m_sampleRate; }
+    unsigned int getRealisedSampleRate() const { return m_outputFormat.mSampleRate; }
     static Float64 getCoreAudioRealisedSampleRate();
 
   private:
-    void         setCoreAudioBuffersize();
+    void setCoreAudioBuffersize() const;
     bool         setCoreAudioInputFormat();
-    void         setCoreAudioPreferredSampleRate();
+    void setCoreAudioPreferredSampleRate() const;
     bool         setupAudio();
     bool         checkAudioRoute();
     bool         checkSessionProperties();
@@ -265,7 +265,7 @@ void CAAudioUnitSink::drain()
   }
 }
 
-void CAAudioUnitSink::setCoreAudioBuffersize()
+void CAAudioUnitSink::setCoreAudioBuffersize() const
 {
 #if !TARGET_IPHONE_SIMULATOR
   // set the buffer size, this affects the number of samples
@@ -293,7 +293,7 @@ bool CAAudioUnitSink::setCoreAudioInputFormat()
   return true;
 }
 
-void CAAudioUnitSink::setCoreAudioPreferredSampleRate()
+void CAAudioUnitSink::setCoreAudioPreferredSampleRate() const
 {
   Float64 preferredSampleRate = m_outputFormat.mSampleRate;
   CLog::Log(LOGINFO, "%s requesting hw samplerate %f", __PRETTY_FUNCTION__, preferredSampleRate);

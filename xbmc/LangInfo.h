@@ -216,7 +216,7 @@ protected:
     Set the locale associated with this region global. This affects string
     sorting & transformations.
     */
-    void SetGlobalLocale();
+    void SetGlobalLocale() const;
     std::string m_strLangLocaleName;
     std::string m_strLangLocaleCodeTwoChar;
     std::string m_strRegionLocaleName;

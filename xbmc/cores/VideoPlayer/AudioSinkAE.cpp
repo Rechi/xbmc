@@ -292,7 +292,7 @@ double CAudioSinkAE::GetPlayingPts()
   return m_playingPts;
 }
 
-double CAudioSinkAE::GetSyncError()
+double CAudioSinkAE::GetSyncError() const
 {
   return m_syncError;
 }
@@ -302,7 +302,7 @@ void CAudioSinkAE::SetSyncErrorCorrection(double correction)
   m_syncError += correction;
 }
 
-double CAudioSinkAE::GetResampleRatio()
+double CAudioSinkAE::GetResampleRatio() const
 {
   return m_resampleRatio;
 }

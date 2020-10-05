@@ -114,7 +114,7 @@ void CDVDDemuxClient::Flush()
   m_dtsAtDisplayTime = DVD_NOPTS_VALUE;
 }
 
-bool CDVDDemuxClient::ParsePacket(DemuxPacket* pkt)
+bool CDVDDemuxClient::ParsePacket(DemuxPacket* pkt) const
 {
   bool change = false;
 

@@ -95,7 +95,7 @@ public:
 protected:
 
   bool Render(unsigned int flags, int renderBuffer);
-  void ClearBackBuffer();
+  void ClearBackBuffer() const;
   void DrawBlackBars();
 
   bool ValidateRenderer();
@@ -136,10 +136,14 @@ protected:
 
   void BindPbo(CPictureBuffer& buff);
   void UnBindPbo(CPictureBuffer& buff);
-  void LoadPlane(CYuvPlane& plane, int type,
-                 unsigned width,  unsigned height,
-                 int stride, int bpp, void* data);
-  void GetPlaneTextureSize(CYuvPlane& plane);
+  void LoadPlane(CYuvPlane& plane,
+                 int type,
+                 unsigned width,
+                 unsigned height,
+                 int stride,
+                 int bpp,
+                 void* data) const;
+  void GetPlaneTextureSize(CYuvPlane& plane) const;
   GLint GetInternalFormat(GLint format, int bpp);
 
   // hooks for HwDec Renderer

@@ -35,7 +35,7 @@ public:
   DEFINE_METHOD1(void, GetAddon, (void* p1))
   DEFINE_METHOD1(const char*, GetAddonTypeVersion, (int p1))
   DEFINE_METHOD1(const char*, GetAddonTypeMinVersion, (int p1))
-  bool GetAddonTypeMinVersion_available() { return m_GetAddonTypeMinVersion != nullptr; }
+  bool GetAddonTypeMinVersion_available() const { return m_GetAddonTypeMinVersion != nullptr; }
   BEGIN_METHOD_RESOLVE()
     RESOLVE_METHOD_RENAME_OPTIONAL(get_addon, GetAddon)
     RESOLVE_METHOD_RENAME(ADDON_Create, Create)

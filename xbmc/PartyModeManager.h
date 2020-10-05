@@ -39,12 +39,12 @@ public:
   void AddUserSongs(PLAYLIST::CPlayList& tempList, bool bPlay = false);
   void AddUserSongs(CFileItemList& tempList, bool bPlay = false);
   bool IsEnabled(PartyModeContext context=PARTYMODECONTEXT_UNKNOWN) const;
-  int GetSongsPlayed();
-  int GetMatchingSongs();
-  int GetMatchingSongsPicked();
-  int GetMatchingSongsLeft();
-  int GetRelaxedSongs();
-  int GetRandomSongs();
+  int GetSongsPlayed() const;
+  int GetMatchingSongs() const;
+  int GetMatchingSongsPicked() const;
+  int GetMatchingSongsLeft() const;
+  int GetRelaxedSongs() const;
+  int GetRandomSongs() const;
   PartyModeContext GetType() const;
 
 private:
@@ -52,12 +52,12 @@ private:
   bool AddRandomSongs();
   void Add(CFileItemPtr &pItem);
   bool ReapSongs();
-  bool MovePlaying();
+  bool MovePlaying() const;
   void SendUpdateMessage();
   void OnError(int iError, const std::string& strLogMessage);
   void ClearState();
   void UpdateStats();
-  void Announce();
+  void Announce() const;
 
   // state
   bool m_bEnabled;

@@ -314,7 +314,7 @@ protected:
   void ResampleSounds();
   bool ResampleSound(CActiveAESound *sound);
   void MixSounds(CSoundPacket &dstSample);
-  void Deamplify(CSoundPacket &dstSample);
+  void Deamplify(CSoundPacket& dstSample) const;
 
   bool CompareFormat(AEAudioFormat &lhs, AEAudioFormat &rhs);
 

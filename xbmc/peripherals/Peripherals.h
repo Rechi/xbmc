@@ -183,34 +183,34 @@ public:
    * @return True when this change was handled by a peripheral (and should not be handled by
    * anything else), false otherwise.
    */
-  bool OnAction(const CAction& action);
+  bool OnAction(const CAction& action) const;
 
   /*!
    * @brief Check whether there's a peripheral that reports to be muted.
    * @return True when at least one peripheral reports to be muted, false otherwise.
    */
-  bool IsMuted();
+  bool IsMuted() const;
 
   /*!
    * @brief Try to toggle the mute status via a peripheral.
    * @return True when this change was handled by a peripheral (and should not be handled by
    * anything else), false otherwise.
    */
-  bool ToggleMute();
+  bool ToggleMute() const;
 
   /*!
    * @brief Try to toggle the playing device state via a peripheral.
    * @param mode Whether to activate, put on standby or toggle the source.
    * @return True when the playing device has been switched on, false otherwise.
    */
-  bool ToggleDeviceState(const CecStateChange mode = STATE_SWITCH_TOGGLE);
+  bool ToggleDeviceState(const CecStateChange mode = STATE_SWITCH_TOGGLE) const;
 
   /*!
    * @brief Try to mute the audio via a peripheral.
    * @return True when this change was handled by a peripheral (and should not be handled by
    * anything else), false otherwise.
    */
-  bool Mute()
+  bool Mute() const
   {
     return ToggleMute();
   } //! @todo CEC only supports toggling the mute status at this time
@@ -220,7 +220,7 @@ public:
    * @return True when this change was handled by a peripheral (and should not be handled by
    * anything else), false otherwise.
    */
-  bool UnMute()
+  bool UnMute() const
   {
     return ToggleMute();
   } //! @todo CEC only supports toggling the mute status at this time
@@ -231,7 +231,7 @@ public:
    * @param key The fetched key.
    * @return True when a keypress was fetched, false otherwise.
    */
-  bool GetNextKeypress(float frameTime, CKey& key);
+  bool GetNextKeypress(float frameTime, CKey& key) const;
 
   /*!
    * @brief Register with the event scanner to control scan timing
@@ -248,18 +248,18 @@ public:
   /*!
    *
    */
-  void OnUserNotification();
+  void OnUserNotification() const;
 
   /*!
    * @brief Request peripherals with the specified feature to perform a quick test
    * @return true if any peripherals support the feature, false otherwise
    */
-  void TestFeature(PeripheralFeature feature);
+  void TestFeature(PeripheralFeature feature) const;
 
   /*!
    * \brief Request all devices with power-off support to power down
    */
-  void PowerOffDevices();
+  void PowerOffDevices() const;
 
   bool SupportsCEC() const
   {
@@ -288,14 +288,14 @@ public:
    * \brief Get an add-on that can provide button maps for a device
    * \return An add-on that provides button maps, or empty if no add-on is found
    */
-  PeripheralAddonPtr GetAddonWithButtonMap(const CPeripheral* device);
+  PeripheralAddonPtr GetAddonWithButtonMap(const CPeripheral* device) const;
 
   /*!
    * \brief Reset all button maps to the defaults for all devices and the given controller
    * \param controllerId The controller profile to reset
    * @todo Add a device parameter to allow resetting button maps per-device
    */
-  void ResetButtonMaps(const std::string& controllerId);
+  void ResetButtonMaps(const std::string& controllerId) const;
 
   /*!
    * \brief Register a button mapper interface
@@ -309,13 +309,13 @@ public:
    * \ref CPeripheral::RegisterJoystickButtonMapper for what is done to the
    * mapper after being given to the peripheral.
    */
-  void RegisterJoystickButtonMapper(KODI::JOYSTICK::IButtonMapper* mapper);
+  void RegisterJoystickButtonMapper(KODI::JOYSTICK::IButtonMapper* mapper) const;
 
   /*!
    * \brief Unregister a button mapper interface
    * \param mapper The button mapper
    */
-  void UnregisterJoystickButtonMapper(KODI::JOYSTICK::IButtonMapper* mapper);
+  void UnregisterJoystickButtonMapper(KODI::JOYSTICK::IButtonMapper* mapper) const;
 
   // implementation of ISettingCallback
   void OnSettingChanged(std::shared_ptr<const CSetting> setting) override;

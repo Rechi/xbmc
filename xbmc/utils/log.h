@@ -52,8 +52,8 @@ public:
   void Uninitialize();
 
   void SetLogLevel(int level);
-  int GetLogLevel() { return m_logLevel; }
-  bool IsLogLevelLogged(int loglevel);
+  int GetLogLevel() const { return m_logLevel; }
+  bool IsLogLevelLogged(int loglevel) const;
 
   bool CanLogComponent(uint32_t component) const;
   static void SettingOptionsLoggingComponentsFiller(std::shared_ptr<const CSetting> setting,

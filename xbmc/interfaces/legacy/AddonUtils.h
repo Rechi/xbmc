@@ -72,7 +72,7 @@ namespace XBMCAddonUtils
     TraceGuard* parent;
     int depth;
 
-    const char* getSpaces();
+    const char* getSpaces() const;
 
     explicit TraceGuard(const char* _function);
     TraceGuard();

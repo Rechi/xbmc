@@ -117,7 +117,7 @@ namespace XFILE
 
           /* returned http header */
           CHttpHeader m_httpheader;
-          bool IsHeaderDone(void) { return m_httpheader.IsHeaderDone(); }
+          bool IsHeaderDone(void) const { return m_httpheader.IsHeaderDone(); }
 
           curl_slist* m_curlHeaderList;
           curl_slist* m_curlAliasList;

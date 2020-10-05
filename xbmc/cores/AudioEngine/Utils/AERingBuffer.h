@@ -212,27 +212,18 @@ public:
    * Returns available space for writing to buffer.
    * Attempt to write more bytes than available results in AE_RING_BUFFER_FULL.
    */
-  unsigned int GetWriteSize()
-  {
-    return m_iSize - ( m_iWritten - m_iRead );
-  }
+  unsigned int GetWriteSize() const { return m_iSize - (m_iWritten - m_iRead); }
 
   /**
    * Returns available space for reading from buffer.
    * Attempt to read more bytes than available results in AE_RING_BUFFER_EMPTY.
    */
-  unsigned int GetReadSize()
-  {
-    return m_iWritten - m_iRead;
-  }
+  unsigned int GetReadSize() const { return m_iWritten - m_iRead; }
 
   /**
    * Returns the buffer size.
    */
-  unsigned int GetMaxSize()
-  {
-    return m_iSize;
-  }
+  unsigned int GetMaxSize() const { return m_iSize; }
 
   /**
    * Returns the number of planes

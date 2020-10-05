@@ -487,7 +487,7 @@ Export* DllLoader::GetExportByFunctionName(const char* sFunctionName)
   return NULL;
 }
 
-int DllLoader::ResolveOrdinal(const char *sName, unsigned long ordinal, void **fixup)
+int DllLoader::ResolveOrdinal(const char* sName, unsigned long ordinal, void** fixup) const
 {
   DllLoader* pDll = static_cast<DllLoader*>(DllLoaderContainer::GetModule(sName));
 
@@ -508,7 +508,7 @@ int DllLoader::ResolveOrdinal(const char *sName, unsigned long ordinal, void **f
   return 0;
 }
 
-int DllLoader::ResolveName(const char *sName, char* sFunction, void **fixup)
+int DllLoader::ResolveName(const char* sName, char* sFunction, void** fixup) const
 {
   DllLoader* pDll = static_cast<DllLoader*>(DllLoaderContainer::GetModule(sName));
 

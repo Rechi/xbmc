@@ -31,7 +31,11 @@ namespace xbmcutil
         dtorCalled = true;
       }
 
-      void beHappy() { if (somethingToAccess) throw somethingToAccess; }
+      void beHappy() const
+      {
+        if (somethingToAccess)
+          throw somethingToAccess;
+      }
     };
   }
 }

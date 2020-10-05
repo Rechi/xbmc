@@ -580,8 +580,8 @@ public:
     m_Button.clear();
   }
 
-  inline unsigned short GetFlags() { return m_Flags; }
-  inline unsigned short GetButtonCode() { return m_ButtonCode; }
+  inline unsigned short GetFlags() const { return m_Flags; }
+  inline unsigned short GetButtonCode() const { return m_ButtonCode; }
 };
 
 class CPacketPING : public CPacket

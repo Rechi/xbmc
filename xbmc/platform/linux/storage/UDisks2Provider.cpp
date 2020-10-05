@@ -58,7 +58,7 @@ CUDisks2Provider::Block::Block(const char *object) : m_object(object)
 {
 }
 
-bool CUDisks2Provider::Block::IsReady()
+bool CUDisks2Provider::Block::IsReady() const
 {
   return m_drive != nullptr;
 }
@@ -80,12 +80,12 @@ std::string CUDisks2Provider::Filesystem::toString()
                              m_object, BOOL2SZ(m_isMounted), m_mountPoint.empty() ? "none" : m_mountPoint);
 }
 
-bool CUDisks2Provider::Filesystem::IsReady()
+bool CUDisks2Provider::Filesystem::IsReady() const
 {
   return m_block != nullptr && m_block->IsReady();
 }
 
-bool CUDisks2Provider::Filesystem::IsOptical()
+bool CUDisks2Provider::Filesystem::IsOptical() const
 {
   return m_block->m_drive->IsOptical();
 }
@@ -132,7 +132,7 @@ bool CUDisks2Provider::Filesystem::Unmount()
   }
 }
 
-std::string CUDisks2Provider::Filesystem::GetDisplayName()
+std::string CUDisks2Provider::Filesystem::GetDisplayName() const
 {
   if (m_block->m_label.empty())
   {
@@ -143,7 +143,7 @@ std::string CUDisks2Provider::Filesystem::GetDisplayName()
     return m_block->m_label;
 }
 
-CMediaSource CUDisks2Provider::Filesystem::ToMediaShare()
+CMediaSource CUDisks2Provider::Filesystem::ToMediaShare() const
 {
   CMediaSource source;
   source.strPath = m_mountPoint;
@@ -158,7 +158,7 @@ CMediaSource CUDisks2Provider::Filesystem::ToMediaShare()
   return source;
 }
 
-bool CUDisks2Provider::Filesystem::IsApproved()
+bool CUDisks2Provider::Filesystem::IsApproved() const
 {
   return IsReady() &&
          (m_isMounted && m_mountPoint != "/" && m_mountPoint != "/boot" && m_mountPoint.compare(0, 6, "/boot/") != 0) /*||

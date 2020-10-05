@@ -24,7 +24,7 @@ public:
   CDriverMonitor() = default;
   virtual ~CDriverMonitor();
   bool Start();
-  bool IsInitialized();
+  bool IsInitialized() const;
 
   CCriticalSection m_sec;
 
@@ -637,7 +637,7 @@ CDriverMonitor::~CDriverMonitor()
   }
 }
 
-bool CDriverMonitor::IsInitialized()
+bool CDriverMonitor::IsInitialized() const
 {
   return m_isInit;
 }

@@ -118,7 +118,7 @@ protected:
     \param strInput string contains the string to be unescaped.
     \return unescaped string.
     */
-  std::string UnescapeString(const std::string &strInput);
+  std::string UnescapeString(const std::string& strInput) const;
 
   /*! \brief Finds the position of line, starting with a given string in current entry.
     * This function can only be called after GetNextEntry()
@@ -126,7 +126,7 @@ protected:
     \param FoundPos will get the position where we found the line starting with the string.
     \return false if no line like that can be found in the entry (m_Entry)
     */
-  bool FindLineStart(const std::string &strToFind, size_t &FoundPos);
+  bool FindLineStart(const std::string& strToFind, size_t& FoundPos) const;
 
   /*! \brief Reads, and links together the quoted strings found with ParseEntry().
     * This function can only be called after GetNextEntry() called.

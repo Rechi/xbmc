@@ -25,7 +25,7 @@ namespace XBMCAddon
       m_request = NULL;
     }
 
-    void WsgiErrorStream::write(const String& str)
+    void WsgiErrorStream::write(const String& str) const
     {
       if (str.empty())
         return;
@@ -41,7 +41,7 @@ namespace XBMCAddon
         CLog::Log(LOGERROR, "WSGI: %s", msg.c_str());
     }
 
-    void WsgiErrorStream::writelines(const std::vector<String>& seq)
+    void WsgiErrorStream::writelines(const std::vector<String>& seq) const
     {
       if (seq.empty())
         return;

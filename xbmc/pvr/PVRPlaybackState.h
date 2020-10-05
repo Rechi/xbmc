@@ -211,7 +211,7 @@ private:
    * @param channel The channel which is updated
    * @param time The last watched time to set
    */
-  void UpdateLastWatched(const std::shared_ptr<CPVRChannel>& channel, const CDateTime& time);
+  void UpdateLastWatched(const std::shared_ptr<CPVRChannel>& channel, const CDateTime& time) const;
 
   std::shared_ptr<CPVRChannel> m_playingChannel;
   std::shared_ptr<CPVRRecording> m_playingRecording;

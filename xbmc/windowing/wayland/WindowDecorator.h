@@ -125,10 +125,7 @@ public:
     : data{data}, dataSize{dataSize}, size{size}, wlBuffer{std::move(buffer)}
     {}
 
-    std::uint32_t* RgbaBuffer()
-    {
-      return static_cast<std::uint32_t*> (data);
-    }
+    std::uint32_t* RgbaBuffer() const { return static_cast<std::uint32_t*>(data); }
   };
 
   struct Surface

@@ -84,17 +84,11 @@ public:
     CJobManager::GetInstance().CancelJob(m_id);
   }
 
-  CEvent& GetEvent()
-  {
-    return m_result->m_event;
-  }
+  CEvent& GetEvent() const { return m_result->m_event; }
 
-  bool Wait(unsigned int timeout)
-  {
-    return m_result->m_event.WaitMSec(timeout);
-  }
+  bool Wait(unsigned int timeout) const { return m_result->m_event.WaitMSec(timeout); }
 
-  bool GetDirectory(CFileItemList& list)
+  bool GetDirectory(CFileItemList& list) const
   {
     /* if it was not finished or failed, return failure */
     if(!m_result->m_event.WaitMSec(0) || !m_result->m_result)

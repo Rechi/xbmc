@@ -161,7 +161,7 @@ bool CLinuxRendererGLES::ConfigChanged(const VideoPicture &picture)
   return false;
 }
 
-int CLinuxRendererGLES::NextYV12Texture()
+int CLinuxRendererGLES::NextYV12Texture() const
 {
   return (m_iYV12RenderBuffer + 1) % m_NumYV12Buffers;
 }

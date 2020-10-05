@@ -98,8 +98,8 @@ protected:
   void PrintImportTable(ImportDirTable_t *ImportDirTable);
   void PrintExportTable(ExportDirTable_t *ExportDirTable);
 
-  int ResolveOrdinal(const char*, unsigned long, void**);
-  int ResolveName(const char*, char*, void **);
+  int ResolveOrdinal(const char*, unsigned long, void**) const;
+  int ResolveName(const char*, char*, void**) const;
   const char* ResolveReferencedDll(const char* dll);
   int LoadExports();
   void LoadSymbols();

@@ -73,7 +73,7 @@ void CDVDStreamInfo::Clear()
   orientation = 0;
 }
 
-bool CDVDStreamInfo::Equal(const CDVDStreamInfo& right, int compare)
+bool CDVDStreamInfo::Equal(const CDVDStreamInfo& right, int compare) const
 {
   if (codec != right.codec || type != right.type ||
       ((compare & COMPARE_ID) && uniqueId != right.uniqueId) ||
@@ -165,7 +165,7 @@ bool CDVDStreamInfo::Equal(const CDVDStreamInfo& right, int compare)
   return true;
 }
 
-bool CDVDStreamInfo::Equal(const CDemuxStream& right, bool withextradata)
+bool CDVDStreamInfo::Equal(const CDemuxStream& right, bool withextradata) const
 {
   CDVDStreamInfo info;
   info.Assign(right, withextradata);

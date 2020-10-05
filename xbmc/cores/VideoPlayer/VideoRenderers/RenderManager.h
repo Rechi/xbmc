@@ -82,7 +82,7 @@ public:
   bool Supports(ERENDERFEATURE feature);
   bool Supports(ESCALINGMETHOD method);
 
-  int GetSkippedFrames()  { return m_QueueSkip; }
+  int GetSkippedFrames() const { return m_QueueSkip; }
 
   bool Configure(const VideoPicture& picture, float fps, unsigned int orientation, int buffers = 0);
   bool AddVideoPicture(const VideoPicture& picture, volatile std::atomic_bool& bStop, EINTERLACEMETHOD deintMethod, bool wait);

@@ -39,7 +39,7 @@ CRenderCaptureBase::CRenderCaptureBase()
 
 CRenderCaptureBase::~CRenderCaptureBase() = default;
 
-bool CRenderCaptureBase::UseOcclusionQuery()
+bool CRenderCaptureBase::UseOcclusionQuery() const
 {
   if (m_flags & CAPTUREFLAG_IMMEDIATELY)
     return false;

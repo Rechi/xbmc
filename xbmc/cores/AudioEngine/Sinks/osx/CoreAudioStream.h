@@ -30,15 +30,15 @@ public:
   void    Close(bool restore = true);
 
   AudioStreamID GetId() const {return m_StreamId;}
-  UInt32  GetDirection();
+  UInt32 GetDirection() const;
   static UInt32 GetTerminalType(AudioStreamID id);
-  UInt32  GetNumLatencyFrames();
-  bool    GetVirtualFormat(AudioStreamBasicDescription *pDesc);
-  bool    GetPhysicalFormat(AudioStreamBasicDescription *pDesc);
+  UInt32 GetNumLatencyFrames() const;
+  bool GetVirtualFormat(AudioStreamBasicDescription* pDesc) const;
+  bool GetPhysicalFormat(AudioStreamBasicDescription* pDesc) const;
   bool    SetVirtualFormat(AudioStreamBasicDescription *pDesc);
   bool    SetPhysicalFormat(AudioStreamBasicDescription *pDesc);
-  bool    GetAvailableVirtualFormats(StreamFormatList *pList);
-  bool    GetAvailablePhysicalFormats(StreamFormatList *pList);
+  bool GetAvailableVirtualFormats(StreamFormatList* pList) const;
+  bool GetAvailablePhysicalFormats(StreamFormatList* pList) const;
   static bool GetAvailableVirtualFormats(AudioStreamID id, StreamFormatList *pList);
   static bool GetAvailablePhysicalFormats(AudioStreamID id, StreamFormatList *pList);
   static bool IsDigitalOutput(AudioStreamID id);

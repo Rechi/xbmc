@@ -1722,7 +1722,7 @@ namespace PVR
     return selectedHook->first->CallSettingsMenuHook(selectedHook->second) == PVR_ERROR_NO_ERROR;
   }
 
-  bool CPVRGUIActions::ResetPVRDatabase(bool bResetEPGOnly)
+  bool CPVRGUIActions::ResetPVRDatabase(bool bResetEPGOnly) const
   {
     CGUIDialogProgress* pDlgProgress = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogProgress>(WINDOW_DIALOG_PROGRESS);
     if (!pDlgProgress)

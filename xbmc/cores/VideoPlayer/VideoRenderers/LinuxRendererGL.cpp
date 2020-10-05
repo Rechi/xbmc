@@ -301,7 +301,7 @@ void CLinuxRendererGL::ReleaseBuffer(int idx)
   }
 }
 
-void CLinuxRendererGL::GetPlaneTextureSize(CYuvPlane& plane)
+void CLinuxRendererGL::GetPlaneTextureSize(CYuvPlane& plane) const
 {
   /* texture is assumed to be bound */
   GLint width  = 0
@@ -393,9 +393,13 @@ void CLinuxRendererGL::CalculateTextureSourceRects(int source, int num_planes)
   }
 }
 
-void CLinuxRendererGL::LoadPlane(CYuvPlane& plane, int type,
-                                 unsigned width, unsigned height,
-                                 int stride, int bpp, void* data)
+void CLinuxRendererGL::LoadPlane(CYuvPlane& plane,
+                                 int type,
+                                 unsigned width,
+                                 unsigned height,
+                                 int stride,
+                                 int bpp,
+                                 void* data) const
 {
 
   if (plane.pbo)
@@ -525,7 +529,7 @@ void CLinuxRendererGL::RenderUpdate(int index, int index2, bool clear, unsigned 
   glFlush();
 }
 
-void CLinuxRendererGL::ClearBackBuffer()
+void CLinuxRendererGL::ClearBackBuffer() const
 {
   //set the entire backbuffer to black
   glClearColor(m_clearColour, m_clearColour, m_clearColour, 0);

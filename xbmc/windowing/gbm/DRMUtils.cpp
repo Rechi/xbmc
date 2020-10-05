@@ -547,7 +547,7 @@ bool CDRMUtils::FindPlanes()
   return true;
 }
 
-bool CDRMUtils::FindModifiersForPlane(struct plane *object)
+bool CDRMUtils::FindModifiersForPlane(struct plane *object) const
 {
   uint64_t blob_id = 0;
 
@@ -979,7 +979,7 @@ uint32_t CDRMUtils::FourCCWithoutAlpha(uint32_t fourcc)
   return (fourcc & 0xFFFFFF00) | static_cast<uint32_t>('X');
 }
 
-bool CDRMUtils::CheckConnector(int connector_id)
+bool CDRMUtils::CheckConnector(int connector_id) const
 {
   struct connector connectorcheck;
   unsigned retryCnt = 7;
@@ -1011,7 +1011,7 @@ std::string CDRMUtils::FourCCToString(uint32_t fourcc)
   return ss.str();
 }
 
-bool plane::SupportsFormat(uint32_t format)
+bool plane::SupportsFormat(uint32_t format) const
 {
   for (uint32_t i = 0; i < plane->count_formats; i++)
     if (plane->formats[i] == format)

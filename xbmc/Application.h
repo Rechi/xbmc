@@ -195,7 +195,7 @@ public:
   void DelayedPlayerRestart();
   void CheckDelayedPlayerRestart();
   bool IsPlayingFullScreenVideo() const;
-  bool IsFullScreen();
+  bool IsFullScreen() const;
   bool OnAction(const CAction &action);
   void CheckShutdown();
   void InhibitIdleShutdown(bool inhibit);
@@ -282,9 +282,9 @@ public:
    \param userInitiated Whether the action was initiated by the user (either via GUI or any other method) or not.  It is meant to hide or show dialogs.
    \param flags Flags for controlling the scanning process.  See xbmc/music/infoscanner/MusicInfoScanner.h for possible values.
    */
-  void StartMusicScan(const std::string &path, bool userInitiated = true, int flags = 0);
-  void StartMusicAlbumScan(const std::string& strDirectory, bool refresh = false);
-  void StartMusicArtistScan(const std::string& strDirectory, bool refresh = false);
+  void StartMusicScan(const std::string& path, bool userInitiated = true, int flags = 0) const;
+  void StartMusicAlbumScan(const std::string& strDirectory, bool refresh = false) const;
+  void StartMusicArtistScan(const std::string& strDirectory, bool refresh = false) const;
 
   void UpdateLibraries();
 
@@ -300,19 +300,19 @@ public:
   MEDIA_DETECT::CDetectDVDMedia m_DetectDVDType;
 #endif
 
-  inline bool IsInScreenSaver() { return m_screensaverActive; };
+  inline bool IsInScreenSaver() const { return m_screensaverActive; };
   inline std::string ScreensaverIdInUse() { return m_screensaverIdInUse; }
 
-  inline bool IsDPMSActive() { return m_dpmsIsActive; };
+  inline bool IsDPMSActive() const { return m_dpmsIsActive; };
   int m_iScreenSaveLock = 0; // spiff: are we checking for a lock? if so, ignore the screensaver state, if -1 we have failed to input locks
 
   std::string m_strPlayListFile;
 
   int GlobalIdleTime();
 
-  bool PlatformDirectoriesEnabled() { return m_bPlatformDirectories; }
-  bool IsStandAlone() { return m_bStandalone; }
-  bool IsEnableTestMode() { return m_bTestMode; }
+  bool PlatformDirectoriesEnabled() const { return m_bPlatformDirectories; }
+  bool IsStandAlone() const { return m_bStandalone; }
+  bool IsEnableTestMode() const { return m_bTestMode; }
 
   bool IsAppFocused() const { return m_AppFocused; }
 

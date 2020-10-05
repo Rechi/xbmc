@@ -53,7 +53,7 @@ public:
   int64_t TotalTime();
   void SetTotalTime(int64_t time);
   void Start() { m_canPlay = true;}; // cause a pre-buffered stream to start.
-  int GetStatus() { return m_status; };
+  int GetStatus() const { return m_status; };
   void SetStatus(int status) { m_status = status; }
 
   AEAudioFormat GetFormat();

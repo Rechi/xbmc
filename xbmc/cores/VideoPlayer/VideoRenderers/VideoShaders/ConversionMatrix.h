@@ -109,8 +109,8 @@ public:
   void SetParams(float contrast, float black, bool limited);
   void GetYuvMat(float (&mat)[4][4]);
   bool GetPrimMat(float (&mat)[3][3]);
-  float GetGammaSrc();
-  float GetGammaDst();
+  float GetGammaSrc() const;
+  float GetGammaDst() const;
 
   static bool GetRGBYuvCoefs(AVColorSpace colspace, float (&coefs)[3]);
 

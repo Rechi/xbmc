@@ -67,7 +67,7 @@ public:
   void SetFPS(float fps);
   float GetDisplayLatency() const;
   bool IsFullScreenRoot() const;
-  void ToggleFullScreen();
+  void ToggleFullScreen() const;
   void SetFullScreenVideo(bool bOnOff);
   bool IsFullScreenVideo() const;
   bool IsValidResolution(RESOLUTION res);
@@ -93,9 +93,9 @@ public:
   void SetViewWindow(float left, float top, float right, float bottom);
   bool IsCalibrating() const;
   void SetCalibrating(bool bOnOff);
-  void ResetOverscan(RESOLUTION res, OVERSCAN &overscan);
+  void ResetOverscan(RESOLUTION res, OVERSCAN& overscan) const;
   void ResetOverscan(RESOLUTION_INFO &resinfo);
-  void ResetScreenParameters(RESOLUTION res);
+  void ResetScreenParameters(RESOLUTION res) const;
   void CaptureStateBlock();
   void ApplyStateBlock();
   void Clear(UTILS::Color color = 0);

@@ -52,12 +52,12 @@ namespace XBMCAddon
       strHeading = heading;
     }
 
-    String Keyboard::getText()
+    String Keyboard::getText() const
     {
       return strText;
     }
 
-    bool Keyboard::isConfirmed()
+    bool Keyboard::isConfirmed() const
     {
       return bConfirmed;
     }

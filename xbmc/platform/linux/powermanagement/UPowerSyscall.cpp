@@ -30,12 +30,12 @@ void CUPowerSource::Update()
   m_batteryLevel = properties["Percentage"].asDouble();
 }
 
-bool CUPowerSource::IsRechargeable()
+bool CUPowerSource::IsRechargeable() const
 {
   return m_isRechargeable;
 }
 
-double CUPowerSource::BatteryLevel()
+double CUPowerSource::BatteryLevel() const
 {
   return m_batteryLevel;
 }

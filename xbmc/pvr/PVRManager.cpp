@@ -807,7 +807,8 @@ void CPVRManager::TriggerSearchMissingChannelIcons()
   }
 }
 
-void CPVRManager::TriggerSearchMissingChannelIcons(const std::shared_ptr<CPVRChannelGroup>& group)
+void CPVRManager::TriggerSearchMissingChannelIcons(
+    const std::shared_ptr<CPVRChannelGroup>& group) const
 {
   if (IsStarted())
   {

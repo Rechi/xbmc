@@ -335,7 +335,8 @@ CDateTime CPVRPlaybackState::GetChannelPlaybackTime(int iClientID, int iUniqueCh
   return CDateTime::GetUTCDateTime();
 }
 
-void CPVRPlaybackState::UpdateLastWatched(const std::shared_ptr<CPVRChannel>& channel, const CDateTime& time)
+void CPVRPlaybackState::UpdateLastWatched(const std::shared_ptr<CPVRChannel>& channel,
+                                          const CDateTime& time) const
 {
   time_t iTime;
   time.GetAsTime(iTime);

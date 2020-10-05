@@ -41,7 +41,7 @@ public:
 
     virtual ~CElement() = default;
 
-    bool IsElementType(ElementType type) { return (type == m_type); }
+    bool IsElementType(ElementType type) const { return (type == m_type); }
 
     CElement* pNext;
     ElementType m_type;

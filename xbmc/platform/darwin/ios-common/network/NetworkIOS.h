@@ -59,7 +59,7 @@ public:
   friend class CNetworkInterfaceIOS;
 
 private:
-  int GetSocket() { return m_sock; }
+  int GetSocket() const { return m_sock; }
   void queryInterfaceList();
   std::vector<CNetworkInterfaceIOS*> m_interfaces;
   int m_sock;

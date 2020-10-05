@@ -47,12 +47,12 @@ struct plane : drm_object
   std::map<uint32_t, std::vector<uint64_t>> modifiers_map;
 
   void SetFormat(uint32_t newFormat) { format = newFormat; }
-  uint32_t GetFormat() { return format; }
+  uint32_t GetFormat() const { return format; }
 
   bool SupportsFormatAndModifier(uint32_t format, uint64_t modifier);
 
 private:
-  bool SupportsFormat(uint32_t format);
+  bool SupportsFormat(uint32_t format) const;
 
   uint32_t format{DRM_FORMAT_XRGB8888};
 };
@@ -140,12 +140,12 @@ private:
   bool FindEncoder();
   bool FindCrtcs();
   bool FindPlanes();
-  bool FindModifiersForPlane(struct plane *object);
+  bool FindModifiersForPlane(struct plane *object) const;
   bool FindPreferredMode();
   bool RestoreOriginalMode();
   static void DrmFbDestroyCallback(struct gbm_bo *bo, void *data);
   RESOLUTION_INFO GetResolutionInfo(drmModeModeInfoPtr mode);
-  bool CheckConnector(int connectorId);
+  bool CheckConnector(int connectorId) const;
   void PrintDrmDeviceInfo(drmDevicePtr device);
 
   int m_renderFd;

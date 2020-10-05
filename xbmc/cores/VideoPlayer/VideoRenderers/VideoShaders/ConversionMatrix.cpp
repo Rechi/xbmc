@@ -541,12 +541,12 @@ bool CConvertMatrix::GetPrimMat(float (&mat)[3][3])
   return true;
 }
 
-float CConvertMatrix::GetGammaSrc()
+float CConvertMatrix::GetGammaSrc() const
 {
   return m_gammaSrc;
 }
 
-float CConvertMatrix::GetGammaDst()
+float CConvertMatrix::GetGammaDst() const
 {
   return m_gammaDst;
 }

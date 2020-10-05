@@ -141,7 +141,7 @@ namespace XBMCAddon
       ///
       getX();
 #else
-      int getX() { return dwPosX; }
+      int getX() const { return dwPosX; }
 #endif
 
 #ifdef DOXYGEN_SHOULD_USE_THIS
@@ -163,7 +163,7 @@ namespace XBMCAddon
       ///
       getY();
 #else
-      int getY() { return dwPosY; }
+      int getY() const { return dwPosY; }
 #endif
 
 #ifdef DOXYGEN_SHOULD_USE_THIS

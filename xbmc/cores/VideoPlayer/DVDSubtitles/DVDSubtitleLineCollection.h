@@ -35,7 +35,7 @@ public:
 
   void Remove();
   void Clear();
-  int GetSize() { return m_iSize; }
+  int GetSize() const { return m_iSize; }
 
 private:
   ListElement* m_pHead;

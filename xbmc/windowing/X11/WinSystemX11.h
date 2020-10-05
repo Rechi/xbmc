@@ -54,12 +54,12 @@ public:
 
   // Local to WinSystemX11 only
   Display*  GetDisplay() { return m_dpy; }
-  int GetScreen() { return m_screen; }
+  int GetScreen() const { return m_screen; }
   void NotifyXRREvent();
   void GetConnectedOutputs(std::vector<std::string> *outputs);
   bool IsCurrentOutput(std::string output);
   void RecreateWindow();
-  int GetCrtc() { return m_crtc; }
+  int GetCrtc() const { return m_crtc; }
 
   // winevents override
   bool MessagePump() override;

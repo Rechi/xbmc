@@ -484,7 +484,7 @@ bool CStereoscopicsManager::OnAction(const CAction &action)
   return false;
 }
 
-void CStereoscopicsManager::ApplyStereoMode(const RENDER_STEREO_MODE &mode, bool notify)
+void CStereoscopicsManager::ApplyStereoMode(const RENDER_STEREO_MODE& mode, bool notify) const
 {
   RENDER_STEREO_MODE currentMode = CServiceBroker::GetWinSystem()->GetGfxContext().GetStereoMode();
   CLog::Log(LOGDEBUG, "StereoscopicsManager::ApplyStereoMode: trying to apply stereo mode. Current: %s | Target: %s", ConvertGuiStereoModeToString(currentMode), ConvertGuiStereoModeToString(mode));

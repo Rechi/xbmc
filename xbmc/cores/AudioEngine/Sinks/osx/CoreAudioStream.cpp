@@ -94,7 +94,7 @@ void CCoreAudioStream::Close(bool restore)
   m_StreamId = 0;
 }
 
-UInt32 CCoreAudioStream::GetDirection()
+UInt32 CCoreAudioStream::GetDirection() const
 {
   if (!m_StreamId)
     return 0;
@@ -174,7 +174,7 @@ UInt32 CCoreAudioStream::GetTerminalType(AudioStreamID id)
   return val;
 }
 
-UInt32 CCoreAudioStream::GetNumLatencyFrames()
+UInt32 CCoreAudioStream::GetNumLatencyFrames() const
 {
   if (!m_StreamId)
     return 0;
@@ -197,7 +197,7 @@ UInt32 CCoreAudioStream::GetNumLatencyFrames()
   return num_latency_frames;
 }
 
-bool CCoreAudioStream::GetVirtualFormat(AudioStreamBasicDescription* pDesc)
+bool CCoreAudioStream::GetVirtualFormat(AudioStreamBasicDescription* pDesc) const
 {
   if (!pDesc || !m_StreamId)
     return false;
@@ -287,7 +287,7 @@ bool CCoreAudioStream::SetVirtualFormat(AudioStreamBasicDescription* pDesc)
   return true;
 }
 
-bool CCoreAudioStream::GetPhysicalFormat(AudioStreamBasicDescription* pDesc)
+bool CCoreAudioStream::GetPhysicalFormat(AudioStreamBasicDescription* pDesc) const
 {
   if (!pDesc || !m_StreamId)
     return false;
@@ -375,7 +375,7 @@ bool CCoreAudioStream::SetPhysicalFormat(AudioStreamBasicDescription* pDesc)
   return true;
 }
 
-bool CCoreAudioStream::GetAvailableVirtualFormats(StreamFormatList* pList)
+bool CCoreAudioStream::GetAvailableVirtualFormats(StreamFormatList* pList) const
 {
   return GetAvailableVirtualFormats(m_StreamId, pList);
 }
@@ -407,7 +407,7 @@ bool CCoreAudioStream::GetAvailableVirtualFormats(AudioStreamID id, StreamFormat
   return (ret == noErr);
 }
 
-bool CCoreAudioStream::GetAvailablePhysicalFormats(StreamFormatList* pList)
+bool CCoreAudioStream::GetAvailablePhysicalFormats(StreamFormatList* pList) const
 {
   return GetAvailablePhysicalFormats(m_StreamId, pList);
 }

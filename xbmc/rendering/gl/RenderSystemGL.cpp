@@ -466,7 +466,7 @@ void CRenderSystemGL::ResetScissors()
   SetScissors(CRect(0, 0, (float)m_width, (float)m_height));
 }
 
-void CRenderSystemGL::GetGLSLVersion(int& major, int& minor)
+void CRenderSystemGL::GetGLSLVersion(int& major, int& minor) const
 {
   major = m_glslMajor;
   minor = m_glslMinor;

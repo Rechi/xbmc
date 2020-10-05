@@ -196,7 +196,7 @@ CSkinInfo::~CSkinInfo() = default;
 struct closestRes
 {
   explicit closestRes(const RESOLUTION_INFO &target) : m_target(target) { };
-  bool operator()(const RESOLUTION_INFO &i, const RESOLUTION_INFO &j)
+  bool operator()(const RESOLUTION_INFO& i, const RESOLUTION_INFO& j) const
   {
     float diff = fabs(i.DisplayRatio() - m_target.DisplayRatio()) - fabs(j.DisplayRatio() - m_target.DisplayRatio());
     if (diff < 0) return true;

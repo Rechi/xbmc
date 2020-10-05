@@ -3381,7 +3381,7 @@ bool CApplication::IsPlayingFullScreenVideo() const
   return m_appPlayer.IsPlayingVideo() && CServiceBroker::GetWinSystem()->GetGfxContext().IsFullScreenVideo();
 }
 
-bool CApplication::IsFullScreen()
+bool CApplication::IsFullScreen() const
 {
   return IsPlayingFullScreenVideo() ||
         (CServiceBroker::GetGUI()->GetWindowManager().GetActiveWindow() == WINDOW_VISUALISATION) ||
@@ -4808,7 +4808,9 @@ void CApplication::StartMusicCleanup(bool userInitiated /* = true */)
     CMusicLibraryQueue::GetInstance().CleanLibrary(false);
 }
 
-void CApplication::StartMusicScan(const std::string &strDirectory, bool userInitiated /* = true */, int flags /* = 0 */)
+void CApplication::StartMusicScan(const std::string& strDirectory,
+                                  bool userInitiated /* = true */,
+                                  int flags /* = 0 */) const
 {
   if (IsMusicScanning())
     return;
@@ -4825,7 +4827,7 @@ void CApplication::StartMusicScan(const std::string &strDirectory, bool userInit
   CMusicLibraryQueue::GetInstance().ScanLibrary(strDirectory, flags, !(flags & CMusicInfoScanner::SCAN_BACKGROUND));
 }
 
-void CApplication::StartMusicAlbumScan(const std::string& strDirectory, bool refresh)
+void CApplication::StartMusicAlbumScan(const std::string& strDirectory, bool refresh) const
 {
   if (IsMusicScanning())
     return;
@@ -4833,8 +4835,7 @@ void CApplication::StartMusicAlbumScan(const std::string& strDirectory, bool ref
   CMusicLibraryQueue::GetInstance().StartAlbumScan(strDirectory, refresh);
 }
 
-void CApplication::StartMusicArtistScan(const std::string& strDirectory,
-                                        bool refresh)
+void CApplication::StartMusicArtistScan(const std::string& strDirectory, bool refresh) const
 {
   if (IsMusicScanning())
     return;

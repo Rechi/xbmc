@@ -140,10 +140,10 @@ namespace SOCKETS
     virtual void Close() {};
 
     // state functions
-    bool Ready() { return m_bReady; }
-    bool Bound() { return m_bBound; }
+    bool Ready() const { return m_bReady; }
+    bool Bound() const { return m_bBound; }
     SocketType Type() { return m_Type; }
-    int Port() { return m_iPort; }
+    int Port() const { return m_iPort; }
     virtual SOCKET Socket() = 0;
 
   protected:
