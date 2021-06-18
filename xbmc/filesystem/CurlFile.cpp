@@ -1565,11 +1565,7 @@ int CCurlFile::Stat(const CURL& url, struct __stat64* buffer)
     SetRequestHeaders(m_state);
     g_curlInterface.easy_setopt(m_state->m_easyHandle, CURLOPT_TIMEOUT, CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_curlconnecttimeout);
     g_curlInterface.easy_setopt(m_state->m_easyHandle, CURLOPT_FILETIME, 1);
-#if LIBCURL_VERSION_NUM >= 0x072000 // 0.7.32
-    g_curlInterface.easy_setopt(m_state->m_easyHandle, CURLOPT_XFERINFOFUNCTION, transfer_abort_callback);
-#else
     g_curlInterface.easy_setopt(m_state->m_easyHandle, CURLOPT_PROGRESSFUNCTION, transfer_abort_callback);
-#endif
     g_curlInterface.easy_setopt(m_state->m_easyHandle, CURLOPT_NOPROGRESS, 0);
 
     result = g_curlInterface.easy_perform(m_state->m_easyHandle);
@@ -2135,18 +2131,8 @@ const std::vector<std::string> CCurlFile::GetPropertyValues(XFILE::FileProperty 
 
 double CCurlFile::GetDownloadSpeed()
 {
-#if LIBCURL_VERSION_NUM >= 0x073a00 // 0.7.58.0
   double speed = 0.0;
   if (g_curlInterface.easy_getinfo(m_state->m_easyHandle, CURLINFO_SPEED_DOWNLOAD, &speed) == CURLE_OK)
     return speed;
-#else
-  double time = 0.0, size = 0.0;
-  if (g_curlInterface.easy_getinfo(m_state->m_easyHandle, CURLINFO_TOTAL_TIME, &time) == CURLE_OK
-    && g_curlInterface.easy_getinfo(m_state->m_easyHandle, CURLINFO_SIZE_DOWNLOAD, &size) == CURLE_OK
-    && time > 0.0)
-  {
-    return size / time;
-  }
-#endif
   return 0.0;
 }
