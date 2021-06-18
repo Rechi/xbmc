@@ -74,9 +74,7 @@ std::string CBlurayDirectory::GetDiscInfoString(DiscInfo info)
 
     std::string title = "";
 
-#if (BLURAY_VERSION > BLURAY_VERSION_CODE(1,0,0))
     title = disc_info->disc_name ? disc_info->disc_name : "";
-#endif
 
     return title;
   }
@@ -91,14 +89,12 @@ std::string CBlurayDirectory::GetDiscInfoString(DiscInfo info)
 
     std::string id = "";
 
-#if (BLURAY_VERSION > BLURAY_VERSION_CODE(1,0,0))
     id = disc_info->udf_volume_id ? disc_info->udf_volume_id : "";
 
     if (id.empty())
     {
       id = HexToString(disc_info->disc_id, 20);
     }
-#endif
 
     return id;
   }
