@@ -119,6 +119,8 @@ target_include_directories(upnp PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
                                        Neptune/Source/System/Posix)
 if(CORE_SYSTEM_NAME STREQUAL windows OR CORE_SYSTEM_NAME STREQUAL windowsstore)
   target_include_directories(upnp PRIVATE Neptune/Source/System/Win32)
+elseif(CORE_SYSTEM_NAME STREQUAL android)
+  target_compile_definitions(upnp PRIVATE NPT_CONFIG_HAVE_GETIFADDRS)
 endif()
 set_target_properties(upnp PROPERTIES CXX_CLANG_TIDY "")
 set_target_properties(upnp PROPERTIES CXX_CPPCHECK "")
