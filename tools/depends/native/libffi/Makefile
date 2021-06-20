@@ -5,12 +5,12 @@ DEPS= ../../Makefile.include Makefile
 
 # lib name, version
 LIBNAME=libffi
-VERSION=3.2.1
+VERSION=3.3
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
-CONFIGURE= CFLAGS="-fPIC" ./configure --prefix=$(NATIVEPREFIX) --disable-shared --disable-builddir
+CONFIGURE= CFLAGS="-fPIC" ./configure --prefix=$(NATIVEPREFIX) --disable-shared --disable-builddir --disable-docs
 
 
 LIBDYLIB=$(PLATFORM)/.libs/$(LIBNAME).a
@@ -26,13 +26,11 @@ $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	cd $(PLATFORM); $(CONFIGURE)
 
 $(LIBDYLIB): $(PLATFORM)
-	$(MAKE) -j 1 -C $(PLATFORM)
+	$(MAKE) -C $(PLATFORM)
 	touch $@
 
 .installed-$(PLATFORM): $(LIBDYLIB)
 	$(MAKE) -C $(PLATFORM) install
-	mkdir -p $(NATIVEPREFIX)/include/ffi
-	cp $(NATIVEPREFIX)/lib/$(SOURCE)/include/* $(NATIVEPREFIX)/include/ffi/
 	touch $@
 
 clean:
