@@ -1,19 +1,19 @@
---- a/setup.py
-+++ b/setup.py
-@@ -266,6 +266,16 @@
-         # Disable any assembly in libtomcrypt files
-         self.compiler.define_macro("LTC_NO_ASM")
+--- a/compiler_opt.py
++++ b/compiler_opt.py
+@@ -354,6 +354,16 @@
+     # Disable any assembly in libtomcrypt files
+     extra_macros.append(("LTC_NO_ASM", None))
  
-+        compiler = os.environ.get('CC')
-+        args = {}
-+        # unfortunately, distutils doesn't let us provide separate C and C++
-+        # compilers
-+        if compiler is not None:
-+            ccshared = os.environ.get('CCSHARED') or ''
-+            cflags = os.environ.get('CFLAGS') or ''
-+            args['compiler_so'] = compiler + ' ' + ccshared + ' ' + cflags
-+        self.compiler.set_executables(**args)
++    compiler = os.environ.get('CC')
++    args = {}
++    # unfortunately, distutils doesn't let us provide separate C and C++
++    # compilers
++    if compiler is not None:
++        ccshared = os.environ.get('CCSHARED') or ''
++        cflags = os.environ.get('CFLAGS') or ''
++        args['compiler_so'] = compiler + ' ' + ccshared + ' ' + cflags
++    # self.compiler.set_executables(**args)
 +
-         # Detect which modules should be compiled
-         self.detect_modules()
- 
+     # Native 128-bit integer
+     if compiler_supports_uint128():
+         extra_macros.append(("HAVE_UINT128", None))
