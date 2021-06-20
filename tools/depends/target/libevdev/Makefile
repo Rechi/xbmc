@@ -3,7 +3,7 @@ DEPS=../../Makefile.include Makefile
 
 # lib name, version
 LIBNAME=libevdev
-VERSION=1.5.8
+VERSION=1.9.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
 
