@@ -3,7 +3,7 @@ DEPS= ../../Makefile.include Makefile sqlite3.c.patch
 
 # lib name, version
 LIBNAME=sqlite
-VERSION=3260000
+VERSION=3310100
 SOURCE=$(LIBNAME)-autoconf-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
@@ -46,4 +46,3 @@ clean:
 
 distclean::
 	rm -rf $(PLATFORM) .installed-$(PLATFORM)
-
