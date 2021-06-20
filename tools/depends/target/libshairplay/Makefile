@@ -8,7 +8,7 @@ SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
 
 # configuration settings
-CONFIGURE=./configure --prefix=$(PREFIX)
+CONFIGURE=CFLAGS="-DAES_cbc_encrypt=shairplay_AES_cbc_encrypt" ./configure --prefix=$(PREFIX) --disable-shared
 
 
 LIBDYLIB=$(PLATFORM)/src/lib/.libs/libshairplay.a
