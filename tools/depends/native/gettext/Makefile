@@ -5,7 +5,7 @@ DEPS= ../../Makefile.include Makefile 01-gettext-tools-stpncpy.patch
 
 # lib name, version
 LIBNAME=gettext
-VERSION=0.19.8
+VERSION=0.20.2
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
@@ -50,4 +50,3 @@ clean:
 
 distclean::
 	rm -rf $(PLATFORM) .installed-$(PLATFORM)
-
