@@ -3,9 +3,9 @@ DEPS= ../../Makefile.include Makefile
 
 # lib name, version
 LIBNAME=dbus
-VERSION=1.11.16
+VERSION=1.13.14
 SOURCE=$(LIBNAME)-$(VERSION)
-ARCHIVE=$(SOURCE).tar.gz
+ARCHIVE=$(SOURCE).tar.xz
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) \
