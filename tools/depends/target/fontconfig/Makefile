@@ -6,6 +6,7 @@ LIBNAME=fontconfig
 VERSION=2.13.1
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
+BASE_URL=https://www.freedesktop.org/software/fontconfig/release
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) \

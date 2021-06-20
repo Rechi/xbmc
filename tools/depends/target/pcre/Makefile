@@ -6,6 +6,7 @@ LIBNAME=pcre
 VERSION=8.44
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://ftp.pcre.org/pub/pcre
 
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; ./configure --prefix=$(PREFIX) \

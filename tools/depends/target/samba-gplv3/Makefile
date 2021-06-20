@@ -6,6 +6,7 @@ LIBNAME=samba
 VERSION=4.11.13
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://download.samba.org/pub/samba/stable
 
 CONFIGURE=./configure --prefix=$(PREFIX) \
           --cross-compile --cross-answers=cross-answers.txt \

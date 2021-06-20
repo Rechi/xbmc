@@ -6,6 +6,7 @@ LIBNAME=libxml2
 VERSION=2.9.10
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=ftp://xmlsoft.org/libxml2
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --without-python --without-iconv --disable-shared

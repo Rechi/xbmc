@@ -6,6 +6,7 @@ LIBNAME=libgcrypt
 VERSION=1.8.5
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
+BASE_URL=https://gnupg.org/ftp/gcrypt/libgcrypt
 
 ifeq ($(OS),osx)
   CONFIGURE_FLAGS+= --disable-asm --disable-avx-support --disable-avx2-support

@@ -6,6 +6,7 @@ LIBNAME=sqlite
 VERSION=3310100
 SOURCE=$(LIBNAME)-autoconf-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://www.sqlite.org/2019
 
 # configuration settings
 export CXXFLAGS+=-DSQLITE_ENABLE_COLUMN_METADATA=1

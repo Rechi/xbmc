@@ -6,6 +6,7 @@ LIBNAME=libass
 VERSION=0.15.1
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://github.com/libass/libass/releases/download/$(VERSION)
 
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \

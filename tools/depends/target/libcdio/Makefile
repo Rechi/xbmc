@@ -6,6 +6,8 @@ LIBNAME=libcdio
 VERSION=0.80
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://ftp.gnu.org/pub/gnu/libcdio
+
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
           ./configure --prefix=$(PREFIX)  --with-cd-drive=no --with-cd-info=no --with-cd-paranoia=no \
@@ -43,4 +45,3 @@ clean:
 
 distclean::
 	rm -rf $(PLATFORM) .installed-$(PLATFORM)
-

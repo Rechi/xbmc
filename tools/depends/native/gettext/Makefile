@@ -8,6 +8,7 @@ LIBNAME=gettext
 VERSION=0.20.2
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://ftp.gnu.org/pub/gnu/gettext
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) \

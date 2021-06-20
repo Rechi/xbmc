@@ -6,6 +6,7 @@ LIBNAME=libasound
 VERSION=1.2.2
 SOURCE=alsa-lib-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
+BASE_URL=ftp://ftp.alsa-project.org/pub/lib
 
 # configuration settings
 CFLAGS += \

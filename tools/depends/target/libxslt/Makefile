@@ -6,6 +6,7 @@ LIBNAME=libxslt
 VERSION=1.1.34
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=ftp://xmlsoft.org/libxslt
 
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \

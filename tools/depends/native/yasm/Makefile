@@ -7,6 +7,7 @@ APPNAME=yasm
 VERSION=1.3.0
 SOURCE=$(APPNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=http://www.tortall.net/projects/yasm/releases
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --disable-nls --disable-python
@@ -37,4 +38,3 @@ clean:
 
 distclean::
 	rm -rf $(PLATFORM) .installed-$(PLATFORM)
-

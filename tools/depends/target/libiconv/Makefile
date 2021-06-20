@@ -6,6 +6,7 @@ LIBNAME=libiconv
 VERSION=1.16
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://ftp.gnu.org/pub/gnu/libiconv
 
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) build-aux/; \

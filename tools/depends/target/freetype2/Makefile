@@ -6,6 +6,7 @@ LIBNAME=freetype
 VERSION=2.10.2
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
+BASE_URL=https://download.savannah.gnu.org/releases/freetype
 
 # configuration settings
 # force using internal libtool

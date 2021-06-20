@@ -6,6 +6,7 @@ LIBNAME=libevdev
 VERSION=1.9.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
+BASE_URL=https://www.freedesktop.org/software/libevdev
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --disable-shared --enable-static --disable-tests

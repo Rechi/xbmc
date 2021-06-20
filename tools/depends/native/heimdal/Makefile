@@ -8,6 +8,7 @@ LIBNAME=heimdal
 VERSION=7.7.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://github.com/$(LIBNAME)/$(LIBNAME)/releases/download/$(SOURCE)
 
 APP=$(PLATFORM)/lib/asn1/asn1_compile
 

@@ -8,6 +8,7 @@ APPNAME=tar
 VERSION=1.32
 SOURCE=$(APPNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=http://ftp.gnu.org/gnu/tar
 
 ifeq ($(NATIVE_OS),osx)
 # https://openradar.appspot.com/radar?id=6160634819379200

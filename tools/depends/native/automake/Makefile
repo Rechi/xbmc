@@ -7,6 +7,7 @@ LIBNAME=automake
 VERSION=1.16.1
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=http://ftp.gnu.org/gnu/automake
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(NATIVEPREFIX)

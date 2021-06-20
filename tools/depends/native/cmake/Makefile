@@ -6,6 +6,7 @@ APPNAME=cmake
 VERSION=3.20.3
 SOURCE=$(APPNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://github.com/Kitware/CMake/releases/download/v$(VERSION)
 
 # configuration settings
 
@@ -47,4 +48,3 @@ clean:
 
 distclean::
 	rm -rf $(PLATFORM) .installed-$(PLATFORM)
-

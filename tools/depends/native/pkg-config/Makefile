@@ -9,6 +9,7 @@ LIBNAME=pkg-config
 VERSION=0.29.2
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://pkgconfig.freedesktop.org/releases
 
 PC_PATH=$(PREFIX)/lib/pkgconfig:$(PREFIX)/share/pkgconfig
 ifeq ($(CROSS_COMPILING),no)

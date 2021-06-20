@@ -6,6 +6,7 @@ LIBNAME=libzip
 VERSION=1.6.1
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://libzip.org/download
 
 LIBDYLIB=$(PLATFORM)/build/lib/libzip.a
 

@@ -6,6 +6,7 @@ LIBNAME=libffi
 VERSION=3.2.1
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=ftp://sourceware.org/pub/libffi
 
 # configuration settings
 CONFIGURE= ./configure --prefix=$(PREFIX) --disable-shared --disable-builddir

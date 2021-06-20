@@ -6,6 +6,7 @@ LIBNAME=libxkbcommon
 VERSION=0.10.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
+BASE_URL=http://xkbcommon.org/download
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --disable-shared --enable-static --disable-x11 --disable-docs

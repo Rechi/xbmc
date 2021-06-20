@@ -6,6 +6,7 @@ LIBNAME=libinput
 VERSION=1.15.5
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
+BASE_URL=https://www.freedesktop.org/software/libinput
 
 # configuration settings
 CONFIGURE= $(NATIVEPREFIX)/bin/python3 $(NATIVEPREFIX)/bin/meson \

@@ -8,6 +8,7 @@ LIBNAME=giflib
 VERSION=5.2.1
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://sourceforge.net/projects/$(LIBNAME)/files
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX)

@@ -6,6 +6,7 @@ LIBNAME=gnutls
 VERSION=3.6.14
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
+BASE_URL=https://www.gnupg.org/ftp/gcrypt/gnutls/v$(shell echo ${VERSION} | cut -d . -f 1-2)
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --disable-shared --without-p11-kit --disable-nls --with-included-unistring \

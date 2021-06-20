@@ -10,6 +10,7 @@ VERSION_PATCH=7
 VERSION=$(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_PATCH)
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://github.com/Pulse-Eight/libcec/archive
 
 LIBDYLIB=$(PLATFORM)/build/src/$(LIBNAME)/$(LIBNAME).so
 ifeq (darwin, $(findstring darwin, $(HOST)))
@@ -42,4 +43,3 @@ clean:
 
 distclean::
 	rm -rf $(PLATFORM) .installed-$(PLATFORM)
-

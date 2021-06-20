@@ -6,6 +6,7 @@ LIBNAME=fribidi
 VERSION=1.0.10
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://github.com/fribidi/fribidi/releases/download/v$(VERSION)
 
 MESON_BUILD_TYPE=release
 

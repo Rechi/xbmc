@@ -6,6 +6,7 @@ LIBNAME=nettle
 VERSION=3.6
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://ftp.gnu.org/gnu/nettle
 
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \

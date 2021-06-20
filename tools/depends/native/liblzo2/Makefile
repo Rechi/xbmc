@@ -8,6 +8,7 @@ LIBNAME=lzo
 VERSION=2.10
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=http://www.oberhumer.com/opensource/lzo/download
 
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) autoconf/; \

@@ -7,7 +7,8 @@ DEPS= ../../Makefile.include Makefile 01-no-gnu-patch.patch 02-perl-min-version.
 LIBNAME=dpkg
 VERSION=1.19.7
 SOURCE=$(LIBNAME)_$(VERSION)
-ARCHIVE=$(SOURCE).tar.xz
+ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://salsa.debian.org/dpkg-team/dpkg/-/archive/$(VERSION)
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --enable-static --disable-shared --disable-devel-docs \

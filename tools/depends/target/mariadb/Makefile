@@ -4,6 +4,7 @@ DEPS= ../../Makefile.include Makefile 01-android.patch 02-symbol_rename-gnutls_c
 LIBNAME=mariadb
 VERSION=3.1.9
 ARCHIVE=$(LIBNAME)-connector-c-$(VERSION)-src.tar.gz
+BASE_URL=https://downloads.mariadb.com/Connectors/c/connector-c-$(VERSION)
 
 LIBDYLIB=$(PLATFORM)/build/lib$(LIBNAME)/lib$(LIBNAME)client.a
 

@@ -8,6 +8,7 @@ LIBNAME=expat
 VERSION=2.2.7
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
+BASE_URL=https://github.com/libexpat/libexpat/releases/download/R_$(shell echo ${VERSION} | sed 's/\./_/g')
 
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) ./conftools; CFLAGS="-fPIC" ./configure --prefix=$(PREFIX) --disable-shared

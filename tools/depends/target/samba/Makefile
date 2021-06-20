@@ -10,6 +10,7 @@ LIBNAME=samba
 VERSION=3.0.37
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://github.com/samba-team/samba/archive
 
 # configuration settings
 # android does not really support LFS but we can force it
@@ -80,4 +81,3 @@ clean:
 
 distclean::
 	rm -rf $(PLATFORM) .installed-$(PLATFORM)
-

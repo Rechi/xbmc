@@ -6,6 +6,7 @@ LIBNAME=libgpg-error
 VERSION=1.36
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
+BASE_URL= https://gnupg.org/ftp/gcrypt/libgpg-error
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) \

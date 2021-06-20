@@ -6,6 +6,7 @@ LIBNAME=libjpeg-turbo
 VERSION=2.0.5
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(LIBNAME)-$(VERSION).tar.gz
+BASE_URL=https://sourceforge.net/projects/libjpeg-turbo/files/$(VERSION)
 
 LIBDYLIB=$(PLATFORM)/build/libjpeg.a
 

@@ -6,6 +6,7 @@ LIBNAME=libbluray
 VERSION=1.1.2
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
+BASE_URL=https://download.videolan.org/pub/videolan/$(LIBNAME)/$(VERSION)
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --disable-shared --exec-prefix=$(PREFIX) \

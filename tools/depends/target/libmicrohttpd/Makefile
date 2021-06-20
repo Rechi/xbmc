@@ -6,6 +6,7 @@ LIBNAME=libmicrohttpd
 VERSION=0.9.71
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://ftp.gnu.org/gnu/libmicrohttpd
 
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \

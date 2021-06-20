@@ -6,6 +6,7 @@ LIBNAME=libnfs
 VERSION=4.0.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://github.com/sahlberg/libnfs/archive
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --disable-shared --disable-utils --disable-examples

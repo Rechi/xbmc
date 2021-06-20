@@ -6,6 +6,8 @@ LIBNAME=curl
 VERSION=7.68.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
+BASE_URL=https://curl.haxx.se/download
+
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
           ./configure --prefix=$(PREFIX) --disable-shared --disable-ldap \

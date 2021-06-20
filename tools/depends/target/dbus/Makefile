@@ -6,6 +6,7 @@ LIBNAME=dbus
 VERSION=1.13.14
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
+BASE_URL=https://dbus.freedesktop.org/releases/dbus
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) \
