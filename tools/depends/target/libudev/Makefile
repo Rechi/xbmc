@@ -3,7 +3,7 @@ DEPS=../../Makefile.include Makefile
 
 # lib name, version
 LIBNAME=libudev
-VERSION=3.2.5
+VERSION=3.2.9
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
