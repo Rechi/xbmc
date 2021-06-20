@@ -3,7 +3,7 @@ DEPS=../../Makefile.include Makefile
 
 # lib name, version
 LIBNAME=libxkbcommon
-VERSION=0.8.0
+VERSION=0.10.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
 
