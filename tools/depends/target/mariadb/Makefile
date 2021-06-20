@@ -1,5 +1,5 @@
 include ../../Makefile.include
-DEPS= ../../Makefile.include Makefile 01-android.patch 02-symbol_rename-gnutls_clash.patch 03-cmake3.20_syntax_fix.patch
+DEPS= ../../Makefile.include Makefile 01-android.patch 02-symbol_rename-gnutls_clash.patch 03-cmake3.20_syntax_fix.patch 04-link-openssl.patch
 
 LIBNAME=mariadb
 VERSION=3.1.9
@@ -24,6 +24,7 @@ $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	cd $(PLATFORM); patch -p1 -i ../01-android.patch
 	cd $(PLATFORM); patch -p1 -i ../02-symbol_rename-gnutls_clash.patch
 	cd $(PLATFORM); patch -p1 -i ../03-cmake3.20_syntax_fix.patch
+	cd $(PLATFORM); patch -p1 -i ../04-link-openssl.patch
 	cd $(PLATFORM)/build; $(CMAKE) $(PLUGIN_BUILD_FLAGS) -DWITH_UNIT_TESTS:BOOL=OFF -DWITH_EXTERNAL_ZLIB:BOOL=ON -DWITH_CURL:BOOL=OFF ..
 
 $(LIBDYLIB): $(PLATFORM)
