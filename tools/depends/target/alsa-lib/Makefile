@@ -3,7 +3,7 @@ DEPS= ../../Makefile.include Makefile
 
 # lib name, version
 LIBNAME=libasound
-VERSION=1.1.4.1
+VERSION=1.2.2
 SOURCE=alsa-lib-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
 
