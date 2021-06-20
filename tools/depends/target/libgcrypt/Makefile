@@ -3,7 +3,7 @@ DEPS= ../../Makefile.include Makefile 01-gcrypt-android-select.patch 02-fix-armv
 
 # lib name, version
 LIBNAME=libgcrypt
-VERSION=1.8.1
+VERSION=1.8.5
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
 
