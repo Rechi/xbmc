@@ -5,13 +5,13 @@ DEPS= ../../Makefile.include Makefile
 
 # lib name, version
 LIBNAME=libpng
-VERSION=1.6.26
+VERSION=1.6.37
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
-          ./configure --prefix=$(PREFIX)
+          ./configure --prefix=$(PREFIX) --disable-shared
 
 LIBDYLIB=$(PLATFORM)/.libs/$(LIBNAME)16.a
 
@@ -27,7 +27,6 @@ $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 
 $(LIBDYLIB): $(PLATFORM)
 	$(MAKE) -C $(PLATFORM)
-	touch $@
 
 .installed-$(PLATFORM): $(LIBDYLIB)
 	$(MAKE) -C $(PLATFORM) install
