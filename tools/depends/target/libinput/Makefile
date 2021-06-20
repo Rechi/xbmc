@@ -3,7 +3,7 @@ DEPS=../../Makefile.include Makefile
 
 # lib name, version
 LIBNAME=libinput
-VERSION=1.10.5
+VERSION=1.15.5
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
 
