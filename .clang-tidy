@@ -1,4 +1,5 @@
 Checks: "\
+  google-readability-casting,\
   performance-faster-string-find,\
   performance-for-range-copy,\
   performance-implicit-conversion-in-loop,\

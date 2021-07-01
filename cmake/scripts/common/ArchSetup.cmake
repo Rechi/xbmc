@@ -157,6 +157,7 @@ endif()
 if(NOT MSVC)
   add_options(ALL_LANGUAGES ALL_BUILDS "-Wall" "-Wdouble-promotion" "-Wmissing-field-initializers")
   add_options(ALL_LANGUAGES DEBUG "-g" "-D_DEBUG")
+  add_options(CXX DEBUG "-Wold-style-cast")
 endif()
 
 # set for compile info to help detect binary addons
