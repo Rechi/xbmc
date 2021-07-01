@@ -30,13 +30,14 @@ void CJNIXBMCMainView::RegisterNatives(JNIEnv* env)
   jclass cClass = env->FindClass(s_className.c_str());
   if(cClass)
   {
-    JNINativeMethod methods[] =
-    {
-      {"_attach", "()V", (void*)&CJNIXBMCMainView::_attach},
-      {"_surfaceChanged", "(Landroid/view/SurfaceHolder;III)V", (void*)&CJNIXBMCMainView::_surfaceChanged},
-      {"_surfaceCreated", "(Landroid/view/SurfaceHolder;)V", (void*)&CJNIXBMCMainView::_surfaceCreated},
-      {"_surfaceDestroyed", "(Landroid/view/SurfaceHolder;)V", (void*)&CJNIXBMCMainView::_surfaceDestroyed}
-    };
+    JNINativeMethod methods[] = {
+        {"_attach", "()V", reinterpret_cast<void*>(&CJNIXBMCMainView::_attach)},
+        {"_surfaceChanged", "(Landroid/view/SurfaceHolder;III)V",
+         reinterpret_cast<void*>(&CJNIXBMCMainView::_surfaceChanged)},
+        {"_surfaceCreated", "(Landroid/view/SurfaceHolder;)V",
+         reinterpret_cast<void*>(&CJNIXBMCMainView::_surfaceCreated)},
+        {"_surfaceDestroyed", "(Landroid/view/SurfaceHolder;)V",
+         reinterpret_cast<void*>(&CJNIXBMCMainView::_surfaceDestroyed)}};
 
     env->RegisterNatives(cClass, methods, sizeof(methods)/sizeof(methods[0]));
   }

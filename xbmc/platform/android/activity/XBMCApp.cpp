@@ -676,8 +676,8 @@ CRect CXBMCApp::MapRenderToDroid(const CRect& srcRect)
   if (r.width() && r.height())
   {
     RESOLUTION_INFO renderRes = CDisplaySettings::GetInstance().GetResolutionInfo(CServiceBroker::GetWinSystem()->GetGfxContext().GetVideoResolution());
-    scaleX = (double)r.width() / renderRes.iWidth;
-    scaleY = (double)r.height() / renderRes.iHeight;
+    scaleX = static_cast<double>(r.width()) / renderRes.iWidth;
+    scaleY = static_cast<double>(r.height()) / renderRes.iHeight;
   }
 
   return CRect(srcRect.x1 * scaleX, srcRect.y1 * scaleY, srcRect.x2 * scaleX, srcRect.y2 * scaleY);
@@ -954,8 +954,8 @@ bool CXBMCApp::GetStorageUsage(const std::string &path, std::string &usage)
   if (blockSize <= 0 || blockCount <= 0 || freeBlocks < 0)
     return false;
 
-  float totalSize = (float)blockSize * blockCount / GIGABYTES;
-  float freeSize = (float)blockSize * freeBlocks / GIGABYTES;
+  float totalSize = static_cast<float>(blockSize) * blockCount / GIGABYTES;
+  float freeSize = static_cast<float>(blockSize) * freeBlocks / GIGABYTES;
   float usedSize = totalSize - freeSize;
   float usedPercentage = usedSize / totalSize * 100;
 
@@ -999,7 +999,7 @@ float CXBMCApp::GetSystemVolume()
 {
   CJNIAudioManager audioManager(getSystemService("audio"));
   if (audioManager)
-    return (float)audioManager.getStreamVolume() / GetMaxSystemVolume();
+    return static_cast<float>(audioManager.getStreamVolume()) / GetMaxSystemVolume();
   else
   {
     android_printf("CXBMCApp::GetSystemVolume: Could not get Audio Manager");
@@ -1010,7 +1010,7 @@ float CXBMCApp::GetSystemVolume()
 void CXBMCApp::SetSystemVolume(float percent)
 {
   CJNIAudioManager audioManager(getSystemService("audio"));
-  int maxVolume = (int)(GetMaxSystemVolume() * percent);
+  int maxVolume = static_cast<int>(GetMaxSystemVolume() * percent);
   if (audioManager)
     audioManager.setStreamVolume(maxVolume);
   else
@@ -1114,7 +1114,7 @@ void CXBMCApp::onReceive(CJNIIntent intent)
       CLog::Log(LOGINFO, "Ignore MEDIA_BUTTON intent: no media playing");
       return;
     }
-    CJNIKeyEvent keyevt = (CJNIKeyEvent)intent.getParcelableExtra(CJNIIntent::EXTRA_KEY_EVENT);
+    CJNIKeyEvent keyevt = CJNIKeyEvent(intent.getParcelableExtra(CJNIIntent::EXTRA_KEY_EVENT));
 
     int keycode = keyevt.getKeyCode();
     bool up = (keyevt.getAction() == CJNIKeyEvent::ACTION_UP);

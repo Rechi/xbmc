@@ -370,8 +370,9 @@ bool CZeroconfBrowserAvahi::createClient()
 AvahiServiceBrowser* CZeroconfBrowserAvahi::createServiceBrowser ( const std::string& fcr_service_type, AvahiClient* fp_client, void* fp_userdata)
 {
   assert(fp_client);
-  AvahiServiceBrowser* ret = avahi_service_browser_new ( fp_client, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC, fcr_service_type.c_str(),
-                                                         NULL, ( AvahiLookupFlags ) 0, browseCallback, fp_userdata );
+  AvahiServiceBrowser* ret = avahi_service_browser_new(
+      fp_client, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC, fcr_service_type.c_str(), NULL,
+      static_cast<AvahiLookupFlags>(0), browseCallback, fp_userdata);
   if ( !ret )
   {
     CLog::Log(

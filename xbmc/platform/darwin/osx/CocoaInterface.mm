@@ -54,12 +54,12 @@ uint32_t Cocoa_GL_GetCurrentDisplayID(void)
       {
         NSDictionary* screenInfo = [[window screen] deviceDescription];
         NSNumber* screenID = [screenInfo objectForKey:@"NSScreenNumber"];
-        display_id = (CGDirectDisplayID)[screenID longValue];
+        display_id = static_cast<CGDirectDisplayID>([screenID longValue]);
       }
     }
   }
 
-  return((uint32_t)display_id);
+  return (static_cast<uint32_t>(display_id));
 }
 
 bool Cocoa_CVDisplayLinkCreate(void *displayLinkcallback, void *displayLinkContext)
@@ -71,14 +71,16 @@ bool Cocoa_CVDisplayLinkCreate(void *displayLinkcallback, void *displayLinkConte
   GLint swapInterval = 1;
   [[NSOpenGLContext currentContext] setValues:&swapInterval forParameter:NSOpenGLCPSwapInterval];
 
-  display_id = (CGDirectDisplayID)Cocoa_GL_GetCurrentDisplayID();
+  display_id = static_cast<CGDirectDisplayID>(Cocoa_GL_GetCurrentDisplayID());
   if (!displayLink)
   {
     // Create a display link capable of being used with all active displays
     status = CVDisplayLinkCreateWithActiveCGDisplays(&displayLink);
 
     // Set the renderer output callback function
-    status = CVDisplayLinkSetOutputCallback(displayLink, (CVDisplayLinkOutputCallback)displayLinkcallback, displayLinkContext);
+    status = CVDisplayLinkSetOutputCallback(
+        displayLink, static_cast<CVDisplayLinkOutputCallback>(displayLinkcallback),
+        displayLinkContext);
   }
 
   if (status == kCVReturnSuccess)
@@ -111,7 +113,7 @@ void Cocoa_CVDisplayLinkUpdate(void)
   {
     CGDirectDisplayID display_id;
 
-    display_id = (CGDirectDisplayID)Cocoa_GL_GetCurrentDisplayID();
+    display_id = static_cast<CGDirectDisplayID>(Cocoa_GL_GetCurrentDisplayID());
     // Set the display link to the current display
     CVDisplayLinkSetCurrentCGDisplay(displayLink, display_id);
   }
@@ -182,7 +184,7 @@ char* Cocoa_MountPoint2DeviceName(char *path)
       if (!StringUtils::CompareNoCase(mntbufp[i].f_mntonname, strDVDDevice))
       {
         // Replace "/dev/" with "/dev/r"
-        path = (char*)realloc(path, strlen(mntbufp[i].f_mntfromname) + 2 );
+        path = static_cast<char*>(realloc(path, strlen(mntbufp[i].f_mntfromname) + 2));
         strcpy( path, "/dev/r" );
         strcat( path, mntbufp[i].f_mntfromname + strlen( "/dev/" ) );
         break;

@@ -88,7 +88,7 @@ bool CNetworkInterfaceOsx::GetHostMacAddress(unsigned long host_ip, std::string&
           if (host_ip != sin->sin_addr.s_addr || sdl->sdl_alen < 6)
             continue;
 
-          u_char* cp = (u_char*)LLADDR(sdl);
+          u_char* cp = reinterpret_cast<u_char*> LLADDR(sdl);
 
           mac = StringUtils::Format("{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}", cp[0], cp[1],
                                     cp[2], cp[3], cp[4], cp[5]);
@@ -136,10 +136,11 @@ void CNetworkOsx::GetMacAddress(const std::string& interfaceName, char rawMac[6]
     if (interfaceName == interface->ifa_name)
     {
       if ((interface->ifa_addr->sa_family == AF_LINK) &&
-          (((const struct sockaddr_dl*)interface->ifa_addr)->sdl_type == IFT_ETHER))
+          ((reinterpret_cast<const struct sockaddr_dl*>(interface->ifa_addr))->sdl_type ==
+           IFT_ETHER))
       {
-        dlAddr = (const struct sockaddr_dl*)interface->ifa_addr;
-        base = (const uint8_t*)&dlAddr->sdl_data[dlAddr->sdl_nlen];
+        dlAddr = reinterpret_cast<const struct sockaddr_dl*>(interface->ifa_addr);
+        base = reinterpret_cast<const uint8_t*>(&dlAddr->sdl_data[dlAddr->sdl_nlen]);
 
         if (dlAddr->sdl_alen > 5)
         {
