@@ -10703,7 +10703,7 @@ void CGUIInfoManager::Clear()
   // log which ones are used - they should all be gone by now
   for (INFOBOOLTYPE::const_iterator i = m_bools.begin(); i != m_bools.end(); ++i)
     CLog::Log(LOGDEBUG, "Infobool '{}' still used by {} instances", (*i)->GetExpression(),
-              (unsigned int)i->use_count());
+              static_cast<unsigned int>(i->use_count()));
 }
 
 void CGUIInfoManager::UpdateAVInfo()

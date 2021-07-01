@@ -372,22 +372,22 @@ bool CGUIPassword::CheckSettingLevelLock(const SettingLevel& level, bool enforce
 
     //check if we are already in settings and in an level that needs unlocking
   int windowID = CServiceBroker::GetGUI()->GetWindowManager().GetActiveWindow();
-  if ((int)lockLevel-1 <= (short)CViewStateSettings::GetInstance().GetSettingLevel() &&
-     (windowID == WINDOW_SETTINGS_MENU ||
-         (windowID >= WINDOW_SCREEN_CALIBRATION &&
-          windowID <= WINDOW_SETTINGS_MYPVR)))
+  if (static_cast<int>(lockLevel) - 1 <=
+          static_cast<short>(CViewStateSettings::GetInstance().GetSettingLevel()) &&
+      (windowID == WINDOW_SETTINGS_MENU ||
+       (windowID >= WINDOW_SCREEN_CALIBRATION && windowID <= WINDOW_SETTINGS_MYPVR)))
     return true; //Already unlocked
 
   else if (lockLevel == LOCK_LEVEL::ALL)
     return IsMasterLockUnlocked(true);
-  else if ((int)lockLevel-1 <= (short)level)
+  else if (static_cast<int>(lockLevel) - 1 <= static_cast<short>(level))
   {
     if (enforce)
       return IsMasterLockUnlocked(true);
     else if (!IsMasterLockUnlocked(false))
     {
       //Current Setting level is higher than our permission... so lower the viewing level
-      SettingLevel newLevel = (SettingLevel)(short)(lockLevel-2);
+      SettingLevel newLevel = static_cast<SettingLevel>(static_cast<short>(lockLevel - 2));
       CViewStateSettings::GetInstance().SetSettingLevel(newLevel);
     }
   }
