@@ -139,26 +139,26 @@ public:
   ///@{
 
   /// @brief To get settings value as string.
-  std::string GetString() const { return (const char*)m_settingValue; }
+  std::string GetString() const { return static_cast<const char*>(m_settingValue); }
 
   /// @brief To get settings value as integer.
-  int GetInt() const { return *(const int*)m_settingValue; }
+  int GetInt() const { return *static_cast<const int*>(m_settingValue); }
 
   /// @brief To get settings value as unsigned integer.
-  unsigned int GetUInt() const { return *(const unsigned int*)m_settingValue; }
+  unsigned int GetUInt() const { return *static_cast<const unsigned int*>(m_settingValue); }
 
   /// @brief To get settings value as boolean.
-  bool GetBoolean() const { return *(const bool*)m_settingValue; }
+  bool GetBoolean() const { return *static_cast<const bool*>(m_settingValue); }
 
   /// @brief To get settings value as floating point.
-  float GetFloat() const { return *(const float*)m_settingValue; }
+  float GetFloat() const { return *static_cast<const float*>(m_settingValue); }
 
   /// @brief To get settings value as enum.
   /// @note Inside settings.xml them stored as integer.
   template<typename enumType>
   enumType GetEnum() const
   {
-    return static_cast<enumType>(*(const int*)m_settingValue);
+    return static_cast<enumType>(*static_cast<const int*>(m_settingValue));
   }
 
   ///@}
