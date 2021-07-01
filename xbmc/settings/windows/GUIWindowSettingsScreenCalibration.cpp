@@ -157,15 +157,16 @@ bool CGUIWindowSettingsScreenCalibration::OnMessage(CGUIMessage& message)
       else
       {
         SET_CONTROL_HIDDEN(CONTROL_VIDEO);
-        m_iCurRes = (unsigned int)-1;
+        m_iCurRes = static_cast<unsigned int>(-1);
         CServiceBroker::GetWinSystem()->GetGfxContext().GetAllowedResolutions(m_Res);
         // find our starting resolution
         m_iCurRes = FindCurrentResolution();
       }
-      if (m_iCurRes==(unsigned int)-1)
+      if (m_iCurRes == static_cast<unsigned int>(-1))
       {
-        CLog::Log(LOGERROR, "CALIBRATION: Reported current resolution: {}",
-                  (int)CServiceBroker::GetWinSystem()->GetGfxContext().GetVideoResolution());
+        CLog::Log(
+            LOGERROR, "CALIBRATION: Reported current resolution: {}",
+            static_cast<int>(CServiceBroker::GetWinSystem()->GetGfxContext().GetVideoResolution()));
         CLog::Log(LOGERROR, "CALIBRATION: Could not determine current resolution, falling back to default");
         m_iCurRes = 0;
       }
@@ -263,8 +264,8 @@ void CGUIWindowSettingsScreenCalibration::ResetControls()
                          -info.iHeight / 4,
                          info.iWidth / 4,
                          info.iHeight / 4);
-    pControl->SetPosition((float)info.Overscan.left,
-                          (float)info.Overscan.top);
+    pControl->SetPosition(static_cast<float>(info.Overscan.left),
+                          static_cast<float>(info.Overscan.top));
     pControl->SetLocation(info.Overscan.left,
                           info.Overscan.top, false);
   }
@@ -275,8 +276,9 @@ void CGUIWindowSettingsScreenCalibration::ResetControls()
                         info.iHeight*3 / 4,
                         info.iWidth*5 / 4,
                         info.iHeight*5 / 4);
-    pControl->SetPosition((float)info.Overscan.right - (int)pControl->GetWidth(),
-                          (float)info.Overscan.bottom - (int)pControl->GetHeight());
+    pControl->SetPosition(
+        static_cast<float>(info.Overscan.right) - static_cast<int>(pControl->GetWidth()),
+        static_cast<float>(info.Overscan.bottom) - static_cast<int>(pControl->GetHeight()));
     pControl->SetLocation(info.Overscan.right,
                           info.Overscan.bottom, false);
   }
