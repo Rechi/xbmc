@@ -68,7 +68,8 @@ bool PNGDecoder::CanDecode(const std::string &filename)
 
   /* Compare the first PNG_BYTES_TO_CHECK bytes of the signature.
    Return nonzero (true) if they match */
-  return(!png_sig_cmp((png_bytep)buf, (png_size_t)0, PNG_BYTES_TO_CHECK));
+  return (!png_sig_cmp(reinterpret_cast<png_bytep>(buf), static_cast<png_size_t>(0),
+                       PNG_BYTES_TO_CHECK));
 }
 
 bool PNGDecoder::LoadFile(const std::string &filename, DecodedFrames &frames)
@@ -218,7 +219,7 @@ bool PNGDecoder::LoadFile(const std::string &filename, DecodedFrames &frames)
 
   DecodedFrame frame;
 
-  frame.rgbaImage.pixels = (char *)image_data;
+  frame.rgbaImage.pixels = reinterpret_cast<char*>(image_data);
   frame.rgbaImage.height = temp_height;
   frame.rgbaImage.width = temp_width;
   frame.rgbaImage.bbp = 32;

@@ -216,7 +216,7 @@ bool GifHelper::LoadGif(const char* file)
       fprintf(stderr, "Gif::LoadGif(): Could not extract any frame. File %s\n", m_filename.c_str());
       return false;
     }
-    else if (extractedFrames < (int)m_numFrames)
+    else if (extractedFrames < static_cast<int>(m_numFrames))
     {
       fprintf(stderr, "Gif::LoadGif(): Could only extract %d/%d frames. File %s\n", extractedFrames, m_numFrames, m_filename.c_str());
       m_numFrames = extractedFrames;
@@ -284,7 +284,7 @@ bool GifHelper::GcbToFrame(GifFrame &frame, unsigned int imgIdx)
 #endif
   }
 
-  if (transparent >= 0 && (unsigned)transparent < frame.m_palette.size())
+  if (transparent >= 0 && static_cast<unsigned>(transparent) < frame.m_palette.size())
     frame.m_palette[transparent].a = 0;
   return true;
 }

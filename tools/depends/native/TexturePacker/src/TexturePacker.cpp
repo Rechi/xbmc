@@ -202,7 +202,7 @@ CXBTFFrame createXBTFFrame(RGBAImage &image, CXBTFWriter& writer, double maxMSE,
 
   int width, height;
   unsigned int format = 0;
-  unsigned char* argb = (unsigned char*)image.pixels;
+  unsigned char* argb = reinterpret_cast<unsigned char*>(image.pixels);
 
   width  = image.width;
   height = image.height;
@@ -300,9 +300,8 @@ int createBundle(const std::string& InputDir, const std::string& OutputFile, dou
     if (dupecheck)
     {
       for (unsigned int j = 0; j < frames.frameList.size(); j++)
-        MD5Update(&ctx,
-          (const uint8_t*)frames.frameList[j].rgbaImage.pixels,
-          frames.frameList[j].rgbaImage.height * frames.frameList[j].rgbaImage.pitch);
+        MD5Update(&ctx, reinterpret_cast<const uint8_t*>(frames.frameList[j].rgbaImage.pixels),
+                  frames.frameList[j].rgbaImage.height * frames.frameList[j].rgbaImage.pitch);
 
       if (checkDupe(&ctx,hashes,dupes,i))
       {
@@ -390,7 +389,8 @@ int main(int argc, char* argv[])
       valid = true;
 #ifdef TARGET_POSIX
       char *c = NULL;
-      while ((c = (char *)strchr(OutputFilename.c_str(), '\\')) != NULL) *c = '/';
+      while ((c = const_cast<char*>(strchr(OutputFilename.c_str(), '\\'))) != NULL)
+        *c = '/';
 #endif
     }
     else

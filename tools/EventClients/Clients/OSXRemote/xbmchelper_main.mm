@@ -96,7 +96,7 @@ void ReadConfig()
     std::string::size_type j = 0;
     while ((j = it->find("\"", j)) != std::string::npos )
       it->replace(j, 1, "");
-		argv[i++] = (char* )(*it++).c_str();
+    argv[i++] = const_cast<char*>((*it++).c_str());
   }
 
 	argv[i] = 0;
