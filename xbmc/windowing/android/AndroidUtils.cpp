@@ -90,7 +90,7 @@ static void fetchDisplayModes()
         s_res_cur_displayMode.fRefreshRate = m.getRefreshRate();
         s_res_cur_displayMode.dwFlags= D3DPRESENTFLAG_PROGRESSIVE;
         s_res_cur_displayMode.bFullScreen   = true;
-        s_res_cur_displayMode.iSubtitles    = (int)(0.965 * s_res_cur_displayMode.iHeight);
+        s_res_cur_displayMode.iSubtitles = static_cast<int>(0.965 * s_res_cur_displayMode.iHeight);
         s_res_cur_displayMode.fPixelRatio   = 1.0f;
         s_res_cur_displayMode.strMode = StringUtils::Format(
             "{}x{} @ {:.6f}{} - Full Screen", s_res_cur_displayMode.iScreenWidth,
@@ -110,7 +110,7 @@ static void fetchDisplayModes()
           res.fRefreshRate = m.getRefreshRate();
           res.dwFlags= D3DPRESENTFLAG_PROGRESSIVE;
           res.bFullScreen   = true;
-          res.iSubtitles    = (int)(0.965 * res.iHeight);
+          res.iSubtitles = static_cast<int>(0.965 * res.iHeight);
           res.fPixelRatio   = 1.0f;
           res.strMode = StringUtils::Format("{}x{} @ {:.6f}{} - Full Screen", res.iScreenWidth,
                                             res.iScreenHeight, res.fRefreshRate,
@@ -196,7 +196,8 @@ CAndroidUtils::CAndroidUtils()
 
 bool CAndroidUtils::GetNativeResolution(RESOLUTION_INFO* res) const
 {
-  EGLNativeWindowType nativeWindow = (EGLNativeWindowType)CXBMCApp::GetNativeWindow(30000);
+  EGLNativeWindowType nativeWindow =
+      static_cast<EGLNativeWindowType>(CXBMCApp::GetNativeWindow(30000));
   if (!nativeWindow)
     return false;
 
@@ -227,7 +228,7 @@ bool CAndroidUtils::GetNativeResolution(RESOLUTION_INFO* res) const
     res->iScreenWidth  = res->iWidth;
     res->iScreenHeight = res->iHeight;
   }
-  res->iSubtitles    = (int)(0.965 * res->iHeight);
+  res->iSubtitles = static_cast<int>(0.965 * res->iHeight);
   res->strMode =
       StringUtils::Format("{}x{} @ {:.6f}{} - Full Screen", res->iScreenWidth, res->iScreenHeight,
                           res->fRefreshRate, res->dwFlags & D3DPRESENTFLAG_INTERLACED ? "i" : "");
