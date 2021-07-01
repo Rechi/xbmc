@@ -35,12 +35,12 @@ public:
   CDVDOverlayImage(const CDVDOverlayImage& src)
     : CDVDOverlay(src)
   {
-    data    = (uint8_t*)malloc(src.linesize * src.height);
+    data = static_cast<uint8_t*>(malloc(src.linesize * src.height));
     memcpy(data, src.data, src.linesize * src.height);
 
     if(src.palette)
     {
-      palette = (uint32_t*)malloc(src.palette_colors * 4);
+      palette = static_cast<uint32_t*>(malloc(src.palette_colors * 4));
       memcpy(palette, src.palette, src.palette_colors * 4);
     }
     else
@@ -64,7 +64,7 @@ public:
     if(src.palette)
     {
       bpp = 1;
-      palette = (uint32_t*)malloc(src.palette_colors * 4);
+      palette = static_cast<uint32_t*>(malloc(src.palette_colors * 4));
       memcpy(palette, src.palette, src.palette_colors * 4);
     }
     else
@@ -82,7 +82,7 @@ public:
     source_width   = src.source_width;
     source_height  = src.source_height;
 
-    data = (uint8_t*)malloc(sub_h * linesize);
+    data = static_cast<uint8_t*>(malloc(sub_h * linesize));
 
     uint8_t* s = src.data_at(sub_x, sub_y);
     uint8_t* t = data;

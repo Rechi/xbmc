@@ -98,7 +98,7 @@ int CDVDInputStreamFile::Read(uint8_t* buf, int buf_size)
   if (ret == 0)
     m_eof = true;
 
-  return (int)ret;
+  return static_cast<int>(ret);
 }
 
 int64_t CDVDInputStreamFile::Seek(int64_t offset, int whence)
@@ -153,7 +153,7 @@ int CDVDInputStreamFile::GetBlockSize()
 void CDVDInputStreamFile::SetReadRate(unsigned rate)
 {
   // Increase requested rate by 10%:
-  unsigned maxrate = (unsigned) (1.1 * rate);
+  unsigned maxrate = static_cast<unsigned>(1.1 * rate);
 
   if(m_pFile->IoControl(IOCTRL_CACHE_SETRATE, &maxrate) >= 0)
     CLog::Log(LOGDEBUG,

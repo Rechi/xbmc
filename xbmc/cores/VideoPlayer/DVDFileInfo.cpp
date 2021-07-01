@@ -246,10 +246,11 @@ bool CDVDFileInfo::ExtractThumb(const CFileItem& fileItem,
         {
           {
             unsigned int nWidth = std::min(picture.iDisplayWidth, CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_imageRes);
-            double aspect = (double)picture.iDisplayWidth / (double)picture.iDisplayHeight;
+            double aspect = static_cast<double>(picture.iDisplayWidth) /
+                            static_cast<double>(picture.iDisplayHeight);
             if(hint.forced_aspect && hint.aspect != 0)
               aspect = hint.aspect;
-            unsigned int nHeight = (unsigned int)((double)nWidth / aspect);
+            unsigned int nHeight = static_cast<unsigned int>(static_cast<double>(nWidth) / aspect);
 
             // We pass the buffers to sws_scale uses 16 aligned widths when using intrinsics
             int sizeNeeded = FFALIGN(nWidth, 16) * nHeight * 4;
@@ -266,7 +267,7 @@ bool CDVDFileInfo::ExtractThumb(const CFileItem& fileItem,
               uint8_t *src[4]= { planes[0], planes[1], planes[2], 0 };
               int srcStride[] = { stride[0], stride[1], stride[2], 0 };
               uint8_t *dst[] = { pOutBuf, 0, 0, 0 };
-              int dstStride[] = { (int)nWidth*4, 0, 0, 0 };
+              int dstStride[] = {static_cast<int>(nWidth) * 4, 0, 0, 0};
               int orientation = DegreeToOrientation(hint.orientation);
               sws_scale(context, src, srcStride, 0, picture.iHeight, dst, dstStride);
               sws_freeContext(context);
@@ -391,7 +392,7 @@ bool CDVDFileInfo::DemuxerToStreamDetails(const std::shared_ptr<CDVDInputStream>
       p->m_iHeight = vstream->iHeight;
       p->m_fAspect = static_cast<float>(vstream->fAspect);
       if (p->m_fAspect == 0.0f)
-        p->m_fAspect = (float)p->m_iWidth / p->m_iHeight;
+        p->m_fAspect = static_cast<float>(p->m_iWidth) / p->m_iHeight;
       p->m_strCodec = pDemux->GetStreamCodecName(stream->demuxerId, stream->uniqueId);
       p->m_iDuration = pDemux->GetStreamLength();
       p->m_strStereoMode = vstream->stereo_mode;

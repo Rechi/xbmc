@@ -196,7 +196,7 @@ int CDVDOverlayCodecTX3G::Decode(DemuxPacket *pPacket)
     if ((*pos & 0xC0) == 0x80)
     {
       // Is a non-first byte of a multi-byte UTF-8 character
-      strUTF8.append((const char*)pos, 1);
+      strUTF8.append(reinterpret_cast<const char*>(pos), 1);
       continue;   // ...without incrementing 'charIndex'
     }
 
@@ -230,7 +230,7 @@ int CDVDOverlayCodecTX3G::Decode(DemuxPacket *pPacket)
       strUTF8.append("[B]");
 
     // stuff the UTF8 char
-    strUTF8.append((const char*)pos, 1);
+    strUTF8.append(reinterpret_cast<const char*>(pos), 1);
 
     // this is a char index, not a byte index.
     charIndex++;

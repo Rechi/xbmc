@@ -163,7 +163,9 @@ void CVideoPlayerVideo::OpenStream(CDVDStreamInfo& hint, std::unique_ptr<CDVDVid
   //reported fps is usually not completely correct
   if (hint.fpsrate && hint.fpsscale)
   {
-    m_fFrameRate = DVD_TIME_BASE / CDVDCodecUtils::NormalizeFrameduration((double)DVD_TIME_BASE * hint.fpsscale / hint.fpsrate);
+    m_fFrameRate =
+        DVD_TIME_BASE / CDVDCodecUtils::NormalizeFrameduration(static_cast<double>(DVD_TIME_BASE) *
+                                                               hint.fpsscale / hint.fpsrate);
     m_bFpsInvalid = false;
     m_processInfo.SetVideoFps(static_cast<float>(m_fFrameRate));
   }
@@ -185,7 +187,7 @@ void CVideoPlayerVideo::OpenStream(CDVDStreamInfo& hint, std::unique_ptr<CDVDVid
     CLog::Log(LOGERROR,
               "CVideoPlayerVideo::OpenStream - Invalid framerate {}, using forced 25fps and just "
               "trust timestamps",
-              (int)m_fFrameRate);
+              static_cast<int>(m_fFrameRate));
     m_fFrameRate = 25;
   }
 
@@ -302,7 +304,7 @@ void CVideoPlayerVideo::Process()
   CLog::Log(LOGINFO, "running thread: video_thread");
 
   double pts = 0;
-  double frametime = (double)DVD_TIME_BASE / m_fFrameRate;
+  double frametime = static_cast<double>(DVD_TIME_BASE) / m_fFrameRate;
 
   bool bRequestDrop = false;
   int iDropDirective;
@@ -316,7 +318,7 @@ void CVideoPlayerVideo::Process()
 
   while (!m_bStop)
   {
-    int iQueueTimeOut = (int)(m_stalled ? frametime : frametime * 10) / 1000;
+    int iQueueTimeOut = static_cast<int>(m_stalled ? frametime : frametime * 10) / 1000;
     int iPriority = 0;
 
     if (m_syncState == IDVDStreamPlayer::SYNC_WAITSYNC)
@@ -677,11 +679,11 @@ bool CVideoPlayerVideo::ProcessDecoderOutput(double &frametime, double &pts)
     // use forced aspect if any
     if (m_fForcedAspectRatio != 0.0f)
     {
-      m_picture.iDisplayWidth = (int) (m_picture.iDisplayHeight * m_fForcedAspectRatio);
+      m_picture.iDisplayWidth = static_cast<int>(m_picture.iDisplayHeight * m_fForcedAspectRatio);
       if (m_picture.iDisplayWidth > m_picture.iWidth)
       {
         m_picture.iDisplayWidth =  m_picture.iWidth;
-        m_picture.iDisplayHeight = (int) (m_picture.iDisplayWidth / m_fForcedAspectRatio);
+        m_picture.iDisplayHeight = static_cast<int>(m_picture.iDisplayWidth / m_fForcedAspectRatio);
       }
     }
 
@@ -758,7 +760,7 @@ bool CVideoPlayerVideo::ProcessDecoderOutput(double &frametime, double &pts)
       m_messageParent.Put(std::make_shared<CDVDMsgType<SStartMsg>>(CDVDMsg::PLAYER_STARTED, msg));
     }
 
-    frametime = (double)DVD_TIME_BASE / m_fFrameRate;
+    frametime = static_cast<double>(DVD_TIME_BASE) / m_fFrameRate;
   }
 
   return true;
@@ -939,7 +941,8 @@ std::string CVideoPlayerVideo::GetPlayerInfo()
 {
   std::ostringstream s;
   s << "vq:"   << std::setw(2) << std::min(99, m_processInfo.GetLevelVQ()) << "%";
-  s << ", Mb/s:" << std::fixed << std::setprecision(2) << (double)GetVideoBitrate() / (1024.0*1024.0);
+  s << ", Mb/s:" << std::fixed << std::setprecision(2)
+    << static_cast<double>(GetVideoBitrate()) / (1024.0 * 1024.0);
   s << ", fr:"     << std::fixed << std::setprecision(3) << m_fFrameRate;
   s << ", drop:" << m_iDroppedFrames;
   s << ", skip:" << m_renderManager.GetSkippedFrames();
@@ -955,7 +958,7 @@ std::string CVideoPlayerVideo::GetPlayerInfo()
 
 int CVideoPlayerVideo::GetVideoBitrate()
 {
-  return (int)m_videoStats.GetBitrate();
+  return static_cast<int>(m_videoStats.GetBitrate());
 }
 
 void CVideoPlayerVideo::ResetFrameRateCalc()

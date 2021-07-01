@@ -57,9 +57,9 @@ int CDVDOverlayCodecText::Decode(DemuxPacket *pPacket)
   CDVDOverlayCodec::GetAbsoluteTimes(m_pOverlay->iPTSStartTime, m_pOverlay->iPTSStopTime, pPacket, m_pOverlay->replace);
 
   char *start, *end, *p;
-  start = (char*)data;
-  end   = (char*)data + size;
-  p     = (char*)data;
+  start = reinterpret_cast<char*>(data);
+  end = reinterpret_cast<char*>(data) + size;
+  p = reinterpret_cast<char*>(data);
 
   CDVDSubtitleTagSami TagConv;
   bool Taginit = TagConv.Init();
@@ -80,7 +80,7 @@ int CDVDOverlayCodecText::Decode(DemuxPacket *pPacket)
       while(*p != '}' && p<end)
         p++;
 
-      char* override = (char*)malloc(p-start + 1);
+      char* override = static_cast<char*>(malloc(p - start + 1));
       memcpy(override, start, p-start);
       override[p-start] = '\0';
       CLog::Log(LOGINFO, "{} - Skipped formatting tag {}", __FUNCTION__, override);
