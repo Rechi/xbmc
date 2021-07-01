@@ -143,13 +143,13 @@ bool CPicture::ResizeTexture(const std::string &image, uint8_t *pixels, uint32_t
   }
   else if (dest_width == 0)
   {
-    double factor = (double)dest_height / (double)height;
-    dest_width = (uint32_t)(width * factor);
+    double factor = static_cast<double>(dest_height) / static_cast<double>(height);
+    dest_width = static_cast<uint32_t>(width * factor);
   }
   else if (dest_height == 0)
   {
-    double factor = (double)dest_width / (double)width;
-    dest_height = (uint32_t)(height * factor);
+    double factor = static_cast<double>(dest_width) / static_cast<double>(width);
+    dest_height = static_cast<uint32_t>(height * factor);
   }
 
   // nothing special to do if the dimensions already match
@@ -239,13 +239,13 @@ bool CPicture::CacheTexture(uint8_t *pixels, uint32_t width, uint32_t height, ui
     uint32_t *buffer = new uint32_t[dest_width * dest_height];
     if (buffer)
     {
-      if (ScaleImage(pixels, width, height, pitch,
-                     (uint8_t *)buffer, dest_width, dest_height, dest_width * 4,
-                     scalingAlgorithm))
+      if (ScaleImage(pixels, width, height, pitch, reinterpret_cast<uint8_t*>(buffer), dest_width,
+                     dest_height, dest_width * 4, scalingAlgorithm))
       {
         if (!orientation || OrientateImage(buffer, dest_width, dest_height, orientation))
         {
-          success = CreateThumbnailFromSurface((unsigned char*)buffer, dest_width, dest_height, dest_width * 4, dest);
+          success = CreateThumbnailFromSurface(reinterpret_cast<unsigned char*>(buffer), dest_width,
+                                               dest_height, dest_width * 4, dest);
         }
       }
       delete[] buffer;
@@ -266,7 +266,7 @@ bool CPicture::CreateTiledThumb(const std::vector<std::string> &files, const std
   if (!files.size())
     return false;
 
-  unsigned int num_across = (unsigned int)ceil(sqrt((float)files.size()));
+  unsigned int num_across = static_cast<unsigned int>(ceil(sqrt(static_cast<float>(files.size()))));
   unsigned int num_down = (files.size() + num_across - 1) / num_across;
 
   unsigned int imageRes = CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_imageRes;
@@ -293,8 +293,9 @@ bool CPicture::CreateTiledThumb(const std::vector<std::string> &files, const std
 
       // scale appropriately
       uint32_t *scaled = new uint32_t[width * height];
-      if (ScaleImage(texture->GetPixels(), texture->GetWidth(), texture->GetHeight(), texture->GetPitch(),
-                     (uint8_t *)scaled, width, height, width * 4))
+      if (ScaleImage(texture->GetPixels(), texture->GetWidth(), texture->GetHeight(),
+                     texture->GetPitch(), reinterpret_cast<uint8_t*>(scaled), width, height,
+                     width * 4))
       {
         if (!texture->GetOrientation() || OrientateImage(scaled, width, height, texture->GetOrientation()))
         {
@@ -318,7 +319,8 @@ bool CPicture::CreateTiledThumb(const std::vector<std::string> &files, const std
   }
   // now save to a file
   if (success)
-    success = CreateThumbnailFromSurface((uint8_t *)buffer, imageRes, imageRes, imageRes * 4, thumb);
+    success = CreateThumbnailFromSurface(reinterpret_cast<uint8_t*>(buffer), imageRes, imageRes,
+                                         imageRes * 4, thumb);
 
   free(buffer);
   return success;
@@ -326,11 +328,11 @@ bool CPicture::CreateTiledThumb(const std::vector<std::string> &files, const std
 
 void CPicture::GetScale(unsigned int width, unsigned int height, unsigned int &out_width, unsigned int &out_height)
 {
-  float aspect = (float)width / height;
-  if ((unsigned int)(out_width / aspect + 0.5f) > out_height)
-    out_width = (unsigned int)(out_height * aspect + 0.5f);
+  float aspect = static_cast<float>(width) / height;
+  if (static_cast<unsigned int>(out_width / aspect + 0.5f) > out_height)
+    out_width = static_cast<unsigned int>(out_height * aspect + 0.5f);
   else
-    out_height = (unsigned int)(out_width / aspect + 0.5f);
+    out_height = static_cast<unsigned int>(out_width / aspect + 0.5f);
 }
 
 bool CPicture::ScaleImage(uint8_t *in_pixels, unsigned int in_width, unsigned int in_height, unsigned int in_pitch,
@@ -342,9 +344,9 @@ bool CPicture::ScaleImage(uint8_t *in_pixels, unsigned int in_width, unsigned in
                                                          CPictureScalingAlgorithm::ToSwscale(scalingAlgorithm), NULL, NULL, NULL);
 
   uint8_t *src[] = { in_pixels, 0, 0, 0 };
-  int     srcStride[] = { (int)in_pitch, 0, 0, 0 };
+  int srcStride[] = {static_cast<int>(in_pitch), 0, 0, 0};
   uint8_t *dst[] = { out_pixels , 0, 0, 0 };
-  int     dstStride[] = { (int)out_pitch, 0, 0, 0 };
+  int dstStride[] = {static_cast<int>(out_pitch), 0, 0, 0};
 
   if (context)
   {
