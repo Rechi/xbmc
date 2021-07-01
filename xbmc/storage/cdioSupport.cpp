@@ -266,7 +266,7 @@ int CCdIoSupport::ReadSector(HANDLE hDevice, DWORD dwSector, char* lpczBuffer)
 {
   CSingleLock lock(*m_cdio);
 
-  CdIo* cdio = (CdIo*) hDevice;
+  CdIo* cdio = reinterpret_cast<CdIo*>(hDevice);
   if ( cdio == NULL )
     return -1;
 
@@ -280,7 +280,7 @@ int CCdIoSupport::ReadSectorMode2(HANDLE hDevice, DWORD dwSector, char* lpczBuff
 {
   CSingleLock lock(*m_cdio);
 
-  CdIo* cdio = (CdIo*) hDevice;
+  CdIo* cdio = reinterpret_cast<CdIo*>(hDevice);
   if ( cdio == NULL )
     return -1;
 
@@ -294,7 +294,7 @@ int CCdIoSupport::ReadSectorCDDA(HANDLE hDevice, DWORD dwSector, char* lpczBuffe
 {
   CSingleLock lock(*m_cdio);
 
-  CdIo* cdio = (CdIo*) hDevice;
+  CdIo* cdio = reinterpret_cast<CdIo*>(hDevice);
   if ( cdio == NULL )
     return -1;
 
@@ -308,7 +308,7 @@ void CCdIoSupport::CloseCDROM(HANDLE hDevice)
 {
   CSingleLock lock(*m_cdio);
 
-  CdIo* cdio = (CdIo*) hDevice;
+  CdIo* cdio = reinterpret_cast<CdIo*>(hDevice);
 
   if ( cdio == NULL )
     return ;
@@ -451,8 +451,7 @@ int CCdIoSupport::ReadBlock(int superblock, uint32_t offset, uint8_t bufnum, tra
     return -1;
   }
 
-  ::cdio_debug("about to read sector %lu\n",
-             (long unsigned int) offset + superblock);
+  ::cdio_debug("about to read sector %lu\n", static_cast<long unsigned int>(offset) + superblock);
 
   if (::cdio_get_track_green(cdio, track_num))
   {
@@ -499,7 +498,7 @@ int CCdIoSupport::IsJoliet(void)
 
 int CCdIoSupport::IsUDF(void)
 {
-  return 2 == ((uint16_t)buffer[5][0] | ((uint16_t)buffer[5][1] << 8));
+  return 2 == (static_cast<uint16_t>(buffer[5][0]) | (static_cast<uint16_t>(buffer[5][1]) << 8));
 }
 
 /* ISO 9660 volume space in M2F1_SECTOR_SIZE byte units */
@@ -627,8 +626,8 @@ void CCdIoSupport::GetCdTextInfo(xbmc_cdtext_t &xcdt, int trackNum)
 
 #if defined(LIBCDIO_VERSION_NUM) && (LIBCDIO_VERSION_NUM >= 84)
   for (int i=0; i < MAX_CDTEXT_FIELDS; i++)
-    if (cdtext_get_const(pcdtext, (cdtext_field_t)i, trackNum))
-      xcdt[(cdtext_field_t)i] = cdtext_field2str((cdtext_field_t)i);
+    if (cdtext_get_const(pcdtext, static_cast<cdtext_field_t>(i), trackNum))
+      xcdt[static_cast<cdtext_field_t>(i)] = cdtext_field2str(static_cast<cdtext_field_t>(i));
 #else
   //! @todo - remove after Ubuntu 16.04 (Xenial) is EOL
   // Same ids used in libcdio and for our structure + the ids are consecutive make this copy loop safe.
