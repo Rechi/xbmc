@@ -164,7 +164,7 @@ bool CGUIDialogVideoBookmarks::OnAction(const CAction &action)
 
 void CGUIDialogVideoBookmarks::OnPopupMenu(int item)
 {
-  if (item < 0 || item >= (int) m_bookmarks.size())
+  if (item < 0 || item >= static_cast<int>(m_bookmarks.size()))
     return;
 
   // highlight the item
@@ -184,7 +184,7 @@ void CGUIDialogVideoBookmarks::OnPopupMenu(int item)
 
 void CGUIDialogVideoBookmarks::Delete(int item)
 {
-  if ( item>=0 && (unsigned)item < m_bookmarks.size() )
+  if (item >= 0 && static_cast<unsigned>(item) < m_bookmarks.size())
   {
     CVideoDatabase videoDatabase;
     videoDatabase.Open();
@@ -251,7 +251,8 @@ void CGUIDialogVideoBookmarks::OnRefreshList()
                                          m_bookmarks[i].seasonNumber, g_localizeStrings.Get(20359),
                                          m_bookmarks[i].episodeNumber);
     else
-      bookmarkTime = StringUtils::SecondsToTimeString((long)m_bookmarks[i].timeInSeconds, TIME_FORMAT_HH_MM_SS);
+      bookmarkTime = StringUtils::SecondsToTimeString(
+          static_cast<long>(m_bookmarks[i].timeInSeconds), TIME_FORMAT_HH_MM_SS);
 
     CFileItemPtr item(new CFileItem(StringUtils::Format(g_localizeStrings.Get(299), i + 1)));
     item->SetLabel2(bookmarkTime);
@@ -269,7 +270,8 @@ void CGUIDialogVideoBookmarks::OnRefreshList()
     g_application.GetAppPlayer().GetChapterName(chapterName, i);
 
     int64_t pos = g_application.GetAppPlayer().GetChapterPos(i);
-    std::string time = StringUtils::SecondsToTimeString((long) pos, TIME_FORMAT_HH_MM_SS);
+    std::string time =
+        StringUtils::SecondsToTimeString(static_cast<long>(pos), TIME_FORMAT_HH_MM_SS);
 
     if (chapterName.empty() ||
         StringUtils::StartsWithNoCase(chapterName, time) ||
@@ -394,8 +396,8 @@ bool CGUIDialogVideoBookmarks::AddBookmark(CVideoInfoTag* tag)
 {
   CVideoDatabase videoDatabase;
   CBookmark bookmark;
-  bookmark.timeInSeconds = (int)g_application.GetTime();
-  bookmark.totalTimeInSeconds = (int)g_application.GetTotalTime();
+  bookmark.timeInSeconds = static_cast<int>(g_application.GetTime());
+  bookmark.totalTimeInSeconds = static_cast<int>(g_application.GetTotalTime());
 
   if( g_application.GetAppPlayer().HasPlayer() )
     bookmark.playerState = g_application.GetAppPlayer().GetPlayerState();
@@ -407,15 +409,15 @@ bool CGUIDialogVideoBookmarks::AddBookmark(CVideoInfoTag* tag)
   // create the thumbnail image
   float aspectRatio = g_application.GetAppPlayer().GetRenderAspectRatio();
   int width = BOOKMARK_THUMB_WIDTH;
-  int height = (int)(BOOKMARK_THUMB_WIDTH / aspectRatio);
-  if (height > (int)BOOKMARK_THUMB_WIDTH)
+  int height = static_cast<int>(BOOKMARK_THUMB_WIDTH / aspectRatio);
+  if (height > static_cast<int>(BOOKMARK_THUMB_WIDTH))
   {
     height = BOOKMARK_THUMB_WIDTH;
-    width = (int)(BOOKMARK_THUMB_WIDTH * aspectRatio);
+    width = static_cast<int>(BOOKMARK_THUMB_WIDTH * aspectRatio);
   }
 
 
-  uint8_t *pixels = (uint8_t*)malloc(height * width * 4);
+  uint8_t* pixels = static_cast<uint8_t*>(malloc(height * width * 4));
   unsigned int captureId = g_application.GetAppPlayer().RenderCaptureAlloc();
 
   g_application.GetAppPlayer().RenderCapture(captureId, width, height, CAPTUREFLAG_IMMEDIATELY);
@@ -427,7 +429,7 @@ bool CGUIDialogVideoBookmarks::AddBookmark(CVideoInfoTag* tag)
 
     auto crc = Crc32::ComputeFromLowerCase(g_application.CurrentFile());
     bookmark.thumbNailImage =
-        StringUtils::Format("{:08x}_{}.jpg", crc, (int)bookmark.timeInSeconds);
+        StringUtils::Format("{:08x}_{}.jpg", crc, static_cast<int>(bookmark.timeInSeconds));
     bookmark.thumbNailImage = URIUtils::AddFileToFolder(profileManager->GetBookmarksThumbFolder(), bookmark.thumbNailImage);
 
     if (!CPicture::CreateThumbnailFromSurface(pixels, width, height, width * 4,
