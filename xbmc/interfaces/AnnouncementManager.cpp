@@ -213,7 +213,8 @@ void CAnnouncementManager::DoAnnounce(AnnouncementFlag flag,
     if (!item->GetVideoInfoTag()->m_type.empty())
       type = item->GetVideoInfoTag()->m_type;
     else
-      CVideoDatabase::VideoContentTypeToString((VIDEODB_CONTENT_TYPE)item->GetVideoContentType(), type);
+      CVideoDatabase::VideoContentTypeToString(
+          static_cast<VIDEODB_CONTENT_TYPE>(item->GetVideoContentType()), type);
 
     if (id <= 0)
     {
