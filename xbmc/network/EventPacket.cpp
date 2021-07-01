@@ -18,7 +18,7 @@ using namespace EVENTPACKET;
 /************************************************************************/
 bool CEventPacket::Parse(int datasize, const void *data)
 {
-  unsigned char* buf = const_cast<unsigned char*>((const unsigned char *)data);
+  unsigned char* buf = const_cast<unsigned char*>(static_cast<const unsigned char*>(data));
   if (datasize < HEADER_SIZE || datasize > PACKET_SIZE)
     return false;
 
@@ -36,9 +36,10 @@ bool CEventPacket::Parse(int datasize, const void *data)
     return false;
 
   // get packet type
-  m_eType = (PacketType)ntohs(*((uint16_t*)buf));
+  m_eType = static_cast<PacketType>(ntohs(*((uint16_t*)buf)));
 
-  if (m_eType < (unsigned short)PT_HELO || m_eType >= (unsigned short)PT_LAST)
+  if (m_eType < static_cast<unsigned short>(PT_HELO) ||
+      m_eType >= static_cast<unsigned short>(PT_LAST))
     return false;
 
   // get packet sequence id
@@ -53,7 +54,7 @@ bool CEventPacket::Parse(int datasize, const void *data)
   buf += 4;
   m_iPayloadSize = ntohs(*((uint16_t*)buf));
 
-  if ((m_iPayloadSize + HEADER_SIZE) != (unsigned int)datasize)
+  if ((m_iPayloadSize + HEADER_SIZE) != static_cast<unsigned int>(datasize))
     return false;
 
   // get the client's token
@@ -80,7 +81,7 @@ bool CEventPacket::Parse(int datasize, const void *data)
       CLog::Log(LOGERROR, "ES: Out of memory");
       return false;
     }
-    memcpy(m_pPayload, buf, (size_t)m_iPayloadSize);
+    memcpy(m_pPayload, buf, static_cast<size_t>(m_iPayloadSize));
   }
   m_bValid = true;
   return true;

@@ -234,13 +234,13 @@ public:
         std::set<std::pair<NPT_String, NPT_String> > values;
         if (item.GetVideoInfoTag()->GetResumePoint().timeInSeconds != bookmark.timeInSeconds) {
           m_logger->debug("Updating resume point for item {}", path);
-          long time = (long)bookmark.timeInSeconds;
+          long time = static_cast<long>(bookmark.timeInSeconds);
           if (time < 0)
             time = 0;
 
           values.insert(std::make_pair(
             NPT_String::Format("<upnp:lastPlaybackPosition>%ld</upnp:lastPlaybackPosition>",
-              (long)item.GetVideoInfoTag()->GetResumePoint().timeInSeconds),
+              static_cast<long>(item.GetVideoInfoTag()->GetResumePoint().timeInSeconds)),
             NPT_String::Format("<upnp:lastPlaybackPosition>%ld</upnp:lastPlaybackPosition>",
               time)));
 

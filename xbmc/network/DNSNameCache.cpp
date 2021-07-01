@@ -92,10 +92,11 @@ bool CDNSNameCache::Lookup(const std::string& strHostName, std::string& strIpAdd
   struct hostent *host = gethostbyname(strHostName.c_str());
   if (host && host->h_addr_list[0])
   {
-    strIpAddress = StringUtils::Format("{}.{}.{}.{}", (unsigned char)host->h_addr_list[0][0],
-                                       (unsigned char)host->h_addr_list[0][1],
-                                       (unsigned char)host->h_addr_list[0][2],
-                                       (unsigned char)host->h_addr_list[0][3]);
+    strIpAddress =
+        StringUtils::Format("{}.{}.{}.{}", static_cast<unsigned char>(host->h_addr_list[0][0]),
+                            static_cast<unsigned char>(host->h_addr_list[0][1]),
+                            static_cast<unsigned char>(host->h_addr_list[0][2]),
+                            static_cast<unsigned char>(host->h_addr_list[0][3]));
     g_DNSCache.Add(strHostName, strIpAddress);
     return true;
   }
@@ -109,7 +110,7 @@ bool CDNSNameCache::GetCached(const std::string& strHostName, std::string& strIp
   CSingleLock lock(m_critical);
 
   // loop through all DNSname entries and see if strHostName is cached
-  for (int i = 0; i < (int)g_DNSCache.m_vecDNSNames.size(); ++i)
+  for (int i = 0; i < static_cast<int>(g_DNSCache.m_vecDNSNames.size()); ++i)
   {
     CDNSName& DNSname = g_DNSCache.m_vecDNSNames[i];
     if ( DNSname.m_strHostName == strHostName )

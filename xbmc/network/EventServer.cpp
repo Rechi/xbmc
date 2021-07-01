@@ -155,7 +155,7 @@ void CEventServer::Run()
     CLog::Log(LOGERROR, "ES: Could not create socket, aborting!");
     return;
   }
-  m_pPacketBuffer = (unsigned char *)malloc(PACKET_SIZE);
+  m_pPacketBuffer = static_cast<unsigned char*>(malloc(PACKET_SIZE));
 
   if (!m_pPacketBuffer)
   {
@@ -255,7 +255,7 @@ void CEventServer::ProcessPacket(CAddress& addr, int pSize)
 
   if ( iter == m_clients.end() )
   {
-    if ( m_clients.size() >= (unsigned int)m_iMaxClients)
+    if (m_clients.size() >= static_cast<unsigned int>(m_iMaxClients))
     {
       CLog::Log(LOGWARNING, "ES: Cannot accept any more clients, maximum client count reached");
       delete packet;

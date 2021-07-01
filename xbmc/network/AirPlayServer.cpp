@@ -355,7 +355,7 @@ void CAirPlayServer::Process()
     for (SOCKET socket : m_ServerSockets)
     {
       FD_SET(socket, &rfds);
-      if ((intptr_t)socket > (intptr_t)max_fd)
+      if (static_cast<intptr_t>(socket) > static_cast<intptr_t>(max_fd))
         max_fd = socket;
     }
 
@@ -382,7 +382,7 @@ void CAirPlayServer::Process()
         {
           char buffer[RECEIVEBUFFER] = {};
           int  nread = 0;
-          nread = recv(socket, (char*)&buffer, RECEIVEBUFFER, 0);
+          nread = recv(socket, reinterpret_cast<char*>(&buffer), RECEIVEBUFFER, 0);
           if (nread > 0)
           {
             std::string sessionId;
@@ -404,7 +404,9 @@ void CAirPlayServer::Process()
         {
           CLog::Log(LOGDEBUG, "AIRPLAY Server: New connection detected");
           CTCPClient newconnection;
-          newconnection.m_socket = accept(socket, (struct sockaddr*) &newconnection.m_cliaddr, &newconnection.m_addrlen);
+          newconnection.m_socket =
+              accept(socket, reinterpret_cast<struct sockaddr*>(&newconnection.m_cliaddr),
+                     &newconnection.m_addrlen);
           sessionCounter++;
           newconnection.m_sessionCounter = sessionCounter;
 
@@ -735,7 +737,7 @@ void CAirPlayServer::backupVolume()
   CSingleLock lock(ServerInstanceLock);
 
   if (ServerInstance && ServerInstance->m_origVolume == -1)
-    ServerInstance->m_origVolume = (int)g_application.GetVolumePercent();
+    ServerInstance->m_origVolume = static_cast<int>(g_application.GetVolumePercent());
 }
 
 void CAirPlayServer::restoreVolume()
@@ -744,7 +746,7 @@ void CAirPlayServer::restoreVolume()
 
   if (ServerInstance && ServerInstance->m_origVolume != -1 && CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_SERVICES_AIRPLAYVOLUMECONTROL))
   {
-    g_application.SetVolume((float)ServerInstance->m_origVolume);
+    g_application.SetVolume(static_cast<float>(ServerInstance->m_origVolume));
     ServerInstance->m_origVolume = -1;
   }
 }
@@ -804,7 +806,7 @@ int CAirPlayServer::CTCPClient::ProcessRequest( std::string& responseHeader,
   else if (uri == "/rate")
   {
       const char* found = strstr(queryString.c_str(), "value=");
-      int rate = found ? (int)(atof(found + strlen("value=")) + 0.5) : 0;
+      int rate = found ? static_cast<int>(atof(found + strlen("value=")) + 0.5) : 0;
 
       CLog::Log(LOGDEBUG, "AIRPLAY: got request {} with rate {}", uri, rate);
 
@@ -835,7 +837,7 @@ int CAirPlayServer::CTCPClient::ProcessRequest( std::string& responseHeader,
   else if (uri == "/volume")
   {
       const char* found = strstr(queryString.c_str(), "volume=");
-      float volume = found ? (float)strtod(found + strlen("volume="), NULL) : 0;
+      float volume = found ? static_cast<float>(strtod(found + strlen("volume="), NULL)) : 0;
 
       CLog::Log(LOGDEBUG, "AIRPLAY: got request {} with volume {:f}", uri, volume);
 
@@ -888,7 +890,7 @@ int CAirPlayServer::CTCPClient::ProcessRequest( std::string& responseHeader,
         {
           double tmpDouble = 0;
           plist_get_real_val(tmpNode, &tmpDouble);
-          position = (float)tmpDouble;
+          position = static_cast<float>(tmpDouble);
         }
 
         tmpNode = plist_dict_get_item(dict, "Content-Location");
@@ -955,7 +957,7 @@ int CAirPlayServer::CTCPClient::ProcessRequest( std::string& responseHeader,
         start += startPosition.size();
         int end = body.find('\n', start);
         std::string positionStr = body.substr(start, end - start);
-        position = (float)atof(positionStr.c_str());
+        position = static_cast<float>(atof(positionStr.c_str()));
       }
     }
 
@@ -995,10 +997,10 @@ int CAirPlayServer::CTCPClient::ProcessRequest( std::string& responseHeader,
 
       if (g_application.GetAppPlayer().GetTotalTime())
       {
-        float position = ((float) g_application.GetAppPlayer().GetTime()) / 1000;
+        float position = (static_cast<float>(g_application.GetAppPlayer().GetTime())) / 1000;
         responseBody = StringUtils::Format(
             "duration: {:.6f}\r\nposition: {:.6f}\r\n",
-            (float)g_application.GetAppPlayer().GetTotalTime() / 1000, position);
+            static_cast<float>(g_application.GetAppPlayer().GetTotalTime()) / 1000, position);
       }
       else
       {
@@ -1011,7 +1013,7 @@ int CAirPlayServer::CTCPClient::ProcessRequest( std::string& responseHeader,
 
       if (found && g_application.GetAppPlayer().HasPlayer())
       {
-        int64_t position = (int64_t) (atof(found + strlen("position=")) * 1000.0);
+        int64_t position = static_cast<int64_t>(atof(found + strlen("position=")) * 1000.0);
         g_application.GetAppPlayer().SeekTime(position);
         CLog::Log(LOGDEBUG, "AIRPLAY: got POST request {} with pos {}", uri, position);
       }
@@ -1097,7 +1099,9 @@ int CAirPlayServer::CTCPClient::ProcessRequest( std::string& responseHeader,
 
       if (showPhoto)
       {
-        if ((writtenBytes > 0 && (unsigned int)writtenBytes == m_httpParser->getContentLength()) || !receivePhoto)
+        if ((writtenBytes > 0 &&
+             static_cast<unsigned int>(writtenBytes) == m_httpParser->getContentLength()) ||
+            !receivePhoto)
         {
           if (!receivePhoto && !XFILE::CFile::Exists(tmpFileName))
           {
@@ -1133,8 +1137,8 @@ int CAirPlayServer::CTCPClient::ProcessRequest( std::string& responseHeader,
     {
       if (g_application.GetAppPlayer().GetTotalTime())
       {
-        position = ((float) g_application.GetAppPlayer().GetTime()) / 1000;
-        duration = ((float) g_application.GetAppPlayer().GetTotalTime()) / 1000;
+        position = (static_cast<float>(g_application.GetAppPlayer().GetTime())) / 1000;
+        duration = (static_cast<float>(g_application.GetAppPlayer().GetTotalTime())) / 1000;
         playing = !g_application.GetAppPlayer().IsPaused();
         cachePosition = position + (duration * g_application.GetAppPlayer().GetCachePercentage() / 100.0f);
       }
