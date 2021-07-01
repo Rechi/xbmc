@@ -128,7 +128,7 @@ bool CInputManager::ProcessMouse(int windowId)
     return true;
 
   // Retrieve the corresponding action
-  CKey key(mousekey, (unsigned int)0);
+  CKey key(mousekey, static_cast<unsigned int>(0));
   CAction mouseaction = m_buttonTranslator->GetAction(windowId, key);
 
   // Deactivate mouse if non-mouse action
@@ -160,10 +160,10 @@ bool CInputManager::ProcessMouse(int windowId)
     return g_application.OnAction(mouseaction);
 
   // This is a mouse action so we need to record the mouse position
-  return g_application.OnAction(CAction(mouseaction.GetID(), m_Mouse.GetHold(MOUSE_LEFT_BUTTON),
-                                        (float)m_Mouse.GetX(), (float)m_Mouse.GetY(),
-                                        (float)m_Mouse.GetDX(), (float)m_Mouse.GetDY(), 0.0f, 0.0f,
-                                        mouseaction.GetName()));
+  return g_application.OnAction(CAction(
+      mouseaction.GetID(), m_Mouse.GetHold(MOUSE_LEFT_BUTTON), static_cast<float>(m_Mouse.GetX()),
+      static_cast<float>(m_Mouse.GetY()), static_cast<float>(m_Mouse.GetDX()),
+      static_cast<float>(m_Mouse.GetDY()), 0.0f, 0.0f, mouseaction.GetName()));
 }
 
 bool CInputManager::ProcessEventServer(int windowId, float frameTime)
@@ -275,8 +275,8 @@ bool CInputManager::ProcessEventServer(int windowId, float frameTime)
     {
       XBMC_Event newEvent;
       newEvent.type = XBMC_MOUSEMOTION;
-      newEvent.motion.x = (uint16_t)pos.x;
-      newEvent.motion.y = (uint16_t)pos.y;
+      newEvent.motion.x = static_cast<uint16_t>(pos.x);
+      newEvent.motion.y = static_cast<uint16_t>(pos.y);
       CServiceBroker::GetAppPort()->OnEvent(
           newEvent); // had to call this to update g_Mouse position
       return g_application.OnAction(CAction(ACTION_MOUSE_MOVE, pos.x, pos.y));

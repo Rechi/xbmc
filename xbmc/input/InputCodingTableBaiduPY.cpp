@@ -101,7 +101,7 @@ std::wstring CInputCodingTableBaiduPY::UnicodeToWString(const std::string& unico
   {
     int c;
     sscanf(unicode.c_str() + i, "\\u%x", &c);
-    result += (wchar_t)c;
+    result += static_cast<wchar_t>(c);
   }
   return result;
 }
