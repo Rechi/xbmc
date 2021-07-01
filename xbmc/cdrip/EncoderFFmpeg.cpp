@@ -144,7 +144,7 @@ bool CEncoderFFmpeg::Init(AddonToKodiFuncTable_AudioEncoder& callbacks)
   /* calculate how many bytes we need per frame */
   m_NeededFrames = m_CodecCtx->frame_size;
   m_NeededBytes  = av_samples_get_buffer_size(NULL, m_iInChannels, m_NeededFrames, m_InFormat, 0);
-  m_Buffer       = (uint8_t*)av_malloc(m_NeededBytes);
+  m_Buffer = static_cast<uint8_t*>(av_malloc(m_NeededBytes));
   m_BufferSize   = 0;
 
   m_BufferFrame = av_frame_alloc();
@@ -183,7 +183,7 @@ bool CEncoderFFmpeg::Init(AddonToKodiFuncTable_AudioEncoder& callbacks)
     }
 
     m_ResampledBufferSize = av_samples_get_buffer_size(NULL, m_iInChannels, m_NeededFrames, m_OutFormat, 0);
-    m_ResampledBuffer = (uint8_t*)av_malloc(m_ResampledBufferSize);
+    m_ResampledBuffer = static_cast<uint8_t*>(av_malloc(m_ResampledBufferSize));
     m_ResampledFrame = av_frame_alloc();
     if(!m_ResampledBuffer || !m_ResampledFrame)
     {
@@ -261,7 +261,7 @@ int CEncoderFFmpeg::Encode(int nNumBytesRead, uint8_t* pbtStream)
   while(nNumBytesRead > 0)
   {
     unsigned int space = m_NeededBytes - m_BufferSize;
-    unsigned int copy  = (unsigned int)nNumBytesRead > space ? space : nNumBytesRead;
+    unsigned int copy = static_cast<unsigned int>(nNumBytesRead) > space ? space : nNumBytesRead;
 
     memcpy(&m_Buffer[m_BufferSize], pbtStream, copy);
     m_BufferSize  += copy;
