@@ -284,7 +284,7 @@ bool CTexture::LoadFromFileInternal(const std::string& texturePath,
   else
     pImage = ImageFactory::CreateLoaderFromMimeType(strMimeType);
 
-  if (!LoadIImage(pImage, (unsigned char *)buf.get(), buf.size(), width, height))
+  if (!LoadIImage(pImage, reinterpret_cast<unsigned char*>(buf.get()), buf.size(), width, height))
   {
     CLog::Log(LOGDEBUG, "{} - Load of {} failed.", __FUNCTION__, CURL::GetRedacted(texturePath));
     delete pImage;

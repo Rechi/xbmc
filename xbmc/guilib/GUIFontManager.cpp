@@ -100,7 +100,7 @@ CGUIFont* GUIFontManager::LoadTTF(const std::string& strFontName, const std::str
   if (!sourceRes) // no source res specified, so assume the skin res
     sourceRes = &m_skinResolution;
 
-  float newSize = (float)iSize;
+  float newSize = static_cast<float>(iSize);
   RescaleFontSizeAndAspect(&newSize, &aspect, *sourceRes, preserveAspect);
 
   // First try to load the font from the skin
@@ -161,7 +161,8 @@ CGUIFont* GUIFontManager::LoadTTF(const std::string& strFontName, const std::str
   }
 
   // font file is loaded, create our CGUIFont
-  CGUIFont *pNewFont = new CGUIFont(strFontName, iStyle, textColor, shadowColor, lineSpacing, (float)iSize, pFontFile);
+  CGUIFont* pNewFont = new CGUIFont(strFontName, iStyle, textColor, shadowColor, lineSpacing,
+                                    static_cast<float>(iSize), pFontFile);
   m_vecFonts.push_back(pNewFont);
 
   // Store the original TTF font info in case we need to reload it in a different resolution
@@ -221,7 +222,7 @@ void GUIFontManager::ReloadTTFFonts(void)
     OrigFontInfo fontInfo = m_vecFontInfo[i];
 
     float aspect = fontInfo.aspect;
-    float newSize = (float)fontInfo.size;
+    float newSize = static_cast<float>(fontInfo.size);
     std::string& strPath = fontInfo.fontFilePath;
     std::string& strFilename = fontInfo.fileName;
 
@@ -277,7 +278,7 @@ void GUIFontManager::FreeFontFile(CGUIFontTTF* pFont)
 
 CGUIFontTTF* GUIFontManager::GetFontFile(const std::string& strFileName)
 {
-  for (int i = 0; i < (int)m_vecFontFiles.size(); ++i)
+  for (int i = 0; i < static_cast<int>(m_vecFontFiles.size()); ++i)
   {
     CGUIFontTTF* pFont = m_vecFontFiles[i];
     if (StringUtils::EqualsNoCase(pFont->GetFileName(), strFileName))
@@ -288,7 +289,7 @@ CGUIFontTTF* GUIFontManager::GetFontFile(const std::string& strFileName)
 
 CGUIFont* GUIFontManager::GetFont(const std::string& strFontName, bool fallback /*= true*/)
 {
-  for (int i = 0; i < (int)m_vecFonts.size(); ++i)
+  for (int i = 0; i < static_cast<int>(m_vecFonts.size()); ++i)
   {
     CGUIFont* pFont = m_vecFonts[i];
     if (StringUtils::EqualsNoCase(pFont->GetFontName(), strFontName))
@@ -336,7 +337,7 @@ CGUIFont* GUIFontManager::GetDefaultFont(bool border)
 
 void GUIFontManager::Clear()
 {
-  for (int i = 0; i < (int)m_vecFonts.size(); ++i)
+  for (int i = 0; i < static_cast<int>(m_vecFonts.size()); ++i)
   {
     CGUIFont* pFont = m_vecFonts[i];
     delete pFont;

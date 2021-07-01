@@ -217,7 +217,7 @@ bool CTextureBundleXBT::ConvertFrameToTexture(const std::string& name,
                                               CTexture** ppTexture)
 {
   // found texture - allocate the necessary buffers
-  unsigned char *buffer = new unsigned char [(size_t)frame.GetPackedSize()];
+  unsigned char* buffer = new unsigned char[static_cast<size_t>(frame.GetPackedSize())];
   if (buffer == NULL)
   {
     CLog::Log(LOGERROR, "Out of memory loading texture: {} (need {} bytes)", name,
@@ -236,7 +236,7 @@ bool CTextureBundleXBT::ConvertFrameToTexture(const std::string& name,
   // check if it's packed with lzo
   if (frame.IsPacked())
   { // unpack
-    unsigned char *unpacked = new unsigned char[(size_t)frame.GetUnpackedSize()];
+    unsigned char* unpacked = new unsigned char[static_cast<size_t>(frame.GetUnpackedSize())];
     if (unpacked == NULL)
     {
       CLog::Log(LOGERROR, "Out of memory unpacking texture: {} (need {} bytes)", name,
@@ -244,8 +244,9 @@ bool CTextureBundleXBT::ConvertFrameToTexture(const std::string& name,
       delete[] buffer;
       return false;
     }
-    lzo_uint s = (lzo_uint)frame.GetUnpackedSize();
-    if (lzo1x_decompress_safe(buffer, (lzo_uint)frame.GetPackedSize(), unpacked, &s, NULL) != LZO_E_OK ||
+    lzo_uint s = static_cast<lzo_uint>(frame.GetUnpackedSize());
+    if (lzo1x_decompress_safe(buffer, static_cast<lzo_uint>(frame.GetPackedSize()), unpacked, &s,
+                              NULL) != LZO_E_OK ||
         s != frame.GetUnpackedSize())
     {
       CLog::Log(LOGERROR, "Error loading texture: {}: Decompression error", name);

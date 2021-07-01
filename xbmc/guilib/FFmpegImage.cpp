@@ -30,7 +30,7 @@ Frame::Frame(const Frame& src) :
 {
   if (src.m_pImage)
   {
-    m_pImage = (unsigned char*) av_malloc(m_imageSize);
+    m_pImage = static_cast<unsigned char*>(av_malloc(m_imageSize));
     memcpy(m_pImage, src.m_pImage, m_imageSize);
   }
 }
@@ -68,7 +68,8 @@ struct ThumbDataManagement
 // and bufferSize -1 last data point
 static inline size_t Clamp(int64_t newPosition, size_t bufferSize)
 {
-  return std::min(std::max((int64_t) 0, newPosition), (int64_t) (bufferSize -1));
+  return std::min(std::max(static_cast<int64_t>(0), newPosition),
+                  static_cast<int64_t>(bufferSize - 1));
 }
 
 static int mem_file_read(void *h, uint8_t* buf, int size)
@@ -81,7 +82,7 @@ static int mem_file_read(void *h, uint8_t* buf, int size)
   if (unread <= 0)
     return AVERROR_EOF;
 
-  size_t tocopy = std::min((size_t)size, (size_t)unread);
+  size_t tocopy = std::min(static_cast<size_t>(size), static_cast<size_t>(unread));
   memcpy(buf, mbuf->data + mbuf->pos, tocopy);
   mbuf->pos += tocopy;
   return static_cast<int>(tocopy);
@@ -102,7 +103,7 @@ static int64_t mem_file_seek(void *h, int64_t pos, int whence)
   }
   else if (whence == SEEK_CUR)
   {
-    mbuf->pos = Clamp(((int64_t)mbuf->pos) + pos, mbuf->size);
+    mbuf->pos = Clamp((static_cast<int64_t>(mbuf->pos)) + pos, mbuf->size);
   }
   else
     CLog::LogF(LOGERROR, "Unknown seek mode: {}", whence);
@@ -154,7 +155,7 @@ bool CFFmpegImage::LoadImageFromMemory(unsigned char* buffer, unsigned int bufSi
 bool CFFmpegImage::Initialize(unsigned char* buffer, size_t bufSize)
 {
   int bufferSize = 4096;
-  uint8_t* fbuffer = (uint8_t*)av_malloc(bufferSize + AV_INPUT_BUFFER_PADDING_SIZE);
+  uint8_t* fbuffer = static_cast<uint8_t*>(av_malloc(bufferSize + AV_INPUT_BUFFER_PADDING_SIZE));
   if (!fbuffer)
   {
     CLog::LogF(LOGERROR, "Could not allocate buffer");
@@ -311,7 +312,7 @@ AVFrame* CFFmpegImage::ExtractFrame()
       // only values between including 0 and including 8
       // http://sylvana.net/jpegcrop/exif_orientation.html
       if (orientation >= 0 && orientation <= 8)
-        m_orientation = (unsigned int)orientation;
+        m_orientation = static_cast<unsigned int>(orientation);
     }
   }
   av_packet_unref(&pkt);
@@ -440,7 +441,7 @@ bool CFFmpegImage::DecodeFrame(AVFrame* frame, unsigned int width, unsigned int 
   if (!aligned)
     CLog::Log(LOGDEBUG, "Alignment of external buffer is not suitable for ffmpeg intrinsics - please fix your malloc");
 
-  if (aligned && size == pixelsSize && (int)pitch == pictureRGB->linesize[0])
+  if (aligned && size == pixelsSize && static_cast<int>(pitch) == pictureRGB->linesize[0])
   {
     // We can use the pixels buffer directly
     pictureRGB->data[0] = pixels;
@@ -467,18 +468,18 @@ bool CFFmpegImage::DecodeFrame(AVFrame* frame, unsigned int width, unsigned int 
   AVPixelFormat pixFormat = ConvertFormats(frame);
 
   // assumption quadratic maximums e.g. 2048x2048
-  float ratio = m_width / (float)m_height;
+  float ratio = m_width / static_cast<float>(m_height);
   unsigned int nHeight = m_originalHeight;
   unsigned int nWidth = m_originalWidth;
   if (nHeight > height)
   {
     nHeight = height;
-    nWidth = (unsigned int)(nHeight * ratio + 0.5f);
+    nWidth = static_cast<unsigned int>(nHeight * ratio + 0.5f);
   }
   if (nWidth > width)
   {
     nWidth = width;
-    nHeight = (unsigned int)(nWidth / ratio + 0.5f);
+    nHeight = static_cast<unsigned int>(nWidth / ratio + 0.5f);
   }
 
   struct SwsContext* context = sws_getContext(m_originalWidth, m_originalHeight, pixFormat,
@@ -500,7 +501,7 @@ bool CFFmpegImage::DecodeFrame(AVFrame* frame, unsigned int width, unsigned int 
 
   if (needsCopy)
   {
-    int minPitch = std::min((int)pitch, pictureRGB->linesize[0]);
+    int minPitch = std::min(static_cast<int>(pitch), pictureRGB->linesize[0]);
     if (minPitch < 0)
     {
       CLog::LogF(LOGERROR, "negative pitch or height");
@@ -593,9 +594,9 @@ bool CFFmpegImage::CreateThumbnailFromSurface(unsigned char* bufferin, unsigned 
     CleanupLocalOutputBuffer();
     return false;
   }
-  internalBufOutSize = (unsigned int) size;
+  internalBufOutSize = static_cast<unsigned int>(size);
 
-  tdm.intermediateBuffer = (uint8_t*) av_malloc(internalBufOutSize);
+  tdm.intermediateBuffer = static_cast<uint8_t*>(av_malloc(internalBufOutSize));
   if (!tdm.intermediateBuffer)
   {
     CLog::Log(LOGERROR, "Could not allocate memory for thumbnail: {}", destFile);
@@ -635,7 +636,7 @@ bool CFFmpegImage::CreateThumbnailFromSurface(unsigned char* bufferin, unsigned 
   }
 
   uint8_t* src[] = { bufferin, NULL, NULL, NULL };
-  int srcStride[] = { (int) pitch, 0, 0, 0};
+  int srcStride[] = {static_cast<int>(pitch), 0, 0, 0};
 
   //input size == output size which means only pix_fmt conversion
   tdm.sws = sws_getContext(width, height, AV_PIX_FMT_RGB32, width, height, jpg_output ? AV_PIX_FMT_YUV420P : AV_PIX_FMT_RGBA, 0, 0, 0, 0);
@@ -703,7 +704,7 @@ bool CFFmpegImage::CreateThumbnailFromSurface(unsigned char* bufferin, unsigned 
   }
 
   bufferoutSize = avpkt->size;
-  m_outputBuffer = (uint8_t*) av_malloc(bufferoutSize);
+  m_outputBuffer = static_cast<uint8_t*>(av_malloc(bufferoutSize));
   if (!m_outputBuffer)
   {
     CLog::Log(LOGERROR, "Could not generate allocate memory for thumbnail: {}", destFile);
@@ -738,9 +739,9 @@ std::shared_ptr<Frame> CFFmpegImage::ReadFrame()
   if (avframe == nullptr)
     return nullptr;
   std::shared_ptr<Frame> frame(new Frame());
-  frame->m_delay = (unsigned int)avframe->pkt_duration;
+  frame->m_delay = static_cast<unsigned int>(avframe->pkt_duration);
   frame->m_pitch = avframe->width * 4;
-  frame->m_pImage = (unsigned char*) av_malloc(avframe->height * frame->m_pitch);
+  frame->m_pImage = static_cast<unsigned char*>(av_malloc(avframe->height * frame->m_pitch));
   DecodeFrame(avframe, avframe->width, avframe->height, frame->m_pitch, frame->m_pImage);
   av_frame_free(&avframe);
   return frame;
