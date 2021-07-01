@@ -34,7 +34,7 @@ double AEDelayStatus::GetDelay() const
 {
   double d = 0;
   if (tick)
-    d = (double)(CurrentHostCounter() - tick) / CurrentHostFrequency();
+    d = static_cast<double>(CurrentHostCounter() - tick) / CurrentHostFrequency();
   if (d > maxcorrection)
     d = maxcorrection;
 
@@ -235,7 +235,7 @@ void CAEUtil::SSEMulArray(float *data, const float mul, uint32_t count)
   for (uint32_t i = 0; i < even; i+=4, data+=4)
   {
     __m128 to      = _mm_load_ps(data);
-    *(__m128*)data = _mm_mul_ps (to, m);
+    *reinterpret_cast<__m128*>(data) = _mm_mul_ps(to, m);
   }
 
   if (even != count)
@@ -250,16 +250,16 @@ void CAEUtil::SSEMulArray(float *data, const float mul, uint32_t count)
       {
         to = _mm_setr_ps(data[0], data[1], 0, 0);
         __m128 ou = _mm_mul_ps(to, m);
-        data[0] = ((float*)&ou)[0];
-        data[1] = ((float*)&ou)[1];
+        data[0] = (reinterpret_cast<float*>(&ou))[0];
+        data[1] = (reinterpret_cast<float*>(&ou))[1];
       }
       else
       {
         to = _mm_setr_ps(data[0], data[1], data[2], 0);
         __m128 ou = _mm_mul_ps(to, m);
-        data[0] = ((float*)&ou)[0];
-        data[1] = ((float*)&ou)[1];
-        data[2] = ((float*)&ou)[2];
+        data[0] = (reinterpret_cast<float*>(&ou))[0];
+        data[1] = (reinterpret_cast<float*>(&ou))[1];
+        data[2] = (reinterpret_cast<float*>(&ou))[2];
       }
     }
   }
@@ -283,7 +283,7 @@ void CAEUtil::SSEMulAddArray(float *data, float *add, const float mul, uint32_t 
   {
     __m128 ad      = _mm_load_ps(add );
     __m128 to      = _mm_load_ps(data);
-    *(__m128*)data = _mm_add_ps (to, _mm_mul_ps(ad, m));
+    *reinterpret_cast<__m128*>(data) = _mm_add_ps(to, _mm_mul_ps(ad, m));
   }
 
   if (even != count)
@@ -300,17 +300,17 @@ void CAEUtil::SSEMulAddArray(float *data, float *add, const float mul, uint32_t 
         ad = _mm_setr_ps(add [0], add [1], 0, 0);
         to = _mm_setr_ps(data[0], data[1], 0, 0);
         __m128 ou = _mm_add_ps(to, _mm_mul_ps(ad, m));
-        data[0] = ((float*)&ou)[0];
-        data[1] = ((float*)&ou)[1];
+        data[0] = (reinterpret_cast<float*>(&ou))[0];
+        data[1] = (reinterpret_cast<float*>(&ou))[1];
       }
       else
       {
         ad = _mm_setr_ps(add [0], add [1], add [2], 0);
         to = _mm_setr_ps(data[0], data[1], data[2], 0);
         __m128 ou = _mm_add_ps(to, _mm_mul_ps(ad, m));
-        data[0] = ((float*)&ou)[0];
-        data[1] = ((float*)&ou)[1];
-        data[2] = ((float*)&ou)[2];
+        data[0] = (reinterpret_cast<float*>(&ou))[0];
+        data[1] = (reinterpret_cast<float*>(&ou))[1];
+        data[2] = (reinterpret_cast<float*>(&ou))[2];
       }
     }
   }
@@ -376,13 +376,8 @@ void CAEUtil::ClampArray(float *data, uint32_t count)
     /* tanh approx clamp */
     __m128 dt = _mm_load_ps(data);
     __m128 tmp     = _mm_mul_ps(dt, dt);
-    *(__m128*)data = _mm_div_ps(
-      _mm_mul_ps(
-        dt,
-        _mm_add_ps(c1, tmp)
-      ),
-      _mm_add_ps(c2, tmp)
-    );
+    *reinterpret_cast<__m128*>(data) =
+        _mm_div_ps(_mm_mul_ps(dt, _mm_add_ps(c1, tmp)), _mm_add_ps(c2, tmp));
   }
 
   if (even != count)
@@ -408,8 +403,8 @@ void CAEUtil::ClampArray(float *data, uint32_t count)
           _mm_add_ps(c2, tmp)
         );
 
-        data[0] = ((float*)&out)[0];
-        data[1] = ((float*)&out)[1];
+        data[0] = (reinterpret_cast<float*>(&out))[0];
+        data[1] = (reinterpret_cast<float*>(&out))[1];
       }
       else
       {
@@ -424,9 +419,9 @@ void CAEUtil::ClampArray(float *data, uint32_t count)
           _mm_add_ps(c2, tmp)
         );
 
-        data[0] = ((float*)&out)[0];
-        data[1] = ((float*)&out)[1];
-        data[2] = ((float*)&out)[2];
+        data[0] = (reinterpret_cast<float*>(&out))[0];
+        data[1] = (reinterpret_cast<float*>(&out))[1];
+        data[2] = (reinterpret_cast<float*>(&out))[2];
       }
     }
   }

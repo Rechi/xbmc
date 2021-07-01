@@ -580,7 +580,7 @@ static bool SetupContext(const char* host,
 
   pa_context_set_state_callback(*context, ContextStateCallback, *mainloop);
 
-  if (pa_context_connect(*context, host, (pa_context_flags_t)0, nullptr) < 0)
+  if (pa_context_connect(*context, host, static_cast<pa_context_flags_t>(0), nullptr) < 0)
   {
     CLog::Log(LOGERROR, "PulseAudio: Failed to connect context");
     return false;
@@ -907,16 +907,17 @@ bool CAESinkPULSE::Initialize(AEAudioFormat &format, std::string &device)
 
   pa_buffer_attr buffer_attr;
   buffer_attr.fragsize = latency;
-  buffer_attr.maxlength = (uint32_t) -1;
+  buffer_attr.maxlength = static_cast<uint32_t>(-1);
   buffer_attr.minreq = process_time;
-  buffer_attr.prebuf = (uint32_t) -1;
+  buffer_attr.prebuf = static_cast<uint32_t>(-1);
   buffer_attr.tlength = latency;
   int flags = (PA_STREAM_INTERPOLATE_TIMING | PA_STREAM_AUTO_TIMING_UPDATE | PA_STREAM_ADJUST_LATENCY);
 
   if (m_passthrough)
     flags |= PA_STREAM_PASSTHROUGH;
 
-  if (pa_stream_connect_playback(m_Stream, isDefaultDevice ? NULL : device.c_str(), &buffer_attr, (pa_stream_flags) flags, NULL, NULL) < 0)
+  if (pa_stream_connect_playback(m_Stream, isDefaultDevice ? NULL : device.c_str(), &buffer_attr,
+                                 static_cast<pa_stream_flags>(flags), NULL, NULL) < 0)
   {
     CLog::Log(LOGERROR, "PulseAudio: Failed to connect stream to output");
     pa_threaded_mainloop_unlock(m_MainLoop);
@@ -1169,7 +1170,7 @@ void CAESinkPULSE::SetVolume(float volume)
        m_volume_needs_update = false;
        pa_volume_t n_vol = pa_cvolume_avg(&m_Volume);
        n_vol = std::min(n_vol, PA_VOLUME_NORM);
-       per_cent_volume = (float) n_vol / PA_VOLUME_NORM;
+       per_cent_volume = static_cast<float>(n_vol) / PA_VOLUME_NORM;
        // only update internal volume
        pa_threaded_mainloop_unlock(m_MainLoop);
        g_application.SetVolume(per_cent_volume, false);

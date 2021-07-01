@@ -28,7 +28,8 @@ CCoreAudioStream::~CCoreAudioStream()
 bool CCoreAudioStream::Open(AudioStreamID streamId)
 {
   m_StreamId = streamId;
-  CLog::Log(LOGDEBUG, "CCoreAudioStream::Open: Opened stream {:#04x}.", (uint)m_StreamId);
+  CLog::Log(LOGDEBUG, "CCoreAudioStream::Open: Opened stream {:#04x}.",
+            static_cast<uint>(m_StreamId));
 
   // watch for physical property changes.
   AudioObjectPropertyAddress propertyAOPA;
@@ -78,7 +79,8 @@ void CCoreAudioStream::Close(bool restore)
     CLog::Log(LOGDEBUG,
               "CCoreAudioStream::Close: "
               "Restoring original virtual format for stream {:#04x}. ({})",
-              (uint)m_StreamId, StreamDescriptionToString(m_OriginalVirtualFormat, formatString));
+              static_cast<uint>(m_StreamId),
+              StreamDescriptionToString(m_OriginalVirtualFormat, formatString));
     AudioStreamBasicDescription setFormat = m_OriginalVirtualFormat;
     SetVirtualFormat(&setFormat);
   }
@@ -87,14 +89,16 @@ void CCoreAudioStream::Close(bool restore)
     CLog::Log(LOGDEBUG,
               "CCoreAudioStream::Close: "
               "Restoring original physical format for stream {:#04x}. ({})",
-              (uint)m_StreamId, StreamDescriptionToString(m_OriginalPhysicalFormat, formatString));
+              static_cast<uint>(m_StreamId),
+              StreamDescriptionToString(m_OriginalPhysicalFormat, formatString));
     AudioStreamBasicDescription setFormat = m_OriginalPhysicalFormat;
     SetPhysicalFormat(&setFormat);
   }
 
   m_OriginalVirtualFormat.mFormatID  = 0;
   m_OriginalPhysicalFormat.mFormatID = 0;
-  CLog::Log(LOGDEBUG, "CCoreAudioStream::Close: Closed stream {:#04x}.", (uint)m_StreamId);
+  CLog::Log(LOGDEBUG, "CCoreAudioStream::Close: Closed stream {:#04x}.",
+            static_cast<uint>(m_StreamId));
   m_StreamId = 0;
 }
 
@@ -244,7 +248,7 @@ bool CCoreAudioStream::SetVirtualFormat(AudioStreamBasicDescription* pDesc)
       CLog::Log(LOGERROR,
                 "CCoreAudioStream::SetVirtualFormat: "
                 "Unable to retrieve current virtual format for stream {:#04x}.",
-                (uint)m_StreamId);
+                static_cast<uint>(m_StreamId));
       return false;
     }
   }
@@ -262,7 +266,7 @@ bool CCoreAudioStream::SetVirtualFormat(AudioStreamBasicDescription* pDesc)
     CLog::Log(LOGERROR,
               "CCoreAudioStream::SetVirtualFormat: "
               "Unable to set virtual format for stream {:#04x}. Error = {}",
-              (uint)m_StreamId, GetError(ret));
+              static_cast<uint>(m_StreamId), GetError(ret));
     return false;
   }
 
@@ -278,7 +282,7 @@ bool CCoreAudioStream::SetVirtualFormat(AudioStreamBasicDescription* pDesc)
       CLog::Log(LOGERROR,
                 "CCoreAudioStream::SetVirtualFormat: "
                 "Unable to retrieve current physical format for stream {:#04x}.",
-                (uint)m_StreamId);
+                static_cast<uint>(m_StreamId));
       return false;
     }
     if (checkVirtualFormat.mSampleRate == pDesc->mSampleRate &&
@@ -289,7 +293,8 @@ bool CCoreAudioStream::SetVirtualFormat(AudioStreamBasicDescription* pDesc)
       CLog::Log(LOGDEBUG,
                 "CCoreAudioStream::SetVirtualFormat: "
                 "Virtual format for stream {:#04x}. now active ({})",
-                (uint)m_StreamId, StreamDescriptionToString(checkVirtualFormat, formatString));
+                static_cast<uint>(m_StreamId),
+                StreamDescriptionToString(checkVirtualFormat, formatString));
       break;
     }
     m_virtual_format_event.Wait(100ms);
@@ -336,7 +341,7 @@ bool CCoreAudioStream::SetPhysicalFormat(AudioStreamBasicDescription* pDesc)
       CLog::Log(LOGERROR,
                 "CCoreAudioStream::SetPhysicalFormat: "
                 "Unable to retrieve current physical format for stream {:#04x}.",
-                (uint)m_StreamId);
+                static_cast<uint>(m_StreamId));
       return false;
     }
   }
@@ -354,7 +359,7 @@ bool CCoreAudioStream::SetPhysicalFormat(AudioStreamBasicDescription* pDesc)
     CLog::Log(LOGERROR,
               "CCoreAudioStream::SetPhysicalFormat: "
               "Unable to set physical format for stream {:#04x}. Error = {}",
-              (uint)m_StreamId, GetError(ret));
+              static_cast<uint>(m_StreamId), GetError(ret));
     return false;
   }
 
@@ -370,7 +375,7 @@ bool CCoreAudioStream::SetPhysicalFormat(AudioStreamBasicDescription* pDesc)
       CLog::Log(LOGERROR,
                 "CCoreAudioStream::SetPhysicalFormat: "
                 "Unable to retrieve current physical format for stream {:#04x}.",
-                (uint)m_StreamId);
+                static_cast<uint>(m_StreamId));
       return false;
     }
     if (checkPhysicalFormat.mSampleRate == pDesc->mSampleRate &&
@@ -382,7 +387,8 @@ bool CCoreAudioStream::SetPhysicalFormat(AudioStreamBasicDescription* pDesc)
       CLog::Log(LOGDEBUG,
                 "CCoreAudioStream::SetPhysicalFormat: "
                 "Physical format for stream {:#04x}. now active ({})",
-                (uint)m_StreamId, StreamDescriptionToString(checkPhysicalFormat, formatString));
+                static_cast<uint>(m_StreamId),
+                StreamDescriptionToString(checkPhysicalFormat, formatString));
       break;
     }
     m_physical_format_event.Wait(100ms);
@@ -458,7 +464,7 @@ bool CCoreAudioStream::GetAvailablePhysicalFormats(AudioStreamID id, StreamForma
 OSStatus CCoreAudioStream::HardwareStreamListener(AudioObjectID inObjectID,
   UInt32 inNumberAddresses, const AudioObjectPropertyAddress inAddresses[], void *inClientData)
 {
-  CCoreAudioStream *ca_stream = (CCoreAudioStream*)inClientData;
+  CCoreAudioStream* ca_stream = static_cast<CCoreAudioStream*>(inClientData);
 
   for (UInt32 i = 0; i < inNumberAddresses; i++)
   {

@@ -289,7 +289,7 @@ void CActiveAESink::StateMachine(int signal, Protocol *port, Message *msg)
             reply.hasVolume = m_sink->HasVolume();
             m_state = S_TOP_CONFIGURED_IDLE;
             m_extTimeout = 10000;
-            m_sinkLatency = (int64_t)(reply.latency * 1000);
+            m_sinkLatency = static_cast<int64_t>(reply.latency * 1000);
             msg->Reply(CSinkControlProtocol::ACC, &reply, sizeof(SinkReply));
           }
           else
@@ -318,21 +318,21 @@ void CActiveAESink::StateMachine(int signal, Protocol *port, Message *msg)
           return;
 
         case CSinkControlProtocol::APPFOCUSED:
-          m_extAppFocused = *(bool*)msg->data;
+          m_extAppFocused = *reinterpret_cast<bool*>(msg->data);
           SetSilenceTimer();
           m_extTimeout = 0;
           return;
 
         case CSinkControlProtocol::STREAMING:
-          m_extStreaming = *(bool*)msg->data;
+          m_extStreaming = *reinterpret_cast<bool*>(msg->data);
           return;
 
         case CSinkControlProtocol::SETSILENCETIMEOUT:
-          m_silenceTimeOut = *(int*)msg->data;
+          m_silenceTimeOut = *reinterpret_cast<int*>(msg->data);
           return;
 
         case CSinkControlProtocol::SETNOISETYPE:
-          m_streamNoise = *(bool*)msg->data;
+          m_streamNoise = *reinterpret_cast<bool*>(msg->data);
           return;
 
         default:
@@ -378,7 +378,7 @@ void CActiveAESink::StateMachine(int signal, Protocol *port, Message *msg)
         {
         case CSinkDataProtocol::SAMPLE:
           CSampleBuffer *samples;
-          samples = *((CSampleBuffer**)msg->data);
+          samples = *(reinterpret_cast<CSampleBuffer**>(msg->data));
           CThread::Sleep(std::chrono::milliseconds(1000 * samples->pkt->nb_samples /
                                                    samples->pkt->config.sample_rate));
           msg->Reply(CSinkDataProtocol::RETURNSAMPLE, &samples, sizeof(CSampleBuffer*));
@@ -396,7 +396,7 @@ void CActiveAESink::StateMachine(int signal, Protocol *port, Message *msg)
         switch (signal)
         {
         case CSinkControlProtocol::STREAMING:
-          m_extStreaming = *(bool*)msg->data;
+          m_extStreaming = *reinterpret_cast<bool*>(msg->data);
           SetSilenceTimer();
           if (!m_extSilenceTimer.IsTimePast())
           {
@@ -405,13 +405,13 @@ void CActiveAESink::StateMachine(int signal, Protocol *port, Message *msg)
           m_extTimeout = 0;
           return;
         case CSinkControlProtocol::VOLUME:
-          m_volume = *(float*)msg->data;
+          m_volume = *reinterpret_cast<float*>(msg->data);
           m_sink->SetVolume(m_volume);
           return;
 
         case CSinkControlProtocol::SETNOISETYPE:
         {
-          bool streamNoise = *(bool*)msg->data;
+          bool streamNoise = *reinterpret_cast<bool*>(msg->data);
           if (streamNoise != m_streamNoise)
           {
             m_streamNoise = streamNoise;
@@ -436,7 +436,7 @@ void CActiveAESink::StateMachine(int signal, Protocol *port, Message *msg)
         case CSinkDataProtocol::SAMPLE:
           CSampleBuffer *samples;
           unsigned int delay;
-          samples = *((CSampleBuffer**)msg->data);
+          samples = *(reinterpret_cast<CSampleBuffer**>(msg->data));
           delay = OutputSamples(samples);
           msg->Reply(CSinkDataProtocol::RETURNSAMPLE, &samples, sizeof(CSampleBuffer*));
           if (m_extError)
@@ -466,12 +466,12 @@ void CActiveAESink::StateMachine(int signal, Protocol *port, Message *msg)
         switch (signal)
         {
         case CSinkControlProtocol::STREAMING:
-          m_extStreaming = *(bool*)msg->data;
+          m_extStreaming = *reinterpret_cast<bool*>(msg->data);
           SetSilenceTimer();
           m_extTimeout = 0;
           return;
         case CSinkControlProtocol::VOLUME:
-          m_volume = *(float*)msg->data;
+          m_volume = *reinterpret_cast<float*>(msg->data);
           return;
         default:
           break;
@@ -908,7 +908,7 @@ void CActiveAESink::ReturnBuffers()
   {
     if (msg->signal == CSinkDataProtocol::SAMPLE)
     {
-      samples = *((CSampleBuffer**)msg->data);
+      samples = *(reinterpret_cast<CSampleBuffer**>(msg->data));
       msg->Reply(CSinkDataProtocol::RETURNSAMPLE, &samples, sizeof(CSampleBuffer*));
     }
     msg->Release();
@@ -981,12 +981,14 @@ unsigned int CActiveAESink::OutputSamples(CSampleBuffer* samples)
           break;
         case NEED_BYTESWAP:
           if (!skipSwap)
-            Endian_Swap16_buf((uint16_t *)buffer[0], (uint16_t *)buffer[0], size / 2);
+            Endian_Swap16_buf(reinterpret_cast<uint16_t*>(buffer[0]),
+                              reinterpret_cast<uint16_t*>(buffer[0]), size / 2);
           break;
         case CHECK_SWAP:
           SwapInit(samples);
           if (m_swapState == NEED_BYTESWAP)
-            Endian_Swap16_buf((uint16_t *)buffer[0], (uint16_t *)buffer[0], size / 2);
+            Endian_Swap16_buf(reinterpret_cast<uint16_t*>(buffer[0]),
+                              reinterpret_cast<uint16_t*>(buffer[0]), size / 2);
           break;
         default:
           break;
@@ -1103,8 +1105,8 @@ void CActiveAESink::GenerateNoise()
     {
       do
       {
-        R1 = (float) rand() / (float) RAND_MAX;
-        R2 = (float) rand() / (float) RAND_MAX;
+        R1 = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+        R2 = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
       }
       while(R1 == 0.0f);
 
@@ -1134,7 +1136,8 @@ void CActiveAESink::GenerateNoise()
                   false, false, M_SQRT1_2, nullptr, AE_QUALITY_UNKNOWN, false);
 
   resampler->Resample(m_sampleOfSilence.pkt->data, m_sampleOfSilence.pkt->max_nb_samples,
-                     (uint8_t**)&noise, m_sampleOfSilence.pkt->max_nb_samples, 1.0);
+                      reinterpret_cast<uint8_t**>(&noise), m_sampleOfSilence.pkt->max_nb_samples,
+                      1.0);
 
   KODI::MEMORY::AlignedFree(noise);
   delete resampler;
