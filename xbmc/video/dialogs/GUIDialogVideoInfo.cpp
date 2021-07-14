@@ -1314,7 +1314,9 @@ int CGUIDialogVideoInfo::ManageVideoItem(const CFileItemPtr &item)
       buttons.Add(
           CONTEXT_BUTTON_TAGS_ADD_ITEMS,
           StringUtils::Format(g_localizeStrings.Get(20460), GetLocalizedVideoType(mediaType)));
-      buttons.Add(CONTEXT_BUTTON_TAGS_REMOVE_ITEMS, StringUtils::Format(g_localizeStrings.Get(20461).c_str(), GetLocalizedVideoType(mediaType).c_str()));
+      buttons.Add(CONTEXT_BUTTON_TAGS_REMOVE_ITEMS,
+                  StringUtils::Format(g_localizeStrings.Get(20461),
+                                      GetLocalizedVideoType(mediaType).c_str()));
     }
   }
 

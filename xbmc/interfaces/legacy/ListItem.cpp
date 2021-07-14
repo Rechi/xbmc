@@ -230,7 +230,7 @@ namespace XBMCAddon
       }
       else if (lowerKey == "mimetype")
       { // special case for mime type - don't actually stored in a property,
-        item->SetMimeType(value.c_str());
+        item->SetMimeType(value);
       }
       else if (lowerKey == "totaltime")
       {
@@ -814,7 +814,7 @@ namespace XBMCAddon
         for (const auto& it : dictionary)
         {
           const String& key = it.first;
-          const String value(it.second.c_str());
+          const String value(it.second);
 
           if (key == "codec")
             video->m_strCodec = value;

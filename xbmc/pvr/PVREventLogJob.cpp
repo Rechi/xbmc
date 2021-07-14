@@ -31,8 +31,9 @@ bool CPVREventLogJob::DoWork()
   for (const auto& event : m_events)
   {
     if (event.m_bNotifyUser)
-      CGUIDialogKaiToast::QueueNotification(
-        event.m_bError ? CGUIDialogKaiToast::Error : CGUIDialogKaiToast::Info, event.m_label.c_str(), event.m_msg, 5000, true);
+      CGUIDialogKaiToast::QueueNotification(event.m_bError ? CGUIDialogKaiToast::Error
+                                                           : CGUIDialogKaiToast::Info,
+                                            event.m_label, event.m_msg, 5000, true);
 
     // Write event log entry.
     CServiceBroker::GetEventLog().Add(

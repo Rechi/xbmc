@@ -826,7 +826,7 @@ std::string CSmartPlaylistRule::FormatParameter(const std::string &operatorStrin
   if (m_field == FieldTime || m_field == FieldAlbumDuration)
   { // translate time to seconds
     std::string seconds = std::to_string(StringUtils::TimeStringToSeconds(param));
-    return db.PrepareSQL(operatorString.c_str(), seconds.c_str());
+    return db.PrepareSQL(operatorString, seconds.c_str());
   }
   return CDatabaseQueryRule::FormatParameter(operatorString, param, db, strType);
 }
@@ -1013,9 +1013,10 @@ std::string CSmartPlaylistRule::FormatWhereClause(const std::string &negate, con
     table = "episode_view";
 
     if (m_field == FieldGenre)
-      query = negate + FormatLinkQuery("genre", "genre", MediaTypeTvShow, (table + ".idShow").c_str(), parameter);
+      query =
+          negate + FormatLinkQuery("genre", "genre", MediaTypeTvShow, table + ".idShow", parameter);
     else if (m_field == FieldTag)
-      query = negate + FormatLinkQuery("tag", "tag", MediaTypeTvShow, (table + ".idShow").c_str(), parameter);
+      query = negate + FormatLinkQuery("tag", "tag", MediaTypeTvShow, table + ".idShow", parameter);
     else if (m_field == FieldDirector)
       query = negate + FormatLinkQuery("director", "actor", MediaTypeEpisode, GetField(FieldId, strType), parameter);
     else if (m_field == FieldActor)
@@ -1025,7 +1026,8 @@ std::string CSmartPlaylistRule::FormatWhereClause(const std::string &negate, con
     else if ((m_field == FieldLastPlayed || m_field == FieldDateAdded) && (m_operator == OPERATOR_LESS_THAN || m_operator == OPERATOR_BEFORE || m_operator == OPERATOR_NOT_IN_THE_LAST))
       query = GetField(m_field, strType) + " IS NULL OR " + GetField(m_field, strType) + parameter;
     else if (m_field == FieldStudio)
-      query = negate + FormatLinkQuery("studio", "studio", MediaTypeTvShow, (table + ".idShow").c_str(), parameter);
+      query = negate +
+              FormatLinkQuery("studio", "studio", MediaTypeTvShow, table + ".idShow", parameter);
     else if (m_field == FieldMPAA)
       query = negate + " (" + GetField(m_field, strType) +  parameter + ")";
   }

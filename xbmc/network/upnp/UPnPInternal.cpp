@@ -652,7 +652,7 @@ BuildObject(CFileItem&                    item,
         std::string ext;
         for (unsigned int i = 0; i < filenames.size(); i++)
         {
-            ext = URIUtils::GetExtension(filenames[i]).c_str();
+            ext = URIUtils::GetExtension(filenames[i]);
             ext = ext.substr(1);
             std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
             /* Hardcoded check for extension is not the best way, but it can't be allowed to pass all
@@ -714,7 +714,7 @@ BuildObject(CFileItem&                    item,
             protocolInfo = protInfo.GetProtocol() + ":" + protInfo.GetMask() + ":smi/caption:" + protInfo.GetExtra();
             upnp_server->AddSafeResourceUri(object, rooturi, ips, NPT_String(subtitlePath.c_str()), protocolInfo);
 
-            ext = URIUtils::GetExtension(subtitlePath).c_str();
+            ext = URIUtils::GetExtension(subtitlePath);
             ext = ext.substr(1);
             std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
 

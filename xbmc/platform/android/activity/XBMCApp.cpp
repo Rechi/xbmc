@@ -407,7 +407,10 @@ bool CXBMCApp::EnableWakeLock(bool on)
     StringUtils::ToLower(appName);
     std::string className = CCompileInfo::GetPackage();
     // SCREEN_BRIGHT_WAKE_LOCK is marked as deprecated but there is no real alternatives for now
-    m_wakeLock = new CJNIWakeLock(CJNIPowerManager(getSystemService("power")).newWakeLock(CJNIPowerManager::SCREEN_BRIGHT_WAKE_LOCK | CJNIPowerManager::ON_AFTER_RELEASE, className.c_str()));
+    m_wakeLock = new CJNIWakeLock(CJNIPowerManager(getSystemService("power"))
+                                      .newWakeLock(CJNIPowerManager::SCREEN_BRIGHT_WAKE_LOCK |
+                                                       CJNIPowerManager::ON_AFTER_RELEASE,
+                                                   className));
     if (m_wakeLock)
       m_wakeLock->setReferenceCounted(false);
     else
@@ -1391,7 +1394,7 @@ void CXBMCApp::SetupEnv()
   {
     CJNIFile androidPath = getExternalFilesDir("");
     if (!androidPath)
-      androidPath = getDir(className.c_str(), 1);
+      androidPath = getDir(className, 1);
 
     if (androidPath)
       externalDir = androidPath.getAbsolutePath();

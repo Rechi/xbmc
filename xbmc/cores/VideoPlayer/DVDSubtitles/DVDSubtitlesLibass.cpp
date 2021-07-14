@@ -37,7 +37,7 @@ std::string GetDefaultFontPath(std::string& font)
     auto fontPath = URIUtils::AddFileToFolder(path, font);
     if (XFILE::CFile::Exists(fontPath))
     {
-      return CSpecialProtocol::TranslatePath(fontPath).c_str();
+      return CSpecialProtocol::TranslatePath(fontPath);
     }
   }
   CLog::Log(LOGERROR, "CDVDSubtitlesLibass: Could not find font {} in font sources", font);

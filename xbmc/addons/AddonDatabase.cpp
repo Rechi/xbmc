@@ -556,7 +556,7 @@ bool CAddonDatabase::FindByAddonId(const std::string& addonId, ADDON::VECADDONS&
         "AND addons.addonID='%s'", addonId.c_str());
 
     VECADDONS addons;
-    m_pDS->query(sql.c_str());
+    m_pDS->query(sql);
     while (!m_pDS->eof())
     {
       CAddonInfoBuilder::CFromDB builder;
@@ -606,7 +606,7 @@ bool CAddonDatabase::GetAvailableVersions(const std::string& addonId,
         "AND EXISTS (SELECT * FROM installed WHERE installed.addonID=repoID AND installed.enabled=1) "
         "AND addons.addonID='%s'", addonId.c_str());
 
-    m_pDS->query(sql.c_str());
+    m_pDS->query(sql);
     while (!m_pDS->eof())
     {
       AddonVersion version(m_pDS->fv("version").get_asString());
@@ -639,7 +639,7 @@ bool CAddonDatabase::GetAddon(const std::string& addonID, const AddonVersion& ve
       "WHERE addons.addonID='%s' AND addons.version='%s' AND repo.addonID='%s'",
       addonID.c_str(), version.asString().c_str(), repoId.c_str());
 
-    m_pDS->query(sql.c_str());
+    m_pDS->query(sql);
     if (m_pDS->eof())
       return false;
 

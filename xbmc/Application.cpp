@@ -437,7 +437,7 @@ bool CApplication::Create(const CAppParamParser &params)
   {
     if (XFILE::CFile::Exists(caCert))
     {
-      CEnvironment::setenv("SSL_CERT_FILE", caCert.c_str(), 1);
+      CEnvironment::setenv("SSL_CERT_FILE", caCert, 1);
       CLog::Log(LOGDEBUG, "CApplication::Create - SSL_CERT_FILE: {}", caCert);
     }
     else
@@ -2075,7 +2075,7 @@ void CApplication::OnApplicationMessage(ThreadMessage* pMsg)
 #if defined(TARGET_DARWIN)
     CLog::Log(LOGINFO, "ExecWait is not implemented on this platform");
 #elif defined(TARGET_POSIX)
-    CUtil::RunCommandLine(pMsg->strParam.c_str(), (pMsg->param1 == 1));
+    CUtil::RunCommandLine(pMsg->strParam, (pMsg->param1 == 1));
 #elif defined(TARGET_WINDOWS)
     CWIN32Util::XBMCShellExecute(pMsg->strParam.c_str(), (pMsg->param1 == 1));
 #endif
@@ -2095,7 +2095,7 @@ void CApplication::OnApplicationMessage(ThreadMessage* pMsg)
     break;
 
   case TMSG_EXECUTE_BUILT_IN:
-    CBuiltins::GetInstance().Execute(pMsg->strParam.c_str());
+    CBuiltins::GetInstance().Execute(pMsg->strParam);
     break;
 
   case TMSG_PICTURE_SHOW:
