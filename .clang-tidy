@@ -24,6 +24,7 @@ Checks: "\
   readability-redundant-smartptr-get,\
   readability-redundant-string-cstr,\
   readability-redundant-string-init,\
+  readability-simplify-boolean-expr,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'
 CheckOptions:

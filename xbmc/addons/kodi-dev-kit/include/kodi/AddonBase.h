@@ -120,7 +120,7 @@ class ATTRIBUTE_HIDDEN CSettingValue
 public:
   explicit CSettingValue(const void* settingValue) : m_settingValue(settingValue) {}
 
-  bool empty() const { return (m_settingValue == nullptr) ? true : false; }
+  bool empty() const { return m_settingValue == nullptr; }
 
   /// @defgroup cpp_kodi_addon_addonbase_Defs_CSettingValue_Help Value Help
   /// @ingroup cpp_kodi_addon_addonbase_Defs_CSettingValue

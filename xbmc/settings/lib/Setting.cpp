@@ -693,7 +693,7 @@ void CSettingBool::MergeDetails(const CSetting& other)
     return;
 
   const auto& boolSetting = static_cast<const CSettingBool&>(other);
-  if (m_default == false && boolSetting.m_default == true)
+  if (!m_default && boolSetting.m_default)
     m_default = boolSetting.m_default;
   if (m_value == m_default && boolSetting.m_value != m_default)
     m_value = boolSetting.m_value;
@@ -1396,9 +1396,9 @@ void CSettingString::MergeDetails(const CSetting& other)
     m_default = stringSetting.m_default;
   if (m_value == m_default && stringSetting.m_value != m_default)
     m_value = stringSetting.m_value;
-  if (m_allowEmpty == false && stringSetting.m_allowEmpty == true)
+  if (!m_allowEmpty && stringSetting.m_allowEmpty)
     m_allowEmpty = stringSetting.m_allowEmpty;
-  if (m_allowNewOption == false && stringSetting.m_allowNewOption == true)
+  if (!m_allowNewOption && stringSetting.m_allowNewOption)
     m_allowNewOption = stringSetting.m_allowNewOption;
   if (m_translatableOptions.empty() && !stringSetting.m_translatableOptions.empty())
     m_translatableOptions = stringSetting.m_translatableOptions;

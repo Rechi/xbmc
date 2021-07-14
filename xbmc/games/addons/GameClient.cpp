@@ -244,12 +244,7 @@ bool CGameClient::OpenFile(const CFileItem& file,
     return false;
   }
 
-  if (!InitializeGameplay(file.GetPath(), streamManager, input))
-  {
-    return false;
-  }
-
-  return true;
+  return InitializeGameplay(file.GetPath(), streamManager, input);
 }
 
 bool CGameClient::OpenStandalone(RETRO::IStreamManager& streamManager, IGameInputCallback* input)
@@ -280,12 +275,7 @@ bool CGameClient::OpenStandalone(RETRO::IStreamManager& streamManager, IGameInpu
     return false;
   }
 
-  if (!InitializeGameplay("", streamManager, input))
-  {
-    return false;
-  }
-
-  return true;
+  return InitializeGameplay("", streamManager, input);
 }
 
 bool CGameClient::InitializeGameplay(const std::string& gamePath,

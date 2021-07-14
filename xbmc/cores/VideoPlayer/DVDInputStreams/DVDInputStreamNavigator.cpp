@@ -1348,11 +1348,7 @@ bool CDVDInputStreamNavigator::IsSubtitleStreamEnabled()
   if (!vm)
     return false;
 
-
-  if(vm->state.SPST_REG & 0x40)
-    return true;
-  else
-    return false;
+  return (vm->state.SPST_REG & 0x40) != 0;
 }
 
 bool CDVDInputStreamNavigator::GetState(std::string &xmlstate)

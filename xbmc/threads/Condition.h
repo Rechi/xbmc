@@ -112,7 +112,7 @@ namespace XbmcThreads
 
           auto remaining = duration - elapsed;
 
-          for (bool notdone = true; notdone && ret == true;
+          for (bool notdone = true; notdone && ret;
                ret = (notdone = (!predicate))
                          ? (remaining > std::chrono::duration<Rep, Period>::zero())
                          : true)

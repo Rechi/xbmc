@@ -80,7 +80,11 @@ public:
   void SetCmd(int cmd) { CSingleLock l(m_sec); processCmd = cmd; }
   void GetCmd(int &cmd) { CSingleLock l(m_sec); cmd = processCmd; processCmd = 0; }
   void SetCanSkipDeint(bool canSkip) { CSingleLock l(m_sec); canSkipDeint = canSkip; }
-  bool CanSkipDeint() { CSingleLock l(m_sec); if (canSkipDeint) return true; else return false;}
+  bool CanSkipDeint()
+  {
+    CSingleLock l(m_sec);
+    return canSkipDeint;
+  }
   void SetVpp(bool vpp) {CSingleLock l(m_sec); isVpp = vpp;}
 private:
   CCriticalSection m_sec;

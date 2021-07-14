@@ -140,10 +140,7 @@ bool CMusicDatabaseDirectory::GetDirectoryNodeInfo(const std::string& strPath,
                                                    MUSICDATABASEDIRECTORY::CQueryParams& params)
 {
   std::string path = CLegacyPathTranslation::TranslateMusicDbPath(strPath);
-  if (!CDirectoryNode::GetNodeInfo(path, type, childtype, params))
-    return false;
-
-  return true;
+  return CDirectoryNode::GetNodeInfo(path, type, childtype, params);
 }
 
 bool CMusicDatabaseDirectory::IsArtistDir(const std::string& strDirectory)
@@ -167,9 +164,7 @@ bool CMusicDatabaseDirectory::IsAllItem(const std::string& strDirectory)
 {
   //Last query parameter, ignoring any appended options, is -1
   CURL url(strDirectory);
-  if (StringUtils::EndsWith(url.GetWithoutOptions(), "/-1/"))
-    return true;
-  return false;
+  return StringUtils::EndsWith(url.GetWithoutOptions(), "/-1/");
 }
 
 bool CMusicDatabaseDirectory::GetLabel(const std::string& strDirectory, std::string& strLabel)

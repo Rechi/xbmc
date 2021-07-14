@@ -346,10 +346,7 @@ bool CQueue::IsVisible(const CFileItem& item) const
   if (CServiceBroker::GetGUI()->GetWindowManager().GetActiveWindow() == WINDOW_VIDEO_PLAYLIST)
     return false; // Already queued
 
-  if (item.IsUsablePVRRecording() || IsActiveRecordingsFolder(item))
-    return true;
-
-  return false; //! @todo implement
+  return item.IsUsablePVRRecording() || IsActiveRecordingsFolder(item); //! @todo implement
 }
 
 bool CQueue::Execute(const CFileItemPtr& item) const
@@ -372,10 +369,7 @@ bool CPlayNext::IsVisible(const CFileItem& item) const
   if (CServiceBroker::GetGUI()->GetWindowManager().GetActiveWindow() == WINDOW_VIDEO_PLAYLIST)
     return false; // Already queued
 
-  if (item.IsUsablePVRRecording() || IsActiveRecordingsFolder(item))
-    return true;
-
-  return false; //! @todo implement
+  return item.IsUsablePVRRecording() || IsActiveRecordingsFolder(item); //! @todo implement
 }
 
 bool CPlayNext::Execute(const CFileItemPtr& item) const
@@ -399,11 +393,8 @@ bool CPlayAndQueue::IsVisible(const CFileItem& item) const
   if (windowId == WINDOW_VIDEO_PLAYLIST)
     return false; // Already queued
 
-  if ((windowId == WINDOW_TV_RECORDINGS || windowId == WINDOW_RADIO_RECORDINGS) &&
-      item.IsUsablePVRRecording())
-    return true;
-
-  return false; //! @todo implement
+  return (windowId == WINDOW_TV_RECORDINGS || windowId == WINDOW_RADIO_RECORDINGS) &&
+         item.IsUsablePVRRecording(); //! @todo implement
 }
 
 bool CPlayAndQueue::Execute(const CFileItemPtr& item) const

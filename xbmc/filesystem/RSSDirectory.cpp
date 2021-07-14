@@ -506,11 +506,8 @@ static void ParseItem(CFileItem* item, TiXmlElement* root, const std::string& pa
     if(best->mime == "application/rss+xml" && StringUtils::StartsWithNoCase(item->GetPath(), "https://"))
       item->SetPath("rsss://" + item->GetPath().substr(8));
 
-    if(StringUtils::StartsWithNoCase(item->GetPath(), "rss://")
-      || StringUtils::StartsWithNoCase(item->GetPath(), "rsss://"))
-      item->m_bIsFolder = true;
-    else
-      item->m_bIsFolder = false;
+    item->m_bIsFolder = StringUtils::StartsWithNoCase(item->GetPath(), "rss://") ||
+                        StringUtils::StartsWithNoCase(item->GetPath(), "rsss://");
   }
 
   if(!item->m_strTitle.empty())

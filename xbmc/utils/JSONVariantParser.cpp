@@ -203,10 +203,7 @@ bool CJSONVariantParser::Parse(const char* json, CVariant& data)
   CJSONVariantParserHandler handler(data);
   // use kParseIterativeFlag to eliminate possible stack overflow
   // from json parsing via reentrant calls
-  if (reader.Parse<rapidjson::kParseIterativeFlag>(stringStream, handler))
-    return true;
-
-  return false;
+  return reader.Parse<rapidjson::kParseIterativeFlag>(stringStream, handler);
 }
 
 bool CJSONVariantParser::Parse(const std::string& json, CVariant& data)

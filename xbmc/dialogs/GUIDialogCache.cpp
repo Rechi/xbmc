@@ -110,10 +110,7 @@ bool CGUIDialogCache::OnFileCallback(void* pContext, int ipercent, float avgSpee
     m_pDlg->SetPercentage(ipercent);
   }
 
-  if( IsCanceled() )
-    return false;
-  else
-    return true;
+  return !IsCanceled();
 }
 
 void CGUIDialogCache::Process()

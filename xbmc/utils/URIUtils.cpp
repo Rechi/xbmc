@@ -616,10 +616,7 @@ bool URIUtils::IsRemote(const std::string& strFile)
   if (IsAndroidApp(strFile))
     return false;
 
-  if (!url.IsLocal())
-    return true;
-
-  return false;
+  return !url.IsLocal();
 }
 
 bool URIUtils::IsOnDVD(const std::string& strFile)
@@ -1027,17 +1024,14 @@ bool URIUtils::IsInternetStream(const CURL& url, bool bStrictCheck /* = false */
     return bStrictCheck;
 
   std::string protocol = url.GetTranslatedProtocol();
-  if (CURL::IsProtocolEqual(protocol, "http")  || CURL::IsProtocolEqual(protocol, "https")  ||
-      CURL::IsProtocolEqual(protocol, "tcp")   || CURL::IsProtocolEqual(protocol, "udp")    ||
-      CURL::IsProtocolEqual(protocol, "rtp")   || CURL::IsProtocolEqual(protocol, "sdp")    ||
-      CURL::IsProtocolEqual(protocol, "mms")   || CURL::IsProtocolEqual(protocol, "mmst")   ||
-      CURL::IsProtocolEqual(protocol, "mmsh")  || CURL::IsProtocolEqual(protocol, "rtsp")   ||
-      CURL::IsProtocolEqual(protocol, "rtmp")  || CURL::IsProtocolEqual(protocol, "rtmpt")  ||
-      CURL::IsProtocolEqual(protocol, "rtmpe") || CURL::IsProtocolEqual(protocol, "rtmpte") ||
-      CURL::IsProtocolEqual(protocol, "rtmps"))
-    return true;
-
-  return false;
+  return CURL::IsProtocolEqual(protocol, "http") || CURL::IsProtocolEqual(protocol, "https") ||
+         CURL::IsProtocolEqual(protocol, "tcp") || CURL::IsProtocolEqual(protocol, "udp") ||
+         CURL::IsProtocolEqual(protocol, "rtp") || CURL::IsProtocolEqual(protocol, "sdp") ||
+         CURL::IsProtocolEqual(protocol, "mms") || CURL::IsProtocolEqual(protocol, "mmst") ||
+         CURL::IsProtocolEqual(protocol, "mmsh") || CURL::IsProtocolEqual(protocol, "rtsp") ||
+         CURL::IsProtocolEqual(protocol, "rtmp") || CURL::IsProtocolEqual(protocol, "rtmpt") ||
+         CURL::IsProtocolEqual(protocol, "rtmpe") || CURL::IsProtocolEqual(protocol, "rtmpte") ||
+         CURL::IsProtocolEqual(protocol, "rtmps");
 }
 
 bool URIUtils::IsUPnP(const std::string& strFile)
@@ -1050,11 +1044,8 @@ bool URIUtils::IsLiveTV(const std::string& strFile)
   std::string strFileWithoutSlash(strFile);
   RemoveSlashAtEnd(strFileWithoutSlash);
 
-  if (StringUtils::EndsWithNoCase(strFileWithoutSlash, ".pvr") &&
-      !StringUtils::StartsWith(strFileWithoutSlash, "pvr://recordings"))
-    return true;
-
-  return false;
+  return StringUtils::EndsWithNoCase(strFileWithoutSlash, ".pvr") &&
+         !StringUtils::StartsWith(strFileWithoutSlash, "pvr://recordings");
 }
 
 bool URIUtils::IsPVRRecording(const std::string& strFile)
@@ -1173,10 +1164,7 @@ bool URIUtils::HasSlashAtEnd(const std::string& strFile, bool checkURL /* = fals
   }
   char kar = strFile.c_str()[strFile.size() - 1];
 
-  if (kar == '/' || kar == '\\')
-    return true;
-
-  return false;
+  return kar == '/' || kar == '\\';
 }
 
 void URIUtils::RemoveSlashAtEnd(std::string& strFolder)

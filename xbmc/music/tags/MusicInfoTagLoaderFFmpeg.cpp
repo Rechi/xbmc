@@ -108,7 +108,7 @@ bool CMusicInfoTagLoaderFFmpeg::Load(const std::string& strFileName, CMusicInfoT
                             else if (StringUtils::CompareNoCase(avtag->key, "date") == 0)
                               tag.SetReleaseDate(avtag->value);
                             else if (StringUtils::CompareNoCase(avtag->key, "compilation") == 0)
-                              tag.SetCompilation((strtol(avtag->value, nullptr, 10) == 0) ? false : true);
+                              tag.SetCompilation(strtol(avtag->value, nullptr, 10) != 0);
                             else if (StringUtils::CompareNoCase(avtag->key, "encoded_by") == 0) {}
                             else if (StringUtils::CompareNoCase(avtag->key, "composer") == 0)
                               tag.AddArtistRole("Composer", avtag->value);

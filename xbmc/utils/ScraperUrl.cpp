@@ -175,16 +175,10 @@ bool CScraperUrl::ParseAndAppendUrl(const TiXmlElement* element)
   url.m_spoof = XMLUtils::GetAttribute(element, "spoof");
 
   const char* szPost = element->Attribute("post");
-  if (szPost && StringUtils::CompareNoCase(szPost, "yes") == 0)
-    url.m_post = true;
-  else
-    url.m_post = false;
+  url.m_post = szPost && StringUtils::CompareNoCase(szPost, "yes") == 0;
 
   const char* szIsGz = element->Attribute("gzip");
-  if (szIsGz && StringUtils::CompareNoCase(szIsGz, "yes") == 0)
-    url.m_isgz = true;
-  else
-    url.m_isgz = false;
+  url.m_isgz = szIsGz && StringUtils::CompareNoCase(szIsGz, "yes") == 0;
 
   url.m_cache = XMLUtils::GetAttribute(element, "cache");
 

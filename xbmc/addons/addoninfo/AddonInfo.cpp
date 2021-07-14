@@ -194,7 +194,7 @@ bool CAddonInfo::ProvidesSeveralSubContents() const
   int contents = 0;
   for (const auto& addonType : m_types)
     contents += addonType.ProvidedSubContents();
-  return contents > 0 ? true : false;
+  return contents > 0;
 }
 
 bool CAddonInfo::MeetsVersion(const AddonVersion& versionMin, const AddonVersion& version) const
