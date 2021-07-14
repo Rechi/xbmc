@@ -42,7 +42,7 @@ public:
 
   bool m_wantsIECPassthrough;           /* if sink supports passthrough encapsulation is done when set to true */
 
-  operator std::string();
+  operator std::string() const;
   static std::string DeviceTypeToString(enum AEDeviceType deviceType);
 };
 
