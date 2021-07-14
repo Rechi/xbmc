@@ -29,9 +29,9 @@
 using namespace PVR;
 
 CPVREpgInfoTag::CPVREpgInfoTag()
-: m_iUniqueBroadcastID(EPG_TAG_INVALID_UID),
-  m_iFlags(EPG_TAG_FLAG_UNDEFINED),
-  m_channelData(new CPVREpgChannelData)
+  : m_iUniqueBroadcastID(EPG_TAG_INVALID_UID), // NOLINT(modernize-use-default-member-init)
+    m_iFlags(EPG_TAG_FLAG_UNDEFINED),
+    m_channelData(new CPVREpgChannelData)
 {
 }
 
@@ -40,7 +40,7 @@ CPVREpgInfoTag::CPVREpgInfoTag(const std::shared_ptr<CPVREpgChannelData>& channe
                                const CDateTime& start,
                                const CDateTime& end,
                                bool bIsGapTag)
-  : m_iUniqueBroadcastID(EPG_TAG_INVALID_UID),
+  : m_iUniqueBroadcastID(EPG_TAG_INVALID_UID), // NOLINT(modernize-use-default-member-init)
     m_iFlags(EPG_TAG_FLAG_UNDEFINED),
     m_bIsGapTag(bIsGapTag),
     m_iEpgID(iEpgID)

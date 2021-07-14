@@ -25,6 +25,7 @@ public:
 
   const CFileItemList& GetPlaylist() const;
 
+  // NOLINTNEXTLINE(modernize-use-default-member-init)
   int m_logLevel;
   bool m_startFullScreen = false;
   bool m_platformDirectories = true;

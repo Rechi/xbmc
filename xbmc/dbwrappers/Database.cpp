@@ -250,6 +250,7 @@ void CDatabase::Split(const std::string& strFileNameAndPath, std::string& strPat
   strFileName = strFileNameAndPath.substr(i);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 std::string CDatabase::PrepareSQL(std::string strStmt, ...) const
 {
   std::string strResult = "";

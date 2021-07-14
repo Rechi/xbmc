@@ -157,7 +157,7 @@ protected:
   {
     std::vector<EDL::Cut> m_cutList;
     std::vector<std::pair<std::string, int64_t>> m_chapters; // name and position for chapters
-  } m_contentInfo;
+  } m_contentInfo; // NOLINT(modernize-use-default-member-init)
 
   CCriticalSection m_renderSection;
   struct SRenderInfo

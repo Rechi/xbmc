@@ -214,6 +214,7 @@ extern "C" intptr_t (*__stdcall dllGetProcAddress(HMODULE hModule, const char* f
     }
   }
 
+  // NOLINTNEXTLINE(modernize-redundant-void-arg)
   return (intptr_t(*)(void)) address;
 }
 

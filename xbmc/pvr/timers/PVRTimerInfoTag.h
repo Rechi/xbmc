@@ -344,6 +344,7 @@ namespace PVR
     int m_iClientId; /*!< @brief ID of the backend */
     int m_iClientIndex = PVR_TIMER_NO_CLIENT_INDEX; /*!< @brief index number of the tag, given by the backend, PVR_TIMER_NO_CLIENT_INDEX for new */
     int m_iParentClientIndex = PVR_TIMER_NO_PARENT; /*!< @brief for timers scheduled by a timer rule, the index number of the parent, given by the backend, PVR_TIMER_NO_PARENT for no parent */
+    // NOLINTNEXTLINE(modernize-use-default-member-init)
     int m_iClientChannelUid; /*!< @brief channel uid */
     bool m_bStartAnyTime = false; /*!< @brief Ignore start date and time clock. Record at 'Any Time' */
     bool m_bEndAnyTime = false; /*!< @brief Ignore end date and time clock. Record at 'Any Time' */
@@ -358,6 +359,7 @@ namespace PVR
     unsigned int m_iTimerId = 0; /*!< @brief id that won't change as long as Kodi is running */
     unsigned int m_iMarginStart; /*!< @brief (optional) if set, the backend starts the recording iMarginStart minutes before startTime. */
     unsigned int m_iMarginEnd; /*!< @brief (optional) if set, the backend ends the recording iMarginEnd minutes after endTime. */
+    // NOLINTNEXTLINE(modernize-use-default-member-init)
     mutable unsigned int m_iEpgUid; /*!< id of epg event associated with this timer, EPG_TAG_INVALID_UID if none. */
     std::string m_strSeriesLink; /*!< series link */
 

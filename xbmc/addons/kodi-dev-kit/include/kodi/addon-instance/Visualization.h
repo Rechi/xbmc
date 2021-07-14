@@ -485,6 +485,7 @@ public:
   /// @param[in] songName The name of the currently-playing song
   /// @return true if start successful done
   ///
+  // NOLINTNEXTLINE(performance-unnecessary-value-param)
   virtual bool Start(int channels, int samplesPerSec, int bitsPerSample, std::string songName)
   {
     return true;
@@ -656,6 +657,7 @@ public:
   /// @param[in] albumart Path to the current album art image
   /// @return Return true if the image is used
   ///
+  // NOLINTNEXTLINE(performance-unnecessary-value-param)
   virtual bool UpdateAlbumart(std::string albumart) { return false; }
   //----------------------------------------------------------------------------
 

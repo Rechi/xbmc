@@ -50,6 +50,7 @@ void CDBusMessage::AppendArgument<bool>(const bool arg)
 }
 
 template<>
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void CDBusMessage::AppendArgument<std::string>(const std::string arg)
 {
   AppendArgument(arg.c_str());
