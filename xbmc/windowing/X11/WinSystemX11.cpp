@@ -340,11 +340,11 @@ void CWinSystemX11::UpdateResolutions()
 
       // switch off other outputs
       std::vector<XOutput> outputs = g_xrandr.GetModes();
-      for (size_t i=0; i<outputs.size(); i++)
+      for (const XOutput& output : outputs)
       {
-        if (StringUtils::EqualsNoCase(outputs[i].name, m_userOutput))
+        if (StringUtils::EqualsNoCase(output.name, m_userOutput))
           continue;
-        g_xrandr.TurnOffOutput(outputs[i].name);
+        g_xrandr.TurnOffOutput(output.name);
       }
     }
 
@@ -468,9 +468,9 @@ void CWinSystemX11::GetConnectedOutputs(std::vector<std::string> *outputs)
   g_xrandr.Query(true);
   outs = g_xrandr.GetModes();
   outputs->push_back("Default");
-  for(unsigned int i=0; i<outs.size(); ++i)
+  for (const XOutput& out : outs)
   {
-    outputs->push_back(outs[i].name);
+    outputs->push_back(out.name);
   }
 }
 
@@ -619,8 +619,8 @@ void CWinSystemX11::OnLostDevice()
   CLog::Log(LOGDEBUG, "{} - notify display change event", __FUNCTION__);
 
   { CSingleLock lock(m_resourceSection);
-    for (std::vector<IDispResource *>::iterator i = m_resources.begin(); i != m_resources.end(); ++i)
-      (*i)->OnLostDisplay();
+    for (IDispResource* resource : m_resources)
+      resource->OnLostDisplay();
   }
 
   m_winEventsX11->SetXRRFailSafeTimer(3000);
