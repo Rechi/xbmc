@@ -15,8 +15,7 @@ extern "C" {
 #include <libavutil/mem.h>
 }
 
-CDVDVideoPPFFmpeg::CDVDVideoPPFFmpeg(CProcessInfo &processInfo):
-  m_sType(""), m_processInfo(processInfo)
+CDVDVideoPPFFmpeg::CDVDVideoPPFFmpeg(CProcessInfo& processInfo) : m_processInfo(processInfo)
 {
   m_pMode = m_pContext = NULL;
   m_iInitWidth = m_iInitHeight = 0;

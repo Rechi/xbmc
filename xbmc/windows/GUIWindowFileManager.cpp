@@ -452,7 +452,7 @@ bool CGUIWindowFileManager::Update(int iList, const std::string &strDirectory)
 
   // get selected item
   int iItem = GetSelectedItem(iList);
-  std::string strSelectedItem = "";
+  std::string strSelectedItem;
 
   if (iItem >= 0 && iItem < m_vecItems[iList]->Size())
   {
@@ -797,7 +797,7 @@ void CGUIWindowFileManager::OnSelectAll(int iList)
 
 void CGUIWindowFileManager::OnNewFolder(int iList)
 {
-  std::string strNewFolder = "";
+  std::string strNewFolder;
   if (CGUIKeyboardFactory::ShowAndGetInput(strNewFolder, CVariant{g_localizeStrings.Get(16014)}, false))
   {
     std::string strNewPath = m_Directory[iList]->GetPath();

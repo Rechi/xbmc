@@ -101,7 +101,7 @@ bool CGUIDialogPVRGroupManager::ActionButtonNewGroup(CGUIMessage& message)
 
   if (iControl == BUTTON_NEWGROUP)
   {
-    std::string strGroupName = "";
+    std::string strGroupName;
     /* prompt for a group name */
     if (CGUIKeyboardFactory::ShowAndGetInput(strGroupName, CVariant{g_localizeStrings.Get(19139)}, false))
     {

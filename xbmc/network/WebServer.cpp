@@ -63,7 +63,6 @@ typedef struct
 
 CWebServer::CWebServer()
   : m_authenticationUsername("kodi"),
-    m_authenticationPassword(""),
     m_logger(CServiceBroker::GetLogging().GetLogger("CWebServer"))
 {
 #if defined(TARGET_DARWIN)

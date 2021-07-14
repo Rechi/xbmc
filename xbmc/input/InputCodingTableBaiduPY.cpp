@@ -96,7 +96,7 @@ void CInputCodingTableBaiduPY::HandleResponse(const std::string& strCode,
 
 std::wstring CInputCodingTableBaiduPY::UnicodeToWString(const std::string& unicode)
 {
-  std::wstring result = L"";
+  std::wstring result;
   for (unsigned int i = 0; i < unicode.length(); i += 6)
   {
     int c;

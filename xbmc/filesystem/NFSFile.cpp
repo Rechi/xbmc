@@ -54,8 +54,7 @@
 
 using namespace XFILE;
 
-CNfsConnection::CNfsConnection()
-  : m_pNfsContext(NULL), m_exportPath(""), m_hostName(""), m_resolvedHostName("")
+CNfsConnection::CNfsConnection() : m_pNfsContext(NULL)
 {
 }
 

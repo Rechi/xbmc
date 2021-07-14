@@ -72,7 +72,7 @@ std::string CBlurayDirectory::GetDiscInfoString(DiscInfo info)
     if (!disc_info || !disc_info->bluray_detected)
       return "";
 
-    std::string title = "";
+    std::string title;
 
 #if (BLURAY_VERSION > BLURAY_VERSION_CODE(1,0,0))
     title = disc_info->disc_name ? disc_info->disc_name : "";
@@ -89,7 +89,7 @@ std::string CBlurayDirectory::GetDiscInfoString(DiscInfo info)
     if (!disc_info || !disc_info->bluray_detected)
       return "";
 
-    std::string id = "";
+    std::string id;
 
 #if (BLURAY_VERSION > BLURAY_VERSION_CODE(1,0,0))
     id = disc_info->udf_volume_id ? disc_info->udf_volume_id : "";

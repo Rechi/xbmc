@@ -175,7 +175,7 @@ bool CAutorun::RunDisc(IDirectory* pDir, const std::string& strDrive, int& nAdde
   // is this a root folder we have to check the content to determine a disc type
   if (bRoot)
   {
-    std::string hddvdname = "";
+    std::string hddvdname;
     CFileItemPtr phddvdItem;
     bool bAutorunDVDs = CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_DVDS_AUTORUN);
 

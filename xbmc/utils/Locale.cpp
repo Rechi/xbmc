@@ -143,7 +143,7 @@ bool CLocale::Matches(const std::string& locale) const
 
 std::string CLocale::FindBestMatch(const std::set<std::string>& locales) const
 {
-  std::string bestMatch = "";
+  std::string bestMatch;
   int bestMatchRank = -1;
 
   for (auto const& locale : locales)
@@ -165,7 +165,7 @@ std::string CLocale::FindBestMatch(const std::set<std::string>& locales) const
 
 std::string CLocale::FindBestMatch(const std::unordered_map<std::string, std::string>& locales) const
 {
-  std::string bestMatch = "";
+  std::string bestMatch;
   int bestMatchRank = -1;
 
   for (auto const& locale : locales)

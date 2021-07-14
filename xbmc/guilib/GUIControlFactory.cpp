@@ -715,8 +715,8 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
   CGUIAction focusActions;
   CGUIAction unfocusActions;
   CGUIAction textChangeActions;
-  std::string strTitle = "";
-  std::string strRSSTags = "";
+  std::string strTitle;
+  std::string strRSSTags;
 
   float buttonGap = 5;
   int iMovementRange = 0;

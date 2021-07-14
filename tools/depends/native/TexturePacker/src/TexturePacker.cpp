@@ -105,7 +105,7 @@ void CreateSkeletonHeaderImpl(CXBTFWriter& xbtfWriter,
         }
         else if (DecoderManager::IsSupportedGraphicsFile(dp->d_name))
         {
-          std::string fileName = "";
+          std::string fileName;
           if (!relativePath.empty())
           {
             fileName += relativePath;

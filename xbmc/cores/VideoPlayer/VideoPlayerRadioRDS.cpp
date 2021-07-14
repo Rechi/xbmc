@@ -682,7 +682,7 @@ void CDVDRadioRDSData::OnExit()
 
 std::string CDVDRadioRDSData::GetRadioText(unsigned int line)
 {
-  std::string str = "";
+  std::string str;
 
   if (m_RT_Present)
   {
@@ -701,7 +701,7 @@ std::string CDVDRadioRDSData::GetRadioText(unsigned int line)
   }
   else if (m_PS_Present)
   {
-    std::string temp = "";
+    std::string temp;
     int ind = (m_PS_Index == 0) ? 11 : m_PS_Index - 1;
     for (int i = ind+1; i < PS_TEXT_ENTRIES; ++i)
     {
