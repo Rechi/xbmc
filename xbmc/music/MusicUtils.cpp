@@ -24,6 +24,8 @@
 #include "settings/SettingsComponent.h"
 #include "utils/JobManager.h"
 
+#include <memory>
+
 using namespace MUSIC_INFO;
 using namespace XFILE;
 using namespace PLAYLIST;
@@ -130,7 +132,7 @@ namespace MUSIC_UTILS
       // Similarly update the art of the currently playing song so it shows on OSD
       if (g_application.GetAppPlayer().IsPlayingAudio() && g_application.CurrentFileItem().HasMusicInfoTag())
       {
-        CFileItemPtr songitem = CFileItemPtr(new CFileItem(g_application.CurrentFileItem()));
+        CFileItemPtr songitem = std::make_shared<CFileItem>(g_application.CurrentFileItem());
         if (HasSongExtraArtChanged(songitem, type, itemID, db))
           g_application.UpdateCurrentPlayArt();
       }

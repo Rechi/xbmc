@@ -59,11 +59,12 @@
 #include "utils/Variant.h"
 #include "utils/XTimeUtils.h"
 #include "utils/log.h"
-#include "video/dialogs/GUIDialogVideoInfo.h"
 #include "video/VideoInfoTag.h"
+#include "video/dialogs/GUIDialogVideoInfo.h"
 #include "view/GUIViewState.h"
 
 #include <algorithm>
+#include <memory>
 
 using namespace XFILE;
 using namespace MUSICDATABASEDIRECTORY;
@@ -1017,7 +1018,7 @@ bool CGUIWindowMusicBase::GetDirectory(const std::string &strDirectory, CFileIte
       newPlaylist->m_bIsFolder = true;
       items.Add(newPlaylist);
 
-      newPlaylist.reset(new CFileItem("newplaylist://", false));
+      newPlaylist = std::make_shared<CFileItem>("newplaylist://", false);
       newPlaylist->SetLabel(g_localizeStrings.Get(525));
       newPlaylist->SetArt("icon", "DefaultAddSource.png");
       newPlaylist->SetLabelPreformatted(true);
@@ -1025,7 +1026,7 @@ bool CGUIWindowMusicBase::GetDirectory(const std::string &strDirectory, CFileIte
       newPlaylist->SetCanQueue(false);
       items.Add(newPlaylist);
 
-      newPlaylist.reset(new CFileItem("newsmartplaylist://music", false));
+      newPlaylist = std::make_shared<CFileItem>("newsmartplaylist://music", false);
       newPlaylist->SetLabel(g_localizeStrings.Get(21437));
       newPlaylist->SetArt("icon", "DefaultAddSource.png");
       newPlaylist->SetLabelPreformatted(true);

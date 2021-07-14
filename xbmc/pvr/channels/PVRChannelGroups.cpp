@@ -518,7 +518,8 @@ bool CPVRChannelGroups::AddGroup(const std::string& strName)
     if (!group)
     {
       // create a new group
-      group.reset(new CPVRChannelGroup(CPVRChannelsPath(m_bRadio, strName), GetGroupAll()));
+      group =
+          std::make_shared<CPVRChannelGroup>(CPVRChannelsPath(m_bRadio, strName), GetGroupAll());
 
       m_groups.push_back(group);
       bPersist = true;

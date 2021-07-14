@@ -16,25 +16,28 @@
 #include "Util.h"
 #include "filesystem/Directory.h"
 #include "filesystem/SpecialProtocol.h"
-#ifdef TARGET_DARWIN_EMBEDDED
-#include "platform/darwin/ios-common/DarwinEmbedUtils.h"
-#endif
 #ifdef TARGET_WINDOWS
 #include "platform/Environment.h"
 #endif
 #include "profiles/ProfileManager.h"
-#include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
+#include "utils/log.h"
 #ifdef TARGET_WINDOWS
 #include "win32util.h"
 #endif
 
+#ifdef TARGET_DARWIN_EMBEDDED
+#include "platform/darwin/ios-common/DarwinEmbedUtils.h"
+#endif
+
+#include <memory>
+
 CSettingsComponent::CSettingsComponent()
 {
-  m_advancedSettings.reset(new CAdvancedSettings());
-  m_settings.reset(new CSettings());
-  m_profileManager.reset(new CProfileManager());
+  m_advancedSettings = std::make_shared<CAdvancedSettings>();
+  m_settings = std::make_shared<CSettings>();
+  m_profileManager = std::make_shared<CProfileManager>();
 }
 
 CSettingsComponent::~CSettingsComponent()

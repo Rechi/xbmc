@@ -13,6 +13,7 @@
 #include "cores/VideoPlayer/Interface/TimingConstants.h"
 #include "utils/log.h"
 
+#include <memory>
 #include <utility>
 
 #define FF_MAX_EXTRADATA_SIZE ((1 << 28) - AV_INPUT_BUFFER_PADDING_SIZE)
@@ -423,7 +424,7 @@ void CDVDDemuxClient::SetStreamProps(CDemuxStream *stream, std::map<int, std::sh
       streamAudio = std::dynamic_pointer_cast<CDemuxStreamClientInternalTpl<CDemuxStreamAudio>>(currentStream);
     if (forceInit || !streamAudio || streamAudio->codec != source->codec)
     {
-      streamAudio.reset(new CDemuxStreamClientInternalTpl<CDemuxStreamAudio>());
+      streamAudio = std::make_shared<CDemuxStreamClientInternalTpl<CDemuxStreamAudio>>();
       streamAudio->m_parser = av_parser_init(source->codec);
       if (streamAudio->m_parser)
         streamAudio->m_parser->flags |= PARSER_FLAG_COMPLETE_FRAMES;
@@ -464,7 +465,7 @@ void CDVDDemuxClient::SetStreamProps(CDemuxStream *stream, std::map<int, std::sh
       streamVideo = std::dynamic_pointer_cast<CDemuxStreamClientInternalTpl<CDemuxStreamVideo>>(currentStream);
     if (forceInit || !streamVideo || streamVideo->codec != source->codec)
     {
-      streamVideo.reset(new CDemuxStreamClientInternalTpl<CDemuxStreamVideo>());
+      streamVideo = std::make_shared<CDemuxStreamClientInternalTpl<CDemuxStreamVideo>>();
       streamVideo->m_parser = av_parser_init(source->codec);
       if (streamVideo->m_parser)
         streamVideo->m_parser->flags |= PARSER_FLAG_COMPLETE_FRAMES;
@@ -512,7 +513,7 @@ void CDVDDemuxClient::SetStreamProps(CDemuxStream *stream, std::map<int, std::sh
       streamSubtitle = std::dynamic_pointer_cast<CDemuxStreamClientInternalTpl<CDemuxStreamSubtitle>>(currentStream);
     if (!streamSubtitle || streamSubtitle->codec != source->codec)
     {
-      streamSubtitle.reset(new CDemuxStreamClientInternalTpl<CDemuxStreamSubtitle>());
+      streamSubtitle = std::make_shared<CDemuxStreamClientInternalTpl<CDemuxStreamSubtitle>>();
       streamSubtitle->m_parser = av_parser_init(source->codec);
       if (streamSubtitle->m_parser)
         streamSubtitle->m_parser->flags |= PARSER_FLAG_COMPLETE_FRAMES;
@@ -546,7 +547,7 @@ void CDVDDemuxClient::SetStreamProps(CDemuxStream *stream, std::map<int, std::sh
        streamTeletext = std::dynamic_pointer_cast<CDemuxStreamClientInternalTpl<CDemuxStreamTeletext>>(currentStream);
     if (!streamTeletext || streamTeletext->codec != source->codec)
     {
-      streamTeletext.reset(new CDemuxStreamClientInternalTpl<CDemuxStreamTeletext>());
+      streamTeletext = std::make_shared<CDemuxStreamClientInternalTpl<CDemuxStreamTeletext>>();
     }
 
     map[stream->uniqueId] = streamTeletext;
@@ -569,7 +570,7 @@ void CDVDDemuxClient::SetStreamProps(CDemuxStream *stream, std::map<int, std::sh
       streamRDS = std::dynamic_pointer_cast<CDemuxStreamClientInternalTpl<CDemuxStreamRadioRDS>>(currentStream);
     if (!streamRDS || streamRDS->codec != source->codec)
     {
-      streamRDS.reset(new CDemuxStreamClientInternalTpl<CDemuxStreamRadioRDS>());
+      streamRDS = std::make_shared<CDemuxStreamClientInternalTpl<CDemuxStreamRadioRDS>>();
     }
 
     map[stream->uniqueId] = streamRDS;

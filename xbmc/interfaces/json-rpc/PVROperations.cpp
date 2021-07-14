@@ -25,6 +25,8 @@
 #include "pvr/timers/PVRTimers.h"
 #include "utils/Variant.h"
 
+#include <memory>
+
 using namespace JSONRPC;
 using namespace PVR;
 using namespace KODI::MESSAGING;
@@ -215,7 +217,8 @@ JSONRPC_STATUS CPVROperations::GetBroadcastDetails(const std::string &method, IT
   if (!epgTag)
     return InvalidParams;
 
-  HandleFileItem("broadcastid", false, "broadcastdetails", CFileItemPtr(new CFileItem(epgTag)), parameterObject, parameterObject["properties"], result, false);
+  HandleFileItem("broadcastid", false, "broadcastdetails", std::make_shared<CFileItem>(epgTag),
+                 parameterObject, parameterObject["properties"], result, false);
 
   return OK;
 }
@@ -393,7 +396,8 @@ JSONRPC_STATUS CPVROperations::GetTimerDetails(const std::string &method, ITrans
   if (!timer)
     return InvalidParams;
 
-  HandleFileItem("timerid", false, "timerdetails", CFileItemPtr(new CFileItem(timer)), parameterObject, parameterObject["properties"], result, false);
+  HandleFileItem("timerid", false, "timerdetails", std::make_shared<CFileItem>(timer),
+                 parameterObject, parameterObject["properties"], result, false);
 
   return OK;
 }

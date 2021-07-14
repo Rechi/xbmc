@@ -11,189 +11,173 @@
 #include "AppInboundProtocol.h"
 #include "AppParamParser.h"
 #include "Autorun.h"
+#include "CompileInfo.h"
+#include "DatabaseManager.h"
+#include "FileItem.h"
 #include "GUIInfoManager.h"
-#include "HDRStatus.h"
-#include "LangInfo.h"
-#include "PlayListPlayer.h"
-#include "URL.h"
-#include "Util.h"
-#include "addons/Skin.h"
-#include "addons/VFSEntry.h"
-#include "cores/AudioEngine/Engines/ActiveAE/ActiveAE.h"
-#include "cores/IPlayer.h"
-#include "cores/playercorefactory/PlayerCoreFactory.h"
-#include "dialogs/GUIDialogBusy.h"
-#include "dialogs/GUIDialogKaiToast.h"
-#include "events/EventLog.h"
-#include "events/NotificationEvent.h"
-#include "guilib/GUIColorManager.h"
-#include "guilib/GUIComponent.h"
-#include "guilib/GUIControlProfiler.h"
-#include "guilib/GUIFontManager.h"
-#include "guilib/StereoscopicsManager.h"
-#include "guilib/TextureManager.h"
-#include "interfaces/builtins/Builtins.h"
-#include "interfaces/generic/ScriptInvocationManager.h"
-#include "music/MusicLibraryQueue.h"
-#include "network/EventServer.h"
-#include "network/Network.h"
-#include "platform/Environment.h"
-#include "playlists/PlayListFactory.h"
-#include "threads/SystemClock.h"
-#include "utils/JobManager.h"
-#include "utils/LangCodeExpander.h"
-#include "utils/Screenshot.h"
-#include "utils/Variant.h"
-#include "video/Bookmark.h"
-#include "video/VideoLibraryQueue.h"
-#ifdef HAS_PYTHON
-#include "interfaces/python/XBPython.h"
-#endif
 #include "GUILargeTextureManager.h"
 #include "GUIPassword.h"
 #include "GUIUserMessages.h"
+#include "HDRStatus.h"
+#include "LangInfo.h"
+#include "PartyModeManager.h"
+#include "PlayListPlayer.h"
 #include "SectionLoader.h"
 #include "SeekHandler.h"
 #include "ServiceBroker.h"
 #include "TextureCache.h"
+#include "URL.h"
+#include "Util.h"
+#include "addons/AddonInstaller.h"
+#include "addons/AddonManager.h"
+#include "addons/AddonSystemSettings.h"
+#include "addons/RepositoryUpdater.h"
+#include "addons/Skin.h"
+#include "addons/VFSEntry.h"
+#include "addons/gui/GUIDialogAddonSettings.h"
+#include "cores/AudioEngine/Engines/ActiveAE/ActiveAE.h"
 #include "cores/DllLoader/DllLoaderContainer.h"
+#include "cores/FFmpeg.h"
+#include "cores/IPlayer.h"
+#include "cores/playercorefactory/PlayerCoreFactory.h"
+#include "dialogs/GUIDialogBusy.h"
+#include "dialogs/GUIDialogButtonMenu.h"
+#include "dialogs/GUIDialogCache.h"
+#include "dialogs/GUIDialogKaiToast.h"
+#include "dialogs/GUIDialogSimpleMenu.h"
+#include "dialogs/GUIDialogSubMenu.h"
+#include "dialogs/GUIDialogVolumeBar.h"
+#include "events/EventLog.h"
+#include "events/NotificationEvent.h"
 #include "filesystem/Directory.h"
 #include "filesystem/DirectoryCache.h"
 #include "filesystem/DllLibCurl.h"
+#ifdef HAS_FILESYSTEM_NFS
+#include "filesystem/NFSFile.h"
+#endif
 #include "filesystem/PluginDirectory.h"
 #include "filesystem/SpecialProtocol.h"
 #include "filesystem/StackDirectory.h"
+#ifdef HAS_UPNP
+#include "filesystem/UPnPDirectory.h"
+#endif
 #include "guilib/GUIAudioManager.h"
+#include "guilib/GUIColorManager.h"
+#include "guilib/GUIComponent.h"
+#include "guilib/GUIControlProfiler.h"
+#include "guilib/GUIFontManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "guilib/LocalizeStrings.h"
+#include "guilib/StereoscopicsManager.h"
+#include "guilib/TextureManager.h"
 #include "input/ButtonTranslator.h"
 #include "input/InertialScrollingHandler.h"
+#include "input/InputManager.h"
 #include "input/KeyboardLayoutManager.h"
 #include "input/actions/ActionTranslator.h"
+#include "interfaces/AnnouncementManager.h"
+#include "interfaces/builtins/Builtins.h"
+#include "interfaces/generic/ScriptInvocationManager.h"
+#include "interfaces/json-rpc/JSONRPC.h"
+#ifdef HAS_PYTHON
+#include "interfaces/python/XBPython.h"
+#endif
 #include "messaging/ApplicationMessenger.h"
 #include "messaging/ThreadMessage.h"
 #include "messaging/helpers/DialogHelper.h"
 #include "messaging/helpers/DialogOKHelper.h"
+#include "music/MusicLibraryQueue.h"
+#include "music/MusicThumbLoader.h"
+#include "music/MusicUtils.h"
+#include "music/infoscanner/MusicInfoScanner.h"
+#include "music/tags/MusicInfoTag.h"
+#include "network/EventServer.h"
+#include "network/Network.h"
+#include "network/ZeroconfBrowser.h"
+#ifdef HAS_UPNP
+#include "network/upnp/UPnP.h"
+#endif
+#include "peripherals/Peripherals.h"
+#include "pictures/GUIWindowSlideShow.h"
+#include "platform/Environment.h"
 #include "playlists/PlayList.h"
+#include "playlists/PlayListFactory.h"
 #include "playlists/SmartPlayList.h"
 #include "powermanagement/DPMSSupport.h"
 #include "powermanagement/PowerManager.h"
 #include "powermanagement/PowerTypes.h"
 #include "profiles/ProfileManager.h"
+#include "pvr/PVRManager.h"
+#include "pvr/guilib/PVRGUIActions.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/DisplaySettings.h"
 #include "settings/MediaSettings.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "settings/SkinSettings.h"
-#include "utils/CPUInfo.h"
-#include "utils/FileExtensionProvider.h"
-#include "utils/SystemInfo.h"
-#include "utils/TimeUtils.h"
-#include "utils/XTimeUtils.h"
-#include "utils/log.h"
-#include "windowing/WinSystem.h"
-#include "windowing/WindowSystemFactory.h"
-
-#include <cmath>
-
-#ifdef HAS_UPNP
-#include "network/upnp/UPnP.h"
-#include "filesystem/UPnPDirectory.h"
-#endif
-#if defined(TARGET_POSIX) && defined(HAS_FILESYSTEM_SMB)
-#include "platform/posix/filesystem/SMBDirectory.h"
-#endif
-#ifdef HAS_FILESYSTEM_NFS
-#include "filesystem/NFSFile.h"
-#endif
-#include "PartyModeManager.h"
-#include "network/ZeroconfBrowser.h"
+#include "storage/MediaManager.h"
+#include "threads/SystemClock.h"
 #ifndef TARGET_POSIX
 #include "threads/platform/win/Win32Exception.h"
 #endif
-#include "interfaces/json-rpc/JSONRPC.h"
-#include "interfaces/AnnouncementManager.h"
-#include "peripherals/Peripherals.h"
-#include "music/infoscanner/MusicInfoScanner.h"
-#include "music/MusicUtils.h"
-#include "music/MusicThumbLoader.h"
-
-// Windows includes
-#include "guilib/GUIWindowManager.h"
-#include "video/dialogs/GUIDialogVideoInfo.h"
-#include "windows/GUIWindowScreensaver.h"
-#include "video/PlayerController.h"
-
-// Dialog includes
-#include "addons/gui/GUIDialogAddonSettings.h"
-#include "dialogs/GUIDialogButtonMenu.h"
-#include "dialogs/GUIDialogKaiToast.h"
-#include "dialogs/GUIDialogSimpleMenu.h"
-#include "dialogs/GUIDialogSubMenu.h"
-#include "dialogs/GUIDialogVolumeBar.h"
-#include "video/dialogs/GUIDialogVideoBookmarks.h"
-
-// PVR related include Files
-#include "pvr/PVRManager.h"
-#include "pvr/guilib/PVRGUIActions.h"
-
-#include "video/dialogs/GUIDialogFullScreenInfo.h"
-#include "dialogs/GUIDialogCache.h"
+#include "utils/AlarmClock.h"
+#include "utils/CPUInfo.h"
+#include "utils/CharsetConverter.h"
+#include "utils/FileExtensionProvider.h"
+#include "utils/JobManager.h"
+#include "utils/LangCodeExpander.h"
+#include "utils/SaveFileStateJob.h"
+#include "utils/Screenshot.h"
+#include "utils/StringUtils.h"
+#include "utils/SystemInfo.h"
+#include "utils/TimeUtils.h"
 #include "utils/URIUtils.h"
+#include "utils/Variant.h"
 #include "utils/XMLUtils.h"
-#include "addons/AddonInstaller.h"
-#include "addons/AddonManager.h"
-#include "addons/RepositoryUpdater.h"
-#include "music/tags/MusicInfoTag.h"
-#include "CompileInfo.h"
-
+#include "utils/XTimeUtils.h"
+#include "utils/log.h"
+#include "video/Bookmark.h"
+#include "video/PlayerController.h"
+#include "video/VideoLibraryQueue.h"
+#include "video/dialogs/GUIDialogFullScreenInfo.h"
+#include "video/dialogs/GUIDialogVideoBookmarks.h"
+#include "video/dialogs/GUIDialogVideoInfo.h"
 #ifdef TARGET_WINDOWS
 #include "win32util.h"
 #endif
-
-#ifdef TARGET_DARWIN_OSX
-#include "platform/darwin/osx/CocoaInterface.h"
-#include "platform/darwin/osx/XBMCHelper.h"
-#endif
-#ifdef TARGET_DARWIN
-#include "platform/darwin/DarwinUtils.h"
-#endif
-
-#ifdef HAS_DVD_DRIVE
-#include <cdio/logging.h>
-#endif
-
-#include "storage/MediaManager.h"
-#include "utils/SaveFileStateJob.h"
-#include "utils/AlarmClock.h"
-#include "utils/StringUtils.h"
-#include "DatabaseManager.h"
-#include "input/InputManager.h"
-
-#ifdef TARGET_POSIX
-#include "platform/posix/XHandle.h"
-#include "platform/posix/filesystem/PosixDirectory.h"
-#include "platform/posix/PlatformPosix.h"
-#endif
+#include "windowing/WinSystem.h"
+#include "windowing/WindowSystemFactory.h"
+#include "windows/GUIWindowScreensaver.h"
 
 #if defined(TARGET_ANDROID)
 #include "platform/android/activity/XBMCApp.h"
 #endif
-
-#ifdef TARGET_WINDOWS
-#include "platform/Environment.h"
+#ifdef TARGET_DARWIN
+#include "platform/darwin/DarwinUtils.h"
 #endif
+#ifdef TARGET_DARWIN_OSX
+#include "platform/darwin/osx/CocoaInterface.h"
+#include "platform/darwin/osx/XBMCHelper.h"
+#endif
+#ifdef TARGET_POSIX
+#include "platform/posix/PlatformPosix.h"
+#include "platform/posix/XHandle.h"
+#include "platform/posix/filesystem/PosixDirectory.h"
+#endif
+#if defined(TARGET_POSIX) && defined(HAS_FILESYSTEM_SMB)
+#include "platform/posix/filesystem/SMBDirectory.h"
+#endif
+
+#include <cmath>
+#include <memory>
 
 //TODO: XInitThreads
 #ifdef HAVE_X11
 #include <X11/Xlib.h>
 #endif
-
-#include "cores/FFmpeg.h"
-#include "utils/CharsetConverter.h"
-#include "pictures/GUIWindowSlideShow.h"
-#include "addons/AddonSystemSettings.h"
-#include "FileItem.h"
+#ifdef HAS_DVD_DRIVE
+#include <cdio/logging.h>
+#endif
 
 using namespace ADDON;
 using namespace XFILE;
@@ -2647,7 +2631,8 @@ bool CApplication::PlayMedia(CFileItem& item, const std::string &player, int iPl
   }
   else if (item.IsPVR())
   {
-    return CServiceBroker::GetPVRManager().GUIActions()->PlayMedia(CFileItemPtr(new CFileItem(item)));
+    return CServiceBroker::GetPVRManager().GUIActions()->PlayMedia(
+        std::make_shared<CFileItem>(item));
   }
 
   CURL path(item.GetPath());
@@ -2998,9 +2983,9 @@ void CApplication::OnPlayBackStarted(const CFileItem &file)
     m_appPlayer.SetUpdateStreamDetails();
 
   if (m_stackHelper.IsPlayingISOStack() || m_stackHelper.IsPlayingRegularStack())
-    m_itemCurrentFile.reset(new CFileItem(*m_stackHelper.GetRegisteredStack(file)));
+    m_itemCurrentFile = std::make_shared<CFileItem>(*m_stackHelper.GetRegisteredStack(file));
   else
-    m_itemCurrentFile.reset(new CFileItem(file));
+    m_itemCurrentFile = std::make_shared<CFileItem>(file);
 
   /* When playing video pause any low priority jobs, they will be unpaused  when playback stops.
    * This should speed up player startup for files on internet filesystems (eg. webdav) and
@@ -3775,7 +3760,7 @@ bool CApplication::OnMessage(CGUIMessage& message)
         CGUIMessage msg(GUI_MSG_PLAYLISTPLAYER_CHANGED, 0, 0, CServiceBroker::GetPlaylistPlayer().GetCurrentPlaylist(), param, item);
         CServiceBroker::GetGUI()->GetWindowManager().SendThreadMessage(msg);
         CServiceBroker::GetPlaylistPlayer().SetCurrentSong(m_nextPlaylistItem);
-        m_itemCurrentFile.reset(new CFileItem(*item));
+        m_itemCurrentFile = std::make_shared<CFileItem>(*item);
       }
       CServiceBroker::GetGUI()->GetInfoManager().SetCurrentItem(*m_itemCurrentFile);
       g_partyModeManager.OnSongChange(true);

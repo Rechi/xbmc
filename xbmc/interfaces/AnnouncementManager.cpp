@@ -19,6 +19,7 @@
 #include "utils/log.h"
 #include "video/VideoDatabase.h"
 
+#include <memory>
 #include <stdio.h>
 
 #define LOOKUP_PROPERTY "database-lookup"
@@ -134,7 +135,7 @@ void CAnnouncementManager::Announce(AnnouncementFlag flag,
   announcement.data = data;
 
   if (item != nullptr)
-    announcement.item = CFileItemPtr(new CFileItem(*item));
+    announcement.item = std::make_shared<CFileItem>(*item);
 
   {
     CSingleLock lock (m_queueCritSection);

@@ -1166,7 +1166,8 @@ namespace PVR
   {
     std::string resumeString;
 
-    const std::shared_ptr<CPVRRecording> recording(CPVRItem(CFileItemPtr(new CFileItem(item))).GetRecording());
+    const std::shared_ptr<CPVRRecording> recording(
+        CPVRItem(std::make_shared<CFileItem>(item)).GetRecording());
     if (recording && !recording->IsDeleted())
     {
       int positionInSeconds = lrint(recording->GetResumePoint().timeInSeconds);

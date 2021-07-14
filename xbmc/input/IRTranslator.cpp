@@ -18,6 +18,7 @@
 #include "utils/XBMCTinyXML.h"
 #include "utils/log.h"
 
+#include <memory>
 #include <stdlib.h>
 #include <vector>
 
@@ -102,7 +103,7 @@ void CIRTranslator::MapRemote(TiXmlNode* pRemote, const std::string& szDevice)
 
   auto it = m_irRemotesMap.find(szDevice);
   if (it == m_irRemotesMap.end())
-    m_irRemotesMap[szDevice].reset(new IRButtonMap);
+    m_irRemotesMap[szDevice] = std::make_shared<IRButtonMap>();
 
   std::shared_ptr<IRButtonMap>& buttons = m_irRemotesMap[szDevice];
 

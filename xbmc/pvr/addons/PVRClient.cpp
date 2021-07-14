@@ -546,8 +546,7 @@ bool CPVRClient::GetAddonProperties()
                          GetFriendlyName(), Author());
               continue;
             }
-            timerTypes.emplace_back(
-                std::shared_ptr<CPVRTimerType>(new CPVRTimerType(types_array[i], m_iClientId)));
+            timerTypes.emplace_back(std::make_shared<CPVRTimerType>(types_array[i], m_iClientId));
           }
         }
         return retval;
@@ -1559,7 +1558,7 @@ PVR_ERROR CPVRClient::OnPowerSavingDeactivated()
 std::shared_ptr<CPVRClientMenuHooks> CPVRClient::GetMenuHooks()
 {
   if (!m_menuhooks)
-    m_menuhooks.reset(new CPVRClientMenuHooks(ID()));
+    m_menuhooks = std::make_shared<CPVRClientMenuHooks>(ID());
 
   return m_menuhooks;
 }

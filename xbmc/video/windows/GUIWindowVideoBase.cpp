@@ -39,9 +39,9 @@
 #include "profiles/ProfileManager.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/MediaSettings.h"
+#include "settings/SettingUtils.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
-#include "settings/SettingUtils.h"
 #include "settings/dialogs/GUIDialogContentSettings.h"
 #include "storage/MediaManager.h"
 #include "utils/FileExtensionProvider.h"
@@ -56,6 +56,8 @@
 #include "video/VideoLibraryQueue.h"
 #include "video/dialogs/GUIDialogVideoInfo.h"
 #include "view/GUIViewState.h"
+
+#include <memory>
 
 using namespace XFILE;
 using namespace PLAYLIST;
@@ -270,7 +272,7 @@ void CGUIWindowVideoBase::OnItemInfo(const CFileItem& fileItem, ADDON::ScraperPt
   if (fileItem.m_bIsFolder)
     item.SetProperty("set_folder_thumb", fileItem.GetPath());
 
-  bool modified = ShowIMDB(CFileItemPtr(new CFileItem(item)), scraper, fromDB);
+  bool modified = ShowIMDB(std::make_shared<CFileItem>(item), scraper, fromDB);
   if (modified &&
      (CServiceBroker::GetGUI()->GetWindowManager().GetActiveWindow() == WINDOW_VIDEO_NAV)) // since we can be called from the music library we need this check
   {
@@ -1336,7 +1338,7 @@ bool CGUIWindowVideoBase::GetDirectory(const std::string &strDirectory, CFileIte
     newPlaylist->SetLabelPreformatted(true);
     items.Add(newPlaylist);
 */
-    newPlaylist.reset(new CFileItem("newsmartplaylist://video", false));
+    newPlaylist = std::make_shared<CFileItem>("newsmartplaylist://video", false);
     newPlaylist->SetLabel(g_localizeStrings.Get(21437));  // "new smart playlist..."
     newPlaylist->SetArt("icon", "DefaultAddSource.png");
     newPlaylist->SetLabelPreformatted(true);

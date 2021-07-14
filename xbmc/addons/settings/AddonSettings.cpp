@@ -37,6 +37,7 @@
 #include "utils/log.h"
 
 #include <algorithm>
+#include <memory>
 #include <vector>
 
 static const std::string OldSettingValuesSeparator = "|";
@@ -492,7 +493,7 @@ std::shared_ptr<CSettingGroup> CAddonSettings::ParseOldSettingElement(
           category->AddGroup(group);
 
           // and create a new one
-          group.reset(new CSettingGroup(std::to_string(groupId), GetSettingsManager()));
+          group = std::make_shared<CSettingGroup>(std::to_string(groupId), GetSettingsManager());
           groupId += 1;
         }
 

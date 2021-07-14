@@ -61,6 +61,7 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <memory>
 
 using namespace KODI;
 using namespace XFILE;
@@ -2036,11 +2037,11 @@ bool CFileItem::LoadTracksFromCueDocument(CFileItemList& scannedItems)
       if ( tag.Loaded() && oneFilePerTrack && ! ( tag.GetAlbum().empty() || tag.GetArtist().empty() || tag.GetTitle().empty() ) )
       {
         // If there are multiple files in a cue file, the tags from the files should be prefered if they exist.
-        scannedItems.Add(CFileItemPtr(new CFileItem(song, tag)));
+        scannedItems.Add(std::make_shared<CFileItem>(song, tag));
       }
       else
       {
-        scannedItems.Add(CFileItemPtr(new CFileItem(song)));
+        scannedItems.Add(std::make_shared<CFileItem>(song));
       }
       ++tracksFound;
     }
@@ -2419,7 +2420,7 @@ void CFileItemList::Sort(SortDescription sortDescription)
   SortItems sortItems((size_t)Size());
   for (int index = 0; index < Size(); index++)
   {
-    sortItems[index] = std::shared_ptr<SortItem>(new SortItem);
+    sortItems[index] = std::make_shared<SortItem>();
     m_items[index]->ToSortable(*sortItems[index], fields);
     (*sortItems[index])[FieldId] = index;
   }
@@ -2501,7 +2502,7 @@ void CFileItemList::Archive(CArchive& ar)
     {
       CFileItemPtr pItem=m_items[0];
       if (pItem->IsParentFolder())
-        pParent.reset(new CFileItem(*pItem));
+        pParent = std::make_shared<CFileItem>(*pItem);
     }
 
     SetIgnoreURLOptions(false);

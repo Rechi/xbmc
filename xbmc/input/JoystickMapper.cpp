@@ -17,6 +17,7 @@
 #include "utils/XBMCTinyXML.h"
 
 #include <algorithm>
+#include <memory>
 #include <sstream>
 #include <utility>
 
@@ -42,7 +43,7 @@ void CJoystickMapper::MapActions(int windowID, const TiXmlNode* pDevice)
   // Create/overwrite keymap
   auto& keymap = m_joystickKeymaps[controllerId];
   if (!keymap)
-    keymap.reset(new CWindowKeymap(controllerId));
+    keymap = std::make_shared<CWindowKeymap>(controllerId);
 
   const TiXmlElement* pButton = pDevice->FirstChildElement();
   while (pButton != nullptr)

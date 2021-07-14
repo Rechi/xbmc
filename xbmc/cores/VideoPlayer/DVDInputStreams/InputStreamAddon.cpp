@@ -19,6 +19,8 @@
 #include "utils/URIUtils.h"
 #include "utils/log.h"
 
+#include <memory>
+
 CInputStreamProvider::CInputStreamProvider(const ADDON::AddonInfoPtr& addonInfo,
                                            KODI_HANDLE parentInstance)
   : m_addonInfo(addonInfo), m_parentInstance(parentInstance)
@@ -187,8 +189,8 @@ bool CInputStreamAddon::Open()
     m_caps = {};
     m_struct.toAddon->get_capabilities(&m_struct, &m_caps);
 
-    m_subAddonProvider = std::shared_ptr<CInputStreamProvider>(
-        new CInputStreamProvider(GetAddonInfo(), m_struct.toAddon->addonInstance));
+    m_subAddonProvider =
+        std::make_shared<CInputStreamProvider>(GetAddonInfo(), m_struct.toAddon->addonInstance);
   }
   return ret;
 }
@@ -434,8 +436,7 @@ KODI_HANDLE CInputStreamAddon::cb_get_stream_transfer(KODI_HANDLE handle,
 
     if (stream->m_masteringMetadata)
     {
-      videoStream->masteringMetaData =
-          std::shared_ptr<AVMasteringDisplayMetadata>(new AVMasteringDisplayMetadata);
+      videoStream->masteringMetaData = std::make_shared<AVMasteringDisplayMetadata>();
       videoStream->masteringMetaData->display_primaries[0][0] =
           av_d2q(stream->m_masteringMetadata->primary_r_chromaticity_x, INT_MAX);
       videoStream->masteringMetaData->display_primaries[0][1] =
@@ -462,8 +463,7 @@ KODI_HANDLE CInputStreamAddon::cb_get_stream_transfer(KODI_HANDLE handle,
 
     if (stream->m_contentLightMetadata)
     {
-      videoStream->contentLightMetaData =
-          std::shared_ptr<AVContentLightMetadata>(new AVContentLightMetadata);
+      videoStream->contentLightMetaData = std::make_shared<AVContentLightMetadata>();
       videoStream->contentLightMetaData->MaxCLL =
           static_cast<unsigned>(stream->m_contentLightMetadata->max_cll);
       videoStream->contentLightMetaData->MaxFALL =
@@ -532,9 +532,9 @@ KODI_HANDLE CInputStreamAddon::cb_get_stream_transfer(KODI_HANDLE handle,
         CRYPTO_SESSION_SYSTEM_PLAYREADY,
         CRYPTO_SESSION_SYSTEM_WISEPLAY,
     };
-    demuxStream->cryptoSession = std::shared_ptr<DemuxCryptoSession>(
-        new DemuxCryptoSession(map[stream->m_cryptoSession.keySystem],
-                               stream->m_cryptoSession.sessionId, stream->m_cryptoSession.flags));
+    demuxStream->cryptoSession = std::make_shared<DemuxCryptoSession>(
+        map[stream->m_cryptoSession.keySystem], stream->m_cryptoSession.sessionId,
+        stream->m_cryptoSession.flags);
 
     if ((stream->m_features & INPUTSTREAM_FEATURE_DECODE) != 0)
       demuxStream->externalInterfaces = thisClass->m_subAddonProvider;

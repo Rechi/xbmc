@@ -264,7 +264,7 @@ bool CPVRTimers::UpdateEntries(const CPVRTimersContainer& timers, const std::vec
       else
       {
         /* new timer */
-        std::shared_ptr<CPVRTimerInfoTag> newTimer = std::shared_ptr<CPVRTimerInfoTag>(new CPVRTimerInfoTag);
+        std::shared_ptr<CPVRTimerInfoTag> newTimer = std::make_shared<CPVRTimerInfoTag>();
         newTimer->UpdateEntry(*timerIt);
         newTimer->m_iTimerId = ++m_iLastId;
         InsertEntry(newTimer);
@@ -930,7 +930,7 @@ std::shared_ptr<CPVRTimerInfoTag> CPVRTimers::UpdateEntry(const std::shared_ptr<
   }
   else
   {
-    tag.reset(new CPVRTimerInfoTag());
+    tag = std::make_shared<CPVRTimerInfoTag>();
     if (tag->UpdateEntry(timer))
     {
       tag->m_iTimerId = ++m_iLastId;
