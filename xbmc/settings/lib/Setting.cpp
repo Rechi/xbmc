@@ -1103,7 +1103,7 @@ IntegerSettingOptions CSettingInt::UpdateDynamicOptions()
   {
     for (size_t index = 0; index < options.size(); index++)
     {
-      if (options[index].label.compare(m_dynamicOptions[index].label) != 0 ||
+      if (options[index].label != m_dynamicOptions[index].label ||
           options[index].value != m_dynamicOptions[index].value)
       {
         changed = true;
@@ -1593,8 +1593,8 @@ StringSettingOptions CSettingString::UpdateDynamicOptions()
   {
     for (size_t index = 0; index < options.size(); index++)
     {
-      if (options[index].label.compare(m_dynamicOptions[index].label) != 0 ||
-          options[index].value.compare(m_dynamicOptions[index].value) != 0)
+      if (options[index].label != m_dynamicOptions[index].label ||
+          options[index].value != m_dynamicOptions[index].value)
       {
         changed = true;
         break;

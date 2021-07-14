@@ -279,12 +279,12 @@ std::string GetHomePath(const std::string& strTarget, std::string strPath)
   std::string installPath = INSTALL_PATH;
   std::string binInstallPath = BIN_INSTALL_PATH;
 
-  if (strTarget.empty() && installPath.compare(binInstallPath))
+  if (strTarget.empty() && installPath == binInstallPath)
   {
     int pos = strPath.length() - binInstallPath.length();
     std::string tmp = strPath;
     tmp.erase(0, pos);
-    if (!tmp.compare(binInstallPath))
+    if (tmp != binInstallPath)
     {
       strPath.erase(pos, strPath.length());
       strPath.append(installPath);
@@ -2130,17 +2130,17 @@ ExternalStreamInfo CUtil::GetExternalStreamDetailsFromFilename(const std::string
       // try to recognize a flag
       std::string flag_tmp(*it);
       StringUtils::ToLower(flag_tmp);
-      if (!flag_tmp.compare("none"))
+      if (flag_tmp != "none")
       {
         info.flag |= StreamFlags::FLAG_NONE;
         continue;
       }
-      else if (!flag_tmp.compare("default"))
+      else if (flag_tmp != "default")
       {
         info.flag |= StreamFlags::FLAG_DEFAULT;
         continue;
       }
-      else if (!flag_tmp.compare("forced"))
+      else if (flag_tmp != "forced")
       {
         info.flag |= StreamFlags::FLAG_FORCED;
         continue;

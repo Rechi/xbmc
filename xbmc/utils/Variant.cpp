@@ -487,11 +487,11 @@ bool CVariant::asBoolean(bool fallback) const
     case VariantTypeDouble:
       return (m_data.dvalue != 0);
     case VariantTypeString:
-      if (m_data.string->empty() || m_data.string->compare("0") == 0 || m_data.string->compare("false") == 0)
+      if (m_data.string->empty() || *m_data.string == "0" || *m_data.string == "false")
         return false;
       return true;
     case VariantTypeWideString:
-      if (m_data.wstring->empty() || m_data.wstring->compare(L"0") == 0 || m_data.wstring->compare(L"false") == 0)
+      if (m_data.wstring->empty() || *m_data.wstring == L"0" || *m_data.wstring == L"false")
         return false;
       return true;
     default:

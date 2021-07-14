@@ -141,7 +141,7 @@ bool CWinSystemX11::ResizeWindow(int newWidth, int newHeight, int newLeft, int n
 {
   m_userOutput = CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_VIDEOSCREEN_MONITOR);
   XOutput *out = NULL;
-  if (m_userOutput.compare("Default") != 0)
+  if (m_userOutput != "Default")
   {
     out = g_xrandr.GetOutput(m_userOutput);
     if (out)
@@ -179,7 +179,7 @@ void CWinSystemX11::FinishWindowResize(int newWidth, int newHeight)
 {
   m_userOutput = CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_VIDEOSCREEN_MONITOR);
   XOutput *out = NULL;
-  if (m_userOutput.compare("Default") != 0)
+  if (m_userOutput != "Default")
   {
     out = g_xrandr.GetOutput(m_userOutput);
     if (out)
@@ -203,7 +203,7 @@ void CWinSystemX11::FinishWindowResize(int newWidth, int newHeight)
   XResizeWindow(m_dpy, m_glWindow, newWidth, newHeight);
   UpdateCrtc();
 
-  if (m_userOutput.compare(m_currentOutput) != 0)
+  if (m_userOutput != m_currentOutput)
   {
     SetWindow(newWidth, newHeight, false, m_userOutput);
   }
@@ -309,13 +309,13 @@ void CWinSystemX11::UpdateResolutions()
   const std::shared_ptr<CSettings> settings = CServiceBroker::GetSettingsComponent()->GetSettings();
   bool switchOnOff = settings->GetBool(CSettings::SETTING_VIDEOSCREEN_BLANKDISPLAYS);
   m_userOutput = settings->GetString(CSettings::SETTING_VIDEOSCREEN_MONITOR);
-  if (m_userOutput.compare("Default") == 0)
+  if (m_userOutput == "Default")
     switchOnOff = false;
 
   if(g_xrandr.Query(true, !switchOnOff))
   {
     XOutput *out = NULL;
-    if (m_userOutput.compare("Default") != 0)
+    if (m_userOutput != "Default")
     {
       out = g_xrandr.GetOutput(m_userOutput);
       if (out)
@@ -476,7 +476,7 @@ void CWinSystemX11::GetConnectedOutputs(std::vector<std::string> *outputs)
 
 bool CWinSystemX11::IsCurrentOutput(const std::string& output)
 {
-  return (StringUtils::EqualsNoCase(output, "Default")) || (m_currentOutput.compare(output) == 0);
+  return (StringUtils::EqualsNoCase(output, "Default")) || (m_currentOutput == output);
 }
 
 void CWinSystemX11::ShowOSMouse(bool show)
@@ -665,7 +665,7 @@ bool CWinSystemX11::SetWindow(int width, int height, bool fullscreen, const std:
     CServiceBroker::GetInputManager().SetMouseActive(false);
   }
 
-  if (m_mainWindow && ((m_bFullScreen != fullscreen) || m_currentOutput.compare(output) != 0 || m_windowDirty))
+  if (m_mainWindow && ((m_bFullScreen != fullscreen) || m_currentOutput != output || m_windowDirty))
   {
     // set mouse to last known position
     // we can't trust values after an xrr event

@@ -652,8 +652,8 @@ std::string CLangInfo::GetSubtitleCharSet() const
 
 LanguageResourcePtr CLangInfo::GetLanguageAddon(const std::string& locale /* = "" */) const
 {
-  if (locale.empty() ||
-     (m_languageAddon != NULL && (locale.compare(m_languageAddon->ID()) == 0 || m_languageAddon->GetLocale().Equals(locale))))
+  if (locale.empty() || (m_languageAddon != NULL && (locale == m_languageAddon->ID() ||
+                                                     m_languageAddon->GetLocale().Equals(locale))))
     return m_languageAddon;
 
   std::string addonId = ADDON::CLanguageResource::GetAddonId(locale);

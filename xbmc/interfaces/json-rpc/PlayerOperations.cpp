@@ -372,7 +372,7 @@ JSONRPC_STATUS CPlayerOperations::SetSpeed(const std::string &method, ITransport
       }
       else if (parameterObject["speed"].isString())
       {
-        if (parameterObject["speed"].asString().compare("increment") == 0)
+        if (parameterObject["speed"].asString() == "increment")
           CBuiltins::GetInstance().Execute("playercontrol(forward)");
         else
           CBuiltins::GetInstance().Execute("playercontrol(rewind)");
@@ -636,7 +636,7 @@ JSONRPC_STATUS CPlayerOperations::Rotate(const std::string &method, ITransportLa
   switch (GetPlayer(parameterObject["playerid"]))
   {
     case Picture:
-      if (parameterObject["value"].asString().compare("clockwise") == 0)
+      if (parameterObject["value"].asString() == "clockwise")
         SendSlideshowAction(ACTION_ROTATE_PICTURE_CW);
       else
         SendSlideshowAction(ACTION_ROTATE_PICTURE_CCW);
@@ -1080,13 +1080,13 @@ JSONRPC_STATUS CPlayerOperations::SetAudioStream(const std::string &method, ITra
         if (parameterObject["stream"].isString())
         {
           std::string action = parameterObject["stream"].asString();
-          if (action.compare("previous") == 0)
+          if (action == "previous")
           {
             index = g_application.GetAppPlayer().GetAudioStream() - 1;
             if (index < 0)
               index = g_application.GetAppPlayer().GetAudioStreamCount() - 1;
           }
-          else if (action.compare("next") == 0)
+          else if (action == "next")
           {
             index = g_application.GetAppPlayer().GetAudioStream() + 1;
             if (index >= g_application.GetAppPlayer().GetAudioStreamCount())
@@ -1143,24 +1143,24 @@ JSONRPC_STATUS CPlayerOperations::SetSubtitle(const std::string &method, ITransp
         if (parameterObject["subtitle"].isString())
         {
           std::string action = parameterObject["subtitle"].asString();
-          if (action.compare("previous") == 0)
+          if (action == "previous")
           {
             index = g_application.GetAppPlayer().GetSubtitle() - 1;
             if (index < 0)
               index = g_application.GetAppPlayer().GetSubtitleCount() - 1;
           }
-          else if (action.compare("next") == 0)
+          else if (action == "next")
           {
             index = g_application.GetAppPlayer().GetSubtitle() + 1;
             if (index >= g_application.GetAppPlayer().GetSubtitleCount())
               index = 0;
           }
-          else if (action.compare("off") == 0)
+          else if (action == "off")
           {
             g_application.GetAppPlayer().SetSubtitleVisible(false);
             return ACK;
           }
-          else if (action.compare("on") == 0)
+          else if (action == "on")
           {
             g_application.GetAppPlayer().SetSubtitleVisible(true);
             return ACK;
@@ -1206,13 +1206,13 @@ JSONRPC_STATUS CPlayerOperations::SetVideoStream(const std::string &method, ITra
       if (parameterObject["stream"].isString())
       {
         std::string action = parameterObject["stream"].asString();
-        if (action.compare("previous") == 0)
+        if (action == "previous")
         {
           index--;
           if (index < 0)
             index = streamCount - 1;
         }
-        else if (action.compare("next") == 0)
+        else if (action == "next")
         {
           index++;
           if (index >= streamCount)
@@ -1948,9 +1948,9 @@ int CPlayerOperations::ParseRepeatState(const CVariant &repeat)
   REPEAT_STATE state = REPEAT_NONE;
   std::string strState = repeat.asString();
 
-  if (strState.compare("one") == 0)
+  if (strState == "one")
     state = REPEAT_ONE;
-  else if (strState.compare("all") == 0)
+  else if (strState == "all")
     state = REPEAT_ALL;
 
   return state;

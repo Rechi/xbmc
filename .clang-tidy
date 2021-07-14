@@ -27,6 +27,7 @@ Checks: "\
   readability-simplify-boolean-expr,\
   readability-static-accessed-through-instance,\
   readability-static-definition-in-anonymous-namespace,\
+  readability-string-compare,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'
 CheckOptions:

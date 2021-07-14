@@ -61,12 +61,12 @@ JSONRPC_STATUS CApplicationOperations::SetVolume(const std::string &method, ITra
   {
     JSONRPC_STATUS ret;
     std::string direction = parameterObject["volume"].asString();
-    if (direction.compare("increment") == 0)
+    if (direction == "increment")
     {
       ret = CInputOperations::SendAction(ACTION_VOLUME_UP, false, true);
       up = true;
     }
-    else if (direction.compare("decrement") == 0)
+    else if (direction == "decrement")
     {
       ret = CInputOperations::SendAction(ACTION_VOLUME_DOWN, false, true);
       up = false;
@@ -87,9 +87,11 @@ JSONRPC_STATUS CApplicationOperations::SetVolume(const std::string &method, ITra
 
 JSONRPC_STATUS CApplicationOperations::SetMute(const std::string &method, ITransportLayer *transport, IClient *client, const CVariant &parameterObject, CVariant &result)
 {
-  if ((parameterObject["mute"].isString() && parameterObject["mute"].asString().compare("toggle") == 0) ||
-      (parameterObject["mute"].isBoolean() && parameterObject["mute"].asBoolean() != g_application.IsMuted()))
-      CApplicationMessenger::GetInstance().SendMsg(TMSG_GUI_ACTION, WINDOW_INVALID, -1, static_cast<void*>(new CAction(ACTION_MUTE)));
+  if ((parameterObject["mute"].isString() && parameterObject["mute"].asString() == "toggle") ||
+      (parameterObject["mute"].isBoolean() &&
+       parameterObject["mute"].asBoolean() != g_application.IsMuted()))
+    CApplicationMessenger::GetInstance().SendMsg(TMSG_GUI_ACTION, WINDOW_INVALID, -1,
+                                                 static_cast<void*>(new CAction(ACTION_MUTE)));
   else if (!parameterObject["mute"].isBoolean() && !parameterObject["mute"].isString())
     return InvalidParams;
 

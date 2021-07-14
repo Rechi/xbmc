@@ -882,8 +882,9 @@ void CDisplaySettings::SettingOptionsMonitorsFiller(const SettingConstPtr& setti
 #if defined(HAVE_X11) || defined(TARGET_DARWIN)
   for (unsigned int i = 0; i < monitors.size(); ++i)
   {
-    if(currentMonitor.compare("Default") != 0 &&
-       StringUtils::EqualsNoCase(CDisplaySettings::GetInstance().GetResolutionInfo(RES_DESKTOP).strOutput, monitors[i]))
+    if (currentMonitor != "Default" &&
+        StringUtils::EqualsNoCase(
+            CDisplaySettings::GetInstance().GetResolutionInfo(RES_DESKTOP).strOutput, monitors[i]))
     {
       current = monitors[i];
     }

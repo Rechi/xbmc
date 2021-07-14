@@ -744,7 +744,7 @@ bool CSkinInfo::SettingsLoaded() const
 bool CSkinInfo::SettingsFromXML(const CXBMCTinyXML &doc, bool loadDefaults /* = false */)
 {
   const TiXmlElement *rootElement = doc.RootElement();
-  if (rootElement == nullptr || rootElement->ValueStr().compare(XML_SETTINGS) != 0)
+  if (rootElement == nullptr || rootElement->ValueStr() != XML_SETTINGS)
   {
     CLog::Log(LOGWARNING, "CSkinInfo: no <settings> tag found");
     return false;

@@ -85,13 +85,14 @@ JSONRPC_STATUS CPlaylistOperations::GetItems(const std::string &method, ITranspo
 
 bool CPlaylistOperations::CheckMediaParameter(int playlist, const CVariant &itemObject)
 {
-  if (itemObject.isMember("media") && itemObject["media"].asString().compare("files") != 0)
+  if (itemObject.isMember("media") && itemObject["media"].asString() != "files")
   {
-    if (playlist == PLAYLIST_VIDEO && itemObject["media"].asString().compare("video") != 0)
+    if (playlist == PLAYLIST_VIDEO && itemObject["media"].asString() != "video")
       return false;
-    if (playlist == PLAYLIST_MUSIC && itemObject["media"].asString().compare("music") != 0)
+    if (playlist == PLAYLIST_MUSIC && itemObject["media"].asString() != "music")
       return false;
-    if (playlist == PLAYLIST_PICTURE && itemObject["media"].asString().compare("video") != 0 && itemObject["media"].asString().compare("pictures") != 0)
+    if (playlist == PLAYLIST_PICTURE && itemObject["media"].asString() != "video" &&
+        itemObject["media"].asString() != "pictures")
       return false;
   }
   return true;

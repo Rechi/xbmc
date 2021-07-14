@@ -21,11 +21,11 @@ static const std::string HTTPMethodPost = "POST";
 
 HTTPMethod GetHTTPMethod(const char *method)
 {
-  if (HTTPMethodGet.compare(method) == 0)
+  if (HTTPMethodGet == method)
     return GET;
-  if (HTTPMethodPost.compare(method) == 0)
+  if (HTTPMethodPost == method)
     return POST;
-  if (HTTPMethodHead.compare(method) == 0)
+  if (HTTPMethodHead == method)
     return HEAD;
 
   return UNKNOWN;

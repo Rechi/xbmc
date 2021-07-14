@@ -319,10 +319,9 @@ bool PAPlayer::QueueNextFileEx(const CFileItem &file, bool fadeIn)
     // if this is the case we don't need to open a new stream
     std::string newURL = file.GetDynURL().GetFileName();
     std::string oldURL = m_currentStream->m_fileItem.GetDynURL().GetFileName();
-    if (newURL.compare(oldURL) == 0 &&
-        file.m_lStartOffset &&
-        file.m_lStartOffset == m_currentStream->m_fileItem.m_lEndOffset &&
-        m_currentStream && m_currentStream->m_prepareTriggered)
+    if (newURL == oldURL && file.m_lStartOffset &&
+        file.m_lStartOffset == m_currentStream->m_fileItem.m_lEndOffset && m_currentStream &&
+        m_currentStream->m_prepareTriggered)
     {
       m_currentStream->m_nextFileItem.reset(new CFileItem(file));
       m_upcomingCrossfadeMS = 0;
