@@ -98,8 +98,9 @@ void CGUIDialogPVRGuideSearch::UpdateGroupsSpin()
 
   /* groups */
   std::vector<std::shared_ptr<CPVRChannelGroup>> groups = CServiceBroker::GetPVRManager().ChannelGroups()->Get(m_searchFilter->IsRadio())->GetMembers();
-  for (std::vector<std::shared_ptr<CPVRChannelGroup>>::const_iterator it = groups.begin(); it != groups.end(); ++it)
-    labels.emplace_back((*it)->GroupName(), (*it)->GroupID());
+  labels.reserve(groups.size());
+  for (const std::shared_ptr<CPVRChannelGroup>& group : groups)
+    labels.emplace_back(group->GroupName(), group->GroupID());
 
   SET_CONTROL_LABELS(CONTROL_SPIN_GROUPS, m_searchFilter->GetChannelGroup(), &labels);
 }
