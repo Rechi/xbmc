@@ -59,10 +59,10 @@ void CFDEventMonitor::AddFDs(const std::vector<MonitoredFD>& monitoredFDs,
   CSingleLock lock(m_mutex);
   InterruptPoll();
 
-  for (unsigned int i = 0; i < monitoredFDs.size(); ++i)
+  for (const MonitoredFD& monitoredFD : monitoredFDs)
   {
     int id;
-    AddFDLocked(monitoredFDs[i], id);
+    AddFDLocked(monitoredFD, id);
     ids.push_back(id);
   }
 
