@@ -384,7 +384,7 @@ BuildObject(CFileItem&                    item,
 
   logger->debug("Building didl for object '{}'", item.GetPath());
 
-  auto settingsComponent = CServiceBroker::GetSettingsComponent();
+  auto* settingsComponent = CServiceBroker::GetSettingsComponent();
   if (!settingsComponent)
     return nullptr;
 

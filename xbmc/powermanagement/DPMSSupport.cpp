@@ -19,7 +19,7 @@
 
 CDPMSSupport::CDPMSSupport()
 {
-  auto settingsComponent = CServiceBroker::GetSettingsComponent();
+  auto* settingsComponent = CServiceBroker::GetSettingsComponent();
   if (settingsComponent)
   {
     auto settings = settingsComponent->GetSettings();

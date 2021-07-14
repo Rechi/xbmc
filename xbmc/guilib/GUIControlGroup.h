@@ -89,7 +89,11 @@ private:
 
   struct IDCollectorList
   {
-    ~IDCollectorList() { for (auto item : m_items) delete item; };
+    ~IDCollectorList()
+    {
+      for (auto* item : m_items)
+        delete item;
+    };
 
     std::vector<CGUIControl *> *Get() {
       if (++m_stackDepth > m_items.size())

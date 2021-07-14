@@ -835,7 +835,7 @@ bool CEdl::GetNearestCut(bool bPlus, const int iSeek, Cut *pCut) const
   if (bPlus)
   {
     // Searching forwards
-    for (auto &cut : m_vecCuts)
+    for (const auto& cut : m_vecCuts)
     {
       if (iSeek >= cut.start && iSeek <= cut.end) // Inside cut.
       {

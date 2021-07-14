@@ -3314,7 +3314,7 @@ void CApplication::StopScreenSaverTimer()
 
 bool CApplication::ToggleDPMS(bool manual)
 {
-  auto winSystem = CServiceBroker::GetWinSystem();
+  auto* winSystem = CServiceBroker::GetWinSystem();
   if (!winSystem)
     return false;
 
@@ -3481,7 +3481,7 @@ void CApplication::CheckScreenSaverAndDPMS()
   else if (CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_SCREENSAVER_MODE).empty())
     maybeScreensaver = false;
 
-  auto winSystem = CServiceBroker::GetWinSystem();
+  auto* winSystem = CServiceBroker::GetWinSystem();
   if (!winSystem)
     return;
 

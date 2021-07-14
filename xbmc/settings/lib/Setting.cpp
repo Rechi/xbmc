@@ -102,11 +102,11 @@ bool CSetting::Deserialize(const TiXmlNode *node, bool update /* = false */)
   if (!ISetting::Deserialize(node, update))
     return false;
 
-  auto element = node->ToElement();
+  const auto* element = node->ToElement();
   if (element == nullptr)
     return false;
 
-  auto parentSetting = element->Attribute(SETTING_XML_ATTR_PARENT);
+  const auto* parentSetting = element->Attribute(SETTING_XML_ATTR_PARENT);
   if (parentSetting != nullptr)
     m_parentSetting = parentSetting;
 
@@ -123,10 +123,10 @@ bool CSetting::Deserialize(const TiXmlNode *node, bool update /* = false */)
   if (m_level < SettingLevel::Basic || m_level > SettingLevel::Internal)
     m_level = SettingLevel::Standard;
 
-  auto dependencies = node->FirstChild(SETTING_XML_ELM_DEPENDENCIES);
+  const auto* dependencies = node->FirstChild(SETTING_XML_ELM_DEPENDENCIES);
   if (dependencies != nullptr)
   {
-    auto dependencyNode = dependencies->FirstChild(SETTING_XML_ELM_DEPENDENCY);
+    const auto* dependencyNode = dependencies->FirstChild(SETTING_XML_ELM_DEPENDENCY);
     while (dependencyNode != nullptr)
     {
       CSettingDependency dependency(m_settingsManager);
@@ -139,10 +139,10 @@ bool CSetting::Deserialize(const TiXmlNode *node, bool update /* = false */)
     }
   }
 
-  auto control = node->FirstChildElement(SETTING_XML_ELM_CONTROL);
+  const auto* control = node->FirstChildElement(SETTING_XML_ELM_CONTROL);
   if (control != nullptr)
   {
-    auto controlType = control->Attribute(SETTING_XML_ATTR_TYPE);
+    const auto* controlType = control->Attribute(SETTING_XML_ATTR_TYPE);
     if (controlType == nullptr)
     {
       s_logger->error("error reading \"{}\" attribute of <control> tag of \"{}\"",
@@ -163,10 +163,10 @@ bool CSetting::Deserialize(const TiXmlNode *node, bool update /* = false */)
     return false;
   }
 
-  auto updates = node->FirstChild(SETTING_XML_ELM_UPDATES);
+  const auto* updates = node->FirstChild(SETTING_XML_ELM_UPDATES);
   if (updates != nullptr)
   {
-    auto updateElem = updates->FirstChildElement(SETTING_XML_ELM_UPDATE);
+    const auto* updateElem = updates->FirstChildElement(SETTING_XML_ELM_UPDATE);
     while (updateElem != nullptr)
     {
       CSettingUpdate settingUpdate;
@@ -402,7 +402,7 @@ bool CSettingList::Deserialize(const TiXmlNode *node, bool update /* = false */)
   if (!CSetting::Deserialize(node, update))
     return false;
 
-  auto element = node->ToElement();
+  const auto* element = node->ToElement();
   if (element == nullptr)
   {
     s_logger->warn("unable to read type of list setting of {}", m_id);
@@ -414,7 +414,7 @@ bool CSettingList::Deserialize(const TiXmlNode *node, bool update /* = false */)
   if (!m_definition->Deserialize(node, true))
     return false;
 
-  auto constraints = node->FirstChild(SETTING_XML_ELM_CONSTRAINTS);
+  const auto* constraints = node->FirstChild(SETTING_XML_ELM_CONSTRAINTS);
   if (constraints != nullptr)
   {
     // read the delimiter
@@ -911,11 +911,11 @@ bool CSettingInt::Deserialize(const TiXmlNode *node, bool update /* = false */)
     return false;
   }
 
-  auto constraints = node->FirstChild(SETTING_XML_ELM_CONSTRAINTS);
+  const auto* constraints = node->FirstChild(SETTING_XML_ELM_CONSTRAINTS);
   if (constraints != nullptr)
   {
     // get the entries
-    auto options = constraints->FirstChildElement(SETTING_XML_ELM_OPTIONS);
+    const auto* options = constraints->FirstChildElement(SETTING_XML_ELM_OPTIONS);
     if (options != nullptr && options->FirstChild() != nullptr)
     {
       if (!DeserializeOptionsSort(options, m_optionsSort))
@@ -933,7 +933,7 @@ bool CSettingInt::Deserialize(const TiXmlNode *node, bool update /* = false */)
       else
       {
         m_translatableOptions.clear();
-        auto optionElement = options->FirstChildElement(SETTING_XML_ELM_OPTION);
+        const auto* optionElement = options->FirstChildElement(SETTING_XML_ELM_OPTION);
         while (optionElement != nullptr)
         {
           TranslatableIntegerSettingOption entry;
@@ -1234,7 +1234,7 @@ bool CSettingNumber::Deserialize(const TiXmlNode *node, bool update /* = false *
     return false;
   }
 
-  auto constraints = node->FirstChild(SETTING_XML_ELM_CONSTRAINTS);
+  const auto* constraints = node->FirstChild(SETTING_XML_ELM_CONSTRAINTS);
   if (constraints != nullptr)
   {
     // get the minimum value
@@ -1424,7 +1424,7 @@ bool CSettingString::Deserialize(const TiXmlNode *node, bool update /* = false *
   if (!CSetting::Deserialize(node, update))
     return false;
 
-  auto constraints = node->FirstChild(SETTING_XML_ELM_CONSTRAINTS);
+  const auto* constraints = node->FirstChild(SETTING_XML_ELM_CONSTRAINTS);
   if (constraints != nullptr)
   {
     // get allowempty (needs to be parsed before parsing the default value)
@@ -1434,7 +1434,7 @@ bool CSettingString::Deserialize(const TiXmlNode *node, bool update /* = false *
     XMLUtils::GetBoolean(constraints, SETTING_XML_ELM_ALLOWNEWOPTION, m_allowNewOption);
 
     // get the entries
-    auto options = constraints->FirstChildElement(SETTING_XML_ELM_OPTIONS);
+    const auto* options = constraints->FirstChildElement(SETTING_XML_ELM_OPTIONS);
     if (options != nullptr && options->FirstChild() != nullptr)
     {
       if (!DeserializeOptionsSort(options, m_optionsSort))
@@ -1452,7 +1452,7 @@ bool CSettingString::Deserialize(const TiXmlNode *node, bool update /* = false *
       else
       {
         m_translatableOptions.clear();
-        auto optionElement = options->FirstChildElement(SETTING_XML_ELM_OPTION);
+        const auto* optionElement = options->FirstChildElement(SETTING_XML_ELM_OPTION);
         while (optionElement != nullptr)
         {
           TranslatableStringSettingOption entry;

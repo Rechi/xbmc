@@ -183,7 +183,9 @@ bool CGUIDialogVideoInfo::OnMessage(CGUIMessage& message)
           OnSearch(directors[0]);
         else
         {
-          auto pDlgSelect = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSelect>(WINDOW_DIALOG_SELECT);
+          auto* pDlgSelect =
+              CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSelect>(
+                  WINDOW_DIALOG_SELECT);
           if (pDlgSelect)
           {
             pDlgSelect->Reset();
@@ -2403,7 +2405,8 @@ bool CGUIDialogVideoInfo::OnGetFanart(const CFileItemPtr &videoItem)
 
 void CGUIDialogVideoInfo::ShowFor(const CFileItem& item)
 {
-  auto window = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIWindowVideoNav>(WINDOW_VIDEO_NAV);
+  auto* window =
+      CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIWindowVideoNav>(WINDOW_VIDEO_NAV);
   if (window)
   {
     ADDON::ScraperPtr info;

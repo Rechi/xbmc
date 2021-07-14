@@ -31,7 +31,7 @@ void CDumbBufferObject::Register()
 
 CDumbBufferObject::CDumbBufferObject()
 {
-  auto winSystem = static_cast<CWinSystemGbmEGLContext*>(CServiceBroker::GetWinSystem());
+  auto* winSystem = static_cast<CWinSystemGbmEGLContext*>(CServiceBroker::GetWinSystem());
 
   m_device = winSystem->GetDrm()->GetFileDescriptor();
 }

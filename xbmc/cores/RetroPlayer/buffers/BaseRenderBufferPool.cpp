@@ -40,7 +40,7 @@ bool CBaseRenderBufferPool::HasVisibleRenderer() const
 {
   CSingleLock lock(m_rendererMutex);
 
-  for (auto renderer : m_renderers)
+  for (auto* renderer : m_renderers)
   {
     if (renderer->IsVisible())
       return true;
@@ -142,7 +142,7 @@ void CBaseRenderBufferPool::Prime(unsigned int width, unsigned int height)
       buffers.emplace_back(buffer);
   }
 
-  for (auto buffer : buffers)
+  for (auto* buffer : buffers)
     buffer->Release();
 }
 

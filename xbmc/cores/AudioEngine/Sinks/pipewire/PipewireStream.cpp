@@ -49,7 +49,7 @@ bool CPipewireStream::Connect(uint32_t id, spa_audio_info_raw& info)
 {
   std::array<uint8_t, 1024> buffer;
   auto builder = SPA_POD_BUILDER_INIT(buffer.data(), buffer.size());
-  auto params = spa_format_audio_raw_build(&builder, SPA_PARAM_EnumFormat, &info);
+  auto* params = spa_format_audio_raw_build(&builder, SPA_PARAM_EnumFormat, &info);
 
   int ret = pw_stream_connect(m_stream.get(), PW_DIRECTION_OUTPUT, id,
                               static_cast<pw_stream_flags>(PW_STREAM_FLAG_AUTOCONNECT |
@@ -107,8 +107,8 @@ void CPipewireStream::StateChanged(void* userdata,
                                    enum pw_stream_state state,
                                    const char* error)
 {
-  auto pipewire = reinterpret_cast<CPipewire*>(userdata);
-  auto loop = pipewire->GetThreadLoop();
+  auto* pipewire = reinterpret_cast<CPipewire*>(userdata);
+  auto* loop = pipewire->GetThreadLoop();
   auto stream = pipewire->GetStream();
 
   CLog::Log(LOGDEBUG, "CPipewireStream::{} - stream state changed {} -> {}", __FUNCTION__,
@@ -126,16 +126,16 @@ void CPipewireStream::StateChanged(void* userdata,
 
 void CPipewireStream::Process(void* userdata)
 {
-  auto pipewire = reinterpret_cast<CPipewire*>(userdata);
-  auto loop = pipewire->GetThreadLoop();
+  auto* pipewire = reinterpret_cast<CPipewire*>(userdata);
+  auto* loop = pipewire->GetThreadLoop();
 
   loop->Signal(false);
 }
 
 void CPipewireStream::Drained(void* userdata)
 {
-  auto pipewire = reinterpret_cast<CPipewire*>(userdata);
-  auto loop = pipewire->GetThreadLoop();
+  auto* pipewire = reinterpret_cast<CPipewire*>(userdata);
+  auto* loop = pipewire->GetThreadLoop();
   auto stream = pipewire->GetStream();
 
   stream->SetActive(false);

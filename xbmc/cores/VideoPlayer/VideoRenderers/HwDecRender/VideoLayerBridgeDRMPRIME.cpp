@@ -31,12 +31,12 @@ CVideoLayerBridgeDRMPRIME::~CVideoLayerBridgeDRMPRIME()
 void CVideoLayerBridgeDRMPRIME::Disable()
 {
   // disable video plane
-  auto plane = m_DRM->GetVideoPlane();
+  auto* plane = m_DRM->GetVideoPlane();
   m_DRM->AddProperty(plane, "FB_ID", 0);
   m_DRM->AddProperty(plane, "CRTC_ID", 0);
 
   // disable HDR metadata
-  auto connector = m_DRM->GetConnector();
+  auto* connector = m_DRM->GetConnector();
   if (connector->SupportsProperty("HDR_OUTPUT_METADATA"))
   {
     m_DRM->AddProperty(connector, "HDR_OUTPUT_METADATA", 0);
@@ -161,7 +161,7 @@ void CVideoLayerBridgeDRMPRIME::Configure(CVideoBufferDRMPRIME* buffer)
 {
   const VideoPicture& picture = buffer->GetPicture();
 
-  auto plane = m_DRM->GetVideoPlane();
+  auto* plane = m_DRM->GetVideoPlane();
 
   bool result;
   uint64_t value;
@@ -173,7 +173,7 @@ void CVideoLayerBridgeDRMPRIME::Configure(CVideoBufferDRMPRIME* buffer)
   if (result)
     m_DRM->AddProperty(plane, "COLOR_RANGE", value);
 
-  auto connector = m_DRM->GetConnector();
+  auto* connector = m_DRM->GetConnector();
   if (connector->SupportsProperty("HDR_OUTPUT_METADATA"))
   {
     m_hdr_metadata.metadata_type = HDMI_STATIC_METADATA_TYPE1;
@@ -240,7 +240,7 @@ void CVideoLayerBridgeDRMPRIME::SetVideoPlane(CVideoBufferDRMPRIME* buffer, cons
     return;
   }
 
-  auto plane = m_DRM->GetVideoPlane();
+  auto* plane = m_DRM->GetVideoPlane();
   m_DRM->AddProperty(plane, "FB_ID", buffer->m_fb_id);
   m_DRM->AddProperty(plane, "CRTC_ID", m_DRM->GetCrtc()->GetCrtcId());
   m_DRM->AddProperty(plane, "SRC_X", 0);
@@ -262,7 +262,7 @@ void CVideoLayerBridgeDRMPRIME::UpdateVideoPlane()
   Release(m_prev_buffer);
   m_prev_buffer = nullptr;
 
-  auto plane = m_DRM->GetVideoPlane();
+  auto* plane = m_DRM->GetVideoPlane();
   m_DRM->AddProperty(plane, "FB_ID", m_buffer->m_fb_id);
   m_DRM->AddProperty(plane, "CRTC_ID", m_DRM->GetCrtc()->GetCrtcId());
 }

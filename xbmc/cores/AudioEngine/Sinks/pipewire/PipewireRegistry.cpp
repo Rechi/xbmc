@@ -47,7 +47,7 @@ void CPipewireRegistry::OnGlobalAdded(void* userdata,
                                       uint32_t version,
                                       const struct spa_dict* props)
 {
-  auto pipewire = reinterpret_cast<CPipewire*>(userdata);
+  auto* pipewire = reinterpret_cast<CPipewire*>(userdata);
 
   if (strcmp(type, PW_TYPE_INTERFACE_Node) == 0)
   {
@@ -83,7 +83,7 @@ void CPipewireRegistry::OnGlobalAdded(void* userdata,
 
 void CPipewireRegistry::OnGlobalRemoved(void* userdata, uint32_t id)
 {
-  auto pipewire = reinterpret_cast<CPipewire*>(userdata);
+  auto* pipewire = reinterpret_cast<CPipewire*>(userdata);
   auto& globals = pipewire->GetGlobals();
 
   auto global = globals.find(id);

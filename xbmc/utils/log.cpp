@@ -83,7 +83,7 @@ void CLog::Initialize(const std::string& path)
     return;
 
   // register setting callbacks
-  auto settingsManager =
+  auto* settingsManager =
       CServiceBroker::GetSettingsComponent()->GetSettings()->GetSettingsManager();
   settingsManager->RegisterSettingOptionsFiller("loggingcomponents",
                                                 SettingOptionsLoggingComponentsFiller);
@@ -133,7 +133,7 @@ void CLog::Uninitialize()
     return;
 
   // unregister setting callbacks
-  auto settingsManager =
+  auto* settingsManager =
       CServiceBroker::GetSettingsComponent()->GetSettings()->GetSettingsManager();
   settingsManager->UnregisterSettingOptionsFiller("loggingcomponents");
   settingsManager->UnregisterSettingsHandler(this);

@@ -212,7 +212,7 @@ IAESink* CAESinkPipewire::Create(std::string& device, AEAudioFormat& desiredForm
 
 void CAESinkPipewire::EnumerateDevicesEx(AEDeviceInfoList& list, bool force)
 {
-  auto loop = pipewire->GetThreadLoop();
+  auto* loop = pipewire->GetThreadLoop();
   loop->Lock();
 
   CAEDeviceInfo device;
@@ -247,8 +247,8 @@ void CAESinkPipewire::EnumerateDevicesEx(AEDeviceInfoList& list, bool force)
     for (const auto& rate : defaultSampleRates)
       device.m_sampleRates.emplace_back(rate);
 
-    auto proxy = global.second->proxy.get();
-    auto node = static_cast<PIPEWIRE::CPipewireNode*>(proxy);
+    auto* proxy = global.second->proxy.get();
+    auto* node = static_cast<PIPEWIRE::CPipewireNode*>(proxy);
 
     node->EnumerateFormats();
 
@@ -278,8 +278,8 @@ void CAESinkPipewire::Destroy()
 
 bool CAESinkPipewire::Initialize(AEAudioFormat& format, std::string& device)
 {
-  auto core = pipewire->GetCore();
-  auto loop = pipewire->GetThreadLoop();
+  auto* core = pipewire->GetCore();
+  auto* loop = pipewire->GetThreadLoop();
   auto& stream = pipewire->GetStream();
 
   loop->Lock();
@@ -379,7 +379,7 @@ bool CAESinkPipewire::Initialize(AEAudioFormat& format, std::string& device)
 
 void CAESinkPipewire::Deinitialize()
 {
-  auto loop = pipewire->GetThreadLoop();
+  auto* loop = pipewire->GetThreadLoop();
   auto& stream = pipewire->GetStream();
 
   loop->Lock();
@@ -398,7 +398,7 @@ double CAESinkPipewire::GetCacheTotal()
 
 unsigned int CAESinkPipewire::AddPackets(uint8_t** data, unsigned int frames, unsigned int offset)
 {
-  auto loop = pipewire->GetThreadLoop();
+  auto* loop = pipewire->GetThreadLoop();
   auto& stream = pipewire->GetStream();
 
   loop->Lock();
@@ -446,7 +446,7 @@ void CAESinkPipewire::GetDelay(AEDelayStatus& status)
 
 void CAESinkPipewire::Drain()
 {
-  auto loop = pipewire->GetThreadLoop();
+  auto* loop = pipewire->GetThreadLoop();
   auto& stream = pipewire->GetStream();
 
   loop->Lock();

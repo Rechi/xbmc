@@ -17,6 +17,7 @@ Checks: "\
   readability-container-size-empty,\
   readability-delete-null-pointer,\
   readability-non-const-parameter,\
+  readability-qualified-auto,\
   readability-redundant-control-flow,\
   readability-redundant-declaration,\
   readability-redundant-member-init,\

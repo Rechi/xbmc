@@ -79,7 +79,7 @@ bool CWinSystemGbm::InitWindowSystem()
     return false;
   }
 
-  auto settingsComponent = CServiceBroker::GetSettingsComponent();
+  auto* settingsComponent = CServiceBroker::GetSettingsComponent();
   if (!settingsComponent)
     return false;
 
@@ -263,7 +263,7 @@ void CWinSystemGbm::OnLostDevice()
   m_dispReset = true;
 
   CSingleLock lock(m_resourceSection);
-  for (auto resource : m_resources)
+  for (auto* resource : m_resources)
     resource->OnLostDisplay();
 }
 

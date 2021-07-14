@@ -305,7 +305,7 @@ void CUDisks2Provider::DriveAdded(Drive *drive)
 
   for (auto &elt: m_blocks)
   {
-    auto block = elt.second;
+    auto* block = elt.second;
     if (block->m_driveobject == drive->m_object)
     {
       block->m_drive = drive;
@@ -326,7 +326,7 @@ bool CUDisks2Provider::DriveRemoved(const std::string& object)
 
   for (auto &elt: m_blocks)
   {
-    auto block = elt.second;
+    auto* block = elt.second;
     if (block->m_driveobject == object)
     {
       block->m_drive = nullptr;
@@ -357,7 +357,7 @@ void CUDisks2Provider::BlockAdded(Block *block, bool isNew)
 
   if (m_filesystems.count(block->m_object) > 0)
   {
-    auto fs = m_filesystems[block->m_object];
+    auto* fs = m_filesystems[block->m_object];
     fs->m_block = block;
     FilesystemAdded(fs, false);
   }
@@ -411,7 +411,7 @@ bool CUDisks2Provider::FilesystemRemoved(const char *object, IStorageEventsCallb
   bool result = false;
   if (m_filesystems.count(object) > 0)
   {
-    auto fs = m_filesystems[object];
+    auto* fs = m_filesystems[object];
     if (fs->m_isMounted)
     {
       callback->OnStorageUnsafelyRemoved(fs->GetDisplayName());
@@ -493,7 +493,7 @@ bool CUDisks2Provider::DrivePropertiesChanged(const char *object, DBusMessageIte
 {
   if (m_drives.count(object) > 0)
   {
-    auto drive = m_drives[object];
+    auto* drive = m_drives[object];
     CLog::Log(LOGDEBUG, LOGDBUS, "UDisks2: Before update: {}", drive->toString());
     auto ParseDriveProperty = std::bind(&CUDisks2Provider::ParseDriveProperty, this, std::placeholders::_1,
                                         std::placeholders::_2, std::placeholders::_3);
@@ -507,7 +507,7 @@ bool CUDisks2Provider::BlockPropertiesChanged(const char *object, DBusMessageIte
 {
   if (m_blocks.count(object) > 0)
   {
-    auto block = m_blocks[object];
+    auto* block = m_blocks[object];
     CLog::Log(LOGDEBUG, LOGDBUS, "UDisks2: Before update: {}", block->toString());
     auto ParseBlockProperty = std::bind(&CUDisks2Provider::ParseBlockProperty, this, std::placeholders::_1,
                                         std::placeholders::_2, std::placeholders::_3);
@@ -521,7 +521,7 @@ bool CUDisks2Provider::FilesystemPropertiesChanged(const char *object, DBusMessa
 {
   if (m_filesystems.count(object) > 0)
   {
-    auto fs = m_filesystems[object];
+    auto* fs = m_filesystems[object];
     CLog::Log(LOGDEBUG, LOGDBUS, "UDisks2: Before update: {}", fs->toString());
     bool wasMounted = fs->m_isMounted;
     auto ParseFilesystemProperty = std::bind(&CUDisks2Provider::ParseFilesystemProperty, this,

@@ -57,7 +57,7 @@ void CEngineStats::AddSamples(int samples, std::list<CActiveAEStream*> &streams)
   CSingleLock lock(m_lock);
   m_bufferedSamples += samples;
 
-  for (auto stream : streams)
+  for (auto* stream : streams)
   {
     UpdateStream(stream);
   }

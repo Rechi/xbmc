@@ -974,7 +974,7 @@ int CVideoDatabase::AddFile(const CFileItem& item)
 {
   if (item.IsVideoDb() && item.HasVideoInfoTag())
   {
-    const auto videoInfoTag = item.GetVideoInfoTag();
+    const auto* const videoInfoTag = item.GetVideoInfoTag();
     if (videoInfoTag->m_iFileId != -1)
       return videoInfoTag->m_iFileId;
     else

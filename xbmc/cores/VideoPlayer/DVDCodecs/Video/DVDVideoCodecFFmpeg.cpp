@@ -135,7 +135,7 @@ protected:
 
 CVideoBufferPoolFFmpeg::~CVideoBufferPoolFFmpeg()
 {
-  for (auto buf : m_all)
+  for (auto* buf : m_all)
   {
     delete buf;
   }
@@ -1042,7 +1042,7 @@ bool CDVDVideoCodecFFmpeg::GetPictureCommon(VideoPicture* pVideoPicture)
       int type;
     };
 
-    auto qp = reinterpret_cast<qp_properties*>(sd->data);
+    auto* qp = reinterpret_cast<qp_properties*>(sd->data);
 
     sd = av_frame_get_side_data(m_pFrame, AV_FRAME_DATA_QP_TABLE_DATA);
     if (sd && sd->buf && qp)

@@ -14,7 +14,7 @@
 
 int CUDFBlockInput::Close(udfread_block_input* bi)
 {
-  auto m_bi = reinterpret_cast<UDF_BI*>(bi);
+  auto* m_bi = reinterpret_cast<UDF_BI*>(bi);
 
   m_bi->fp->Close();
 
@@ -23,7 +23,7 @@ int CUDFBlockInput::Close(udfread_block_input* bi)
 
 uint32_t CUDFBlockInput::Size(udfread_block_input* bi)
 {
-  auto m_bi = reinterpret_cast<UDF_BI*>(bi);
+  auto* m_bi = reinterpret_cast<UDF_BI*>(bi);
 
   return static_cast<uint32_t>(m_bi->fp->GetLength() / UDF_BLOCK_SIZE);
 }
@@ -31,7 +31,7 @@ uint32_t CUDFBlockInput::Size(udfread_block_input* bi)
 int CUDFBlockInput::Read(
     udfread_block_input* bi, uint32_t lba, void* buf, uint32_t blocks, int flags)
 {
-  auto m_bi = reinterpret_cast<UDF_BI*>(bi);
+  auto* m_bi = reinterpret_cast<UDF_BI*>(bi);
   CSingleLock lock(m_bi->lock);
 
   int64_t pos = static_cast<int64_t>(lba) * UDF_BLOCK_SIZE;

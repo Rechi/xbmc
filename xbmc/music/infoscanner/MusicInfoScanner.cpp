@@ -2294,7 +2294,7 @@ bool CMusicInfoScanner::AddRemoteArtwork(std::map<std::string, std::string>& art
 void CMusicInfoScanner::Run()
 {
   int count = 0;
-  for (auto& it : m_pathsToScan)
+  for (const auto& it : m_pathsToScan)
   {
     count += CountFilesRecursively(it);
   }

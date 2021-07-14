@@ -851,7 +851,7 @@ JSONRPC_STATUS CPlayerOperations::Open(const std::string &method, ITransportLaye
             list[0]->m_lStartOffset = CUtil::ConvertSecsToMilliSecs(ParseTimeInSeconds(optionResume));
         }
 
-        auto l = new CFileItemList(); //don't delete
+        auto* l = new CFileItemList(); //don't delete
         l->Copy(list);
         CApplicationMessenger::GetInstance().PostMsg(TMSG_MEDIA_PLAY, -1, -1, static_cast<void*>(l), playername);
       }

@@ -18,12 +18,12 @@ bool CSettingConditionItem::Deserialize(const TiXmlNode *node)
   if (!CBooleanLogicValue::Deserialize(node))
     return false;
 
-  auto elem = node->ToElement();
+  const auto* elem = node->ToElement();
   if (elem == nullptr)
     return false;
 
   // get the "name" attribute
-  auto strAttribute = elem->Attribute(SETTING_XML_ATTR_NAME);
+  const auto* strAttribute = elem->Attribute(SETTING_XML_ATTR_NAME);
   if (strAttribute != nullptr)
     m_name = strAttribute;
 

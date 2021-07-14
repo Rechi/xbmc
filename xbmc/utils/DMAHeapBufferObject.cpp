@@ -39,7 +39,7 @@ std::unique_ptr<CBufferObject> CDMAHeapBufferObject::Create()
 
 void CDMAHeapBufferObject::Register()
 {
-  for (auto path : DMA_HEAP_PATHS)
+  for (const auto* path : DMA_HEAP_PATHS)
   {
     int fd = open(path, O_RDWR);
     if (fd < 0)

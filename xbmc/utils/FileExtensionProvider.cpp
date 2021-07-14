@@ -161,7 +161,7 @@ void CFileExtensionProvider::OnAddonEvent(const AddonEvent& event)
       typeid(event) == typeid(AddonEvents::Disabled) ||
       typeid(event) == typeid(AddonEvents::ReInstalled))
   {
-    for (auto &type : ADDON_TYPES)
+    for (const auto& type : ADDON_TYPES)
     {
       if (m_addonManager.HasType(event.id, type))
       {

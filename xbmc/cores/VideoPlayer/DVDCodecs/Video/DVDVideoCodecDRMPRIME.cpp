@@ -97,7 +97,7 @@ std::unique_ptr<CDVDVideoCodec> CDVDVideoCodecDRMPRIME::Create(CProcessInfo& pro
 
 void CDVDVideoCodecDRMPRIME::Register()
 {
-  auto settingsComponent = CServiceBroker::GetSettingsComponent();
+  auto* settingsComponent = CServiceBroker::GetSettingsComponent();
   if (!settingsComponent)
     return;
 
@@ -226,7 +226,7 @@ int CDVDVideoCodecDRMPRIME::GetBuffer(struct AVCodecContext* avctx, AVFrame* fra
     }
 
     CDVDVideoCodecDRMPRIME* ctx = static_cast<CDVDVideoCodecDRMPRIME*>(avctx->opaque);
-    auto buffer = dynamic_cast<CVideoBufferDMA*>(
+    auto* buffer = dynamic_cast<CVideoBufferDMA*>(
         ctx->m_processInfo.GetVideoBufferManager().Get(avctx->pix_fmt, size, nullptr));
     if (!buffer)
       return -1;
@@ -273,7 +273,8 @@ bool CDVDVideoCodecDRMPRIME::Open(CDVDStreamInfo& hints, CDVDCodecOptions& optio
       device = getenv("KODI_RENDER_NODE");
 
 #if defined(HAVE_GBM)
-    auto winSystem = dynamic_cast<KODI::WINDOWING::GBM::CWinSystemGbm*>(CServiceBroker::GetWinSystem());
+    auto* winSystem =
+        dynamic_cast<KODI::WINDOWING::GBM::CWinSystemGbm*>(CServiceBroker::GetWinSystem());
 
     if (winSystem)
     {

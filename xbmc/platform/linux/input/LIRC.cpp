@@ -45,7 +45,7 @@ void CLirc::Start()
 
 void CLirc::Process()
 {
-  auto settingsComponent = CServiceBroker::GetSettingsComponent();
+  auto* settingsComponent = CServiceBroker::GetSettingsComponent();
   if (!settingsComponent)
     throw std::runtime_error("CSettingsComponent needs to exist before starting CLirc");
 

@@ -59,11 +59,11 @@ void CRPRenderManager::Deinitialize()
   }
   m_scalers.clear();
 
-  for (auto renderBuffer : m_renderBuffers)
+  for (auto* renderBuffer : m_renderBuffers)
     renderBuffer->Release();
   m_renderBuffers.clear();
 
-  for (auto buffer : m_pendingBuffers)
+  for (auto* buffer : m_pendingBuffers)
     buffer->Release();
   m_pendingBuffers.clear();
 
@@ -180,12 +180,12 @@ void CRPRenderManager::AddFrame(const uint8_t* data,
     CSingleLock lock(m_bufferMutex);
 
     // Set render buffers
-    for (auto renderBuffer : m_renderBuffers)
+    for (auto* renderBuffer : m_renderBuffers)
       renderBuffer->Release();
     m_renderBuffers = std::move(renderBuffers);
 
     // Apply rotation to render buffers
-    for (auto renderBuffer : m_renderBuffers)
+    for (auto* renderBuffer : m_renderBuffers)
       renderBuffer->SetRotation(orientationDegCCW);
 
     // Cache frame if it arrived after being paused
@@ -245,7 +245,7 @@ void CRPRenderManager::FrameMove()
 
   if (bIsConfigured)
   {
-    for (auto& renderer : m_renderers)
+    for (const auto& renderer : m_renderers)
       renderer->FrameMove();
   }
 }
@@ -256,7 +256,7 @@ void CRPRenderManager::CheckFlush()
   {
     {
       CSingleLock lock(m_bufferMutex);
-      for (auto renderBuffer : m_renderBuffers)
+      for (auto* renderBuffer : m_renderBuffers)
         renderBuffer->Release();
       m_renderBuffers.clear();
 

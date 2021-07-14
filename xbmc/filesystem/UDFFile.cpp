@@ -28,7 +28,7 @@ bool CUDFFile::Open(const CURL& url)
   if (!m_udf)
     return false;
 
-  auto bi = m_bi->GetBlockInput(url.GetHostName());
+  auto* bi = m_bi->GetBlockInput(url.GetHostName());
 
   if (!bi)
   {

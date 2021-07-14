@@ -922,7 +922,7 @@ void CGUIDialogPVRChannelManager::SaveList()
 
   group->SortAndRenumber();
 
-  auto channelGroups = CServiceBroker::GetPVRManager().ChannelGroups()->Get(m_bIsRadio);
+  auto* channelGroups = CServiceBroker::GetPVRManager().ChannelGroups()->Get(m_bIsRadio);
   channelGroups->UpdateChannelNumbersFromAllChannelsGroup();
   channelGroups->PersistAll();
   pDlgProgress->Close();

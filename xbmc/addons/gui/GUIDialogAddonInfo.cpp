@@ -271,7 +271,7 @@ static const std::string LOCAL_CACHE =
 
 int CGUIDialogAddonInfo::AskForVersion(std::vector<std::pair<AddonVersion, std::string>>& versions)
 {
-  auto dialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSelect>(
+  auto* dialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSelect>(
       WINDOW_DIALOG_SELECT);
   dialog->Reset();
   dialog->SetHeading(CVariant{21338});
@@ -597,7 +597,7 @@ bool CGUIDialogAddonInfo::ShowDependencyList(Reactivate reactivate, EntryPoint e
 {
   if (entryPoint != EntryPoint::INSTALL || m_showDepDialogOnInstall)
   {
-    auto pDialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSelect>(
+    auto* pDialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSelect>(
         WINDOW_DIALOG_SELECT);
     CFileItemList items;
 

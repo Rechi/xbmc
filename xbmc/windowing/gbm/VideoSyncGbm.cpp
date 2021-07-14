@@ -36,7 +36,7 @@ bool CVideoSyncGbm::Setup(PUPDATECLOCK func)
   m_winSystem->Register(this);
   CLog::Log(LOGDEBUG, "CVideoSyncGbm::{} setting up", __FUNCTION__);
 
-  auto winSystemGbm = dynamic_cast<KODI::WINDOWING::GBM::CWinSystemGbm*>(m_winSystem);
+  auto* winSystemGbm = dynamic_cast<KODI::WINDOWING::GBM::CWinSystemGbm*>(m_winSystem);
   if (!winSystemGbm)
   {
     CLog::Log(LOGWARNING, "CVideoSyncGbm::{}: failed to get winSystem", __FUNCTION__);
@@ -50,7 +50,7 @@ bool CVideoSyncGbm::Setup(PUPDATECLOCK func)
     return false;
   }
 
-  auto crtc = drm->GetCrtc();
+  auto* crtc = drm->GetCrtc();
   if (!crtc)
   {
     CLog::Log(LOGWARNING, "CVideoSyncGbm::{}: failed to get crtc", __FUNCTION__);

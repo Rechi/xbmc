@@ -48,9 +48,9 @@ void CPipewireCore::Sync()
 
 void CPipewireCore::OnCoreDone(void* userdata, uint32_t id, int seq)
 {
-  auto pipewire = reinterpret_cast<CPipewire*>(userdata);
-  auto core = pipewire->GetCore();
-  auto loop = pipewire->GetThreadLoop();
+  auto* pipewire = reinterpret_cast<CPipewire*>(userdata);
+  auto* core = pipewire->GetCore();
+  auto* loop = pipewire->GetThreadLoop();
 
   if (core->GetSync() == seq)
     loop->Signal(false);

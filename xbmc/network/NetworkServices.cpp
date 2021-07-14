@@ -578,7 +578,7 @@ void CNetworkServices::Stop(bool bWait)
 
 bool CNetworkServices::StartServer(enum ESERVERS server, bool start)
 {
-  auto settingsComponent = CServiceBroker::GetSettingsComponent();
+  auto* settingsComponent = CServiceBroker::GetSettingsComponent();
   if (!settingsComponent)
     return false;
 

@@ -23,7 +23,7 @@ bool CCPUInfoPosix::GetTemperature(CTemperature& temperature)
 
   if (!cmd.empty())
   {
-    auto p = popen(cmd.c_str(), "r");
+    auto* p = popen(cmd.c_str(), "r");
     if (p)
     {
       int ret = fscanf(p, "%d %c", &value, &scale);

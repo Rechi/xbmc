@@ -35,8 +35,8 @@ CDRMObject::CDRMObject(int fd) : m_fd(fd)
 
 std::string CDRMObject::GetTypeName() const
 {
-  auto name = std::find_if(DrmModeObjectTypes.begin(), DrmModeObjectTypes.end(),
-                           [this](auto& p) { return p.first == m_type; });
+  const auto* name = std::find_if(DrmModeObjectTypes.begin(), DrmModeObjectTypes.end(),
+                                  [this](auto& p) { return p.first == m_type; });
   if (name != DrmModeObjectTypes.end())
     return name->second;
 
@@ -90,7 +90,7 @@ std::tuple<bool, uint64_t> CDRMObject::GetPropertyValue(const std::string& name,
   if (property == m_propsInfo.end())
     return std::make_tuple(false, 0);
 
-  auto prop = property->get();
+  auto* prop = property->get();
 
   if (!static_cast<bool>(drm_property_type_is(prop, DRM_MODE_PROP_ENUM)))
     return std::make_tuple(false, 0);

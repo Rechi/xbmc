@@ -55,7 +55,7 @@ void CPipewireNode::EnumerateFormats()
 
 void CPipewireNode::Info(void* userdata, const struct pw_node_info* info)
 {
-  auto node = reinterpret_cast<CPipewireNode*>(userdata);
+  auto* node = reinterpret_cast<CPipewireNode*>(userdata);
 
   if (node->m_info)
   {
@@ -98,7 +98,7 @@ static std::set<T> ParseArray(uint32_t type, void* body, uint32_t size)
     }
     case SPA_TYPE_Array:
     {
-      auto array = reinterpret_cast<spa_pod_array_body*>(body);
+      auto* array = reinterpret_cast<spa_pod_array_body*>(body);
       void* p;
       std::set<T> values;
       SPA_POD_ARRAY_BODY_FOREACH(array, size, p)
@@ -108,7 +108,7 @@ static std::set<T> ParseArray(uint32_t type, void* body, uint32_t size)
     }
     case SPA_TYPE_Choice:
     {
-      auto choice = reinterpret_cast<spa_pod_choice_body*>(body);
+      auto* choice = reinterpret_cast<spa_pod_choice_body*>(body);
       void* p;
       std::set<T> values;
       SPA_POD_CHOICE_BODY_FOREACH(choice, size, p)
@@ -127,7 +127,7 @@ void CPipewireNode::Parse(uint32_t type, void* body, uint32_t size)
   {
     case SPA_TYPE_Object:
     {
-      auto object = reinterpret_cast<spa_pod_object_body*>(body);
+      auto* object = reinterpret_cast<spa_pod_object_body*>(body);
 
       switch (object->type)
       {
@@ -183,9 +183,9 @@ void CPipewireNode::Param(void* userdata,
                           uint32_t next,
                           const struct spa_pod* param)
 {
-  auto node = reinterpret_cast<CPipewireNode*>(userdata);
-  auto pipewire = node->GetPipewire();
-  auto loop = pipewire->GetThreadLoop();
+  auto* node = reinterpret_cast<CPipewireNode*>(userdata);
+  auto* pipewire = node->GetPipewire();
+  auto* loop = pipewire->GetThreadLoop();
 
   node->Parse(SPA_POD_TYPE(param), SPA_POD_BODY(param), SPA_POD_BODY_SIZE(param));
 

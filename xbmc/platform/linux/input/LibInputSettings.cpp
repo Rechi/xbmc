@@ -34,7 +34,7 @@ namespace
 CLibInputSettings::CLibInputSettings(CLibInputHandler *handler) :
   m_libInputHandler(handler)
 {
-  auto settingsComponent = CServiceBroker::GetSettingsComponent();
+  auto* settingsComponent = CServiceBroker::GetSettingsComponent();
   if (!settingsComponent)
     return;
 
@@ -42,7 +42,7 @@ CLibInputSettings::CLibInputSettings(CLibInputHandler *handler) :
   if (!settings)
     return;
 
-  auto settingsManager = settings->GetSettingsManager();
+  auto* settingsManager = settings->GetSettingsManager();
   if (!settingsManager)
     return;
 

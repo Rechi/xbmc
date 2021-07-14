@@ -320,7 +320,7 @@ void CLangInfo::OnSettingChanged(const std::shared_ptr<const CSetting>& setting)
   if (setting == NULL)
     return;
 
-  auto settingsComponent = CServiceBroker::GetSettingsComponent();
+  auto* settingsComponent = CServiceBroker::GetSettingsComponent();
   if (!settingsComponent)
     return;
 

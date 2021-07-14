@@ -49,7 +49,7 @@ bool CSettingAddon::Deserialize(const TiXmlNode *node, bool update /* = false */
 
   bool ok = false;
   std::string strAddonType;
-  auto constraints = node->FirstChild("constraints");
+  const auto* constraints = node->FirstChild("constraints");
   if (constraints != nullptr)
   {
     // get the addon type

@@ -139,7 +139,7 @@ public:
 protected:
   inline CArchive &streamout(const void *dataPtr, size_t size)
   {
-    auto ptr = static_cast<const uint8_t *>(dataPtr);
+    const auto* ptr = static_cast<const uint8_t*>(dataPtr);
     /* Note, the buffer is flushed as soon as it is full (m_BufferRemain == size) rather
      * than waiting until we attempt to put more data into an already full buffer */
     if (m_BufferRemain > size)
@@ -155,7 +155,7 @@ protected:
 
   inline CArchive &streamin(void *dataPtr, size_t size)
   {
-    auto ptr = static_cast<uint8_t *>(dataPtr);
+    auto* ptr = static_cast<uint8_t*>(dataPtr);
     /* Note, refilling the buffer is deferred until we know we need to read more from it */
     if (m_BufferRemain >= size)
     {

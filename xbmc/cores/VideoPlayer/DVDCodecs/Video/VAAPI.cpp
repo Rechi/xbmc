@@ -168,7 +168,7 @@ void CVAAPIContext::SetValidDRMVaDisplayFromRenderNode()
       continue;
     }
 
-    auto display = vaGetDisplayDRM(fd);
+    auto* display = vaGetDisplayDRM(fd);
 
     if (display != nullptr)
     {
@@ -545,7 +545,7 @@ bool CDecoder::Open(AVCodecContext* avctx, AVCodecContext* mainctx, const enum A
   auto entry = settings_map.find(avctx->codec_id);
   if (entry != settings_map.end())
   {
-    auto settingsComponent = CServiceBroker::GetSettingsComponent();
+    auto* settingsComponent = CServiceBroker::GetSettingsComponent();
     if (!settingsComponent)
       return false;
 
@@ -1248,7 +1248,7 @@ void CDecoder::Register(IVaapiWinSystem *winSystem, bool deepColor)
   CDVDFactoryCodec::RegisterHWAccel("vaapi", CDecoder::Create);
   config.context->Release(nullptr);
 
-  auto settingsComponent = CServiceBroker::GetSettingsComponent();
+  auto* settingsComponent = CServiceBroker::GetSettingsComponent();
   if (!settingsComponent)
     return;
 
@@ -1262,7 +1262,7 @@ void CDecoder::Register(IVaapiWinSystem *winSystem, bool deepColor)
       SETTING_VIDEOPLAYER_USEVAAPIVP8,  SETTING_VIDEOPLAYER_USEVAAPIVP9,
       SETTING_VIDEOPLAYER_USEVAAPIHEVC, SETTING_VIDEOPLAYER_PREFERVAAPIRENDER};
 
-  for (const auto vaapiSetting : vaapiSettings)
+  for (const auto* const vaapiSetting : vaapiSettings)
   {
     auto setting = settings->GetSetting(vaapiSetting);
     if (!setting)

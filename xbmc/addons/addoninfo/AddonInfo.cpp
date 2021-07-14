@@ -160,7 +160,7 @@ const CAddonType* CAddonInfo::Type(TYPE type) const
     if (type == ADDON_UNKNOWN)
       return &m_types[0];
 
-    for (auto& addonType : m_types)
+    for (const auto& addonType : m_types)
     {
       if (addonType.Type() == type)
         return &addonType;

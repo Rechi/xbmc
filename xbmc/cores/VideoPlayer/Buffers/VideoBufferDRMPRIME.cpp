@@ -110,7 +110,7 @@ bool CVideoBufferDRMPRIMEFFmpeg::IsValid() const
 
 CVideoBufferPoolDRMPRIMEFFmpeg::~CVideoBufferPoolDRMPRIMEFFmpeg()
 {
-  for (auto buf : m_all)
+  for (auto* buf : m_all)
     delete buf;
 }
 

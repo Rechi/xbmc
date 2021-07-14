@@ -215,7 +215,7 @@ void CGUIDialogVideoSettings::OnSettingAction(const std::shared_ptr<const CSetti
   {
     const std::shared_ptr<CProfileManager> profileManager = CServiceBroker::GetSettingsComponent()->GetProfileManager();
 
-    auto settingsComponent = CServiceBroker::GetSettingsComponent();
+    auto* settingsComponent = CServiceBroker::GetSettingsComponent();
     if (!settingsComponent)
       return;
 

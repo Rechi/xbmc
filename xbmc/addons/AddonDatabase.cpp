@@ -97,7 +97,7 @@ CVariant CAddonDatabaseSerializer::SerializeExtensions(const CAddonExtensions& a
   }
 
   variant["children"] = CVariant(CVariant::VariantTypeArray);
-  for (auto& child : addonType.m_children)
+  for (const auto& child : addonType.m_children)
   {
     CVariant info(CVariant::VariantTypeObject);
     info["id"] = child.first;

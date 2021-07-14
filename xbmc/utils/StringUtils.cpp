@@ -1053,7 +1053,7 @@ static wchar_t GetCollationWeight(const wchar_t& r)
   auto index = r >> 8;
   if (index > 255)
     return 0xFFFD;
-  auto plane = planemap[index];
+  const auto* plane = planemap[index];
   if (plane == nullptr)
     return r;
   return static_cast<wchar_t>(plane[r & 0xFF]);

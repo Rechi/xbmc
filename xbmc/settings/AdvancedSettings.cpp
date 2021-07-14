@@ -1424,7 +1424,7 @@ void CAdvancedSettings::SetExtraArtwork(const TiXmlElement* arttypes, std::vecto
 
 void ConvertToWhitelist(const std::vector<std::string>& oldlist, std::vector<CVariant>& whitelist)
 {
-  for (auto& it : oldlist)
+  for (const auto& it : oldlist)
   {
     size_t last_index = it.find_last_not_of("0123456789");
     std::string strFamilyType = it.substr(0, last_index + 1); // "fanart" of "fanart16"
