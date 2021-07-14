@@ -148,14 +148,14 @@ namespace PVR
     {
       const std::shared_ptr<CPVRChannel> channel(item.GetPVRChannelInfoTag());
       if (channel)
-        return channel->GetEPGNow().get() != nullptr;
+        return channel->GetEPGNow() != nullptr;
 
       if (item.HasEPGInfoTag())
         return !item.GetEPGInfoTag()->IsGapTag();
 
       const std::shared_ptr<CPVRTimerInfoTag> timer(item.GetPVRTimerInfoTag());
       if (timer && !URIUtils::PathEquals(item.GetPath(), CPVRTimersPath::PATH_ADDTIMER))
-        return timer->GetEpgInfoTag().get() != nullptr;
+        return timer->GetEpgInfoTag() != nullptr;
 
       if (item.GetPVRRecordingInfoTag())
         return true;
@@ -178,7 +178,7 @@ namespace PVR
     {
       const std::shared_ptr<CPVRChannel> channel(item.GetPVRChannelInfoTag());
       if (channel)
-        return channel->GetEPGNow().get() != nullptr;
+        return channel->GetEPGNow() != nullptr;
 
       return false;
     }
@@ -195,14 +195,14 @@ namespace PVR
     {
       const std::shared_ptr<CPVRChannel> channel(item.GetPVRChannelInfoTag());
       if (channel)
-        return channel->GetEPGNow().get() != nullptr;
+        return channel->GetEPGNow() != nullptr;
 
       if (item.HasEPGInfoTag())
         return !item.GetEPGInfoTag()->IsGapTag();
 
       const std::shared_ptr<CPVRTimerInfoTag> timer(item.GetPVRTimerInfoTag());
       if (timer && !URIUtils::PathEquals(item.GetPath(), CPVRTimersPath::PATH_ADDTIMER))
-        return timer->GetEpgInfoTag().get() != nullptr;
+        return timer->GetEpgInfoTag() != nullptr;
 
       const std::shared_ptr<CPVRRecording> recording(item.GetPVRRecordingInfoTag());
       if (recording)

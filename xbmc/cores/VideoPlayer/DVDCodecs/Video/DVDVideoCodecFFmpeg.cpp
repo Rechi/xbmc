@@ -1067,7 +1067,7 @@ bool CDVDVideoCodecFFmpeg::GetPictureCommon(VideoPicture* pVideoPicture)
   }
   else if (m_hints.masteringMetadata)
   {
-    pVideoPicture->displayMetadata = *m_hints.masteringMetadata.get();
+    pVideoPicture->displayMetadata = *m_hints.masteringMetadata;
     pVideoPicture->hasDisplayMetadata = true;
   }
   sd = av_frame_get_side_data(m_pFrame, AV_FRAME_DATA_CONTENT_LIGHT_LEVEL);
@@ -1078,7 +1078,7 @@ bool CDVDVideoCodecFFmpeg::GetPictureCommon(VideoPicture* pVideoPicture)
   }
   else if (m_hints.contentLightMetadata)
   {
-    pVideoPicture->lightMetadata = *m_hints.contentLightMetadata.get();
+    pVideoPicture->lightMetadata = *m_hints.contentLightMetadata;
     pVideoPicture->hasLightMetadata = true;
   }
 

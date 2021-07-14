@@ -184,7 +184,7 @@ namespace PVR
       * @brief Checks whether this timer has a timer type.
       * @return True if this timer has a timer type, false otherwise
       */
-    bool HasTimerType() const { return m_timerType.get() != NULL; }
+    bool HasTimerType() const { return m_timerType != NULL; }
 
     /*!
       * @brief Gets the type of this timer.

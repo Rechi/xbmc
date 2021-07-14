@@ -518,7 +518,7 @@ void CDVDVideoCodecDRMPRIME::SetPictureParams(VideoPicture* pVideoPicture)
   }
   else if (m_hints.masteringMetadata)
   {
-    pVideoPicture->displayMetadata = *m_hints.masteringMetadata.get();
+    pVideoPicture->displayMetadata = *m_hints.masteringMetadata;
     pVideoPicture->hasDisplayMetadata = true;
   }
 
@@ -531,7 +531,7 @@ void CDVDVideoCodecDRMPRIME::SetPictureParams(VideoPicture* pVideoPicture)
   }
   else if (m_hints.contentLightMetadata)
   {
-    pVideoPicture->lightMetadata = *m_hints.contentLightMetadata.get();
+    pVideoPicture->lightMetadata = *m_hints.contentLightMetadata;
     pVideoPicture->hasLightMetadata = true;
   }
 

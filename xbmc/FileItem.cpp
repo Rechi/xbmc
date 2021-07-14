@@ -3690,7 +3690,7 @@ void CFileItemList::ClearSortState()
 bool CFileItem::HasVideoInfoTag() const
 {
   // Note: CPVRRecording is derived from CVideoInfoTag
-  return m_pvrRecordingInfoTag.get() != nullptr || m_videoInfoTag != nullptr;
+  return m_pvrRecordingInfoTag != nullptr || m_videoInfoTag != nullptr;
 }
 
 CVideoInfoTag* CFileItem::GetVideoInfoTag()
