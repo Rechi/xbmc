@@ -323,7 +323,7 @@ public:
   {
   }
 
-  PeripheralScanResult(void) = default;
+  PeripheralScanResult() = default;
 
   bool operator==(const PeripheralScanResult& right) const
   {

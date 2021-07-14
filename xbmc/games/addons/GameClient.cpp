@@ -105,7 +105,7 @@ CGameClient::CGameClient(const ADDON::AddonInfoPtr& addonInfo)
       addonInfo->Type(ADDON_GAMEDLL)->GetValue(GAME_PROPERTY_SUPPORTS_STANDALONE).asBoolean();
 }
 
-CGameClient::~CGameClient(void)
+CGameClient::~CGameClient()
 {
   CloseFile();
   CGameClientSubsystem::DestroySubsystems(m_subsystems);
@@ -144,7 +144,7 @@ bool CGameClient::IsExtensionValid(const std::string& strExtension) const
   return m_extensions.find(NormalizeExtension(strExtension)) != m_extensions.end();
 }
 
-bool CGameClient::Initialize(void)
+bool CGameClient::Initialize()
 {
   using namespace XFILE;
 
@@ -551,7 +551,7 @@ bool CGameClient::Deserialize(const uint8_t* data, size_t size)
   return bSuccess;
 }
 
-void CGameClient::LogAddonProperties(void) const
+void CGameClient::LogAddonProperties() const
 {
   CLog::Log(LOGINFO, "GAME: ------------------------------------");
   CLog::Log(LOGINFO, "GAME: Loaded DLL for {}", ID());

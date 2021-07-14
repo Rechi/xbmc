@@ -22,7 +22,7 @@ CGUISelectKeyButton::CGUISelectKeyButton(const CGUIButtonControl& buttonTemplate
 {
 }
 
-const CControllerFeature& CGUISelectKeyButton::Feature(void) const
+const CControllerFeature& CGUISelectKeyButton::Feature() const
 {
   if (m_state == STATE::NEED_INPUT)
     return m_selectedKey;
@@ -65,7 +65,7 @@ bool CGUISelectKeyButton::PromptForInput(CEvent& waitEvent)
   return bInterrupted;
 }
 
-bool CGUISelectKeyButton::IsFinished(void) const
+bool CGUISelectKeyButton::IsFinished() const
 {
   return m_state >= STATE::FINISHED;
 }
@@ -75,7 +75,7 @@ void CGUISelectKeyButton::SetKey(const CControllerFeature& key)
   m_selectedKey = key;
 }
 
-void CGUISelectKeyButton::Reset(void)
+void CGUISelectKeyButton::Reset()
 {
   m_state = STATE::NEED_KEY;
   m_selectedKey.Reset();

@@ -61,14 +61,14 @@ public:
   // -----------------------------------------------------------------------------------
   // These are platform specific and can be found in ./platform/[platform]/ThreadImpl.cpp
   // -----------------------------------------------------------------------------------
-  static int GetMinPriority(void);
-  static int GetMaxPriority(void);
-  static int GetNormalPriority(void);
+  static int GetMinPriority();
+  static int GetMaxPriority();
+  static int GetNormalPriority();
   static std::uintptr_t GetCurrentThreadNativeHandle();
   static uint64_t GetCurrentThreadNativeId();
 
   // Get and set the thread's priority
-  int GetPriority(void);
+  int GetPriority();
   bool SetPriority(const int iPriority);
 
   // -----------------------------------------------------------------------------------

@@ -27,7 +27,7 @@ public:
 
   static void reset();
   static void resetSystemCharset();
-  static void reinitCharsetsFromSettings(void);
+  static void reinitCharsetsFromSettings();
 
   static void clear();
 
@@ -162,8 +162,8 @@ public:
                                            void* data);
 
 private:
-  static void resetUserCharset(void);
-  static void resetSubtitleCharset(void);
+  static void resetUserCharset();
+  static void resetSubtitleCharset();
 
   static const int m_Utf8CharMinSize, m_Utf8CharMaxSize;
   class CInnerConverter;

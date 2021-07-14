@@ -37,7 +37,7 @@ public:
                    float posX, float posY, float width, float height,
                    const CTextureInfo& textureFocus, const CTextureInfo& textureNoFocus);
 
-  ~CGUIMoverControl(void) override = default;
+  ~CGUIMoverControl() override = default;
   CGUIMoverControl *Clone() const override { return new CGUIMoverControl(*this); };
 
   void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;

@@ -381,7 +381,7 @@ void BlankOtherDisplays(int screen_index)
   }
 }
 
-void UnblankDisplays(void)
+void UnblankDisplays()
 {
   int numDisplays = [[NSScreen screens] count];
   int i = 0;
@@ -1414,7 +1414,7 @@ void CWinSystemOSX::FillInVideoModes()
   }
 }
 
-bool CWinSystemOSX::FlushBuffer(void)
+bool CWinSystemOSX::FlushBuffer()
 {
   if (m_updateGLContext < 5)
   {
@@ -1427,7 +1427,7 @@ bool CWinSystemOSX::FlushBuffer(void)
   return true;
 }
 
-bool CWinSystemOSX::IsObscured(void)
+bool CWinSystemOSX::IsObscured()
 {
   // check once a second if we are obscured.
   auto now_time = std::chrono::steady_clock::now();
@@ -1811,7 +1811,7 @@ NSOpenGLContext* CWinSystemOSX::GetNSOpenGLContext()
   return m_impl->m_glContext;
 }
 
-std::string CWinSystemOSX::GetClipboardText(void)
+std::string CWinSystemOSX::GetClipboardText()
 {
   std::string utf8_text;
 

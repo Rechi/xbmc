@@ -23,7 +23,7 @@
 #include "utils/Variant.h"
 #include "utils/log.h"
 
-CGUIWindowHome::CGUIWindowHome(void) : CGUIWindow(WINDOW_HOME, "Home.xml")
+CGUIWindowHome::CGUIWindowHome() : CGUIWindow(WINDOW_HOME, "Home.xml")
 {
   m_updateRA = (Audio | Video | Totals);
   m_loadType = KEEP_IN_MEMORY;
@@ -31,7 +31,7 @@ CGUIWindowHome::CGUIWindowHome(void) : CGUIWindow(WINDOW_HOME, "Home.xml")
   CServiceBroker::GetAnnouncementManager()->AddAnnouncer(this);
 }
 
-CGUIWindowHome::~CGUIWindowHome(void)
+CGUIWindowHome::~CGUIWindowHome()
 {
   CServiceBroker::GetAnnouncementManager()->RemoveAnnouncer(this);
 }

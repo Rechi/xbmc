@@ -71,7 +71,7 @@ public:
    *  - Imitating an analog feature with a digital button so that events can be
    *    dispatched every frame.
    */
-  virtual void ProcessAxisMotions(void) = 0;
+  virtual void ProcessAxisMotions() = 0;
 };
 } // namespace JOYSTICK
 } // namespace KODI

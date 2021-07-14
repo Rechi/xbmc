@@ -47,7 +47,7 @@ void CFFmpegLog::ClearLogLevel()
 static CCriticalSection m_logSection;
 std::map<const CThread*, std::string> g_logbuffer;
 
-void ff_flush_avutil_log_buffers(void)
+void ff_flush_avutil_log_buffers()
 {
   CSingleLock lock(m_logSection);
   /* Loop through the logbuffer list and remove any blank buffers

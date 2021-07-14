@@ -22,8 +22,8 @@ public:
     std::string m_strHostName;
     std::string m_strIpAddress;
   };
-  CDNSNameCache(void);
-  virtual ~CDNSNameCache(void);
+  CDNSNameCache();
+  virtual ~CDNSNameCache();
   static bool Lookup(const std::string& strHostName, std::string& strIpAddress);
   static void Add(const std::string& strHostName, const std::string& strIpAddress);
 

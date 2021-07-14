@@ -41,9 +41,9 @@ using namespace PLAYLIST;
 ------------------------ end of example wpl playlist file ---------------------------------*/
 //Note: File is utf-8 encoded by default
 
-CPlayListWPL::CPlayListWPL(void) = default;
+CPlayListWPL::CPlayListWPL() = default;
 
-CPlayListWPL::~CPlayListWPL(void) = default;
+CPlayListWPL::~CPlayListWPL() = default;
 
 
 bool CPlayListWPL::LoadData(std::istream& stream)

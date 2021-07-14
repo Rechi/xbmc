@@ -123,8 +123,8 @@ public:
   // of currently playing item, otherwise it will seek to start of the previous item in playlist
   static const unsigned int ACTION_PREV_ITEM_THRESHOLD = 3; // seconds;
 
-  CApplication(void);
-  ~CApplication(void) override;
+  CApplication();
+  ~CApplication() override;
   bool Initialize() override;
   void FrameMove(bool processEvents, bool processGUI = true) override;
   void Render() override;
@@ -199,7 +199,7 @@ public:
   void SetVolume(float iValue, bool isPercentage = true);
   bool IsMuted() const;
   bool IsMutedInternal() const { return m_muted; }
-  void ToggleMute(void);
+  void ToggleMute();
   void SetMute(bool mute);
   void ShowVolumeBar(const CAction *action = NULL);
   int GetSubtitleDelay();

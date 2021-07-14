@@ -419,7 +419,7 @@ public:
   ///
   /// @remarks Only called from addon itself
   ///
-  void CloseGame(void) { m_instanceData->toKodi->CloseGame(m_instanceData->toKodi->kodiInstance); }
+  void CloseGame() { m_instanceData->toKodi->CloseGame(m_instanceData->toKodi->kodiInstance); }
   //----------------------------------------------------------------------------
 
   //============================================================================

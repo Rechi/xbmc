@@ -244,8 +244,8 @@ public:
   void SetValid(bool yesNo);
   bool IsValid() const;
 
-  static void ResetTimezoneBias(void);
-  static CDateTimeSpan GetTimezoneBias(void);
+  static void ResetTimezoneBias();
+  static CDateTimeSpan GetTimezoneBias();
 
 private:
   bool ToFileTime(const KODI::TIME::SystemTime& time, KODI::TIME::FileTime& fileTime) const;

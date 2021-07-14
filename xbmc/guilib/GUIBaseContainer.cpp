@@ -59,7 +59,7 @@ CGUIBaseContainer::CGUIBaseContainer(int parentID, int controlID, float posX, fl
 
 CGUIBaseContainer::CGUIBaseContainer(const CGUIBaseContainer &) = default;
 
-CGUIBaseContainer::~CGUIBaseContainer(void)
+CGUIBaseContainer::~CGUIBaseContainer()
 {
   // release the container from items
   for (const auto& item : m_items)

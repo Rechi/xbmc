@@ -45,7 +45,7 @@ class CJpegParse
 {
   public:
     CJpegParse();
-   ~CJpegParse(void) = default;
+    ~CJpegParse() = default;
     bool Process(const char *picFileName);
     const ExifInfo_t * GetExifInfo() const { return &m_ExifInfo; };
     const IPTCInfo_t * GetIptcInfo() const { return &m_IPTCInfo; };
@@ -53,8 +53,8 @@ class CJpegParse
   private:
     bool ExtractInfo(XFILE::CFile& infile);
     bool GetSection(XFILE::CFile& infile, const unsigned short sectionLength);
-    void ReleaseSection(void);
-    void ProcessSOFn(void);
+    void ReleaseSection();
+    void ProcessSOFn();
 
     unsigned char* m_SectionBuffer;
     ExifInfo_t m_ExifInfo;

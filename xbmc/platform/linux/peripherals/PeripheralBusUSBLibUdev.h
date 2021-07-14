@@ -22,9 +22,9 @@ namespace PERIPHERALS
   {
   public:
     explicit CPeripheralBusUSB(CPeripherals& manager);
-    ~CPeripheralBusUSB(void) override;
+    ~CPeripheralBusUSB() override;
 
-    void Clear(void) override;
+    void Clear() override;
 
     /*!
      * @see PeripheralBus::PerformDeviceScan()
@@ -34,8 +34,8 @@ namespace PERIPHERALS
   protected:
     static PeripheralType GetType(int iDeviceClass);
 
-    void Process(void) override;
-    bool WaitForUpdate(void);
+    void Process() override;
+    bool WaitForUpdate();
 
     struct udev *        m_udev;
     struct udev_monitor *m_udevMon;

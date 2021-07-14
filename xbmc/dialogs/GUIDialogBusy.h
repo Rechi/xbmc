@@ -16,8 +16,8 @@ class CEvent;
 class CGUIDialogBusy: public CGUIDialog
 {
 public:
-  CGUIDialogBusy(void);
-  ~CGUIDialogBusy(void) override;
+  CGUIDialogBusy();
+  ~CGUIDialogBusy() override;
   bool OnBack(int actionID) override;
   void DoProcess(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;
   void Render() override;

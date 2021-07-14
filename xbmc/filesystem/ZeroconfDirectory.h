@@ -19,8 +19,8 @@ namespace XFILE
   class CZeroconfDirectory : public IDirectory
   {
     public:
-      CZeroconfDirectory(void);
-      ~CZeroconfDirectory(void) override;
+      CZeroconfDirectory();
+      ~CZeroconfDirectory() override;
       bool GetDirectory(const CURL& url, CFileItemList &items) override;
       DIR_CACHE_TYPE GetCacheType(const CURL& url) const override { return DIR_CACHE_NEVER; };
   };

@@ -98,11 +98,11 @@ public:
   static std::string VideoDimsToResolutionDescription(int iWidth, int iHeight);
   static std::string VideoAspectToAspectDescription(float fAspect);
 
-  bool HasItems(void) const { return m_vecItems.size() > 0; };
+  bool HasItems() const { return m_vecItems.size() > 0; };
   int GetStreamCount(CStreamDetail::StreamType type) const;
-  int GetVideoStreamCount(void) const;
-  int GetAudioStreamCount(void) const;
-  int GetSubtitleStreamCount(void) const;
+  int GetVideoStreamCount() const;
+  int GetAudioStreamCount() const;
+  int GetSubtitleStreamCount() const;
   const CStreamDetail* GetNthStream(CStreamDetail::StreamType type, int idx) const;
 
   std::string GetVideoCodec(int idx = 0) const;
@@ -121,8 +121,8 @@ public:
   std::string GetSubtitleLanguage(int idx = 0) const;
 
   void AddStream(CStreamDetail *item);
-  void Reset(void);
-  void DetermineBestStreams(void);
+  void Reset();
+  void DetermineBestStreams();
 
   void Archive(CArchive& ar) override;
   void Serialize(CVariant& value) const override;

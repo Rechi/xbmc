@@ -39,9 +39,9 @@ std::string GetXMLText(const TiXmlElement* pXmlElement)
 
 }
 
-CPlayListXSPF::CPlayListXSPF(void) = default;
+CPlayListXSPF::CPlayListXSPF() = default;
 
-CPlayListXSPF::~CPlayListXSPF(void) = default;
+CPlayListXSPF::~CPlayListXSPF() = default;
 
 bool CPlayListXSPF::Load(const std::string& strFileName)
 {

@@ -29,11 +29,11 @@ public:
   CControllerLayout(const CControllerLayout& other);
   ~CControllerLayout();
 
-  void Reset(void);
+  void Reset();
 
-  int LabelID(void) const { return m_labelId; }
-  const std::string& Icon(void) const { return m_icon; }
-  const std::string& Image(void) const { return m_strImage; }
+  int LabelID() const { return m_labelId; }
+  const std::string& Icon() const { return m_icon; }
+  const std::string& Image() const { return m_strImage; }
 
   /*!
    * \brief Ensures the layout was deserialized correctly, and optionally logs if not
@@ -49,14 +49,14 @@ public:
    *
    * \return The label, or empty if unknown
    */
-  std::string Label(void) const;
+  std::string Label() const;
 
   /*!
    * \brief Get the image path of the primary layout used when mapping the controller
    *
    * \return The image path, or empty if unknown
    */
-  std::string ImagePath(void) const;
+  std::string ImagePath() const;
 
   /*!
    * \brief Get the physical topology of this controller
@@ -67,7 +67,7 @@ public:
    *
    * \return The physical topology of the controller
    */
-  const CControllerTopology& Topology(void) const { return *m_topology; }
+  const CControllerTopology& Topology() const { return *m_topology; }
 
   /*!
    * \brief Deserialize the specified XML element

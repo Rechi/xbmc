@@ -146,19 +146,19 @@ uint64_t CThread::GetCurrentThreadNativeId()
   return static_cast<uint64_t>(GetCurrentThreadPid_());
 }
 
-int CThread::GetMinPriority(void)
+int CThread::GetMinPriority()
 {
   // one level lower than application
   return -1;
 }
 
-int CThread::GetMaxPriority(void)
+int CThread::GetMaxPriority()
 {
   // one level higher than application
   return 1;
 }
 
-int CThread::GetNormalPriority(void)
+int CThread::GetNormalPriority()
 {
   // same level as application
   return 0;

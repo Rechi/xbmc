@@ -37,7 +37,7 @@ CControllerLayout::CControllerLayout(const CControllerLayout& other)
 
 CControllerLayout::~CControllerLayout() = default;
 
-void CControllerLayout::Reset(void)
+void CControllerLayout::Reset()
 {
   m_controller = nullptr;
   m_labelId = -1;
@@ -67,7 +67,7 @@ bool CControllerLayout::IsValid(bool bLog) const
   return true;
 }
 
-std::string CControllerLayout::Label(void) const
+std::string CControllerLayout::Label() const
 {
   std::string label;
 
@@ -77,7 +77,7 @@ std::string CControllerLayout::Label(void) const
   return label;
 }
 
-std::string CControllerLayout::ImagePath(void) const
+std::string CControllerLayout::ImagePath() const
 {
   std::string path;
 

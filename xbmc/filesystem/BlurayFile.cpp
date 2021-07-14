@@ -15,11 +15,10 @@
 namespace XFILE
 {
 
-  CBlurayFile::CBlurayFile(void)
-    : COverrideFile(false)
-  { }
+CBlurayFile::CBlurayFile() : COverrideFile(false)
+{ }
 
-  CBlurayFile::~CBlurayFile(void) = default;
+CBlurayFile::~CBlurayFile() = default;
 
   std::string CBlurayFile::TranslatePath(const CURL& url)
   {

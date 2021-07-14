@@ -54,8 +54,8 @@ protected:
   static void PrintWindowsHeader(WindowsHeader_t *WinHdr);
   static void PrintOptionHeader(OptionHeader_t *OptHdr);
   static void PrintSection(SectionHeader_t *ScnHdr, char *data);
-  void PrintStringTable(void);
-  void PrintSymbolTable(void);
+  void PrintStringTable();
+  void PrintSymbolTable();
 
   // Members for Loading the Different structures
   int LoadCoffHModule(FILE * fp);
@@ -74,6 +74,6 @@ protected:
   char *GetSymbolName(SymbolTable_t *sym);
   char *GetSymbolName(int index);
 
-  void PerformFixups(void);
+  void PerformFixups();
 };
 

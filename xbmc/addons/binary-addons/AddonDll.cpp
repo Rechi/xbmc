@@ -324,7 +324,7 @@ void CAddonDll::OnPostUnInstall()
     m_binaryAddonBase->OnPostUnInstall();
 }
 
-bool CAddonDll::DllLoaded(void) const
+bool CAddonDll::DllLoaded() const
 {
   return m_pDll != nullptr;
 }

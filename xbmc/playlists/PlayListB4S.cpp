@@ -39,9 +39,9 @@ using namespace PLAYLIST;
   </playlist>
  </WinampXML>
 ------------------------ end of example b4s playlist file ---------------------------------*/
-CPlayListB4S::CPlayListB4S(void) = default;
+CPlayListB4S::CPlayListB4S() = default;
 
-CPlayListB4S::~CPlayListB4S(void) = default;
+CPlayListB4S::~CPlayListB4S() = default;
 
 
 bool CPlayListB4S::LoadData(std::istream& stream)

@@ -19,8 +19,8 @@ class CGUIDialogSmartPlaylistEditor :
 public:
   enum PLAYLIST_TYPE { TYPE_SONGS = 1, TYPE_ALBUMS, TYPE_ARTISTS, TYPE_MIXED, TYPE_MUSICVIDEOS, TYPE_MOVIES, TYPE_TVSHOWS, TYPE_EPISODES };
 
-  CGUIDialogSmartPlaylistEditor(void);
-  ~CGUIDialogSmartPlaylistEditor(void) override;
+  CGUIDialogSmartPlaylistEditor();
+  ~CGUIDialogSmartPlaylistEditor() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnBack(int actionID) override;
   void OnInitWindow() override;

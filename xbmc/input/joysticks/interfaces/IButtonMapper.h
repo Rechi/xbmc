@@ -42,7 +42,7 @@ public:
    *
    * \return The ID of the add-on extending kodi.game.controller
    */
-  virtual std::string ControllerID(void) const = 0;
+  virtual std::string ControllerID() const = 0;
 
   /*!
    * \brief Return true if the button mapper wants a cooldown between button
@@ -51,7 +51,7 @@ public:
    * \return True to only send button mapping commands that occur after a small
    *         timeout from the previous command.
    */
-  virtual bool NeedsCooldown(void) const = 0;
+  virtual bool NeedsCooldown() const = 0;
 
   /*!
    * \brief Return true if the button mapper accepts primitives of the given type
@@ -114,8 +114,8 @@ public:
   {
     m_callbacks[deviceName] = callback;
   }
-  void ResetButtonMapCallbacks(void) { m_callbacks.clear(); }
-  std::map<std::string, IButtonMapCallback*>& ButtonMapCallbacks(void) { return m_callbacks; }
+  void ResetButtonMapCallbacks() { m_callbacks.clear(); }
+  std::map<std::string, IButtonMapCallback*>& ButtonMapCallbacks() { return m_callbacks; }
 
 private:
   std::map<std::string, IButtonMapCallback*> m_callbacks;

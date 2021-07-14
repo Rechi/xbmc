@@ -25,7 +25,7 @@ CGUIListGroup::CGUIListGroup(const CGUIListGroup &right)
   ControlType = GUICONTROL_LISTGROUP;
 }
 
-CGUIListGroup::~CGUIListGroup(void)
+CGUIListGroup::~CGUIListGroup()
 {
   FreeResources();
 }

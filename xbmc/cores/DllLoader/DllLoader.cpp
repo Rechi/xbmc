@@ -55,7 +55,7 @@ typedef int (APIENTRY *EntryFunc)(HINSTANCE hinstDLL, DWORD fdwReason, void* lpv
  * Added the noinline attribute as e.g. gcc 3.2.2 inlines this function
  * in a way that breaks it.
  */
-static void __attribute__((noinline)) extend_stack_for_dll_alloca(void)
+static void __attribute__((noinline)) extend_stack_for_dll_alloca()
 {
     volatile int* mem =(volatile int*)alloca(0x20000);
     *mem=0x1234;
@@ -262,7 +262,7 @@ void DllLoader::PrintExportTable(ExportDirTable_t *ExportDirTable)
   }
 }
 
-int DllLoader::ResolveImports(void)
+int DllLoader::ResolveImports()
 {
   int bResult = 1;
   if ( NumOfDirectories >= 2 && Directory[IMPORT_TABLE].Size > 0 )

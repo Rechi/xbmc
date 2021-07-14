@@ -500,7 +500,7 @@ CAEChannelInfo CDVDAudioCodecAndroidMediaCodec::GetChannelMap()
   return chaninfo;
 }
 
-bool CDVDAudioCodecAndroidMediaCodec::ConfigureMediaCodec(void)
+bool CDVDAudioCodecAndroidMediaCodec::ConfigureMediaCodec()
 {
   // setup a MediaFormat to match the audio content,
   // used by codec during configure

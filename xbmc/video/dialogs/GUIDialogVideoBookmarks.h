@@ -20,8 +20,8 @@ class CGUIDialogVideoBookmarks : public CGUIDialog, public CJobQueue
   typedef std::map<CJob*, unsigned int> MAPJOBSCHAPS;
 
 public:
-  CGUIDialogVideoBookmarks(void);
-  ~CGUIDialogVideoBookmarks(void) override;
+  CGUIDialogVideoBookmarks();
+  ~CGUIDialogVideoBookmarks() override;
   bool OnMessage(CGUIMessage& message) override;
   void OnWindowLoaded() override;
   void OnWindowUnload() override;

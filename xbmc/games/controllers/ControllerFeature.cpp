@@ -27,7 +27,7 @@ CControllerFeature::CControllerFeature(int labelId)
   m_labelId = labelId;
 }
 
-void CControllerFeature::Reset(void)
+void CControllerFeature::Reset()
 {
   *this = CControllerFeature();
 }

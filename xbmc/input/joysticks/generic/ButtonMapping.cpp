@@ -396,7 +396,7 @@ bool CButtonMapping::OnAxisMotion(unsigned int axisIndex,
   return GetAxis(axisIndex, position).OnMotion(position);
 }
 
-void CButtonMapping::ProcessAxisMotions(void)
+void CButtonMapping::ProcessAxisMotions()
 {
   for (auto& axis : m_axes)
     axis.second.ProcessMotion();

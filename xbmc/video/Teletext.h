@@ -36,7 +36,7 @@ class CTeletextDecoder
 {
 public:
   CTeletextDecoder();
-  virtual ~CTeletextDecoder(void);
+  virtual ~CTeletextDecoder();
 
   bool NeedRendering() { return m_updateTexture; }
   void RenderingDone() { m_updateTexture = false; }

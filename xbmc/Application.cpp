@@ -202,15 +202,15 @@ using KODI::MESSAGING::HELPERS::DialogResponse;
 
 #define MAX_FFWD_SPEED 5
 
-CApplication::CApplication(void)
-:
+CApplication::CApplication()
+  :
 #ifdef HAS_DVD_DRIVE
-  m_Autorun(new CAutorun()),
+    m_Autorun(new CAutorun()),
 #endif
-  m_itemCurrentFile(new CFileItem)
-  , m_pInertialScrollingHandler(new CInertialScrollingHandler())
-  , m_WaitingExternalCalls(0)
-  , m_playerEvent(true, true)
+    m_itemCurrentFile(new CFileItem),
+    m_pInertialScrollingHandler(new CInertialScrollingHandler()),
+    m_WaitingExternalCalls(0),
+    m_playerEvent(true, true)
 {
   TiXmlBase::SetCondenseWhiteSpace(false);
 
@@ -219,7 +219,7 @@ CApplication::CApplication(void)
 #endif
 }
 
-CApplication::~CApplication(void)
+CApplication::~CApplication()
 {
   delete m_pInertialScrollingHandler;
 
@@ -4308,7 +4308,7 @@ bool CApplication::IsMuted() const
   return true;
 }
 
-void CApplication::ToggleMute(void)
+void CApplication::ToggleMute()
 {
   if (m_muted)
     UnMute();

@@ -65,31 +65,31 @@ public:
 /* sets a new host name */
   virtual void setHostName(const char *newHost) { host = newHost; }
 /* gets a host name */
-  const char *getHostName(void) const { return host.c_str(); }
+  const char* getHostName() const { return host.c_str(); }
 /* sets a new port */
   void setPort(const char *newPort) { port = newPort; }
 /* gets a port */
-  const char *getPort(void) const { return port.c_str(); }
+  const char* getPort() const { return port.c_str(); }
 /* sets a new database name */
   virtual void setDatabase(const char *newDb) { db = newDb; }
 /* gets a database name */
-  const char *getDatabase(void) const { return db.c_str(); }
+  const char* getDatabase() const { return db.c_str(); }
 /* sets a new login to database */
   void setLogin(const char *newLogin) { login = newLogin; }
 /* gets a login */
-  const char *getLogin(void) const { return login.c_str(); }
+  const char* getLogin() const { return login.c_str(); }
 /* sets a password */
   void setPasswd(const char *newPasswd) { passwd = newPasswd; }
 /* gets a password */
-  const char *getPasswd(void) const { return passwd.c_str(); }
+  const char* getPasswd() const { return passwd.c_str(); }
 /* active status is OK state */
-  virtual bool isActive(void) const { return active; }
+  virtual bool isActive() const { return active; }
 /* Set new name of sequence table */
   void setSequenceTable(const char *new_seq_table) { sequence_table = new_seq_table; };
 /* Get name of sequence table */
-  const char *getSequenceTable(void) { return sequence_table.c_str(); }
+  const char* getSequenceTable() { return sequence_table.c_str(); }
 /* Get the default character set */
-  const char *getDefaultCharset(void) { return default_charset.c_str(); }
+  const char* getDefaultCharset() { return default_charset.c_str(); }
 /* Sets configuration */
   virtual void setConfig(const char *newKey, const char *newCert, const char *newCA, const char *newCApath, const char *newCiphers, bool newCompression) {
     key = newKey;
@@ -102,29 +102,29 @@ public:
 
 /* virtual methods that must be overloaded in derived classes */
 
-  virtual int init(void) { return DB_COMMAND_OK; }
-  virtual int status(void) { return DB_CONNECTION_NONE; }
+  virtual int init() { return DB_COMMAND_OK; }
+  virtual int status() { return DB_CONNECTION_NONE; }
   virtual int setErr(int err_code, const char *qry)=0;
-  virtual const char *getErrorMsg(void) { return error.c_str(); }
+  virtual const char* getErrorMsg() { return error.c_str(); }
 
   virtual int connect(bool create) { return DB_COMMAND_OK; }
   virtual int connectFull( const char *newDb, const char *newHost=NULL,
                       const char *newLogin=NULL, const char *newPasswd=NULL,const char *newPort=NULL,
                       const char *newKey=NULL, const char *newCert=NULL, const char *newCA=NULL,
                       const char *newCApath=NULL, const char *newCiphers=NULL, bool newCompression = false);
-  virtual void disconnect(void) { active = false; }
-  virtual int reset(void) { return DB_COMMAND_OK; }
-  virtual int create(void) { return DB_COMMAND_OK; }
-  virtual int drop(void) { return DB_COMMAND_OK; }
+  virtual void disconnect() { active = false; }
+  virtual int reset() { return DB_COMMAND_OK; }
+  virtual int create() { return DB_COMMAND_OK; }
+  virtual int drop() { return DB_COMMAND_OK; }
   virtual long nextid(const char* seq_name)=0;
 
 /* \brief copy database */
   virtual int copy(const char *new_name) { return -1; }
 
 /* \brief drop all extra analytics from database */
-  virtual int drop_analytics(void) { return -1; }
+  virtual int drop_analytics() { return -1; }
 
-  virtual bool exists(void) { return false; }
+  virtual bool exists() { return false; }
 
 /* virtual methods for transaction */
 
@@ -240,7 +240,7 @@ protected:
 
 /* This function works only with MySQL database
    Filling the fields information from select statement */
-  virtual void fill_fields(void)=0;
+  virtual void fill_fields() = 0;
 
 /* Parse Sql - replacing fields with prefixes :OLD_ and :NEW_ with current values of OLD or NEW field. */
   void parse_sql(std::string &sql);
@@ -261,15 +261,15 @@ public:
 /* sets a new value of connection to database */
   void setDatabase(Database *newDb) { db = newDb; }
 /* retrieves  a database which connected */
-  Database *getDatabase(void) { return db; }
+  Database* getDatabase() { return db; }
 
 /* sets a new query string to database server */
   void setExecSql(const char *newSql) { sql = newSql; }
 /* retrieves a query string */
-  const char *getExecSql(void) { return sql.c_str(); }
+  const char* getExecSql() { return sql.c_str(); }
 
 /* status active is OK query */
-  virtual bool isActive(void) { return active; }
+  virtual bool isActive() { return active; }
 
   virtual void setSqlParams(const char *sqlFrmt, sqlType t, ...);
 
@@ -323,9 +323,9 @@ public:
   virtual void last();
 
 /* Check for Ending dataset */
-  virtual bool eof(void) { return feof; }
+  virtual bool eof() { return feof; }
 /* Check for Beginning dataset */
-  virtual bool bof(void) { return fbof; }
+  virtual bool bof() { return fbof; }
 
 /* Start the insert mode */
   virtual void insert();

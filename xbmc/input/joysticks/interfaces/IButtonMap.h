@@ -38,33 +38,33 @@ public:
    *
    * \return The ID of this button map's game controller add-on
    */
-  virtual std::string ControllerID(void) const = 0;
+  virtual std::string ControllerID() const = 0;
 
   /*!
    * \brief The name of the peripheral associated with this button map
    *
    * \return The peripheral's name
    */
-  virtual std::string DeviceName(void) const = 0;
+  virtual std::string DeviceName() const = 0;
 
   /*!
    * \brief Load the button map into memory
    *
    * \return True if button map is ready to start translating buttons, false otherwise
    */
-  virtual bool Load(void) = 0;
+  virtual bool Load() = 0;
 
   /*!
    * \brief Reset the button map to its defaults, or clear button map if no defaults
    */
-  virtual void Reset(void) = 0;
+  virtual void Reset() = 0;
 
   /*!
    * \brief Check if the button map is empty
    *
    * \return True if the button map is empty, false if it has features
    */
-  virtual bool IsEmpty(void) const = 0;
+  virtual bool IsEmpty() const = 0;
 
   /*!
    * \brief Get the feature associated with a driver primitive

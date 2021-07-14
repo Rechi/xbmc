@@ -14,7 +14,7 @@
 class CApplicationStackHelper
 {
 public:
-  CApplicationStackHelper(void);
+  CApplicationStackHelper();
   ~CApplicationStackHelper() = default;
 
   void Clear();

@@ -23,8 +23,8 @@ class CFileItemList;
 class CGUIDialogFileBrowser : public CGUIDialog, public IBackgroundLoaderObserver
 {
 public:
-  CGUIDialogFileBrowser(void);
-  ~CGUIDialogFileBrowser(void) override;
+  CGUIDialogFileBrowser();
+  ~CGUIDialogFileBrowser() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;
   bool OnBack(int actionID) override;

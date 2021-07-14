@@ -16,8 +16,8 @@ class CPlayListXML :
       public CPlayList
 {
 public:
-  CPlayListXML(void);
-  ~CPlayListXML(void) override;
+  CPlayListXML();
+  ~CPlayListXML() override;
   bool Load(const std::string& strFileName) override;
   void Save(const std::string& strFileName) const override;
 };

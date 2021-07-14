@@ -120,7 +120,7 @@ public:
   bool IsExtensionValid(const std::string& strExtension) const;
 
   // Start/stop gameplay
-  bool Initialize(void);
+  bool Initialize();
   void Unload();
   bool OpenFile(const CFileItem& file,
                 RETRO::IStreamManager& streamManager,
@@ -164,7 +164,7 @@ private:
   std::string GetMissingResource();
 
   // Helper functions
-  void LogAddonProperties(void) const;
+  void LogAddonProperties() const;
 
   /*!
    * @brief Callback functions from addon to kodi

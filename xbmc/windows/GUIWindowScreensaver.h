@@ -15,7 +15,7 @@ namespace ADDON { class CScreenSaver; }
 class CGUIWindowScreensaver : public CGUIWindow
 {
 public:
-  CGUIWindowScreensaver(void);
+  CGUIWindowScreensaver();
 
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override { return false; } // We're just a screen saver, nothing to do here

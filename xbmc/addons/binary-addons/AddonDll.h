@@ -55,7 +55,7 @@ public:
   // addon settings
   void SaveSettings() override;
 
-  bool DllLoaded(void) const;
+  bool DllLoaded() const;
 
   /*!
    * @brief Get api version of moduleType type

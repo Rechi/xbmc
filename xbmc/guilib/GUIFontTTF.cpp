@@ -177,7 +177,7 @@ CGUIFontTTF::CGUIFontTTF(const std::string& strFileName)
   m_renderSystem = CServiceBroker::GetRenderSystem();
 }
 
-CGUIFontTTF::~CGUIFontTTF(void)
+CGUIFontTTF::~CGUIFontTTF()
 {
   Clear();
 }

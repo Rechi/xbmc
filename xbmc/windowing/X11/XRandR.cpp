@@ -218,7 +218,7 @@ bool CXRandR::TurnOnOutput(const std::string& name)
   return false;
 }
 
-std::vector<XOutput> CXRandR::GetModes(void)
+std::vector<XOutput> CXRandR::GetModes()
 {
   Query();
   return m_outputs;
@@ -391,7 +391,7 @@ XMode CXRandR::GetPreferredMode(const std::string& outputName)
   return result;
 }
 
-void CXRandR::LoadCustomModeLinesToAllOutputs(void)
+void CXRandR::LoadCustomModeLinesToAllOutputs()
 {
   Query();
   CXBMCTinyXML xmlDoc;

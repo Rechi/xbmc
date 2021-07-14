@@ -5,7 +5,7 @@
 class CExifParse
 {
   public:
-   ~CExifParse(void) = default;
+    ~CExifParse() = default;
     bool Process(const unsigned char* const Data, const unsigned short length, ExifInfo_t *info);
     static int Get16(const void* const Short, const bool motorolaOrder=true);
     static int Get32(const void* const Long,  const bool motorolaOrder=true);

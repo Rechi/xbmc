@@ -30,7 +30,7 @@ public:
 
   // specialisation of CPeripheralBus
   bool InitializeProperties(CPeripheral& peripheral) override;
-  void Initialise(void) override;
+  void Initialise() override;
   void ProcessEvents() override;
 
   bool PerformDeviceScan(PeripheralScanResults& results) override;

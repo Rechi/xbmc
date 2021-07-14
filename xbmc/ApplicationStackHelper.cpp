@@ -21,8 +21,7 @@
 
 using namespace XFILE;
 
-CApplicationStackHelper::CApplicationStackHelper(void)
-  : m_currentStack(new CFileItemList)
+CApplicationStackHelper::CApplicationStackHelper() : m_currentStack(new CFileItemList)
 {
 }
 

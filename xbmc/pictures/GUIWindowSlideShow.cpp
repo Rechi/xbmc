@@ -142,8 +142,7 @@ void CBackgroundPicLoader::LoadPic(int iPic, int iSlideNumber, const std::string
   m_loadPic.Set();
 }
 
-CGUIWindowSlideShow::CGUIWindowSlideShow(void)
-    : CGUIDialog(WINDOW_SLIDESHOW, "SlideShow.xml")
+CGUIWindowSlideShow::CGUIWindowSlideShow() : CGUIDialog(WINDOW_SLIDESHOW, "SlideShow.xml")
 {
   m_Resolution = RES_INVALID;
   m_loadType = KEEP_IN_MEMORY;

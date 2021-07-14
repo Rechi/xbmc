@@ -27,8 +27,7 @@
 #define CONTROL_BTNSORTASC     4
 #define CONTROL_LABELFILES    12
 
-CGUIWindowPrograms::CGUIWindowPrograms(void)
-    : CGUIMediaWindow(WINDOW_PROGRAMS, "MyPrograms.xml")
+CGUIWindowPrograms::CGUIWindowPrograms() : CGUIMediaWindow(WINDOW_PROGRAMS, "MyPrograms.xml")
 {
   m_thumbLoader.SetObserver(this);
   m_dlgProgress = NULL;
@@ -36,7 +35,7 @@ CGUIWindowPrograms::CGUIWindowPrograms(void)
 }
 
 
-CGUIWindowPrograms::~CGUIWindowPrograms(void) = default;
+CGUIWindowPrograms::~CGUIWindowPrograms() = default;
 
 bool CGUIWindowPrograms::OnMessage(CGUIMessage& message)
 {

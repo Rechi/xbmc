@@ -90,11 +90,11 @@ public:
 
   iconv_t GetConverter(CSingleLock& converterLock);
 
-  void Reset(void);
+  void Reset();
   void ReinitTo(const std::string& sourceCharset, const std::string& targetCharset, unsigned int targetSingleCharMaxLen = 1);
-  std::string GetSourceCharset(void) const  { return m_sourceCharset; }
-  std::string GetTargetCharset(void) const  { return m_targetCharset; }
-  unsigned int GetTargetSingleCharMaxLen(void) const  { return m_targetSingleCharMaxLen; }
+  std::string GetSourceCharset() const { return m_sourceCharset; }
+  std::string GetTargetCharset() const { return m_targetCharset; }
+  unsigned int GetTargetSingleCharMaxLen() const { return m_targetSingleCharMaxLen; }
 
 private:
   static std::string ResolveSpecialCharset(enum SpecialCharset charset);
@@ -188,7 +188,7 @@ iconv_t CConverterType::GetConverter(CSingleLock& converterLock)
   return m_iconv;
 }
 
-void CConverterType::Reset(void)
+void CConverterType::Reset()
 {
   CSingleLock lock(*this);
   if (m_iconv != NO_ICONV)
@@ -612,19 +612,19 @@ std::string CCharsetConverter::getCharsetNameByLabel(const std::string& charsetL
   return "";
 }
 
-void CCharsetConverter::reset(void)
+void CCharsetConverter::reset()
 {
   for (CConverterType& conversion : CInnerConverter::m_stdConversion)
     conversion.Reset();
 }
 
-void CCharsetConverter::resetSystemCharset(void)
+void CCharsetConverter::resetSystemCharset()
 {
   CInnerConverter::m_stdConversion[Utf8ToSystem].Reset();
   CInnerConverter::m_stdConversion[SystemToUtf8].Reset();
 }
 
-void CCharsetConverter::resetUserCharset(void)
+void CCharsetConverter::resetUserCharset()
 {
   CInnerConverter::m_stdConversion[UserCharsetToUtf8].Reset();
   CInnerConverter::m_stdConversion[UserCharsetToUtf8].Reset();
@@ -632,12 +632,12 @@ void CCharsetConverter::resetUserCharset(void)
   resetSubtitleCharset();
 }
 
-void CCharsetConverter::resetSubtitleCharset(void)
+void CCharsetConverter::resetSubtitleCharset()
 {
   CInnerConverter::m_stdConversion[SubtitleCharsetToUtf8].Reset();
 }
 
-void CCharsetConverter::reinitCharsetsFromSettings(void)
+void CCharsetConverter::reinitCharsetsFromSettings()
 {
   resetUserCharset(); // this will also reinit Subtitle charsets
 }

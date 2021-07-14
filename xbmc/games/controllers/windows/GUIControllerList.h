@@ -42,9 +42,9 @@ public:
   void ResetController() override;
 
 private:
-  bool RefreshControllers(void);
+  bool RefreshControllers();
 
-  void CleanupButtons(void);
+  void CleanupButtons();
   void OnEvent(const ADDON::AddonEvent& event);
 
   // GUI stuff

@@ -70,7 +70,7 @@ CGUIEditControl::CGUIEditControl(const CGUIButtonControl &button)
   DefaultConstructor();
 }
 
-CGUIEditControl::~CGUIEditControl(void) = default;
+CGUIEditControl::~CGUIEditControl() = default;
 
 bool CGUIEditControl::OnMessage(CGUIMessage &message)
 {

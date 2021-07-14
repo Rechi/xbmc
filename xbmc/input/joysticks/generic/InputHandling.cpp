@@ -27,7 +27,7 @@ CInputHandling::CInputHandling(IInputHandler* handler, IButtonMap* buttonMap)
 {
 }
 
-CInputHandling::~CInputHandling(void) = default;
+CInputHandling::~CInputHandling() = default;
 
 bool CInputHandling::OnButtonMotion(unsigned int buttonIndex, bool bPressed)
 {
@@ -84,7 +84,7 @@ bool CInputHandling::OnAxisMotion(unsigned int axisIndex,
   return bHandled;
 }
 
-void CInputHandling::ProcessAxisMotions(void)
+void CInputHandling::ProcessAxisMotions()
 {
   for (auto& it : m_features)
     it.second->ProcessMotions();

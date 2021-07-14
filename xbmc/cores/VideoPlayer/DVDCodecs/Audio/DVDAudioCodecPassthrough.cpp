@@ -25,7 +25,7 @@ CDVDAudioCodecPassthrough::CDVDAudioCodecPassthrough(CProcessInfo &processInfo, 
   m_format.m_streamInfo.m_type = streamType;
 }
 
-CDVDAudioCodecPassthrough::~CDVDAudioCodecPassthrough(void)
+CDVDAudioCodecPassthrough::~CDVDAudioCodecPassthrough()
 {
   Dispose();
 }

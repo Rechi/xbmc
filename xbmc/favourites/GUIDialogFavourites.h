@@ -18,8 +18,8 @@ class CGUIDialogFavourites :
       public CGUIDialog
 {
 public:
-  CGUIDialogFavourites(void);
-  ~CGUIDialogFavourites(void) override;
+  CGUIDialogFavourites();
+  ~CGUIDialogFavourites() override;
   bool OnMessage(CGUIMessage &message) override;
   void OnInitWindow() override;
 

@@ -72,10 +72,10 @@ using namespace KODI::MESSAGING;
 using namespace KODI::GUILIB;
 
 //********************************************************************************************************************************
-CVideoDatabase::CVideoDatabase(void) = default;
+CVideoDatabase::CVideoDatabase() = default;
 
 //********************************************************************************************************************************
-CVideoDatabase::~CVideoDatabase(void) = default;
+CVideoDatabase::~CVideoDatabase() = default;
 
 //********************************************************************************************************************************
 bool CVideoDatabase::Open()

@@ -31,7 +31,7 @@ class CKeyboardInputHandling : public IKeyboardDriverHandler
 public:
   CKeyboardInputHandling(IKeyboardInputHandler* handler, JOYSTICK::IButtonMap* buttonMap);
 
-  ~CKeyboardInputHandling(void) override = default;
+  ~CKeyboardInputHandling() override = default;
 
   // implementation of IKeyboardDriverHandler
   bool OnKeyPress(const CKey& key) override;

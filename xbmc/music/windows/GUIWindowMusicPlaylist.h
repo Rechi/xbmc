@@ -13,8 +13,8 @@
 class CGUIWindowMusicPlayList : public CGUIWindowMusicBase
 {
 public:
-  CGUIWindowMusicPlayList(void);
-  ~CGUIWindowMusicPlayList(void) override;
+  CGUIWindowMusicPlayList();
+  ~CGUIWindowMusicPlayList() override;
 
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;

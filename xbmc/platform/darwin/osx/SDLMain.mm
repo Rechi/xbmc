@@ -49,7 +49,7 @@ static int    gArgc;
 static char  **gArgv;
 static BOOL   gCalledAppMainline = FALSE;
 
-static NSString *getApplicationName(void)
+static NSString* getApplicationName()
 {
   NSDictionary *dict;
   NSString *appName = 0;
@@ -64,7 +64,7 @@ static NSString *getApplicationName(void)
 
   return appName;
 }
-static void setupApplicationMenu(void)
+static void setupApplicationMenu()
 {
   // warning: this code is very odd
   NSMenu *appleMenu;
@@ -105,7 +105,7 @@ static void setupApplicationMenu(void)
 }
 
 // Create a window menu
-static void setupWindowMenu(void)
+static void setupWindowMenu()
 {
   NSMenu      *windowMenu;
   NSMenuItem  *windowMenuItem;

@@ -42,8 +42,8 @@ namespace GUIINFO
 class CGUIControlFactory
 {
 public:
-  CGUIControlFactory(void);
-  virtual ~CGUIControlFactory(void);
+  CGUIControlFactory();
+  virtual ~CGUIControlFactory();
   CGUIControl* Create(int parentID, const CRect &rect, TiXmlElement* pControlNode, bool insideContainer = false);
 
   /*! \brief translate from control name to control type

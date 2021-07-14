@@ -22,9 +22,9 @@
 //Define this to get loggin on all calls to load/unload sections/dlls
 //#define LOGALL
 
-CSectionLoader::CSectionLoader(void) = default;
+CSectionLoader::CSectionLoader() = default;
 
-CSectionLoader::~CSectionLoader(void)
+CSectionLoader::~CSectionLoader()
 {
   UnloadAll();
 }

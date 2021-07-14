@@ -48,7 +48,8 @@ public:
   float GetPercentage() const;
   std::string GetDescription() const override;
   void UpdateInfo(const CGUIListItem *item = NULL) override;
-  bool UpdateLayout(void);
+  bool UpdateLayout();
+
 protected:
   bool UpdateColors() override;
   std::unique_ptr<CGUITexture> m_guiBackground;

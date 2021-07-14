@@ -17,9 +17,9 @@
 
 #include <utility>
 
-CGUIColorManager::CGUIColorManager(void) = default;
+CGUIColorManager::CGUIColorManager() = default;
 
-CGUIColorManager::~CGUIColorManager(void)
+CGUIColorManager::~CGUIColorManager()
 {
   Clear();
 }

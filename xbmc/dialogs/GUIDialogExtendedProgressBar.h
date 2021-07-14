@@ -20,18 +20,18 @@ public:
     m_fPercentage(0),
     m_strTitle(strTitle),
     m_bFinished(false) {}
-  virtual ~CGUIDialogProgressBarHandle(void) = default;
+  virtual ~CGUIDialogProgressBarHandle() = default;
 
-  const std::string &Title(void) { return m_strTitle; }
+  const std::string& Title() { return m_strTitle; }
   void SetTitle(const std::string &strTitle);
 
-  std::string Text(void) const;
+  std::string Text() const;
   void SetText(const std::string &strText);
 
-  bool IsFinished(void) const { return m_bFinished; }
-  void MarkFinished(void)     { m_bFinished = true; }
+  bool IsFinished() const { return m_bFinished; }
+  void MarkFinished() { m_bFinished = true; }
 
-  float Percentage(void) const          { return m_fPercentage;}
+  float Percentage() const { return m_fPercentage; }
   void SetPercentage(float fPercentage) { m_fPercentage = fPercentage; }
   void SetProgress(int currentItem, int itemCount);
 
@@ -46,8 +46,8 @@ private:
 class CGUIDialogExtendedProgressBar : public CGUIDialog
 {
 public:
-  CGUIDialogExtendedProgressBar(void);
-  ~CGUIDialogExtendedProgressBar(void) override = default;
+  CGUIDialogExtendedProgressBar();
+  ~CGUIDialogExtendedProgressBar() override = default;
   bool OnMessage(CGUIMessage& message) override;
   void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;
 

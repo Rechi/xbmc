@@ -100,12 +100,12 @@ static void AnnounceUpdate(const std::string& content, int id, bool added = fals
   CServiceBroker::GetAnnouncementManager()->Announce(ANNOUNCEMENT::AudioLibrary, "OnUpdate", data);
 }
 
-CMusicDatabase::CMusicDatabase(void)
+CMusicDatabase::CMusicDatabase()
 {
   m_translateBlankArtist = true;
 }
 
-CMusicDatabase::~CMusicDatabase(void)
+CMusicDatabase::~CMusicDatabase()
 {
   EmptyCache();
 }

@@ -18,6 +18,6 @@ public:
   CPeripheralNIC(CPeripherals& manager,
                  const PeripheralScanResult& scanResult,
                  CPeripheralBus* bus);
-  ~CPeripheralNIC(void) override = default;
+  ~CPeripheralNIC() override = default;
 };
 } // namespace PERIPHERALS

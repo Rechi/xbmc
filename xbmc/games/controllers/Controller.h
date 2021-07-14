@@ -41,7 +41,7 @@ public:
    *
    * \return The features
    */
-  const std::vector<CControllerFeature>& Features(void) const { return m_features; }
+  const std::vector<CControllerFeature>& Features() const { return m_features; }
 
   /*!
    * \brief Get a feature by its name
@@ -94,12 +94,12 @@ public:
    *
    * \return true if the layout is loaded or was already loaded, false otherwise
    */
-  bool LoadLayout(void);
+  bool LoadLayout();
 
   /*!
    * \brief Get the controller layout
    */
-  const CControllerLayout& Layout(void) const { return *m_layout; }
+  const CControllerLayout& Layout() const { return *m_layout; }
 
   /*!
    * \brief Get the controller's physical topology

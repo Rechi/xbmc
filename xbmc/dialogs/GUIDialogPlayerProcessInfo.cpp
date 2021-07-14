@@ -10,13 +10,13 @@
 
 #include "input/Key.h"
 
-CGUIDialogPlayerProcessInfo::CGUIDialogPlayerProcessInfo(void)
-    : CGUIDialog(WINDOW_DIALOG_PLAYER_PROCESS_INFO, "DialogPlayerProcessInfo.xml")
+CGUIDialogPlayerProcessInfo::CGUIDialogPlayerProcessInfo()
+  : CGUIDialog(WINDOW_DIALOG_PLAYER_PROCESS_INFO, "DialogPlayerProcessInfo.xml")
 {
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIDialogPlayerProcessInfo::~CGUIDialogPlayerProcessInfo(void) = default;
+CGUIDialogPlayerProcessInfo::~CGUIDialogPlayerProcessInfo() = default;
 
 bool CGUIDialogPlayerProcessInfo::OnAction(const CAction &action)
 {

@@ -47,8 +47,8 @@ struct OrigFontInfo
 class GUIFontManager : public IMsgTargetCallback
 {
 public:
-  GUIFontManager(void);
-  ~GUIFontManager(void) override;
+  GUIFontManager();
+  ~GUIFontManager() override;
 
   bool OnMessage(CGUIMessage &message) override;
 

@@ -104,9 +104,8 @@ protected:
 };
 }
 
-CGUIWindowFileManager::CGUIWindowFileManager(void)
-    : CGUIWindow(WINDOW_FILES, "FileManager.xml"),
-      CJobQueue(false,2)
+CGUIWindowFileManager::CGUIWindowFileManager()
+  : CGUIWindow(WINDOW_FILES, "FileManager.xml"), CJobQueue(false, 2)
 {
   m_Directory[0] = new CFileItem;
   m_Directory[1] = new CFileItem;
@@ -120,7 +119,7 @@ CGUIWindowFileManager::CGUIWindowFileManager(void)
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIWindowFileManager::~CGUIWindowFileManager(void)
+CGUIWindowFileManager::~CGUIWindowFileManager()
 {
   delete m_Directory[0];
   delete m_Directory[1];

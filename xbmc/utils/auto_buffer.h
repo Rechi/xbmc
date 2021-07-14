@@ -19,7 +19,7 @@ namespace XUTILS
     /**
      * Create buffer with zero size
      */
-    auto_buffer(void) = default;
+    auto_buffer() = default;
     /**
      * Create buffer with specified size
      * @param size of created buffer
@@ -43,28 +43,28 @@ namespace XUTILS
      * Reset buffer to zero size
      * @return reference to itself
      */
-    auto_buffer& clear(void);
+    auto_buffer& clear();
 
     /**
      * Get pointer to buffer content
      * @return pointer to buffer content or NULL if buffer is zero size
      */
-    inline char* get(void) { return static_cast<char*>(p); }
+    inline char* get() { return static_cast<char*>(p); }
     /**
      * Get constant pointer to buffer content
      * @return constant pointer to buffer content
      */
-    inline const char* get(void) const { return static_cast<char*>(p); }
+    inline const char* get() const { return static_cast<char*>(p); }
     /**
      * Get size of the buffer
      * @return size of the buffer
      */
-    inline size_t size(void) const { return s; }
+    inline size_t size() const { return s; }
     /**
      * Get size of the buffer
      * @return size of the buffer
      */
-    inline size_t length(void) const { return s; }
+    inline size_t length() const { return s; }
 
     /**
      * Attach malloc'ed pointer to the buffer, discarding current buffer content
@@ -81,7 +81,7 @@ namespace XUTILS
      * when pointer in not needed anymore
      * @return detached from buffer pointer to content
      */
-    void* detach(void);
+    void* detach();
 
   private:
     auto_buffer(const auto_buffer& other) = delete; // disallow copy constructor

@@ -15,7 +15,7 @@ class CGUIDialogSlider : public CGUIDialog
 {
 public:
   CGUIDialogSlider();
-  ~CGUIDialogSlider(void) override;
+  ~CGUIDialogSlider() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;
 

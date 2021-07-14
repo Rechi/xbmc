@@ -18,7 +18,7 @@ class CEventLockHandle;
 class IEventLockCallback
 {
 public:
-  virtual ~IEventLockCallback(void) = default;
+  virtual ~IEventLockCallback() = default;
 
   virtual void ReleaseLock(CEventLockHandle& handle) = 0;
 };
@@ -39,7 +39,7 @@ public:
   /*!
    * \brief Handle is automatically released when this class is destructed
    */
-  ~CEventLockHandle(void);
+  ~CEventLockHandle();
 
 private:
   // Construction parameters

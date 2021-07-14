@@ -18,8 +18,8 @@ namespace XFILE
   class CNFSDirectory : public IDirectory
   {
     public:
-      CNFSDirectory(void);
-      ~CNFSDirectory(void) override;
+      CNFSDirectory();
+      ~CNFSDirectory() override;
       bool GetDirectory(const CURL& url, CFileItemList &items) override;
       DIR_CACHE_TYPE GetCacheType(const CURL& url) const override { return DIR_CACHE_ONCE; };
       bool Create(const CURL& url) override;

@@ -21,7 +21,7 @@ class CGUIDialogSelect : public CGUIDialogBoxBase
 {
 public:
   CGUIDialogSelect();
-  ~CGUIDialogSelect(void) override;
+  ~CGUIDialogSelect() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnBack(int actionID) override;
 

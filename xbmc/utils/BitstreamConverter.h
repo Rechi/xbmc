@@ -87,14 +87,14 @@ public:
   ~CBitstreamConverter();
 
   bool              Open(enum AVCodecID codec, uint8_t *in_extradata, int in_extrasize, bool to_annexb);
-  void              Close(void);
-  bool              NeedConvert(void) const { return m_convert_bitstream; };
+  void Close();
+  bool NeedConvert() const { return m_convert_bitstream; };
   bool              Convert(uint8_t *pData, int iSize);
-  uint8_t*          GetConvertBuffer(void) const;
+  uint8_t* GetConvertBuffer() const;
   int               GetConvertSize() const;
-  uint8_t*          GetExtraData(void) const;
+  uint8_t* GetExtraData() const;
   int               GetExtraSize() const;
-  void              ResetStartDecode(void);
+  void ResetStartDecode();
   bool              CanStartDecode() const;
 
   static bool       mpeg2_sequence_header(const uint8_t *data, const uint32_t size, mpeg2_sequence *sequence);

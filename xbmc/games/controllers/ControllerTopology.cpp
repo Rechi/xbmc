@@ -24,7 +24,7 @@ CControllerPort::CControllerPort(std::string portId, std::vector<std::string> ac
 {
 }
 
-void CControllerPort::Reset(void)
+void CControllerPort::Reset()
 {
   CControllerPort defaultPort;
   *this = std::move(defaultPort);

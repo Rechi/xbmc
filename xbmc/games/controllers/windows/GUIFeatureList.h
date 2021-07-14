@@ -41,7 +41,7 @@ public:
 private:
   IFeatureButton* GetButtonControl(unsigned int buttonIndex);
 
-  void CleanupButtons(void);
+  void CleanupButtons();
 
   // Helper functions
   struct FeatureGroup

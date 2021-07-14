@@ -17,8 +17,8 @@ namespace XFILE
 class CSMBDirectory : public IDirectory
 {
 public:
-  CSMBDirectory(void);
-  ~CSMBDirectory(void) override;
+  CSMBDirectory();
+  ~CSMBDirectory() override;
   bool GetDirectory(const CURL& url, CFileItemList &items) override;
   DIR_CACHE_TYPE GetCacheType(const CURL& url) const override { return DIR_CACHE_ONCE; };
   bool Create(const CURL& url) override;

@@ -96,7 +96,7 @@ bool CJoystickMonitor::OnThrottleMotion(const FeatureName& feature,
   return false;
 }
 
-bool CJoystickMonitor::ResetTimers(void)
+bool CJoystickMonitor::ResetTimers()
 {
   g_application.ResetSystemIdleTimer();
   g_application.ResetScreenSaver();

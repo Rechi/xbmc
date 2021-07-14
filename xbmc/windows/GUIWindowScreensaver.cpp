@@ -18,8 +18,7 @@
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 
-CGUIWindowScreensaver::CGUIWindowScreensaver(void)
-  : CGUIWindow(WINDOW_SCREENSAVER, "")
+CGUIWindowScreensaver::CGUIWindowScreensaver() : CGUIWindow(WINDOW_SCREENSAVER, "")
 {
 }
 

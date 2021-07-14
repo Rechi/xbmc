@@ -22,7 +22,7 @@ CGUIWrappingListContainer::CGUIWrappingListContainer(int parentID, int controlID
   m_extraItems = 0;
 }
 
-CGUIWrappingListContainer::~CGUIWrappingListContainer(void) = default;
+CGUIWrappingListContainer::~CGUIWrappingListContainer() = default;
 
 void CGUIWrappingListContainer::UpdatePageControl(int offset)
 {

@@ -16,8 +16,8 @@
 class CGUIWindowSystemInfo : public CGUIWindow
 {
 public:
-  CGUIWindowSystemInfo(void);
-  ~CGUIWindowSystemInfo(void) override;
+  CGUIWindowSystemInfo();
+  ~CGUIWindowSystemInfo() override;
   bool OnMessage(CGUIMessage& message) override;
   void FrameMove() override;
 private:

@@ -63,12 +63,12 @@
 #endif
 
 namespace PythonBindings {
-PyObject* PyInit_Module_xbmcdrm(void);
-PyObject* PyInit_Module_xbmcgui(void);
-PyObject* PyInit_Module_xbmc(void);
-PyObject* PyInit_Module_xbmcplugin(void);
-PyObject* PyInit_Module_xbmcaddon(void);
-PyObject* PyInit_Module_xbmcvfs(void);
+PyObject* PyInit_Module_xbmcdrm();
+PyObject* PyInit_Module_xbmcgui();
+PyObject* PyInit_Module_xbmc();
+PyObject* PyInit_Module_xbmcplugin();
+PyObject* PyInit_Module_xbmcaddon();
+PyObject* PyInit_Module_xbmcvfs();
 }
 
 using namespace PythonBindings;

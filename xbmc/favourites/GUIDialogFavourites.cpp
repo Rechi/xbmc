@@ -35,7 +35,7 @@ CGUIDialogFavourites::CGUIDialogFavourites() :
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIDialogFavourites::~CGUIDialogFavourites(void)
+CGUIDialogFavourites::~CGUIDialogFavourites()
 {
   delete m_favourites;
 }

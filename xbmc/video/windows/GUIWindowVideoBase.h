@@ -29,7 +29,7 @@ class CGUIWindowVideoBase : public CGUIMediaWindow, public IBackgroundLoaderObse
 {
 public:
   CGUIWindowVideoBase(int id, const std::string &xmlFile);
-  ~CGUIWindowVideoBase(void) override;
+  ~CGUIWindowVideoBase() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;
 

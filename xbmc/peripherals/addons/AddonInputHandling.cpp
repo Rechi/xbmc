@@ -108,7 +108,7 @@ CAddonInputHandling::CAddonInputHandling(CPeripherals& manager,
   }
 }
 
-CAddonInputHandling::~CAddonInputHandling(void)
+CAddonInputHandling::~CAddonInputHandling()
 {
   m_driverHandler.reset();
   m_inputReceiver.reset();
@@ -143,7 +143,7 @@ bool CAddonInputHandling::OnAxisMotion(unsigned int axisIndex,
   return false;
 }
 
-void CAddonInputHandling::ProcessAxisMotions(void)
+void CAddonInputHandling::ProcessAxisMotions()
 {
   if (m_driverHandler)
     m_driverHandler->ProcessAxisMotions();

@@ -86,8 +86,8 @@ protected:
   void  EnableVSync(bool enable);
   bool  SwitchToVideoMode(int width, int height, double refreshrate);
   void  FillInVideoModes();
-  bool  FlushBuffer(void);
-  bool  IsObscured(void);
+  bool FlushBuffer();
+  bool IsObscured();
   void  StartTextInput();
   void  StopTextInput();
 

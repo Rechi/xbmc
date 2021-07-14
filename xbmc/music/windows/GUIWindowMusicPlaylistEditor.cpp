@@ -36,14 +36,14 @@
 #define CONTROL_PLAYLIST         100
 #define CONTROL_LABEL_PLAYLIST   101
 
-CGUIWindowMusicPlaylistEditor::CGUIWindowMusicPlaylistEditor(void)
-    : CGUIWindowMusicBase(WINDOW_MUSIC_PLAYLIST_EDITOR, "MyMusicPlaylistEditor.xml")
+CGUIWindowMusicPlaylistEditor::CGUIWindowMusicPlaylistEditor()
+  : CGUIWindowMusicBase(WINDOW_MUSIC_PLAYLIST_EDITOR, "MyMusicPlaylistEditor.xml")
 {
   m_playlistThumbLoader.SetObserver(this);
   m_playlist = new CFileItemList;
 }
 
-CGUIWindowMusicPlaylistEditor::~CGUIWindowMusicPlaylistEditor(void)
+CGUIWindowMusicPlaylistEditor::~CGUIWindowMusicPlaylistEditor()
 {
   delete m_playlist;
 }

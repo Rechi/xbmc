@@ -51,7 +51,7 @@ private:
 class CGUIWindowSlideShow : public CGUIDialog
 {
 public:
-  CGUIWindowSlideShow(void);
+  CGUIWindowSlideShow();
   ~CGUIWindowSlideShow() override = default;
 
   bool OnMessage(CGUIMessage& message) override;

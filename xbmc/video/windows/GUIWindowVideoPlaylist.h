@@ -13,8 +13,8 @@
 class CGUIWindowVideoPlaylist : public CGUIWindowVideoBase
 {
 public:
-  CGUIWindowVideoPlaylist(void);
-  ~CGUIWindowVideoPlaylist(void) override;
+  CGUIWindowVideoPlaylist();
+  ~CGUIWindowVideoPlaylist() override;
 
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;

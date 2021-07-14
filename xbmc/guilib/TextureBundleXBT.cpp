@@ -45,7 +45,7 @@ CTextureBundleXBT::CTextureBundleXBT(bool themeBundle)
 {
 }
 
-CTextureBundleXBT::~CTextureBundleXBT(void)
+CTextureBundleXBT::~CTextureBundleXBT()
 {
   CloseBundle();
 }

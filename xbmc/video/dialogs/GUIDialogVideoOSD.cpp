@@ -19,13 +19,12 @@
 
 using namespace PVR;
 
-CGUIDialogVideoOSD::CGUIDialogVideoOSD(void)
-    : CGUIDialog(WINDOW_DIALOG_VIDEO_OSD, "VideoOSD.xml")
+CGUIDialogVideoOSD::CGUIDialogVideoOSD() : CGUIDialog(WINDOW_DIALOG_VIDEO_OSD, "VideoOSD.xml")
 {
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIDialogVideoOSD::~CGUIDialogVideoOSD(void) = default;
+CGUIDialogVideoOSD::~CGUIDialogVideoOSD() = default;
 
 void CGUIDialogVideoOSD::FrameMove()
 {

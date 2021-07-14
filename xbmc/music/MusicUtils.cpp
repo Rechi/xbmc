@@ -42,7 +42,7 @@ namespace MUSIC_UTILS
       : pItem(item), m_artType(type), m_newArt(newArt)
     { }
 
-    ~CSetArtJob(void) override = default;
+    ~CSetArtJob() override = default;
 
     bool HasSongExtraArtChanged(const CFileItemPtr& pSongItem,
                                 const std::string& type,
@@ -89,7 +89,7 @@ namespace MUSIC_UTILS
     // Asynchronously update song, album or artist art in library
     // and trigger update to album & artist art of the currently playing song
     // and songs queued in the current playlist
-    bool DoWork(void) override
+    bool DoWork() override
     {
       int itemID = pItem->GetMusicInfoTag()->GetDatabaseId();
       if (itemID <= 0)
@@ -160,9 +160,9 @@ namespace MUSIC_UTILS
       iUserrating(userrating)
     { }
 
-    ~CSetSongRatingJob(void) override = default;
+    ~CSetSongRatingJob() override = default;
 
-    bool DoWork(void) override
+    bool DoWork() override
     {
       // Asynchronously update song userrating in library
       CMusicDatabase db;

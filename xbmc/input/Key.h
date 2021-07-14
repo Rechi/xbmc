@@ -135,7 +135,7 @@ public:
 class CKey
 {
 public:
-  CKey(void);
+  CKey();
   CKey(uint32_t buttonCode,
        uint8_t leftTrigger = 0,
        uint8_t rightTrigger = 0,
@@ -155,7 +155,7 @@ public:
   CKey(const CKey& key);
   void Reset();
 
-  virtual ~CKey(void);
+  virtual ~CKey();
   CKey& operator=(const CKey& key);
   uint8_t GetLeftTrigger() const;
   uint8_t GetRightTrigger() const;

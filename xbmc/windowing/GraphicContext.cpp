@@ -29,8 +29,8 @@
 
 using namespace KODI::MESSAGING;
 
-CGraphicContext::CGraphicContext(void) = default;
-CGraphicContext::~CGraphicContext(void) = default;
+CGraphicContext::CGraphicContext() = default;
+CGraphicContext::~CGraphicContext() = default;
 
 void CGraphicContext::SetOrigin(float x, float y)
 {

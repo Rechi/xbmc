@@ -51,7 +51,7 @@ private:
    * \brief  Reset screensaver and shutdown timers
    * \return True if the application was woken from screensaver
    */
-  bool ResetTimers(void);
+  bool ResetTimers();
 };
 } // namespace JOYSTICK
 } // namespace KODI

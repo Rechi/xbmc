@@ -26,18 +26,18 @@ public:
                   const std::weak_ptr<CPeripheralAddon>& addon,
                   const std::string& strControllerId);
 
-  ~CAddonButtonMap(void) override;
+  ~CAddonButtonMap() override;
 
   // Implementation of IButtonMap
-  std::string ControllerID(void) const override { return m_strControllerId; }
+  std::string ControllerID() const override { return m_strControllerId; }
 
-  std::string DeviceName(void) const override;
+  std::string DeviceName() const override;
 
-  bool Load(void) override;
+  bool Load() override;
 
-  void Reset(void) override;
+  void Reset() override;
 
-  bool IsEmpty(void) const override;
+  bool IsEmpty() const override;
 
   bool GetFeature(const KODI::JOYSTICK::CDriverPrimitive& primitive,
                   KODI::JOYSTICK::FeatureName& feature) override;

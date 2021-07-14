@@ -45,7 +45,7 @@ public:
                   float width, float height, const CTextureInfo &textureFocus, const CTextureInfo &textureNoFocus,
                   const CLabelInfo& labelInfo, const std::string &text);
   explicit CGUIEditControl(const CGUIButtonControl &button);
-  ~CGUIEditControl(void) override;
+  ~CGUIEditControl() override;
   CGUIEditControl *Clone() const override { return new CGUIEditControl(*this); };
 
   bool OnMessage(CGUIMessage &message) override;

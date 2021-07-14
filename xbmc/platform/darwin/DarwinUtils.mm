@@ -30,7 +30,7 @@
 
 
 // platform strings are based on http://theiphonewiki.com/wiki/Models
-const char* CDarwinUtils::getIosPlatformString(void)
+const char* CDarwinUtils::getIosPlatformString()
 {
   static std::string iOSPlatformString;
   static std::once_flag flag;
@@ -50,7 +50,7 @@ const char* CDarwinUtils::getIosPlatformString(void)
   return iOSPlatformString.c_str();
 }
 
-const char *CDarwinUtils::GetOSReleaseString(void)
+const char* CDarwinUtils::GetOSReleaseString()
 {
   static std::string osreleaseStr;
   static std::once_flag flag;
@@ -65,7 +65,7 @@ const char *CDarwinUtils::GetOSReleaseString(void)
   return osreleaseStr.c_str();
 }
 
-const char *CDarwinUtils::GetOSVersionString(void)
+const char* CDarwinUtils::GetOSVersionString()
 {
   @autoreleasepool
   {
@@ -204,7 +204,7 @@ bool CDarwinUtils::CFStringRefToUTF8String(CFStringRef source, std::string &dest
   return CFStringRefToStringWithEncoding(source, destination, kCFStringEncodingUTF8);
 }
 
-const std::string& CDarwinUtils::GetManufacturer(void)
+const std::string& CDarwinUtils::GetManufacturer()
 {
   static std::string manufName;
   if (manufName.empty())
