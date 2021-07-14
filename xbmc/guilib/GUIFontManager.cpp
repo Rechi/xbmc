@@ -212,7 +212,7 @@ bool GUIFontManager::OnMessage(CGUIMessage &message)
 
 void GUIFontManager::ReloadTTFFonts(void)
 {
-  if (!m_vecFonts.size())
+  if (m_vecFonts.empty())
     return;   // we haven't even loaded fonts in yet
 
   for (unsigned int i = 0; i < m_vecFonts.size(); i++)

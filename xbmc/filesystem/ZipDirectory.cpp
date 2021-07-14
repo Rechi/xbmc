@@ -66,7 +66,7 @@ namespace XFILE
   {
     std::vector<SZipEntry> items;
     g_ZipManager.GetZipList(url, items);
-    if (items.size())
+    if (!items.empty())
     {
       if (items.size() > 1)
         return true;

@@ -588,7 +588,7 @@ void CGUIWindowMusicBase::GetContextButtons(int itemNumber, CContextButtons &but
           // check what players we have, if we have multiple display play with option
           std::vector<std::string> players;
           playerCoreFactory.GetPlayers(*item, players);
-          if (players.size() >= 1)
+          if (!players.empty())
             buttons.Add(CONTEXT_BUTTON_PLAY_WITH, 15213); // Play With...
         }
         if (item->IsSmartPlayList())

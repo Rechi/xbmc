@@ -86,7 +86,7 @@ static int EnableAddon(const std::vector<std::string>& params)
  */
 static int RunPlugin(const std::vector<std::string>& params)
 {
-  if (params.size())
+  if (!params.empty())
   {
     CFileItem item(params[0]);
     if (!item.m_bIsFolder)
@@ -112,7 +112,7 @@ static int RunPlugin(const std::vector<std::string>& params)
  */
 static int RunAddon(const std::vector<std::string>& params)
 {
-  if (params.size())
+  if (!params.empty())
   {
     const std::string& addonid = params[0];
 

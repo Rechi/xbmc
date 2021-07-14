@@ -53,7 +53,7 @@ VIDEODB_CONTENT_TYPE CVideoDatabaseFile::GetType(const CURL& url)
     return VIDEODB_CONTENT_UNKNOWN;
 
   std::vector<std::string> pathElem = StringUtils::Split(strPath, "/");
-  if (pathElem.size() == 0)
+  if (pathElem.empty())
     return VIDEODB_CONTENT_UNKNOWN;
 
   std::string itemType = pathElem.at(2);

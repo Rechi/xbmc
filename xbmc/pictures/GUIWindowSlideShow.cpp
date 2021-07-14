@@ -355,7 +355,7 @@ void CGUIWindowSlideShow::StartSlideShow()
 {
   m_bSlideShow = true;
   m_iDirection = 1;
-  if (m_slides.size())
+  if (!m_slides.empty())
     AnnouncePlayerPlay(m_slides.at(m_iCurrentSlide));
 }
 
@@ -795,7 +795,7 @@ bool CGUIWindowSlideShow::OnAction(const CAction &action)
     }
     break;
   case ACTION_STOP:
-    if (m_slides.size())
+    if (!m_slides.empty())
       AnnouncePlayerStop(m_slides.at(m_iCurrentSlide));
     if (g_application.GetAppPlayer().IsPlayingVideo())
       g_application.GetAppPlayer().ClosePlayer();
@@ -834,7 +834,7 @@ bool CGUIWindowSlideShow::OnAction(const CAction &action)
 
   case ACTION_PAUSE:
   case ACTION_PLAYER_PLAY:
-    if (m_slides.size() == 0)
+    if (m_slides.empty())
       break;
     if (m_slides.at(m_iCurrentSlide)->IsVideo())
     {
@@ -1221,7 +1221,7 @@ void CGUIWindowSlideShow::AddFromPath(const std::string &strPath,
                                       SortBy method, SortOrder order, SortAttribute sortAttributes,
                                       const std::string &strExtensions)
 {
-  if (strPath!="")
+  if (!strPath.empty())
   {
     // reset the slideshow
     Reset();

@@ -263,7 +263,7 @@ bool CPicture::CacheTexture(uint8_t *pixels, uint32_t width, uint32_t height, ui
 
 bool CPicture::CreateTiledThumb(const std::vector<std::string> &files, const std::string &thumb)
 {
-  if (!files.size())
+  if (files.empty())
     return false;
 
   unsigned int num_across = (unsigned int)ceil(sqrt((float)files.size()));

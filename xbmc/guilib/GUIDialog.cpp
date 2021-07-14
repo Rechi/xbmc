@@ -55,7 +55,7 @@ void CGUIDialog::OnWindowLoaded()
   CGUIWindow::OnWindowLoaded();
 
   // Clip labels to extents
-  if (m_children.size())
+  if (!m_children.empty())
   {
     CGUIControl* pBase = m_children[0];
 

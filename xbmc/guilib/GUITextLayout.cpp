@@ -52,7 +52,7 @@ void CGUITextLayout::Render(float x, float y, float angle, UTILS::Color color, U
     return;
 
   // set the main text color
-  if (m_colors.size())
+  if (!m_colors.empty())
     m_colors[0] = color;
 
   // render the text at the required location, angle, and size
@@ -101,7 +101,7 @@ void CGUITextLayout::RenderScrolling(float x, float y, float angle, UTILS::Color
     return;
 
   // set the main text color
-  if (m_colors.size())
+  if (!m_colors.empty())
     m_colors[0] = color;
 
   // render the text at the required location, angle, and size
@@ -140,7 +140,7 @@ void CGUITextLayout::RenderOutline(float x, float y, UTILS::Color color, UTILS::
 
   // set the outline color
   std::vector<UTILS::Color> outlineColors;
-  if (m_colors.size())
+  if (!m_colors.empty())
     outlineColors.push_back(outlineColor);
 
   // center our text vertically
@@ -181,7 +181,7 @@ void CGUITextLayout::RenderOutline(float x, float y, UTILS::Color color, UTILS::
   }
 
   // set the main text color
-  if (m_colors.size())
+  if (!m_colors.empty())
     m_colors[0] = color;
 
   m_font->Begin();
@@ -558,7 +558,7 @@ void CGUITextLayout::WrapText(const vecText &text, float maxWidth)
         if (nMaxLines > 0 && m_lines.size() >= (size_t)nMaxLines)
           return;
         curLine.erase(curLine.begin(), curLine.begin() + lastSpaceInLine);
-        while (curLine.size() && IsSpace(curLine.at(0)))
+        while (!curLine.empty() && IsSpace(curLine.at(0)))
           curLine.erase(curLine.begin());
       }
     }
@@ -629,7 +629,7 @@ unsigned int CGUITextLayout::GetTextLength() const
 void CGUITextLayout::GetFirstText(vecText &text) const
 {
   text.clear();
-  if (m_lines.size())
+  if (!m_lines.empty())
     text = m_lines[0].m_text;
 }
 

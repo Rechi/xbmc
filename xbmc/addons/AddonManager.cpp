@@ -436,7 +436,7 @@ bool CAddonMgr::GetAddonsInternal(const TYPE& type,
       addons.emplace_back(std::move(addon));
     }
   }
-  return addons.size() > 0;
+  return !addons.empty();
 }
 
 bool CAddonMgr::GetIncompatibleEnabledAddonInfos(std::vector<AddonInfoPtr>& incompatible) const

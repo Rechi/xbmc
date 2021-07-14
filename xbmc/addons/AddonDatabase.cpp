@@ -527,7 +527,7 @@ std::pair<AddonVersion, std::string> CAddonDatabase::GetAddonVersion(const std::
     if (m_pDB && m_pDS2)
     {
       std::vector<std::pair<ADDON::AddonVersion, std::string>> versions;
-      if (GetAvailableVersions(id, versions) && versions.size() > 0)
+      if (GetAvailableVersions(id, versions) && !versions.empty())
         return *std::max_element(versions.begin(), versions.end());
     }
   }

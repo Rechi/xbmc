@@ -607,7 +607,7 @@ bool CPVRClients::AnyClientSupportingRecordingsSize() const
       recordingSizeClients.emplace_back(client);
     return PVR_ERROR_NO_ERROR;
   });
-  return recordingSizeClients.size() != 0;
+  return !recordingSizeClients.empty();
 }
 
 bool CPVRClients::AnyClientSupportingEPG() const

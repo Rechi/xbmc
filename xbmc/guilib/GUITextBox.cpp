@@ -237,13 +237,13 @@ void CGUITextBox::Render()
       int current = offset;
 
       // set the main text color
-      if (m_colors.size())
+      if (!m_colors.empty())
         m_colors[0] = m_label.textColor;
 
       while (posY < m_posY + m_renderHeight && current < (int)m_lines.size())
       {
         uint32_t align = alignment;
-        if (m_lines[current].m_text.size() && m_lines[current].m_carriageReturn)
+        if (!m_lines[current].m_text.empty() && m_lines[current].m_carriageReturn)
           align &= ~XBFONT_JUSTIFIED; // last line of a paragraph shouldn't be justified
         m_font->DrawText(posX, posY, m_colors, m_label.shadowColor, m_lines[current].m_text, align, m_width);
         posY += m_itemHeight;

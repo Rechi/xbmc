@@ -1256,7 +1256,7 @@ namespace PVR
           client->GetEpgTagStreamProperties(item->GetEPGInfoTag(), props);
       }
 
-      if (props.size())
+      if (!props.empty())
       {
         const std::string url = props.GetStreamURL();
         if (!url.empty())

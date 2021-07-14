@@ -56,7 +56,8 @@ void CURL::Parse(const std::string& strURL1)
   // format 3: drive:directoryandfile
   //
   // first need 2 check if this is a protocol or just a normal drive & path
-  if (!strURL.size()) return ;
+  if (strURL.empty())
+    return;
   if (strURL == "?") return;
 
   // form is format 1 or 2
@@ -281,7 +282,7 @@ void CURL::Parse(const std::string& strURL1)
 
   if (IsProtocol("musicdb") || IsProtocol("videodb") || IsProtocol("sources") || IsProtocol("pvr"))
   {
-    if (m_strHostName != "" && m_strFileName != "")
+    if (!m_strHostName.empty() && !m_strFileName.empty())
     {
       m_strFileName = StringUtils::Format("{}/{}", m_strHostName, m_strFileName);
       m_strHostName = "";
@@ -461,7 +462,8 @@ std::string CURL::GetWithoutOptions() const
   std::string strGet = GetWithoutFilename();
 
   // Prevent double slash when concatenating host part and filename part
-  if (m_strFileName.size() && (m_strFileName[0] == '/' || m_strFileName[0] == '\\') && URIUtils::HasSlashAtEnd(strGet))
+  if (!m_strFileName.empty() && (m_strFileName[0] == '/' || m_strFileName[0] == '\\') &&
+      URIUtils::HasSlashAtEnd(strGet))
     URIUtils::RemoveSlashAtEnd(strGet);
 
   return strGet + m_strFileName;
@@ -637,7 +639,8 @@ bool CURL::IsFileOnly(const std::string &url)
 
 bool CURL::IsFullPath(const std::string &url)
 {
-  if (url.size() && url[0] == '/') return true;     //   /foo/bar.ext
+  if (!url.empty() && url[0] == '/')
+    return true; //   /foo/bar.ext
   if (url.find("://") != std::string::npos) return true;                 //   foo://bar.ext
   if (url.size() > 1 && url[1] == ':') return true; //   c:\\foo\\bar\\bar.ext
   if (StringUtils::StartsWith(url, "\\\\")) return true;    //   \\UNC\path\to\file

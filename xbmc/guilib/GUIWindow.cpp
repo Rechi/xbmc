@@ -744,7 +744,7 @@ void CGUIWindow::AllocResources(bool forceLoad /*= false */)
   if (forceLoad)
   {
     std::string xmlFile = GetProperty("xmlfile").asString();
-    if (xmlFile.size())
+    if (!xmlFile.empty())
     {
       bool bHasPath =
           xmlFile.find('\\') != std::string::npos || xmlFile.find('/') != std::string::npos;

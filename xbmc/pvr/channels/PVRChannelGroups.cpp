@@ -354,7 +354,7 @@ bool CPVRChannelGroups::Load()
               m_bRadio ? "radio" : "TV");
 
   // need at least 1 group
-  return m_groups.size() > 0;
+  return !m_groups.empty();
 }
 
 bool CPVRChannelGroups::PersistAll()

@@ -95,7 +95,7 @@ void CGUITextureGL::Begin(UTILS::Color color)
 
 void CGUITextureGL::End()
 {
-  if (m_packedVertices.size())
+  if (!m_packedVertices.empty())
   {
     GLint posLoc  = m_renderSystem->ShaderGetPos();
     GLint tex0Loc = m_renderSystem->ShaderGetCoord0();

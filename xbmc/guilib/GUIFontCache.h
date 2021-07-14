@@ -96,7 +96,7 @@ struct CGUIFontCacheHash
     size_t hash = 0, i;
     for (i = 0; i < 3 && i < key.m_text.size(); ++i)
       hash += key.m_text[i];
-    if (key.m_colors.size())
+    if (!key.m_colors.empty())
       hash += key.m_colors[0];
     hash += static_cast<size_t>(MatrixHashContribution(key)); // horrible
     return hash;

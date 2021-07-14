@@ -18,7 +18,7 @@ CTextSearch::CTextSearch(const std::string &strSearchTerms, bool bCaseSensitive 
 
 bool CTextSearch::IsValid(void) const
 {
-  return m_AND.size() > 0 || m_OR.size() > 0 || m_NOT.size() > 0;
+  return !m_AND.empty() || !m_OR.empty() || !m_NOT.empty();
 }
 
 bool CTextSearch::Search(const std::string &strHaystack) const

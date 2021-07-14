@@ -517,7 +517,7 @@ void CGUIDialogKeyboardGeneric::OnDeinitWindow(int nextWindowID)
 
 void CGUIDialogKeyboardGeneric::MoveCursor(int iAmount)
 {
-  if (m_codingtable && m_words.size())
+  if (m_codingtable && !m_words.empty())
     ChangeWordList(iAmount);
   else
   {

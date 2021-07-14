@@ -171,7 +171,7 @@ bool CHTTPDirectory::GetDirectory(const CURL& url, CFileItemList &items)
 
       // we detect http directory items by its display name and its stripped link
       // if same, we consider it as a valid item.
-      if (strLinkTemp != ".." && strLinkTemp != "" && NameMatchesLink(strNameTemp, strLinkTemp))
+      if (strLinkTemp != ".." && !strLinkTemp.empty() && NameMatchesLink(strNameTemp, strLinkTemp))
       {
         CFileItemPtr pItem(new CFileItem(strNameTemp));
         pItem->SetProperty("IsHTTPDirectory", true);

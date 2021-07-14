@@ -4676,7 +4676,7 @@ bool CMusicDatabase::LookupCDDBInfo(bool bRequery /*=false*/)
         while (true)
         {
           std::string strTitle = cddb.getInexactTitle(i);
-          if (strTitle == "")
+          if (strTitle.empty())
             break;
 
           const std::string& strArtist = cddb.getInexactArtist(i);
@@ -9838,7 +9838,7 @@ int CMusicDatabase::AddSource(const std::string& strName,
 
       // Find albums by song path, building WHERE for multiple source paths
       // (providing source has a path)
-      if (vecPaths.size() > 0)
+      if (!vecPaths.empty())
       {
         std::vector<int> albumIds;
         Filter extFilter;

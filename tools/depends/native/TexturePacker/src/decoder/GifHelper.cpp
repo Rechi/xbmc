@@ -480,7 +480,7 @@ GifFrame::GifFrame(const GifFrame& src)
     memcpy(m_pImage, src.m_pImage, m_imageSize);
   }
 
-  if (src.m_palette.size())
+  if (!src.m_palette.empty())
   {
     m_palette = src.m_palette;
   }

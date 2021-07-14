@@ -252,7 +252,7 @@ SettingGroupList CSettingCategory::GetGroups(SettingLevel level) const
   SettingGroupList groups;
   for (const auto& group : m_groups)
   {
-    if (group->MeetsRequirements() && group->IsVisible() && group->GetSettings(level).size() > 0)
+    if (group->MeetsRequirements() && group->IsVisible() && !group->GetSettings(level).empty())
       groups.push_back(group);
   }
 
@@ -331,7 +331,8 @@ SettingCategoryList CSettingSection::GetCategories(SettingLevel level) const
   SettingCategoryList categories;
   for (const auto& category : m_categories)
   {
-    if (category->MeetsRequirements() && category->IsVisible() && category->GetGroups(level).size() > 0)
+    if (category->MeetsRequirements() && category->IsVisible() &&
+        !category->GetGroups(level).empty())
       categories.push_back(category);
   }
 

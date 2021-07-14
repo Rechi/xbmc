@@ -121,7 +121,7 @@ void CGUIBaseContainer::Process(unsigned int currentTime, CDirtyRegionList &dirt
   end += cacheAfter * m_layout->Size(m_orientation);
 
   int current = offset - cacheBefore;
-  while (pos < end && m_items.size())
+  while (pos < end && !m_items.empty())
   {
     int itemNo = CorrectOffset(current, 0);
     if (itemNo >= (int)m_items.size())
@@ -230,7 +230,7 @@ void CGUIBaseContainer::Render()
     float focusedPos = 0;
     CGUIListItemPtr focusedItem;
     int current = offset - cacheBefore;
-    while (pos < end && m_items.size())
+    while (pos < end && !m_items.empty())
     {
       int itemNo = CorrectOffset(current, 0);
       if (itemNo >= (int)m_items.size())
@@ -381,7 +381,7 @@ bool CGUIBaseContainer::OnAction(const CAction &action)
     return true;
 
   case ACTION_LAST_PAGE:
-    if (m_items.size())
+    if (!m_items.empty())
       SelectItem(m_items.size() - 1);
     return true;
 
@@ -553,7 +553,7 @@ void CGUIBaseContainer::OnNextLetter()
 void CGUIBaseContainer::OnPrevLetter()
 {
   int offset = CorrectOffset(GetOffset(), GetCursor());
-  if (!m_letterOffsets.size())
+  if (m_letterOffsets.empty())
     return;
   for (int i = (int)m_letterOffsets.size() - 1; i >= 0; i--)
   {
@@ -575,7 +575,7 @@ void CGUIBaseContainer::OnJumpLetter(const std::string& letter, bool skip /*=fal
   m_matchTimer.StartZero();
 
   // we can't jump through letters if we have none
-  if (0 == m_letterOffsets.size())
+  if (m_letterOffsets.empty())
     return;
 
   // find the current letter we're focused on
@@ -610,7 +610,7 @@ void CGUIBaseContainer::OnJumpSMS(int letter)
   static const char letterMap[8][6] = { "ABC2", "DEF3", "GHI4", "JKL5", "MNO6", "PQRS7", "TUV8", "WXYZ9" };
 
   // only 2..9 supported
-  if (letter < 2 || letter > 9 || !m_letterOffsets.size())
+  if (letter < 2 || letter > 9 || m_letterOffsets.empty())
     return;
 
   const std::string letters = letterMap[letter - 2];
@@ -666,7 +666,7 @@ int CGUIBaseContainer::GetSelectedItem() const
 
 CGUIListItemPtr CGUIBaseContainer::GetListItem(int offset, unsigned int flag) const
 {
-  if (!m_items.size() || !m_layout)
+  if (m_items.empty() || !m_layout)
     return CGUIListItemPtr();
   int item = GetSelectedItem() + offset;
   if (flag & INFOFLAG_LISTITEM_POSITION) // use offset from the first item displayed, taking into account scrolling
@@ -1279,7 +1279,8 @@ bool CGUIBaseContainer::GetCondition(int condition, int data) const
   case CONTAINER_HAS_PREVIOUS:
     return (HasPreviousPage());
   case CONTAINER_HAS_PARENT_ITEM:
-    return (m_items.size() && m_items[0]->IsFileItem() && (std::static_pointer_cast<CFileItem>(m_items[0]))->IsParentFolder());
+    return (!m_items.empty() && m_items[0]->IsFileItem() &&
+            (std::static_pointer_cast<CFileItem>(m_items[0]))->IsParentFolder());
   case CONTAINER_SUBITEM:
     {
       CGUIListItemLayout *layout = GetFocusedLayout();
@@ -1347,7 +1348,8 @@ std::string CGUIBaseContainer::GetLabel(int info) const
     break;
   case CONTAINER_CURRENT_ITEM:
     {
-      if (m_items.size() && m_items[0]->IsFileItem() && (std::static_pointer_cast<CFileItem>(m_items[0]))->IsParentFolder())
+      if (!m_items.empty() && m_items[0]->IsFileItem() &&
+          (std::static_pointer_cast<CFileItem>(m_items[0]))->IsParentFolder())
         label = std::to_string(GetSelectedItem());
       else
         label = std::to_string(GetSelectedItem() + 1);

@@ -357,7 +357,7 @@ bool CSystemGUIInfo::GetLabel(std::string& value, const CFileItem *item, int con
     case NETWORK_DNS1_ADDRESS:
     {
       const std::vector<std::string> nss = CServiceBroker::GetNetwork().GetNameServers();
-      if (nss.size() >= 1)
+      if (!nss.empty())
       {
         value = nss[0];
         return true;

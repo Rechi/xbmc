@@ -75,7 +75,7 @@ bool CPlayListB4S::LoadData(std::istream& stream)
       iColon++;
       strFileName.erase(0, iColon);
     }
-    if (strFileName.size())
+    if (!strFileName.empty())
     {
       TiXmlNode* pNodeInfo = pEntryElement->FirstChild("Name");
       TiXmlNode* pNodeLength = pEntryElement->FirstChild("Length");
@@ -102,7 +102,8 @@ bool CPlayListB4S::LoadData(std::istream& stream)
 
 void CPlayListB4S::Save(const std::string& strFileName) const
 {
-  if (!m_vecItems.size()) return ;
+  if (m_vecItems.empty())
+    return;
   std::string strPlaylist = strFileName;
   strPlaylist = CUtil::MakeLegalPath(strPlaylist);
   CFile file;

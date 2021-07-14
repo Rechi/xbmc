@@ -421,7 +421,7 @@ bool CGUIControlFactory::GetConditionalVisibility(const TiXmlNode* control, std:
       conditions.emplace_back(node->FirstChild()->Value());
     node = node->NextSiblingElement("visible");
   }
-  if (!conditions.size())
+  if (conditions.empty())
     return false;
   if (conditions.size() == 1)
     condition = conditions[0];
@@ -496,7 +496,7 @@ bool CGUIControlFactory::GetActions(const TiXmlNode* pRootNode, const char* strT
     }
     pElement = pElement->NextSiblingElement(strTag);
   }
-  return action.m_actions.size() > 0;
+  return !action.m_actions.empty();
 }
 
 bool CGUIControlFactory::GetHitRect(const TiXmlNode *control, CRect &rect, const CRect &parentRect)
@@ -560,7 +560,7 @@ void CGUIControlFactory::GetInfoLabel(const TiXmlNode *pControlNode, const std::
 {
   std::vector<GUIINFO::CGUIInfoLabel> labels;
   GetInfoLabels(pControlNode, labelTag, labels, parentID);
-  if (labels.size())
+  if (!labels.empty())
     infoLabel = labels[0];
 }
 
@@ -610,7 +610,7 @@ void CGUIControlFactory::GetInfoLabels(const TiXmlNode *pControlNode, const std:
   if (infoNode)
   { // <info> nodes override <label>'s (backward compatibility)
     std::string fallback;
-    if (infoLabels.size())
+    if (!infoLabels.empty())
       fallback = infoLabels[0].GetLabel(0);
     infoLabels.clear();
     while (infoNode)
@@ -1104,7 +1104,8 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
     break;
   case CGUIControl::GUICONTROL_LABEL:
     {
-      const GUIINFO::CGUIInfoLabel &content = (infoLabels.size()) ? infoLabels[0] : GUIINFO::CGUIInfoLabel("");
+      const GUIINFO::CGUIInfoLabel& content =
+          (!infoLabels.empty()) ? infoLabels[0] : GUIINFO::CGUIInfoLabel("");
       if (insideContainer)
       { // inside lists we use CGUIListLabel
         control = new CGUIListLabel(parentID, id, posX, posY, width, height, labelInfo, content, scrollValue);
@@ -1426,7 +1427,7 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
       CGUITextBox* tcontrol = static_cast<CGUITextBox*>(control);
 
       tcontrol->SetPageControl(pageControl);
-      if (infoLabels.size())
+      if (!infoLabels.empty())
         tcontrol->SetInfo(infoLabels[0]);
       tcontrol->SetAutoScrolling(pControlNode);
       tcontrol->SetMinHeight(minHeight);

@@ -56,7 +56,7 @@ void CGUIPanelContainer::Process(unsigned int currentTime, CDirtyRegionList &dir
 
   int current = (offset - cacheBefore) * m_itemsPerRow;
   int col = 0;
-  while (pos < end && m_items.size())
+  while (pos < end && !m_items.empty())
   {
     if (current >= (int)m_items.size())
       break;
@@ -113,7 +113,7 @@ void CGUIPanelContainer::Render()
     CGUIListItemPtr focusedItem;
     int current = (offset - cacheBefore) * m_itemsPerRow;
     int col = 0;
-    while (pos < end && m_items.size())
+    while (pos < end && !m_items.empty())
     {
       if (current >= (int)m_items.size())
         break;

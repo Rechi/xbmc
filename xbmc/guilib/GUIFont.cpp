@@ -162,7 +162,7 @@ void CGUIFont::DrawScrollingText(float x, float y, const std::vector<UTILS::Colo
   if (!m_font) return;
   if (!shadowColor) shadowColor = m_shadowColor;
 
-  if (!text.size() || ClippedRegionIsEmpty(x, y, maxWidth, alignment))
+  if (text.empty() || ClippedRegionIsEmpty(x, y, maxWidth, alignment))
     return; // nothing to render
 
   if (!scrollInfo.m_widthValid)

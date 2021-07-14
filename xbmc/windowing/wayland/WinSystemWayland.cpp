@@ -1506,7 +1506,7 @@ std::string CWinSystemWayland::GetClipboardText()
   for (auto const& seat : m_seats)
   {
     auto text = seat.second.GetSelectionText();
-    if (text != "")
+    if (!text.empty())
     {
       return text;
     }

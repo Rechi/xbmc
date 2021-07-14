@@ -208,7 +208,7 @@ bool CPlayListM3U::Load(const std::string& strFileName)
 
 void CPlayListM3U::Save(const std::string& strFileName) const
 {
-  if (!m_vecItems.size())
+  if (m_vecItems.empty())
     return;
   std::string strPlaylist = CUtil::MakeLegalPath(strFileName);
   CFile file;

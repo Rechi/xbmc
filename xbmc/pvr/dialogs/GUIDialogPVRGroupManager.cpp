@@ -105,7 +105,7 @@ bool CGUIDialogPVRGroupManager::ActionButtonNewGroup(CGUIMessage& message)
     /* prompt for a group name */
     if (CGUIKeyboardFactory::ShowAndGetInput(strGroupName, CVariant{g_localizeStrings.Get(19139)}, false))
     {
-      if (strGroupName != "")
+      if (!strGroupName.empty())
       {
         /* add the group if it doesn't already exist */
         CPVRChannelGroups* groups = CServiceBroker::GetPVRManager().ChannelGroups()->Get(m_bIsRadio);

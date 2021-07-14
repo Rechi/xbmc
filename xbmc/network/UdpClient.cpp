@@ -213,7 +213,7 @@ bool CUdpClient::DispatchNextCommand()
   {
     CSingleLock lock(critical_section);
 
-    if (commands.size() <= 0)
+    if (commands.empty())
       return false;
 
     COMMANDITERATOR it = commands.begin();

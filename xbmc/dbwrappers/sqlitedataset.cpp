@@ -163,7 +163,7 @@ int callback(void* res_ptr,int ncol, char** result,char** cols)
 {
   result_set* r = static_cast<result_set*>(res_ptr);
 
-  if (!r->record_header.size())
+  if (r->record_header.empty())
   {
     r->record_header.reserve(ncol);
     for (int i=0; i < ncol; i++) {
@@ -354,7 +354,7 @@ bool SqliteDatabase::exists(void)
   sprintf(sqlcmd,"SELECT * FROM sqlite_master");
   if ((last_err = sqlite3_exec(getHandle(),sqlcmd, &callback, &res,NULL)) == SQLITE_OK)
   {
-    bRet = (res.records.size() > 0);
+    bRet = (!res.records.empty());
   }
 
   return bRet;
@@ -703,7 +703,7 @@ void SqliteDataset::fill_fields() {
   //cout <<"rr "<<result.records.size()<<"|" << frecno <<"\n";
   if ((db == NULL) || (result.record_header.empty()) || (result.records.size() < (unsigned int)frecno)) return;
 
-  if (fields_object->size() == 0) // Filling columns name
+  if (fields_object->empty()) // Filling columns name
   {
     const unsigned int ncols = result.record_header.size();
     fields_object->resize(ncols);
@@ -712,7 +712,7 @@ void SqliteDataset::fill_fields() {
   }
 
   //Filling result
-  if (result.records.size() != 0)
+  if (!result.records.empty())
   {
     const sql_record *row = result.records[frecno];
     if (row)
@@ -876,7 +876,8 @@ void SqliteDataset::open(const std::string &sql) {
 }
 
 void SqliteDataset::open() {
-  if (select_sql.size()) {
+  if (!select_sql.empty())
+  {
     query(select_sql);
   }
   else {
@@ -897,7 +898,7 @@ void SqliteDataset::close() {
 
 void SqliteDataset::cancel() {
   if ((ds_state == dsInsert) || (ds_state==dsEdit)) {
-    if (result.record_header.size())
+    if (!result.record_header.empty())
       ds_state = dsSelect;
     else
       ds_state = dsInactive;
