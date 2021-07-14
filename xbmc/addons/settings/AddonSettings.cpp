@@ -140,8 +140,7 @@ SettingPtr AddSettingWithoutDefinition(ADDON::CAddonSettings& settings,
 namespace ADDON
 {
 CAddonSettings::CAddonSettings(const std::shared_ptr<const IAddon>& addon)
-  : CSettingsBase(),
-    m_addon(addon),
+  : m_addon(addon),
     m_addonId(addon->ID()),
     m_addonPath(addon->Path()),
     m_addonProfile(addon->Profile()),

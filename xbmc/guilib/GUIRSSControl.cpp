@@ -37,17 +37,14 @@ CGUIRSSControl::CGUIRSSControl(int parentID, int controlID, float posX, float po
   ControlType = GUICONTROL_RSS;
 }
 
-CGUIRSSControl::CGUIRSSControl(const CGUIRSSControl &from)
+CGUIRSSControl::CGUIRSSControl(const CGUIRSSControl& from)
   : CGUIControl(from),
-  m_feed(),
-  m_strRSSTags(from.m_strRSSTags),
-  m_label(from.m_label),
-  m_channelColor(from.m_channelColor),
-  m_headlineColor(from.m_headlineColor),
-  m_vecUrls(),
-  m_vecIntervals(),
-  m_scrollInfo(from.m_scrollInfo),
-  m_dirty(true)
+    m_strRSSTags(from.m_strRSSTags),
+    m_label(from.m_label),
+    m_channelColor(from.m_channelColor),
+    m_headlineColor(from.m_headlineColor),
+    m_scrollInfo(from.m_scrollInfo),
+    m_dirty(true)
 {
   m_pReader = NULL;
   m_rtl = from.m_rtl;

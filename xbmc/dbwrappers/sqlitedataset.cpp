@@ -602,7 +602,8 @@ std::string SqliteDatabase::vprepare(const char *format, va_list args)
 
 //************* SqliteDataset implementation ***************
 
-SqliteDataset::SqliteDataset():Dataset() {
+SqliteDataset::SqliteDataset()
+{
   haveError = false;
   db = NULL;
   errmsg = NULL;

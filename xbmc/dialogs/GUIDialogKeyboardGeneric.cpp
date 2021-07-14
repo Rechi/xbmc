@@ -69,9 +69,7 @@ using namespace KODI::MESSAGING;
 #define SEARCH_DELAY         1000
 
 CGUIDialogKeyboardGeneric::CGUIDialogKeyboardGeneric()
-: CGUIDialog(WINDOW_DIALOG_KEYBOARD, "DialogKeyboard.xml")
-, CGUIKeyboard()
-, m_pCharCallback(NULL)
+  : CGUIDialog(WINDOW_DIALOG_KEYBOARD, "DialogKeyboard.xml"), m_pCharCallback(NULL)
 {
   m_bIsConfirmed = false;
   m_bShift = false;

@@ -247,20 +247,9 @@ JsonRpcMethodMap CJSONServiceDescription::m_methodMaps[] = {
 };
 
 JSONSchemaTypeDefinition::JSONSchemaTypeDefinition()
-  : missingReference(),
-    name(),
-    ID(),
-    referencedType(nullptr),
-    extends(),
-    description(),
-    unionTypes(),
-    defaultValue(),
+  : referencedType(nullptr),
     minimum(-std::numeric_limits<double>::max()),
     maximum(std::numeric_limits<double>::max()),
-    enums(),
-    items(),
-    additionalItems(),
-    properties(),
     additionalProperties(nullptr)
 { }
 
@@ -1236,8 +1225,7 @@ void JSONSchemaTypeDefinition::ResolveReference()
   referencedTypeSet = true;
 }
 
-JSONSchemaTypeDefinition::CJsonSchemaPropertiesMap::CJsonSchemaPropertiesMap() :
-   m_propertiesmap(std::map<std::string, JSONSchemaTypeDefinitionPtr>())
+JSONSchemaTypeDefinition::CJsonSchemaPropertiesMap::CJsonSchemaPropertiesMap()
 {
 }
 
@@ -1270,11 +1258,7 @@ unsigned int JSONSchemaTypeDefinition::CJsonSchemaPropertiesMap::size() const
 }
 
 JsonRpcMethod::JsonRpcMethod()
-  : missingReference(),
-    name(),
-    method(NULL),
-    description(),
-    parameters(),
+  : method(NULL),
     returns(new JSONSchemaTypeDefinition())
 { }
 
@@ -2110,8 +2094,7 @@ void CJSONServiceDescription::getReferencedTypes(const JSONSchemaTypeDefinitionP
     getReferencedTypes(type->unionTypes.at(index), referencedTypes);
 }
 
-CJSONServiceDescription::CJsonRpcMethodMap::CJsonRpcMethodMap():
-  m_actionmap(std::map<std::string, JsonRpcMethod>())
+CJSONServiceDescription::CJsonRpcMethodMap::CJsonRpcMethodMap()
 {
 }
 

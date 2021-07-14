@@ -19,7 +19,6 @@ using namespace XFILE;
 using namespace XCURL;
 
 CDAVFile::CDAVFile(void)
-  : CCurlFile()
 {
 }
 

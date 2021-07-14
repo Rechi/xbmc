@@ -25,7 +25,6 @@
 #endif
 
 CRenderSystemGLES::CRenderSystemGLES()
- : CRenderSystemBase()
 {
 }
 

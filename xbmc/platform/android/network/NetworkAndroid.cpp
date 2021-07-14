@@ -233,7 +233,6 @@ std::unique_ptr<CNetworkBase> CNetworkBase::GetNetwork()
 }
 
 CNetworkAndroid::CNetworkAndroid()
- : CNetworkBase()
 {
   RetrieveInterfaces();
 }

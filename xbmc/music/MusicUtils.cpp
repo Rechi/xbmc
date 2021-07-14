@@ -152,11 +152,7 @@ namespace MUSIC_UTILS
       iUserrating(userrating)
     { }
 
-    CSetSongRatingJob(int songId, int userrating) :
-      strPath(),
-      idSong(songId),
-      iUserrating(userrating)
-    { }
+    CSetSongRatingJob(int songId, int userrating) : idSong(songId), iUserrating(userrating) {}
 
     ~CSetSongRatingJob(void) override = default;
 

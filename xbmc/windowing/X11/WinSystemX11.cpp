@@ -38,7 +38,7 @@ using namespace KODI::WINDOWING::X11;
 
 #define EGL_NO_CONFIG (EGLConfig)0
 
-CWinSystemX11::CWinSystemX11() : CWinSystemBase()
+CWinSystemX11::CWinSystemX11()
 {
   m_dpy = NULL;
   m_glWindow = 0;

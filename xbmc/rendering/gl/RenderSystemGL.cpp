@@ -21,7 +21,7 @@
 #include "utils/log.h"
 #include "windowing/GraphicContext.h"
 
-CRenderSystemGL::CRenderSystemGL() : CRenderSystemBase()
+CRenderSystemGL::CRenderSystemGL()
 {
 }
 

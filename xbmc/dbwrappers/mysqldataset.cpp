@@ -1406,7 +1406,8 @@ std::string MysqlDatabase::mysql_vmprintf(const char *zFormat, va_list ap) {
 
 //************* MysqlDataset implementation ***************
 
-MysqlDataset::MysqlDataset():Dataset() {
+MysqlDataset::MysqlDataset()
+{
   haveError = false;
   db = NULL;
   errmsg = NULL;

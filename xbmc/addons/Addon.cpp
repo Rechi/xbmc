@@ -38,7 +38,6 @@ namespace ADDON
 
 CAddon::CAddon(const AddonInfoPtr& addonInfo, TYPE addonType)
   : m_addonInfo(addonInfo),
-    m_userSettingsPath(),
     m_loadSettingsFailed(false),
     m_hasUserSettings(false),
     m_profilePath(StringUtils::Format("special://profile/addon_data/{}/", m_addonInfo->ID())),

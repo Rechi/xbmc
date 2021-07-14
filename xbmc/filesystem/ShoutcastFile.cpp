@@ -36,8 +36,7 @@ using namespace MUSIC_INFO;
 using namespace KODI::MESSAGING;
 using namespace std::chrono_literals;
 
-CShoutcastFile::CShoutcastFile() :
-  IFile(), CThread("ShoutcastFile")
+CShoutcastFile::CShoutcastFile() : CThread("ShoutcastFile")
 {
   m_discarded = 0;
   m_currint = 0;

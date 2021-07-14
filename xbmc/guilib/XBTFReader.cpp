@@ -54,8 +54,6 @@ static bool ReadUInt64(FILE* file, uint64_t& value)
 }
 
 CXBTFReader::CXBTFReader()
-  : CXBTFBase(),
-    m_path()
 { }
 
 CXBTFReader::~CXBTFReader()

@@ -121,7 +121,7 @@ std::unique_ptr<CNetworkBase> CNetworkBase::GetNetwork()
   return std::make_unique<CNetworkLinux>();
 }
 
-CNetworkLinux::CNetworkLinux() : CNetworkPosix()
+CNetworkLinux::CNetworkLinux()
 {
   queryInterfaceList();
 }

@@ -26,7 +26,7 @@ public:
   {}
 };
 
-CDVDDemuxBXA::CDVDDemuxBXA() : CDVDDemux()
+CDVDDemuxBXA::CDVDDemuxBXA()
 {
   m_pInput = NULL;
   m_stream = NULL;

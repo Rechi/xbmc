@@ -58,8 +58,6 @@ private:
 
 CJSONVariantParserHandler::CJSONVariantParserHandler(CVariant& parsedObject)
   : m_parsedObject(parsedObject),
-    m_parse(),
-    m_key(),
     m_status(PARSE_STATUS::Variable)
 { }
 

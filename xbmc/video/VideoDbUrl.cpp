@@ -16,7 +16,6 @@
 using namespace XFILE;
 
 CVideoDbUrl::CVideoDbUrl()
-  : CDbUrl()
 { }
 
 CVideoDbUrl::~CVideoDbUrl() = default;

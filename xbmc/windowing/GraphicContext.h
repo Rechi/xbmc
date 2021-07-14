@@ -205,7 +205,7 @@ protected:
   class UITransform
   {
   public:
-    UITransform() : matrix() {};
+    UITransform(){};
     UITransform(const TransformMatrix &m, const float sX = 1.0f, const float sY = 1.0f) : matrix(m), scaleX(sX), scaleY(sY) { };
     void Reset() { matrix.Reset(); scaleX = scaleY = 1.0f; };
 

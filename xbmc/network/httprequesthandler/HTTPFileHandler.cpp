@@ -13,15 +13,9 @@
 #include "utils/URIUtils.h"
 
 CHTTPFileHandler::CHTTPFileHandler()
-  : IHTTPRequestHandler(),
-    m_url(),
-    m_lastModified()
 { }
 
-CHTTPFileHandler::CHTTPFileHandler(const HTTPRequest &request)
-  : IHTTPRequestHandler(request),
-    m_url(),
-    m_lastModified()
+CHTTPFileHandler::CHTTPFileHandler(const HTTPRequest& request) : IHTTPRequestHandler(request)
 { }
 
 MHD_RESULT CHTTPFileHandler::HandleRequest()

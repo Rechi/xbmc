@@ -52,15 +52,9 @@ std::string GetHTTPMethod(HTTPMethod method)
 }
 
 IHTTPRequestHandler::IHTTPRequestHandler()
-  : m_request(),
-    m_response(),
-    m_postFields()
 { }
 
-IHTTPRequestHandler::IHTTPRequestHandler(const HTTPRequest &request)
-  : m_request(request),
-    m_response(),
-    m_postFields()
+IHTTPRequestHandler::IHTTPRequestHandler(const HTTPRequest& request) : m_request(request)
 {
   m_response.type = HTTPError;
   m_response.status = MHD_HTTP_INTERNAL_SERVER_ERROR;

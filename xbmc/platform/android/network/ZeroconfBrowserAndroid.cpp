@@ -199,9 +199,7 @@ void CZeroconfBrowserAndroid::removeDiscoveredService(CZeroconfBrowserAndroidDis
 /******************************************************************/
 
 CZeroconfBrowserAndroidDiscover::CZeroconfBrowserAndroidDiscover(CZeroconfBrowserAndroid* browser)
-  : CJNIXBMCNsdManagerDiscoveryListener()
-  , m_browser(browser)
-  , m_isActive(false)
+  : m_browser(browser), m_isActive(false)
 {
 }
 
@@ -271,7 +269,6 @@ void CZeroconfBrowserAndroidDiscover::onStopDiscoveryFailed(const std::string& s
 /***************************************/
 
 CZeroconfBrowserAndroidResolve::CZeroconfBrowserAndroidResolve()
-  : CJNIXBMCNsdManagerResolveListener()
 {
 }
 

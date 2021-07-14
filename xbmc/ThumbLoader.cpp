@@ -14,8 +14,7 @@
 
 using namespace XFILE;
 
-CThumbLoader::CThumbLoader() :
-  CBackgroundInfoLoader()
+CThumbLoader::CThumbLoader()
 {
   m_textureDatabase = new CTextureDatabase();
 }

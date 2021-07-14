@@ -142,7 +142,7 @@ void CDebugRenderer::Flush()
   m_overlayRenderer.Flush();
 }
 
-CDebugRenderer::CRenderer::CRenderer() : OVERLAY::CRenderer()
+CDebugRenderer::CRenderer::CRenderer()
 {
   m_font = "__debug__";
   m_fontBorder = "__debugborder__";
