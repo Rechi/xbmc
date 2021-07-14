@@ -27,6 +27,8 @@
 #include "utils/log.h"
 #include "video/Bookmark.h"
 
+#include <memory>
+
 using namespace KODI::MESSAGING;
 using namespace std::chrono_literals;
 
@@ -320,7 +322,7 @@ bool PAPlayer::QueueNextFileEx(const CFileItem &file, bool fadeIn)
         file.m_lStartOffset == m_currentStream->m_fileItem.m_lEndOffset &&
         m_currentStream && m_currentStream->m_prepareTriggered)
     {
-      m_currentStream->m_nextFileItem.reset(new CFileItem(file));
+      m_currentStream->m_nextFileItem = std::make_unique<CFileItem>(file);
       m_upcomingCrossfadeMS = 0;
       return true;
     }

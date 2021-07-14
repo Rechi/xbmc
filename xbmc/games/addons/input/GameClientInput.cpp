@@ -29,6 +29,7 @@
 #include "utils/log.h"
 
 #include <algorithm>
+#include <memory>
 
 using namespace KODI;
 using namespace GAME;
@@ -94,7 +95,7 @@ void CGameClientInput::Start(IGameInputCallback* input)
   }
 
   // Ensure hardware is open to receive events
-  m_hardware.reset(new CGameClientHardware(m_gameClient));
+  m_hardware = std::make_unique<CGameClientHardware>(m_gameClient);
 
   if (CServiceBroker::IsServiceManagerUp())
     CServiceBroker::GetPeripherals().RegisterObserver(this);
@@ -222,7 +223,7 @@ void CGameClientInput::LoadTopology()
   if (hardwarePorts.empty())
     hardwarePorts.emplace_back(new CGameClientPort(GetControllers(m_gameClient)));
 
-  m_topology.reset(new CGameClientTopology(std::move(hardwarePorts), playerLimit));
+  m_topology = std::make_unique<CGameClientTopology>(std::move(hardwarePorts), playerLimit);
 }
 
 void CGameClientInput::ActivateControllers(CControllerHub& hub)
@@ -244,7 +245,8 @@ void CGameClientInput::SetControllerLayouts(const ControllerVector& controllers)
   {
     const std::string controllerId = controller->ID();
     if (m_controllerLayouts.find(controllerId) == m_controllerLayouts.end())
-      m_controllerLayouts[controllerId].reset(new CGameClientController(*this, controller));
+      m_controllerLayouts[controllerId] =
+          std::make_unique<CGameClientController>(*this, controller);
   }
 
   std::vector<game_controller_layout> controllerStructs;
@@ -346,8 +348,8 @@ bool CGameClientInput::OpenKeyboard(const ControllerPtr& controller)
 
   if (bSuccess)
   {
-    m_keyboard.reset(
-        new CGameClientKeyboard(m_gameClient, controller->ID(), keyboards.at(0).get()));
+    m_keyboard = std::make_unique<CGameClientKeyboard>(m_gameClient, controller->ID(),
+                                                       keyboards.at(0).get());
     return true;
   }
 
@@ -411,7 +413,7 @@ bool CGameClientInput::OpenMouse(const ControllerPtr& controller)
 
   if (bSuccess)
   {
-    m_mouse.reset(new CGameClientMouse(m_gameClient, controller->ID(), mice.at(0).get()));
+    m_mouse = std::make_unique<CGameClientMouse>(m_gameClient, controller->ID(), mice.at(0).get());
     return true;
   }
 
@@ -482,7 +484,8 @@ bool CGameClientInput::OpenJoystick(const std::string& portAddress, const Contro
   {
     PERIPHERALS::EventLockHandlePtr lock = CServiceBroker::GetPeripherals().RegisterEventLock();
 
-    m_joysticks[portAddress].reset(new CGameClientJoystick(m_gameClient, portAddress, controller));
+    m_joysticks[portAddress] =
+        std::make_unique<CGameClientJoystick>(m_gameClient, portAddress, controller);
     ProcessJoysticks();
 
     return true;

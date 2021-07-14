@@ -8,6 +8,9 @@
 
 #include "RenderManager.h"
 
+/* to use the same as player */
+#include "../VideoPlayer/DVDClock.h"
+#include "../VideoPlayer/DVDCodecs/Video/DVDVideoCodec.h"
 #include "Application.h"
 #include "RenderCapture.h"
 #include "RenderFactory.h"
@@ -27,9 +30,7 @@
 #include "windowing/GraphicContext.h"
 #include "windowing/WinSystem.h"
 
-/* to use the same as player */
-#include "../VideoPlayer/DVDClock.h"
-#include "../VideoPlayer/DVDCodecs/Video/DVDVideoCodec.h"
+#include <memory>
 
 using namespace KODI::MESSAGING;
 using namespace std::chrono_literals;
@@ -142,7 +143,7 @@ bool CRenderManager::Configure(const VideoPicture& picture, float fps, unsigned 
     m_stateEvent.Reset();
     m_clockSync.Reset();
     m_dvdClock.SetVsyncAdjust(0);
-    m_pConfigPicture.reset(new VideoPicture());
+    m_pConfigPicture = std::make_unique<VideoPicture>();
     m_pConfigPicture->CopyRef(picture);
 
     CSingleLock lock2(m_presentlock);

@@ -12,6 +12,7 @@
 
 #include <algorithm>
 #include <limits>
+#include <memory>
 
 using namespace std::chrono_literals;
 
@@ -19,7 +20,7 @@ void CEvent::addGroup(XbmcThreads::CEventGroup* group)
 {
   CSingleLock lock(groupListMutex);
   if (!groups)
-    groups.reset(new std::vector<XbmcThreads::CEventGroup*>);
+    groups = std::make_unique<std::vector<XbmcThreads::CEventGroup*>>();
 
   groups->push_back(group);
 }

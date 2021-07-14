@@ -17,6 +17,8 @@
 #include "utils/GLUtils.h"
 #include "utils/log.h"
 
+#include <memory>
+
 using namespace VAAPI;
 using namespace KODI::UTILS::EGL;
 
@@ -92,18 +94,18 @@ bool CRendererVAAPI::Configure(const VideoPicture &picture, float fps, unsigned 
   {
     if (useVaapi2)
     {
-      tex.reset(new VAAPI::CVaapi2Texture);
+      tex = std::make_unique<VAAPI::CVaapi2Texture>();
     }
     else
     {
-      tex.reset(new VAAPI::CVaapi1Texture);
+      tex = std::make_unique<VAAPI::CVaapi1Texture>();
     }
     tex->Init(interop);
   }
 
   for (auto& fence : m_fences)
   {
-    fence.reset(new CEGLFence(CRendererVAAPI::m_pWinSystem->GetEGLDisplay()));
+    fence = std::make_unique<CEGLFence>(CRendererVAAPI::m_pWinSystem->GetEGLDisplay());
   }
 
   return CLinuxRendererGLES::Configure(picture, fps, orientation);

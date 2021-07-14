@@ -7,26 +7,32 @@
  */
 
 #include "DVDInputStreamNavigator.h"
-#include "filesystem/IFileTypes.h"
-#include "utils/LangCodeExpander.h"
+
 #include "../DVDDemuxSPU.h"
 #include "DVDStateSerializer.h"
-#include "settings/Settings.h"
-#include "settings/SettingsComponent.h"
 #include "LangInfo.h"
 #include "ServiceBroker.h"
-#include "utils/Geometry.h"
-#include "utils/log.h"
-#include "utils/URIUtils.h"
-#include "utils/StringUtils.h"
+#include "filesystem/IFileTypes.h"
+#if defined(TARGET_WINDOWS_STORE)
+#include "filesystem/SpecialProtocol.h"
+#endif
 #include "guilib/LocalizeStrings.h"
+#if defined(TARGET_WINDOWS_STORE)
+#include "platform/Environment.h"
+#endif
+#include "settings/Settings.h"
+#include "settings/SettingsComponent.h"
+#include "utils/Geometry.h"
+#include "utils/LangCodeExpander.h"
+#include "utils/StringUtils.h"
+#include "utils/URIUtils.h"
+#include "utils/log.h"
+
 #if defined(TARGET_DARWIN_OSX)
 #include "platform/darwin/osx/CocoaInterface.h"
 #endif
-#if defined(TARGET_WINDOWS_STORE)
-#include "filesystem/SpecialProtocol.h"
-#include "platform/Environment.h"
-#endif
+
+#include <memory>
 
 #define HOLDMODE_NONE 0
 #define HOLDMODE_HELD 1 /* set internally when we wish to flush demuxer */
@@ -109,7 +115,8 @@ bool CDVDInputStreamNavigator::Open()
   if (m_item.IsDiscImage())
   {
     // if dvd image file (ISO or alike) open using libdvdnav stream callback functions
-    m_pstream.reset(new CDVDInputStreamFile(m_item, XFILE::READ_TRUNCATED | XFILE::READ_BITRATE | XFILE::READ_CHUNKED));
+    m_pstream = std::make_unique<CDVDInputStreamFile>(
+        m_item, XFILE::READ_TRUNCATED | XFILE::READ_BITRATE | XFILE::READ_CHUNKED);
     if (!m_pstream->Open() || m_dll.dvdnav_open_stream(&m_dvdnav, m_pstream.get(), &m_dvdnav_stream_cb) != DVDNAV_STATUS_OK)
     {
       CLog::Log(LOGERROR, "Error opening image file or Error on dvdnav_open_stream");

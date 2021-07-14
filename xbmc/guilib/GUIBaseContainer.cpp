@@ -26,6 +26,8 @@
 #include "utils/XBMCTinyXML.h"
 #include "utils/log.h"
 
+#include <memory>
+
 #define HOLD_TIME_START 100
 #define HOLD_TIME_END   3000
 #define SCROLLING_GAP   200U
@@ -165,7 +167,7 @@ void CGUIBaseContainer::ProcessItem(float posX, float posY, CGUIListItemPtr& ite
   {
     if (!item->GetFocusedLayout())
     {
-      item->SetFocusedLayout(CGUIListItemLayoutPtr(new CGUIListItemLayout(*m_focusedLayout, this)));
+      item->SetFocusedLayout(std::make_unique<CGUIListItemLayout>(*m_focusedLayout, this));
     }
     if (item->GetFocusedLayout())
     {

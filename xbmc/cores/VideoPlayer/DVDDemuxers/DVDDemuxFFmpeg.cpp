@@ -10,6 +10,9 @@
 
 #include "DVDDemuxUtils.h"
 #include "DVDInputStreams/DVDInputStream.h"
+#ifdef HAVE_LIBBLURAY
+#include "DVDInputStreams/DVDInputStreamBluray.h"
+#endif
 #include "DVDInputStreams/DVDInputStreamFFmpeg.h"
 #include "ServiceBroker.h"
 #include "URL.h"
@@ -30,12 +33,10 @@
 #include "utils/XTimeUtils.h"
 #include "utils/log.h"
 
+#include <memory>
 #include <sstream>
 #include <utility>
 
-#ifdef HAVE_LIBBLURAY
-#include "DVDInputStreams/DVDInputStreamBluray.h"
-#endif
 #ifndef __STDC_CONSTANT_MACROS
 #define __STDC_CONSTANT_MACROS
 #endif
@@ -2202,8 +2203,7 @@ void CDVDDemuxFFmpeg::ParsePacket(AVPacket* pkt)
     auto parser = m_parsers.find(st->index);
     if (parser == m_parsers.end())
     {
-      m_parsers.insert(std::make_pair(st->index,
-                                      std::unique_ptr<CDemuxParserFFmpeg>(new CDemuxParserFFmpeg())));
+      m_parsers.insert(std::make_pair(st->index, std::make_unique<CDemuxParserFFmpeg>()));
       parser = m_parsers.find(st->index);
 
       parser->second->m_parserCtx = av_parser_init(st->codecpar->codec_id);

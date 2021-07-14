@@ -117,7 +117,7 @@ bool CGUIWindowPVRSearchBase::OnContextButton(int itemNumber, CONTEXT_BUTTON but
 
 void CGUIWindowPVRSearchBase::SetItemToSearch(const CFileItemPtr& item)
 {
-  m_searchfilter.reset(new CPVREpgSearchFilter(m_bRadio));
+  m_searchfilter = std::make_unique<CPVREpgSearchFilter>(m_bRadio);
 
   if (item->IsUsablePVRRecording())
   {
@@ -229,7 +229,7 @@ void CGUIWindowPVRSearchBase::OpenDialogSearch()
     return;
 
   if (!m_searchfilter)
-    m_searchfilter.reset(new CPVREpgSearchFilter(m_bRadio));
+    m_searchfilter = std::make_unique<CPVREpgSearchFilter>(m_bRadio);
 
   dlgSearch->SetFilterData(m_searchfilter.get());
 

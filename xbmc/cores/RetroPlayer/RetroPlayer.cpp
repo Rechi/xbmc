@@ -48,6 +48,8 @@
 #include "utils/log.h"
 #include "windowing/WinSystem.h"
 
+#include <memory>
+
 using namespace KODI;
 using namespace GAME;
 using namespace RETRO;
@@ -91,7 +93,7 @@ bool CRetroPlayer::OpenFile(const CFileItem& file, const CPlayerOptions& options
   m_processInfo->SetDataCache(&CServiceBroker::GetDataCacheCore());
   m_processInfo->ResetInfo();
 
-  m_renderManager.reset(new CRPRenderManager(*m_processInfo));
+  m_renderManager = std::make_unique<CRPRenderManager>(*m_processInfo);
 
   CSingleLock lock(m_mutex);
 
@@ -119,9 +121,9 @@ bool CRetroPlayer::OpenFile(const CFileItem& file, const CPlayerOptions& options
     m_gameClient = std::static_pointer_cast<CGameClient>(addon);
     if (m_gameClient->Initialize())
     {
-      m_streamManager.reset(new CRPStreamManager(*m_renderManager, *m_processInfo));
+      m_streamManager = std::make_unique<CRPStreamManager>(*m_renderManager, *m_processInfo);
 
-      m_input.reset(new CRetroPlayerInput(CServiceBroker::GetPeripherals()));
+      m_input = std::make_unique<CRetroPlayerInput>(CServiceBroker::GetPeripherals());
 
       if (!bStandalone)
       {
@@ -178,11 +180,11 @@ bool CRetroPlayer::OpenFile(const CFileItem& file, const CPlayerOptions& options
     // Initialize gameplay
     CreatePlayback(m_gameServices.GameSettings().AutosaveEnabled());
     RegisterWindowCallbacks();
-    m_playbackControl.reset(new CGUIPlaybackControl(*this));
+    m_playbackControl = std::make_unique<CGUIPlaybackControl>(*this);
     m_callback.OnPlayBackStarted(fileCopy);
     m_callback.OnAVStarted(fileCopy);
     if (!bStandalone)
-      m_autoSave.reset(new CRetroPlayerAutoSave(*this, m_gameServices.GameSettings()));
+      m_autoSave = std::make_unique<CRetroPlayerAutoSave>(*this, m_gameServices.GameSettings());
 
     // Set video framerate
     m_processInfo->SetVideoFps(static_cast<float>(m_gameClient->GetFrameRate()));
@@ -551,8 +553,8 @@ void CRetroPlayer::CreatePlayback(bool bRestoreState)
   if (m_gameClient->RequiresGameLoop())
   {
     m_playback->Deinitialize();
-    m_playback.reset(new CReversiblePlayback(m_gameClient.get(), m_gameClient->GetFrameRate(),
-                                             m_gameClient->GetSerializeSize()));
+    m_playback = std::make_unique<CReversiblePlayback>(
+        m_gameClient.get(), m_gameClient->GetFrameRate(), m_gameClient->GetSerializeSize());
   }
   else
     ResetPlayback();
@@ -578,7 +580,7 @@ void CRetroPlayer::ResetPlayback()
   if (m_playback)
     m_playback->Deinitialize();
 
-  m_playback.reset(new CRealtimePlayback);
+  m_playback = std::make_unique<CRealtimePlayback>();
 }
 
 void CRetroPlayer::OpenOSD()

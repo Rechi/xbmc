@@ -43,7 +43,10 @@ namespace WAYLAND
 class CRegistry;
 class CWindowDecorator;
 
-class CWinSystemWayland : public CWinSystemBase, IInputHandler, IWindowDecorationHandler, IShellSurfaceHandler
+class CWinSystemWayland : public CWinSystemBase,
+                          public IInputHandler,
+                          public IWindowDecorationHandler,
+                          public IShellSurfaceHandler
 {
 public:
   CWinSystemWayland();

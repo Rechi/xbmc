@@ -36,6 +36,7 @@
 #import "platform/darwin/ios/IOSScreenManager.h"
 #import "platform/darwin/ios/XBMCController.h"
 
+#include <memory>
 #include <vector>
 
 #import <Foundation/Foundation.h>
@@ -101,7 +102,7 @@ CWinSystemIOS::CWinSystemIOS() : CWinSystemBase()
   m_bIsBackgrounded = false;
   m_pDisplayLink = new CADisplayLinkWrapper;
   m_pDisplayLink->callbackClass = [[IOSDisplayLinkCallback alloc] init];
-  m_winEvents.reset(new CWinEventsIOS());
+  m_winEvents = std::make_unique<CWinEventsIOS>();
 
   CAESinkDARWINIOS::Register();
 }

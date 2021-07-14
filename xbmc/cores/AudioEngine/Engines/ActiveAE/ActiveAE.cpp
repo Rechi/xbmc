@@ -8,23 +8,25 @@
 
 #include "ActiveAE.h"
 
-using namespace AE;
-using namespace ActiveAE;
 #include "ActiveAESettings.h"
 #include "ActiveAESound.h"
 #include "ActiveAEStream.h"
 #include "ServiceBroker.h"
-#include "cores/AudioEngine/Interfaces/IAudioCallback.h"
-#include "cores/AudioEngine/Utils/AEUtil.h"
-#include "cores/AudioEngine/Utils/AEStreamData.h"
-#include "cores/AudioEngine/Utils/AEStreamInfo.h"
 #include "cores/AudioEngine/AEResampleFactory.h"
 #include "cores/AudioEngine/Encoders/AEEncoderFFmpeg.h"
-
+#include "cores/AudioEngine/Interfaces/IAudioCallback.h"
+#include "cores/AudioEngine/Utils/AEStreamData.h"
+#include "cores/AudioEngine/Utils/AEStreamInfo.h"
+#include "cores/AudioEngine/Utils/AEUtil.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
-#include "windowing/WinSystem.h"
 #include "utils/log.h"
+#include "windowing/WinSystem.h"
+
+#include <memory>
+
+using namespace AE;
+using namespace ActiveAE;
 
 #define MAX_CACHE_LEVEL 0.4   // total cache time of stream in seconds
 #define MAX_WATER_LEVEL 0.2   // buffered time after stream stages in seconds
@@ -271,7 +273,7 @@ CActiveAE::CActiveAE() :
   m_stats.Reset(44100, true);
   m_streamIdGen = 0;
 
-  m_settingsHandler.reset(new CActiveAESettings(*this));
+  m_settingsHandler = std::make_unique<CActiveAESettings>(*this);
 }
 
 CActiveAE::~CActiveAE()

@@ -12,6 +12,9 @@
 #include "rendering/MatrixGL.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/SettingsComponent.h"
+#if defined(TARGET_LINUX)
+#include "utils/EGLUtils.h"
+#endif
 #include "utils/GLUtils.h"
 #include "utils/MathUtils.h"
 #include "utils/SystemInfo.h"
@@ -20,9 +23,7 @@
 #include "utils/log.h"
 #include "windowing/GraphicContext.h"
 
-#if defined(TARGET_LINUX)
-#include "utils/EGLUtils.h"
-#endif
+#include <memory>
 
 CRenderSystemGLES::CRenderSystemGLES()
  : CRenderSystemBase()
@@ -384,7 +385,8 @@ void CRenderSystemGLES::InitialiseShaders()
     defines += "#define KODI_LIMITED_RANGE 1\n";
   }
 
-  m_pShader[SM_DEFAULT].reset(new CGLESShader("gles_shader.vert", "gles_shader_default.frag", defines));
+  m_pShader[SM_DEFAULT] =
+      std::make_unique<CGLESShader>("gles_shader.vert", "gles_shader_default.frag", defines);
   if (!m_pShader[SM_DEFAULT]->CompileAndLink())
   {
     m_pShader[SM_DEFAULT]->Free();
@@ -392,7 +394,7 @@ void CRenderSystemGLES::InitialiseShaders()
     CLog::Log(LOGERROR, "GUI Shader gles_shader_default.frag - compile and link failed");
   }
 
-  m_pShader[SM_TEXTURE].reset(new CGLESShader("gles_shader_texture.frag", defines));
+  m_pShader[SM_TEXTURE] = std::make_unique<CGLESShader>("gles_shader_texture.frag", defines);
   if (!m_pShader[SM_TEXTURE]->CompileAndLink())
   {
     m_pShader[SM_TEXTURE]->Free();
@@ -400,7 +402,7 @@ void CRenderSystemGLES::InitialiseShaders()
     CLog::Log(LOGERROR, "GUI Shader gles_shader_texture.frag - compile and link failed");
   }
 
-  m_pShader[SM_MULTI].reset(new CGLESShader("gles_shader_multi.frag", defines));
+  m_pShader[SM_MULTI] = std::make_unique<CGLESShader>("gles_shader_multi.frag", defines);
   if (!m_pShader[SM_MULTI]->CompileAndLink())
   {
     m_pShader[SM_MULTI]->Free();
@@ -408,7 +410,7 @@ void CRenderSystemGLES::InitialiseShaders()
     CLog::Log(LOGERROR, "GUI Shader gles_shader_multi.frag - compile and link failed");
   }
 
-  m_pShader[SM_FONTS].reset(new CGLESShader("gles_shader_fonts.frag", defines));
+  m_pShader[SM_FONTS] = std::make_unique<CGLESShader>("gles_shader_fonts.frag", defines);
   if (!m_pShader[SM_FONTS]->CompileAndLink())
   {
     m_pShader[SM_FONTS]->Free();
@@ -416,7 +418,8 @@ void CRenderSystemGLES::InitialiseShaders()
     CLog::Log(LOGERROR, "GUI Shader gles_shader_fonts.frag - compile and link failed");
   }
 
-  m_pShader[SM_TEXTURE_NOBLEND].reset(new CGLESShader("gles_shader_texture_noblend.frag", defines));
+  m_pShader[SM_TEXTURE_NOBLEND] =
+      std::make_unique<CGLESShader>("gles_shader_texture_noblend.frag", defines);
   if (!m_pShader[SM_TEXTURE_NOBLEND]->CompileAndLink())
   {
     m_pShader[SM_TEXTURE_NOBLEND]->Free();
@@ -424,7 +427,8 @@ void CRenderSystemGLES::InitialiseShaders()
     CLog::Log(LOGERROR, "GUI Shader gles_shader_texture_noblend.frag - compile and link failed");
   }
 
-  m_pShader[SM_MULTI_BLENDCOLOR].reset(new CGLESShader("gles_shader_multi_blendcolor.frag", defines));
+  m_pShader[SM_MULTI_BLENDCOLOR] =
+      std::make_unique<CGLESShader>("gles_shader_multi_blendcolor.frag", defines);
   if (!m_pShader[SM_MULTI_BLENDCOLOR]->CompileAndLink())
   {
     m_pShader[SM_MULTI_BLENDCOLOR]->Free();
@@ -432,7 +436,7 @@ void CRenderSystemGLES::InitialiseShaders()
     CLog::Log(LOGERROR, "GUI Shader gles_shader_multi_blendcolor.frag - compile and link failed");
   }
 
-  m_pShader[SM_TEXTURE_RGBA].reset(new CGLESShader("gles_shader_rgba.frag", defines));
+  m_pShader[SM_TEXTURE_RGBA] = std::make_unique<CGLESShader>("gles_shader_rgba.frag", defines);
   if (!m_pShader[SM_TEXTURE_RGBA]->CompileAndLink())
   {
     m_pShader[SM_TEXTURE_RGBA]->Free();
@@ -440,7 +444,8 @@ void CRenderSystemGLES::InitialiseShaders()
     CLog::Log(LOGERROR, "GUI Shader gles_shader_rgba.frag - compile and link failed");
   }
 
-  m_pShader[SM_TEXTURE_RGBA_BLENDCOLOR].reset(new CGLESShader("gles_shader_rgba_blendcolor.frag", defines));
+  m_pShader[SM_TEXTURE_RGBA_BLENDCOLOR] =
+      std::make_unique<CGLESShader>("gles_shader_rgba_blendcolor.frag", defines);
   if (!m_pShader[SM_TEXTURE_RGBA_BLENDCOLOR]->CompileAndLink())
   {
     m_pShader[SM_TEXTURE_RGBA_BLENDCOLOR]->Free();
@@ -448,7 +453,8 @@ void CRenderSystemGLES::InitialiseShaders()
     CLog::Log(LOGERROR, "GUI Shader gles_shader_rgba_blendcolor.frag - compile and link failed");
   }
 
-  m_pShader[SM_TEXTURE_RGBA_BOB].reset(new CGLESShader("gles_shader_rgba_bob.frag", defines));
+  m_pShader[SM_TEXTURE_RGBA_BOB] =
+      std::make_unique<CGLESShader>("gles_shader_rgba_bob.frag", defines);
   if (!m_pShader[SM_TEXTURE_RGBA_BOB]->CompileAndLink())
   {
     m_pShader[SM_TEXTURE_RGBA_BOB]->Free();
@@ -458,7 +464,8 @@ void CRenderSystemGLES::InitialiseShaders()
 
   if (IsExtSupported("GL_OES_EGL_image_external"))
   {
-    m_pShader[SM_TEXTURE_RGBA_OES].reset(new CGLESShader("gles_shader_rgba_oes.frag", defines));
+    m_pShader[SM_TEXTURE_RGBA_OES] =
+        std::make_unique<CGLESShader>("gles_shader_rgba_oes.frag", defines);
     if (!m_pShader[SM_TEXTURE_RGBA_OES]->CompileAndLink())
     {
       m_pShader[SM_TEXTURE_RGBA_OES]->Free();
@@ -467,7 +474,8 @@ void CRenderSystemGLES::InitialiseShaders()
     }
 
 
-    m_pShader[SM_TEXTURE_RGBA_BOB_OES].reset(new CGLESShader("gles_shader_rgba_bob_oes.frag", defines));
+    m_pShader[SM_TEXTURE_RGBA_BOB_OES] =
+        std::make_unique<CGLESShader>("gles_shader_rgba_bob_oes.frag", defines);
     if (!m_pShader[SM_TEXTURE_RGBA_BOB_OES]->CompileAndLink())
     {
       m_pShader[SM_TEXTURE_RGBA_BOB_OES]->Free();
@@ -476,7 +484,8 @@ void CRenderSystemGLES::InitialiseShaders()
     }
   }
 
-  m_pShader[SM_TEXTURE_NOALPHA].reset(new CGLESShader("gles_shader_texture_noalpha.frag", defines));
+  m_pShader[SM_TEXTURE_NOALPHA] =
+      std::make_unique<CGLESShader>("gles_shader_texture_noalpha.frag", defines);
   if (!m_pShader[SM_TEXTURE_NOALPHA]->CompileAndLink())
   {
     m_pShader[SM_TEXTURE_NOALPHA]->Free();

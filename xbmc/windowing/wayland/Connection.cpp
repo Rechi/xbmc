@@ -9,12 +9,13 @@
 #include "Connection.h"
 
 #include <cassert>
+#include <memory>
 
 using namespace KODI::WINDOWING::WAYLAND;
 
 CConnection::CConnection()
 {
-  m_display.reset(new wayland::display_t);
+  m_display = std::make_unique<wayland::display_t>();
 }
 
 wayland::display_t& CConnection::GetDisplay()

@@ -35,6 +35,7 @@
 #include "platform/android/media/drm/MediaDrmCryptoSession.h"
 
 #include <float.h>
+#include <memory>
 #include <string.h>
 
 #include <EGL/eglplatform.h>
@@ -56,7 +57,7 @@ CWinSystemAndroid::CWinSystemAndroid()
 
   m_android = nullptr;
 
-  m_winEvents.reset(new CWinEventsAndroid());
+  m_winEvents = std::make_unique<CWinEventsAndroid>();
 }
 
 CWinSystemAndroid::~CWinSystemAndroid()

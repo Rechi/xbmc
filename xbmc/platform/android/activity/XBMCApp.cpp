@@ -8,19 +8,56 @@
 
 #include "XBMCApp.h"
 
+#include "AndroidKey.h"
+#include "AppParamParser.h"
+#include "Application.h"
+#include "CompileInfo.h"
+// Audio Engine includes for Factory and interfaces
+#include "GUIInfoManager.h"
+#include "ServiceBroker.h"
+#include "TextureCache.h"
+#include "cores/AudioEngine/AESinkFactory.h"
+#include "cores/AudioEngine/Interfaces/AE.h"
+#include "cores/AudioEngine/Sinks/AESinkAUDIOTRACK.h"
+#include "cores/VideoPlayer/VideoRenderers/RenderManager.h"
+#include "filesystem/SpecialProtocol.h"
+#include "filesystem/VideoDatabaseFile.h"
+#include "guilib/GUIComponent.h"
+#include "guilib/GUIWindowManager.h"
+#include "guilib/guiinfo/GUIInfoLabels.h"
+#include "input/Key.h"
+#include "input/mouse/MouseStat.h"
+#include "interfaces/AnnouncementManager.h"
+#include "messaging/ApplicationMessenger.h"
+#include "platform/xbmc.h"
+#include "powermanagement/PowerManager.h"
+#include "settings/AdvancedSettings.h"
+#include "settings/DisplaySettings.h"
+#include "utils/StringUtils.h"
+#include "utils/TimeUtils.h"
+#include "utils/URIUtils.h"
+#include "utils/Variant.h"
+#include "utils/log.h"
+#include "windowing/GraphicContext.h"
+#include "windowing/WinEvents.h"
+#include "windowing/android/VideoSyncAndroid.h"
+#include "windowing/android/WinSystemAndroid.h"
+
+#include "platform/android/activity/IInputDeviceCallbacks.h"
+#include "platform/android/activity/IInputDeviceEventHandler.h"
+#include "platform/android/network/NetworkAndroid.h"
+#include "platform/android/powermanagement/AndroidPowerSyscall.h"
+
+#include <memory>
 #include <sstream>
-#include <unistd.h>
 #include <stdlib.h>
-#include <dlfcn.h>
 #include <string.h>
 
-#include <jni.h>
-#include <android/configuration.h>
 #include <android/bitmap.h>
+#include <android/configuration.h>
 #include <android/log.h>
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
-
 #include <androidjni/ActivityManager.h>
 #include <androidjni/ApplicationInfo.h>
 #include <androidjni/BitmapFactory.h>
@@ -52,47 +89,9 @@
 #include <androidjni/WakeLock.h>
 #include <androidjni/Window.h>
 #include <androidjni/WindowManager.h>
-
-#include "AndroidKey.h"
-#include "settings/AdvancedSettings.h"
-#include "interfaces/AnnouncementManager.h"
-#include "Application.h"
-#include "AppParamParser.h"
-#include "messaging/ApplicationMessenger.h"
-#include "CompileInfo.h"
-#include "settings/DisplaySettings.h"
-#include "windowing/GraphicContext.h"
-#include "guilib/GUIWindowManager.h"
-// Audio Engine includes for Factory and interfaces
-#include "GUIInfoManager.h"
-#include "ServiceBroker.h"
-#include "TextureCache.h"
-#include "cores/AudioEngine/AESinkFactory.h"
-#include "cores/AudioEngine/Interfaces/AE.h"
-#include "cores/AudioEngine/Sinks/AESinkAUDIOTRACK.h"
-#include "cores/VideoPlayer/VideoRenderers/RenderManager.h"
-#include "filesystem/SpecialProtocol.h"
-#include "filesystem/VideoDatabaseFile.h"
-#include "guilib/GUIComponent.h"
-#include "guilib/GUIWindowManager.h"
-#include "guilib/guiinfo/GUIInfoLabels.h"
-#include "input/Key.h"
-#include "input/mouse/MouseStat.h"
-#include "platform/xbmc.h"
-#include "powermanagement/PowerManager.h"
-#include "utils/StringUtils.h"
-#include "utils/TimeUtils.h"
-#include "utils/URIUtils.h"
-#include "utils/Variant.h"
-#include "utils/log.h"
-#include "windowing/WinEvents.h"
-#include "windowing/android/VideoSyncAndroid.h"
-#include "windowing/android/WinSystemAndroid.h"
-
-#include "platform/android/activity/IInputDeviceCallbacks.h"
-#include "platform/android/activity/IInputDeviceEventHandler.h"
-#include "platform/android/network/NetworkAndroid.h"
-#include "platform/android/powermanagement/AndroidPowerSyscall.h"
+#include <dlfcn.h>
+#include <jni.h>
+#include <unistd.h>
 
 #define GIGABYTES       1073741824
 
@@ -156,7 +155,7 @@ CXBMCApp::CXBMCApp(ANativeActivity* nativeActivity, IInputHandler& inputHandler)
     exit(1);
     return;
   }
-  m_mainView.reset(new CJNIXBMCMainView(this));
+  m_mainView = std::make_unique<CJNIXBMCMainView>(this);
   m_firstrun = true;
   m_exiting = false;
   m_hdmiSource = CJNISystemProperties::get("ro.hdmi.device_type", "") == "4";
@@ -231,7 +230,7 @@ void CXBMCApp::onStart()
     intentFilter.addAction("android.intent.action.SCREEN_OFF");
     intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
     registerReceiver(*this, intentFilter);
-    m_mediaSession.reset(new CJNIXBMCMediaSession());
+    m_mediaSession = std::make_unique<CJNIXBMCMediaSession>();
   }
 }
 
@@ -390,7 +389,8 @@ void CXBMCApp::Initialize()
 {
   CServiceBroker::GetAnnouncementManager()->AddAnnouncer(CXBMCApp::get());
   runNativeOnUiThread(RegisterDisplayListener, nullptr);
-  m_activityManager.reset(new CJNIActivityManager(getSystemService(CJNIContext::ACTIVITY_SERVICE)));
+  m_activityManager =
+      std::make_unique<CJNIActivityManager>(getSystemService(CJNIContext::ACTIVITY_SERVICE));
   m_inputHandler.setDPI(GetDPI());
 }
 

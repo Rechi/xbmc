@@ -14,6 +14,8 @@
 #include "filesystem/File.h"
 #include "utils/log.h"
 
+#include <memory>
+
 using namespace KODI;
 using namespace RETRO;
 
@@ -23,7 +25,7 @@ std::unique_ptr<ISavestate> CSavestateDatabase::CreateSavestate()
 {
   std::unique_ptr<ISavestate> savestate;
 
-  savestate.reset(new CSavestateFlatBuffer);
+  savestate = std::make_unique<CSavestateFlatBuffer>();
 
   return savestate;
 }

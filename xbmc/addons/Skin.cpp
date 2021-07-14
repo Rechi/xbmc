@@ -7,6 +7,7 @@
  */
 
 #include "Skin.h"
+
 #include "AddonManager.h"
 #include "ServiceBroker.h"
 #include "Util.h"
@@ -26,11 +27,13 @@
 #include "settings/lib/Setting.h"
 #include "settings/lib/SettingDefinitions.h"
 #include "threads/Timer.h"
-#include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
-#include "utils/XMLUtils.h"
 #include "utils/Variant.h"
+#include "utils/XMLUtils.h"
+#include "utils/log.h"
+
+#include <memory>
 
 #define XML_SETTINGS      "settings"
 #define XML_SETTING       "setting"
@@ -155,7 +158,7 @@ CSkinInfo::CSkinInfo(
       m_effectsSlowDown(1.f),
       m_debugging(false)
   {
-    m_settingsUpdateHandler.reset(new CSkinSettingUpdateHandler(*this));
+    m_settingsUpdateHandler = std::make_unique<CSkinSettingUpdateHandler>(*this);
   }
 
 CSkinInfo::CSkinInfo(const AddonInfoPtr& addonInfo) : CAddon(addonInfo, ADDON_SKIN)
@@ -191,7 +194,7 @@ CSkinInfo::CSkinInfo(const AddonInfoPtr& addonInfo) : CAddon(addonInfo, ADDON_SK
 
   m_debugging = Type(ADDON_SKIN)->GetValue("@debugging").asBoolean();
 
-  m_settingsUpdateHandler.reset(new CSkinSettingUpdateHandler(*this));
+  m_settingsUpdateHandler = std::make_unique<CSkinSettingUpdateHandler>(*this);
   LoadStartupWindows(addonInfo);
 }
 

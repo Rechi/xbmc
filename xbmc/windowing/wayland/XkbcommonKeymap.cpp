@@ -13,6 +13,7 @@
 #include "utils/log.h"
 
 #include <iostream>
+#include <memory>
 #include <sstream>
 #include <stdexcept>
 #include <vector>
@@ -202,7 +203,7 @@ std::unique_ptr<CXkbcommonKeymap> CXkbcommonContext::KeymapFromString(std::strin
     throw std::runtime_error("Failed to compile keymap");
   }
 
-  return std::unique_ptr<CXkbcommonKeymap>{new CXkbcommonKeymap(std::move(xkbKeymap))};
+  return std::make_unique<CXkbcommonKeymap>(std::move(xkbKeymap));
 }
 
 std::unique_ptr<CXkbcommonKeymap> CXkbcommonContext::KeymapFromNames(const std::string& rules, const std::string& model, const std::string& layout, const std::string& variant, const std::string& options)
@@ -222,7 +223,7 @@ std::unique_ptr<CXkbcommonKeymap> CXkbcommonContext::KeymapFromNames(const std::
     throw std::runtime_error("Failed to compile keymap");
   }
 
-  return std::unique_ptr<CXkbcommonKeymap>{new CXkbcommonKeymap(std::move(keymap))};
+  return std::make_unique<CXkbcommonKeymap>(std::move(keymap));
 }
 
 std::unique_ptr<xkb_state, CXkbcommonKeymap::XkbStateDeleter> CXkbcommonKeymap::CreateXkbStateFromKeymap(xkb_keymap* keymap)
