@@ -315,11 +315,11 @@ AEStreamHandle* Interface_AudioEngine::audioengine_make_stream(void* kodiBase,
     return nullptr;
 
   CAEChannelInfo layout;
-  for (unsigned int ch = 0; ch < AUDIOENGINE_CH_MAX; ++ch)
+  for (const AudioEngineChannel& channel : streamFormat->m_channels)
   {
-    if (streamFormat->m_channels[ch] == AUDIOENGINE_CH_NULL)
+    if (channel == AUDIOENGINE_CH_NULL)
       break;
-    layout += TranslateAEChannelToKodi(streamFormat->m_channels[ch]);
+    layout += TranslateAEChannelToKodi(channel);
   }
 
   AEAudioFormat format;

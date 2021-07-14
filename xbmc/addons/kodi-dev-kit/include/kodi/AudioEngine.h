@@ -113,8 +113,8 @@ public:
     m_cStructure->m_frameSize = 0;
     m_cStructure->m_channelCount = 0;
 
-    for (size_t ch = 0; ch < AUDIOENGINE_CH_MAX; ++ch)
-      m_cStructure->m_channels[ch] = AUDIOENGINE_CH_NULL;
+    for (AudioEngineChannel& channel : m_cStructure->m_channels)
+      channel = AUDIOENGINE_CH_NULL;
   }
   AudioEngineFormat(const AudioEngineFormat& channel) : CStructHdl(channel) {}
   AudioEngineFormat(const AUDIO_ENGINE_FORMAT* channel) : CStructHdl(channel) {}
@@ -164,8 +164,8 @@ public:
   {
     // Reset first all to empty values to AUDIOENGINE_CH_NULL, in case given list is empty
     m_cStructure->m_channelCount = 0;
-    for (size_t ch = 0; ch < AUDIOENGINE_CH_MAX; ++ch)
-      m_cStructure->m_channels[ch] = AUDIOENGINE_CH_NULL;
+    for (AudioEngineChannel& channel : m_cStructure->m_channels)
+      channel = AUDIOENGINE_CH_NULL;
 
     for (size_t ch = 0; ch < layout.size() && ch < AUDIOENGINE_CH_MAX; ++ch)
     {
@@ -178,12 +178,12 @@ public:
   std::vector<enum AudioEngineChannel> GetChannelLayout() const
   {
     std::vector<enum AudioEngineChannel> channels;
-    for (size_t ch = 0; ch < AUDIOENGINE_CH_MAX; ++ch)
+    for (const AudioEngineChannel& channel : m_cStructure->m_channels)
     {
-      if (m_cStructure->m_channels[ch] == AUDIOENGINE_CH_NULL)
+      if (channel == AUDIOENGINE_CH_NULL)
         break;
 
-      channels.push_back(m_cStructure->m_channels[ch]);
+      channels.push_back(channel);
     }
     return channels;
   }

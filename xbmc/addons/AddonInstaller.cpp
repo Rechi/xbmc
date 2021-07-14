@@ -106,19 +106,19 @@ void CAddonInstaller::GetInstallList(VECADDONS &addons) const
 {
   CSingleLock lock(m_critSection);
   std::vector<std::string> addonIDs;
-  for (JobMap::const_iterator i = m_downloadJobs.begin(); i != m_downloadJobs.end(); ++i)
+  for (const std::pair<const std::string, CDownloadJob>& downloadJob : m_downloadJobs)
   {
-    if (i->second.jobID)
-      addonIDs.push_back(i->first);
+    if (downloadJob.second.jobID)
+      addonIDs.push_back(downloadJob.first);
   }
   lock.Leave();
 
   CAddonDatabase database;
   database.Open();
-  for (std::vector<std::string>::iterator it = addonIDs.begin(); it != addonIDs.end(); ++it)
+  for (const std::string& addonID : addonIDs)
   {
     AddonPtr addon;
-    if (database.GetAddon(*it, addon))
+    if (database.GetAddon(addonID, addon))
       addons.push_back(addon);
   }
 }
@@ -407,11 +407,11 @@ void CAddonInstaller::PrunePackageCache()
   CFileItemList items;
   CAddonDatabase db;
   db.Open();
-  for (auto it = packs.begin(); it != packs.end(); ++it)
+  for (const std::pair<const std::string, std::unique_ptr<CFileItemList>>& pack : packs)
   {
-    it->second->Sort(SortByLabel, SortOrderDescending);
-    for (int j = 2; j < it->second->Size(); j++)
-      items.Add(CFileItemPtr(new CFileItem(*it->second->Get(j))));
+    pack.second->Sort(SortByLabel, SortOrderDescending);
+    for (int j = 2; j < pack.second->Size(); j++)
+      items.Add(CFileItemPtr(new CFileItem(*pack.second->Get(j))));
   }
 
   items.Sort(SortBySize, SortOrderDescending);
@@ -427,10 +427,10 @@ void CAddonInstaller::PrunePackageCache()
   {
     // 2. Remove the oldest packages (leaving least 1 for each add-on)
     items.Clear();
-    for (auto it = packs.begin(); it != packs.end(); ++it)
+    for (const std::pair<const std::string, std::unique_ptr<CFileItemList>>& pack : packs)
     {
-      if (it->second->Size() > 1)
-        items.Add(CFileItemPtr(new CFileItem(*it->second->Get(1))));
+      if (pack.second->Size() > 1)
+        items.Add(CFileItemPtr(new CFileItem(*pack.second->Get(1))));
     }
 
     items.Sort(SortByDate, SortOrderAscending);
