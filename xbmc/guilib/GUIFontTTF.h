@@ -104,7 +104,7 @@ protected:
       glyphInfo = gInfo;
       glyphPosition = gPos;
     }
-    Glyph() {}
+    Glyph() = default;
   };
 
   struct Character

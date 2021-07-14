@@ -19,13 +19,9 @@
 using namespace KODI;
 
 
-CServiceBroker::CServiceBroker()
-{
-}
+CServiceBroker::CServiceBroker() = default;
 
-CServiceBroker::~CServiceBroker()
-{
-}
+CServiceBroker::~CServiceBroker() = default;
 
 CLog& CServiceBroker::GetLogging()
 {

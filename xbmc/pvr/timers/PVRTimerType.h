@@ -60,7 +60,7 @@ namespace PVR
                                                                uint64_t iMustNotHaveAttr,
                                                                int iClientId);
 
-    CPVRTimerType();
+    CPVRTimerType() = default;
     CPVRTimerType(const PVR_TIMER_TYPE& type, int iClientId);
     CPVRTimerType(unsigned int iTypeId,
                   uint64_t iAttributes,

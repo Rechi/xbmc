@@ -21,11 +21,7 @@ public:
     m_libass = std::move(libass);
   }
 
-  CDVDOverlaySSA(CDVDOverlaySSA& src)
-    : CDVDOverlay(src)
-    , m_libass(src.m_libass)
-  {
-  }
+  CDVDOverlaySSA(CDVDOverlaySSA& src) = default;
 
   ~CDVDOverlaySSA() override = default;
 
