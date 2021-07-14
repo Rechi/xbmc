@@ -378,11 +378,11 @@ DemuxPacket* CDVDDemuxCC::Decode()
 
   if (m_hasData)
   {
-    for (unsigned int i=0; i<m_streamdata.size(); i++)
+    for (streamdata& i : m_streamdata)
     {
-      if (m_streamdata[i].hasData)
+      if (i.hasData)
       {
-        int service = m_streamdata[i].service;
+        int service = i.service;
 
         char *data;
         int len;
@@ -402,9 +402,9 @@ DemuxPacket* CDVDDemuxCC::Decode()
         memcpy(pPacket->pData, data, pPacket->iSize);
 
         pPacket->iStreamId = service;
-        pPacket->pts = m_streamdata[i].pts;
+        pPacket->pts = i.pts;
         pPacket->duration = 0;
-        m_streamdata[i].hasData = false;
+        i.hasData = false;
         break;
       }
       m_hasData = false;

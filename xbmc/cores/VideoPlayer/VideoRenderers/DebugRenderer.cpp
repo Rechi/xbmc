@@ -127,8 +127,8 @@ void CDebugRenderer::SetInfo(DEBUG_INFO_VIDEO& video, DEBUG_INFO_RENDER& render)
     m_overlay[5]->AddElement(new CDVDOverlayText::CElementText(m_strDebug[5]));
   }
 
-  for (int i = 0; i < 6; i++)
-    m_overlayRenderer.AddOverlay(m_overlay[i], 0, 0);
+  for (CDVDOverlayText* overlay : m_overlay)
+    m_overlayRenderer.AddOverlay(overlay, 0, 0);
 }
 
 void CDebugRenderer::Render(CRect& src, CRect& dst, CRect& view)
@@ -153,12 +153,12 @@ void CDebugRenderer::CRenderer::Render(int idx)
   std::vector<COverlay*> render;
   std::vector<SElement>& list = m_buffers[idx];
   float posY = 0.0f;
-  for (std::vector<SElement>::iterator it = list.begin(); it != list.end(); ++it)
+  for (const SElement& it : list)
   {
     COverlay* o = nullptr;
 
-    if (it->overlay_dvd)
-      o = Convert(it->overlay_dvd, it->pts);
+    if (it.overlay_dvd)
+      o = Convert(it.overlay_dvd, it.pts);
 
     if (!o)
       continue;

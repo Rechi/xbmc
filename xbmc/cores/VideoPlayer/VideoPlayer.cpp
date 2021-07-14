@@ -335,13 +335,13 @@ void CSelectionStreams::Clear(StreamType type, StreamSource source)
 SelectionStream& CSelectionStreams::Get(StreamType type, int index)
 {
   int count = -1;
-  for(size_t i=0;i<m_Streams.size();i++)
+  for (SelectionStream& stream : m_Streams)
   {
-    if(m_Streams[i].type != type)
+    if (stream.type != type)
       continue;
     count++;
     if(count == index)
-      return m_Streams[i];
+      return stream;
   }
   return m_invalid;
 }
@@ -359,13 +359,13 @@ std::vector<SelectionStream> CSelectionStreams::Get(StreamType type)
 
 bool CSelectionStreams::Get(StreamType type, StreamFlags flag, SelectionStream& out)
 {
-  for(size_t i=0;i<m_Streams.size();i++)
+  for (const SelectionStream& stream : m_Streams)
   {
-    if(m_Streams[i].type != type)
+    if (stream.type != type)
       continue;
-    if((m_Streams[i].flags & flag) != flag)
+    if ((stream.flags & flag) != flag)
       continue;
-    out = m_Streams[i];
+    out = stream;
     return true;
   }
   return false;
@@ -390,9 +390,8 @@ int CSelectionStreams::TypeIndexOf(StreamType type, int source, int64_t demuxerI
 int CSelectionStreams::Source(StreamSource source, const std::string& filename)
 {
   int index = source - 1;
-  for (size_t i=0; i<m_Streams.size(); i++)
+  for (const SelectionStream& s : m_Streams)
   {
-    SelectionStream &s = m_Streams[i];
     if (STREAM_SOURCE_MASK(s.source) != source)
       continue;
     // if it already exists, return same

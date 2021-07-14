@@ -629,9 +629,9 @@ bool CEdl::AddCut(const Cut& newCut)
     return false;
   }
 
-  for (int i = 0; i < (int)m_vecCuts.size(); i++)
+  for (const Cut& vecCut : m_vecCuts)
   {
-    if (cut.start < m_vecCuts[i].start && cut.end > m_vecCuts[i].end)
+    if (cut.start < vecCut.start && cut.end > vecCut.end)
     {
       CLog::Log(LOGERROR, "{} - Cut surrounds an existing cut! [{} - {}], {}", __FUNCTION__,
                 MillisecondsToTimeString(cut.start), MillisecondsToTimeString(cut.end),
@@ -733,14 +733,15 @@ int CEdl::RemoveCutTime(int iSeek) const
    * total duration for display.
    */
   int iCutTime = 0;
-  for (int i = 0; i < (int)m_vecCuts.size(); i++)
+  for (const Cut& cut : m_vecCuts)
   {
-    if (m_vecCuts[i].action == Action::CUT)
+    if (cut.action == Action::CUT)
     {
-      if (iSeek >= m_vecCuts[i].start && iSeek <= m_vecCuts[i].end) // Inside cut
-        iCutTime += iSeek - m_vecCuts[i].start - 1; // Decrease cut length by 1ms to jump over end boundary.
-      else if (iSeek >= m_vecCuts[i].start) // Cut has already been passed over.
-        iCutTime += m_vecCuts[i].end - m_vecCuts[i].start;
+      if (iSeek >= cut.start && iSeek <= cut.end) // Inside cut
+        iCutTime +=
+            iSeek - cut.start - 1; // Decrease cut length by 1ms to jump over end boundary.
+      else if (iSeek >= cut.start) // Cut has already been passed over.
+        iCutTime += cut.end - cut.start;
     }
   }
   return iSeek - iCutTime;
@@ -752,10 +753,10 @@ double CEdl::RestoreCutTime(double dClock) const
     return dClock;
 
   double dSeek = dClock;
-  for (int i = 0; i < (int)m_vecCuts.size(); i++)
+  for (const Cut& cut : m_vecCuts)
   {
-    if (m_vecCuts[i].action == Action::CUT && dSeek >= m_vecCuts[i].start)
-      dSeek += static_cast<double>(m_vecCuts[i].end - m_vecCuts[i].start);
+    if (cut.action == Action::CUT && dSeek >= cut.start)
+      dSeek += static_cast<double>(cut.end - cut.start);
   }
 
   return dSeek;
@@ -772,9 +773,9 @@ std::string CEdl::GetInfo() const
   if (HasCut())
   {
     int cutCount = 0, muteCount = 0, commBreakCount = 0;
-    for (int i = 0; i < (int)m_vecCuts.size(); i++)
+    for (const Cut& cut : m_vecCuts)
     {
-      switch (m_vecCuts[i].action)
+      switch (cut.action)
       {
       case Action::CUT:
         cutCount++;
@@ -804,15 +805,15 @@ std::string CEdl::GetInfo() const
 
 bool CEdl::InCut(const int iSeek, Cut *pCut)
 {
-  for (int i = 0; i < (int)m_vecCuts.size(); i++)
+  for (const Cut& cut : m_vecCuts)
   {
-    if (iSeek < m_vecCuts[i].start) // Early exit if not even up to the cut start time.
+    if (iSeek < cut.start) // Early exit if not even up to the cut start time.
       return false;
 
-    if (iSeek >= m_vecCuts[i].start && iSeek <= m_vecCuts[i].end) // Inside cut.
+    if (iSeek >= cut.start && iSeek <= cut.end) // Inside cut.
     {
       if (pCut)
-        *pCut = m_vecCuts[i];
+        *pCut = cut;
       return true;
     }
   }
@@ -887,24 +888,24 @@ bool CEdl::GetNextSceneMarker(bool bPlus, const int iClock, int *iSceneMarker)
 
   if (bPlus) // Find closest scene forwards
   {
-    for (int i = 0; i < (int)m_vecSceneMarkers.size(); i++)
+    for (int sceneMarker : m_vecSceneMarkers)
     {
-      if ((m_vecSceneMarkers[i] > iSeek) && ((m_vecSceneMarkers[i] - iSeek) < iDiff))
+      if ((sceneMarker > iSeek) && ((sceneMarker - iSeek) < iDiff))
       {
-        iDiff = m_vecSceneMarkers[i] - iSeek;
-        *iSceneMarker = m_vecSceneMarkers[i];
+        iDiff = sceneMarker - iSeek;
+        *iSceneMarker = sceneMarker;
         bFound = true;
       }
     }
   }
   else // Find closest scene backwards
   {
-    for (int i = 0; i < (int)m_vecSceneMarkers.size(); i++)
+    for (int sceneMarker : m_vecSceneMarkers)
     {
-      if ((m_vecSceneMarkers[i] < iSeek) && ((iSeek - m_vecSceneMarkers[i]) < iDiff))
+      if ((sceneMarker < iSeek) && ((iSeek - sceneMarker) < iDiff))
       {
-        iDiff = iSeek - m_vecSceneMarkers[i];
-        *iSceneMarker = m_vecSceneMarkers[i];
+        iDiff = iSeek - sceneMarker;
+        *iSceneMarker = sceneMarker;
         bFound = true;
       }
     }
@@ -1017,13 +1018,13 @@ void CEdl::MergeShortCommBreaks()
   /*
    * Add in scene markers at the start and end of the commercial breaks.
    */
-  for (int i = 0; i < (int)m_vecCuts.size(); i++)
+  for (const Cut& cut : m_vecCuts)
   {
-    if (m_vecCuts[i].action == Action::COMM_BREAK)
+    if (cut.action == Action::COMM_BREAK)
     {
-      if (m_vecCuts[i].start > 0) // Don't add a scene marker at the start.
-        AddSceneMarker(m_vecCuts[i].start);
-      AddSceneMarker(m_vecCuts[i].end);
+      if (cut.start > 0) // Don't add a scene marker at the start.
+        AddSceneMarker(cut.start);
+      AddSceneMarker(cut.end);
     }
   }
 }

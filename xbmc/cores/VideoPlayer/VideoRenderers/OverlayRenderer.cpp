@@ -152,12 +152,12 @@ void CRenderer::Render(int idx)
 
   std::vector<COverlay*> render;
   std::vector<SElement>& list = m_buffers[idx];
-  for(std::vector<SElement>::iterator it = list.begin(); it != list.end(); ++it)
+  for (const SElement& it : list)
   {
     COverlay* o = NULL;
 
-    if(it->overlay_dvd)
-      o = Convert(it->overlay_dvd, it->pts);
+    if (it.overlay_dvd)
+      o = Convert(it.overlay_dvd, it.pts);
 
     if(!o)
       continue;
@@ -170,10 +170,10 @@ void CRenderer::Render(int idx)
   float total_height = 0.0f;
   float cur_height = 0.0f;
   int subalign = settings->GetInt(CSettings::SETTING_SUBTITLES_ALIGN);
-  for (std::vector<COverlay*>::iterator it = render.begin(); it != render.end(); ++it)
+  for (COverlay* it : render)
   {
     COverlay* o = nullptr;
-    COverlayText *text = dynamic_cast<COverlayText*>(*it);
+    COverlayText* text = dynamic_cast<COverlayText*>(it);
     if (text)
     {
       
@@ -199,16 +199,14 @@ void CRenderer::Render(int idx)
     }
     else
     {
-      o = *it;
+      o = it;
       o->PrepareRender();
     }
     total_height += o->m_height;
   }
 
-  for (std::vector<COverlay*>::iterator it = render.begin(); it != render.end(); ++it)
+  for (COverlay* o : render)
   {
-    COverlay* o = *it;
-
     float adjust_height = 0.0f;
 
     if (o->m_type == COverlay::TYPE_GUITEXT)
@@ -316,9 +314,9 @@ bool CRenderer::HasOverlay(int idx)
   CSingleLock lock(m_section);
 
   std::vector<SElement>& list = m_buffers[idx];
-  for(std::vector<SElement>::iterator it = list.begin(); it != list.end(); ++it)
+  for (const SElement& it : list)
   {
-    if (it->overlay_dvd)
+    if (it.overlay_dvd)
     {
       hasOverlay = true;
       break;

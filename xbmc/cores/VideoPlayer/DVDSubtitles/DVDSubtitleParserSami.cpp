@@ -48,11 +48,11 @@ bool CDVDSubtitleParserSami::Open(CDVDStreamInfo &hints)
   TagConv.LoadHead(m_pStream.get());
   if (TagConv.m_Langclass.size() >= 2)
   {
-    for (unsigned int i = 0; i < TagConv.m_Langclass.size(); i++)
+    for (const CDVDSubtitleTagSami::SLangclass& langclass : TagConv.m_Langclass)
     {
-      if (strFileName.find(TagConv.m_Langclass[i].Name, 9) == 9)
+      if (strFileName.find(langclass.Name, 9) == 9)
       {
-        strClassID = TagConv.m_Langclass[i].ID;
+        strClassID = langclass.ID;
         StringUtils::ToLower(strClassID);
         break;
       }

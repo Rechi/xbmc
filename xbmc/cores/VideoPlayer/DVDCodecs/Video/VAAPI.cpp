@@ -1955,15 +1955,15 @@ void COutput::Flush()
     msg->Release();
   }
 
-  for (unsigned int i = 0; i < m_bufferPool->decodedPics.size(); i++)
+  for (const CVaapiDecodedPicture& decodedPic : m_bufferPool->decodedPics)
   {
-    m_config.videoSurfaces->ClearRender(m_bufferPool->decodedPics[i].videoSurface);
+    m_config.videoSurfaces->ClearRender(decodedPic.videoSurface);
   }
   m_bufferPool->decodedPics.clear();
 
-  for (unsigned int i = 0; i < m_bufferPool->processedPics.size(); i++)
+  for (CVaapiProcessedPicture& processedPic : m_bufferPool->processedPics)
   {
-    ReleaseProcessedPicture(m_bufferPool->processedPics[i]);
+    ReleaseProcessedPicture(processedPic);
   }
   m_bufferPool->processedPics.clear();
 
@@ -2228,15 +2228,15 @@ void COutput::ReleaseBufferPool(bool precleanup)
 
   m_bufferPool->DeleteTextures(precleanup);
 
-  for (unsigned int i = 0; i < m_bufferPool->decodedPics.size(); i++)
+  for (const CVaapiDecodedPicture& decodedPic : m_bufferPool->decodedPics)
   {
-    m_config.videoSurfaces->ClearRender(m_bufferPool->decodedPics[i].videoSurface);
+    m_config.videoSurfaces->ClearRender(decodedPic.videoSurface);
   }
   m_bufferPool->decodedPics.clear();
 
-  for (unsigned int i = 0; i < m_bufferPool->processedPics.size(); i++)
+  for (CVaapiProcessedPicture& processedPic : m_bufferPool->processedPics)
   {
-    ReleaseProcessedPicture(m_bufferPool->processedPics[i]);
+    ReleaseProcessedPicture(processedPic);
   }
   m_bufferPool->processedPics.clear();
 }

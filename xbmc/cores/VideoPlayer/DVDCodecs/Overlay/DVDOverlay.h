@@ -112,8 +112,8 @@ class CDVDOverlayGroup : public CDVDOverlay
 public:
   ~CDVDOverlayGroup() override
   {
-    for(VecOverlaysIter it = m_overlays.begin(); it != m_overlays.end(); ++it)
-      (*it)->Release();
+    for (CDVDOverlay* overlay : m_overlays)
+      overlay->Release();
     m_overlays.clear();
   }
 
@@ -125,8 +125,8 @@ public:
   CDVDOverlayGroup(CDVDOverlayGroup& src)
     : CDVDOverlay(src)
   {
-    for(VecOverlaysIter it = src.m_overlays.begin(); it != src.m_overlays.end(); ++it)
-      m_overlays.push_back((*it)->Clone());
+    for (CDVDOverlay* overlay : src.m_overlays)
+      m_overlays.push_back(overlay->Clone());
   }
   VecOverlays m_overlays;
 };
