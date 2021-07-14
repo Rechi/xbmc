@@ -390,7 +390,8 @@ bool CGUIWindowMusicNav::GetDirectory(const std::string &strDirectory, CFileItem
   if (StringUtils::StartsWithNoCase(strDirectory, "videodb://") || items.IsVideoDb())
   {
     CVideoDatabaseDirectory dir;
-    VIDEODATABASEDIRECTORY::NODE_TYPE node = dir.GetDirectoryChildType(items.GetPath());
+    VIDEODATABASEDIRECTORY::NODE_TYPE node =
+        XFILE::CVideoDatabaseDirectory::GetDirectoryChildType(items.GetPath());
     if (node == VIDEODATABASEDIRECTORY::NODE_TYPE_TITLE_MUSICVIDEOS ||
         node == VIDEODATABASEDIRECTORY::NODE_TYPE_RECENTLY_ADDED_MUSICVIDEOS)
       items.SetContent("musicvideos");
@@ -416,7 +417,7 @@ bool CGUIWindowMusicNav::GetDirectory(const std::string &strDirectory, CFileItem
   else if (StringUtils::StartsWithNoCase(strDirectory, "musicdb://") || items.IsMusicDb())
   {
     CMusicDatabaseDirectory dir;
-    NODE_TYPE node = dir.GetDirectoryChildType(items.GetPath());
+    NODE_TYPE node = XFILE::CMusicDatabaseDirectory::GetDirectoryChildType(items.GetPath());
     if (node == NODE_TYPE_ALBUM ||
         node == NODE_TYPE_ALBUM_RECENTLY_ADDED ||
         node == NODE_TYPE_ALBUM_RECENTLY_PLAYED ||
@@ -500,7 +501,7 @@ void CGUIWindowMusicNav::UpdateButtons()
   else
   {
     CMusicDatabaseDirectory dir;
-    dir.GetLabel(m_vecItems->GetPath(), strLabel);
+    XFILE::CMusicDatabaseDirectory::GetLabel(m_vecItems->GetPath(), strLabel);
   }
 
   SET_CONTROL_LABEL(CONTROL_FILTER, strLabel);
@@ -599,7 +600,7 @@ void CGUIWindowMusicNav::GetContextButtons(int itemNumber, CContextButtons &butt
 
       CMusicDatabaseDirectory dir;
 
-      if (!item->IsParentFolder() && !dir.IsAllItem(item->GetPath()))
+      if (!item->IsParentFolder() && !XFILE::CMusicDatabaseDirectory::IsAllItem(item->GetPath()))
       {
         if (item->m_bIsFolder && !item->IsVideoDb() &&
           !item->IsPlugin() && !StringUtils::StartsWithNoCase(item->GetPath(), "musicsearch://"))
@@ -612,7 +613,7 @@ void CGUIWindowMusicNav::GetContextButtons(int itemNumber, CContextButtons &butt
             buttons.Add(CONTEXT_BUTTON_INFO_ALL, 21884);
 
           //Set default or clear default
-          NODE_TYPE nodetype = dir.GetDirectoryType(item->GetPath());
+          NODE_TYPE nodetype = XFILE::CMusicDatabaseDirectory::GetDirectoryType(item->GetPath());
           if (!inPlaylists &&
              (nodetype == NODE_TYPE_ROOT ||
               nodetype == NODE_TYPE_OVERVIEW ||

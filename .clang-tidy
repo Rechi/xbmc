@@ -25,6 +25,7 @@ Checks: "\
   readability-redundant-string-cstr,\
   readability-redundant-string-init,\
   readability-simplify-boolean-expr,\
+  readability-static-accessed-through-instance,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'
 CheckOptions:

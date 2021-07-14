@@ -41,7 +41,7 @@ bool CDNSNameCache::Lookup(const std::string& strHostName, std::string& strIpAdd
   }
 
   // check if there's a custom entry or if it's already cached
-  if(g_DNSCache.GetCached(strHostName, strIpAddress))
+  if (CDNSNameCache::GetCached(strHostName, strIpAddress))
     return true;
 
 #if !defined(TARGET_WINDOWS) && defined(HAS_FILESYSTEM_SMB)
@@ -83,7 +83,7 @@ bool CDNSNameCache::Lookup(const std::string& strHostName, std::string& strIpAdd
 
   if (!strIpAddress.empty())
   {
-    g_DNSCache.Add(strHostName, strIpAddress);
+    CDNSNameCache::Add(strHostName, strIpAddress);
     return true;
   }
 #endif
@@ -96,7 +96,7 @@ bool CDNSNameCache::Lookup(const std::string& strHostName, std::string& strIpAdd
                                        (unsigned char)host->h_addr_list[0][1],
                                        (unsigned char)host->h_addr_list[0][2],
                                        (unsigned char)host->h_addr_list[0][3]);
-    g_DNSCache.Add(strHostName, strIpAddress);
+    CDNSNameCache::Add(strHostName, strIpAddress);
     return true;
   }
 

@@ -10498,7 +10498,9 @@ void CVideoDatabase::ImportFromXML(const std::string &path)
         // season artwork
         std::map<int, std::map<std::string, std::string> > seasonArt;
         artItem.GetVideoInfoTag()->m_strPath = artPath;
-        scanner.GetSeasonThumbs(*artItem.GetVideoInfoTag(), seasonArt, CVideoThumbLoader::GetArtTypes(MediaTypeSeason), true);
+        VIDEO::CVideoInfoScanner::GetSeasonThumbs(*artItem.GetVideoInfoTag(), seasonArt,
+                                                  CVideoThumbLoader::GetArtTypes(MediaTypeSeason),
+                                                  true);
         for (const auto &i : seasonArt)
         {
           int seasonID = AddSeason(showID, i.first);

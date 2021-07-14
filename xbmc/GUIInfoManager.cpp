@@ -10370,7 +10370,7 @@ INFO::InfoPtr CGUIInfoManager::Register(const std::string &expression, int conte
   CSingleLock lock(m_critInfo);
   std::pair<INFOBOOLTYPE::iterator, bool> res;
 
-  if (condition.find_first_of("|+[]!") != condition.npos)
+  if (condition.find_first_of("|+[]!") != std::string::npos)
     res = m_bools.insert(std::make_shared<InfoExpression>(condition, context, m_refreshCounter));
   else
     res = m_bools.insert(std::make_shared<InfoSingle>(condition, context, m_refreshCounter));
@@ -10528,7 +10528,7 @@ bool CGUIInfoManager::GetMultiInfoBool(const CGUIInfo &info, int contextWindow, 
 
             // Handle the case when a value contains time separator (:). This makes Integer.IsGreater
             // useful for Player.Time* members without adding a separate set of members returning time in seconds
-            if (value.find_first_of( ':' ) != value.npos)
+            if (value.find_first_of(':') != std::string::npos)
               integer = StringUtils::TimeStringToSeconds(value);
             else
               integer = atoi(value.c_str());

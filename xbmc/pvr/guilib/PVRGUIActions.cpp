@@ -2066,7 +2066,7 @@ namespace PVR
       }
       else
       {
-        name = g_sysinfo.GetAppName();
+        name = CSysInfo::GetAppName();
         icon = "special://xbmc/media/icon256x256.png";
       }
 

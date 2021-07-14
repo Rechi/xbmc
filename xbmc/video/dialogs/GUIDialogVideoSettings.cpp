@@ -433,7 +433,7 @@ void CGUIDialogVideoSettings::InitializeSettings()
   if (g_application.GetAppPlayer().Supports(RENDERFEATURE_TONEMAP))
   {
     bool visible = !(CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(
-                         CServiceBroker::GetWinSystem()->SETTING_WINSYSTEM_IS_HDR_DISPLAY) &&
+                         CWinSystemBase ::SETTING_WINSYSTEM_IS_HDR_DISPLAY) &&
                      CServiceBroker::GetWinSystem()->IsHDRDisplay());
     entries.clear();
     entries.push_back(TranslatableIntegerSettingOption(36554, VS_TONEMAPMETHOD_OFF));

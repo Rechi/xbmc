@@ -80,7 +80,7 @@ void CGUIViewStateMusicSearch::SaveViewState()
 CGUIViewStateMusicDatabase::CGUIViewStateMusicDatabase(const CFileItemList& items) : CGUIViewStateWindowMusic(items)
 {
   CMusicDatabaseDirectory dir;
-  NODE_TYPE NodeType=dir.GetDirectoryChildType(items.GetPath());
+  NODE_TYPE NodeType = XFILE::CMusicDatabaseDirectory::GetDirectoryChildType(items.GetPath());
 
   const std::shared_ptr<CSettings> settings = CServiceBroker::GetSettingsComponent()->GetSettings();
   std::string strTrack = settings->GetString(CSettings::SETTING_MUSICFILES_LIBRARYTRACKFORMAT);
@@ -291,7 +291,7 @@ CGUIViewStateMusicDatabase::CGUIViewStateMusicDatabase(const CFileItemList& item
       const CViewState *viewState = CViewStateSettings::GetInstance().Get("musicnavsongs");
       // the "All Albums" entries always default to SortByAlbum as this is most logical - user can always
       // change it and the change will be saved for this particular path
-      if (dir.IsAllItem(items.GetPath()))
+      if (XFILE::CMusicDatabaseDirectory::IsAllItem(items.GetPath()))
         SetSortMethod(SortByAlbum);
       else
         SetSortMethod(viewState->m_sortDescription);
@@ -326,7 +326,7 @@ CGUIViewStateMusicDatabase::CGUIViewStateMusicDatabase(const CFileItemList& item
 void CGUIViewStateMusicDatabase::SaveViewState()
 {
   CMusicDatabaseDirectory dir;
-  NODE_TYPE NodeType=dir.GetDirectoryChildType(m_items.GetPath());
+  NODE_TYPE NodeType = XFILE::CMusicDatabaseDirectory::GetDirectoryChildType(m_items.GetPath());
 
   switch (NodeType)
   {

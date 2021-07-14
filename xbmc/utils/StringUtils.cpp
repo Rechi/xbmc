@@ -531,7 +531,7 @@ std::string& StringUtils::TrimRight(std::string &str)
 std::string& StringUtils::TrimRight(std::string &str, const char* const chars)
 {
   size_t nidx = str.find_last_not_of(chars);
-  str.erase(str.npos == nidx ? 0 : ++nidx);
+  str.erase(std::string::npos == nidx ? 0 : ++nidx);
   return str;
 }
 
@@ -1739,7 +1739,7 @@ bool StringUtils::ContainsKeyword(const std::string &str, const std::vector<std:
 {
   for (std::vector<std::string>::const_iterator it = keywords.begin(); it != keywords.end(); ++it)
   {
-    if (str.find(*it) != str.npos)
+    if (str.find(*it) != std::string::npos)
       return true;
   }
   return false;

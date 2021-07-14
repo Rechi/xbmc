@@ -481,18 +481,16 @@ bool CAutorun::RunDisc(IDirectory* pDir, const std::string& strDrive, int& nAdde
 void CAutorun::HandleAutorun()
 {
 #if !defined(TARGET_WINDOWS) && defined(HAS_DVD_DRIVE)
-  const CDetectDVDMedia& mediadetect = CServiceBroker::GetDetectDVDMedia();
-
   if (!m_bEnable)
   {
-    mediadetect.m_evAutorun.Reset();
+    MEDIA_DETECT::CDetectDVDMedia::m_evAutorun.Reset();
     return ;
   }
 
-  if (mediadetect.m_evAutorun.Wait(0ms))
+  if (MEDIA_DETECT::CDetectDVDMedia::m_evAutorun.Wait(0ms))
   {
     ExecuteAutorun();
-    mediadetect.m_evAutorun.Reset();
+    MEDIA_DETECT::CDetectDVDMedia::m_evAutorun.Reset();
   }
 #endif
 }

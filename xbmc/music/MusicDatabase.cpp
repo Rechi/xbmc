@@ -13152,7 +13152,7 @@ bool CMusicDatabase::GetFilter(CDbUrl& musicUrl, Filter& filter, SortDescription
     std::string xspWhere;
     xspWhere = xsp.GetWhereClause(*this, playlists);
     hasRoleRules = xsp.GetType() == "artists" &&
-                   xspWhere.find("song_artist.idRole = role.idRole") != xspWhere.npos;
+                   xspWhere.find("song_artist.idRole = role.idRole") != std::string::npos;
 
     // Check if the filter playlist matches the item type
     // Allow for grouping name like "originalyears" and type "years"

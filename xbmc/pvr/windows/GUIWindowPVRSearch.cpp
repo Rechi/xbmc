@@ -78,7 +78,7 @@ namespace
     }
 
     if (m_filter->ShouldRemoveDuplicates())
-      m_filter->RemoveDuplicates(results);
+      PVR::CPVREpgSearchFilter::RemoveDuplicates(results);
 
     for (const auto& tag : results)
     {
