@@ -159,9 +159,9 @@ bool CDisplaySettings::Load(const TiXmlNode *settings)
 
     // store calibration, avoid adding duplicates
     bool found = false;
-    for (ResolutionInfos::const_iterator  it = m_calibrations.begin(); it != m_calibrations.end(); ++it)
+    for (const RESOLUTION_INFO& calibration : m_calibrations)
     {
-      if (StringUtils::EqualsNoCase(it->strMode, cal.strMode))
+      if (StringUtils::EqualsNoCase(calibration.strMode, cal.strMode))
       {
         found = true;
         break;
@@ -190,7 +190,7 @@ bool CDisplaySettings::Save(TiXmlNode *settings) const
     return false;
 
   // save calibrations
-  for (ResolutionInfos::const_iterator it = m_calibrations.begin(); it != m_calibrations.end(); ++it)
+  for (const RESOLUTION_INFO& calibration : m_calibrations)
   {
     // Write the resolution tag
     TiXmlElement resElement("resolution");
@@ -199,13 +199,13 @@ bool CDisplaySettings::Save(TiXmlNode *settings) const
       return false;
 
     // Now write each of the pieces of information we need...
-    XMLUtils::SetString(pNode, "description", it->strMode);
-    XMLUtils::SetInt(pNode, "subtitles", it->iSubtitles);
-    XMLUtils::SetFloat(pNode, "pixelratio", it->fPixelRatio);
+    XMLUtils::SetString(pNode, "description", calibration.strMode);
+    XMLUtils::SetInt(pNode, "subtitles", calibration.iSubtitles);
+    XMLUtils::SetFloat(pNode, "pixelratio", calibration.fPixelRatio);
 #ifdef HAVE_X11
-    XMLUtils::SetFloat(pNode, "refreshrate", it->fRefreshRate);
-    XMLUtils::SetString(pNode, "output", it->strOutput);
-    XMLUtils::SetString(pNode, "xrandrid", it->strId);
+    XMLUtils::SetFloat(pNode, "refreshrate", calibration.fRefreshRate);
+    XMLUtils::SetString(pNode, "output", calibration.strOutput);
+    XMLUtils::SetString(pNode, "xrandrid", calibration.strId);
 #endif
 
     // create the overscan child
@@ -214,10 +214,10 @@ bool CDisplaySettings::Save(TiXmlNode *settings) const
     if (pOverscanNode == NULL)
       return false;
 
-    XMLUtils::SetInt(pOverscanNode, "left", it->Overscan.left);
-    XMLUtils::SetInt(pOverscanNode, "top", it->Overscan.top);
-    XMLUtils::SetInt(pOverscanNode, "right", it->Overscan.right);
-    XMLUtils::SetInt(pOverscanNode, "bottom", it->Overscan.bottom);
+    XMLUtils::SetInt(pOverscanNode, "left", calibration.Overscan.left);
+    XMLUtils::SetInt(pOverscanNode, "top", calibration.Overscan.top);
+    XMLUtils::SetInt(pOverscanNode, "right", calibration.Overscan.right);
+    XMLUtils::SetInt(pOverscanNode, "bottom", calibration.Overscan.bottom);
   }
 
   return true;
@@ -523,45 +523,45 @@ void CDisplaySettings::ApplyCalibrations()
 {
   CSingleLock lock(m_critical);
   // apply all calibrations to the resolutions
-  for (ResolutionInfos::const_iterator itCal = m_calibrations.begin(); itCal != m_calibrations.end(); ++itCal)
+  for (const RESOLUTION_INFO& calibration : m_calibrations)
   {
     // find resolutions
     for (size_t res = RES_DESKTOP; res < m_resolutions.size(); ++res)
     {
-      if (StringUtils::EqualsNoCase(itCal->strMode, m_resolutions[res].strMode))
+      if (StringUtils::EqualsNoCase(calibration.strMode, m_resolutions[res].strMode))
       {
         // overscan
-        m_resolutions[res].Overscan.left = itCal->Overscan.left;
+        m_resolutions[res].Overscan.left = calibration.Overscan.left;
         if (m_resolutions[res].Overscan.left < -m_resolutions[res].iWidth/4)
           m_resolutions[res].Overscan.left = -m_resolutions[res].iWidth/4;
         if (m_resolutions[res].Overscan.left > m_resolutions[res].iWidth/4)
           m_resolutions[res].Overscan.left = m_resolutions[res].iWidth/4;
 
-        m_resolutions[res].Overscan.top = itCal->Overscan.top;
+        m_resolutions[res].Overscan.top = calibration.Overscan.top;
         if (m_resolutions[res].Overscan.top < -m_resolutions[res].iHeight/4)
           m_resolutions[res].Overscan.top = -m_resolutions[res].iHeight/4;
         if (m_resolutions[res].Overscan.top > m_resolutions[res].iHeight/4)
           m_resolutions[res].Overscan.top = m_resolutions[res].iHeight/4;
 
-        m_resolutions[res].Overscan.right = itCal->Overscan.right;
+        m_resolutions[res].Overscan.right = calibration.Overscan.right;
         if (m_resolutions[res].Overscan.right < m_resolutions[res].iWidth / 2)
           m_resolutions[res].Overscan.right = m_resolutions[res].iWidth / 2;
         if (m_resolutions[res].Overscan.right > m_resolutions[res].iWidth * 3/2)
           m_resolutions[res].Overscan.right = m_resolutions[res].iWidth *3/2;
 
-        m_resolutions[res].Overscan.bottom = itCal->Overscan.bottom;
+        m_resolutions[res].Overscan.bottom = calibration.Overscan.bottom;
         if (m_resolutions[res].Overscan.bottom < m_resolutions[res].iHeight / 2)
           m_resolutions[res].Overscan.bottom = m_resolutions[res].iHeight / 2;
         if (m_resolutions[res].Overscan.bottom > m_resolutions[res].iHeight * 3/2)
           m_resolutions[res].Overscan.bottom = m_resolutions[res].iHeight * 3/2;
 
-        m_resolutions[res].iSubtitles = itCal->iSubtitles;
+        m_resolutions[res].iSubtitles = calibration.iSubtitles;
         if (m_resolutions[res].iSubtitles < m_resolutions[res].iHeight / 2)
           m_resolutions[res].iSubtitles = m_resolutions[res].iHeight / 2;
         if (m_resolutions[res].iSubtitles > m_resolutions[res].iHeight* 5/4)
           m_resolutions[res].iSubtitles = m_resolutions[res].iHeight* 5/4;
 
-        m_resolutions[res].fPixelRatio = itCal->fPixelRatio;
+        m_resolutions[res].fPixelRatio = calibration.fPixelRatio;
         if (m_resolutions[res].fPixelRatio < 0.5f)
           m_resolutions[res].fPixelRatio = 0.5f;
         if (m_resolutions[res].fPixelRatio > 2.0f)
@@ -619,9 +619,9 @@ RESOLUTION CDisplaySettings::FindBestMatchingResolution(const std::map<RESOLUTIO
   float bestScore = FLT_MAX;
   flags &= D3DPRESENTFLAG_MODEMASK;
 
-  for (std::map<RESOLUTION, RESOLUTION_INFO>::const_iterator it = resolutionInfos.begin(); it != resolutionInfos.end(); ++it)
+  for (const std::pair<const RESOLUTION, RESOLUTION_INFO>& resolutionInfo : resolutionInfos)
   {
-    const RESOLUTION_INFO &info = it->second;
+    const RESOLUTION_INFO& info = resolutionInfo.second;
 
     if ((info.dwFlags & D3DPRESENTFLAG_MODEMASK) != flags)
       continue;
@@ -632,7 +632,7 @@ RESOLUTION CDisplaySettings::FindBestMatchingResolution(const std::map<RESOLUTIO
     if (score < bestScore)
     {
       bestScore = score;
-      bestRes = it->first;
+      bestRes = resolutionInfo.first;
     }
   }
 
@@ -769,12 +769,13 @@ void CDisplaySettings::SettingOptionsRefreshRatesFiller(const SettingConstPtr& s
   std::vector<REFRESHRATE> refreshrates = CServiceBroker::GetWinSystem()->RefreshRates(resInfo.iScreenWidth, resInfo.iScreenHeight, resInfo.dwFlags);
 
   bool match = false;
-  for (std::vector<REFRESHRATE>::const_iterator refreshrate = refreshrates.begin(); refreshrate != refreshrates.end(); ++refreshrate)
+  for (const REFRESHRATE& refreshrate : refreshrates)
   {
-    std::string screenmode = GetStringFromResolution((RESOLUTION)refreshrate->ResInfo_Index, refreshrate->RefreshRate);
+    std::string screenmode =
+        GetStringFromResolution((RESOLUTION)refreshrate.ResInfo_Index, refreshrate.RefreshRate);
     if (!match && StringUtils::EqualsNoCase(std::static_pointer_cast<const CSettingString>(setting)->GetValue(), screenmode))
       match = true;
-    list.emplace_back(StringUtils::Format("{:.2f}", refreshrate->RefreshRate), screenmode);
+    list.emplace_back(StringUtils::Format("{:.2f}", refreshrate.RefreshRate), screenmode);
   }
 
   if (!match)
@@ -797,13 +798,15 @@ void CDisplaySettings::SettingOptionsResolutionsFiller(const SettingConstPtr& se
   {
     std::map<RESOLUTION, RESOLUTION_INFO> resolutionInfos;
     std::vector<RESOLUTION_WHR> resolutions = CServiceBroker::GetWinSystem()->ScreenResolutions(info.fRefreshRate);
-    for (std::vector<RESOLUTION_WHR>::const_iterator resolution = resolutions.begin(); resolution != resolutions.end(); ++resolution)
+    for (const RESOLUTION_WHR& resolution : resolutions)
     {
-      list.emplace_back(StringUtils::Format("{}x{}{}", resolution->width, resolution->height,
-                                            ModeFlagsToString(resolution->flags, false)),
-                        resolution->ResInfo_Index);
+      list.emplace_back(StringUtils::Format("{}x{}{}", resolution.width, resolution.height,
+                                            ModeFlagsToString(resolution.flags, false)),
+                        resolution.ResInfo_Index);
 
-      resolutionInfos.insert(std::make_pair((RESOLUTION)resolution->ResInfo_Index, CDisplaySettings::GetInstance().GetResolutionInfo(resolution->ResInfo_Index)));
+      resolutionInfos.insert(std::make_pair(
+          (RESOLUTION)resolution.ResInfo_Index,
+          CDisplaySettings::GetInstance().GetResolutionInfo(resolution.ResInfo_Index)));
     }
 
     current = FindBestMatchingResolution(resolutionInfos,
@@ -879,14 +882,15 @@ void CDisplaySettings::SettingOptionsMonitorsFiller(const SettingConstPtr& setti
   winSystem->GetConnectedOutputs(&monitors);
   std::string currentMonitor = CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_VIDEOSCREEN_MONITOR);
 #if defined(HAVE_X11) || defined(TARGET_DARWIN)
-  for (unsigned int i = 0; i < monitors.size(); ++i)
+  for (const std::string& monitor : monitors)
   {
-    if(currentMonitor.compare("Default") != 0 &&
-       StringUtils::EqualsNoCase(CDisplaySettings::GetInstance().GetResolutionInfo(RES_DESKTOP).strOutput, monitors[i]))
+    if (currentMonitor.compare("Default") != 0 &&
+        StringUtils::EqualsNoCase(
+            CDisplaySettings::GetInstance().GetResolutionInfo(RES_DESKTOP).strOutput, monitor))
     {
-      current = monitors[i];
+      current = monitor;
     }
-    list.emplace_back(monitors[i], monitors[i]);
+    list.emplace_back(monitor, monitor);
   }
 #elif defined(HAVE_WAYLAND) || defined(TARGET_WINDOWS_DESKTOP)
   bool foundMonitor = false;

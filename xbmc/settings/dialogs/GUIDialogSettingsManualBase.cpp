@@ -801,7 +801,7 @@ std::shared_ptr<CSettingList> CGUIDialogSettingsManualBase::AddList(
     const std::string& id,
     int label,
     SettingLevel level,
-    std::vector<std::string> values,
+    const std::vector<std::string>& values,
     StringSettingOptionsFiller filler,
     int heading,
     int minimumItems /* = 0 */,
@@ -824,8 +824,9 @@ std::shared_ptr<CSettingList> CGUIDialogSettingsManualBase::AddList(
     return NULL;
 
   std::vector<CVariant> valueList;
-  for (std::vector<std::string>::const_iterator itValue = values.begin(); itValue != values.end(); ++itValue)
-    valueList.emplace_back(*itValue);
+  valueList.reserve(values.size());
+  for (const std::string& value : values)
+    valueList.emplace_back(value);
   SettingList settingValues;
   if (!CSettingUtils::ValuesToList(setting, valueList, settingValues))
     return NULL;
@@ -846,7 +847,7 @@ std::shared_ptr<CSettingList> CGUIDialogSettingsManualBase::AddList(
     const std::string& id,
     int label,
     SettingLevel level,
-    std::vector<int> values,
+    const std::vector<int>& values,
     const TranslatableIntegerSettingOptions& entries,
     int heading,
     int minimumItems /* = 0 */,
@@ -869,8 +870,9 @@ std::shared_ptr<CSettingList> CGUIDialogSettingsManualBase::AddList(
     return NULL;
 
   std::vector<CVariant> valueList;
-  for (std::vector<int>::const_iterator itValue = values.begin(); itValue != values.end(); ++itValue)
-    valueList.emplace_back(*itValue);
+  valueList.reserve(values.size());
+  for (int value : values)
+    valueList.emplace_back(value);
   SettingList settingValues;
   if (!CSettingUtils::ValuesToList(setting, valueList, settingValues))
     return NULL;
@@ -891,7 +893,7 @@ std::shared_ptr<CSettingList> CGUIDialogSettingsManualBase::AddList(
     const std::string& id,
     int label,
     SettingLevel level,
-    std::vector<int> values,
+    const std::vector<int>& values,
     const IntegerSettingOptions& entries,
     int heading,
     int minimumItems /* = 0 */,
@@ -914,8 +916,9 @@ std::shared_ptr<CSettingList> CGUIDialogSettingsManualBase::AddList(
     return NULL;
 
   std::vector<CVariant> valueList;
-  for (std::vector<int>::const_iterator itValue = values.begin(); itValue != values.end(); ++itValue)
-    valueList.emplace_back(*itValue);
+  valueList.reserve(values.size());
+  for (int value : values)
+    valueList.emplace_back(value);
   SettingList settingValues;
   if (!CSettingUtils::ValuesToList(setting, valueList, settingValues))
     return NULL;
@@ -936,7 +939,7 @@ std::shared_ptr<CSettingList> CGUIDialogSettingsManualBase::AddList(
     const std::string& id,
     int label,
     SettingLevel level,
-    std::vector<int> values,
+    const std::vector<int>& values,
     IntegerSettingOptionsFiller filler,
     int heading,
     int minimumItems /* = 0 */,
@@ -960,8 +963,9 @@ std::shared_ptr<CSettingList> CGUIDialogSettingsManualBase::AddList(
     return NULL;
 
   std::vector<CVariant> valueList;
-  for (std::vector<int>::const_iterator itValue = values.begin(); itValue != values.end(); ++itValue)
-    valueList.emplace_back(*itValue);
+  valueList.reserve(values.size());
+  for (int value : values)
+    valueList.emplace_back(value);
   SettingList settingValues;
   if (!CSettingUtils::ValuesToList(setting, valueList, settingValues))
     return NULL;

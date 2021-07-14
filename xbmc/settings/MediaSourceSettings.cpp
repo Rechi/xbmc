@@ -194,25 +194,25 @@ bool CMediaSourceSettings::UpdateSource(const std::string &strType, const std::s
   if (pShares == NULL)
     return false;
 
-  for (IVECSOURCES it = pShares->begin(); it != pShares->end(); it++)
+  for (CMediaSource& share : *pShares)
   {
-    if (it->strName == strOldName)
+    if (share.strName == strOldName)
     {
       if (strUpdateChild == "name")
-        it->strName = strUpdateValue;
+        share.strName = strUpdateValue;
       else if (strUpdateChild == "lockmode")
-        it->m_iLockMode = (LockType)std::strtol(strUpdateValue.c_str(), NULL, 10);
+        share.m_iLockMode = (LockType)std::strtol(strUpdateValue.c_str(), NULL, 10);
       else if (strUpdateChild == "lockcode")
-        it->m_strLockCode = strUpdateValue;
+        share.m_strLockCode = strUpdateValue;
       else if (strUpdateChild == "badpwdcount")
-        it->m_iBadPwdCount = (int)std::strtol(strUpdateValue.c_str(), NULL, 10);
+        share.m_iBadPwdCount = (int)std::strtol(strUpdateValue.c_str(), NULL, 10);
       else if (strUpdateChild == "thumbnail")
-        it->m_strThumbnailImage = strUpdateValue;
+        share.m_strThumbnailImage = strUpdateValue;
       else if (strUpdateChild == "path")
       {
-        it->vecPaths.clear();
-        it->strPath = strUpdateValue;
-        it->vecPaths.push_back(strUpdateValue);
+        share.vecPaths.clear();
+        share.strPath = strUpdateValue;
+        share.vecPaths.push_back(strUpdateValue);
       }
       else
         return false;
@@ -294,14 +294,14 @@ bool CMediaSourceSettings::UpdateShare(const std::string &type, const std::strin
 
   // update our current share list
   CMediaSource* pShare = NULL;
-  for (IVECSOURCES it = pShares->begin(); it != pShares->end(); it++)
+  for (CMediaSource& it : *pShares)
   {
-    if (it->strName == oldName)
+    if (it.strName == oldName)
     {
-      it->strName = share.strName;
-      it->strPath = share.strPath;
-      it->vecPaths = share.vecPaths;
-      pShare = &(*it);
+      it.strName = share.strName;
+      it.strPath = share.strPath;
+      it.vecPaths = share.vecPaths;
+      pShare = &it;
       break;
     }
   }
@@ -366,9 +366,9 @@ bool CMediaSourceSettings::GetSource(const std::string &category, const TiXmlNod
   else
   {
     // validate the paths
-    for (std::vector<std::string>::const_iterator path = vecPaths.begin(); path != vecPaths.end(); ++path)
+    for (const std::string& path : vecPaths)
     {
-      CURL url(*path);
+      CURL url(path);
       bool bIsInvalid = false;
 
       // for my programs
@@ -376,18 +376,18 @@ bool CMediaSourceSettings::GetSource(const std::string &category, const TiXmlNod
       {
         // only allow HD and plugins
         if (url.IsLocal() || url.IsProtocol("plugin"))
-          verifiedPaths.push_back(*path);
+          verifiedPaths.push_back(path);
         else
           bIsInvalid = true;
       }
       // for others allow everything (if the user does something silly, we can't stop them)
       else
-        verifiedPaths.push_back(*path);
+        verifiedPaths.push_back(path);
 
       // error message
       if (bIsInvalid)
         CLog::Log(LOGERROR, "CMediaSourceSettings:    invalid path type ({}) for multipath source",
-                  path->c_str());
+                  path.c_str());
     }
 
     // no valid paths? skip to next source
@@ -471,17 +471,16 @@ bool CMediaSourceSettings::SetSources(TiXmlNode *root, const char *section, cons
     return false;
 
   XMLUtils::SetPath(sectionNode, "default", defaultPath);
-  for (CIVECSOURCES it = shares.begin(); it != shares.end(); it++)
+  for (const CMediaSource& share : shares)
   {
-    const CMediaSource &share = *it;
     if (share.m_ignore)
       continue;
 
     TiXmlElement source(XML_SOURCE);
     XMLUtils::SetString(&source, "name", share.strName);
 
-    for (unsigned int i = 0; i < share.vecPaths.size(); i++)
-      XMLUtils::SetPath(&source, "path", share.vecPaths[i]);
+    for (const std::string& path : share.vecPaths)
+      XMLUtils::SetPath(&source, "path", path);
 
     if (share.m_iHasLock)
     {
