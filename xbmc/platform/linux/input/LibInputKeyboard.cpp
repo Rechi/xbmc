@@ -150,8 +150,7 @@ static const std::map<xkb_keysym_t, XBMCKey> xkbMap =
 };
 } // namespace
 
-CLibInputKeyboard::CLibInputKeyboard()
-  : m_repeatTimer(std::bind(&CLibInputKeyboard::KeyRepeatTimeout, this))
+CLibInputKeyboard::CLibInputKeyboard() : m_repeatTimer([this] { KeyRepeatTimeout(); })
 {
   m_ctx = xkb_context_new(XKB_CONTEXT_NO_FLAGS);
   if (!m_ctx)

@@ -597,7 +597,7 @@ public:
   void Add(bool (A::*function)(), unsigned int resId)
   {
     CContextButtons::Add(size(), resId);
-    m_functions.emplace_back(std::bind(function, m_instance));
+    m_functions.emplace_back([this, function] { return (*m_instance.*function)(); });
   }
 
   bool Call(int idx)
