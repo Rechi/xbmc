@@ -79,11 +79,9 @@ namespace PVR
     CPVRRecording();
     CPVRRecording(const PVR_RECORDING& recording, unsigned int iClientId);
 
-  private:
     CPVRRecording(const CPVRRecording& tag) = delete;
     CPVRRecording& operator =(const CPVRRecording& other) = delete;
 
-  public:
     bool operator ==(const CPVRRecording& right) const;
     bool operator !=(const CPVRRecording& right) const;
 

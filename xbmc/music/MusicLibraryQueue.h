@@ -29,6 +29,8 @@ class CGUIDialogProgress;
 class CMusicLibraryQueue : protected CJobQueue
 {
 public:
+  CMusicLibraryQueue(const CMusicLibraryQueue&) = delete;
+  CMusicLibraryQueue const& operator=(CMusicLibraryQueue const&) = delete;
   ~CMusicLibraryQueue() override;
 
   /*!
@@ -129,8 +131,6 @@ protected:
 
 private:
   CMusicLibraryQueue();
-  CMusicLibraryQueue(const CMusicLibraryQueue&);
-  CMusicLibraryQueue const& operator=(CMusicLibraryQueue const&);
 
   typedef std::set<CMusicLibraryJob*> MusicLibraryJobs;
   typedef std::map<std::string, MusicLibraryJobs> MusicLibraryJobMap;

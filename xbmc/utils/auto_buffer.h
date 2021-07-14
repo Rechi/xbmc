@@ -25,6 +25,8 @@ namespace XUTILS
      * @param size of created buffer
      */
     explicit auto_buffer(size_t size);
+    auto_buffer(const auto_buffer& other) = delete; // disallow copy constructor
+    auto_buffer& operator=(const auto_buffer& other) = delete; // disallow assignment
     ~auto_buffer();
 
     /**
@@ -84,9 +86,6 @@ namespace XUTILS
     void* detach();
 
   private:
-    auto_buffer(const auto_buffer& other) = delete; // disallow copy constructor
-    auto_buffer& operator=(const auto_buffer& other) = delete; // disallow assignment
-
     void* p = 0;
     size_t s = 0;
   };

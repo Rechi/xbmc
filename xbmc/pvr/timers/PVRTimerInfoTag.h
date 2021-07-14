@@ -35,6 +35,8 @@ namespace PVR
   public:
     explicit CPVRTimerInfoTag(bool bRadio = false);
     CPVRTimerInfoTag(const PVR_TIMER& timer, const std::shared_ptr<CPVRChannel>& channel, unsigned int iClientId);
+    CPVRTimerInfoTag(const CPVRTimerInfoTag& tag) = delete;
+    CPVRTimerInfoTag& operator=(const CPVRTimerInfoTag& orig) = delete;
 
     bool operator ==(const CPVRTimerInfoTag& right) const;
     bool operator !=(const CPVRTimerInfoTag& right) const;
@@ -360,9 +362,6 @@ namespace PVR
     std::string m_strSeriesLink; /*!< series link */
 
   private:
-    CPVRTimerInfoTag(const CPVRTimerInfoTag& tag) = delete;
-    CPVRTimerInfoTag& operator=(const CPVRTimerInfoTag& orig) = delete;
-
     std::string GetWeekdaysString() const;
     void UpdateEpgInfoTag();
 

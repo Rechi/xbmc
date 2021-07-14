@@ -20,6 +20,9 @@
 class CGenericTouchActionHandler : public ITouchActionHandler
 {
 public:
+  CGenericTouchActionHandler(const CGenericTouchActionHandler&) = delete;
+  CGenericTouchActionHandler const& operator=(CGenericTouchActionHandler const&) = delete;
+
   /*!
    \brief Get an instance of the touch input manager
    */
@@ -78,8 +81,6 @@ public:
 private:
   // private construction, and no assignments; use the provided singleton methods
   CGenericTouchActionHandler() = default;
-  CGenericTouchActionHandler(const CGenericTouchActionHandler&) = delete;
-  CGenericTouchActionHandler const& operator=(CGenericTouchActionHandler const&) = delete;
   ~CGenericTouchActionHandler() override = default;
 
   void sendEvent(int actionId,

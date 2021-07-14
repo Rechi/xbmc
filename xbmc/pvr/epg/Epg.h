@@ -59,6 +59,10 @@ namespace PVR
             const std::shared_ptr<CPVREpgChannelData>& channelData,
             const std::shared_ptr<CPVREpgDatabase>& database);
 
+    CPVREpg() = delete;
+    CPVREpg(const CPVREpg&) = delete;
+    CPVREpg& operator=(const CPVREpg&) = delete;
+
     /*!
      * @brief Destroy this EPG instance.
      */
@@ -283,10 +287,6 @@ namespace PVR
     void RemovedFromContainer();
 
   private:
-    CPVREpg() = delete;
-    CPVREpg(const CPVREpg&) = delete;
-    CPVREpg& operator =(const CPVREpg&) = delete;
-
     /*!
      * @brief Update the EPG from a scraper set in the channel tag.
      * @todo not implemented yet for non-pvr EPGs

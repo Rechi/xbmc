@@ -173,6 +173,8 @@ class CVideoBufferManager
 {
 public:
   CVideoBufferManager();
+  CVideoBufferManager(const CVideoBufferManager&) = delete;
+  CVideoBufferManager& operator=(const CVideoBufferManager&) = delete;
   void RegisterPool(const std::shared_ptr<IVideoBufferPool>& pool);
   void RegisterPoolFactory(const std::string& id, CreatePoolFunc createFunc);
   void ReleasePools();
@@ -185,8 +187,4 @@ protected:
   std::list<std::shared_ptr<IVideoBufferPool>> m_pools;
   std::list<std::shared_ptr<IVideoBufferPool>> m_discardedPools;
   std::map<std::string, CreatePoolFunc> m_poolFactories;
-
-private:
-  CVideoBufferManager (const CVideoBufferManager&) = delete;
-  CVideoBufferManager& operator= (const CVideoBufferManager&) = delete;
 };

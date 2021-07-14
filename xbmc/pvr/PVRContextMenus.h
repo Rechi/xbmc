@@ -37,6 +37,9 @@ namespace PVR
   class CPVRContextMenuManager
   {
   public:
+    CPVRContextMenuManager(const CPVRContextMenuManager&) = delete;
+    CPVRContextMenuManager const& operator=(CPVRContextMenuManager const&) = delete;
+
     static CPVRContextMenuManager& GetInstance();
 
     std::vector<std::shared_ptr<IContextMenuItem>> GetMenuItems() const { return m_items; }
@@ -51,8 +54,6 @@ namespace PVR
 
   private:
     CPVRContextMenuManager();
-    CPVRContextMenuManager(const CPVRContextMenuManager&) = delete;
-    CPVRContextMenuManager const& operator=(CPVRContextMenuManager const&) = delete;
     virtual ~CPVRContextMenuManager() = default;
 
     std::vector<std::shared_ptr<IContextMenuItem>> m_items;

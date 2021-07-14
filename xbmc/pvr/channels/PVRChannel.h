@@ -36,6 +36,8 @@ namespace PVR
   public:
     explicit CPVRChannel(bool bRadio);
     CPVRChannel(const PVR_CHANNEL& channel, unsigned int iClientId);
+    CPVRChannel(const CPVRChannel& tag) = delete;
+    CPVRChannel& operator=(const CPVRChannel& channel) = delete;
 
     virtual ~CPVRChannel();
 
@@ -434,8 +436,6 @@ namespace PVR
     //@}
   private:
     CPVRChannel();
-    CPVRChannel(const CPVRChannel& tag) = delete;
-    CPVRChannel& operator=(const CPVRChannel& channel) = delete;
 
     /*!
      * @brief Update the encryption name after SetEncryptionSystem() has been called.

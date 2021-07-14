@@ -23,6 +23,8 @@ typedef std::map<std::string, CKeyboardLayout> KeyboardLayouts;
 class CKeyboardLayoutManager
 {
 public:
+  CKeyboardLayoutManager(const CKeyboardLayoutManager&) = delete;
+  CKeyboardLayoutManager const& operator=(CKeyboardLayoutManager const&) = delete;
   virtual ~CKeyboardLayoutManager();
 
   static CKeyboardLayoutManager& GetInstance();
@@ -40,8 +42,6 @@ public:
 
 private:
   CKeyboardLayoutManager() = default;
-  CKeyboardLayoutManager(const CKeyboardLayoutManager&) = delete;
-  CKeyboardLayoutManager const& operator=(CKeyboardLayoutManager const&) = delete;
 
   KeyboardLayouts m_layouts;
 };

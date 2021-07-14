@@ -28,6 +28,9 @@ namespace PVR
      */
     CPVRChannelGroupsContainer();
 
+    CPVRChannelGroupsContainer& operator=(const CPVRChannelGroupsContainer&) = delete;
+    CPVRChannelGroupsContainer(const CPVRChannelGroupsContainer&) = delete;
+
     /*!
      * @brief Destroy this container.
      */
@@ -152,9 +155,6 @@ namespace PVR
     bool CreateChannelEpgs();
 
   private:
-    CPVRChannelGroupsContainer& operator=(const CPVRChannelGroupsContainer&) = delete;
-    CPVRChannelGroupsContainer(const CPVRChannelGroupsContainer&) = delete;
-
     CPVRChannelGroups* m_groupsRadio; /*!< all radio channel groups */
     CPVRChannelGroups* m_groupsTV; /*!< all TV channel groups */
     CCriticalSection m_critSection;

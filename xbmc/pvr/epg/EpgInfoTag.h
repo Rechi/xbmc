@@ -53,6 +53,9 @@ namespace PVR
                    const CDateTime& end,
                    bool bIsGapTag);
 
+    CPVREpgInfoTag(const CPVREpgInfoTag& tag) = delete;
+    CPVREpgInfoTag& operator=(const CPVREpgInfoTag& other) = delete;
+
     /*!
      * @brief Set data for the channel linked to this EPG infotag.
      * @param data The channel data.
@@ -432,9 +435,6 @@ namespace PVR
 
   private:
     CPVREpgInfoTag();
-
-    CPVREpgInfoTag(const CPVREpgInfoTag& tag) = delete;
-    CPVREpgInfoTag& operator =(const CPVREpgInfoTag& other) = delete;
 
     /*!
      * @brief Change the genre of this event.

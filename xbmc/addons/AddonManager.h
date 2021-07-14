@@ -76,6 +76,7 @@ namespace ADDON
 
     CAddonMgr() = default;
     CAddonMgr(const CAddonMgr&) = delete;
+    CAddonMgr& operator=(CAddonMgr const&) = delete;
     virtual ~CAddonMgr();
 
     CEventStream<AddonEvent>& Events() { return m_events; }
@@ -541,8 +542,6 @@ namespace ADDON
     const std::string& GetLastAvailableUpdatesCountAsString() const;
 
   private:
-    CAddonMgr& operator=(CAddonMgr const&) = delete;
-
     VECADDONS m_updateableAddons;
 
     /*!

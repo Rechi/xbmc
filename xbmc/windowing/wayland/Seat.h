@@ -121,6 +121,8 @@ public:
    * \param connection connection for retrieving additional globals
    */
   CSeat(std::uint32_t globalName, wayland::seat_t const& seat, CConnection& connection);
+  CSeat(CSeat const& other) = delete;
+  CSeat& operator=(CSeat const& other) = delete;
   ~CSeat() noexcept;
 
   void AddRawInputHandlerKeyboard(IRawInputHandlerKeyboard* rawKeyboardHandler);
@@ -175,9 +177,6 @@ public:
   void SetCursor(std::uint32_t serial, wayland::surface_t const& surface, std::int32_t hotspotX, std::int32_t hotspotY);
 
 private:
-  CSeat(CSeat const& other) = delete;
-  CSeat& operator=(CSeat const& other) = delete;
-
   void HandleOnCapabilities(const wayland::seat_capability& caps);
   void HandlePointerCapability();
   void HandleKeyboardCapability();

@@ -63,8 +63,6 @@ private:
 
 class CCaptionBlock
 {
-  CCaptionBlock(const CCaptionBlock&) = delete;
-  CCaptionBlock& operator=(const CCaptionBlock&) = delete;
 public:
   explicit CCaptionBlock(int size)
   {
@@ -72,6 +70,8 @@ public:
     m_size = size;
     m_pts = 0.0; //silence coverity uninitialized warning, is set elsewhere
   }
+  CCaptionBlock(const CCaptionBlock&) = delete;
+  CCaptionBlock& operator=(const CCaptionBlock&) = delete;
   virtual ~CCaptionBlock()
   {
     free(m_data);

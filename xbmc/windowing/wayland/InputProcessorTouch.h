@@ -32,6 +32,8 @@ class CInputProcessorTouch final : public IRawInputHandlerTouch
 {
 public:
   CInputProcessorTouch(wayland::surface_t const& surface);
+  CInputProcessorTouch(CInputProcessorTouch const& other) = delete;
+  CInputProcessorTouch& operator=(CInputProcessorTouch const& other) = delete;
   ~CInputProcessorTouch() noexcept;
   void SetCoordinateScale(std::int32_t scale) { m_coordinateScale = scale; }
 
@@ -48,9 +50,6 @@ public:
   void OnTouchShape(CSeat* seat, std::int32_t id, double major, double minor) override;
 
 private:
-  CInputProcessorTouch(CInputProcessorTouch const& other) = delete;
-  CInputProcessorTouch& operator=(CInputProcessorTouch const& other) = delete;
-
   struct TouchPoint
   {
     std::uint32_t lastEventTime;

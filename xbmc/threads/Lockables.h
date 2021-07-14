@@ -36,14 +36,14 @@ namespace XbmcThreads
   {
     friend class ConditionVariable;
 
-    CountingLockable(const CountingLockable&) = delete;
-    CountingLockable& operator=(const CountingLockable&) = delete;
   protected:
     L mutex;
     unsigned int count = 0;
 
   public:
     inline CountingLockable() = default;
+    CountingLockable(const CountingLockable&) = delete;
+    CountingLockable& operator=(const CountingLockable&) = delete;
 
     // STL Lockable concept
     inline void lock() { mutex.lock(); count++; }
@@ -104,8 +104,6 @@ namespace XbmcThreads
    */
   template<typename L> class UniqueLock
   {
-    UniqueLock(const UniqueLock&) = delete;
-    UniqueLock& operator=(const UniqueLock&) = delete;
   protected:
     L& mutex;
     bool owns;
@@ -114,6 +112,8 @@ namespace XbmcThreads
     inline ~UniqueLock() { if (owns) mutex.unlock(); }
 
   public:
+    UniqueLock(const UniqueLock&) = delete;
+    UniqueLock& operator=(const UniqueLock&) = delete;
 
     inline bool owns_lock() const { return owns; }
 
@@ -141,6 +141,7 @@ namespace XbmcThreads
    */
   template<typename L> class SharedLock
   {
+  public:
     SharedLock(const SharedLock&) = delete;
     SharedLock& operator=(const SharedLock&) = delete;
   protected:

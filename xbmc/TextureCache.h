@@ -32,6 +32,9 @@ class CTexture;
 class CTextureCache : public CJobQueue
 {
 public:
+  CTextureCache(const CTextureCache&) = delete;
+  CTextureCache const& operator=(CTextureCache const&) = delete;
+
   /*!
    \brief The only way through which the global instance of the CTextureCache should be accessed.
    \return the global instance.
@@ -149,8 +152,6 @@ public:
 private:
   // private construction, and no assignments; use the provided singleton methods
   CTextureCache();
-  CTextureCache(const CTextureCache&) = delete;
-  CTextureCache const& operator=(CTextureCache const&) = delete;
   ~CTextureCache() override;
 
   /*! \brief Check if the given image is a cached image

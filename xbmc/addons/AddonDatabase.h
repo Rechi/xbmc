@@ -31,9 +31,9 @@ namespace ADDON
  */
 class CAddonDatabaseSerializer
 {
+public:
   CAddonDatabaseSerializer() = delete;
 
-public:
   static std::string SerializeMetadata(const CAddonInfo& addon);
   static void DeserializeMetadata(const std::string& document, CAddonInfoBuilder::CFromDB& builder);
 

@@ -41,6 +41,8 @@ class ATTRIBUTE_HIDDEN VideoCodecInitdata
   /*! \endcond */
 
 public:
+  VideoCodecInitdata() = delete;
+
   /// @defgroup cpp_kodi_addon_videocodec_Defs_VideoCodecInitdata_Help Value Help
   /// @ingroup cpp_kodi_addon_videocodec_Defs_VideoCodecInitdata
   ///
@@ -110,7 +112,6 @@ public:
   ///@}
 
 private:
-  VideoCodecInitdata() = delete;
   VideoCodecInitdata(const VideoCodecInitdata& session) : CStructHdl(session) {}
   VideoCodecInitdata(const VIDEOCODEC_INITDATA* session) : CStructHdl(session) {}
   VideoCodecInitdata(VIDEOCODEC_INITDATA* session) : CStructHdl(session) {}

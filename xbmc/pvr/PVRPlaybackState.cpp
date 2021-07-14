@@ -36,6 +36,7 @@ using namespace PVR;
 class CPVRPlaybackState::CLastWatchedUpdateTimer : public CTimer, private ITimerCallback
 {
 public:
+  CLastWatchedUpdateTimer() = delete;
   CLastWatchedUpdateTimer(CPVRPlaybackState& state,
                           const std::shared_ptr<CPVRChannelGroupMember>& channel,
                           const CDateTime& time)
@@ -50,8 +51,6 @@ public:
   }
 
 private:
-  CLastWatchedUpdateTimer() = delete;
-
   CPVRPlaybackState& m_state;
   const std::shared_ptr<CPVRChannelGroupMember> m_channel;
   const CDateTime m_time;

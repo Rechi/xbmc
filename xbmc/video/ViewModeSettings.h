@@ -19,10 +19,11 @@ struct IntegerSettingOption;
 class CViewModeSettings
 {
 private:
-  CViewModeSettings();
   ~CViewModeSettings() = default;
 
 public:
+  CViewModeSettings() = delete;
+
   /** Gets the next view mode for quick cycling through the modes
    *
    * @param viewMode The current view mode

@@ -238,6 +238,9 @@ class CJobManager final
   };
 
 public:
+  CJobManager(const CJobManager&) = delete;
+  CJobManager const& operator=(CJobManager const&) = delete;
+
   /*!
    \brief The only way through which the global instance of the CJobManager should be accessed.
    \return the global instance.
@@ -359,8 +362,6 @@ protected:
 private:
   // private construction, and no assignments; use the provided singleton methods
   CJobManager();
-  CJobManager(const CJobManager&) = delete;
-  CJobManager const& operator=(CJobManager const&) = delete;
 
   /*! \brief Pop a job off the job queue and add to the processing queue ready to process
    \return the job to process, NULL if no jobs are available

@@ -226,6 +226,9 @@ struct ThreadMessageCallback
 class CApplicationMessenger
 {
 public:
+  CApplicationMessenger(const CApplicationMessenger&) = delete;
+  CApplicationMessenger const& operator=(CApplicationMessenger const&) = delete;
+
   /*!
    \brief The only way through which the global instance of the CApplicationMessenger should be accessed.
    \return the global instance.
@@ -412,8 +415,6 @@ public:
 private:
   // private construction, and no assignments; use the provided singleton methods
   CApplicationMessenger();
-  CApplicationMessenger(const CApplicationMessenger&) = delete;
-  CApplicationMessenger const& operator=(CApplicationMessenger const&) = delete;
   ~CApplicationMessenger();
 
   int SendMsg(ThreadMessage&& msg, bool wait);

@@ -95,6 +95,8 @@ class CActiveAEStreamBuffers
 {
 public:
   CActiveAEStreamBuffers(const AEAudioFormat& inputFormat, const AEAudioFormat& outputFormat, AEQuality quality);
+  CActiveAEStreamBuffers(const CActiveAEStreamBuffers&) = delete;
+  CActiveAEStreamBuffers& operator=(const CActiveAEStreamBuffers&) = delete;
   virtual ~CActiveAEStreamBuffers();
   bool Create(unsigned int totaltime, bool remap, bool upmix, bool normalize = true);
   void SetExtraData(int profile, enum AVMatrixEncoding matrix_encoding, enum AVAudioServiceType audio_service_type);
@@ -121,10 +123,6 @@ public:
 protected:
   CActiveAEBufferPoolResample *m_resampleBuffers;
   CActiveAEBufferPoolAtempo *m_atempoBuffers;
-
-private:
-  CActiveAEStreamBuffers(const CActiveAEStreamBuffers&) = delete;
-  CActiveAEStreamBuffers& operator=(const CActiveAEStreamBuffers&) = delete;
 };
 
 class CActiveAEStream : public IAEStream

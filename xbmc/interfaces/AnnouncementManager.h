@@ -26,6 +26,8 @@ namespace ANNOUNCEMENT
   {
   public:
     CAnnouncementManager();
+    CAnnouncementManager(const CAnnouncementManager&) = delete;
+    CAnnouncementManager const& operator=(CAnnouncementManager const&) = delete;
     ~CAnnouncementManager() override;
 
     void Start();
@@ -84,9 +86,6 @@ namespace ANNOUNCEMENT
     CEvent m_queueEvent;
 
   private:
-    CAnnouncementManager(const CAnnouncementManager&) = delete;
-    CAnnouncementManager const& operator=(CAnnouncementManager const&) = delete;
-
     CCriticalSection m_announcersCritSection;
     CCriticalSection m_queueCritSection;
     std::vector<IAnnouncer *> m_announcers;

@@ -33,6 +33,9 @@ typedef enum {
 class CMediaSettings : public ISettingCallback, public ISettingsHandler, public ISubSettings
 {
 public:
+  CMediaSettings(const CMediaSettings&) = delete;
+  CMediaSettings& operator=(CMediaSettings const&) = delete;
+
   static CMediaSettings& GetInstance();
 
   bool Load(const TiXmlNode *settings) override;
@@ -87,8 +90,6 @@ public:
 
 protected:
   CMediaSettings();
-  CMediaSettings(const CMediaSettings&) = delete;
-  CMediaSettings& operator=(CMediaSettings const&) = delete;
   ~CMediaSettings() override;
 
   static std::string GetWatchedContent(const std::string &content);

@@ -68,6 +68,8 @@ namespace PVR
   {
   public:
     CPVRGUIActions();
+    CPVRGUIActions(const CPVRGUIActions&) = delete;
+    CPVRGUIActions const& operator=(CPVRGUIActions const&) = delete;
     virtual ~CPVRGUIActions() = default;
 
     /*!
@@ -442,9 +444,6 @@ namespace PVR
     void OnPlaybackStopped(const std::shared_ptr<CFileItem>& item);
 
   private:
-    CPVRGUIActions(const CPVRGUIActions&) = delete;
-    CPVRGUIActions const& operator=(CPVRGUIActions const&) = delete;
-
     /*!
      * @brief Open the timer settings dialog.
      * @param timer containing the timer the settings shall be displayed for.

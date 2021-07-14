@@ -30,6 +30,9 @@ enum class AddonRepoUpdateMode
 class CAddonSystemSettings : public ISettingCallback
 {
 public:
+  CAddonSystemSettings(const CAddonSystemSettings&) = delete;
+  CAddonSystemSettings& operator=(const CAddonSystemSettings&) = delete;
+
   static CAddonSystemSettings& GetInstance();
   void OnSettingAction(const std::shared_ptr<const CSetting>& setting) override;
   void OnSettingChanged(const std::shared_ptr<const CSetting>& setting) override;
@@ -61,8 +64,6 @@ public:
 
 private:
   CAddonSystemSettings();
-  CAddonSystemSettings(const CAddonSystemSettings&) = delete;
-  CAddonSystemSettings& operator=(const CAddonSystemSettings&) = delete;
   ~CAddonSystemSettings() override = default;
 
   const std::map<ADDON::TYPE, std::string> m_activeSettings;

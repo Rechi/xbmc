@@ -31,6 +31,8 @@ class TiXmlElement;
 class CSettingsBase
 {
 public:
+  CSettingsBase(const CSettingsBase&) = delete;
+  CSettingsBase& operator=(const CSettingsBase&) = delete;
   virtual ~CSettingsBase();
 
   CSettingsManager* GetSettingsManager() const { return m_settingsManager; }
@@ -273,7 +275,4 @@ protected:
   bool m_initialized = false;
   CSettingsManager* m_settingsManager;
   mutable CCriticalSection m_critical;
-private:
-  CSettingsBase(const CSettingsBase&) = delete;
-  CSettingsBase& operator=(const CSettingsBase&) = delete;
 };

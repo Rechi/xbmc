@@ -34,6 +34,9 @@ class IGenericTouchGestureDetector;
 class CGenericTouchInputHandler : public ITouchInputHandler, private ITimerCallback
 {
 public:
+  CGenericTouchInputHandler(const CGenericTouchInputHandler&) = delete;
+  CGenericTouchInputHandler const& operator=(CGenericTouchInputHandler const&) = delete;
+
   /*!
    \brief Get an instance of the touch input manager
    */
@@ -54,8 +57,6 @@ private:
   // private construction, and no assignments; use the provided singleton methods
   CGenericTouchInputHandler();
   ~CGenericTouchInputHandler() override;
-  CGenericTouchInputHandler(const CGenericTouchInputHandler&) = delete;
-  CGenericTouchInputHandler const& operator=(CGenericTouchInputHandler const&) = delete;
 
   typedef enum
   {
