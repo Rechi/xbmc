@@ -108,9 +108,9 @@ const char** CGameClientProperties::GetResourceDirectories(void)
   {
     // Add all other game resources
     const auto& dependencies = m_parent.GetDependencies();
-    for (auto it = dependencies.begin(); it != dependencies.end(); ++it)
+    for (const DependencyInfo& dependency : dependencies)
     {
-      const std::string& strAddonId = it->id;
+      const std::string& strAddonId = dependency.id;
       AddonPtr addon;
       if (CServiceBroker::GetAddonMgr().GetAddon(strAddonId, addon, ADDON_RESOURCE_GAMES,
                                                  OnlyEnabled::YES))
