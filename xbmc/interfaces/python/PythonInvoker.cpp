@@ -246,8 +246,8 @@ bool CPythonInvoker::execute(const std::string& script, const std::vector<std::w
           GetId());
       ADDON::VECADDONS addons;
       CServiceBroker::GetAddonMgr().GetAddons(addons, ADDON::ADDON_SCRIPT_MODULE);
-      for (unsigned int i = 0; i < addons.size(); ++i)
-        addPath(CSpecialProtocol::TranslatePath(addons[i]->LibPath()));
+      for (const ADDON::AddonPtr& addon : addons)
+        addPath(CSpecialProtocol::TranslatePath(addon->LibPath()));
     }
 
     // we want to use sys.path so it includes site-packages
