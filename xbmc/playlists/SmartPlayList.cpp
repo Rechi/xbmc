@@ -257,9 +257,9 @@ bool CSmartPlaylistRule::Validate(const std::string &input, void *data)
 
   // split the input into multiple values and validate every value separately
   std::vector<std::string> values = StringUtils::Split(input, RULE_VALUE_SEPARATOR);
-  for (std::vector<std::string>::const_iterator it = values.begin(); it != values.end(); ++it)
+  for (const std::string& value : values)
   {
-    if (!validator(*it, data))
+    if (!validator(value, data))
       return false;
   }
 
@@ -1084,20 +1084,21 @@ std::string CSmartPlaylistRuleCombination::GetWhereClause(const CDatabase &db, c
   }
 
   // translate the rules into SQL
-  for (CDatabaseQueryRules::const_iterator it = m_rules.begin(); it != m_rules.end(); ++it)
+  for (const std::shared_ptr<CDatabaseQueryRule>& m_rule : m_rules)
   {
     // don't include playlists that are meant to be displayed
     // as a virtual folders in the SQL WHERE clause
-    if ((*it)->m_field == FieldVirtualFolder)
+    if (m_rule->m_field == FieldVirtualFolder)
       continue;
 
     if (!rule.empty())
       rule += m_type == CombinationAnd ? " AND " : " OR ";
     rule += "(";
     std::string currentRule;
-    if ((*it)->m_field == FieldPlaylist)
+    if (m_rule->m_field == FieldPlaylist)
     {
-      std::string playlistFile = CSmartPlaylistDirectory::GetPlaylistByName((*it)->m_parameter.at(0), strType);
+      std::string playlistFile =
+          CSmartPlaylistDirectory::GetPlaylistByName(m_rule->m_parameter.at(0), strType);
       if (!playlistFile.empty() && referencedPlaylists.find(playlistFile) == referencedPlaylists.end())
       {
         referencedPlaylists.insert(playlistFile);
@@ -1113,7 +1114,7 @@ std::string CSmartPlaylistRuleCombination::GetWhereClause(const CDatabase &db, c
           }
           if (playlist.GetType() == strType)
           {
-            if ((*it)->m_operator == CDatabaseQueryRule::OPERATOR_DOES_NOT_EQUAL)
+            if (m_rule->m_operator == CDatabaseQueryRule::OPERATOR_DOES_NOT_EQUAL)
               currentRule = StringUtils::Format("NOT ({})", playlistQuery);
             else
               currentRule = playlistQuery;
@@ -1122,7 +1123,7 @@ std::string CSmartPlaylistRuleCombination::GetWhereClause(const CDatabase &db, c
       }
     }
     else
-      currentRule = (*it)->GetWhereClause(db, strType);
+      currentRule = m_rule->GetWhereClause(db, strType);
     // if we don't get a rule, we add '1' or '0' so the query is still valid and doesn't fail
     if (currentRule.empty())
       currentRule = m_type == CombinationAnd ? "'1'" : "'0'";
@@ -1135,23 +1136,26 @@ std::string CSmartPlaylistRuleCombination::GetWhereClause(const CDatabase &db, c
 
 void CSmartPlaylistRuleCombination::GetVirtualFolders(const std::string& strType, std::vector<std::string> &virtualFolders) const
 {
-  for (CDatabaseQueryRuleCombinations::const_iterator it = m_combinations.begin(); it != m_combinations.end(); ++it)
+  for (const std::shared_ptr<CDatabaseQueryRuleCombination>& combination : m_combinations)
   {
-    std::shared_ptr<CSmartPlaylistRuleCombination> combo = std::static_pointer_cast<CSmartPlaylistRuleCombination>(*it);
+    std::shared_ptr<CSmartPlaylistRuleCombination> combo =
+        std::static_pointer_cast<CSmartPlaylistRuleCombination>(combination);
     if (combo)
       combo->GetVirtualFolders(strType, virtualFolders);
   }
 
-  for (CDatabaseQueryRules::const_iterator it = m_rules.begin(); it != m_rules.end(); ++it)
+  for (const std::shared_ptr<CDatabaseQueryRule>& rule : m_rules)
   {
-    if (((*it)->m_field != FieldVirtualFolder && (*it)->m_field != FieldPlaylist) || (*it)->m_operator != CDatabaseQueryRule::OPERATOR_EQUALS)
+    if ((rule->m_field != FieldVirtualFolder && rule->m_field != FieldPlaylist) ||
+        rule->m_operator != CDatabaseQueryRule::OPERATOR_EQUALS)
       continue;
 
-    std::string playlistFile = CSmartPlaylistDirectory::GetPlaylistByName((*it)->m_parameter.at(0), strType);
+    std::string playlistFile =
+        CSmartPlaylistDirectory::GetPlaylistByName(rule->m_parameter.at(0), strType);
     if (playlistFile.empty())
       continue;
 
-    if ((*it)->m_field == FieldVirtualFolder)
+    if (rule->m_field == FieldVirtualFolder)
       virtualFolders.push_back(playlistFile);
     else
     {
@@ -1558,11 +1562,11 @@ std::string CSmartPlaylist::GetSaveLocation() const
 void CSmartPlaylist::GetAvailableFields(const std::string &type, std::vector<std::string> &fieldList)
 {
   std::vector<Field> typeFields = CSmartPlaylistRule::GetFields(type);
-  for (std::vector<Field>::const_iterator field = typeFields.begin(); field != typeFields.end(); ++field)
+  for (const Field& typeField : typeFields)
   {
     for (const translateField& i : fields)
     {
-      if (*field == i.field)
+      if (typeField == i.field)
         fieldList.emplace_back(i.string);
     }
   }
