@@ -279,9 +279,9 @@ void CGUIDialogAudioSettings::InitializeSettings()
 
 bool CGUIDialogAudioSettings::SupportsAudioFeature(int feature)
 {
-  for (Features::iterator itr = m_audioCaps.begin(); itr != m_audioCaps.end(); ++itr)
+  for (int& audioCap : m_audioCaps)
   {
-    if (*itr == feature || *itr == IPC_AUD_ALL)
+    if (audioCap == feature || audioCap == IPC_AUD_ALL)
       return true;
   }
 
