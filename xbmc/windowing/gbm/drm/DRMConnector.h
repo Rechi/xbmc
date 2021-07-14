@@ -23,7 +23,7 @@ public:
   explicit CDRMConnector(int fd, uint32_t connector);
   CDRMConnector(const CDRMConnector&) = delete;
   CDRMConnector& operator=(const CDRMConnector&) = delete;
-  ~CDRMConnector() = default;
+  ~CDRMConnector() override = default;
 
   uint32_t GetEncoderId() const { return m_connector->encoder_id; }
   uint32_t* GetConnectorId() const { return &m_connector->connector_id; }

@@ -17,7 +17,7 @@ class CUDMABufferObject : public CBufferObject
 {
 public:
   CUDMABufferObject() = default;
-  virtual ~CUDMABufferObject() override;
+  ~CUDMABufferObject() override;
 
   // Registration
   static std::unique_ptr<CBufferObject> Create();

@@ -24,7 +24,7 @@ protected:
   using HandleType = int;
 
   CRunningScriptsHandler() = default;
-  virtual ~CRunningScriptsHandler() = default;
+  ~CRunningScriptsHandler() override = default;
 
   using CScriptRunner::ExecuteScript;
   using CScriptRunner::GetAddon;

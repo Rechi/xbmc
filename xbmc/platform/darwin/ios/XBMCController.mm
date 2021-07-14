@@ -68,7 +68,7 @@ public:
     CServiceBroker::GetSettingsComponent()->GetSettings()->RegisterCallback(
         this, std::set<std::string>{CSettings::SETTING_DEBUG_SHARE_LOG});
   }
-  virtual ~DebugLogSharingPresenter()
+  ~DebugLogSharingPresenter() override
   {
     CServiceBroker::GetSettingsComponent()->GetSettings()->UnregisterCallback(this);
   }

@@ -39,7 +39,7 @@ class CLog : public ISettingsHandler, public ISettingCallback
 {
 public:
   CLog();
-  ~CLog() = default;
+  ~CLog() override = default;
 
   // implementation of ISettingsHandler
   void OnSettingsLoaded() override;

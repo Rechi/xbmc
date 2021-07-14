@@ -59,7 +59,7 @@ public:
   Settings(std::shared_ptr<CSettingsBase> settings);
 #endif
 
-  virtual ~Settings() = default;
+  ~Settings() override = default;
 
 #ifdef DOXYGEN_SHOULD_USE_THIS
   ///
