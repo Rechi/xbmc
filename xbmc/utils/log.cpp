@@ -28,9 +28,9 @@
 
 namespace
 {
-static constexpr unsigned char Utf8Bom[3] = {0xEF, 0xBB, 0xBF};
-static const std::string LogFileExtension = ".log";
-static const std::string LogPattern = "%Y-%m-%d %T.%e T:%-5t %7l <%n>: %v";
+constexpr unsigned char Utf8Bom[3] = {0xEF, 0xBB, 0xBF};
+const std::string LogFileExtension = ".log";
+const std::string LogPattern = "%Y-%m-%d %T.%e T:%-5t %7l <%n>: %v";
 } // namespace
 
 CLog::CLog()

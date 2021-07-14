@@ -68,7 +68,7 @@ bool CRenderContext::IsExtSupported(const char* extension)
 #if defined(HAS_GL) || defined(HAS_GLES)
 namespace
 {
-static ESHADERMETHOD TranslateShaderMethod(GL_SHADER_METHOD method)
+ESHADERMETHOD TranslateShaderMethod(GL_SHADER_METHOD method)
 {
   switch (method)
   {
