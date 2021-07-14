@@ -263,14 +263,14 @@ std::string XMLUtils::GetAttribute(const TiXmlElement *element, const char *tag)
 void XMLUtils::SetAdditiveString(TiXmlNode* pRootNode, const char *strTag, const std::string& strSeparator, const std::string& strValue)
 {
   std::vector<std::string> list = StringUtils::Split(strValue, strSeparator);
-  for (std::vector<std::string>::const_iterator i = list.begin(); i != list.end(); ++i)
-    SetString(pRootNode, strTag, *i);
+  for (const std::string& i : list)
+    SetString(pRootNode, strTag, i);
 }
 
 void XMLUtils::SetStringArray(TiXmlNode* pRootNode, const char *strTag, const std::vector<std::string>& arrayValue)
 {
-  for (unsigned int i = 0; i < arrayValue.size(); i++)
-    SetString(pRootNode, strTag, arrayValue.at(i));
+  for (const std::string& value : arrayValue)
+    SetString(pRootNode, strTag, value);
 }
 
 TiXmlNode* XMLUtils::SetString(TiXmlNode* pRootNode, const char *strTag, const std::string& strValue)

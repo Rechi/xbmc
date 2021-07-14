@@ -30,12 +30,12 @@ void CFanart::Pack()
   // Take our data and pack it into the m_xml string
   m_xml.clear();
   TiXmlElement fanart("fanart");
-  for (std::vector<SFanartData>::const_iterator it = m_fanart.begin(); it != m_fanart.end(); ++it)
+  for (const SFanartData& it : m_fanart)
   {
     TiXmlElement thumb("thumb");
-    thumb.SetAttribute("colors", it->strColors.c_str());
-    thumb.SetAttribute("preview", it->strPreview.c_str());
-    TiXmlText text(it->strImage);
+    thumb.SetAttribute("colors", it.strColors.c_str());
+    thumb.SetAttribute("preview", it.strPreview.c_str());
+    TiXmlText text(it.strImage);
     thumb.InsertEndChild(text);
     fanart.InsertEndChild(thumb);
   }

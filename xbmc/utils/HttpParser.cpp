@@ -215,10 +215,8 @@ HttpParser::getBody() const
 const char*
 HttpParser::getValue( const char* key ) const
 {
-    for( IntArray::const_iterator iter = _keys.begin();
-            iter != _keys.end(); ++iter  )
+  for (unsigned int index : _keys)
     {
-        unsigned index = *iter;
         if ( strcmp( &_data[index], key ) == 0 ) {
             return &_data[index + strlen(key) + 2];
         }
