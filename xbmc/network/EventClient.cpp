@@ -694,10 +694,7 @@ void CEventClient::FreePacketQueues()
   std::map<unsigned int, EVENTPACKET::CEventPacket*>::iterator iter = m_seqPackets.begin();
   while (iter != m_seqPackets.end())
   {
-    if (iter->second)
-    {
-      delete iter->second;
-    }
+    delete iter->second;
     ++iter;
   }
   m_seqPackets.clear();

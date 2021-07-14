@@ -15,6 +15,7 @@ Checks: "\
   readability-avoid-const-params-in-decls,\
   readability-const-return-type,\
   readability-container-size-empty,\
+  readability-delete-null-pointer,\
   readability-redundant-control-flow,\
   readability-redundant-declaration,\
   readability-redundant-member-init,\

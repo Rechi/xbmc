@@ -114,7 +114,7 @@ namespace xbmcutil
     {
     public:
       K* guarded;
-      ~Deleter() { if (guarded) delete guarded; }
+      ~Deleter() { delete guarded; }
     };
 
     /**

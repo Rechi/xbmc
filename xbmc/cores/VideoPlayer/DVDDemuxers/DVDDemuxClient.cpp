@@ -156,8 +156,7 @@ bool CDVDDemuxClient::ParsePacket(DemuxPacket* pkt)
     int len = stream->m_parser->parser->split(stream->m_context, pkt->pData, pkt->iSize);
     if (len > 0 && len < FF_MAX_EXTRADATA_SIZE)
     {
-      if (st->ExtraData)
-        delete[] st->ExtraData;
+      delete[] st->ExtraData;
       st->changes++;
       st->disabled = false;
       st->ExtraSize = len;

@@ -114,10 +114,7 @@ void CEventServer::Cleanup()
   std::map<unsigned long, CEventClient*>::iterator iter = m_clients.begin();
   while (iter != m_clients.end())
   {
-    if (iter->second)
-    {
-      delete iter->second;
-    }
+    delete iter->second;
     m_clients.erase(iter);
     iter =  m_clients.begin();
   }

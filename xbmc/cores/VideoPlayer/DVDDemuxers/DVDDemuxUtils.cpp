@@ -43,8 +43,7 @@ void CDVDDemuxUtils::FreeDemuxPacket(DemuxPacket* pPacket)
         av_packet_free(&avPkt);
       }
     }
-    if (pPacket->cryptoInfo)
-      delete pPacket->cryptoInfo;
+    delete pPacket->cryptoInfo;
     delete pPacket;
   }
 }

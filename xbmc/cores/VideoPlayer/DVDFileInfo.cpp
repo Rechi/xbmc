@@ -122,8 +122,7 @@ bool CDVDFileInfo::ExtractThumb(const CFileItem& fileItem,
   catch(...)
   {
     CLog::Log(LOGERROR, "{} - Exception thrown when opening demuxer", __FUNCTION__);
-    if (pDemuxer)
-      delete pDemuxer;
+    delete pDemuxer;
 
     return false;
   }
@@ -288,8 +287,7 @@ bool CDVDFileInfo::ExtractThumb(const CFileItem& fileItem,
     }
   }
 
-  if (pDemuxer)
-    delete pDemuxer;
+  delete pDemuxer;
 
   if(!bOk)
   {
