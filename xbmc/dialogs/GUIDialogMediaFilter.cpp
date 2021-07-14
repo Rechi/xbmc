@@ -264,8 +264,8 @@ void CGUIDialogMediaFilter::OnSettingChanged(const std::shared_ptr<const CSettin
         filter.rule = AddRule(filter.field, filter.ruleOperator);
 
       filter.rule->m_parameter.clear();
-      for (const auto& itValue : values)
-        filter.rule->m_parameter.push_back(itValue.asString());
+      for (const auto& value : values)
+        filter.rule->m_parameter.push_back(value.asString());
     }
     else
       remove = true;
@@ -589,21 +589,21 @@ bool CGUIDialogMediaFilter::SetPath(const std::string &path)
 
 void CGUIDialogMediaFilter::UpdateControls()
 {
-  for (const auto& itFilter : m_filters)
+  for (const std::pair<const std::string, Filter>& filter : m_filters)
   {
-    if (itFilter.second.controlType != "list")
+    if (filter.second.controlType != "list")
       continue;
 
     std::vector<std::string> items;
-    int size = GetItems(itFilter.second, items, true);
+    int size = GetItems(filter.second, items, true);
 
-    std::string label = g_localizeStrings.Get(itFilter.second.label);
-    BaseSettingControlPtr control = GetSettingControl(itFilter.second.setting->GetId());
+    std::string label = g_localizeStrings.Get(filter.second.label);
+    BaseSettingControlPtr control = GetSettingControl(filter.second.setting->GetId());
     if (control == NULL)
       continue;
 
     if (size <= 0 ||
-        (size == 1 && itFilter.second.field != FieldSet && itFilter.second.field != FieldTag))
+        (size == 1 && filter.second.field != FieldSet && filter.second.field != FieldTag))
       CONTROL_DISABLE(control->GetID());
     else
     {
