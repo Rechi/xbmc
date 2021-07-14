@@ -45,7 +45,7 @@ void DecoderManager::FreeDecoders()
 }
 
 // returns true for png, bmp, tga, jpg and dds files, otherwise returns false
-bool DecoderManager::IsSupportedGraphicsFile(char *strFileName)
+bool DecoderManager::IsSupportedGraphicsFile(const char* strFileName)
 {
   std::string filename = strFileName;
   if (filename.length() < 4)

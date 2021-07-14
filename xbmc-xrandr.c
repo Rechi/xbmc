@@ -967,8 +967,8 @@ output_is_primary(output_t *output)
 }
 
 /* Returns the index of the last value in an array < 0xffff */
-static int
-find_last_non_clamped(CARD16 array[], int size) {
+static int find_last_non_clamped(const CARD16 array[], int size)
+{
     int i;
     for (i = size - 1; i > 0; i--) {
         if (array[i] < 0xffff)

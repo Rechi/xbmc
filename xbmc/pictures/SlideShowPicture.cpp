@@ -788,7 +788,7 @@ bool CSlideShowPic::UpdateVertexBuffer(Vertex* vertices)
 }
 #endif
 
-void CSlideShowPic::Render(float* x, float* y, CTexture* pTexture, UTILS::Color color)
+void CSlideShowPic::Render(const float* x, const float* y, CTexture* pTexture, UTILS::Color color)
 {
 #ifdef HAS_DX
   Vertex vertex[5];
