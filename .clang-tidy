@@ -15,5 +15,6 @@ Checks: "\
   readability-avoid-const-params-in-decls,\
   readability-const-return-type,\
   readability-container-size-empty,\
+  readability-redundant-control-flow,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'
