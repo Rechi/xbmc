@@ -41,9 +41,8 @@ void CGUIControlGroupList::Process(unsigned int currentTime, CDirtyRegionList &d
 
   // first we update visibility of all our items, to ensure our size and
   // alignment computations are correct.
-  for (iControls it = m_children.begin(); it != m_children.end(); ++it)
+  for (CGUIControl* control : m_children)
   {
-    CGUIControl *control = *it;
     GUIPROFILER_VISIBILITY_BEGIN(control);
     control->UpdateVisibility(nullptr);
     GUIPROFILER_VISIBILITY_END(control);
@@ -66,11 +65,10 @@ void CGUIControlGroupList::Process(unsigned int currentTime, CDirtyRegionList &d
   // we run through the controls, rendering as we go
   int index = 0;
   float pos = GetAlignOffset();
-  for (iControls it = m_children.begin(); it != m_children.end(); ++it)
+  for (CGUIControl* control : m_children)
   {
     // note we render all controls, even if they're offscreen, as then they'll be updated
     // with respect to animations
-    CGUIControl *control = *it;
     if (m_orientation == VERTICAL)
       CServiceBroker::GetWinSystem()->GetGfxContext().SetOrigin(m_posX, m_posY + pos - m_scroller.GetValue());
     else
@@ -100,11 +98,10 @@ void CGUIControlGroupList::Render()
   float pos = GetAlignOffset();
   float focusedPos = 0;
   CGUIControl *focusedControl = NULL;
-  for (iControls it = m_children.begin(); it != m_children.end(); ++it)
+  for (CGUIControl* control : m_children)
   {
     // note we render all controls, even if they're offscreen, as then they'll be updated
     // with respect to animations
-    CGUIControl *control = *it;
     if (m_renderFocusedLast && control->HasFocus())
     {
       focusedControl = control;
@@ -143,9 +140,8 @@ bool CGUIControlGroupList::OnMessage(CGUIMessage& message)
       // scroll if we need to and update our page control
       ValidateOffset();
       float offset = 0;
-      for (iControls it = m_children.begin(); it != m_children.end(); ++it)
+      for (CGUIControl* control : m_children)
       {
-        CGUIControl *control = *it;
         if (!control->IsVisible())
           continue;
         if (control->GetControl(message.GetControlId()))
@@ -172,9 +168,8 @@ bool CGUIControlGroupList::OnMessage(CGUIMessage& message)
       ValidateOffset();
       // now check the focusControl's offset
       float offset = 0;
-      for (iControls it = m_children.begin(); it != m_children.end(); ++it)
+      for (CGUIControl* control : m_children)
       {
-        CGUIControl *control = *it;
         if (!control->IsVisible())
           continue;
         if (control->GetControl(m_focusedControl))
@@ -187,9 +182,8 @@ bool CGUIControlGroupList::OnMessage(CGUIMessage& message)
       }
       // find the first control on this page
       offset = 0;
-      for (iControls it = m_children.begin(); it != m_children.end(); ++it)
+      for (const CGUIControl* control : m_children)
       {
-        CGUIControl *control = *it;
         if (!control->IsVisible())
           continue;
         if (control->CanFocus() && IsControlOnScreen(offset, control))
@@ -376,9 +370,8 @@ EVENT_RESULT CGUIControlGroupList::SendMouseEvent(const CPoint &point, const CMo
   {
     float pos = 0;
     float alignOffset = GetAlignOffset();
-    for (ciControls i = m_children.begin(); i != m_children.end(); ++i)
+    for (CGUIControl* child : m_children)
     {
-      CGUIControl *child = *i;
       if (child->IsVisible())
       {
         if (IsControlOnScreen(pos, child))
@@ -409,9 +402,8 @@ void CGUIControlGroupList::UnfocusFromPoint(const CPoint &point)
   CPoint controlCoords(point);
   m_transform.InverseTransformPosition(controlCoords.x, controlCoords.y);
   float alignOffset = GetAlignOffset();
-  for (iControls it = m_children.begin(); it != m_children.end(); ++it)
+  for (CGUIControl* child : m_children)
   {
-    CGUIControl *child = *it;
     if (child->IsVisible())
     {
       if (IsControlOnScreen(pos, child))
@@ -485,9 +477,8 @@ bool CGUIControlGroupList::IsControlOnScreen(float pos, const CGUIControl *contr
 
 bool CGUIControlGroupList::IsFirstFocusableControl(const CGUIControl *control) const
 {
-  for (ciControls it = m_children.begin(); it != m_children.end(); ++it)
+  for (const CGUIControl* child : m_children)
   {
-    CGUIControl *child = *it;
     if (child->IsVisible() && child->CanFocus())
     { // found first focusable
       return child == control;
@@ -515,7 +506,7 @@ void CGUIControlGroupList::CalculateItemGap()
   {
     int itemsCount = 0;
     float itemsSize = 0;
-    for (const auto& child : m_children)
+    for (const CGUIControl* child : m_children)
     {
       if (child->IsVisible())
       {
@@ -547,9 +538,8 @@ EVENT_RESULT CGUIControlGroupList::OnMouseEvent(const CPoint &point, const CMous
   {
     // find the current control and move to the next or previous
     float offset = 0;
-    for (ciControls it = m_children.begin(); it != m_children.end(); ++it)
+    for (const CGUIControl* control : m_children)
     {
-      CGUIControl *control = *it;
       if (!control->IsVisible()) continue;
       float nextOffset = offset + Size(control) + m_itemGap;
       if (event.m_id == ACTION_MOUSE_WHEEL_DOWN && nextOffset > m_scroller.GetValue() && m_scroller.GetValue() < m_totalSize - Size()) // past our current offset
@@ -590,9 +580,8 @@ EVENT_RESULT CGUIControlGroupList::OnMouseEvent(const CPoint &point, const CMous
 float CGUIControlGroupList::GetTotalSize() const
 {
   float totalSize = 0;
-  for (ciControls it = m_children.begin(); it != m_children.end(); ++it)
+  for (const CGUIControl* control : m_children)
   {
-    CGUIControl *control = *it;
     if (!control->IsVisible()) continue;
     totalSize += Size(control) + m_itemGap;
   }

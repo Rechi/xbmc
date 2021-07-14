@@ -95,9 +95,8 @@ void CGUIControl::FreeResources(bool immediately)
     // Reset our animation states - not conditional anims though.
     // I'm not sure if this is needed for most cases anyway.  I believe it's only here
     // because some windows aren't loaded on demand
-    for (unsigned int i = 0; i < m_animations.size(); i++)
+    for (CAnimation& anim : m_animations)
     {
-      CAnimation &anim = m_animations[i];
       if (anim.GetType() != ANIM_TYPE_CONDITIONAL)
         anim.ResetAnimation();
     }
@@ -605,9 +604,8 @@ void CGUIControl::UpdateVisibility(const CGUIListItem *item)
     }
   }
   // check for conditional animations
-  for (unsigned int i = 0; i < m_animations.size(); i++)
+  for (CAnimation& anim : m_animations)
   {
-    CAnimation &anim = m_animations[i];
     if (anim.GetType() == ANIM_TYPE_CONDITIONAL)
       anim.UpdateCondition(item);
   }
@@ -644,9 +642,8 @@ void CGUIControl::SetInitialVisibility()
   else if (m_visible == DELAYED)
     m_visible = VISIBLE;
   // and handle animation conditions as well
-  for (unsigned int i = 0; i < m_animations.size(); i++)
+  for (CAnimation& anim : m_animations)
   {
-    CAnimation &anim = m_animations[i];
     if (anim.GetType() == ANIM_TYPE_CONDITIONAL)
       anim.SetInitialCondition();
   }
@@ -681,10 +678,10 @@ void CGUIControl::ResetAnimation(ANIMATION_TYPE type)
 {
   MarkDirtyRegion();
 
-  for (unsigned int i = 0; i < m_animations.size(); i++)
+  for (CAnimation& animation : m_animations)
   {
-    if (m_animations[i].GetType() == type)
-      m_animations[i].ResetAnimation();
+    if (animation.GetType() == type)
+      animation.ResetAnimation();
   }
 }
 
@@ -692,8 +689,8 @@ void CGUIControl::ResetAnimations()
 {
   MarkDirtyRegion();
 
-  for (unsigned int i = 0; i < m_animations.size(); i++)
-    m_animations[i].ResetAnimation();
+  for (CAnimation& animation : m_animations)
+    animation.ResetAnimation();
 
   MarkDirtyRegion();
 }
@@ -754,9 +751,8 @@ void CGUIControl::QueueAnimation(ANIMATION_TYPE animType)
 
 CAnimation *CGUIControl::GetAnimation(ANIMATION_TYPE type, bool checkConditions /* = true */)
 {
-  for (unsigned int i = 0; i < m_animations.size(); i++)
+  for (CAnimation& anim : m_animations)
   {
-    CAnimation &anim = m_animations[i];
     if (anim.GetType() == type)
     {
       if (!checkConditions || anim.CheckCondition())
@@ -840,9 +836,8 @@ bool CGUIControl::Animate(unsigned int currentTime)
   bool changed = false;
 
   CPoint center(GetXPosition() + GetWidth() * 0.5f, GetYPosition() + GetHeight() * 0.5f);
-  for (unsigned int i = 0; i < m_animations.size(); i++)
+  for (CAnimation& anim : m_animations)
   {
-    CAnimation &anim = m_animations[i];
     anim.Animate(currentTime, HasProcessed() || visible == DELAYED);
     // Update the control states (such as visibility)
     UpdateStates(anim.GetType(), anim.GetProcess(), anim.GetState());
@@ -862,9 +857,8 @@ bool CGUIControl::Animate(unsigned int currentTime)
 
 bool CGUIControl::IsAnimating(ANIMATION_TYPE animType)
 {
-  for (unsigned int i = 0; i < m_animations.size(); i++)
+  for (const CAnimation& anim : m_animations)
   {
-    CAnimation &anim = m_animations[i];
     if (anim.GetType() == animType)
     {
       if (anim.GetQueuedProcess() == ANIM_PROCESS_NORMAL)

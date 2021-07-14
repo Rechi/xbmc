@@ -277,9 +277,8 @@ void GUIFontManager::FreeFontFile(CGUIFontTTF* pFont)
 
 CGUIFontTTF* GUIFontManager::GetFontFile(const std::string& strFileName)
 {
-  for (int i = 0; i < (int)m_vecFontFiles.size(); ++i)
+  for (CGUIFontTTF* pFont : m_vecFontFiles)
   {
-    CGUIFontTTF* pFont = m_vecFontFiles[i];
     if (StringUtils::EqualsNoCase(pFont->GetFileName(), strFileName))
       return pFont;
   }
@@ -288,9 +287,8 @@ CGUIFontTTF* GUIFontManager::GetFontFile(const std::string& strFileName)
 
 CGUIFont* GUIFontManager::GetFont(const std::string& strFontName, bool fallback /*= true*/)
 {
-  for (int i = 0; i < (int)m_vecFonts.size(); ++i)
+  for (CGUIFont* pFont : m_vecFonts)
   {
-    CGUIFont* pFont = m_vecFonts[i];
     if (StringUtils::EqualsNoCase(pFont->GetFontName(), strFontName))
       return pFont;
   }
@@ -336,9 +334,8 @@ CGUIFont* GUIFontManager::GetDefaultFont(bool border)
 
 void GUIFontManager::Clear()
 {
-  for (int i = 0; i < (int)m_vecFonts.size(); ++i)
+  for (const CGUIFont* pFont : m_vecFonts)
   {
-    CGUIFont* pFont = m_vecFonts[i];
     delete pFont;
   }
 

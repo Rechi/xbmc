@@ -237,8 +237,8 @@ void CGUIImage::AllocResources()
 void CGUIImage::FreeTextures(bool immediately /* = false */)
 {
   m_texture->FreeResources(immediately);
-  for (unsigned int i = 0; i < m_fadingTextures.size(); i++)
-    delete m_fadingTextures[i];
+  for (const CFadingTexture* m_fadingTexture : m_fadingTextures)
+    delete m_fadingTexture;
   m_fadingTextures.clear();
   m_currentTexture.clear();
   if (!m_info.IsConstant()) // constant textures never change

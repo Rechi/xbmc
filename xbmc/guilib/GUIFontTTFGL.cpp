@@ -225,15 +225,15 @@ void CGUIFontTTFGL::LastEnd()
     // Store current scissor
     CRect scissor = CServiceBroker::GetWinSystem()->GetGfxContext().StereoCorrection(CServiceBroker::GetWinSystem()->GetGfxContext().GetScissors());
 
-    for (size_t i = 0; i < m_vertexTrans.size(); i++)
+    for (const CTranslatedVertices& vertexTran : m_vertexTrans)
     {
-      if (m_vertexTrans[i].vertexBuffer->bufferHandle == 0)
+      if (vertexTran.vertexBuffer->bufferHandle == 0)
       {
         continue;
       }
 
       // Apply the clip rectangle
-      CRect clip = renderSystem->ClipRectToScissorRect(m_vertexTrans[i].clip);
+      CRect clip = renderSystem->ClipRectToScissorRect(vertexTran.clip);
       if (!clip.IsEmpty())
       {
         // intersect with current scissor
@@ -246,17 +246,19 @@ void CGUIFontTTFGL::LastEnd()
 
       // Apply the translation to the currently active (top-of-stack) model view matrix
       glMatrixModview.Push();
-      glMatrixModview.Get().Translatef(m_vertexTrans[i].translateX, m_vertexTrans[i].translateY, m_vertexTrans[i].translateZ);
+      glMatrixModview.Get().Translatef(vertexTran.translateX, vertexTran.translateY,
+                                       vertexTran.translateZ);
       glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glMatrixModview.Get());
 
       // Bind the buffer to the OpenGL context's GL_ARRAY_BUFFER binding point
-      glBindBuffer(GL_ARRAY_BUFFER, m_vertexTrans[i].vertexBuffer->bufferHandle);
+      glBindBuffer(GL_ARRAY_BUFFER, vertexTran.vertexBuffer->bufferHandle);
 
       // Do the actual drawing operation, split into groups of characters no
       // larger than the pre-determined size of the element array
-      for (size_t character = 0; m_vertexTrans[i].vertexBuffer->size > character; character += ELEMENT_ARRAY_MAX_CHAR_INDEX)
+      for (size_t character = 0; vertexTran.vertexBuffer->size > character;
+           character += ELEMENT_ARRAY_MAX_CHAR_INDEX)
       {
-        size_t count = m_vertexTrans[i].vertexBuffer->size - character;
+        size_t count = vertexTran.vertexBuffer->size - character;
         count = std::min<size_t>(count, ELEMENT_ARRAY_MAX_CHAR_INDEX);
 
         // Set up the offsets of the various vertex attributes within the buffer
