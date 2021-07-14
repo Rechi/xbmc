@@ -77,8 +77,9 @@ void CViewDatabase::UpdateTables(int version)
       }
       m_pDS->close();
 
-      for (std::vector< std::pair<int, std::string> >::const_iterator it = paths.begin(); it != paths.end(); ++it)
-        m_pDS->exec(PrepareSQL("UPDATE view SET path='%s' WHERE idView=%d", it->second.c_str(), it->first));
+      for (const std::pair<int, std::string>& path : paths)
+        m_pDS->exec(PrepareSQL("UPDATE view SET path='%s' WHERE idView=%d", path.second.c_str(),
+                               path.first));
     }
   }
   if (version < 6)
