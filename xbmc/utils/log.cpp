@@ -36,10 +36,7 @@ static const std::string LogPattern = "%Y-%m-%d %T.%e T:%-5t %7l <%n>: %v";
 CLog::CLog()
   : m_platform(IPlatformLog::CreatePlatformLog()),
     m_sinks(std::make_shared<spdlog::sinks::dist_sink_mt>()),
-    m_defaultLogger(CreateLogger("general")),
-    m_logLevel(LOG_LEVEL_DEBUG),
-    m_componentLogEnabled(false),
-    m_componentLogLevels(0)
+    m_defaultLogger(CreateLogger("general"))
 {
   // add platform-specific debug sinks
   m_platform->AddSinks(m_sinks);

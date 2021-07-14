@@ -47,9 +47,9 @@ private:
   bool OpenBundle();
   bool ConvertFrameToTexture(const std::string& name, CXBTFFrame& frame, CTexture** ppTexture);
 
-  time_t m_TimeStamp;
+  time_t m_TimeStamp = 0;
 
-  bool m_themeBundle;
+  bool m_themeBundle = false;
   std::string m_path;
   std::shared_ptr<CXBTFReader> m_XBTFReader;
 };

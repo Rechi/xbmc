@@ -141,7 +141,7 @@ protected:
     int height;
     float fps;
     float dar;
-  } m_playerVideoInfo;
+  } m_playerVideoInfo{};
 
   CCriticalSection m_audioPlayerSection;
   struct SPlayerAudioInfo
@@ -150,7 +150,7 @@ protected:
     std::string channels;
     int sampleRate;
     int bitsPerSample;
-  } m_playerAudioInfo;
+  } m_playerAudioInfo{};
 
   mutable CCriticalSection m_contentSection;
   struct SContentInfo
@@ -163,7 +163,7 @@ protected:
   struct SRenderInfo
   {
     bool m_isClockSync;
-  } m_renderInfo;
+  } m_renderInfo{};
 
   CCriticalSection m_stateSection;
   bool m_playerStateChanged = false;
@@ -175,7 +175,7 @@ protected:
     float m_tempo;
     float m_speed;
     bool m_frameAdvance;
-  } m_stateInfo;
+  } m_stateInfo{};
 
   struct STimeInfo
   {

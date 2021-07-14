@@ -181,8 +181,8 @@ private:
 
   std::shared_ptr<spdlog::sinks::sink> m_fileSink;
 
-  int m_logLevel;
+  int m_logLevel = LOG_LEVEL_DEBUG;
 
-  bool m_componentLogEnabled;
-  uint32_t m_componentLogLevels;
+  bool m_componentLogEnabled = false;
+  uint32_t m_componentLogLevels = 0;
 };

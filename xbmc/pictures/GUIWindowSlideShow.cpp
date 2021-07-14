@@ -66,12 +66,6 @@ static float zoomamount[10] = { 1.0f, 1.2f, 1.5f, 2.0f, 2.8f, 4.0f, 6.0f, 9.0f, 
 
 CBackgroundPicLoader::CBackgroundPicLoader()
   : CThread("BgPicLoader")
-  , m_iPic{0}
-  , m_iSlideNumber{0}
-  , m_maxWidth{0}
-  , m_maxHeight{0}
-  , m_isLoading{false}
-  , m_pCallback{nullptr}
 {
 }
 

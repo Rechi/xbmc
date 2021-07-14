@@ -394,8 +394,8 @@ namespace PVR
     void InitRecordingGroupValues(const PVR_TIMER_TYPE& type);
 
     int m_iClientId = -1;
-    unsigned int m_iTypeId;
-    uint64_t m_iAttributes;
+    unsigned int m_iTypeId = PVR_TIMER_TYPE_NONE;
+    uint64_t m_iAttributes = PVR_TIMER_TYPE_ATTRIBUTE_NONE;
     std::string m_strDescription;
     std::vector< std::pair<std::string, int> > m_priorityValues;
     int m_iPriorityDefault = DEFAULT_RECORDING_PRIORITY;

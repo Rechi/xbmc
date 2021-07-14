@@ -1146,7 +1146,7 @@ public:
   ///                 as default
   JoystickFeature(const std::string& name = "",
                   JOYSTICK_FEATURE_TYPE type = JOYSTICK_FEATURE_TYPE_UNKNOWN)
-    : m_name(name), m_type(type), m_primitives{}
+    : m_name(name), m_type(type)
   {
   }
 
@@ -1261,7 +1261,7 @@ public:
 private:
   std::string m_name;
   JOYSTICK_FEATURE_TYPE m_type;
-  std::array<DriverPrimitive, JOYSTICK_PRIMITIVE_MAX> m_primitives;
+  std::array<DriverPrimitive, JOYSTICK_PRIMITIVE_MAX> m_primitives{};
 };
 ///@}
 //------------------------------------------------------------------------------

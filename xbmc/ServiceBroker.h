@@ -158,12 +158,12 @@ public:
 private:
   std::unique_ptr<CLog> m_logging;
   std::shared_ptr<ANNOUNCEMENT::CAnnouncementManager> m_pAnnouncementManager;
-  CGUIComponent* m_pGUI;
-  CWinSystemBase* m_pWinSystem;
-  IAE* m_pActiveAE;
+  CGUIComponent* m_pGUI = nullptr;
+  CWinSystemBase* m_pWinSystem = nullptr;
+  IAE* m_pActiveAE = nullptr;
   std::shared_ptr<CAppInboundProtocol> m_pAppPort;
-  CSettingsComponent* m_pSettingsComponent;
-  CDecoderFilterManager* m_decoderFilterManager;
+  CSettingsComponent* m_pSettingsComponent = nullptr;
+  CDecoderFilterManager* m_decoderFilterManager = nullptr;
   std::shared_ptr<CCPUInfo> m_cpuInfo;
 };
 

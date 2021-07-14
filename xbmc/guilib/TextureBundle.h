@@ -37,7 +37,7 @@ public:
 private:
   CTextureBundleXBT m_tbXBT;
 
-  bool m_useXBT;
+  bool m_useXBT = false;
 };
 
 

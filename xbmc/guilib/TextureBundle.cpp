@@ -10,7 +10,6 @@
 
 CTextureBundle::CTextureBundle()
   : m_tbXBT{false}
-	, m_useXBT{false}
 {
 }
 
