@@ -4807,9 +4807,9 @@ void CApplication::UnregisterActionListener(IActionListener *listener)
 bool CApplication::NotifyActionListeners(const CAction &action) const
 {
   CSingleLock lock(m_critSection);
-  for (std::vector<IActionListener *>::const_iterator it = m_actionListeners.begin(); it != m_actionListeners.end(); ++it)
+  for (IActionListener* actionListener : m_actionListeners)
   {
-    if ((*it)->OnAction(action))
+    if (actionListener->OnAction(action))
       return true;
   }
 

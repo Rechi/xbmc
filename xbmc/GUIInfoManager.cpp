@@ -10701,9 +10701,9 @@ void CGUIInfoManager::Clear()
   } while (swapList.size() != m_bools.size());
 
   // log which ones are used - they should all be gone by now
-  for (INFOBOOLTYPE::const_iterator i = m_bools.begin(); i != m_bools.end(); ++i)
-    CLog::Log(LOGDEBUG, "Infobool '{}' still used by {} instances", (*i)->GetExpression(),
-              (unsigned int)i->use_count());
+  for (const InfoPtr& b : m_bools)
+    CLog::Log(LOGDEBUG, "Infobool '{}' still used by {} instances", b->GetExpression(),
+              (unsigned int)b.use_count());
 }
 
 void CGUIInfoManager::UpdateAVInfo()
@@ -11016,9 +11016,9 @@ std::string CGUIInfoManager::GetSkinVariableString(int info,
 
 bool CGUIInfoManager::ConditionsChangedValues(const std::map<INFO::InfoPtr, bool>& map)
 {
-  for (std::map<INFO::InfoPtr, bool>::const_iterator it = map.begin() ; it != map.end() ; ++it)
+  for (const std::pair<const INFO::InfoPtr, bool>& it : map)
   {
-    if (it->first->Get() != it->second)
+    if (it.first->Get() != it.second)
       return true;
   }
   return false;

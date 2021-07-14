@@ -1588,18 +1588,19 @@ bool CUtil::RunCommandLine(const std::string& cmdLine, bool waitExit)
   // This allows the python invocation to be written more naturally with any amount of whitespace around the args.
   // But it's still limited, for example quotes inside the strings are not expanded, etc.
   //! @todo Maybe some python library routine can parse this more properly ?
-  for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); ++it)
+  for (std::string& arg : args)
   {
     size_t pos;
-    pos = it->find_first_not_of(" \t\n\"'");
+    pos = arg.find_first_not_of(" \t\n\"'");
     if (pos != std::string::npos)
     {
-      it->erase(0, pos);
+      arg.erase(0, pos);
     }
 
-    pos = it->find_last_not_of(" \t\n\"'"); // if it returns npos we'll end up with an empty string which is OK
+    pos = arg.find_last_not_of(
+        " \t\n\"'"); // if it returns npos we'll end up with an empty string which is OK
     {
-      it->erase(++pos, it->size());
+      arg.erase(++pos, arg.size());
     }
   }
 
@@ -1875,10 +1876,10 @@ void CUtil::GetItemsToScan(const std::string& videoPath,
     }
   }
 
-  for (std::vector<std::string>::const_iterator it = additionalPaths.begin(); it != additionalPaths.end(); ++it)
+  for (const std::string& additionalPath : additionalPaths)
   {
     CFileItemList moreItems;
-    CDirectory::GetDirectory(*it, moreItems, item_exts, flags);
+    CDirectory::GetDirectory(additionalPath, moreItems, item_exts, flags);
     items.Append(moreItems);
   }
 }
@@ -2112,11 +2113,11 @@ ExternalStreamInfo CUtil::GetExternalStreamDetailsFromFilename(const std::string
     std::vector<std::string> tokens;
     StringUtils::Tokenize(inputString, tokens, delimiters);
 
-    for (std::vector<std::string>::iterator it = tokens.begin(); it != tokens.end(); ++it)
+    for (const std::string& token : tokens)
     {
       if (info.language.empty())
       {
-        std::string langTmp(*it);
+        std::string langTmp(token);
         std::string langCode;
         // try to recognize language
         if (g_LangCodeExpander.ConvertToISO6392B(langTmp, langCode))
@@ -2127,7 +2128,7 @@ ExternalStreamInfo CUtil::GetExternalStreamDetailsFromFilename(const std::string
       }
 
       // try to recognize a flag
-      std::string flag_tmp(*it);
+      std::string flag_tmp(token);
       StringUtils::ToLower(flag_tmp);
       if (!flag_tmp.compare("none"))
       {
@@ -2145,7 +2146,7 @@ ExternalStreamInfo CUtil::GetExternalStreamDetailsFromFilename(const std::string
         continue;
       }
 
-      name += " " + (*it);
+      name += " " + token;
     }
   }
   name += " ";
