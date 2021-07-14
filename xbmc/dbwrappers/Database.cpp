@@ -351,9 +351,9 @@ bool CDatabase::CommitMultipleExecute()
 {
   m_multipleExecute = false;
   BeginTransaction();
-  for (const auto& i : m_multipleQueries)
+  for (const auto& multipleQuery : m_multipleQueries)
   {
-    if (!ExecuteQuery(i))
+    if (!ExecuteQuery(multipleQuery))
     {
       RollbackTransaction();
       return false;

@@ -499,8 +499,8 @@ bool CDatabaseQueryRuleCombination::Load(const CVariant &obj, const IDatabaseQue
 
 bool CDatabaseQueryRuleCombination::Save(TiXmlNode *parent) const
 {
-  for (const auto& it : m_rules)
-    it->Save(parent);
+  for (const std::shared_ptr<CDatabaseQueryRule>& rule : m_rules)
+    rule->Save(parent);
   return true;
 }
 
@@ -512,17 +512,17 @@ bool CDatabaseQueryRuleCombination::Save(CVariant &obj) const
   CVariant comboArray(CVariant::VariantTypeArray);
   if (!m_combinations.empty())
   {
-    for (const auto& combo : m_combinations)
+    for (const auto& combination : m_combinations)
     {
       CVariant comboObj(CVariant::VariantTypeObject);
-      if (combo->Save(comboObj))
+      if (combination->Save(comboObj))
         comboArray.push_back(comboObj);
     }
 
   }
   if (!m_rules.empty())
   {
-    for (const auto& rule : m_rules)
+    for (const std::shared_ptr<CDatabaseQueryRule>& rule : m_rules)
     {
       CVariant ruleObj(CVariant::VariantTypeObject);
       if (rule->Save(ruleObj))
