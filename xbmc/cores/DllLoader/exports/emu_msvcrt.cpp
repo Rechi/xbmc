@@ -91,7 +91,6 @@ extern void update_cache_dialog(const char* tmp);
 
 #define EMU_MAX_ENVIRONMENT_ITEMS 100
 static char *dll__environ_imp[EMU_MAX_ENVIRONMENT_ITEMS + 1];
-extern "C" char **dll__environ;
 char **dll__environ = dll__environ_imp;
 
 CCriticalSection dll_cs_environ;

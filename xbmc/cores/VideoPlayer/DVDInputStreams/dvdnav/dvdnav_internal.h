@@ -185,9 +185,6 @@ struct dvdnav_s {
 
 /** HELPER FUNCTIONS **/
 
-/* converts a dvd_time_t to PTS ticks */
-int64_t dvdnav_convert_time(dvd_time_t *time);
-
 /* XBMC added functions */
 /*
  * Get current playback state
