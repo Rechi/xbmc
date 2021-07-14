@@ -28,8 +28,10 @@ namespace ADDON
 
     bool LoadImageFromMemory(unsigned char* buffer, unsigned int bufSize,
                              unsigned int width, unsigned int height) override;
-    bool Decode(unsigned char* const pixels, unsigned int width,
-                unsigned int height, unsigned int pitch,
+    bool Decode(unsigned char* pixels,
+                unsigned int width,
+                unsigned int height,
+                unsigned int pitch,
                 unsigned int format) override;
 
   protected:

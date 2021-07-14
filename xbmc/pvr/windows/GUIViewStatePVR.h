@@ -28,7 +28,7 @@ namespace PVR
   class CGUIViewStateWindowPVRChannels : public CGUIViewStatePVR
   {
   public:
-    CGUIViewStateWindowPVRChannels(const int windowId, const CFileItemList& items);
+    CGUIViewStateWindowPVRChannels(int windowId, const CFileItemList& items);
 
   protected:
     void SaveViewState() override;
@@ -37,7 +37,7 @@ namespace PVR
   class CGUIViewStateWindowPVRRecordings : public CGUIViewStatePVR
   {
   public:
-    CGUIViewStateWindowPVRRecordings(const int windowId, const CFileItemList& items);
+    CGUIViewStateWindowPVRRecordings(int windowId, const CFileItemList& items);
 
   protected:
     void SaveViewState() override;
@@ -47,7 +47,7 @@ namespace PVR
   class CGUIViewStateWindowPVRGuide : public CGUIViewStatePVR
   {
   public:
-    CGUIViewStateWindowPVRGuide(const int windowId, const CFileItemList& items);
+    CGUIViewStateWindowPVRGuide(int windowId, const CFileItemList& items);
 
   protected:
     void SaveViewState() override;
@@ -56,7 +56,7 @@ namespace PVR
   class CGUIViewStateWindowPVRTimers : public CGUIViewStatePVR
   {
   public:
-    CGUIViewStateWindowPVRTimers(const int windowId, const CFileItemList& items);
+    CGUIViewStateWindowPVRTimers(int windowId, const CFileItemList& items);
 
   protected:
     void SaveViewState() override;
@@ -66,7 +66,7 @@ namespace PVR
   class CGUIViewStateWindowPVRSearch : public CGUIViewStatePVR
   {
   public:
-    CGUIViewStateWindowPVRSearch(const int windowId, const CFileItemList& items);
+    CGUIViewStateWindowPVRSearch(int windowId, const CFileItemList& items);
 
   protected:
     void SaveViewState() override;

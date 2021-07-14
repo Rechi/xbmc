@@ -85,7 +85,7 @@ public:
   bool ReceiveInputEvent(const game_input_event& eventStruct);
 
   // Implementation of Observer
-  void Notify(const Observable& obs, const ObservableMessage msg) override;
+  void Notify(const Observable& obs, ObservableMessage msg) override;
 
 private:
   using PortAddress = std::string;

@@ -65,9 +65,15 @@ public:
   static bool GetAdditiveString(const TiXmlNode* rootNode, const char* tag, const std::string& separator, std::string& value, bool clear = false);
   static bool GetStringArray(const TiXmlNode* rootNode, const char* tag, std::vector<std::string>& arrayValue, bool clear = false, const std::string& separator = "");
   static bool GetPath(const TiXmlNode* pRootNode, const char* strTag, std::string& strStringValue);
-  static bool GetFloat(const TiXmlNode* pRootNode, const char* strTag, float& value, const float min, const float max);
-  static bool GetUInt(const TiXmlNode* pRootNode, const char* strTag, uint32_t& dwUIntValue, const uint32_t min, const uint32_t max);
-  static bool GetInt(const TiXmlNode* pRootNode, const char* strTag, int& iIntValue, const int min, const int max);
+  static bool GetFloat(
+      const TiXmlNode* pRootNode, const char* strTag, float& value, float min, float max);
+  static bool GetUInt(const TiXmlNode* pRootNode,
+                      const char* strTag,
+                      uint32_t& dwUIntValue,
+                      uint32_t min,
+                      uint32_t max);
+  static bool GetInt(
+      const TiXmlNode* pRootNode, const char* strTag, int& iIntValue, int min, int max);
   static bool GetDate(const TiXmlNode* pRootNode, const char* strTag, CDateTime& date);
   static bool GetDateTime(const TiXmlNode* pRootNode, const char* strTag, CDateTime& dateTime);
   /*! \brief Fetch a std::string copy of an attribute, if it exists.  Cannot distinguish between empty and non-existent attributes.

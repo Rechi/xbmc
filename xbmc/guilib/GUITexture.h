@@ -88,7 +88,7 @@ public:
   bool SetWidth(float width);
   bool SetHeight(float height);
   bool SetFileName(const std::string &filename);
-  void SetUseCache(const bool useCache = true);
+  void SetUseCache(bool useCache = true);
   bool SetAspectRatio(const CAspectRatio &aspect);
 
   const std::string& GetFileName() const { return m_info.filename; };

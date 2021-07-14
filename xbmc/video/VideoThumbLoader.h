@@ -131,5 +131,5 @@ protected:
    */
   void DetectAndAddMissingItemData(CFileItem &item);
 
-  const ArtMap& GetArtFromCache(const std::string &mediaType, const int id);
+  const ArtMap& GetArtFromCache(const std::string& mediaType, int id);
 };

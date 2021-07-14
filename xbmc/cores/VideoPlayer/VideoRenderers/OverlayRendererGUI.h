@@ -35,8 +35,15 @@ public:
   ~COverlayText() override;
   void Render(SRenderState& state) override;
   using COverlay::PrepareRender;
-  void PrepareRender(const std::string &font, int color, int opacity, int height, int style, const std::string &fontcache,
-                     const std::string &fontbordercache, const UTILS::Color bgcolor, const CRect &rectView);
+  void PrepareRender(const std::string& font,
+                     int color,
+                     int opacity,
+                     int height,
+                     int style,
+                     const std::string& fontcache,
+                     const std::string& fontbordercache,
+                     UTILS::Color bgcolor,
+                     const CRect& rectView);
   virtual CGUITextLayout* GetFontLayout(const std::string &font, int color, int opacity, int height, int style,
                                         const std::string &fontcache, const std::string &fontbordercache);
 

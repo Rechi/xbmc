@@ -23,7 +23,7 @@ class CEdl
 public:
   CEdl();
 
-  bool ReadEditDecisionLists(const CFileItem& fileItem, const float fFramesPerSecond);
+  bool ReadEditDecisionLists(const CFileItem& fileItem, float fFramesPerSecond);
   void Clear();
 
   bool HasCut() const;
@@ -36,14 +36,14 @@ public:
   const std::vector<EDL::Cut>& GetCutList() const { return m_vecCuts; }
 
   bool InCut(int iSeek, EDL::Cut* pCut = nullptr);
-  bool GetNearestCut(bool bPlus, const int iSeek, EDL::Cut* pCut) const;
+  bool GetNearestCut(bool bPlus, int iSeek, EDL::Cut* pCut) const;
 
   int GetLastCutTime() const;
-  void SetLastCutTime(const int iCutTime);
+  void SetLastCutTime(int iCutTime);
 
-  bool GetNextSceneMarker(bool bPlus, const int iClock, int *iSceneMarker);
+  bool GetNextSceneMarker(bool bPlus, int iClock, int* iSceneMarker);
 
-  static std::string MillisecondsToTimeString(const int iMilliseconds);
+  static std::string MillisecondsToTimeString(int iMilliseconds);
 
 private:
   int m_iTotalCutTime; // ms
@@ -51,14 +51,14 @@ private:
   std::vector<int> m_vecSceneMarkers;
   int m_lastCutTime;
 
-  bool ReadEdl(const std::string& strMovie, const float fFramesPerSecond);
-  bool ReadComskip(const std::string& strMovie, const float fFramesPerSecond);
+  bool ReadEdl(const std::string& strMovie, float fFramesPerSecond);
+  bool ReadComskip(const std::string& strMovie, float fFramesPerSecond);
   bool ReadVideoReDo(const std::string& strMovie);
   bool ReadBeyondTV(const std::string& strMovie);
   bool ReadPvr(const CFileItem& fileItem);
 
   bool AddCut(const EDL::Cut& newCut);
-  bool AddSceneMarker(const int sceneMarker);
+  bool AddSceneMarker(int sceneMarker);
 
   void MergeShortCommBreaks();
 };

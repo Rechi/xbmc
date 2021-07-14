@@ -71,7 +71,9 @@ public:
   void UpdateInfo(const CGUIListItem *item = NULL) override;
 
   virtual void SetInfo(const KODI::GUILIB::GUIINFO::CGUIInfoLabel &info);
-  virtual void SetFileName(const std::string& strFileName, bool setConstant = false, const bool useCache = true);
+  virtual void SetFileName(const std::string& strFileName,
+                           bool setConstant = false,
+                           bool useCache = true);
   virtual void SetAspectRatio(const CAspectRatio &aspect);
   void SetWidth(float width) override;
   void SetHeight(float height) override;

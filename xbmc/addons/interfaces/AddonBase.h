@@ -54,7 +54,7 @@ struct Interface_Base
   static char* get_type_version(void* kodiBase, int type);
   static char* get_addon_path(void* kodiBase);
   static char* get_base_user_path(void* kodiBase);
-  static void addon_log_msg(void* kodiBase, const int addonLogLevel, const char* strMessage);
+  static void addon_log_msg(void* kodiBase, int addonLogLevel, const char* strMessage);
   static bool is_setting_using_default(void* kodiBase, const char* id);
   static bool get_setting_bool(void* kodiBase, const char* id, bool* value);
   static bool get_setting_int(void* kodiBase, const char* id, int* value);

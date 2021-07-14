@@ -81,7 +81,7 @@ public:
 
   int GetActiveSubtitleStream();
   int GetSubTitleStreamCount();
-  SubtitleStreamInfo GetSubtitleStreamInfo(const int iId);
+  SubtitleStreamInfo GetSubtitleStreamInfo(int iId);
 
   bool SetActiveSubtitleStream(int iId);
   void EnableSubtitleStream(bool bEnable);
@@ -92,7 +92,7 @@ public:
   int GetActiveAngle();
   bool SetAngle(int angle);
   bool SetActiveAudioStream(int iId);
-  AudioStreamInfo GetAudioStreamInfo(const int iId);
+  AudioStreamInfo GetAudioStreamInfo(int iId);
 
   bool GetState(std::string &xmlstate) override;
   bool SetState(const std::string &xmlstate) override;

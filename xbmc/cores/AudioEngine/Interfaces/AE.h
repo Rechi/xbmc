@@ -119,13 +119,13 @@ public:
    * Sets the master volume level of the AudioEngine
    * @param volume The new volume level between 0.0 and 1.0
    */
-  virtual void SetVolume(const float volume) = 0;
+  virtual void SetVolume(float volume) = 0;
 
   /**
    * Set the mute state (does not affect volume level value)
    * @param enabled The mute state
    */
-  virtual void SetMute(const bool enabled) = 0;
+  virtual void SetMute(bool enabled) = 0;
 
   /**
    * Get the current mute state

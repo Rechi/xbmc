@@ -86,7 +86,7 @@ public:
    \param parentSize the size of the parent.
    \sa GetPosition
    */
-  static float ParsePosition(const char* pos, const float parentSize);
+  static float ParsePosition(const char* pos, float parentSize);
 
   static bool GetInfoLabelFromElement(const TiXmlElement *element, KODI::GUILIB::GUIINFO::CGUIInfoLabel &infoLabel, int parentID);
   static void GetInfoLabel(const TiXmlNode *pControlNode, const std::string &labelTag, KODI::GUILIB::GUIINFO::CGUIInfoLabel &infoLabel, int parentID);
@@ -114,7 +114,7 @@ private:
    \param value [out] the returned value.
    \sa ParsePosition, GetDimension, GetDimensions.
    */
-  static bool GetPosition(const TiXmlNode *node, const char* tag, const float parentSize, float& value);
+  static bool GetPosition(const TiXmlNode* node, const char* tag, float parentSize, float& value);
 
   /*! \brief grab a dimension out of the XML
 
@@ -130,7 +130,8 @@ private:
    \return true if we found and read the tag.
    \sa GetPosition, GetDimensions, ParsePosition.
    */
-  static bool GetDimension(const TiXmlNode *node, const char* strTag, const float parentSize, float &value, float &min);
+  static bool GetDimension(
+      const TiXmlNode* node, const char* strTag, float parentSize, float& value, float& min);
 
   /*! \brief Retrieve the dimensions for a control.
 
@@ -149,8 +150,15 @@ private:
    \return true if we can successfully derive the position and size, false otherwise.
    \sa GetDimension, GetPosition, ParsePosition.
    */
-  static bool GetDimensions(const TiXmlNode *node, const char *leftTag, const char *rightTag, const char *centerLeftTag,
-                            const char *centerRightTag, const char *widthTag, const float parentSize, float &left,
-                            float &width, float &min_width);
+  static bool GetDimensions(const TiXmlNode* node,
+                            const char* leftTag,
+                            const char* rightTag,
+                            const char* centerLeftTag,
+                            const char* centerRightTag,
+                            const char* widthTag,
+                            float parentSize,
+                            float& left,
+                            float& width,
+                            float& min_width);
 };
 

@@ -69,7 +69,7 @@ public:
 
   // Get and set the thread's priority
   int GetPriority(void);
-  bool SetPriority(const int iPriority);
+  bool SetPriority(int iPriority);
 
   // -----------------------------------------------------------------------------------
 

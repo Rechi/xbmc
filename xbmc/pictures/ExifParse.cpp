@@ -38,7 +38,7 @@
 
 
 // Prototypes for exif utility functions.
-static void ErrNonfatal(const char* const msg, int a1, int a2);
+static void ErrNonfatal(const char* msg, int a1, int a2);
 
 #define DIR_ENTRY_ADDR(Start, Entry) ((Start)+2+12*(Entry))
 

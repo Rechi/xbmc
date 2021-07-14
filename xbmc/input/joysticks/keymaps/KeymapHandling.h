@@ -58,7 +58,7 @@ public:
   IKeymap* GetKeymap(const std::string& controllerId) const;
 
   // implementation of Observer
-  void Notify(const Observable& obs, const ObservableMessage msg) override;
+  void Notify(const Observable& obs, ObservableMessage msg) override;
 
 private:
   void LoadKeymaps();

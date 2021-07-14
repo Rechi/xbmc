@@ -52,7 +52,7 @@ class CJpegParse
 
   private:
     bool ExtractInfo(XFILE::CFile& infile);
-    bool GetSection(XFILE::CFile& infile, const unsigned short sectionLength);
+    bool GetSection(XFILE::CFile& infile, unsigned short sectionLength);
     void ReleaseSection(void);
     void ProcessSOFn(void);
 
