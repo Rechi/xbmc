@@ -65,7 +65,7 @@ static void __attribute__((noinline)) extend_stack_for_dll_alloca()
 
 DllLoader::DllLoader(const char *sDll, bool bTrack, bool bSystemDll, bool bLoadSymbols, Export* exps) : LibraryLoader(sDll)
 {
-  ImportDirTable = 0;
+  ImportDirTable = nullptr;
   m_pExportHead = NULL;
   m_pStaticExports = exps;
   m_bTrack = bTrack;
@@ -124,7 +124,7 @@ DllLoader::~DllLoader()
   }
   if (m_bTrack) tracker_dll_free(this);
 
-  ImportDirTable = 0;
+  ImportDirTable = nullptr;
 
   // hModule points to DllLoader in this case
   if (m_bSystemDll)
@@ -605,7 +605,8 @@ bool DllLoader::Load()
 #ifdef TARGET_POSIX
 	extend_stack_for_dll_alloca();
 #endif
-      initdll((HINSTANCE)hModule, DLL_PROCESS_ATTACH , 0); //call "DllMain" with DLL_PROCESS_ATTACH
+      initdll((HINSTANCE)hModule, DLL_PROCESS_ATTACH,
+              nullptr); //call "DllMain" with DLL_PROCESS_ATTACH
 
 #ifdef LOGALL
       CLog::Log(LOGDEBUG, "EntryPoint with DLL_PROCESS_ATTACH called - Dll: {}", sName);
@@ -649,7 +650,7 @@ void DllLoader::Unload()
     if(EntryAddress)
     {
       EntryFunc initdll = (EntryFunc)EntryAddress;
-      initdll((HINSTANCE)hModule, DLL_PROCESS_DETACH , 0);
+      initdll((HINSTANCE)hModule, DLL_PROCESS_DETACH, nullptr);
     }
 
 #ifdef LOGALL

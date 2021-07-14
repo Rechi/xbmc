@@ -20,7 +20,7 @@ CGLContextGLX::CGLContextGLX(Display *dpy) : CGLContext(dpy)
 {
   m_extPrefix = "GLX_";
   m_glxWindow = 0;
-  m_glxContext = 0;
+  m_glxContext = nullptr;
   m_vsyncMode = 0;
 }
 
@@ -125,7 +125,7 @@ void CGLContextGLX::Destroy()
 {
   glXMakeCurrent(m_dpy, None, NULL);
   glXDestroyContext(m_dpy, m_glxContext);
-  m_glxContext = 0;
+  m_glxContext = nullptr;
 }
 
 void CGLContextGLX::Detach()

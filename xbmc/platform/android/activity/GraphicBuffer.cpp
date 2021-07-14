@@ -61,8 +61,11 @@ enum
     HAL_PIXEL_FORMAT_YV12   = 0x32315659, // YCrCb 4:2:0 Planar
 };
 
-CGraphicBuffer::CGraphicBuffer(uint32_t width, uint32_t height, uint32_t format, gfxImageUsage usage):
-  m_handle(0)
+CGraphicBuffer::CGraphicBuffer(uint32_t width,
+                               uint32_t height,
+                               uint32_t format,
+                               gfxImageUsage usage)
+  : m_handle(nullptr)
 {
   CLog::Log(LOGDEBUG, "CGraphicBuffer::CGraphicBuffer");
   if (!m_dll)

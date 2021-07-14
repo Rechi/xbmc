@@ -652,7 +652,7 @@ void CLinuxRendererGL::DrawBlackBars()
   glBindBuffer(GL_ARRAY_BUFFER, vertexVBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(Svertex)*count, &vertices[0], GL_STATIC_DRAW);
 
-  glVertexAttribPointer(posLoc, 3, GL_FLOAT, GL_FALSE, sizeof(Svertex), 0);
+  glVertexAttribPointer(posLoc, 3, GL_FLOAT, GL_FALSE, sizeof(Svertex), nullptr);
   glEnableVertexAttribArray(posLoc);
 
   glDrawArrays(GL_TRIANGLES, 0, count);
@@ -1171,7 +1171,7 @@ void CLinuxRendererGL::RenderSinglePass(int index, int field)
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexVBO);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLubyte)*4, idx, GL_STATIC_DRAW);
 
-  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, 0);
+  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, nullptr);
   VerifyGLState();
 
   glDisableVertexAttribArray(vertLoc);
@@ -1384,7 +1384,7 @@ void CLinuxRendererGL::RenderToFBO(int index, int field, bool weave /*= false*/)
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexVBO);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLubyte)*4, idx, GL_STATIC_DRAW);
 
-  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, 0);
+  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, nullptr);
   VerifyGLState();
 
   glDisableVertexAttribArray(vertLoc);
@@ -1505,7 +1505,7 @@ void CLinuxRendererGL::RenderFromFBO()
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexVBO);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLubyte)*4, idx, GL_STATIC_DRAW);
 
-  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, 0);
+  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, nullptr);
   VerifyGLState();
 
   glDisableVertexAttribArray(loc);
@@ -1644,7 +1644,7 @@ void CLinuxRendererGL::RenderRGB(int index, int field)
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexVBO);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLubyte)*4, idx, GL_STATIC_DRAW);
 
-  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, 0);
+  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, nullptr);
 
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glDeleteBuffers(1, &vertexVBO);
@@ -1869,7 +1869,7 @@ bool CLinuxRendererGL::CreateYV12Texture(int index)
     for (int i = 0; i < 3; i++)
     {
       glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo[i]);
-      glBufferData(GL_PIXEL_UNPACK_BUFFER, im.planesize[i] + PBO_OFFSET, 0, GL_STREAM_DRAW);
+      glBufferData(GL_PIXEL_UNPACK_BUFFER, im.planesize[i] + PBO_OFFSET, nullptr, GL_STREAM_DRAW);
       void* pboPtr = glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
       if (pboPtr)
       {
@@ -2175,7 +2175,7 @@ bool CLinuxRendererGL::CreateNV12Texture(int index)
     for (int i = 0; i < 2; i++)
     {
       glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo[i]);
-      glBufferData(GL_PIXEL_UNPACK_BUFFER, im.planesize[i] + PBO_OFFSET, 0, GL_STREAM_DRAW);
+      glBufferData(GL_PIXEL_UNPACK_BUFFER, im.planesize[i] + PBO_OFFSET, nullptr, GL_STREAM_DRAW);
       void* pboPtr = glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
       if (pboPtr)
       {
@@ -2441,7 +2441,7 @@ bool CLinuxRendererGL::CreateYUV422PackedTexture(int index)
     glGenBuffers(1, pbo);
 
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo[0]);
-    glBufferData(GL_PIXEL_UNPACK_BUFFER, im.planesize[0] + PBO_OFFSET, 0, GL_STREAM_DRAW);
+    glBufferData(GL_PIXEL_UNPACK_BUFFER, im.planesize[0] + PBO_OFFSET, nullptr, GL_STREAM_DRAW);
     void* pboPtr = glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
     if (pboPtr)
     {

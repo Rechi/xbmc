@@ -266,7 +266,7 @@ int NestDetect::m_nest = 0;
 class ProgressDialogHelper
 {
 public:
-  explicit ProgressDialogHelper (const std::string& heading) : m_dialog(0)
+  explicit ProgressDialogHelper(const std::string& heading) : m_dialog(nullptr)
   {
     if (g_application.IsCurrentThread())
     {
@@ -289,7 +289,7 @@ public:
       m_dialog->Close();
   }
 
-  bool HasDialog() const { return m_dialog != 0; }
+  bool HasDialog() const { return m_dialog != nullptr; }
 
   enum wait_result { TimedOut, Canceled, Success };
 

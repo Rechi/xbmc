@@ -52,7 +52,7 @@ static BOOL   gCalledAppMainline = FALSE;
 static NSString* getApplicationName()
 {
   NSDictionary *dict;
-  NSString *appName = 0;
+  NSString* appName = nullptr;
 
   // Determine the application name
   dict = (NSDictionary *)CFBundleGetInfoDictionary(CFBundleGetMainBundle());
@@ -211,7 +211,7 @@ static void setupWindowMenu()
 {
   char parentdir[MAXPATHLEN];
   CFURLRef url = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-  CFURLRef url2 = CFURLCreateCopyDeletingLastPathComponent(0, url);
+  CFURLRef url2 = CFURLCreateCopyDeletingLastPathComponent(nullptr, url);
   if (CFURLGetFileSystemRepresentation(url2, true, (UInt8 *)parentdir, MAXPATHLEN))
   {
     assert( chdir (parentdir) == 0 );   /* chdir to the binary app's parent */

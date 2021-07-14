@@ -86,7 +86,7 @@ namespace XUTILS
     void* detach();
 
   private:
-    void* p = 0;
+    void* p = nullptr;
     size_t s = 0;
   };
 }

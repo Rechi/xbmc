@@ -47,7 +47,7 @@ class CZeroconfDummy : public CZeroconf
 #endif
 
 std::atomic_flag CZeroconf::sm_singleton_guard = ATOMIC_FLAG_INIT;
-CZeroconf* CZeroconf::smp_instance = 0;
+CZeroconf* CZeroconf::smp_instance = nullptr;
 
 CZeroconf::CZeroconf():mp_crit_sec(new CCriticalSection)
 {
@@ -158,7 +158,7 @@ void CZeroconf::ReleaseInstance()
 {
   CAtomicSpinLock lock(sm_singleton_guard);
   delete smp_instance;
-  smp_instance = 0;
+  smp_instance = nullptr;
 }
 
 CZeroconf::CPublish::CPublish(const std::string& fcr_identifier, const PublishInfo& pubinfo)

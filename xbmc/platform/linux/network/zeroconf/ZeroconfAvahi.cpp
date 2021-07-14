@@ -43,9 +43,12 @@ private:
 ///helper to store information on howto create an avahi-group to publish
 struct CZeroconfAvahi::ServiceInfo
 {
-  ServiceInfo(const std::string& fcr_type, const std::string& fcr_name,
-              unsigned int f_port, AvahiStringList *txt, AvahiEntryGroup* fp_group = 0):
-    m_type(fcr_type), m_name(fcr_name), m_port(f_port), mp_txt(txt), mp_group(fp_group)
+  ServiceInfo(const std::string& fcr_type,
+              const std::string& fcr_name,
+              unsigned int f_port,
+              AvahiStringList* txt,
+              AvahiEntryGroup* fp_group = nullptr)
+    : m_type(fcr_type), m_name(fcr_name), m_port(f_port), mp_txt(txt), mp_group(fp_group)
   {
   }
 
@@ -188,7 +191,7 @@ bool CZeroconfAvahi::doRemoveService(const std::string& fcr_ident)
   if (it->second->mp_group)
   {
     avahi_entry_group_free(it->second->mp_group);
-    it->second->mp_group = 0;
+    it->second->mp_group = nullptr;
   }
 
   if(it->second->mp_txt)
@@ -209,7 +212,7 @@ void CZeroconfAvahi::doStop()
     if (it.second->mp_group)
     {
       avahi_entry_group_free(it.second->mp_group);
-      it.second->mp_group = 0;
+      it.second->mp_group = nullptr;
     }
 
     if (it.second->mp_txt)
@@ -244,11 +247,11 @@ void CZeroconfAvahi::clientCallback(AvahiClient* fp_client, AvahiClientState f_s
     CLog::Log(LOGINFO, "CZeroconfAvahi::clientCallback: client failure. avahi-daemon stopped? Recreating client...");
     //We were forced to disconnect from server. now free and recreate the client object
     avahi_client_free(fp_client);
-    p_instance->mp_client = 0;
+    p_instance->mp_client = nullptr;
     //freeing the client also frees all groups and browsers, pointers are undefined afterwards, so fix that now
     for (auto& it : p_instance->m_services)
     {
-      it.second->mp_group = 0;
+      it.second->mp_group = nullptr;
     }
     p_instance->createClient();
     break;
@@ -322,7 +325,7 @@ void CZeroconfAvahi::groupCallback(AvahiEntryGroup *fp_group, AvahiEntryGroupSta
         if (it.second->mp_group == fp_group)
         {
           avahi_entry_group_free(it.second->mp_group);
-          it.second->mp_group = 0;
+          it.second->mp_group = nullptr;
           if (it.second->mp_txt)
           {
             avahi_string_list_free(it.second->mp_txt);
@@ -391,7 +394,7 @@ void CZeroconfAvahi::addService(const tServiceMap::mapped_type& fp_service_info,
     {
       CLog::Log(LOGDEBUG, "CZeroconfAvahi::addService() avahi_entry_group_new() failed: {}",
                 avahi_strerror(avahi_client_errno(fp_client)));
-      fp_service_info->mp_group = 0;
+      fp_service_info->mp_group = nullptr;
       return;
     }
   }

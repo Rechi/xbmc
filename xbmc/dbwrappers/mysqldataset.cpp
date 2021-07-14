@@ -865,7 +865,7 @@ void MysqlDatabase::mysqlVXPrintf(
   size_t idx2;
 
   length = 0;
-  bufpt = 0;
+  bufpt = nullptr;
   for(; (c=(*fmt))!=0; ++fmt){
     bool isLike = false;
     if( c!='%' ){
@@ -958,7 +958,7 @@ void MysqlDatabase::mysqlVXPrintf(
         break;
       }
     }
-    zExtra = 0;
+    zExtra = nullptr;
 
     /* Limit the precision to prevent overflowing buf[] during conversion */
     if( precision>etBUFSIZE-40 && (infop->flags & FLAG_STRING)==0 ){
@@ -1219,7 +1219,8 @@ void MysqlDatabase::mysqlVXPrintf(
       case etSTRING:
       case etDYNSTRING:
         bufpt = va_arg(ap,char*);
-        if( bufpt==0 ){
+        if (bufpt == nullptr)
+        {
           bufpt = const_cast<char *>("");
         }else if( xtype==etDYNSTRING ){
           zExtra = bufpt;
@@ -1242,7 +1243,7 @@ void MysqlDatabase::mysqlVXPrintf(
           StringUtils::Replace(arg, "\\", "\\\\");
         const char *escarg = arg.c_str();
 
-        isnull = escarg==0;
+        isnull = escarg == nullptr;
         if( isnull ) escarg = (xtype==etSQLESCAPE2 ? "NULL" : "(NULL)");
         k = precision;
         for(i=0; k!=0 && (ch=escarg[i])!=0; i++, k--);
@@ -1250,7 +1251,8 @@ void MysqlDatabase::mysqlVXPrintf(
         n = i*2 + 1 + needQuote*2;
         if( n>etBUFSIZE ){
           bufpt = zExtra = (char *)malloc(n);
-          if( bufpt==0 ){
+          if (bufpt == nullptr)
+          {
             pAccum->mallocFailed = true;
             return;
           }
@@ -1311,7 +1313,8 @@ bool MysqlDatabase::mysqlStrAccumAppend(StrAccum *p, const char *z, int N) {
   if( N<0 ){
     N = strlen(z);
   }
-  if( N==0 || z==0 ){
+  if (N == 0 || z == nullptr)
+  {
     return false;
   }
   if( p->nChar+N >= p->nAlloc ){
@@ -1380,7 +1383,7 @@ void MysqlDatabase::mysqlStrAccumReset(StrAccum *p){
   if( p->zText!=p->zBase ){
     free(p->zText);
   }
-  p->zText = 0;
+  p->zText = nullptr;
 }
 
 /*

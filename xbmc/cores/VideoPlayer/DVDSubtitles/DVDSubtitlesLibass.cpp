@@ -152,7 +152,7 @@ bool CDVDSubtitlesLibass::CreateTrack(char* buf, size_t size)
 
   CLog::Log(LOGINFO, "SSA Parser: Creating m_track from SSA buffer");
 
-  m_track = ass_read_memory(m_library, buf, size, 0);
+  m_track = ass_read_memory(m_library, buf, size, nullptr);
   if(m_track == NULL)
     return false;
 

@@ -43,14 +43,14 @@ const char *DATA_DIR_NAME[16] =
 
 CoffLoader::CoffLoader()
 {
-  CoffFileHeader = 0;
-  OptionHeader = 0;
-  WindowsHeader = 0;
-  Directory = 0;
-  SectionHeader = 0;
-  SymTable = 0;
-  StringTable = 0;
-  SectionData = 0;
+  CoffFileHeader = nullptr;
+  OptionHeader = nullptr;
+  WindowsHeader = nullptr;
+  Directory = nullptr;
+  SectionHeader = nullptr;
+  SymTable = nullptr;
+  StringTable = nullptr;
+  SectionData = nullptr;
 
   NumberOfSymbols = 0;
   SizeOfStringTable = 0;
@@ -75,17 +75,17 @@ CoffLoader::~CoffLoader()
   if ( SymTable )
   {
     delete [] SymTable;
-    SymTable = 0;
+    SymTable = nullptr;
   }
   if ( StringTable )
   {
     delete [] StringTable;
-    StringTable = 0;
+    StringTable = nullptr;
   }
   if ( SectionData )
   {
     delete [] SectionData;
-    SectionData = 0;
+    SectionData = nullptr;
   }
 }
 

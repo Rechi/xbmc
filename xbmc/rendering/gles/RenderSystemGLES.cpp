@@ -43,7 +43,7 @@ bool CRenderSystemGLES::InitRenderSystem()
   m_RenderVersionMinor = 0;
 
   const char* ver = (const char*)glGetString(GL_VERSION);
-  if (ver != 0)
+  if (ver != nullptr)
   {
     sscanf(ver, "%d.%d", &m_RenderVersionMajor, &m_RenderVersionMinor);
     if (!m_RenderVersionMajor)

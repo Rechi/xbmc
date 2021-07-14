@@ -198,7 +198,7 @@ void CDVDStreamInfo::Assign(const CDVDStreamInfo& right, bool withextradata)
   else
   {
     extrasize = 0;
-    extradata = 0;
+    extradata = nullptr;
   }
 
   cryptoSession = right.cryptoSession;

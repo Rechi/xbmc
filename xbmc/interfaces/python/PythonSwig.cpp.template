@@ -396,7 +396,7 @@ void doClassMethodInfo(Node clazz, List initTypeCalls)
   PyMappingMethods ${module.@name}_${classNameAsVariable}_as_mapping = {
     ${module.@name}_${classNameAsVariable}_size_,    /* inquiry mp_length;                  __len__ */
     (PyCFunction)${module.@name}_${PythonTools.getPyMethodName(indexOp,MethodType.method)},   /* binaryfunc mp_subscript             __getitem__ */
-    0,                  /* objargproc mp_ass_subscript;     __setitem__ */
+    nullptr, /* objargproc mp_ass_subscript;     __setitem__ */
   };
 <%
   }

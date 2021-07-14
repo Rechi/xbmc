@@ -354,7 +354,7 @@ void BlankOtherDisplays(int screen_index)
   // zero out blankingWindows for debugging
   for (i=0; i<MAX_DISPLAYS; i++)
   {
-    blankingWindows[i] = 0;
+    blankingWindows[i] = nullptr;
   }
 
   // Blank.
@@ -388,11 +388,11 @@ void UnblankDisplays()
 
   for (i=0; i<numDisplays; i++)
   {
-    if (blankingWindows[i] != 0)
+    if (blankingWindows[i] != nullptr)
     {
       // Get rid of the blanking windows we created.
       [blankingWindows[i] close];
-      blankingWindows[i] = 0;
+      blankingWindows[i] = nullptr;
     }
   }
 }

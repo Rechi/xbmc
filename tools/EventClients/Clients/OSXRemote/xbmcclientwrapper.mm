@@ -142,20 +142,23 @@ void XBMCClientWrapperImpl::restartTimer(){
 	if (m_timer)
     resetTimer();
 
-	CFRunLoopTimerContext context = { 0, this, 0, 0, 0 };
+  CFRunLoopTimerContext context = {0, this, nullptr, nullptr, nullptr};
 	m_timer = CFRunLoopTimerCreate(kCFAllocatorDefault, CFAbsoluteTimeGetCurrent() + m_sequence_timeout, 0, 0, 0, timerCallBack, &context);
 	CFRunLoopAddTimer(CFRunLoopGetCurrent(), m_timer, kCFRunLoopCommonModes);
 }
 
-XBMCClientWrapperImpl::XBMCClientWrapperImpl(eRemoteMode f_mode, const std::string& fcr_address, int f_port, bool f_verbose_mode):
-    m_mode(f_mode),
+XBMCClientWrapperImpl::XBMCClientWrapperImpl(eRemoteMode f_mode,
+                                             const std::string& fcr_address,
+                                             int f_port,
+                                             bool f_verbose_mode)
+  : m_mode(f_mode),
     m_address(fcr_address),
     m_port(f_port),
-    m_timer(0),
+    m_timer(nullptr),
     m_sequence_timeout(0.5),
     m_device_id(150),
     m_verbose_mode(f_verbose_mode)
-  {
+{
     if(m_mode == MULTIREMOTE_MODE){
       if(m_verbose_mode)
         NSLog(@"XBMCClientWrapperImpl started in multiremote mode sending to address %s, port %i", fcr_address.c_str(), f_port);
@@ -204,7 +207,7 @@ bool XBMCClientWrapperImpl::isStartToken(eATVClientEvent f_event){
 }
 
 void XBMCClientWrapperImpl::sendButton(eATVClientEvent f_event){
-  CPacketBUTTON* lp_packet = 0;
+  CPacketBUTTON* lp_packet = nullptr;
   if(m_mode == MULTIREMOTE_MODE){
     tMultiRemoteMap::iterator it = m_multiremote_map.find(std::make_pair(m_device_id, f_event));
     if(it == m_multiremote_map.end()){

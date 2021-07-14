@@ -33,7 +33,7 @@
 #include "PlatformDefs.h"
 
 static std::atomic_flag sg_singleton_lock_variable = ATOMIC_FLAG_INIT;
-XBMCHelper* XBMCHelper::smp_instance = 0;
+XBMCHelper* XBMCHelper::smp_instance = nullptr;
 
 #define XBMC_HELPER_PROGRAM "XBMCHelper"
 #define SOFA_CONTROL_PROGRAM "Sofa Control"
@@ -392,7 +392,7 @@ void XBMCHelper::WriteFile(const char* fileName, const std::string& data)
 /////////////////////////////////////////////////////////////////////////////
 int XBMCHelper::GetProcessPid(const char* strProgram)
 {
-  kinfo_proc* mylist = 0;
+  kinfo_proc* mylist = nullptr;
   size_t mycount = 0;
   int ret = -1;
 

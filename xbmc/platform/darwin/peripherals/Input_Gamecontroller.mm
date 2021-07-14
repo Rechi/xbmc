@@ -617,13 +617,13 @@ struct PlayerControllerState
       // Thumbstick release event
       kodi::addon::PeripheralEvent releaseEvent;
       releaseEvent.SetPeripheralIndex(static_cast<unsigned int>(playerIndex));
-      [self setAxisValue:0
+      [self setAxisValue:nullptr
                withEvent:&releaseEvent
                 withAxis:GCCONTROLLER_EXTENDED_GAMEPAD_AXIS::RIGHTTHUMB_X];
 
       [cbmanager SetAxisEvent:releaseEvent];
 
-      [self setAxisValue:0
+      [self setAxisValue:nullptr
                withEvent:&releaseEvent
                 withAxis:GCCONTROLLER_EXTENDED_GAMEPAD_AXIS::RIGHTTHUMB_Y];
 
@@ -640,13 +640,13 @@ struct PlayerControllerState
       // Thumbstick release event
       kodi::addon::PeripheralEvent releaseEvent;
       releaseEvent.SetPeripheralIndex(static_cast<unsigned int>(playerIndex));
-      [self setAxisValue:0
+      [self setAxisValue:nullptr
                withEvent:&releaseEvent
                 withAxis:GCCONTROLLER_EXTENDED_GAMEPAD_AXIS::LEFTTHUMB_X];
 
       [cbmanager SetAxisEvent:releaseEvent];
 
-      [self setAxisValue:0
+      [self setAxisValue:nullptr
                withEvent:&releaseEvent
                 withAxis:GCCONTROLLER_EXTENDED_GAMEPAD_AXIS::LEFTTHUMB_Y];
 
@@ -673,7 +673,7 @@ struct PlayerControllerState
         // Thumbstick release event
         kodi::addon::PeripheralEvent newReleaseEvent;
         newReleaseEvent.SetPeripheralIndex(static_cast<unsigned int>(playerIndex));
-        [self setAxisValue:0
+        [self setAxisValue:nullptr
                  withEvent:&newReleaseEvent
                   withAxis:(thumbstickside == GCCONTROLLER_EXTENDED_GAMEPAD_AXIS::RIGHT
                                 ? GCCONTROLLER_EXTENDED_GAMEPAD_AXIS::RIGHTTHUMB_Y
@@ -720,7 +720,7 @@ struct PlayerControllerState
         // Thumbstick release event
         kodi::addon::PeripheralEvent newReleaseEvent;
         newReleaseEvent.SetPeripheralIndex(static_cast<unsigned int>(playerIndex));
-        [self setAxisValue:0
+        [self setAxisValue:nullptr
                  withEvent:&newReleaseEvent
                   withAxis:(thumbstickside == GCCONTROLLER_EXTENDED_GAMEPAD_AXIS::RIGHT
                                 ? GCCONTROLLER_EXTENDED_GAMEPAD_AXIS::RIGHTTHUMB_Y
@@ -767,7 +767,7 @@ struct PlayerControllerState
         // Thumbstick release event
         kodi::addon::PeripheralEvent newReleaseEvent;
         newReleaseEvent.SetPeripheralIndex(static_cast<unsigned int>(playerIndex));
-        [self setAxisValue:0
+        [self setAxisValue:nullptr
                  withEvent:&newReleaseEvent
                   withAxis:(thumbstickside == GCCONTROLLER_EXTENDED_GAMEPAD_AXIS::RIGHT
                                 ? GCCONTROLLER_EXTENDED_GAMEPAD_AXIS::RIGHTTHUMB_X
@@ -814,7 +814,7 @@ struct PlayerControllerState
         // Thumbstick release event
         kodi::addon::PeripheralEvent newReleaseEvent;
         newReleaseEvent.SetPeripheralIndex(static_cast<unsigned int>(playerIndex));
-        [self setAxisValue:0
+        [self setAxisValue:nullptr
                  withEvent:&newReleaseEvent
                   withAxis:(thumbstickside == GCCONTROLLER_EXTENDED_GAMEPAD_AXIS::RIGHT
                                 ? GCCONTROLLER_EXTENDED_GAMEPAD_AXIS::RIGHTTHUMB_X
