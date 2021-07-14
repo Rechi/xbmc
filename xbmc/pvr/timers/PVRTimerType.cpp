@@ -23,7 +23,7 @@
 
 using namespace PVR;
 
-const std::vector<std::shared_ptr<CPVRTimerType>> CPVRTimerType::GetAllTypes()
+std::vector<std::shared_ptr<CPVRTimerType>> CPVRTimerType::GetAllTypes()
 {
   std::vector<std::shared_ptr<CPVRTimerType>> allTypes;
   CServiceBroker::GetPVRManager().Clients()->GetTimerTypes(allTypes);
@@ -101,7 +101,8 @@ const std::vector<std::shared_ptr<CPVRTimerType>> CPVRTimerType::GetAllTypes()
   return allTypes;
 }
 
-const std::shared_ptr<CPVRTimerType> CPVRTimerType::GetFirstAvailableType(const std::shared_ptr<CPVRClient>& client)
+std::shared_ptr<CPVRTimerType> CPVRTimerType::GetFirstAvailableType(
+    const std::shared_ptr<CPVRClient>& client)
 {
   if (client)
   {

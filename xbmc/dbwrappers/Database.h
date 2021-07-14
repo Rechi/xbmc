@@ -70,7 +70,7 @@ public:
     void SetFetch(int fieldno, bool bFetch = true);
     bool GetOutput(int fieldno);
     int GetRecNo(int fieldno);
-    const std::string GetFields();
+    std::string GetFields();
     bool HasFilterFields();
 
   private:

@@ -864,7 +864,7 @@ void CVideoInfoTag::ToSortable(SortItem& sortable, Field field) const
   }
 }
 
-const CRating CVideoInfoTag::GetRating(std::string type) const
+CRating CVideoInfoTag::GetRating(std::string type) const
 {
   if (type.empty())
     type = m_strDefaultRating;
@@ -912,7 +912,7 @@ const CDateTime& CVideoInfoTag::GetFirstAired() const
   return m_firstAired;
 }
 
-const std::string CVideoInfoTag::GetUniqueID(std::string type) const
+std::string CVideoInfoTag::GetUniqueID(std::string type) const
 {
   if (type.empty())
     type = m_strDefaultUniqueID;
@@ -939,7 +939,7 @@ bool CVideoInfoTag::HasUniqueID() const
   return !m_uniqueIDs.empty();
 }
 
-const std::string CVideoInfoTag::GetCast(bool bIncludeRole /*= false*/) const
+std::string CVideoInfoTag::GetCast(bool bIncludeRole /*= false*/) const
 {
   std::string strLabel;
   for (iCast it = m_cast.begin(); it != m_cast.end(); ++it)

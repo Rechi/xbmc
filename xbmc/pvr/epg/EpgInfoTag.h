@@ -201,43 +201,43 @@ namespace PVR
      * @brief Get the cast of this event.
      * @return The cast.
      */
-    const std::vector<std::string> Cast() const;
+    std::vector<std::string> Cast() const;
 
     /*!
      * @brief Get the director(s) of this event.
      * @return The director(s).
      */
-    const std::vector<std::string> Directors() const;
+    std::vector<std::string> Directors() const;
 
     /*!
      * @brief Get the writer(s) of this event.
      * @return The writer(s).
      */
-    const std::vector<std::string> Writers() const;
+    std::vector<std::string> Writers() const;
 
     /*!
      * @brief Get the cast of this event as formatted string.
      * @return The cast label.
      */
-    const std::string GetCastLabel() const;
+    std::string GetCastLabel() const;
 
     /*!
      * @brief Get the director(s) of this event as formatted string.
      * @return The directors label.
      */
-    const std::string GetDirectorsLabel() const;
+    std::string GetDirectorsLabel() const;
 
     /*!
      * @brief Get the writer(s) of this event as formatted string.
      * @return The writers label.
      */
-    const std::string GetWritersLabel() const;
+    std::string GetWritersLabel() const;
 
     /*!
      * @brief Get the genre(s) of this event as formatted string.
      * @return The genres label.
      */
-    const std::string GetGenresLabel() const;
+    std::string GetGenresLabel() const;
 
     /*!
      * @brief Get the year of this event.
@@ -267,7 +267,7 @@ namespace PVR
      * @brief Get the genre as human readable string.
      * @return The genre.
      */
-    const std::vector<std::string> Genre() const;
+    std::vector<std::string> Genre() const;
 
     /*!
      * @brief Get the first air date of this event.
@@ -421,14 +421,14 @@ namespace PVR
      * @param str The string to tokenize.
      * @return the tokens.
      */
-    static const std::vector<std::string> Tokenize(const std::string& str);
+    static std::vector<std::string> Tokenize(const std::string& str);
 
     /*!
      * @brief Combine the given strings to a single string. Inserts EPG_STRING_TOKEN_SEPARATOR as separator.
      * @param tokens The tokens.
      * @return the combined string.
      */
-    static const std::string DeTokenize(const std::vector<std::string>& tokens);
+    static std::string DeTokenize(const std::vector<std::string>& tokens);
 
   private:
     CPVREpgInfoTag();

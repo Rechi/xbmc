@@ -124,14 +124,14 @@ public:
   ~CFileItem(void) override;
   CGUIListItem *Clone() const override { return new CFileItem(*this); };
 
-  const CURL GetURL() const;
+  CURL GetURL() const;
   void SetURL(const CURL& url);
   bool IsURL(const CURL& url) const;
   const std::string &GetPath() const { return m_strPath; };
   void SetPath(const std::string &path) { m_strPath = path; };
   bool IsPath(const std::string& path, bool ignoreURLOptions = false) const;
 
-  const CURL GetDynURL() const;
+  CURL GetDynURL() const;
   void SetDynURL(const CURL& url);
   const std::string &GetDynPath() const;
   void SetDynPath(const std::string &path);
@@ -288,30 +288,27 @@ public:
     return m_epgInfoTag.get() != NULL;
   }
 
-  inline const std::shared_ptr<PVR::CPVREpgInfoTag> GetEPGInfoTag() const
-  {
-    return m_epgInfoTag;
-  }
+  inline std::shared_ptr<PVR::CPVREpgInfoTag> GetEPGInfoTag() const { return m_epgInfoTag; }
 
   inline bool HasPVRChannelGroupMemberInfoTag() const
   {
     return m_pvrChannelGroupMemberInfoTag.get() != nullptr;
   }
 
-  inline const std::shared_ptr<PVR::CPVRChannelGroupMember> GetPVRChannelGroupMemberInfoTag() const
+  inline std::shared_ptr<PVR::CPVRChannelGroupMember> GetPVRChannelGroupMemberInfoTag() const
   {
     return m_pvrChannelGroupMemberInfoTag;
   }
 
   bool HasPVRChannelInfoTag() const;
-  const std::shared_ptr<PVR::CPVRChannel> GetPVRChannelInfoTag() const;
+  std::shared_ptr<PVR::CPVRChannel> GetPVRChannelInfoTag() const;
 
   inline bool HasPVRRecordingInfoTag() const
   {
     return m_pvrRecordingInfoTag.get() != NULL;
   }
 
-  inline const std::shared_ptr<PVR::CPVRRecording> GetPVRRecordingInfoTag() const
+  inline std::shared_ptr<PVR::CPVRRecording> GetPVRRecordingInfoTag() const
   {
     return m_pvrRecordingInfoTag;
   }
@@ -321,7 +318,7 @@ public:
     return m_pvrTimerInfoTag != NULL;
   }
 
-  inline const std::shared_ptr<PVR::CPVRTimerInfoTag> GetPVRTimerInfoTag() const
+  inline std::shared_ptr<PVR::CPVRTimerInfoTag> GetPVRTimerInfoTag() const
   {
     return m_pvrTimerInfoTag;
   }
@@ -363,7 +360,7 @@ public:
   }
 
   bool HasAddonInfo() const { return m_addonInfo != nullptr; }
-  const std::shared_ptr<const ADDON::IAddon> GetAddonInfo() const { return m_addonInfo; }
+  std::shared_ptr<const ADDON::IAddon> GetAddonInfo() const { return m_addonInfo; }
 
   inline bool HasGameInfoTag() const
   {
@@ -665,9 +662,9 @@ public:
   ~CFileItemList() override;
   void Archive(CArchive& ar) override;
   CFileItemPtr operator[] (int iItem);
-  const CFileItemPtr operator[] (int iItem) const;
+  CFileItemPtr operator[](int iItem) const;
   CFileItemPtr operator[] (const std::string& strPath);
-  const CFileItemPtr operator[] (const std::string& strPath) const;
+  CFileItemPtr operator[](const std::string& strPath) const;
   void Clear();
   void ClearItems();
   void Add(CFileItemPtr item);
@@ -676,10 +673,10 @@ public:
   void Remove(CFileItem* pItem);
   void Remove(int iItem);
   CFileItemPtr Get(int iItem);
-  const CFileItemPtr Get(int iItem) const;
+  CFileItemPtr Get(int iItem) const;
   const VECFILEITEMS& GetList() const { return m_items; }
   CFileItemPtr Get(const std::string& strPath);
-  const CFileItemPtr Get(const std::string& strPath) const;
+  CFileItemPtr Get(const std::string& strPath) const;
   int Size() const;
   bool IsEmpty() const;
   void Append(const CFileItemList& itemlist);

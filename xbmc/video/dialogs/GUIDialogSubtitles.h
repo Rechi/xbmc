@@ -36,7 +36,7 @@ protected:
   void OnJobComplete(unsigned int jobID, bool success, CJob *job) override;
 
   bool SetService(const std::string &service);
-  const CFileItemPtr GetService() const;
+  CFileItemPtr GetService() const;
   void FillServices();
   void ClearServices();
   void ClearSubtitles();

@@ -154,7 +154,7 @@ std::string CPVRRecordingsPath::GetUnescapedSubDirectoryPath(const std::string& 
   return strReturn;
 }
 
-const std::string CPVRRecordingsPath::GetTitle() const
+std::string CPVRRecordingsPath::GetTitle() const
 {
   if (m_bValid)
   {

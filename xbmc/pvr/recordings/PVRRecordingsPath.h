@@ -44,7 +44,7 @@ namespace PVR
     std::string GetUnescapedDirectoryPath() const;
     std::string GetUnescapedSubDirectoryPath(const std::string& strPath) const;
 
-    const std::string GetTitle() const;
+    std::string GetTitle() const;
     void AppendSegment(const std::string& strSegment);
 
   private:

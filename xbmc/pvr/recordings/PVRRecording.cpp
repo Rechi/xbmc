@@ -575,7 +575,7 @@ void CPVRRecording::SetGenre(int iGenreType, int iGenreSubType, const std::strin
   }
 }
 
-const std::string CPVRRecording::GetGenresLabel() const
+std::string CPVRRecording::GetGenresLabel() const
 {
   return StringUtils::Join(m_genre, CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_videoItemSeparator);
 }

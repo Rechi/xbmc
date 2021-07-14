@@ -57,7 +57,7 @@ void CScraperUrl::SetData(std::string data)
   m_parsed = false;
 }
 
-const CScraperUrl::SUrlEntry CScraperUrl::GetFirstUrlByType(const std::string& type) const
+CScraperUrl::SUrlEntry CScraperUrl::GetFirstUrlByType(const std::string& type) const
 {
   const auto url = std::find_if(m_urls.begin(), m_urls.end(), [type](const SUrlEntry& url) {
     return url.m_type == UrlType::General && (type.empty() || url.m_aspect == type);
@@ -68,7 +68,7 @@ const CScraperUrl::SUrlEntry CScraperUrl::GetFirstUrlByType(const std::string& t
   return SUrlEntry();
 }
 
-const CScraperUrl::SUrlEntry CScraperUrl::GetSeasonUrl(int season, const std::string& type) const
+CScraperUrl::SUrlEntry CScraperUrl::GetSeasonUrl(int season, const std::string& type) const
 {
   const auto url = std::find_if(m_urls.begin(), m_urls.end(), [season, type](const SUrlEntry& url) {
     return url.m_type == UrlType::Season && url.m_season == season &&

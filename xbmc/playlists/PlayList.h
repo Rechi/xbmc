@@ -45,7 +45,7 @@ public:
   int size() const;
   int RemoveDVDItems();
 
-  const CFileItemPtr operator[] (int iItem) const;
+  CFileItemPtr operator[](int iItem) const;
   CFileItemPtr operator[] (int iItem);
 
   void Shuffle(int iPosition = 0);

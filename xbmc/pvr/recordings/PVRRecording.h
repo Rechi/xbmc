@@ -323,13 +323,13 @@ namespace PVR
      * @brief Get the genre as human readable string.
      * @return The genre.
      */
-    const std::vector<std::string> Genre() const { return m_genre; }
+    std::vector<std::string> Genre() const { return m_genre; }
 
     /*!
      * @brief Get the genre(s) of this recording as formatted string.
      * @return The genres label.
      */
-   const std::string GetGenresLabel() const;
+    std::string GetGenresLabel() const;
 
    /*!
     * @brief Get the first air date of this recording.

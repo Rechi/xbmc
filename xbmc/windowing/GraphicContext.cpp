@@ -293,7 +293,7 @@ void CGraphicContext::ResetScissors()
   CServiceBroker::GetRenderSystem()->SetScissors(StereoCorrection(m_scissors));
 }
 
-const CRect CGraphicContext::GetViewWindow() const
+CRect CGraphicContext::GetViewWindow() const
 {
   if (m_bCalibrating || m_bFullScreenVideo)
   {
@@ -601,7 +601,7 @@ void CGraphicContext::ApplyStateBlock()
   CServiceBroker::GetRenderSystem()->ApplyStateBlock();
 }
 
-const RESOLUTION_INFO CGraphicContext::GetResInfo(RESOLUTION res) const
+RESOLUTION_INFO CGraphicContext::GetResInfo(RESOLUTION res) const
 {
   RESOLUTION_INFO info = CDisplaySettings::GetInstance().GetResolutionInfo(res);
 
@@ -663,7 +663,7 @@ void CGraphicContext::SetResInfo(RESOLUTION res, const RESOLUTION_INFO& info)
   }
 }
 
-const RESOLUTION_INFO CGraphicContext::GetResInfo() const
+RESOLUTION_INFO CGraphicContext::GetResInfo() const
 {
   return GetResInfo(m_Resolution);
 }

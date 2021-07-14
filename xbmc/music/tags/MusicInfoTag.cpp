@@ -80,7 +80,7 @@ const std::vector<std::string>& CMusicInfoTag::GetArtist() const
   return m_artist;
 }
 
-const std::string CMusicInfoTag::GetArtistString() const
+std::string CMusicInfoTag::GetArtistString() const
 {
   if (!m_strArtistDesc.empty())
     return m_strArtistDesc;
@@ -115,7 +115,7 @@ const std::string& CMusicInfoTag::GetOriginalDate() const
   return m_strOriginalDate;
 }
 
-const std::string MUSIC_INFO::CMusicInfoTag::GetOriginalYear() const
+std::string MUSIC_INFO::CMusicInfoTag::GetOriginalYear() const
 {
   return StringUtils::Left(m_strOriginalDate, 4);
 }
@@ -130,7 +130,7 @@ const std::vector<std::string>& CMusicInfoTag::GetAlbumArtist() const
   return m_albumArtist;
 }
 
-const std::string CMusicInfoTag::GetAlbumArtistString() const
+std::string CMusicInfoTag::GetAlbumArtistString() const
 {
   if (!m_strAlbumArtistDesc.empty())
     return m_strAlbumArtistDesc;
@@ -301,7 +301,7 @@ const std::string& CMusicInfoTag::GetReleaseDate() const
   return m_strReleaseDate;
 }
 
-const std::string MUSIC_INFO::CMusicInfoTag::GetReleaseYear() const
+std::string MUSIC_INFO::CMusicInfoTag::GetReleaseYear() const
 {
   return StringUtils::Left(m_strReleaseDate, 4);
 }
@@ -1252,7 +1252,7 @@ void CMusicInfoTag::AppendArtistRole(const CMusicRole& ArtistRole)
   m_musicRoles.push_back(ArtistRole);
 }
 
-const std::string CMusicInfoTag::GetArtistStringForRole(const std::string& strRole) const
+std::string CMusicInfoTag::GetArtistStringForRole(const std::string& strRole) const
 {
   std::vector<std::string> artistvector;
   for (const auto& credit : m_musicRoles)
@@ -1263,7 +1263,7 @@ const std::string CMusicInfoTag::GetArtistStringForRole(const std::string& strRo
   return StringUtils::Join(artistvector, CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_musicItemSeparator);
 }
 
-const std::string CMusicInfoTag::GetContributorsText() const
+std::string CMusicInfoTag::GetContributorsText() const
 {
   std::string strLabel;
   for (const auto& credit : m_musicRoles)
@@ -1273,7 +1273,7 @@ const std::string CMusicInfoTag::GetContributorsText() const
   return StringUtils::TrimRight(strLabel, "\n");
 }
 
-const std::string CMusicInfoTag::GetContributorsAndRolesText() const
+std::string CMusicInfoTag::GetContributorsAndRolesText() const
 {
   std::string strLabel;
   for (const auto& credit : m_musicRoles)

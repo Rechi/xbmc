@@ -324,22 +324,22 @@ std::string CPVREpgInfoTag::OriginalTitle() const
   return m_strOriginalTitle;
 }
 
-const std::vector<std::string> CPVREpgInfoTag::Cast() const
+std::vector<std::string> CPVREpgInfoTag::Cast() const
 {
   return m_cast;
 }
 
-const std::vector<std::string> CPVREpgInfoTag::Directors() const
+std::vector<std::string> CPVREpgInfoTag::Directors() const
 {
   return m_directors;
 }
 
-const std::vector<std::string> CPVREpgInfoTag::Writers() const
+std::vector<std::string> CPVREpgInfoTag::Writers() const
 {
   return m_writers;
 }
 
-const std::string CPVREpgInfoTag::GetCastLabel() const
+std::string CPVREpgInfoTag::GetCastLabel() const
 {
   // Note: see CVideoInfoTag::GetCast for reference implementation.
   std::string strLabel;
@@ -349,17 +349,17 @@ const std::string CPVREpgInfoTag::GetCastLabel() const
   return StringUtils::TrimRight(strLabel, "\n");
 }
 
-const std::string CPVREpgInfoTag::GetDirectorsLabel() const
+std::string CPVREpgInfoTag::GetDirectorsLabel() const
 {
   return StringUtils::Join(m_directors, CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_videoItemSeparator);
 }
 
-const std::string CPVREpgInfoTag::GetWritersLabel() const
+std::string CPVREpgInfoTag::GetWritersLabel() const
 {
   return StringUtils::Join(m_writers, CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_videoItemSeparator);
 }
 
-const std::string CPVREpgInfoTag::GetGenresLabel() const
+std::string CPVREpgInfoTag::GetGenresLabel() const
 {
   return StringUtils::Join(m_genre, CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_videoItemSeparator);
 }
@@ -407,7 +407,7 @@ int CPVREpgInfoTag::GenreSubType() const
   return m_iGenreSubType;
 }
 
-const std::vector<std::string> CPVREpgInfoTag::Genre() const
+std::vector<std::string> CPVREpgInfoTag::Genre() const
 {
   return m_genre;
 }
@@ -663,12 +663,12 @@ bool CPVREpgInfoTag::IsLive() const
   return (m_iFlags & EPG_TAG_FLAG_IS_LIVE) > 0;
 }
 
-const std::vector<std::string> CPVREpgInfoTag::Tokenize(const std::string& str)
+std::vector<std::string> CPVREpgInfoTag::Tokenize(const std::string& str)
 {
   return StringUtils::Split(str.c_str(), EPG_STRING_TOKEN_SEPARATOR);
 }
 
-const std::string CPVREpgInfoTag::DeTokenize(const std::vector<std::string>& tokens)
+std::string CPVREpgInfoTag::DeTokenize(const std::vector<std::string>& tokens)
 {
   return StringUtils::Join(tokens, EPG_STRING_TOKEN_SEPARATOR);
 }

@@ -784,7 +784,7 @@ void CLangInfo::SetSubtitleLanguage(const std::string& language)
 }
 
 // two character codes as defined in ISO639
-const std::string CLangInfo::GetDVDMenuLanguage() const
+std::string CLangInfo::GetDVDMenuLanguage() const
 {
   std::string code;
   if (!g_LangCodeExpander.ConvertToISO6391(m_currentRegion->m_strLangLocaleName, code))
@@ -794,7 +794,7 @@ const std::string CLangInfo::GetDVDMenuLanguage() const
 }
 
 // two character codes as defined in ISO639
-const std::string CLangInfo::GetDVDAudioLanguage() const
+std::string CLangInfo::GetDVDAudioLanguage() const
 {
   std::string code;
   if (!g_LangCodeExpander.ConvertToISO6391(m_audioLanguage, code))
@@ -804,7 +804,7 @@ const std::string CLangInfo::GetDVDAudioLanguage() const
 }
 
 // two character codes as defined in ISO639
-const std::string CLangInfo::GetDVDSubtitleLanguage() const
+std::string CLangInfo::GetDVDSubtitleLanguage() const
 {
   std::string code;
   if (!g_LangCodeExpander.ConvertToISO6391(m_subtitleLanguage, code))

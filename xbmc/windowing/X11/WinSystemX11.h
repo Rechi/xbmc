@@ -37,7 +37,7 @@ public:
   CWinSystemX11();
   ~CWinSystemX11() override;
 
-  const std::string GetName() override { return "x11"; }
+  std::string GetName() override { return "x11"; }
 
   // CWinSystemBase
   bool InitWindowSystem() override;

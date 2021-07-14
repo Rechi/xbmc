@@ -13,7 +13,7 @@
 
 namespace
 {
-const bool HasPreferredArtType(const CFileItem& item)
+bool HasPreferredArtType(const CFileItem& item)
 {
   return item.HasVideoInfoTag() && (item.GetVideoInfoTag()->m_type == MediaTypeMovie ||
                                     item.GetVideoInfoTag()->m_type == MediaTypeTvShow ||
@@ -32,7 +32,7 @@ std::string GetPreferredArtType(const MediaType& type)
 }
 } // namespace
 
-const std::string ContentUtils::GetPreferredArtImage(const CFileItem& item)
+std::string ContentUtils::GetPreferredArtImage(const CFileItem& item)
 {
   if (HasPreferredArtType(item))
   {

@@ -83,37 +83,37 @@ public:
   const std::string& GetSMSStudio() const;
 
   void SetInfoNews(const std::string& strNews);
-  const std::string GetInfoNews() const;
+  std::string GetInfoNews() const;
 
   void SetInfoNewsLocal(const std::string& strNews);
-  const std::string GetInfoNewsLocal() const;
+  std::string GetInfoNewsLocal() const;
 
   void SetInfoSport(const std::string& strSport);
-  const std::string GetInfoSport() const;
+  std::string GetInfoSport() const;
 
   void SetInfoStock(const std::string& strSport);
-  const std::string GetInfoStock() const;
+  std::string GetInfoStock() const;
 
   void SetInfoWeather(const std::string& strWeather);
-  const std::string GetInfoWeather() const;
+  std::string GetInfoWeather() const;
 
   void SetInfoHoroscope(const std::string& strHoroscope);
-  const std::string GetInfoHoroscope() const;
+  std::string GetInfoHoroscope() const;
 
   void SetInfoCinema(const std::string& strCinema);
-  const std::string GetInfoCinema() const;
+  std::string GetInfoCinema() const;
 
   void SetInfoLottery(const std::string& strLottery);
-  const std::string GetInfoLottery() const;
+  std::string GetInfoLottery() const;
 
   void SetInfoOther(const std::string& strOther);
-  const std::string GetInfoOther() const;
+  std::string GetInfoOther() const;
 
   void SetEditorialStaff(const std::string& strEditorialStaff);
-  const std::string GetEditorialStaff() const;
+  std::string GetEditorialStaff() const;
 
   void SetRadioStyle(const std::string& style);
-  const std::string GetRadioStyle() const;
+  std::string GetRadioStyle() const;
 
   void SetPlayingRadiotext(bool yesNo);
   bool IsPlayingRadiotext() const;

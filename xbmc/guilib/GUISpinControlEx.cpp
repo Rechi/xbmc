@@ -104,7 +104,7 @@ void CGUISpinControlEx::SetEnabled(bool bEnable)
   CGUISpinControl::SetEnabled(bEnable);
 }
 
-const std::string CGUISpinControlEx::GetCurrentLabel() const
+std::string CGUISpinControlEx::GetCurrentLabel() const
 {
   return CGUISpinControl::GetLabel();
 }

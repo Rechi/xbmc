@@ -444,7 +444,7 @@ namespace ADDON
                                TYPE type,
                                AddonDisabledReason disabledReason) const;
 
-    const AddonInfoPtr GetAddonInfo(const std::string& id, TYPE type = ADDON_UNKNOWN) const;
+    AddonInfoPtr GetAddonInfo(const std::string& id, TYPE type = ADDON_UNKNOWN) const;
 
     /*!
      * @brief Get the path where temporary add-on files are stored

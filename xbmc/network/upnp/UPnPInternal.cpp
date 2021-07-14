@@ -160,10 +160,9 @@ GetMimeType(const CFileItem& item,
 /*----------------------------------------------------------------------
 |   GetProtocolInfo
 +---------------------------------------------------------------------*/
-const NPT_String
-GetProtocolInfo(const CFileItem&              item,
-                const char*                   protocol,
-                const PLT_HttpRequestContext* context /* = NULL */)
+NPT_String GetProtocolInfo(const CFileItem& item,
+                           const char* protocol,
+                           const PLT_HttpRequestContext* context /* = NULL */)
 {
     NPT_String proto = protocol;
 

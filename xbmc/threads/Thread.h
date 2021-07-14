@@ -53,10 +53,7 @@ public:
   bool IsCurrentThread() const;
   bool Join(std::chrono::milliseconds duration);
 
-  inline static const std::thread::id GetCurrentThreadId()
-  {
-    return std::this_thread::get_id();
-  }
+  inline static std::thread::id GetCurrentThreadId() { return std::this_thread::get_id(); }
 
   // -----------------------------------------------------------------------------------
   // These are platform specific and can be found in ./platform/[platform]/ThreadImpl.cpp

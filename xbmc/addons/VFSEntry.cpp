@@ -74,7 +74,7 @@ void CVFSAddonCache::Deinit()
   CServiceBroker::GetAddonMgr().Events().Unsubscribe(this);
 }
 
-const std::vector<VFSEntryPtr> CVFSAddonCache::GetAddonInstances()
+std::vector<VFSEntryPtr> CVFSAddonCache::GetAddonInstances()
 {
   CSingleLock lock(m_critSection);
   return m_addonsInstances;

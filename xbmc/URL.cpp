@@ -372,7 +372,7 @@ void CURL::SetProtocolOptions(const std::string& strOptions)
   }
 }
 
-const std::string CURL::GetTranslatedProtocol() const
+std::string CURL::GetTranslatedProtocol() const
 {
   if (IsProtocol("shout")
    || IsProtocol("dav")
@@ -386,7 +386,7 @@ const std::string CURL::GetTranslatedProtocol() const
   return GetProtocol();
 }
 
-const std::string CURL::GetFileNameWithoutPath() const
+std::string CURL::GetFileNameWithoutPath() const
 {
   // *.zip and *.rar store the actual zip/rar path in the hostname of the url
   if ((IsProtocol("rar")  ||

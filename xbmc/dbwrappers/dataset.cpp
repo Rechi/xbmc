@@ -351,7 +351,8 @@ bool Dataset::get_index_map_entry(const char *f_name) {
 }
 /********* INDEXMAP SECTION END *********/
 
-const field_value Dataset::get_field_value(const char *f_name) {
+field_value Dataset::get_field_value(const char* f_name)
+{
   if (ds_state != dsInactive)
   {
     if (ds_state == dsEdit || ds_state == dsInsert){
@@ -384,7 +385,8 @@ const field_value Dataset::get_field_value(const char *f_name) {
   //return fv;
 }
 
-const field_value Dataset::get_field_value(int index) {
+field_value Dataset::get_field_value(int index)
+{
   if (ds_state != dsInactive) {
     if (ds_state == dsEdit || ds_state == dsInsert){
       if (index < 0 || index >= field_count())
@@ -411,7 +413,8 @@ const sql_record* Dataset::get_sql_record()
   return result.records[frecno];
 }
 
-const field_value Dataset::f_old(const char *f_name) {
+field_value Dataset::f_old(const char* f_name)
+{
   if (ds_state != dsInactive)
     for (int unsigned i=0; i < fields_object->size(); i++)
       if ((*fields_object)[i].props.name == f_name)

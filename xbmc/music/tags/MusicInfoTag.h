@@ -34,12 +34,12 @@ public:
   const std::string& GetURL() const;
   const std::vector<std::string>& GetArtist() const;
   const std::string& GetArtistSort() const;
-  const std::string GetArtistString() const;
+  std::string GetArtistString() const;
   const std::string& GetComposerSort() const;
   const std::string& GetAlbum() const;
   int GetAlbumId() const;
   const std::vector<std::string>& GetAlbumArtist() const;
-  const std::string GetAlbumArtistString() const;
+  std::string GetAlbumArtistString() const;
   const std::string& GetAlbumArtistSort() const;
   const std::vector<std::string>& GetGenre() const;
   int GetTrackNumber() const;
@@ -49,9 +49,9 @@ public:
   int GetDuration() const;  // may be set even if Loaded() returns false
   int GetYear() const;
   const std::string& GetReleaseDate() const;
-  const std::string GetReleaseYear() const;
+  std::string GetReleaseYear() const;
   const std::string& GetOriginalDate() const;
-  const std::string GetOriginalYear() const;
+  std::string GetOriginalYear() const;
   int GetDatabaseId() const;
   const std::string &GetType() const;
   const std::string& GetDiscSubtitle() const;
@@ -181,9 +181,9 @@ public:
   void AddArtistRole(const std::string& Role, const std::string& strArtist);
   void AddArtistRole(const std::string& Role, const std::vector<std::string>& artists);
   void AppendArtistRole(const CMusicRole& ArtistRole);
-  const std::string GetArtistStringForRole(const std::string& strRole) const;
-  const std::string GetContributorsText() const;
-  const std::string GetContributorsAndRolesText() const;
+  std::string GetArtistStringForRole(const std::string& strRole) const;
+  std::string GetContributorsText() const;
+  std::string GetContributorsAndRolesText() const;
   const VECMUSICROLES &GetContributors() const;
   void SetContributors(const VECMUSICROLES& contributors);
   bool HasContributors() const { return !m_musicRoles.empty(); }

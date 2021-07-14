@@ -102,9 +102,9 @@ public:
   // or a language name in english (as used by XBMC)
   void SetSubtitleLanguage(const std::string& language);
 
-  const std::string GetDVDMenuLanguage() const;
-  const std::string GetDVDAudioLanguage() const;
-  const std::string GetDVDSubtitleLanguage() const;
+  std::string GetDVDMenuLanguage() const;
+  std::string GetDVDAudioLanguage() const;
+  std::string GetDVDSubtitleLanguage() const;
   const std::string& GetTimeZone() const;
 
   const std::string& GetRegionLocale() const;

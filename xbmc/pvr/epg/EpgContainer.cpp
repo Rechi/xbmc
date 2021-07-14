@@ -809,7 +809,7 @@ bool CPVREpgContainer::UpdateEPG(bool bOnlyPending /* = false */)
   return !bInterrupted;
 }
 
-const CDateTime CPVREpgContainer::GetFirstEPGDate()
+CDateTime CPVREpgContainer::GetFirstEPGDate()
 {
   CDateTime returnValue;
 
@@ -827,7 +827,7 @@ const CDateTime CPVREpgContainer::GetFirstEPGDate()
   return returnValue;
 }
 
-const CDateTime CPVREpgContainer::GetLastEPGDate()
+CDateTime CPVREpgContainer::GetLastEPGDate()
 {
   CDateTime returnValue;
 

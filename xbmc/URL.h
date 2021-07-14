@@ -102,7 +102,7 @@ public:
     return m_strProtocol;
   }
 
-  const std::string GetTranslatedProtocol() const;
+  std::string GetTranslatedProtocol() const;
 
   const std::string& GetFileType() const
   {
@@ -124,7 +124,7 @@ public:
     return m_strProtocolOptions;
   }
 
-  const std::string GetFileNameWithoutPath() const; /* return the filename excluding path */
+  std::string GetFileNameWithoutPath() const; /* return the filename excluding path */
 
   char GetDirectorySeparator() const;
 

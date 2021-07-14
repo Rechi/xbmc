@@ -116,13 +116,13 @@ namespace PVR
      * @brief Get the start time of the first entry.
      * @return The start time.
      */
-    const CDateTime GetFirstEPGDate();
+    CDateTime GetFirstEPGDate();
 
     /*!
      * @brief Get the end time of the last entry.
      * @return The end time.
      */
-    const CDateTime GetLastEPGDate();
+    CDateTime GetLastEPGDate();
 
     /*!
      * @brief Get all EPGs.

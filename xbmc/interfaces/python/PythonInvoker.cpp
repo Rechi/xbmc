@@ -66,7 +66,7 @@ using namespace std::chrono_literals;
 
 CCriticalSection CPythonInvoker::s_critical;
 
-static const std::string getListOfAddonClassesAsString(
+static std::string getListOfAddonClassesAsString(
     XBMCAddon::AddonClass::Ref<XBMCAddon::Python::PythonLanguageHook>& languageHook)
 {
   std::string message;

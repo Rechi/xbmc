@@ -190,7 +190,7 @@ namespace PVR
       * @brief Gets the type of this timer.
       * @return the timer type or NULL if this tag has no timer type.
       */
-    const std::shared_ptr<CPVRTimerType> GetTimerType() const { return m_timerType; }
+    std::shared_ptr<CPVRTimerType> GetTimerType() const { return m_timerType; }
 
     /*!
       * @brief Sets the type of this timer.

@@ -347,7 +347,7 @@ void CPVRRadioRDSInfoTag::SetInfoNews(const std::string& strNews)
   m_strInfoNews.Add(strNews);
 }
 
-const std::string CPVRRadioRDSInfoTag::GetInfoNews() const
+std::string CPVRRadioRDSInfoTag::GetInfoNews() const
 {
   CSingleLock lock(m_critSection);
   return m_strInfoNews.GetText();
@@ -359,7 +359,7 @@ void CPVRRadioRDSInfoTag::SetInfoNewsLocal(const std::string& strNews)
   m_strInfoNewsLocal.Add(strNews);
 }
 
-const std::string CPVRRadioRDSInfoTag::GetInfoNewsLocal() const
+std::string CPVRRadioRDSInfoTag::GetInfoNewsLocal() const
 {
   CSingleLock lock(m_critSection);
   return m_strInfoNewsLocal.GetText();
@@ -371,7 +371,7 @@ void CPVRRadioRDSInfoTag::SetInfoSport(const std::string& strSport)
   m_strInfoSport.Add(strSport);
 }
 
-const std::string CPVRRadioRDSInfoTag::GetInfoSport() const
+std::string CPVRRadioRDSInfoTag::GetInfoSport() const
 {
   CSingleLock lock(m_critSection);
   return m_strInfoSport.GetText();
@@ -383,7 +383,7 @@ void CPVRRadioRDSInfoTag::SetInfoStock(const std::string& strStock)
   m_strInfoStock.Add(strStock);
 }
 
-const std::string CPVRRadioRDSInfoTag::GetInfoStock() const
+std::string CPVRRadioRDSInfoTag::GetInfoStock() const
 {
   CSingleLock lock(m_critSection);
   return m_strInfoStock.GetText();
@@ -395,7 +395,7 @@ void CPVRRadioRDSInfoTag::SetInfoWeather(const std::string& strWeather)
   m_strInfoWeather.Add(strWeather);
 }
 
-const std::string CPVRRadioRDSInfoTag::GetInfoWeather() const
+std::string CPVRRadioRDSInfoTag::GetInfoWeather() const
 {
   CSingleLock lock(m_critSection);
   return m_strInfoWeather.GetText();
@@ -407,7 +407,7 @@ void CPVRRadioRDSInfoTag::SetInfoLottery(const std::string& strLottery)
   m_strInfoLottery.Add(strLottery);
 }
 
-const std::string CPVRRadioRDSInfoTag::GetInfoLottery() const
+std::string CPVRRadioRDSInfoTag::GetInfoLottery() const
 {
   CSingleLock lock(m_critSection);
   return m_strInfoLottery.GetText();
@@ -419,7 +419,7 @@ void CPVRRadioRDSInfoTag::SetEditorialStaff(const std::string& strEditorialStaff
   m_strEditorialStaff.Add(strEditorialStaff);
 }
 
-const std::string CPVRRadioRDSInfoTag::GetEditorialStaff() const
+std::string CPVRRadioRDSInfoTag::GetEditorialStaff() const
 {
   CSingleLock lock(m_critSection);
   return m_strEditorialStaff.GetText();
@@ -431,7 +431,7 @@ void CPVRRadioRDSInfoTag::SetInfoHoroscope(const std::string& strHoroscope)
   m_strInfoHoroscope.Add(strHoroscope);
 }
 
-const std::string CPVRRadioRDSInfoTag::GetInfoHoroscope() const
+std::string CPVRRadioRDSInfoTag::GetInfoHoroscope() const
 {
   CSingleLock lock(m_critSection);
   return m_strInfoHoroscope.GetText();
@@ -443,7 +443,7 @@ void CPVRRadioRDSInfoTag::SetInfoCinema(const std::string& strCinema)
   m_strInfoCinema.Add(strCinema);
 }
 
-const std::string CPVRRadioRDSInfoTag::GetInfoCinema() const
+std::string CPVRRadioRDSInfoTag::GetInfoCinema() const
 {
   CSingleLock lock(m_critSection);
   return m_strInfoCinema.GetText();
@@ -455,7 +455,7 @@ void CPVRRadioRDSInfoTag::SetInfoOther(const std::string& strOther)
   m_strInfoOther.Add(strOther);
 }
 
-const std::string CPVRRadioRDSInfoTag::GetInfoOther() const
+std::string CPVRRadioRDSInfoTag::GetInfoOther() const
 {
   CSingleLock lock(m_critSection);
   return m_strInfoOther.GetText();
@@ -610,7 +610,7 @@ void CPVRRadioRDSInfoTag::SetRadioStyle(const std::string& style)
   m_strRadioStyle = style;
 }
 
-const std::string CPVRRadioRDSInfoTag::GetRadioStyle() const
+std::string CPVRRadioRDSInfoTag::GetRadioStyle() const
 {
   CSingleLock lock(m_critSection);
   return m_strRadioStyle;

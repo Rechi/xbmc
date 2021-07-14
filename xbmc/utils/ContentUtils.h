@@ -24,5 +24,5 @@ public:
     \param item The CFileItem to process
     \return the preferred art image
   */
-  static const std::string GetPreferredArtImage(const CFileItem& item);
+  static std::string GetPreferredArtImage(const CFileItem& item);
 };

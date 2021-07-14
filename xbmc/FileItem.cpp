@@ -1905,7 +1905,7 @@ void CFileItem::SetURL(const CURL& url)
   m_strPath = url.Get();
 }
 
-const CURL CFileItem::GetURL() const
+CURL CFileItem::GetURL() const
 {
   CURL url(m_strPath);
   return url;
@@ -1926,7 +1926,7 @@ void CFileItem::SetDynURL(const CURL& url)
   m_strDynPath = url.Get();
 }
 
-const CURL CFileItem::GetDynURL() const
+CURL CFileItem::GetDynURL() const
 {
   if (!m_strDynPath.empty())
   {
@@ -2074,7 +2074,7 @@ CFileItemPtr CFileItemList::operator[] (int iItem)
   return Get(iItem);
 }
 
-const CFileItemPtr CFileItemList::operator[] (int iItem) const
+CFileItemPtr CFileItemList::operator[](int iItem) const
 {
   return Get(iItem);
 }
@@ -2084,7 +2084,7 @@ CFileItemPtr CFileItemList::operator[] (const std::string& strPath)
   return Get(strPath);
 }
 
-const CFileItemPtr CFileItemList::operator[] (const std::string& strPath) const
+CFileItemPtr CFileItemList::operator[](const std::string& strPath) const
 {
   return Get(strPath);
 }
@@ -2293,7 +2293,7 @@ CFileItemPtr CFileItemList::Get(int iItem)
   return CFileItemPtr();
 }
 
-const CFileItemPtr CFileItemList::Get(int iItem) const
+CFileItemPtr CFileItemList::Get(int iItem) const
 {
   CSingleLock lock(m_lock);
 
@@ -2326,7 +2326,7 @@ CFileItemPtr CFileItemList::Get(const std::string& strPath)
   return CFileItemPtr();
 }
 
-const CFileItemPtr CFileItemList::Get(const std::string& strPath) const
+CFileItemPtr CFileItemList::Get(const std::string& strPath) const
 {
   CSingleLock lock(m_lock);
 
@@ -3739,7 +3739,7 @@ bool CFileItem::HasPVRChannelInfoTag() const
   return m_pvrChannelGroupMemberInfoTag && m_pvrChannelGroupMemberInfoTag->Channel() != nullptr;
 }
 
-const std::shared_ptr<PVR::CPVRChannel> CFileItem::GetPVRChannelInfoTag() const
+std::shared_ptr<PVR::CPVRChannel> CFileItem::GetPVRChannelInfoTag() const
 {
   return m_pvrChannelGroupMemberInfoTag ? m_pvrChannelGroupMemberInfoTag->Channel()
                                         : std::shared_ptr<CPVRChannel>();
