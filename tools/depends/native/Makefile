@@ -10,6 +10,7 @@ NATIVE= \
   autoconf-archive \
   automake \
   cmake \
+  distutilscross \
   flatbuffers \
   gas-preprocessor \
   gettext \
@@ -61,6 +62,7 @@ all: native
 autoconf-archive: autoconf
 autoconf: m4
 automake: autoconf
+distutilscross: python3 setuptools
 dpkg: automake gettext libtool pkg-config tar
 flatbuffers: cmake
 heimdal: libtool
