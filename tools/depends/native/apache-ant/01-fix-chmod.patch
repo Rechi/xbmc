@@ -1,0 +1,34 @@
+--- a/build.xml
++++ b/build.xml
+@@ -1267,16 +1267,6 @@
+       <exclude name="${tests.etc.dir}/taskdefs/fixcrlf/input/Junk?.java"/>
+     </fixcrlf>
+ 
+-    <setpermissions mode="755" failonerror="${setpermissions.fail}"
+-                    nonPosixMode="${setpermissions.nonposixmode}">
+-      <dirset dir="${src.dist.dir}"/>
+-    </setpermissions>
+-
+-    <setpermissions mode="644" failonerror="${setpermissions.fail}"
+-                    nonPosixMode="${setpermissions.nonposixmode}">
+-      <fileset dir="${src.dist.dir}"/>
+-    </setpermissions>
+-
+     <setpermissions mode="755" failonerror="${setpermissions.fail}"
+                     nonPosixMode="${setpermissions.nonposixmode}">
+       <fileset dir="${src.dist.dir}">
+@@ -1340,14 +1330,6 @@
+     <unzip src="${dist.base.binaries}/${dist.name}-bin.zip" dest="${build.pkg.dir}">
+       <mapper type="regexp" from="^([^/]*)/(.*)$$" to="\2"/>
+     </unzip>
+-    <chmod perm="+x" type="file">
+-      <fileset dir="${build.pkg.dir}/bin">
+-        <include name="ant"/>
+-        <include name="antRun"/>
+-        <include name="*.pl"/>
+-        <include name="*.py"/>
+-      </fileset>
+-    </chmod>
+     <exec executable="/usr/bin/pkgbuild">
+       <arg value="--root"/>
+       <arg value="${build.pkg.dir}"/>
