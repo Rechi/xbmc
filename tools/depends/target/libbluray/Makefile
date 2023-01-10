@@ -1,6 +1,7 @@
 include ../../Makefile.include LIBBLURAY-VERSION ../../download-files.include
 DEPS = ../../Makefile.include LIBBLURAY-VERSION Makefile ../../download-files.include \
                                   001-darwinembed_DiskArbitration-revert.patch \
+                                  002-javadir.patch \
                                   tvos.patch
 
 # configuration settings
@@ -19,6 +20,9 @@ $(PLATFORM): $(DEPS) | $(TARBALLS_LOCATION)/$(ARCHIVE).$(HASH_TYPE)
 	cd $(PLATFORM); $(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 ifeq ($(OS),darwin_embedded)
 	cd $(PLATFORM); patch -p1 -i ../001-darwinembed_DiskArbitration-revert.patch
+endif
+ifeq ($(OS),osx)
+	cd $(PLATFORM); patch -p1 -i ../002-javadir.patch
 endif
 ifeq ($(TARGET_PLATFORM),appletvos)
 	cd $(PLATFORM); patch -p1 -i ../tvos.patch
