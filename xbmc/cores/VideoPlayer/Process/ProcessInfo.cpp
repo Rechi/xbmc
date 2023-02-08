@@ -47,7 +47,7 @@ CProcessInfo::CProcessInfo()
 
 void CProcessInfo::SetDataCache(CDataCacheCore *cache)
 {
-  m_dataCache = cache;;
+  m_dataCache = cache;
 
   ResetVideoCodecInfo();
   m_renderGuiLayer = false;
@@ -326,7 +326,7 @@ void CProcessInfo::ResetAudioCodecInfo()
 
   m_audioDecoderName = "unknown";
   m_audioChannels = "unknown";
-  m_audioSampleRate = 0;;
+  m_audioSampleRate = 0;
   m_audioBitsPerSample = 0;
 
   if (m_dataCache)

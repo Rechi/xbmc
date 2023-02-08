@@ -478,7 +478,6 @@ bool CPVRGUIInfo::GetListItemAndPlayerLabel(const CFileItem* item,
         if (recording->HasExpirationTime())
         {
           strValue = GetAsLocalizedTimeString(recording->ExpirationTimeAsLocalTime());
-          ;
           return true;
         }
         break;
