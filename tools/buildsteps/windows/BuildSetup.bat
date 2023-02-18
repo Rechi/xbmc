@@ -70,7 +70,7 @@ set WORKSPACE=%base_dir%\kodi-build.%TARGET_PLATFORM%
     goto DIE
   )
 
-  cmake.exe --build . --config "%buildconfig%"
+  cmake.exe --build . --config "%buildconfig%" -- -maxcpucount
   IF %errorlevel%==1 (
     set DIETEXT="%APP_NAME%.EXE failed to build!"
     goto DIE
