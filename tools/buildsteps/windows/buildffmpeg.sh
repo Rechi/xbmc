@@ -98,7 +98,7 @@ export CFLAGS=""
 export CXXFLAGS=""
 export LDFLAGS=""
 
-extra_cflags="-I$LOCALDESTDIR/include -I/depends/$TRIPLET/include -DWIN32_LEAN_AND_MEAN"
+extra_cflags="-I$LOCALDESTDIR/include -I/depends/$TRIPLET/include -DWIN32_LEAN_AND_MEAN -Z7"
 extra_ldflags="-LIBPATH:\"$LOCALDESTDIR/lib\" -LIBPATH:\"$MINGW_PREFIX/lib\" -LIBPATH:\"/depends/$TRIPLET/lib\""
 if [ $win10 == "yes" ]; then
   do_addOption "--enable-cross-compile"
