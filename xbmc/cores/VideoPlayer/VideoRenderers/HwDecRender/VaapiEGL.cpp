@@ -15,8 +15,6 @@
 #include <drm_fourcc.h>
 #include <va/va_drmcommon.h>
 
-#define HAVE_VAEXPORTSURFACHEHANDLE VA_CHECK_VERSION(1, 1, 0)
-
 using namespace VAAPI;
 
 void CVaapi1Texture::Init(InteropInfo &interop)
@@ -437,7 +435,6 @@ void CVaapi2Texture::Init(InteropInfo& interop)
 
 bool CVaapi2Texture::Map(CVaapiRenderPicture* pic)
 {
-#if HAVE_VAEXPORTSURFACHEHANDLE
   if (m_vaapiPic)
     return true;
 
@@ -554,9 +551,6 @@ bool CVaapi2Texture::Map(CVaapiRenderPicture* pic)
   }
 
   return true;
-#else
-  return false;
-#endif
 }
 
 void CVaapi2Texture::Unmap()
@@ -600,7 +594,6 @@ CSizeInt CVaapi2Texture::GetTextureSize()
 
 bool CVaapi2Texture::TestEsh(VADisplay vaDpy, EGLDisplay eglDisplay, std::uint32_t rtFormat, std::int32_t pixelFormat)
 {
-#if HAVE_VAEXPORTSURFACHEHANDLE
   int width = 1920;
   int height = 1080;
 
@@ -668,9 +661,6 @@ bool CVaapi2Texture::TestEsh(VADisplay vaDpy, EGLDisplay eglDisplay, std::uint32
   vaDestroySurfaces(vaDpy, &surface, 1);
 
   return result;
-#else
-  return false;
-#endif
 }
 
 void CVaapi2Texture::TestInterop(VADisplay vaDpy, EGLDisplay eglDisplay, bool& general, bool& deepColor)
