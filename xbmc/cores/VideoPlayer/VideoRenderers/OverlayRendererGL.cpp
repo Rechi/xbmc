@@ -59,23 +59,19 @@ static void LoadTexture(GLenum target
                 , pixelData);
 
   if(height < height2)
-    glTexSubImage2D( target, 0
-                   , 0, height, width, 1
-                   , externalFormat, GL_UNSIGNED_BYTE
-                   , (const unsigned char*)pixelData + stride * (height-1));
+    glTexSubImage2D(target, 0, 0, height, width, 1, externalFormat, GL_UNSIGNED_BYTE,
+                    static_cast<const unsigned char*>(pixelData) + stride * (height - 1));
 
   if(width  < width2)
-    glTexSubImage2D( target, 0
-                   , width, 0, 1, height
-                   , externalFormat, GL_UNSIGNED_BYTE
-                   , (const unsigned char*)pixelData + bytesPerPixel * (width-1));
+    glTexSubImage2D(target, 0, width, 0, 1, height, externalFormat, GL_UNSIGNED_BYTE,
+                    static_cast<const unsigned char*>(pixelData) + bytesPerPixel * (width - 1));
 
   glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
 
   free(pixelVector);
 
-  *u = (GLfloat)width  / width2;
-  *v = (GLfloat)height / height2;
+  *u = static_cast<GLfloat>(width) / width2;
+  *v = static_cast<GLfloat>(height) / height2;
 }
 
 std::shared_ptr<COverlay> COverlay::Create(const CDVDOverlayImage& o, CRect& rSource)

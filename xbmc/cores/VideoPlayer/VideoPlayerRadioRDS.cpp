@@ -889,7 +889,9 @@ unsigned int CDVDRadioRDSData::DecodeTA_TP(const uint8_t* msgElement)
     auto& components = CServiceBroker::GetAppComponents();
     const auto appVolume = components.GetComponent<CApplicationVolumeHandling>();
     m_TA_TP_TrafficVolume = appVolume->GetVolumePercent();
-    float trafAdvVol = (float)CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt("pvrplayback.trafficadvisoryvolume");
+    float trafAdvVol =
+        static_cast<float>(CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(
+            "pvrplayback.trafficadvisoryvolume"));
     if (trafAdvVol)
       appVolume->SetVolume(m_TA_TP_TrafficVolume + trafAdvVol);
 
@@ -1208,7 +1210,7 @@ unsigned int CDVDRadioRDSData::DecodeRTPlus(uint8_t *msgElement, unsigned int le
             {
               memcpy(m_RTPlus_Title, m_RTPlus_Temptext, RT_MEL);
               if (m_RTPlus_Show && m_RTPlus_iTime.GetElapsedSeconds() > 1)
-                m_RTPlus_iDiffs = (int) m_RTPlus_iTime.GetElapsedSeconds();
+                m_RTPlus_iDiffs = static_cast<int>(m_RTPlus_iTime.GetElapsedSeconds());
               if (!m_RT_NewItem)
               {
                 m_RTPlus_Starttime = time(NULL);
@@ -1236,7 +1238,7 @@ unsigned int CDVDRadioRDSData::DecodeRTPlus(uint8_t *msgElement, unsigned int le
             {
               memcpy(m_RTPlus_Artist, m_RTPlus_Temptext, RT_MEL);
               if (m_RTPlus_Show && m_RTPlus_iTime.GetElapsedSeconds() > 1)
-                m_RTPlus_iDiffs = (int) m_RTPlus_iTime.GetElapsedSeconds();
+                m_RTPlus_iDiffs = static_cast<int>(m_RTPlus_iTime.GetElapsedSeconds());
               if (!m_RT_NewItem)
               {
                 m_RTPlus_Starttime = time(NULL);
@@ -1395,7 +1397,7 @@ unsigned int CDVDRadioRDSData::DecodeRTPlus(uint8_t *msgElement, unsigned int le
     {
       m_RTPlus_Show = false;
       m_RTPlus_TToggle = true;
-      m_RTPlus_iDiffs = (int) m_RTPlus_iTime.GetElapsedSeconds();
+      m_RTPlus_iDiffs = static_cast<int>(m_RTPlus_iTime.GetElapsedSeconds());
       m_RTPlus_Starttime = time(NULL);
     }
     m_RT_NewItem = false;
@@ -1672,8 +1674,8 @@ void CDVDRadioRDSData::SendTMCSignal(unsigned int flags, uint8_t *data)
     msg["ident"]   = m_PI_Current;
     msg["flags"]   = flags;
     msg["x"]       = m_TMC_LastData[0];
-    msg["y"]       = (unsigned int)(m_TMC_LastData[1]<<8 | m_TMC_LastData[2]);
-    msg["z"]       = (unsigned int)(m_TMC_LastData[3]<<8 | m_TMC_LastData[4]);
+    msg["y"] = static_cast<unsigned int>(m_TMC_LastData[1] << 8 | m_TMC_LastData[2]);
+    msg["z"] = static_cast<unsigned int>(m_TMC_LastData[3] << 8 | m_TMC_LastData[4]);
 
     CServiceBroker::GetAnnouncementManager()->Announce(ANNOUNCEMENT::PVR, "RDSRadioTMC", msg);
   }

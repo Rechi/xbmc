@@ -196,12 +196,9 @@ bool CDVDDemuxClient::ParsePacket(DemuxPacket* pkt)
 
   uint8_t *outbuf = nullptr;
   int outbuf_size = 0;
-  int len = av_parser_parse2(stream->m_parser,
-                             stream->m_context, &outbuf, &outbuf_size,
-                             pkt->pData, pkt->iSize,
-                             (int64_t)(pkt->pts * DVD_TIME_BASE),
-                             (int64_t)(pkt->dts * DVD_TIME_BASE),
-                             0);
+  int len = av_parser_parse2(stream->m_parser, stream->m_context, &outbuf, &outbuf_size, pkt->pData,
+                             pkt->iSize, static_cast<int64_t>(pkt->pts * DVD_TIME_BASE),
+                             static_cast<int64_t>(pkt->dts * DVD_TIME_BASE), 0);
 
   // our parse is setup to parse complete frames, so we don't care about outbufs
   if (len >= 0)

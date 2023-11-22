@@ -123,7 +123,7 @@ bool CLinuxRendererGLES::Configure(const VideoPicture &picture, float fps, unsig
   ManageRenderArea();
 
   m_bConfigured = true;
-  m_scalingMethodGui = (ESCALINGMETHOD)-1;
+  m_scalingMethodGui = static_cast<ESCALINGMETHOD>(-1);
 
   // Ensure that textures are recreated and rendering starts only after the 1st
   // frame is loaded after every call to Configure().
