@@ -151,7 +151,7 @@ bool CHTTPDirectory::GetDirectory(const CURL& url, CFileItemList &items)
       while (pos != std::string::npos) 
       {
         std::stringstream convert;
-        convert << '%' << std::hex << int(strLinkBase.at(pos));
+        convert << '%' << std::hex << static_cast<int>(strLinkBase.at(pos));
         strLinkBase.replace(pos, 1, convert.str());
         pos = strLinkBase.find_first_of("+;");
       }
@@ -265,7 +265,7 @@ bool CHTTPDirectory::GetDirectory(const CURL& url, CFileItemList &items)
             else if (strUnit == "G")
               Size = Size * 1024 * 1024 * 1024;
 
-            pItem->m_dwSize = (int64_t)Size;
+            pItem->m_dwSize = static_cast<int64_t>(Size);
           }
           else if (reSize.RegFind(strMetadata.c_str()) >= 0)
           {
@@ -279,7 +279,7 @@ bool CHTTPDirectory::GetDirectory(const CURL& url, CFileItemList &items)
             else if (strUnit == "G")
               Size = Size * 1024 * 1024 * 1024;
 
-            pItem->m_dwSize = (int64_t)Size;
+            pItem->m_dwSize = static_cast<int64_t>(Size);
           }
           else
           if (CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_bHTTPDirectoryStatFilesize) // As a fallback get the size by stat-ing the file (slow)

@@ -121,7 +121,7 @@ std::shared_ptr<CFileItem> CBlurayDirectory::GetTitle(const BLURAY_TITLE_INFO* t
   buf = StringUtils::Format("BDMV/PLAYLIST/{:05}.mpls", title->playlist);
   path.SetFileName(buf);
   item->SetPath(path.Get());
-  int duration = (int)(title->duration / 90000);
+  int duration = static_cast<int>(title->duration / 90000);
   item->GetVideoInfoTag()->SetDuration(duration);
   item->GetVideoInfoTag()->m_iTrack = title->playlist;
   buf = StringUtils::Format(label, title->playlist);
