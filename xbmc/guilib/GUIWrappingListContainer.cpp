@@ -115,7 +115,8 @@ bool CGUIWrappingListContainer::GetOffsetRange(int &minOffset, int &maxOffset) c
 void CGUIWrappingListContainer::ValidateOffset()
 {
   // our minimal amount of items - we need to take into account extra items to display wrapped items when scrolling
-  unsigned int minItems = (unsigned int)m_itemsPerPage + ScrollCorrectionRange() + GetCacheCount() / 2;
+  unsigned int minItems =
+      static_cast<unsigned int>(m_itemsPerPage) + ScrollCorrectionRange() + GetCacheCount() / 2;
   if (minItems <= m_items.size())
     return;
 
@@ -141,7 +142,7 @@ int CGUIWrappingListContainer::CorrectOffset(int offset, int cursor) const
 {
   if (m_items.size())
   {
-    int correctOffset = (offset + cursor) % (int)m_items.size();
+    int correctOffset = (offset + cursor) % static_cast<int>(m_items.size());
     if (correctOffset < 0) correctOffset += m_items.size();
     return correctOffset;
   }
@@ -152,7 +153,7 @@ int CGUIWrappingListContainer::GetSelectedItem() const
 {
   if (m_items.size() > m_extraItems)
   {
-    int numItems = (int)(m_items.size() - m_extraItems);
+    int numItems = static_cast<int>(m_items.size() - m_extraItems);
     int correctOffset = (GetOffset() + GetCursor()) % numItems;
     if (correctOffset < 0) correctOffset += numItems;
     return correctOffset;
@@ -204,7 +205,7 @@ bool CGUIWrappingListContainer::SelectItemFromPoint(const CPoint &point)
 
 void CGUIWrappingListContainer::SelectItem(int item)
 {
-  if (item >= 0 && item < (int)m_items.size())
+  if (item >= 0 && item < static_cast<int>(m_items.size()))
     ScrollToOffset(item - GetCursor());
 }
 
@@ -225,7 +226,7 @@ void CGUIWrappingListContainer::Reset()
 int CGUIWrappingListContainer::GetCurrentPage() const
 {
   int offset = CorrectOffset(GetOffset(), GetCursor());
-  if (offset + m_itemsPerPage - GetCursor() >= (int)GetRows())  // last page
+  if (offset + m_itemsPerPage - GetCursor() >= static_cast<int>(GetRows())) // last page
     return (GetRows() + m_itemsPerPage - 1) / m_itemsPerPage;
   return offset / m_itemsPerPage + 1;
 }

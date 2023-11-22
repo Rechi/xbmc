@@ -162,18 +162,18 @@ bool CGUIControlFactory::GetFloatRange(const TiXmlNode* pRootNode,
   const TiXmlNode* pNode = pRootNode->FirstChild(strTag);
   if (!pNode || !pNode->FirstChild())
     return false;
-  fMinValue = (float)atof(pNode->FirstChild()->Value());
+  fMinValue = static_cast<float>(atof(pNode->FirstChild()->Value()));
   const char* maxValue = strchr(pNode->FirstChild()->Value(), ',');
   if (maxValue)
   {
     maxValue++;
-    fMaxValue = (float)atof(maxValue);
+    fMaxValue = static_cast<float>(atof(maxValue));
 
     const char* intervalValue = strchr(maxValue, ',');
     if (intervalValue)
     {
       intervalValue++;
-      fIntervalValue = (float)atof(intervalValue);
+      fIntervalValue = static_cast<float>(atof(intervalValue));
     }
   }
 
@@ -183,7 +183,7 @@ bool CGUIControlFactory::GetFloatRange(const TiXmlNode* pRootNode,
 float CGUIControlFactory::ParsePosition(const char* pos, const float parentSize)
 {
   char* end = NULL;
-  float value = pos ? (float)strtod(pos, &end) : 0;
+  float value = pos ? static_cast<float>(strtod(pos, &end)) : 0;
   if (end)
   {
     if (*end == 'r')
@@ -418,17 +418,17 @@ void CGUIControlFactory::GetRectFromString(const std::string& string, CRect& rec
   std::vector<std::string> strRect = StringUtils::Split(string, ',');
   if (strRect.size() == 1)
   {
-    rect.x1 = (float)atof(strRect[0].c_str());
+    rect.x1 = static_cast<float>(atof(strRect[0].c_str()));
     rect.y1 = rect.x1;
     rect.x2 = rect.x1;
     rect.y2 = rect.x1;
   }
   else if (strRect.size() == 4)
   {
-    rect.x1 = (float)atof(strRect[0].c_str());
-    rect.y1 = (float)atof(strRect[1].c_str());
-    rect.x2 = (float)atof(strRect[2].c_str());
-    rect.y2 = (float)atof(strRect[3].c_str());
+    rect.x1 = static_cast<float>(atof(strRect[0].c_str()));
+    rect.y1 = static_cast<float>(atof(strRect[1].c_str()));
+    rect.x2 = static_cast<float>(atof(strRect[2].c_str()));
+    rect.y2 = static_cast<float>(atof(strRect[3].c_str()));
   }
 }
 
@@ -580,11 +580,11 @@ bool CGUIControlFactory::GetHitRect(const TiXmlNode* control, CRect& rect, const
     rect.x1 = ParsePosition(node->Attribute("x"), parentRect.Width());
     rect.y1 = ParsePosition(node->Attribute("y"), parentRect.Height());
     if (node->Attribute("w"))
-      rect.x2 = (float)atof(node->Attribute("w")) + rect.x1;
+      rect.x2 = static_cast<float>(atof(node->Attribute("w"))) + rect.x1;
     else if (node->Attribute("right"))
       rect.x2 = std::min(ParsePosition(node->Attribute("right"), parentRect.Width()), rect.x1);
     if (node->Attribute("h"))
-      rect.y2 = (float)atof(node->Attribute("h")) + rect.y1;
+      rect.y2 = static_cast<float>(atof(node->Attribute("h"))) + rect.y1;
     else if (node->Attribute("bottom"))
       rect.y2 = std::min(ParsePosition(node->Attribute("bottom"), parentRect.Height()), rect.y1);
     return true;
@@ -992,7 +992,7 @@ CGUIControl* CGUIControlFactory::Create(int parentID,
   XMLUtils::GetFloat(pControlNode, "textoffsety", labelInfo.offsetY);
   int angle = 0; // use the negative angle to compensate for our vertically flipped cartesian plane
   if (XMLUtils::GetInt(pControlNode, "angle", angle))
-    labelInfo.angle = (float)-angle;
+    labelInfo.angle = static_cast<float>(-angle);
   std::string strFont, strMonoFont;
   if (XMLUtils::GetString(pControlNode, "font", strFont))
     labelInfo.font = g_fontManager.GetFont(strFont);
