@@ -198,7 +198,7 @@ CXBTFFrame TexturePacker::CreateXBTFFrame(DecodedFrame& decodedFrame, CXBTFWrite
   const unsigned int height = decodedFrame.rgbaImage.height;
   const unsigned int size = width * height * 4;
   const XB_FMT format = XB_FMT_A8R8G8B8;
-  unsigned char* data = (unsigned char*)decodedFrame.rgbaImage.pixels.data();
+  unsigned char* data = static_cast<unsigned char*>(decodedFrame.rgbaImage.pixels.data());
 
   const bool hasAlpha = HasAlpha(data, width, height);
 
@@ -414,7 +414,8 @@ int main(int argc, char* argv[])
       valid = true;
 #ifdef TARGET_POSIX
       char *c = NULL;
-      while ((c = (char *)strchr(OutputFilename.c_str(), '\\')) != NULL) *c = '/';
+      while ((c = const_cast<char*>(strchr(OutputFilename.c_str(), '\\'))) != NULL)
+        *c = '/';
 #endif
     }
     else

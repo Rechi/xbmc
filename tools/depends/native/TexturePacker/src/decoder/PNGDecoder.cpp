@@ -73,7 +73,8 @@ bool PNGDecoder::CanDecode(const std::string &filename)
 
   /* Compare the first PNG_BYTES_TO_CHECK bytes of the signature.
    Return nonzero (true) if they match */
-  return(!png_sig_cmp((png_bytep)buf, (png_size_t)0, PNG_BYTES_TO_CHECK));
+  return (!png_sig_cmp(reinterpret_cast<png_bytep>(buf), static_cast<png_size_t>(0),
+                       PNG_BYTES_TO_CHECK));
 }
 
 bool PNGDecoder::LoadFile(const std::string &filename, DecodedFrames &frames)
