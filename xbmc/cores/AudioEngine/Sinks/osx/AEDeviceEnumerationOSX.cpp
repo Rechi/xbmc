@@ -505,8 +505,8 @@ std::string AEDeviceEnumerationOSX::getExtraDisplayNameForStream(UInt32 streamId
     extraName << startChannel + numChannels - 1;
     CLog::Log(LOGINFO,
               "{} adding stream {} as pseudo device with start channel {} and {} channels total",
-              __FUNCTION__, (unsigned int)streamIdx, (unsigned int)startChannel,
-              (unsigned int)numChannels);
+              __FUNCTION__, static_cast<unsigned int>(streamIdx),
+              static_cast<unsigned int>(startChannel), static_cast<unsigned int>(numChannels));
     return extraName.str();
   }
 
@@ -637,7 +637,8 @@ bool AEDeviceEnumerationOSX::FindSuitableFormatForStream(UInt32 &streamIdx, cons
   }
 
   if (m_isPlanar)
-    outputFormat.mChannelsPerFrame = std::min((size_t)format.m_channelLayout.Count(), m_caStreamInfos.size());
+    outputFormat.mChannelsPerFrame =
+        std::min(static_cast<size_t>(format.m_channelLayout.Count()), m_caStreamInfos.size());
 
   return formatFound;
 }
@@ -743,7 +744,7 @@ enum AEChannel AEDeviceEnumerationOSX::caChannelToAEChannel(const AudioChannelLa
       ret = AE_CH_FC;
       break;
     default:
-      ret = (enum AEChannel)unknownChannel++;
+      ret = static_cast<enum AEChannel>(unknownChannel++);
   }
   if (unknownChannel == AE_CH_MAX)
     unknownChannel = AE_CH_UNKNOWN1;
