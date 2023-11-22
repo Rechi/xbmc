@@ -22,7 +22,7 @@ void CHTMLUtil::RemoveTags(std::string& strHTML)
 {
   int iNested = 0;
   std::string strReturn = "";
-  for (int i = 0; i < (int) strHTML.size(); ++i)
+  for (int i = 0; i < static_cast<int>(strHTML.size()); ++i)
   {
     if (strHTML[i] == '<') iNested++;
     else if (strHTML[i] == '>') iNested--;
@@ -216,7 +216,7 @@ void CHTMLUtil::ConvertHTMLToW(const std::wstring& strHTML, std::wstring& strStr
       iPos++;
 
     num = strStripped.substr(i, iPos-i);
-    wchar_t val = (wchar_t)wcstol(num.c_str(),NULL,base);
+    wchar_t val = static_cast<wchar_t>(wcstol(num.c_str(), NULL, base));
     if (base == 10)
       num = StringUtils::Format(L"&#{};", num);
     else
