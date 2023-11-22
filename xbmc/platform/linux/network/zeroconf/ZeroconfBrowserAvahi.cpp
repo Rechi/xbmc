@@ -155,9 +155,10 @@ bool CZeroconfBrowserAvahi::doResolveService ( CZeroconfBrowser::ZeroconfService
     //start resolving
     m_resolving_service = fr_service;
     m_resolved_event.Reset();
-    if ( !avahi_service_resolver_new ( mp_client, it->second.interface, it->second.protocol,
-      it->first.GetName().c_str(), it->first.GetType().c_str(), it->first.GetDomain().c_str(),
-                                       AVAHI_PROTO_UNSPEC, AvahiLookupFlags ( 0 ), resolveCallback, this ) )
+    if (!avahi_service_resolver_new(mp_client, it->second.interface, it->second.protocol,
+                                    it->first.GetName().c_str(), it->first.GetType().c_str(),
+                                    it->first.GetDomain().c_str(), AVAHI_PROTO_UNSPEC,
+                                    static_cast<AvahiLookupFlags>(0), resolveCallback, this))
     {
       CLog::Log(LOGERROR,
                 "CZeroconfBrowserAvahi::doResolveService Failed to resolve service '{}': {}\n",
@@ -370,8 +371,9 @@ bool CZeroconfBrowserAvahi::createClient()
 AvahiServiceBrowser* CZeroconfBrowserAvahi::createServiceBrowser ( const std::string& fcr_service_type, AvahiClient* fp_client, void* fp_userdata)
 {
   assert(fp_client);
-  AvahiServiceBrowser* ret = avahi_service_browser_new ( fp_client, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC, fcr_service_type.c_str(),
-                                                         NULL, ( AvahiLookupFlags ) 0, browseCallback, fp_userdata );
+  AvahiServiceBrowser* ret = avahi_service_browser_new(
+      fp_client, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC, fcr_service_type.c_str(), NULL,
+      static_cast<AvahiLookupFlags>(0), browseCallback, fp_userdata);
   if ( !ret )
   {
     CLog::Log(

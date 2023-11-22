@@ -23,9 +23,9 @@ void CJNIXBMCURIUtils::RegisterNatives(JNIEnv *env)
   jclass cClass = env->FindClass(s_className.c_str());
   if(cClass)
   {
-    JNINativeMethod methods[] =
-    {
-      {"_substitutePath", "(Ljava/lang/String;)Ljava/lang/String;", (void*)&CJNIXBMCURIUtils::_substitutePath},
+    JNINativeMethod methods[] = {
+        {"_substitutePath", "(Ljava/lang/String;)Ljava/lang/String;",
+         reinterpret_cast<void*>(&CJNIXBMCURIUtils::_substitutePath)},
     };
 
     env->RegisterNatives(cClass, methods, sizeof(methods)/sizeof(methods[0]));
