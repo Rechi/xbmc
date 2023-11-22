@@ -110,7 +110,7 @@ inline int ATTR_DLL_LOCAL Show(const std::string& heading,
 {
   using namespace ::kodi::addon;
   unsigned int size = static_cast<unsigned int>(entries.size());
-  const char** cEntries = (const char**)malloc(size * sizeof(const char**));
+  const char** cEntries = static_cast<const char**>(malloc(size * sizeof(const char**)));
   for (unsigned int i = 0; i < size; ++i)
   {
     cEntries[i] = entries[i].c_str();
