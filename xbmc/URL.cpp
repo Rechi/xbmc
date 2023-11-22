@@ -673,7 +673,7 @@ std::string CURL::Decode(std::string_view strURLData)
           strResult += *iter;
         else
         {
-          strResult += (char)dec_num;
+          strResult += static_cast<char>(dec_num);
           iter += 2;
         }
       }
@@ -702,7 +702,7 @@ std::string CURL::Encode(std::string_view strURLData)
       strResult.push_back(kar);
     else
       fmt::format_to(std::back_insert_iterator(strResult), "%{:02x}",
-                     (unsigned int)((unsigned char)kar));
+                     static_cast<unsigned int>(static_cast<unsigned char>(kar)));
   }
 
   return strResult;

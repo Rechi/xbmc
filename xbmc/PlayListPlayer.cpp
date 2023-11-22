@@ -840,7 +840,7 @@ void PLAYLIST::CPlayListPlayer::OnApplicationMessage(KODI::MESSAGING::ThreadMess
   case TMSG_PLAYLISTPLAYER_PLAY_SONG_ID:
     if (pMsg->param1 != -1)
     {
-      bool *result = (bool*)pMsg->lpVoid;
+      bool* result = static_cast<bool*>(pMsg->lpVoid);
       *result = PlaySongId(pMsg->param1);
     }
     else
