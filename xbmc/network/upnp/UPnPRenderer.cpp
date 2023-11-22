@@ -709,7 +709,7 @@ CUPnPRenderer::OnSetVolume(PLT_ActionReference& action)
     NPT_CHECK_SEVERE(action->GetArgumentValue("DesiredVolume", volume));
     auto& components = CServiceBroker::GetAppComponents();
     const auto appVolume = components.GetComponent<CApplicationVolumeHandling>();
-    appVolume->SetVolume((float)strtod((const char*)volume, NULL));
+    appVolume->SetVolume(static_cast<float>(strtod((const char*)volume, NULL)));
     return NPT_SUCCESS;
 }
 

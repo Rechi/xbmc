@@ -73,8 +73,8 @@ void CEventButtonState::Load()
         (StringUtils::StartsWith(m_mapName, "JS")) )
     {
       m_joystickName = m_mapName.substr(2);  // <num>:joyname
-      m_iControllerNumber = (unsigned char)(*(m_joystickName.c_str()))
-        - (unsigned char)'0'; // convert <num> to int
+      m_iControllerNumber = static_cast<unsigned char>(*(m_joystickName.c_str())) -
+                            static_cast<unsigned char>('0'); // convert <num> to int
       m_joystickName = m_joystickName.substr(2); // extract joyname
     }
 
@@ -234,8 +234,8 @@ bool CEventClient::OnPacketHELO(CEventPacket *packet)
   if (Greeted())
     return false;
 
-  unsigned char *payload = (unsigned char *)packet->Payload();
-  int psize = (int)packet->PayloadSize();
+  unsigned char* payload = const_cast<unsigned char*>(packet->Payload());
+  int psize = static_cast<int>(packet->PayloadSize());
 
   // parse device name
   if (!ParseString(payload, psize, m_deviceName))
@@ -247,13 +247,13 @@ bool CEventClient::OnPacketHELO(CEventPacket *packet)
   unsigned char ltype;
   if (!ParseByte(payload, psize, ltype))
     return false;
-  m_eLogoType = (LogoType)ltype;
+  m_eLogoType = static_cast<LogoType>(ltype);
 
   // client's port (if any)
   unsigned short dport;
   if (!ParseUInt16(payload, psize, dport))
     return false;
-  m_iRemotePort = (unsigned int)dport;
+  m_iRemotePort = static_cast<unsigned int>(dport);
 
   // 2 x reserved uint32 (8 bytes)
   unsigned int reserved;
@@ -312,8 +312,8 @@ bool CEventClient::OnPacketBYE(CEventPacket *packet)
 
 bool CEventClient::OnPacketBUTTON(CEventPacket *packet)
 {
-  unsigned char *payload = (unsigned char *)packet->Payload();
-  int psize = (int)packet->PayloadSize();
+  unsigned char* payload = const_cast<unsigned char*>(packet->Payload());
+  int psize = static_cast<int>(packet->PayloadSize());
 
   std::string map, button;
   unsigned short flags;
@@ -365,9 +365,9 @@ bool CEventClient::OnPacketBUTTON(CEventPacket *packet)
   if(flags & PTB_USE_AMOUNT)
   {
     if(flags & PTB_AXIS)
-      famount = (float)amount/65535.0f*2.0f-1.0f;
+      famount = static_cast<float>(amount) / 65535.0f * 2.0f - 1.0f;
     else
-      famount = (float)amount/65535.0f;
+      famount = static_cast<float>(amount) / 65535.0f;
   }
   else
     famount = (active ? 1.0f : 0.0f);
@@ -484,8 +484,8 @@ bool CEventClient::OnPacketBUTTON(CEventPacket *packet)
 
 bool CEventClient::OnPacketMOUSE(CEventPacket *packet)
 {
-  unsigned char *payload = (unsigned char *)packet->Payload();
-  int psize = (int)packet->PayloadSize();
+  unsigned char* payload = const_cast<unsigned char*>(packet->Payload());
+  int psize = static_cast<int>(packet->PayloadSize());
   unsigned char flags;
   unsigned short mx, my;
 
@@ -516,8 +516,8 @@ bool CEventClient::OnPacketMOUSE(CEventPacket *packet)
 
 bool CEventClient::OnPacketNOTIFICATION(CEventPacket *packet)
 {
-  unsigned char *payload = (unsigned char *)packet->Payload();
-  int psize = (int)packet->PayloadSize();
+  unsigned char* payload = const_cast<unsigned char*>(packet->Payload());
+  int psize = static_cast<int>(packet->PayloadSize());
   std::string title, message;
 
   // parse caption
@@ -532,7 +532,7 @@ bool CEventClient::OnPacketNOTIFICATION(CEventPacket *packet)
   unsigned char ltype;
   if (!ParseByte(payload, psize, ltype))
     return false;
-  m_eLogoType = (LogoType)ltype;
+  m_eLogoType = static_cast<LogoType>(ltype);
 
   // reserved uint32
   unsigned int reserved;
@@ -578,8 +578,8 @@ bool CEventClient::OnPacketNOTIFICATION(CEventPacket *packet)
 
 bool CEventClient::OnPacketLOG(CEventPacket *packet)
 {
-  unsigned char *payload = (unsigned char *)packet->Payload();
-  int psize = (int)packet->PayloadSize();
+  unsigned char* payload = const_cast<unsigned char*>(packet->Payload());
+  int psize = static_cast<int>(packet->PayloadSize());
   std::string logmsg;
   unsigned char ltype;
 
@@ -588,14 +588,14 @@ bool CEventClient::OnPacketLOG(CEventPacket *packet)
   if (!ParseString(payload, psize, logmsg))
     return false;
 
-  CLog::Log((int)ltype, "{}", logmsg);
+  CLog::Log(static_cast<int>(ltype), "{}", logmsg);
   return true;
 }
 
 bool CEventClient::OnPacketACTION(CEventPacket *packet)
 {
-  unsigned char *payload = (unsigned char *)packet->Payload();
-  int psize = (int)packet->PayloadSize();
+  unsigned char* payload = const_cast<unsigned char*>(packet->Payload());
+  int psize = static_cast<int>(packet->PayloadSize());
   std::string actionString;
   unsigned char actionType;
 
@@ -627,11 +627,12 @@ bool CEventClient::ParseString(unsigned char* &payload, int &psize, std::string&
   if (psize <= 0)
     return false;
 
-  unsigned char *pos = (unsigned char *)memchr((void*)payload, (int)'\0', psize);
+  unsigned char* pos =
+      static_cast<unsigned char*>(memchr((void*)payload, static_cast<int>('\0'), psize));
   if (!pos)
     return false;
 
-  parsedVal = (char*)payload;
+  parsedVal = reinterpret_cast<char*>(payload);
   psize -= ((pos - payload) + 1);
   payload = pos+1;
   return true;

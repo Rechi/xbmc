@@ -385,7 +385,8 @@ PLT_MediaObject* CUPnPServer::Build(const std::shared_ptr<CFileItem>& item,
                     // for tvshows and seasons, iEpisode and playCount are
                     // invalid
                     item->m_bIsFolder = true;
-                    item->GetVideoInfoTag()->m_iEpisode = (int)item->GetProperty("totalepisodes").asInteger();
+                    item->GetVideoInfoTag()->m_iEpisode =
+                        static_cast<int>(item->GetProperty("totalepisodes").asInteger());
                     item->GetVideoInfoTag()->SetPlayCount(static_cast<int>(item->GetProperty("watchedepisodes").asInteger()));
                 }
                 // if this is an item in the library without a playable path it most be a folder
@@ -485,11 +486,11 @@ void CUPnPServer::Announce(AnnouncementFlag flag,
     else {
         // handle both updates & removals
         if (!data["item"].isNull()) {
-            item_id = (int)data["item"]["id"].asInteger();
+            item_id = static_cast<int>(data["item"]["id"].asInteger());
             item_type = data["item"]["type"].asString();
         }
         else {
-            item_id = (int)data["id"].asInteger();
+            item_id = static_cast<int>(data["id"].asInteger());
             item_type = data["type"].asString();
         }
 
@@ -828,8 +829,13 @@ CUPnPServer::BuildResponse(PLT_ActionReference&          action,
 
     // won't return more than UPNP_MAX_RETURNED_ITEMS items at a time to keep things smooth
     // 0 requested means as many as possible
-    NPT_UInt32 max_count  = (requested_count == 0)?m_MaxReturnedItems:std::min((unsigned long)requested_count, (unsigned long)m_MaxReturnedItems);
-    NPT_UInt32 stop_index = std::min((unsigned long)(starting_index + max_count), (unsigned long)items.Size()); // don't return more than we can
+    NPT_UInt32 max_count = (requested_count == 0)
+                               ? m_MaxReturnedItems
+                               : std::min(static_cast<unsigned long>(requested_count),
+                                          static_cast<unsigned long>(m_MaxReturnedItems));
+    NPT_UInt32 stop_index =
+        std::min(static_cast<unsigned long>(starting_index + max_count),
+                 static_cast<unsigned long>(items.Size())); // don't return more than we can
 
     NPT_Cardinal count = 0;
     NPT_Cardinal total = items.Size();

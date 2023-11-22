@@ -56,10 +56,11 @@ bool CDNSNameCache::Lookup(const std::string& strHostName, std::string& strIpAdd
   struct hostent *host = gethostbyname(strHostName.c_str());
   if (host && host->h_addr_list[0])
   {
-    strIpAddress = StringUtils::Format("{}.{}.{}.{}", (unsigned char)host->h_addr_list[0][0],
-                                       (unsigned char)host->h_addr_list[0][1],
-                                       (unsigned char)host->h_addr_list[0][2],
-                                       (unsigned char)host->h_addr_list[0][3]);
+    strIpAddress =
+        StringUtils::Format("{}.{}.{}.{}", static_cast<unsigned char>(host->h_addr_list[0][0]),
+                            static_cast<unsigned char>(host->h_addr_list[0][1]),
+                            static_cast<unsigned char>(host->h_addr_list[0][2]),
+                            static_cast<unsigned char>(host->h_addr_list[0][3]));
     g_DNSCache.Add(strHostName, strIpAddress);
     return true;
   }
