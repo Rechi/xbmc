@@ -1822,7 +1822,7 @@ namespace VIDEO
                                                      file->iSeason)); // Season x
         pDlgProgress->SetLine(3, StringUtils::Format("{} {}", g_localizeStrings.Get(20359),
                                                      file->iEpisode)); // Episode y
-        pDlgProgress->SetPercentage((int)((float)(iCurr++)/iMax*100));
+        pDlgProgress->SetPercentage(static_cast<int>(static_cast<float>(iCurr++) / iMax * 100));
         pDlgProgress->Progress();
       }
       if (m_handle)
@@ -2139,7 +2139,7 @@ namespace VIDEO
         time = buffer.st_ctime;
       if (time)
       {
-        digest.Update((unsigned char *)&time, sizeof(time));
+        digest.Update(reinterpret_cast<unsigned char*>(&time), sizeof(time));
         return digest.Finalize();
       }
     }
@@ -2177,7 +2177,7 @@ namespace VIDEO
 
     if (time)
     {
-      digest.Update((unsigned char *)&time, sizeof(time));
+      digest.Update(reinterpret_cast<unsigned char*>(&time), sizeof(time));
       return digest.Finalize();
     }
     return "";

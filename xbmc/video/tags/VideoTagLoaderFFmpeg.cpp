@@ -54,7 +54,7 @@ CVideoTagLoaderFFmpeg::CVideoTagLoaderFFmpeg(const CFileItem& item,
 
   int blockSize = m_file->GetChunkSize();
   int bufferSize = blockSize > 1 ? blockSize : 4096;
-  uint8_t* buffer = (uint8_t*)av_malloc(bufferSize);
+  uint8_t* buffer = static_cast<uint8_t*>(av_malloc(bufferSize));
   m_ioctx = avio_alloc_context(buffer, bufferSize, 0,
                                m_file, vfs_file_read, nullptr,
                                vfs_file_seek);
