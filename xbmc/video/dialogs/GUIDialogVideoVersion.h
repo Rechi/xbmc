@@ -38,7 +38,7 @@ public:
 
   using VideoVersionPlayCallback = std::function<void(const std::shared_ptr<CFileItem>& item)>;
   static void PlayVideoVersion(const std::shared_ptr<CFileItem>& item,
-                               VideoVersionPlayCallback play);
+                               const VideoVersionPlayCallback& play);
 
   static int ManageVideoVersionContextMenu(const std::shared_ptr<CFileItem>& version);
 

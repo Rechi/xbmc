@@ -52,6 +52,7 @@
 #include <algorithm>
 #include <iterator>
 #include <string>
+#include <utility>
 
 static constexpr unsigned int CONTROL_LABEL_MODE = 1;
 static constexpr unsigned int CONTROL_LABEL_TITLE = 2;
@@ -601,7 +602,7 @@ void CGUIDialogVideoVersion::SetSelectedVideoVersion(const std::shared_ptr<CFile
 
 void CGUIDialogVideoVersion::SetPlayCallback(VideoVersionPlayCallback callback)
 {
-  m_playCallback = callback;
+  m_playCallback = std::move(callback);
 }
 
 void CGUIDialogVideoVersion::PlayVideoItem(const std::shared_ptr<CFileItem>& item)
@@ -625,7 +626,7 @@ void CGUIDialogVideoVersion::ManageVideoVersion(const std::shared_ptr<CFileItem>
 }
 
 void CGUIDialogVideoVersion::PlayVideoVersion(const std::shared_ptr<CFileItem>& item,
-                                              VideoVersionPlayCallback callback)
+                                              const VideoVersionPlayCallback& callback)
 {
   // play the specified video version
   if (item->GetVideoInfoTag()->m_idVideoVersion > 0)
