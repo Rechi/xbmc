@@ -394,7 +394,7 @@ bool CPythonInvoker::execute(const std::string& script, std::vector<std::wstring
       if (old != s)
       {
         CLog::Log(LOGINFO, "CPythonInvoker({}, {}): waiting on thread {}", GetId(), m_sourceFile,
-                  (uint64_t)s->thread_id);
+                  static_cast<uint64_t>(s->thread_id));
         old = s;
       }
 
@@ -462,7 +462,7 @@ bool CPythonInvoker::stop(bool abort)
       setState(InvokerStateStopping);
       lock.unlock();
 
-      PyEval_RestoreThread((PyThreadState*)m_threadState);
+      PyEval_RestoreThread(static_cast<PyThreadState*>(m_threadState));
 
       //tell xbmc.Monitor to call onAbortRequested()
       if (m_addon)
@@ -515,7 +515,7 @@ bool CPythonInvoker::stop(bool abort)
       {
         // grabbing the PyLock while holding the m_critical is asking for a deadlock
         CSingleExit ex2(m_critical);
-        PyEval_RestoreThread((PyThreadState*)m_threadState);
+        PyEval_RestoreThread(static_cast<PyThreadState*>(m_threadState));
       }
 
 
@@ -636,7 +636,7 @@ void CPythonInvoker::onPythonModuleInitialization(void* moduleDict)
   if (m_addon.get() == NULL || moduleDict == NULL)
     return;
 
-  PyObject* moduleDictionary = (PyObject*)moduleDict;
+  PyObject* moduleDictionary = static_cast<PyObject*>(moduleDict);
 
   PyDict_SetItemString(moduleDictionary, "__xbmcaddonid__",
                        PyObjectPtr(PyUnicode_FromString(m_addon->ID().c_str())).get());

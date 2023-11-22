@@ -325,7 +325,8 @@ JSONRPC_STATUS CPlayerOperations::PlayPause(const std::string &method, ITranspor
         else if (!appPlayer->IsPausedPlayback())
           CServiceBroker::GetAppMessenger()->SendMsg(TMSG_MEDIA_PAUSE);
       }
-      result["speed"] = appPlayer->IsPausedPlayback() ? 0 : (int)lrint(appPlayer->GetPlaySpeed());
+      result["speed"] =
+          appPlayer->IsPausedPlayback() ? 0 : static_cast<int>(lrint(appPlayer->GetPlaySpeed()));
       return OK;
     }
 
@@ -449,7 +450,7 @@ JSONRPC_STATUS CPlayerOperations::SetSpeed(const std::string &method, ITransport
       const auto appPlayer = components.GetComponent<CApplicationPlayer>();
       if (parameterObject["speed"].isInteger())
       {
-        int speed = (int)parameterObject["speed"].asInteger();
+        int speed = static_cast<int>(parameterObject["speed"].asInteger());
         if (speed != 0)
         {
           // If the player is paused we first need to unpause
@@ -470,7 +471,8 @@ JSONRPC_STATUS CPlayerOperations::SetSpeed(const std::string &method, ITransport
       else
         return InvalidParams;
 
-      result["speed"] = appPlayer->IsPausedPlayback() ? 0 : (int)lrint(appPlayer->GetPlaySpeed());
+      result["speed"] =
+          appPlayer->IsPausedPlayback() ? 0 : static_cast<int>(lrint(appPlayer->GetPlaySpeed()));
       return OK;
     }
 
@@ -576,7 +578,7 @@ JSONRPC_STATUS CPlayerOperations::Zoom(const std::string &method, ITransportLaye
   {
     case Picture:
       if (zoom.isInteger())
-        SendSlideshowAction(ACTION_ZOOM_LEVEL_NORMAL + ((int)zoom.asInteger() - 1));
+        SendSlideshowAction(ACTION_ZOOM_LEVEL_NORMAL + (static_cast<int>(zoom.asInteger()) - 1));
       else if (zoom.isString())
       {
         std::string strZoom = zoom.asString();
@@ -773,7 +775,7 @@ JSONRPC_STATUS CPlayerOperations::Open(const std::string &method, ITransportLaye
                                                       false);
     }
 
-    int playlistStartPosition = (int)parameterObject["item"]["position"].asInteger();
+    int playlistStartPosition = static_cast<int>(parameterObject["item"]["position"].asInteger());
 
     switch (playlistid)
     {
@@ -1220,7 +1222,7 @@ JSONRPC_STATUS CPlayerOperations::SetAudioStream(const std::string &method, ITra
             return InvalidParams;
         }
         else if (parameterObject["stream"].isInteger())
-          index = (int)parameterObject["stream"].asInteger();
+          index = static_cast<int>(parameterObject["stream"].asInteger());
 
         if (index < 0 || appPlayer->GetAudioStreamCount() <= index)
           return InvalidParams;
@@ -1300,7 +1302,7 @@ JSONRPC_STATUS CPlayerOperations::SetSubtitle(const std::string &method, ITransp
             return InvalidParams;
         }
         else if (parameterObject["subtitle"].isInteger())
-          index = (int)parameterObject["subtitle"].asInteger();
+          index = static_cast<int>(parameterObject["subtitle"].asInteger());
 
         if (index < 0 || appPlayer->GetSubtitleCount() <= index)
           return InvalidParams;
@@ -1356,7 +1358,7 @@ JSONRPC_STATUS CPlayerOperations::SetVideoStream(const std::string &method, ITra
           return InvalidParams;
       }
       else if (parameterObject["stream"].isInteger())
-        index = (int)parameterObject["stream"].asInteger();
+        index = static_cast<int>(parameterObject["stream"].asInteger());
 
       if (index < 0 || streamCount <= index)
         return InvalidParams;
@@ -1548,7 +1550,8 @@ JSONRPC_STATUS CPlayerOperations::GetPropertyValue(PlayerType player, const std:
       {
         const auto& components = CServiceBroker::GetAppComponents();
         const auto appPlayer = components.GetComponent<CApplicationPlayer>();
-        result = appPlayer->IsPausedPlayback() ? 0 : (int)lrint(appPlayer->GetPlaySpeed());
+        result =
+            appPlayer->IsPausedPlayback() ? 0 : static_cast<int>(lrint(appPlayer->GetPlaySpeed()));
         break;
       }
 
@@ -1573,7 +1576,7 @@ JSONRPC_STATUS CPlayerOperations::GetPropertyValue(PlayerType player, const std:
       {
         int ms = 0;
         if (!IsPVRChannel())
-          ms = (int)(g_application.GetTime() * 1000.0);
+          ms = static_cast<int>(g_application.GetTime() * 1000.0);
         else
         {
           std::shared_ptr<CPVREpgInfoTag> epg(GetCurrentEpg());
@@ -1617,7 +1620,7 @@ JSONRPC_STATUS CPlayerOperations::GetPropertyValue(PlayerType player, const std:
       case Picture:
         slideshow = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIWindowSlideShow>(WINDOW_SLIDESHOW);
         if (slideshow && slideshow->NumSlides() > 0)
-          result = (double)slideshow->CurrentSlide() / slideshow->NumSlides();
+          result = static_cast<double>(slideshow->CurrentSlide()) / slideshow->NumSlides();
         else
           result = 0.0;
         break;
@@ -1656,7 +1659,7 @@ JSONRPC_STATUS CPlayerOperations::GetPropertyValue(PlayerType player, const std:
       {
         int ms = 0;
         if (!IsPVRChannel())
-          ms = (int)(g_application.GetTotalTime() * 1000.0);
+          ms = static_cast<int>(g_application.GetTotalTime() * 1000.0);
         else
         {
           std::shared_ptr<CPVREpgInfoTag> epg(GetCurrentEpg());
