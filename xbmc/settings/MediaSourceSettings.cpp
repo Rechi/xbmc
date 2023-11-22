@@ -203,11 +203,11 @@ bool CMediaSourceSettings::UpdateSource(const std::string& strType,
       if (strUpdateChild == "name")
         it->strName = strUpdateValue;
       else if (strUpdateChild == "lockmode")
-        it->m_iLockMode = (LockType)std::strtol(strUpdateValue.c_str(), NULL, 10);
+        it->m_iLockMode = static_cast<LockType>(std::strtol(strUpdateValue.c_str(), NULL, 10));
       else if (strUpdateChild == "lockcode")
         it->m_strLockCode = strUpdateValue;
       else if (strUpdateChild == "badpwdcount")
-        it->m_iBadPwdCount = (int)std::strtol(strUpdateValue.c_str(), NULL, 10);
+        it->m_iBadPwdCount = static_cast<int>(std::strtol(strUpdateValue.c_str(), NULL, 10));
       else if (strUpdateChild == "thumbnail")
         it->m_strThumbnailImage = strUpdateValue;
       else if (strUpdateChild == "path")
