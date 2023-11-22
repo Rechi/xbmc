@@ -65,7 +65,8 @@ void CVideoSyncIos::IosVblankHandler()
   int64_t       nowtime = CurrentHostCounter();
 
   //calculate how many vblanks happened
-  VBlankTime = (double)(nowtime - m_LastVBlankTime) / (double)CurrentHostFrequency();
+  VBlankTime =
+      static_cast<double>(nowtime - m_LastVBlankTime) / static_cast<double>(CurrentHostFrequency());
   NrVBlanks = MathUtils::round_int(VBlankTime * static_cast<double>(m_fps));
 
   //save the timestamp of this vblank so we can calculate how many happened next time
