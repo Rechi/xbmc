@@ -25,10 +25,12 @@ namespace ANNOUNCEMENT
     Input         = 0x080,
     PVR           = 0x100,
     Other         = 0x200,
-    Info          = 0x400
+    Info = 0x400,
+    PictureLibrary = 0x800,
   };
 
-  const auto ANNOUNCE_ALL = (Player | Playlist | GUI | System | VideoLibrary | AudioLibrary | Application | Input | ANNOUNCEMENT::PVR | Other);
+  const auto ANNOUNCE_ALL = (Player | Playlist | GUI | System | VideoLibrary | AudioLibrary |
+                             PictureLibrary | Application | Input | ANNOUNCEMENT::PVR | Other);
 
   /*!
     \brief Returns a string representation for the
@@ -52,6 +54,8 @@ namespace ANNOUNCEMENT
       return "VideoLibrary";
     case AudioLibrary:
       return "AudioLibrary";
+    case PictureLibrary:
+      return "PictureLibrary";
     case Application:
       return "Application";
     case Input:

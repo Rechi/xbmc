@@ -32,6 +32,7 @@ xbmc/listproviders                              listproviders
 xbmc/messaging                                  messaging
 xbmc/messaging/helpers                          messagingHelpers
 xbmc/pictures                                   pictures
+xbmc/pictures/jobs                              pictures/jobs
 xbmc/platform                                   platform
 xbmc/playlists                                  playlists
 xbmc/powermanagement                            powermanagement

@@ -9,8 +9,10 @@
 #include "GUIViewStatePictures.h"
 
 #include "FileItem.h"
+#include "PictureDatabase.h"
 #include "ServiceBroker.h"
 #include "filesystem/Directory.h"
+#include "filesystem/PictureDatabaseDirectory.h"
 #include "guilib/LocalizeStrings.h"
 #include "guilib/WindowIDs.h"
 #include "settings/MediaSourceSettings.h"
@@ -21,7 +23,7 @@
 #include "view/ViewStateSettings.h"
 
 using namespace XFILE;
-using namespace ADDON;
+using namespace PICTUREDATABASEDIRECTORY;
 
 CGUIViewStateWindowPictures::CGUIViewStateWindowPictures(const CFileItemList& items) : CGUIViewState(items)
 {
@@ -34,6 +36,20 @@ CGUIViewStateWindowPictures::CGUIViewStateWindowPictures(const CFileItemList& it
     SetViewAsControl(DEFAULT_VIEW_LIST);
 
     SetSortOrder(SortOrderAscending);
+  }
+  else if (items.IsVideoDb())
+  {
+    NODE_TYPE NodeType = CPictureDatabaseDirectory::GetDirectoryChildType(items.GetPath());
+
+    switch (NodeType)
+    {
+      case NODE_TYPE_TAGS:
+      {
+      }
+      break;
+      default:
+        break;
+    }
   }
   else
   {

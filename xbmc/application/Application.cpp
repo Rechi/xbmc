@@ -103,6 +103,8 @@
 #endif
 #include "peripherals/Peripherals.h"
 #include "pictures/GUIWindowSlideShow.h"
+#include "pictures/PictureInfoScanner.h"
+#include "pictures/PictureLibraryQueue.h"
 #include "platform/Environment.h"
 #include "playlists/PlayList.h"
 #include "playlists/PlayListFactory.h"
@@ -188,6 +190,7 @@ using namespace MEDIA_DETECT;
 #endif
 using namespace VIDEO;
 using namespace MUSIC_INFO;
+using namespace PICTURE;
 using namespace EVENTSERVER;
 using namespace JSONRPC;
 using namespace PVR;
@@ -3448,6 +3451,13 @@ void CApplication::UpdateLibraries()
     CMusicLibraryQueue::GetInstance().ScanLibrary(
         "", MUSIC_INFO::CMusicInfoScanner::SCAN_NORMAL,
         !settings->GetBool(CSettings::SETTING_MUSICLIBRARY_BACKGROUNDUPDATE));
+  }
+
+  if (settings->GetBool(CSettings::SETTING_PICTURELIBRARY_UPDATEONSTARTUP))
+  {
+    CLog::LogF(LOGINFO, "Starting picture library startup scan");
+    CPictureLibraryQueue::GetInstance().ScanLibrary(
+        "", !settings->GetBool(CSettings::SETTING_PICTURELIBRARY_BACKGROUNDUPDATE));
   }
 }
 

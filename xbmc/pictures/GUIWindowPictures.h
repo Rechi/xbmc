@@ -20,6 +20,7 @@ public:
   ~CGUIWindowPictures(void) override;
   bool OnMessage(CGUIMessage& message) override;
   void OnInitWindow() override;
+  void DoScan(const std::string& strPath);
 
 protected:
   bool GetDirectory(const std::string &strDirectory, CFileItemList& items) override;
@@ -29,6 +30,7 @@ protected:
   void OnPrepareFileItems(CFileItemList& items) override;
   bool Update(const std::string &strDirectory, bool updateFilterPath = true) override;
   void GetContextButtons(int itemNumber, CContextButtons &buttons) override;
+  virtual void OnRemoveSource(int iItem);
   bool OnContextButton(int itemNumber, CONTEXT_BUTTON button) override;
   bool OnAddMediaSource() override;
   std::string GetStartFolder(const std::string &dir) override;
@@ -43,6 +45,7 @@ protected:
   void OnSlideShowRecursive();
   void OnItemLoaded(CFileItem* pItem) override;
   void LoadPlayList(const std::string& strPlayList) override;
+  virtual void OnScan(int iItem);
 
   CGUIDialogProgress* m_dlgProgress;
 

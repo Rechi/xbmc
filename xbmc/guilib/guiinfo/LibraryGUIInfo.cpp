@@ -16,6 +16,7 @@
 #include "guilib/guiinfo/GUIInfoLabels.h"
 #include "music/MusicDatabase.h"
 #include "music/MusicLibraryQueue.h"
+#include "pictures/PictureLibraryQueue.h"
 #include "profiles/ProfileManager.h"
 #include "settings/SettingsComponent.h"
 #include "utils/FileUtils.h"
@@ -65,6 +66,8 @@ void CLibraryGUIInfo::SetLibraryBool(int condition, bool value)
       break;
     case LIBRARY_HAS_BOXSETS:
       m_libraryHasBoxsets = value ? 1 : 0;
+    case LIBRARY_HAS_PICTURES:
+      m_libraryHasPictures = value ? 1 : 0;
       break;
     default:
       break;
@@ -81,6 +84,7 @@ void CLibraryGUIInfo::ResetLibraryBools()
   m_libraryHasSingles = -1;
   m_libraryHasCompilations = -1;
   m_libraryHasBoxsets = -1;
+  m_libraryHasPictures = -1;
   m_libraryRoleCounts.clear();
 }
 
@@ -224,6 +228,12 @@ bool CLibraryGUIInfo::GetBool(bool& value, const CGUIListItem *gitem, int contex
               GetBool(value, gitem, contextWindow, CGUIInfo(LIBRARY_HAS_TVSHOWS)) ||
               GetBool(value, gitem, contextWindow, CGUIInfo(LIBRARY_HAS_MUSICVIDEOS)));
     }
+    case LIBRARY_HAS_PICTURES:
+    {
+      //! @todo: query db
+      value = m_libraryHasPictures > 0;
+      return true;
+    }
     case LIBRARY_HAS_ROLE:
     {
       std::string strRole = info.GetData3();
@@ -282,6 +292,11 @@ bool CLibraryGUIInfo::GetBool(bool& value, const CGUIListItem *gitem, int contex
     case LIBRARY_IS_SCANNING_MUSIC:
     {
       value = CMusicLibraryQueue::GetInstance().IsScanningLibrary();
+      return true;
+    }
+    case LIBRARY_IS_SCANNING_PICTURES:
+    {
+      value = CPictureLibraryQueue::GetInstance().IsScanningLibrary();
       return true;
     }
   }

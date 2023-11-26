@@ -20,6 +20,7 @@
 #include "messaging/helpers/DialogOKHelper.h"
 #include "music/MusicLibraryQueue.h"
 #include "music/infoscanner/MusicInfoScanner.h"
+#include "pictures/PictureLibraryQueue.h"
 #include "settings/LibExportSettings.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
@@ -320,6 +321,14 @@ static int UpdateLibrary(const std::vector<std::string>& params)
       CMusicLibraryQueue::GetInstance().ScanLibrary(params.size() > 1 ? params[1] : "",
                                                     MUSIC_INFO::CMusicInfoScanner::SCAN_NORMAL,
                                                     userInitiated);
+  }
+  else if (StringUtils::EqualsNoCase(params[0], "picture"))
+  {
+    if (CPictureLibraryQueue::GetInstance().IsScanningLibrary())
+      CPictureLibraryQueue::GetInstance().StopLibraryScanning();
+    else
+      CPictureLibraryQueue::GetInstance().ScanLibrary(params.size() > 1 ? params[1] : "",
+                                                      userInitiated);
   }
   else if (StringUtils::EqualsNoCase(params[0], "video"))
   {

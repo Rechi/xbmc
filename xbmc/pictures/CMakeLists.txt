@@ -10,7 +10,9 @@ set(SOURCES ExifParse.cpp
             PictureDatabase.cpp
             PictureFolderImageFileLoader.cpp
             PictureInfoLoader.cpp
+            PictureInfoScanner.cpp
             PictureInfoTag.cpp
+            PictureLibraryQueue.cpp
             PictureScalingAlgorithm.cpp
             PictureThumbLoader.cpp
             SlideShowPicture.cpp)
@@ -23,7 +25,9 @@ set(HEADERS GUIDialogPictureInfo.h
             PictureDatabase.h
             PictureFolderImageFileLoader.h
             PictureInfoLoader.h
+            PictureInfoScanner.h
             PictureInfoTag.h
+            PictureLibraryQueue.h
             PictureScalingAlgorithm.h
             PictureThumbLoader.h
             SlideShowPicture.h)
