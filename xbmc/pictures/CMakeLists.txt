@@ -7,6 +7,7 @@ set(SOURCES ExifParse.cpp
             JpegParse.cpp
             libexif.cpp
             Picture.cpp
+            PictureDatabase.cpp
             PictureFolderImageFileLoader.cpp
             PictureInfoLoader.cpp
             PictureInfoTag.cpp
@@ -19,6 +20,7 @@ set(HEADERS GUIDialogPictureInfo.h
             GUIWindowPictures.h
             GUIWindowSlideShow.h
             Picture.h
+            PictureDatabase.h
             PictureFolderImageFileLoader.h
             PictureInfoLoader.h
             PictureInfoTag.h
