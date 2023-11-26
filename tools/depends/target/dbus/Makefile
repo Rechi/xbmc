@@ -3,10 +3,10 @@ DEPS = ../../Makefile.include Makefile ../../download-files.include
 
 # lib name, version
 LIBNAME=dbus
-VERSION=1.11.16
+VERSION=1.13.14
 SOURCE=$(LIBNAME)-$(VERSION)
-ARCHIVE=$(SOURCE).tar.gz
-SHA512=991ba6293d5f305e5a7e4ce6b131ea7fddd3bebadbb5b8c2fec29ccb76ab324786a01b89d2df6a3a112756436549dc7b856e78d4adb3f7514c8537ad854741bc
+ARCHIVE=$(SOURCE).tar.xz
+SHA512=64290c16a32111cfe342b62e30cacfc700b2f23623e3eca9687def3a4ace6bf9054f5ab97b41b072040b29e6736cc32233e007998a912b56b3f52974af223308
 include ../../download-files.include
 
 # configuration settings
