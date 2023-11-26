@@ -7,6 +7,7 @@ VERSION=1.15.5
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
 SHA512=61f19ea777b523f0e76869b8e7dbbff5e51132d3c856c6edb9915a695f7903256228e71be2567642866923a800f1283bdd5aff97266ac26c2e42dfce0bffa50b
+BASE_URL=https://www.freedesktop.org/software/libinput
 include ../../download-files.include
 
 # configuration settings

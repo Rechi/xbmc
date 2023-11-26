@@ -9,6 +9,7 @@ VERSION=7.7.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 SHA512=6660939b5a36ce36310721a08a089fb671d1e3d2e8ac74ea4775bfa5f8f772d32de805551456200fe96cc486c092c44beb84f5dd877008bc305490ee971bbf99
+BASE_URL=https://github.com/$(LIBNAME)/$(LIBNAME)/releases/download/$(SOURCE)
 include ../../download-files.include
 
 APP=$(PLATFORM)/lib/asn1/asn1_compile

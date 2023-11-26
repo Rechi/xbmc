@@ -9,6 +9,7 @@ VERSION=5.2.1
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 SHA512=4550e53c21cb1191a4581e363fc9d0610da53f7898ca8320f0d3ef6711e76bdda2609c2df15dc94c45e28bff8de441f1227ec2da7ea827cb3c0405af4faa4736
+BASE_URL=https://sourceforge.net/projects/$(LIBNAME)/files
 include ../../download-files.include
 
 # configuration settings

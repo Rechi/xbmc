@@ -7,6 +7,7 @@ VERSION=0.80
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 SHA512=4bc723fd882baac090f61576aa798a3045df7877c9482b81e0c78e25e29503774240b7c34d255150ca7557d9aa8d8b113ca6fd1c1dae1362e4c0f314d8f33a51
+BASE_URL=https://ftp.gnu.org/pub/gnu/libcdio
 include ../../download-files.include
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
@@ -43,4 +44,3 @@ clean:
 
 distclean::
 	rm -rf $(PLATFORM) .installed-$(PLATFORM)
-

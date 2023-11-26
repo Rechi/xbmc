@@ -7,6 +7,7 @@ VERSION=1.17
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 SHA512=18a09de2d026da4f2d8b858517b0f26d853b21179cf4fa9a41070b2d140030ad9525637dc4f34fc7f27abca8acdc84c6751dfb1d426e78bf92af4040603ced86
+BASE_URL=https://ftp.gnu.org/pub/gnu/libiconv
 include ../../download-files.include
 
 # configuration settings

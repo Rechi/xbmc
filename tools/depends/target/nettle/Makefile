@@ -7,6 +7,7 @@ VERSION=3.7.3
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 SHA512=9901eba305421adff6d551ac7f478dff3f68a339d444c776724ab0b977fe6be792b1d2950c8705acbe76bd924fd6d898a65eded546777884be3b436d0e052437
+BASE_URL=https://ftp.gnu.org/gnu/nettle
 include ../../download-files.include
 
 ifeq ($(OS),osx)

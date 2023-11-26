@@ -9,6 +9,7 @@ VERSION=0.21
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
 SHA512=f7e2968651879f8444d43a176a149db9f9411f4a03132a7f3b37c2ed97e3978ae6888169c995c1953cb78943b6e3573811abcbb8661b6631edbbe067b2699ddf
+BASE_URL=https://ftp.gnu.org/pub/gnu/gettext
 include ../../download-files.include
 
 # configuration settings

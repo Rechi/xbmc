@@ -9,6 +9,7 @@ VERSION=8.45
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
 SHA512=91bff52eed4a2dfc3f3bfdc9c672b88e7e2ffcf3c4b121540af8a4ae8c1ce05178430aa6b8000658b9bb7b4252239357250890e20ceb84b79cdfcde05154061a
+BASE_URL=https://ftp.pcre.org/pub/pcre
 include ../../download-files.include
 
 # configuration settings

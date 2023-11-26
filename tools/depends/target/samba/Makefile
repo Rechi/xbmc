@@ -12,6 +12,7 @@ VERSION=3.0.37
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 SHA512=7311a38abc271b461086d088a2a1b6ba74dc706c57cc34b18088e344e313e7a65f42ab6155a31f5467bc3f9e7bfb1d554288a1553d25503aed2a636f58868c6d
+BASE_URL=https://github.com/samba-team/samba/archive
 include ../../download-files.include
 
 # configuration settings
@@ -81,4 +82,3 @@ clean:
 
 distclean::
 	rm -rf $(PLATFORM) .installed-$(PLATFORM)
-

@@ -10,6 +10,7 @@ VERSION=0.29.2
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 SHA512=4861ec6428fead416f5cbbbb0bbad10b9152967e481d4b0ff2eb396a9f297f552984c9bb72f6864a37dcd8fca1d9ccceda3ef18d8f121938dbe4fdf2b870fe75
+BASE_URL=https://pkgconfig.freedesktop.org/releases
 include ../../download-files.include
 
 PC_PATH=$(PREFIX)/lib/pkgconfig:$(PREFIX)/share/pkgconfig

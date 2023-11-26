@@ -7,6 +7,7 @@ VERSION=1.13.14
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
 SHA512=991ba6293d5f305e5a7e4ce6b131ea7fddd3bebadbb5b8c2fec29ccb76ab324786a01b89d2df6a3a112756436549dc7b856e78d4adb3f7514c8537ad854741bc
+BASE_URL=https://dbus.freedesktop.org/releases/dbus
 include ../../download-files.include
 
 # configuration settings

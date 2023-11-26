@@ -7,7 +7,8 @@ DEPS = ../../Makefile.include Makefile 01-no-gnu-patch.patch 02-perl-min-version
 LIBNAME=dpkg
 VERSION=1.19.7
 SOURCE=$(LIBNAME)_$(VERSION)
-ARCHIVE=$(SOURCE).tar.xz
+ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=https://salsa.debian.org/dpkg-team/dpkg/-/archive/$(VERSION)
 SHA512=9ca441dc265baf5359c71617aef1c57504a7097c26ea57108b88dadc511bfa9918fcc765d8c67cec9def9916c5df92d6cabe508446dbc7223a29b45260445e81
 include ../../download-files.include
 

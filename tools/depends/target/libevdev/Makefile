@@ -7,6 +7,7 @@ VERSION=1.9.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
 SHA512=e9485d8c6b48ebf762b32b003bc6b761c548024ad3bc34a0793485b53383746881fcc9b206a078d571937291e519d9822e50c5d8816778d347094691b65ec3fa
+BASE_URL=https://www.freedesktop.org/software/libevdev
 include ../../download-files.include
 
 # configuration settings

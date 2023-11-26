@@ -7,6 +7,7 @@ VERSION=2.1.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
 SHA512=c290821da55fd9ae366670a58857aa6efcebc9f25b7caea063cf12f9cbda84fe770c5f59f972227fda50517ca58c5f39c0137daa0f93179e3daa45303d8b610f
+BASE_URL=https://ftp.gnu.org/pub/gnu/$(LIBNAME)
 include ../../download-files.include
 
 # configuration settings

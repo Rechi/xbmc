@@ -9,6 +9,7 @@ VERSION=1.34
 SOURCE=$(APPNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
 SHA512=5e77c4a7b49983ad7d15238c2bce28be7a8aa437b4b1815fc00abd13096da308b6bba196cc6e3ed79d85e62823d520ae0d8fcda2d93873842cf84dc3369fc902
+BASE_URL=http://ftp.gnu.org/gnu/tar
 include ../../download-files.include
 
 export PATH:=$(PREFIX)/bin:$(PATH)

@@ -7,6 +7,7 @@ VERSION=1.5.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
 SHA512=bbba6665f052c04c7450413cc5e2badd6bfd41326b0e4c60e3ec01d730cae695fd34ce2662b8a91ece7a76b974a0ea330f7462dd5d2db148b0d0da26264ced9c
+BASE_URL=http://xkbcommon.org/download
 include ../../download-files.include
 
 # configuration settings

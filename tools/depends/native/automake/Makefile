@@ -8,6 +8,7 @@ VERSION=1.16.5
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.xz
 SHA512=3084ae543aa3fb5a05104ffb2e66cfa9a53080f2343c44809707fd648516869511500dba50dae67ff10f92a1bf3b5a92b2a0fa01cda30adb69b9da03994d9d88
+BASE_URL=http://ftp.gnu.org/gnu/automake
 include ../../download-files.include
 
 # configuration settings
