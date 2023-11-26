@@ -10,7 +10,7 @@ SHA512=592a001954fd3ca86a81a907fef3892ebb53f4b91e937a049ec048e3473919f1c6e00fdf4
 include ../../download-files.include
 
 # configuration settings
-CONFIGURE=./configure --prefix=$(PREFIX)
+CONFIGURE=CFLAGS="-DAES_cbc_encrypt=shairplay_AES_cbc_encrypt" ./configure --prefix=$(PREFIX) --disable-shared
 
 
 LIBDYLIB=$(PLATFORM)/src/lib/.libs/libshairplay.a
