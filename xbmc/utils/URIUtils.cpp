@@ -6,19 +6,21 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "network/Network.h"
 #include "URIUtils.h"
+
 #include "FileItem.h"
+#include "ServiceBroker.h"
+#include "StringUtils.h"
+#include "URL.h"
 #include "filesystem/MultiPathDirectory.h"
 #include "filesystem/SpecialProtocol.h"
 #include "filesystem/StackDirectory.h"
 #include "network/DNSNameCache.h"
+#include "network/Network.h"
 #include "pvr/channels/PVRChannelsPath.h"
 #include "settings/AdvancedSettings.h"
-#include "URL.h"
+#include "settings/SettingsComponent.h"
 #include "utils/FileExtensionProvider.h"
-#include "ServiceBroker.h"
-#include "StringUtils.h"
 #include "utils/log.h"
 
 #if defined(TARGET_WINDOWS)
@@ -27,8 +29,9 @@
 
 #include <algorithm>
 #include <cassert>
-#include <netinet/in.h>
+
 #include <arpa/inet.h>
+#include <netinet/in.h>
 
 using namespace PVR;
 using namespace XFILE;
@@ -534,6 +537,43 @@ std::string URIUtils::SubstitutePath(const std::string& strPath, bool reverse /*
     }
   }
   return strPath;
+}
+
+std::vector<CURL> URIUtils::AlternativePaths(const CURL& url)
+{
+  std::vector<CURL> paths;
+  for (const std::string& alternative : AlternativePaths(url.Get()))
+  {
+    CURL url(alternative);
+    paths.push_back(url);
+  }
+  return paths;
+}
+
+std::vector<std::string> URIUtils::AlternativePaths(const std::string& strPath)
+{
+  std::vector<std::string> paths;
+  paths.push_back(strPath);
+  for (const std::pair<std::string, std::string>& pathAlternative :
+       CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_pathAlternatives)
+  {
+    std::string fromPath = pathAlternative.first; // Fake path;
+    std::string toPath = pathAlternative.second; // Real path;
+
+    if (strncmp(strPath.c_str(), fromPath.c_str(),
+                HasSlashAtEnd(fromPath) ? fromPath.size() - 1 : fromPath.size()) == 0)
+    {
+      if (strPath.size() > fromPath.size())
+      {
+        std::string strSubPathAndFileName = strPath.substr(fromPath.size());
+        paths.push_back(ChangeBasePath(fromPath, strSubPathAndFileName,
+                                       toPath)); // Fix encoding + slash direction
+      }
+      else
+        paths.push_back(toPath);
+    }
+  }
+  return paths;
 }
 
 bool URIUtils::IsProtocol(const std::string& url, const std::string &type)
