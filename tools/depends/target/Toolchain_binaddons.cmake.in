@@ -66,7 +66,7 @@ if(NOT "@use_toolchain@" STREQUAL "")
   if("@target_platform@" STREQUAL "webos")
     list(APPEND CMAKE_FIND_ROOT_PATH @use_toolchain@/@use_host@/sysroot)
   else()
-    list(APPEND CMAKE_FIND_ROOT_PATH @use_toolchain@/sysroot/usr)
+    list(APPEND CMAKE_FIND_ROOT_PATH @use_toolchain@ @use_toolchain@/@use_host@ @use_toolchain@/@use_host@/sysroot @use_toolchain@/@use_host@/sysroot/usr @use_toolchain@/@use_host@/libc @use_toolchain@/lib/@use_host@/sysroot @use_toolchain@/usr @use_toolchain@/sysroot/usr)
   endif()
 endif()
 
