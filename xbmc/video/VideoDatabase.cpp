@@ -85,7 +85,8 @@ bool CVideoDatabase::Open()
 void CVideoDatabase::CreateTables()
 {
   CLog::Log(LOGINFO, "create bookmark table");
-  m_pDS->exec("CREATE TABLE bookmark ( idBookmark integer primary key, idFile integer, timeInSeconds double, totalTimeInSeconds double, thumbNailImage text, player text, playerState text, type integer)\n");
+  m_pDS->exec(
+      "CREATE TABLE bookmark ( idBookmark integer primary key, idFile integer, idUser integer, timeInSeconds double, totalTimeInSeconds double, thumbNailImage text, player text, playerState text, type integer)\n");
 
   CLog::Log(LOGINFO, "create settings table");
   m_pDS->exec("CREATE TABLE settings ( idFile integer, Deinterlace bool,"
@@ -237,7 +238,7 @@ void CVideoDatabase::CreateAnalytics()
   /* however an index on ( foo_id, bar_id ) will be considered for use  */
 
   CLog::Log(LOGINFO, "{} - creating indices", __FUNCTION__);
-  m_pDS->exec("CREATE INDEX ix_bookmark ON bookmark (idFile, type)");
+  m_pDS->exec("CREATE INDEX ix_bookmark ON bookmark (idFile, type, idUser)");
   m_pDS->exec("CREATE UNIQUE INDEX ix_settings ON settings ( idFile )\n");
   m_pDS->exec("CREATE UNIQUE INDEX ix_stacktimes ON stacktimes ( idFile )\n");
   m_pDS->exec("CREATE INDEX ix_path ON path ( strPath(255) )");
@@ -2410,10 +2411,13 @@ bool CVideoDatabase::GetFileInfo(const std::string& strFilenameAndPath, CVideoIn
     if (idFile < 0)
       return false;
 
-    std::string sql = PrepareSQL("SELECT * FROM files "
-                                "JOIN path ON path.idPath = files.idPath "
-                                "LEFT JOIN bookmark ON bookmark.idFile = files.idFile AND bookmark.type = %i "
-                                "WHERE files.idFile = %i", CBookmark::RESUME, idFile);
+    std::string sql = PrepareSQL(
+        "SELECT * FROM files "
+        "JOIN path ON path.idPath = files.idPath "
+        "LEFT JOIN bookmark ON bookmark.idFile = files.idFile AND bookmark.type = %i AND bookmark.idUser = %i "
+        "WHERE files.idFile = %i",
+        CBookmark::RESUME, idFile,
+        CServiceBroker::GetSettingsComponent()->GetProfileManager()->GetCurrentProfileId());
     if (!m_pDS->query(sql))
       return false;
 
@@ -3269,7 +3273,10 @@ void CVideoDatabase::GetBookMarksForFile(const std::string& strFilenameAndPath, 
       if (nullptr == m_pDS)
         return;
 
-      std::string strSQL=PrepareSQL("select * from bookmark where idFile=%i and type=%i order by timeInSeconds", idFile, (int)type);
+      std::string strSQL = PrepareSQL(
+          "select * from bookmark where idFile=%i and type=%i and idUser=%i order by timeInSeconds",
+          idFile, (int)type,
+          CServiceBroker::GetSettingsComponent()->GetProfileManager()->GetCurrentProfileId());
       m_pDS->query( strSQL );
       while (!m_pDS->eof())
       {
@@ -3329,7 +3336,9 @@ void CVideoDatabase::DeleteResumeBookMark(const CFileItem& item)
 
   try
   {
-    std::string sql = PrepareSQL("delete from bookmark where idFile=%i and type=%i", fileID, CBookmark::RESUME);
+    std::string sql = PrepareSQL(
+        "delete from bookmark where idFile=%i and type=%i and idUser=%i", fileID, CBookmark::RESUME,
+        CServiceBroker::GetSettingsComponent()->GetProfileManager()->GetCurrentProfileId());
     m_pDS->exec(sql);
 
     VideoDbContentType iType = static_cast<VideoDbContentType>(item.GetVideoContentType());
@@ -3401,14 +3410,19 @@ void CVideoDatabase::AddBookMarkToFile(const std::string& strFilenameAndPath, co
     int idBookmark=-1;
     if (type == CBookmark::RESUME) // get the same resume mark bookmark each time type
     {
-      strSQL=PrepareSQL("select idBookmark from bookmark where idFile=%i and type=1", idFile);
+      strSQL = PrepareSQL(
+          "select idBookmark from bookmark where idFile=%i and type=1 and idUser=%i", idFile,
+          CServiceBroker::GetSettingsComponent()->GetProfileManager()->GetCurrentProfileId());
     }
     else if (type == CBookmark::STANDARD) // get the same bookmark again, and update. not sure here as a dvd can have same time in multiple places, state will differ thou
     {
       /* get a bookmark within the same time as previous */
       double mintime = bookmark.timeInSeconds - 0.5;
       double maxtime = bookmark.timeInSeconds + 0.5;
-      strSQL=PrepareSQL("select idBookmark from bookmark where idFile=%i and type=%i and (timeInSeconds between %f and %f) and playerState='%s'", idFile, (int)type, mintime, maxtime, bookmark.playerState.c_str());
+      strSQL = PrepareSQL(
+          "select idBookmark from bookmark where idFile=%i and type=%i and (timeInSeconds between %f and %f) and playerState='%s' and idUser=%i",
+          idFile, (int)type, mintime, maxtime, bookmark.playerState.c_str(),
+          CServiceBroker::GetSettingsComponent()->GetProfileManager()->GetCurrentProfileId());
     }
 
     if (type != CBookmark::EPISODE)
@@ -3423,7 +3437,12 @@ void CVideoDatabase::AddBookMarkToFile(const std::string& strFilenameAndPath, co
     if (idBookmark >= 0 )
       strSQL=PrepareSQL("update bookmark set timeInSeconds = %f, totalTimeInSeconds = %f, thumbNailImage = '%s', player = '%s', playerState = '%s' where idBookmark = %i", bookmark.timeInSeconds, bookmark.totalTimeInSeconds, bookmark.thumbNailImage.c_str(), bookmark.player.c_str(), bookmark.playerState.c_str(), idBookmark);
     else
-      strSQL=PrepareSQL("insert into bookmark (idBookmark, idFile, timeInSeconds, totalTimeInSeconds, thumbNailImage, player, playerState, type) values(NULL,%i,%f,%f,'%s','%s','%s', %i)", idFile, bookmark.timeInSeconds, bookmark.totalTimeInSeconds, bookmark.thumbNailImage.c_str(), bookmark.player.c_str(), bookmark.playerState.c_str(), (int)type);
+      strSQL = PrepareSQL(
+          "insert into bookmark (idBookmark, idFile, idUser, timeInSeconds, totalTimeInSeconds, thumbNailImage, player, playerState, type) values(NULL,%i,%i,%f,%f,'%s','%s','%s', %i)",
+          idFile,
+          CServiceBroker::GetSettingsComponent()->GetProfileManager()->GetCurrentProfileId(),
+          bookmark.timeInSeconds, bookmark.totalTimeInSeconds, bookmark.thumbNailImage.c_str(),
+          bookmark.player.c_str(), bookmark.playerState.c_str(), (int)type);
 
     m_pDS->exec(strSQL);
   }
@@ -3448,7 +3467,10 @@ void CVideoDatabase::ClearBookMarkOfFile(const std::string& strFilenameAndPath, 
     /* should be no problem since we never add bookmarks that are closer than that   */
     double mintime = bookmark.timeInSeconds - 0.5;
     double maxtime = bookmark.timeInSeconds + 0.5;
-    std::string strSQL = PrepareSQL("select idBookmark from bookmark where idFile=%i and type=%i and playerState like '%s' and player like '%s' and (timeInSeconds between %f and %f)", idFile, type, bookmark.playerState.c_str(), bookmark.player.c_str(), mintime, maxtime);
+    std::string strSQL = PrepareSQL(
+        "select idBookmark from bookmark where idFile=%i and type=%i and playerState like '%s' and player like '%s' and (timeInSeconds between %f and %f) and idUser=%i",
+        idFile, type, bookmark.playerState.c_str(), bookmark.player.c_str(), mintime, maxtime,
+        CServiceBroker::GetSettingsComponent()->GetProfileManager()->GetCurrentProfileId());
 
     m_pDS->query( strSQL );
     if (m_pDS->num_rows() != 0)
@@ -3491,7 +3513,9 @@ void CVideoDatabase::ClearBookMarksOfFile(int idFile, CBookmark::EType type /*= 
     if (nullptr == m_pDS)
       return;
 
-    std::string strSQL=PrepareSQL("delete from bookmark where idFile=%i and type=%i", idFile, (int)type);
+    std::string strSQL = PrepareSQL(
+        "delete from bookmark where idFile=%i and type=%i and idUser=%i", idFile, (int)type,
+        CServiceBroker::GetSettingsComponent()->GetProfileManager()->GetCurrentProfileId());
     m_pDS->exec(strSQL);
     if (type == CBookmark::EPISODE)
     {
@@ -4226,7 +4250,10 @@ bool CVideoDatabase::GetResumePoint(CVideoInfoTag& tag)
     }
     else
     {
-      std::string strSQL=PrepareSQL("select timeInSeconds, totalTimeInSeconds from bookmark where idFile=%i and type=%i order by timeInSeconds", tag.m_iFileId, CBookmark::RESUME);
+      std::string strSQL = PrepareSQL(
+          "select timeInSeconds, totalTimeInSeconds from bookmark where idFile=%i and type=%i and idUser=%i order by timeInSeconds",
+          tag.m_iFileId, CBookmark::RESUME,
+          CServiceBroker::GetSettingsComponent()->GetProfileManager()->GetCurrentProfileId());
       m_pDS2->query( strSQL );
       if (!m_pDS2->eof())
       {
@@ -6148,11 +6175,14 @@ void CVideoDatabase::UpdateTables(int iVersion)
         "INSERT INTO videoversion SELECT idFile, idMovie, 'movie', '%i', '%i' FROM movie",
         VideoVersionItemType::PRIMARY, VIDEO_VERSION_ID_DEFAULT));
   }
+
+  if (iVersion < 124)
+    m_pDS->exec("ALTER TABLE bookmark ADD idUser INTEGER NOT NULL AFTER idFile");
 }
 
 int CVideoDatabase::GetSchemaVersion() const
 {
-  return 123;
+  return 124;
 }
 
 bool CVideoDatabase::LookupByFolders(const std::string &path, bool shows)
@@ -6195,12 +6225,12 @@ bool CVideoDatabase::GetPlayCounts(const std::string &strPath, CFileItemList &it
       return false;
 
     std::string sql =
-      "SELECT"
-      "  files.strFilename, files.playCount,"
-      "  bookmark.timeInSeconds, bookmark.totalTimeInSeconds "
-      "FROM files"
-      "  LEFT JOIN bookmark ON"
-      "    files.idFile = bookmark.idFile AND bookmark.type = %i ";
+        "SELECT"
+        "  files.strFilename, files.playCount,"
+        "  bookmark.timeInSeconds, bookmark.totalTimeInSeconds "
+        "FROM files"
+        "  LEFT JOIN bookmark ON"
+        "    files.idFile = bookmark.idFile AND bookmark.type = %i AND bookmark.idUser = %i ";
 
     if (URIUtils::IsPlugin(strPath))
     {
@@ -6211,10 +6241,12 @@ bool CVideoDatabase::GetPlayCounts(const std::string &strPath, CFileItemList &it
 
         std::string path, filename;
         SplitPath(item->GetPath(), path, filename);
-        m_pDS->query(PrepareSQL(sql +
-          "INNER JOIN path ON files.idPath = path.idPath "
-          "WHERE files.strFilename='%s' AND path.strPath='%s'",
-          (int)CBookmark::RESUME, filename.c_str(), path.c_str()));
+        m_pDS->query(PrepareSQL(
+            sql + "INNER JOIN path ON files.idPath = path.idPath "
+                  "WHERE files.strFilename='%s' AND path.strPath='%s'",
+            (int)CBookmark::RESUME,
+            CServiceBroker::GetSettingsComponent()->GetProfileManager()->GetCurrentProfileId(),
+            filename.c_str(), path.c_str()));
 
         if (!m_pDS->eof())
         {
@@ -6229,7 +6261,10 @@ bool CVideoDatabase::GetPlayCounts(const std::string &strPath, CFileItemList &it
     else
     {
       //! @todo also test a single query for the above and below
-      sql = PrepareSQL(sql + "WHERE files.idPath=%i", (int)CBookmark::RESUME, pathID);
+      sql = PrepareSQL(
+          sql + "WHERE files.idPath=%i", (int)CBookmark::RESUME,
+          CServiceBroker::GetSettingsComponent()->GetProfileManager()->GetCurrentProfileId(),
+          pathID);
 
       if (RunQuery(sql) <= 0)
         return false;
