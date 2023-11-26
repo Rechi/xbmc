@@ -1148,6 +1148,11 @@ bool URIUtils::IsMusicDb(const std::string& strFile)
   return IsProtocol(strFile, "musicdb");
 }
 
+bool URIUtils::IsPictureDb(const std::string& strFile)
+{
+  return IsProtocol(strFile, "picturedb");
+}
+
 bool URIUtils::IsNfs(const std::string& strFile)
 {
   if (IsStack(strFile))
