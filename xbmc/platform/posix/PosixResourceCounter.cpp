@@ -12,8 +12,6 @@
 
 #include <errno.h>
 
-#include "PlatformDefs.h"
-
 CPosixResourceCounter::CPosixResourceCounter()
 {
   Reset();

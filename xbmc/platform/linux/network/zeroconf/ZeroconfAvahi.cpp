@@ -22,8 +22,6 @@
 #include <avahi-common/thread-watch.h>
 #include <unistd.h> //gethostname
 
-#include "PlatformDefs.h"
-
 ///helper RAII-struct to block event loop for modifications
 struct ScopedEventLoopBlock
 {

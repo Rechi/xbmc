@@ -13,6 +13,8 @@
 #include <cassert>
 #include <mutex>
 
+#include "PlatformDefs.h"
+
 int CXHandle::m_objectTracker[10] = {};
 
 HANDLE WINAPI GetCurrentProcess(void) {

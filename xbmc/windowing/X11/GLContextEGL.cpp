@@ -21,11 +21,11 @@
 #include <clocale>
 #include <mutex>
 
-#include <EGL/eglext.h>
 #include <unistd.h>
 
-#include "PlatformDefs.h"
 #include "system_gl.h"
+
+#include <EGL/eglext.h>
 
 #define EGL_NO_CONFIG (EGLConfig)0
 

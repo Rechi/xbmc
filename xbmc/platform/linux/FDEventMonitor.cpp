@@ -18,8 +18,6 @@
 #include <sys/eventfd.h>
 #include <unistd.h>
 
-#include "PlatformDefs.h"
-
 CFDEventMonitor::CFDEventMonitor() :
   CThread("FDEventMonitor")
 {

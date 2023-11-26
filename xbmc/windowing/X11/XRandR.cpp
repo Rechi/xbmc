@@ -17,14 +17,10 @@
 
 #include <string.h>
 
-#include <sys/wait.h>
-
-#include "PlatformDefs.h"
-
 #if defined(TARGET_FREEBSD)
 #include <sys/types.h>
-#include <sys/wait.h>
 #endif
+#include <sys/wait.h>
 
 using namespace std::chrono_literals;
 

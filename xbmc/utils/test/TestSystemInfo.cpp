@@ -11,13 +11,12 @@
 #include "settings/Settings.h"
 #include "utils/CPUInfo.h"
 #include "utils/SystemInfo.h"
+
 #if defined(TARGET_WINDOWS)
 #include "platform/win32/CharsetConverter.h"
 #endif
 
 #include <gtest/gtest.h>
-
-#include "PlatformDefs.h"
 
 class TestSystemInfo : public testing::Test
 {

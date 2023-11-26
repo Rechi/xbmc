@@ -9,10 +9,11 @@
 #pragma once
 
 #include "AEAudioFormat.h"
-#include "PlatformDefs.h"
+
 #include <math.h>
 
-extern "C" {
+extern "C"
+{
 #include <libavutil/channel_layout.h>
 #include <libavutil/samplefmt.h>
 }

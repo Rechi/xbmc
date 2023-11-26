@@ -21,8 +21,6 @@
 
 #include <unistd.h>
 
-#include "PlatformDefs.h"
-
 #include <EGL/eglext.h>
 
 void CWinSystemAndroidGLESContext::Register()

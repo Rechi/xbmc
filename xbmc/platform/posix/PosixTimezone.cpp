@@ -22,8 +22,6 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "PlatformDefs.h"
-
 CPosixTimezone::CPosixTimezone()
 {
    char* line = NULL;

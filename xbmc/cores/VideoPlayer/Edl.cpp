@@ -20,8 +20,6 @@
 #include "utils/XBMCTinyXML.h"
 #include "utils/log.h"
 
-#include "PlatformDefs.h"
-
 #define COMSKIP_HEADER "FILE PROCESSING COMPLETE"
 #define VIDEOREDO_HEADER "<Version>2"
 #define VIDEOREDO_TAG_CUT "<Cut>"
