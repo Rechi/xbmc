@@ -31,7 +31,7 @@ void CWinIdleTimer::StartZero()
         // this may throw an exception
         displayRequest = DisplayRequest();
       }
-      catch (const winrt::hresult_error&) 
+      catch (const winrt::hresult_error&)
       {
         return;
       }

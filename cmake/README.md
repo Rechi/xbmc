@@ -37,9 +37,9 @@ CMake supports multiple generators. See [here](https://cmake.org/cmake/help/v3.1
 
 In case of additional options the call might look like this:
 
-cmake `<path>` [-G `<generator>`] \  
-      -DCMAKE_BUILD_TYPE=Release \  
-      -DARCH_DEFINES="-DTARGET_LINUX" \  
+cmake `<path>` [-G `<generator>`] \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DARCH_DEFINES="-DTARGET_LINUX" \
       -DCMAKE_INSTALL_PREFIX="`<path-to-install-directory>`"
 
 ## Tests

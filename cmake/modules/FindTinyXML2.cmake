@@ -60,7 +60,7 @@ if(NOT TARGET tinyxml2::tinyxml2)
     buildTinyXML2()
   else()
     # This is the fallback case where linux distro's dont ship cmake config files
-    # use the old find_library way. Only do this if we didnt find a cmake config 
+    # use the old find_library way. Only do this if we didnt find a cmake config
     # in the event of the version < depends version
     if(NOT TARGET tinyxml2::tinyxml2)
       if(PKG_CONFIG_FOUND)

@@ -28,7 +28,7 @@ if(NOT LIBZIP_FOUND OR LIBZIP_VERSION VERSION_LESS ${${MODULE}_VER})
   find_package(GnuTLS MODULE REQUIRED)
 
   # Eventually we will want Find modules for the following deps
-  # bzip2 
+  # bzip2
   # ZLIB
 
   set(CMAKE_ARGS -DBUILD_DOC=OFF
@@ -72,7 +72,7 @@ if(LIBZIP_FOUND)
   else()
     # ToDo: When we correctly import dependencies cmake targets for the following
     # BZip2::BZip2, LibLZMA::LibLZMA, GnuTLS::GnuTLS, Nettle::Nettle,ZLIB::ZLIB
-    # For now, we just override 
+    # For now, we just override
     set_target_properties(libzip::zip PROPERTIES
                                       INTERFACE_LINK_LIBRARIES "")
   endif()

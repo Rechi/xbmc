@@ -44,7 +44,7 @@ if(NOT P8Platform::P8Platform OR P8Platform_FIND_REQUIRED)
     buildlibp8platform()
   else()
     # p8-platform cmake config is terrible for modern cmake. For now just use pkgconfig
-    # and manual find_* 
+    # and manual find_*
     find_package(PkgConfig)
     # Do not use pkgconfig on windows
     if(PKG_CONFIG_FOUND AND NOT WIN32)

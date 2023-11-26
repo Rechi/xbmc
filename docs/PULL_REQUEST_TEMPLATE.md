@@ -33,7 +33,7 @@
 ## Checklist:
 <!--- Go over all the following points, and put an `X` with no space in all the boxes that apply like this: [X] -->
 <!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
-- [ ] My code follows the **[Code Guidelines](https://github.com/xbmc/xbmc/blob/master/docs/CODE_GUIDELINES.md)** of this project 
+- [ ] My code follows the **[Code Guidelines](https://github.com/xbmc/xbmc/blob/master/docs/CODE_GUIDELINES.md)** of this project
 - [ ] My change requires a change to the documentation, either Doxygen or wiki
 - [ ] I have updated the documentation accordingly
 - [ ] I have read the **[Contributing](https://github.com/xbmc/xbmc/blob/master/docs/CONTRIBUTING.md)** document

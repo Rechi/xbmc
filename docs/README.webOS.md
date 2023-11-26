@@ -8,22 +8,22 @@ This guide has been tested with an adapted buildroot configuration where the Lin
 2. **[Prerequisites](#2-prerequisites)**
 3. **[Configure the tool chain](#3-Configure-the-tool-chain)**
 4. **[Configure ares-cli tools](#4-Configure-ares-cli-tools)**
-5. **[Get the source code](#5-get-the-source-code)**  
-6. **[Configure and build tools and dependencies](#6-configure-and-build-tools-and-dependencies)**  
+5. **[Get the source code](#5-get-the-source-code)**
+6. **[Configure and build tools and dependencies](#6-configure-and-build-tools-and-dependencies)**
   6.1. **[Advanced Configure Options](#61-Advanced-Configure-Options)**
-7. **[Generate Kodi Build files](#7-Generate-Kodi-Build-files)**  
-  7.1. **[Generate Project Files](#71-Generate-Project-Files)**  
+7. **[Generate Kodi Build files](#7-Generate-Kodi-Build-files)**
+  7.1. **[Generate Project Files](#71-Generate-Project-Files)**
   7.2. **[Add Binary Addons to Project](#72-Add-Binary-Addons-to-Project)**
-8. **[Build](#8-build)**  
+8. **[Build](#8-build)**
   8.1. **[Build kodi binary](#81-Build-kodi-binary)**
-9. **[Packaging kodi to distribute as an IPK](#9-Packaging-kodi-to-distribute-as-an-IPK)**  
-  9.1. **[Create the IPK](#91-Create-the-IPK)**  
-10. **[Install](#10-Install)**  
-  10.1. **[Using make install](#101-Using-make-install)**  
+9. **[Packaging kodi to distribute as an IPK](#9-Packaging-kodi-to-distribute-as-an-IPK)**
+  9.1. **[Create the IPK](#91-Create-the-IPK)**
+10. **[Install](#10-Install)**
+  10.1. **[Using make install](#101-Using-make-install)**
   10.2. **[Using ares-cli to install](#102-Using-ares-cli-to-install)**
 11. **[Debugging ](#11-Debugging)**
-12. **[Uninstall](#12-Uninstall)**  
-  12.1. **[Using make to uninstall](#121-Using-make-to-uninstall)**  
+12. **[Uninstall](#12-Uninstall)**
+  12.1. **[Using make to uninstall](#121-Using-make-to-uninstall)**
   12.1. **[Using ares-cli to uninstall](#122-Using-ares-cli-to-uninstall)**
 
 ## 1. Document conventions
@@ -106,8 +106,8 @@ git clone https://github.com/xbmc/xbmc kodi
 ## 6. Configure and build tools and dependencies
 Kodi should be built as a 32bit program for webOS. The dependencies are built in `$HOME/kodi/tools/depends` and installed into `/media/developer/apps/usr/palm/applications/org.xbmc.kodi/xbmc-deps`.
 
---prefix should be set to where xbmc-deps are going to be built  
---with-toolchain=/path/to/buildroot, --host=arm-linux or whatever your compiler is  
+--prefix should be set to where xbmc-deps are going to be built
+--with-toolchain=/path/to/buildroot, --host=arm-linux or whatever your compiler is
 
 Configure build:
 ```

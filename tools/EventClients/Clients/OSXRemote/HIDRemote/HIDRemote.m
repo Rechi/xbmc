@@ -12,21 +12,21 @@
 //
 //  Copyright (c) 2007-2017 IOSPIRIT GmbH (http://www.iospirit.com/)
 //  All rights reserved.
-//  
+//
 //  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  
+//
 //  * Redistributions of source code must retain the above copyright notice, this list
 //    of conditions and the following disclaimer.
-//  
+//
 //  * Redistributions in binary form must reproduce the above copyright notice, this
 //    list of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-//  
+//
 //  * Neither the name of IOSPIRIT GmbH nor the names of its contributors may be used to
 //    endorse or promote products derived from this software without specific prior
 //    written permission.
-//  
+//
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 //  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
 //  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
@@ -65,7 +65,7 @@
 
 	#define __HIDRemoteBridge
 	#define HIDRemoteBridgingRelease
-	#define HIDRemoteBridgingRetain	  
+	#define HIDRemoteBridgingRetain	
 #else /* !__has_feature(objc_arc) */
 	#define HIDRemoteRetain(object)
 	#define HIDRemoteRetained(object)     object
@@ -78,12 +78,12 @@
 	#define HIDRemoteAutoreleasePoolClose() }
 
 	#define __HIDRemoteBridge		  __bridge
-	#define HIDRemoteBridgingRelease	 CFBridgingRelease	  
-	#define HIDRemoteBridgingRetain	 CFBridgingRetain	  
+	#define HIDRemoteBridgingRelease	 CFBridgingRelease	
+	#define HIDRemoteBridgingRetain	 CFBridgingRetain	
 #endif
 
 // Callback Prototypes
-static void HIDEventCallback(	void * target, 
+static void HIDEventCallback(	void * target,
 				IOReturn result,
 				void * refcon,
 				void * sender);
@@ -376,7 +376,7 @@ static HIDRemote *sHIDRemote = nil;
 									&_matchingServicesIterator);
 			if (kernReturn != kIOReturnSuccess) { break; }
 
-			// Setup serviceAttribMap 
+			// Setup serviceAttribMap
 			_serviceAttribMap = [[NSMutableDictionary alloc] init];
 			if (_serviceAttribMap==nil) { break; }
 			
@@ -1151,12 +1151,12 @@ static HIDRemote *sHIDRemote = nil;
 		{
 			error = [NSError errorWithDomain:NSMachErrorDomain code:kernResult userInfo:nil];
 			errorCode = 1;
-			break; 
+			break;
 		}
 
 		
 		// .. use it to get the HID interface ..
-		hResult = (*cfPluginInterface)->QueryInterface(	cfPluginInterface, 
+		hResult = (*cfPluginInterface)->QueryInterface(	cfPluginInterface,
 								CFUUIDGetUUIDBytes(kIOHIDDeviceInterfaceID122),
 								(LPVOID)&hidDeviceInterface);
 									
@@ -1164,7 +1164,7 @@ static HIDRemote *sHIDRemote = nil;
 		{
 			error = [NSError errorWithDomain:NSMachErrorDomain code:hResult userInfo:nil];
 			errorCode = 2;
-			break; 
+			break;
 		}
 
 		
@@ -1331,7 +1331,7 @@ static HIDRemote *sHIDRemote = nil;
 		{
 			error = [NSError errorWithDomain:NSMachErrorDomain code:returnCode userInfo:nil];
 			errorCode = 9;
-			break; 
+			break;
 		}
 		
 		returnCode = (*hidQueueInterface)->setEventCallout(hidQueueInterface, HIDEventCallback, (void *)((intptr_t)service), (__HIDRemoteBridge void *)self);
@@ -1530,7 +1530,7 @@ static HIDRemote *sHIDRemote = nil;
 	{
 		if (error!=nil)
 		{
-			error = [NSError errorWithDomain:[error domain] 
+			error = [NSError errorWithDomain:[error domain]
 						    code:[error code]
 						userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:errorCode] forKey:@"InternalErrorCode"]
 				];
@@ -1716,7 +1716,7 @@ static HIDRemote *sHIDRemote = nil;
 	if ((hidAttribsDict = (NSMutableDictionary *)[aTimer userInfo]) != nil)
 	{
 		if (((shTimer	   = [hidAttribsDict objectForKey:kHIDRemoteSimulateHoldEventsTimer]) != nil) &&
-		    ((shButtonCode = [hidAttribsDict objectForKey:kHIDRemoteSimulateHoldEventsOriginButtonCode]) != nil)) 
+		    ((shButtonCode = [hidAttribsDict objectForKey:kHIDRemoteSimulateHoldEventsOriginButtonCode]) != nil))
 		{
 			[shTimer invalidate];
 			[hidAttribsDict removeObjectForKey:kHIDRemoteSimulateHoldEventsTimer];
@@ -2102,7 +2102,7 @@ static HIDRemote *sHIDRemote = nil;
 
 #pragma mark - PRIVATE: IOKitLib Callbacks
 
-static void HIDEventCallback(	void * target, 
+static void HIDEventCallback(	void * target,
 				IOReturn result,
 				void * refCon,
 				void * sender)

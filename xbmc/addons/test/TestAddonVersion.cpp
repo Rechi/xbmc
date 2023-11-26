@@ -226,7 +226,7 @@ TEST_F(TestAddonVersion, LessThan)
   EXPECT_LT(v1_0_0_alpha3, v1_0_0_alpha10);
   EXPECT_LT(v1_0_0_alpha10, v1_0_0);
   EXPECT_LT(v1_0_0_alpha10, v1_0_0_beta);
-  
+
   // pep-0440/local-version-identifiers
   // ref: https://www.python.org/dev/peps/pep-0440/#local-version-identifiers
   // Python addons use this kind of versioning particularly for script.module
@@ -265,7 +265,7 @@ TEST_F(TestAddonVersion, Equivalent)
   EXPECT_FALSE(v1_01 < v1_1);
   EXPECT_FALSE(v1_01 > v1_1);
   EXPECT_TRUE(v1_01 == v1_1);
-  
+
   // pep-0440/local-version-identifiers
   EXPECT_TRUE(CAddonVersion("1.0.0+leia.1") == CAddonVersion("1.0.0+Leia.1"));
 }

@@ -58,7 +58,7 @@ private:
   void AddCommand(const std::string& message, const std::string& extraparameter = "");
 
   /*
-   * Process received broadcast messages and add accepted items to 
+   * Process received broadcast messages and add accepted items to
    * in        (string) SOAPXML Message
    * return    (void)
    */

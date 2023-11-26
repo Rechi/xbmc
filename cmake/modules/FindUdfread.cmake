@@ -37,7 +37,7 @@ if(NOT TARGET udfread::udfread)
 
     # Check for existing UDFREAD. If version >= UDFREAD-VERSION file version, dont build
     # A corner case, but if a linux/freebsd user WANTS to build internal udfread, build anyway
-    if(NOT udfread_FOUND OR 
+    if(NOT udfread_FOUND OR
        (udfread_VERSION VERSION_LESS ${${MODULE}_VER} AND ENABLE_INTERNAL_UDFREAD) OR
        ((CORE_SYSTEM_NAME STREQUAL linux OR CORE_SYSTEM_NAME STREQUAL freebsd) AND ENABLE_INTERNAL_UDFREAD))
 

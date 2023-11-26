@@ -145,7 +145,7 @@ private:
 
   /*! \brief Rebuild a label value, based on the provided already resolved info portions (a localized string, multiple infolabels, etc)
    \param label[in, out] label value where to store the processed result
-   \param infoPortion the list of info portions 
+   \param infoPortion the list of info portions
    */
   void RebuildLabel(std::string& label, const std::vector<CInfoPortion>& infoPortion) const;
 
@@ -154,7 +154,7 @@ private:
    \param preferImages caller is specifically wanting an image rather than a label.
    \param fallback if non-NULL, is set to an alternate value to use should the actual value be not appropriate. This is used by infoproviders to
    to re-write the fallback label
-   \param infoPortion the list of info portions 
+   \param infoPortion the list of info portions
    \return true if an update is needed, false otherwise
    */
   bool LabelNeedsUpdate(int context,
@@ -166,7 +166,7 @@ private:
    \param preferImages caller is specifically wanting an image rather than a label.
    \param fallback if non-NULL, is set to an alternate value to use should the actual value be not appropriate. This is used by infoproviders to
    to re-write the fallback label
-   \param infoPortion the list of info portions 
+   \param infoPortion the list of info portions
    \return true if an update is needed, false otherwise
    */
   bool ItemLabelNeedsUpdate(const CGUIListItem* item,

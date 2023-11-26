@@ -264,7 +264,7 @@ _sqlite3 _sqlite/blob.c _sqlite/connection.c _sqlite/cursor.c _sqlite/microproto
 # *** Always uncomment this; X11 libraries to link with:
 #	-lX11
 
-# Some system have -lcurses 
+# Some system have -lcurses
 #_curses -lncurses -lncursesw -ltermcap _cursesmodule.c
 #_curses_panel -lpanel -lncurses _curses_panel.c
 

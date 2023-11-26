@@ -14,7 +14,7 @@ set(SOURCES DirectoryNodeAlbum.cpp
             DirectoryNodeSingles.cpp
             DirectoryNodeSong.cpp
             DirectoryNodeSongTop100.cpp
-            DirectoryNodeTop100.cpp           
+            DirectoryNodeTop100.cpp
             QueryParams.cpp)
 
 set(HEADERS DirectoryNode.h

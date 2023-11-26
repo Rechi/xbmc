@@ -9,10 +9,10 @@ Guide originally published at **[PR13658](https://github.com/xbmc/xbmc/pull/1365
 3. **[What is the solution?](#3-what-is-the-solution)**
 4. **[Step 1: Identify and remove the instance](#4-step-1-identify-and-remove-the-instance)**
 5. **[Step 2: Add instance to CServiceManager](#5-step-2-add-instance-to-cservicemanager)**
-6. **[Step 3: Move initialization and deinitialization to CServiceManager](#6-step-3-move-initialization-and-deinitialization-to-cservicemanager)**  
-7. **[Step 4: Replace local dependencies with references](#7-step-4-replace-local-dependencies-with-references)**  
-  7.1. **[Step 4.1 - Settings](#71-step-41---settings)**  
-  7.2. **[Step 4.2 - Data Cache Core](#72-step-42---data-cache-core)**  
+6. **[Step 3: Move initialization and deinitialization to CServiceManager](#6-step-3-move-initialization-and-deinitialization-to-cservicemanager)**
+7. **[Step 4: Replace local dependencies with references](#7-step-4-replace-local-dependencies-with-references)**
+  7.1. **[Step 4.1 - Settings](#71-step-41---settings)**
+  7.2. **[Step 4.2 - Data Cache Core](#72-step-42---data-cache-core)**
 8. **[Step 5: Make service registration local](#8-step-5-make-service-registration-local)**
 9. **[Step 6: Const-correctness and static cleanup](#9-step-6-const-correctness-and-static-cleanup)**
 10. **[Step 7: Replace external uses with CServiceBroker calls](#10-step-7-replace-external-uses-with-cservicebroker-calls)**

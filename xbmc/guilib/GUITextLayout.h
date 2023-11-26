@@ -99,7 +99,7 @@ public:
   float GetTextWidth() const { return m_textWidth; }
 
   float GetTextWidth(const std::wstring &text) const;
-  
+
   /*! \brief Returns the precalculated height of the text to be rendered (in constant time).
    \return height of text
   */

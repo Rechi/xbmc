@@ -9,7 +9,7 @@ Guide originally published at **[PR13717](https://github.com/xbmc/xbmc/pull/1371
 3. **[How to clean up OR's](#3-how-to-clean-up-ors)**
 4. **[How to clean up AND's](#4-how-to-clean-up-ands)**
 5. **[How to clean up ternary (`? :`) statements](#5-how-to-clean-up-ternary-statements)**
-6. **[Extra credit: the `switch` statement](#6-extra-credit-the-switch-statement)**  
+6. **[Extra credit: the `switch` statement](#6-extra-credit-the-switch-statement)**
 7. **[Choosing AND vs. OR](#7-choosing-and-vs-or)**
 
 ## 1. Why clean logic is important

@@ -33,7 +33,7 @@ const uint8_t* find_start_code(const uint8_t *p, const uint8_t *end, uint32_t *s
  *  AVC helper functions for muxers
  *  Copyright (c) 2006 Baptiste Coudurier <baptiste.coudurier@smartjog.com>
  *  This is part of FFmpeg
- *  
+ *
  *  SPDX-License-Identifier: LGPL-2.1-or-later
  *  See LICENSES/README.md for more information.
  */

@@ -8,13 +8,13 @@ It should work if you're using macOS. If that is the case, read **[macOS specifi
 ## Table of Contents
 1. **[Document conventions](#1-document-conventions)**
 2. **[Install the required packages](#2-install-the-required-packages)**
-3. **[Prerequisites](#3-prerequisites)**  
-  3.1. **[Extract Android SDK](#31-extract-android-sdk)**  
-  3.2. **[Configure Android SDK](#32-configure-android-sdk)**   
+3. **[Prerequisites](#3-prerequisites)**
+  3.1. **[Extract Android SDK](#31-extract-android-sdk)**
+  3.2. **[Configure Android SDK](#32-configure-android-sdk)**
   3.3. **[Create a key to sign debug APKs](#33-create-a-key-to-sign-debug-apks)**
 4. **[Get the source code](#4-get-the-source-code)**
-5. **[Build tools and dependencies](#5-build-tools-and-dependencies)**  
-  5.1. **[Advanced Configure Options](#51-advanced-configure-options)**  
+5. **[Build tools and dependencies](#5-build-tools-and-dependencies)**
+  5.1. **[Advanced Configure Options](#51-advanced-configure-options)**
 6. **[Build binary add-ons](#6-build-binary-add-ons)**
 7. **[Build Kodi](#7-build-kodi)**
 8. **[Package](#8-package)**
@@ -47,9 +47,9 @@ git clone -b Krypton https://github.com/xbmc/xbmc kodi
 ```
 
 Several different strategies are used to draw your attention to certain pieces of information. In order of how critical the information is, these items are marked as a note, tip, or warning. For example:
- 
-**NOTE:** Linux is user friendly... It's just very particular about who its friends are.  
-**TIP:** Algorithm is what developers call code they do not want to explain.  
+
+**NOTE:** Linux is user friendly... It's just very particular about who its friends are.
+**TIP:** Algorithm is what developers call code they do not want to explain.
 **WARNING:** Developers don't change light bulbs. It's a hardware problem.
 
 **[back to top](#table-of-contents)** | **[back to section top](#1-document-conventions)**
@@ -101,7 +101,7 @@ All packages must be signed. The following command will generate a self-signed d
 ```
 keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android -keyalg RSA -keysize 2048 -validity 10000
 ```
-  
+
 **[back to top](#table-of-contents)** | **[back to section top](#3-prerequisites)**
 
 ## 4. Get the source code

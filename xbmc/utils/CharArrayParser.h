@@ -71,7 +71,7 @@ public:
   uint16_t ReadNextUnsignedShort();
 
   /*!
-   * \brief Reads the next four chars as unsigned int value (it is assumed 
+   * \brief Reads the next four chars as unsigned int value (it is assumed
    * that the caller has already checked the availability of the data for its length)
    * \return The unsigned int value
    */
