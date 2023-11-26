@@ -15,7 +15,6 @@
 #include "guilib/GUIComponent.h"
 #include "guilib/GUIWindowManager.h"
 #include "guilib/TextureManager.h"
-#include "guilib/gui3d.h"
 #include "input/InputManager.h"
 #include "messaging/ApplicationMessenger.h"
 #include "rendering/RenderSystem.h"
