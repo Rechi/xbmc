@@ -38,5 +38,3 @@ protected:
   bool CheckInit(int iWidth, int iHeight);
   bool CheckFrameBuffer(const VideoPicture* pSource);
 };
-
-

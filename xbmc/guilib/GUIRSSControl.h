@@ -69,4 +69,3 @@ protected:
   bool m_stopped;
   int  m_urlset;
 };
-

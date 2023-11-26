@@ -755,4 +755,3 @@ CUPnPRenderer::OnSeek(PLT_ActionReference& action)
 }
 
 } /* namespace UPNP */
-

@@ -50,4 +50,3 @@ protected:
   std::string m_lastHeaderLine;
   static const char* const m_whitespaceChars;
 };
-

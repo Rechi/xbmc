@@ -268,5 +268,3 @@ private:
                                              std::vector<std::string>& associatedFiles);
 
 };
-
-

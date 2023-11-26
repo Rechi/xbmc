@@ -668,4 +668,3 @@ bool CAlbum::Save(TiXmlNode *node, const std::string &tag, const std::string& st
 
   return true;
 }
-

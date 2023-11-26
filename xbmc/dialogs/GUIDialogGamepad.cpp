@@ -323,4 +323,3 @@ bool CGUIDialogGamepad::IsCanceled() const
 {
   return m_bCanceled;
 }
-

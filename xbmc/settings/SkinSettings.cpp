@@ -183,4 +183,3 @@ void CSkinSettings::MigrateSettings(const std::shared_ptr<ADDON::CSkinInfo>& ski
     CServiceBroker::GetSettingsComponent()->GetSettings()->Save();
   }
 }
-

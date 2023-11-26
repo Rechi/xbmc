@@ -820,4 +820,3 @@ public:
     action.Send(m_Socket, m_Addr, m_UID);
   }
 };
-

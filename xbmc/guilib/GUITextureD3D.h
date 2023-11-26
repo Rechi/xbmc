@@ -38,4 +38,3 @@ private:
 
   UTILS::COLOR::Color m_col;
 };
-

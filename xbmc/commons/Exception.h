@@ -110,4 +110,3 @@ namespace XbmcCommons
   catch (const XbmcCommons::UncheckedException* ) { throw; }
 
 }
-

@@ -66,4 +66,3 @@ private:
     CCriticalSection m_critSection;
     std::vector<uint8_t> m_adapterAddresses;
 };
-

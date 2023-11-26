@@ -44,4 +44,3 @@ private:
   FILE* m_file = nullptr;
   std::vector<uint8_t> m_data;
 };
-

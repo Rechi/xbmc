@@ -22,4 +22,3 @@ index d7a3f507e8..4b85e881b1 100755
  enabled rkmpp             && { require_pkg_config rkmpp rockchip_mpp  rockchip/rk_mpi.h mpp_create &&
 -- 
 2.29.2
-

@@ -34,4 +34,3 @@ class CExifParse
                     const int ComponentSize,
                     char *latlongString);
 };
-

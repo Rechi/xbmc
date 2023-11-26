@@ -476,4 +476,3 @@ void CLabelFormatter::FillMusicMaskContent(const char mask, const std::string &v
     break;
   }
 }
-

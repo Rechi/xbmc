@@ -52,4 +52,3 @@ protected:
   bool SelectItemFromPoint(const CPoint &point) override;
   int GetCursorFromPoint(const CPoint &point, CPoint *itemPoint = NULL) const override;
 };
-

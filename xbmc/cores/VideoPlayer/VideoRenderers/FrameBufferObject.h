@@ -72,5 +72,3 @@ private:
   bool   m_supported;
   GLuint m_texid = 0;
 };
-
-

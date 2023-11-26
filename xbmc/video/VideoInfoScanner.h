@@ -262,4 +262,3 @@ namespace VIDEO
     static std::string GetArtTypeFromSize(unsigned int width, unsigned int height);
   };
 }
-

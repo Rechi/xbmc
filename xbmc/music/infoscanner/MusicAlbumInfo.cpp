@@ -49,4 +49,3 @@ bool CMusicAlbumInfo::Load(XFILE::CCurlFile& http, const ADDON::ScraperPtr& scra
   SetLoaded(fSuccess);
   return fSuccess;
 }
-

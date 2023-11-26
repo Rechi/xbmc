@@ -59,4 +59,3 @@ protected:
 
   int m_itemsPerRow;
 };
-

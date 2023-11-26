@@ -214,4 +214,3 @@ void CPipeFile::SetOpenThreshold(int threshold)
 {
   m_pipe->SetOpenThreshold(threshold);
 }
-

@@ -165,5 +165,3 @@ int64_t CDVDInputStreamStack::GetLength()
 {
   return m_length;
 }
-
-

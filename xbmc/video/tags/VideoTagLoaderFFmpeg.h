@@ -59,4 +59,3 @@ protected:
   //! \brief Load tags from AVI file.
   CInfoScanner::INFO_TYPE LoadAVI(CVideoInfoTag& tag, std::vector<EmbeddedArt>* art);
 };
-

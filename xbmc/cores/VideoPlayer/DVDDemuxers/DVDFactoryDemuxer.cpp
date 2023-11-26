@@ -77,4 +77,3 @@ CDVDDemux* CDVDFactoryDemuxer::CreateDemuxer(const std::shared_ptr<CDVDInputStre
   else
     return NULL;
 }
-

@@ -35,4 +35,3 @@ int CAndroidFeatures::GetCPUCount()
   }
   return count;
 }
-

@@ -242,4 +242,3 @@ protected:
   CAESyncInfo::AESyncState m_syncState;
 };
 }
-

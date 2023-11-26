@@ -22,4 +22,3 @@ index e3a8f45ff4..983d7e1078 100755
  enabled libdrm            && require_pkg_config libdrm libdrm xf86drm.h drmGetVersion
 -- 
 2.29.2
-

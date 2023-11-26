@@ -18,4 +18,3 @@ TEST(TestSwig, TypeConversion)
   EXPECT_TRUE(isParameterRightType("p.XBMCAddon::xbmc::PlayList","p.PlayList","XBMCAddon::xbmc::"));
   EXPECT_TRUE(isParameterRightType("p.PlayList","p.XBMCAddon::xbmc::PlayList","XBMCAddon::xbmc::"));
 }
-

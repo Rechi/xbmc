@@ -219,4 +219,3 @@ void CVdpauTexture::UnmapRGB()
   m_interop.glVDPAUUnregisterSurfaceNV(m_glSurface.glVdpauSurface);
   glDeleteTextures(1, &m_texture);
 }
-

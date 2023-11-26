@@ -140,4 +140,3 @@ private:
 
   CCriticalSection m_listSection;
 };
-

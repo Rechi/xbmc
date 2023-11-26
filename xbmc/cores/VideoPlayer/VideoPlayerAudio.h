@@ -120,4 +120,3 @@ protected:
   XbmcThreads::EndTime<> m_disconTimer;
   bool m_disconLearning = false;
 };
-

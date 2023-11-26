@@ -16,6 +16,3 @@ namespace XBMCAddon
 
   extern String emptyString;
 }
-
-
-

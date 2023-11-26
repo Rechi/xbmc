@@ -68,4 +68,3 @@ protected:
 private:
   CGUIProgressControl(const CGUIProgressControl& control);
 };
-

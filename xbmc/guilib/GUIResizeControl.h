@@ -67,4 +67,3 @@ protected:
 private:
   CGUIResizeControl(const CGUIResizeControl& control);
 };
-

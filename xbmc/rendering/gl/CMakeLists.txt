@@ -9,4 +9,3 @@ if(TARGET OpenGL::GL)
 
   core_add_library(rendering_gl)
 endif()
-

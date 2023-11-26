@@ -75,4 +75,3 @@ protected:
   bool m_randomized;
   bool m_allLabelsShown = true;
 };
-

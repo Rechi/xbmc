@@ -169,4 +169,3 @@ void GLSLOutput::FreeTextures()
     m_tDitherTex = 0;
   }
 }
-

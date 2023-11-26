@@ -60,4 +60,3 @@ class CJpegParse
     ExifInfo_t m_ExifInfo;
     IPTCInfo_t m_IPTCInfo;
 };
-

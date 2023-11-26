@@ -313,4 +313,3 @@ bool CJpegParse::Process (const char *picFileName)
   file.Close();
   return result;
 }
-

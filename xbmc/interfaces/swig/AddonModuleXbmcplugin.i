@@ -29,4 +29,3 @@ using namespace xbmcplugin;
 %include "interfaces/legacy/swighelper.h"
 %include "interfaces/legacy/AddonString.h"
 %include "interfaces/legacy/ModuleXbmcplugin.h"
-

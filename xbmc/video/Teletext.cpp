@@ -4163,4 +4163,3 @@ UTILS::COLOR::Color CTeletextDecoder::GetColorRGB(enumTeletextColor ttc)
                               (m_RenderInfo.gn0[index] << 8) | m_RenderInfo.rd0[index];
   return color;
 }
-

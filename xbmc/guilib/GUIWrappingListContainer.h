@@ -47,4 +47,3 @@ protected:
   void ResetExtraItems();
   unsigned int m_extraItems;
 };
-

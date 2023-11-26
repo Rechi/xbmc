@@ -201,4 +201,3 @@ std::string CVideoTagLoaderNFO::FindNFO(const CFileItem& item,
 
   return nfoFile;
 }
-

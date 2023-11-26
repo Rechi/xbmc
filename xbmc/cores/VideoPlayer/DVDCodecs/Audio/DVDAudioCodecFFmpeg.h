@@ -61,4 +61,3 @@ protected:
   std::string m_codecName;
   uint64_t m_hint_layout;
 };
-

@@ -269,4 +269,3 @@ public:
    */
   virtual void RegisterSlave(IAEStream *stream) = 0;
 };
-

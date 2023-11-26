@@ -1069,4 +1069,3 @@ void CGUIWindowMusicBase::OnAssignContent(const std::string& oldName, const CMed
     CMusicLibraryQueue::GetInstance().ScanLibrary(source.strPath,
                                                   MUSIC_INFO::CMusicInfoScanner::SCAN_NORMAL, true);
 }
-

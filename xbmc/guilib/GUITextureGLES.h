@@ -57,4 +57,3 @@ private:
   std::vector<GLushort> m_idx;
   CRenderSystemGLES *m_renderSystem;
 };
-

@@ -16,4 +16,3 @@
 
 /* sse4 */
 #define DLL_PATH_LIBSSE4      "special://xbmcbin/system/libsse4-@ARCH@.so"
-

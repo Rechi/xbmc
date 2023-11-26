@@ -79,4 +79,3 @@ private:
 };
 
 extern CZipManager g_ZipManager;
-

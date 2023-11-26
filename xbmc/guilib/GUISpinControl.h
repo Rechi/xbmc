@@ -130,4 +130,3 @@ protected:
   int m_numItems;
   bool m_showOnePage;
 };
-

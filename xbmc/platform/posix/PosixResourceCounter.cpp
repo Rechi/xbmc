@@ -64,8 +64,3 @@ void CPosixResourceCounter::Reset()
 
   m_dLastUsage = 0.0;
 }
-
-
-
-
-

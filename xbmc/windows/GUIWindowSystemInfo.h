@@ -26,4 +26,3 @@ private:
   void SetControlLabel(int id, const char *format, int label, int info);
   std::vector<std::string> m_diskUsage;
 };
-

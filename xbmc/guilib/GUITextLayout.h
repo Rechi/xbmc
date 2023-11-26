@@ -197,4 +197,3 @@ private:
                         std::vector<UTILS::COLOR::Color>& colors,
                         vecText& parsedText);
 };
-

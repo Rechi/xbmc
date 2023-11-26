@@ -10,5 +10,3 @@ public enum MethodType
 {
   constructor, destructor, method
 }
-
-

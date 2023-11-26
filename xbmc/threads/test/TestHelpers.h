@@ -72,4 +72,3 @@ public:
 
   bool timed_join(std::chrono::milliseconds duration) { return cthread->Join(duration); }
 };
-

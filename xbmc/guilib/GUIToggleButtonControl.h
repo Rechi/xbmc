@@ -53,4 +53,3 @@ private:
   void ProcessToggle(unsigned int currentTime);
   std::string m_altLabel;
 };
-

@@ -145,4 +145,3 @@ void CVideoSyncOsx::DeinitDisplayLink()
 {
   Cocoa_CVDisplayLinkRelease();
 }
-

@@ -151,4 +151,3 @@ private:
   void CloseFileCB(StreamInfo &si);
   void AdvancePlaylistOnError(CFileItem &fileItem);
 };
-

@@ -47,4 +47,3 @@ public:
 protected:
   const CGUIListItem *m_item;
 };
-

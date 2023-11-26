@@ -236,4 +236,3 @@ namespace MathUtils
   }
 #endif
 } // namespace MathUtils
-

@@ -175,4 +175,3 @@ void CGLESShader::Free()
   // Do Cleanup here
   CGLSLShaderProgram::Free();
 }
-

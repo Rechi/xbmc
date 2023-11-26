@@ -73,4 +73,3 @@ private:
 
 typedef std::shared_ptr<CRepository> RepositoryPtr;
 }
-

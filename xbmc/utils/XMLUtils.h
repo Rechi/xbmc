@@ -152,4 +152,3 @@ public:
 
   static const int path_version = 1;
 };
-

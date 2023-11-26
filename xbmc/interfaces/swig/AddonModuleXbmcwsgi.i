@@ -49,4 +49,3 @@ using namespace xbmcwsgi;
 %insert("footer") %{
 #endif
 %}
-

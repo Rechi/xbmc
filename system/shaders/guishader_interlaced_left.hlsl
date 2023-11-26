@@ -36,5 +36,3 @@ float4 PS(PS_INPUT input) : SV_TARGET
 {
   return StereoInterlaced(input, STEREO_LEFT_EYE_INDEX);
 }
-
-

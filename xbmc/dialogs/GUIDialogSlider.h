@@ -54,4 +54,3 @@ protected:
   ISliderCallback *m_callback;
   void *m_callbackData;
 };
-

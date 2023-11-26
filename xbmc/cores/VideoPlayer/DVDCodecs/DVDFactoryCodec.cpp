@@ -286,4 +286,3 @@ std::unique_ptr<CDVDOverlayCodec> CDVDFactoryCodec::CreateOverlayCodec(CDVDStrea
 
   return nullptr;
 }
-

@@ -280,4 +280,3 @@ bool CJNIXBMCMediaSession::_onMediaButtonEvent(JNIEnv* env, jobject thiz, jobjec
     return inst->OnMediaButtonEvent(CJNIIntent(jhobject::fromJNI(intent)));
   return false;
 }
-

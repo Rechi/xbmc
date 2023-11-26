@@ -95,4 +95,3 @@ private:
   static std::string win_getenv(const std::string &name);
 #endif // TARGET_WINDOWS
 };
-

@@ -228,4 +228,3 @@ void MD5Final(uint8_t digest[16], struct MD5Context *ctx)
 	memcpy(digest, ctx->buf, 16);
 	memset(ctx, 0, sizeof(*ctx));	/* In case it's sensitive */
 }
-

@@ -633,4 +633,3 @@ int CGUIPassword::VerifyPassword(LockType btnType, const std::string& strPasswor
 
   return iVerifyPasswordResult;
 }
-

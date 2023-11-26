@@ -69,4 +69,3 @@ protected:
 private:
   GUIScrollBarControl(const GUIScrollBarControl& control);
 };
-

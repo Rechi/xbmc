@@ -51,5 +51,3 @@ private:
 
   bool m_useXBT;
 };
-
-

@@ -16,4 +16,3 @@ extern "C" HMODULE __stdcall dllLoadLibraryExExtended(const char* lpLibFileName,
 extern "C" HMODULE __stdcall dllLoadLibraryExA(const char* lpLibFileName, HANDLE hFile, DWORD dwFlags);
 extern "C" int __stdcall dllFreeLibrary(HINSTANCE hLibModule);
 extern "C" HMODULE WINAPI dllGetModuleHandleA(const char* lpModuleName);
-

@@ -140,4 +140,3 @@ if(NOT TARGET TagLib::TagLib)
   endif()
   mark_as_advanced(TAGLIB_INCLUDE_DIR TAGLIB_LIBRARY)
 endif()
-

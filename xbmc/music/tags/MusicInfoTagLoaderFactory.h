@@ -23,4 +23,3 @@ namespace MUSIC_INFO
       static IMusicInfoTagLoader* CreateLoader(const CFileItem& item);
   };
 }
-

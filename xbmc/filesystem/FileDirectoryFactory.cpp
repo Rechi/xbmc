@@ -247,4 +247,3 @@ IFileDirectory* CFileDirectoryFactory::Create(const CURL& url, CFileItem* pItem,
   }
   return NULL;
 }
-

@@ -233,4 +233,3 @@ HttpParser::getContentLength() const
 {
     return _contentLength;
 }
-

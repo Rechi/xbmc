@@ -36,5 +36,3 @@ float4 PS(PS_INPUT input) : SV_TARGET
 {
   return StereoCheckerboard(input, STEREO_LEFT_EYE_INDEX);
 }
-
-

@@ -86,4 +86,3 @@ private:
   std::shared_ptr<IAESound> LoadWindowSound(TiXmlNode* pWindowNode,
                                             const std::string& strIdentifier);
 };
-

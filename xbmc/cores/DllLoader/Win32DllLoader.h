@@ -46,4 +46,3 @@ private:
   std::vector<Import> m_overriddenImports;
   std::vector<HMODULE> m_referencedDlls;
 };
-

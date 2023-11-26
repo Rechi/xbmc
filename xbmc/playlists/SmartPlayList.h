@@ -183,4 +183,3 @@ private:
 
   CXBMCTinyXML m_xmlDoc;
 };
-

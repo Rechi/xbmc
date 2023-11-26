@@ -483,4 +483,3 @@ bool CCueDocument::ResolvePath(std::string &strPath, const std::string &strBase)
 
   return true;
 }
-

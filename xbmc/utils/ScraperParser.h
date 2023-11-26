@@ -75,4 +75,3 @@ private:
   std::string m_strFile;
   ADDON::CScraper* m_scraper;
 };
-

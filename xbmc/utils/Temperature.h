@@ -100,4 +100,3 @@ protected:
   double m_value; // we store as fahrenheit
   bool m_valid;
 };
-

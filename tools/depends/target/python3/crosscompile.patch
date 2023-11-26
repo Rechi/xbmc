@@ -61,4 +61,3 @@
          self.detect_readline_curses()
          self.detect_crypt()
          self.detect_openssl_hashlib()
-

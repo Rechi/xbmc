@@ -34,4 +34,3 @@ bool CDirectoryNodeRecentlyAddedMusicVideos::GetContent(CFileItemList& items) co
 
   return bSuccess;
 }
-

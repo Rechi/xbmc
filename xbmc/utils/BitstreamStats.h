@@ -37,4 +37,3 @@ private:
   int64_t m_tmStart;
   static int64_t m_tmFreq;
 };
-

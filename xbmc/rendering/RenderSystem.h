@@ -95,4 +95,3 @@ protected:
   std::unique_ptr<CGUIImage> m_splashImage;
   std::unique_ptr<CGUITextLayout> m_splashMessageLayout;
 };
-

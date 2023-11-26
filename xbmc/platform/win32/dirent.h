@@ -868,4 +868,3 @@ dirent_set_errno(
 #ifdef __cplusplus
 }
 #endif
-

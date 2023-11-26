@@ -153,4 +153,3 @@ bool CJNIXBMCVideoView::isCreated() const
 {
   return get_field<jboolean>(m_object, "mIsCreated");
 }
-

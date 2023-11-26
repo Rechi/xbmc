@@ -31,4 +31,3 @@ namespace XFILE
       bool ResolveSymlink( const std::string &dirName, struct nfsdirent *dirent, CURL &resolvedUrl);
   };
 }
-

@@ -94,4 +94,3 @@ protected:
 
   KODI::GUILIB::GUIINFO::CGUIInfoLabel m_info;
 };
-

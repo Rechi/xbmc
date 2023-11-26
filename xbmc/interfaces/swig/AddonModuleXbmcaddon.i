@@ -34,4 +34,3 @@ using namespace xbmcaddon;
 
 %include "interfaces/legacy/Addon.h"
 %include "interfaces/legacy/Settings.h"
-

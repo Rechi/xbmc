@@ -34,4 +34,3 @@ protected:
   void DeleteTexture(int index) override;
   bool CreateTexture(int index) override;
 };
-

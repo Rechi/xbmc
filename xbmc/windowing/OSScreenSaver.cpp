@@ -93,6 +93,3 @@ COSScreenSaverInhibitor::~COSScreenSaverInhibitor() noexcept
 {
   Release();
 }
-
-
-

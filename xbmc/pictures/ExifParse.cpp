@@ -954,4 +954,3 @@ void CExifParse::ProcessGpsInfo(
     }
   }
 }
-
