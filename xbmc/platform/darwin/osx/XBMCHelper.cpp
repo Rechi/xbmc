@@ -29,9 +29,8 @@
 #include <sstream>
 
 #include <mach-o/dyld.h>
+#include <sys/sysctl.h>
 #include <unistd.h>
-
-#include "PlatformDefs.h"
 
 namespace
 {

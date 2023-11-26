@@ -12,6 +12,7 @@
 #include "URL.h"
 
 #include <mutex>
+#include <string.h>
 
 using namespace XFILE;
 

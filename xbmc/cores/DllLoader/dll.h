@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <stdint.h>
+
 #include "PlatformDefs.h"
 
 extern "C" HMODULE __stdcall dllLoadLibraryExtended(const char* file, const char* sourcedll);

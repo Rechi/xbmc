@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "DynamicDll.h"
+
 extern "C" {
 #define DVDNAV_COMPILE
  #include <stdint.h>
@@ -28,7 +30,6 @@ extern "C" {
  #undef HAVE_CONFIG_H
  #endif
 }
-#include "DynamicDll.h"
 
 class DllDvdNavInterface
 {

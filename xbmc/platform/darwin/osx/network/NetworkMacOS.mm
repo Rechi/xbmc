@@ -24,6 +24,7 @@
 #include <net/route.h>
 #include <netinet/if_ether.h>
 #include <sys/sockio.h>
+#include <sys/sysctl.h>
 #include <unistd.h>
 
 CNetworkInterfaceMacOS::CNetworkInterfaceMacOS(CNetworkPosix* network,

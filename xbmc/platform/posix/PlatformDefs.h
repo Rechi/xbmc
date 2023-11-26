@@ -8,34 +8,16 @@
 
 #pragma once
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <pthread.h>
-#include <string.h>
-#if defined(TARGET_DARWIN)
+#include <errno.h>
+#include <stdint.h>
 #include <stdio.h>
-#include <sched.h>
-#include <AvailabilityMacros.h>
-#ifndef __STDC_FORMAT_MACROS
-  #define __STDC_FORMAT_MACROS
-#endif
-#include <sys/sysctl.h>
-#include <mach/mach.h>
-#if defined(TARGET_DARWIN_OSX)
-#include <libkern/OSTypes.h>
-#endif
-
-#elif defined(TARGET_FREEBSD)
-#include <stdio.h>
-#include <sys/sysctl.h>
-#else
-#include <sys/sysinfo.h>
-#endif
-
-#include <sys/time.h>
 #include <time.h>
+
+#include <fcntl.h>
+#include <sys/ioctl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #if defined(__ppc__) || defined(__powerpc__)
 #define PIXEL_ASHIFT 0
@@ -48,8 +30,6 @@
 #define PIXEL_GSHIFT 8
 #define PIXEL_BSHIFT 0
 #endif
-
-#include <stdint.h>
 
 #define _fdopen fdopen
 #define _vsnprintf vsnprintf

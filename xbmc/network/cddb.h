@@ -8,16 +8,15 @@
 
 #pragma once
 
-#include <string>
-#include <sstream>
+#include "storage/cdioSupport.h"
+#include "utils/ScopeGuard.h"
+
 #include <iostream>
 #include <map>
-#ifndef TARGET_POSIX
-#include <strstream>
-#endif
-#include "storage/cdioSupport.h"
+#include <sstream>
+#include <string>
 
-#include "utils/ScopeGuard.h"
+#include <unistd.h>
 
 namespace CDDB
 {

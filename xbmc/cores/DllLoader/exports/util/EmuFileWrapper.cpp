@@ -11,6 +11,7 @@
 #include "filesystem/File.h"
 
 #include <mutex>
+#include <string.h>
 
 CEmuFileWrapper g_emuFileWrapper;
 
