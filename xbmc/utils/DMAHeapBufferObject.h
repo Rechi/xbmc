@@ -17,7 +17,7 @@ class CDMAHeapBufferObject : public CBufferObject
 {
 public:
   CDMAHeapBufferObject() = default;
-  virtual ~CDMAHeapBufferObject() override;
+  ~CDMAHeapBufferObject() override;
 
   // Registration
   static std::unique_ptr<CBufferObject> Create();

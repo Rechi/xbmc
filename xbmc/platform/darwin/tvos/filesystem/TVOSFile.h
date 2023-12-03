@@ -30,7 +30,7 @@ class CTVOSFile : public IFile
 {
 public:
   CTVOSFile() = default;
-  ~CTVOSFile();
+  ~CTVOSFile() override;
 
   bool static WantsFile(const CURL& url);
 

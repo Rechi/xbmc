@@ -31,7 +31,7 @@ class CPVRChannelGroupSettings : public ISettingCallback
 {
 public:
   CPVRChannelGroupSettings();
-  virtual ~CPVRChannelGroupSettings();
+  ~CPVRChannelGroupSettings() override;
 
   void OnSettingChanged(const std::shared_ptr<const CSetting>& setting) override;
 

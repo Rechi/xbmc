@@ -16,7 +16,7 @@ class TestNetwork : public testing::Test
 {
 public:
   TestNetwork() = default;
-  ~TestNetwork() = default;
+  ~TestNetwork() override = default;
 
   bool PingHost(const std::string& ip) const
   {

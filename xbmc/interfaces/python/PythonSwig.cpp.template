@@ -798,12 +798,12 @@ namespace PythonBindings
 <%
       getAllVirtualMethods(clazz).each
       { %>
-      virtual ${SwigTypeParser.SwigType_str(Helper.getReturnSwigType(it))} ${Helper.callingName(it)}( <%
+      ${SwigTypeParser.SwigType_str(Helper.getReturnSwigType(it))} ${Helper.callingName(it)}( <%
     List params = it?.parm
     String paramFormatStr = ''
     params.each { paramFormatStr += 'O' }
     params.eachWithIndex { param, i -> %> ${SwigTypeParser.SwigType_str(param.@type)} ${param.@name}${i < params.size() - 1 ? "," : ""} <% }
-    %> )
+    %> ) override
       { <%
         params.each
         { param ->

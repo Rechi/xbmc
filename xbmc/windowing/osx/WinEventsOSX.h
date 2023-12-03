@@ -21,10 +21,10 @@ class CWinEventsOSX : public IWinEvents, public CThread
 {
 public:
   CWinEventsOSX();
-  ~CWinEventsOSX();
+  ~CWinEventsOSX() override;
 
   void MessagePush(XBMC_Event* newEvent);
-  bool MessagePump();
+  bool MessagePump() override;
   size_t GetQueueSize();
 
   void enableInputEvents();

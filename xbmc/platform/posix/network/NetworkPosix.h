@@ -21,7 +21,7 @@ public:
   CNetworkInterfacePosix(CNetworkPosix* network,
                          std::string interfaceName,
                          char interfaceMacAddrRaw[6]);
-  virtual ~CNetworkInterfacePosix() override = default;
+  ~CNetworkInterfacePosix() override = default;
 
   bool IsEnabled() const override;
   bool IsConnected() const override;
@@ -43,7 +43,7 @@ private:
 class CNetworkPosix : public CNetworkBase
 {
 public:
-  virtual ~CNetworkPosix() override;
+  ~CNetworkPosix() override;
 
   std::vector<CNetworkInterface*>& GetInterfaceList() override;
   CNetworkInterface* GetFirstConnectedInterface() override;

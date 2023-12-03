@@ -21,7 +21,7 @@ class CCPUInfoAndroid : public CCPUInfoPosix
 {
 public:
   CCPUInfoAndroid();
-  ~CCPUInfoAndroid() = default;
+  ~CCPUInfoAndroid() override = default;
 
   bool SupportsCPUUsage() const override { return false; }
   int GetUsedPercentage() override { return 0; }

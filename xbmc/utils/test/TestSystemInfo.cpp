@@ -23,7 +23,7 @@ class TestSystemInfo : public testing::Test
 {
 protected:
   TestSystemInfo() { CServiceBroker::RegisterCPUInfo(CCPUInfo::GetCPUInfo()); }
-  ~TestSystemInfo() { CServiceBroker::UnregisterCPUInfo(); }
+  ~TestSystemInfo() override { CServiceBroker::UnregisterCPUInfo(); }
 };
 
 TEST_F(TestSystemInfo, Print_System_Info)

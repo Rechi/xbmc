@@ -18,7 +18,7 @@ class CCPUInfoOsx : public CCPUInfoPosix
 {
 public:
   CCPUInfoOsx();
-  ~CCPUInfoOsx() = default;
+  ~CCPUInfoOsx() override = default;
 
   int GetUsedPercentage() override;
   float GetCPUFrequency() override;

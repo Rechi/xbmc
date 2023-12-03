@@ -60,7 +60,7 @@ class CGameAgentManager : public Observable,
 public:
   CGameAgentManager(PERIPHERALS::CPeripherals& peripheralManager, CInputManager& inputManager);
 
-  virtual ~CGameAgentManager();
+  ~CGameAgentManager() override;
 
   // Lifecycle functions
   void Start(GameClientPtr gameClient);

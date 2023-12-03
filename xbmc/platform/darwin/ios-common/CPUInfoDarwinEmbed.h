@@ -20,7 +20,7 @@ class CCPUInfoDarwinEmbed : public CCPUInfoPosix
 {
 public:
   CCPUInfoDarwinEmbed();
-  ~CCPUInfoDarwinEmbed() = default;
+  ~CCPUInfoDarwinEmbed() override = default;
 
   int GetUsedPercentage() override;
   float GetCPUFrequency() override;

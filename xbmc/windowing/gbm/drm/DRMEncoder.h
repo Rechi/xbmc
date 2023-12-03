@@ -23,7 +23,7 @@ public:
   explicit CDRMEncoder(int fd, uint32_t encoder);
   CDRMEncoder(const CDRMEncoder&) = delete;
   CDRMEncoder& operator=(const CDRMEncoder&) = delete;
-  ~CDRMEncoder() = default;
+  ~CDRMEncoder() override = default;
 
   uint32_t GetEncoderId() const { return m_encoder->encoder_id; }
   uint32_t GetCrtcId() const { return m_encoder->crtc_id; }

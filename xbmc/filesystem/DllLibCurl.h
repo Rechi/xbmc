@@ -68,7 +68,7 @@ class DllLibCurlGlobal : public DllLibCurl
 {
 public:
   DllLibCurlGlobal();
-  ~DllLibCurlGlobal();
+  ~DllLibCurlGlobal() override;
   /* extend interface with buffered functions */
   void easy_acquire(const char* protocol,
                     const char* hostname,

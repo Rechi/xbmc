@@ -27,7 +27,7 @@ typedef std::shared_ptr<CVFSEntry> VFSEntryPtr;
 class CVFSAddonCache : public CAddonDllInformer
 {
 public:
-  virtual ~CVFSAddonCache();
+  ~CVFSAddonCache() override;
   void Init();
   void Deinit();
   const std::vector<VFSEntryPtr> GetAddonInstances();

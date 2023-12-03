@@ -22,12 +22,12 @@ class CWinEventsTVOS : public IWinEvents, public CThread
 {
 public:
   CWinEventsTVOS();
-  ~CWinEventsTVOS();
+  ~CWinEventsTVOS() override;
 
   void MessagePush(XBMC_Event* newEvent);
   size_t GetQueueSize();
 
-  bool MessagePump();
+  bool MessagePump() override;
 
 private:
   CCriticalSection m_eventsCond;
