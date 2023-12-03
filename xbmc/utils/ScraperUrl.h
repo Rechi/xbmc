@@ -114,7 +114,7 @@ public:
 private:
   std::string m_title;
   std::string m_id;
-  double m_relevance;
+  double m_relevance = 0.0;
   std::vector<SUrlEntry> m_urls;
-  bool m_parsed;
+  bool m_parsed = false;
 };

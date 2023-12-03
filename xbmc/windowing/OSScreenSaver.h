@@ -42,8 +42,8 @@ public:
 private:
   friend class COSScreenSaverManager;
   explicit COSScreenSaverInhibitor(COSScreenSaverManager* manager);
-  bool m_active;
-  COSScreenSaverManager* m_manager;
+  bool m_active = false;
+  COSScreenSaverManager* m_manager{};
 
   COSScreenSaverInhibitor(COSScreenSaverInhibitor const& other) = delete;
   COSScreenSaverInhibitor& operator=(COSScreenSaverInhibitor const& other) = delete;

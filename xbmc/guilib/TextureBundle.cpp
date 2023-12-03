@@ -12,7 +12,7 @@
 
 class CTexture;
 
-CTextureBundle::CTextureBundle() : m_tbXBT{false}, m_useXBT{false}
+CTextureBundle::CTextureBundle() : m_tbXBT{false}
 {
 }
 

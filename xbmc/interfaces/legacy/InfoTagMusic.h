@@ -49,7 +49,7 @@ namespace XBMCAddon
     private:
       MUSIC_INFO::CMusicInfoTag* infoTag;
       bool offscreen;
-      bool owned;
+      bool owned = true;
 
     public:
 #ifndef SWIG
