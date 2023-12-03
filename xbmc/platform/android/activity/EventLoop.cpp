@@ -12,8 +12,7 @@
 
 #define IS_FROM_SOURCE(v, s) ((v & s) == s)
 
-CEventLoop::CEventLoop(android_app* application)
-  : m_application(application), m_activityHandler(NULL), m_inputHandler(NULL)
+CEventLoop::CEventLoop(android_app* application) : m_application(application)
 {
   if (m_application == NULL)
     return;

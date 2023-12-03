@@ -154,7 +154,7 @@ void CGUIDialogNetworkSetup::OnDeinitWindow(int nextWindowID)
 {
   // clear protocol spinner
   BaseSettingControlPtr settingControl = GetSettingControl(SETTING_PROTOCOL);
-  if (settingControl != nullptr && settingControl->GetControl() != NULL)
+  if (settingControl != nullptr && settingControl->GetControl() != nullptr)
   {
     CGUIMessage msg(GUI_MSG_LABEL_RESET, GetID(), settingControl->GetID());
     OnMessage(msg);
@@ -246,7 +246,7 @@ void CGUIDialogNetworkSetup::OnCancel()
 void CGUIDialogNetworkSetup::OnProtocolChange()
 {
   BaseSettingControlPtr settingControl = GetSettingControl(SETTING_PROTOCOL);
-  if (settingControl != nullptr && settingControl->GetControl() != NULL)
+  if (settingControl != nullptr && settingControl->GetControl() != nullptr)
   {
     CGUIMessage msg(GUI_MSG_ITEM_SELECTED, GetID(), settingControl->GetID());
     if (!OnMessage(msg))
@@ -263,7 +263,7 @@ void CGUIDialogNetworkSetup::UpdateButtons()
 {
   // Address label
   BaseSettingControlPtr addressControl = GetSettingControl(SETTING_SERVER_ADDRESS);
-  if (addressControl != nullptr && addressControl->GetControl() != NULL)
+  if (addressControl != nullptr && addressControl->GetControl() != nullptr)
   {
     int addressControlID = addressControl->GetID();
     SET_CONTROL_LABEL2(addressControlID, m_server);
@@ -280,7 +280,7 @@ void CGUIDialogNetworkSetup::UpdateButtons()
 
   // remote path
   BaseSettingControlPtr pathControl = GetSettingControl(SETTING_REMOTE_PATH);
-  if (pathControl != nullptr && pathControl->GetControl() != NULL)
+  if (pathControl != nullptr && pathControl->GetControl() != nullptr)
   {
     int pathControlID = pathControl->GetID();
     SET_CONTROL_LABEL2(pathControlID, m_path);
@@ -298,7 +298,7 @@ void CGUIDialogNetworkSetup::UpdateButtons()
 
   // username
   BaseSettingControlPtr userControl = GetSettingControl(SETTING_USERNAME);
-  if (userControl != nullptr && userControl->GetControl() != NULL)
+  if (userControl != nullptr && userControl->GetControl() != nullptr)
   {
     int userControlID = userControl->GetID();
     SET_CONTROL_LABEL2(userControlID, m_username);
@@ -310,7 +310,7 @@ void CGUIDialogNetworkSetup::UpdateButtons()
 
   // port
   BaseSettingControlPtr portControl = GetSettingControl(SETTING_PORT_NUMBER);
-  if (portControl != nullptr && portControl->GetControl() != NULL)
+  if (portControl != nullptr && portControl->GetControl() != nullptr)
   {
     int portControlID = portControl->GetID();
     SET_CONTROL_LABEL2(portControlID, m_port);
@@ -321,7 +321,7 @@ void CGUIDialogNetworkSetup::UpdateButtons()
 
   // password
   BaseSettingControlPtr passControl = GetSettingControl(SETTING_PASSWORD);
-  if (passControl != nullptr && passControl->GetControl() != NULL)
+  if (passControl != nullptr && passControl->GetControl() != nullptr)
   {
     int passControlID = passControl->GetID();
     SET_CONTROL_LABEL2(passControlID, m_password);
@@ -333,7 +333,7 @@ void CGUIDialogNetworkSetup::UpdateButtons()
 
   // server browse should be disabled if we are in FTP, FTPS, HTTP, HTTPS, RSS, RSSS, DAV or DAVS
   BaseSettingControlPtr browseControl = GetSettingControl(SETTING_SERVER_BROWSE);
-  if (browseControl != nullptr && browseControl->GetControl() != NULL)
+  if (browseControl != nullptr && browseControl->GetControl() != nullptr)
   {
     int browseControlID = browseControl->GetID();
     CONTROL_ENABLE_ON_CONDITION(browseControlID,

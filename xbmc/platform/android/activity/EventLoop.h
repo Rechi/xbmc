@@ -33,7 +33,7 @@ private:
 
   bool m_enabled = false;
   android_app* m_application;
-  IActivityHandler* m_activityHandler;
-  IInputHandler* m_inputHandler;
+  IActivityHandler* m_activityHandler = nullptr;
+  IInputHandler* m_inputHandler = nullptr;
 };
 

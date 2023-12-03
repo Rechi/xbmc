@@ -1186,7 +1186,7 @@ CSmartPlaylist::CSmartPlaylist()
 
 bool CSmartPlaylist::OpenAndReadName(const CURL &url)
 {
-  if (readNameFromPath(url) == NULL)
+  if (readNameFromPath(url) == nullptr)
     return false;
 
   return !m_playlistName.empty();
@@ -1194,17 +1194,17 @@ bool CSmartPlaylist::OpenAndReadName(const CURL &url)
 
 const TiXmlNode* CSmartPlaylist::readName(const TiXmlNode *root)
 {
-  if (root == NULL)
-    return NULL;
+  if (root == nullptr)
+    return nullptr;
 
   const TiXmlElement *rootElem = root->ToElement();
-  if (rootElem == NULL)
-    return NULL;
+  if (rootElem == nullptr)
+    return nullptr;
 
   if (!StringUtils::EqualsNoCase(root->Value(), "smartplaylist"))
   {
     CLog::Log(LOGERROR, "Error loading Smart playlist");
-    return NULL;
+    return nullptr;
   }
 
   // load the playlist type
@@ -1229,7 +1229,7 @@ const TiXmlNode* CSmartPlaylist::readNameFromPath(const CURL &url)
   if (!file.Open(url))
   {
     CLog::Log(LOGERROR, "Error loading Smart playlist {} (failed to read file)", url.GetRedacted());
-    return NULL;
+    return nullptr;
   }
 
   m_xmlDoc.Clear();
@@ -1251,7 +1251,7 @@ const TiXmlNode* CSmartPlaylist::readNameFromXml(const std::string &xml)
   if (xml.empty())
   {
     CLog::Log(LOGERROR, "Error loading empty Smart playlist");
-    return NULL;
+    return nullptr;
   }
 
   m_xmlDoc.Clear();
@@ -1259,7 +1259,7 @@ const TiXmlNode* CSmartPlaylist::readNameFromXml(const std::string &xml)
   {
     CLog::Log(LOGERROR, "Error loading Smart playlist (failed to parse xml: {})",
               m_xmlDoc.ErrorDesc());
-    return NULL;
+    return nullptr;
   }
 
   const TiXmlNode *root = readName(m_xmlDoc.RootElement());
@@ -1269,7 +1269,7 @@ const TiXmlNode* CSmartPlaylist::readNameFromXml(const std::string &xml)
 
 bool CSmartPlaylist::load(const TiXmlNode *root)
 {
-  if (root == NULL)
+  if (root == nullptr)
     return false;
 
   return LoadFromXML(root);
@@ -1361,7 +1361,7 @@ bool CSmartPlaylist::LoadFromXML(const TiXmlNode *root, const std::string &encod
   }
 
   const TiXmlElement *groupElement = root->FirstChildElement("group");
-  if (groupElement != NULL && groupElement->FirstChild() != NULL)
+  if (groupElement != nullptr && groupElement->FirstChild() != nullptr)
   {
     m_group = groupElement->FirstChild()->ValueStr();
     const char* mixed = groupElement->Attribute("mixed");

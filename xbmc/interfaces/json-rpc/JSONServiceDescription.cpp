@@ -287,7 +287,7 @@ bool JSONSchemaTypeDefinition::Parse(const CVariant &value, bool isParameter /* 
     std::string refType = value["$ref"].asString();
     // Check if the referenced type exists
     JSONSchemaTypeDefinitionPtr referencedTypeDef = CJSONServiceDescription::GetType(refType);
-    if (refType.length() <= 0 || referencedTypeDef.get() == NULL)
+    if (refType.length() <= 0 || referencedTypeDef.get() == nullptr)
     {
       CLog::Log(LOGDEBUG, "JSONRPC: JSON schema type {} references an unknown type {}", name,
                 refType);
@@ -350,7 +350,7 @@ bool JSONSchemaTypeDefinition::Parse(const CVariant &value, bool isParameter /* 
       if (!extendsName.empty())
       {
         JSONSchemaTypeDefinitionPtr extendedTypeDef = CJSONServiceDescription::GetType(extendsName);
-        if (extendedTypeDef.get() == NULL)
+        if (extendedTypeDef.get() == nullptr)
         {
           CLog::Log(LOGDEBUG, "JSONRPC: JSON schema type {} extends an unknown type {}", name,
                     extendsName);
@@ -371,7 +371,7 @@ bool JSONSchemaTypeDefinition::Parse(const CVariant &value, bool isParameter /* 
         if (!extendsName.empty())
         {
           JSONSchemaTypeDefinitionPtr extendedTypeDef = CJSONServiceDescription::GetType(extendsName);
-          if (extendedTypeDef.get() == NULL)
+          if (extendedTypeDef.get() == nullptr)
           {
             extends.clear();
             CLog::Log(LOGDEBUG, "JSONRPC: JSON schema type {} extends an unknown type {}", name,
@@ -1239,7 +1239,7 @@ void JSONSchemaTypeDefinition::ResolveReference()
   if (!origDefaultValue.isNull())
     defaultValue = origDefaultValue;
 
-  if (referencedTypeDef.get() != NULL)
+  if (referencedTypeDef.get() != nullptr)
     referencedType = referencedTypeDef;
 
   // This will have been overwritten by the copy of the reference
@@ -1359,9 +1359,10 @@ bool JsonRpcMethod::Parse(const CVariant &value)
 
 JSONRPC_STATUS JsonRpcMethod::Check(const CVariant &requestParameters, ITransportLayer *transport, IClient *client, bool notification, MethodCall &methodCall, CVariant &outputParameters) const
 {
-  if (transport != NULL && (transport->GetCapabilities() & transportneed) == transportneed)
+  if (transport != nullptr && (transport->GetCapabilities() & transportneed) == transportneed)
   {
-    if (client != NULL && (client->GetPermissionFlags() & permission) == permission && (!notification || (permission & OPERATION_PERMISSION_NOTIFICATION) == permission))
+    if (client != nullptr && (client->GetPermissionFlags() & permission) == permission &&
+        (!notification || (permission & OPERATION_PERMISSION_NOTIFICATION) == permission))
     {
       methodCall = method;
 

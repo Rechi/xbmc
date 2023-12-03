@@ -28,7 +28,7 @@ class CAESinkDARWINIOS : public IAESink
 public:
   const char* GetName() override { return "DARWINIOS"; }
 
-  CAESinkDARWINIOS();
+  CAESinkDARWINIOS() = default;
   ~CAESinkDARWINIOS() override = default;
 
   static void Register();
@@ -49,7 +49,7 @@ private:
   CAEDeviceInfo      m_info;
   AEAudioFormat      m_format;
 
-  CAAudioUnitSink   *m_audioSink;
+  CAAudioUnitSink* m_audioSink = nullptr;
 #if DO_440HZ_TONE_TEST
   SineWaveGenerator  m_SineWaveGenerator;
 #endif

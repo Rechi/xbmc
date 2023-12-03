@@ -121,7 +121,7 @@ namespace UPNP
 /*----------------------------------------------------------------------
 |   static
 +---------------------------------------------------------------------*/
-CUPnP* CUPnP::upnp = NULL;
+CUPnP* CUPnP::upnp = nullptr;
 static NPT_List<void*> g_UserData;
 static NPT_Mutex       g_UserDataLock;
 
@@ -482,11 +482,8 @@ private:
 /*----------------------------------------------------------------------
 |   CUPnP::CUPnP
 +---------------------------------------------------------------------*/
-CUPnP::CUPnP() :
-    m_MediaBrowser(NULL),
-    m_MediaController(NULL),
-    m_LogHandler(NULL),
-    m_ServerHolder(new CDeviceHostReferenceHolder()),
+CUPnP::CUPnP()
+  : m_ServerHolder(new CDeviceHostReferenceHolder()),
     m_RendererHolder(new CRendererReferenceHolder()),
     m_CtrlPointHolder(new CCtrlPointReferenceHolder())
 {
@@ -550,7 +547,7 @@ CUPnP::ReleaseInstance(bool bWait)
 {
     if (upnp) {
         CUPnP* _upnp = upnp;
-        upnp = NULL;
+        upnp = nullptr;
 
         if (bWait) {
             delete _upnp;
@@ -570,7 +567,7 @@ CUPnPServer* CUPnP::GetServer()
 {
   if(upnp)
     return static_cast<CUPnPServer*>(upnp->m_ServerHolder->m_Device.AsPointer());
-  return NULL;
+  return nullptr;
 }
 
 /*----------------------------------------------------------------------
@@ -629,7 +626,7 @@ CUPnP::DestroyControlPoint()
         return;
 
     m_UPnP->RemoveCtrlPoint(m_CtrlPointHolder->m_CtrlPoint);
-    m_CtrlPointHolder->m_CtrlPoint = NULL;
+    m_CtrlPointHolder->m_CtrlPoint = nullptr;
 }
 
 /*----------------------------------------------------------------------
@@ -654,7 +651,7 @@ void
 CUPnP::StartClient()
 {
   std::unique_lock<CCriticalSection> lock(m_lockMediaBrowser);
-  if (m_MediaBrowser != NULL)
+  if (m_MediaBrowser != nullptr)
     return;
 
   CreateControlPoint();
@@ -670,11 +667,11 @@ void
 CUPnP::StopClient()
 {
   std::unique_lock<CCriticalSection> lock(m_lockMediaBrowser);
-  if (m_MediaBrowser == NULL)
+  if (m_MediaBrowser == nullptr)
     return;
 
   delete m_MediaBrowser;
-  m_MediaBrowser = NULL;
+  m_MediaBrowser = nullptr;
 
   if (!IsControllerStarted())
     DestroyControlPoint();
@@ -686,7 +683,7 @@ CUPnP::StopClient()
 void
 CUPnP::StartController()
 {
-    if (m_MediaController != NULL)
+    if (m_MediaController != nullptr)
         return;
 
     CreateControlPoint();
@@ -700,11 +697,11 @@ CUPnP::StartController()
 void
 CUPnP::StopController()
 {
-  if (m_MediaController == NULL)
+  if (m_MediaController == nullptr)
       return;
 
   delete m_MediaController;
-  m_MediaController = NULL;
+  m_MediaController = nullptr;
 
   if (!IsClientStarted())
       DestroyControlPoint();
@@ -793,7 +790,7 @@ CUPnP::StopServer()
     if (m_ServerHolder->m_Device.IsNull()) return;
 
     m_UPnP->RemoveDevice(m_ServerHolder->m_Device);
-    m_ServerHolder->m_Device = NULL;
+    m_ServerHolder->m_Device = nullptr;
 }
 
 /*----------------------------------------------------------------------
@@ -864,7 +861,7 @@ void CUPnP::StopRenderer()
     if (m_RendererHolder->m_Device.IsNull()) return;
 
     m_UPnP->RemoveDevice(m_RendererHolder->m_Device);
-    m_RendererHolder->m_Device = NULL;
+    m_RendererHolder->m_Device = nullptr;
 }
 
 /*----------------------------------------------------------------------

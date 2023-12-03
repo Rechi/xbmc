@@ -52,7 +52,6 @@ public:
                         PLT_DeviceDataReference& device,
                         IPlayerCallback& callback)
     : m_control(control),
-      m_transport(NULL),
       m_device(device),
       m_callback(callback),
       m_logger(CServiceBroker::GetLogging().GetLogger("CUPnPPlayerController"))
@@ -137,7 +136,7 @@ public:
   ~CUPnPPlayerController() override = default;
 
   PLT_MediaController*     m_control;
-  PLT_Service *            m_transport;
+  PLT_Service* m_transport = nullptr;
   PLT_DeviceDataReference  m_device;
   NPT_UInt32 m_instance = 0;
   IPlayerCallback&         m_callback;
@@ -159,8 +158,6 @@ public:
 
 CUPnPPlayer::CUPnPPlayer(IPlayerCallback& callback, const char* uuid)
   : IPlayer(callback),
-    m_control(NULL),
-    m_delegate(NULL),
     m_logger(CServiceBroker::GetLogging().GetLogger(StringUtils::Format("CUPnPPlayer[{}]", uuid)))
 {
   m_control  = CUPnP::GetInstance()->m_MediaController;
@@ -214,7 +211,7 @@ int CUPnPPlayer::PlayFile(const CFileItem& file,
   else if (item.IsMusicDb())
     thumb_loader = NPT_Reference<CThumbLoader>(new CMusicThumbLoader());
 
-  obj = BuildObject(item, path, false, thumb_loader, NULL, CUPnP::GetServer(), UPnPPlayer);
+  obj = BuildObject(item, path, false, thumb_loader, nullptr, CUPnP::GetServer(), UPnPPlayer);
   if(obj.IsNull()) goto failed;
 
   NPT_CHECK_LABEL_SEVERE(PLT_Didl::ToDidl(*obj, "", tmp), failed_todidl);
@@ -400,7 +397,7 @@ bool CUPnPPlayer::QueueNextFile(const CFileItem& file)
     thumb_loader = NPT_Reference<CThumbLoader>(new CMusicThumbLoader());
 
 
-  obj = BuildObject(item, path, false, thumb_loader, NULL, CUPnP::GetServer(), UPnPPlayer);
+  obj = BuildObject(item, path, false, thumb_loader, nullptr, CUPnP::GetServer(), UPnPPlayer);
   if(!obj.IsNull())
   {
     NPT_CHECK_LABEL_SEVERE(PLT_Didl::ToDidl(*obj, "", tmp), failed);

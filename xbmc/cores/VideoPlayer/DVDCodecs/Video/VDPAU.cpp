@@ -128,7 +128,7 @@ bool CVDPAUContext::EnsureContext(CVDPAUContext **ctx)
     {
       delete m_context;
       m_context = nullptr;
-      *ctx = NULL;
+      *ctx = nullptr;
       return false;
     }
   }
@@ -1616,7 +1616,7 @@ void CMixer::StateMachine(int signal, Protocol *port, Message *msg)
         }
       }
       {
-        std::string portName = port == NULL ? "timer" : port->portName;
+        std::string portName = port == nullptr ? "timer" : port->portName;
         CLog::Log(LOGWARNING, "CMixer::{} - signal: {} form port: {} not handled for state: {}",
                   __FUNCTION__, signal, portName, m_state);
       }
@@ -1697,7 +1697,7 @@ void CMixer::StateMachine(int signal, Protocol *port, Message *msg)
       break;
 
     case M_TOP_CONFIGURED_WAIT1:
-      if (port == NULL) // timeout
+      if (port == nullptr) // timeout
       {
         switch (signal)
         {
@@ -1730,7 +1730,7 @@ void CMixer::StateMachine(int signal, Protocol *port, Message *msg)
       break;
 
     case M_TOP_CONFIGURED_STEP1:
-      if (port == NULL) // timeout
+      if (port == nullptr) // timeout
       {
         switch (signal)
         {
@@ -1775,7 +1775,7 @@ void CMixer::StateMachine(int signal, Protocol *port, Message *msg)
       break;
 
     case M_TOP_CONFIGURED_WAIT2:
-      if (port == NULL) // timeout
+      if (port == nullptr) // timeout
       {
         switch (signal)
         {
@@ -1797,7 +1797,7 @@ void CMixer::StateMachine(int signal, Protocol *port, Message *msg)
       break;
 
     case M_TOP_CONFIGURED_STEP2:
-       if (port == NULL) // timeout
+       if (port == nullptr) // timeout
        {
          switch (signal)
          {
@@ -1834,8 +1834,8 @@ void CMixer::StateMachine(int signal, Protocol *port, Message *msg)
 
 void CMixer::Process()
 {
-  Message *msg = NULL;
-  Protocol *port = NULL;
+  Message* msg = nullptr;
+  Protocol* port = nullptr;
   bool gotMsg;
 
   m_state = M_TOP_UNCONFIGURED;
@@ -1854,7 +1854,7 @@ void CMixer::Process()
       if (!m_bStateMachineSelfTrigger)
       {
         msg->Release();
-        msg = NULL;
+        msg = nullptr;
       }
       continue;
     }
@@ -1877,7 +1877,7 @@ void CMixer::Process()
       if (!m_bStateMachineSelfTrigger)
       {
         msg->Release();
-        msg = NULL;
+        msg = nullptr;
       }
       continue;
     }
@@ -1898,7 +1898,7 @@ void CMixer::Process()
       if (!m_bStateMachineSelfTrigger)
       {
         msg->Release();
-        msg = NULL;
+        msg = nullptr;
       }
     }
   }
@@ -2892,7 +2892,7 @@ void COutput::StateMachine(int signal, Protocol *port, Message *msg)
         }
       }
       {
-        std::string portName = port == NULL ? "timer" : port->portName;
+        std::string portName = port == nullptr ? "timer" : port->portName;
         CLog::Log(LOGWARNING, "COutput::{} - signal: {} form port: {} not handled for state: {}",
                   __FUNCTION__, signal, portName, m_state);
       }
@@ -3003,7 +3003,7 @@ void COutput::StateMachine(int signal, Protocol *port, Message *msg)
       break;
 
     case O_TOP_CONFIGURED_IDLE:
-      if (port == NULL) // timeout
+      if (port == nullptr) // timeout
       {
         switch (signal)
         {
@@ -3022,7 +3022,7 @@ void COutput::StateMachine(int signal, Protocol *port, Message *msg)
       break;
 
     case O_TOP_CONFIGURED_WORK:
-      if (port == NULL) // timeout
+      if (port == nullptr) // timeout
       {
         switch (signal)
         {
@@ -3060,8 +3060,8 @@ void COutput::StateMachine(int signal, Protocol *port, Message *msg)
 
 void COutput::Process()
 {
-  Message *msg = NULL;
-  Protocol *port = NULL;
+  Message* msg = nullptr;
+  Protocol* port = nullptr;
   bool gotMsg;
 
   m_state = O_TOP_UNCONFIGURED;
@@ -3080,7 +3080,7 @@ void COutput::Process()
       if (!m_bStateMachineSelfTrigger)
       {
         msg->Release();
-        msg = NULL;
+        msg = nullptr;
       }
       continue;
     }
@@ -3108,7 +3108,7 @@ void COutput::Process()
       if (!m_bStateMachineSelfTrigger)
       {
         msg->Release();
-        msg = NULL;
+        msg = nullptr;
       }
       continue;
     }
@@ -3129,7 +3129,7 @@ void COutput::Process()
       if (!m_bStateMachineSelfTrigger)
       {
         msg->Release();
-        msg = NULL;
+        msg = nullptr;
       }
     }
   }
@@ -3244,7 +3244,7 @@ bool COutput::HasWork()
 
 CVdpauRenderPicture* COutput::ProcessMixerPicture()
 {
-  CVdpauRenderPicture *retPic = NULL;
+  CVdpauRenderPicture* retPic = nullptr;
 
   if (!m_bufferPool->processedPics.empty() && m_bufferPool->HasFree())
   {

@@ -44,5 +44,5 @@ private:
       const HTTPPythonRequest* httpRequest, const ADDON::AddonPtr& addon);
   static void addWsgiEnvironment(HTTPPythonRequest* request, void* environment);
 
-  XBMCAddon::xbmcwsgi::WsgiResponse* m_wsgiResponse;
+  XBMCAddon::xbmcwsgi::WsgiResponse* m_wsgiResponse = nullptr;
 };

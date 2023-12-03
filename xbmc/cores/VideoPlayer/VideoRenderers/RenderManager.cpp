@@ -497,7 +497,7 @@ void CRenderManager::DeleteRenderer()
     CLog::Log(LOGDEBUG, "{} - deleting renderer", __FUNCTION__);
 
     delete m_pRenderer;
-    m_pRenderer = NULL;
+    m_pRenderer = nullptr;
   }
 }
 

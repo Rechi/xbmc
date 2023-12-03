@@ -757,14 +757,14 @@ void CGUIDialogPVRTimerSettings::SetButtonLabels()
 {
   // timer start time
   BaseSettingControlPtr settingControl = GetSettingControl(SETTING_TMR_BEGIN);
-  if (settingControl != nullptr && settingControl->GetControl() != NULL)
+  if (settingControl != nullptr && settingControl->GetControl() != nullptr)
   {
     SET_CONTROL_LABEL2(settingControl->GetID(), m_timerStartTimeStr);
   }
 
   // timer end time
   settingControl = GetSettingControl(SETTING_TMR_END);
-  if (settingControl != nullptr && settingControl->GetControl() != NULL)
+  if (settingControl != nullptr && settingControl->GetControl() != nullptr)
   {
     SET_CONTROL_LABEL2(settingControl->GetID(), m_timerEndTimeStr);
   }
@@ -1286,7 +1286,7 @@ bool CGUIDialogPVRTimerSettings::TypeReadOnlyCondition(const std::string& condit
     return false;
 
   CGUIDialogPVRTimerSettings* pThis = static_cast<CGUIDialogPVRTimerSettings*>(data);
-  if (pThis == NULL)
+  if (pThis == nullptr)
   {
     CLog::LogF(LOGERROR, "No dialog");
     return false;
@@ -1351,7 +1351,7 @@ bool CGUIDialogPVRTimerSettings::TypeSupportsCondition(const std::string& condit
     return false;
 
   CGUIDialogPVRTimerSettings* pThis = static_cast<CGUIDialogPVRTimerSettings*>(data);
-  if (pThis == NULL)
+  if (pThis == nullptr)
   {
     CLog::LogF(LOGERROR, "No dialog");
     return false;
@@ -1436,7 +1436,7 @@ bool CGUIDialogPVRTimerSettings::StartAnytimeSetCondition(const std::string& con
     return false;
 
   CGUIDialogPVRTimerSettings* pThis = static_cast<CGUIDialogPVRTimerSettings*>(data);
-  if (pThis == NULL)
+  if (pThis == nullptr)
   {
     CLog::LogF(LOGERROR, "No dialog");
     return false;
@@ -1483,7 +1483,7 @@ bool CGUIDialogPVRTimerSettings::EndAnytimeSetCondition(const std::string& condi
     return false;
 
   CGUIDialogPVRTimerSettings* pThis = static_cast<CGUIDialogPVRTimerSettings*>(data);
-  if (pThis == NULL)
+  if (pThis == nullptr)
   {
     CLog::LogF(LOGERROR, "No dialog");
     return false;

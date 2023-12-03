@@ -62,7 +62,7 @@ bool CGUIDialogLockSettings::ShowAndGetLock(LockType &lockMode, std::string &pas
 bool CGUIDialogLockSettings::ShowAndGetLock(CProfile::CLock &locks, int buttonLabel /* = 20091 */, bool conditional /* = false */, bool details /* = true */)
 {
   CGUIDialogLockSettings *dialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogLockSettings>(WINDOW_DIALOG_LOCK_SETTINGS);
-  if (dialog == NULL)
+  if (dialog == nullptr)
     return false;
 
   dialog->m_locks = locks;
@@ -87,7 +87,7 @@ bool CGUIDialogLockSettings::ShowAndGetLock(CProfile::CLock &locks, int buttonLa
 bool CGUIDialogLockSettings::ShowAndGetUserAndPassword(std::string &user, std::string &password, const std::string &url, bool *saveUserDetails)
 {
   CGUIDialogLockSettings *dialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogLockSettings>(WINDOW_DIALOG_LOCK_SETTINGS);
-  if (dialog == NULL)
+  if (dialog == nullptr)
     return false;
 
   dialog->m_getUser = true;
@@ -315,6 +315,6 @@ void CGUIDialogLockSettings::SetSettingLockCodeLabel()
   if (m_locks.mode > LOCK_MODE_QWERTY)
     m_locks.mode = LOCK_MODE_EVERYONE;
   BaseSettingControlPtr settingControl = GetSettingControl(SETTING_LOCKCODE);
-  if (settingControl != nullptr && settingControl->GetControl() != NULL)
+  if (settingControl != nullptr && settingControl->GetControl() != nullptr)
     SET_CONTROL_LABEL2(settingControl->GetID(), GetLockModeLabel());
 }

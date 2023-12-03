@@ -82,7 +82,7 @@ std::unique_ptr<IStorageProvider> IStorageProvider::CreateInstance()
 
 CAndroidStorageProvider::CAndroidStorageProvider()
 {
-  PumpDriveChangeEvents(NULL);
+  PumpDriveChangeEvents(nullptr);
 }
 
 std::string CAndroidStorageProvider::unescape(const std::string& str)

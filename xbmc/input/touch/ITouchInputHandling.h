@@ -23,7 +23,7 @@
 class ITouchInputHandling : protected ITouchActionHandler
 {
 public:
-  ITouchInputHandling() : m_handler(NULL) {}
+  ITouchInputHandling() = default;
   ~ITouchInputHandling() override = default;
 
   /*!
@@ -86,5 +86,5 @@ protected:
   void OnRotate(float centerX, float centerY, float angle) override;
 
 private:
-  ITouchActionHandler* m_handler;
+  ITouchActionHandler* m_handler = nullptr;
 };

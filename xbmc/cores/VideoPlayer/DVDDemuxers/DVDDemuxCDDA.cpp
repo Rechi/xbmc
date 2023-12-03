@@ -21,7 +21,7 @@ class CDemuxStreamAudioCDDA
 
 CDVDDemuxCDDA::CDVDDemuxCDDA() : CDVDDemux()
 {
-  m_stream = NULL;
+  m_stream = nullptr;
   m_bytes  = 0;
 }
 
@@ -59,7 +59,7 @@ bool CDVDDemuxCDDA::Open(const std::shared_ptr<CDVDInputStream>& pInput)
 void CDVDDemuxCDDA::Dispose()
 {
   delete m_stream;
-  m_stream = NULL;
+  m_stream = nullptr;
 
   m_pInput = nullptr;
   m_bytes  = 0;
@@ -152,7 +152,7 @@ int CDVDDemuxCDDA::GetStreamLength()
 CDemuxStream* CDVDDemuxCDDA::GetStream(int iStreamId) const
 {
   if(iStreamId != 0)
-    return NULL;
+    return nullptr;
 
   return m_stream;
 }
@@ -171,7 +171,7 @@ std::vector<CDemuxStream*> CDVDDemuxCDDA::GetStreams() const
 
 int CDVDDemuxCDDA::GetNrOfStreams() const
 {
-  return (m_stream == NULL ? 0 : 1);
+  return (m_stream == nullptr ? 0 : 1);
 }
 
 std::string CDVDDemuxCDDA::GetFileName()

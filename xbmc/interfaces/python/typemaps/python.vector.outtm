@@ -15,7 +15,7 @@
     if (ispointer)
     {
 %>
-    if (${api} != NULL)
+    if (${api} != nullptr)
     {
 <%  }  %>
       ${result} = PyList_New(0);

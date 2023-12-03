@@ -85,7 +85,7 @@ std::string Database::prepare(const char* format, ...)
 Dataset::Dataset() : select_sql("")
 {
 
-  db = NULL;
+  db = nullptr;
   haveError = active = false;
   frecno = 0;
   fbof = feof = true;
@@ -416,7 +416,7 @@ const field_value& Dataset::get_field_value(int index)
 const sql_record* Dataset::get_sql_record()
 {
   if (result.records.empty() || frecno >= (int)result.records.size())
-    return NULL;
+    return nullptr;
 
   return result.records[frecno];
 }

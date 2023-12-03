@@ -85,8 +85,8 @@ protected:
                                    std::string& current,
                                    void* data);
 
-  CDbUrl* m_dbUrl;
+  CDbUrl* m_dbUrl = nullptr;
   std::string m_mediaType;
-  CSmartPlaylist *m_filter;
+  CSmartPlaylist* m_filter = nullptr;
   std::map<std::string, Filter> m_filters;
 };

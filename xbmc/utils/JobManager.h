@@ -74,7 +74,7 @@ class CJobQueue: public IJobCallback
     void FreeJob()
     {
       delete m_job;
-      m_job = NULL;
+      m_job = nullptr;
     };
     bool operator==(const CJob *job) const
     {
@@ -225,12 +225,9 @@ class CJobManager final
     void FreeJob()
     {
       delete m_job;
-      m_job = NULL;
+      m_job = nullptr;
     };
-    void Cancel()
-    {
-      m_callback = NULL;
-    };
+    void Cancel() { m_callback = nullptr; };
     CJob         *m_job;
     unsigned int  m_id;
     IJobCallback *m_callback;

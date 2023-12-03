@@ -49,9 +49,7 @@ void CCacheStrategy::ClearEndOfInput()
 }
 
 CSimpleFileCache::CSimpleFileCache()
-  : m_cacheFileRead(new CacheLocalFile())
-  , m_cacheFileWrite(new CacheLocalFile())
-  , m_hDataAvailEvent(NULL)
+  : m_cacheFileRead(new CacheLocalFile()), m_cacheFileWrite(new CacheLocalFile())
 {
 }
 
@@ -103,7 +101,7 @@ void CSimpleFileCache::Close()
   if (m_hDataAvailEvent)
     delete m_hDataAvailEvent;
 
-  m_hDataAvailEvent = NULL;
+  m_hDataAvailEvent = nullptr;
 
   m_cacheFileWrite->Close();
   m_cacheFileRead->Close();
@@ -291,9 +289,9 @@ CCacheStrategy *CSimpleFileCache::CreateNew()
 
 CDoubleCache::CDoubleCache(CCacheStrategy *impl)
 {
-  assert(NULL != impl);
+  assert(nullptr != impl);
   m_pCache = impl;
-  m_pCacheOld = NULL;
+  m_pCacheOld = nullptr;
 }
 
 CDoubleCache::~CDoubleCache()
@@ -313,7 +311,7 @@ void CDoubleCache::Close()
   if (m_pCacheOld)
   {
     delete m_pCacheOld;
-    m_pCacheOld = NULL;
+    m_pCacheOld = nullptr;
   }
 }
 

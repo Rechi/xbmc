@@ -27,8 +27,8 @@ class CDVDSubtitleTagSami
 public:
   CDVDSubtitleTagSami()
   {
-    m_tags = NULL;
-    m_tagOptions = NULL;
+    m_tags = nullptr;
+    m_tagOptions = nullptr;
     m_flag[FLAG_BOLD] = false;
     m_flag[FLAG_ITALIC] = false;
     m_flag[FLAG_UNDERLINE] = false;

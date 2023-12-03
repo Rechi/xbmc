@@ -4745,7 +4745,7 @@ bool CMusicDatabase::LookupCDDBInfo(bool bRequery /*=false*/)
 
   // Get information for the inserted disc
   CCdInfo* pCdInfo = CServiceBroker::GetMediaManager().GetCdInfo();
-  if (pCdInfo == NULL)
+  if (pCdInfo == nullptr)
     return false;
 
   // If the disc has no tracks, we are finished here.
@@ -11903,7 +11903,7 @@ void CMusicDatabase::ExportToXML(const CLibExportSettings& settings,
     CXBMCTinyXML xmlDoc;
     TiXmlDeclaration decl("1.0", "UTF-8", "yes");
     xmlDoc.InsertEndChild(decl);
-    TiXmlNode* pMain = NULL;
+    TiXmlNode* pMain = nullptr;
     if ((settings.IsToLibFolders() || settings.IsSeparateFiles()) && !artistfoldersonly)
       pMain = &xmlDoc;
     else if (settings.IsSingleFile())

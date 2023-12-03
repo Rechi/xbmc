@@ -100,7 +100,7 @@ XFILE::CFile *CXBMCTestUtils::CreateTempFile(std::string const& suffix)
   if (f->Create(suffix))
     return f;
   delete f;
-  return NULL;
+  return nullptr;
 }
 
 bool CXBMCTestUtils::DeleteTempFile(XFILE::CFile *tempfile)
@@ -157,7 +157,7 @@ XFILE::CFile *CXBMCTestUtils::CreateCorruptedFile(std::string const& strFileName
         inputfile.Close();
         tmpfile->Close();
         DeleteTempFile(tmpfile);
-        return NULL;
+        return nullptr;
       }
     }
     inputfile.Close();
@@ -165,7 +165,7 @@ XFILE::CFile *CXBMCTestUtils::CreateCorruptedFile(std::string const& strFileName
     return tmpfile;
   }
   delete tmpfile;
-  return NULL;
+  return nullptr;
 }
 
 

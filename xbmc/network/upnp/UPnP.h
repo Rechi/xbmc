@@ -49,12 +49,12 @@ public:
     // client
     void StartClient();
     void StopClient();
-    bool IsClientStarted() { return (m_MediaBrowser != NULL); }
+    bool IsClientStarted() { return (m_MediaBrowser != nullptr); }
 
     // controller
     void StartController();
     void StopController();
-    bool IsControllerStarted() { return (m_MediaController != NULL); }
+    bool IsControllerStarted() { return (m_MediaController != nullptr); }
 
     // renderer
     bool StartRenderer();
@@ -65,7 +65,7 @@ public:
     static CUPnP* GetInstance();
     static CUPnPServer* GetServer();
     static void   ReleaseInstance(bool bWait);
-    static bool   IsInstantiated() { return upnp != NULL; }
+    static bool IsInstantiated() { return upnp != nullptr; }
 
     static bool MarkWatched(const CFileItem& item,
                             const bool watched);
@@ -88,14 +88,14 @@ private:
 
     CCriticalSection m_lockMediaBrowser;
 
-  public:
-    PLT_SyncMediaBrowser*       m_MediaBrowser;
-    PLT_MediaController*        m_MediaController;
+public:
+  PLT_SyncMediaBrowser* m_MediaBrowser = nullptr;
+  PLT_MediaController* m_MediaController = nullptr;
 
 private:
     std::string                 m_IP;
     PLT_UPnP*                   m_UPnP;
-    NPT_LogHandler*             m_LogHandler;
+    NPT_LogHandler* m_LogHandler = nullptr;
     CDeviceHostReferenceHolder* m_ServerHolder;
     CRendererReferenceHolder*   m_RendererHolder;
     CCtrlPointReferenceHolder*  m_CtrlPointHolder;

@@ -63,8 +63,8 @@ private:
   int64_t GetTotalTime();
   float GetPercentage();
 
-  PLT_MediaController* m_control;
-  CUPnPPlayerController* m_delegate;
+  PLT_MediaController* m_control = nullptr;
+  CUPnPPlayerController* m_delegate = nullptr;
   std::string m_current_uri;
   std::string m_current_meta;
   bool m_started = false;

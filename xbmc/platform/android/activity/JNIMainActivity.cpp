@@ -16,7 +16,7 @@
 
 using namespace jni;
 
-CJNIMainActivity* CJNIMainActivity::m_appInstance(NULL);
+CJNIMainActivity* CJNIMainActivity::m_appInstance(nullptr);
 
 CJNIMainActivity::CJNIMainActivity(const ANativeActivity *nativeActivity)
   : CJNIActivity(nativeActivity)
@@ -26,7 +26,7 @@ CJNIMainActivity::CJNIMainActivity(const ANativeActivity *nativeActivity)
 
 CJNIMainActivity::~CJNIMainActivity()
 {
-  m_appInstance = NULL;
+  m_appInstance = nullptr;
 }
 
 void CJNIMainActivity::RegisterNatives(JNIEnv* env)

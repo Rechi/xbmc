@@ -30,9 +30,9 @@ using namespace std::chrono_literals;
 CCriticalSection CDetectDVDMedia::m_muReadingMedia;
 CEvent CDetectDVDMedia::m_evAutorun;
 DriveState CDetectDVDMedia::m_DriveState{DriveState::CLOSED_NO_MEDIA};
-CCdInfo* CDetectDVDMedia::m_pCdInfo = NULL;
+CCdInfo* CDetectDVDMedia::m_pCdInfo = nullptr;
 time_t CDetectDVDMedia::m_LastPoll = 0;
-CDetectDVDMedia* CDetectDVDMedia::m_pInstance = NULL;
+CDetectDVDMedia* CDetectDVDMedia::m_pInstance = nullptr;
 std::string CDetectDVDMedia::m_diskLabel = "";
 std::string CDetectDVDMedia::m_diskPath = "";
 UTILS::DISCS::DiscInfo CDetectDVDMedia::m_discInfo;
@@ -211,15 +211,15 @@ void CDetectDVDMedia::DetectMediaType()
   CCdIoSupport cdio;
 
   // Delete old CD-Information
-  if ( m_pCdInfo != NULL )
+  if (m_pCdInfo != nullptr)
   {
     delete m_pCdInfo;
-    m_pCdInfo = NULL;
+    m_pCdInfo = nullptr;
   }
 
   // Detect new CD-Information
   m_pCdInfo = cdio.GetCdInfo();
-  if (m_pCdInfo == NULL)
+  if (m_pCdInfo == nullptr)
   {
     CLog::Log(LOGERROR, "Detection of DVD-ROM media failed.");
     return ;

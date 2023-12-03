@@ -96,7 +96,7 @@ namespace VIDEO
 
         if (m_handle)
           m_handle->MarkFinished();
-        m_handle = NULL;
+        m_handle = nullptr;
 
         m_bRunning = false;
 
@@ -179,7 +179,7 @@ namespace VIDEO
 
     if (m_handle)
       m_handle->MarkFinished();
-    m_handle = NULL;
+    m_handle = nullptr;
   }
 
   void CVideoInfoScanner::Start(const std::string& strDirectory, bool scanAll)
@@ -532,7 +532,7 @@ namespace VIDEO
         }
       }
 
-      pURL = NULL;
+      pURL = nullptr;
 
       // Keep track of directories we've seen
       if (m_bClean && pItem->m_bIsFolder)

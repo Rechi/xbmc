@@ -92,7 +92,7 @@ protected:
   std::string m_filename;
   IFile*   m_cacheFileRead;
   IFile*   m_cacheFileWrite;
-  CEvent*  m_hDataAvailEvent;
+  CEvent* m_hDataAvailEvent = nullptr;
   volatile int64_t m_nStartPosition = 0;
   volatile int64_t m_nWritePosition = 0;
   volatile int64_t m_nReadPosition = 0;

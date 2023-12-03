@@ -30,7 +30,7 @@ CGameClientJoystick::CGameClientJoystick(CGameClient& gameClient,
     m_controller(controller),
     m_portInput(new CPortInput(this))
 {
-  assert(m_controller.get() != NULL);
+  assert(m_controller.get() != nullptr);
 }
 
 CGameClientJoystick::~CGameClientJoystick() = default;

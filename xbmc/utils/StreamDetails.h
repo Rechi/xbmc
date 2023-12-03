@@ -31,14 +31,14 @@ public:
     SUBTITLE
   };
 
-  explicit CStreamDetail(StreamType type) : m_eType(type), m_pParent(NULL) {}
+  explicit CStreamDetail(StreamType type) : m_eType(type) {}
   virtual ~CStreamDetail() = default;
   virtual bool IsWorseThan(const CStreamDetail &that) const = 0;
 
   const StreamType m_eType;
 
 protected:
-  CStreamDetails *m_pParent;
+  CStreamDetails* m_pParent = nullptr;
   friend class CStreamDetails;
 };
 

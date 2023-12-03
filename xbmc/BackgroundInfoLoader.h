@@ -54,7 +54,7 @@ protected:
 
   volatile bool m_bIsLoading;
   volatile bool m_bStop;
-  CThread *m_thread;
+  CThread* m_thread = nullptr;
 
   IBackgroundLoaderObserver* m_pObserver;
   IProgressCallback* m_pProgressCallback;

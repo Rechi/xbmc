@@ -36,7 +36,7 @@ bool CPicture::GetThumbnailFromSurface(const unsigned char* buffer, int width, i
 
   // get an image handler
   IImage* image = ImageFactory::CreateLoader(thumbFile);
-  if (image == NULL ||
+  if (image == nullptr ||
       !image->CreateThumbnailFromSurface(const_cast<unsigned char*>(buffer), width, height,
                                          XB_FMT_A8R8G8B8, stride, thumbFile, thumb, thumbsize))
   {
@@ -63,7 +63,9 @@ bool CPicture::CreateThumbnailFromSurface(const unsigned char *buffer, int width
   unsigned char *thumb = NULL;
   unsigned int thumbsize=0;
   IImage* pImage = ImageFactory::CreateLoader(thumbFile);
-  if(pImage == NULL || !pImage->CreateThumbnailFromSurface(const_cast<unsigned char*>(buffer), width, height, XB_FMT_A8R8G8B8, stride, thumbFile.c_str(), thumb, thumbsize))
+  if (pImage == nullptr || !pImage->CreateThumbnailFromSurface(
+                               const_cast<unsigned char*>(buffer), width, height, XB_FMT_A8R8G8B8,
+                               stride, thumbFile.c_str(), thumb, thumbsize))
   {
     CLog::Log(LOGERROR, "Failed to CreateThumbnailFromSurface for {}",
               CURL::GetRedacted(thumbFile));
@@ -121,7 +123,7 @@ bool CPicture::ResizeTexture(const std::string& image,
                              CPictureScalingAlgorithm::Algorithm
                                  scalingAlgorithm /* = CPictureScalingAlgorithm::NoAlgorithm */)
 {
-  if (image.empty() || texture == NULL)
+  if (image.empty() || texture == nullptr)
     return false;
 
   return ResizeTexture(image, texture->GetPixels(), texture->GetWidth(), texture->GetHeight(), texture->GetPitch(),

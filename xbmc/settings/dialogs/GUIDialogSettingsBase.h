@@ -169,15 +169,15 @@ protected:
   std::shared_ptr<CSettingAction> m_resetSetting;
   std::shared_ptr<CSettingCategory> m_dummyCategory;
 
-  CGUISpinControlEx* m_pOriginalSpin;
-  CGUISettingsSliderControl* m_pOriginalSlider;
-  CGUIRadioButtonControl* m_pOriginalRadioButton;
+  CGUISpinControlEx* m_pOriginalSpin = nullptr;
+  CGUISettingsSliderControl* m_pOriginalSlider = nullptr;
+  CGUIRadioButtonControl* m_pOriginalRadioButton = nullptr;
   CGUIColorButtonControl* m_pOriginalColorButton = nullptr;
-  CGUIButtonControl* m_pOriginalCategoryButton;
-  CGUIButtonControl* m_pOriginalButton;
-  CGUIEditControl* m_pOriginalEdit;
-  CGUIImage* m_pOriginalImage;
-  CGUILabelControl* m_pOriginalGroupTitle;
+  CGUIButtonControl* m_pOriginalCategoryButton = nullptr;
+  CGUIButtonControl* m_pOriginalButton = nullptr;
+  CGUIEditControl* m_pOriginalEdit = nullptr;
+  CGUIImage* m_pOriginalImage = nullptr;
+  CGUILabelControl* m_pOriginalGroupTitle = nullptr;
   bool m_newOriginalEdit = false;
 
   BaseSettingControlPtr

@@ -62,7 +62,7 @@ bool CDVDDemuxVobsub::Open(const std::string& filename, int source, const std::s
   CFileItem item(vobsub, false);
   item.SetMimeType("video/x-vobsub");
   item.SetContentLookup(false);
-  m_Input = CDVDFactoryInputStream::CreateInputStream(NULL, item);
+  m_Input = CDVDFactoryInputStream::CreateInputStream(nullptr, item);
   if (!m_Input || !m_Input->Open())
     return false;
 

@@ -283,7 +283,7 @@ CActiveAE::CActiveAE() :
   m_muted = false;
   m_aeMuted = false;
   m_mode = MODE_PCM;
-  m_encoder = NULL;
+  m_encoder = nullptr;
   m_vizInitialized = false;
   m_sinkHasVolume = false;
   m_aeGUISoundForce = false;
@@ -443,7 +443,7 @@ void CActiveAE::StateMachine(int signal, Protocol *port, Message *msg)
         }
       }
       {
-        std::string portName = port == NULL ? "timer" : port->portName;
+        std::string portName = port == nullptr ? "timer" : port->portName;
         CLog::Log(LOGWARNING, "CActiveAE::{} - signal: {} from port: {} not handled for state: {}",
                   __FUNCTION__, signal, portName, m_state);
       }
@@ -484,7 +484,7 @@ void CActiveAE::StateMachine(int signal, Protocol *port, Message *msg)
       break;
 
     case AE_TOP_ERROR:
-      if (port == NULL) // timeout
+      if (port == nullptr) // timeout
       {
         switch (signal)
         {
@@ -549,7 +549,7 @@ void CActiveAE::StateMachine(int signal, Protocol *port, Message *msg)
       break;
 
     case AE_TOP_RECONFIGURING:
-      if (port == NULL) // timeout
+      if (port == nullptr) // timeout
       {
         switch (signal)
         {
@@ -936,7 +936,7 @@ void CActiveAE::StateMachine(int signal, Protocol *port, Message *msg)
           break;
         }
       }
-      else if (port == NULL) // timeout
+      else if (port == nullptr) // timeout
       {
         switch (signal)
         {
@@ -973,7 +973,7 @@ void CActiveAE::StateMachine(int signal, Protocol *port, Message *msg)
           break;
         }
       }
-      else if (port == NULL) // timeout
+      else if (port == nullptr) // timeout
       {
         switch (signal)
         {
@@ -1009,7 +1009,7 @@ void CActiveAE::StateMachine(int signal, Protocol *port, Message *msg)
       break;
 
     case AE_TOP_CONFIGURED_PLAY:
-      if (port == NULL) // timeout
+      if (port == nullptr) // timeout
       {
         switch (signal)
         {
@@ -1049,8 +1049,8 @@ void CActiveAE::StateMachine(int signal, Protocol *port, Message *msg)
 
 void CActiveAE::Process()
 {
-  Message *msg = NULL;
-  Protocol *port = NULL;
+  Message* msg = nullptr;
+  Protocol* port = nullptr;
   bool gotMsg;
   XbmcThreads::EndTime<> timer;
 
@@ -1077,7 +1077,7 @@ void CActiveAE::Process()
       if (!m_bStateMachineSelfTrigger)
       {
         msg->Release();
-        msg = NULL;
+        msg = nullptr;
       }
       continue;
     }
@@ -1123,7 +1123,7 @@ void CActiveAE::Process()
       if (!m_bStateMachineSelfTrigger)
       {
         msg->Release();
-        msg = NULL;
+        msg = nullptr;
       }
       continue;
     }
@@ -1145,7 +1145,7 @@ void CActiveAE::Process()
       if (!m_bStateMachineSelfTrigger)
       {
         msg->Release();
-        msg = NULL;
+        msg = nullptr;
       }
     }
   }
@@ -1254,7 +1254,7 @@ void CActiveAE::Configure(AEAudioFormat *desiredFmt)
     m_sink.m_controlPort.SendOutMessage(CSinkControlProtocol::STREAMING, &streaming, sizeof(bool));
 
     delete m_encoder;
-    m_encoder = NULL;
+    m_encoder = nullptr;
 
     if (m_encoderBuffers)
     {
@@ -1482,7 +1482,7 @@ CActiveAEStream* CActiveAE::CreateStream(MsgStreamNew *streamMsg)
   }
   if (hasRawStream || (hasStream && (streamMsg->format.m_dataFormat == AE_FMT_RAW)))
   {
-    return NULL;
+    return nullptr;
   }
 
   // create the stream
@@ -1958,7 +1958,7 @@ bool CActiveAE::RunStages()
           if (m_settings.config == AE_CONFIG_MATCH)
             Configure(&slave->m_format);
 
-          (*it)->m_streamSlave = NULL;
+          (*it)->m_streamSlave = nullptr;
         }
         (*it)->m_streamDrained = true;
         (*it)->m_streamDraining = false;
@@ -2011,7 +2011,7 @@ bool CActiveAE::RunStages()
     // mix streams and sounds sounds
     if (m_mode != MODE_RAW)
     {
-      CSampleBuffer *out = NULL;
+      CSampleBuffer* out = nullptr;
       if (!m_sounds_playing.empty() && m_streams.empty())
       {
         if (m_silenceBuffers && !m_silenceBuffers->m_freeSamples.empty())
@@ -2137,7 +2137,7 @@ bool CActiveAE::RunStages()
           }
           else
           {
-            CSampleBuffer *mix = NULL;
+            CSampleBuffer* mix = nullptr;
             mix = (*it)->m_processingBuffers->m_outputSamples.front();
             (*it)->m_processingBuffers->m_outputSamples.pop_front();
 
@@ -2345,7 +2345,7 @@ bool CActiveAE::RunStages()
   busy |= m_sinkBuffers->ResampleBuffers();
   while(!m_sinkBuffers->m_outputSamples.empty())
   {
-    CSampleBuffer *out = NULL;
+    CSampleBuffer* out = nullptr;
     out = m_sinkBuffers->m_outputSamples.front();
     m_sinkBuffers->m_outputSamples.pop_front();
     m_sink.m_dataPort.SendOutMessage(CSinkDataProtocol::SAMPLE,
@@ -2379,7 +2379,7 @@ bool CActiveAE::HasWork()
 
 CSampleBuffer* CActiveAE::SyncStream(CActiveAEStream *stream)
 {
-  CSampleBuffer *ret = NULL;
+  CSampleBuffer* ret = nullptr;
 
   if (!stream->m_pClock)
     return ret;

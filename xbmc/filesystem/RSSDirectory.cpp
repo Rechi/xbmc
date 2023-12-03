@@ -581,7 +581,7 @@ bool CRSSDirectory::GetDirectory(const CURL& url, CFileItemList &items)
   else
     return false;
 
-  TiXmlElement* child = NULL;
+  TiXmlElement* child = nullptr;
   for (child = channelXmlNode->FirstChildElement("item"); child; child = child->NextSiblingElement())
   {
     // Create new item,

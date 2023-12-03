@@ -51,7 +51,7 @@ public:
   bool HasProgressIndicator() const;
 
 protected:
-  CProgressJob();
+  CProgressJob() = default;
   explicit CProgressJob(CGUIDialogProgressBarHandle* progressBar);
 
   /*!
@@ -158,6 +158,6 @@ private:
   bool m_autoClose = true;
   bool m_updateProgress = true;
   bool m_updateInformation = true;
-  mutable CGUIDialogProgressBarHandle* m_progress;
-  mutable CGUIDialogProgress* m_progressDialog;
+  mutable CGUIDialogProgressBarHandle* m_progress = nullptr;
+  mutable CGUIDialogProgress* m_progressDialog = nullptr;
 };

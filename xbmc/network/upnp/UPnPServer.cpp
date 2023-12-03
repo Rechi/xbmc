@@ -103,7 +103,7 @@ NPT_Result
 CUPnPServer::SetupServices()
 {
     PLT_MediaConnect::SetupServices();
-    PLT_Service* service = NULL;
+    PLT_Service* service = nullptr;
     NPT_Result result = FindServiceById("urn:upnp-org:serviceId:ContentDirectory", service);
     if (service)
     {
@@ -162,10 +162,10 @@ CUPnPServer::UpdateContainer(const std::string& id)
 void
 CUPnPServer::PropagateUpdates()
 {
-    PLT_Service* service = NULL;
+    PLT_Service* service = nullptr;
     NPT_String current_ids;
     std::string buffer;
-    std::map<std::string, std::pair<bool, unsigned long> >::iterator itr;
+    std::map<std::string, std::pair<bool, unsigned long>>::iterator itr;
 
     if (m_scanning || !CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_SERVICES_UPNPANNOUNCE))
         return;
@@ -266,8 +266,8 @@ PLT_MediaObject* CUPnPServer::Build(const std::shared_ptr<CFileItem>& item,
                                     NPT_Reference<CThumbLoader>& thumb_loader,
                                     const char* parent_id /* = NULL */)
 {
-    PLT_MediaObject* object = NULL;
-    NPT_String       path = item->GetPath().c_str();
+    PLT_MediaObject* object = nullptr;
+    NPT_String path = item->GetPath().c_str();
 
     //HACK: temporary disabling count as it thrashes HDD
     with_count = false;
@@ -313,7 +313,8 @@ PLT_MediaObject* CUPnPServer::Build(const std::shared_ptr<CFileItem>& item,
                     MUSICDATABASEDIRECTORY::CDirectoryNode::GetDatabaseInfo((const char*)path, params);
 
                     CMusicDatabase db;
-                    if (!db.Open() ) return NULL;
+                    if (!db.Open())
+                        return nullptr;
 
                     if (params.GetSongId() >= 0 ) {
                         CSong song;
@@ -360,7 +361,8 @@ PLT_MediaObject* CUPnPServer::Build(const std::shared_ptr<CFileItem>& item,
                     VIDEODATABASEDIRECTORY::CDirectoryNode::GetDatabaseInfo((const char*)path, params);
 
                     CVideoDatabase db;
-                    if (!db.Open() ) return NULL;
+                    if (!db.Open())
+                        return nullptr;
 
                     if (params.GetMovieId() >= 0 )
                         db.GetMovieInfo((const char*)path, *item->GetVideoInfoTag(), params.GetMovieId());
@@ -450,7 +452,7 @@ PLT_MediaObject* CUPnPServer::Build(const std::shared_ptr<CFileItem>& item,
 
 failure:
     delete object;
-    return NULL;
+    return nullptr;
 }
 
 /*----------------------------------------------------------------------
@@ -1143,7 +1145,7 @@ CUPnPServer::OnUpdateObject(PLT_ActionReference&             action,
     bool updatelisting(false);
 
     // we pause eventing as multiple announces may happen in this operation
-    PLT_Service* service = NULL;
+    PLT_Service* service = nullptr;
     NPT_CHECK_LABEL(FindServiceById("urn:upnp-org:serviceId:ContentDirectory", service), error);
     NPT_CHECK_LABEL(service->PauseEventing(), error);
 

@@ -107,7 +107,11 @@ protected:
 class CWebSocket
 {
 public:
-  CWebSocket() { m_state = WebSocketStateNotConnected; m_message = NULL; }
+  CWebSocket()
+  {
+    m_state = WebSocketStateNotConnected;
+    m_message = nullptr;
+  }
   virtual ~CWebSocket()
   {
     if (m_message)

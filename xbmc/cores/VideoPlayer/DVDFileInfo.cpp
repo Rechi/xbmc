@@ -54,7 +54,7 @@ bool CDVDFileInfo::GetFileDuration(const std::string &path, int& duration)
   std::unique_ptr<CDVDDemux> demux;
 
   CFileItem item(path, false);
-  auto input = CDVDFactoryInputStream::CreateInputStream(NULL, item);
+  auto input = CDVDFactoryInputStream::CreateInputStream(nullptr, item);
   if (!input)
     return false;
 
@@ -299,7 +299,7 @@ bool CDVDFileInfo::GetFileStreamDetails(CFileItem *pItem)
 
   CFileItem item(playablePath, false);
   item.SetMimeTypeForInternetFile();
-  auto pInputStream = CDVDFactoryInputStream::CreateInputStream(NULL, item);
+  auto pInputStream = CDVDFactoryInputStream::CreateInputStream(nullptr, item);
   if (!pInputStream)
     return false;
 
