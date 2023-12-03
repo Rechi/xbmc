@@ -20,7 +20,7 @@
 class CDebugRenderer
 {
 public:
-  CDebugRenderer();
+  CDebugRenderer() = default;
   virtual ~CDebugRenderer();
   void Initialize();
   void Dispose();

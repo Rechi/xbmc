@@ -20,13 +20,9 @@
 
 using namespace KODI;
 
-CServiceBroker::CServiceBroker()
-{
-}
+CServiceBroker::CServiceBroker() = default;
 
-CServiceBroker::~CServiceBroker()
-{
-}
+CServiceBroker::~CServiceBroker() = default;
 
 std::shared_ptr<CAppParams> CServiceBroker::GetAppParams()
 {

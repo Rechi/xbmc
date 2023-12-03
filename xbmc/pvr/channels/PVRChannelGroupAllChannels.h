@@ -35,7 +35,7 @@ public:
    */
   explicit CPVRChannelGroupAllChannels(const CPVRChannelsPath& path);
 
-  ~CPVRChannelGroupAllChannels() override;
+  ~CPVRChannelGroupAllChannels() override = default;
 
   /*!
    * @see CPVRChannelGroup::IsGroupMember

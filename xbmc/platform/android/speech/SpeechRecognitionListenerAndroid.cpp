@@ -25,10 +25,6 @@ CSpeechRecognitionListenerAndroid::CSpeechRecognitionListenerAndroid(
 {
 }
 
-CSpeechRecognitionListenerAndroid::~CSpeechRecognitionListenerAndroid()
-{
-}
-
 void CSpeechRecognitionListenerAndroid::onReadyForSpeech(CJNIBundle bundle)
 {
   if (m_listener)

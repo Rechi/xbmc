@@ -39,9 +39,7 @@ PERIPHERALS::CPeripheralBusGCController::CPeripheralBusGCController(CPeripherals
   m_scanResults = GetInputDevices();
 }
 
-PERIPHERALS::CPeripheralBusGCController::~CPeripheralBusGCController()
-{
-}
+PERIPHERALS::CPeripheralBusGCController::~CPeripheralBusGCController() = default;
 
 bool PERIPHERALS::CPeripheralBusGCController::InitializeProperties(CPeripheral& peripheral)
 {

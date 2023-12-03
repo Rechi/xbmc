@@ -36,10 +36,6 @@ CSpeechRecognitionAndroid::CSpeechRecognitionAndroid(const CJNIContext& context)
 {
 }
 
-CSpeechRecognitionAndroid::~CSpeechRecognitionAndroid()
-{
-}
-
 void CSpeechRecognitionAndroid::StartSpeechRecognition(
     const std::shared_ptr<speech::ISpeechRecognitionListener>& listener)
 {

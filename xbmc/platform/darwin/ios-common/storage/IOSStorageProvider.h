@@ -16,8 +16,8 @@
 class CIOSStorageProvider : public IStorageProvider
 {
 public:
-  CIOSStorageProvider() {}
-  ~CIOSStorageProvider() override {}
+  CIOSStorageProvider() = default;
+  ~CIOSStorageProvider() override = default;
 
   void Initialize() override {}
   void Stop() override {}

@@ -185,9 +185,7 @@ CXBMCApp::CXBMCApp(ANativeActivity* nativeActivity, IInputHandler& inputHandler)
   xg::initJni(env);
 }
 
-CXBMCApp::~CXBMCApp()
-{
-}
+CXBMCApp::~CXBMCApp() = default;
 
 void CXBMCApp::Announce(ANNOUNCEMENT::AnnouncementFlag flag,
                         const std::string& sender,

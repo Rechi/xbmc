@@ -64,10 +64,6 @@ CAEBitstreamPacker::CAEBitstreamPacker()
   Reset();
 }
 
-CAEBitstreamPacker::~CAEBitstreamPacker()
-{
-}
-
 void CAEBitstreamPacker::Pack(CAEStreamInfo &info, uint8_t* data, int size)
 {
   m_pauseDuration = 0;

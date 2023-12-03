@@ -21,7 +21,7 @@ class CAEBitstreamPacker
 {
 public:
   CAEBitstreamPacker();
-  ~CAEBitstreamPacker();
+  ~CAEBitstreamPacker() = default;
 
   void Pack(CAEStreamInfo &info, uint8_t* data, int size);
   bool PackPause(CAEStreamInfo &info, unsigned int millis, bool iecBursts);

@@ -27,10 +27,6 @@
 #include <cstring>
 #include <sstream>
 
-CScraperUrl::CScraperUrl()
-{
-}
-
 CScraperUrl::CScraperUrl(const std::string& strUrl) : CScraperUrl()
 {
   ParseFromData(strUrl);

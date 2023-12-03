@@ -153,10 +153,6 @@ CWSDiscoveryListenerUDP::CWSDiscoveryListenerUDP()
 {
 }
 
-CWSDiscoveryListenerUDP::~CWSDiscoveryListenerUDP()
-{
-}
-
 void CWSDiscoveryListenerUDP::Stop()
 {
   StopThread(true);

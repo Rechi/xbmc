@@ -83,10 +83,6 @@ CGUIDialogVideoVersion::CGUIDialogVideoVersion(int id)
     CLog::Log(LOGERROR, "{}: Failed to open database", __FUNCTION__);
 }
 
-CGUIDialogVideoVersion::~CGUIDialogVideoVersion()
-{
-}
-
 bool CGUIDialogVideoVersion::OnMessage(CGUIMessage& message)
 {
   switch (message.GetMessage())

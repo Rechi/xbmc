@@ -119,7 +119,7 @@ public:
   explicit SqliteDataset(SqliteDatabase* newDb);
 
   /* destructor */
-  ~SqliteDataset() override;
+  ~SqliteDataset() override = default;
 
   /* set autorefresh boolean value (if true - refresh the data after edit()
 or insert() operations default = false) */

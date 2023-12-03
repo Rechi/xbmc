@@ -25,7 +25,7 @@ class CGUIWindowPVRSearchBase : public CGUIWindowPVRBase
 {
 public:
   CGUIWindowPVRSearchBase(bool bRadio, int id, const std::string& xmlFile);
-  ~CGUIWindowPVRSearchBase() override;
+  ~CGUIWindowPVRSearchBase() override = default;
 
   bool OnAction(const CAction& action) override;
   bool OnMessage(CGUIMessage& message) override;

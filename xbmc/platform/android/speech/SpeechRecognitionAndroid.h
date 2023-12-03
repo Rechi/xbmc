@@ -27,7 +27,7 @@ class CSpeechRecognitionAndroid : public ISpeechRecognitionCallback,
 {
 public:
   explicit CSpeechRecognitionAndroid(const CJNIContext& context);
-  ~CSpeechRecognitionAndroid() override;
+  ~CSpeechRecognitionAndroid() override = default;
 
   // ISpeechRecognition implementation
   void StartSpeechRecognition(

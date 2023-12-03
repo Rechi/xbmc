@@ -31,7 +31,7 @@ class COSScreenSaverManager;
 class COSScreenSaverInhibitor
 {
 public:
-  COSScreenSaverInhibitor() noexcept;
+  COSScreenSaverInhibitor() noexcept = default;
   COSScreenSaverInhibitor(COSScreenSaverInhibitor&& other) noexcept;
   COSScreenSaverInhibitor& operator=(COSScreenSaverInhibitor&& other) noexcept;
   ~COSScreenSaverInhibitor() noexcept;
