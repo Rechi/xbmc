@@ -78,7 +78,8 @@ CSeat::CSeat(std::uint32_t globalName, wayland::seat_t const& seat, CConnection&
 : m_globalName{globalName}, m_seat{seat}, m_selection{connection, seat}
 {
   m_seat.on_name() = [this](std::string name) { m_name = std::move(name); };
-  m_seat.on_capabilities() = std::bind(&CSeat::HandleOnCapabilities, this, std::placeholders::_1);
+  m_seat.on_capabilities() = [this](auto&& PH1)
+  { HandleOnCapabilities(std::forward<decltype(PH1)>(PH1)); };
 }
 
 CSeat::~CSeat() noexcept = default;
@@ -118,15 +119,18 @@ void CSeat::RemoveRawInputHandlerTouch(KODI::WINDOWING::WAYLAND::IRawInputHandle
 
 void CSeat::HandleOnCapabilities(const wayland::seat_capability& caps)
 {
-  if (HandleCapabilityChange(caps, wayland::seat_capability::keyboard, GetName(), "keyboard", m_keyboard, std::bind(&wayland::seat_t::get_keyboard, m_seat)))
+  if (HandleCapabilityChange(caps, wayland::seat_capability::keyboard, GetName(), "keyboard",
+                             m_keyboard, [this] { return m_seat.get_keyboard(); }))
   {
     HandleKeyboardCapability();
   }
-  if (HandleCapabilityChange(caps, wayland::seat_capability::pointer, GetName(), "pointer", m_pointer, std::bind(&wayland::seat_t::get_pointer, m_seat)))
+  if (HandleCapabilityChange(caps, wayland::seat_capability::pointer, GetName(), "pointer",
+                             m_pointer, [this] { return m_seat.get_pointer(); }))
   {
     HandlePointerCapability();
   }
-  if (HandleCapabilityChange(caps, wayland::seat_capability::touch, GetName(), "touch", m_touch, std::bind(&wayland::seat_t::get_touch, m_seat)))
+  if (HandleCapabilityChange(caps, wayland::seat_capability::touch, GetName(), "touch", m_touch,
+                             [this] { return m_seat.get_touch(); }))
   {
     HandleTouchCapability();
   }

@@ -36,7 +36,13 @@ bool CVideoSyncWpPresentation::Setup()
 
 void CVideoSyncWpPresentation::Run(CEvent& stopEvent)
 {
-  m_presentationHandler = m_winSystem.RegisterOnPresentationFeedback(std::bind(&CVideoSyncWpPresentation::HandlePresentation, this, _1, _2, _3, _4, _5));
+  m_presentationHandler = m_winSystem.RegisterOnPresentationFeedback(
+      [this](auto&& PH1, auto&& PH2, auto&& PH3, auto&& PH4, auto&& PH5)
+      {
+        HandlePresentation(std::forward<decltype(PH1)>(PH1), std::forward<decltype(PH2)>(PH2),
+                           std::forward<decltype(PH3)>(PH3), std::forward<decltype(PH4)>(PH4),
+                           std::forward<decltype(PH5)>(PH5));
+      });
 
   XbmcThreads::CEventGroup waitGroup{&stopEvent, &m_stopEvent};
   waitGroup.wait();
