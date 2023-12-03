@@ -213,7 +213,7 @@ bool CDVDAudioCodecAndroidMediaCodec::Open(CDVDStreamInfo &hints, CDVDCodecOptio
         {
           xbmc_jnienv()->ExceptionDescribe();
           xbmc_jnienv()->ExceptionClear();
-          m_codec = NULL;
+          m_codec = nullptr;
           continue;
         }
         CLog::Log(LOGINFO, "CDVDAudioCodecAndroidMediaCodec: Selected audio decoder: {}",

@@ -87,7 +87,7 @@ bool CGUIDialogSubtitleSettings::OnMessage(CGUIMessage& message)
 
 void CGUIDialogSubtitleSettings::OnSettingChanged(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   auto& components = CServiceBroker::GetAppComponents();
@@ -177,7 +177,7 @@ std::string CGUIDialogSubtitleSettings::BrowseForSubtitle()
 
 void CGUIDialogSubtitleSettings::OnSettingAction(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   CGUIDialogSettingsManualBase::OnSettingAction(setting);
@@ -254,7 +254,7 @@ void CGUIDialogSubtitleSettings::InitializeSettings()
   const auto appPlayer = components.GetComponent<CApplicationPlayer>();
 
   const std::shared_ptr<CSettingCategory> category = AddCategory("audiosubtitlesettings", -1);
-  if (category == NULL)
+  if (category == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogSubtitleSettings: unable to setup settings");
     return;
@@ -262,19 +262,19 @@ void CGUIDialogSubtitleSettings::InitializeSettings()
 
   // get all necessary setting groups
   const std::shared_ptr<CSettingGroup> groupAudio = AddGroup(category);
-  if (groupAudio == NULL)
+  if (groupAudio == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogSubtitleSettings: unable to setup settings");
     return;
   }
   const std::shared_ptr<CSettingGroup> groupSubtitles = AddGroup(category);
-  if (groupSubtitles == NULL)
+  if (groupSubtitles == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogSubtitleSettings: unable to setup settings");
     return;
   }
   const std::shared_ptr<CSettingGroup> groupSaveAsDefault = AddGroup(category);
-  if (groupSaveAsDefault == NULL)
+  if (groupSaveAsDefault == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogSubtitleSettings: unable to setup settings");
     return;
@@ -329,7 +329,7 @@ bool CGUIDialogSubtitleSettings::SupportsSubtitleFeature(int feature)
 void CGUIDialogSubtitleSettings::AddSubtitleStreams(const std::shared_ptr<CSettingGroup>& group,
                                                     const std::string& settingId)
 {
-  if (group == NULL || settingId.empty())
+  if (group == nullptr || settingId.empty())
     return;
 
   auto& components = CServiceBroker::GetAppComponents();

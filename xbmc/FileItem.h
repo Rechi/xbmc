@@ -333,10 +333,7 @@ public:
     return m_pvrRecordingInfoTag;
   }
 
-  inline bool HasPVRTimerInfoTag() const
-  {
-    return m_pvrTimerInfoTag != NULL;
-  }
+  inline bool HasPVRTimerInfoTag() const { return m_pvrTimerInfoTag != nullptr; }
 
   inline const std::shared_ptr<PVR::CPVRTimerInfoTag> GetPVRTimerInfoTag() const
   {

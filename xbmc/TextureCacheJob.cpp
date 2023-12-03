@@ -165,7 +165,7 @@ bool CTextureCacheJob::ResizeTexture(const std::string &url, uint8_t* &result, s
     return false;
 
   std::unique_ptr<CTexture> texture = LoadImage(image, width, height, additional_info, true);
-  if (texture == NULL)
+  if (texture == nullptr)
     return false;
 
   bool success = CPicture::ResizeTexture(image, texture.get(), width, height, result, result_size,
@@ -252,12 +252,12 @@ std::unique_ptr<CTexture> CTextureCacheJob::LoadImage(const std::string& image,
   file.FillInMimeType();
   if (!(file.IsPicture() && !(file.IsZIP() || file.IsRAR() || file.IsCBR() || file.IsCBZ() ))
       && !StringUtils::StartsWithNoCase(file.GetMimeType(), "image/") && !StringUtils::EqualsNoCase(file.GetMimeType(), "application/octet-stream")) // ignore non-pictures
-    return NULL;
+    return nullptr;
 
   std::unique_ptr<CTexture> texture =
       CTexture::LoadFromFile(image, width, height, requirePixels, file.GetMimeType());
   if (!texture)
-    return NULL;
+    return nullptr;
 
   // EXIF bits are interpreted as: <flipXY><flipY*flipX><flipX>
   // where to undo the operation we apply them in reverse order <flipX>*<flipY*flipX>*<flipXY>

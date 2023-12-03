@@ -43,7 +43,7 @@ CGUIAudioManager::~CGUIAudioManager()
 
 void CGUIAudioManager::OnSettingChanged(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   const std::string &settingId = setting->GetId();
@@ -58,7 +58,7 @@ bool CGUIAudioManager::OnSettingUpdate(const std::shared_ptr<CSetting>& setting,
                                        const char* oldSettingId,
                                        const TiXmlNode* oldSettingNode)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   if (setting->GetId() == CSettings::SETTING_LOOKANDFEEL_SOUNDSKIN)
@@ -348,13 +348,13 @@ std::shared_ptr<IAESound> CGUIAudioManager::LoadWindowSound(TiXmlNode* pWindowNo
                                                             const std::string& strIdentifier)
 {
   if (!pWindowNode)
-    return NULL;
+    return nullptr;
 
   TiXmlNode* pFileNode = pWindowNode->FirstChild(strIdentifier);
   if (pFileNode && pFileNode->FirstChild())
     return LoadSound(URIUtils::AddFileToFolder(m_strMediaDir, pFileNode->FirstChild()->Value()));
 
-  return NULL;
+  return nullptr;
 }
 
 // \brief Enable/Disable nav sounds

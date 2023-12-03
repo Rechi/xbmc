@@ -700,7 +700,7 @@ void CDVDDemuxFFmpeg::Dispose()
 
   DisposeStreams();
 
-  m_pInput = NULL;
+  m_pInput = nullptr;
 }
 
 bool CDVDDemuxFFmpeg::Reset()

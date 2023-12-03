@@ -135,7 +135,7 @@ CPosixTimezone::CPosixTimezone()
 
 void CPosixTimezone::OnSettingChanged(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   const std::string &settingId = setting->GetId();

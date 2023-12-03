@@ -78,7 +78,7 @@ void CAudioSinkAE::Destroy(bool finish)
     m_pAudioStream.reset();
   }
 
-  m_pAudioStream = NULL;
+  m_pAudioStream = nullptr;
   m_sampleRate = 0;
   m_iBitsPerSample = 0;
   m_bPassthrough = false;
