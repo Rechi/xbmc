@@ -108,6 +108,7 @@ public:
   bool IsAnalog() const;
 
 private:
+  // NOLINTNEXTLINE(modernize-use-default-member-init)
   int m_id;
   std::string m_name;
 

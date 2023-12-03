@@ -22,6 +22,7 @@ CGUIDialogKeyboardTouch::CGUIDialogKeyboardTouch()
 bool CGUIDialogKeyboardTouch::ShowAndGetInput(char_callback_t pCallback, const std::string &initialString, std::string &typedString, const std::string &heading, bool bHiddenInput)
 {
 #if defined(TARGET_DARWIN_EMBEDDED)
+  // NOLINTNEXTLINE(modernize-make-unique)
   m_keyboard.reset(new CDarwinEmbedKeyboard());
 #endif
 

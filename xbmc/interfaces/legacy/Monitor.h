@@ -163,6 +163,7 @@ namespace XBMCAddon
       ///
       onScanStarted(...);
 #else
+      // NOLINTNEXTLINE(performance-unnecessary-value-param)
       virtual void onScanStarted(const String library) { XBMC_TRACE; }
 #endif
 
@@ -184,6 +185,7 @@ namespace XBMCAddon
       ///
       onScanFinished(...);
 #else
+      // NOLINTNEXTLINE(performance-unnecessary-value-param)
       virtual void onScanFinished(const String library) { XBMC_TRACE; }
 #endif
 
@@ -205,6 +207,7 @@ namespace XBMCAddon
       ///
       onCleanStarted(...);
 #else
+      // NOLINTNEXTLINE(performance-unnecessary-value-param)
       virtual void onCleanStarted(const String library) { XBMC_TRACE; }
 #endif
 
@@ -226,6 +229,7 @@ namespace XBMCAddon
       ///
       onCleanFinished(...);
 #else
+      // NOLINTNEXTLINE(performance-unnecessary-value-param)
       virtual void onCleanFinished(const String library) { XBMC_TRACE; }
 #endif
 
@@ -247,6 +251,7 @@ namespace XBMCAddon
       ///
       onNotification(...);
 #else
+      // NOLINTNEXTLINE(performance-unnecessary-value-param)
       virtual void onNotification(const String sender, const String method, const String data)
       {
         XBMC_TRACE;

@@ -30,6 +30,7 @@ typedef fpos_t fpos64_t;
 #include <dirent.h>
 #endif
 
+// NOLINTNEXTLINE(modernize-redundant-void-arg)
 typedef void ( *PFV)(void);
 
 #define __IS_STDIN_STREAM(stream)  (stream == stdin || fileno(stream) == fileno(stdin) || fileno(stream) == 0)
