@@ -48,7 +48,7 @@ CGUIFadeLabelControl::CGUIFadeLabelControl(const CGUIFadeLabelControl &from)
   m_allLabelsShown = from.m_allLabelsShown;
 }
 
-CGUIFadeLabelControl::~CGUIFadeLabelControl(void) = default;
+CGUIFadeLabelControl::~CGUIFadeLabelControl() = default;
 
 void CGUIFadeLabelControl::SetInfo(const std::vector<GUIINFO::CGUIInfoLabel> &infoLabels)
 {

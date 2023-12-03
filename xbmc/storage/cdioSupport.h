@@ -305,12 +305,12 @@ public:
 protected:
   int ReadBlock(int superblock, uint32_t offset, uint8_t bufnum, track_t track_num);
   bool IsIt(int num);
-  int IsHFS(void);
-  int Is3DO(void);
-  int IsJoliet(void);
-  int IsUDF(void);
-  int GetSize(void);
-  int GetJolietLevel( void );
+  int IsHFS();
+  int Is3DO();
+  int IsJoliet();
+  int IsUDF();
+  int GetSize();
+  int GetJolietLevel();
   int GuessFilesystem(int start_session, track_t track_num);
 
   uint32_t CddbDiscId();

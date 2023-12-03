@@ -16,7 +16,7 @@ namespace MUSIC_INFO
 class CMusicInfoTagLoaderSHN: public IMusicInfoTagLoader
 {
 public:
-  CMusicInfoTagLoaderSHN(void);
+  CMusicInfoTagLoaderSHN();
   ~CMusicInfoTagLoaderSHN() override;
 
   bool Load(const std::string& strFileName, CMusicInfoTag& tag, EmbeddedArt *art = NULL) override;

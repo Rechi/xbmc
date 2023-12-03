@@ -22,9 +22,9 @@
 #ifdef TARGET_POSIX
 #include "platform/posix/ConvUtils.h"
 #endif
-CViewDatabase::CViewDatabase(void) = default;
+CViewDatabase::CViewDatabase() = default;
 
-CViewDatabase::~CViewDatabase(void) = default;
+CViewDatabase::~CViewDatabase() = default;
 
 bool CViewDatabase::Open()
 {

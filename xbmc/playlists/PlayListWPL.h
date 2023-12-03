@@ -17,8 +17,8 @@ class CPlayListWPL :
       public CPlayList
 {
 public:
-  CPlayListWPL(void);
-  ~CPlayListWPL(void) override;
+  CPlayListWPL();
+  ~CPlayListWPL() override;
   bool LoadData(std::istream& stream) override;
   void Save(const std::string& strFileName) const override;
 };

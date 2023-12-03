@@ -33,9 +33,9 @@ using KODI::UTILITY::CDigest;
 CGUIKeyboard *CGUIKeyboardFactory::g_activeKeyboard = NULL;
 FILTERING CGUIKeyboardFactory::m_filtering = FILTERING_NONE;
 
-CGUIKeyboardFactory::CGUIKeyboardFactory(void) = default;
+CGUIKeyboardFactory::CGUIKeyboardFactory() = default;
 
-CGUIKeyboardFactory::~CGUIKeyboardFactory(void) = default;
+CGUIKeyboardFactory::~CGUIKeyboardFactory() = default;
 
 void CGUIKeyboardFactory::keyTypedCB(CGUIKeyboard *ref, const std::string &typedString)
 {

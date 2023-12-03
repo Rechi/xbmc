@@ -61,7 +61,7 @@ public:
   // addon settings
   bool SaveSettings(AddonInstanceId id = ADDON_SETTINGS_ID) override;
 
-  bool DllLoaded(void) const;
+  bool DllLoaded() const;
 
   /*!
    * @brief Get api version of moduleType type

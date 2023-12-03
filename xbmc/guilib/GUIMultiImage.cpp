@@ -59,7 +59,7 @@ CGUIMultiImage::CGUIMultiImage(const CGUIMultiImage &from)
   m_jobID = 0;
 }
 
-CGUIMultiImage::~CGUIMultiImage(void)
+CGUIMultiImage::~CGUIMultiImage()
 {
   CancelLoading();
 }

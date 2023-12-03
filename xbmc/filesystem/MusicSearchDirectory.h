@@ -15,8 +15,8 @@ namespace XFILE
   class CMusicSearchDirectory : public IDirectory
   {
   public:
-    CMusicSearchDirectory(void);
-    ~CMusicSearchDirectory(void) override;
+    CMusicSearchDirectory();
+    ~CMusicSearchDirectory() override;
     bool GetDirectory(const CURL& url, CFileItemList &items) override;
     bool Exists(const CURL& url) override;
     bool AllowAll() const override { return true; }

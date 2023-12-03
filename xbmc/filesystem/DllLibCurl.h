@@ -47,7 +47,7 @@ public:
   }
   void easy_cleanup(CURL_HANDLE* handle);
   virtual CURL_HANDLE* easy_duphandle(CURL_HANDLE* handle);
-  CURLM* multi_init(void);
+  CURLM* multi_init();
   CURLMcode multi_add_handle(CURLM* multi_handle, CURL_HANDLE* easy_handle);
   CURLMcode multi_perform(CURLM* multi_handle, int* running_handles);
   CURLMcode multi_remove_handle(CURLM* multi_handle, CURL_HANDLE* easy_handle);

@@ -15,8 +15,8 @@ class CFileItemList;
 class CGUIWindowMusicPlaylistEditor : public CGUIWindowMusicBase
 {
 public:
-  CGUIWindowMusicPlaylistEditor(void);
-  ~CGUIWindowMusicPlaylistEditor(void) override;
+  CGUIWindowMusicPlaylistEditor();
+  ~CGUIWindowMusicPlaylistEditor() override;
 
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;

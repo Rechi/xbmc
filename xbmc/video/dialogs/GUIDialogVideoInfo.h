@@ -22,8 +22,8 @@ class CGUIDialogVideoInfo :
       public CGUIDialog
 {
 public:
-  CGUIDialogVideoInfo(void);
-  ~CGUIDialogVideoInfo(void) override;
+  CGUIDialogVideoInfo();
+  ~CGUIDialogVideoInfo() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;
   void SetMovie(const CFileItem *item);

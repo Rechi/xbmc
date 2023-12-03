@@ -14,9 +14,9 @@
 
 using namespace XFILE;
 
-CImageFile::CImageFile(void) = default;
+CImageFile::CImageFile() = default;
 
-CImageFile::~CImageFile(void)
+CImageFile::~CImageFile()
 {
   Close();
 }

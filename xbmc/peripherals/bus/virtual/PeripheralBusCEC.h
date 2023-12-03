@@ -29,7 +29,7 @@ class CPeripheralBusCEC : public CPeripheralBus
 {
 public:
   explicit CPeripheralBusCEC(CPeripherals& manager);
-  ~CPeripheralBusCEC(void) override;
+  ~CPeripheralBusCEC() override;
 
   /*!
    * @see PeripheralBus::PerformDeviceScan()

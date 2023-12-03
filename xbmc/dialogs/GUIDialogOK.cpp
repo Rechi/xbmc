@@ -14,12 +14,11 @@
 #include "guilib/GUIWindowManager.h"
 #include "utils/Variant.h"
 
-CGUIDialogOK::CGUIDialogOK(void)
-    : CGUIDialogBoxBase(WINDOW_DIALOG_OK, "DialogConfirm.xml")
+CGUIDialogOK::CGUIDialogOK() : CGUIDialogBoxBase(WINDOW_DIALOG_OK, "DialogConfirm.xml")
 {
 }
 
-CGUIDialogOK::~CGUIDialogOK(void) = default;
+CGUIDialogOK::~CGUIDialogOK() = default;
 
 bool CGUIDialogOK::OnMessage(CGUIMessage& message)
 {

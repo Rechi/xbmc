@@ -412,7 +412,7 @@ bool CWinSystemIOS::InitDisplayLink(CVideoSyncIos *syncImpl)
   return m_pDisplayLink->impl != nil;
 }
 
-void CWinSystemIOS::DeinitDisplayLink(void)
+void CWinSystemIOS::DeinitDisplayLink()
 {
   if (m_pDisplayLink->impl)
   {

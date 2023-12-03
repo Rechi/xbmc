@@ -16,11 +16,10 @@
 
 using namespace XFILE;
 
-CVideoDatabaseFile::CVideoDatabaseFile(void)
-  : COverrideFile(true)
+CVideoDatabaseFile::CVideoDatabaseFile() : COverrideFile(true)
 { }
 
-CVideoDatabaseFile::~CVideoDatabaseFile(void) = default;
+CVideoDatabaseFile::~CVideoDatabaseFile() = default;
 
 CVideoInfoTag CVideoDatabaseFile::GetVideoTag(const CURL& url)
 {

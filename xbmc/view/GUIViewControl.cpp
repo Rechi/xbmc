@@ -21,7 +21,7 @@
 
 #include <utility>
 
-CGUIViewControl::CGUIViewControl(void)
+CGUIViewControl::CGUIViewControl()
 {
   m_viewAsControl = -1;
   m_parentWindow = WINDOW_INVALID;
@@ -29,7 +29,7 @@ CGUIViewControl::CGUIViewControl(void)
   Reset();
 }
 
-CGUIViewControl::~CGUIViewControl(void) = default;
+CGUIViewControl::~CGUIViewControl() = default;
 
 void CGUIViewControl::Reset()
 {

@@ -20,8 +20,8 @@ class CMultiPathDirectory :
       public IDirectory
 {
 public:
-  CMultiPathDirectory(void);
-  ~CMultiPathDirectory(void) override;
+  CMultiPathDirectory();
+  ~CMultiPathDirectory() override;
   bool GetDirectory(const CURL& url, CFileItemList &items) override;
   bool Exists(const CURL& url) override;
   bool Remove(const CURL& url) override;

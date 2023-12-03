@@ -28,7 +28,7 @@ public:
   ~CGUISelectKeyButton() override = default;
 
   // implementation of IFeatureButton
-  const CPhysicalFeature& Feature(void) const override;
+  const CPhysicalFeature& Feature() const override;
   bool AllowWizard() const override { return false; }
   bool PromptForInput(CEvent& waitEvent) override;
   bool IsFinished() const override;

@@ -31,7 +31,7 @@ CDVDAudioCodecPassthrough::CDVDAudioCodecPassthrough(CProcessInfo &processInfo, 
   m_deviceIsRAW = processInfo.WantsRawPassthrough();
 }
 
-CDVDAudioCodecPassthrough::~CDVDAudioCodecPassthrough(void)
+CDVDAudioCodecPassthrough::~CDVDAudioCodecPassthrough()
 {
   Dispose();
 }

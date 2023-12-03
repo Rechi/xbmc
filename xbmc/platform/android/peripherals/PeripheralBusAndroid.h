@@ -35,7 +35,7 @@ namespace PERIPHERALS
 
     // specialisation of CPeripheralBus
     bool InitializeProperties(CPeripheral& peripheral) override;
-    void Initialise(void) override;
+    void Initialise() override;
     void ProcessEvents() override;
 
     // implementations of IInputDeviceCallbacks

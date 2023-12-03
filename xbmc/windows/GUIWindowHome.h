@@ -20,8 +20,8 @@ class CGUIWindowHome :
       public IJobCallback
 {
 public:
-  CGUIWindowHome(void);
-  ~CGUIWindowHome(void) override;
+  CGUIWindowHome();
+  ~CGUIWindowHome() override;
   void OnInitWindow() override;
   void Announce(ANNOUNCEMENT::AnnouncementFlag flag,
                 const std::string& sender,

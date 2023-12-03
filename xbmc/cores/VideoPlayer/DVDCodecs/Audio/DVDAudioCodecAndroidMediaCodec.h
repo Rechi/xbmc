@@ -53,7 +53,7 @@ protected:
   int GetEncodedSampleRate() { return m_samplerate; }
   enum AEDataFormat GetDataFormat() { return AE_FMT_S16NE; }
 
-  bool ConfigureMediaCodec(void);
+  bool ConfigureMediaCodec();
   void ConfigureOutputFormat(CJNIMediaFormat* mediaformat);
 
   CDVDStreamInfo m_hints;

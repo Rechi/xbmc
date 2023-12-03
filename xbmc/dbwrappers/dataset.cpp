@@ -203,7 +203,7 @@ void Dataset::parse_sql(std::string& sql)
   } //for
 }
 
-void Dataset::close(void)
+void Dataset::close()
 {
   haveError = false;
   frecno = 0;
@@ -471,7 +471,7 @@ bool Dataset::locate(const ParamList& params)
   return locate();
 }
 
-bool Dataset::findNext(void)
+bool Dataset::findNext()
 {
   bool result;
   if (plist.empty())

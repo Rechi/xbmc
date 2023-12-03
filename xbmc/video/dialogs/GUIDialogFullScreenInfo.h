@@ -14,8 +14,8 @@ class CGUIDialogFullScreenInfo :
       public CGUIDialog
 {
 public:
-  CGUIDialogFullScreenInfo(void);
-  ~CGUIDialogFullScreenInfo(void) override;
+  CGUIDialogFullScreenInfo();
+  ~CGUIDialogFullScreenInfo() override;
   bool OnAction(const CAction &action) override;
 };
 

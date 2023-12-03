@@ -22,7 +22,7 @@
 
 using namespace MUSIC_INFO;
 
-CMusicInfoTag::CMusicInfoTag(void)
+CMusicInfoTag::CMusicInfoTag()
 {
   Clear();
 }

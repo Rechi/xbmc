@@ -13,9 +13,8 @@ class CFileItemList;
 class CAutoSwitch
 {
 public:
-
-  CAutoSwitch(void);
-  virtual ~CAutoSwitch(void);
+  CAutoSwitch();
+  virtual ~CAutoSwitch();
 
   static int GetView(const CFileItemList& vecItems);
 

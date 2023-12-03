@@ -13,8 +13,8 @@
 class CGUIWindowWeather : public CGUIWindow
 {
 public:
-  CGUIWindowWeather(void);
-  ~CGUIWindowWeather(void) override;
+  CGUIWindowWeather();
+  ~CGUIWindowWeather() override;
   bool OnMessage(CGUIMessage& message) override;
   void FrameMove() override;
 

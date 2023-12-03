@@ -31,7 +31,7 @@ typedef enum
 class CPartyModeManager final
 {
 public:
-  CPartyModeManager(void);
+  CPartyModeManager();
 
   bool Enable(PartyModeContext context=PARTYMODECONTEXT_MUSIC, const std::string& strXspPath = "");
   void Disable();

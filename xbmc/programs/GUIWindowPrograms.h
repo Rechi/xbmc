@@ -16,8 +16,8 @@ class CGUIWindowPrograms :
       public CGUIMediaWindow, public IBackgroundLoaderObserver
 {
 public:
-  CGUIWindowPrograms(void);
-  ~CGUIWindowPrograms(void) override;
+  CGUIWindowPrograms();
+  ~CGUIWindowPrograms() override;
   bool OnMessage(CGUIMessage& message) override;
   virtual void OnItemInfo(int iItem);
 protected:

@@ -169,7 +169,7 @@ CGUIFontTTF::CGUIFontTTF(const std::string& fontIdent)
 {
 }
 
-CGUIFontTTF::~CGUIFontTTF(void)
+CGUIFontTTF::~CGUIFontTTF()
 {
   Clear();
 }

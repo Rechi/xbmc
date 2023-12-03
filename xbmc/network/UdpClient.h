@@ -26,7 +26,7 @@ class CUdpClient : CThread
 {
 public:
   CUdpClient();
-  ~CUdpClient(void) override;
+  ~CUdpClient() override;
 
 protected:
 

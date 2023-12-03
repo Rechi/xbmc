@@ -31,7 +31,7 @@ public:
   void NotifyUser(IInputReceiver* receiver);
   bool DoTest(IInputReceiver* receiver);
 
-  void AbortRumble(void) { StopThread(); }
+  void AbortRumble() { StopThread(); }
 
 protected:
   // implementation of CThread

@@ -29,7 +29,7 @@ public:
   CHTTPPythonWsgiInvoker(ILanguageInvocationHandler* invocationHandler, HTTPPythonRequest* request);
   ~CHTTPPythonWsgiInvoker() override;
 
-  static void GlobalInitializeModules(void);
+  static void GlobalInitializeModules();
 
   // implementations of CHTTPPythonInvoker
   HTTPPythonRequest* GetRequest() override;

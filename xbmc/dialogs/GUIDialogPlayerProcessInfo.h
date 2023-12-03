@@ -13,8 +13,8 @@
 class CGUIDialogPlayerProcessInfo : public CGUIDialog
 {
 public:
-  CGUIDialogPlayerProcessInfo(void);
-  ~CGUIDialogPlayerProcessInfo(void) override;
+  CGUIDialogPlayerProcessInfo();
+  ~CGUIDialogPlayerProcessInfo() override;
 
   bool OnAction(const CAction &action) override;
 };

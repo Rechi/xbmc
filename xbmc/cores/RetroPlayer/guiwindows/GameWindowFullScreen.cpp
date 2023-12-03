@@ -30,7 +30,7 @@ using namespace KODI;
 using namespace KODI::GUILIB;
 using namespace RETRO;
 
-CGameWindowFullScreen::CGameWindowFullScreen(void)
+CGameWindowFullScreen::CGameWindowFullScreen()
   : CGUIWindow(WINDOW_FULLSCREEN_GAME, "VideoFullScreen.xml"),
     m_fullscreenText(new CGameWindowFullScreenText(*this))
 {

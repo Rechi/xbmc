@@ -26,9 +26,8 @@ class CGUIWindowFileManager :
       public CJobQueue
 {
 public:
-
-  CGUIWindowFileManager(void);
-  ~CGUIWindowFileManager(void) override;
+  CGUIWindowFileManager();
+  ~CGUIWindowFileManager() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;
   bool OnBack(int actionID) override;

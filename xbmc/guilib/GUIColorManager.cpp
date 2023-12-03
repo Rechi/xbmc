@@ -16,9 +16,9 @@
 #include "utils/XBMCTinyXML.h"
 #include "utils/log.h"
 
-CGUIColorManager::CGUIColorManager(void) = default;
+CGUIColorManager::CGUIColorManager() = default;
 
-CGUIColorManager::~CGUIColorManager(void)
+CGUIColorManager::~CGUIColorManager()
 {
   Clear();
 }

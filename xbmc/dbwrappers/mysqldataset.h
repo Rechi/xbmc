@@ -63,7 +63,7 @@ public:
   int copy(const char* backup_name) override;
 
   /* \brief drop all extra analytics from database */
-  int drop_analytics(void) override;
+  int drop_analytics() override;
 
   long nextid(const char* seq_name) override;
 
@@ -141,7 +141,7 @@ or insert() operations default = false) */
   /* as open, but with our query exec Sql */
   bool query(const std::string& query) override;
   /* func. closes a query */
-  void close(void) override;
+  void close() override;
   /* Cancel changes, made in insert or edit states of dataset */
   void cancel() override;
   /* last insert id */

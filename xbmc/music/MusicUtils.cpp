@@ -62,7 +62,7 @@ public:
   {
   }
 
-  ~CSetArtJob(void) override = default;
+  ~CSetArtJob() override = default;
 
   bool HasSongExtraArtChanged(const CFileItemPtr& pSongItem,
                               const std::string& type,
@@ -110,7 +110,7 @@ public:
   // Asynchronously update song, album or artist art in library
   // and trigger update to album & artist art of the currently playing song
   // and songs queued in the current playlist
-  bool DoWork(void) override
+  bool DoWork() override
   {
     int itemID = pItem->GetMusicInfoTag()->GetDatabaseId();
     if (itemID <= 0)
@@ -183,9 +183,9 @@ public:
   {
   }
 
-  ~CSetSongRatingJob(void) override = default;
+  ~CSetSongRatingJob() override = default;
 
-  bool DoWork(void) override
+  bool DoWork() override
   {
     // Asynchronously update song userrating in library
     CMusicDatabase db;

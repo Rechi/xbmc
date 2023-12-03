@@ -32,7 +32,7 @@ public:
                  const CLabelInfo& labelInfo, const KODI::GUILIB::GUIINFO::CGUIInfoColor &channelColor,
                  const KODI::GUILIB::GUIINFO::CGUIInfoColor &headlineColor, std::string& strRSSTags);
   CGUIRSSControl(const CGUIRSSControl &from);
-  ~CGUIRSSControl(void) override;
+  ~CGUIRSSControl() override;
   CGUIRSSControl* Clone() const override { return new CGUIRSSControl(*this); }
 
   void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;

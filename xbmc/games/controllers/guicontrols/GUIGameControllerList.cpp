@@ -53,7 +53,7 @@ CGUIGameControllerList::CGUIGameControllerList(const CGUIGameControllerList& oth
   ControlType = GUICONTROL_GAMECONTROLLERLIST;
 }
 
-CGUIGameControllerList* CGUIGameControllerList::Clone(void) const
+CGUIGameControllerList* CGUIGameControllerList::Clone() const
 {
   return new CGUIGameControllerList(*this);
 }

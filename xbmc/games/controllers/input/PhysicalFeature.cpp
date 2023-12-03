@@ -29,7 +29,7 @@ CPhysicalFeature::CPhysicalFeature(int labelId)
   m_labelId = labelId;
 }
 
-void CPhysicalFeature::Reset(void)
+void CPhysicalFeature::Reset()
 {
   *this = CPhysicalFeature();
 }

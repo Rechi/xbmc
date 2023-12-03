@@ -17,8 +17,8 @@ class CGUIDialogProgress :
       public CGUIDialogBoxBase, public IProgressCallback
 {
 public:
-  CGUIDialogProgress(void);
-  ~CGUIDialogProgress(void) override;
+  CGUIDialogProgress();
+  ~CGUIDialogProgress() override;
 
   void Reset();
   void Open(const std::string &param = "");

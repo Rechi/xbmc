@@ -24,7 +24,7 @@ class CGUIListGroup final : public CGUIControlGroup
 public:
   CGUIListGroup(int parentID, int controlID, float posX, float posY, float width, float height);
   explicit CGUIListGroup(const CGUIListGroup& right);
-  ~CGUIListGroup(void) override;
+  ~CGUIListGroup() override;
   CGUIListGroup* Clone() const override { return new CGUIListGroup(*this); }
 
   void AddControl(CGUIControl *control, int position = -1) override;

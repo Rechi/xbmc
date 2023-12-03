@@ -13,9 +13,8 @@
 class CGUIDialogVideoOSD : public CGUIDialog
 {
 public:
-
-  CGUIDialogVideoOSD(void);
-  ~CGUIDialogVideoOSD(void) override;
+  CGUIDialogVideoOSD();
+  ~CGUIDialogVideoOSD() override;
 
   void FrameMove() override;
   bool OnMessage(CGUIMessage& message) override;

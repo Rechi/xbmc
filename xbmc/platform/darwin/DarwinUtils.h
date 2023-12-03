@@ -18,16 +18,16 @@ typedef const struct __CFString * CFStringRef;
 class CDarwinUtils
 {
 public:
-  static const char *getIosPlatformString(void);
-  static const char *GetOSReleaseString(void);
-  static const char *GetOSVersionString(void);
+  static const char* getIosPlatformString();
+  static const char* GetOSReleaseString();
+  static const char* GetOSVersionString();
   static const char* GetVersionString();
   static std::string GetFrameworkPath(bool forPython);
   static int         GetExecutablePath(char* path, size_t *pathsize);
   static void        SetScheduling(bool realtime);
   static bool        CFStringRefToString(CFStringRef source, std::string& destination);
   static bool        CFStringRefToUTF8String(CFStringRef source, std::string& destination);
-  static const std::string&  GetManufacturer(void);
+  static const std::string& GetManufacturer();
   static bool        IsAliasShortcut(const std::string& path, bool isdirectory);
   static void        TranslateAliasShortcut(std::string& path);
   static bool        CreateAliasShortcut(const std::string& fromPath, const std::string& toPath);

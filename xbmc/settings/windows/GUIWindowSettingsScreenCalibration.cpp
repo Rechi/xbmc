@@ -53,7 +53,7 @@ constexpr int DEFAULT_GUI_WIDTH = 1920;
 constexpr int CONTROL_SUBTITLES_SPACE = 80;
 } // unnamed namespace
 
-CGUIWindowSettingsScreenCalibration::CGUIWindowSettingsScreenCalibration(void)
+CGUIWindowSettingsScreenCalibration::CGUIWindowSettingsScreenCalibration()
   : CGUIWindow(WINDOW_SCREEN_CALIBRATION, "SettingsScreenCalibration.xml")
 {
   m_iCurRes = 0;
@@ -62,7 +62,7 @@ CGUIWindowSettingsScreenCalibration::CGUIWindowSettingsScreenCalibration(void)
   m_needsScaling = false; // we handle all the scaling
 }
 
-CGUIWindowSettingsScreenCalibration::~CGUIWindowSettingsScreenCalibration(void) = default;
+CGUIWindowSettingsScreenCalibration::~CGUIWindowSettingsScreenCalibration() = default;
 
 
 void CGUIWindowSettingsScreenCalibration::ResetCalibration()

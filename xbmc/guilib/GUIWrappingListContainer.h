@@ -22,7 +22,7 @@ class CGUIWrappingListContainer : public CGUIBaseContainer
 {
 public:
   CGUIWrappingListContainer(int parentID, int controlID, float posX, float posY, float width, float height, ORIENTATION orientation, const CScroller& scroller, int preloadItems, int fixedPosition);
-  ~CGUIWrappingListContainer(void) override;
+  ~CGUIWrappingListContainer() override;
   CGUIWrappingListContainer* Clone() const override { return new CGUIWrappingListContainer(*this); }
 
   bool OnAction(const CAction &action) override;

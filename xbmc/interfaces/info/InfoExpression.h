@@ -73,7 +73,8 @@ private:
   class InfoSubexpression
   {
   public:
-    virtual ~InfoSubexpression(void) = default; // so we can destruct derived classes using a pointer to their base class
+    virtual ~InfoSubexpression() =
+        default; // so we can destruct derived classes using a pointer to their base class
     virtual bool Evaluate(int contextWindow, const CGUIListItem* item) = 0;
     virtual node_type_t Type() const=0;
   };

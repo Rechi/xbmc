@@ -60,12 +60,12 @@ bool CGUIWheelButton::PromptForInput(CEvent& waitEvent)
   return bInterrupted;
 }
 
-bool CGUIWheelButton::IsFinished(void) const
+bool CGUIWheelButton::IsFinished() const
 {
   return m_state >= STATE::FINISHED;
 }
 
-JOYSTICK::WHEEL_DIRECTION CGUIWheelButton::GetWheelDirection(void) const
+JOYSTICK::WHEEL_DIRECTION CGUIWheelButton::GetWheelDirection() const
 {
   using namespace JOYSTICK;
 
@@ -82,7 +82,7 @@ JOYSTICK::WHEEL_DIRECTION CGUIWheelButton::GetWheelDirection(void) const
   return WHEEL_DIRECTION::NONE;
 }
 
-void CGUIWheelButton::Reset(void)
+void CGUIWheelButton::Reset()
 {
   m_state = STATE::WHEEL_LEFT;
 }

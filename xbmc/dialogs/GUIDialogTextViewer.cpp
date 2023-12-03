@@ -23,13 +23,13 @@ using namespace XFILE;
 #define CONTROL_HEADING  1
 #define CONTROL_TEXTAREA 5
 
-CGUIDialogTextViewer::CGUIDialogTextViewer(void)
-    : CGUIDialog(WINDOW_DIALOG_TEXT_VIEWER, "DialogTextViewer.xml")
+CGUIDialogTextViewer::CGUIDialogTextViewer()
+  : CGUIDialog(WINDOW_DIALOG_TEXT_VIEWER, "DialogTextViewer.xml")
 {
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIDialogTextViewer::~CGUIDialogTextViewer(void) = default;
+CGUIDialogTextViewer::~CGUIDialogTextViewer() = default;
 
 bool CGUIDialogTextViewer::OnAction(const CAction &action)
 {

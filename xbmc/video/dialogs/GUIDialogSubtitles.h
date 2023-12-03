@@ -26,8 +26,8 @@ class CFileItemList;
 class CGUIDialogSubtitles : public CGUIDialog, CJobQueue
 {
 public:
-  CGUIDialogSubtitles(void);
-  ~CGUIDialogSubtitles(void) override;
+  CGUIDialogSubtitles();
+  ~CGUIDialogSubtitles() override;
   bool OnMessage(CGUIMessage& message) override;
   void OnInitWindow() override;
 

@@ -22,9 +22,9 @@ using namespace XFILE;
 //[InternetShortcut]
 //URL=http://msdn2.microsoft.com/en-us/library/ms812698.aspx
 
-CPlayListURL::CPlayListURL(void) = default;
+CPlayListURL::CPlayListURL() = default;
 
-CPlayListURL::~CPlayListURL(void) = default;
+CPlayListURL::~CPlayListURL() = default;
 
 bool CPlayListURL::Load(const std::string& strFileName)
 {

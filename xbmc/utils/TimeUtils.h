@@ -14,8 +14,8 @@
 
 class CDateTime;
 
-int64_t CurrentHostCounter(void);
-int64_t CurrentHostFrequency(void);
+int64_t CurrentHostCounter();
+int64_t CurrentHostFrequency();
 
 class CTimeUtils
 {

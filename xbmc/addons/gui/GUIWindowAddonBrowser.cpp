@@ -50,7 +50,7 @@
 using namespace ADDON;
 using namespace XFILE;
 
-CGUIWindowAddonBrowser::CGUIWindowAddonBrowser(void)
+CGUIWindowAddonBrowser::CGUIWindowAddonBrowser()
   : CGUIMediaWindow(WINDOW_ADDON_BROWSER, "AddonBrowser.xml")
 {
 }

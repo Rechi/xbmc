@@ -55,12 +55,12 @@ public:
    * \return true if the resource is initialized and can be used
    *         false if the resource failed to initialize and must not be used
    */
-  virtual bool Initialize(void) = 0;
+  virtual bool Initialize() = 0;
 
   /*!
    * \brief  Deinitialize the resource
    */
-  virtual void Deinitialize(void) = 0;
+  virtual void Deinitialize() = 0;
 
   /*!
    * \brief Refresh the contents of the list
@@ -95,7 +95,7 @@ public:
   /*!
    * \brief Reset the focused controller
    */
-  virtual void ResetController(void) = 0;
+  virtual void ResetController() = 0;
 };
 
 /*!
@@ -117,13 +117,13 @@ public:
    * \return true if the resource is initialized and can be used
    *         false if the resource failed to initialize and must not be used
    */
-  virtual bool Initialize(void) = 0;
+  virtual bool Initialize() = 0;
 
   /*!
    * \brief  Deinitialize the resource
    * \remark This must be called if Initialize() returned true
    */
-  virtual void Deinitialize(void) = 0;
+  virtual void Deinitialize() = 0;
 
   /*!
    * \brief Check if the feature type has any buttons in the GUI
@@ -164,7 +164,7 @@ public:
   /*!
    * \brief Get the feature represented by this button
    */
-  virtual const CPhysicalFeature& Feature(void) const = 0;
+  virtual const CPhysicalFeature& Feature() const = 0;
 
   /*!
    * \brief Allow the wizard to include this feature in a list of buttons
@@ -186,7 +186,7 @@ public:
    * \brief Check if the button supports further calls to PromptForInput()
    * \return true if the button requires no more input elements from the user
    */
-  virtual bool IsFinished(void) const = 0;
+  virtual bool IsFinished() const = 0;
 
   /*!
    * \brief Get the direction of the next analog stick or relative pointer
@@ -194,21 +194,21 @@ public:
    * \return The next direction to be prompted, or UNKNOWN if this isn't a
    *         cardinal feature or the prompt is finished
    */
-  virtual INPUT::CARDINAL_DIRECTION GetCardinalDirection(void) const = 0;
+  virtual INPUT::CARDINAL_DIRECTION GetCardinalDirection() const = 0;
 
   /*!
    * \brief Get the direction of the next wheel prompt
    * \return The next direction to be prompted, or UNKNOWN if this isn't a
    *         wheel or the prompt is finished
    */
-  virtual JOYSTICK::WHEEL_DIRECTION GetWheelDirection(void) const = 0;
+  virtual JOYSTICK::WHEEL_DIRECTION GetWheelDirection() const = 0;
 
   /*!
    * \brief Get the direction of the next throttle prompt
    * \return The next direction to be prompted, or UNKNOWN if this isn't a
    *         throttle or the prompt is finished
    */
-  virtual JOYSTICK::THROTTLE_DIRECTION GetThrottleDirection(void) const = 0;
+  virtual JOYSTICK::THROTTLE_DIRECTION GetThrottleDirection() const = 0;
 
   /*!
    * \brief True if the button is waiting for a key press
@@ -225,7 +225,7 @@ public:
   /*!
    * \brief Reset button after prompting for input has finished
    */
-  virtual void Reset(void) = 0;
+  virtual void Reset() = 0;
 };
 
 /*!

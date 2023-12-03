@@ -59,7 +59,7 @@ public:
                       CPeripheral* peripheral,
                       KODI::MOUSE::IMouseInputHandler* handler);
 
-  ~CAddonInputHandling(void) override;
+  ~CAddonInputHandling() override;
 
   // implementation of IDriverHandler
   bool OnButtonMotion(unsigned int buttonIndex, bool bPressed) override;
@@ -68,7 +68,7 @@ public:
                     float position,
                     int center,
                     unsigned int range) override;
-  void OnInputFrame(void) override;
+  void OnInputFrame() override;
 
   // implementation of IKeyboardDriverHandler
   bool OnKeyPress(const CKey& key) override;

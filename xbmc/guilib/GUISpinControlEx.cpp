@@ -18,7 +18,7 @@ CGUISpinControlEx::CGUISpinControlEx(int parentID, int controlID, float posX, fl
   m_spinPosX = 0;
 }
 
-CGUISpinControlEx::~CGUISpinControlEx(void) = default;
+CGUISpinControlEx::~CGUISpinControlEx() = default;
 
 void CGUISpinControlEx::AllocResources()
 {

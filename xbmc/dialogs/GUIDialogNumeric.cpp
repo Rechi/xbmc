@@ -36,14 +36,14 @@
 using namespace KODI::MESSAGING;
 using KODI::UTILITY::CDigest;
 
-CGUIDialogNumeric::CGUIDialogNumeric(void)
+CGUIDialogNumeric::CGUIDialogNumeric()
   : CGUIDialog(WINDOW_DIALOG_NUMERIC, "DialogNumeric.xml"), m_block{}, m_lastblock{}
 {
   memset(&m_datetime, 0, sizeof(KODI::TIME::SystemTime));
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIDialogNumeric::~CGUIDialogNumeric(void) = default;
+CGUIDialogNumeric::~CGUIDialogNumeric() = default;
 
 void CGUIDialogNumeric::OnInitWindow()
 {

@@ -25,7 +25,7 @@ CMusicInfoScraper::CMusicInfoScraper(const ADDON::ScraperPtr& scraper)
   m_http = new XFILE::CCurlFile;
 }
 
-CMusicInfoScraper::~CMusicInfoScraper(void)
+CMusicInfoScraper::~CMusicInfoScraper()
 {
   StopThread();
   delete m_http;

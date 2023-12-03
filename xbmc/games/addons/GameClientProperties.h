@@ -41,37 +41,37 @@ class CGameClientProperties
 {
 public:
   CGameClientProperties(const CGameClient& parent, AddonProps_Game& props);
-  ~CGameClientProperties(void) { ReleaseResources(); }
+  ~CGameClientProperties() { ReleaseResources(); }
 
-  bool InitializeProperties(void);
+  bool InitializeProperties();
 
 private:
   // Release mutable resources
-  void ReleaseResources(void);
+  void ReleaseResources();
 
   // Equal to parent's real library path
-  const char* GetLibraryPath(void);
+  const char* GetLibraryPath();
 
   // List of proxy DLLs needed to load the game client
   const char** GetProxyDllPaths(const ADDON::VECADDONS& addons);
 
   // Number of proxy DLLs needed to load the game client
-  unsigned int GetProxyDllCount(void) const;
+  unsigned int GetProxyDllCount() const;
 
   // Paths to game resources
-  const char** GetResourceDirectories(void);
+  const char** GetResourceDirectories();
 
   // Number of resource directories
-  unsigned int GetResourceDirectoryCount(void) const;
+  unsigned int GetResourceDirectoryCount() const;
 
   // Equal to special://profile/addon_data/<parent's id>
-  const char* GetProfileDirectory(void);
+  const char* GetProfileDirectory();
 
   // List of extensions from addon.xml
-  const char** GetExtensions(void);
+  const char** GetExtensions();
 
   // Number of extensions
-  unsigned int GetExtensionCount(void) const;
+  unsigned int GetExtensionCount() const;
 
   // Helper functions
   bool GetProxyAddons(ADDON::VECADDONS& addons);

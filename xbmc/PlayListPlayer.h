@@ -31,8 +31,8 @@ class CPlayListPlayer : public IMsgTargetCallback,
 {
 
 public:
-  CPlayListPlayer(void);
-  ~CPlayListPlayer(void) override;
+  CPlayListPlayer();
+  ~CPlayListPlayer() override;
   bool OnMessage(CGUIMessage &message) override;
 
   int GetMessageMask() override;

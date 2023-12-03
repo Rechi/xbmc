@@ -17,8 +17,8 @@ namespace XFILE
   class CVideoDatabaseDirectory : public IDirectory
   {
   public:
-    CVideoDatabaseDirectory(void);
-    ~CVideoDatabaseDirectory(void) override;
+    CVideoDatabaseDirectory();
+    ~CVideoDatabaseDirectory() override;
     bool GetDirectory(const CURL& url, CFileItemList &items) override;
     bool Exists(const CURL& url) override;
     bool AllowAll() const override { return true; }

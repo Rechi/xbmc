@@ -15,7 +15,8 @@
 
 int CXHandle::m_objectTracker[10] = {};
 
-HANDLE WINAPI GetCurrentProcess(void) {
+HANDLE WINAPI GetCurrentProcess()
+{
   return (HANDLE)-1; // -1 a special value - pseudo handle
 }
 

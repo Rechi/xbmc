@@ -24,7 +24,7 @@ public:
                       const PeripheralScanResult& scanResult,
                       CPeripheralBus* bus);
 
-  ~CPeripheralKeyboard(void) override;
+  ~CPeripheralKeyboard() override;
 
   // implementation of CPeripheral
   bool InitialiseFeature(const PeripheralFeature feature) override;

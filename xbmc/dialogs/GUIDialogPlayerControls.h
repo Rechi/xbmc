@@ -14,6 +14,6 @@ class CGUIDialogPlayerControls :
       public CGUIDialog
 {
 public:
-  CGUIDialogPlayerControls(void);
-  ~CGUIDialogPlayerControls(void) override;
+  CGUIDialogPlayerControls();
+  ~CGUIDialogPlayerControls() override;
 };

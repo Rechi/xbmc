@@ -23,8 +23,8 @@ namespace XFILE
   class CDAVDirectory : public IDirectory
   {
     public:
-      CDAVDirectory(void);
-      ~CDAVDirectory(void) override;
+      CDAVDirectory();
+      ~CDAVDirectory() override;
       bool GetDirectory(const CURL& url, CFileItemList &items) override;
       bool Create(const CURL& url) override;
       bool Exists(const CURL& url) override;

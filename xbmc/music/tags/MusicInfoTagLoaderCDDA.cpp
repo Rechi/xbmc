@@ -30,7 +30,7 @@ using namespace CDDB;
 #define CDTEXT_FIELD_GENRE CDTEXT_GENRE
 #endif
 
-CMusicInfoTagLoaderCDDA::CMusicInfoTagLoaderCDDA(void) = default;
+CMusicInfoTagLoaderCDDA::CMusicInfoTagLoaderCDDA() = default;
 
 CMusicInfoTagLoaderCDDA::~CMusicInfoTagLoaderCDDA() = default;
 

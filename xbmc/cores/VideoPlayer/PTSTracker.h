@@ -21,14 +21,18 @@ class CPtsTracker
     CPtsTracker();
     void   Add(double pts);
     void   Flush(); //flush the saved pattern and the ringbuffer
-    void   ResetVFRDetection(void);
+    void ResetVFRDetection();
 
     int    GetPatternLength() { return m_patternlength;            }
     double GetFrameDuration() { return m_frameduration;            }
-    double GetMaxFrameDuration(void) { return m_maxframeduration;  }
-    double GetMinFrameDuration(void) { return m_minframeduration;  }
+    double GetMaxFrameDuration() { return m_maxframeduration; }
+    double GetMinFrameDuration() { return m_minframeduration; }
     bool   HasFullBuffer()    { return m_ringfill == DIFFRINGSIZE; }
-    bool   VFRDetection(void) { return ((m_VFRCounter >= VFR_DETECTION_THRESHOLD) && (m_patternCounter >= VFR_PATTERN_THRESHOLD)); }
+    bool VFRDetection()
+    {
+      return ((m_VFRCounter >= VFR_DETECTION_THRESHOLD) &&
+              (m_patternCounter >= VFR_PATTERN_THRESHOLD));
+    }
 
   private:
     double m_prevpts;                //last pts added

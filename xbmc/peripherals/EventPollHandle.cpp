@@ -14,7 +14,7 @@ CEventPollHandle::CEventPollHandle(IEventPollCallback& callback) : m_callback(ca
 {
 }
 
-CEventPollHandle::~CEventPollHandle(void)
+CEventPollHandle::~CEventPollHandle()
 {
   m_callback.Release(*this);
 }

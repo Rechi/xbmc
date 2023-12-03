@@ -13,7 +13,7 @@
 
 #import <Foundation/Foundation.h>
 
-const char* CDarwinEmbedUtils::GetAppRootFolder(void)
+const char* CDarwinEmbedUtils::GetAppRootFolder()
 {
   static std::string rootFolder;
   static std::once_flag flag;
@@ -40,7 +40,7 @@ const char* CDarwinEmbedUtils::GetAppRootFolder(void)
   return rootFolder.c_str();
 }
 
-bool CDarwinEmbedUtils::IsIosSandboxed(void)
+bool CDarwinEmbedUtils::IsIosSandboxed()
 {
   static bool ret;
   static std::once_flag flag;

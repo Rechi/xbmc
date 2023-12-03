@@ -60,12 +60,12 @@ bool CGUIThrottleButton::PromptForInput(CEvent& waitEvent)
   return bInterrupted;
 }
 
-bool CGUIThrottleButton::IsFinished(void) const
+bool CGUIThrottleButton::IsFinished() const
 {
   return m_state >= STATE::FINISHED;
 }
 
-JOYSTICK::THROTTLE_DIRECTION CGUIThrottleButton::GetThrottleDirection(void) const
+JOYSTICK::THROTTLE_DIRECTION CGUIThrottleButton::GetThrottleDirection() const
 {
   using namespace JOYSTICK;
 
@@ -82,7 +82,7 @@ JOYSTICK::THROTTLE_DIRECTION CGUIThrottleButton::GetThrottleDirection(void) cons
   return THROTTLE_DIRECTION::NONE;
 }
 
-void CGUIThrottleButton::Reset(void)
+void CGUIThrottleButton::Reset()
 {
   m_state = STATE::THROTTLE_UP;
 }

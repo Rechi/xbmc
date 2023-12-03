@@ -32,7 +32,7 @@ public:
               const CLabelInfo &labelInfo, int scrollTime = 200,
               const CLabelInfo* labelInfoMono = nullptr);
   CGUITextBox(const CGUITextBox &from);
-  ~CGUITextBox(void) override;
+  ~CGUITextBox() override;
   CGUITextBox* Clone() const override { return new CGUITextBox(*this); }
 
   void DoProcess(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;

@@ -17,7 +17,7 @@ public:
   CGUIControlLookup(int parentID, int controlID, float posX, float posY, float width, float height)
     : CGUIControl(parentID, controlID, posX, posY, width, height) {}
   explicit CGUIControlLookup(const CGUIControlLookup& from);
-  ~CGUIControlLookup(void) override = default;
+  ~CGUIControlLookup() override = default;
 
   CGUIControl *GetControl(int id, std::vector<CGUIControl*> *idCollector = nullptr) override;
 protected:

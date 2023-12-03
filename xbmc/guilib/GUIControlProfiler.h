@@ -31,15 +31,15 @@ public:
   int64_t m_i64RenderStart = 0;
 
   CGUIControlProfilerItem(CGUIControlProfiler *pProfiler, CGUIControlProfilerItem *pParent, CGUIControl *pControl);
-  ~CGUIControlProfilerItem(void);
+  ~CGUIControlProfilerItem();
 
   void Reset(CGUIControlProfiler *pProfiler);
-  void BeginVisibility(void);
-  void EndVisibility(void);
-  void BeginRender(void);
-  void EndRender(void);
+  void BeginVisibility();
+  void EndVisibility();
+  void BeginRender();
+  void EndRender();
   void SaveToXML(TiXmlElement *parent);
-  unsigned int GetTotalTime(void) const { return m_visTime + m_renderTime; }
+  unsigned int GetTotalTime() const { return m_visTime + m_renderTime; }
 
   CGUIControlProfilerItem *AddControl(CGUIControl *pControl);
   CGUIControlProfilerItem *FindOrAddControl(CGUIControl *pControl, bool recurse);
@@ -48,26 +48,26 @@ public:
 class CGUIControlProfiler
 {
 public:
-  static CGUIControlProfiler &Instance(void);
-  static bool IsRunning(void);
+  static CGUIControlProfiler& Instance();
+  static bool IsRunning();
 
-  void Start(void);
-  void EndFrame(void);
+  void Start();
+  void EndFrame();
   void BeginVisibility(CGUIControl *pControl);
   void EndVisibility(CGUIControl *pControl);
   void BeginRender(CGUIControl *pControl);
   void EndRender(CGUIControl *pControl);
-  int GetMaxFrameCount(void) const { return m_iMaxFrameCount; }
+  int GetMaxFrameCount() const { return m_iMaxFrameCount; }
   void SetMaxFrameCount(int iMaxFrameCount) { m_iMaxFrameCount = iMaxFrameCount; }
   void SetOutputFile(const std::string& strOutputFile) { m_strOutputFile = strOutputFile; }
-  const std::string& GetOutputFile(void) const { return m_strOutputFile; }
-  bool SaveResults(void);
-  unsigned int GetTotalTime(void) const { return m_ItemHead.GetTotalTime(); }
+  const std::string& GetOutputFile() const { return m_strOutputFile; }
+  bool SaveResults();
+  unsigned int GetTotalTime() const { return m_ItemHead.GetTotalTime(); }
 
   float m_fPerfScale;
 private:
-  CGUIControlProfiler(void);
-  ~CGUIControlProfiler(void) = default;
+  CGUIControlProfiler();
+  ~CGUIControlProfiler() = default;
   CGUIControlProfiler(const CGUIControlProfiler &that) = delete;
   CGUIControlProfiler &operator=(const CGUIControlProfiler &that) = delete;
 

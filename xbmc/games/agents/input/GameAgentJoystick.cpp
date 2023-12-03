@@ -53,7 +53,7 @@ float CGameAgentJoystick::GetActivation() const
   return m_controllerActivity->GetActivation();
 }
 
-std::string CGameAgentJoystick::ControllerID(void) const
+std::string CGameAgentJoystick::ControllerID() const
 {
   if (m_controllerAppearance)
     return m_controllerAppearance->ID();

@@ -1411,7 +1411,7 @@ std::vector<uint8_t> CDVDVideoCodecAndroidMediaCodec::GetHDRStaticMetadata()
   return metadata;
 }
 
-bool CDVDVideoCodecAndroidMediaCodec::ConfigureMediaCodec(void)
+bool CDVDVideoCodecAndroidMediaCodec::ConfigureMediaCodec()
 {
   // setup a MediaFormat to match the video content,
   // used by codec during configure
@@ -1566,7 +1566,7 @@ bool CDVDVideoCodecAndroidMediaCodec::ConfigureMediaCodec(void)
   return true;
 }
 
-int CDVDVideoCodecAndroidMediaCodec::GetOutputPicture(void)
+int CDVDVideoCodecAndroidMediaCodec::GetOutputPicture()
 {
   int rtn = 0;
   int64_t timeout_us = (m_state == MEDIACODEC_STATE_WAIT_ENDOFSTREAM) ? 100000 : 10000;
@@ -1750,7 +1750,7 @@ void CDVDVideoCodecAndroidMediaCodec::CallbackInitSurfaceTexture(void *userdata)
   ctx->InitSurfaceTexture();
 }
 
-void CDVDVideoCodecAndroidMediaCodec::InitSurfaceTexture(void)
+void CDVDVideoCodecAndroidMediaCodec::InitSurfaceTexture()
 {
   if (m_render_surface)
     return;
@@ -1792,7 +1792,7 @@ void CDVDVideoCodecAndroidMediaCodec::InitSurfaceTexture(void)
   }
 }
 
-void CDVDVideoCodecAndroidMediaCodec::ReleaseSurfaceTexture(void)
+void CDVDVideoCodecAndroidMediaCodec::ReleaseSurfaceTexture()
 {
   if (m_render_surface)
     return;

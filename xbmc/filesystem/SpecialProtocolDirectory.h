@@ -15,8 +15,8 @@ namespace XFILE
   class CSpecialProtocolDirectory : public COverrideDirectory
   {
   public:
-    CSpecialProtocolDirectory(void);
-    ~CSpecialProtocolDirectory(void) override;
+    CSpecialProtocolDirectory();
+    ~CSpecialProtocolDirectory() override;
     bool GetDirectory(const CURL& url, CFileItemList &items) override;
 
   protected:

@@ -46,9 +46,9 @@ CGUIConfigurationWizard::CGUIConfigurationWizard()
   InitializeState();
 }
 
-CGUIConfigurationWizard::~CGUIConfigurationWizard(void) = default;
+CGUIConfigurationWizard::~CGUIConfigurationWizard() = default;
 
-void CGUIConfigurationWizard::InitializeState(void)
+void CGUIConfigurationWizard::InitializeState()
 {
   m_currentButton = nullptr;
   m_cardinalDirection = INPUT::CARDINAL_DIRECTION::NONE;
@@ -117,7 +117,7 @@ void CGUIConfigurationWizard::UnregisterKeys()
   m_keyMap.clear();
 }
 
-void CGUIConfigurationWizard::Process(void)
+void CGUIConfigurationWizard::Process()
 {
   CLog::Log(LOGDEBUG, "Starting configuration wizard");
 
@@ -459,7 +459,7 @@ bool CGUIConfigurationWizard::IsMapping(const std::string& location) const
   return m_location == location;
 }
 
-void CGUIConfigurationWizard::InstallHooks(void)
+void CGUIConfigurationWizard::InstallHooks()
 {
   // Install button mapper with lowest priority
   CServiceBroker::GetPeripherals().RegisterJoystickButtonMapper(this);
@@ -471,7 +471,7 @@ void CGUIConfigurationWizard::InstallHooks(void)
   CServiceBroker::GetInputManager().RegisterKeyboardDriverHandler(this);
 }
 
-void CGUIConfigurationWizard::RemoveHooks(void)
+void CGUIConfigurationWizard::RemoveHooks()
 {
   CServiceBroker::GetInputManager().UnregisterKeyboardDriverHandler(this);
   CServiceBroker::GetPeripherals().UnregisterObserver(this);

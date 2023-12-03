@@ -47,7 +47,7 @@ CAddonButtonMapping::CAddonButtonMapping(CPeripherals& manager,
   }
 }
 
-CAddonButtonMapping::~CAddonButtonMapping(void)
+CAddonButtonMapping::~CAddonButtonMapping()
 {
   m_buttonMapping.reset();
   m_buttonMap.reset();
@@ -80,7 +80,7 @@ bool CAddonButtonMapping::OnAxisMotion(unsigned int axisIndex,
   return false;
 }
 
-void CAddonButtonMapping::OnInputFrame(void)
+void CAddonButtonMapping::OnInputFrame()
 {
   if (m_buttonMapping)
     m_buttonMapping->OnInputFrame();

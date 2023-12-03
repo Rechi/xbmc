@@ -24,7 +24,7 @@ public:
   CTextSearch(const std::string &strSearchTerms, bool bCaseSensitive = false, TextSearchDefault defaultSearchMode = SEARCH_DEFAULT_OR);
 
   bool Search(const std::string &strHaystack) const;
-  bool IsValid(void) const;
+  bool IsValid() const;
 
 private:
   static void GetAndCutNextTerm(std::string &strSearchTerm, std::string &strNextTerm);

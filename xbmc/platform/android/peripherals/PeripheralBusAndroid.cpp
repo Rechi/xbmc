@@ -120,7 +120,7 @@ bool CPeripheralBusAndroid::InitializeProperties(CPeripheral& peripheral)
   return true;
 }
 
-void CPeripheralBusAndroid::Initialise(void)
+void CPeripheralBusAndroid::Initialise()
 {
   CPeripheralBus::Initialise();
   TriggerDeviceScan();

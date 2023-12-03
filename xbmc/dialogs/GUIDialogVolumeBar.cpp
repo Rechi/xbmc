@@ -19,13 +19,13 @@
 
 #define VOLUME_BAR_DISPLAY_TIME 1000L
 
-CGUIDialogVolumeBar::CGUIDialogVolumeBar(void)
+CGUIDialogVolumeBar::CGUIDialogVolumeBar()
   : CGUIDialog(WINDOW_DIALOG_VOLUME_BAR, "DialogVolumeBar.xml", DialogModalityType::MODELESS)
 {
   m_loadType = LOAD_ON_GUI_INIT;
 }
 
-CGUIDialogVolumeBar::~CGUIDialogVolumeBar(void) = default;
+CGUIDialogVolumeBar::~CGUIDialogVolumeBar() = default;
 
 bool CGUIDialogVolumeBar::OnAction(const CAction &action)
 {

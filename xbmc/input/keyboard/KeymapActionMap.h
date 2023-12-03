@@ -17,9 +17,9 @@ namespace KEYBOARD
 class CKeymapActionMap : public IActionMap
 {
 public:
-  CKeymapActionMap(void) = default;
+  CKeymapActionMap() = default;
 
-  ~CKeymapActionMap(void) override = default;
+  ~CKeymapActionMap() override = default;
 
   // implementation of IActionMap
   unsigned int GetActionID(const CKey& key) override;

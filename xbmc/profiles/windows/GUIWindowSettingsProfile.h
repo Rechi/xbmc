@@ -16,8 +16,8 @@ class CGUIWindowSettingsProfile :
       public CGUIWindow
 {
 public:
-  CGUIWindowSettingsProfile(void);
-  ~CGUIWindowSettingsProfile(void) override;
+  CGUIWindowSettingsProfile();
+  ~CGUIWindowSettingsProfile() override;
   bool OnMessage(CGUIMessage& message) override;
 
 protected:

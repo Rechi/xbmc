@@ -15,7 +15,7 @@ namespace MUSIC_INFO
   class CMusicInfoTagLoaderFFmpeg: public IMusicInfoTagLoader
   {
   public:
-    CMusicInfoTagLoaderFFmpeg(void);
+    CMusicInfoTagLoaderFFmpeg();
     ~CMusicInfoTagLoaderFFmpeg() override;
 
     bool Load(const std::string& strFileName, CMusicInfoTag& tag, EmbeddedArt *art = NULL) override;

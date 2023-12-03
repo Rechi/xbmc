@@ -15,8 +15,8 @@ namespace XFILE
   class CFTPDirectory : public IDirectory
   {
     public:
-      CFTPDirectory(void);
-      ~CFTPDirectory(void) override;
+      CFTPDirectory();
+      ~CFTPDirectory() override;
       bool GetDirectory(const CURL& url, CFileItemList &items) override;
       bool Exists(const CURL& url) override;
     private:

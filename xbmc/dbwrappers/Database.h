@@ -96,7 +96,7 @@ public:
   };
 
   CDatabase();
-  virtual ~CDatabase(void);
+  virtual ~CDatabase();
   bool IsOpen();
   virtual void Close();
   bool Compress(bool bForce = true);

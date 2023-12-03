@@ -84,7 +84,7 @@ bool CApplicationVolumeHandling::IsMuted() const
   return true;
 }
 
-void CApplicationVolumeHandling::ToggleMute(void)
+void CApplicationVolumeHandling::ToggleMute()
 {
   if (m_muted)
     UnMute();

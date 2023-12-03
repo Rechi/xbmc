@@ -15,6 +15,6 @@ class CGUIDialogSubMenu :
 {
 public:
   CGUIDialogSubMenu(int id = WINDOW_DIALOG_SUB_MENU, const std::string &xmlFile = "DialogSubMenu.xml");
-  ~CGUIDialogSubMenu(void) override;
+  ~CGUIDialogSubMenu() override;
   bool OnMessage(CGUIMessage &message) override;
 };

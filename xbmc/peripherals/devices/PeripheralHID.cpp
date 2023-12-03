@@ -25,7 +25,7 @@ CPeripheralHID::CPeripheralHID(CPeripherals& manager,
   m_features.push_back(FEATURE_HID);
 }
 
-CPeripheralHID::~CPeripheralHID(void)
+CPeripheralHID::~CPeripheralHID()
 {
   if (!m_strKeymap.empty() && !GetSettingBool("do_not_use_custom_keymap"))
   {

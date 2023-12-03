@@ -13,8 +13,8 @@
 class CGUIDialogSeekBar : public CGUIDialog
 {
 public:
-  CGUIDialogSeekBar(void);
-  ~CGUIDialogSeekBar(void) override;
+  CGUIDialogSeekBar();
+  ~CGUIDialogSeekBar() override;
   bool OnMessage(CGUIMessage& message) override;
   void FrameMove() override;
 private:

@@ -16,7 +16,7 @@ class CGUIBorderedImage : public CGUIImage
 {
 public:
   CGUIBorderedImage(int parentID, int controlID, float posX, float posY, float width, float height, const CTextureInfo& texture, const CTextureInfo& borderTexture, const CRect &borderSize);
-  ~CGUIBorderedImage(void) override = default;
+  ~CGUIBorderedImage() override = default;
   CGUIBorderedImage* Clone() const override { return new CGUIBorderedImage(*this); }
 
   void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;

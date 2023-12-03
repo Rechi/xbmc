@@ -273,7 +273,7 @@ bool GUIFontManager::OnMessage(CGUIMessage& message)
   return false;
 }
 
-void GUIFontManager::ReloadTTFFonts(void)
+void GUIFontManager::ReloadTTFFonts()
 {
   CWinSystemBase* const winSystem = CServiceBroker::GetWinSystem();
   if (m_vecFonts.empty() || !winSystem)

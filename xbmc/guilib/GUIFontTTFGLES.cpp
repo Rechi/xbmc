@@ -43,7 +43,7 @@ CGUIFontTTFGLES::CGUIFontTTFGLES(const std::string& fontIdent) : CGUIFontTTF(fon
 {
 }
 
-CGUIFontTTFGLES::~CGUIFontTTFGLES(void)
+CGUIFontTTFGLES::~CGUIFontTTFGLES()
 {
   // It's important that all the CGUIFontCacheEntry objects are
   // destructed before the CGUIFontTTFGLES goes out of scope, because
@@ -378,7 +378,7 @@ void CGUIFontTTFGLES::DeleteHardwareTexture()
   }
 }
 
-void CGUIFontTTFGLES::CreateStaticVertexBuffers(void)
+void CGUIFontTTFGLES::CreateStaticVertexBuffers()
 {
   if (m_staticVertexBufferCreated)
     return;
@@ -404,7 +404,7 @@ void CGUIFontTTFGLES::CreateStaticVertexBuffers(void)
   m_staticVertexBufferCreated = true;
 }
 
-void CGUIFontTTFGLES::DestroyStaticVertexBuffers(void)
+void CGUIFontTTFGLES::DestroyStaticVertexBuffers()
 {
   if (!m_staticVertexBufferCreated)
     return;

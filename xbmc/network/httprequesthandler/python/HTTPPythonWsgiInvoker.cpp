@@ -68,9 +68,9 @@
 #endif
 
 namespace PythonBindings {
-PyObject* PyInit_Module_xbmc(void);
-PyObject* PyInit_Module_xbmcaddon(void);
-PyObject* PyInit_Module_xbmcwsgi(void);
+PyObject* PyInit_Module_xbmc();
+PyObject* PyInit_Module_xbmcaddon();
+PyObject* PyInit_Module_xbmcwsgi();
 }
 
 using namespace PythonBindings;
@@ -100,7 +100,7 @@ CHTTPPythonWsgiInvoker::~CHTTPPythonWsgiInvoker()
   m_wsgiResponse = NULL;
 }
 
-void CHTTPPythonWsgiInvoker::GlobalInitializeModules(void)
+void CHTTPPythonWsgiInvoker::GlobalInitializeModules()
 {
   if (PyImport_ExtendInittab(const_cast<_inittab*>(PythonModules)))
     CLog::Log(LOGWARNING, "CHTTPPythonWsgiInvoker(): unable to extend inittab");

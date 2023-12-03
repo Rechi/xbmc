@@ -77,7 +77,7 @@ namespace XBMCAddon
       //  construction of a Player needs to identify whether or not any
       //  callbacks will be executed asynchronously or not.
       explicit Player();
-      ~Player(void) override;
+      ~Player() override;
 #endif
 
 #ifdef DOXYGEN_SHOULD_USE_THIS

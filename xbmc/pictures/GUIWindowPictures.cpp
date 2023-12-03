@@ -54,8 +54,7 @@ using namespace std::chrono_literals;
 #define CONTROL_BTNSLIDESHOW_RECURSIVE   7
 #define CONTROL_SHUFFLE      9
 
-CGUIWindowPictures::CGUIWindowPictures(void)
-    : CGUIMediaWindow(WINDOW_PICTURES, "MyPics.xml")
+CGUIWindowPictures::CGUIWindowPictures() : CGUIMediaWindow(WINDOW_PICTURES, "MyPics.xml")
 {
   m_thumbLoader.SetObserver(this);
   m_slideShowStarted = false;
@@ -81,7 +80,7 @@ void CGUIWindowPictures::OnInitWindow()
   }
 }
 
-CGUIWindowPictures::~CGUIWindowPictures(void) = default;
+CGUIWindowPictures::~CGUIWindowPictures() = default;
 
 bool CGUIWindowPictures::OnMessage(CGUIMessage& message)
 {
