@@ -23,6 +23,9 @@ class TiXmlNode;
 class CViewStateSettings : public ISubSettings
 {
 public:
+  CViewStateSettings(const CViewStateSettings&) = delete;
+  CViewStateSettings& operator=(CViewStateSettings const&) = delete;
+
   static CViewStateSettings& GetInstance();
 
   bool Load(const TiXmlNode *settings) override;
@@ -47,8 +50,6 @@ public:
 
 protected:
   CViewStateSettings();
-  CViewStateSettings(const CViewStateSettings&) = delete;
-  CViewStateSettings& operator=(CViewStateSettings const&) = delete;
   ~CViewStateSettings() override;
 
 private:

@@ -37,14 +37,14 @@ namespace XbmcThreads
   {
     friend class ConditionVariable;
 
-    CountingLockable(const CountingLockable&) = delete;
-    CountingLockable& operator=(const CountingLockable&) = delete;
   protected:
     L mutex;
     unsigned int count = 0;
 
   public:
     inline CountingLockable() = default;
+    CountingLockable(const CountingLockable&) = delete;
+    CountingLockable& operator=(const CountingLockable&) = delete;
 
     // STL Lockable concept
     inline void lock() { mutex.lock(); count++; }

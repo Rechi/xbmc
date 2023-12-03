@@ -18,6 +18,8 @@ class CPVRGUIActionsEPG : public IPVRComponent
 {
 public:
   CPVRGUIActionsEPG() = default;
+  CPVRGUIActionsEPG(const CPVRGUIActionsEPG&) = delete;
+  CPVRGUIActionsEPG const& operator=(CPVRGUIActionsEPG const&) = delete;
   ~CPVRGUIActionsEPG() override = default;
 
   /*!
@@ -69,10 +71,6 @@ public:
    * @return True on success, false otherwise.
    */
   bool DeleteSavedSearch(const CFileItem& item);
-
-private:
-  CPVRGUIActionsEPG(const CPVRGUIActionsEPG&) = delete;
-  CPVRGUIActionsEPG const& operator=(CPVRGUIActionsEPG const&) = delete;
 };
 
 namespace GUI

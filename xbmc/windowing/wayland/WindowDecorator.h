@@ -73,6 +73,8 @@ public:
    * \param state surface state for adjusting decoration appearance
    */
   CWindowDecorator(IWindowDecorationHandler& handler, CConnection& connection, wayland::surface_t const& mainSurface);
+  CWindowDecorator(CWindowDecorator const& other) = delete;
+  CWindowDecorator& operator=(CWindowDecorator const& other) = delete;
 
   /**
    * Set decoration state and size by providing full surface size including decorations
@@ -140,9 +142,6 @@ public:
   };
 
 private:
-  CWindowDecorator(CWindowDecorator const& other) = delete;
-  CWindowDecorator& operator=(CWindowDecorator const& other) = delete;
-
   // IRawInputHandlerTouch
   void OnTouchDown(CSeat* seat,
                    std::uint32_t serial,

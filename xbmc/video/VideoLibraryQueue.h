@@ -28,6 +28,8 @@ class CVideoLibraryJob;
 class CVideoLibraryQueue : protected CJobQueue
 {
 public:
+  CVideoLibraryQueue(const CVideoLibraryQueue&) = delete;
+  CVideoLibraryQueue const& operator=(CVideoLibraryQueue const&) = delete;
   ~CVideoLibraryQueue() override;
 
   /*!
@@ -153,8 +155,6 @@ protected:
 
 private:
   CVideoLibraryQueue();
-  CVideoLibraryQueue(const CVideoLibraryQueue&) = delete;
-  CVideoLibraryQueue const& operator=(CVideoLibraryQueue const&) = delete;
 
   typedef std::set<CVideoLibraryJob*> VideoLibraryJobs;
   typedef std::map<std::string, VideoLibraryJobs> VideoLibraryJobMap;

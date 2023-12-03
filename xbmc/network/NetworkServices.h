@@ -30,6 +30,8 @@ class CNetworkServices : public ISettingCallback
 {
 public:
   CNetworkServices();
+  CNetworkServices(const CNetworkServices&) = delete;
+  CNetworkServices const& operator=(CNetworkServices const&) = delete;
   ~CNetworkServices() override;
 
   bool OnSettingChanging(const std::shared_ptr<const CSetting>& setting) override;
@@ -103,9 +105,6 @@ public:
   bool StopWSDiscovery();
 
 private:
-  CNetworkServices(const CNetworkServices&);
-  CNetworkServices const& operator=(CNetworkServices const&);
-
   bool ValidatePort(int port);
 
   // Construction parameters

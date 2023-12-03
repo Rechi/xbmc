@@ -22,6 +22,8 @@ class CPVRGUIActionsRecordings : public IPVRComponent
 {
 public:
   CPVRGUIActionsRecordings() = default;
+  CPVRGUIActionsRecordings(const CPVRGUIActionsRecordings&) = delete;
+  CPVRGUIActionsRecordings const& operator=(CPVRGUIActionsRecordings const&) = delete;
   ~CPVRGUIActionsRecordings() override = default;
 
   /*!
@@ -74,9 +76,6 @@ public:
   bool UndeleteRecording(const CFileItem& item) const;
 
 private:
-  CPVRGUIActionsRecordings(const CPVRGUIActionsRecordings&) = delete;
-  CPVRGUIActionsRecordings const& operator=(CPVRGUIActionsRecordings const&) = delete;
-
   /*!
    * @brief Open a dialog to confirm to delete a recording.
    * @param item the recording to delete.

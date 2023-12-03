@@ -25,6 +25,10 @@ class CWindow;
 class ATTR_DLL_LOCAL CAddonGUIControlBase
 {
 public:
+  CAddonGUIControlBase() = delete;
+  CAddonGUIControlBase(const CAddonGUIControlBase&) = delete;
+  CAddonGUIControlBase& operator=(const CAddonGUIControlBase&) = delete;
+
   KODI_GUI_LISTITEM_HANDLE GetControlHandle() const { return m_controlHandle; }
 
 protected:
@@ -42,11 +46,6 @@ protected:
   KODI_GUI_LISTITEM_HANDLE m_controlHandle;
   AddonToKodiFuncTable_Addon* m_interface;
   CAddonGUIControlBase* m_Window;
-
-private:
-  CAddonGUIControlBase() = delete;
-  CAddonGUIControlBase(const CAddonGUIControlBase&) = delete;
-  CAddonGUIControlBase& operator=(const CAddonGUIControlBase&) = delete;
 };
 
 class CListItem;

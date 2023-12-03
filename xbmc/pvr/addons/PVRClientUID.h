@@ -22,6 +22,8 @@ public:
   {
   }
 
+  CPVRClientUID() = delete;
+
   virtual ~CPVRClientUID() = default;
 
   /*!
@@ -31,8 +33,6 @@ public:
   int GetUID() const;
 
 private:
-  CPVRClientUID() = delete;
-
   std::string m_addonID;
   ADDON::AddonInstanceId m_instanceID{ADDON::ADDON_SINGLETON_INSTANCE_ID};
 

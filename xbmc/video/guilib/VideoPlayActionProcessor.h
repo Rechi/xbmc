@@ -20,6 +20,7 @@ class CVideoPlayActionProcessorBase
 {
 public:
   explicit CVideoPlayActionProcessorBase(CFileItem& item) : m_item(item) {}
+  CVideoPlayActionProcessorBase() = delete;
   virtual ~CVideoPlayActionProcessorBase() = default;
 
   static PlayAction GetDefaultPlayAction();
@@ -37,7 +38,6 @@ protected:
   bool m_userCancelled{false};
 
 private:
-  CVideoPlayActionProcessorBase() = delete;
   PlayAction ChoosePlayOrResume();
 };
 } // namespace GUILIB

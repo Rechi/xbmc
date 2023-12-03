@@ -22,7 +22,10 @@ enum AppleRemoteOptions
 
 class XBMCHelper : public ISettingCallback
 {
- public:
+public:
+  XBMCHelper(XBMCHelper const&) = delete;
+  XBMCHelper& operator=(XBMCHelper const&) = delete;
+
   static XBMCHelper& GetInstance();
 
   bool OnSettingChanging(const std::shared_ptr<const CSetting>& setting) override;
@@ -41,8 +44,6 @@ class XBMCHelper : public ISettingCallback
 
 private:
   XBMCHelper();
-  XBMCHelper(XBMCHelper const& ) = delete;
-  XBMCHelper& operator=(XBMCHelper const&) = delete;
 
   void HandleLaunchAgent();
   void Install();

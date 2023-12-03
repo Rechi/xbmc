@@ -145,13 +145,12 @@ class CGUIFontCache
 {
   std::unique_ptr<CGUIFontCacheImpl<Position, Value>> m_impl;
 
-  CGUIFontCache(const CGUIFontCache<Position, Value>&) = delete;
-  const CGUIFontCache<Position, Value>& operator=(const CGUIFontCache<Position, Value>&) = delete;
-
 public:
   const CGUIFontTTF& m_font;
 
   explicit CGUIFontCache(CGUIFontTTF& font);
+  CGUIFontCache(const CGUIFontCache<Position, Value>&) = delete;
+  const CGUIFontCache<Position, Value>& operator=(const CGUIFontCache<Position, Value>&) = delete;
 
   ~CGUIFontCache();
 

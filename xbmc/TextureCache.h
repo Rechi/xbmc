@@ -37,6 +37,8 @@ class CTextureCache : public CJobQueue
 {
 public:
   CTextureCache();
+  CTextureCache(const CTextureCache&) = delete;
+  CTextureCache const& operator=(CTextureCache const&) = delete;
   ~CTextureCache() override;
 
   /*! \brief Initialize the texture cache
@@ -159,10 +161,6 @@ public:
   bool Export(const std::string &image, const std::string &destination, bool overwrite);
   bool Export(const std::string &image, const std::string &destination); //! @todo BACKWARD COMPATIBILITY FOR MUSIC THUMBS
 private:
-  // private construction, and no assignments; use the provided singleton methods
-  CTextureCache(const CTextureCache&) = delete;
-  CTextureCache const& operator=(CTextureCache const&) = delete;
-
   /*! \brief Check if the given image is a cached image
    \param image url of the image
    \return true if this is a cached image, false otherwise.

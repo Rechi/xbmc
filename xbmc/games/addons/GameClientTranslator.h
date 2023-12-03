@@ -31,9 +31,9 @@ namespace GAME
  */
 class CGameClientTranslator
 {
+public:
   CGameClientTranslator() = delete;
 
-public:
   /*!
    * \brief Translates game errors to string representation (e.g. for logging).
    * \param error The error to translate.

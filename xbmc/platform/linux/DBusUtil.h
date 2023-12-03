@@ -39,15 +39,14 @@ class CDBusConnection
 {
 public:
   CDBusConnection();
+  CDBusConnection(CDBusConnection const& other) = delete;
+  CDBusConnection& operator=(CDBusConnection const& other) = delete;
   bool Connect(DBusBusType bus, bool openPrivate = false);
   bool Connect(DBusBusType bus, CDBusError& error, bool openPrivate = false);
   void Destroy();
   operator DBusConnection*();
 
 private:
-  CDBusConnection(CDBusConnection const& other) = delete;
-  CDBusConnection& operator=(CDBusConnection const& other) = delete;
-
   struct DBusConnectionDeleter
   {
     DBusConnectionDeleter() noexcept = default;
@@ -62,6 +61,8 @@ class CDBusError
 {
 public:
   CDBusError();
+  CDBusError(CDBusError const& other) = delete;
+  CDBusError& operator=(CDBusError const& other) = delete;
   ~CDBusError();
   operator DBusError*();
   bool IsSet() const;
@@ -82,8 +83,5 @@ public:
   void Log(int level, std::string const& message = "DBus error") const;
 
 private:
-  CDBusError(CDBusError const& other) = delete;
-  CDBusError& operator=(CDBusError const& other) = delete;
-
   DBusError m_error;
 };

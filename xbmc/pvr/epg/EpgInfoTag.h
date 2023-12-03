@@ -59,6 +59,10 @@ public:
                  const CDateTime& end,
                  bool bIsGapTag);
 
+  CPVREpgInfoTag() = delete;
+  CPVREpgInfoTag(const CPVREpgInfoTag& tag) = delete;
+  CPVREpgInfoTag& operator=(const CPVREpgInfoTag& other) = delete;
+
   /*!
    * @brief Set data for the channel linked to this EPG infotag.
    * @param data The channel data.
@@ -465,10 +469,6 @@ public:
 
 private:
   CPVREpgInfoTag(int iEpgID, const std::string& iconPath);
-
-  CPVREpgInfoTag() = delete;
-  CPVREpgInfoTag(const CPVREpgInfoTag& tag) = delete;
-  CPVREpgInfoTag& operator=(const CPVREpgInfoTag& other) = delete;
 
   /*!
      * @brief Get current time, taking timeshifting into account.

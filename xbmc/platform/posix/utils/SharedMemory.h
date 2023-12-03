@@ -30,6 +30,8 @@ class CSharedMemory
 {
 public:
   explicit CSharedMemory(std::size_t size);
+  CSharedMemory(CSharedMemory const& other) = delete;
+  CSharedMemory& operator=(CSharedMemory const& other) = delete;
 
   std::size_t Size() const
   {
@@ -45,9 +47,6 @@ public:
   }
 
 private:
-  CSharedMemory(CSharedMemory const& other) = delete;
-  CSharedMemory& operator=(CSharedMemory const& other) = delete;
-
   CFileHandle Open();
   CFileHandle OpenMemfd();
   CFileHandle OpenShm();

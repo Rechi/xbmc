@@ -20,6 +20,7 @@ class CVideoSelectActionProcessorBase
 {
 public:
   explicit CVideoSelectActionProcessorBase(CFileItem& item) : m_item(item) {}
+  CVideoSelectActionProcessorBase() = delete;
   virtual ~CVideoSelectActionProcessorBase() = default;
 
   static SelectAction GetDefaultSelectAction();
@@ -40,7 +41,6 @@ protected:
   CFileItem& m_item;
 
 private:
-  CVideoSelectActionProcessorBase() = delete;
   SelectAction ChooseVideoItemSelectAction() const;
   unsigned int ChooseStackItemPartNumber() const;
 };

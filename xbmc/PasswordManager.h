@@ -27,6 +27,9 @@ class CURL;
 class CPasswordManager
 {
 public:
+  CPasswordManager(const CPasswordManager&) = delete;
+  CPasswordManager& operator=(CPasswordManager const&) = delete;
+
  /*!
    \brief The only way through which the global instance of the CPasswordManager should be accessed.
    \return the global instance.
@@ -88,8 +91,6 @@ public:
 private:
   // private construction, and no assignments; use the provided singleton methods
   CPasswordManager();
-  CPasswordManager(const CPasswordManager&) = delete;
-  CPasswordManager& operator=(CPasswordManager const&) = delete;
   ~CPasswordManager() = default;
 
   void Load();

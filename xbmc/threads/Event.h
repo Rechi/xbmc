@@ -58,14 +58,14 @@ class CEvent
     return ret;
   }
 
-  CEvent(const CEvent&) = delete;
-  CEvent& operator=(const CEvent&) = delete;
-
 public:
   inline CEvent(bool manual = false, bool signaled_ = false)
     : manualReset(manual), signaled(signaled_)
   {
   }
+
+  CEvent(const CEvent&) = delete;
+  CEvent& operator=(const CEvent&) = delete;
 
   inline void Reset()
   {
@@ -154,15 +154,15 @@ class CEventGroup
 
   friend class ::CEvent;
 
-  CEventGroup(const CEventGroup&) = delete;
-  CEventGroup& operator=(const CEventGroup&) = delete;
-
 public:
   /**
    * @brief Create a CEventGroup from a number of CEvents.
    *
    */
   CEventGroup(std::initializer_list<CEvent*> events);
+
+  CEventGroup(const CEventGroup&) = delete;
+  CEventGroup& operator=(const CEventGroup&) = delete;
 
   ~CEventGroup();
 

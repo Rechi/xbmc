@@ -38,6 +38,8 @@ class CUPnP
 {
 public:
     CUPnP();
+    CUPnP(const CUPnP&) = delete;
+    CUPnP& operator=(const CUPnP&) = delete;
     ~CUPnP();
 
     // server
@@ -77,9 +79,6 @@ public:
     static void RegisterUserdata(void* ptr);
     static void UnregisterUserdata(void* ptr);
 private:
-    CUPnP(const CUPnP&) = delete;
-    CUPnP& operator=(const CUPnP&) = delete;
-
     void CreateControlPoint();
     void DestroyControlPoint();
 

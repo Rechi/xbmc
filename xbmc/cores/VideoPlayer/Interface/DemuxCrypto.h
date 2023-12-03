@@ -30,6 +30,9 @@ struct DemuxCryptoSession
   {
   }
 
+  DemuxCryptoSession(const DemuxCryptoSession&) = delete;
+  DemuxCryptoSession& operator=(const DemuxCryptoSession&) = delete;
+
   bool operator == (const DemuxCryptoSession &other) const
   {
     return keySystem == other.keySystem && sessionId == other.sessionId;
@@ -41,9 +44,6 @@ struct DemuxCryptoSession
 
   static const uint8_t FLAG_SECURE_DECODER = 1;
   uint8_t flags;
-private:
-  DemuxCryptoSession(const DemuxCryptoSession&) = delete;
-  DemuxCryptoSession& operator=(const DemuxCryptoSession&) = delete;
 };
 
 //CryptoInfo stores the information to decrypt a sample
@@ -58,13 +58,12 @@ struct DemuxCryptoInfo : DEMUX_CRYPTO_INFO
     cipherBytes = new uint32_t[numSubs];
   };
 
+  DemuxCryptoInfo(const DemuxCryptoInfo&) = delete;
+  DemuxCryptoInfo& operator=(const DemuxCryptoInfo&) = delete;
+
   ~DemuxCryptoInfo()
   {
     delete[] clearBytes;
     delete[] cipherBytes;
   }
-
-private:
-  DemuxCryptoInfo(const DemuxCryptoInfo&) = delete;
-  DemuxCryptoInfo& operator=(const DemuxCryptoInfo&) = delete;
 };

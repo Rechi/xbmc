@@ -28,6 +28,11 @@ public:
   {
   public:
     /**
+    * Executable action default constructor
+    */
+    CExecutableAction() = delete;
+
+    /**
     * Executable action constructor (without conditional execution)
     * @param action - The action to be executed
     */
@@ -64,10 +69,6 @@ public:
     void SetAction(const std::string& action);
 
   private:
-    /**
-    * Executable action default constructor
-    */
-    CExecutableAction() = delete;
     /* The condition that dictates the action execution */
     std::string m_condition;
     /* The actual action */

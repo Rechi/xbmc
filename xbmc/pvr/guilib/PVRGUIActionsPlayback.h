@@ -30,6 +30,8 @@ class CPVRGUIActionsPlayback : public IPVRComponent
 {
 public:
   CPVRGUIActionsPlayback();
+  CPVRGUIActionsPlayback(const CPVRGUIActionsPlayback&) = delete;
+  CPVRGUIActionsPlayback const& operator=(CPVRGUIActionsPlayback const&) = delete;
   ~CPVRGUIActionsPlayback() override = default;
 
   /*!
@@ -111,9 +113,6 @@ public:
   void SeekBackward(unsigned int iThreshold);
 
 private:
-  CPVRGUIActionsPlayback(const CPVRGUIActionsPlayback&) = delete;
-  CPVRGUIActionsPlayback const& operator=(CPVRGUIActionsPlayback const&) = delete;
-
   /*!
    * @brief Check whether resume play is possible for a given item, display "resume from ..."/"play
    * from start" context menu in case.

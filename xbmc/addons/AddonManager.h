@@ -89,6 +89,7 @@ public:
 
   CAddonMgr();
   CAddonMgr(const CAddonMgr&) = delete;
+  CAddonMgr& operator=(CAddonMgr const&) = delete;
   virtual ~CAddonMgr();
 
   CEventStream<AddonEvent>& Events() { return m_events; }
@@ -609,8 +610,6 @@ public:
   std::vector<std::shared_ptr<IAddon>> GetOrphanedDependencies() const;
 
 private:
-  CAddonMgr& operator=(CAddonMgr const&) = delete;
-
   VECADDONS m_updateableAddons;
 
   /*!

@@ -30,6 +30,9 @@ namespace PVR
      */
     CPVRChannelGroupsContainer();
 
+    CPVRChannelGroupsContainer& operator=(const CPVRChannelGroupsContainer&) = delete;
+    CPVRChannelGroupsContainer(const CPVRChannelGroupsContainer&) = delete;
+
     /*!
      * @brief Destroy this container.
      */
@@ -152,9 +155,6 @@ namespace PVR
     int CleanupCachedImages();
 
   private:
-    CPVRChannelGroupsContainer& operator=(const CPVRChannelGroupsContainer&) = delete;
-    CPVRChannelGroupsContainer(const CPVRChannelGroupsContainer&) = delete;
-
     /*!
      * @brief Load all channel groups and all channels from PVR database.
      * @param clients The PVR clients data should be loaded for. Leave empty for all clients.

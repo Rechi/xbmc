@@ -21,6 +21,9 @@ class TiXmlNode;
 class CSkinSettings : public ISubSettings
 {
 public:
+  CSkinSettings(const CSkinSettings&) = delete;
+  CSkinSettings& operator=(CSkinSettings const&) = delete;
+
   static CSkinSettings& GetInstance();
 
   bool Load(const TiXmlNode *settings) override;
@@ -52,8 +55,6 @@ public:
 
 protected:
   CSkinSettings();
-  CSkinSettings(const CSkinSettings&) = delete;
-  CSkinSettings& operator=(CSkinSettings const&) = delete;
   ~CSkinSettings() override;
 
 private:

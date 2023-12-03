@@ -29,6 +29,8 @@ public:
    * See mmap(3p) for parameter description
    */
   CMmap(void* addr, std::size_t length, int prot, int flags, int fildes, off_t offset);
+  CMmap(CMmap const& other) = delete;
+  CMmap& operator=(CMmap const& other) = delete;
   ~CMmap();
 
   void* Data() const
@@ -41,9 +43,6 @@ public:
   }
 
 private:
-  CMmap(CMmap const& other) = delete;
-  CMmap& operator=(CMmap const& other) = delete;
-
   std::size_t m_size;
   void* m_memory;
 };
