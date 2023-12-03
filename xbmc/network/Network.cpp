@@ -312,7 +312,7 @@ static const char* ConnectHostPort(SOCKET soc, const struct sockaddr_in& addr, s
       FD_ZERO(&wset);
       FD_SET(soc, &wset);
 
-      result = select(FD_SETSIZE, 0, &wset, 0, &timeOut);
+      result = select(FD_SETSIZE, nullptr, &wset, nullptr, &timeOut);
     }
 
     if (result < 0)
@@ -341,7 +341,7 @@ static const char* ConnectHostPort(SOCKET soc, const struct sockaddr_in& addr, s
     FD_ZERO(&rset);
     FD_SET(soc, &rset);
 
-    result = select(FD_SETSIZE, &rset, 0, 0, &timeOut);
+    result = select(FD_SETSIZE, &rset, nullptr, nullptr, &timeOut);
 
     if (result > 0)
     {
@@ -357,7 +357,7 @@ static const char* ConnectHostPort(SOCKET soc, const struct sockaddr_in& addr, s
       return "recv fail";
   }
 
-  return 0; // success
+  return nullptr; // success
 }
 
 bool CNetworkBase::PingHost(unsigned long ipaddr, unsigned short port, unsigned int timeOutMs, bool readability_check)
@@ -397,7 +397,7 @@ bool CNetworkBase::PingHost(unsigned long ipaddr, unsigned short port, unsigned 
               err_msg, sock_err);
   }
 
-  return err_msg == 0;
+  return err_msg == nullptr;
 }
 
 //creates, binds and listens tcp sockets on the desired port. Set bindLocal to

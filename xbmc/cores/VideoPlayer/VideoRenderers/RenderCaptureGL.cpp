@@ -100,7 +100,7 @@ void CRenderCaptureGL::BeginRender()
     if (m_bufferSize != m_width * m_height * 4)
     {
       m_bufferSize = m_width * m_height * 4;
-      glBufferData(GL_PIXEL_PACK_BUFFER, m_bufferSize, 0, GL_STREAM_READ);
+      glBufferData(GL_PIXEL_PACK_BUFFER, m_bufferSize, nullptr, GL_STREAM_READ);
       delete[] m_pixels;
       m_pixels = new uint8_t[m_bufferSize];
     }

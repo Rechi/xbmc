@@ -85,7 +85,7 @@ void CRendererVTB::ReleaseBuffer(int idx)
     if (renderBuf.m_fence && glIsSyncAPPLE(renderBuf.m_fence))
     {
       glDeleteSyncAPPLE(renderBuf.m_fence);
-      renderBuf.m_fence = 0;
+      renderBuf.m_fence = nullptr;
     }
     buf.videoBuffer->Release();
     buf.videoBuffer = nullptr;

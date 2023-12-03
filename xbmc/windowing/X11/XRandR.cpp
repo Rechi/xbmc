@@ -470,7 +470,7 @@ bool CXRandR::IsOutputConnected(const std::string& name)
 
 XOutput* CXRandR::GetOutput(const std::string& outputName)
 {
-  XOutput *result = 0;
+  XOutput* result = nullptr;
   Query();
   for (unsigned int i = 0; i < m_outputs.size(); ++i)
   {
