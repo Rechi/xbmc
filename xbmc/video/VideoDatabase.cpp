@@ -11672,7 +11672,7 @@ void CVideoDatabase::InitializeVideoVersionTypeTable()
 
     for (int id = VIDEO_VERSION_ID_BEGIN; id <= VIDEO_VERSION_ID_END; ++id)
     {
-      std::string type = g_localizeStrings.Get(id);
+      const std::string& type = g_localizeStrings.Get(id);
       m_pDS->exec(PrepareSQL("INSERT INTO videoversiontype VALUES(%i, '%s', %i)", id, type.c_str(),
                              VideoVersionTypeOwner::SYSTEM));
     }
@@ -11694,7 +11694,7 @@ void CVideoDatabase::UpdateVideoVersionTypeTable()
 
     for (int id = VIDEO_VERSION_ID_BEGIN; id <= VIDEO_VERSION_ID_END; ++id)
     {
-      std::string type = g_localizeStrings.Get(id);
+      const std::string& type = g_localizeStrings.Get(id);
       m_pDS->exec(PrepareSQL("UPDATE videoversiontype SET name = '%s', owner = %i WHERE id = '%i'",
                              type.c_str(), VideoVersionTypeOwner::SYSTEM, id));
     }
