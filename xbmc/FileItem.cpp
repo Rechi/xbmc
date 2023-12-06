@@ -679,7 +679,7 @@ void CFileItem::Archive(CArchive& ar)
     ar >> m_lEndOffset;
     int temp;
     ar >> temp;
-    m_iLockMode = (LockType)temp;
+    m_iLockMode = static_cast<LockType>(temp);
     ar >> m_strLockCode;
     ar >> m_iBadPwdCount;
 
@@ -687,7 +687,7 @@ void CFileItem::Archive(CArchive& ar)
     ar >> m_mimetype;
     ar >> m_extrainfo;
     ar >> temp;
-    m_specialSort = (SortSpecial)temp;
+    m_specialSort = static_cast<SortSpecial>(temp);
     ar >> m_doContentLookup;
 
     int iType;
@@ -2429,7 +2429,7 @@ CFileItemPtr CFileItemList::Get(int iItem) const
 {
   std::unique_lock<CCriticalSection> lock(m_lock);
 
-  if (iItem > -1 && iItem < (int)m_items.size())
+  if (iItem > -1 && iItem < static_cast<int>(m_items.size()))
     return m_items[iItem];
 
   return CFileItemPtr();
@@ -2462,7 +2462,7 @@ CFileItemPtr CFileItemList::Get(const std::string& strPath) const
 int CFileItemList::Size() const
 {
   std::unique_lock<CCriticalSection> lock(m_lock);
-  return (int)m_items.size();
+  return static_cast<int>(m_items.size());
 }
 
 bool CFileItemList::IsEmpty() const
@@ -2512,7 +2512,8 @@ void CFileItemList::Sort(SortDescription sortDescription)
       sortDescription.sortBy == SortByRating || sortDescription.sortBy == SortByYear ||
       sortDescription.sortBy == SortByPlaylistOrder || sortDescription.sortBy == SortByLastPlayed ||
       sortDescription.sortBy == SortByPlaycount)
-    sortDescription.sortAttributes = (SortAttribute)((int)sortDescription.sortAttributes | SortAttributeIgnoreFolders);
+    sortDescription.sortAttributes = static_cast<SortAttribute>(
+        static_cast<int>(sortDescription.sortAttributes) | SortAttributeIgnoreFolders);
 
   if (sortDescription.sortBy == SortByNone ||
      (m_sortDescription.sortBy == sortDescription.sortBy && m_sortDescription.sortOrder == sortDescription.sortOrder &&
@@ -2520,10 +2521,11 @@ void CFileItemList::Sort(SortDescription sortDescription)
     return;
 
   if (m_sortIgnoreFolders)
-    sortDescription.sortAttributes = (SortAttribute)((int)sortDescription.sortAttributes | SortAttributeIgnoreFolders);
+    sortDescription.sortAttributes = static_cast<SortAttribute>(
+        static_cast<int>(sortDescription.sortAttributes) | SortAttributeIgnoreFolders);
 
   const Fields fields = SortUtils::GetFieldsForSorting(sortDescription.sortBy);
-  SortItems sortItems((size_t)Size());
+  SortItems sortItems(static_cast<size_t>(Size()));
   for (int index = 0; index < Size(); index++)
   {
     sortItems[index] = std::make_shared<SortItem>();
@@ -2539,7 +2541,7 @@ void CFileItemList::Sort(SortDescription sortDescription)
   sortedFileItems.reserve(Size());
   for (SortItems::const_iterator it = sortItems.begin(); it != sortItems.end(); ++it)
   {
-    CFileItemPtr item = m_items[(int)(*it)->at(FieldId).asInteger()];
+    CFileItemPtr item = m_items[static_cast<int>((*it)->at(FieldId).asInteger())];
     // Set the sort label in the CFileItem
     item->SetSortLabel((*it)->at(FieldSort).asWideString());
 
@@ -2567,25 +2569,25 @@ void CFileItemList::Archive(CArchive& ar)
     if (!m_items.empty() && m_items[0]->IsParentFolder())
       i = 1;
 
-    ar << (int)(m_items.size() - i);
+    ar << static_cast<int>(m_items.size() - i);
 
     ar << m_ignoreURLOptions;
 
     ar << m_fastLookup;
 
-    ar << (int)m_sortDescription.sortBy;
-    ar << (int)m_sortDescription.sortOrder;
-    ar << (int)m_sortDescription.sortAttributes;
+    ar << static_cast<int>(m_sortDescription.sortBy);
+    ar << static_cast<int>(m_sortDescription.sortOrder);
+    ar << static_cast<int>(m_sortDescription.sortAttributes);
     ar << m_sortIgnoreFolders;
-    ar << (int)m_cacheToDisc;
+    ar << static_cast<int>(m_cacheToDisc);
 
-    ar << (int)m_sortDetails.size();
+    ar << static_cast<int>(m_sortDetails.size());
     for (unsigned int j = 0; j < m_sortDetails.size(); ++j)
     {
       const GUIViewSortDetails &details = m_sortDetails[j];
-      ar << (int)details.m_sortDescription.sortBy;
-      ar << (int)details.m_sortDescription.sortOrder;
-      ar << (int)details.m_sortDescription.sortAttributes;
+      ar << static_cast<int>(details.m_sortDescription.sortBy);
+      ar << static_cast<int>(details.m_sortDescription.sortOrder);
+      ar << static_cast<int>(details.m_sortDescription.sortAttributes);
       ar << details.m_buttonLabel;
       ar << details.m_labelMasks.m_strLabelFile;
       ar << details.m_labelMasks.m_strLabelFolder;
@@ -2595,7 +2597,7 @@ void CFileItemList::Archive(CArchive& ar)
 
     ar << m_content;
 
-    for (; i < (int)m_items.size(); ++i)
+    for (; i < static_cast<int>(m_items.size()); ++i)
     {
       CFileItemPtr pItem = m_items[i];
       ar << *pItem;
@@ -2638,14 +2640,14 @@ void CFileItemList::Archive(CArchive& ar)
 
     int tempint;
     ar >> tempint;
-    m_sortDescription.sortBy = (SortBy)tempint;
+    m_sortDescription.sortBy = static_cast<SortBy>(tempint);
     ar >> tempint;
-    m_sortDescription.sortOrder = (SortOrder)tempint;
+    m_sortDescription.sortOrder = static_cast<SortOrder>(tempint);
     ar >> tempint;
-    m_sortDescription.sortAttributes = (SortAttribute)tempint;
+    m_sortDescription.sortAttributes = static_cast<SortAttribute>(tempint);
     ar >> m_sortIgnoreFolders;
     ar >> tempint;
-    m_cacheToDisc = CACHE_TYPE(tempint);
+    m_cacheToDisc = static_cast<CACHE_TYPE>(tempint);
 
     unsigned int detailSize = 0;
     ar >> detailSize;
@@ -2653,11 +2655,11 @@ void CFileItemList::Archive(CArchive& ar)
     {
       GUIViewSortDetails details;
       ar >> tempint;
-      details.m_sortDescription.sortBy = (SortBy)tempint;
+      details.m_sortDescription.sortBy = static_cast<SortBy>(tempint);
       ar >> tempint;
-      details.m_sortDescription.sortOrder = (SortOrder)tempint;
+      details.m_sortDescription.sortOrder = static_cast<SortOrder>(tempint);
       ar >> tempint;
-      details.m_sortDescription.sortAttributes = (SortAttribute)tempint;
+      details.m_sortDescription.sortAttributes = static_cast<SortAttribute>(tempint);
       ar >> details.m_buttonLabel;
       ar >> details.m_labelMasks.m_strLabelFile;
       ar >> details.m_labelMasks.m_strLabelFolder;
@@ -2683,7 +2685,7 @@ void CFileItemList::Archive(CArchive& ar)
 void CFileItemList::FillInDefaultIcons()
 {
   std::unique_lock<CCriticalSection> lock(m_lock);
-  for (int i = 0; i < (int)m_items.size(); ++i)
+  for (int i = 0; i < static_cast<int>(m_items.size()); ++i)
   {
     CFileItemPtr pItem = m_items[i];
     pItem->FillInDefaultIcon();
@@ -2694,7 +2696,7 @@ int CFileItemList::GetFolderCount() const
 {
   std::unique_lock<CCriticalSection> lock(m_lock);
   int nFolderCount = 0;
-  for (int i = 0; i < (int)m_items.size(); i++)
+  for (int i = 0; i < static_cast<int>(m_items.size()); i++)
   {
     CFileItemPtr pItem = m_items[i];
     if (pItem->m_bIsFolder)
@@ -2708,7 +2710,7 @@ int CFileItemList::GetObjectCount() const
 {
   std::unique_lock<CCriticalSection> lock(m_lock);
 
-  int numObjects = (int)m_items.size();
+  int numObjects = static_cast<int>(m_items.size());
   if (numObjects && m_items[0]->IsParentFolder())
     numObjects--;
 
@@ -2719,7 +2721,7 @@ int CFileItemList::GetFileCount() const
 {
   std::unique_lock<CCriticalSection> lock(m_lock);
   int nFileCount = 0;
-  for (int i = 0; i < (int)m_items.size(); i++)
+  for (int i = 0; i < static_cast<int>(m_items.size()); i++)
   {
     CFileItemPtr pItem = m_items[i];
     if (!pItem->m_bIsFolder)
@@ -2733,7 +2735,7 @@ int CFileItemList::GetSelectedCount() const
 {
   std::unique_lock<CCriticalSection> lock(m_lock);
   int count = 0;
-  for (int i = 0; i < (int)m_items.size(); i++)
+  for (int i = 0; i < static_cast<int>(m_items.size()); i++)
   {
     CFileItemPtr pItem = m_items[i];
     if (pItem->IsSelected())
@@ -2748,7 +2750,7 @@ void CFileItemList::FilterCueItems()
   std::unique_lock<CCriticalSection> lock(m_lock);
   // Handle .CUE sheet files...
   std::vector<std::string> itemstodelete;
-  for (int i = 0; i < (int)m_items.size(); i++)
+  for (int i = 0; i < static_cast<int>(m_items.size()); i++)
   {
     CFileItemPtr pItem = m_items[i];
     if (!pItem->m_bIsFolder)
@@ -2806,7 +2808,7 @@ void CFileItemList::FilterCueItems()
             {
               cuesheet->UpdateMediaFile(fileFromCue, strMediaFile);
               // apply CUE for later processing
-              for (int j = 0; j < (int)m_items.size(); j++)
+              for (int j = 0; j < static_cast<int>(m_items.size()); j++)
               {
                 CFileItemPtr pItem = m_items[j];
                 if (StringUtils::CompareNoCase(pItem->GetPath(), strMediaFile) == 0)
@@ -2820,9 +2822,9 @@ void CFileItemList::FilterCueItems()
     }
   }
   // now delete the .CUE files.
-  for (int i = 0; i < (int)itemstodelete.size(); i++)
+  for (int i = 0; i < static_cast<int>(itemstodelete.size()); i++)
   {
-    for (int j = 0; j < (int)m_items.size(); j++)
+    for (int j = 0; j < static_cast<int>(m_items.size()); j++)
     {
       CFileItemPtr pItem = m_items[j];
       if (StringUtils::CompareNoCase(pItem->GetPath(), itemstodelete[i]) == 0)
