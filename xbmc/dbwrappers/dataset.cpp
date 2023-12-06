@@ -175,7 +175,7 @@ void Dataset::parse_sql(std::string& sql)
     while ((idx = sql.find(fpattern, next_idx)) >= 0)
     {
       next_idx = idx + fpattern.size();
-      if (sql.length() > ((unsigned int)next_idx))
+      if (sql.length() > (static_cast<unsigned int>(next_idx)))
         if (isalnum(sql[next_idx]) || sql[next_idx] == '_')
         {
           continue;
@@ -193,7 +193,7 @@ void Dataset::parse_sql(std::string& sql)
     while ((idx = sql.find(fpattern, next_idx)) >= 0)
     {
       next_idx = idx + fpattern.size();
-      if (sql.length() > ((unsigned int)next_idx))
+      if (sql.length() > (static_cast<unsigned int>(next_idx)))
         if (isalnum(sql[next_idx]) || sql[next_idx] == '_')
         {
           continue;
@@ -218,7 +218,7 @@ bool Dataset::seek(int pos)
   frecno = (pos < num_rows() - 1) ? pos : num_rows() - 1;
   frecno = (frecno < 0) ? 0 : frecno;
   fbof = feof = (num_rows() == 0) ? true : false;
-  return ((bool)frecno);
+  return (static_cast<bool>(frecno));
 }
 
 void Dataset::refresh()
@@ -415,7 +415,7 @@ const field_value& Dataset::get_field_value(int index)
 
 const sql_record* Dataset::get_sql_record()
 {
-  if (result.records.empty() || frecno >= (int)result.records.size())
+  if (result.records.empty() || frecno >= static_cast<int>(result.records.size()))
     return NULL;
 
   return result.records[frecno];
