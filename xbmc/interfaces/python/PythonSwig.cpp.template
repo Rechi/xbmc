@@ -84,7 +84,7 @@ Helper.setup(this,classes,
       'unsigned long' : '${api} = PyLong_AsUnsignedLong(${slarg});',
       'long long' : '${api} = PyLong_AsLongLong(${slarg});',
       'unsigned long long' : '${api} = PyLong_AsUnsignedLongLong(${slarg});',
-      'int' : '${api} = (int)PyLong_AsLong(${slarg});',
+      'int' : '${api} = static_cast<int>(PyLong_AsLong(${slarg}));',
       'double' : '${api} = PyFloat_AsDouble(${slarg});',
       'float' : '${api} = (float)PyFloat_AsDouble(${slarg});',
       'XBMCAddon::StringOrInt' : 'if (${slarg}) PyXBMCGetUnicodeString(${api},${slarg},PyLong_Check(${slarg}) || PyFloat_Check(${slarg}),"${api}","${method.@name}");'
@@ -199,7 +199,7 @@ void doMethod(Node method, MethodType methodType)
 %>      <%
     if (returns != "void") { %>apiResult = <% }
     if (clazz && !constructor) {
-      %>((${clazz}*)retrieveApiInstance((PyObject*)self,&Ty${classNameAsVariable}_Type,"${Helper.callingName(method)}","${clazz}"))-> <%
+      %>((${clazz}*)retrieveApiInstance(reinterpret_cast<PyObject*>(self), &Ty${classNameAsVariable}_Type, "${Helper.callingName(method)}", "${clazz}"))-> <%
     }
     if (constructor && classnode.@feature_director) {
     %>(&(Ty${classNameAsVariable}_Type.pythonType) != pytype) ? new ${classNameAsVariable}_Director(<% params.eachWithIndex { param, i -> %> ${param.@name}${i < params.size() - 1 ? "," : ""} <% } %>) : <% }
@@ -212,7 +212,7 @@ void doMethod(Node method, MethodType methodType)
     } // close the 'if method is not a destructor'
     else {  // it is a destructor
 %>
-      ${clazz}* theObj = (${clazz}*)retrieveApiInstance((PyObject*)self,&Ty${classNameAsVariable}_Type,"~${Helper.callingName(method)}","${clazz}");
+      ${clazz}* theObj = (${clazz}*)retrieveApiInstance(reinterpret_cast<PyObject*>(self), &Ty${classNameAsVariable}_Type, "~${Helper.callingName(method)}", "${clazz}");
       cleanForDealloc(theObj);
 <%
     }
@@ -262,7 +262,7 @@ void doMethod(Node method, MethodType methodType)
 
     return result; <% }
     else { %>
-    (((PyObject*)(self))->ob_type)->tp_free((PyObject*)self);
+    ((reinterpret_cast<PyObject*>(self))->ob_type)->tp_free(reinterpret_cast<PyObject*>(self));
     <%
     }
     %>
@@ -387,7 +387,7 @@ void doClassMethodInfo(Node clazz, List initTypeCalls)
 %>
   static Py_ssize_t ${module.@name}_${classNameAsVariable}_size_(PyObject* self)
   {
-    return (Py_ssize_t)((${fullClassName}*)retrieveApiInstance(self,&Ty${classNameAsVariable}_Type,"${Helper.callingName(indexOp)}","${fullClassName}"))-> size();
+    return static_cast<Py_ssize_t>(((${fullClassName}*)retrieveApiInstance(self, &Ty${classNameAsVariable}_Type, "${Helper.callingName(indexOp)}", "${fullClassName}"))->size());
   }
 
   //=========================================================================
@@ -395,7 +395,7 @@ void doClassMethodInfo(Node clazz, List initTypeCalls)
   //=========================================================================
   PyMappingMethods ${module.@name}_${classNameAsVariable}_as_mapping = {
     ${module.@name}_${classNameAsVariable}_size_,    /* inquiry mp_length;                  __len__ */
-    (PyCFunction)${module.@name}_${PythonTools.getPyMethodName(indexOp,MethodType.method)},   /* binaryfunc mp_subscript             __getitem__ */
+    reinterpret_cast<PyCFunction>(${module.@name}_${PythonTools.getPyMethodName(indexOp,MethodType.method)}), /* binaryfunc mp_subscript             __getitem__ */
     0,                  /* objargproc mp_ass_subscript;     __setitem__ */
   };
 <%
@@ -415,7 +415,7 @@ void doClassMethodInfo(Node clazz, List initTypeCalls)
   // All of the methods on this class
   static PyMethodDef ${classNameAsVariable}_methods[] = { <%
     normalMethods.each {  %>
-    {"${it.@sym_name}", (PyCFunction)${module.@name}_${PythonTools.getPyMethodName(it,MethodType.method)}, METH_VARARGS|METH_KEYWORDS, ${Helper.hasDoc(it) ? PythonTools.getPyMethodName(it,MethodType.method) + '__doc__' : 'NULL'} }, <% }
+    {"${it.@sym_name}", reinterpret_cast<PyCFunction>(${module.@name}_${PythonTools.getPyMethodName(it,MethodType.method)}), METH_VARARGS | METH_KEYWORDS, ${Helper.hasDoc(it) ? PythonTools.getPyMethodName(it,MethodType.method) + '__doc__' : 'NULL'} }, <% }
 
     // now do all of the explicit feature:python:method's that may be in this class
     List tmpl = []
@@ -643,10 +643,10 @@ void doClassMethodInfo(Node clazz, List initTypeCalls)
     PyTypeObject& pythonType = Ty${classNameAsVariable}_Type.pythonType;
     pythonType.tp_name = "${module.@name}.${clazz.@sym_name}";
     pythonType.tp_basicsize = sizeof(PyHolder);
-    pythonType.tp_dealloc = (destructor)${module.@name}_${classNameAsVariable}_Dealloc; <%
+    pythonType.tp_dealloc = reinterpret_cast<destructor>(${module.@name}_${classNameAsVariable}_Dealloc); <%
 
   if (clazz.@feature_python_rcmp) { %>
-    pythonType.tp_richcompare=(richcmpfunc)${module.@name}_${classNameAsVariable}_rcmp;<%
+    pythonType.tp_richcompare = static_cast<richcmpfunc>(${module.@name}_${classNameAsVariable}_rcmp);<%
   } %>
 
     pythonType.tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE;
@@ -658,7 +658,7 @@ void doClassMethodInfo(Node clazz, List initTypeCalls)
 <%
   }
   if (callableOp) { %>
-    pythonType.tp_call = (ternaryfunc)${module.@name}_${PythonTools.getPyMethodName(callableOp,MethodType.method)};
+    pythonType.tp_call = reinterpret_cast<ternaryfunc>(${module.@name}_${PythonTools.getPyMethodName(callableOp,MethodType.method)});
 <%
   }
   if (doAsMapping) { %>
@@ -667,12 +667,12 @@ void doClassMethodInfo(Node clazz, List initTypeCalls)
   }
 
   if (clazz.@feature_iterator) { %>
-    pythonType.tp_iter = (getiterfunc)${module.@name}_${classNameAsVariable}_iter;
-    pythonType.tp_iternext = (iternextfunc)${module.@name}_${classNameAsVariable}_iternext;
+    pythonType.tp_iter = static_cast<getiterfunc>(${module.@name}_${classNameAsVariable}_iter);
+    pythonType.tp_iternext = static_cast<iternextfunc>(${module.@name}_${classNameAsVariable}_iternext);
 <%
   }
   else if (clazz.@feature_iterable && clazz.@feature_iterable != '') { %>
-    pythonType.tp_iter = (getiterfunc)${module.@name}_${classNameAsVariable}_iter;
+    pythonType.tp_iter = static_cast<getiterfunc>(${module.@name}_${classNameAsVariable}_iter);
 <%
   }
 
@@ -854,7 +854,7 @@ namespace PythonBindings
 
   static PyMethodDef ${module.@name}_methods[] = { <%
     module.depthFirst().findAll({ it.name() == 'function' && Helper.parents(it, { Node lnode -> lnode.name() == 'class'}).size() == 0 }).each {  %>
-    {"${it.@sym_name}", (PyCFunction)${module.@name}_${PythonTools.getPyMethodName(it,MethodType.method)}, METH_VARARGS|METH_KEYWORDS, ${Helper.hasDoc(it) ? PythonTools.getPyMethodName(it,MethodType.method) + '__doc__' : 'NULL'} }, <% }
+    {"${it.@sym_name}", reinterpret_cast<PyCFunction>(${module.@name}_${PythonTools.getPyMethodName(it,MethodType.method)}), METH_VARARGS | METH_KEYWORDS, ${Helper.hasDoc(it) ? PythonTools.getPyMethodName(it,MethodType.method) + '__doc__' : 'NULL'} }, <% }
 %>
     {NULL, NULL, 0, NULL}
   };
@@ -907,7 +907,7 @@ namespace PythonBindings
     if (module == NULL) return NULL;
 
 <% classes.each { clazz -> %>
-    PyModule_AddObject(module, "${clazz.@sym_name}", (PyObject*)(&(Ty${PythonTools.getClassNameAsVariable(clazz)}_Type.pythonType)));<%
+    PyModule_AddObject(module, "${clazz.@sym_name}", reinterpret_cast<PyObject*>(&(Ty${PythonTools.getClassNameAsVariable(clazz)}_Type.pythonType)));<%
    }%>
 
    // constants
