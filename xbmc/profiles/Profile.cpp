@@ -74,7 +74,7 @@ void CProfile::Load(const TiXmlNode *node, int nextIdProfile)
   XMLUtils::GetBoolean(node, "lockaddonmanager", m_locks.addonManager);
   int settings = m_locks.settings;
   XMLUtils::GetInt(node, "locksettings", settings);
-  m_locks.settings = (LOCK_LEVEL::SETTINGS_LOCK)settings;
+  m_locks.settings = static_cast<LOCK_LEVEL::SETTINGS_LOCK>(settings);
   XMLUtils::GetBoolean(node, "lockfiles", m_locks.files);
   XMLUtils::GetBoolean(node, "lockmusic", m_locks.music);
   XMLUtils::GetBoolean(node, "lockvideo", m_locks.video);
@@ -84,7 +84,7 @@ void CProfile::Load(const TiXmlNode *node, int nextIdProfile)
 
   int lockMode = m_locks.mode;
   XMLUtils::GetInt(node, "lockmode", lockMode);
-  m_locks.mode = (LockType)lockMode;
+  m_locks.mode = static_cast<LockType>(lockMode);
   if (m_locks.mode > LOCK_MODE_QWERTY || m_locks.mode < LOCK_MODE_EVERYONE)
     m_locks.mode = LOCK_MODE_EVERYONE;
 
