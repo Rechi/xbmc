@@ -64,7 +64,7 @@ bool CDVDOverlayCodecFFmpeg::Open(CDVDStreamInfo &hints, CDVDCodecOptions &optio
   {
     m_pCodecContext->extradata_size = hints.extradata.GetSize();
     m_pCodecContext->extradata =
-        (uint8_t*)av_mallocz(hints.extradata.GetSize() + AV_INPUT_BUFFER_PADDING_SIZE);
+        static_cast<uint8_t*>(av_mallocz(hints.extradata.GetSize() + AV_INPUT_BUFFER_PADDING_SIZE));
     memcpy(m_pCodecContext->extradata, hints.extradata.GetData(), hints.extradata.GetSize());
 
     // start parsing of extra data - create a copy to be safe and make it zero-terminating to avoid access violations!
@@ -134,8 +134,10 @@ OverlayMessage CDVDOverlayCodecFFmpeg::Decode(DemuxPacket* pPacket)
 
   avpkt->data = pPacket->pData;
   avpkt->size = pPacket->iSize;
-  avpkt->pts = pPacket->pts == DVD_NOPTS_VALUE ? AV_NOPTS_VALUE : (int64_t)pPacket->pts;
-  avpkt->dts = pPacket->dts == DVD_NOPTS_VALUE ? AV_NOPTS_VALUE : (int64_t)pPacket->dts;
+  avpkt->pts =
+      pPacket->pts == DVD_NOPTS_VALUE ? AV_NOPTS_VALUE : static_cast<int64_t>(pPacket->pts);
+  avpkt->dts =
+      pPacket->dts == DVD_NOPTS_VALUE ? AV_NOPTS_VALUE : static_cast<int64_t>(pPacket->dts);
 
   len = avcodec_decode_subtitle2(m_pCodecContext, &m_Subtitle, &gotsub, avpkt);
 
@@ -217,7 +219,7 @@ std::shared_ptr<CDVDOverlay> CDVDOverlayCodecFFmpeg::GetOverlay()
 
   if(m_Subtitle.format == 0)
   {
-    if(m_SubtitleIndex >= (int)m_Subtitle.num_rects)
+    if (m_SubtitleIndex >= static_cast<int>(m_Subtitle.num_rects))
       return nullptr;
 
     if(m_Subtitle.rects[m_SubtitleIndex] == NULL)

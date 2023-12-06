@@ -110,7 +110,7 @@ bool CDVDSubtitleStream::IsIncompatible(CDVDInputStream* pInputStream,
   }
   else
   {
-    *bytesRead = (size_t)read;
+    *bytesRead = static_cast<size_t>(read);
   }
 
   if (read >= 4)

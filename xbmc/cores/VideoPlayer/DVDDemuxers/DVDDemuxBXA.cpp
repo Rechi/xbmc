@@ -47,7 +47,7 @@ bool CDVDDemuxBXA::Open(const std::shared_ptr<CDVDInputStream>& pInput)
   if(!pInput || !pInput->IsStreamType(DVDSTREAM_TYPE_FILE))
     return false;
 
-  if(pInput->Read((uint8_t *)&m_header, sizeof(Demux_BXA_FmtHeader)) < 1)
+  if (pInput->Read(reinterpret_cast<uint8_t*>(&m_header), sizeof(Demux_BXA_FmtHeader)) < 1)
     return false;
 
   // file valid?
@@ -131,7 +131,7 @@ DemuxPacket* CDVDDemuxBXA::Read()
     if (n > 0)
     {
       m_bytes += pPacket->iSize;
-      pPacket->dts = (double)m_bytes * DVD_TIME_BASE / n;
+      pPacket->dts = static_cast<double>(m_bytes) * DVD_TIME_BASE / n;
       pPacket->pts = pPacket->dts;
     }
     else

@@ -91,7 +91,10 @@ public:
   MenuType GetSupportedMenuType() override { return MenuType::NATIVE; }
 
   bool IsInMenu() override { return m_bInMenu; }
-  double GetTimeStampCorrection() override { return (double)(m_iVobUnitCorrection * 1000) / 90; }
+  double GetTimeStampCorrection() override
+  {
+    return static_cast<double>(m_iVobUnitCorrection * 1000) / 90;
+  }
 
   int GetActiveSubtitleStream();
   int GetSubTitleStreamCount();

@@ -35,7 +35,7 @@ bool CDVDSubtitleParserVplayer::Open(CDVDStreamInfo& hints)
   // Vplayer subtitles don't have StopTime, so we use following subtitle's StartTime
   // for that, unless gap was more than 4 seconds. Then we set subtitle duration
   // for 4 seconds, to not have text hanging around in silent scenes...
-  int defaultDuration = 4 * (int)m_framerate;
+  int defaultDuration = 4 * static_cast<int>(m_framerate);
 
   CRegExp reg;
   if (!reg.RegComp("([0-9]+):([0-9]+):([0-9]+):(.+)$"))
