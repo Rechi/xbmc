@@ -77,7 +77,7 @@ void CPeripheralBus::UnregisterRemovedDevices(const PeripheralScanResults& resul
 
   {
     std::unique_lock<CCriticalSection> lock(m_critSection);
-    for (int iDevicePtr = (int)m_peripherals.size() - 1; iDevicePtr >= 0; iDevicePtr--)
+    for (int iDevicePtr = static_cast<int>(m_peripherals.size()) - 1; iDevicePtr >= 0; iDevicePtr--)
     {
       const PeripheralPtr& peripheral = m_peripherals.at(iDevicePtr);
       PeripheralScanResult updatedDevice(m_type);
