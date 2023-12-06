@@ -125,7 +125,7 @@ void XBMCClientWrapperImpl::timerCallBack (CFRunLoopTimerRef timer, void *info)
 		return;
 	}
 
-	XBMCClientWrapperImpl *p_impl = (XBMCClientWrapperImpl *)info;
+	XBMCClientWrapperImpl* p_impl = static_cast<XBMCClientWrapperImpl*>(info);
 	p_impl->sendSequence();
 	p_impl->resetTimer();
 }

@@ -59,14 +59,14 @@ public:
 
   uint64_t Read(void *data, uint64_t size)
   {
-    if (fread(data, (size_t)size, 1, m_file) == 1)
+    if (fread(data, static_cast<size_t>(size), 1, m_file) == 1)
       return size;
     return 0;
   }
 
   uint64_t Write(const void *data, uint64_t size)
   {
-    if (fwrite(data, (size_t)size, 1, m_file) == 1)
+    if (fwrite(data, static_cast<size_t>(size), 1, m_file) == 1)
       return size;
     return 0;
   }
@@ -84,7 +84,7 @@ public:
     {
       long size = ftell(m_file);
       if (size >= 0)
-        fileSize = (uint64_t)size;
+        fileSize = static_cast<uint64_t>(size);
     }
 
     // restore fileptr
