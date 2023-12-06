@@ -86,7 +86,7 @@ bool CGUIKeyboardFactory::ShowAndGetInput(std::string& aTextString,
   if (heading.isString())
     headingStr = heading.asString();
   else if (heading.isInteger() && heading.asInteger())
-    headingStr = g_localizeStrings.Get((uint32_t)heading.asInteger());
+    headingStr = g_localizeStrings.Get(static_cast<uint32_t>(heading.asInteger()));
 
   bool useKodiKeyboard = true;
 #if defined(TARGET_DARWIN_EMBEDDED)

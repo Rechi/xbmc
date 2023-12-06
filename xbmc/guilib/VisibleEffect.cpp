@@ -31,8 +31,10 @@ CAnimEffect::CAnimEffect(const TiXmlElement *node, EFFECT_TYPE effect)
   // time and delay
 
   float temp;
-  if (TIXML_SUCCESS == node->QueryFloatAttribute("time", &temp)) m_length = (unsigned int)(temp * g_SkinInfo->GetEffectsSlowdown());
-  if (TIXML_SUCCESS == node->QueryFloatAttribute("delay", &temp)) m_delay = (unsigned int)(temp * g_SkinInfo->GetEffectsSlowdown());
+  if (TIXML_SUCCESS == node->QueryFloatAttribute("time", &temp))
+    m_length = static_cast<unsigned int>(temp * g_SkinInfo->GetEffectsSlowdown());
+  if (TIXML_SUCCESS == node->QueryFloatAttribute("delay", &temp))
+    m_delay = static_cast<unsigned int>(temp * g_SkinInfo->GetEffectsSlowdown());
 
   m_pTweener = GetTweener(node);
 }
@@ -72,7 +74,7 @@ void CAnimEffect::Calculate(unsigned int time, const CPoint &center)
   // calculate offset and tweening
   float offset = 0.0f;  // delayed forward, or finished reverse
   if (time >= m_delay && time < m_delay + m_length)
-    offset = (float)(time - m_delay) / m_length;
+    offset = static_cast<float>(time - m_delay) / m_length;
   else if (time >= m_delay + m_length)
     offset = 1.0f;
   if (m_pTweener)
@@ -226,18 +228,18 @@ CSlideEffect::CSlideEffect(const TiXmlElement *node) : CAnimEffect(node, EFFECT_
   {
     std::vector<std::string> commaSeparated = StringUtils::Split(startPos, ",");
     if (commaSeparated.size() > 1)
-      m_startY = (float)atof(commaSeparated[1].c_str());
+      m_startY = static_cast<float>(atof(commaSeparated[1].c_str()));
     if (!commaSeparated.empty())
-      m_startX = (float)atof(commaSeparated[0].c_str());
+      m_startX = static_cast<float>(atof(commaSeparated[0].c_str()));
   }
   const char *endPos = node->Attribute("end");
   if (endPos)
   {
     std::vector<std::string> commaSeparated = StringUtils::Split(endPos, ",");
     if (commaSeparated.size() > 1)
-      m_endY = (float)atof(commaSeparated[1].c_str());
+      m_endY = static_cast<float>(atof(commaSeparated[1].c_str()));
     if (!commaSeparated.empty())
-      m_endX = (float)atof(commaSeparated[0].c_str());
+      m_endX = static_cast<float>(atof(commaSeparated[0].c_str()));
   }
 }
 
@@ -266,9 +268,9 @@ CRotateEffect::CRotateEffect(const TiXmlElement *node, EFFECT_TYPE effect) : CAn
     {
       std::vector<std::string> commaSeparated = StringUtils::Split(centerPos, ",");
       if (commaSeparated.size() > 1)
-        m_center.y = (float)atof(commaSeparated[1].c_str());
+        m_center.y = static_cast<float>(atof(commaSeparated[1].c_str()));
       if (!commaSeparated.empty())
-        m_center.x = (float)atof(commaSeparated[0].c_str());
+        m_center.x = static_cast<float>(atof(commaSeparated[0].c_str()));
     }
   }
 }
@@ -828,7 +830,8 @@ bool CScroller::Update(unsigned int time)
       m_startPosition = 0;
     }
     else
-      m_scrollValue = m_startPosition + Tween((float)(time - m_startTime) / m_duration) * m_delta;
+      m_scrollValue =
+          m_startPosition + Tween(static_cast<float>(time - m_startTime) / m_duration) * m_delta;
     return true;
   }
   else
