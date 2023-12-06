@@ -158,7 +158,7 @@ void TagLibVFSStream::insert(const ByteVector &data, TagLib::ulong start, TagLib
 
     // Check to see if we just read the last block.  We need to call clear()
     // if we did so that the last write succeeds.
-    if (TagLib::ulong(bytesRead) < bufferLength)
+    if (static_cast<TagLib::ulong>(bytesRead) < bufferLength)
       clear();
 
     // Seek to the write position and write our buffer.  Increment the
@@ -301,7 +301,7 @@ long TagLibVFSStream::tell() const
   if(pos > LONG_MAX)
     return -1;
   else
-    return (long)pos;
+    return static_cast<long>(pos);
 }
 
 /*!
@@ -309,7 +309,7 @@ long TagLibVFSStream::tell() const
  */
 long TagLibVFSStream::length()
 {
-  return (long)m_file.GetLength();
+  return static_cast<long>(m_file.GetLength());
 }
 
 /*!
