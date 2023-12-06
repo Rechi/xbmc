@@ -475,7 +475,7 @@ std::string CLangCodeExpander::CodeToString(long code)
   std::string ret;
   for (unsigned int j = 0; j < 4; j++)
   {
-    char c = (char)code & 0xFF;
+    char c = static_cast<char>(code) & 0xFF;
     if (c == '\0')
       break;
 

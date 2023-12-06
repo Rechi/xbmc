@@ -242,7 +242,7 @@ CRegExp& CRegExp::operator=(const CRegExp& re)
   {
     if (pcre_fullinfo(re.m_re, NULL, PCRE_INFO_SIZE, &size) >= 0)
     {
-      if ((m_re = (pcre*)malloc(size)))
+      if ((m_re = static_cast<pcre*>(malloc(size))))
       {
         memcpy(m_re, re.m_re, size);
         memcpy(m_iOvector, re.m_iOvector, OVECCOUNT*sizeof(int));

@@ -25,9 +25,9 @@ void Base64::Encode(const char* input, unsigned int length, std::string &output)
 
   for (unsigned int i = 0; i < length; i += 3)
   {
-    l  = ((((unsigned long) input[i]) << 16) & 0xFFFFFF) |
-         ((((i + 1) < length) ? (((unsigned long) input[i + 1]) << 8) : 0) & 0xFFFF) |
-         ((((i + 2) < length) ? (((unsigned long) input[i + 2]) << 0) : 0) & 0x00FF);
+    l = (((static_cast<unsigned long>(input[i])) << 16) & 0xFFFFFF) |
+        ((((i + 1) < length) ? ((static_cast<unsigned long>(input[i + 1])) << 8) : 0) & 0xFFFF) |
+        ((((i + 2) < length) ? ((static_cast<unsigned long>(input[i + 2])) << 0) : 0) & 0x00FF);
 
     output.push_back(m_characters[(l >> 18) & 0x3F]);
     output.push_back(m_characters[(l >> 12) & 0x3F]);
@@ -89,16 +89,22 @@ void Base64::Decode(const char* input, unsigned int length, std::string &output)
 
   for (unsigned int i = 0; i < length; i += 4)
   {
-    l = ((((unsigned long) m_characters.find(input[i])) & 0x3F) << 18);
-    l |= (((i + 1) < length) ? ((((unsigned long) m_characters.find(input[i + 1])) & 0x3F) << 12) : 0);
-    l |= (((i + 2) < length) ? ((((unsigned long) m_characters.find(input[i + 2])) & 0x3F) <<  6) : 0);
-    l |= (((i + 3) < length) ? ((((unsigned long) m_characters.find(input[i + 3])) & 0x3F) <<  0) : 0);
+    l = (((static_cast<unsigned long>(m_characters.find(input[i]))) & 0x3F) << 18);
+    l |= (((i + 1) < length)
+              ? (((static_cast<unsigned long>(m_characters.find(input[i + 1]))) & 0x3F) << 12)
+              : 0);
+    l |= (((i + 2) < length)
+              ? (((static_cast<unsigned long>(m_characters.find(input[i + 2]))) & 0x3F) << 6)
+              : 0);
+    l |= (((i + 3) < length)
+              ? (((static_cast<unsigned long>(m_characters.find(input[i + 3]))) & 0x3F) << 0)
+              : 0);
 
-    output.push_back((char)((l >> 16) & 0xFF));
+    output.push_back(static_cast<char>((l >> 16) & 0xFF));
     if (i + 2 < length)
-      output.push_back((char)((l >> 8) & 0xFF));
+      output.push_back(static_cast<char>((l >> 8) & 0xFF));
     if (i + 3 < length)
-      output.push_back((char)((l >> 0) & 0xFF));
+      output.push_back(static_cast<char>((l >> 0) & 0xFF));
   }
 }
 
