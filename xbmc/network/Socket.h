@@ -113,10 +113,10 @@ namespace SOCKETS
         hash |= 0xe0000000u;
         if (hash == 0xffffffffu)
           hash = 0xfffffffeu;
-        return (unsigned long)htonl(hash);
+        return static_cast<unsigned long>(htonl(hash));
       }
       else
-        return (unsigned long)saddr.saddr4.sin_addr.s_addr;
+        return static_cast<unsigned long>(saddr.saddr4.sin_addr.s_addr);
     }
   };
 

@@ -94,7 +94,7 @@ bool CTCPServer::IsRunning()
   if (ServerInstance == NULL)
     return false;
 
-  return ((CThread*)ServerInstance)->IsRunning();
+  return static_cast<CThread*>(ServerInstance)->IsRunning();
 }
 
 CTCPServer::CTCPServer(int port, bool nonlocal) : CThread("TCPServer")
@@ -118,18 +118,18 @@ void CTCPServer::Process()
     for (auto& it : m_servers)
     {
       FD_SET(it, &rfds);
-      if ((intptr_t)it > (intptr_t)max_fd)
+      if (static_cast<intptr_t>(it) > static_cast<intptr_t>(max_fd))
         max_fd = it;
     }
 
     for (unsigned int i = 0; i < m_connections.size(); i++)
     {
       FD_SET(m_connections[i]->m_socket, &rfds);
-      if ((intptr_t)m_connections[i]->m_socket > (intptr_t)max_fd)
+      if (static_cast<intptr_t>(m_connections[i]->m_socket) > static_cast<intptr_t>(max_fd))
         max_fd = m_connections[i]->m_socket;
     }
 
-    int res = select((intptr_t)max_fd+1, &rfds, NULL, NULL, &to);
+    int res = select(static_cast<intptr_t>(max_fd) + 1, &rfds, NULL, NULL, &to);
     if (res < 0)
     {
       CLog::Log(LOGERROR, "JSONRPC Server: Select failed");
@@ -145,7 +145,7 @@ void CTCPServer::Process()
         {
           char buffer[RECEIVEBUFFER] = {};
           int  nread = 0;
-          nread = recv(socket, (char*)&buffer, RECEIVEBUFFER, 0);
+          nread = recv(socket, reinterpret_cast<char*>(&buffer), RECEIVEBUFFER, 0);
           bool close = false;
           if (nread > 0)
           {
@@ -192,7 +192,8 @@ void CTCPServer::Process()
           CLog::Log(LOGDEBUG, "JSONRPC Server: New connection detected");
           CTCPClient *newconnection = new CTCPClient();
           newconnection->m_socket =
-              accept(it, (sockaddr*)&newconnection->m_cliaddr, &newconnection->m_addrlen);
+              accept(it, reinterpret_cast<sockaddr*>(&newconnection->m_cliaddr),
+                     &newconnection->m_addrlen);
 
           if (newconnection->m_socket == INVALID_SOCKET)
           {
@@ -365,7 +366,7 @@ bool CTCPServer::InitializeBlue()
   sa.rc_bdaddr  = bt_bdaddr_any;
   sa.rc_channel = 0;
 
-  if (bind(fd, (struct sockaddr*)&sa, sizeof(sa)) < 0)
+  if (bind(fd, reinterpret_cast<struct sockaddr*>(&sa), sizeof(sa)) < 0)
   {
     CLog::Log(LOGINFO, "JSONRPC Server: Unable to bind to bluetooth socket");
     closesocket(fd);
@@ -373,7 +374,7 @@ bool CTCPServer::InitializeBlue()
   }
 
   socklen_t len = sizeof(sa);
-  if (getsockname(fd, (struct sockaddr*)&sa, &len) < 0)
+  if (getsockname(fd, reinterpret_cast<struct sockaddr*>(&sa), &len) < 0)
     CLog::Log(LOGERROR, "JSONRPC Server: Failed to get bluetooth port");
 
   if (listen(fd, 10) < 0)
@@ -494,7 +495,7 @@ void CTCPServer::Deinitialize()
 
 #ifdef HAVE_LIBBLUETOOTH
   if (m_sdpd)
-    sdp_close((sdp_session_t*)m_sdpd);
+    sdp_close(static_cast<sdp_session_t*>(m_sdpd));
   m_sdpd = NULL;
 #endif
 
@@ -692,7 +693,8 @@ void CTCPServer::CWebSocketClient::Send(const char *data, unsigned int size)
 
   std::vector<const CWebSocketFrame *> frames = msg->GetFrames();
   for (unsigned int index = 0; index < frames.size(); index++)
-    CTCPClient::Send(frames.at(index)->GetFrameData(), (unsigned int)frames.at(index)->GetFrameLength());
+    CTCPClient::Send(frames.at(index)->GetFrameData(),
+                     static_cast<unsigned int>(frames.at(index)->GetFrameLength()));
 }
 
 void CTCPServer::CWebSocketClient::PushBuffer(CTCPServer *host, const char *buffer, int length)
@@ -725,7 +727,8 @@ void CTCPServer::CWebSocketClient::PushBuffer(CTCPServer *host, const char *buff
       else
       {
         for (unsigned int index = 0; index < frames.size(); index++)
-          CTCPClient::PushBuffer(host, frames.at(index)->GetApplicationData(), (int)frames.at(index)->GetLength());
+          CTCPClient::PushBuffer(host, frames.at(index)->GetApplicationData(),
+                                 static_cast<int>(frames.at(index)->GetLength()));
       }
 
       delete msg;
@@ -748,7 +751,7 @@ void CTCPServer::CWebSocketClient::Disconnect()
     {
       const CWebSocketFrame *closeFrame = m_websocket->Close();
       if (closeFrame)
-        Send(closeFrame->GetFrameData(), (unsigned int)closeFrame->GetFrameLength());
+        Send(closeFrame->GetFrameData(), static_cast<unsigned int>(closeFrame->GetFrameLength()));
     }
 
     if (m_websocket->GetState() == WebSocketStateClosed)
