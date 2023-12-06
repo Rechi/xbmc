@@ -525,8 +525,8 @@ bool CSettingList::SetValue(const SettingList &values)
 {
   std::unique_lock<CSharedSection> lock(m_critical);
 
-  if ((int)values.size() < m_minimumItems ||
-     (m_maximumItems > 0 && (int)values.size() > m_maximumItems))
+  if (static_cast<int>(values.size()) < m_minimumItems ||
+      (m_maximumItems > 0 && static_cast<int>(values.size()) > m_maximumItems))
     return false;
 
   bool equal = values.size() == m_values.size();
@@ -622,8 +622,8 @@ bool CSettingList::fromString(const std::string &strValue, SettingList &values) 
 
 bool CSettingList::fromValues(const std::vector<std::string> &strValues, SettingList &values) const
 {
-  if ((int)strValues.size() < m_minimumItems ||
-     (m_maximumItems > 0 && (int)strValues.size() > m_maximumItems))
+  if (static_cast<int>(strValues.size()) < m_minimumItems ||
+      (m_maximumItems > 0 && static_cast<int>(strValues.size()) > m_maximumItems))
     return false;
 
   bool ret = true;
@@ -1148,7 +1148,7 @@ bool CSettingInt::fromString(const std::string &strValue, int &value)
     return false;
 
   char *end = nullptr;
-  value = (int)strtol(strValue.c_str(), &end, 10);
+  value = static_cast<int>(strtol(strValue.c_str(), &end, 10));
   if (end != nullptr && *end != '\0')
     return false;
 
