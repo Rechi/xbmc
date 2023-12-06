@@ -108,7 +108,8 @@ namespace XbmcCommons
      *
      * Buffer b = Buffer(buf,bufSize).forward(bufSize).flip();
      */
-    inline Buffer(void* buffer_, size_t bufferSize) : buffer((unsigned char*)buffer_), mcapacity(bufferSize)
+    inline Buffer(void* buffer_, size_t bufferSize)
+      : buffer(static_cast<unsigned char*>(buffer_)), mcapacity(bufferSize)
     {
       clear();
     }
@@ -238,16 +239,29 @@ namespace XbmcCommons
     inline Buffer& putString(const char* str) { size_t len = strlen(str) + 1; check(len); put(str, len); return (*this); }
     inline Buffer& putString(const std::string& str) { size_t len = str.length() + 1; check(len); put(str.c_str(), len); return (*this); }
 
-    inline std::string getString() { std::string ret((const char*)(buffer + mposition)); size_t len = ret.length() + 1; check(len); mposition += len; return ret; }
+    inline std::string getString()
+    {
+      std::string ret(reinterpret_cast<const char*>(buffer + mposition));
+      size_t len = ret.length() + 1;
+      check(len);
+      mposition += len;
+      return ret;
+    }
     inline std::string getString(size_t length)
     {
       check(length);
-      std::string ret((const char*)(buffer + mposition),length);
+      std::string ret(reinterpret_cast<const char*>(buffer + mposition), length);
       mposition += length;
       return ret;
     }
-    inline char* getCharPointerDirect() { char* ret = (char*)(buffer + mposition); size_t len = strlen(ret) + 1; check(len); mposition += len; return ret; }
-
+    inline char* getCharPointerDirect()
+    {
+      char* ret = reinterpret_cast<char*>(buffer + mposition);
+      size_t len = strlen(ret) + 1;
+      check(len);
+      mposition += len;
+      return ret;
+    }
   };
 
 }
