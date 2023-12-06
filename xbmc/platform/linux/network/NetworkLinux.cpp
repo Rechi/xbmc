@@ -131,17 +131,17 @@ bool CNetworkInterfaceLinux::GetHostMacAddress(unsigned long host_ip, std::strin
 
   memset(&areq, 0x0, sizeof(areq));
 
-  sin = (struct sockaddr_in*)&areq.arp_pa;
+  sin = reinterpret_cast<struct sockaddr_in*>(&areq.arp_pa);
   sin->sin_family = AF_INET;
   sin->sin_addr.s_addr = host_ip;
 
-  sin = (struct sockaddr_in*)&areq.arp_ha;
+  sin = reinterpret_cast<struct sockaddr_in*>(&areq.arp_ha);
   sin->sin_family = ARPHRD_ETHER;
 
   strncpy(areq.arp_dev, m_interfaceName.c_str(), sizeof(areq.arp_dev));
   areq.arp_dev[sizeof(areq.arp_dev) - 1] = '\0';
 
-  int result = ioctl(m_network->GetSocket(), SIOCGARP, (caddr_t)&areq);
+  int result = ioctl(m_network->GetSocket(), SIOCGARP, reinterpret_cast<caddr_t>(&areq));
 
   if (result != 0)
   {
@@ -150,10 +150,11 @@ bool CNetworkInterfaceLinux::GetHostMacAddress(unsigned long host_ip, std::strin
   }
 
   struct sockaddr* res = &areq.arp_ha;
-  mac = StringUtils::Format("{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}", (uint8_t)res->sa_data[0],
-                            (uint8_t)res->sa_data[1], (uint8_t)res->sa_data[2],
-                            (uint8_t)res->sa_data[3], (uint8_t)res->sa_data[4],
-                            (uint8_t)res->sa_data[5]);
+  mac = StringUtils::Format(
+      "{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}", static_cast<uint8_t>(res->sa_data[0]),
+      static_cast<uint8_t>(res->sa_data[1]), static_cast<uint8_t>(res->sa_data[2]),
+      static_cast<uint8_t>(res->sa_data[3]), static_cast<uint8_t>(res->sa_data[4]),
+      static_cast<uint8_t>(res->sa_data[5]));
 
   for (int i = 0; i < 6; ++i)
     if (res->sa_data[i])

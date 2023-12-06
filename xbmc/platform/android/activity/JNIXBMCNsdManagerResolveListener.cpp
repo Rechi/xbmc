@@ -44,10 +44,11 @@ void CJNIXBMCNsdManagerResolveListener::RegisterNatives(JNIEnv* env)
   jclass cClass = env->FindClass(s_className.c_str());
   if(cClass)
   {
-    JNINativeMethod methods[] =
-    {
-      {"_onResolveFailed", "(Landroid/net/nsd/NsdServiceInfo;I)V", (void*)&CJNIXBMCNsdManagerResolveListener::_onResolveFailed},
-      {"_onServiceResolved", "(Landroid/net/nsd/NsdServiceInfo;)V", (void*)&CJNIXBMCNsdManagerResolveListener::_onServiceResolved},
+    JNINativeMethod methods[] = {
+        {"_onResolveFailed", "(Landroid/net/nsd/NsdServiceInfo;I)V",
+         reinterpret_cast<void*>(&CJNIXBMCNsdManagerResolveListener::_onResolveFailed)},
+        {"_onServiceResolved", "(Landroid/net/nsd/NsdServiceInfo;)V",
+         reinterpret_cast<void*>(&CJNIXBMCNsdManagerResolveListener::_onServiceResolved)},
     };
 
     env->RegisterNatives(cClass, methods, sizeof(methods)/sizeof(methods[0]));

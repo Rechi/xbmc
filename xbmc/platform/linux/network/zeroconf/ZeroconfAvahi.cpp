@@ -166,9 +166,10 @@ bool CZeroconfAvahi::doForceReAnnounceService(const std::string& fcr_identifier)
     it->second->mp_txt = avahi_string_list_reverse(it->second->mp_txt);
 
     // this will trigger the reannouncement
-    if ((avahi_entry_group_update_service_txt_strlst(it->second->mp_group, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC, AvahiPublishFlags(0),
-                                              it->second->m_name.c_str(),
-                                              it->second->m_type.c_str(), NULL, it->second->mp_txt)) >= 0)
+    if ((avahi_entry_group_update_service_txt_strlst(
+            it->second->mp_group, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC,
+            static_cast<AvahiPublishFlags>(0), it->second->m_name.c_str(),
+            it->second->m_type.c_str(), NULL, it->second->mp_txt)) >= 0)
       ret = true;
   }
 
@@ -401,9 +402,11 @@ void CZeroconfAvahi::addService(const tServiceMap::mapped_type& fp_service_info,
   int ret;
   if (avahi_entry_group_is_empty(fp_service_info->mp_group))
   {
-    if ((ret = avahi_entry_group_add_service_strlst(fp_service_info->mp_group, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC, AvahiPublishFlags(0),
-                                             fp_service_info->m_name.c_str(),
-                                             fp_service_info->m_type.c_str(), NULL, NULL, fp_service_info->m_port, fp_service_info->mp_txt)) < 0)
+    if ((ret = avahi_entry_group_add_service_strlst(
+             fp_service_info->mp_group, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC,
+             static_cast<AvahiPublishFlags>(0), fp_service_info->m_name.c_str(),
+             fp_service_info->m_type.c_str(), NULL, NULL, fp_service_info->m_port,
+             fp_service_info->mp_txt)) < 0)
     {
       if (ret == AVAHI_ERR_COLLISION)
       {
