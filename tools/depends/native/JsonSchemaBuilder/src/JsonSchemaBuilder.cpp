@@ -61,28 +61,29 @@ void print_json(std::ifstream &in, std::ofstream &out)
     out << "  ";
     bool started = false;
     closing = false;
-    for (std::string::iterator itr = line.begin(); itr != line.end(); ++itr)
+    for (char& itr : line)
     {
       // Skip \r characters
-      if (*itr == '\r') {
+      if (itr == '\r')
+      {
         break;
       }
 
       // Count opening { but ignore the first one
-      if (*itr == '{')
+      if (itr == '{')
       {
         count++;
         if (count == 1)
           break;
       }
       // Replace tabs with 2 spaces
-      if (*itr == '\t')
+      if (itr == '\t')
       {
         out << "  ";
         continue;
       }
       // Count closing } but ignore the last one
-      if (*itr == '}')
+      if (itr == '}')
       {
         count--;
         if (count == 0)
@@ -96,15 +97,15 @@ void print_json(std::ifstream &in, std::ofstream &out)
         }
       }
       // Only print a " before the first real sign
-      if (!started && *itr != ' ')
+      if (!started && itr != ' ')
       {
         started = true;
         out << '"';
       }
       // Add a backslash before a double-quote and backslashes
-      if (*itr == '"' || *itr == '\\')
+      if (itr == '"' || itr == '\\')
         out << '\\';
-      out << (*itr);
+      out << itr;
     }
     // Only print a closing " if there was real content on the line
     if (started)
