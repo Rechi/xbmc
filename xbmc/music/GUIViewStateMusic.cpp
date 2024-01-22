@@ -565,13 +565,6 @@ void CGUIViewStateWindowMusicNav::AddOnlineShares()
 {
   if (!CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_bVirtualShares)
     return;
-
-  VECSOURCES *musicSources = CMediaSourceSettings::GetInstance().GetSources("music");
-
-  for (int i = 0; i < (int)musicSources->size(); ++i)
-  {
-    CMediaSource share = musicSources->at(i);
-  }
 }
 
 VECSOURCES& CGUIViewStateWindowMusicNav::GetSources()
