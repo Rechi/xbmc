@@ -422,8 +422,7 @@ void CGUIDialogSettingsBase::SetupControls(bool createSettings /* = true */)
 
     // go through the categories and create the necessary buttons
     int buttonIdOffset = 0;
-    for (SettingCategoryList::const_iterator category = m_categories.begin();
-         category != m_categories.end(); ++category)
+    for (const SettingCategoryPtr& category : m_categories)
     {
       CGUIButtonControl* pButton = NULL;
       if (m_pOriginalCategoryButton->GetControlType() == CGUIControl::GUICONTROL_TOGGLEBUTTON)
@@ -434,7 +433,7 @@ void CGUIDialogSettingsBase::SetupControls(bool createSettings /* = true */)
             *static_cast<CGUIColorButtonControl*>(m_pOriginalCategoryButton));
       else
         pButton = new CGUIButtonControl(*m_pOriginalCategoryButton);
-      pButton->SetLabel(GetSettingsLabel(*category));
+      pButton->SetLabel(GetSettingsLabel(category));
       pButton->SetID(CONTROL_SETTINGS_START_BUTTONS + buttonIdOffset);
       pButton->SetVisible(true);
       pButton->AllocResources();
@@ -492,9 +491,8 @@ void CGUIDialogSettingsBase::FreeSettingsControls()
     control->ClearAll();
   }
 
-  for (std::vector<BaseSettingControlPtr>::iterator control = m_settingControls.begin();
-       control != m_settingControls.end(); ++control)
-    (*control)->Clear();
+  for (const BaseSettingControlPtr& settingControl : m_settingControls)
+    settingControl->Clear();
 
   m_settingControls.clear();
 }
@@ -558,21 +556,20 @@ std::set<std::string> CGUIDialogSettingsBase::CreateSettings()
   const SettingGroupList& groups = category->GetGroups((SettingLevel)GetSettingLevel());
   int iControlID = CONTROL_SETTINGS_START_CONTROL;
   bool first = true;
-  for (SettingGroupList::const_iterator groupIt = groups.begin(); groupIt != groups.end();
-       ++groupIt)
+  for (const SettingGroupPtr& groupIt : groups)
   {
-    if (*groupIt == NULL)
+    if (groupIt == NULL)
       continue;
 
-    const SettingList& settings = (*groupIt)->GetSettings((SettingLevel)GetSettingLevel());
+    const SettingList& settings = groupIt->GetSettings((SettingLevel)GetSettingLevel());
     if (settings.size() <= 0)
       continue;
 
     std::shared_ptr<const CSettingControlTitle> title =
-        std::dynamic_pointer_cast<const CSettingControlTitle>((*groupIt)->GetControl());
+        std::dynamic_pointer_cast<const CSettingControlTitle>(groupIt->GetControl());
     bool hideSeparator = title ? title->IsSeparatorHidden() : false;
     bool separatorBelowGroupLabel = title ? title->IsSeparatorBelowLabel() : false;
-    int groupLabel = (*groupIt)->GetLabel();
+    int groupLabel = groupIt->GetLabel();
 
     // hide the separator for the first settings grouplist if it
     // is the very first item in the list (also above the label)
@@ -586,15 +583,13 @@ std::set<std::string> CGUIDialogSettingsBase::CreateSettings()
       AddSeparator(group->GetWidth(), iControlID);
 
     if (groupLabel > 0)
-      AddGroupLabel(*groupIt, group->GetWidth(), iControlID);
+      AddGroupLabel(groupIt, group->GetWidth(), iControlID);
 
     if (separatorBelowGroupLabel && !hideSeparator)
       AddSeparator(group->GetWidth(), iControlID);
 
-    for (SettingList::const_iterator settingIt = settings.begin(); settingIt != settings.end();
-         ++settingIt)
+    for (const std::shared_ptr<CSetting>& pSetting : settings)
     {
-      const std::shared_ptr<CSetting>& pSetting = *settingIt;
       settingMap.insert(pSetting->GetId());
       AddSetting(pSetting, group->GetWidth(), iControlID);
     }
@@ -622,10 +617,8 @@ std::string CGUIDialogSettingsBase::GetSettingsLabel(const std::shared_ptr<ISett
 
 void CGUIDialogSettingsBase::UpdateSettings()
 {
-  for (std::vector<BaseSettingControlPtr>::iterator it = m_settingControls.begin();
-       it != m_settingControls.end(); ++it)
+  for (const BaseSettingControlPtr& pSettingControl : m_settingControls)
   {
-    BaseSettingControlPtr pSettingControl = *it;
     std::shared_ptr<CSetting> pSetting = pSettingControl->GetSetting();
     CGUIControl* pControl = pSettingControl->GetControl();
     if (pSetting == NULL || pControl == NULL)
@@ -855,10 +848,9 @@ void CGUIDialogSettingsBase::OnResetSettings()
 {
   if (CGUIDialogYesNo::ShowAndGetInput(CVariant{10041}, CVariant{10042}))
   {
-    for (std::vector<BaseSettingControlPtr>::iterator it = m_settingControls.begin();
-         it != m_settingControls.end(); ++it)
+    for (const BaseSettingControlPtr& settingControl : m_settingControls)
     {
-      std::shared_ptr<CSetting> setting = (*it)->GetSetting();
+      std::shared_ptr<CSetting> setting = settingControl->GetSetting();
       if (setting != NULL)
         setting->Reset();
     }
@@ -947,11 +939,10 @@ void CGUIDialogSettingsBase::SetControlLabel(int controlId, const CVariant& labe
 
 BaseSettingControlPtr CGUIDialogSettingsBase::GetSettingControl(const std::string& strSetting)
 {
-  for (std::vector<BaseSettingControlPtr>::iterator control = m_settingControls.begin();
-       control != m_settingControls.end(); ++control)
+  for (const BaseSettingControlPtr& settingControl : m_settingControls)
   {
-    if ((*control)->GetSetting() != NULL && (*control)->GetSetting()->GetId() == strSetting)
-      return *control;
+    if (settingControl->GetSetting() != NULL && settingControl->GetSetting()->GetId() == strSetting)
+      return settingControl;
   }
 
   return BaseSettingControlPtr();
