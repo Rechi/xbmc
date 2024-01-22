@@ -399,10 +399,10 @@ std::vector<std::string> CAndroidStorageProvider::GetDiskUsage()
   // add removable storage
   VECSOURCES drives;
   GetRemovableDrives(drives);
-  for (unsigned int i = 0; i < drives.size(); i++)
+  for (const CMediaSource& drive : drives)
   {
     usage.clear();
-    if (CXBMCApp::GetStorageUsage(drives[i].strPath, usage) && !usage.empty())
+    if (CXBMCApp::GetStorageUsage(drive.strPath, usage) && !usage.empty())
       result.push_back(usage);
   }
 
