@@ -3370,11 +3370,11 @@ void COutput::ReleaseBufferPool()
 
   // release all output surfaces
   m_bufferPool->InvalidateUsed();
-  for (unsigned int i = 0; i < m_bufferPool->outputSurfaces.size(); ++i)
+  for (VdpOutputSurface outputSurface : m_bufferPool->outputSurfaces)
   {
-    if (m_bufferPool->outputSurfaces[i] == VDP_INVALID_HANDLE)
+    if (outputSurface == VDP_INVALID_HANDLE)
       continue;
-    vdp_st = m_config.context->GetProcs().vdp_output_surface_destroy(m_bufferPool->outputSurfaces[i]);
+    vdp_st = m_config.context->GetProcs().vdp_output_surface_destroy(outputSurface);
     CheckStatus(vdp_st, __LINE__);
   }
   m_bufferPool->outputSurfaces.clear();
@@ -3419,10 +3419,9 @@ void COutput::PreCleanup()
 
 void COutput::InitMixer()
 {
-  for (unsigned int i = 0; i < m_bufferPool->outputSurfaces.size(); ++i)
+  for (const VdpOutputSurface& outputSurface : m_bufferPool->outputSurfaces)
   {
-    m_mixer.m_dataPort.SendOutMessage(CMixerDataProtocol::BUFFER,
-                                      &m_bufferPool->outputSurfaces[i],
+    m_mixer.m_dataPort.SendOutMessage(CMixerDataProtocol::BUFFER, &outputSurface,
                                       sizeof(VdpOutputSurface));
   }
 }

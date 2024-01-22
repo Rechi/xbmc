@@ -638,9 +638,9 @@ bool CEdl::AddEdit(const Edit& newEdit)
     return false;
   }
 
-  for (size_t i = 0; i < m_vecEdits.size(); ++i)
+  for (const Edit& vecEdit : m_vecEdits)
   {
-    if (edit.start < m_vecEdits[i].start && edit.end > m_vecEdits[i].end)
+    if (edit.start < vecEdit.start && edit.end > vecEdit.end)
     {
       CLog::Log(LOGERROR, "{} - Edit surrounds an existing edit! [{} - {}], {}", __FUNCTION__,
                 MillisecondsToTimeString(edit.start), MillisecondsToTimeString(edit.end),
@@ -841,15 +841,15 @@ bool CEdl::HasSceneMarker() const
 
 bool CEdl::InEdit(const int iSeek, Edit* pEdit)
 {
-  for (size_t i = 0; i < m_vecEdits.size(); ++i)
+  for (const Edit& edit : m_vecEdits)
   {
-    if (iSeek < m_vecEdits[i].start) // Early exit if not even up to the edit start time.
+    if (iSeek < edit.start) // Early exit if not even up to the edit start time.
       return false;
 
-    if (iSeek >= m_vecEdits[i].start && iSeek <= m_vecEdits[i].end) // Inside edit.
+    if (iSeek >= edit.start && iSeek <= edit.end) // Inside edit.
     {
       if (pEdit)
-        *pEdit = m_vecEdits[i];
+        *pEdit = edit;
       return true;
     }
   }
@@ -894,24 +894,24 @@ bool CEdl::GetNextSceneMarker(bool bPlus, const int iClock, int *iSceneMarker)
 
   if (bPlus) // Find closest scene forwards
   {
-    for (int i = 0; i < (int)m_vecSceneMarkers.size(); i++)
+    for (int sceneMarker : m_vecSceneMarkers)
     {
-      if ((m_vecSceneMarkers[i] > iSeek) && ((m_vecSceneMarkers[i] - iSeek) < iDiff))
+      if ((sceneMarker > iSeek) && ((sceneMarker - iSeek) < iDiff))
       {
-        iDiff = m_vecSceneMarkers[i] - iSeek;
-        *iSceneMarker = m_vecSceneMarkers[i];
+        iDiff = sceneMarker - iSeek;
+        *iSceneMarker = sceneMarker;
         bFound = true;
       }
     }
   }
   else // Find closest scene backwards
   {
-    for (int i = 0; i < (int)m_vecSceneMarkers.size(); i++)
+    for (int sceneMarker : m_vecSceneMarkers)
     {
-      if ((m_vecSceneMarkers[i] < iSeek) && ((iSeek - m_vecSceneMarkers[i]) < iDiff))
+      if ((sceneMarker < iSeek) && ((iSeek - sceneMarker) < iDiff))
       {
-        iDiff = iSeek - m_vecSceneMarkers[i];
-        *iSceneMarker = m_vecSceneMarkers[i];
+        iDiff = iSeek - sceneMarker;
+        *iSceneMarker = sceneMarker;
         bFound = true;
       }
     }
