@@ -627,11 +627,11 @@ std::string StringUtils::ReplaceSpecialCharactersWithSpace(const std::string& st
 int StringUtils::Replace(std::string &str, char oldChar, char newChar)
 {
   int replacedChars = 0;
-  for (std::string::iterator it = str.begin(); it != str.end(); ++it)
+  for (char& it : str)
   {
-    if (*it == oldChar)
+    if (it == oldChar)
     {
-      *it = newChar;
+      it = newChar;
       replacedChars++;
     }
   }
@@ -802,13 +802,13 @@ std::vector<std::string> StringUtils::SplitMulti(const std::vector<std::string>&
   std::vector<std::string> strings1;
   if (iMaxStrings == 0)
   {
-    for (size_t di = 0; di < delimiters.size(); di++)
+    for (const std::string& delimiter : delimiters)
     {
-      for (size_t i = 0; i < results.size(); i++)
+      for (const std::string& result : results)
       {
-        std::vector<std::string> substrings = StringUtils::Split(results[i], delimiters[di]);
-        for (size_t j = 0; j < substrings.size(); j++)
-          strings1.push_back(substrings[j]);
+        std::vector<std::string> substrings = StringUtils::Split(result, delimiter);
+        for (const std::string& substring : substrings)
+          strings1.push_back(substring);
       }
       results = strings1;
       strings1.clear();
@@ -819,19 +819,19 @@ std::vector<std::string> StringUtils::SplitMulti(const std::vector<std::string>&
   // Control the number of strings input is split into, keeping the original strings.
   // Note iMaxStrings > input.size()
   int64_t iNew = iMaxStrings - results.size();
-  for (size_t di = 0; di < delimiters.size(); di++)
+  for (const std::string& delimiter : delimiters)
   {
-    for (size_t i = 0; i < results.size(); i++)
+    for (const std::string& result : results)
     {
       if (iNew > 0)
       {
-        std::vector<std::string> substrings = StringUtils::Split(results[i], delimiters[di], iNew + 1);
+        std::vector<std::string> substrings = StringUtils::Split(result, delimiter, iNew + 1);
         iNew = iNew - substrings.size() + 1;
-        for (size_t j = 0; j < substrings.size(); j++)
-          strings1.push_back(substrings[j]);
+        for (const std::string& substring : substrings)
+          strings1.push_back(substring);
       }
       else
-        strings1.push_back(results[i]);
+        strings1.push_back(result);
     }
     results = strings1;
     iNew = iMaxStrings - results.size();
@@ -1728,16 +1728,16 @@ void StringUtils::WordToDigits(std::string &word)
 {
   static const char word_to_letter[] = "22233344455566677778889999";
   StringUtils::ToLower(word);
-  for (unsigned int i = 0; i < word.size(); ++i)
+  for (char& i : word)
   { // NB: This assumes ascii, which probably needs extending at some  point.
-    char letter = word[i];
+    char letter = i;
     if ((letter >= 'a' && letter <= 'z')) // assume contiguous letter range
     {
-      word[i] = word_to_letter[letter-'a'];
+      i = word_to_letter[letter - 'a'];
     }
     else if (letter < '0' || letter > '9') // We want to keep 0-9!
     {
-      word[i] = ' ';  // replace everything else with a space
+      i = ' '; // replace everything else with a space
     }
   }
 }
@@ -1793,9 +1793,9 @@ int StringUtils::FindBestMatch(const std::string &str, const std::vector<std::st
 
 bool StringUtils::ContainsKeyword(const std::string &str, const std::vector<std::string> &keywords)
 {
-  for (std::vector<std::string>::const_iterator it = keywords.begin(); it != keywords.end(); ++it)
+  for (const std::string& keyword : keywords)
   {
-    if (str.find(*it) != str.npos)
+    if (str.find(keyword) != str.npos)
       return true;
   }
   return false;
