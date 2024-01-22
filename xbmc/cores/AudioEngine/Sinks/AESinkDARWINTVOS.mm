@@ -646,11 +646,11 @@ bool CAESinkDARWINTVOS::Initialize(AEAudioFormat& format, std::string& device)
   bool found = false;
   std::string devicelower = device;
   StringUtils::ToLower(devicelower);
-  for (size_t i = 0; i < m_devices.size(); i++)
+  for (const CAEDeviceInfo& device : m_devices)
   {
-    if (devicelower.find(m_devices[i].m_deviceName) != std::string::npos)
+    if (devicelower.find(device.m_deviceName) != std::string::npos)
     {
-      m_info = m_devices[i];
+      m_info = device;
       found = true;
       break;
     }

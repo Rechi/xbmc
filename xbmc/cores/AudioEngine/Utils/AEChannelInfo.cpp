@@ -334,8 +334,8 @@ void CAEChannelInfo::ReplaceChannel(const enum AEChannel from, const enum AEChan
 int CAEChannelInfo::BestMatch(const std::vector<CAEChannelInfo>& dsts, int* score) const
 {
   CAEChannelInfo availableDstChannels;
-  for (unsigned int i = 0; i < dsts.size(); i++)
-    availableDstChannels.AddMissingChannels(dsts[i]);
+  for (const CAEChannelInfo& dst : dsts)
+    availableDstChannels.AddMissingChannels(dst);
 
   /* if we have channels not existing in any destination layout but that
    * are remappable (e.g. RC => RL+RR), do those remaps */
