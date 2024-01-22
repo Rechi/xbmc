@@ -481,12 +481,12 @@ bool CGUIWindow::OnAction(const CAction &action)
 
 CPoint CGUIWindow::GetPosition() const
 {
-  for (unsigned int i = 0; i < m_origins.size(); i++)
+  for (const COrigin& origin : m_origins)
   {
     // no condition implies true
-    if (!m_origins[i].condition || m_origins[i].condition->Get(INFO::DEFAULT_CONTEXT))
+    if (!origin.condition || origin.condition->Get(INFO::DEFAULT_CONTEXT))
     { // found origin
-      return CPoint(m_origins[i].x, m_origins[i].y);
+      return CPoint(origin.x, origin.y);
     }
   }
   return CGUIControlGroup::GetPosition();
@@ -719,9 +719,8 @@ bool CGUIWindow::OnMessage(CGUIMessage& message)
           message.GetParam1() == GUI_MSG_REFRESH_LIST ||
           message.GetParam1() == GUI_MSG_WINDOW_RESIZE)
         { // alter the message accordingly, and send to all controls
-          for (iControls it = m_children.begin(); it != m_children.end(); ++it)
+          for (CGUIControl* control : m_children)
           {
-            CGUIControl *control = *it;
             CGUIMessage msg(message.GetParam1(), message.GetControlId(), control->GetID(), message.GetParam2());
             control->OnMessage(msg);
           }
@@ -859,8 +858,8 @@ bool CGUIWindow::CheckAnimation(ANIMATION_TYPE animType)
     if (!m_bAllocated || !HasProcessed()) // can't process an animation if we aren't allocated or haven't processed
       return false;
     // make sure we update our visibility prior to queuing the window close anim
-    for (unsigned int i = 0; i < m_children.size(); i++)
-      m_children[i]->UpdateVisibility(nullptr);
+    for (CGUIControl* child : m_children)
+      child->UpdateVisibility(nullptr);
   }
   return true;
 }
@@ -920,8 +919,8 @@ void CGUIWindow::SaveControlStates()
   ResetControlStates();
   if (!m_defaultAlways)
     m_lastControlID = GetFocusedControlID();
-  for (iControls it = m_children.begin(); it != m_children.end(); ++it)
-    (*it)->SaveStates(m_controlStates);
+  for (CGUIControl* child : m_children)
+    child->SaveStates(m_controlStates);
 }
 
 void CGUIWindow::RestoreControlStates()
@@ -968,9 +967,9 @@ bool CGUIWindow::OnMove(int fromControl, int moveAction)
     if (!nextControl) // 0 isn't valid control id
       return false;
     // check our history - if the nextControl is in it, we can't focus it
-    for (unsigned int i = 0; i < moveHistory.size(); i++)
+    for (int i : moveHistory)
     {
-      if (nextControl == moveHistory[i])
+      if (nextControl == i)
         return false; // no control to focus so do nothing
     }
     control = GetFirstFocusableControl(nextControl);
