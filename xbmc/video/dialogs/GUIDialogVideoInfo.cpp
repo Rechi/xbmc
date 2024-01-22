@@ -351,11 +351,11 @@ void CGUIDialogVideoInfo::SetMovie(const CFileItem *item)
     CMusicDatabase database;
     database.Open();
     const std::vector<std::string> &artists = m_movieItem->GetVideoInfoTag()->m_artist;
-    for (std::vector<std::string>::const_iterator it = artists.begin(); it != artists.end(); ++it)
+    for (const std::string& artist : artists)
     {
-      int idArtist = database.GetArtistByName(*it);
+      int idArtist = database.GetArtistByName(artist);
       std::string thumb = database.GetArtForItem(idArtist, MediaTypeArtist, "thumb");
-      CFileItemPtr item(new CFileItem(*it));
+      CFileItemPtr item(new CFileItem(artist));
       if (!thumb.empty())
         item->SetArt("thumb", thumb);
       item->SetArt("icon", "DefaultArtist.png");
@@ -1467,9 +1467,9 @@ bool CGUIDialogVideoInfo::ManageMovieSets(const std::shared_ptr<CFileItem>& item
   // update the "added" items
   VECFILEITEMS addedItems;
   set_difference(selected.begin(),selected.end(), original.begin(),original.end(), std::back_inserter(addedItems), compFileItemsByDbId);
-  for (VECFILEITEMS::const_iterator it = addedItems.begin();  it != addedItems.end(); ++it)
+  for (const CFileItemPtr& addedItem : addedItems)
   {
-    if (SetMovieSet(it->get(), item.get()))
+    if (SetMovieSet(addedItem.get(), item.get()))
       refreshNeeded = true;
   }
 
@@ -1478,9 +1478,9 @@ bool CGUIDialogVideoInfo::ManageMovieSets(const std::shared_ptr<CFileItem>& item
   clearItem->GetVideoInfoTag()->m_iDbId = -1; // -1 will be used to clear set
   VECFILEITEMS deletedItems;
   set_difference(original.begin(),original.end(), selected.begin(),selected.end(), std::back_inserter(deletedItems), compFileItemsByDbId);
-  for (VECFILEITEMS::iterator it = deletedItems.begin();  it != deletedItems.end(); ++it)
+  for (const CFileItemPtr& deletedItem : deletedItems)
   {
-    if (SetMovieSet(it->get(), clearItem.get()))
+    if (SetMovieSet(deletedItem.get(), clearItem.get()))
       refreshNeeded = true;
   }
 
@@ -2031,10 +2031,10 @@ bool CGUIDialogVideoInfo::LinkMovieToTvShow(const std::shared_ptr<CFileItem>& it
     if (!database.GetLinksToTvShow(dbId, ids))
       return false;
 
-    for (unsigned int i = 0; i < ids.size(); ++i)
+    for (int id : ids)
     {
       CVideoInfoTag tag;
-      database.GetTvShowInfo("", tag, ids[i], 0 , VideoDbDetailsNone);
+      database.GetTvShowInfo("", tag, id, 0, VideoDbDetailsNone);
       CFileItemPtr show(new CFileItem(tag));
       list.Add(show);
     }
