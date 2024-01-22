@@ -217,8 +217,8 @@ bool CPythonInvoker::execute(const std::string& script, std::vector<std::wstring
           GetId());
       ADDON::VECADDONS addons;
       CServiceBroker::GetAddonMgr().GetAddons(addons, ADDON::AddonType::SCRIPT_MODULE);
-      for (unsigned int i = 0; i < addons.size(); ++i)
-        pythonPath.emplace(CSpecialProtocol::TranslatePath(addons[i]->LibPath()));
+      for (const ADDON::AddonPtr& addon : addons)
+        pythonPath.emplace(CSpecialProtocol::TranslatePath(addon->LibPath()));
     }
 
     PyObject* sysPath = PySys_GetObject("path");
