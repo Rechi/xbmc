@@ -64,8 +64,8 @@ void CWinSystemX11GLContext::PresentRenderImpl(bool rendered)
     m_delayDispReset = false;
     std::unique_lock<CCriticalSection> lock(m_resourceSection);
     // tell any shared resources
-    for (std::vector<IDispResource *>::iterator i = m_resources.begin(); i != m_resources.end(); ++i)
-      (*i)->OnResetDisplay();
+    for (IDispResource* resource : m_resources)
+      resource->OnResetDisplay();
   }
 }
 
@@ -132,8 +132,8 @@ bool CWinSystemX11GLContext::SetWindow(int width, int height, bool fullscreen, c
     {
       std::unique_lock<CCriticalSection> lock(m_resourceSection);
       // tell any shared resources
-      for (std::vector<IDispResource *>::iterator i = m_resources.begin(); i != m_resources.end(); ++i)
-        (*i)->OnResetDisplay();
+      for (IDispResource* resource : m_resources)
+        resource->OnResetDisplay();
     }
   }
   return true;

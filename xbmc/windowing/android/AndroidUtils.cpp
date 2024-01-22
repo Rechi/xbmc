@@ -309,11 +309,11 @@ bool CAndroidUtils::ProbeResolutions(std::vector<RESOLUTION_INFO>& resolutions)
 
       if (!refreshRates.empty())
       {
-        for (unsigned int i = 0; i < refreshRates.size(); i++)
+        for (float refreshRate : refreshRates)
         {
-          if (refreshRates[i] < 20.0f)
+          if (refreshRate < 20.0f)
             continue;
-          cur_res.fRefreshRate = refreshRates[i];
+          cur_res.fRefreshRate = refreshRate;
           cur_res.strMode = StringUtils::Format(
               "{}x{} @ {:.6f}{} - Full Screen", cur_res.iScreenWidth, cur_res.iScreenHeight,
               cur_res.fRefreshRate, cur_res.dwFlags & D3DPRESENTFLAG_INTERLACED ? "i" : "");
