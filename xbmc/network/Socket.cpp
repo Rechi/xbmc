@@ -261,9 +261,9 @@ bool CSocketListener::Listen(int timeout)
   m_iCurrentSocket = 0;
 
   FD_ZERO(&m_fdset);
-  for (unsigned int i = 0 ; i<m_sockets.size() ; i++)
+  for (CBaseSocket* socket : m_sockets)
   {
-    FD_SET(m_sockets[i]->Socket(), &m_fdset);
+    FD_SET(socket->Socket(), &m_fdset);
   }
 
   // set our timeout

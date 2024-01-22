@@ -260,8 +260,8 @@ CWebSocketMessage::CWebSocketMessage()
 
 CWebSocketMessage::~CWebSocketMessage()
 {
-  for (unsigned int index = 0; index < m_frames.size(); index++)
-    delete m_frames[index];
+  for (const CWebSocketFrame* frame : m_frames)
+    delete frame;
 
   m_frames.clear();
 }
