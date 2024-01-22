@@ -259,9 +259,9 @@ public:
   ~result_set() { clear(); };
   void clear()
   {
-    for (unsigned int i = 0; i < records.size(); i++)
-      if (records[i])
-        delete records[i];
+    for (const sql_record* record : records)
+      if (record)
+        delete record;
     records.clear();
     record_header.clear();
   };
