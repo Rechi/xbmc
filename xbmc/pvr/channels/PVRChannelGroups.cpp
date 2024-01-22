@@ -576,24 +576,22 @@ std::shared_ptr<CPVRChannelGroup> CPVRChannelGroups::GetNextGroup(
     bool bReturnNext = false;
 
     std::unique_lock<CCriticalSection> lock(m_critSection);
-    for (std::vector<std::shared_ptr<CPVRChannelGroup>>::const_iterator it = m_groups.begin();
-         it != m_groups.end(); ++it)
+    for (const std::shared_ptr<CPVRChannelGroup>& m_group : m_groups)
     {
       // return this entry
-      if (bReturnNext && !(*it)->IsHidden())
-        return *it;
+      if (bReturnNext && !m_group->IsHidden())
+        return m_group;
 
       // return the next entry
-      if ((*it)->GroupID() == group.GroupID())
+      if (m_group->GroupID() == group.GroupID())
         bReturnNext = true;
     }
 
     // no match return first visible group
-    for (std::vector<std::shared_ptr<CPVRChannelGroup>>::const_iterator it = m_groups.begin();
-         it != m_groups.end(); ++it)
+    for (const std::shared_ptr<CPVRChannelGroup>& group : m_groups)
     {
-      if (!(*it)->IsHidden())
-        return *it;
+      if (!group->IsHidden())
+        return group;
     }
   }
 

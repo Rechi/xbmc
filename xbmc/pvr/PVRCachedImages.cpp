@@ -47,12 +47,12 @@ int CPVRCachedImages::Cleanup(const std::vector<PVRImagePattern>& urlPatterns,
         StringUtils::Format("{}@{}", pattern.owner, CURL::Encode(pattern.path));
 
     std::string escapedPattern;
-    for (size_t i = 0; i < encodedPattern.size(); ++i)
+    for (char i : encodedPattern)
     {
-      if (encodedPattern[i] == '%' || encodedPattern[i] == '^')
+      if (i == '%' || i == '^')
         escapedPattern += '^';
 
-      escapedPattern += encodedPattern[i];
+      escapedPattern += i;
     }
 
     const std::string where =

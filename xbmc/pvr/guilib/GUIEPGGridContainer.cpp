@@ -1965,11 +1965,11 @@ void CGUIEPGGridContainer::GetCurrentLayouts()
 {
   m_channelLayout = nullptr;
 
-  for (unsigned int i = 0; i < m_channelLayouts.size(); i++)
+  for (CGUIListItemLayout& channelLayout : m_channelLayouts)
   {
-    if (m_channelLayouts[i].CheckCondition())
+    if (channelLayout.CheckCondition())
     {
-      m_channelLayout = &m_channelLayouts[i];
+      m_channelLayout = &channelLayout;
       break;
     }
   }
@@ -1979,11 +1979,11 @@ void CGUIEPGGridContainer::GetCurrentLayouts()
 
   m_focusedChannelLayout = nullptr;
 
-  for (unsigned int i = 0; i < m_focusedChannelLayouts.size(); i++)
+  for (CGUIListItemLayout& focusedChannelLayout : m_focusedChannelLayouts)
   {
-    if (m_focusedChannelLayouts[i].CheckCondition())
+    if (focusedChannelLayout.CheckCondition())
     {
-      m_focusedChannelLayout = &m_focusedChannelLayouts[i];
+      m_focusedChannelLayout = &focusedChannelLayout;
       break;
     }
   }
@@ -1993,11 +1993,11 @@ void CGUIEPGGridContainer::GetCurrentLayouts()
 
   m_programmeLayout = nullptr;
 
-  for (unsigned int i = 0; i < m_programmeLayouts.size(); i++)
+  for (CGUIListItemLayout& programmeLayout : m_programmeLayouts)
   {
-    if (m_programmeLayouts[i].CheckCondition())
+    if (programmeLayout.CheckCondition())
     {
-      m_programmeLayout = &m_programmeLayouts[i];
+      m_programmeLayout = &programmeLayout;
       break;
     }
   }
@@ -2007,11 +2007,11 @@ void CGUIEPGGridContainer::GetCurrentLayouts()
 
   m_focusedProgrammeLayout = nullptr;
 
-  for (unsigned int i = 0; i < m_focusedProgrammeLayouts.size(); i++)
+  for (CGUIListItemLayout& focusedProgrammeLayout : m_focusedProgrammeLayouts)
   {
-    if (m_focusedProgrammeLayouts[i].CheckCondition())
+    if (focusedProgrammeLayout.CheckCondition())
     {
-      m_focusedProgrammeLayout = &m_focusedProgrammeLayouts[i];
+      m_focusedProgrammeLayout = &focusedProgrammeLayout;
       break;
     }
   }
@@ -2021,11 +2021,11 @@ void CGUIEPGGridContainer::GetCurrentLayouts()
 
   m_rulerLayout = nullptr;
 
-  for (unsigned int i = 0; i < m_rulerLayouts.size(); i++)
+  for (CGUIListItemLayout& rulerLayout : m_rulerLayouts)
   {
-    if (m_rulerLayouts[i].CheckCondition())
+    if (rulerLayout.CheckCondition())
     {
-      m_rulerLayout = &m_rulerLayouts[i];
+      m_rulerLayout = &rulerLayout;
       break;
     }
   }
@@ -2035,11 +2035,11 @@ void CGUIEPGGridContainer::GetCurrentLayouts()
 
   m_rulerDateLayout = nullptr;
 
-  for (unsigned int i = 0; i < m_rulerDateLayouts.size(); i++)
+  for (CGUIListItemLayout& rulerDateLayout : m_rulerDateLayouts)
   {
-    if (m_rulerDateLayouts[i].CheckCondition())
+    if (rulerDateLayout.CheckCondition())
     {
-      m_rulerDateLayout = &m_rulerDateLayouts[i];
+      m_rulerDateLayout = &rulerDateLayout;
       break;
     }
   }
