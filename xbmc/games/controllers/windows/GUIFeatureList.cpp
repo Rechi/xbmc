@@ -88,23 +88,23 @@ void CGUIFeatureList::Load(const ControllerPtr& controller)
 
   // Create controls
   m_buttonCount = 0;
-  for (auto itGroup = featureGroups.begin(); itGroup != featureGroups.end(); ++itGroup)
+  for (const FeatureGroup& featureGroup : featureGroups)
   {
-    const std::string& groupName = itGroup->groupName;
-    const bool bIsVirtualKey = itGroup->bIsVirtualKey;
+    const std::string& groupName = featureGroup.groupName;
+    const bool bIsVirtualKey = featureGroup.bIsVirtualKey;
 
     std::vector<CGUIButtonControl*> buttons;
 
     // Create buttons
     if (bIsVirtualKey)
     {
-      CGUIButtonControl* button = GetSelectKeyButton(itGroup->features, m_buttonCount);
+      CGUIButtonControl* button = GetSelectKeyButton(featureGroup.features, m_buttonCount);
       if (button != nullptr)
         buttons.push_back(button);
     }
     else
     {
-      buttons = GetButtons(itGroup->features, m_buttonCount);
+      buttons = GetButtons(featureGroup.features, m_buttonCount);
     }
 
     // Just in case
