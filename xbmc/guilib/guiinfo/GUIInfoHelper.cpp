@@ -84,9 +84,7 @@ bool CheckWindowCondition(CGUIWindow *window, int condition)
     return false;
   if ((condition & WINDOW_CONDITION_HAS_LIST_ITEMS) && !window->HasListItems())
     return false;
-  if ((condition & WINDOW_CONDITION_IS_MEDIA_WINDOW) && !window->IsMediaWindow())
-    return false;
-  return true;
+  return !((condition & WINDOW_CONDITION_IS_MEDIA_WINDOW) && !window->IsMediaWindow());
 }
 
 CGUIWindow* GetWindowWithCondition(int contextWindow, int condition)

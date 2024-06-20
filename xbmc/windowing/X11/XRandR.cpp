@@ -162,10 +162,7 @@ bool CXRandR::TurnOffOutput(const std::string& name)
   if (status == -1)
     return false;
 
-  if (WEXITSTATUS(status) != 0)
-    return false;
-
-  return true;
+  return WEXITSTATUS(status) == 0;
 }
 
 bool CXRandR::TurnOnOutput(const std::string& name)
@@ -337,10 +334,7 @@ bool CXRandR::SetMode(const XOutput& output, const XMode& mode)
   if (status == -1)
     return false;
 
-  if (WEXITSTATUS(status) != 0)
-    return false;
-
-  return true;
+  return WEXITSTATUS(status) == 0;
 }
 
 XMode CXRandR::GetCurrentMode(const std::string& outputName)

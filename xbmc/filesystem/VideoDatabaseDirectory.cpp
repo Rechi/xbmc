@@ -373,10 +373,7 @@ bool CVideoDatabaseDirectory::Exists(const CURL& url)
   if (!pNode)
     return false;
 
-  if (pNode->GetChildType() == VIDEODATABASEDIRECTORY::NODE_TYPE_NONE)
-    return false;
-
-  return true;
+  return pNode->GetChildType() != VIDEODATABASEDIRECTORY::NODE_TYPE_NONE;
 }
 
 bool CVideoDatabaseDirectory::CanCache(const std::string& strPath)

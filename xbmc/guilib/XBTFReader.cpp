@@ -204,8 +204,6 @@ bool CXBTFReader::Load(const CXBTFFrame& frame, unsigned char* buffer) const
 #endif
     return false;
 
-  if (fread(buffer, 1, static_cast<size_t>(frame.GetPackedSize()), m_file) != frame.GetPackedSize())
-    return false;
-
-  return true;
+  return fread(buffer, 1, static_cast<size_t>(frame.GetPackedSize()), m_file) ==
+         frame.GetPackedSize();
 }

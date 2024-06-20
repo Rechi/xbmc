@@ -4548,9 +4548,7 @@ bool CMusicDatabase::CleanupOrphanedItems()
     return false;
   if (!CleanupRoles())
     return false;
-  if (!CleanupInfoSettings())
-    return false;
-  return true;
+  return CleanupInfoSettings();
 }
 
 int CMusicDatabase::Cleanup(CGUIDialogProgress* progressDialog /*= nullptr*/)

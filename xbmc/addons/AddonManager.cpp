@@ -976,10 +976,7 @@ bool CAddonMgr::CanAddonBeDisabled(const std::string& ID)
     return false;
 
   // can't disable an addon that is in use
-  if (localAddon->IsInUse())
-    return false;
-
-  return true;
+  return !localAddon->IsInUse();
 }
 
 bool CAddonMgr::CanAddonBeEnabled(const std::string& id)

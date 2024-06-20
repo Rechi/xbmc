@@ -39,8 +39,7 @@ public:
   {
     if (ratio != right.ratio) return true;
     if (align != right.align) return true;
-    if (scaleDiffuse != right.scaleDiffuse) return true;
-    return false;
+    return scaleDiffuse != right.scaleDiffuse;
   };
 
   ASPECT_RATIO ratio;
