@@ -1987,7 +1987,7 @@ void CGUIEPGGridContainer::GetCurrentLayouts()
   }
 
   if (!m_channelLayout && !m_channelLayouts.empty())
-    m_channelLayout = &m_channelLayouts[0]; // failsafe
+    m_channelLayout = m_channelLayouts.data(); // failsafe
 
   m_focusedChannelLayout = nullptr;
 
@@ -2001,7 +2001,7 @@ void CGUIEPGGridContainer::GetCurrentLayouts()
   }
 
   if (!m_focusedChannelLayout && !m_focusedChannelLayouts.empty())
-    m_focusedChannelLayout = &m_focusedChannelLayouts[0]; // failsafe
+    m_focusedChannelLayout = m_focusedChannelLayouts.data(); // failsafe
 
   m_programmeLayout = nullptr;
 
@@ -2015,7 +2015,7 @@ void CGUIEPGGridContainer::GetCurrentLayouts()
   }
 
   if (!m_programmeLayout && !m_programmeLayouts.empty())
-    m_programmeLayout = &m_programmeLayouts[0]; // failsafe
+    m_programmeLayout = m_programmeLayouts.data(); // failsafe
 
   m_focusedProgrammeLayout = nullptr;
 
@@ -2029,7 +2029,7 @@ void CGUIEPGGridContainer::GetCurrentLayouts()
   }
 
   if (!m_focusedProgrammeLayout && !m_focusedProgrammeLayouts.empty())
-    m_focusedProgrammeLayout = &m_focusedProgrammeLayouts[0]; // failsafe
+    m_focusedProgrammeLayout = m_focusedProgrammeLayouts.data(); // failsafe
 
   m_rulerLayout = nullptr;
 
@@ -2043,7 +2043,7 @@ void CGUIEPGGridContainer::GetCurrentLayouts()
   }
 
   if (!m_rulerLayout && !m_rulerLayouts.empty())
-    m_rulerLayout = &m_rulerLayouts[0]; // failsafe
+    m_rulerLayout = m_rulerLayouts.data(); // failsafe
 
   m_rulerDateLayout = nullptr;
 

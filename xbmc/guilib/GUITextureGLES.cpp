@@ -125,12 +125,15 @@ void CGUITextureGLES::End()
 
     if(m_diffuse.size())
     {
-      glVertexAttribPointer(tex1Loc, 2, GL_FLOAT, 0, sizeof(PackedVertex), (char*)&m_packedVertices[0] + offsetof(PackedVertex, u2));
+      glVertexAttribPointer(tex1Loc, 2, GL_FLOAT, 0, sizeof(PackedVertex),
+                            (char*)m_packedVertices.data() + offsetof(PackedVertex, u2));
       glEnableVertexAttribArray(tex1Loc);
     }
-    glVertexAttribPointer(posLoc, 3, GL_FLOAT, 0, sizeof(PackedVertex), (char*)&m_packedVertices[0] + offsetof(PackedVertex, x));
+    glVertexAttribPointer(posLoc, 3, GL_FLOAT, 0, sizeof(PackedVertex),
+                          (char*)m_packedVertices.data() + offsetof(PackedVertex, x));
     glEnableVertexAttribArray(posLoc);
-    glVertexAttribPointer(tex0Loc, 2, GL_FLOAT, 0, sizeof(PackedVertex), (char*)&m_packedVertices[0] + offsetof(PackedVertex, u1));
+    glVertexAttribPointer(tex0Loc, 2, GL_FLOAT, 0, sizeof(PackedVertex),
+                          (char*)m_packedVertices.data() + offsetof(PackedVertex, u1));
     glEnableVertexAttribArray(tex0Loc);
 
     glDrawElements(GL_TRIANGLES, m_packedVertices.size()*6 / 4, GL_UNSIGNED_SHORT, m_idx.data());
