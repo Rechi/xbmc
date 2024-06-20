@@ -1103,8 +1103,8 @@ bool CApplication::OnAction(const CAction &action)
 
   // Now check with the playlist player if action can be handled.
   // In case of ACTION_PREV_ITEM, we only allow the playlist player to take it if we're less than ACTION_PREV_ITEM_THRESHOLD seconds into playback.
-  if (!(action.GetID() == ACTION_PREV_ITEM && appPlayer->CanSeek() &&
-        GetTime() > ACTION_PREV_ITEM_THRESHOLD))
+  if (action.GetID() != ACTION_PREV_ITEM || !appPlayer->CanSeek() ||
+      GetTime() <= ACTION_PREV_ITEM_THRESHOLD)
   {
     if (CServiceBroker::GetPlaylistPlayer().OnAction(action))
       return true;
@@ -2430,7 +2430,7 @@ bool CApplication::PlayFile(CFileItem item,
   }
 
   // a disc image might be Blu-Ray disc
-  if (!(options.startpercent > 0.0 || options.starttime > 0.0) &&
+  if (options.startpercent <= 0.0 && options.starttime <= 0.0 &&
       (VIDEO::IsBDFile(item) || item.IsDiscImage() ||
        (forceSelection && VIDEO::IsBlurayPlaylist(item))))
   {

@@ -2179,7 +2179,7 @@ std::string CFileItem::GetLocalArtBaseFilename(bool& useFolder) const
     useFolder = true;
     strFile = GetLocalMetadataPath();
   }
-  else if (useFolder && !(m_bIsFolder && !IsFileFolder()))
+  else if (useFolder && (!m_bIsFolder || IsFileFolder()))
   {
     file = strFile.empty() ? m_strPath : strFile;
     strFile = URIUtils::GetDirectory(file);

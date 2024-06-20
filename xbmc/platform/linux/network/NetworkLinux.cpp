@@ -326,7 +326,7 @@ bool CNetworkLinux::PingHost(unsigned long remote_ip, unsigned int timeout_ms)
 
   const auto end = std::chrono::steady_clock::now();
 
-  if (!(packet.header.type == ICMP_ECHOREPLY && packet.header.code == 0))
+  if (packet.header.type != ICMP_ECHOREPLY || packet.header.code != 0)
   {
     CLog::Log(LOGERROR, "unexpected ping reply: type={} code={}", packet.header.type,
               packet.header.code);

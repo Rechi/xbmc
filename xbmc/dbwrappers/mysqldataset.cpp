@@ -1865,7 +1865,7 @@ bool MysqlDataset::query(const std::string& query)
   std::string qry = query;
   int fs = qry.find("select");
   int fS = qry.find("SELECT");
-  if (!(fs >= 0 || fS >= 0))
+  if (fs < 0 && fS < 0)
     throw DbErrors("MUST be select SQL!");
 
   close();

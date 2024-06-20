@@ -86,7 +86,8 @@ void CSaveFileState::DoWork(CFileItem& item,
       {
         videodatabase.BeginTransaction();
 
-        if (URIUtils::IsPlugin(progressTrackingFile) && !(item.HasVideoInfoTag() && item.GetVideoInfoTag()->m_iDbId >= 0))
+        if (URIUtils::IsPlugin(progressTrackingFile) &&
+            (!item.HasVideoInfoTag() || item.GetVideoInfoTag()->m_iDbId < 0))
         {
           // FileItem from plugin can lack information, make sure all needed fields are set
           CVideoInfoTag *tag = item.GetVideoInfoTag();
