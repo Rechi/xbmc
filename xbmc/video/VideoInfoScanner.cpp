@@ -2488,7 +2488,7 @@ namespace KODI::VIDEO
               typeVideoVersion, VideoAssetTypeOwner::AUTO, VideoAssetType::EXTRA);
 
           m_database.AddVideoAsset(ContentToVideoDbType(content), dbId, idVideoVersion,
-                                   VideoAssetType::EXTRA, *item.get());
+                                   VideoAssetType::EXTRA, *item);
 
           CLog::Log(LOGDEBUG, "VideoInfoScanner: Added video extras {}",
                     CURL::GetRedacted(item->GetPath()));
