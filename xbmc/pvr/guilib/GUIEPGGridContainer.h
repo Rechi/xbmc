@@ -201,7 +201,6 @@ namespace PVR
     void GetChannelCacheOffsets(int& cacheBefore, int& cacheAfter);
     void GetProgrammeCacheOffsets(int& cacheBefore, int& cacheAfter);
 
-  private:
     bool OnMouseClick(int dwButton, const CPoint& point);
     bool OnMouseDoubleClick(int dwButton, const CPoint& point);
     bool OnMouseWheel(char wheel, const CPoint& point);

@@ -78,7 +78,6 @@ protected:
 
   ~TestHTTPDirectory() override = default;
 
-protected:
   void SetUp() override
   {
     SetupMediaSources();

@@ -85,7 +85,6 @@ private:
    */
   void UnicastGet(wsd_req_info& info);
 
-private:
   template<std::size_t SIZE>
   std::string wsd_tag_find(const std::string& xml,
                            const std::array<std::pair<std::string, std::string>, SIZE>& tag);

@@ -25,7 +25,6 @@ public:
   static void RegisterNatives(JNIEnv* env);
 
   // CJNINsdManagerRegistrationListener interface
-public:
   void onRegistrationFailed(const CJNINsdServiceInfo& serviceInfo, int errorCode) override {}
   void onServiceRegistered(const CJNINsdServiceInfo& serviceInfo) override {}
   void onServiceUnregistered(const CJNINsdServiceInfo& serviceInfo) override {}

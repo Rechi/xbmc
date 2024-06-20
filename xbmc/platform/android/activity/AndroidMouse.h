@@ -25,6 +25,5 @@ private:
   void MouseButton(float x, float y, int32_t type, int32_t buttons);
   void MouseWheel(float x, float y, float value);
 
-private:
   int32_t m_lastButtonState = 0;
 };

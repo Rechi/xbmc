@@ -61,7 +61,6 @@ protected:
   }
   ~TestWebServer() override = default;
 
-protected:
   void SetUp() override
   {
     SetupMediaSources();
