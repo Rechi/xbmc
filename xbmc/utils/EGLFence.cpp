@@ -72,12 +72,7 @@ bool CEGLFence::IsSignaled()
     return false;
   }
 
-  if (status == EGL_SIGNALED_KHR)
-  {
-    return true;
-  }
-
-  return false;
+  return status == EGL_SIGNALED_KHR;
 }
 
 #if defined(EGL_ANDROID_native_fence_sync) && defined(EGL_KHR_fence_sync)

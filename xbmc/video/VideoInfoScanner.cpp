@@ -1283,7 +1283,7 @@ namespace KODI::VIDEO
       episode.cDate.SetValid(false);
       episode.isFolder = false;
 
-      bool byDate = expression[i].byDate ? true : false;
+      bool byDate = expression[i].byDate;
       bool byTitle = expression[i].byTitle;
       int defaultSeason = expression[i].defaultSeason;
 

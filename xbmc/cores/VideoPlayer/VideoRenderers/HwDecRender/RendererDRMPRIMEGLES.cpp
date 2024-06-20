@@ -291,10 +291,7 @@ bool CRendererDRMPRIMEGLES::RenderCapture(int index, CRenderCapture* capture)
 
 bool CRendererDRMPRIMEGLES::ConfigChanged(const VideoPicture& picture)
 {
-  if (picture.videoBuffer->GetFormat() != m_format)
-    return true;
-
-  return false;
+  return picture.videoBuffer->GetFormat() != m_format;
 }
 
 void CRendererDRMPRIMEGLES::Render(unsigned int flags, int index)

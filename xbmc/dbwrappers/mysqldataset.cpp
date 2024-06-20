@@ -65,7 +65,7 @@ Dataset* MysqlDatabase::CreateDataset() const
 
 int MysqlDatabase::status(void)
 {
-  if (active == false)
+  if (!active)
     return DB_CONNECTION_NONE;
   return DB_CONNECTION_OK;
 }

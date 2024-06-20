@@ -227,10 +227,7 @@ bool CDVDDemuxFFmpeg::Aborted()
     return true;
 
   std::shared_ptr<CDVDInputStreamFFmpeg> input = std::dynamic_pointer_cast<CDVDInputStreamFFmpeg>(m_pInput);
-  if (input && input->Aborted())
-    return true;
-
-  return false;
+  return input && input->Aborted();
 }
 
 bool CDVDDemuxFFmpeg::Open(const std::shared_ptr<CDVDInputStream>& pInput, bool fileinfo)
@@ -1389,10 +1386,7 @@ bool CDVDDemuxFFmpeg::SeekTime(double time, bool backwards, double* startpts)
 
   if (ret >= 0)
   {
-    if (!hitEnd)
-      return true;
-    else
-      return false;
+    return !hitEnd;
   }
   else
     return false;
@@ -1654,10 +1648,7 @@ CDemuxStream* CDVDDemuxFFmpeg::AddStream(int streamIdx)
       {
         CDemuxStreamVideoFFmpeg* st = new CDemuxStreamVideoFFmpeg(pStream);
         stream = st;
-        if (strcmp(m_pFormatContext->iformat->name, "flv") == 0)
-          st->bVFR = true;
-        else
-          st->bVFR = false;
+        st->bVFR = strcmp(m_pFormatContext->iformat->name, "flv") == 0;
 
         // never trust pts in avi files with h264.
         if (m_bAVI && pStream->codecpar->codec_id == AV_CODEC_ID_H264)

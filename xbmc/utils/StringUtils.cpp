@@ -597,10 +597,7 @@ std::string& StringUtils::RemoveDuplicatedSpacesAndTabs(std::string& str)
 bool StringUtils::IsSpecialCharacter(char c)
 {
   static constexpr std::string_view view(" .-_+,!'\"\t/\\*?#$%&@()[]{}");
-  if (std::any_of(view.begin(), view.end(), [c](char ch) { return ch == c; }))
-    return true;
-  else
-    return false;
+  return std::any_of(view.begin(), view.end(), [c](char ch) { return ch == c; });
 }
 
 std::string StringUtils::ReplaceSpecialCharactersWithSpace(const std::string& str)

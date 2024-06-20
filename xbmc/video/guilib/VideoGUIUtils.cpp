@@ -567,13 +567,10 @@ bool IsItemPlayable(const CFileItem& item)
     // Exclude top level nodes - eg can't play 'genres' just a specific genre etc
     const XFILE::VIDEODATABASEDIRECTORY::NODE_TYPE node =
         XFILE::CVideoDatabaseDirectory::GetDirectoryParentType(item.GetPath());
-    if (node == XFILE::VIDEODATABASEDIRECTORY::NODE_TYPE_OVERVIEW ||
-        node == XFILE::VIDEODATABASEDIRECTORY::NODE_TYPE_MOVIES_OVERVIEW ||
-        node == XFILE::VIDEODATABASEDIRECTORY::NODE_TYPE_TVSHOWS_OVERVIEW ||
-        node == XFILE::VIDEODATABASEDIRECTORY::NODE_TYPE_MUSICVIDEOS_OVERVIEW)
-      return false;
-
-    return true;
+    return !(node == XFILE::VIDEODATABASEDIRECTORY::NODE_TYPE_OVERVIEW ||
+             node == XFILE::VIDEODATABASEDIRECTORY::NODE_TYPE_MOVIES_OVERVIEW ||
+             node == XFILE::VIDEODATABASEDIRECTORY::NODE_TYPE_TVSHOWS_OVERVIEW ||
+             node == XFILE::VIDEODATABASEDIRECTORY::NODE_TYPE_MUSICVIDEOS_OVERVIEW);
   }
 
   if (item.HasVideoInfoTag() && item.CanQueue())

@@ -765,10 +765,7 @@ CAgentInput::PortMap CAgentInput::MapJoysticks(
             const PortAddress& portAddress = itPeripheral->second;
 
             // If port is disconnected, use this joystick
-            if (gameClientjoysticks.find(portAddress) == gameClientjoysticks.end())
-              return true;
-
-            return false;
+            return gameClientjoysticks.find(portAddress) == gameClientjoysticks.end();
           });
     }
 

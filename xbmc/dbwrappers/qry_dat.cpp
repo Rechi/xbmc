@@ -262,10 +262,7 @@ bool field_value::get_asBool() const
   {
     case ft_String:
     {
-      if (str_value == "True" || str_value == "true" || str_value == "1")
-        return true;
-      else
-        return false;
+      return str_value == "True" || str_value == "true" || str_value == "1";
     }
     case ft_Boolean:
     {
@@ -273,10 +270,7 @@ bool field_value::get_asBool() const
     }
     case ft_Char:
     {
-      if (char_value == 'T' || char_value == 't')
-        return true;
-      else
-        return false;
+      return char_value == 'T' || char_value == 't';
     }
     case ft_Short:
     {

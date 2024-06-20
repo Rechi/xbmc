@@ -1191,7 +1191,7 @@ bool CGUIWindowSlideShow::PlayVideo()
   m_bPlayingVideo = true;
   m_iVideoSlide = m_iCurrentSlide;
   bool ret = g_application.PlayFile(*item, "");
-  if (ret == true)
+  if (ret)
     return true;
   else
   {

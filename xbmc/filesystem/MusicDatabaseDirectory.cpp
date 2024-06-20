@@ -142,10 +142,7 @@ bool CMusicDatabaseDirectory::GetDirectoryNodeInfo(const std::string& strPath,
                                                    MUSICDATABASEDIRECTORY::CQueryParams& params)
 {
   std::string path = CLegacyPathTranslation::TranslateMusicDbPath(strPath);
-  if (!CDirectoryNode::GetNodeInfo(path, type, childtype, params))
-    return false;
-
-  return true;
+  return CDirectoryNode::GetNodeInfo(path, type, childtype, params);
 }
 
 bool CMusicDatabaseDirectory::IsArtistDir(const std::string& strDirectory)

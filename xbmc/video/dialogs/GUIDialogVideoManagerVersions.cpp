@@ -425,10 +425,7 @@ bool CGUIDialogVideoManagerVersions::GetAllOtherMovies(const std::shared_ptr<CFi
                 ? SortAttributeIgnoreArticle
                 : SortAttributeNone);
 
-  if (!PostProcessList(list, item->GetVideoInfoTag()->m_iDbId))
-    return false;
-
-  return true;
+  return PostProcessList(list, item->GetVideoInfoTag()->m_iDbId);
 }
 
 bool CGUIDialogVideoManagerVersions::ProcessVideoVersion(VideoDbContentType itemType, int dbId)

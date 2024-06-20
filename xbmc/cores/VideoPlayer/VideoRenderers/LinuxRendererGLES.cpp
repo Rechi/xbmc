@@ -144,12 +144,7 @@ bool CLinuxRendererGLES::Configure(const VideoPicture &picture, float fps, unsig
 
 bool CLinuxRendererGLES::ConfigChanged(const VideoPicture &picture)
 {
-  if (picture.videoBuffer->GetFormat() != m_format)
-  {
-    return true;
-  }
-
-  return false;
+  return picture.videoBuffer->GetFormat() != m_format;
 }
 
 int CLinuxRendererGLES::NextYV12Texture()
@@ -1525,14 +1520,7 @@ bool CLinuxRendererGLES::UploadNV12Texture(int source)
   YuvImage* im = &buf.image;
 
   bool deinterlacing;
-  if (m_currentField == FIELD_FULL)
-  {
-    deinterlacing = false;
-  }
-  else
-  {
-    deinterlacing = true;
-  }
+  deinterlacing = m_currentField != FIELD_FULL;
 
   VerifyGLState();
 

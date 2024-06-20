@@ -625,7 +625,7 @@ bool CGUIDialogFileBrowser::ShowAndGetImage(const CFileItemList &items, const VE
     browser->m_vecItems->Add(item);
   }
   browser->SetHeading(heading);
-  browser->m_flipEnabled = flip?true:false;
+  browser->m_flipEnabled = flip != nullptr;
   browser->Open();
   bool confirmed(browser->IsConfirmed());
   if (confirmed)

@@ -271,10 +271,7 @@ bool CDRMAtomic::DisplayHardwareScalingEnabled()
 {
   auto settings = CServiceBroker::GetSettingsComponent()->GetSettings();
 
-  if (settings && settings->GetBool(SETTING_VIDEOSCREEN_HW_SCALING_FILTER))
-    return true;
-
-  return false;
+  return settings && settings->GetBool(SETTING_VIDEOSCREEN_HW_SCALING_FILTER);
 }
 
 CDRMAtomic::CDRMAtomicRequest::CDRMAtomicRequest() : m_atomicRequest(drmModeAtomicAlloc())

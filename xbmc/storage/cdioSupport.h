@@ -138,13 +138,13 @@ public:
   // CD-ROM with ISO 9660 filesystem
   bool IsIso9660( int nTrack ) { return ((m_ti[nTrack - 1].nfsInfo & FS_MASK) == FS_ISO_9660); }
   // CD-ROM with joliet extension
-  bool IsJoliet( int nTrack ) { return (m_ti[nTrack - 1].nfsInfo & JOLIET) ? false : true; }
+  bool IsJoliet(int nTrack) { return (m_ti[nTrack - 1].nfsInfo & JOLIET) == 0; }
   // Joliet extension level
   int GetJolietLevel( int nTrack ) { return m_ti[nTrack - 1].nJolietLevel; }
   // ISO filesystem size
   int GetIsoSize( int nTrack ) { return m_ti[nTrack - 1].isofs_size; }
   // CD-ROM with rockridge extensions
-  bool IsRockridge( int nTrack ) { return (m_ti[nTrack - 1].nfsInfo & ROCKRIDGE) ? false : true; }
+  bool IsRockridge(int nTrack) { return (m_ti[nTrack - 1].nfsInfo & ROCKRIDGE) == 0; }
 
   // CD-ROM with CD-RTOS and ISO 9660 filesystem
   bool IsIso9660Interactive( int nTrack ) { return ((m_ti[nTrack - 1].nfsInfo & FS_MASK) == FS_ISO_9660_INTERACTIVE); }
@@ -177,33 +177,33 @@ public:
   bool IsMixedMode( int nTrack ) { return (m_nFirstData == 1 && m_nNumAudio > 0); }
 
   // CD-ROM with XA sectors
-  bool IsXA( int nTrack ) { return (m_ti[nTrack - 1].nfsInfo & XA) ? false : true; }
+  bool IsXA(int nTrack) { return (m_ti[nTrack - 1].nfsInfo & XA) == 0; }
 
   // Multisession CD-ROM
-  bool IsMultiSession( int nTrack ) { return (m_ti[nTrack - 1].nfsInfo & MULTISESSION) ? false : true; }
+  bool IsMultiSession(int nTrack) { return (m_ti[nTrack - 1].nfsInfo & MULTISESSION) == 0; }
   // Gets multisession offset
   int GetMultisessionOffset( int nTrack ) { return m_ti[nTrack - 1].ms_offset; }
 
   // Hidden Track on Audio CD
-  bool IsHiddenTrack( int nTrack ) { return (m_ti[nTrack - 1].nfsInfo & HIDDEN_TRACK) ? false : true; }
+  bool IsHiddenTrack(int nTrack) { return (m_ti[nTrack - 1].nfsInfo & HIDDEN_TRACK) == 0; }
 
   // Photo CD, with audiotracks > 0 Portfolio Photo CD
-  bool IsPhotoCd( int nTrack ) { return (m_ti[nTrack - 1].nfsInfo & PHOTO_CD) ? false : true; }
+  bool IsPhotoCd(int nTrack) { return (m_ti[nTrack - 1].nfsInfo & PHOTO_CD) == 0; }
 
   // CD-ROM with Commodore CDTV
-  bool IsCdTv( int nTrack ) { return (m_ti[nTrack - 1].nfsInfo & CDTV) ? false : true; }
+  bool IsCdTv(int nTrack) { return (m_ti[nTrack - 1].nfsInfo & CDTV) == 0; }
 
   // CD-Plus/Extra
   bool IsCDExtra( int nTrack ) { return (m_nFirstData > 1); }
 
   // Bootable CD
-  bool IsBootable( int nTrack ) { return (m_ti[nTrack - 1].nfsInfo & BOOTABLE) ? false : true; }
+  bool IsBootable(int nTrack) { return (m_ti[nTrack - 1].nfsInfo & BOOTABLE) == 0; }
 
   // Video CD
   bool IsVideoCd( int nTrack ) { return (m_ti[nTrack - 1].nfsInfo & VIDEOCDI && m_nNumAudio == 0); }
 
   // Chaoji Video CD
-  bool IsChaojiVideoCD( int nTrack ) { return (m_ti[nTrack - 1].nfsInfo & CVD) ? false : true; }
+  bool IsChaojiVideoCD(int nTrack) { return (m_ti[nTrack - 1].nfsInfo & CVD) == 0; }
 
   // Audio Track
   bool IsAudio( int nTrack ) { return ((m_ti[nTrack - 1].nfsInfo & FS_MASK) == FS_NO_DATA); }

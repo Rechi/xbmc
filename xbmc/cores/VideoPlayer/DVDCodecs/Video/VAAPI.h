@@ -144,10 +144,7 @@ public:
   bool CanSkipDeint()
   {
     std::unique_lock<CCriticalSection> l(m_sec);
-    if (canSkipDeint)
-      return true;
-    else
-      return false;
+    return canSkipDeint;
   }
   void SetVpp(bool vpp)
   {
