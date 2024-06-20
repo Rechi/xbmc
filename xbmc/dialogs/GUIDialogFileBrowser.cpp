@@ -691,8 +691,7 @@ bool CGUIDialogFileBrowser::ShowAndGetFile(const VECSOURCES &shares, const std::
   std::string strMask = mask;
   if (mask == "/")
     browser->m_browsingForFolders=1;
-  else
-  if (mask == "/w")
+  else if (mask == "/w")
   {
     browser->m_browsingForFolders=2;
     strMask = "/";
@@ -747,8 +746,7 @@ bool CGUIDialogFileBrowser::ShowAndGetFile(const std::string &directory, const s
   std::string strMask = mask;
   if (mask == "/")
     browser->m_browsingForFolders=1;
-  else
-  if (mask == "/w")
+  else if (mask == "/w")
   {
     browser->m_browsingForFolders=2;
     strMask = "/";

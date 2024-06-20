@@ -2420,7 +2420,7 @@ bool CUtil::ValidatePort(int port)
     return false;
   else
 #endif
-  if (port <= 0 || port > 65535)
+      if (port <= 0 || port > 65535)
     return false;
 
   return true;
