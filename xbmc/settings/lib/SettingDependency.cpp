@@ -80,12 +80,12 @@ bool CSettingDependencyCondition::Deserialize(const TiXmlNode *node)
   if (!CSettingConditionItem::Deserialize(node))
     return false;
 
-  auto elem = node->ToElement();
+  const auto* elem = node->ToElement();
   if (elem == nullptr)
     return false;
 
   m_target = SettingDependencyTarget::Setting;
-  auto strTarget = elem->Attribute(SETTING_XML_ATTR_ON);
+  const auto* strTarget = elem->Attribute(SETTING_XML_ATTR_ON);
   if (strTarget != nullptr && !setTarget(strTarget))
   {
     s_logger->warn("unknown target \"{}\"", strTarget);
@@ -110,7 +110,7 @@ bool CSettingDependencyCondition::Deserialize(const TiXmlNode *node)
   }
 
   m_operator = SettingDependencyOperator::Equals;
-  auto strOperator = elem->Attribute(SETTING_XML_ATTR_OPERATOR);
+  const auto* strOperator = elem->Attribute(SETTING_XML_ATTR_OPERATOR);
   if (strOperator != nullptr && !setOperator(strOperator))
   {
     s_logger->warn("unknown operator \"{}\"", strOperator);
@@ -280,7 +280,8 @@ bool CSettingDependencyConditionCombination::Deserialize(const TiXmlNode *node)
       if (m_operations[i] == nullptr)
         continue;
 
-      auto combination = static_cast<CSettingDependencyConditionCombination*>(m_operations[i].get());
+      auto* combination =
+          static_cast<CSettingDependencyConditionCombination*>(m_operations[i].get());
       if (combination == nullptr)
         continue;
 
@@ -296,7 +297,7 @@ bool CSettingDependencyConditionCombination::Deserialize(const TiXmlNode *node)
       if (m_values[i] == nullptr)
         continue;
 
-      auto condition = static_cast<CSettingDependencyCondition*>(m_values[i].get());
+      auto* condition = static_cast<CSettingDependencyCondition*>(m_values[i].get());
       if (condition == nullptr)
         continue;
 
@@ -360,11 +361,11 @@ bool CSettingDependency::Deserialize(const TiXmlNode *node)
   if (node == nullptr)
     return false;
 
-  auto elem = node->ToElement();
+  const auto* elem = node->ToElement();
   if (elem == nullptr)
     return false;
 
-  auto strType = elem->Attribute(SETTING_XML_ATTR_TYPE);
+  const auto* strType = elem->Attribute(SETTING_XML_ATTR_TYPE);
   if (strType == nullptr || strlen(strType) <= 0 || !setType(strType))
   {
     s_logger->warn("missing or unknown dependency type definition");
@@ -379,7 +380,7 @@ std::set<std::string> CSettingDependency::GetSettings() const
   if (m_operation == nullptr)
     return std::set<std::string>();
 
-  auto combination = static_cast<CSettingDependencyConditionCombination*>(m_operation.get());
+  auto* combination = static_cast<CSettingDependencyConditionCombination*>(m_operation.get());
   if (combination == nullptr)
     return std::set<std::string>();
 

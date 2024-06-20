@@ -50,7 +50,7 @@ CRPRendererDMA::CRPRendererDMA(const CRenderSettings& renderSettings,
 
 void CRPRendererDMA::Render(uint8_t alpha)
 {
-  auto renderBuffer = static_cast<CRenderBufferDMA*>(m_renderBuffer);
+  auto* renderBuffer = static_cast<CRenderBufferDMA*>(m_renderBuffer);
   assert(renderBuffer != nullptr);
 
   CRect rect = m_sourceRect;

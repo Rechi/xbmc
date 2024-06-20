@@ -46,7 +46,7 @@ void CVideoFileItemListModifier::AddQueuingFolder(CFileItemList& items)
   if (!IsVideoDb(items))
     return;
 
-  auto directoryNode = CDirectoryNode::ParseURL(items.GetPath());
+  auto* directoryNode = CDirectoryNode::ParseURL(items.GetPath());
 
   CFileItemPtr pItem;
 

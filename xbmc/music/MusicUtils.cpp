@@ -482,7 +482,7 @@ SortDescription GetSortDescription(const CGUIViewState& state, const CFileItemLi
       {
         if (item->HasMusicInfoTag())
         {
-          const auto tag = item->GetMusicInfoTag();
+          auto* const tag = item->GetMusicInfoTag();
           if (lastAlbumId != -1 && tag->GetAlbumId() != lastAlbumId)
           {
             // First choice for folders containing multiple albums

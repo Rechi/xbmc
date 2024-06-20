@@ -91,7 +91,7 @@ bool CIRTranslator::LoadIRMap(const std::string& irMapPath)
       const char* szRemote = pRemote->Value();
       if (szRemote != nullptr)
       {
-        auto* pAttr = pRemote->ToElement()->FirstAttribute();
+        const auto* pAttr = pRemote->ToElement()->FirstAttribute();
         if (pAttr != nullptr)
           MapRemote(pRemote, pAttr->Value());
       }

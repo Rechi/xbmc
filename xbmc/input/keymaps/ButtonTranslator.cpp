@@ -320,7 +320,7 @@ void CButtonTranslator::MapWindowActions(const tinyxml2::XMLNode* pWindow, int w
 
   for (const auto& type : types)
   {
-    for (auto* pDevice = pWindow->FirstChildElement(type.c_str()); pDevice != nullptr;
+    for (const auto* pDevice = pWindow->FirstChildElement(type.c_str()); pDevice != nullptr;
          pDevice = pDevice->NextSiblingElement(type.c_str()))
     {
       buttonMap map;
@@ -379,7 +379,7 @@ void CButtonTranslator::MapWindowActions(const tinyxml2::XMLNode* pWindow, int w
     IKeyMapper* mapper = it.second;
 
     // Map device actions
-    auto* pDevice = pWindow->FirstChildElement(device.c_str());
+    const auto* pDevice = pWindow->FirstChildElement(device.c_str());
     while (pDevice)
     {
       mapper->MapActions(windowID, pDevice);

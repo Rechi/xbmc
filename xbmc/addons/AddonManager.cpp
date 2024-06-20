@@ -63,14 +63,14 @@ static bool LoadManifest(std::set<std::string>& system, std::set<std::string>& o
     return false;
   }
 
-  auto root = doc.RootElement();
+  auto* root = doc.RootElement();
   if (!root || root->ValueStr() != "addons")
   {
     CLog::Log(LOGERROR, "ADDONS: malformed manifest");
     return false;
   }
 
-  auto elem = root->FirstChildElement("addon");
+  auto* elem = root->FirstChildElement("addon");
   while (elem)
   {
     if (elem->FirstChild())
@@ -864,7 +864,7 @@ bool CAddonMgr::DisableAddon(const std::string& id, AddonDisabledReason disabled
   AddonPtr addon;
   if (GetAddon(id, addon, AddonType::UNKNOWN, OnlyEnabled::CHOICE_NO) && addon != nullptr)
   {
-    auto eventLog = CServiceBroker::GetEventLog();
+    auto* eventLog = CServiceBroker::GetEventLog();
     if (eventLog)
       eventLog->Add(EventPtr(new CAddonManagementEvent(addon, 24141)));
   }
@@ -900,7 +900,7 @@ bool CAddonMgr::EnableSingle(const std::string& id)
   if (!GetAddon(id, addon, AddonType::UNKNOWN, OnlyEnabled::CHOICE_NO) || addon == nullptr)
     return false;
 
-  auto eventLog = CServiceBroker::GetEventLog();
+  auto* eventLog = CServiceBroker::GetEventLog();
 
   if (!IsCompatible(addon))
   {
@@ -1208,7 +1208,7 @@ bool CAddonMgr::GetAddonInfos(AddonInfos& addonInfos, bool onlyEnabled, AddonTyp
   std::unique_lock<CCriticalSection> lock(m_critSection);
 
   bool forUnknown = type == AddonType::UNKNOWN;
-  for (auto& info : m_installedAddons)
+  for (const auto& info : m_installedAddons)
   {
     if (onlyEnabled && m_disabled.find(info.first) != m_disabled.end())
       continue;
@@ -1229,7 +1229,7 @@ std::vector<AddonInfoPtr> CAddonMgr::GetAddonInfos(bool onlyEnabled,
 
   std::unique_lock<CCriticalSection> lock(m_critSection);
 
-  for (auto& info : m_installedAddons)
+  for (const auto& info : m_installedAddons)
   {
     if (onlyEnabled && m_disabled.find(info.first) != m_disabled.end())
       continue;
@@ -1375,7 +1375,7 @@ bool CAddonMgr::AddonsFromRepoXML(const RepositoryDirInfo& repo,
   }
 
   // each addon XML should have a UTF-8 declaration
-  auto element = doc.RootElement()->FirstChildElement("addon");
+  auto* element = doc.RootElement()->FirstChildElement("addon");
   while (element)
   {
     auto addonInfo = CAddonInfoBuilder::Generate(element, repo);

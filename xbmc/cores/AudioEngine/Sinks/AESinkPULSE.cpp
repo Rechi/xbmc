@@ -327,7 +327,7 @@ struct ServerInfoStruct
 
 static void ServerInfoCallback(pa_context* c, const pa_server_info* i, void* userdata)
 {
-  auto serverInfo = reinterpret_cast<ServerInfoStruct*>(userdata);
+  auto* serverInfo = reinterpret_cast<ServerInfoStruct*>(userdata);
   serverInfo->m_serverName = i->server_name;
   serverInfo->m_isInfoSet = true;
   pa_threaded_mainloop_signal(serverInfo->m_mainloop, 0);

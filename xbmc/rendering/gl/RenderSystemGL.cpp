@@ -78,7 +78,7 @@ bool CRenderSystemGL::InitRenderSystem()
   }
   else
   {
-    auto extensions = (const char*) glGetString(GL_EXTENSIONS);
+    const auto* extensions = (const char*)glGetString(GL_EXTENSIONS);
     if (extensions)
     {
       m_RenderExtensions += extensions;

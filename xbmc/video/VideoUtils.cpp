@@ -201,7 +201,7 @@ std::string GetOpticalMediaPath(const CFileItem& item)
 #endif
   };
 
-  const auto it = std::find_if(files.begin(), files.end(), exists);
+  const auto* const it = std::find_if(files.begin(), files.end(), exists);
   return it != files.end() ? URIUtils::AddFileToFolder(item.GetPath(), *it) : std::string{};
 }
 

@@ -242,14 +242,14 @@ void CWinSystemAndroid::SetHdmiState(bool connected)
         return;
     }
 
-    for (auto resource : m_resources)
+    for (auto* resource : m_resources)
       resource->OnResetDisplay();
     m_dispResetTimer->Stop();
     m_HdmiModeTriggered = false;
   }
   else
   {
-    for (auto resource : m_resources)
+    for (auto* resource : m_resources)
       resource->OnLostDisplay();
   }
 }

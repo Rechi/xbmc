@@ -292,7 +292,7 @@ CVideoBufferPoolSysMem::~CVideoBufferPoolSysMem()
 {
   std::unique_lock<CCriticalSection> lock(m_critSection);
 
-  for (auto buf : m_all)
+  for (auto* buf : m_all)
   {
     delete buf;
   }

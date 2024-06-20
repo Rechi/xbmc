@@ -77,7 +77,7 @@ void CApplicationPowerHandling::StopScreenSaverTimer()
 
 bool CApplicationPowerHandling::ToggleDPMS(bool manual)
 {
-  auto winSystem = CServiceBroker::GetWinSystem();
+  auto* winSystem = CServiceBroker::GetWinSystem();
   if (!winSystem)
     return false;
 
@@ -259,7 +259,7 @@ void CApplicationPowerHandling::CheckScreenSaverAndDPMS()
                .empty())
     maybeScreensaver = false;
 
-  auto winSystem = CServiceBroker::GetWinSystem();
+  auto* winSystem = CServiceBroker::GetWinSystem();
   if (!winSystem)
     return;
 

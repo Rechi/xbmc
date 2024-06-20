@@ -564,7 +564,7 @@ void CVaapi2Texture::Unmap()
   if (!m_vaapiPic)
     return;
 
-  for (auto texture : {&m_y, &m_vu})
+  for (auto* texture : {&m_y, &m_vu})
   {
     if (texture->eglImage != EGL_NO_IMAGE_KHR)
     {

@@ -457,7 +457,7 @@ void CMediaSourceSettings::GetSources(const tinyxml2::XMLNode* rootElement,
     return;
   }
 
-  auto child = childElement->FirstChild();
+  const auto* child = childElement->FirstChild();
   while (child)
   {
     std::string value = child->Value();

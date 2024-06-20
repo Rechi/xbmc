@@ -525,7 +525,7 @@ namespace KODI::VIDEO
         else if (info2->Content() == CONTENT_MUSICVIDEOS)
           mediaType = MediaTypeMusicVideo;
 
-        auto eventLog = CServiceBroker::GetEventLog();
+        auto* eventLog = CServiceBroker::GetEventLog();
         if (eventLog)
         {
           const std::string itemlogpath = (info2->Content() == CONTENT_TVSHOWS)

@@ -684,7 +684,7 @@ bool CGUIWindow::OnMessage(CGUIMessage& message)
     {
       CAction action(ACTION_GESTURE_NOTIFY, 0, static_cast<float>(message.GetParam1()), static_cast<float>(message.GetParam2()), 0, 0);
       EVENT_RESULT result = OnMouseAction(action);
-      auto res = new int(result);
+      auto* res = new int(result);
       message.SetPointer(static_cast<void*>(res));
       return result != EVENT_RESULT_UNHANDLED;
     }

@@ -303,7 +303,7 @@ bool CDisplaySettings::OnSettingChanging(const std::shared_ptr<const CSetting>& 
   }
   else if (settingId == CSettings::SETTING_VIDEOSCREEN_MONITOR)
   {
-    auto winSystem = CServiceBroker::GetWinSystem();
+    auto* winSystem = CServiceBroker::GetWinSystem();
     if (winSystem->SupportsScreenMove())
     {
       const std::string screen =
@@ -341,7 +341,7 @@ bool CDisplaySettings::OnSettingChanging(const std::shared_ptr<const CSetting>& 
 #if defined(HAVE_X11) || defined(TARGET_WINDOWS_DESKTOP) || defined(TARGET_DARWIN_OSX)
   else if (settingId == CSettings::SETTING_VIDEOSCREEN_BLANKDISPLAYS)
   {
-    auto winSystem = CServiceBroker::GetWinSystem();
+    auto* winSystem = CServiceBroker::GetWinSystem();
 #if defined(HAVE_X11)
     winSystem->UpdateResolutions();
 #elif defined(TARGET_WINDOWS_DESKTOP) || defined(TARGET_DARWIN_OSX)
@@ -888,7 +888,7 @@ void CDisplaySettings::SettingOptionsMonitorsFiller(const SettingConstPtr& setti
                                                     std::string& current,
                                                     void* data)
 {
-  auto winSystem = CServiceBroker::GetWinSystem();
+  auto* winSystem = CServiceBroker::GetWinSystem();
   if (!winSystem)
     return;
 

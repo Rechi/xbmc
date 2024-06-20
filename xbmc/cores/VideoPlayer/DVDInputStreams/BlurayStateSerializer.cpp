@@ -64,7 +64,7 @@ bool CBlurayStateSerializer::XMLToBlurayState(BlurayState& state, const std::str
     return false;
   }
 
-  auto version = hRoot.ToElement()->Attribute("version");
+  const auto* version = hRoot.ToElement()->Attribute("version");
   if (!version ||
       !StringUtils::EqualsNoCase(version, std::to_string(BLURAYSTATESERIALIZER_VERSION)))
   {

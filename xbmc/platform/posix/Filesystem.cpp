@@ -64,7 +64,7 @@ std::string temp_directory_path(std::error_code &ec)
 {
   ec.clear();
 
-  auto result = getenv("TMPDIR");
+  auto* result = getenv("TMPDIR");
   if (result)
     return URIUtils::AppendSlash(result);
 
@@ -80,7 +80,7 @@ std::string create_temp_directory(std::error_code &ec)
   strncpy(buf, (path + "xbmctempXXXXXX").c_str(), sizeof(buf) - 1);
   buf[sizeof(buf) - 1] = '\0';
 
-  auto tmp = mkdtemp(buf);
+  auto* tmp = mkdtemp(buf);
   if (!tmp)
   {
     ec.assign(errno, std::system_category());

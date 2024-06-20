@@ -1107,7 +1107,7 @@ static wchar_t GetCollationWeight(const wchar_t& r)
   auto index = r >> 8;
   if (index > 255)
     return 0xFFFD;
-  auto plane = planemap[index];
+  const auto* plane = planemap[index];
   if (plane == nullptr)
     return r;
   return static_cast<wchar_t>(plane[r & 0xFF]);
@@ -1931,10 +1931,9 @@ bool StringUtils::Contains(std::string_view str,
 {
   if (isCaseInsensitive)
   {
-    auto itStr = std::search(str.begin(), str.end(), keyword.begin(), keyword.end(),
-                             [](unsigned char ch1, unsigned char ch2) {
-                               return std::toupper(ch1) == std::toupper(ch2);
-                             });
+    const auto* itStr = std::search(str.begin(), str.end(), keyword.begin(), keyword.end(),
+                                    [](unsigned char ch1, unsigned char ch2)
+                                    { return std::toupper(ch1) == std::toupper(ch2); });
     return (itStr != str.end());
   }
 

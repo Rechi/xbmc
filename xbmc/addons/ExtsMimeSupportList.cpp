@@ -99,7 +99,7 @@ CExtsMimeSupportList::SupportValues CExtsMimeSupportList::ScanAddonProperties(
     values.m_hasTracks = addonInfo->Type(type)->GetValue("@tracks").asBoolean();
   }
 
-  const auto support = addonInfo->Type(type)->GetElement("support");
+  const auto* const support = addonInfo->Type(type)->GetElement("support");
   if (support)
   {
     // Scan here about complete defined xml groups with description and maybe icon

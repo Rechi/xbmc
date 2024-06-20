@@ -27,11 +27,11 @@ bool ISettingControl::Deserialize(const TiXmlNode *node, bool update /* = false 
   if (node == nullptr)
     return false;
 
-  auto elem = node->ToElement();
+  const auto* elem = node->ToElement();
   if (elem == nullptr)
     return false;
 
-  auto strTmp = elem->Attribute(SETTING_XML_ATTR_FORMAT);
+  const auto* strTmp = elem->Attribute(SETTING_XML_ATTR_FORMAT);
   std::string format;
   if (strTmp != nullptr)
     format = strTmp;

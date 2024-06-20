@@ -165,7 +165,7 @@ bool CGUIDialogPVRGroupManager::ActionButtonNewGroup(const CGUIMessage& message)
       if (!strGroupName.empty())
       {
         // add the group if it doesn't already exist
-        auto groups = CServiceBroker::GetPVRManager().ChannelGroups()->Get(m_bIsRadio);
+        auto* groups = CServiceBroker::GetPVRManager().ChannelGroups()->Get(m_bIsRadio);
         const auto group = groups->AddGroup(strGroupName);
         if (group)
         {
@@ -631,7 +631,7 @@ void CGUIDialogPVRGroupManager::Update()
       m_groupMembers->Add(std::make_shared<CFileItem>(groupMember));
     }
 
-    const auto groups = CServiceBroker::GetPVRManager().ChannelGroups()->Get(m_bIsRadio);
+    auto* const groups = CServiceBroker::GetPVRManager().ChannelGroups()->Get(m_bIsRadio);
     const auto availableMembers = groups->GetMembersAvailableForGroup(m_selectedGroup);
 
     for (const auto& groupMember : availableMembers)

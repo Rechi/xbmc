@@ -22,12 +22,12 @@ void addISetting(const TiXmlNode* node, const T& item, std::vector<T>& items, bo
 {
   if (node != nullptr)
   {
-    auto element = node->ToElement();
+    const auto* element = node->ToElement();
     if (element != nullptr)
     {
       // check if there is a "before" or "after" attribute to place the setting at a specific position
       int position = -1; // -1 => end, 0 => before, 1 => after
-      auto positionId = element->Attribute(SETTING_XML_ATTR_BEFORE);
+      const auto* positionId = element->Attribute(SETTING_XML_ATTR_BEFORE);
       if (positionId != nullptr && strlen(positionId) > 0)
         position = 0;
       else if ((positionId = element->Attribute(SETTING_XML_ATTR_AFTER)) != nullptr && strlen(positionId) > 0)
@@ -73,10 +73,10 @@ bool CSettingGroup::Deserialize(const TiXmlNode *node, bool update /* = false */
   if (!ISetting::Deserialize(node, update))
     return false;
 
-  auto controlElement = node->FirstChildElement(SETTING_XML_ELM_CONTROL);
+  const auto* controlElement = node->FirstChildElement(SETTING_XML_ELM_CONTROL);
   if (controlElement != nullptr)
   {
-    auto controlType = controlElement->Attribute(SETTING_XML_ATTR_TYPE);
+    const auto* controlType = controlElement->Attribute(SETTING_XML_ATTR_TYPE);
     if (controlType == nullptr || strlen(controlType) <= 0)
     {
       s_logger->error("unable to read control type");
@@ -97,7 +97,7 @@ bool CSettingGroup::Deserialize(const TiXmlNode *node, bool update /* = false */
     }
   }
 
-  auto settingElement = node->FirstChildElement(SETTING_XML_ELM_SETTING);
+  const auto* settingElement = node->FirstChildElement(SETTING_XML_ELM_SETTING);
   while (settingElement != nullptr)
   {
     std::string settingId;
@@ -117,7 +117,7 @@ bool CSettingGroup::Deserialize(const TiXmlNode *node, bool update /* = false */
       update = (setting != nullptr);
       if (!update)
       {
-        auto settingType = settingElement->Attribute(SETTING_XML_ATTR_TYPE);
+        const auto* settingType = settingElement->Attribute(SETTING_XML_ATTR_TYPE);
         if (settingType == nullptr || strlen(settingType) <= 0)
         {
           s_logger->error("unable to read setting type of \"{}\"", settingId);
@@ -219,11 +219,11 @@ bool CSettingCategory::Deserialize(const TiXmlNode *node, bool update /* = false
   if (!ISetting::Deserialize(node, update))
     return false;
 
-  auto accessNode = node->FirstChild(SETTING_XML_ELM_ACCESS);
+  const auto* accessNode = node->FirstChild(SETTING_XML_ELM_ACCESS);
   if (accessNode != nullptr && !m_accessCondition.Deserialize(accessNode))
     return false;
 
-  auto groupNode = node->FirstChild(SETTING_XML_ELM_GROUP);
+  const auto* groupNode = node->FirstChild(SETTING_XML_ELM_GROUP);
   while (groupNode != nullptr)
   {
     std::string groupId;
@@ -307,7 +307,7 @@ bool CSettingSection::Deserialize(const TiXmlNode *node, bool update /* = false 
   if (!ISetting::Deserialize(node, update))
     return false;
 
-  auto categoryNode = node->FirstChild(SETTING_XML_ELM_CATEGORY);
+  const auto* categoryNode = node->FirstChild(SETTING_XML_ELM_CATEGORY);
   while (categoryNode != nullptr)
   {
     std::string categoryId;

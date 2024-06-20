@@ -49,21 +49,21 @@ TEST(TestMediaSourceSettings, SaveString)
   EXPECT_TRUE(ms.Save(xmlfile));
   ms.Clear();
   EXPECT_TRUE(ms.Load(xmlfile));
-  auto progsources = ms.GetSources("programs");
-  auto progsources2 = ms.GetSources("myprograms");
+  auto* progsources = ms.GetSources("programs");
+  auto* progsources2 = ms.GetSources("myprograms");
   EXPECT_TRUE(progsources == progsources2);
   EXPECT_EQ(progsources->size(), refprograms);
-  auto filessources = ms.GetSources("files");
+  auto* filessources = ms.GetSources("files");
   EXPECT_EQ(filessources->size(), reffiles);
-  auto musicsources = ms.GetSources("music");
+  auto* musicsources = ms.GetSources("music");
   EXPECT_EQ(musicsources->size(), refmusic);
-  auto videosources = ms.GetSources("video");
-  auto videosources2 = ms.GetSources("videos");
+  auto* videosources = ms.GetSources("video");
+  auto* videosources2 = ms.GetSources("videos");
   EXPECT_TRUE(videosources == videosources2);
   EXPECT_EQ(videosources->size(), refvideo);
-  auto picturessources = ms.GetSources("pictures");
+  auto* picturessources = ms.GetSources("pictures");
   EXPECT_EQ(picturessources->size(), refpictures);
-  auto gamessources = ms.GetSources("games");
+  auto* gamessources = ms.GetSources("games");
   EXPECT_EQ(gamessources->size(), refgames);
 }
 

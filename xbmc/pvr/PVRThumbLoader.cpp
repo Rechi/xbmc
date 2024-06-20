@@ -70,7 +70,7 @@ void CPVRThumbLoader::ClearCachedImage(CFileItem& item)
 
 void CPVRThumbLoader::ClearCachedImages(const CFileItemList& items)
 {
-  for (auto& item : items)
+  for (const auto& item : items)
     ClearCachedImage(*item);
 }
 

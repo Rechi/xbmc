@@ -173,7 +173,7 @@ TEST(TestVideoFileItemClassify, IsDVDFile)
 
 TEST(TestVideoFileItemClassify, IsProtectedBlurayDisc)
 {
-  const auto temp_file = CXBMCTestUtils::Instance().CreateTempFile("bluraytest");
+  auto* const temp_file = CXBMCTestUtils::Instance().CreateTempFile("bluraytest");
   const std::string dir = CXBMCTestUtils::Instance().TempFileDirectory(temp_file);
   CFileUtils::DeleteItem(URIUtils::AddFileToFolder(dir, "AACS", "Unit_Key_RO.inf"));
   EXPECT_FALSE(VIDEO::IsProtectedBlurayDisc(CFileItem(dir, true)));

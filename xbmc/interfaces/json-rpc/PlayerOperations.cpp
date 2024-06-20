@@ -1002,7 +1002,7 @@ JSONRPC_STATUS CPlayerOperations::Open(const std::string &method, ITransportLaye
                 CUtil::ConvertSecsToMilliSecs(ParseTimeInSeconds(optionResume)));
         }
 
-        auto l = new CFileItemList(); //don't delete
+        auto* l = new CFileItemList(); //don't delete
         l->Copy(list);
         CServiceBroker::GetAppMessenger()->PostMsg(TMSG_MEDIA_PLAY, -1, -1, static_cast<void*>(l),
                                                    playername);
