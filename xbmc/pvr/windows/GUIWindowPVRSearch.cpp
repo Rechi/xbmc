@@ -87,7 +87,7 @@ void AsyncSearchAction::Run()
   }
 
   if (m_filter->ShouldRemoveDuplicates())
-    m_filter->RemoveDuplicates(results);
+    PVR::CPVREpgSearchFilter::RemoveDuplicates(results);
 
   m_filter->SetLastExecutedDateTime(CDateTime::GetUTCDateTime());
 

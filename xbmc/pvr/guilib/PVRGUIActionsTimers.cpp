@@ -879,7 +879,7 @@ void AddEventLogEntry(const std::shared_ptr<const CPVRTimerInfoTag>& timer, int 
   }
   else
   {
-    name = g_sysinfo.GetAppName();
+    name = CSysInfo::GetAppName();
     icon = "special://xbmc/media/icon256x256.png";
   }
 

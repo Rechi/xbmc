@@ -969,7 +969,7 @@ void CFileItemList::StackFiles()
         else
         {
           CStackDirectory dir;
-          stackPath = dir.ConstructStackPath(*this, stack);
+          stackPath = XFILE::CStackDirectory::ConstructStackPath(*this, stack);
         }
         item1->SetPath(stackPath);
         // clean up list

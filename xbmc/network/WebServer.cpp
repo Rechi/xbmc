@@ -1152,7 +1152,7 @@ bool CWebServer::LoadCert(std::string& skey, std::string& scert)
   const char* keyFile = "special://userdata/server.key";
   const char* certFile = "special://userdata/server.pem";
 
-  if (!file.Exists(keyFile) || !file.Exists(certFile))
+  if (!XFILE::CFile::Exists(keyFile) || !XFILE::CFile::Exists(certFile))
     return false;
 
   if (file.LoadFile(keyFile, buf) > 0)

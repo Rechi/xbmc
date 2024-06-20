@@ -2316,9 +2316,9 @@ std::string CFileItem::GetLocalFanart() const
     URIUtils::GetParentPath(m_strPath,strPath);
     CStackDirectory dir;
     std::string strPath2;
-    strPath2 = dir.GetStackedTitlePath(strFile);
+    strPath2 = XFILE::CStackDirectory::GetStackedTitlePath(strFile);
     strFile = URIUtils::AddFileToFolder(strPath, URIUtils::GetFileName(strPath2));
-    CFileItem item(dir.GetFirstStackedFile(m_strPath),false);
+    CFileItem item(XFILE::CStackDirectory::GetFirstStackedFile(m_strPath), false);
     std::string strTBNFile(URIUtils::ReplaceExtension(item.GetTBNFile(), "-fanart"));
     strFile2 = URIUtils::AddFileToFolder(strPath, URIUtils::GetFileName(strTBNFile));
   }
@@ -2419,7 +2419,8 @@ bool CFileItem::LoadMusicTag()
   // load tag from file
   CLog::Log(LOGDEBUG, "{}: loading tag information for file: {}", __FUNCTION__, m_strPath);
   CMusicInfoTagLoaderFactory factory;
-  std::unique_ptr<IMusicInfoTagLoader> pLoader (factory.CreateLoader(*this));
+  std::unique_ptr<IMusicInfoTagLoader> pLoader(
+      MUSIC_INFO::CMusicInfoTagLoaderFactory::CreateLoader(*this));
   if (pLoader)
   {
     if (pLoader->Load(m_strPath, *GetMusicInfoTag()))
@@ -2722,9 +2723,9 @@ std::string CFileItem::FindTrailer() const
     URIUtils::GetParentPath(m_strPath,strPath);
     CStackDirectory dir;
     std::string strPath2;
-    strPath2 = dir.GetStackedTitlePath(strFile);
+    strPath2 = XFILE::CStackDirectory::GetStackedTitlePath(strFile);
     strFile = URIUtils::AddFileToFolder(strPath,URIUtils::GetFileName(strPath2));
-    CFileItem item(dir.GetFirstStackedFile(m_strPath),false);
+    CFileItem item(XFILE::CStackDirectory::GetFirstStackedFile(m_strPath), false);
     std::string strTBNFile(URIUtils::ReplaceExtension(item.GetTBNFile(), "-trailer"));
     strFile2 = URIUtils::AddFileToFolder(strPath,URIUtils::GetFileName(strTBNFile));
   }
@@ -2809,7 +2810,7 @@ VideoDbContentType CFileItem::GetVideoContentType() const
 
   CVideoDatabaseDirectory dir;
   VIDEODATABASEDIRECTORY::CQueryParams params;
-  dir.GetQueryParams(m_strPath, params);
+  XFILE::CVideoDatabaseDirectory::GetQueryParams(m_strPath, params);
   if (params.GetSetId() != -1 && params.GetMovieId() == -1) // movie set
     return VideoDbContentType::MOVIE_SETS;
 

@@ -54,7 +54,7 @@ bool CDNSNameCache::Lookup(const std::string& strHostName, std::string& strIpAdd
   }
 
   // check if there's a custom entry or if it's already cached
-  if (g_DNSCache.GetCached(strHostName, strIpAddress))
+  if (CDNSNameCache::GetCached(strHostName, strIpAddress))
     return true;
 
   // perform dns lookup
@@ -69,7 +69,7 @@ bool CDNSNameCache::Lookup(const std::string& strHostName, std::string& strIpAdd
   {
     strIpAddress = CNetworkBase::GetIpStr(res->ai_addr);
     freeaddrinfo(res);
-    g_DNSCache.Add(strHostName, strIpAddress);
+    CDNSNameCache::Add(strHostName, strIpAddress);
     return true;
   }
 
