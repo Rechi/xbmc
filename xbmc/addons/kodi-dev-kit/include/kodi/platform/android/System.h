@@ -35,7 +35,7 @@ namespace platform
 ///
 /// #if defined(ANDROID)
 /// kodi::platform::CInterfaceAndroidSystem system;
-/// if (system.GetSDKVersion() >= 23)
+/// if (system.GetSDKVersion() >= 25)
 /// {
 ///   ...
 /// }
