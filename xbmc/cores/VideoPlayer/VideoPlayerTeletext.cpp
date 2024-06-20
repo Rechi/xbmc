@@ -67,7 +67,7 @@ void CDVDTeletextTools::Hex2Str(char *s, unsigned int n)
   } while (n);
 }
 
-signed int CDVDTeletextTools::deh24(unsigned char *p)
+signed int CDVDTeletextTools::deh24(const unsigned char* p)
 {
   int e = hamm24par[0][p[0]]
     ^ hamm24par[1][p[1]]

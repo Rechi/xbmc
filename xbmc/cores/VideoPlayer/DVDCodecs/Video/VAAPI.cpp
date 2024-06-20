@@ -869,7 +869,7 @@ int CDecoder::FFGetBuffer(AVCodecContext *avctx, AVFrame *pic, int flags)
   return 0;
 }
 
-void CDecoder::FFReleaseBuffer(uint8_t *data)
+void CDecoder::FFReleaseBuffer(const uint8_t* data)
 {
   {
     VASurfaceID surf;
