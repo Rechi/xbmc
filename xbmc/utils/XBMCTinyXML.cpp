@@ -21,7 +21,6 @@
 #define BUFFER_SIZE 4096
 
 CXBMCTinyXML::CXBMCTinyXML()
-: TiXmlDocument()
 {
 }
 

@@ -117,8 +117,6 @@ uint64_t CXBTFFrame::GetHeaderSize() const
 }
 
 CXBTFFile::CXBTFFile()
-  : m_path(),
-    m_frames()
 { }
 
 const std::string& CXBTFFile::GetPath() const

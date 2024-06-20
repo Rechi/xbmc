@@ -44,7 +44,7 @@
 using namespace KODI;
 using namespace XFILE;
 
-CVideoThumbLoader::CVideoThumbLoader() : CThumbLoader()
+CVideoThumbLoader::CVideoThumbLoader()
 {
   m_videoDatabase = new CVideoDatabase();
 }

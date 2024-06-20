@@ -32,9 +32,9 @@ enum class Type
 struct StorageDevice
 {
   /*! Device name/label */
-  std::string label{};
+  std::string label;
   /*! Device mountpoint/path */
-  std::string path{};
+  std::string path;
   /*! The storage type (e.g. OPTICAL) */
   STORAGE::Type type{STORAGE::Type::UNKNOWN};
 };

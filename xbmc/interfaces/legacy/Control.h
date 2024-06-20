@@ -612,7 +612,7 @@ namespace XBMCAddon
       int iControlDown = 0;
       int iControlLeft = 0;
       int iControlRight = 0;
-      std::string m_label{};
+      std::string m_label;
       bool m_visible{true};
       CGUIControl* pGUIControl = nullptr;
 #endif

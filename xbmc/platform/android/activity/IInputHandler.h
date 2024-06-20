@@ -20,12 +20,7 @@ class IInputHandler
 , public CAndroidJoyStick
 {
 public:
-  IInputHandler()
-  : CAndroidKey()
-  , CAndroidMouse()
-  , CAndroidTouch()
-  , CAndroidJoyStick()
-  {}
+  IInputHandler() : CAndroidKey(), CAndroidJoyStick() {}
 
   void setDPI(uint32_t dpi) override { CAndroidTouch::setDPI(dpi); }
 };

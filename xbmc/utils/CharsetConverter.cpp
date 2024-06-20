@@ -108,53 +108,62 @@ private:
   unsigned int        m_targetSingleCharMaxLen;
 };
 
-CConverterType::CConverterType(const std::string& sourceCharset, const std::string& targetCharset, unsigned int targetSingleCharMaxLen /*= 1*/) : CCriticalSection(),
-  m_sourceSpecialCharset(NotSpecialCharset),
-  m_sourceCharset(sourceCharset),
-  m_targetSpecialCharset(NotSpecialCharset),
-  m_targetCharset(targetCharset),
-  m_iconv(NO_ICONV),
-  m_targetSingleCharMaxLen(targetSingleCharMaxLen)
+CConverterType::CConverterType(const std::string& sourceCharset,
+                               const std::string& targetCharset,
+                               unsigned int targetSingleCharMaxLen /*= 1*/)
+  : CCriticalSection(),
+    m_sourceSpecialCharset(NotSpecialCharset),
+    m_sourceCharset(sourceCharset),
+    m_targetSpecialCharset(NotSpecialCharset),
+    m_targetCharset(targetCharset),
+    m_iconv(NO_ICONV),
+    m_targetSingleCharMaxLen(targetSingleCharMaxLen)
 {
 }
 
-CConverterType::CConverterType(enum SpecialCharset sourceSpecialCharset, const std::string& targetCharset, unsigned int targetSingleCharMaxLen /*= 1*/) : CCriticalSection(),
-  m_sourceSpecialCharset(sourceSpecialCharset),
-  m_sourceCharset(),
-  m_targetSpecialCharset(NotSpecialCharset),
-  m_targetCharset(targetCharset),
-  m_iconv(NO_ICONV),
-  m_targetSingleCharMaxLen(targetSingleCharMaxLen)
+CConverterType::CConverterType(enum SpecialCharset sourceSpecialCharset,
+                               const std::string& targetCharset,
+                               unsigned int targetSingleCharMaxLen /*= 1*/)
+  : CCriticalSection(),
+    m_sourceSpecialCharset(sourceSpecialCharset),
+    m_targetSpecialCharset(NotSpecialCharset),
+    m_targetCharset(targetCharset),
+    m_iconv(NO_ICONV),
+    m_targetSingleCharMaxLen(targetSingleCharMaxLen)
 {
 }
 
-CConverterType::CConverterType(const std::string& sourceCharset, enum SpecialCharset targetSpecialCharset, unsigned int targetSingleCharMaxLen /*= 1*/) : CCriticalSection(),
-  m_sourceSpecialCharset(NotSpecialCharset),
-  m_sourceCharset(sourceCharset),
-  m_targetSpecialCharset(targetSpecialCharset),
-  m_targetCharset(),
-  m_iconv(NO_ICONV),
-  m_targetSingleCharMaxLen(targetSingleCharMaxLen)
+CConverterType::CConverterType(const std::string& sourceCharset,
+                               enum SpecialCharset targetSpecialCharset,
+                               unsigned int targetSingleCharMaxLen /*= 1*/)
+  : CCriticalSection(),
+    m_sourceSpecialCharset(NotSpecialCharset),
+    m_sourceCharset(sourceCharset),
+    m_targetSpecialCharset(targetSpecialCharset),
+    m_iconv(NO_ICONV),
+    m_targetSingleCharMaxLen(targetSingleCharMaxLen)
 {
 }
 
-CConverterType::CConverterType(enum SpecialCharset sourceSpecialCharset, enum SpecialCharset targetSpecialCharset, unsigned int targetSingleCharMaxLen /*= 1*/) : CCriticalSection(),
-  m_sourceSpecialCharset(sourceSpecialCharset),
-  m_sourceCharset(),
-  m_targetSpecialCharset(targetSpecialCharset),
-  m_targetCharset(),
-  m_iconv(NO_ICONV),
-  m_targetSingleCharMaxLen(targetSingleCharMaxLen)
+CConverterType::CConverterType(enum SpecialCharset sourceSpecialCharset,
+                               enum SpecialCharset targetSpecialCharset,
+                               unsigned int targetSingleCharMaxLen /*= 1*/)
+  : CCriticalSection(),
+    m_sourceSpecialCharset(sourceSpecialCharset),
+    m_targetSpecialCharset(targetSpecialCharset),
+    m_iconv(NO_ICONV),
+    m_targetSingleCharMaxLen(targetSingleCharMaxLen)
 {
 }
 
-CConverterType::CConverterType(const CConverterType& other) : CCriticalSection(),
-  m_sourceSpecialCharset(other.m_sourceSpecialCharset),
-  m_sourceCharset(other.m_sourceCharset),
-  m_targetSpecialCharset(other.m_targetSpecialCharset),
-  m_targetCharset(other.m_targetCharset),
-  m_iconv(NO_ICONV),
-  m_targetSingleCharMaxLen(other.m_targetSingleCharMaxLen)
+CConverterType::CConverterType(const CConverterType& other)
+  : CCriticalSection(),
+    m_sourceSpecialCharset(other.m_sourceSpecialCharset),
+    m_sourceCharset(other.m_sourceCharset),
+    m_targetSpecialCharset(other.m_targetSpecialCharset),
+    m_targetCharset(other.m_targetCharset),
+    m_iconv(NO_ICONV),
+    m_targetSingleCharMaxLen(other.m_targetSingleCharMaxLen)
 {
 }
 

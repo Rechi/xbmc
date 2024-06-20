@@ -97,8 +97,8 @@ struct TestUtilCleanStringData
   std::string expTitle;
   std::string expTitleYear;
   std::string expYear;
-  std::string expIdentifierType{};
-  std::string expIdentifier{};
+  std::string expIdentifierType;
+  std::string expIdentifier;
 };
 
 std::ostream& operator<<(std::ostream& os, const TestUtilCleanStringData& rhs)

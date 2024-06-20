@@ -31,7 +31,7 @@
 using namespace KODI::VIDEO;
 using namespace XFILE;
 
-CPictureThumbLoader::CPictureThumbLoader() : CThumbLoader()
+CPictureThumbLoader::CPictureThumbLoader()
 {
   m_regenerateThumbs = false;
 }

@@ -13,8 +13,7 @@
 #include "TextureCache.h"
 #include "utils/FileUtils.h"
 
-CThumbLoader::CThumbLoader() :
-  CBackgroundInfoLoader()
+CThumbLoader::CThumbLoader()
 {
   m_textureDatabase = new CTextureDatabase();
 }
