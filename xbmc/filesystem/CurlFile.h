@@ -49,8 +49,10 @@ namespace XFILE
       bool ReadString(char *szLine, int iLineLength) override { return m_state->ReadString(szLine, iLineLength); }
       ssize_t Read(void* lpBuf, size_t uiBufSize) override { return m_state->Read(lpBuf, uiBufSize); }
       ssize_t Write(const void* lpBuf, size_t uiBufSize) override;
-      const std::string GetProperty(XFILE::FileProperty type, const std::string &name = "") const override;
-      const std::vector<std::string> GetPropertyValues(XFILE::FileProperty type, const std::string &name = "") const override;
+      std::string GetProperty(XFILE::FileProperty type,
+                              const std::string& name = "") const override;
+      std::vector<std::string> GetPropertyValues(XFILE::FileProperty type,
+                                                 const std::string& name = "") const override;
       int IoControl(EIoControl request, void* param) override;
       double GetDownloadSpeed() override;
 

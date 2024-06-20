@@ -609,7 +609,7 @@ PVR_ERROR CPVRClients::UpdateTimerTypes(const std::vector<std::shared_ptr<CPVRCl
       failedClients);
 }
 
-const std::vector<std::shared_ptr<CPVRTimerType>> CPVRClients::GetTimerTypes() const
+std::vector<std::shared_ptr<CPVRTimerType>> CPVRClients::GetTimerTypes() const
 {
   std::vector<std::shared_ptr<CPVRTimerType>> types;
 

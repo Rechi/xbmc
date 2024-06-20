@@ -32,14 +32,14 @@ namespace PVR
      * @brief Return a list with all known timer types.
      * @return A list of timer types or an empty list if no types available.
      */
-    static const std::vector<std::shared_ptr<CPVRTimerType>> GetAllTypes();
+    static std::vector<std::shared_ptr<CPVRTimerType>> GetAllTypes();
 
     /*!
      * @brief Return the first available timer type from given client.
      * @param client the PVR client.
      * @return A timer type or NULL if none available.
      */
-    static const std::shared_ptr<CPVRTimerType> GetFirstAvailableType(
+    static std::shared_ptr<CPVRTimerType> GetFirstAvailableType(
         const std::shared_ptr<const CPVRClient>& client);
 
     /*!

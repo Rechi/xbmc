@@ -83,8 +83,8 @@ public:
   void ApplyModeChange(RESOLUTION res);
   void ApplyWindowResize(int newWidth, int newHeight);
   RESOLUTION GetVideoResolution() const;
-  const RESOLUTION_INFO GetResInfo() const;
-  const RESOLUTION_INFO GetResInfo(RESOLUTION res) const;
+  RESOLUTION_INFO GetResInfo() const;
+  RESOLUTION_INFO GetResInfo(RESOLUTION res) const;
   void SetResInfo(RESOLUTION res, const RESOLUTION_INFO& info);
 
   void Flip(bool rendered, bool videoLayer);
@@ -97,7 +97,7 @@ public:
   void SetScissors(const CRect &rect);
   void ResetScissors();
   const CRect &GetScissors() const;
-  const CRect GetViewWindow() const;
+  CRect GetViewWindow() const;
   void SetViewWindow(float left, float top, float right, float bottom);
   bool IsCalibrating() const;
   void SetCalibrating(bool bOnOff);

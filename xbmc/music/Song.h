@@ -65,50 +65,50 @@ public:
   /*! \brief Get artist names from the vector of artistcredits objects
   \return artist names as a vector of strings
   */
-  const std::vector<std::string> GetArtist() const;
+  std::vector<std::string> GetArtist() const;
 
   /*! \brief Get artist sort name string
   \return artist sort name as a single string
   */
-  const std::string GetArtistSort() const;
+  std::string GetArtistSort() const;
 
   /*! \brief Get artist MusicBrainz IDs from the vector of artistcredits objects
   \return artist MusicBrainz IDs as a vector of strings
   */
-  const std::vector<std::string> GetMusicBrainzArtistID() const;
+  std::vector<std::string> GetMusicBrainzArtistID() const;
 
   /*! \brief Get artist names from the artist description string (if it exists)
   or concatenated from the vector of artistcredits objects
   \return artist names as a single string
   */
-  const std::string GetArtistString() const;
+  std::string GetArtistString() const;
 
   /*! \brief Get song artist IDs (for json rpc) from the vector of artistcredits objects
   \return album artist IDs as a vector of integers
   */
-  const std::vector<int> GetArtistIDArray() const;
+  std::vector<int> GetArtistIDArray() const;
 
   /*! \brief Get album artist names associated with song from tag data
    Note for initial album processing only, normalised album artist data belongs to album
    and is stored in album artist credits
   \return album artist names as a vector of strings
   */
-  const std::vector<std::string> GetAlbumArtist() const { return m_albumArtist; }
+  std::vector<std::string> GetAlbumArtist() const { return m_albumArtist; }
 
   /*! \brief Get album artist sort name string
   \return album artist sort name as a single string
   */
-  const std::string GetAlbumArtistSort() const { return m_strAlbumArtistSort; }
+  std::string GetAlbumArtistSort() const { return m_strAlbumArtistSort; }
 
   /*! \brief Get disc subtitle string where one exists
   \return disc subtitle as a single string
   */
-  const std::string GetDiscSubtitle() const;
+  std::string GetDiscSubtitle() const;
 
   /*! \brief Get composer sort name string
   \return composer sort name as a single string
   */
-  const std::string GetComposerSort() const { return m_strComposerSort; }
+  std::string GetComposerSort() const { return m_strComposerSort; }
 
   /*! \brief Get the full list of artist names and the role each played for those
     that contributed to the recording. Given in music file tags other than ARTIST

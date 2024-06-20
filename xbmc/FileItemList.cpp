@@ -54,7 +54,7 @@ CFileItemPtr CFileItemList::operator[](int iItem)
   return Get(iItem);
 }
 
-const CFileItemPtr CFileItemList::operator[](int iItem) const
+CFileItemPtr CFileItemList::operator[](int iItem) const
 {
   return Get(iItem);
 }
@@ -64,7 +64,7 @@ CFileItemPtr CFileItemList::operator[](const std::string& strPath)
   return Get(strPath);
 }
 
-const CFileItemPtr CFileItemList::operator[](const std::string& strPath) const
+CFileItemPtr CFileItemList::operator[](const std::string& strPath) const
 {
   return Get(strPath);
 }

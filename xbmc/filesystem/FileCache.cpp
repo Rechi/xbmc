@@ -604,7 +604,7 @@ void CFileCache::StopThread(bool bWait /*= true*/)
   CThread::StopThread(bWait);
 }
 
-const std::string CFileCache::GetProperty(XFILE::FileProperty type, const std::string &name) const
+std::string CFileCache::GetProperty(XFILE::FileProperty type, const std::string& name) const
 {
   if (!m_source.GetImplementation())
     return IFile::GetProperty(type, name);

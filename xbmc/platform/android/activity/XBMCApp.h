@@ -197,7 +197,7 @@ public:
   // input device methods
   void RegisterInputDeviceCallbacks(IInputDeviceCallbacks* handler);
   void UnregisterInputDeviceCallbacks();
-  static const CJNIViewInputDevice GetInputDevice(int deviceId);
+  static CJNIViewInputDevice GetInputDevice(int deviceId);
   static std::vector<int> GetInputDeviceIds();
 
   void RegisterInputDeviceEventHandler(IInputDeviceEventHandler* handler);

@@ -63,7 +63,7 @@ public:
   virtual ~CPVRJob() = default;
 
   virtual bool DoWork() = 0;
-  virtual const std::string GetType() const = 0;
+  virtual std::string GetType() const = 0;
 
 protected:
 };
@@ -81,7 +81,7 @@ public:
     return true;
   }
 
-  const std::string GetType() const override { return m_type; }
+  std::string GetType() const override { return m_type; }
 
 private:
   std::string m_type;

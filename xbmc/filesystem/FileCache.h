@@ -50,9 +50,10 @@ namespace XFILE
 
     IFile *GetFileImp();
 
-    const std::string GetProperty(XFILE::FileProperty type, const std::string &name = "") const override;
+    std::string GetProperty(XFILE::FileProperty type, const std::string& name = "") const override;
 
-    const std::vector<std::string> GetPropertyValues(XFILE::FileProperty type, const std::string& name = "") const override
+    std::vector<std::string> GetPropertyValues(XFILE::FileProperty type,
+                                               const std::string& name = "") const override
     {
       return std::vector<std::string>();
     }

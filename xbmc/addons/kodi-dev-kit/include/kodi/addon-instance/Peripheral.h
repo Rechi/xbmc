@@ -558,7 +558,7 @@ public:
   ///
   /// @return The add-on installation path
   ///
-  const std::string AddonPath() const { return m_instanceData->props->addon_path; }
+  std::string AddonPath() const { return m_instanceData->props->addon_path; }
   //----------------------------------------------------------------------------
 
   //============================================================================
@@ -570,7 +570,7 @@ public:
   ///
   /// @return Path to the user profile
   ///
-  const std::string UserPath() const { return m_instanceData->props->user_path; }
+  std::string UserPath() const { return m_instanceData->props->user_path; }
   //----------------------------------------------------------------------------
 
   //============================================================================

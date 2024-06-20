@@ -34,9 +34,9 @@ public:
   ~CFileItemList() override;
   void Archive(CArchive& ar) override;
   CFileItemPtr operator[](int iItem);
-  const CFileItemPtr operator[](int iItem) const;
+  CFileItemPtr operator[](int iItem) const;
   CFileItemPtr operator[](const std::string& strPath);
-  const CFileItemPtr operator[](const std::string& strPath) const;
+  CFileItemPtr operator[](const std::string& strPath) const;
   void Clear();
   void ClearItems();
   void Add(CFileItemPtr item);

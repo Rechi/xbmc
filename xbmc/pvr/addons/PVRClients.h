@@ -223,7 +223,7 @@ struct SBackend
      * @brief Get all timer types supported by the backends, without updating them from the backends.
      * @return the types.
      */
-    const std::vector<std::shared_ptr<CPVRTimerType>> GetTimerTypes() const;
+    std::vector<std::shared_ptr<CPVRTimerType>> GetTimerTypes() const;
 
     //@}
 

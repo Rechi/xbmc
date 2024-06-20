@@ -198,12 +198,12 @@ bool CPVRProvider::SetIconPath(const std::string& strIconPath)
 namespace
 {
 
-const std::vector<std::string> Tokenize(const std::string& str)
+std::vector<std::string> Tokenize(const std::string& str)
 {
   return StringUtils::Split(str, PROVIDER_STRING_TOKEN_SEPARATOR);
 }
 
-const std::string DeTokenize(const std::vector<std::string>& tokens)
+std::string DeTokenize(const std::vector<std::string>& tokens)
 {
   return StringUtils::Join(tokens, PROVIDER_STRING_TOKEN_SEPARATOR);
 }

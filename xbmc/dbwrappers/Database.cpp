@@ -198,7 +198,7 @@ int CDatabase::DatasetLayout::GetRecNo(int fieldno)
   return -1;
 }
 
-const std::string CDatabase::DatasetLayout::GetFields()
+std::string CDatabase::DatasetLayout::GetFields()
 {
   std::string strSQL;
   for (const auto& field : m_fields)

@@ -81,7 +81,7 @@ public:
    * provided with respect to the actual timeline, i.e. considering EDL cuts
    * are not part of the media item.
   */
-  const std::vector<EDL::Edit> GetEditList() const;
+  std::vector<EDL::Edit> GetEditList() const;
 
   /*!
    * @brief Get the list of EDL cut markers.
@@ -90,7 +90,7 @@ public:
    * has multiple cuts, the positions of subsquent cuts are automatically corrected by
    * substracting the previous cut durations.
   */
-  const std::vector<int64_t> GetCutMarkers() const;
+  std::vector<int64_t> GetCutMarkers() const;
 
   /*!
    * @brief Get the list of EDL scene markers.
@@ -99,7 +99,7 @@ public:
    * has multiple cuts, the positions of scene markers are automatically corrected by
    * substracting the surpassed cut durations until the scene marker point.
   */
-  const std::vector<int64_t> GetSceneMarkers() const;
+  std::vector<int64_t> GetSceneMarkers() const;
 
   /*!
    * @brief Check if for the provided seek time is contained within an EDL

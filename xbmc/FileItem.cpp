@@ -1816,7 +1816,7 @@ void CFileItem::SetURL(const CURL& url)
   m_strPath = url.Get();
 }
 
-const CURL CFileItem::GetURL() const
+CURL CFileItem::GetURL() const
 {
   CURL url(m_strPath);
   return url;
@@ -1837,7 +1837,7 @@ void CFileItem::SetDynURL(const CURL& url)
   m_strDynPath = url.Get();
 }
 
-const CURL CFileItem::GetDynURL() const
+CURL CFileItem::GetDynURL() const
 {
   if (!m_strDynPath.empty())
   {
@@ -2706,7 +2706,7 @@ bool CFileItem::HasPVRChannelInfoTag() const
   return m_pvrChannelGroupMemberInfoTag && m_pvrChannelGroupMemberInfoTag->Channel() != nullptr;
 }
 
-const std::shared_ptr<PVR::CPVRChannel> CFileItem::GetPVRChannelInfoTag() const
+std::shared_ptr<PVR::CPVRChannel> CFileItem::GetPVRChannelInfoTag() const
 {
   return m_pvrChannelGroupMemberInfoTag ? m_pvrChannelGroupMemberInfoTag->Channel()
                                         : std::shared_ptr<CPVRChannel>();
