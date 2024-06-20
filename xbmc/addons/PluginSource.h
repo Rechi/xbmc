@@ -28,7 +28,7 @@ public:
   bool HasType(AddonType type) const override;
   bool Provides(const Content& content) const
   {
-    return content == UNKNOWN ? false : m_providedContent.count(content) > 0;
+    return content == UNKNOWN ? false : m_providedContent.contains(content);
   }
 
   bool ProvidesSeveral() const

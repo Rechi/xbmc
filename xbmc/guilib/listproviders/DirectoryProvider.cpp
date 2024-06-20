@@ -163,7 +163,7 @@ public:
   template<class CThumbLoaderClass>
   void initThumbLoader(InfoTagType type)
   {
-    if (!m_thumbloaders.count(type))
+    if (!m_thumbloaders.contains(type))
     {
       std::shared_ptr<CThumbLoader> thumbLoader = std::make_shared<CThumbLoaderClass>();
       thumbLoader->OnLoaderStart();
