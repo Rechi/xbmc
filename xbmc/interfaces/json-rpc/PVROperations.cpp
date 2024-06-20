@@ -65,7 +65,8 @@ JSONRPC_STATUS CPVROperations::GetChannelGroups(const std::string &method, ITran
   if (!channelGroupContainer)
     return FailedToExecute;
 
-  CPVRChannelGroups *channelGroups = channelGroupContainer->Get(parameterObject["channeltype"].asString().compare("radio") == 0);
+  CPVRChannelGroups* channelGroups =
+      channelGroupContainer->Get(parameterObject["channeltype"].asString() == "radio");
   if (channelGroups == NULL)
     return FailedToExecute;
 
