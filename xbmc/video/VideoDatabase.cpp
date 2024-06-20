@@ -3011,7 +3011,7 @@ int CVideoDatabase::SetDetailsForSeason(const CVideoInfoTag& details, const std:
     else
       sql += ", userrating = NULL";
     sql += PrepareSQL(" WHERE idSeason=%i", idSeason);
-    m_pDS->exec(sql.c_str());
+    m_pDS->exec(sql);
     CommitTransaction();
 
     return idSeason;
@@ -9430,8 +9430,7 @@ bool CVideoDatabase::GetMusicVideosByWhere(const std::string &baseDir, const Fil
     {
       idArtist = option->second.asInteger();
       strArtist = GetSingleValue(
-                      PrepareSQL("SELECT name FROM actor where actor_id = '%i'", idArtist), m_pDS)
-                      .c_str();
+          PrepareSQL("SELECT name FROM actor where actor_id = '%i'", idArtist), m_pDS);
     }
     Filter extFilter = filter;
     SortDescription sorting = sortDescription;
