@@ -1960,7 +1960,8 @@ bool CFileItem::LoadTracksFromCueDocument(CFileItemList& scannedItems)
       { // must be the last song
         song.iDuration = CUtil::ConvertMilliSecsToSecsIntRounded(CUtil::ConvertSecsToMilliSecs(tag.GetDuration()) - song.iStartOffset);
       }
-      if ( tag.Loaded() && oneFilePerTrack && ! ( tag.GetAlbum().empty() || tag.GetArtist().empty() || tag.GetTitle().empty() ) )
+      if (tag.Loaded() && oneFilePerTrack && !tag.GetAlbum().empty() && !tag.GetArtist().empty() &&
+          !tag.GetTitle().empty())
       {
         // If there are multiple files in a cue file, the tags from the files should be preferred if they exist.
         scannedItems.Add(std::make_shared<CFileItem>(song, tag));

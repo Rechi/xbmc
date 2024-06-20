@@ -126,8 +126,8 @@ public:
 
     if (onlyforced)
     {
-      return !((ss.flags & StreamFlags::FLAG_FORCED) &&
-               g_LangCodeExpander.CompareISO639Codes(ss.language, audiolang));
+      return !(ss.flags & StreamFlags::FLAG_FORCED) ||
+             !g_LangCodeExpander.CompareISO639Codes(ss.language, audiolang);
     }
 
     if(STREAM_SOURCE_MASK(ss.source) == STREAM_SOURCE_DEMUX_SUB || STREAM_SOURCE_MASK(ss.source) == STREAM_SOURCE_TEXT)
