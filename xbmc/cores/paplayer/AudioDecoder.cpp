@@ -55,8 +55,7 @@ void CAudioDecoder::Destroy()
 
   m_pcmBuffer.Destroy();
 
-  if ( m_codec )
-    delete m_codec;
+  delete m_codec;
   m_codec = NULL;
 
   m_canPlay = false;

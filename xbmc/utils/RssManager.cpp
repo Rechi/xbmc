@@ -86,8 +86,7 @@ void CRssManager::Stop()
   m_bActive = false;
   for (unsigned int i = 0; i < m_readers.size(); i++)
   {
-    if (m_readers[i].reader)
-      delete m_readers[i].reader;
+    delete m_readers[i].reader;
   }
   m_readers.clear();
 }

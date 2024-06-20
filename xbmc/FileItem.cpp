@@ -1542,8 +1542,7 @@ void CFileItem::UpdateInfo(const CFileItem &item, bool replaceLabels /*=true*/)
     }
     else
     {
-      if (m_videoInfoTag)
-        delete m_videoInfoTag;
+      delete m_videoInfoTag;
 
       m_videoInfoTag = new CVideoInfoTag;
     }
