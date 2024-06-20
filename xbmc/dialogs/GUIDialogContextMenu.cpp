@@ -439,7 +439,7 @@ bool CGUIDialogContextMenu::OnContextButton(const std::string &type, const CFile
       if (!g_passwordManager.IsMasterLockUnlocked(true))
         return false;
 
-      std::string strNewPassword = "";
+      std::string strNewPassword;
       if (!CGUIDialogLockSettings::ShowAndGetLock(share->m_iLockMode,strNewPassword))
         return false;
       // password entry and re-entry succeeded, write out the lock data

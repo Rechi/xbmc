@@ -61,9 +61,7 @@ typedef struct
 } HttpFileDownloadContext;
 
 CWebServer::CWebServer()
-  : m_authenticationUsername("kodi"),
-    m_authenticationPassword(""),
-    m_logger(CServiceBroker::GetLogging().GetLogger("CWebServer"))
+  : m_authenticationUsername("kodi"), m_logger(CServiceBroker::GetLogging().GetLogger("CWebServer"))
 {
 #if defined(TARGET_DARWIN)
   void* stack_addr;

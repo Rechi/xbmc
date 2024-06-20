@@ -75,7 +75,7 @@ std::string Database::prepare(const char* format, ...)
 
 //************* Dataset implementation ***************
 
-Dataset::Dataset() : select_sql("")
+Dataset::Dataset()
 {
 
   db = NULL;
@@ -89,7 +89,7 @@ Dataset::Dataset() : select_sql("")
   edit_object = new Fields();
 }
 
-Dataset::Dataset(Database* newDb) : select_sql("")
+Dataset::Dataset(Database* newDb)
 {
 
   db = newDb;
