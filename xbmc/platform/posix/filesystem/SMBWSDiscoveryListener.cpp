@@ -291,7 +291,6 @@ void CWSDiscoveryListenerUDP::Process()
   AddCommand(WSD_ACT_BYE);
   DispatchCommand();
   Cleanup(false);
-  return;
 }
 
 void CWSDiscoveryListenerUDP::Cleanup(bool aborted)
@@ -489,7 +488,6 @@ void CWSDiscoveryListenerUDP::ParseBuffer(const std::string& buffer)
   }
 
   // Only duplicate items get this far, silently drop
-  return;
 }
 
 bool CWSDiscoveryListenerUDP::buildSoapMessage(const std::string& action,
