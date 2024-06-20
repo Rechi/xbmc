@@ -133,10 +133,8 @@ public:
     StringUtils::Trim(line);
     return !line.empty();
   }
-  bool ready() const override
-  {
-    return m_data.size() > 0;
-  }
+  bool ready() const override { return !m_data.empty(); }
+
 private:
   std::string m_data;
   size_t m_pos = 0;
@@ -189,7 +187,7 @@ void CCueDocument::GetSongs(VECSONGS &songs)
     aSong.iTrack = track.iTrackNumber;
     if (m_iDiscNumber > 0)
       aSong.iTrack |= (m_iDiscNumber << 16); // see CMusicInfoTag::GetDiscNumber()
-    if (track.strTitle.length() == 0) // No track information for this track!
+    if (track.strTitle.empty()) // No track information for this track!
       aSong.strTitle = StringUtils::Format("Track {:2d}", track.iTrackNumber);
     else
       aSong.strTitle = track.strTitle;

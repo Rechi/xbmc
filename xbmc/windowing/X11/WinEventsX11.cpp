@@ -448,7 +448,7 @@ bool CWinEventsX11::MessagePump()
             std::wstring keys;
             g_charsetConverter.utf8ToW(data, keys, false);
 
-            if (keys.length() == 0)
+            if (keys.empty())
             {
               break;
             }
@@ -459,7 +459,7 @@ bool CWinEventsX11::MessagePump()
               newEvent.key.keysym.unicode = keys[i];
               ret |= ProcessKey(newEvent);
             }
-            if (keys.length() > 0)
+            if (!keys.empty())
             {
               newEvent.key.keysym.scancode = xevent.xkey.keycode;
               XLookupString(&xevent.xkey, NULL, 0, &xkeysym, NULL);

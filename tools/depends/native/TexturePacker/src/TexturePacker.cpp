@@ -155,7 +155,7 @@ void TexturePacker::CreateSkeletonHeader(CXBTFWriter& xbtfWriter,
         if (dp->d_type == DT_DIR || stat_p.st_mode & S_IFDIR)
         {
           std::string tmpPath = relativePath;
-          if (tmpPath.size() > 0)
+          if (!tmpPath.empty())
           {
             tmpPath += "/";
           }
@@ -166,7 +166,7 @@ void TexturePacker::CreateSkeletonHeader(CXBTFWriter& xbtfWriter,
         else if (decoderManager.IsSupportedGraphicsFile(dp->d_name))
         {
           std::string fileName = "";
-          if (relativePath.size() > 0)
+          if (!relativePath.empty())
           {
             fileName += relativePath;
             fileName += "/";

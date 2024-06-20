@@ -363,7 +363,7 @@ void CGUIDialogAudioSettings::AudioStreamsOptionFiller(const SettingConstPtr& se
     if (!g_LangCodeExpander.Lookup(info.language, strLanguage))
       strLanguage = strUnknown;
 
-    if (info.name.length() == 0)
+    if (info.name.empty())
       info.name = strUnknown;
 
     strItem = StringUtils::Format(strFormat, strLanguage, info.name, info.channels);

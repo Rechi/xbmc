@@ -544,9 +544,9 @@ void CSelectionStreams::Update(const std::shared_ptr<CDVDInputStream>& input,
       {
         std::string type;
         type = static_cast<CDemuxStreamAudio*>(stream)->GetStreamType();
-        if(type.length() > 0)
+        if (!type.empty())
         {
-          if(s.name.length() > 0)
+          if (!s.name.empty())
             s.name += " - ";
           s.name += type;
         }
@@ -5262,10 +5262,10 @@ void CVideoPlayer::GetVideoStreamInfo(int streamId, VideoStreamInfo& info) const
   }
 
   const SelectionStream& s = m_content.m_selectionStreams.Get(STREAM_VIDEO, streamId);
-  if (s.language.length() > 0)
+  if (!s.language.empty())
     info.language = s.language;
 
-  if (s.name.length() > 0)
+  if (!s.name.empty())
     info.name = s.name;
 
   m_renderManager.GetVideoRect(info.SrcRect, info.DestRect, info.VideoRect);

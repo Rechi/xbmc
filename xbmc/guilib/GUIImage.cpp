@@ -127,7 +127,7 @@ void CGUIImage::Process(unsigned int currentTime, CDirtyRegionList &dirtyregions
       frameTime = (unsigned int)(1000 / CServiceBroker::GetWinSystem()->GetGfxContext().GetFPS());
     m_lastRenderTime = currentTime;
 
-    if (m_fadingTextures.size())  // have some fading images
+    if (!m_fadingTextures.empty()) // have some fading images
     { // anything other than the last old texture needs to be faded out as per usual
       for (std::vector<CFadingTexture *>::iterator i = m_fadingTextures.begin(); i != m_fadingTextures.end() - 1;)
       {

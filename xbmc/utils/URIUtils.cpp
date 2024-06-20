@@ -164,7 +164,7 @@ std::string URIUtils::ReplaceExtension(const std::string& strFile,
 
   std::string strChangedFile;
   std::string strExtension = GetExtension(strFile);
-  if ( strExtension.size() )
+  if (!strExtension.empty())
   {
     strChangedFile = strFile.substr(0, strFile.size() - strExtension.size()) ;
     strChangedFile += strNewExtension;
@@ -692,7 +692,7 @@ static bool addr_match(uint32_t addr, const char* target, const char* submask)
 
 bool URIUtils::IsHostOnLAN(const std::string& host, LanCheckMode lanCheckMode)
 {
-  if(host.length() == 0)
+  if (host.empty())
     return false;
 
   // assume a hostname without dot's
@@ -1368,7 +1368,7 @@ std::string URIUtils::AddFileToFolder(const std::string& strFolder,
     AddSlashAtEnd(strResult);
 
   // Remove any slash at the start of the file
-  if (strFile.size() && (strFile[0] == '/' || strFile[0] == '\\'))
+  if (!strFile.empty() && (strFile[0] == '/' || strFile[0] == '\\'))
     strResult += strFile.substr(1);
   else
     strResult += strFile;
@@ -1472,8 +1472,8 @@ std::string URIUtils::resolvePath(const std::string &path)
   // put together the path
   realPath += StringUtils::Join(realParts, delim);
   // re-add any / or \ at the end
-  if (path.at(path.size() - 1) == delim.at(0) &&
-      realPath.size() > 0 && realPath.at(realPath.size() - 1) != delim.at(0))
+  if (path.at(path.size() - 1) == delim.at(0) && !realPath.empty() &&
+      realPath.at(realPath.size() - 1) != delim.at(0))
     realPath += delim;
 
   return realPath;

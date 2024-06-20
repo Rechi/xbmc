@@ -380,7 +380,7 @@ void CPVRPlaybackState::StartPlayback(
       }
     }
 
-    if (props.size())
+    if (!props.empty())
     {
       const std::string url = props.GetStreamURL();
       if (!url.empty())
