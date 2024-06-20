@@ -38,7 +38,7 @@ namespace
 {
 // clang-format off
 
-  static const std::string sqlCreateTimersTable =
+  const std::string sqlCreateTimersTable =
     "CREATE TABLE timers ("
       "iClientIndex       integer primary key, "
       "iParentClientIndex integer, "
@@ -66,7 +66,7 @@ namespace
       "iRecordingGroup    integer"
   ")";
 
-  static const std::string sqlCreateProvidersTable =
+  const std::string sqlCreateProvidersTable =
     "CREATE TABLE providers ("
       "idProvider           integer primary key, "
       "iUniqueId            integer, "

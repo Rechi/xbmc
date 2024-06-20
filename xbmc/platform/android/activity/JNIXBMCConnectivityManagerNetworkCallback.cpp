@@ -18,7 +18,7 @@ using namespace jni;
 namespace
 {
 
-static std::string className =
+std::string className =
     std::string(CCompileInfo::GetClass()) + "/interfaces/XBMCConnectivityManagerNetworkCallback";
 
 } // namespace

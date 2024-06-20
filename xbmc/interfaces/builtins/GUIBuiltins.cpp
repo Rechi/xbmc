@@ -43,7 +43,7 @@ namespace
  *  \details params[0] = Action to execute.
  *           params[1] = Window to send action to (optional).
  */
-static int Action(const std::vector<std::string>& params)
+int Action(const std::vector<std::string>& params)
 {
   // try translating the action from our ActionTranslator
   unsigned int actionID;
@@ -65,8 +65,8 @@ static int Action(const std::vector<std::string>& params)
  *           Set the Replace template parameter to true to replace current
  *           window in history.
  */
-  template<bool Replace>
-static int ActivateWindow(const std::vector<std::string>& params2)
+template<bool Replace>
+int ActivateWindow(const std::vector<std::string>& params2)
 {
   std::vector<std::string> params(params2);
   // get the parameters
@@ -128,8 +128,8 @@ static int ActivateWindow(const std::vector<std::string>& params2)
  *           Set the Replace template parameter to true to replace current
  *           window in history.
  */
-  template<bool Replace>
-static int ActivateAndFocus(const std::vector<std::string>& params)
+template<bool Replace>
+int ActivateAndFocus(const std::vector<std::string>& params)
 {
   std::string strWindow = params[0];
 
@@ -173,7 +173,7 @@ static int ActivateAndFocus(const std::vector<std::string>& params)
  *           param[3] = "silent" to suppress notifications.
  *           param[3] = "loop" to loop the alarm.
  */
-static int AlarmClock(const std::vector<std::string>& params)
+int AlarmClock(const std::vector<std::string>& params)
 {
   // format is alarmclock(name,command[,time,true,false]);
   float seconds = 0;
@@ -222,7 +222,7 @@ static int AlarmClock(const std::vector<std::string>& params)
  *  \param params The parameters.
  *  \details params[0] = "true" to silently cancel alarm (optional).
  */
-static int CancelAlarm(const std::vector<std::string>& params)
+int CancelAlarm(const std::vector<std::string>& params)
 {
   bool silent = (params.size() > 1 &&
       (StringUtils::EqualsNoCase(params[1], "true") ||
@@ -237,7 +237,7 @@ static int CancelAlarm(const std::vector<std::string>& params)
  *  \details params[0] = The property to clear.
  *           params[1] = The window to clear property in (optional).
  */
-static int ClearProperty(const std::vector<std::string>& params)
+int ClearProperty(const std::vector<std::string>& params)
 {
   CGUIWindow *window = CServiceBroker::GetGUI()->GetWindowManager().GetWindow(params.size() > 1 ? CWindowTranslator::TranslateWindow(params[1]) : CServiceBroker::GetGUI()->GetWindowManager().GetActiveWindowOrDialog());
   if (window)
@@ -251,7 +251,7 @@ static int ClearProperty(const std::vector<std::string>& params)
  *  \details params[0] = "all" to close all dialogs, or dialog name.
  *           params[1] = "true" to force close (skip animations) (optional).
  */
-static int CloseDialog(const std::vector<std::string>& params)
+int CloseDialog(const std::vector<std::string>& params)
 {
   bool bForce = false;
   if (params.size() > 1 && StringUtils::EqualsNoCase(params[1], "true"))
@@ -278,7 +278,7 @@ static int CloseDialog(const std::vector<std::string>& params)
  *           params[2] = Display time in milliseconds (optional).
  *           params[3] = Notification icon (optional).
  */
-static int Notification(const std::vector<std::string>& params)
+int Notification(const std::vector<std::string>& params)
 {
   if (params.size() < 2)
     return -1;
@@ -295,7 +295,7 @@ static int Notification(const std::vector<std::string>& params)
 /*! \brief Refresh RSS feed.
  *  \param params (ignored)
  */
-static int RefreshRSS(const std::vector<std::string>& params)
+int RefreshRSS(const std::vector<std::string>& params)
 {
   CRssManager::GetInstance().Reload();
 
@@ -307,7 +307,7 @@ static int RefreshRSS(const std::vector<std::string>& params)
  *  \details params[0] = URL to save file to. Blank to use default.
  *           params[1] = "sync" to run synchronously (optional).
  */
-static int Screenshot(const std::vector<std::string>& params)
+int Screenshot(const std::vector<std::string>& params)
 {
   if (!params.empty())
   {
@@ -347,7 +347,7 @@ static int Screenshot(const std::vector<std::string>& params)
  *  \param params The parameters.
  *  \details params[0] = The language to use.
  */
-static int SetLanguage(const std::vector<std::string>& params)
+int SetLanguage(const std::vector<std::string>& params)
 {
   CServiceBroker::GetAppMessenger()->PostMsg(TMSG_SETLANGUAGE, -1, -1, nullptr, params[0]);
 
@@ -360,7 +360,7 @@ static int SetLanguage(const std::vector<std::string>& params)
  *           params[1] = The property value.
  *           params[2] = The window to set property in (optional).
  */
-static int SetProperty(const std::vector<std::string>& params)
+int SetProperty(const std::vector<std::string>& params)
 {
   CGUIWindow *window = CServiceBroker::GetGUI()->GetWindowManager().GetWindow(params.size() > 2 ? CWindowTranslator::TranslateWindow(params[2]) : CServiceBroker::GetGUI()->GetWindowManager().GetActiveWindowOrDialog());
   if (window)
@@ -373,7 +373,7 @@ static int SetProperty(const std::vector<std::string>& params)
  *  \param params The parameters.
  *  \details param[0] = Stereo mode identifier.
  */
-static int SetStereoMode(const std::vector<std::string>& params)
+int SetStereoMode(const std::vector<std::string>& params)
 {
   CAction action = CStereoscopicsManager::ConvertActionCommandToAction("SetStereoMode", params[0]);
   if (action.GetID() != ACTION_NONE)
@@ -391,7 +391,7 @@ static int SetStereoMode(const std::vector<std::string>& params)
 /*! \brief Toggle visualization of dirty regions.
  *  \param params Ignored.
  */
-static int ToggleDirty(const std::vector<std::string>&)
+int ToggleDirty(const std::vector<std::string>&)
 {
   CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->ToggleDirtyRegionVisualization();
 
