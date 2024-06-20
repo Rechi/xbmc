@@ -27,10 +27,6 @@ public class XBMCRecommendationBuilder
   private String mBackgroundUri;
   private PendingIntent mIntent;
 
-  // Constants from API >= 21
-  final String API_NOTIFICATION_EXTRA_BACKGROUND_IMAGE_URI = "android.backgroundImageUri";
-  final String API_NOTIFICATION_CATEGORY_RECOMMENDATION = "recommendation";
-
   public XBMCRecommendationBuilder()
   {
   }
@@ -98,7 +94,7 @@ public class XBMCRecommendationBuilder
     if (mBackgroundUri != null)
     {
       Log.d(TAG, "Background - " + mBackgroundUri);
-      extras.putString(API_NOTIFICATION_EXTRA_BACKGROUND_IMAGE_URI, mBackgroundUri);
+      extras.putString(Notification.EXTRA_BACKGROUND_IMAGE_URI, mBackgroundUri);
     }
 
     Notification notification = new Notification.BigPictureStyle(
@@ -109,7 +105,7 @@ public class XBMCRecommendationBuilder
                     .setLocalOnly(true)
                     .setOngoing(true)
                     .setColor(mContext.getResources().getColor(R.color.recommendation_color))
-                    .setCategory(API_NOTIFICATION_CATEGORY_RECOMMENDATION)
+                    .setCategory(Notification.CATEGORY_RECOMMENDATION)
                     .setLargeIcon(mBitmap)
                     .setSmallIcon(mSmallIcon)
                     .setContentIntent(mIntent)
