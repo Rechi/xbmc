@@ -30,7 +30,7 @@ class CTexture;
 class CImageLoader : public CJob
 {
 public:
-  CImageLoader(const std::string &path, const bool useCache);
+  CImageLoader(const std::string& path, bool useCache);
   ~CImageLoader() override;
 
   /*!

@@ -96,7 +96,7 @@ namespace OVERLAY {
     virtual ~CRenderer();
 
     // Implementation of Observer
-    void Notify(const Observable& obs, const ObservableMessage msg) override;
+    void Notify(const Observable& obs, ObservableMessage msg) override;
 
     void AddOverlay(std::shared_ptr<CDVDOverlay> o, double pts, int index);
     virtual void Render(int idx, float depth = 0.0f);
@@ -124,7 +124,7 @@ namespace OVERLAY {
      * \param value The subtitle position in pixels
      * \param save If true, the value will be saved to resolution info
      */
-    void SetSubtitleVerticalPosition(const int value, bool save);
+    void SetSubtitleVerticalPosition(int value, bool save);
 
   protected:
     /*!

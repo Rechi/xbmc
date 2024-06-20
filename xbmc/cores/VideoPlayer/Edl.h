@@ -23,7 +23,7 @@ public:
   // FIXME: remove const modifier for fFramesPerSecond as it makes no sense as it means nothing
   // for the reader of the interface, but limits the implementation
   // to not modify the parameter on stack
-  bool ReadEditDecisionLists(const CFileItem& fileItem, const float fFramesPerSecond);
+  bool ReadEditDecisionLists(const CFileItem& fileItem, float fFramesPerSecond);
   void Clear();
 
   /*!
@@ -147,12 +147,12 @@ public:
   // FIXME: remove const modifier for iClock as it makes no sense as it means nothing
   // for the reader of the interface, but limits the implementation
   // to not modify the parameter on stack
-  bool GetNextSceneMarker(bool bPlus, const int iClock, int *iSceneMarker);
+  bool GetNextSceneMarker(bool bPlus, int iClock, int* iSceneMarker);
 
   // FIXME: remove const modifier as it makes no sense as it means nothing
   // for the reader of the interface, but limits the implementation
   // to not modify the parameter on stack
-  static std::string MillisecondsToTimeString(const int iMilliseconds);
+  static std::string MillisecondsToTimeString(int iMilliseconds);
 
 private:
   // total cut time (edl cuts) in ms
@@ -173,11 +173,11 @@ private:
   // FIXME: remove const modifier for fFramesPerSecond as it makes no sense as it means nothing
   // for the reader of the interface, but limits the implementation
   // to not modify the parameter on stack
-  bool ReadEdl(const std::string& strMovie, const float fFramesPerSecond);
+  bool ReadEdl(const std::string& strMovie, float fFramesPerSecond);
   // FIXME: remove const modifier for fFramesPerSecond as it makes no sense as it means nothing
   // for the reader of the interface, but limits the implementation
   // to not modify the parameter on stack
-  bool ReadComskip(const std::string& strMovie, const float fFramesPerSecond);
+  bool ReadComskip(const std::string& strMovie, float fFramesPerSecond);
   // FIXME: remove const modifier for strMovie as it makes no sense as it means nothing
   // for the reader of the interface, but limits the implementation
   // to not modify the parameter on stack
@@ -198,7 +198,7 @@ private:
   // FIXME: remove const modifier for strMovie as it makes no sense as it means nothing
   // for the reader of the interface, but limits the implementation
   // to not modify the parameter on stack
-  bool AddSceneMarker(const int sceneMarker);
+  bool AddSceneMarker(int sceneMarker);
 
   void MergeShortCommBreaks();
 

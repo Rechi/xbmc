@@ -145,9 +145,9 @@ public:
    \param replayGain [in] album and track replaygain and peak values
    \return the id of the song
    */
-  int AddSong(const int idSong,
+  int AddSong(int idSong,
               const CDateTime& dtDateNew,
-              const int idAlbum,
+              int idAlbum,
               const std::string& strTitle,
               const std::string& strMusicBrainzTrackID,
               const std::string& strPathAndFileName,
@@ -162,7 +162,7 @@ public:
               const std::string& strReleaseDate,
               const std::string& strOrigReleaseDate,
               std::string& strDiscSubtitle,
-              const int iTimesPlayed,
+              int iTimesPlayed,
               int iStartOffset,
               int iEndOffset,
               const CDateTime& dtLastPlayed,
@@ -364,7 +364,7 @@ public:
   int GetAlbumByMatch(const CAlbum& album);
   std::string GetAlbumById(int id);
   std::string GetAlbumDiscTitle(int idAlbum, int idDisc);
-  bool SetAlbumUserrating(const int idAlbum, int userrating);
+  bool SetAlbumUserrating(int idAlbum, int userrating);
   int GetAlbumDiscsCount(int idAlbum);
 
   /////////////////////////////////////////////////
@@ -411,7 +411,7 @@ public:
   bool DeleteArtistDiscography(int idArtist);
   bool GetArtistDiscography(int idArtist, CFileItemList& items);
   bool AddArtistVideoLinks(const CArtist& artist);
-  bool DeleteArtistVideoLinks(const int idArtist);
+  bool DeleteArtistVideoLinks(int idArtist);
 
   std::string GetArtistById(int id);
   int GetArtistByName(const std::string& strArtist);
@@ -716,7 +716,7 @@ public:
   bool ExportSongHistory(TiXmlNode* pNode, CGUIDialogProgress* progressDialog = nullptr);
   void ImportFromXML(const std::string& xmlFile, CGUIDialogProgress* progressDialog = nullptr);
   bool ImportSongHistory(const std::string& xmlFile,
-                         const int total,
+                         int total,
                          CGUIDialogProgress* progressDialog = nullptr);
 
   /////////////////////////////////////////////////
@@ -906,20 +906,20 @@ private:
                  std::string& strFileName);
 
   CSong GetSongFromDataset();
-  CSong GetSongFromDataset(const dbiplus::sql_record* const record, int offset = 0);
+  CSong GetSongFromDataset(const dbiplus::sql_record* record, int offset = 0);
   CArtist GetArtistFromDataset(dbiplus::Dataset* pDS, int offset = 0, bool needThumb = true);
-  CArtist GetArtistFromDataset(const dbiplus::sql_record* const record,
+  CArtist GetArtistFromDataset(const dbiplus::sql_record* record,
                                int offset = 0,
                                bool needThumb = true);
   CAlbum GetAlbumFromDataset(dbiplus::Dataset* pDS, int offset = 0, bool imageURL = false);
-  CAlbum GetAlbumFromDataset(const dbiplus::sql_record* const record,
+  CAlbum GetAlbumFromDataset(const dbiplus::sql_record* record,
                              int offset = 0,
                              bool imageURL = false);
-  CArtistCredit GetArtistCreditFromDataset(const dbiplus::sql_record* const record, int offset = 0);
-  CMusicRole GetArtistRoleFromDataset(const dbiplus::sql_record* const record, int offset = 0);
+  CArtistCredit GetArtistCreditFromDataset(const dbiplus::sql_record* record, int offset = 0);
+  CMusicRole GetArtistRoleFromDataset(const dbiplus::sql_record* record, int offset = 0);
   std::string GetMediaDateFromFile(const std::string& strFileNameAndPath);
   void GetFileItemFromDataset(CFileItem* item, const CMusicDbUrl& baseUrl);
-  void GetFileItemFromDataset(const dbiplus::sql_record* const record,
+  void GetFileItemFromDataset(const dbiplus::sql_record* record,
                               CFileItem* item,
                               const CMusicDbUrl& baseUrl);
   void GetFileItemFromArtistCredits(VECARTISTCREDITS& artistCredits, CFileItem* item);
@@ -940,7 +940,7 @@ private:
   bool SearchSongs(const std::string& strSearch, CFileItemList& songs);
   int GetSongIDFromPath(const std::string& filePath);
   void NormaliseSongDates(std::string& strRelease, std::string& strOriginal);
-  bool TrimImageURLs(std::string& strImage, const size_t space);
+  bool TrimImageURLs(std::string& strImage, size_t space);
 
   /*! \brief Build SQL  for sort subquery from ignore article token list
   \param strField original name or title field that articles could be removed from

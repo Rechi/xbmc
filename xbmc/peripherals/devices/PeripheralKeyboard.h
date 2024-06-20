@@ -30,7 +30,7 @@ public:
   ~CPeripheralKeyboard(void) override;
 
   // implementation of CPeripheral
-  bool InitialiseFeature(const PeripheralFeature feature) override;
+  bool InitialiseFeature(PeripheralFeature feature) override;
   void RegisterKeyboardDriverHandler(KODI::KEYBOARD::IKeyboardDriverHandler* handler,
                                      bool bPromiscuous) override;
   void UnregisterKeyboardDriverHandler(KODI::KEYBOARD::IKeyboardDriverHandler* handler) override;

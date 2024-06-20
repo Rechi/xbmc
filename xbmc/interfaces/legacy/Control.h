@@ -2049,7 +2049,7 @@ namespace XBMCAddon
       ///
       setImage(...);
 #else
-      virtual void setImage(const char* imageFilename, const bool useCache = true);
+      virtual void setImage(const char* imageFilename, bool useCache = true);
 #endif
 
 #ifdef DOXYGEN_SHOULD_USE_THIS

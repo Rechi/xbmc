@@ -56,7 +56,7 @@ public:
   ~CPeripheralJoystick(void) override;
 
   // implementation of CPeripheral
-  bool InitialiseFeature(const PeripheralFeature feature) override;
+  bool InitialiseFeature(PeripheralFeature feature) override;
   void OnUserNotification() override;
   bool TestFeature(PeripheralFeature feature) override;
   void RegisterJoystickDriverHandler(KODI::JOYSTICK::IDriverHandler* handler,

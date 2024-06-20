@@ -38,7 +38,7 @@ public:
   bool OnMessage(CGUIMessage& message) override;
 
   // implementation of Observer
-  void Notify(const Observable& obs, const ObservableMessage msg) override;
+  void Notify(const Observable& obs, ObservableMessage msg) override;
 
 private:
   // implementation of CGUIWindow via CGUIDialogSelect

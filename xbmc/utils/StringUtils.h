@@ -113,11 +113,11 @@ public:
   static std::string Mid(const std::string &str, size_t first, size_t count = std::string::npos);
   static std::string Right(const std::string &str, size_t count);
   static std::string& Trim(std::string &str);
-  static std::string& Trim(std::string &str, const char* const chars);
+  static std::string& Trim(std::string& str, const char* chars);
   static std::string& TrimLeft(std::string &str);
-  static std::string& TrimLeft(std::string &str, const char* const chars);
+  static std::string& TrimLeft(std::string& str, const char* chars);
   static std::string& TrimRight(std::string &str);
-  static std::string& TrimRight(std::string &str, const char* const chars);
+  static std::string& TrimRight(std::string& str, const char* chars);
   static std::string& RemoveDuplicatedSpacesAndTabs(std::string& str);
 
   /*! \brief Check if the character is a special character.
@@ -165,7 +165,9 @@ public:
    \param iMaxStrings (optional) Maximum number of splitted strings
    */
   static std::vector<std::string> Split(const std::string& input, const std::string& delimiter, unsigned int iMaxStrings = 0);
-  static std::vector<std::string> Split(const std::string& input, const char delimiter, size_t iMaxStrings = 0);
+  static std::vector<std::string> Split(const std::string& input,
+                                        char delimiter,
+                                        size_t iMaxStrings = 0);
   static std::vector<std::string> Split(const std::string& input, const std::vector<std::string> &delimiters);
   /*! \brief Splits the given input string using the given delimiter into separate strings.
 
@@ -386,8 +388,8 @@ public:
    */
   static std::vector<std::string> Tokenize(const std::string& input, const std::string& delimiters);
   static void Tokenize(const std::string& input, std::vector<std::string>& tokens, const std::string& delimiters);
-  static std::vector<std::string> Tokenize(const std::string& input, const char delimiter);
-  static void Tokenize(const std::string& input, std::vector<std::string>& tokens, const char delimiter);
+  static std::vector<std::string> Tokenize(const std::string& input, char delimiter);
+  static void Tokenize(const std::string& input, std::vector<std::string>& tokens, char delimiter);
 
   /*!
    * \brief Converts a string to a unsigned int number.
