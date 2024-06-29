@@ -265,7 +265,7 @@ public:
   ///@{
 
   /// @brief To get settings value as string.
-  std::string GetString() const { return str; }
+  const std::string& GetString() const { return str; }
 
   /// @brief To get settings value as integer.
   int GetInt() const { return std::atoi(str.c_str()); }
