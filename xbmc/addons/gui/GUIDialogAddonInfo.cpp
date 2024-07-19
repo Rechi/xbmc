@@ -552,13 +552,13 @@ bool CGUIDialogAddonInfo::PromptIfDependency(int heading, int line2)
   VECADDONS addons;
   std::vector<std::string> deps;
   CServiceBroker::GetAddonMgr().GetAddons(addons);
-  for (VECADDONS::const_iterator it = addons.begin(); it != addons.end(); ++it)
+  for (const AddonPtr& addon : addons)
   {
     auto i =
-        std::find_if((*it)->GetDependencies().begin(), (*it)->GetDependencies().end(),
+        std::find_if(addon->GetDependencies().begin(), addon->GetDependencies().end(),
                      [&](const DependencyInfo& other) { return other.id == m_localAddon->ID(); });
-    if (i != (*it)->GetDependencies().end() && !i->optional) // non-optional dependency
-      deps.push_back((*it)->Name());
+    if (i != addon->GetDependencies().end() && !i->optional) // non-optional dependency
+      deps.push_back(addon->Name());
   }
 
   if (!deps.empty())
