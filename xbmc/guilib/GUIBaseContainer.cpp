@@ -32,6 +32,7 @@
 #include "utils/log.h"
 
 #include <memory>
+#include <ranges>
 
 using namespace KODI;
 
@@ -327,9 +328,9 @@ void CGUIBaseContainer::Render()
     if (CServiceBroker::GetWinSystem()->GetGfxContext().GetRenderOrder() ==
         RENDER_ORDER_FRONT_TO_BACK)
     {
-      for (auto it = std::crbegin(renderitems); it != std::crend(renderitems); it++)
+      for (const RENDERITEM& renderitem : std::ranges::reverse_view(renderitems))
       {
-        RenderItem(it->posX, it->posY, it->item.get(), it->focused);
+        RenderItem(renderitem.posX, renderitem.posY, renderitem.item.get(), renderitem.focused);
       }
     }
     else
@@ -551,8 +552,8 @@ bool CGUIBaseContainer::OnMessage(CGUIMessage& message)
     }
     else if (message.GetMessage() == GUI_MSG_REFRESH_LIST)
     { // update our list contents
-      for (unsigned int i = 0; i < m_items.size(); ++i)
-        m_items[i]->SetInvalid();
+      for (const std::shared_ptr<CGUIListItem>& item : m_items)
+        item->SetInvalid();
     }
     else if (message.GetMessage() == GUI_MSG_REFRESH_THUMBS)
     {
@@ -631,11 +632,11 @@ void CGUIBaseContainer::OnRight()
 void CGUIBaseContainer::OnNextLetter()
 {
   int offset = CorrectOffset(GetOffset(), GetCursor());
-  for (unsigned int i = 0; i < m_letterOffsets.size(); i++)
+  for (const std::pair<int, std::string>& letterOffset : m_letterOffsets)
   {
-    if (m_letterOffsets[i].first > offset)
+    if (letterOffset.first > offset)
     {
-      SelectItem(m_letterOffsets[i].first);
+      SelectItem(letterOffset.first);
       return;
     }
   }
@@ -719,11 +720,11 @@ void CGUIBaseContainer::OnJumpSMS(int letter)
   while (true)
   {
     // check if we can jump to this letter
-    for (size_t i = 0; i < m_letterOffsets.size(); i++)
+    for (const std::pair<int, std::string>& letterOffset : m_letterOffsets)
     {
-      if (m_letterOffsets[i].second == letters.substr(pos, 1))
+      if (letterOffset.second == letters.substr(pos, 1))
       {
-        SelectItem(m_letterOffsets[i].first);
+        SelectItem(letterOffset.first);
         return;
       }
     }
@@ -1012,8 +1013,8 @@ void CGUIBaseContainer::UpdateLayout(bool updateAllItems)
 {
   if (updateAllItems)
   { // free memory of items
-    for (iItems it = m_items.begin(); it != m_items.end(); ++it)
-      (*it)->FreeMemory();
+    for (const std::shared_ptr<CGUIListItem>& item : m_items)
+      item->FreeMemory();
   }
   // and recalculate the layout
   CalculateLayout();
@@ -1381,9 +1382,8 @@ bool CGUIBaseContainer::InsideLayout(const CGUIListItemLayout *layout, const CPo
 void CGUIBaseContainer::DumpTextureUse()
 {
   CLog::Log(LOGDEBUG, "{} for container {}", __FUNCTION__, GetID());
-  for (unsigned int i = 0; i < m_items.size(); ++i)
+  for (const std::shared_ptr<CGUIListItem>& item : m_items)
   {
-    std::shared_ptr<CGUIListItem> item = m_items[i];
     if (item->GetFocusedLayout()) item->GetFocusedLayout()->DumpTextureUse();
     if (item->GetLayout()) item->GetLayout()->DumpTextureUse();
   }

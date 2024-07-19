@@ -27,8 +27,8 @@ CGUIString::CGUIString(iString start, iString end, bool carriageReturn)
 std::string CGUIString::GetAsString() const
 {
   std::string text;
-  for (unsigned int i = 0; i < m_text.size(); i++)
-    text += (char)(m_text[i] & 0xff);
+  for (unsigned int i : m_text)
+    text += (char)(i & 0xff);
   return text;
 }
 
@@ -282,9 +282,9 @@ void CGUITextLayout::UpdateStyled(const vecText& text,
 // BidiTransform is used to handle RTL text flipping in the string
 void CGUITextLayout::BidiTransform(std::vector<CGUIString>& lines, bool forceLTRReadingOrder)
 {
-  for (unsigned int i = 0; i < lines.size(); i++)
+  for (CGUIString& i : lines)
   {
-    CGUIString& line = lines[i];
+    CGUIString& line = i;
     unsigned int lineLength = line.m_text.size();
     std::wstring logicalText;
     vecText style;
@@ -309,9 +309,9 @@ void CGUITextLayout::BidiTransform(std::vector<CGUIString>& lines, bool forceLTR
     // If memory allocation failed, fallback to text with no styling
     if (!visualToLogicalMap)
     {
-      for (unsigned int j = 0; j < visualText.size(); j++)
+      for (wchar_t j : visualText)
       {
-        styledVisualText.push_back(visualText[j]);
+        styledVisualText.push_back(j);
       }
     }
     else
@@ -325,7 +325,7 @@ void CGUITextLayout::BidiTransform(std::vector<CGUIString>& lines, bool forceLTR
     delete[] visualToLogicalMap;
 
     // replace the original line with the processed one
-    lines[i] = CGUIString(styledVisualText.begin(), styledVisualText.end(), line.m_carriageReturn);
+    i = CGUIString(styledVisualText.begin(), styledVisualText.end(), line.m_carriageReturn);
   }
 }
 
@@ -355,8 +355,8 @@ void CGUITextLayout::Filter(std::string &text)
   vecText parsedText;
   ParseText(utf16, 0, 0xffffffff, colors, parsedText);
   utf16.clear();
-  for (unsigned int i = 0; i < parsedText.size(); i++)
-    utf16 += (wchar_t)(0xffff & parsedText[i]);
+  for (unsigned int i : parsedText)
+    utf16 += (wchar_t)(0xffff & i);
   g_charsetConverter.wToUTF8(utf16, text);
 }
 
@@ -748,8 +748,8 @@ void CGUITextLayout::AppendToUTF32(const std::wstring &utf16, character_t colSty
 {
   // NOTE: Assumes a single line of text
   utf32.reserve(utf32.size() + utf16.size());
-  for (unsigned int i = 0; i < utf16.size(); i++)
-    utf32.push_back(utf16[i] | colStyle);
+  for (wchar_t i : utf16)
+    utf32.push_back(i | colStyle);
 }
 
 void CGUITextLayout::AppendToUTF32(const std::string &utf8, character_t colStyle, vecText &utf32)
