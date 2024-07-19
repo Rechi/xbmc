@@ -109,9 +109,9 @@ void CGUIWindowSystemInfo::FrameMove()
     if (m_diskUsage.empty())
       m_diskUsage = CServiceBroker::GetMediaManager().GetDiskUsage();
 
-    for (size_t d = 0; d < m_diskUsage.size(); d++)
+    for (const std::string& d : m_diskUsage)
     {
-      SET_CONTROL_LABEL(i++, m_diskUsage[d]);
+      SET_CONTROL_LABEL(i++, d);
     }
   }
 
