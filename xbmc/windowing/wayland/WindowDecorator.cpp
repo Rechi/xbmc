@@ -17,6 +17,7 @@
 #include <cmath>
 #include <memory>
 #include <mutex>
+#include <ranges>
 #include <vector>
 
 #include <linux/input.h>
@@ -906,13 +907,13 @@ void CWindowDecorator::ResetShm()
 void CWindowDecorator::PositionButtons()
 {
   CPointInt position{m_borderSurfaces[SURFACE_TOP].surface.size.Width() - BORDER_WIDTH, BORDER_WIDTH + BUTTONS_EDGE_DISTANCE};
-  for (auto iter = m_buttons.rbegin(); iter != m_buttons.rend(); iter++)
+  for (Button& button : std::ranges::reverse_view(m_buttons))
   {
     position.x -= (BUTTONS_EDGE_DISTANCE + BUTTON_SIZE);
     // Clamp if not enough space
     position.x = std::max(0, position.x);
 
-    iter->position = CRectInt{position, position + CPointInt{BUTTON_SIZE, BUTTON_SIZE}};
+    button.position = CRectInt{position, position + CPointInt{BUTTON_SIZE, BUTTON_SIZE}};
   }
 }
 
