@@ -17,6 +17,7 @@
 #include "utils/log.h"
 
 #include <algorithm>
+#include <ranges>
 
 using namespace PVR;
 
@@ -143,13 +144,14 @@ void CPVREpgTagsCache::RefreshLastEndedTag(const CDateTime& activeTime)
       m_lastEndedTag->SetChannelData(m_channelData);
   }
 
-  for (auto it = m_changedTags.rbegin(); it != m_changedTags.rend(); ++it)
+  for (const std::pair<const CDateTime, std::shared_ptr<CPVREpgInfoTag>>& changedTag :
+       std::ranges::reverse_view(m_changedTags))
   {
-    if (it->second->WasActive())
+    if (changedTag.second->WasActive())
     {
-      if (!m_lastEndedTag || m_lastEndedTag->EndAsUTC() < it->second->EndAsUTC())
+      if (!m_lastEndedTag || m_lastEndedTag->EndAsUTC() < changedTag.second->EndAsUTC())
       {
-        m_lastEndedTag = it->second;
+        m_lastEndedTag = changedTag.second;
         break;
       }
     }
