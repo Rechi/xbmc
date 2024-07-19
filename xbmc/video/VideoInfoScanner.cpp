@@ -1267,10 +1267,10 @@ namespace KODI::VIDEO
     // URLDecode in case an episode is on a http/https/dav/davs:// source and URL-encoded like foo%201x01%20bar.avi
     strLabel = CURL::Decode(CURL::GetRedacted(strLabel));
 
-    for (unsigned int i=0;i<expression.size();++i)
+    for (const TVShowRegexp& i : expression)
     {
       CRegExp reg(true, CRegExp::autoUtf8);
-      if (!reg.RegComp(expression[i].regexp))
+      if (!reg.RegComp(i.regexp))
         continue;
 
       int regexppos, regexp2pos;
@@ -1285,9 +1285,9 @@ namespace KODI::VIDEO
       episode.cDate.SetValid(false);
       episode.isFolder = false;
 
-      bool byDate = expression[i].byDate ? true : false;
-      bool byTitle = expression[i].byTitle;
-      int defaultSeason = expression[i].defaultSeason;
+      bool byDate = i.byDate ? true : false;
+      bool byTitle = i.byTitle;
+      int defaultSeason = i.defaultSeason;
 
       if (byDate)
       {
@@ -1295,8 +1295,7 @@ namespace KODI::VIDEO
           continue;
 
         CLog::Log(LOGDEBUG, "VideoInfoScanner: Found date based match {} ({}) [{}]",
-                  CURL::GetRedacted(episode.strPath), episode.cDate.GetAsLocalizedDate(),
-                  expression[i].regexp);
+                  CURL::GetRedacted(episode.strPath), episode.cDate.GetAsLocalizedDate(), i.regexp);
       }
       else if (byTitle)
       {
@@ -1304,7 +1303,7 @@ namespace KODI::VIDEO
           continue;
 
         CLog::Log(LOGDEBUG, "VideoInfoScanner: Found title based match {} ({}) [{}]",
-                  CURL::GetRedacted(episode.strPath), episode.strTitle, expression[i].regexp);
+                  CURL::GetRedacted(episode.strPath), episode.strTitle, i.regexp);
       }
       else
       {
@@ -1312,8 +1311,7 @@ namespace KODI::VIDEO
           continue;
 
         CLog::Log(LOGDEBUG, "VideoInfoScanner: Found episode match {} (s{}e{}) [{}]",
-                  CURL::GetRedacted(episode.strPath), episode.iSeason, episode.iEpisode,
-                  expression[i].regexp);
+                  CURL::GetRedacted(episode.strPath), episode.iSeason, episode.iEpisode, i.regexp);
       }
 
       // Grab the remainder from first regexp run
@@ -1585,8 +1583,9 @@ namespace KODI::VIDEO
         if (!URIUtils::IsMultiPath(pItem->GetPath()) || !CMultiPathDirectory::GetPaths(pItem->GetPath(), multipath))
           multipath.push_back(pItem->GetPath());
         std::vector<std::pair<std::string, std::string> > paths;
-        for (std::vector<std::string>::const_iterator i = multipath.begin(); i != multipath.end(); ++i)
-          paths.emplace_back(*i, URIUtils::GetParentPath(*i));
+        paths.reserve(multipath.size());
+        for (const std::string& path : multipath)
+          paths.emplace_back(path, URIUtils::GetParentPath(path));
 
         std::map<int, std::map<std::string, std::string> > seasonArt;
 
@@ -1915,15 +1914,15 @@ namespace KODI::VIDEO
 
     int iMax = files.size();
     int iCurr = 1;
-    for (EPISODELIST::iterator file = files.begin(); file != files.end(); ++file)
+    for (const EPISODE& file : files)
     {
       if (pDlgProgress)
       {
         pDlgProgress->SetLine(1, CVariant{20361}); // Loading episode details
         pDlgProgress->SetLine(2, StringUtils::Format("{} {}", g_localizeStrings.Get(20373),
-                                                     file->iSeason)); // Season x
+                                                     file.iSeason)); // Season x
         pDlgProgress->SetLine(3, StringUtils::Format("{} {}", g_localizeStrings.Get(20359),
-                                                     file->iEpisode)); // Episode y
+                                                     file.iEpisode)); // Episode y
         pDlgProgress->SetPercentage((int)((float)(iCurr++)/iMax*100));
         pDlgProgress->Progress();
       }
@@ -1933,7 +1932,7 @@ namespace KODI::VIDEO
       if ((pDlgProgress && pDlgProgress->IsCanceled()) || m_bStop)
         return INFO_CANCELLED;
 
-      if (m_database.GetEpisodeId(file->strPath, file->iEpisode, file->iSeason) > -1)
+      if (m_database.GetEpisodeId(file.strPath, file.iEpisode, file.iSeason) > -1)
       {
         if (m_handle)
           m_handle->SetText(g_localizeStrings.Get(20415));
@@ -1941,12 +1940,12 @@ namespace KODI::VIDEO
       }
 
       CFileItem item;
-      if (file->item)
-        item = *file->item;
+      if (file.item)
+        item = *file.item;
       else
       {
-        item.SetPath(file->strPath);
-        item.GetVideoInfoTag()->m_iEpisode = file->iEpisode;
+        item.SetPath(file.strPath);
+        item.GetVideoInfoTag()->m_iEpisode = file.iEpisode;
       }
 
       // handle .nfo files
@@ -1966,12 +1965,12 @@ namespace KODI::VIDEO
       if (result == CInfoScanner::FULL_NFO)
       {
         // override with episode and season number from file if available
-        if (file->iEpisode > -1)
+        if (file.iEpisode > -1)
         {
-          item.GetVideoInfoTag()->m_iEpisode = file->iEpisode;
-          item.GetVideoInfoTag()->m_iSeason = file->iSeason;
+          item.GetVideoInfoTag()->m_iEpisode = file.iEpisode;
+          item.GetVideoInfoTag()->m_iSeason = file.iSeason;
         }
-        if (AddVideo(&item, CONTENT_TVSHOWS, file->isFolder, true, &showInfo) < 0)
+        if (AddVideo(&item, CONTENT_TVSHOWS, file.isFolder, true, &showInfo) < 0)
           return INFO_ERROR;
         continue;
       }
@@ -2006,43 +2005,43 @@ namespace KODI::VIDEO
                   " we are using the local scraper. Check your tvshow.nfo and make"
                   " sure the <episodeguide> tag is in place and/or use an online"
                   " scraper.",
-                  CURL::GetRedacted(file->strPath));
+                  CURL::GetRedacted(file.strPath));
         continue;
       }
 
-      EPISODE key(file->iSeason, file->iEpisode, file->iSubepisode);
-      EPISODE backupkey(file->iSeason, file->iEpisode, 0);
+      EPISODE key(file.iSeason, file.iEpisode, file.iSubepisode);
+      EPISODE backupkey(file.iSeason, file.iEpisode, 0);
       bool bFound = false;
       EPISODELIST::iterator guide = episodes.begin();
       EPISODELIST matches;
 
       for (; guide != episodes.end(); ++guide )
       {
-        if ((file->iEpisode!=-1) && (file->iSeason!=-1))
+        if ((file.iEpisode != -1) && (file.iSeason != -1))
         {
           if (key==*guide)
           {
             bFound = true;
             break;
           }
-          else if ((file->iSubepisode!=0) && (backupkey==*guide))
+          else if ((file.iSubepisode != 0) && (backupkey == *guide))
           {
             matches.push_back(*guide);
             continue;
           }
         }
-        if (file->cDate.IsValid() && guide->cDate.IsValid() && file->cDate==guide->cDate)
+        if (file.cDate.IsValid() && guide->cDate.IsValid() && file.cDate == guide->cDate)
         {
           matches.push_back(*guide);
           continue;
         }
         if (!guide->cScraperUrl.GetTitle().empty() &&
-            StringUtils::EqualsNoCase(guide->cScraperUrl.GetTitle(), file->strTitle))
+            StringUtils::EqualsNoCase(guide->cScraperUrl.GetTitle(), file.strTitle))
         {
           bFound = true;
           break;
         }
-        if (!guide->strTitle.empty() && StringUtils::EqualsNoCase(guide->strTitle, file->strTitle))
+        if (!guide->strTitle.empty() && StringUtils::EqualsNoCase(guide->strTitle, file.strTitle))
         {
           bFound = true;
           break;
@@ -2057,14 +2056,14 @@ namespace KODI::VIDEO
          *
          * Otherwise, use the title to further refine the best match.
          */
-        if (matches.size() == 1 || (file->strTitle.empty() && matches.size() > 1))
+        if (matches.size() == 1 || (file.strTitle.empty() && matches.size() > 1))
         {
           guide = matches.begin();
           bFound = true;
         }
-        else if (!file->strTitle.empty())
+        else if (!file.strTitle.empty())
         {
-          CLog::Log(LOGDEBUG, "VideoInfoScanner: analyzing parsed title '{}'", file->strTitle);
+          CLog::Log(LOGDEBUG, "VideoInfoScanner: analyzing parsed title '{}'", file.strTitle);
           double minscore = 0; // Default minimum score is 0 to find whatever is the best match.
 
           EPISODELIST *candidates;
@@ -2090,7 +2089,7 @@ namespace KODI::VIDEO
           }
 
           double matchscore;
-          std::string loweredTitle(file->strTitle);
+          std::string loweredTitle(file.strTitle);
           StringUtils::ToLower(loweredTitle);
           int index = StringUtils::FindBestMatch(loweredTitle, titles, matchscore);
           if (index >= 0 && matchscore >= minscore)
@@ -2100,7 +2099,7 @@ namespace KODI::VIDEO
             CLog::Log(LOGDEBUG,
                       "{} fuzzy title match for show: '{}', title: '{}', match: '{}', score: {:f} "
                       ">= {:f}",
-                      __FUNCTION__, showInfo.m_strTitle, file->strTitle, titles[index], matchscore,
+                      __FUNCTION__, showInfo.m_strTitle, file.strTitle, titles[index], matchscore,
                       minscore);
           }
         }
@@ -2110,7 +2109,7 @@ namespace KODI::VIDEO
       {
         CVideoInfoDownloader imdb(scraper);
         CFileItem item;
-        item.SetPath(file->strPath);
+        item.SetPath(file.strPath);
         if (!imdb.GetEpisodeDetails(guide->cScraperUrl, *item.GetVideoInfoTag(), pDlgProgress))
           return INFO_NOT_FOUND; //! @todo should we just skip to the next episode?
 
@@ -2120,7 +2119,7 @@ namespace KODI::VIDEO
         if (item.GetVideoInfoTag()->m_iEpisode == -1)
           item.GetVideoInfoTag()->m_iEpisode = guide->iEpisode;
 
-        if (AddVideo(&item, CONTENT_TVSHOWS, file->isFolder, useLocal, &showInfo) < 0)
+        if (AddVideo(&item, CONTENT_TVSHOWS, file.isFolder, useLocal, &showInfo) < 0)
           return INFO_ERROR;
       }
       else
@@ -2128,8 +2127,8 @@ namespace KODI::VIDEO
         CLog::Log(
             LOGDEBUG,
             "{} - no match for show: '{}', season: {}, episode: {}.{}, airdate: '{}', title: '{}'",
-            __FUNCTION__, showInfo.m_strTitle, file->iSeason, file->iEpisode, file->iSubepisode,
-            file->cDate.GetAsLocalizedDate(), file->strTitle);
+            __FUNCTION__, showInfo.m_strTitle, file.iSeason, file.iEpisode, file.iSubepisode,
+            file.cDate.GetAsLocalizedDate(), file.strTitle);
       }
     }
     return INFO_ADDED;
@@ -2376,11 +2375,11 @@ namespace KODI::VIDEO
         CDirectory::GetDirectory(actorsDir, items, ".png|.jpg|.tbn", DIR_FLAG_NO_FILE_DIRS |
                                  DIR_FLAG_NO_FILE_INFO);
     }
-    for (std::vector<SActorInfo>::iterator i = actors.begin(); i != actors.end(); ++i)
+    for (SActorInfo& actor : actors)
     {
-      if (i->thumb.empty())
+      if (actor.thumb.empty())
       {
-        std::string thumbFile = i->strName;
+        std::string thumbFile = actor.strName;
         StringUtils::Replace(thumbFile, ' ', '_');
         for (int j = 0; j < items.Size(); j++)
         {
@@ -2388,14 +2387,14 @@ namespace KODI::VIDEO
           URIUtils::RemoveExtension(compare);
           if (!items[j]->m_bIsFolder && compare == thumbFile)
           {
-            i->thumb = items[j]->GetPath();
+            actor.thumb = items[j]->GetPath();
             break;
           }
         }
-        if (i->thumb.empty() && !i->thumbUrl.GetFirstUrlByType().m_url.empty())
-          i->thumb = CScraperUrl::GetThumbUrl(i->thumbUrl.GetFirstUrlByType());
-        if (!i->thumb.empty())
-          CServiceBroker::GetTextureCache()->BackgroundCacheImage(i->thumb);
+        if (actor.thumb.empty() && !actor.thumbUrl.GetFirstUrlByType().m_url.empty())
+          actor.thumb = CScraperUrl::GetThumbUrl(actor.thumbUrl.GetFirstUrlByType());
+        if (!actor.thumb.empty())
+          CServiceBroker::GetTextureCache()->BackgroundCacheImage(actor.thumb);
       }
     }
   }
