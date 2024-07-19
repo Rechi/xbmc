@@ -113,10 +113,10 @@ bool CMultiPathDirectory::Exists(const CURL& url)
   if (!GetPaths(url, vecPaths))
     return false;
 
-  for (unsigned int i = 0; i < vecPaths.size(); ++i)
+  for (const std::string& path : vecPaths)
   {
-    CLog::Log(LOGDEBUG, "Testing Existence ({})", CURL::GetRedacted(vecPaths[i]));
-    if (CDirectory::Exists(vecPaths[i]))
+    CLog::Log(LOGDEBUG, "Testing Existence ({})", CURL::GetRedacted(path));
+    if (CDirectory::Exists(path))
       return true;
   }
   return false;
@@ -129,9 +129,9 @@ bool CMultiPathDirectory::Remove(const CURL& url)
     return false;
 
   bool success = false;
-  for (unsigned int i = 0; i < vecPaths.size(); ++i)
+  for (const std::string& path : vecPaths)
   {
-    if (CDirectory::Remove(vecPaths[i]))
+    if (CDirectory::Remove(path))
       success = true;
   }
   return success;
@@ -182,9 +182,9 @@ bool CMultiPathDirectory::HasPath(const std::string& strPath, const std::string&
     return false;
 
   // check each item
-  for (unsigned int i = 0; i < vecTemp.size(); i++)
+  for (const std::string& temp : vecTemp)
   {
-    if (CURL::Decode(vecTemp[i]) == strPathToFind)
+    if (CURL::Decode(temp) == strPathToFind)
       return true;
   }
   return false;
@@ -197,8 +197,8 @@ std::string CMultiPathDirectory::ConstructMultiPath(const CFileItemList& items, 
   //CLog::Log(LOGDEBUG, "Building multipath");
   std::string newPath = "multipath://";
   //CLog::Log(LOGDEBUG, "-- adding path: {}", strPath);
-  for (unsigned int i = 0; i < stack.size(); ++i)
-    AddToMultiPath(newPath, items[stack[i]]->GetPath());
+  for (int i : stack)
+    AddToMultiPath(newPath, items[i]->GetPath());
 
   //CLog::Log(LOGDEBUG, "Final path: {}", newPath);
   return newPath;
@@ -219,8 +219,8 @@ std::string CMultiPathDirectory::ConstructMultiPath(const std::vector<std::strin
   //CLog::Log(LOGDEBUG, "Building multipath");
   std::string newPath = "multipath://";
   //CLog::Log(LOGDEBUG, "-- adding path: {}", strPath);
-  for (std::vector<std::string>::const_iterator path = vecPaths.begin(); path != vecPaths.end(); ++path)
-    AddToMultiPath(newPath, *path);
+  for (const std::string& path : vecPaths)
+    AddToMultiPath(newPath, path);
   //CLog::Log(LOGDEBUG, "Final path: {}", newPath);
   return newPath;
 }
@@ -303,8 +303,8 @@ bool CMultiPathDirectory::SupportsWriteFileOperations(const std::string &strPath
 {
   std::vector<std::string> paths;
   GetPaths(strPath, paths);
-  for (unsigned int i = 0; i < paths.size(); ++i)
-    if (CUtil::SupportsWriteFileOperations(paths[i]))
+  for (const std::string& path : paths)
+    if (CUtil::SupportsWriteFileOperations(path))
       return true;
   return false;
 }

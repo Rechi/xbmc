@@ -112,9 +112,9 @@ bool CDirectoryHistory::IsInHistory(const std::string &path) const
 {
   std::string slashEnded(path);
   URIUtils::AddSlashAtEnd(slashEnded);
-  for (std::vector<CPathHistoryItem>::const_iterator i = m_vecPathHistory.begin(); i != m_vecPathHistory.end(); ++i)
+  for (const CPathHistoryItem& pathHistory : m_vecPathHistory)
   {
-    std::string testPath(i->GetPath());
+    std::string testPath(pathHistory.GetPath());
     URIUtils::AddSlashAtEnd(testPath);
     if (slashEnded == testPath)
       return true;
