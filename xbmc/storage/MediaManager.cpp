@@ -134,11 +134,11 @@ bool CMediaManager::SaveSources()
   auto* networkNode = rootNode->InsertEndChild(networkElement);
   if (networkNode)
   {
-    for (std::vector<CNetworkLocation>::iterator it = m_locations.begin(); it != m_locations.end(); ++it)
+    for (const CNetworkLocation& location : m_locations)
     {
       auto* locationNode = doc.NewElement("location");
-      locationNode->SetAttribute("id", (*it).id);
-      auto* value = doc.NewText((*it).path.c_str());
+      locationNode->SetAttribute("id", location.id);
+      auto* value = doc.NewText(location.path.c_str());
       locationNode->InsertEndChild(value);
       networkNode->InsertEndChild(locationNode);
     }
@@ -161,10 +161,10 @@ void CMediaManager::GetRemovableDrives(VECSOURCES &removableDrives)
 
 void CMediaManager::GetNetworkLocations(VECSOURCES &locations, bool autolocations)
 {
-  for (unsigned int i = 0; i < m_locations.size(); i++)
+  for (const CNetworkLocation& location : m_locations)
   {
     CMediaSource share;
-    share.strPath = m_locations[i].path;
+    share.strPath = location.path;
     CURL url(share.strPath);
     share.strName = url.GetWithoutUserDetails();
     locations.push_back(share);
@@ -230,9 +230,9 @@ bool CMediaManager::AddNetworkLocation(const std::string &path)
 
 bool CMediaManager::HasLocation(const std::string& path) const
 {
-  for (unsigned int i=0;i<m_locations.size();++i)
+  for (const CNetworkLocation& location : m_locations)
   {
-    if (URIUtils::CompareWithoutSlashAtEnd(m_locations[i].path, path))
+    if (URIUtils::CompareWithoutSlashAtEnd(location.path, path))
       return true;
   }
 
@@ -257,11 +257,11 @@ bool CMediaManager::RemoveLocation(const std::string& path)
 
 bool CMediaManager::SetLocationPath(const std::string& oldPath, const std::string& newPath)
 {
-  for (unsigned int i=0;i<m_locations.size();++i)
+  for (CNetworkLocation& location : m_locations)
   {
-    if (URIUtils::CompareWithoutSlashAtEnd(m_locations[i].path, oldPath))
+    if (URIUtils::CompareWithoutSlashAtEnd(location.path, oldPath))
     {
-      m_locations[i].path = newPath;
+      location.path = newPath;
       return SaveSources();
     }
   }
@@ -611,10 +611,10 @@ std::string CMediaManager::GetDiscPath()
   std::unique_lock<CCriticalSection> lock(m_CritSecStorageProvider);
   VECSOURCES drives;
   m_platformStorage->GetRemovableDrives(drives);
-  for(unsigned i = 0; i < drives.size(); ++i)
+  for (const CMediaSource& drive : drives)
   {
-    if(drives[i].m_iDriveType == CMediaSource::SOURCE_TYPE_DVD && !drives[i].strPath.empty())
-      return drives[i].strPath;
+    if (drive.m_iDriveType == CMediaSource::SOURCE_TYPE_DVD && !drive.strPath.empty())
+      return drive.strPath;
   }
 
   // iso9660://, cdda://local/ or D:\ depending on disc type
