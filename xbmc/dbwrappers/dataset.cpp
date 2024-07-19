@@ -166,10 +166,10 @@ void Dataset::set_select_sql(const std::string& sel_sql)
 void Dataset::parse_sql(std::string& sql)
 {
   std::string fpattern, by_what;
-  for (unsigned int i = 0; i < fields_object->size(); i++)
+  for (const field& i : *fields_object)
   {
-    fpattern = ":OLD_" + (*fields_object)[i].props.name;
-    by_what = "'" + (*fields_object)[i].val.get_asString() + "'";
+    fpattern = ":OLD_" + i.props.name;
+    by_what = "'" + i.val.get_asString() + "'";
     int idx = 0;
     int next_idx = 0;
     while ((idx = sql.find(fpattern, next_idx)) >= 0)
@@ -184,10 +184,10 @@ void Dataset::parse_sql(std::string& sql)
     } //while
   } //for
 
-  for (unsigned int i = 0; i < edit_object->size(); i++)
+  for (const field& i : *edit_object)
   {
-    fpattern = ":NEW_" + (*edit_object)[i].props.name;
-    by_what = "'" + (*edit_object)[i].val.get_asString() + "'";
+    fpattern = ":NEW_" + i.props.name;
+    by_what = "'" + i.val.get_asString() + "'";
     int idx = 0;
     int next_idx = 0;
     while ((idx = sql.find(fpattern, next_idx)) >= 0)
@@ -424,9 +424,9 @@ const sql_record* Dataset::get_sql_record()
 field_value Dataset::f_old(const char* f_name)
 {
   if (ds_state != dsInactive)
-    for (int unsigned i = 0; i < fields_object->size(); i++)
-      if ((*fields_object)[i].props.name == f_name)
-        return (*fields_object)[i].val;
+    for (const field& i : *fields_object)
+      if (i.props.name == f_name)
+        return i.val;
   return {};
 }
 
