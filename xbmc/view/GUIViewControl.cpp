@@ -88,8 +88,8 @@ void CGUIViewControl::SetCurrentView(int viewMode, bool bRefresh /* = false */)
   CGUIControl *pNewView = m_visibleViews[m_currentView];
 
   // make only current control visible...
-  for (ciViews view = m_allViews.begin(); view != m_allViews.end(); ++view)
-    (*view)->SetVisible(false);
+  for (CGUIControl* allView : m_allViews)
+    allView->SetVisible(false);
   pNewView->SetVisible(true);
 
   if (!bRefresh && pNewView == previousView)
@@ -232,9 +232,9 @@ void CGUIViewControl::SetFocused()
 bool CGUIViewControl::HasControl(int viewControlID) const
 {
   // run through our controls, checking for the id
-  for (ciViews it = m_allViews.begin(); it != m_allViews.end(); ++it)
+  for (const CGUIControl* allView : m_allViews)
   {
-    if ((*it)->GetID() == viewControlID)
+    if (allView->GetID() == viewControlID)
       return true;
   }
   return false;
@@ -269,9 +269,9 @@ int CGUIViewControl::GetViewModeCount() const
 
 int CGUIViewControl::GetViewModeByID(int id) const
 {
-  for (unsigned int i = 0; i < m_visibleViews.size(); ++i)
+  for (const CGUIControl* visibleView : m_visibleViews)
   {
-    IGUIContainer *view = static_cast<IGUIContainer*>(m_visibleViews[i]);
+    const IGUIContainer* view = static_cast<const IGUIContainer*>(visibleView);
     if (view->GetID() == id)
       return (view->GetType() << 16) | view->GetID();
   }
@@ -340,9 +340,8 @@ void CGUIViewControl::UpdateViewVisibility()
   infoMgr.ResetCache();
   infoMgr.GetInfoProviders().GetGUIControlsInfoProvider().ResetContainerMovingCache();
   m_visibleViews.clear();
-  for (unsigned int i = 0; i < m_allViews.size(); i++)
+  for (CGUIControl* view : m_allViews)
   {
-    CGUIControl *view = m_allViews[i];
     if (view->HasVisibleCondition())
     {
       view->UpdateVisibility(nullptr);
