@@ -51,8 +51,8 @@ CRssReader::~CRssReader()
   if (m_pObserver)
     m_pObserver->OnFeedRelease();
   StopThread();
-  for (unsigned int i = 0; i < m_vecTimeStamps.size(); i++)
-    delete m_vecTimeStamps[i];
+  for (const KODI::TIME::SystemTime* timeStamp : m_vecTimeStamps)
+    delete timeStamp;
 }
 
 void CRssReader::Create(IRssObserver* aObserver, const std::vector<std::string>& aUrls, const std::vector<int> &times, int spacesBetweenFeeds, bool rtl)
