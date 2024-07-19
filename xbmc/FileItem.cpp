@@ -1877,9 +1877,8 @@ void CFileItem::LoadEmbeddedCue()
     {
       std::vector<std::string> MediaFileVec;
       cuesheet->GetMediaFiles(MediaFileVec);
-      for (std::vector<std::string>::iterator itMedia = MediaFileVec.begin();
-           itMedia != MediaFileVec.end(); ++itMedia)
-        cuesheet->UpdateMediaFile(*itMedia, GetPath());
+      for (const std::string& mediaFile : MediaFileVec)
+        cuesheet->UpdateMediaFile(mediaFile, GetPath());
       SetCueDocument(cuesheet);
     }
     // Clear cuesheet tag having added it to item
@@ -2240,13 +2239,12 @@ std::string CFileItem::GetLocalFanart() const
   if (!strFile2.empty())
     fanarts.insert(m_bIsFolder ? fanarts.end() : fanarts.begin(), URIUtils::GetFileName(strFile2));
 
-  for (std::vector<std::string>::const_iterator i = fanarts.begin(); i != fanarts.end(); ++i)
+  for (std::string strFanart : fanarts)
   {
     for (int j = 0; j < items.Size(); j++)
     {
       std::string strCandidate = URIUtils::GetFileName(items[j]->m_strPath);
       URIUtils::RemoveExtension(strCandidate);
-      std::string strFanart = *i;
       URIUtils::RemoveExtension(strFanart);
       if (StringUtils::EqualsNoCase(strCandidate, strFanart))
         return items[j]->m_strPath;

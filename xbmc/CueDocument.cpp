@@ -215,10 +215,10 @@ void CCueDocument::GetSongs(VECSONGS &songs)
 
 void CCueDocument::UpdateMediaFile(const std::string& oldMediaFile, const std::string& mediaFile)
 {
-  for (Tracks::iterator it = m_tracks.begin(); it != m_tracks.end(); ++it)
+  for (CCueTrack& track : m_tracks)
   {
-    if (it->strFile == oldMediaFile)
-      it->strFile = mediaFile;
+    if (track.strFile == oldMediaFile)
+      track.strFile = mediaFile;
   }
 }
 
@@ -226,11 +226,11 @@ void CCueDocument::GetMediaFiles(std::vector<std::string>& mediaFiles)
 {
   typedef std::set<std::string> TSet;
   TSet uniqueFiles;
-  for (Tracks::const_iterator it = m_tracks.begin(); it != m_tracks.end(); ++it)
-    uniqueFiles.insert(it->strFile);
+  for (const CCueTrack& track : m_tracks)
+    uniqueFiles.insert(track.strFile);
 
-  for (TSet::const_iterator it = uniqueFiles.begin(); it != uniqueFiles.end(); ++it)
-    mediaFiles.push_back(*it);
+  for (const std::string& uniqueFile : uniqueFiles)
+    mediaFiles.push_back(uniqueFile);
 }
 
 std::string CCueDocument::GetMediaTitle()
