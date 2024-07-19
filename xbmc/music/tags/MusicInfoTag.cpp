@@ -1212,9 +1212,9 @@ void CMusicInfoTag::Clear()
 
 void CMusicInfoTag::AppendArtist(const std::string &artist)
 {
-  for (unsigned int index = 0; index < m_artist.size(); index++)
+  for (const std::string& index : m_artist)
   {
-    if (StringUtils::EqualsNoCase(artist, m_artist.at(index)))
+    if (StringUtils::EqualsNoCase(artist, index))
       return;
   }
 
@@ -1223,9 +1223,9 @@ void CMusicInfoTag::AppendArtist(const std::string &artist)
 
 void CMusicInfoTag::AppendAlbumArtist(const std::string &albumArtist)
 {
-  for (unsigned int index = 0; index < m_albumArtist.size(); index++)
+  for (const std::string& index : m_albumArtist)
   {
-    if (StringUtils::EqualsNoCase(albumArtist, m_albumArtist.at(index)))
+    if (StringUtils::EqualsNoCase(albumArtist, index))
       return;
   }
 
@@ -1234,9 +1234,9 @@ void CMusicInfoTag::AppendAlbumArtist(const std::string &albumArtist)
 
 void CMusicInfoTag::AppendGenre(const std::string &genre)
 {
-  for (unsigned int index = 0; index < m_genre.size(); index++)
+  for (const std::string& index : m_genre)
   {
-    if (StringUtils::EqualsNoCase(genre, m_genre.at(index)))
+    if (StringUtils::EqualsNoCase(genre, index))
       return;
   }
 
@@ -1251,9 +1251,9 @@ void CMusicInfoTag::AddArtistRole(const std::string& Role, const std::string& st
 
 void CMusicInfoTag::AddArtistRole(const std::string& Role, const std::vector<std::string>& artists)
 {
-  for (unsigned int index = 0; index < artists.size(); index++)
+  for (const std::string& artist : artists)
   {
-    CMusicRole ArtistCredit(Role, Trim(artists.at(index)));
+    CMusicRole ArtistCredit(Role, Trim(artist));
     //Prevent duplicate entries
     auto credit = find(m_musicRoles.begin(), m_musicRoles.end(), ArtistCredit);
     if (credit == m_musicRoles.end())
