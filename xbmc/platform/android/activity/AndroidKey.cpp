@@ -203,21 +203,21 @@ bool CAndroidKey::onKeyboardEvent(AInputEvent *event)
 
   // Check if we got some special key
   uint16_t sym = XBMCK_UNKNOWN;
-  for (unsigned int index = 0; index < sizeof(keyMap) / sizeof(KeyMap); index++)
+  for (const KeyMap& index : keyMap)
   {
-    if (keycode == keyMap[index].nativeKey)
+    if (keycode == index.nativeKey)
     {
-      sym = keyMap[index].xbmcKey;
+      sym = index.xbmcKey;
       break;
     }
   }
   if (sym == XBMCK_UNKNOWN && m_handleMediaKeys)
   {
-    for (unsigned int index = 0; index < sizeof(MediakeyMap) / sizeof(KeyMap); index++)
+    for (const KeyMap& index : MediakeyMap)
     {
-      if (keycode == MediakeyMap[index].nativeKey)
+      if (keycode == index.nativeKey)
       {
-        sym = MediakeyMap[index].xbmcKey;
+        sym = index.xbmcKey;
         break;
       }
     }
@@ -225,11 +225,11 @@ bool CAndroidKey::onKeyboardEvent(AInputEvent *event)
 
   if (sym == XBMCK_UNKNOWN && m_handleSearchKeys)
   {
-    for (unsigned int index = 0; index < sizeof(SearchkeyMap) / sizeof(KeyMap); index++)
+    for (const KeyMap& index : SearchkeyMap)
     {
-      if (keycode == SearchkeyMap[index].nativeKey)
+      if (keycode == index.nativeKey)
       {
-        sym = SearchkeyMap[index].xbmcKey;
+        sym = index.xbmcKey;
         break;
       }
     }
