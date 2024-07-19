@@ -420,9 +420,9 @@ bool CDVDVideoCodecFFmpeg::Open(CDVDStreamInfo &hints, CDVDCodecOptions &options
   }
 
   // set any special options
-  for(std::vector<CDVDCodecOption>::iterator it = options.m_keys.begin(); it != options.m_keys.end(); ++it)
+  for (const CDVDCodecOption& key : options.m_keys)
   {
-    av_opt_set(m_pCodecContext, it->m_name.c_str(), it->m_value.c_str(), 0);
+    av_opt_set(m_pCodecContext, key.m_name.c_str(), key.m_value.c_str(), 0);
   }
 
   if (avcodec_open2(m_pCodecContext, pCodec, nullptr) < 0)

@@ -139,11 +139,11 @@ int64_t CDVDInputStreamStack::Seek(int64_t offset, int whence)
     return -1;
 
   len = 0;
-  for(TSegVec::iterator it = m_files.begin(); it != m_files.end(); ++it)
+  for (const TSeg& it : m_files)
   {
-    if(len + it->length > pos)
+    if (len + it.length > pos)
     {
-      TFile   file     = it->file;
+      TFile file = it.file;
       int64_t file_pos = pos - len;
       if(file->GetPosition() != file_pos)
       {
@@ -156,7 +156,7 @@ int64_t CDVDInputStreamStack::Seek(int64_t offset, int whence)
       m_eof  = false;
       return pos;
     }
-    len += it->length;
+    len += it.length;
   }
 
   return -1;

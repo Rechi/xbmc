@@ -101,22 +101,22 @@ bool CInputStreamMultiSource::Open()
   if (!m_pPlayer || m_filenames.empty())
     return false;
 
-  for (unsigned int i = 0; i < m_filenames.size(); i++)
+  for (const std::string& filename : m_filenames)
   {
-    CFileItem fileitem = CFileItem(m_filenames[i], false);
+    CFileItem fileitem = CFileItem(filename, false);
     fileitem.SetMimeTypeForInternetFile();
     InputStreamPtr inputstream(CDVDFactoryInputStream::CreateInputStream(m_pPlayer, fileitem));
     if (!inputstream)
     {
       CLog::Log(LOGERROR,
                 "CDVDPlayer::OpenInputStream - unable to create input stream for file [{}]",
-                m_filenames[i]);
+                filename);
       continue;
     }
 
     if (!inputstream->Open())
     {
-      CLog::Log(LOGERROR, "CDVDPlayer::OpenInputStream - error opening file [{}]", m_filenames[i]);
+      CLog::Log(LOGERROR, "CDVDPlayer::OpenInputStream - error opening file [{}]", filename);
       continue;
     }
     m_InputStreams.push_back(inputstream);
