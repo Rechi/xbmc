@@ -107,9 +107,9 @@ void AEDeviceEnumerationOSX::hasPassthroughOrDigitalFormats(const StreamFormatLi
   hasDigitalFormat = false;
   hasPassthroughFormats = false;
 
-  for(UInt32 formatIdx = 0; formatIdx < formatList.size(); formatIdx++)
+  for (const AudioStreamRangedDescription& format : formatList)
   {
-    const AudioStreamBasicDescription &desc = formatList[formatIdx].mFormat;
+    const AudioStreamBasicDescription& desc = format.mFormat;
     if (desc.mFormatID == kAudioFormatAC3 || desc.mFormatID == kAudioFormat60958AC3)
     {
       hasDigitalFormat = true;
@@ -239,9 +239,9 @@ unsigned int AEDeviceEnumerationOSX::GetNumPlanes() const
 
 bool AEDeviceEnumerationOSX::hasSampleRate(const AESampleRateList &list, const unsigned int samplerate) const
 {
-  for (size_t i = 0; i < list.size(); ++i)
+  for (unsigned int i : list)
   {
-    if (list[i] == samplerate)
+    if (i == samplerate)
       return true;
   }
   return false;
@@ -249,9 +249,9 @@ bool AEDeviceEnumerationOSX::hasSampleRate(const AESampleRateList &list, const u
 
 bool AEDeviceEnumerationOSX::hasDataFormat(const AEDataFormatList &list, const enum AEDataFormat format) const
 {
-  for (size_t i = 0; i < list.size(); ++i)
+  for (const AEDataFormat& i : list)
   {
-    if (list[i] == format)
+    if (i == format)
       return true;
   }
   return false;
@@ -259,9 +259,9 @@ bool AEDeviceEnumerationOSX::hasDataFormat(const AEDataFormatList &list, const e
 
 bool AEDeviceEnumerationOSX::hasDataType(const AEDataTypeList &list, CAEStreamInfo::DataType type) const
 {
-  for (size_t i = 0; i < list.size(); ++i)
+  for (const CAEStreamInfo::DataType& i : list)
   {
-    if (list[i] == type)
+    if (i == type)
       return true;
   }
   return false;
@@ -275,14 +275,14 @@ AEDataFormatList AEDeviceEnumerationOSX::getFormatListForStream(UInt32 streamIdx
 
   // check the streams
   const StreamFormatList &formatList = m_caStreamInfos[streamIdx].formatList;
-  for(UInt32 formatIdx = 0; formatIdx < formatList.size(); formatIdx++)
+  for (const AudioStreamRangedDescription& format : formatList)
   {
-    AudioStreamBasicDescription formatDesc = formatList[formatIdx].mFormat;
+    AudioStreamBasicDescription formatDesc = format.mFormat;
     AEDataFormatList aeFormatList = caFormatToAE(formatDesc, m_caStreamInfos[streamIdx].isDigital);
-    for (UInt32 formatListIdx = 0; formatListIdx < aeFormatList.size(); formatListIdx++)
+    for (const AEDataFormat& aeFormat : aeFormatList)
     {
-      if (!hasDataFormat(returnDataFormatList, aeFormatList[formatListIdx]))
-        returnDataFormatList.push_back(aeFormatList[formatListIdx]);
+      if (!hasDataFormat(returnDataFormatList, aeFormat))
+        returnDataFormatList.push_back(aeFormat);
     }
   }
   return returnDataFormatList;
@@ -296,14 +296,14 @@ AEDataTypeList AEDeviceEnumerationOSX::getTypeListForStream(UInt32 streamIdx) co
 
   // check the streams
   const StreamFormatList &formatList = m_caStreamInfos[streamIdx].formatList;
-  for(UInt32 formatIdx = 0; formatIdx < formatList.size(); formatIdx++)
+  for (const AudioStreamRangedDescription& format : formatList)
   {
-    AudioStreamBasicDescription formatDesc = formatList[formatIdx].mFormat;
+    AudioStreamBasicDescription formatDesc = format.mFormat;
     AEDataTypeList aeTypeList = caFormatToAEType(formatDesc, m_caStreamInfos[streamIdx].isDigital);
-    for (UInt32 typeListIdx = 0; typeListIdx < aeTypeList.size(); typeListIdx++)
+    for (const CAEStreamInfo::DataType type : aeTypeList)
     {
-      if (!hasDataType(returnDataTypeList, aeTypeList[typeListIdx]))
-        returnDataTypeList.push_back(aeTypeList[typeListIdx]);
+      if (!hasDataType(returnDataTypeList, type))
+        returnDataTypeList.push_back(type);
     }
   }
   return returnDataTypeList;
@@ -440,9 +440,9 @@ AESampleRateList AEDeviceEnumerationOSX::getSampleRateListForStream(UInt32 strea
 
   // check the streams
   const StreamFormatList &formatList = m_caStreamInfos[streamIdx].formatList;
-  for(UInt32 formatIdx = 0; formatIdx < formatList.size(); formatIdx++)
+  for (const AudioStreamRangedDescription& format : formatList)
   {
-    AudioStreamBasicDescription formatDesc = formatList[formatIdx].mFormat;
+    AudioStreamBasicDescription formatDesc = format.mFormat;
     // add sample rate info
     // for devices which return kAudioStreamAnyRatee
     // we add 44.1khz and 48khz - user can use
@@ -604,9 +604,9 @@ bool AEDeviceEnumerationOSX::FindSuitableFormatForStream(UInt32 &streamIdx, cons
     if (virt)
       formats = &m_caStreamInfos[streamIdxCurrent].formatListVirt;
 
-    for (StreamFormatList::const_iterator j = formats->begin(); j != formats->end(); ++j)
+    for (const AudioStreamRangedDescription& j : *formats)
     {
-      AudioStreamBasicDescription formatDesc = j->mFormat;
+      AudioStreamBasicDescription formatDesc = j.mFormat;
 
       // for devices with kAudioStreamAnyRate
       // assume that the user uses a fixed config

@@ -57,17 +57,17 @@ void CCoreAudioHardware::ResetAudioDevices()
   CoreAudioDeviceList list;
   if (GetOutputDevices(&list))
   {
-    for (CoreAudioDeviceList::iterator it = list.begin(); it != list.end(); ++it)
+    for (unsigned int deviceId : list)
     {
-      CCoreAudioDevice device(*it);
+      CCoreAudioDevice device(deviceId);
 
       AudioStreamIdList streams;
       if (device.GetStreams(&streams))
       {
         CLog::Log(LOGDEBUG, "CCoreAudioHardware::ResetAudioDevices {} streams for device {}",
                   streams.size(), device.GetName());
-        for (AudioStreamIdList::iterator ait = streams.begin(); ait != streams.end(); ++ait)
-          ResetStream(*ait);
+        for (const AudioStreamID& stream : streams)
+          ResetStream(stream);
       }
     }
   }
@@ -91,9 +91,8 @@ void CCoreAudioHardware::ResetStream(AudioStreamID streamId)
       StreamFormatList availableFormats;
       if (stream.GetAvailablePhysicalFormats(&availableFormats))
       {
-        for (StreamFormatList::iterator fmtIt = availableFormats.begin(); fmtIt != availableFormats.end() ; ++fmtIt)
+        for (const AudioStreamRangedDescription fmtDesc : availableFormats)
         {
-          AudioStreamRangedDescription fmtDesc = *fmtIt;
           if (fmtDesc.mFormat.mFormatID == kAudioFormatLinearPCM)
           {
             AudioStreamBasicDescription newFmt = fmtDesc.mFormat;

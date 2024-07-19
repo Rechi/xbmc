@@ -38,8 +38,8 @@ static void EnumerateDevices(CADeviceList &list)
 
     AEDeviceEnumerationOSX devEnum(deviceID);
     CADeviceList listForDevice = devEnum.GetDeviceInfoList();
-    for (UInt32 devIdx = 0; devIdx < listForDevice.size(); devIdx++)
-      list.push_back(listForDevice[devIdx]);
+    for (const std::pair<CADeviceInstance, CAEDeviceInfo>& device : listForDevice)
+      list.push_back(device);
 
     //in the first place of the list add the default device
     //with name "default" - if this is selected
@@ -201,11 +201,11 @@ bool CAESinkDARWINOSX::Initialize(AEAudioFormat &format, std::string &device)
   }
   else
   {
-    for (size_t i = 0; i < devices.size(); i++)
+    for (const std::pair<CADeviceInstance, CAEDeviceInfo>& i : devices)
     {
-      if (device == devices[i].second.m_deviceName)
+      if (device == i.second.m_deviceName)
       {
-        const struct CADeviceInstance &deviceInstance = devices[i].first;
+        const struct CADeviceInstance& deviceInstance = i.first;
         deviceID = deviceInstance.audioDeviceId;
         requestedStreamIndex = deviceInstance.streamIndex;
         requestedSourceId = deviceInstance.sourceId;
