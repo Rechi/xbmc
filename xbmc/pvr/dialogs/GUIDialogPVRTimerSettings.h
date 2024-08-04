@@ -182,6 +182,7 @@ private:
   CDateTime m_endLocalTime;
   bool m_bStartAnyTime = false;
   bool m_bEndAnyTime = false;
+  // NOLINTNEXTLINE(modernize-use-default-member-init)
   unsigned int m_iWeekdays;
   CDateTime m_firstDayLocalTime;
   unsigned int m_iPreventDupEpisodes = 0;

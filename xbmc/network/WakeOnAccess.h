@@ -40,8 +40,11 @@ public:
     std::string host;
     std::string mac;
     CDateTimeSpan timeout;
+    // NOLINTNEXTLINE(modernize-use-default-member-init)
     unsigned int wait_online1_sec; // initial wait
+    // NOLINTNEXTLINE(modernize-use-default-member-init)
     unsigned int wait_online2_sec; // extended wait
+    // NOLINTNEXTLINE(modernize-use-default-member-init)
     unsigned int wait_services_sec;
 
     unsigned short ping_port = 0; // where to ping
@@ -70,6 +73,7 @@ private:
   bool FindOrTouchHostEntry(const std::string& hostName, bool upnpMode, WakeUpEntry& server);
   void TouchHostEntry(const std::string& hostName, bool upnpMode);
 
+  // NOLINTNEXTLINE(modernize-use-default-member-init)
   unsigned int m_netinit_sec, m_netsettle_ms; //time to wait for network connection
 
   bool m_enabled = false;

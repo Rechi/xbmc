@@ -32,7 +32,7 @@ using namespace PVR;
 const std::string CPVREpgInfoTag::IMAGE_OWNER_PATTERN = "epgtag_{}";
 
 CPVREpgInfoTag::CPVREpgInfoTag(int iEpgID, const std::string& iconPath)
-  : m_iUniqueBroadcastID(EPG_TAG_INVALID_UID),
+  : m_iUniqueBroadcastID(EPG_TAG_INVALID_UID), // NOLINT(modernize-use-default-member-init)
     m_iconPath(iconPath, StringUtils::Format(IMAGE_OWNER_PATTERN, iEpgID)),
     m_iFlags(EPG_TAG_FLAG_UNDEFINED),
     m_channelData(new CPVREpgChannelData),
@@ -45,7 +45,7 @@ CPVREpgInfoTag::CPVREpgInfoTag(const std::shared_ptr<CPVREpgChannelData>& channe
                                const CDateTime& start,
                                const CDateTime& end,
                                bool bIsGapTag)
-  : m_iUniqueBroadcastID(EPG_TAG_INVALID_UID),
+  : m_iUniqueBroadcastID(EPG_TAG_INVALID_UID), // NOLINT(modernize-use-default-member-init)
     m_iconPath(StringUtils::Format(IMAGE_OWNER_PATTERN, iEpgID)),
     m_iFlags(EPG_TAG_FLAG_UNDEFINED),
     m_bIsGapTag(bIsGapTag),
