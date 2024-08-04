@@ -23,6 +23,7 @@ public:
     : CVideoPlayActionProcessorBase(item)
   {
   }
+  CVideoSelectActionProcessorBase() = delete;
 
   ~CVideoSelectActionProcessorBase() override = default;
 
@@ -38,7 +39,6 @@ protected:
   virtual bool OnMoreSelected() = 0;
 
 private:
-  CVideoSelectActionProcessorBase() = delete;
   Action ChooseVideoItemSelectAction() const;
   unsigned int ChooseStackItemPartNumber() const;
 };

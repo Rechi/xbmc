@@ -17,6 +17,7 @@
 class IThreadImpl
 {
 public:
+  IThreadImpl() = delete;
   virtual ~IThreadImpl() = default;
 
   static std::unique_ptr<IThreadImpl> CreateThreadImpl(std::thread::native_handle_type handle);
@@ -37,7 +38,4 @@ protected:
   IThreadImpl(std::thread::native_handle_type handle) : m_handle(handle) {}
 
   std::thread::native_handle_type m_handle;
-
-private:
-  IThreadImpl() = delete;
 };

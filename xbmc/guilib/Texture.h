@@ -31,6 +31,8 @@ class CTexture : public CTextureBase
 
 public:
   CTexture(unsigned int width = 0, unsigned int height = 0, XB_FMT format = XB_FMT_A8R8G8B8);
+  // no copy constructor
+  CTexture(const CTexture& copy) = delete;
   virtual ~CTexture();
 
   static std::unique_ptr<CTexture> CreateTexture(unsigned int width = 0,
@@ -101,10 +103,6 @@ public:
    */
   virtual void SyncGPU(){};
   virtual void BindToUnit(unsigned int unit) = 0;
-
-private:
-  // no copy constructor
-  CTexture(const CTexture& copy) = delete;
 
 protected:
   bool LoadFromFileInMem(unsigned char* buffer, size_t size, const std::string& mimeType,

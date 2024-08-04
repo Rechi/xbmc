@@ -22,6 +22,8 @@ class CPVRRadioRDSInfoTag final : public IArchivable, public ISerializable
 {
 public:
   CPVRRadioRDSInfoTag();
+  CPVRRadioRDSInfoTag(const CPVRRadioRDSInfoTag& tag) = delete;
+  const CPVRRadioRDSInfoTag& operator=(const CPVRRadioRDSInfoTag& tag) = delete;
 
   bool operator ==(const CPVRRadioRDSInfoTag& right) const;
   bool operator !=(const CPVRRadioRDSInfoTag& right) const;
@@ -125,9 +127,6 @@ public:
   bool IsPlayingRadioTextPlus() const;
 
 private:
-  CPVRRadioRDSInfoTag(const CPVRRadioRDSInfoTag& tag) = delete;
-  const CPVRRadioRDSInfoTag& operator =(const CPVRRadioRDSInfoTag& tag) = delete;
-
   static std::string Trim(const std::string& value);
 
   mutable CCriticalSection m_critSection;

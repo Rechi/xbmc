@@ -22,6 +22,8 @@ class CPVRGUIActionListener : public KODI::ACTION::IActionListener, public ISett
 {
 public:
   CPVRGUIActionListener();
+  CPVRGUIActionListener(const CPVRGUIActionListener&) = delete;
+  CPVRGUIActionListener& operator=(const CPVRGUIActionListener&) = delete;
   ~CPVRGUIActionListener() override;
 
   void Init(CPVRManager& mgr);
@@ -37,9 +39,6 @@ public:
   void OnPVRManagerEvent(const PVREvent& event);
 
 private:
-  CPVRGUIActionListener(const CPVRGUIActionListener&) = delete;
-  CPVRGUIActionListener& operator=(const CPVRGUIActionListener&) = delete;
-
   static ChannelSwitchMode GetChannelSwitchMode(int iAction);
 };
 

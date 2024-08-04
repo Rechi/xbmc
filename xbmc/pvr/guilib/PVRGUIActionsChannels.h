@@ -50,6 +50,8 @@ class CPVRGUIActionsChannels : public IPVRComponent
 {
 public:
   CPVRGUIActionsChannels();
+  CPVRGUIActionsChannels(const CPVRGUIActionsChannels&) = delete;
+  CPVRGUIActionsChannels const& operator=(CPVRGUIActionsChannels const&) = delete;
   ~CPVRGUIActionsChannels() override;
 
   /*!
@@ -159,9 +161,6 @@ public:
   void SetSelectedChannelPath(bool bRadio, const std::string& path);
 
 private:
-  CPVRGUIActionsChannels(const CPVRGUIActionsChannels&) = delete;
-  CPVRGUIActionsChannels const& operator=(CPVRGUIActionsChannels const&) = delete;
-
   CPVRChannelSwitchingInputHandler m_channelNumberInputHandler;
   bool m_bChannelScanRunning{false};
   CPVRGUIChannelNavigator m_channelNavigator;

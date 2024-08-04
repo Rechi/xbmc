@@ -27,6 +27,7 @@ class CSpeechRecognitionAndroid : public ISpeechRecognitionCallback,
 {
 public:
   explicit CSpeechRecognitionAndroid(const CJNIContext& context);
+  CSpeechRecognitionAndroid() = delete;
   ~CSpeechRecognitionAndroid() override = default;
 
   // ISpeechRecognition implementation
@@ -37,8 +38,6 @@ public:
   void SpeechRecognitionDone(jni::CJNIXBMCSpeechRecognitionListener* listener) override;
 
 private:
-  CSpeechRecognitionAndroid() = delete;
-
   static void RegisterSpeechRecognitionListener(void* thiz);
 
   const CJNIContext& m_context;

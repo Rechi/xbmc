@@ -20,6 +20,7 @@ class CVideoPlayActionProcessorBase
 {
 public:
   explicit CVideoPlayActionProcessorBase(const std::shared_ptr<CFileItem>& item) : m_item(item) {}
+  CVideoPlayActionProcessorBase() = delete;
   virtual ~CVideoPlayActionProcessorBase() = default;
 
   bool ProcessDefaultAction();
@@ -38,8 +39,5 @@ protected:
 
   std::shared_ptr<CFileItem> m_item;
   bool m_userCancelled{false};
-
-private:
-  CVideoPlayActionProcessorBase() = delete;
 };
 } // namespace KODI::VIDEO::GUILIB

@@ -38,6 +38,8 @@ class CInputProcessorPointer final : public IRawInputHandlerPointer
 {
 public:
   CInputProcessorPointer(wayland::surface_t const& surface, IInputHandlerPointer& handler);
+  CInputProcessorPointer(CInputProcessorPointer const& other) = delete;
+  CInputProcessorPointer& operator=(CInputProcessorPointer const& other) = delete;
   void SetCoordinateScale(std::int32_t scale) { m_coordinateScale = scale; }
 
   void OnPointerEnter(CSeat* seat,
@@ -53,9 +55,6 @@ public:
   void OnPointerAxis(CSeat* seat, std::uint32_t time, wayland::pointer_axis axis, double value) override;
 
 private:
-  CInputProcessorPointer(CInputProcessorPointer const& other) = delete;
-  CInputProcessorPointer& operator=(CInputProcessorPointer const& other) = delete;
-
   std::uint16_t ConvertMouseCoordinate(double coord) const;
   void SetMousePosFromSurface(CPointGen<double> position);
   void SendMouseMotion();

@@ -35,6 +35,7 @@ class CVideoChooser
 {
 public:
   explicit CVideoChooser(const std::shared_ptr<const CFileItem>& item) : m_item(item) {}
+  CVideoChooser() = delete;
   virtual ~CVideoChooser() = default;
 
   void EnableTypeSwitch(bool enable) { m_enableTypeSwitch = enable; }
@@ -43,7 +44,6 @@ public:
   std::shared_ptr<const CFileItem> ChooseVideo();
 
 private:
-  CVideoChooser() = delete;
   std::shared_ptr<const CFileItem> ChooseVideoVersion();
   std::shared_ptr<const CFileItem> ChooseVideoExtra();
   std::shared_ptr<const CFileItem> ChooseVideo(CGUIDialogSelect& dialog,

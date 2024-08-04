@@ -61,6 +61,9 @@ public:
   CPVRRecording();
   CPVRRecording(const PVR_RECORDING& recording, unsigned int iClientId);
 
+  CPVRRecording(const CPVRRecording& tag) = delete;
+  CPVRRecording& operator=(const CPVRRecording& other) = delete;
+
   bool operator==(const CPVRRecording& right) const;
   bool operator!=(const CPVRRecording& right) const;
 
@@ -500,9 +503,6 @@ public:
   std::shared_ptr<CPVRProvider> GetProvider() const;
 
 private:
-  CPVRRecording(const CPVRRecording& tag) = delete;
-  CPVRRecording& operator=(const CPVRRecording& other) = delete;
-
   void UpdatePath();
 
   int m_iClientId; /*!< ID of the backend */

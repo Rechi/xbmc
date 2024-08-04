@@ -15,6 +15,8 @@
 class CFileItemListModification : public IFileItemListModifier
 {
 public:
+  CFileItemListModification(const CFileItemListModification&) = delete;
+  CFileItemListModification& operator=(CFileItemListModification const&) = delete;
   ~CFileItemListModification() override;
 
   static CFileItemListModification& GetInstance();
@@ -24,8 +26,6 @@ public:
 
 private:
   CFileItemListModification();
-  CFileItemListModification(const CFileItemListModification&) = delete;
-  CFileItemListModification& operator=(CFileItemListModification const&) = delete;
 
   std::set<IFileItemListModifier*> m_modifiers;
 };

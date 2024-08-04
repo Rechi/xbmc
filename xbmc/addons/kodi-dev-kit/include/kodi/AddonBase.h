@@ -488,6 +488,9 @@ private:
 class ATTR_DLL_LOCAL IInstanceInfo
 {
 public:
+  IInstanceInfo() = delete;
+  IInstanceInfo(const IInstanceInfo&) = delete;
+
   explicit IInstanceInfo(KODI_ADDON_INSTANCE_STRUCT* instance) : m_instance(instance) {}
 
   /// @defgroup cpp_kodi_addon_addonbase_Defs_IInstanceInfo_Help Value Help
@@ -534,9 +537,6 @@ public:
   operator KODI_ADDON_INSTANCE_STRUCT*() const { return m_instance; }
 
 private:
-  IInstanceInfo() = delete;
-  IInstanceInfo(const IInstanceInfo&) = delete;
-
   KODI_ADDON_INSTANCE_STRUCT* m_instance;
 };
 ///@}

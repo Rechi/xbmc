@@ -83,6 +83,8 @@ class CGUIFontTTF
   friend class CGUIFont;
 
 public:
+  CGUIFontTTF(const CGUIFontTTF&) = delete;
+  CGUIFontTTF& operator=(const CGUIFontTTF&) = delete;
   virtual ~CGUIFontTTF();
 
   static CGUIFontTTF* CreateGUIFontTTF(const std::string& fontIdent);
@@ -281,7 +283,5 @@ private:
 
   virtual bool FirstBegin() = 0;
   virtual void LastEnd() = 0;
-  CGUIFontTTF(const CGUIFontTTF&) = delete;
-  CGUIFontTTF& operator=(const CGUIFontTTF&) = delete;
   int m_referenceCount{0};
 };
