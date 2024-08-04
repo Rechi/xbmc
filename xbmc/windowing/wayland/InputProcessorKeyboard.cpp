@@ -24,7 +24,7 @@ constexpr int WL_KEYBOARD_XKB_CODE_OFFSET{8};
 }
 
 CInputProcessorKeyboard::CInputProcessorKeyboard(IInputHandlerKeyboard& handler)
-: m_handler{handler}, m_keyRepeatTimer{std::bind(&CInputProcessorKeyboard::KeyRepeatTimeout, this)}
+  : m_handler{handler}, m_keyRepeatTimer{[this] { KeyRepeatTimeout(); }}
 {
 }
 

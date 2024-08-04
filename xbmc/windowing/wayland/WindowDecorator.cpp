@@ -838,7 +838,8 @@ void CWindowDecorator::ResetSurfaces()
   {
     if (!m_borderSurfaces.front().surface.wlSurface)
     {
-      std::generate(m_borderSurfaces.begin(), m_borderSurfaces.end(), std::bind(&CWindowDecorator::MakeBorderSurface, this));
+      std::generate(m_borderSurfaces.begin(), m_borderSurfaces.end(),
+                    [this] { return MakeBorderSurface(); });
     }
   }
   else

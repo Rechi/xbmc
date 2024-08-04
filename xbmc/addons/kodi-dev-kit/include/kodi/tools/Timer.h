@@ -68,7 +68,7 @@ public:
   ///                     implemented function @ref ITimerCallback::OnTimeout().
   ///
   explicit CTimer(kodi::tools::CTimer::ITimerCallback* callback)
-    : CTimer(std::bind(&ITimerCallback::OnTimeout, callback))
+    : CTimer([callback] { callback->OnTimeout(); })
   {
   }
   //----------------------------------------------------------------------------
