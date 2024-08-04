@@ -476,7 +476,7 @@ void XBPython::Process()
 
 bool XBPython::OnScriptInitialized(ILanguageInvoker* invoker)
 {
-  if (invoker == NULL)
+  if (invoker == nullptr)
     return false;
 
   XBMC_TRACE;
@@ -569,7 +569,7 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker* invoker)
 
 void XBPython::OnScriptStarted(ILanguageInvoker* invoker)
 {
-  if (invoker == NULL)
+  if (invoker == nullptr)
     return;
 
   if (!m_bInitialized)
@@ -588,7 +588,7 @@ void XBPython::NotifyScriptAborting(ILanguageInvoker* invoker)
   XBMC_TRACE;
 
   long invokerId(-1);
-  if (invoker != NULL)
+  if (invoker != nullptr)
     invokerId = invoker->GetId();
 
   LOCK_AND_COPY(std::vector<XBMCAddon::xbmc::Monitor*>, tmp, m_vecMonitorCallbackList);
@@ -648,5 +648,5 @@ bool XBPython::WaitForEvent(CEvent& hEvent, unsigned int milliseconds)
   CEvent* ret = eventGroup.wait(std::chrono::milliseconds(milliseconds));
   if (ret)
     m_globalEvent.Reset();
-  return ret != NULL;
+  return ret != nullptr;
 }

@@ -60,7 +60,7 @@ namespace
 constexpr size_t maxBufferLength = 64 * 1024;
 }
 
-CTCPServer *CTCPServer::ServerInstance = NULL;
+CTCPServer* CTCPServer::ServerInstance = nullptr;
 
 bool CTCPServer::StartServer(int port, bool nonlocal)
 {
@@ -84,14 +84,14 @@ void CTCPServer::StopServer(bool bWait)
     if (bWait)
     {
       delete ServerInstance;
-      ServerInstance = NULL;
+      ServerInstance = nullptr;
     }
   }
 }
 
 bool CTCPServer::IsRunning()
 {
-  if (ServerInstance == NULL)
+  if (ServerInstance == nullptr)
     return false;
 
   return ((CThread*)ServerInstance)->IsRunning();
@@ -157,7 +157,7 @@ void CTCPServer::Process()
               if (!response.empty())
                 m_connections[i]->Send(response.c_str(), response.size());
 
-              if (websocket != NULL)
+              if (websocket != nullptr)
               {
                 // Replace the CTCPClient with a CWebSocketClient
                 CWebSocketClient *websocketClient = new CWebSocketClient(websocket, *(m_connections[i]));
@@ -683,7 +683,7 @@ CTCPServer::CWebSocketClient& CTCPServer::CWebSocketClient::operator=(const CWeb
 void CTCPServer::CWebSocketClient::Send(const char *data, unsigned int size)
 {
   const CWebSocketMessage *msg = m_websocket->Send(WebSocketTextFrame, data, size);
-  if (msg == NULL || !msg->IsComplete())
+  if (msg == nullptr || !msg->IsComplete())
     return;
 
   std::vector<const CWebSocketFrame *> frames = msg->GetFrames();
@@ -694,7 +694,7 @@ void CTCPServer::CWebSocketClient::Send(const char *data, unsigned int size)
 void CTCPServer::CWebSocketClient::PushBuffer(CTCPServer *host, const char *buffer, int length)
 {
   bool send;
-  const CWebSocketMessage *msg = NULL;
+  const CWebSocketMessage* msg = nullptr;
 
   if (m_buffer.size() + length > maxBufferLength)
   {
@@ -709,7 +709,7 @@ void CTCPServer::CWebSocketClient::PushBuffer(CTCPServer *host, const char *buff
 
   do
   {
-    if ((msg = m_websocket->Handle(buf, len, send)) != NULL && msg->IsComplete())
+    if ((msg = m_websocket->Handle(buf, len, send)) != nullptr && msg->IsComplete())
     {
       std::vector<const CWebSocketFrame *> frames = msg->GetFrames();
       if (send)
@@ -726,8 +726,7 @@ void CTCPServer::CWebSocketClient::PushBuffer(CTCPServer *host, const char *buff
 
       delete msg;
     }
-  }
-  while (len > 0 && msg != NULL);
+  } while (len > 0 && msg != nullptr);
 
   if (len < m_buffer.size())
     m_buffer = m_buffer.substr(m_buffer.size() - len);

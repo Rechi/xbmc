@@ -22,7 +22,7 @@
 
 CGUIDialogSlider::CGUIDialogSlider() : CGUIDialog(WINDOW_DIALOG_SLIDER, "DialogSlider.xml")
 {
-  m_callback = NULL;
+  m_callback = nullptr;
   m_callbackData = NULL;
   m_loadType = KEEP_IN_MEMORY;
 }
@@ -55,7 +55,7 @@ bool CGUIDialogSlider::OnMessage(CGUIMessage& message)
     }
     break;
   case GUI_MSG_WINDOW_DEINIT:
-    m_callback = NULL;
+    m_callback = nullptr;
     m_callbackData = NULL;
     break;
   }
@@ -85,7 +85,7 @@ void CGUIDialogSlider::SetSlider(const std::string &label, float value, float mi
 void CGUIDialogSlider::OnWindowLoaded()
 {
   // ensure our callbacks are NULL, incase we were loaded via some non-standard means
-  m_callback = NULL;
+  m_callback = nullptr;
   m_callbackData = NULL;
   CGUIDialog::OnWindowLoaded();
 }

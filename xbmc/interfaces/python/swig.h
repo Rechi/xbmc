@@ -66,7 +66,7 @@ namespace PythonBindings
                                    const char* typenameForErrorString)
   {
     if (pythonObj == NULL || pythonObj == Py_None)
-      return NULL;
+      return nullptr;
     if (reinterpret_cast<PyHolder*>(pythonObj)->magicNumber != XBMC_PYTHON_TYPE_MAGIC_NUMBER || !PyObject_TypeCheck(pythonObj, const_cast<PyTypeObject*>((&(typeToCheck->pythonType)))))
       throw XBMCAddon::WrongTypeException("Incorrect type passed to \"%s\", was expecting a \"%s\".",methodNameForErrorString,typenameForErrorString);
     return reinterpret_cast<PyHolder*>(pythonObj)->pSelf;
@@ -89,8 +89,12 @@ namespace PythonBindings
   inline XBMCAddon::AddonClass* retrieveApiInstance(const PyObject* pythonObj, const char* expectedType, const char* methodNamespacePrefix,
                                    const char* methodNameForErrorString)
   {
-    return (pythonObj == NULL || pythonObj == Py_None) ? NULL :
-      doretrieveApiInstance(reinterpret_cast<const PyHolder*>(pythonObj),reinterpret_cast<const PyHolder*>(pythonObj)->typeInfo, expectedType, methodNamespacePrefix, methodNameForErrorString);
+    return (pythonObj == NULL || pythonObj == Py_None)
+               ? nullptr
+               : doretrieveApiInstance(reinterpret_cast<const PyHolder*>(pythonObj),
+                                       reinterpret_cast<const PyHolder*>(pythonObj)->typeInfo,
+                                       expectedType, methodNamespacePrefix,
+                                       methodNameForErrorString);
   }
 
   /**

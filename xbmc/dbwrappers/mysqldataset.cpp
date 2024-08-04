@@ -1642,7 +1642,7 @@ std::string MysqlDatabase::mysql_vmprintf(const char* zFormat, va_list ap)
 MysqlDataset::MysqlDataset() : Dataset()
 {
   haveError = false;
-  db = NULL;
+  db = nullptr;
   autorefresh = false;
 }
 
@@ -1662,7 +1662,7 @@ void MysqlDataset::set_autorefresh(bool val)
 
 MYSQL* MysqlDataset::handle()
 {
-  if (db != NULL)
+  if (db != nullptr)
   {
     return static_cast<MysqlDatabase*>(db)->getHandle();
   }
@@ -1673,7 +1673,7 @@ MYSQL* MysqlDataset::handle()
 void MysqlDataset::make_query(StringList& _sql)
 {
   std::string query;
-  if (db == NULL)
+  if (db == nullptr)
     throw DbErrors("No Database Connection");
   try
   {
@@ -1724,7 +1724,7 @@ void MysqlDataset::make_deletion()
 
 void MysqlDataset::fill_fields()
 {
-  if ((db == NULL) || (result.record_header.empty()) ||
+  if ((db == nullptr) || (result.record_header.empty()) ||
       (result.records.size() < (unsigned int)frecno))
     return;
 
@@ -2056,7 +2056,7 @@ void MysqlDataset::free_row()
   if (row)
   {
     delete row;
-    result.records[frecno] = NULL;
+    result.records[frecno] = nullptr;
   }
 }
 

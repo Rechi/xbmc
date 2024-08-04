@@ -74,7 +74,7 @@ bool CAutorun::ExecuteAutorun(const std::string& path)
 
   CCdInfo* pInfo = CServiceBroker::GetMediaManager().GetCdInfo(path);
 
-  if ( pInfo == NULL )
+  if (pInfo == nullptr)
     return false;
 
   auto& components = CServiceBroker::GetAppComponents();
@@ -108,7 +108,7 @@ bool CAutorun::PlayDisc(const std::string& path, bool bypassSettings, bool start
   std::string mediaPath;
 
   CCdInfo* pInfo = CServiceBroker::GetMediaManager().GetCdInfo(path);
-  if (pInfo == NULL)
+  if (pInfo == nullptr)
     return false;
 
   if (pInfo->IsAudio(1))

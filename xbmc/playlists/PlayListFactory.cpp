@@ -103,8 +103,7 @@ CPlayList* CPlayListFactory::Create(const CFileItem& item)
   if (extension == ".xspf")
     return new CPlayListXSPF();
 
-  return NULL;
-
+  return nullptr;
 }
 
 bool CPlayListFactory::IsPlaylist(const CFileItem& item)

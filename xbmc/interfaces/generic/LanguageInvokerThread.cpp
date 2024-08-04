@@ -15,7 +15,7 @@
 CLanguageInvokerThread::CLanguageInvokerThread(LanguageInvokerPtr invoker,
                                                CScriptInvocationManager* invocationManager,
                                                bool reuseable)
-  : ILanguageInvoker(NULL),
+  : ILanguageInvoker(nullptr),
     CThread("LanguageInvoker"),
     m_invoker(std::move(invoker)),
     m_invocationManager(invocationManager),

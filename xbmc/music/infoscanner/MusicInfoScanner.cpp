@@ -96,7 +96,7 @@ void CMusicInfoScanner::Process()
     if (m_bClean && m_pathsToScan.empty())
     {
       CMusicLibraryQueue::GetInstance().CleanLibrary(false);
-      m_handle = NULL;
+      m_handle = nullptr;
       m_bRunning = false;
 
       return;
@@ -288,7 +288,7 @@ void CMusicInfoScanner::Process()
 
   if (m_handle)
     m_handle->MarkFinished();
-  m_handle = NULL;
+  m_handle = nullptr;
 }
 
 void CMusicInfoScanner::Start(const std::string& strDirectory, int flags)
@@ -637,7 +637,7 @@ void CMusicInfoScanner::FileItemsToAlbums(CFileItemList& items, VECALBUMS& album
     CSong song(*items[i]);
 
     // keep the db-only fields intact on rescan...
-    if (songsMap != NULL)
+    if (songsMap != nullptr)
     {
       // Match up item to songs in library previously scanned with this path
       MAPSONGS::iterator songlist = songsMap->find(items[i]->GetPath());
@@ -1124,7 +1124,7 @@ void CMusicInfoScanner::FindArtForAlbums(VECALBUMS &albums, const std::string &p
      keep everything as song art.
      */
     bool singleArt = true;
-    CSong *art = NULL;
+    CSong* art = nullptr;
     for (auto& song : album.songs)
     {
       if (song.HasArt())
@@ -1558,7 +1558,7 @@ CMusicInfoScanner::DownloadAlbumInfo(const CAlbum& album,
       ScannerWait(1000);
   }
 
-  CGUIDialogSelect *pDlg = NULL;
+  CGUIDialogSelect* pDlg = nullptr;
   int iSelectedAlbum=0;
   if ((result == CInfoScanner::NO_NFO || result == CInfoScanner::OVERRIDE_NFO)
       && !bMusicBrainz)

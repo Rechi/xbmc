@@ -165,7 +165,7 @@ bool CAAudioUnitSink::close()
   deactivateAudioSession();
 
   delete m_buffer;
-  m_buffer = NULL;
+  m_buffer = nullptr;
 
   m_started = false;
   return true;
@@ -578,11 +578,6 @@ static void EnumerateDevices(AEDeviceInfoList &list)
 /***************************************************************************************/
 AEDeviceInfoList CAESinkDARWINIOS::m_devices;
 
-CAESinkDARWINIOS::CAESinkDARWINIOS()
-:   m_audioSink(NULL)
-{
-}
-
 void CAESinkDARWINIOS::Register()
 {
   AE::AESinkRegEntry reg;
@@ -691,7 +686,7 @@ bool CAESinkDARWINIOS::Initialize(AEAudioFormat &format, std::string &device)
 void CAESinkDARWINIOS::Deinitialize()
 {
   delete m_audioSink;
-  m_audioSink = NULL;
+  m_audioSink = nullptr;
 }
 
 void CAESinkDARWINIOS::GetDelay(AEDelayStatus& status)

@@ -197,7 +197,7 @@ std::string Xcddb::Recv(bool wait4point)
 //-------------------------------------------------------------------------------------------------------------------
 bool Xcddb::queryCDinfo(CCdInfo* pInfo, int inexact_list_select)
 {
-  if ( pInfo == NULL )
+  if (pInfo == nullptr)
   {
     m_lastError = E_PARAMETER_WRONG;
     return false;
@@ -803,7 +803,7 @@ const std::string& Xcddb::getGenre() const
 //-------------------------------------------------------------------------------------------------------------------
 bool Xcddb::queryCDinfo(CCdInfo* pInfo)
 {
-  if ( pInfo == NULL )
+  if (pInfo == nullptr)
   {
     CLog::Log(LOGERROR, "Xcddb::queryCDinfo pInfo == NULL");
     m_lastError = E_PARAMETER_WRONG;
@@ -1060,7 +1060,7 @@ bool Xcddb::isCDCached( CCdInfo* pInfo )
 {
   if (cCacheDir.empty())
     return false;
-  if ( pInfo == NULL )
+  if (pInfo == nullptr)
     return false;
 
   return XFILE::CFile::Exists(GetCacheFile(pInfo->GetCddbDiscId()));

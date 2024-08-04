@@ -30,7 +30,7 @@ namespace XBMCAddon
       if (m_called)
       {
         CLog::Log(LOGWARNING, "WsgiResponse: callable has already been called");
-        return NULL;
+        return nullptr;
       }
 
       m_called = true;

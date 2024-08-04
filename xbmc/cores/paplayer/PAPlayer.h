@@ -122,7 +122,7 @@ private:
   unsigned int m_upcomingCrossfadeMS = 0; /* how long the upcoming crossfade is in ms */
   CEvent              m_startEvent;          /* event for playback start */
   StreamInfo* m_currentStream = nullptr;
-  IAudioCallback*     m_audioCallback;       /* the viz audio callback */
+  IAudioCallback* m_audioCallback = nullptr; /* the viz audio callback */
 
   CCriticalSection    m_streamsLock;         /* lock for the stream list */
   StreamList          m_streams;             /* playing streams */

@@ -28,7 +28,7 @@ std::unique_ptr<IStorageProvider> IStorageProvider::CreateInstance()
 
 COSXStorageProvider::COSXStorageProvider()
 {
-  PumpDriveChangeEvents(NULL);
+  PumpDriveChangeEvents(nullptr);
 }
 
 void COSXStorageProvider::GetLocalDrives(VECSOURCES& localDrives)

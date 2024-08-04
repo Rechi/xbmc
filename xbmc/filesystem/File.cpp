@@ -1083,10 +1083,7 @@ CFileStreamBuffer::~CFileStreamBuffer()
 }
 
 CFileStreamBuffer::CFileStreamBuffer(int backsize)
-  : std::streambuf()
-  , m_file(NULL)
-  , m_buffer(NULL)
-  , m_backsize(backsize)
+  : std::streambuf(), m_buffer(NULL), m_backsize(backsize)
 {
 }
 

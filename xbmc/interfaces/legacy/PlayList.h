@@ -49,7 +49,7 @@ namespace XBMCAddon
     class PlayList : public AddonClass
     {
       int iPlayList;
-      KODI::PLAYLIST::CPlayList* pPlayList;
+      KODI::PLAYLIST::CPlayList* pPlayList = nullptr;
 
     public:
       explicit PlayList(int playList);
@@ -97,7 +97,7 @@ namespace XBMCAddon
       ///
       add(...);
 #else
-      void add(const String& url, XBMCAddon::xbmcgui::ListItem* listitem = NULL, int index = -1);
+      void add(const String& url, XBMCAddon::xbmcgui::ListItem* listitem = nullptr, int index = -1);
 #endif
 
 #ifdef DOXYGEN_SHOULD_USE_THIS
