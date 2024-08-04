@@ -89,7 +89,7 @@ XBMCHelper::XBMCHelper()
 /////////////////////////////////////////////////////////////////////////////
 bool XBMCHelper::OnSettingChanging(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   const std::string &settingId = setting->GetId();

@@ -61,7 +61,7 @@ void CGUIDialogCMSSettings::InitializeSettings()
   CGUIDialogSettingsManualBase::InitializeSettings();
 
   const std::shared_ptr<CSettingCategory> category = AddCategory("cms", -1);
-  if (category == NULL)
+  if (category == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogCMSSettings: unable to setup settings");
     return;
@@ -69,7 +69,7 @@ void CGUIDialogCMSSettings::InitializeSettings()
 
   // get all necessary setting groups
   const std::shared_ptr<CSettingGroup> groupColorManagement = AddGroup(category);
-  if (groupColorManagement == NULL)
+  if (groupColorManagement == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogCMSSettings: unable to setup settings");
     return;
@@ -180,7 +180,7 @@ void CGUIDialogCMSSettings::InitializeSettings()
 
 void CGUIDialogCMSSettings::OnSettingChanged(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   CGUIDialogSettingsManualBase::OnSettingChanged(setting);

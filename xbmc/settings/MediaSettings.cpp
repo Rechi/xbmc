@@ -305,7 +305,7 @@ bool CMediaSettings::Save(TiXmlNode *settings) const
 
 void CMediaSettings::OnSettingAction(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   const std::string &settingId = setting->GetId();

@@ -80,7 +80,7 @@ void CGUIDialogPeripheralSettings::SetFileItem(const CFileItem* item)
 
 void CGUIDialogPeripheralSettings::OnSettingChanged(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   CGUIDialogSettingsManualBase::OnSettingChanged(setting);
@@ -190,14 +190,14 @@ void CGUIDialogPeripheralSettings::InitializeSettings()
   CGUIDialogSettingsManualBase::InitializeSettings();
 
   const std::shared_ptr<CSettingCategory> category = AddCategory("peripheralsettings", -1);
-  if (category == NULL)
+  if (category == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogPeripheralSettings: unable to setup settings");
     return;
   }
 
   const std::shared_ptr<CSettingGroup> group = AddGroup(category);
-  if (group == NULL)
+  if (group == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogPeripheralSettings: unable to setup settings");
     return;
@@ -206,7 +206,7 @@ void CGUIDialogPeripheralSettings::InitializeSettings()
   std::vector<SettingPtr> settings = peripheral->GetSettings();
   for (auto& setting : settings)
   {
-    if (setting == NULL)
+    if (setting == nullptr)
       continue;
 
     if (!setting->IsVisible())
@@ -296,7 +296,7 @@ void CGUIDialogPeripheralSettings::InitializeSettings()
         break;
     }
 
-    if (settingCopy != NULL && settingCopy->GetControl() != NULL)
+    if (settingCopy != nullptr && settingCopy->GetControl() != nullptr)
     {
       settingCopy->SetLevel(SettingLevel::Basic);
       group->AddSetting(settingCopy);

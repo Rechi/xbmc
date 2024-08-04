@@ -224,20 +224,20 @@ void CGUIDialogPVRTimerSettings::InitializeSettings()
   CGUIDialogSettingsManualBase::InitializeSettings();
 
   const std::shared_ptr<CSettingCategory> category = AddCategory("pvrtimersettings", -1);
-  if (category == NULL)
+  if (category == nullptr)
   {
     CLog::LogF(LOGERROR, "Unable to add settings category");
     return;
   }
 
   const std::shared_ptr<CSettingGroup> group = AddGroup(category);
-  if (group == NULL)
+  if (group == nullptr)
   {
     CLog::LogF(LOGERROR, "Unable to add settings group");
     return;
   }
 
-  std::shared_ptr<CSetting> setting = NULL;
+  std::shared_ptr<CSetting> setting = nullptr;
 
   // Timer type
   bool useDetails = false;
@@ -427,7 +427,7 @@ int CGUIDialogPVRTimerSettings::GetWeekdaysFromSetting(const SettingConstPtr& se
 
 void CGUIDialogPVRTimerSettings::OnSettingChanged(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
   {
     CLog::LogF(LOGERROR, "No setting");
     return;
@@ -562,7 +562,7 @@ void CGUIDialogPVRTimerSettings::OnSettingChanged(const std::shared_ptr<const CS
 
 void CGUIDialogPVRTimerSettings::OnSettingAction(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
   {
     CLog::LogF(LOGERROR, "No setting");
     return;
@@ -757,14 +757,14 @@ void CGUIDialogPVRTimerSettings::SetButtonLabels()
 {
   // timer start time
   BaseSettingControlPtr settingControl = GetSettingControl(SETTING_TMR_BEGIN);
-  if (settingControl != NULL && settingControl->GetControl() != NULL)
+  if (settingControl != nullptr && settingControl->GetControl() != NULL)
   {
     SET_CONTROL_LABEL2(settingControl->GetID(), m_timerStartTimeStr);
   }
 
   // timer end time
   settingControl = GetSettingControl(SETTING_TMR_END);
-  if (settingControl != NULL && settingControl->GetControl() != NULL)
+  if (settingControl != nullptr && settingControl->GetControl() != NULL)
   {
     SET_CONTROL_LABEL2(settingControl->GetID(), m_timerEndTimeStr);
   }
@@ -1324,7 +1324,7 @@ bool CGUIDialogPVRTimerSettings::TypeReadOnlyCondition(const std::string& condit
                                                        const SettingConstPtr& setting,
                                                        void* data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   CGUIDialogPVRTimerSettings* pThis = static_cast<CGUIDialogPVRTimerSettings*>(data);
@@ -1389,7 +1389,7 @@ bool CGUIDialogPVRTimerSettings::TypeSupportsCondition(const std::string& condit
                                                        const SettingConstPtr& setting,
                                                        void* data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   CGUIDialogPVRTimerSettings* pThis = static_cast<CGUIDialogPVRTimerSettings*>(data);
@@ -1474,7 +1474,7 @@ bool CGUIDialogPVRTimerSettings::StartAnytimeSetCondition(const std::string& con
                                                           const SettingConstPtr& setting,
                                                           void* data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   CGUIDialogPVRTimerSettings* pThis = static_cast<CGUIDialogPVRTimerSettings*>(data);
@@ -1521,7 +1521,7 @@ bool CGUIDialogPVRTimerSettings::EndAnytimeSetCondition(const std::string& condi
                                                         const SettingConstPtr& setting,
                                                         void* data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   CGUIDialogPVRTimerSettings* pThis = static_cast<CGUIDialogPVRTimerSettings*>(data);
