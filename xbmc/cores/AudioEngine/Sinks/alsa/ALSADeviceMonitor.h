@@ -19,7 +19,7 @@ class CALSADeviceMonitor : public IPlatformService
 {
 public:
   CALSADeviceMonitor();
-  ~CALSADeviceMonitor();
+  ~CALSADeviceMonitor() override;
 
   void Start();
   void Stop();

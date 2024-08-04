@@ -27,7 +27,7 @@ public:
   CGameInfoTag() { Reset(); }
   CGameInfoTag(const CGameInfoTag& tag) { *this = tag; }
   CGameInfoTag& operator=(const CGameInfoTag& tag);
-  virtual ~CGameInfoTag() = default;
+  ~CGameInfoTag() override = default;
   void Reset();
 
   bool operator==(const CGameInfoTag& tag) const;

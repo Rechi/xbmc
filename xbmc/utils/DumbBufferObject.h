@@ -17,7 +17,7 @@ class CDumbBufferObject : public CBufferObject
 {
 public:
   CDumbBufferObject();
-  virtual ~CDumbBufferObject() override;
+  ~CDumbBufferObject() override;
 
   // Registration
   static std::unique_ptr<CBufferObject> Create();

@@ -19,7 +19,7 @@ class CGUIDialogPictureInfo :
 {
 public:
   CGUIDialogPictureInfo();
-  ~CGUIDialogPictureInfo() = default;
+  ~CGUIDialogPictureInfo() override = default;
   void SetPicture(CFileItem *item);
   void FrameMove() override;
 

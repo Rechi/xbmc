@@ -129,7 +129,7 @@ namespace PVR
      */
     bool SetChannel(const CPVRChannelNumber& channelNumber);
 
-    virtual void AssignDepth() override;
+    void AssignDepth() override;
 
     void AssignItemDepth(CGUIListItem* item, bool focused);
 

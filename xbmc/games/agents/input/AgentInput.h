@@ -70,7 +70,7 @@ class CAgentInput : public Observable,
 public:
   CAgentInput(PERIPHERALS::CPeripherals& peripheralManager, CInputManager& inputManager);
 
-  virtual ~CAgentInput();
+  ~CAgentInput() override;
 
   // Lifecycle functions
   void Start(GameClientPtr gameClient);

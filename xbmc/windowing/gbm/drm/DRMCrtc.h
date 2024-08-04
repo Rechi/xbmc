@@ -23,7 +23,7 @@ public:
   explicit CDRMCrtc(int fd, uint32_t crtc);
   CDRMCrtc(const CDRMCrtc&) = delete;
   CDRMCrtc& operator=(const CDRMCrtc&) = delete;
-  ~CDRMCrtc() = default;
+  ~CDRMCrtc() override = default;
 
   uint32_t GetCrtcId() const { return m_crtc->crtc_id; }
   uint32_t GetBufferId() const { return m_crtc->buffer_id; }

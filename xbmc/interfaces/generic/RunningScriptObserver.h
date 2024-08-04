@@ -18,7 +18,7 @@ class CRunningScriptObserver : public IRunnable
 {
 public:
   CRunningScriptObserver(int scriptId, CEvent& evt);
-  ~CRunningScriptObserver();
+  ~CRunningScriptObserver() override;
 
   void Abort();
 

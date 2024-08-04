@@ -36,7 +36,7 @@ public:
    * @param bRadio True if this is a container for radio channels, false if it is for tv channels.
    */
   explicit CPVRChannelGroups(bool bRadio);
-  virtual ~CPVRChannelGroups();
+  ~CPVRChannelGroups() override;
 
   // ISettingCallback implementation
   void OnSettingChanged(const std::shared_ptr<const CSetting>& setting) override;
