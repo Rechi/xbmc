@@ -293,12 +293,12 @@ private:
 class IAEStreamDeleter
 {
 private:
-  IAE* m_iae;
-  bool m_finish;
+  IAE* m_iae = nullptr;
+  bool m_finish = true;
 
 public:
-  IAEStreamDeleter() : m_iae(nullptr), m_finish(true) {}
-  explicit IAEStreamDeleter(IAE& iae) : m_iae(&iae), m_finish{true} {}
+  IAEStreamDeleter() {}
+  explicit IAEStreamDeleter(IAE& iae) : m_iae(&iae) {}
   void setFinish(bool finish) { m_finish = finish; }
   void operator()(IAEStream* stream)
   {
@@ -310,10 +310,10 @@ public:
 class IAESoundDeleter
 {
 private:
-  IAE* m_iae;
+  IAE* m_iae = nullptr;
 
 public:
-  IAESoundDeleter() : m_iae(nullptr) {}
+  IAESoundDeleter() {}
   explicit IAESoundDeleter(IAE& iae) : m_iae(&iae) {}
   void operator()(IAESound* sound)
   {

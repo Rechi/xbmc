@@ -45,7 +45,7 @@ class InfoTagPicture : public AddonClass
 private:
   CPictureInfoTag* infoTag;
   bool offscreen;
-  bool owned;
+  bool owned = true;
 
 public:
 #ifndef SWIG
