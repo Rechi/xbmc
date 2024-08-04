@@ -159,6 +159,7 @@ if(NOT MSVC)
   # these options affect all code built by cmake including external projects.
   add_options(ALL_LANGUAGES ALL_BUILDS
     -Wall
+    -Wdeprecated
     -Wdouble-promotion
     -Wmissing-field-initializers
     -Wsign-compare
@@ -169,6 +170,22 @@ if(NOT MSVC)
   add_options(CXX ALL_BUILDS
     -Wnon-virtual-dtor
   )
+
+  if((CMAKE_CXX_COMPILER_ID STREQUAL Clang AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 13) OR
+      (CMAKE_CXX_COMPILER_ID STREQUAL AppleClang AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 13.1.6))
+    add_options(CXX ALL_BUILDS
+      -Wno-deprecated-copy-with-dtor
+    )
+  elseif((CMAKE_CXX_COMPILER_ID STREQUAL Clang AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 10) OR
+      (CMAKE_CXX_COMPILER_ID STREQUAL AppleClang AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 12.0.5))
+    add_options(CXX ALL_BUILDS
+      -Wno-deprecated-copy-dtor
+    )
+  elseif(CMAKE_CXX_COMPILER_ID STREQUAL Clang OR CMAKE_CXX_COMPILER_ID STREQUAL AppleClang)
+    add_options(CXX ALL_BUILDS
+      -Wno-deprecated
+    )
+  endif()
 
   add_options(ALL_LANGUAGES DEBUG
     -g
