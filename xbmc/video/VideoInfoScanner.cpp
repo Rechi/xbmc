@@ -2495,7 +2495,7 @@ namespace KODI::VIDEO
           CLog::Log(LOGDEBUG, "VideoInfoScanner: Added video extras {}",
                     CURL::GetRedacted(item->GetPath()));
         },
-        [](auto) { return true; }, true,
+        [](const auto&) { return true; }, true,
         CServiceBroker::GetFileExtensionProvider().GetVideoExtensions(), DIR_FLAG_DEFAULTS);
 
     return true;
