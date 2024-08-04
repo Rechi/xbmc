@@ -16,10 +16,6 @@
 
 using namespace OVERLAY;
 
-CDebugRenderer::CDebugRenderer()
-{
-}
-
 CDebugRenderer::~CDebugRenderer()
 {
   Dispose();

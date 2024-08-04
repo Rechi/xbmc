@@ -103,10 +103,6 @@ CGUIWindowPVRSearchBase::CGUIWindowPVRSearchBase(bool bRadio, int id, const std:
 {
 }
 
-CGUIWindowPVRSearchBase::~CGUIWindowPVRSearchBase()
-{
-}
-
 void CGUIWindowPVRSearchBase::GetContextButtons(int itemNumber, CContextButtons& buttons)
 {
   if (itemNumber < 0 || itemNumber >= m_vecItems->Size())

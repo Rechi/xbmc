@@ -39,10 +39,6 @@ CPVRChannelGroupAllChannels::CPVRChannelGroupAllChannels(const CPVRChannelsPath&
 {
 }
 
-CPVRChannelGroupAllChannels::~CPVRChannelGroupAllChannels()
-{
-}
-
 void CPVRChannelGroupAllChannels::CheckGroupName()
 {
   //! @todo major design flaw to fix: channel and group URLs must not contain the group name!

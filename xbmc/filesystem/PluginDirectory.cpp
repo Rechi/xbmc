@@ -61,10 +61,6 @@ CPluginDirectory::CPluginDirectory()
 {
 }
 
-CPluginDirectory::~CPluginDirectory()
-{
-}
-
 bool CPluginDirectory::StartScript(const std::string& strPath, bool resume)
 {
   CURL url(strPath);

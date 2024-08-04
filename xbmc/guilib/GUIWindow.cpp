@@ -63,9 +63,7 @@ CGUIWindow::CGUIWindow(int id, const std::string &xmlFile)
   m_custom = false;
 }
 
-CGUIWindow::~CGUIWindow()
-{
-}
+CGUIWindow::~CGUIWindow() = default;
 
 bool CGUIWindow::Load(const std::string& strFileName, bool bContainsPath)
 {
