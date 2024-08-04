@@ -21,9 +21,10 @@ do_getFFmpegConfig() {
 
   if [ "$ARCH" == "x86_64" ]; then
     FFMPEG_TARGET_OS=mingw64
+    do_addOption "--cpu=ivybridge"
   elif [ "$ARCH" == "x86" ]; then
     FFMPEG_TARGET_OS=mingw32
-    do_addOption "--cpu=i686"
+    do_addOption "--cpu=ivybridge"
   elif [ "$ARCH" == "arm" ]; then
     FFMPEG_TARGET_OS=mingw32
     do_addOption "--cpu=armv7"
