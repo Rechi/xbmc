@@ -270,19 +270,17 @@ bool CNetworkServices::OnSettingChanging(const std::shared_ptr<const CSetting>& 
   else
 #endif // HAS_ZEROCONF
 
-#ifdef HAS_AIRPLAY
+#if defined(HAS_AIRPLAY) && defined(HAS_ZEROCONF)
+  // AirPlay needs zeroconf
   if (settingId == CSettings::SETTING_SERVICES_AIRPLAY)
   {
     if (std::static_pointer_cast<const CSettingBool>(setting)->GetValue())
     {
-#ifdef HAS_ZEROCONF
-      // AirPlay needs zeroconf
       if (!m_settings->GetBool(CSettings::SETTING_SERVICES_ZEROCONF))
       {
         HELPERS::ShowOKDialogText(CVariant{1273}, CVariant{34302});
         return false;
       }
-#endif //HAS_ZEROCONF
 
       // note - airtunesserver has to start before airplay server (ios7 client detection bug)
 #ifdef HAS_AIRTUNES
@@ -341,7 +339,7 @@ bool CNetworkServices::OnSettingChanging(const std::shared_ptr<const CSetting>& 
       return false;
   }
   else
-#endif //HAS_AIRPLAY
+#endif // defined(HAS_AIRPLAY) && defined(HAS_ZEROCONF)
 
 #ifdef HAS_UPNP
   if (settingId == CSettings::SETTING_SERVICES_UPNP)
