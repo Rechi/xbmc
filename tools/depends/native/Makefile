@@ -6,6 +6,7 @@ endif
 
 # Keep in alphabetical order
 NATIVE= \
+  apache-ant \
   autoconf \
   autoconf-archive \
   automake \
