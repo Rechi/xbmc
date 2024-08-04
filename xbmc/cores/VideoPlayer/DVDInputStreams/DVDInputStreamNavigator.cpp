@@ -76,7 +76,7 @@ static void dvd_logger(void* priv, dvdnav_logger_level_t level, const char* fmt,
 CDVDInputStreamNavigator::CDVDInputStreamNavigator(IVideoPlayer* player, const CFileItem& fileitem)
   : CDVDInputStream(DVDSTREAM_TYPE_DVD, fileitem), m_pstream(nullptr)
 {
-  m_dvdnav = 0;
+  m_dvdnav = nullptr;
   m_pVideoPlayer = player;
   m_bCheckButtons = false;
   m_iCellStart = 0;

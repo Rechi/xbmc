@@ -124,7 +124,7 @@ void CRPRendererDMA::Render(uint8_t alpha)
   glUniform4f(uniColLoc, (colour[0] / 255.0f), (colour[1] / 255.0f), (colour[2] / 255.0f),
               (colour[3] / 255.0f));
   glUniform1f(depthLoc, -1.0f);
-  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, 0);
+  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, nullptr);
 
   glDisableVertexAttribArray(vertLoc);
   glDisableVertexAttribArray(loc);

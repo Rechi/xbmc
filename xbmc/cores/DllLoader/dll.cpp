@@ -156,7 +156,8 @@ extern "C" HMODULE WINAPI dllGetModuleHandleA(const char* lpModuleName)
   char* strModuleName = new char[strlen(lpModuleName) + 5];
   strcpy(strModuleName, lpModuleName);
 
-  if (strrchr(strModuleName, '.') == 0) strcat(strModuleName, ".dll");
+  if (strrchr(strModuleName, '.') == nullptr)
+    strcat(strModuleName, ".dll");
 
   //CLog::Log(LOGDEBUG, "GetModuleHandleA({}) .. looking up", lpModuleName);
 

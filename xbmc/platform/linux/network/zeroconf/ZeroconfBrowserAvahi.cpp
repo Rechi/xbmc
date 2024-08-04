@@ -80,7 +80,7 @@ bool CZeroconfBrowserAvahi::doAddServiceType ( const std::string& fcr_service_ty
   if ( it != m_browsers.end() )
     return false;
   else
-    it = m_browsers.insert ( std::make_pair ( fcr_service_type, ( AvahiServiceBrowser* ) 0 ) ).first;
+    it = m_browsers.insert(std::make_pair(fcr_service_type, (AvahiServiceBrowser*)nullptr)).first;
 
   //if the client is running, we directly create a browser for the service here
   if ( mp_client  && avahi_client_get_state ( mp_client ) ==  AVAHI_CLIENT_S_RUNNING )
@@ -195,10 +195,10 @@ void CZeroconfBrowserAvahi::clientCallback ( AvahiClient* fp_client, AvahiClient
       CLog::Log ( LOGINFO, "CZeroconfBrowserAvahi::clientCallback: client failure. avahi-daemon stopped? Recreating client..." );
       //We were forced to disconnect from server. now free and recreate the client object
       avahi_client_free ( fp_client );
-      p_instance->mp_client = 0;
+      p_instance->mp_client = nullptr;
       //freeing the client also frees all groups and browsers, pointers are undefined afterwards, so fix that now
       for (auto& it : p_instance->m_browsers)
-        it.second = (AvahiServiceBrowser*)0;
+        it.second = (AvahiServiceBrowser*)nullptr;
       //clean the list of discovered services and update gui (if someone is interested)
       p_instance->m_discovered_services.clear();
       CGUIMessage message ( GUI_MSG_NOTIFY_ALL, 0, 0, GUI_MSG_UPDATE_PATH );
@@ -357,11 +357,11 @@ bool CZeroconfBrowserAvahi::createClient()
   {
     avahi_client_free ( mp_client );
   }
-  mp_client = avahi_client_new ( avahi_threaded_poll_get ( mp_poll ),
-                                 AVAHI_CLIENT_NO_FAIL, &clientCallback, this, 0 );
+  mp_client = avahi_client_new(avahi_threaded_poll_get(mp_poll), AVAHI_CLIENT_NO_FAIL,
+                               &clientCallback, this, nullptr);
   if ( !mp_client )
   {
-    mp_client = 0;
+    mp_client = nullptr;
     return false;
   }
   return true;

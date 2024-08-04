@@ -48,7 +48,7 @@ std::string CNetworkInterfaceMacOS::GetCurrentDefaultGateway() const
       return "";
 
     char* buf;
-    if ((buf = new char[needed]) == 0)
+    if ((buf = new char[needed]) == nullptr)
       return "";
 
     if (sysctl(mib, sizeof(mib) / sizeof(int), buf, &needed, nullptr, 0) < 0)

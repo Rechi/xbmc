@@ -228,9 +228,9 @@ std::unique_ptr<CTexture> CDVDFileInfo::ExtractThumbToTexture(const CFileItem& f
             int stride[YuvImage::MAX_PLANES];
             picture.videoBuffer->GetPlanes(planes);
             picture.videoBuffer->GetStrides(stride);
-            uint8_t* src[4] = {planes[0], planes[1], planes[2], 0};
+            uint8_t* src[4] = {planes[0], planes[1], planes[2], nullptr};
             int srcStride[] = {stride[0], stride[1], stride[2], 0};
-            uint8_t* dst[] = {result->GetPixels(), 0, 0, 0};
+            uint8_t* dst[] = {result->GetPixels(), nullptr, nullptr, nullptr};
             int dstStride[] = {static_cast<int>(result->GetPitch()), 0, 0, 0};
             result->SetOrientation(DegreeToOrientation(hint.orientation));
             sws_scale(context, src, srcStride, 0, picture.iHeight, dst, dstStride);

@@ -28,17 +28,17 @@ void ParseOptions(int argc, char** argv);
 void ReadConfig();
 
 static struct option long_options[] = {
-{ "help",       no_argument,       0, 'h' },
-{ "server",     required_argument, 0, 's' },
-{ "port",       required_argument, 0, 'p' },
-{ "universal",  no_argument,       0, 'u' },
-{ "multiremote",no_argument,       0, 'm' },
-{ "timeout",    required_argument, 0, 't' },
-{ "verbose",    no_argument,       0, 'v' },
-{ "externalConfig", no_argument,   0, 'x' },
-{ "appPath",    required_argument, 0, 'a' },
-{ "appHome",    required_argument, 0, 'z' },
-{ 0, 0, 0, 0 },
+    {"help", no_argument, nullptr, 'h'},
+    {"server", required_argument, nullptr, 's'},
+    {"port", required_argument, nullptr, 'p'},
+    {"universal", no_argument, nullptr, 'u'},
+    {"multiremote", no_argument, nullptr, 'm'},
+    {"timeout", required_argument, nullptr, 't'},
+    {"verbose", no_argument, nullptr, 'v'},
+    {"externalConfig", no_argument, nullptr, 'x'},
+    {"appPath", required_argument, nullptr, 'a'},
+    {"appHome", required_argument, nullptr, 'z'},
+    {nullptr, 0, nullptr, 0},
 };
 
 static const char *options = "hs:umt:vxa:z:";
@@ -99,7 +99,7 @@ void ReadConfig()
 		argv[i++] = (char* )(*it++).c_str();
   }
 
-	argv[i] = 0;
+  argv[i] = nullptr;
 
 	// Parse the arguments.
 	ParseOptions(argc, argv);
