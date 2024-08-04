@@ -33,13 +33,13 @@ CGUIFeatureList::CGUIFeatureList(CGUIWindow* window, GameClientPtr gameClient)
 {
 }
 
-CGUIFeatureList::~CGUIFeatureList(void)
+CGUIFeatureList::~CGUIFeatureList()
 {
   Deinitialize();
   delete m_wizard;
 }
 
-bool CGUIFeatureList::Initialize(void)
+bool CGUIFeatureList::Initialize()
 {
   m_guiList = dynamic_cast<CGUIControlGroupList*>(m_window->GetControl(CONTROL_FEATURE_LIST));
   m_guiButtonTemplate =
@@ -60,7 +60,7 @@ bool CGUIFeatureList::Initialize(void)
   return m_guiList != nullptr && m_guiButtonTemplate != nullptr;
 }
 
-void CGUIFeatureList::Deinitialize(void)
+void CGUIFeatureList::Deinitialize()
 {
   CleanupButtons();
 
@@ -166,7 +166,7 @@ IFeatureButton* CGUIFeatureList::GetButtonControl(unsigned int buttonIndex)
   return static_cast<IFeatureButton*>(dynamic_cast<CGUIFeatureButton*>(control));
 }
 
-void CGUIFeatureList::CleanupButtons(void)
+void CGUIFeatureList::CleanupButtons()
 {
   m_buttonCount = 0;
 

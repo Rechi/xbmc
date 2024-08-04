@@ -38,7 +38,7 @@ class CGUIWindowMusicBase : public CGUIMediaWindow, public IBackgroundLoaderObse
 {
 public:
   CGUIWindowMusicBase(int id, const std::string &xmlFile);
-  ~CGUIWindowMusicBase(void) override;
+  ~CGUIWindowMusicBase() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;
   bool OnBack(int actionID) override;

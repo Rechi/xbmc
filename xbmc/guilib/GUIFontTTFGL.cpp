@@ -45,7 +45,7 @@ CGUIFontTTFGL::CGUIFontTTFGL(const std::string& fontIdent) : CGUIFontTTF(fontIde
 {
 }
 
-CGUIFontTTFGL::~CGUIFontTTFGL(void)
+CGUIFontTTFGL::~CGUIFontTTFGL()
 {
   // It's important that all the CGUIFontCacheEntry objects are
   // destructed before the CGUIFontTTFGL goes out of scope, because
@@ -425,7 +425,7 @@ void CGUIFontTTFGL::DeleteHardwareTexture()
   }
 }
 
-void CGUIFontTTFGL::CreateStaticVertexBuffers(void)
+void CGUIFontTTFGL::CreateStaticVertexBuffers()
 {
   if (m_staticVertexBufferCreated)
     return;
@@ -451,7 +451,7 @@ void CGUIFontTTFGL::CreateStaticVertexBuffers(void)
   m_staticVertexBufferCreated = true;
 }
 
-void CGUIFontTTFGL::DestroyStaticVertexBuffers(void)
+void CGUIFontTTFGL::DestroyStaticVertexBuffers()
 {
   if (!m_staticVertexBufferCreated)
     return;

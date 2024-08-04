@@ -103,7 +103,7 @@ class CFileItem :
   public CGUIListItem, public IArchivable, public ISerializable, public ISortable
 {
 public:
-  CFileItem(void);
+  CFileItem();
   CFileItem(const CFileItem& item);
   explicit CFileItem(const CGUIListItem& item);
   explicit CFileItem(const std::string& strLabel);
@@ -127,7 +127,7 @@ public:
   explicit CFileItem(std::shared_ptr<const ADDON::IAddon> addonInfo);
   explicit CFileItem(const EventPtr& eventLogEntry);
 
-  ~CFileItem(void) override;
+  ~CFileItem() override;
   CGUIListItem* Clone() const override { return new CFileItem(*this); }
 
   const CURL GetURL() const;

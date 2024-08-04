@@ -23,7 +23,7 @@ CDefaultKeyboardHandling::CDefaultKeyboardHandling(PERIPHERALS::CPeripheral* per
 {
 }
 
-CDefaultKeyboardHandling::~CDefaultKeyboardHandling(void)
+CDefaultKeyboardHandling::~CDefaultKeyboardHandling()
 {
   m_driverHandler.reset();
   m_buttonMap.reset();

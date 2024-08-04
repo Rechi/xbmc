@@ -107,7 +107,7 @@ bool PERIPHERALS::CPeripheralBusGCController::InitializeProperties(CPeripheral& 
   return true;
 }
 
-void PERIPHERALS::CPeripheralBusGCController::Initialise(void)
+void PERIPHERALS::CPeripheralBusGCController::Initialise()
 {
   CPeripheralBus::Initialise();
   TriggerDeviceScan();

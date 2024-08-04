@@ -24,7 +24,7 @@ class CGUIVideoControl :
 {
 public:
   CGUIVideoControl(int parentID, int controlID, float posX, float posY, float width, float height);
-  ~CGUIVideoControl(void) override;
+  ~CGUIVideoControl() override;
   CGUIVideoControl* Clone() const override { return new CGUIVideoControl(*this); }
 
   void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;

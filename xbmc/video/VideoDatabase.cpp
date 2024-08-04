@@ -77,10 +77,10 @@ using namespace KODI::GUILIB;
 using namespace KODI::VIDEO;
 
 //********************************************************************************************************************************
-CVideoDatabase::CVideoDatabase(void) = default;
+CVideoDatabase::CVideoDatabase() = default;
 
 //********************************************************************************************************************************
-CVideoDatabase::~CVideoDatabase(void) = default;
+CVideoDatabase::~CVideoDatabase() = default;
 
 //********************************************************************************************************************************
 bool CVideoDatabase::Open()

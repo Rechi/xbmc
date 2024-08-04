@@ -43,7 +43,7 @@ public:
                       CPeripheral* peripheral,
                       KODI::JOYSTICK::IButtonMapper* mapper);
 
-  ~CAddonButtonMapping(void) override;
+  ~CAddonButtonMapping() override;
 
   // implementation of IDriverHandler
   bool OnButtonMotion(unsigned int buttonIndex, bool bPressed) override;
@@ -52,7 +52,7 @@ public:
                     float position,
                     int center,
                     unsigned int range) override;
-  void OnInputFrame(void) override;
+  void OnInputFrame() override;
 
   // implementation of IKeyboardDriverHandler
   bool OnKeyPress(const CKey& key) override;

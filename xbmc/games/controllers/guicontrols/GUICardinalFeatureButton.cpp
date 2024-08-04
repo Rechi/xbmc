@@ -68,12 +68,12 @@ bool CGUICardinalFeatureButton::PromptForInput(CEvent& waitEvent)
   return bInterrupted;
 }
 
-bool CGUICardinalFeatureButton::IsFinished(void) const
+bool CGUICardinalFeatureButton::IsFinished() const
 {
   return m_state >= STATE::FINISHED;
 }
 
-KODI::INPUT::CARDINAL_DIRECTION CGUICardinalFeatureButton::GetCardinalDirection(void) const
+KODI::INPUT::CARDINAL_DIRECTION CGUICardinalFeatureButton::GetCardinalDirection() const
 {
   using namespace INPUT;
 
@@ -94,7 +94,7 @@ KODI::INPUT::CARDINAL_DIRECTION CGUICardinalFeatureButton::GetCardinalDirection(
   return CARDINAL_DIRECTION::NONE;
 }
 
-void CGUICardinalFeatureButton::Reset(void)
+void CGUICardinalFeatureButton::Reset()
 {
   m_state = STATE::CARDINAL_DIRECTION_UP;
 }

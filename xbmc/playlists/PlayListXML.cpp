@@ -56,9 +56,9 @@ using namespace XFILE;
 namespace KODI::PLAYLIST
 {
 
-CPlayListXML::CPlayListXML(void) = default;
+CPlayListXML::CPlayListXML() = default;
 
-CPlayListXML::~CPlayListXML(void) = default;
+CPlayListXML::~CPlayListXML() = default;
 
 static inline std::string GetString(const tinyxml2::XMLElement* pRootElement, const char* tagName)
 {

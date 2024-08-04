@@ -26,9 +26,9 @@
 using namespace XFILE;
 using namespace VIDEODATABASEDIRECTORY;
 
-CVideoDatabaseDirectory::CVideoDatabaseDirectory(void) = default;
+CVideoDatabaseDirectory::CVideoDatabaseDirectory() = default;
 
-CVideoDatabaseDirectory::~CVideoDatabaseDirectory(void) = default;
+CVideoDatabaseDirectory::~CVideoDatabaseDirectory() = default;
 
 namespace
 {

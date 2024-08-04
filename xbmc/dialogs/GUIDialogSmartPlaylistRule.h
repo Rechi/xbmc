@@ -15,8 +15,8 @@ class CGUIDialogSmartPlaylistRule :
       public CGUIDialog
 {
 public:
-  CGUIDialogSmartPlaylistRule(void);
-  ~CGUIDialogSmartPlaylistRule(void) override;
+  CGUIDialogSmartPlaylistRule();
+  ~CGUIDialogSmartPlaylistRule() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnBack(int actionID) override;
   void OnInitWindow() override;

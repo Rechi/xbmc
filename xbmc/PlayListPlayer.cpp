@@ -48,7 +48,7 @@ using namespace KODI::VIDEO;
 namespace KODI::PLAYLIST
 {
 
-CPlayListPlayer::CPlayListPlayer(void)
+CPlayListPlayer::CPlayListPlayer()
 {
   m_PlaylistMusic = new CPlayList(Id::TYPE_MUSIC);
   m_PlaylistVideo = new CPlayList(Id::TYPE_VIDEO);
@@ -60,7 +60,7 @@ CPlayListPlayer::CPlayListPlayer(void)
   m_failedSongsStart = std::chrono::steady_clock::now();
 }
 
-CPlayListPlayer::~CPlayListPlayer(void)
+CPlayListPlayer::~CPlayListPlayer()
 {
   Clear();
   delete m_PlaylistMusic;

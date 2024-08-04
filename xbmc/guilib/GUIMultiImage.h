@@ -29,7 +29,7 @@ class CGUIMultiImage : public CGUIControl, public IJobCallback
 public:
   CGUIMultiImage(int parentID, int controlID, float posX, float posY, float width, float height, const CTextureInfo& texture, unsigned int timePerImage, unsigned int fadeTime, bool randomized, bool loop, unsigned int timeToPauseAtEnd);
   CGUIMultiImage(const CGUIMultiImage &from);
-  ~CGUIMultiImage(void) override;
+  ~CGUIMultiImage() override;
   CGUIMultiImage* Clone() const override { return new CGUIMultiImage(*this); }
 
   void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;

@@ -158,7 +158,7 @@ bool CPeripheralBusAddon::SendRumbleEvent(const std::string& strLocation,
   return bHandled;
 }
 
-void CPeripheralBusAddon::ProcessEvents(void)
+void CPeripheralBusAddon::ProcessEvents()
 {
   PeripheralAddonVector addons;
 
@@ -296,7 +296,7 @@ unsigned int CPeripheralBusAddon::GetPeripheralsWithFeature(PeripheralVector& re
   return iReturn;
 }
 
-unsigned int CPeripheralBusAddon::GetNumberOfPeripherals(void) const
+unsigned int CPeripheralBusAddon::GetNumberOfPeripherals() const
 {
   unsigned int iReturn = 0;
   std::unique_lock<CCriticalSection> lock(m_critSection);
@@ -374,7 +374,7 @@ bool CPeripheralBusAddon::SplitLocation(const std::string& strLocation,
   return false;
 }
 
-void CPeripheralBusAddon::UpdateAddons(void)
+void CPeripheralBusAddon::UpdateAddons()
 {
   using namespace ADDON;
 

@@ -34,8 +34,8 @@ namespace XFILE
   class CAddonsDirectory : public IDirectory
   {
   public:
-    CAddonsDirectory(void);
-    ~CAddonsDirectory(void) override;
+    CAddonsDirectory();
+    ~CAddonsDirectory() override;
     bool GetDirectory(const CURL& url, CFileItemList &items) override;
     bool Create(const CURL& url) override { return true; }
     bool Exists(const CURL& url) override { return true; }

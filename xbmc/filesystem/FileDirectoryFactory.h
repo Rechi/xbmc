@@ -19,8 +19,8 @@ namespace XFILE
 class CFileDirectoryFactory
 {
 public:
-  CFileDirectoryFactory(void);
-  virtual ~CFileDirectoryFactory(void);
+  CFileDirectoryFactory();
+  virtual ~CFileDirectoryFactory();
   static IFileDirectory* Create(const CURL& url, CFileItem* pItem, const std::string& strMask="");
 };
 }

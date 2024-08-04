@@ -20,7 +20,7 @@ class CEventPollHandle;
 class IEventPollCallback
 {
 public:
-  virtual ~IEventPollCallback(void) = default;
+  virtual ~IEventPollCallback() = default;
 
   virtual void Activate(CEventPollHandle& handle) = 0;
   virtual void Deactivate(CEventPollHandle& handle) = 0;

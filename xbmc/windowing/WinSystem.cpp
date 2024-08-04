@@ -240,12 +240,12 @@ bool CWinSystemBase::UseLimitedColor()
   return false;
 }
 
-std::string CWinSystemBase::GetClipboardText(void)
+std::string CWinSystemBase::GetClipboardText()
 {
   return "";
 }
 
-int CWinSystemBase::NoOfBuffers(void)
+int CWinSystemBase::NoOfBuffers()
 {
   int buffers = CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_VIDEOSCREEN_NOOFBUFFERS);
   return buffers;

@@ -337,7 +337,7 @@ CFileItem::CFileItem(const CGUIListItem& item)
   FillInMimeType(false);
 }
 
-CFileItem::CFileItem(void)
+CFileItem::CFileItem()
 {
   Initialize();
 }
@@ -414,7 +414,7 @@ CFileItem::CFileItem(const EventPtr& eventLogEntry)
     SetArt("icon", eventLogEntry->GetIcon());
 }
 
-CFileItem::~CFileItem(void)
+CFileItem::~CFileItem()
 {
   delete m_musicInfoTag;
   delete m_videoInfoTag;

@@ -246,7 +246,7 @@ bool CAndroidJoystickState::Initialize(const CJNIViewInputDevice& inputDevice)
   return true;
 }
 
-void CAndroidJoystickState::Deinitialize(void)
+void CAndroidJoystickState::Deinitialize()
 {
   m_buttons.clear();
   m_axes.clear();

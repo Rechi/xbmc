@@ -64,7 +64,7 @@ void CContextButtons::Add(unsigned int button, int label)
   push_back(std::pair<unsigned int, std::string>(button, g_localizeStrings.Get(label)));
 }
 
-CGUIDialogContextMenu::CGUIDialogContextMenu(void)
+CGUIDialogContextMenu::CGUIDialogContextMenu()
   : CGUIDialog(WINDOW_DIALOG_CONTEXT_MENU, "DialogContextMenu.xml")
 {
   m_clickedButton = -1;
@@ -74,7 +74,7 @@ CGUIDialogContextMenu::CGUIDialogContextMenu(void)
   m_coordY = 0.0f;
 }
 
-CGUIDialogContextMenu::~CGUIDialogContextMenu(void) = default;
+CGUIDialogContextMenu::~CGUIDialogContextMenu() = default;
 
 bool CGUIDialogContextMenu::OnMessage(CGUIMessage &message)
 {

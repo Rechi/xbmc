@@ -59,7 +59,7 @@ CAddonInputHandling::CAddonInputHandling(CPeripherals& manager,
 {
 }
 
-CAddonInputHandling::~CAddonInputHandling(void)
+CAddonInputHandling::~CAddonInputHandling()
 {
   m_joystickDriverHandler.reset();
   m_joystickInputReceiver.reset();
@@ -141,7 +141,7 @@ bool CAddonInputHandling::OnAxisMotion(unsigned int axisIndex,
   return false;
 }
 
-void CAddonInputHandling::OnInputFrame(void)
+void CAddonInputHandling::OnInputFrame()
 {
   if (m_joystickDriverHandler)
     m_joystickDriverHandler->OnInputFrame();

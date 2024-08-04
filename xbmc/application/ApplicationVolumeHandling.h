@@ -40,7 +40,7 @@ public:
 
   void SetVolume(float iValue, bool isPercentage = true);
   void SetMute(bool mute);
-  void ToggleMute(void);
+  void ToggleMute();
 
   const ReplayGainSettings& GetReplayGainSettings() const { return m_replayGainSettings; }
 

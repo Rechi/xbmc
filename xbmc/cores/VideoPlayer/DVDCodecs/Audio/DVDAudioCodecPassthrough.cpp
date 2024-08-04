@@ -40,7 +40,7 @@ CDVDAudioCodecPassthrough::CDVDAudioCodecPassthrough(CProcessInfo &processInfo, 
   }
 }
 
-CDVDAudioCodecPassthrough::~CDVDAudioCodecPassthrough(void)
+CDVDAudioCodecPassthrough::~CDVDAudioCodecPassthrough()
 {
   Dispose();
 }

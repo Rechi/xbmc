@@ -20,8 +20,8 @@ class CGUIDialogMediaSource :
       public CGUIDialog
 {
 public:
-  CGUIDialogMediaSource(void);
-  ~CGUIDialogMediaSource(void) override;
+  CGUIDialogMediaSource();
+  ~CGUIDialogMediaSource() override;
   bool OnMessage(CGUIMessage& message) override;
   void OnDeinitWindow(int nextWindowID) override;
   bool OnBack(int actionID) override;

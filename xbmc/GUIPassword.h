@@ -24,8 +24,8 @@ typedef std::vector<CMediaSource> VECSOURCES;
 class CGUIPassword : public ISettingCallback
 {
 public:
-  CGUIPassword(void);
-  ~CGUIPassword(void) override;
+  CGUIPassword();
+  ~CGUIPassword() override;
   template<typename T>
   bool IsItemUnlocked(T pItem,
                       const std::string& strType,

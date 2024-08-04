@@ -19,7 +19,7 @@ class CFileAndroidApp : public IFile
 {
 public:
   /*! \brief Currently only used for retrieving App Icons. */
-  CFileAndroidApp(void);
+  CFileAndroidApp();
   ~CFileAndroidApp() override;
   bool Open(const CURL& url) override;
   bool Exists(const CURL& url) override;

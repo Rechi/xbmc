@@ -63,7 +63,7 @@ Dataset* MysqlDatabase::CreateDataset() const
   return new MysqlDataset(const_cast<MysqlDatabase*>(this));
 }
 
-int MysqlDatabase::status(void)
+int MysqlDatabase::status()
 {
   if (active == false)
     return DB_CONNECTION_NONE;
@@ -272,7 +272,7 @@ int MysqlDatabase::connect(bool create_new)
   return DB_CONNECTION_NONE;
 }
 
-void MysqlDatabase::disconnect(void)
+void MysqlDatabase::disconnect()
 {
   if (conn != NULL)
   {
@@ -373,7 +373,7 @@ int MysqlDatabase::copy(const char* backup_name)
   return 1;
 }
 
-int MysqlDatabase::drop_analytics(void)
+int MysqlDatabase::drop_analytics()
 {
   if (!active || conn == NULL)
     throw DbErrors("Can't clean database: no active connection...");
@@ -584,7 +584,7 @@ void MysqlDatabase::rollback_transaction()
   }
 }
 
-bool MysqlDatabase::exists(void)
+bool MysqlDatabase::exists()
 {
   bool ret = false;
 
@@ -2038,20 +2038,20 @@ void MysqlDataset::last()
   fill_fields();
 }
 
-void MysqlDataset::prev(void)
+void MysqlDataset::prev()
 {
   Dataset::prev();
   fill_fields();
 }
 
-void MysqlDataset::next(void)
+void MysqlDataset::next()
 {
   Dataset::next();
   if (!eof())
     fill_fields();
 }
 
-void MysqlDataset::free_row(void)
+void MysqlDataset::free_row()
 {
   if (frecno < 0 || (unsigned int)frecno >= result.records.size())
     return;

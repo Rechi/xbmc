@@ -46,10 +46,10 @@ public:
                       };
   /// @}
 
-  CGUIListItem(void);
+  CGUIListItem();
   explicit CGUIListItem(const CGUIListItem& item);
   explicit CGUIListItem(const std::string& strLabel);
-  virtual ~CGUIListItem(void);
+  virtual ~CGUIListItem();
   virtual CGUIListItem* Clone() const { return new CGUIListItem(*this); }
 
   CGUIListItem& operator =(const CGUIListItem& item);

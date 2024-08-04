@@ -22,19 +22,19 @@ namespace PERIPHERALS
 class CPeripheralCecAdapter : public CPeripheral
 {
 public:
-  bool HasAudioControl(void) { return false; }
-  void VolumeUp(void) {}
-  void VolumeDown(void) {}
-  bool IsMuted(void) { return false; }
-  void ToggleMute(void) {}
+  bool HasAudioControl() { return false; }
+  void VolumeUp() {}
+  void VolumeDown() {}
+  bool IsMuted() { return false; }
+  void ToggleMute() {}
   bool ToggleDeviceState(CecStateChange mode = STATE_SWITCH_TOGGLE, bool forceType = false)
   {
     return false;
   }
 
-  int GetButton(void) { return 0; }
-  unsigned int GetHoldTime(void) { return 0; }
-  void ResetButton(void) {}
+  int GetButton() { return 0; }
+  unsigned int GetHoldTime() { return 0; }
+  void ResetButton() {}
 };
 } // namespace PERIPHERALS
 
@@ -93,7 +93,7 @@ public:
   CPeripheralCecAdapter(CPeripherals& manager,
                         const PeripheralScanResult& scanResult,
                         CPeripheralBus* bus);
-  ~CPeripheralCecAdapter(void) override;
+  ~CPeripheralCecAdapter() override;
 
   void Announce(ANNOUNCEMENT::AnnouncementFlag flag,
                 const std::string& sender,
@@ -101,36 +101,36 @@ public:
                 const CVariant& data) override;
 
   // audio control
-  bool HasAudioControl(void);
-  void VolumeUp(void);
-  void VolumeDown(void);
-  void ToggleMute(void);
-  bool IsMuted(void);
+  bool HasAudioControl();
+  void VolumeUp();
+  void VolumeDown();
+  void ToggleMute();
+  bool IsMuted();
 
   // CPeripheral callbacks
   void OnSettingChanged(const std::string& strChangedSetting) override;
-  void OnDeviceRemoved(void) override;
+  void OnDeviceRemoved() override;
 
   // input
-  int GetButton(void);
-  unsigned int GetHoldTime(void);
-  void ResetButton(void);
+  int GetButton();
+  unsigned int GetHoldTime();
+  void ResetButton();
 
   // public CEC methods
-  void ActivateSource(void);
-  void StandbyDevices(void);
+  void ActivateSource();
+  void StandbyDevices();
   bool ToggleDeviceState(CecStateChange mode = STATE_SWITCH_TOGGLE, bool forceType = false);
 
 private:
   bool InitialiseFeature(const PeripheralFeature feature) override;
-  void ResetMembers(void);
-  void Process(void) override;
-  bool IsRunning(void) const;
+  void ResetMembers();
+  void Process() override;
+  bool IsRunning() const;
 
-  bool OpenConnection(void);
+  bool OpenConnection();
   bool ReopenConnection(bool bAsync = false);
 
-  void SetConfigurationFromSettings(void);
+  void SetConfigurationFromSettings();
   void SetConfigurationFromLibCEC(const CEC::libcec_configuration& config);
   void SetVersionInfo(const CEC::libcec_configuration& configuration);
 
@@ -141,17 +141,17 @@ private:
                              const std::string& strSettingName,
                              const std::string& strAdvancedSettingName);
 
-  void ProcessActivateSource(void);
-  void ProcessStandbyDevices(void);
-  void ProcessVolumeChange(void);
+  void ProcessActivateSource();
+  void ProcessStandbyDevices();
+  void ProcessVolumeChange();
 
   void PushCecKeypress(const CEC::cec_keypress& key);
   void PushCecKeypress(const CecButtonPress& key);
-  void GetNextKey(void);
+  void GetNextKey();
 
   void SetAudioSystemConnected(bool bSetTo);
   void SetMenuLanguage(const char* strLanguage);
-  void OnTvStandby(void);
+  void OnTvStandby();
 
   // callbacks from libCEC
   static void CecLogMessage(void* cbParam, const CEC::cec_log_message* message);
@@ -205,17 +205,17 @@ class CPeripheralCecAdapterUpdateThread : public CThread
 public:
   CPeripheralCecAdapterUpdateThread(CPeripheralCecAdapter* adapter,
                                     CEC::libcec_configuration* configuration);
-  ~CPeripheralCecAdapterUpdateThread(void) override;
+  ~CPeripheralCecAdapterUpdateThread() override;
 
-  void Signal(void);
+  void Signal();
   bool UpdateConfiguration(CEC::libcec_configuration* configuration);
 
 protected:
-  void UpdateMenuLanguage(void);
-  std::string UpdateAudioSystemStatus(void);
-  bool WaitReady(void);
-  bool SetInitialConfiguration(void);
-  void Process(void) override;
+  void UpdateMenuLanguage();
+  std::string UpdateAudioSystemStatus();
+  bool WaitReady();
+  bool SetInitialConfiguration();
+  void Process() override;
 
   CPeripheralCecAdapter* m_adapter;
   CEvent m_event;

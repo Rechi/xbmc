@@ -23,13 +23,12 @@
 #define CONTROL_VIS_BUTTON       500
 #define CONTROL_LOCK_BUTTON      501
 
-CGUIDialogMusicOSD::CGUIDialogMusicOSD(void)
-    : CGUIDialog(WINDOW_DIALOG_MUSIC_OSD, "MusicOSD.xml")
+CGUIDialogMusicOSD::CGUIDialogMusicOSD() : CGUIDialog(WINDOW_DIALOG_MUSIC_OSD, "MusicOSD.xml")
 {
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIDialogMusicOSD::~CGUIDialogMusicOSD(void) = default;
+CGUIDialogMusicOSD::~CGUIDialogMusicOSD() = default;
 
 bool CGUIDialogMusicOSD::OnMessage(CGUIMessage &message)
 {

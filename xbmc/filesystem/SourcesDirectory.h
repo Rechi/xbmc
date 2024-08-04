@@ -20,8 +20,8 @@ namespace XFILE
   class CSourcesDirectory : public IDirectory
   {
   public:
-    CSourcesDirectory(void);
-    ~CSourcesDirectory(void) override;
+    CSourcesDirectory();
+    ~CSourcesDirectory() override;
     bool GetDirectory(const CURL& url, CFileItemList &items) override;
     bool GetDirectory(const VECSOURCES &sources, CFileItemList &items);
     bool Exists(const CURL& url) override;

@@ -22,7 +22,7 @@ class CGUIDialogSelect : public CGUIDialogBoxBase
 public:
   CGUIDialogSelect();
   explicit CGUIDialogSelect(int windowid);
-  ~CGUIDialogSelect(void) override;
+  ~CGUIDialogSelect() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnBack(int actionID) override;
 

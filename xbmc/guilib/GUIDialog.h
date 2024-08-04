@@ -37,7 +37,7 @@ class CGUIDialog :
 {
 public:
   CGUIDialog(int id, const std::string &xmlFile, DialogModalityType modalityType = DialogModalityType::MODAL);
-  ~CGUIDialog(void) override;
+  ~CGUIDialog() override;
 
   bool OnAction(const CAction &action) override;
   bool OnMessage(CGUIMessage& message) override;
@@ -55,9 +55,9 @@ public:
   virtual DialogModalityType GetModalityType() const { return m_modalityType; }
 
   void SetAutoClose(unsigned int timeoutMs);
-  void ResetAutoClose(void);
-  void CancelAutoClose(void);
-  bool IsAutoClosed(void) const { return m_bAutoClosed; }
+  void ResetAutoClose();
+  void CancelAutoClose();
+  bool IsAutoClosed() const { return m_bAutoClosed; }
   void SetSound(bool OnOff) { m_enableSound = OnOff; }
   bool IsSoundEnabled() const override { return m_enableSound; }
 

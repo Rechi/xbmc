@@ -51,13 +51,11 @@ bool InfoBoolComparator(const InfoPtr &right, const InfoPtr &left)
   return *right < *left;
 }
 
-CGUIInfoManager::CGUIInfoManager(void)
-: m_currentFile(new CFileItem),
-  m_bools(&InfoBoolComparator)
+CGUIInfoManager::CGUIInfoManager() : m_currentFile(new CFileItem), m_bools(&InfoBoolComparator)
 {
 }
 
-CGUIInfoManager::~CGUIInfoManager(void)
+CGUIInfoManager::~CGUIInfoManager()
 {
   delete m_currentFile;
 }

@@ -30,7 +30,7 @@ static CVDisplayLinkRef displayLink = NULL;
 
 CGDirectDisplayID Cocoa_GetDisplayIDFromScreen(NSScreen *screen);
 
-uint32_t Cocoa_GL_GetCurrentDisplayID(void)
+uint32_t Cocoa_GL_GetCurrentDisplayID()
 {
   // Find which display we are on from the current context (default to main display)
   CGDirectDisplayID display_id = kCGDirectMainDisplay;

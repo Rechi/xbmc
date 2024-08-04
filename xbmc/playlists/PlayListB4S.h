@@ -16,8 +16,8 @@ namespace KODI::PLAYLIST
 class CPlayListB4S : public CPlayList
 {
 public:
-  CPlayListB4S(void);
-  ~CPlayListB4S(void) override;
+  CPlayListB4S();
+  ~CPlayListB4S() override;
   bool LoadData(std::istream& stream) override;
   void Save(const std::string& strFileName) const override;
 };

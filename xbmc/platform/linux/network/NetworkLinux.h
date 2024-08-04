@@ -32,7 +32,7 @@ public:
   ~CNetworkLinux() override = default;
 
   bool PingHost(unsigned long host, unsigned int timeout_ms = 2000) override;
-  std::vector<std::string> GetNameServers(void) override;
+  std::vector<std::string> GetNameServers() override;
 
 private:
   void GetMacAddress(const std::string& interfaceName, char macAddrRaw[6]) override;

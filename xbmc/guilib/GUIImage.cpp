@@ -49,7 +49,7 @@ CGUIImage::CGUIImage(const CGUIImage& left)
   m_bDynamicResourceAlloc=false;
 }
 
-CGUIImage::~CGUIImage(void) = default;
+CGUIImage::~CGUIImage() = default;
 
 void CGUIImage::UpdateVisibility(const CGUIListItem *item)
 {
@@ -410,7 +410,7 @@ unsigned char CGUIImage::GetFadeLevel(unsigned int time) const
   return (unsigned char)(255.0f * (1 - pow(1-alpha, amount))/alpha);
 }
 
-std::string CGUIImage::GetDescription(void) const
+std::string CGUIImage::GetDescription() const
 {
   return GetFileName();
 }

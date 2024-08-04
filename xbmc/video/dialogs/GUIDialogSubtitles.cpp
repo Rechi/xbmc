@@ -107,15 +107,15 @@ private:
   std::string    m_language;
 };
 
-CGUIDialogSubtitles::CGUIDialogSubtitles(void)
-    : CGUIDialog(WINDOW_DIALOG_SUBTITLES, "DialogSubtitles.xml")
-    , m_subtitles(new CFileItemList)
-    , m_serviceItems(new CFileItemList)
+CGUIDialogSubtitles::CGUIDialogSubtitles()
+  : CGUIDialog(WINDOW_DIALOG_SUBTITLES, "DialogSubtitles.xml"),
+    m_subtitles(new CFileItemList),
+    m_serviceItems(new CFileItemList)
 {
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIDialogSubtitles::~CGUIDialogSubtitles(void)
+CGUIDialogSubtitles::~CGUIDialogSubtitles()
 {
   CancelJobs();
   delete m_subtitles;

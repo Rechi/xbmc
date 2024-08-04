@@ -19,7 +19,7 @@ CPeripheralBusCEC::CPeripheralBusCEC(CPeripherals& manager)
   m_cecAdapter = CECInitialise(&m_configuration);
 }
 
-CPeripheralBusCEC::~CPeripheralBusCEC(void)
+CPeripheralBusCEC::~CPeripheralBusCEC()
 {
   if (m_cecAdapter)
     CECDestroy(m_cecAdapter);

@@ -134,19 +134,19 @@ public:
 
 protected:
   void Dispose();
-  void FlushInternal(void);
+  void FlushInternal();
   void SignalEndOfStream();
   void InjectExtraData(CJNIMediaFormat& mediaformat);
   std::vector<uint8_t> GetHDRStaticMetadata();
-  bool ConfigureMediaCodec(void);
-  int GetOutputPicture(void);
+  bool ConfigureMediaCodec();
+  int GetOutputPicture();
   void ConfigureOutputFormat(CJNIMediaFormat& mediaformat);
   void UpdateFpsDuration();
 
   // surface handling functions
   static void CallbackInitSurfaceTexture(void*);
-  void InitSurfaceTexture(void);
-  void ReleaseSurfaceTexture(void);
+  void InitSurfaceTexture();
+  void ReleaseSurfaceTexture();
 
   CDVDStreamInfo m_hints;
   std::string m_mime;

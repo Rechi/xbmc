@@ -10,12 +10,12 @@
 
 #include "KeyIDs.h"
 
-CKey::CKey(void)
+CKey::CKey()
 {
   Reset();
 }
 
-CKey::~CKey(void) = default;
+CKey::~CKey() = default;
 
 CKey::CKey(uint32_t buttonCode,
            uint8_t leftTrigger,

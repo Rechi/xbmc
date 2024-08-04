@@ -56,8 +56,8 @@ namespace MUSIC_INFO
 class CGUIInfoManager : public KODI::MESSAGING::IMessageTarget
 {
 public:
-  CGUIInfoManager(void);
-  ~CGUIInfoManager(void) override;
+  CGUIInfoManager();
+  ~CGUIInfoManager() override;
 
   void Initialize();
 

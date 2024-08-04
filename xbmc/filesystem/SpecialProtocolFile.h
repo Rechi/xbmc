@@ -15,8 +15,8 @@ namespace XFILE
 class CSpecialProtocolFile : public COverrideFile
 {
 public:
-  CSpecialProtocolFile(void);
-  ~CSpecialProtocolFile(void) override;
+  CSpecialProtocolFile();
+  ~CSpecialProtocolFile() override;
 
 protected:
   std::string TranslatePath(const CURL& url) override;

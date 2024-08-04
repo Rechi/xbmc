@@ -18,8 +18,8 @@ class IGUIVolumeBarCallback;
 class CGUIDialogVolumeBar : public CGUIDialog
 {
 public:
-  CGUIDialogVolumeBar(void);
-  ~CGUIDialogVolumeBar(void) override;
+  CGUIDialogVolumeBar();
+  ~CGUIDialogVolumeBar() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;
 

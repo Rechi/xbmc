@@ -866,7 +866,7 @@ void CPeripherals::PowerOffDevices()
   TestFeature(FEATURE_POWER_OFF);
 }
 
-void CPeripherals::ProcessEvents(void)
+void CPeripherals::ProcessEvents()
 {
   std::vector<PeripheralBusPtr> busses;
   {

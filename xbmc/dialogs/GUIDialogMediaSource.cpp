@@ -55,8 +55,8 @@ using namespace XFILE;
 #define CONTROL_CANCEL          19
 #define CONTROL_CONTENT         20
 
-CGUIDialogMediaSource::CGUIDialogMediaSource(void)
-    : CGUIDialog(WINDOW_DIALOG_MEDIA_SOURCE, "DialogMediaSource.xml")
+CGUIDialogMediaSource::CGUIDialogMediaSource()
+  : CGUIDialog(WINDOW_DIALOG_MEDIA_SOURCE, "DialogMediaSource.xml")
 {
   m_paths = new CFileItemList;
   m_loadType = KEEP_IN_MEMORY;

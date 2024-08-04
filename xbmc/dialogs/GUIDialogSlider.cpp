@@ -20,15 +20,14 @@
 #define CONTROL_SLIDER  11
 #define CONTROL_LABEL   12
 
-CGUIDialogSlider::CGUIDialogSlider(void)
-    : CGUIDialog(WINDOW_DIALOG_SLIDER, "DialogSlider.xml")
+CGUIDialogSlider::CGUIDialogSlider() : CGUIDialog(WINDOW_DIALOG_SLIDER, "DialogSlider.xml")
 {
   m_callback = NULL;
   m_callbackData = NULL;
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIDialogSlider::~CGUIDialogSlider(void) = default;
+CGUIDialogSlider::~CGUIDialogSlider() = default;
 
 bool CGUIDialogSlider::OnAction(const CAction &action)
 {

@@ -46,12 +46,12 @@ struct CachedDirEntry
 
 using namespace XFILE;
 
-CSMBDirectory::CSMBDirectory(void)
+CSMBDirectory::CSMBDirectory()
 {
   smb.AddActiveConnection();
 }
 
-CSMBDirectory::~CSMBDirectory(void)
+CSMBDirectory::~CSMBDirectory()
 {
   smb.AddIdleConnection();
 }

@@ -278,7 +278,7 @@ public:
   }
 
   // implementation of IEventScannerCallback
-  void ProcessEvents(void) override;
+  void ProcessEvents() override;
 
   /*!
    * \brief Initialize button mapping

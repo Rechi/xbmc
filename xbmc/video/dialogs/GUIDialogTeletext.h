@@ -18,8 +18,8 @@ class CTexture;
 class CGUIDialogTeletext : public CGUIDialog
 {
 public:
-  CGUIDialogTeletext(void);
-  ~CGUIDialogTeletext(void) override;
+  CGUIDialogTeletext();
+  ~CGUIDialogTeletext() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction& action) override;
   bool OnBack(int actionID) override;

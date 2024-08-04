@@ -13,13 +13,13 @@
 #include "guilib/GUIWindowManager.h"
 #include "threads/Thread.h"
 
-CGUIDialogBusyNoCancel::CGUIDialogBusyNoCancel(void)
+CGUIDialogBusyNoCancel::CGUIDialogBusyNoCancel()
   : CGUIDialog(WINDOW_DIALOG_BUSY_NOCANCEL, "DialogBusy.xml", DialogModalityType::MODAL)
 {
   m_loadType = LOAD_ON_GUI_INIT;
 }
 
-CGUIDialogBusyNoCancel::~CGUIDialogBusyNoCancel(void) = default;
+CGUIDialogBusyNoCancel::~CGUIDialogBusyNoCancel() = default;
 
 void CGUIDialogBusyNoCancel::Open_Internal(bool bProcessRenderLoop,
                                            const std::string& param /* = "" */)

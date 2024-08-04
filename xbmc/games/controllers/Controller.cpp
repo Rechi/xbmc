@@ -115,7 +115,7 @@ JOYSTICK::INPUT_TYPE CController::GetInputType(const std::string& feature) const
   return JOYSTICK::INPUT_TYPE::UNKNOWN;
 }
 
-bool CController::LoadLayout(void)
+bool CController::LoadLayout()
 {
   if (!m_bLoaded)
   {

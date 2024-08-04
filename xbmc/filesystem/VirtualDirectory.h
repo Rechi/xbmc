@@ -24,8 +24,8 @@ namespace XFILE
   class CVirtualDirectory : public IDirectory
   {
   public:
-    CVirtualDirectory(void);
-    ~CVirtualDirectory(void) override;
+    CVirtualDirectory();
+    ~CVirtualDirectory() override;
     bool GetDirectory(const CURL& url, CFileItemList &items) override;
     void CancelDirectory() override;
     bool GetDirectory(const CURL& url, CFileItemList &items, bool bUseFileDirectories, bool keepImpl);

@@ -15,8 +15,8 @@ namespace HTML
 class CHTMLUtil
 {
 public:
-  CHTMLUtil(void);
-  virtual ~CHTMLUtil(void);
+  CHTMLUtil();
+  virtual ~CHTMLUtil();
   static void RemoveTags(std::string& strHTML);
   static void ConvertHTMLToW(const std::wstring& strHTML, std::wstring& strStripped);
 };

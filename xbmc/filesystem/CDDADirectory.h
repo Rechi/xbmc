@@ -17,8 +17,8 @@ class CCDDADirectory :
       public IDirectory
 {
 public:
-  CCDDADirectory(void);
-  ~CCDDADirectory(void) override;
+  CCDDADirectory();
+  ~CCDDADirectory() override;
   bool GetDirectory(const CURL& url, CFileItemList &items) override;
 };
 }

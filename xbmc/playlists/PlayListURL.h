@@ -15,8 +15,8 @@ namespace KODI::PLAYLIST
 class CPlayListURL : public CPlayList
 {
 public:
-  CPlayListURL(void);
-  ~CPlayListURL(void) override;
+  CPlayListURL();
+  ~CPlayListURL() override;
   bool Load(const std::string& strFileName) override;
 };
 }

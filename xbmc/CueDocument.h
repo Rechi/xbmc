@@ -33,7 +33,7 @@ class CCueDocument
     ReplayGain::Info replayGain;
   };
 public:
-  ~CCueDocument(void);
+  ~CCueDocument();
   // USED
   bool ParseFile(const std::string &strFilePath);
   bool ParseTag(const std::string &strContent);

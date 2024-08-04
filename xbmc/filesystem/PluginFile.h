@@ -15,8 +15,8 @@ namespace XFILE
 class CPluginFile : public COverrideFile
 {
 public:
-  CPluginFile(void);
-  ~CPluginFile(void) override;
+  CPluginFile();
+  ~CPluginFile() override;
   bool Open(const CURL& url) override;
   bool Exists(const CURL& url) override;
   int Stat(const CURL& url, struct __stat64* buffer) override;

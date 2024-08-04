@@ -32,9 +32,9 @@ CDNSNameCache g_DNSCache;
 
 CCriticalSection CDNSNameCache::m_critical;
 
-CDNSNameCache::CDNSNameCache(void) = default;
+CDNSNameCache::CDNSNameCache() = default;
 
-CDNSNameCache::~CDNSNameCache(void) = default;
+CDNSNameCache::~CDNSNameCache() = default;
 
 bool CDNSNameCache::Lookup(const std::string& strHostName, std::string& strIpAddress)
 {

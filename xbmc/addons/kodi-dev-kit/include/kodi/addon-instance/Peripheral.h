@@ -578,7 +578,7 @@ public:
   ///
   /// The add-on calls this if a change in hardware is detected.
   ///
-  void TriggerScan(void)
+  void TriggerScan()
   {
     return m_instanceData->toKodi->trigger_scan(m_instanceData->toKodi->kodiInstance);
   }

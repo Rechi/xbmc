@@ -68,7 +68,7 @@ public:
    * This allows features with motion on multiple driver primitives to call
    * their handler once all driver primitives are accounted for.
    */
-  virtual void ProcessMotions(void) = 0;
+  virtual void ProcessMotions() = 0;
 
   /*!
    * \brief Check if the input handler is accepting input
@@ -159,7 +159,7 @@ private:
 class CFeatureAxis
 {
 public:
-  CFeatureAxis(void) { Reset(); }
+  CFeatureAxis() { Reset(); }
 
   /*!
    * \brief Set value of positive axis
@@ -196,12 +196,12 @@ public:
    *      Pos - Neg:      0.0 (Emulated analog stick is centered)
    *
    */
-  float GetPosition(void) const { return m_positiveDistance - m_negativeDistance; }
+  float GetPosition() const { return m_positiveDistance - m_negativeDistance; }
 
   /*!
    * \brief Reset both positive and negative values to zero
    */
-  void Reset(void) { m_positiveDistance = m_negativeDistance = 0.0f; }
+  void Reset() { m_positiveDistance = m_negativeDistance = 0.0f; }
 
 protected:
   float m_positiveDistance;

@@ -41,8 +41,8 @@ using namespace KODI::MESSAGING;
 #define SETTING_PASSWORD        "password"
 #define SETTING_REMOTE_PATH     "remotepath"
 
-CGUIDialogNetworkSetup::CGUIDialogNetworkSetup(void)
-    : CGUIDialogSettingsManualBase(WINDOW_DIALOG_NETWORK_SETUP, "DialogSettings.xml")
+CGUIDialogNetworkSetup::CGUIDialogNetworkSetup()
+  : CGUIDialogSettingsManualBase(WINDOW_DIALOG_NETWORK_SETUP, "DialogSettings.xml")
 {
   m_protocol = 0;
   m_confirmed = false;

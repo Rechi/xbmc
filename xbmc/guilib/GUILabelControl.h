@@ -26,7 +26,7 @@ class CGUILabelControl :
 {
 public:
   CGUILabelControl(int parentID, int controlID, float posX, float posY, float width, float height, const CLabelInfo& labelInfo, bool wrapMultiLine, bool bHasPath);
-  ~CGUILabelControl(void) override;
+  ~CGUILabelControl() override;
   CGUILabelControl* Clone() const override { return new CGUILabelControl(*this); }
 
   void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;

@@ -51,7 +51,7 @@ private:
 class CGUIWindowSlideShow : public CGUIDialog, public ISlideShowDelegate
 {
 public:
-  CGUIWindowSlideShow(void);
+  CGUIWindowSlideShow();
   ~CGUIWindowSlideShow() override;
 
   // Implementation of ISlideShowDelegate

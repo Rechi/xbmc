@@ -454,8 +454,8 @@ public:
     DatabaseResults results;
   };
 
-  CVideoDatabase(void);
-  ~CVideoDatabase(void) override;
+  CVideoDatabase();
+  ~CVideoDatabase() override;
 
   bool Open() override;
   bool CommitTransaction() override;

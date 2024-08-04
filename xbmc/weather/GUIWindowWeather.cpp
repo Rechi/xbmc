@@ -46,13 +46,12 @@ FIXME'S
 >strings are not centered
 */
 
-CGUIWindowWeather::CGUIWindowWeather(void)
-    : CGUIWindow(WINDOW_WEATHER, "MyWeather.xml")
+CGUIWindowWeather::CGUIWindowWeather() : CGUIWindow(WINDOW_WEATHER, "MyWeather.xml")
 {
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIWindowWeather::~CGUIWindowWeather(void) = default;
+CGUIWindowWeather::~CGUIWindowWeather() = default;
 
 bool CGUIWindowWeather::OnMessage(CGUIMessage& message)
 {

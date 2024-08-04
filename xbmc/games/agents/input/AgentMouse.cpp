@@ -58,7 +58,7 @@ float CAgentMouse::GetActivation() const
   return m_mouseActivity->GetActivation();
 }
 
-std::string CAgentMouse::ControllerID(void) const
+std::string CAgentMouse::ControllerID() const
 {
   return DEFAULT_MOUSE_ID;
 }
