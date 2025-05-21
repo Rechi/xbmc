@@ -264,10 +264,8 @@ bool CDVDInputStreamBluray::Open()
 
   if (disc_info->bluray_detected)
   {
-#if (BLURAY_VERSION > BLURAY_VERSION_CODE(1,0,0))
     CLog::Log(LOGDEBUG, "CDVDInputStreamBluray::Open - Disc name           : {}",
               disc_info->disc_name ? disc_info->disc_name : "");
-#endif
     CLog::Log(LOGDEBUG, "CDVDInputStreamBluray::Open - First Play supported: {}",
               disc_info->first_play_supported);
     CLog::Log(LOGDEBUG, "CDVDInputStreamBluray::Open - Top menu supported  : {}",
@@ -292,10 +290,8 @@ bool CDVDInputStreamBluray::Open()
               disc_info->libbdplus_detected);
     CLog::Log(LOGDEBUG, "CDVDInputStreamBluray::Open - BD+ handled         : {}",
               disc_info->bdplus_handled);
-#if (BLURAY_VERSION >= BLURAY_VERSION_CODE(1,0,0))
     CLog::Log(LOGDEBUG, "CDVDInputStreamBluray::Open - no menus (libmmbd, or profile 6 bdj)  : {}",
               disc_info->no_menu_support);
-#endif
   }
   else
     CLog::Log(LOGERROR, "CDVDInputStreamBluray::Open - BluRay not detected");
@@ -723,28 +719,23 @@ static uint32_t build_rgba(const BD_PG_PALETTE_ENTRY &e)
 
 void CDVDInputStreamBluray::OverlayClose()
 {
-#if(BD_OVERLAY_INTERFACE_VERSION >= 2)
   for(SPlane& plane : m_planes)
     plane.o.clear();
   auto group = std::make_shared<CDVDOverlayGroup>();
   group->bForced = true;
   m_player->OnDiscNavResult(static_cast<void*>(&group), BD_EVENT_MENU_OVERLAY);
   m_hasOverlay = false;
-#endif
 }
 
 void CDVDInputStreamBluray::OverlayInit(SPlane& plane, int w, int h)
 {
-#if(BD_OVERLAY_INTERFACE_VERSION >= 2)
   plane.o.clear();
   plane.w = w;
   plane.h = h;
-#endif
 }
 
 void CDVDInputStreamBluray::OverlayClear(SPlane& plane, int x, int y, int w, int h)
 {
-#if(BD_OVERLAY_INTERFACE_VERSION >= 2)
   CRectInt ovr(x
           , y
           , x + w
@@ -778,12 +769,10 @@ void CDVDInputStreamBluray::OverlayClear(SPlane& plane, int x, int y, int w, int
     it = plane.o.erase(it);
     plane.o.insert(it, add.begin(), add.end());
   }
-#endif
 }
 
 void CDVDInputStreamBluray::OverlayFlush(int64_t pts)
 {
-#if(BD_OVERLAY_INTERFACE_VERSION >= 2)
   auto group = std::make_shared<CDVDOverlayGroup>();
   group->bForced       = true;
   group->iPTSStartTime = static_cast<double>(pts);
@@ -797,12 +786,10 @@ void CDVDInputStreamBluray::OverlayFlush(int64_t pts)
 
   m_player->OnDiscNavResult(static_cast<void*>(&group), BD_EVENT_MENU_OVERLAY);
   m_hasOverlay = true;
-#endif
 }
 
 void CDVDInputStreamBluray::OverlayCallback(const BD_OVERLAY * const ov)
 {
-#if(BD_OVERLAY_INTERFACE_VERSION >= 2)
   if(ov == nullptr || ov->cmd == BD_OVERLAY_CLOSE)
   {
     OverlayClose();
@@ -866,7 +853,6 @@ void CDVDInputStreamBluray::OverlayCallback(const BD_OVERLAY * const ov)
 
   if (ov->cmd == BD_OVERLAY_FLUSH)
     OverlayFlush(ov->pts);
-#endif
 }
 
 #ifdef HAVE_LIBBLURAY_BDJ
@@ -1221,14 +1207,10 @@ void CDVDInputStreamBluray::SetupPlayerSettings()
   bd_set_player_setting(m_bd, BLURAY_PLAYER_SETTING_REGION_CODE, static_cast<uint32_t>(region));
   bd_set_player_setting(m_bd, BLURAY_PLAYER_SETTING_PARENTAL, 99);
   bd_set_player_setting(m_bd, BLURAY_PLAYER_SETTING_3D_CAP, 0xffffffff);
-#if (BLURAY_VERSION >= BLURAY_VERSION_CODE(1, 0, 2))
   bd_set_player_setting(m_bd, BLURAY_PLAYER_SETTING_PLAYER_PROFILE, BLURAY_PLAYER_PROFILE_6_v3_1);
   bd_set_player_setting(m_bd, BLURAY_PLAYER_SETTING_UHD_CAP, 0xffffffff);
   bd_set_player_setting(m_bd, BLURAY_PLAYER_SETTING_UHD_DISPLAY_CAP, 0xffffffff);
   bd_set_player_setting(m_bd, BLURAY_PLAYER_SETTING_HDR_PREFERENCE, 0xffffffff);
-#else
-  bd_set_player_setting(m_bd, BLURAY_PLAYER_SETTING_PLAYER_PROFILE, BLURAY_PLAYER_PROFILE_5_v2_4);
-#endif
 
   std::string langCode;
   g_LangCodeExpander.ConvertToISO6392T(g_langInfo.GetDVDAudioLanguage(), langCode);

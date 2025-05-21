@@ -1681,9 +1681,7 @@ std::string CBlurayDirectory::GetDiscInfoString(DiscInfo info) const
     {
       std::string title;
 
-#if (BLURAY_VERSION > BLURAY_VERSION_CODE(1, 0, 0))
       title = discInfo->disc_name ? discInfo->disc_name : "";
-#endif
 
       return title;
     }
@@ -1691,11 +1689,9 @@ std::string CBlurayDirectory::GetDiscInfoString(DiscInfo info) const
     {
       std::string id;
 
-#if (BLURAY_VERSION > BLURAY_VERSION_CODE(1, 0, 0))
       id = discInfo->udf_volume_id ? discInfo->udf_volume_id : "";
       if (id.empty())
         id = CUtil::GetHexString(discInfo->disc_id, 10);
-#endif
 
       return id;
     }

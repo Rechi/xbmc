@@ -30,7 +30,6 @@ CDiscSettings& CDiscSettings::GetInstance()
 
 void CDiscSettings::OnSettingChanged(const std::shared_ptr<const CSetting>& setting)
 {
-#if (BLURAY_VERSION >= BLURAY_VERSION_CODE(1,0,1))
   if (setting == NULL)
     return;
 
@@ -58,5 +57,4 @@ void CDiscSettings::OnSettingChanged(const std::shared_ptr<const CSetting>& sett
         HELPERS::ShowOKDialogText(CVariant{ 29803 }, CVariant{ 29804 });
     }
   }
-#endif
 }
