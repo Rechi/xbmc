@@ -588,10 +588,8 @@ bool CWebServer::ProcessPostData(const HTTPRequest& request,
       m_logger->error("failed to handle HTTP POST data for {}", request.pathUrl);
 #if (MHD_VERSION >= 0x00097400)
       connectionHandler->errorStatus = MHD_HTTP_CONTENT_TOO_LARGE;
-#elif (MHD_VERSION >= 0x00095213)
-      connectionHandler->errorStatus = MHD_HTTP_PAYLOAD_TOO_LARGE;
 #else
-      connectionHandler->errorStatus = MHD_HTTP_REQUEST_ENTITY_TOO_LARGE;
+      connectionHandler->errorStatus = MHD_HTTP_PAYLOAD_TOO_LARGE;
 #endif
     }
   }
@@ -1205,12 +1203,9 @@ struct MHD_Daemon* CWebServer::StartMHD(unsigned int flags, int port)
             // one thread per connection
             // WARNING: set MHD_OPTION_CONNECTION_TIMEOUT to something higher than 1
             // otherwise on libmicrohttpd 0.4.4-1 it spins a busy loop
-            MHD_USE_THREAD_PER_CONNECTION
-#if (MHD_VERSION >= 0x00095207)
-            |
+            MHD_USE_THREAD_PER_CONNECTION |
             MHD_USE_INTERNAL_POLLING_THREAD /* MHD_USE_THREAD_PER_CONNECTION must be used only with
                                                MHD_USE_INTERNAL_POLLING_THREAD since 0.9.54 */
-#endif
             | MHD_USE_DEBUG /* Print MHD error messages to log */
             | MHD_USE_SSL,
         port, 0, 0, &CWebServer::AnswerToConnection, this,
@@ -1227,11 +1222,9 @@ struct MHD_Daemon* CWebServer::StartMHD(unsigned int flags, int port)
           // one thread per connection
           // WARNING: set MHD_OPTION_CONNECTION_TIMEOUT to something higher than 1
           // otherwise on libmicrohttpd 0.4.4-1 it spins a busy loop
-          MHD_USE_THREAD_PER_CONNECTION
-#if (MHD_VERSION >= 0x00095207)
-          | MHD_USE_INTERNAL_POLLING_THREAD /* MHD_USE_THREAD_PER_CONNECTION must be used only with
+          MHD_USE_THREAD_PER_CONNECTION |
+          MHD_USE_INTERNAL_POLLING_THREAD /* MHD_USE_THREAD_PER_CONNECTION must be used only with
                                                MHD_USE_INTERNAL_POLLING_THREAD since 0.9.54 */
-#endif
           | MHD_USE_DEBUG /* Print MHD error messages to log */
       ,
       port, 0, 0, &CWebServer::AnswerToConnection, this,
