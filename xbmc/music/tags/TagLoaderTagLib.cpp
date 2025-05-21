@@ -58,10 +58,6 @@
 #include <taglib/xiphcomment.h>
 #include <taglib/xmfile.h>
 
-#if TAGLIB_MAJOR_VERSION <= 1 && TAGLIB_MINOR_VERSION < 11
-#include "utils/Base64.h"
-#endif
-
 using namespace TagLib;
 using namespace MUSIC_INFO;
 
@@ -636,9 +632,6 @@ bool CTagLoaderTagLib::ParseTag(Ogg::XiphComment *xiph, EmbeddedArt *art, CMusic
   if (!xiph)
     return false;
 
-#if TAGLIB_MAJOR_VERSION <= 1 && TAGLIB_MINOR_VERSION < 11
-  FLAC::Picture pictures[3];
-#endif
   ReplayGain replayGainInfo;
 
   const Ogg::FieldListMap& fieldListMap = xiph->fieldListMap();
@@ -752,58 +745,10 @@ bool CTagLoaderTagLib::ParseTag(Ogg::XiphComment *xiph, EmbeddedArt *art, CMusic
       if (iUserrating > 0 && iUserrating <= 100)
         tag.SetUserrating((iUserrating / 10));
     }
-#if TAGLIB_MAJOR_VERSION <= 1 && TAGLIB_MINOR_VERSION < 11
-    else if (it->first == "METADATA_BLOCK_PICTURE")
-    {
-      const char* b64 = it->second.front().toCString();
-      std::string decoded_block = Base64::Decode(b64, it->second.front().size());
-      ByteVector bv(decoded_block.data(), decoded_block.size());
-      TagLib::FLAC::Picture* pictureFrame = new TagLib::FLAC::Picture(bv);
-
-      if      (pictureFrame->type() == FLAC::Picture::FrontCover) pictures[0].parse(bv);
-      else if (pictureFrame->type() == FLAC::Picture::Other)      pictures[1].parse(bv);
-
-      delete pictureFrame;
-    }
-    else if (it->first == "COVERART")
-    {
-      const char* b64 = it->second.front().toCString();
-      std::string decoded_block = Base64::Decode(b64, it->second.front().size());
-      ByteVector bv(decoded_block.data(), decoded_block.size());
-      pictures[2].setData(bv);
-      // Assume jpeg
-      if (pictures[2].mimeType().isEmpty())
-        pictures[2].setMimeType("image/jpeg");
-    }
-    else if (it->first == "COVERARTMIME")
-    {
-      pictures[2].setMimeType(it->second.front());
-    }
-#endif
     else if (CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_logLevel == LOG_LEVEL_MAX)
       CLog::Log(LOGDEBUG, "unrecognized XipComment name: {}", it->first.toCString(true));
   }
 
-#if TAGLIB_MAJOR_VERSION <= 1 && TAGLIB_MINOR_VERSION < 11
-  // Process the extracted picture frames; 0 = CoverArt, 1 = Other, 2 = COVERART/COVERARTMIME
-  for (int i = 0; i < 3; ++i)
-    if (pictures[i].data().size())
-    {
-      std::string mime = pictures[i].mimeType().toCString();
-      if (mime.compare(0, 6, "image/") != 0)
-        continue;
-#if (TAGLIB_MAJOR_VERSION >= 2)
-      unsigned int size =            pictures[i].data().size();
-#else
-      TagLib::uint size =            pictures[i].data().size();
-#endif
-      tag.SetCoverArtInfo(size, mime);
-      if (art)
-        art->Set(reinterpret_cast<const uint8_t*>(pictures[i].data().data()), size, mime);
-
-      break;
-    }
-#else
   auto pictureList = xiph->pictureList();
   FLAC::Picture *cover[2] = {};
 
@@ -825,7 +770,6 @@ bool CTagLoaderTagLib::ParseTag(Ogg::XiphComment *xiph, EmbeddedArt *art, CMusic
       break; // one is enough
     }
   }
-#endif
 
   if (!xiph->comment().isEmpty())
     tag.SetComment(xiph->comment().toCString(true));
