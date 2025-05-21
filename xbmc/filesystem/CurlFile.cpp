@@ -369,14 +369,9 @@ long CCurlFile::CReadState::Connect(unsigned int size)
       return -1;
   }
 
-#if LIBCURL_VERSION_NUM >= 0x073700 // CURL_AT_LEAST_VERSION(0, 7, 55)
   curl_off_t length;
   if (CURLE_OK ==
       g_curlInterface.easy_getinfo(m_easyHandle, CURLINFO_CONTENT_LENGTH_DOWNLOAD_T, &length))
-#else
-  double length;
-  if (CURLE_OK == g_curlInterface.easy_getinfo(m_easyHandle, CURLINFO_CONTENT_LENGTH_DOWNLOAD, &length))
-#endif
   {
     if (length < 0)
       length = 0.0;
@@ -1590,11 +1585,7 @@ int CCurlFile::Stat(const CURL& url, struct __stat64* buffer)
     SetRequestHeaders(m_state);
     g_curlInterface.easy_setopt(m_state->m_easyHandle, CURLOPT_TIMEOUT, CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_curlconnecttimeout);
     g_curlInterface.easy_setopt(m_state->m_easyHandle, CURLOPT_FILETIME, 1);
-#if LIBCURL_VERSION_NUM >= 0x072000 // 0.7.32
     g_curlInterface.easy_setopt(m_state->m_easyHandle, CURLOPT_XFERINFOFUNCTION, transfer_abort_callback);
-#else
-    g_curlInterface.easy_setopt(m_state->m_easyHandle, CURLOPT_PROGRESSFUNCTION, transfer_abort_callback);
-#endif
     g_curlInterface.easy_setopt(m_state->m_easyHandle, CURLOPT_NOPROGRESS, 0);
 
     result = g_curlInterface.easy_perform(m_state->m_easyHandle);
@@ -1610,14 +1601,9 @@ int CCurlFile::Stat(const CURL& url, struct __stat64* buffer)
     return -1;
   }
 
-#if LIBCURL_VERSION_NUM >= 0x073700 // CURL_AT_LEAST_VERSION(0, 7, 55)
   curl_off_t length;
   result = g_curlInterface.easy_getinfo(m_state->m_easyHandle, CURLINFO_CONTENT_LENGTH_DOWNLOAD_T,
                                         &length);
-#else
-  double length;
-  result = g_curlInterface.easy_getinfo(m_state->m_easyHandle, CURLINFO_CONTENT_LENGTH_DOWNLOAD, &length);
-#endif
   if (result != CURLE_OK || length < 0.0)
   {
     if (url.IsProtocol("ftp"))
@@ -2162,19 +2148,9 @@ const std::vector<std::string> CCurlFile::GetPropertyValues(XFILE::FileProperty 
 
 double CCurlFile::GetDownloadSpeed()
 {
-#if LIBCURL_VERSION_NUM >= 0x073a00 // 0.7.58.0
   curl_off_t speed = 0;
   if (g_curlInterface.easy_getinfo(m_state->m_easyHandle, CURLINFO_SPEED_DOWNLOAD_T, &speed) ==
       CURLE_OK)
     return speed;
-#else
-  double time = 0.0, size = 0.0;
-  if (g_curlInterface.easy_getinfo(m_state->m_easyHandle, CURLINFO_TOTAL_TIME, &time) == CURLE_OK
-    && g_curlInterface.easy_getinfo(m_state->m_easyHandle, CURLINFO_SIZE_DOWNLOAD, &size) == CURLE_OK
-    && time > 0.0)
-  {
-    return size / time;
-  }
-#endif
   return 0.0;
 }
