@@ -40,15 +40,13 @@ extern "C" {
 #include <libavfilter/buffersrc.h>
 }
 
-#include "system_egl.h"
-
-#include <EGL/eglext.h>
+#include <va/va_str.h>
 #include <va/va_vpp.h>
 #include <xf86drm.h>
 
-#if VA_CHECK_VERSION(1, 0, 0)
-# include <va/va_str.h>
-#endif
+#include "system_egl.h"
+
+#include <EGL/eglext.h>
 
 using namespace VAAPI;
 using namespace std::chrono_literals;
@@ -207,10 +205,8 @@ bool CVAAPIContext::CreateContext()
     return false;
   }
 
-#if VA_CHECK_VERSION(1, 0, 0)
   vaSetErrorCallback(m_display, VaErrorCallback, nullptr);
   vaSetInfoCallback(m_display, VaInfoCallback, nullptr);
-#endif
 
   int major_version, minor_version;
   if (!CheckSuccess(vaInitialize(m_display, &major_version, &minor_version), "vaInitialize"))
@@ -241,10 +237,8 @@ void CVAAPIContext::DestroyContext()
     }
     else
     {
-#if VA_CHECK_VERSION(1, 0, 0)
       vaSetErrorCallback(m_display, nullptr, nullptr);
       vaSetInfoCallback(m_display, nullptr, nullptr);
-#endif
     }
   }
 }
@@ -261,11 +255,7 @@ void CVAAPIContext::QueryCaps()
 
   for(int i = 0; i < m_profileCount; i++)
   {
-#if VA_CHECK_VERSION(1, 0, 0)
     CLog::Log(LOGDEBUG, LOGVIDEO, "VAAPI - profile {}", vaProfileStr(m_profiles[i]));
-#else
-    CLog::Log(LOGDEBUG, LOGVIDEO, "VAAPI - profile {}", m_profiles[i]);
-#endif
   }
 }
 
