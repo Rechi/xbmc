@@ -701,10 +701,6 @@ SqliteDataset::SqliteDataset(SqliteDatabase* newDb) : Dataset(newDb)
   autorefresh = false;
 }
 
-SqliteDataset::~SqliteDataset()
-{
-}
-
 void SqliteDataset::set_autorefresh(bool val)
 {
   autorefresh = val;

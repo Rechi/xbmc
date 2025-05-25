@@ -116,7 +116,7 @@ public:
     for (size_t ch = 0; ch < AUDIOENGINE_CH_MAX; ++ch)
       m_cStructure->m_channels[ch] = AUDIOENGINE_CH_NULL;
   }
-  AudioEngineFormat(const AudioEngineFormat& channel) : CStructHdl(channel) {}
+  AudioEngineFormat(const AudioEngineFormat& channel) = default;
   AudioEngineFormat(const AUDIO_ENGINE_FORMAT* channel) : CStructHdl(channel) {}
   AudioEngineFormat(AUDIO_ENGINE_FORMAT* channel) : CStructHdl(channel) {}
   /*! \endcond */

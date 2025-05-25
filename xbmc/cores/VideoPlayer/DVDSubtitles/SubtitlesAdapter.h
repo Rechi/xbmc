@@ -23,7 +23,7 @@ class CSubtitlesAdapter
 {
 public:
   CSubtitlesAdapter();
-  virtual ~CSubtitlesAdapter();
+  virtual ~CSubtitlesAdapter() = default;
 
   /*!
   * \brief Initialize the subtitles adapter

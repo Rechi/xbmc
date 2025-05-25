@@ -1681,10 +1681,6 @@ MysqlDataset::MysqlDataset(MysqlDatabase* newDb) : Dataset(newDb)
   autorefresh = false;
 }
 
-MysqlDataset::~MysqlDataset()
-{
-}
-
 void MysqlDataset::set_autorefresh(bool val)
 {
   autorefresh = val;

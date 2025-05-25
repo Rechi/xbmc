@@ -25,7 +25,7 @@ public:
   CSpeechRecognitionListenerAndroid(
       const std::shared_ptr<speech::ISpeechRecognitionListener>& listener,
       ISpeechRecognitionCallback& callback);
-  ~CSpeechRecognitionListenerAndroid() override;
+  ~CSpeechRecognitionListenerAndroid() override = default;
 
   void onReadyForSpeech(CJNIBundle bundle) override;
   void onError(int error) override;

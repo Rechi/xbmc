@@ -27,7 +27,7 @@ class CPluginDirectory : public IDirectory, public CRunningScriptsHandler<CPlugi
 {
 public:
   CPluginDirectory();
-  ~CPluginDirectory() override;
+  ~CPluginDirectory() override = default;
   bool GetDirectory(const CURL& url, CFileItemList& items) override;
   bool Resolve(CFileItem& item) const override;
   bool AllowAll() const override { return true; }

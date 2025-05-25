@@ -26,7 +26,7 @@ class CGUIListContainer : public CGUIBaseContainer
 {
 public:
   CGUIListContainer(int parentID, int controlID, float posX, float posY, float width, float height, ORIENTATION orientation, const CScroller& scroller, int preloadItems);
-  explicit CGUIListContainer(const CGUIListContainer& other);
+  explicit CGUIListContainer(const CGUIListContainer& other) = default;
   //#ifdef GUILIB_PYTHON_COMPATIBILITY
   CGUIListContainer(int parentID, int controlID, float posX, float posY, float width, float height,
                          const CLabelInfo& labelInfo, const CLabelInfo& labelInfo2,

@@ -89,7 +89,7 @@ public:
   };
 
   CGUILabel(float posX, float posY, float width, float height, const CLabelInfo& labelInfo, OVER_FLOW overflow = OVER_FLOW_TRUNCATE);
-  CGUILabel(const CGUILabel& label);
+  CGUILabel(const CGUILabel& label) = default;
 
   virtual ~CGUILabel() = default;
 

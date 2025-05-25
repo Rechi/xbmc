@@ -50,7 +50,8 @@ private:
 
   struct DBusConnectionDeleter
   {
-    DBusConnectionDeleter() {}
+    DBusConnectionDeleter() noexcept = default;
+    DBusConnectionDeleter(const DBusConnectionDeleter&) noexcept = default;
     bool closeBeforeUnref = false;
     void operator()(DBusConnection* connection) const;
   };

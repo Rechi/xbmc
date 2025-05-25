@@ -311,10 +311,6 @@ void CSpeechRecognitionDarwin::StartSpeechRecognition(
   }
 }
 
-CSpeechRecognitionDarwin::~CSpeechRecognitionDarwin()
-{
-}
-
 void CSpeechRecognitionDarwin::OnRecognitionDone(speech::ISpeechRecognitionListener* listener)
 {
   std::unique_lock lock(m_impl->m_listenersMutex);

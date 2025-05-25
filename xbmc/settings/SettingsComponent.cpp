@@ -39,10 +39,6 @@ CSettingsComponent::CSettingsComponent()
 {
 }
 
-CSettingsComponent::~CSettingsComponent()
-{
-}
-
 void CSettingsComponent::Initialize()
 {
   if (m_state == State::DEINITED)

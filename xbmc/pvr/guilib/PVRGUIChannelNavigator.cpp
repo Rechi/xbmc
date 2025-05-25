@@ -97,11 +97,9 @@ public:
 };
 } // unnamed namespace
 
-CPVRGUIChannelNavigator::CPVRGUIChannelNavigator()
-{
-  // Note: we cannot subscribe to PlayerInfoProvider here, as we're getting constructed
-  // before the info providers. We will subscribe once our first subscriber appears.
-}
+// Note: we cannot subscribe to PlayerInfoProvider here, as we're getting constructed
+// before the info providers. We will subscribe once our first subscriber appears.
+CPVRGUIChannelNavigator::CPVRGUIChannelNavigator() = default;
 
 CPVRGUIChannelNavigator::~CPVRGUIChannelNavigator()
 {

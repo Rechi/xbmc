@@ -125,7 +125,7 @@ public:
   explicit MysqlDataset(MysqlDatabase* newDb);
 
   /* destructor */
-  ~MysqlDataset() override;
+  ~MysqlDataset() override = default;
 
   /* set autorefresh boolean value (if true - refresh the data after edit()
 or insert() operations default = false) */

@@ -145,7 +145,7 @@ public:
     m_cStructure->provides_buttonmaps = false;
   }
 
-  PeripheralCapabilities(const PeripheralCapabilities& data) : CStructHdl(data) {}
+  PeripheralCapabilities(const PeripheralCapabilities& data) = default;
   /*! \endcond */
 
   /// @defgroup cpp_kodi_addon_peripheral_Defs_PeripheralCapabilities_Help Value Help

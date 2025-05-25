@@ -2364,10 +2364,6 @@ void CSkipPostproc::Discard(COutput *output, ReadyToDispose cb)
 // VPP Postprocessing
 //-----------------------------------------------------------------------------
 
-CVppPostproc::CVppPostproc()
-{
-}
-
 CVppPostproc::~CVppPostproc()
 {
   Dispose();

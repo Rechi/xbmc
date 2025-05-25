@@ -50,7 +50,7 @@ class ATTR_DLL_LOCAL StreamCryptoSession
 public:
   /*! \cond PRIVATE */
   StreamCryptoSession() { memset(m_cStructure, 0, sizeof(STREAM_CRYPTO_SESSION)); }
-  StreamCryptoSession(const StreamCryptoSession& session) : CStructHdl(session) {}
+  StreamCryptoSession(const StreamCryptoSession& session) = default;
   StreamCryptoSession& operator=(const StreamCryptoSession&) = default;
   /*! \endcond */
 

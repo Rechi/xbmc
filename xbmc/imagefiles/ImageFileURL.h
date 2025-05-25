@@ -66,7 +66,7 @@ public:
   bool flipped{false};
 
 private:
-  CImageFileURL();
+  CImageFileURL() = default;
   std::string m_filePath;
   std::string m_specialType;
 

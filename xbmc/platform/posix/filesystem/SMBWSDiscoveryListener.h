@@ -27,7 +27,7 @@ class CWSDiscoveryListenerUDP : public CThread
 {
 public:
   CWSDiscoveryListenerUDP();
-  ~CWSDiscoveryListenerUDP();
+  ~CWSDiscoveryListenerUDP() = default;
 
   void Start();
   void Stop();

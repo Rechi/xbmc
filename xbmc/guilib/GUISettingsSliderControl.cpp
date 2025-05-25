@@ -53,14 +53,6 @@ CGUISettingsSliderControl::CGUISettingsSliderControl(int parentID,
   m_active = false;
 }
 
-CGUISettingsSliderControl::CGUISettingsSliderControl(const CGUISettingsSliderControl& control)
-  : CGUISliderControl(control),
-    m_buttonControl(control.m_buttonControl),
-    m_label(control.m_label),
-    m_active(control.m_active)
-{
-}
-
 void CGUISettingsSliderControl::Process(unsigned int currentTime, CDirtyRegionList &dirtyregions)
 {
   if (m_bInvalidated)

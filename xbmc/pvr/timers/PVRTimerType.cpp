@@ -153,10 +153,6 @@ std::shared_ptr<CPVRTimerType> CPVRTimerType::CreateFromAttributes(uint64_t iMus
   return {};
 }
 
-CPVRTimerType::CPVRTimerType()
-{
-}
-
 CPVRTimerType::CPVRTimerType(const PVR_TIMER_TYPE& type, int iClientId)
   : m_iClientId(iClientId),
     m_iTypeId(type.iId),

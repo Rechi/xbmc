@@ -585,10 +585,6 @@ CActiveAEStreamBuffers::CActiveAEStreamBuffers(const AEAudioFormat& inputFormat,
 {
 }
 
-CActiveAEStreamBuffers::~CActiveAEStreamBuffers()
-{
-}
-
 bool CActiveAEStreamBuffers::HasInputLevel(int level)
 {
   if ((m_inputSamples.size() + m_resampleBuffers->m_inputSamples.size()) >

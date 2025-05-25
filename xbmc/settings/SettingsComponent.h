@@ -26,7 +26,7 @@ class CSettingsComponent
 {
 public:
   CSettingsComponent();
-  virtual ~CSettingsComponent();
+  virtual ~CSettingsComponent() = default;
 
   /*!
    * @brief Initialize all subcomponents with system default values (loaded from code, system settings files, ...).

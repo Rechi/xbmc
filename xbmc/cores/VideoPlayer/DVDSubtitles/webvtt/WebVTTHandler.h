@@ -115,7 +115,7 @@ enum class WebvttSelector
 
 struct webvttCssStyle
 {
-  webvttCssStyle() {}
+  webvttCssStyle() = default;
   webvttCssStyle(WebvttSelector selectorType,
                  const std::string& selectorName,
                  const std::string& colorHexRGB)
@@ -147,8 +147,8 @@ struct tagToken
 class CWebVTTHandler
 {
 public:
-  CWebVTTHandler(){};
-  ~CWebVTTHandler(){};
+  CWebVTTHandler() = default;
+  ~CWebVTTHandler() = default;
 
   /*!
   * \brief Prepare the handler to the decoding
