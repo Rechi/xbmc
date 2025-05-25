@@ -23,8 +23,7 @@ namespace XBMCAddon
   {
     //! @todo need a means to check for a valid construction
     //!  either by throwing an exception or by an "isValid" check
-    PlayList::PlayList(int playList) :
-      iPlayList(playList), pPlayList(NULL)
+    PlayList::PlayList(int playList) : iPlayList(playList)
     {
       // we do not create our own playlist, just using the ones from playlistplayer
       if (PLAYLIST::Id{iPlayList} != PLAYLIST::Id::TYPE_MUSIC &&
@@ -41,7 +40,7 @@ namespace XBMCAddon
     {
       CFileItemList items;
 
-      if (listitem != NULL)
+      if (listitem != nullptr)
       {
         // an optional listitem was passed
         // set m_strPath to the passed url

@@ -23,14 +23,14 @@ CGUIRenderingControl::CGUIRenderingControl(int parentID, int controlID, float po
     : CGUIControl(parentID, controlID, posX, posY, width, height)
 {
   ControlType = GUICONTROL_RENDERADDON;
-  m_callback = NULL;
+  m_callback = nullptr;
 }
 
 CGUIRenderingControl::CGUIRenderingControl(const CGUIRenderingControl &from)
 : CGUIControl(from)
 {
   ControlType = GUICONTROL_RENDERADDON;
-  m_callback = NULL;
+  m_callback = nullptr;
 }
 
 bool CGUIRenderingControl::InitCallback(IRenderingCallback *callback)
@@ -108,7 +108,7 @@ void CGUIRenderingControl::FreeResources(bool immediately)
   CServiceBroker::GetWinSystem()->GetGfxContext().CaptureStateBlock(); //! @todo locking
   m_callback->Stop();
   CServiceBroker::GetWinSystem()->GetGfxContext().ApplyStateBlock();
-  m_callback = NULL;
+  m_callback = nullptr;
 }
 
 bool CGUIRenderingControl::CanFocusFromPoint(const CPoint &point) const

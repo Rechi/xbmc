@@ -157,7 +157,7 @@ std::vector<CMediaSource>* CMediaSourceSettings::GetSources(const std::string& t
   else if (type == "games")
     return &m_gameSources;
 
-  return NULL;
+  return nullptr;
 }
 
 const std::string& CMediaSourceSettings::GetDefaultSource(const std::string& type) const
@@ -193,7 +193,7 @@ bool CMediaSourceSettings::UpdateSource(const std::string& strType,
                                         const std::string& strUpdateValue)
 {
   std::vector<CMediaSource>* pShares = GetSources(strType);
-  if (pShares == NULL)
+  if (pShares == nullptr)
     return false;
 
   for (std::vector<CMediaSource>::iterator it = pShares->begin(); it != pShares->end(); ++it)
@@ -232,7 +232,7 @@ bool CMediaSourceSettings::DeleteSource(const std::string& strType,
                                         bool virtualSource /* = false */)
 {
   std::vector<CMediaSource>* pShares = GetSources(strType);
-  if (pShares == NULL)
+  if (pShares == nullptr)
     return false;
 
   bool found = false;
@@ -257,7 +257,7 @@ bool CMediaSourceSettings::DeleteSource(const std::string& strType,
 bool CMediaSourceSettings::AddShare(const std::string& type, const CMediaSource& share)
 {
   std::vector<CMediaSource>* pShares = GetSources(type);
-  if (pShares == NULL)
+  if (pShares == nullptr)
     return false;
 
   // translate dir and add to our current shares
@@ -296,11 +296,11 @@ bool CMediaSourceSettings::UpdateShare(const std::string& type,
                                        const CMediaSource& share)
 {
   std::vector<CMediaSource>* pShares = GetSources(type);
-  if (pShares == NULL)
+  if (pShares == nullptr)
     return false;
 
   // update our current share list
-  CMediaSource* pShare = NULL;
+  CMediaSource* pShare = nullptr;
   for (std::vector<CMediaSource>::iterator it = pShares->begin(); it != pShares->end(); ++it)
   {
     if (it->strName == oldName)
@@ -313,7 +313,7 @@ bool CMediaSourceSettings::UpdateShare(const std::string& type,
     }
   }
 
-  if (pShare == NULL)
+  if (pShare == nullptr)
     return false;
 
   // Update our XML file as well

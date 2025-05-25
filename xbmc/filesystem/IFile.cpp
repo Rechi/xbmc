@@ -81,11 +81,6 @@ IFile::ReadLineResult IFile::ReadLine(char* szLine, std::size_t bufferSize)
   return {ReadLineResult::TRUNCATED, iBytesRead};
 }
 
-CRedirectException::CRedirectException() :
-  m_pNewFileImp(NULL), m_pNewUrl(NULL)
-{
-}
-
 CRedirectException::CRedirectException(IFile *pNewFileImp, CURL *pNewUrl) :
   m_pNewFileImp(pNewFileImp), m_pNewUrl(pNewUrl)
 {

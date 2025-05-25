@@ -27,7 +27,7 @@ namespace XFILE
 class CPipeFile : public IFile, public IPipeListener
 {
 public:
-  CPipeFile();
+  CPipeFile() = default;
   ~CPipeFile() override;
   int64_t GetPosition() override;
   int64_t GetLength() override;
@@ -68,7 +68,7 @@ protected:
   int64_t m_pos = 0;
   int64_t m_length = -1;
 
-  XFILE::Pipe *m_pipe;
+  XFILE::Pipe* m_pipe = nullptr;
 
   CCriticalSection m_lock;
   std::vector<XFILE::IPipeListener *> m_listeners;

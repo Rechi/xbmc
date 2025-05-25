@@ -74,7 +74,7 @@ CDemuxStream* CDemuxMultiSource::GetStream(int64_t demuxerId, int iStreamId) con
     return iter->second->GetStream(demuxerId, iStreamId);
   }
   else
-    return NULL;
+    return nullptr;
 }
 
 std::vector<CDemuxStream*> CDemuxMultiSource::GetStreams() const

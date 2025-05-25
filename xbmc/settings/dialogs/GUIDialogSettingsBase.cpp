@@ -58,14 +58,6 @@ CGUIDialogSettingsBase::CGUIDialogSettingsBase(int windowId, const std::string& 
   : CGUIDialog(windowId, xmlFile),
     m_resetSetting(nullptr),
     m_dummyCategory(nullptr),
-    m_pOriginalSpin(NULL),
-    m_pOriginalSlider(NULL),
-    m_pOriginalRadioButton(NULL),
-    m_pOriginalCategoryButton(NULL),
-    m_pOriginalButton(NULL),
-    m_pOriginalEdit(NULL),
-    m_pOriginalImage(NULL),
-    m_pOriginalGroupTitle(NULL),
     m_delayedTimer(this)
 {
   m_loadType = KEEP_IN_MEMORY;
@@ -237,7 +229,7 @@ bool CGUIDialogSettingsBase::OnMessage(CGUIMessage& message)
           message.GetControlId() < (int)(CONTROL_SETTINGS_START_CONTROL + m_settingControls.size()))
       {
         BaseSettingControlPtr settingControl = GetSettingControl(message.GetControlId());
-        if (settingControl.get() != NULL && settingControl->GetSetting() != nullptr)
+        if (settingControl.get() != nullptr && settingControl->GetSetting() != nullptr)
         {
           settingControl->UpdateFromSetting(message.GetParam2() != 0);
           return true;
@@ -412,7 +404,7 @@ void CGUIDialogSettingsBase::SetupControls(bool createSettings /* = true */)
   if (m_categories.empty())
     m_categories.push_back(m_dummyCategory);
 
-  if (m_pOriginalCategoryButton != NULL)
+  if (m_pOriginalCategoryButton != nullptr)
   {
     // setup our control groups...
     CGUIControlGroupList* group =
@@ -425,7 +417,7 @@ void CGUIDialogSettingsBase::SetupControls(bool createSettings /* = true */)
     for (SettingCategoryList::const_iterator category = m_categories.begin();
          category != m_categories.end(); ++category)
     {
-      CGUIButtonControl* pButton = NULL;
+      CGUIButtonControl* pButton = nullptr;
       if (m_pOriginalCategoryButton->GetControlType() == CGUIControl::GUICONTROL_TOGGLEBUTTON)
         pButton = new CGUIToggleButtonControl(
             *static_cast<CGUIToggleButtonControl*>(m_pOriginalCategoryButton));
@@ -448,10 +440,10 @@ void CGUIDialogSettingsBase::SetupControls(bool createSettings /* = true */)
     CreateSettings();
 
   // set focus correctly depending on whether there are categories visible or not
-  if (m_pOriginalCategoryButton == NULL &&
+  if (m_pOriginalCategoryButton == nullptr &&
       (m_defaultControl <= 0 || m_defaultControl == CATEGORY_GROUP_ID))
     m_defaultControl = SETTINGS_GROUP_ID;
-  else if (m_pOriginalCategoryButton != NULL && m_defaultControl <= 0)
+  else if (m_pOriginalCategoryButton != nullptr && m_defaultControl <= 0)
     m_defaultControl = CATEGORY_GROUP_ID;
 }
 
@@ -548,7 +540,7 @@ SettingsContainer CGUIDialogSettingsBase::CreateSettings()
     m_iCategory = 0;
 
   CGUIControlGroupList* group = dynamic_cast<CGUIControlGroupList*>(GetControl(SETTINGS_GROUP_ID));
-  if (group == NULL)
+  if (group == nullptr)
     return settingMap;
 
   SettingCategoryPtr category = m_categories.at(m_iCategory);
@@ -631,7 +623,7 @@ void CGUIDialogSettingsBase::UpdateSettings()
     const BaseSettingControlPtr& pSettingControl = *it;
     std::shared_ptr<CSetting> pSetting = pSettingControl->GetSetting();
     CGUIControl* pControl = pSettingControl->GetControl();
-    if (pSetting == nullptr || pControl == NULL)
+    if (pSetting == nullptr || pControl == nullptr)
       continue;
 
     pSettingControl->UpdateFromSetting();
@@ -643,10 +635,10 @@ CGUIControl* CGUIDialogSettingsBase::AddSetting(const std::shared_ptr<CSetting>&
                                                 int& iControlID)
 {
   if (pSetting == nullptr)
-    return NULL;
+    return nullptr;
 
   BaseSettingControlPtr pSettingControl;
-  CGUIControl* pControl = NULL;
+  CGUIControl* pControl = nullptr;
 
   // determine the label and any possible indentation in case of sub settings
   std::string label = GetSettingsLabel(pSetting);
@@ -669,15 +661,15 @@ CGUIControl* CGUIDialogSettingsBase::AddSetting(const std::shared_ptr<CSetting>&
 
   // create the proper controls
   if (!pSetting->GetControl())
-    return NULL;
+    return nullptr;
 
   std::string controlType = pSetting->GetControl()->GetType();
   if (controlType == "toggle")
   {
-    if (m_pOriginalRadioButton != NULL)
+    if (m_pOriginalRadioButton != nullptr)
       pControl = m_pOriginalRadioButton->Clone();
-    if (pControl == NULL)
-      return NULL;
+    if (pControl == nullptr)
+      return nullptr;
 
     static_cast<CGUIRadioButtonControl*>(pControl)->SetLabel(label);
     pSettingControl = std::make_shared<CGUIControlRadioButtonSetting>(
@@ -685,10 +677,10 @@ CGUIControl* CGUIDialogSettingsBase::AddSetting(const std::shared_ptr<CSetting>&
   }
   else if (controlType == "spinner")
   {
-    if (m_pOriginalSpin != NULL)
+    if (m_pOriginalSpin != nullptr)
       pControl = new CGUISpinControlEx(*m_pOriginalSpin);
-    if (pControl == NULL)
-      return NULL;
+    if (pControl == nullptr)
+      return nullptr;
 
     static_cast<CGUISpinControlEx*>(pControl)->SetText(label);
     pSettingControl = std::make_shared<CGUIControlSpinExSetting>(
@@ -696,10 +688,10 @@ CGUIControl* CGUIDialogSettingsBase::AddSetting(const std::shared_ptr<CSetting>&
   }
   else if (controlType == "edit")
   {
-    if (m_pOriginalEdit != NULL)
+    if (m_pOriginalEdit != nullptr)
       pControl = new CGUIEditControl(*m_pOriginalEdit);
-    if (pControl == NULL)
-      return NULL;
+    if (pControl == nullptr)
+      return nullptr;
 
     static_cast<CGUIEditControl*>(pControl)->SetLabel(label);
     pSettingControl = std::make_shared<CGUIControlEditSetting>(
@@ -707,10 +699,10 @@ CGUIControl* CGUIDialogSettingsBase::AddSetting(const std::shared_ptr<CSetting>&
   }
   else if (controlType == "list")
   {
-    if (m_pOriginalButton != NULL)
+    if (m_pOriginalButton != nullptr)
       pControl = new CGUIButtonControl(*m_pOriginalButton);
-    if (pControl == NULL)
-      return NULL;
+    if (pControl == nullptr)
+      return nullptr;
 
     static_cast<CGUIButtonControl*>(pControl)->SetLabel(label);
     pSettingControl = std::make_shared<CGUIControlListSetting>(
@@ -721,10 +713,10 @@ CGUIControl* CGUIDialogSettingsBase::AddSetting(const std::shared_ptr<CSetting>&
     if (controlType == "button" ||
         std::static_pointer_cast<const CSettingControlSlider>(pSetting->GetControl())->UsePopup())
     {
-      if (m_pOriginalButton != NULL)
+      if (m_pOriginalButton != nullptr)
         pControl = new CGUIButtonControl(*m_pOriginalButton);
-      if (pControl == NULL)
-        return NULL;
+      if (pControl == nullptr)
+        return nullptr;
 
       static_cast<CGUIButtonControl*>(pControl)->SetLabel(label);
       pSettingControl = std::make_shared<CGUIControlButtonSetting>(
@@ -732,10 +724,10 @@ CGUIControl* CGUIDialogSettingsBase::AddSetting(const std::shared_ptr<CSetting>&
     }
     else
     {
-      if (m_pOriginalSlider != NULL)
+      if (m_pOriginalSlider != nullptr)
         pControl = m_pOriginalSlider->Clone();
-      if (pControl == NULL)
-        return NULL;
+      if (pControl == nullptr)
+        return nullptr;
 
       static_cast<CGUISettingsSliderControl*>(pControl)->SetText(label);
       pSettingControl = std::make_shared<CGUIControlSliderSetting>(
@@ -744,10 +736,10 @@ CGUIControl* CGUIDialogSettingsBase::AddSetting(const std::shared_ptr<CSetting>&
   }
   else if (controlType == "range")
   {
-    if (m_pOriginalSlider != NULL)
+    if (m_pOriginalSlider != nullptr)
       pControl = m_pOriginalSlider->Clone();
-    if (pControl == NULL)
-      return NULL;
+    if (pControl == nullptr)
+      return nullptr;
 
     static_cast<CGUISettingsSliderControl*>(pControl)->SetText(label);
     pSettingControl = std::make_shared<CGUIControlRangeSetting>(
@@ -755,10 +747,10 @@ CGUIControl* CGUIDialogSettingsBase::AddSetting(const std::shared_ptr<CSetting>&
   }
   else if (controlType == "label")
   {
-    if (m_pOriginalButton != NULL)
+    if (m_pOriginalButton != nullptr)
       pControl = new CGUIButtonControl(*m_pOriginalButton);
-    if (pControl == NULL)
-      return NULL;
+    if (pControl == nullptr)
+      return nullptr;
 
     static_cast<CGUIButtonControl*>(pControl)->SetLabel(label);
     pSettingControl = std::make_shared<CGUIControlLabelSetting>(
@@ -786,12 +778,12 @@ CGUIControl* CGUIDialogSettingsBase::AddSetting(const std::shared_ptr<CSetting>&
 
 CGUIControl* CGUIDialogSettingsBase::AddSeparator(float width, int& iControlID)
 {
-  if (m_pOriginalImage == NULL)
-    return NULL;
+  if (m_pOriginalImage == nullptr)
+    return nullptr;
 
   CGUIControl* pControl = new CGUIImage(*m_pOriginalImage);
-  if (pControl == NULL)
-    return NULL;
+  if (pControl == nullptr)
+    return nullptr;
 
   return AddSettingControl(pControl,
                            BaseSettingControlPtr(new CGUIControlSeparatorSetting(
@@ -803,12 +795,12 @@ CGUIControl* CGUIDialogSettingsBase::AddGroupLabel(const std::shared_ptr<CSettin
                                                    float width,
                                                    int& iControlID)
 {
-  if (m_pOriginalGroupTitle == NULL)
-    return NULL;
+  if (m_pOriginalGroupTitle == nullptr)
+    return nullptr;
 
   CGUIControl* pControl = new CGUILabelControl(*m_pOriginalGroupTitle);
-  if (pControl == NULL)
-    return NULL;
+  if (pControl == nullptr)
+    return nullptr;
 
   static_cast<CGUILabelControl*>(pControl)->SetLabel(GetSettingsLabel(group));
 
@@ -823,10 +815,10 @@ CGUIControl* CGUIDialogSettingsBase::AddSettingControl(CGUIControl* pControl,
                                                        float width,
                                                        int& iControlID)
 {
-  if (pControl == NULL)
+  if (pControl == nullptr)
   {
     pSettingControl.reset();
-    return NULL;
+    return nullptr;
   }
 
   pControl->SetID(iControlID++);
@@ -834,7 +826,7 @@ CGUIControl* CGUIDialogSettingsBase::AddSettingControl(CGUIControl* pControl,
   pControl->SetWidth(width);
 
   CGUIControlGroupList* group = dynamic_cast<CGUIControlGroupList*>(GetControl(SETTINGS_GROUP_ID));
-  if (group != NULL)
+  if (group != nullptr)
   {
     pControl->AllocResources();
     group->AddControl(pControl);
@@ -930,7 +922,7 @@ void CGUIDialogSettingsBase::UpdateSettingControl(const BaseSettingControlPtr& p
 
 void CGUIDialogSettingsBase::SetControlLabel(int controlId, const CVariant& label)
 {
-  if (GetControl(controlId) == NULL)
+  if (GetControl(controlId) == nullptr)
     return;
 
   if (label.isString())

@@ -589,7 +589,11 @@ public:
                     int idVersion = -1,
                     int idFile = -1,
                     int getDetails = VideoDbDetailsAll);
-  bool GetTvShowInfo(const std::string& strPath, CVideoInfoTag& details, int idTvShow = -1, CFileItem* item = NULL, int getDetails = VideoDbDetailsAll);
+  bool GetTvShowInfo(const std::string& strPath,
+                     CVideoInfoTag& details,
+                     int idTvShow = -1,
+                     CFileItem* item = nullptr,
+                     int getDetails = VideoDbDetailsAll);
   bool GetSeasonInfo(const std::string& path, int season, CVideoInfoTag& details, CFileItem* item);
   bool GetSeasonInfo(int idSeason, CVideoInfoTag& details, CFileItem* item);
   bool GetSeasonInfo(int idSeason, CVideoInfoTag& details, bool allDetails = true);
@@ -692,7 +696,7 @@ public:
   void DeleteMusicVideo(int idMusicVideo, bool bKeepId = false);
   void DeleteDetailsForTvShow(int idTvShow);
   void DeleteStreamDetails(int idFile);
-  void RemoveContentForPath(const std::string& strPath,CGUIDialogProgress *progress = NULL);
+  void RemoveContentForPath(const std::string& strPath, CGUIDialogProgress* progress = nullptr);
   void UpdateFanart(const CFileItem& item, VideoDbContentType type);
   void DeleteSet(int idSet);
   void DeleteTag(int idTag, VideoDbContentType mediaType);
@@ -960,7 +964,9 @@ public:
   bool HasContent(VideoDbContentType type);
   bool HasSets() const;
 
-  void CleanDatabase(CGUIDialogProgressBarHandle* handle = NULL, const std::set<int>& paths = std::set<int>(), bool showProgress = true);
+  void CleanDatabase(CGUIDialogProgressBarHandle* handle = nullptr,
+                     const std::set<int>& paths = std::set<int>(),
+                     bool showProgress = true);
 
   /*! \brief Add a file to the database, if necessary
    If the file is already in the database, we simply return its id.
@@ -1295,8 +1301,12 @@ protected:
 
   CVideoInfoTag GetDetailsForMovie(std::unique_ptr<dbiplus::Dataset> &pDS, int getDetails = VideoDbDetailsNone);
   CVideoInfoTag GetDetailsForMovie(const dbiplus::sql_record* const record, int getDetails = VideoDbDetailsNone);
-  CVideoInfoTag GetDetailsForTvShow(std::unique_ptr<dbiplus::Dataset> &pDS, int getDetails = VideoDbDetailsNone, CFileItem* item = NULL);
-  CVideoInfoTag GetDetailsForTvShow(const dbiplus::sql_record* const record, int getDetails = VideoDbDetailsNone, CFileItem* item = NULL);
+  CVideoInfoTag GetDetailsForTvShow(std::unique_ptr<dbiplus::Dataset>& pDS,
+                                    int getDetails = VideoDbDetailsNone,
+                                    CFileItem* item = nullptr);
+  CVideoInfoTag GetDetailsForTvShow(const dbiplus::sql_record* const record,
+                                    int getDetails = VideoDbDetailsNone,
+                                    CFileItem* item = nullptr);
   CVideoInfoTag GetBasicDetailsForEpisode(std::unique_ptr<dbiplus::Dataset> &pDS);
   CVideoInfoTag GetBasicDetailsForEpisode(const dbiplus::sql_record* const record);
   CVideoInfoTag GetDetailsForEpisode(std::unique_ptr<dbiplus::Dataset> &pDS, int getDetails = VideoDbDetailsNone);

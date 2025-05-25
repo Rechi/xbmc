@@ -169,7 +169,7 @@ void CVideoLibraryQueue::ResetResumePoint(const std::shared_ptr<CFileItem>& item
 
 void CVideoLibraryQueue::AddJob(CVideoLibraryJob *job)
 {
-  if (job == NULL)
+  if (job == nullptr)
     return;
 
   std::unique_lock lock(m_critical);
@@ -191,7 +191,7 @@ void CVideoLibraryQueue::AddJob(CVideoLibraryJob *job)
 
 void CVideoLibraryQueue::CancelJob(CVideoLibraryJob *job)
 {
-  if (job == NULL)
+  if (job == nullptr)
     return;
 
   std::unique_lock lock(m_critical);

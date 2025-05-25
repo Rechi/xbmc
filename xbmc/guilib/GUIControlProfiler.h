@@ -73,7 +73,7 @@ private:
   ~CGUIControlProfiler() = default;
 
   CGUIControlProfilerItem m_ItemHead;
-  CGUIControlProfilerItem *m_pLastItem;
+  CGUIControlProfilerItem* m_pLastItem = nullptr;
   CGUIControlProfilerItem *FindOrAddControl(CGUIControl *pControl);
 
   static bool m_bIsRunning;

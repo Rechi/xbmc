@@ -691,7 +691,7 @@ std::string SqliteDatabase::vprepare(const char* format, va_list args)
 SqliteDataset::SqliteDataset() : Dataset()
 {
   haveError = false;
-  db = NULL;
+  db = nullptr;
   autorefresh = false;
 }
 
@@ -711,7 +711,7 @@ void SqliteDataset::set_autorefresh(bool val)
 
 sqlite3* SqliteDataset::handle()
 {
-  if (db != NULL)
+  if (db != nullptr)
   {
     return static_cast<SqliteDatabase*>(db)->getHandle();
   }
@@ -722,7 +722,7 @@ sqlite3* SqliteDataset::handle()
 void SqliteDataset::make_query(StringList& _sql)
 {
   std::string query;
-  if (db == NULL)
+  if (db == nullptr)
     throw DbErrors("No Database Connection");
 
   try
@@ -787,7 +787,7 @@ void SqliteDataset::make_deletion()
 void SqliteDataset::fill_fields()
 {
   //cout <<"rr "<<result.records.size()<<"|" << frecno <<"\n";
-  if ((db == NULL) || (result.record_header.empty()) ||
+  if ((db == nullptr) || (result.record_header.empty()) ||
       (result.records.size() < (unsigned int)frecno))
     return;
 
@@ -1075,7 +1075,7 @@ void SqliteDataset::free_row()
   if (row)
   {
     delete row;
-    result.records[frecno] = NULL;
+    result.records[frecno] = nullptr;
   }
 }
 

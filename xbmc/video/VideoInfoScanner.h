@@ -67,7 +67,12 @@ namespace KODI::VIDEO
      \param libraryImport Whether this call belongs to a full library import or not. Defaults to false.
      \return database id of the added item, or -1 on failure.
      */
-    long AddVideo(CFileItem *pItem, const CONTENT_TYPE &content, bool videoFolder = false, bool useLocal = true, const CVideoInfoTag *showInfo = NULL, bool libraryImport = false);
+    long AddVideo(CFileItem* pItem,
+                  const CONTENT_TYPE& content,
+                  bool videoFolder = false,
+                  bool useLocal = true,
+                  const CVideoInfoTag* showInfo = nullptr,
+                  bool libraryImport = false);
 
     /*! \brief Retrieve information for a list of items and add them to the database.
      \param items list of items to retrieve info for.
@@ -79,7 +84,13 @@ namespace KODI::VIDEO
      \param pDlgProgress progress dialog to update and check for cancellation during processing.  Defaults to NULL.
      \return true if we successfully found information for some items, false otherwise
      */
-    bool RetrieveVideoInfo(CFileItemList& items, bool bDirNames, CONTENT_TYPE content, bool useLocal = true, CScraperUrl *pURL = NULL, bool fetchEpisodes = true, CGUIDialogProgress* pDlgProgress = NULL);
+    bool RetrieveVideoInfo(CFileItemList& items,
+                           bool bDirNames,
+                           CONTENT_TYPE content,
+                           bool useLocal = true,
+                           CScraperUrl* pURL = nullptr,
+                           bool fetchEpisodes = true,
+                           CGUIDialogProgress* pDlgProgress = nullptr);
 
     static void ApplyThumbToFolder(const std::string &folder, const std::string &imdbThumb);
     static bool DownloadFailed(CGUIDialogProgress* pDlgProgress);

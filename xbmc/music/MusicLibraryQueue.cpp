@@ -46,7 +46,7 @@ CMusicLibraryQueue& CMusicLibraryQueue::GetInstance()
 
 void CMusicLibraryQueue::ExportLibrary(const CLibExportSettings& settings, bool showDialog /* = false */)
 {
-  CGUIDialogProgress* progress = NULL;
+  CGUIDialogProgress* progress = nullptr;
   if (showDialog)
   {
     progress = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogProgress>(WINDOW_DIALOG_PROGRESS);
@@ -191,7 +191,7 @@ void CMusicLibraryQueue::StopLibraryScanning()
 
 void CMusicLibraryQueue::CleanLibrary(bool showDialog /* = false */)
 {
-  CGUIDialogProgress* progress = NULL;
+  CGUIDialogProgress* progress = nullptr;
   if (showDialog)
   {
     progress = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogProgress>(WINDOW_DIALOG_PROGRESS);
@@ -215,7 +215,7 @@ void CMusicLibraryQueue::CleanLibrary(bool showDialog /* = false */)
 
 void CMusicLibraryQueue::AddJob(CMusicLibraryJob *job)
 {
-  if (job == NULL)
+  if (job == nullptr)
     return;
 
   std::unique_lock lock(m_critical);
@@ -237,7 +237,7 @@ void CMusicLibraryQueue::AddJob(CMusicLibraryJob *job)
 
 void CMusicLibraryQueue::CancelJob(CMusicLibraryJob *job)
 {
-  if (job == NULL)
+  if (job == nullptr)
     return;
 
   std::unique_lock lock(m_critical);

@@ -20,7 +20,7 @@ using namespace XFILE;
 CDVDInputStreamFile::CDVDInputStreamFile(const CFileItem& fileitem, unsigned int flags)
   : CDVDInputStream(DVDSTREAM_TYPE_FILE, fileitem), m_flags(flags)
 {
-  m_pFile = NULL;
+  m_pFile = nullptr;
   m_eof = true;
 }
 
@@ -64,7 +64,7 @@ bool CDVDInputStreamFile::Open()
   if (!m_pFile->Open(m_item.GetDynPath(), flags))
   {
     delete m_pFile;
-    m_pFile = NULL;
+    m_pFile = nullptr;
     return false;
   }
 
@@ -85,7 +85,7 @@ void CDVDInputStreamFile::Close()
   }
 
   CDVDInputStream::Close();
-  m_pFile = NULL;
+  m_pFile = nullptr;
   m_eof = true;
 }
 

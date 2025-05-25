@@ -109,7 +109,7 @@ void CScriptInvocationManager::Uninitialize()
 
 void CScriptInvocationManager::RegisterLanguageInvocationHandler(ILanguageInvocationHandler *invocationHandler, const std::string &extension)
 {
-  if (invocationHandler == NULL || extension.empty())
+  if (invocationHandler == nullptr || extension.empty())
     return;
 
   std::string ext = extension;
@@ -140,7 +140,7 @@ void CScriptInvocationManager::RegisterLanguageInvocationHandler(ILanguageInvoca
 
 void CScriptInvocationManager::RegisterLanguageInvocationHandler(ILanguageInvocationHandler *invocationHandler, const std::set<std::string> &extensions)
 {
-  if (invocationHandler == NULL || extensions.empty())
+  if (invocationHandler == nullptr || extensions.empty())
     return;
 
   for (const auto& extension : extensions)
@@ -149,7 +149,7 @@ void CScriptInvocationManager::RegisterLanguageInvocationHandler(ILanguageInvoca
 
 void CScriptInvocationManager::UnregisterLanguageInvocationHandler(ILanguageInvocationHandler *invocationHandler)
 {
-  if (invocationHandler == NULL)
+  if (invocationHandler == nullptr)
     return;
 
   std::unique_lock lock(m_critSection);

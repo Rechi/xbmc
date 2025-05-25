@@ -92,8 +92,8 @@ CXHandle::~CXHandle()
 void CXHandle::Init()
 {
   fd=0;
-  m_hMutex=NULL;
-  m_hCond=NULL;
+  m_hMutex = nullptr;
+  m_hCond = nullptr;
   m_type = HND_NULL;
   RecursionCount=0;
   m_bManualEvent=false;

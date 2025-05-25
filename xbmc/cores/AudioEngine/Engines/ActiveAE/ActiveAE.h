@@ -252,7 +252,7 @@ public:
   /* returns a new stream for data in the specified format */
   IAE::StreamPtr MakeStream(AEAudioFormat& audioFormat,
                             unsigned int options = 0,
-                            IAEClockCallback* clock = NULL) override;
+                            IAEClockCallback* clock = nullptr) override;
 
   /* returns a new sound object */
   IAE::SoundPtr MakeSound(const std::string& file) override;

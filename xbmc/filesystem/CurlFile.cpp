@@ -437,7 +437,7 @@ CCurlFile::CCurlFile()
   m_bufferSize = 32768;
   m_postdataset = false;
   m_state = new CReadState();
-  m_oldState = NULL;
+  m_oldState = nullptr;
   m_skipshout = false;
   m_httpresponse = -1;
   m_acceptCharset = "UTF-8,*;q=0.8"; /* prefer UTF-8 if available */
@@ -458,7 +458,7 @@ void CCurlFile::Close()
 
   m_state->Disconnect();
   delete m_oldState;
-  m_oldState = NULL;
+  m_oldState = nullptr;
 
   m_url.clear();
   m_referer.clear();
@@ -1497,7 +1497,7 @@ int64_t CCurlFile::Seek(int64_t iFilePosition, int iWhence)
       {
         delete m_state;
         m_state     = m_oldState;
-        m_oldState  = NULL;
+        m_oldState = nullptr;
       }
       // Retry without multisession
       m_multisession = false;

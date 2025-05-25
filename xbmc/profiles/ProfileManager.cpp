@@ -470,11 +470,11 @@ bool CProfileManager::DeleteProfile(unsigned int index)
 {
   std::unique_lock lock(m_critical);
   const CProfile *profile = GetProfile(index);
-  if (profile == NULL)
+  if (profile == nullptr)
     return false;
 
   CGUIDialogYesNo* dlgYesNo = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogYesNo>(WINDOW_DIALOG_YES_NO);
-  if (dlgYesNo == NULL)
+  if (dlgYesNo == nullptr)
     return false;
 
   const std::string& str = g_localizeStrings.Get(13201);
@@ -560,7 +560,7 @@ const CProfile* CProfileManager::GetProfile(unsigned int index) const
   if (index < m_profiles.size())
     return &m_profiles[index];
 
-  return NULL;
+  return nullptr;
 }
 
 CProfile* CProfileManager::GetProfile(unsigned int index)
@@ -569,7 +569,7 @@ CProfile* CProfileManager::GetProfile(unsigned int index)
   if (index < m_profiles.size())
     return &m_profiles[index];
 
-  return NULL;
+  return nullptr;
 }
 
 int CProfileManager::GetProfileIndex(const std::string &name) const

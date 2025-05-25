@@ -963,7 +963,7 @@ void CLinuxRendererGL::LoadShaders(int field)
     if (m_pYUVShader)
     {
       delete m_pYUVShader;
-      m_pYUVShader = NULL;
+      m_pYUVShader = nullptr;
     }
 
     // create regular progressive scan shader

@@ -44,11 +44,11 @@ CHTTPVfsHandler::CHTTPVfsHandler(const HTTPRequest &request)
           realPath = CURL(realPath).GetHostName();
 
         // Check manually configured sources
-        std::vector<CMediaSource>* sources = NULL;
+        std::vector<CMediaSource>* sources = nullptr;
         for (unsigned int index = 0; index < size && !accessible; index++)
         {
           sources = CMediaSourceSettings::GetInstance().GetSources(sourceTypes[index]);
-          if (sources == NULL)
+          if (sources == nullptr)
             continue;
 
           for (const auto& source : *sources)

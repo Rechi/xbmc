@@ -36,14 +36,13 @@ constexpr const int CONTROL_ID_PERIPHERAL_ICON = 100;
 } // namespace
 
 CGUIDialogPeripheralSettings::CGUIDialogPeripheralSettings()
-  : CGUIDialogSettingsManualBase(WINDOW_DIALOG_PERIPHERAL_SETTINGS, "DialogSettings.xml"),
-    m_item(NULL)
+  : CGUIDialogSettingsManualBase(WINDOW_DIALOG_PERIPHERAL_SETTINGS, "DialogSettings.xml")
 {
 }
 
 CGUIDialogPeripheralSettings::~CGUIDialogPeripheralSettings()
 {
-  if (m_item != NULL)
+  if (m_item != nullptr)
     delete m_item;
 
   m_settingsMap.clear();
@@ -79,10 +78,10 @@ void CGUIDialogPeripheralSettings::UnregisterPeripheralManager()
 
 void CGUIDialogPeripheralSettings::SetFileItem(const CFileItem* item)
 {
-  if (item == NULL)
+  if (item == nullptr)
     return;
 
-  if (m_item != NULL)
+  if (m_item != nullptr)
     delete m_item;
 
   m_item = new CFileItem(*item);
@@ -134,7 +133,7 @@ void CGUIDialogPeripheralSettings::UpdateIcon(const GAME::ControllerPtr& control
 
 bool CGUIDialogPeripheralSettings::Save()
 {
-  if (m_item == NULL || m_initialising)
+  if (m_item == nullptr || m_initialising)
     return true;
 
   PeripheralPtr peripheral = CServiceBroker::GetPeripherals().GetByPath(m_item->GetPath());
@@ -148,7 +147,7 @@ bool CGUIDialogPeripheralSettings::Save()
 
 void CGUIDialogPeripheralSettings::OnResetSettings()
 {
-  if (m_item == NULL)
+  if (m_item == nullptr)
     return;
 
   PeripheralPtr peripheral = CServiceBroker::GetPeripherals().GetByPath(m_item->GetPath());
@@ -192,7 +191,7 @@ void CGUIDialogPeripheralSettings::SetupView()
 
 void CGUIDialogPeripheralSettings::InitializeSettings()
 {
-  if (m_item == NULL)
+  if (m_item == nullptr)
   {
     m_initialising = false;
     return;

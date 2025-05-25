@@ -157,12 +157,12 @@ public:
 class CRedirectException
 {
 public:
-  IFile *m_pNewFileImp;
-  CURL  *m_pNewUrl;
+  IFile* m_pNewFileImp = nullptr;
+  CURL* m_pNewUrl = nullptr;
 
-  CRedirectException();
+  CRedirectException() = default;
 
-  CRedirectException(IFile *pNewFileImp, CURL *pNewUrl=NULL);
+  CRedirectException(IFile* pNewFileImp, CURL* pNewUrl = nullptr);
 };
 
 }

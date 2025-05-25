@@ -227,10 +227,7 @@ public:
   bool SortsOnBottom() const { return m_specialSort == SortSpecialOnBottom; }
   void SetSpecialSort(SortSpecial sort) { m_specialSort = sort; }
 
-  inline bool HasMusicInfoTag() const
-  {
-    return m_musicInfoTag != NULL;
-  }
+  inline bool HasMusicInfoTag() const { return m_musicInfoTag != nullptr; }
 
   MUSIC_INFO::CMusicInfoTag* GetMusicInfoTag();
 
@@ -245,10 +242,7 @@ public:
 
   const CVideoInfoTag* GetVideoInfoTag() const;
 
-  inline bool HasEPGInfoTag() const
-  {
-    return m_epgInfoTag.get() != NULL;
-  }
+  inline bool HasEPGInfoTag() const { return m_epgInfoTag.get() != nullptr; }
 
   inline const std::shared_ptr<PVR::CPVREpgInfoTag> GetEPGInfoTag() const
   {
@@ -275,10 +269,7 @@ public:
   bool HasPVRChannelInfoTag() const;
   const std::shared_ptr<PVR::CPVRChannel> GetPVRChannelInfoTag() const;
 
-  inline bool HasPVRRecordingInfoTag() const
-  {
-    return m_pvrRecordingInfoTag.get() != NULL;
-  }
+  inline bool HasPVRRecordingInfoTag() const { return m_pvrRecordingInfoTag.get() != nullptr; }
 
   inline const std::shared_ptr<PVR::CPVRRecording> GetPVRRecordingInfoTag() const
   {
@@ -359,10 +350,7 @@ public:
    */
   void SetEndOffset(const int64_t offset) { m_lEndOffset = offset; }
 
-  inline bool HasPictureInfoTag() const
-  {
-    return m_pictureInfoTag != NULL;
-  }
+  inline bool HasPictureInfoTag() const { return m_pictureInfoTag != nullptr; }
 
   inline const CPictureInfoTag* GetPictureInfoTag() const
   {
@@ -372,10 +360,7 @@ public:
   bool HasAddonInfo() const { return m_addonInfo != nullptr; }
   const std::shared_ptr<const ADDON::IAddon> GetAddonInfo() const { return m_addonInfo; }
 
-  inline bool HasGameInfoTag() const
-  {
-    return m_gameInfoTag != NULL;
-  }
+  inline bool HasGameInfoTag() const { return m_gameInfoTag != nullptr; }
 
   KODI::GAME::CGameInfoTag* GetGameInfoTag();
 

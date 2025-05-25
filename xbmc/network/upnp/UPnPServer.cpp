@@ -116,7 +116,7 @@ NPT_Result CUPnPServer::ProcessGetSCPD(PLT_Service* service,
 NPT_Result CUPnPServer::SetupServices()
 {
   PLT_MediaConnect::SetupServices();
-  PLT_Service* service = NULL;
+  PLT_Service* service = nullptr;
   NPT_Result result = FindServiceById("urn:upnp-org:serviceId:ContentDirectory", service);
   if (service)
   {
@@ -179,7 +179,7 @@ void CUPnPServer::UpdateContainer(const std::string& id)
 +---------------------------------------------------------------------*/
 void CUPnPServer::PropagateUpdates()
 {
-  PLT_Service* service = NULL;
+  PLT_Service* service = nullptr;
   NPT_String current_ids;
   std::string buffer;
   std::map<std::string, std::pair<bool, unsigned long>>::iterator itr;
@@ -280,7 +280,7 @@ PLT_MediaObject* CUPnPServer::Build(const std::shared_ptr<CFileItem>& item,
                                     NPT_Reference<CThumbLoader>& thumb_loader,
                                     const char* parent_id /* = NULL */)
 {
-  PLT_MediaObject* object = NULL;
+  PLT_MediaObject* object = nullptr;
   NPT_String path = item->GetPath().c_str();
 
   //HACK: temporary disabling count as it thrashes HDD
@@ -338,7 +338,7 @@ PLT_MediaObject* CUPnPServer::Build(const std::shared_ptr<CFileItem>& item,
 
           CMusicDatabase db;
           if (!db.Open())
-            return NULL;
+            return nullptr;
 
           if (params.GetSongId() >= 0)
           {
@@ -397,7 +397,7 @@ PLT_MediaObject* CUPnPServer::Build(const std::shared_ptr<CFileItem>& item,
 
           CVideoDatabase db;
           if (!db.Open())
-            return NULL;
+            return nullptr;
 
           if (params.GetMovieId() >= 0)
             db.GetMovieInfo(static_cast<const char*>(path), *item->GetVideoInfoTag(),
@@ -498,7 +498,7 @@ PLT_MediaObject* CUPnPServer::Build(const std::shared_ptr<CFileItem>& item,
 
 failure:
   delete object;
-  return NULL;
+  return nullptr;
 }
 
 /*----------------------------------------------------------------------
@@ -1315,7 +1315,7 @@ NPT_Result CUPnPServer::OnUpdateObject(PLT_ActionReference& action,
   bool updatelisting(false);
 
   // we pause eventing as multiple announces may happen in this operation
-  PLT_Service* service = NULL;
+  PLT_Service* service = nullptr;
   NPT_CHECK_LABEL(FindServiceById("urn:upnp-org:serviceId:ContentDirectory", service), error);
   NPT_CHECK_LABEL(service->PauseEventing(), error);
 

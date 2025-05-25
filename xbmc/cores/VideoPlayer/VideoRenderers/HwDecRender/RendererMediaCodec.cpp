@@ -88,7 +88,7 @@ void CRendererMediaCodec::ReleaseBuffer(int idx)
     videoBuffer->UpdateTexImage();
     videoBuffer->GetTransformMatrix(m_textureMatrix);
     videoBuffer->Release();
-    buf.videoBuffer = NULL;
+    buf.videoBuffer = nullptr;
   }
 }
 

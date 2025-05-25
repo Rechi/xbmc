@@ -62,13 +62,13 @@
 using namespace XFILE;
 using namespace std::chrono_literals;
 
-CAirTunesServer *CAirTunesServer::ServerInstance = NULL;
+CAirTunesServer* CAirTunesServer::ServerInstance = nullptr;
 std::string CAirTunesServer::m_macAddress;
 std::string CAirTunesServer::m_metadata[3];
 CCriticalSection CAirTunesServer::m_metadataLock;
 bool CAirTunesServer::m_streamStarted = false;
 CCriticalSection CAirTunesServer::m_dacpLock;
-CDACP *CAirTunesServer::m_pDACP = NULL;
+CDACP* CAirTunesServer::m_pDACP = nullptr;
 std::string CAirTunesServer::m_dacp_id;
 std::string CAirTunesServer::m_active_remote_header;
 CCriticalSection CAirTunesServer::m_actionQueueLock;
@@ -320,7 +320,7 @@ void CAirTunesServer::FreeDACPRemote()
   std::unique_lock lock(m_dacpLock);
   if (m_pDACP)
     delete m_pDACP;
-  m_pDACP = NULL;
+  m_pDACP = nullptr;
 }
 
 #define RSA_KEY " \
@@ -453,7 +453,7 @@ void CAirTunesServer::SetupRemoteControl()
 {
   // check if we found the remote control service via zeroconf already or
   // if no valid id and headers was received yet
-  if (m_dacp_id.empty() || m_active_remote_header.empty() || m_pDACP != NULL)
+  if (m_dacp_id.empty() || m_active_remote_header.empty() || m_pDACP != nullptr)
     return;
 
   // check for the service matching m_dacp_id
@@ -475,7 +475,7 @@ void CAirTunesServer::SetupRemoteControl()
           CZeroconfBrowser::GetInstance()->ResolveService(service);
           std::unique_lock lock(m_dacpLock);
           // recheck with lock hold
-          if (m_pDACP == NULL)
+          if (m_pDACP == nullptr)
           {
             // we can control the client with this object now
             m_pDACP = new CDACP(m_active_remote_header, service.GetIP(), service.GetPort());
@@ -640,7 +640,7 @@ void CAirTunesServer::StopServer(bool bWait)
     if (bWait)
     {
       delete ServerInstance;
-      ServerInstance = NULL;
+      ServerInstance = nullptr;
     }
 
     CZeroconf::GetInstance()->RemoveService("servers.airtunes");
@@ -649,7 +649,7 @@ void CAirTunesServer::StopServer(bool bWait)
 
 bool CAirTunesServer::IsRunning()
 {
-  if (ServerInstance == NULL)
+  if (ServerInstance == nullptr)
     return false;
 
   return ServerInstance->IsRAOPRunningInternal();

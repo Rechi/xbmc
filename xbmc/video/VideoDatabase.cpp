@@ -4705,7 +4705,7 @@ CVideoInfoTag CVideoDatabase::GetDetailsForMovie(const dbiplus::sql_record* cons
 {
   CVideoInfoTag details;
 
-  if (record == NULL)
+  if (record == nullptr)
     return details;
 
   int idMovie = record->at(0).get_asInt();
@@ -4793,7 +4793,7 @@ CVideoInfoTag CVideoDatabase::GetDetailsForTvShow(const dbiplus::sql_record* con
 {
   CVideoInfoTag details;
 
-  if (record == NULL)
+  if (record == nullptr)
     return details;
 
   int idTvShow = record->at(0).get_asInt();
@@ -4841,7 +4841,7 @@ CVideoInfoTag CVideoDatabase::GetDetailsForTvShow(const dbiplus::sql_record* con
     details.m_parsedDetails = getDetails;
   }
 
-  if (item != NULL)
+  if (item != nullptr)
   {
     item->m_dateTime = details.GetPremiered();
     item->SetProperty("totalseasons", details.m_iSeason);
@@ -10503,7 +10503,7 @@ void CVideoDatabase::CleanDatabase(CGUIDialogProgressBarHandle* handle,
                                    const std::set<int>& paths,
                                    bool showProgress)
 {
-  CGUIDialogProgress* progress = NULL;
+  CGUIDialogProgress* progress = nullptr;
   try
   {
     if (nullptr == m_pDB)
@@ -10623,7 +10623,7 @@ void CVideoDatabase::CleanDatabase(CGUIDialogProgressBarHandle* handle,
         if (del)
           filesToTestForDelete += m_pDS2->fv("files.idFile").get_asString() + ",";
 
-        if (handle == NULL && progress != NULL)
+        if (handle == nullptr && progress != nullptr)
         {
           int percentage = current * 100 / total;
           if (percentage > progress->GetPercentage())
@@ -10640,7 +10640,7 @@ void CVideoDatabase::CleanDatabase(CGUIDialogProgressBarHandle* handle,
             return;
           }
         }
-        else if (handle != NULL)
+        else if (handle != nullptr)
           handle->SetPercentage(current * 100 / (float)total);
 
         m_pDS2->next();
@@ -10684,7 +10684,7 @@ void CVideoDatabase::CleanDatabase(CGUIDialogProgressBarHandle* handle,
                                          pathsDeleteDecisions, filesToDelete, !showProgress);
       }
 
-      if (progress != NULL)
+      if (progress != nullptr)
       {
         progress->SetPercentage(100);
         progress->Progress();
@@ -11003,7 +11003,7 @@ std::vector<int> CVideoDatabase::CleanMediaType(const std::string &mediaType, co
           else
           {
             CGUIDialogYesNo* pDialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogYesNo>(WINDOW_DIALOG_YES_NO);
-            if (pDialog != NULL)
+            if (pDialog != nullptr)
             {
               CURL sourceUrl(sourcePath);
               pDialog->SetHeading(CVariant{15012});
@@ -11092,7 +11092,7 @@ void CVideoDatabase::DumpToDummyFiles(const std::string &path)
 void CVideoDatabase::ExportToXML(const std::string &path, bool singleFile /* = true */, bool images /* = false */, bool actorThumbs /* false */, bool overwrite /*=false*/)
 {
   int iFailCount = 0;
-  CGUIDialogProgress *progress=NULL;
+  CGUIDialogProgress* progress = nullptr;
   try
   {
     if (nullptr == m_pDB)
@@ -11162,7 +11162,7 @@ void CVideoDatabase::ExportToXML(const std::string &path, bool singleFile /* = t
     CXBMCTinyXML xmlDoc;
     TiXmlDeclaration decl("1.0", "UTF-8", "yes");
     xmlDoc.InsertEndChild(decl);
-    TiXmlNode *pMain = NULL;
+    TiXmlNode* pMain = nullptr;
     if (!singleFile)
       pMain = &xmlDoc;
     else
@@ -11708,7 +11708,7 @@ void CVideoDatabase::ExportActorThumbs(const std::string& strDir,
 
 void CVideoDatabase::ImportFromXML(const std::string &path)
 {
-  CGUIDialogProgress *progress=NULL;
+  CGUIDialogProgress* progress = nullptr;
   try
   {
     if (nullptr == m_pDB)
@@ -11823,7 +11823,7 @@ void CVideoDatabase::ImportFromXML(const std::string &path)
             item.AppendArt(setArt, "set");
           }
         }
-        scanner.AddVideo(&item, CONTENT_MOVIES, useFolders, true, NULL, true);
+        scanner.AddVideo(&item, CONTENT_MOVIES, useFolders, true, nullptr, true);
         current++;
       }
       else if (StringUtils::CompareNoCase(movie->Value(), MediaTypeMusicVideo, 10) == 0)
@@ -11838,7 +11838,7 @@ void CVideoDatabase::ImportFromXML(const std::string &path)
         artItem.SetPath(GetSafeFile(musicvideosDir, filename) + ".avi");
         scanner.GetArtwork(&artItem, CONTENT_MUSICVIDEOS, useFolders, true, actorsDir);
         item.SetArt(artItem.GetArt());
-        scanner.AddVideo(&item, CONTENT_MUSICVIDEOS, useFolders, true, NULL, true);
+        scanner.AddVideo(&item, CONTENT_MUSICVIDEOS, useFolders, true, nullptr, true);
         current++;
       }
       else if (StringUtils::CompareNoCase(movie->Value(), MediaTypeTvShow, 6) == 0)
@@ -11855,7 +11855,7 @@ void CVideoDatabase::ImportFromXML(const std::string &path)
         artItem.SetPath(artPath);
         scanner.GetArtwork(&artItem, CONTENT_TVSHOWS, useFolders, true, actorsDir);
         showItem.SetArt(artItem.GetArt());
-        int showID = scanner.AddVideo(&showItem, CONTENT_TVSHOWS, useFolders, true, NULL, true);
+        int showID = scanner.AddVideo(&showItem, CONTENT_TVSHOWS, useFolders, true, nullptr, true);
         // season artwork
         std::map<int, std::map<std::string, std::string> > seasonArt;
         artItem.GetVideoInfoTag()->m_strPath = artPath;

@@ -74,7 +74,7 @@ private:
     FAILED
   };
   void UpdateStatus(const std::string& name, DBStatus status);
-  void UpdateDatabase(CDatabase &db, DatabaseSettings *settings = NULL);
+  void UpdateDatabase(CDatabase& db, DatabaseSettings* settings = nullptr);
   bool Update(CDatabase &db, const DatabaseSettings &settings);
   bool UpdateVersion(CDatabase &db, const std::string &dbName);
 
