@@ -95,7 +95,7 @@ public:
   {
     std::unique_lock lock(mutex);
     numWaits++;
-    actualCv.wait(mutex, duration, std::bind(&CEvent::Signaled, this));
+    actualCv.wait(mutex, duration, [this] { return Signaled(); });
     numWaits--;
     return prepReturn();
   }
@@ -110,7 +110,7 @@ public:
   {
     std::unique_lock lock(mutex);
     numWaits++;
-    actualCv.wait(mutex, std::bind(&CEvent::Signaled, this));
+    actualCv.wait(mutex, [this] { return Signaled(); });
     numWaits--;
     return prepReturn();
   }
