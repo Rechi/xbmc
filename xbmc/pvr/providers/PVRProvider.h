@@ -43,6 +43,9 @@ public:
                const std::string& addonIconPath,
                const std::string& addonThumbPath);
 
+  CPVRProvider(const CPVRProvider& provider) = delete;
+  CPVRProvider& operator=(const CPVRProvider& orig) = delete;
+
   bool operator==(const CPVRProvider& right) const;
 
   void Serialize(CVariant& value) const override;
@@ -229,9 +232,6 @@ public:
   bool DeleteFromDatabase();
 
 private:
-  CPVRProvider(const CPVRProvider& provider) = delete;
-  CPVRProvider& operator=(const CPVRProvider& orig) = delete;
-
   int m_iDatabaseId = PVR_PROVIDER_INVALID_DB_ID; /*!< the identifier given to this provider by the TV database */
 
   int m_iUniqueId = PVR_PROVIDER_ADDON_UID; /*!< @brief unique ID of the provider on the backend */

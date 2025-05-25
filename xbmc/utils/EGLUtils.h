@@ -24,6 +24,8 @@
 class CEGLUtils
 {
 public:
+  CEGLUtils() = delete;
+
   static std::set<std::string> GetClientExtensions();
   static std::set<std::string> GetExtensions(EGLDisplay eglDisplay);
   static bool HasExtension(EGLDisplay eglDisplay, std::string const & name);
@@ -39,9 +41,6 @@ public:
     }
     return p;
   }
-
-private:
-  CEGLUtils();
 };
 
 /**

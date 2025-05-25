@@ -64,6 +64,7 @@ public:
         this, ANNOUNCEMENT::VideoLibrary | ANNOUNCEMENT::AudioLibrary | ANNOUNCEMENT::Player |
                   ANNOUNCEMENT::GUI);
   }
+  CSubscriber() = delete;
   ~CSubscriber() override { CServiceBroker::GetAnnouncementManager()->RemoveAnnouncer(this); }
 
   virtual bool IsReadyToUse() const { return true; }
@@ -75,8 +76,6 @@ protected:
   }
 
 private:
-  CSubscriber() = delete;
-
   // IAnnouncer implementation
   void Announce(ANNOUNCEMENT::AnnouncementFlag flag,
                 const std::string& sender,

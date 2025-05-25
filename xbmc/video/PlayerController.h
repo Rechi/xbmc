@@ -21,6 +21,9 @@
 class CPlayerController : public ISliderCallback, public KODI::ACTION::IActionListener
 {
 public:
+  CPlayerController(const CPlayerController&) = delete;
+  CPlayerController& operator=(CPlayerController const&) = delete;
+
   static CPlayerController& GetInstance();
 
   /*! \brief Perform a player control action if appropriate.
@@ -36,8 +39,6 @@ public:
 
 protected:
   CPlayerController();
-  CPlayerController(const CPlayerController&) = delete;
-  CPlayerController& operator=(CPlayerController const&) = delete;
   ~CPlayerController() override;
 
 private:

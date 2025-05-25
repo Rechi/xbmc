@@ -18,6 +18,9 @@ class CGUIListItem;
 class CBuiltins
 {
 public:
+  CBuiltins(const CBuiltins&) = delete;
+  const CBuiltins& operator=(const CBuiltins&) = delete;
+
   //! \brief Struct representing a command from handler classes.
   struct BUILT_IN
   {
@@ -41,8 +44,6 @@ public:
 
 protected:
   CBuiltins();
-  CBuiltins(const CBuiltins&) = delete;
-  const CBuiltins& operator=(const CBuiltins&) = delete;
   virtual ~CBuiltins();
 
 private:

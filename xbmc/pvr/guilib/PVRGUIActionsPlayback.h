@@ -31,6 +31,8 @@ class CPVRGUIActionsPlayback : public IPVRComponent
 {
 public:
   CPVRGUIActionsPlayback();
+  CPVRGUIActionsPlayback(const CPVRGUIActionsPlayback&) = delete;
+  CPVRGUIActionsPlayback const& operator=(CPVRGUIActionsPlayback const&) = delete;
   ~CPVRGUIActionsPlayback() override;
 
   /*!
@@ -95,9 +97,6 @@ public:
   void SeekBackward(unsigned int iThreshold) const;
 
 private:
-  CPVRGUIActionsPlayback(const CPVRGUIActionsPlayback&) = delete;
-  CPVRGUIActionsPlayback const& operator=(CPVRGUIActionsPlayback const&) = delete;
-
   /*!
    * @brief Check "play minimized" settings value and switch to fullscreen if not set.
    * @param bFullscreen switch to fullscreen or set windowed playback.

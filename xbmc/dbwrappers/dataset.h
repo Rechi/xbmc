@@ -279,6 +279,8 @@ public:
   /* constructor */
   Dataset();
   explicit Dataset(Database* newDb);
+  Dataset(const Dataset&) = delete;
+  Dataset& operator=(const Dataset&) = delete;
 
   /* destructor */
   virtual ~Dataset();
@@ -411,9 +413,6 @@ public:
   const sql_record* get_sql_record();
 
 private:
-  Dataset(const Dataset&) = delete;
-  Dataset& operator=(const Dataset&) = delete;
-
   /* Get the column index from a string field_value request */
   bool get_index_map_entry(const char* f_name);
 

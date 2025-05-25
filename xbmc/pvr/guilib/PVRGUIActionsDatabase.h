@@ -16,6 +16,8 @@ class CPVRGUIActionsDatabase : public IPVRComponent
 {
 public:
   CPVRGUIActionsDatabase() = default;
+  CPVRGUIActionsDatabase(const CPVRGUIActionsDatabase&) = delete;
+  CPVRGUIActionsDatabase const& operator=(CPVRGUIActionsDatabase const&) = delete;
   ~CPVRGUIActionsDatabase() override = default;
 
   /*!
@@ -25,10 +27,6 @@ public:
    * @return true on success, false otherwise.
    */
   bool ResetDatabase(bool bResetEPGOnly) const;
-
-private:
-  CPVRGUIActionsDatabase(const CPVRGUIActionsDatabase&) = delete;
-  CPVRGUIActionsDatabase const& operator=(CPVRGUIActionsDatabase const&) = delete;
 };
 
 namespace GUI

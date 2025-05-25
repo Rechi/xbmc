@@ -239,6 +239,8 @@ class CJobManager final
 
 public:
   CJobManager();
+  CJobManager(const CJobManager&) = delete;
+  CJobManager const& operator=(CJobManager const&) = delete;
 
   /*!
    \brief Add a job to the threaded job manager.
@@ -352,9 +354,6 @@ protected:
   bool  OnJobProgress(unsigned int progress, unsigned int total, const CJob *job) const;
 
 private:
-  CJobManager(const CJobManager&) = delete;
-  CJobManager const& operator=(CJobManager const&) = delete;
-
   /*! \brief Pop a job off the job queue and add to the processing queue ready to process
    \return the job to process, NULL if no jobs are available
    */

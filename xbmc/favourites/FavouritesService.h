@@ -23,6 +23,11 @@ class CFavouritesService
 {
 public:
   explicit CFavouritesService(std::string userDataFolder);
+  CFavouritesService() = delete;
+  CFavouritesService(const CFavouritesService&) = delete;
+  CFavouritesService& operator=(const CFavouritesService&) = delete;
+  CFavouritesService(CFavouritesService&&) = delete;
+  CFavouritesService& operator=(CFavouritesService&&) = delete;
   virtual ~CFavouritesService() = default;
 
   /** For profiles*/
@@ -49,12 +54,6 @@ public:
   CEventStream<FavouritesUpdated>& Events() { return m_events; }
 
 private:
-  CFavouritesService() = delete;
-  CFavouritesService(const CFavouritesService&) = delete;
-  CFavouritesService& operator=(const CFavouritesService&) = delete;
-  CFavouritesService(CFavouritesService&&) = delete;
-  CFavouritesService& operator=(CFavouritesService&&) = delete;
-
   void OnUpdated();
   bool Persist() const;
 

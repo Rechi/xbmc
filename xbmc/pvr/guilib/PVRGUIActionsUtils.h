@@ -20,6 +20,8 @@ class CPVRGUIActionsUtils : public IPVRComponent
 {
 public:
   CPVRGUIActionsUtils() = default;
+  CPVRGUIActionsUtils(const CPVRGUIActionsUtils&) = delete;
+  CPVRGUIActionsUtils const& operator=(CPVRGUIActionsUtils const&) = delete;
   ~CPVRGUIActionsUtils() override = default;
 
   /*!
@@ -42,10 +44,6 @@ public:
    * @return Loaded item on success, nullptr otherwise.
    */
   std::shared_ptr<CFileItem> LoadItem(const CFileItem& item) const;
-
-private:
-  CPVRGUIActionsUtils(const CPVRGUIActionsUtils&) = delete;
-  CPVRGUIActionsUtils const& operator=(CPVRGUIActionsUtils const&) = delete;
 };
 
 namespace GUI

@@ -23,6 +23,8 @@ class CPVRGUIActionsPowerManagement : public IPVRComponent
 {
 public:
   CPVRGUIActionsPowerManagement();
+  CPVRGUIActionsPowerManagement(const CPVRGUIActionsPowerManagement&) = delete;
+  CPVRGUIActionsPowerManagement const& operator=(CPVRGUIActionsPowerManagement const&) = delete;
   ~CPVRGUIActionsPowerManagement() override;
 
   /*!
@@ -36,9 +38,6 @@ public:
   bool CanSystemPowerdown(bool bAskUser = true) const;
 
 private:
-  CPVRGUIActionsPowerManagement(const CPVRGUIActionsPowerManagement&) = delete;
-  CPVRGUIActionsPowerManagement const& operator=(CPVRGUIActionsPowerManagement const&) = delete;
-
   bool AllLocalBackendsIdle(std::shared_ptr<CPVRTimerInfoTag>& causingEvent) const;
   bool EventOccursOnLocalBackend(const std::shared_ptr<CPVRTimerInfoTag>& event) const;
   bool IsNextEventWithinBackendIdleTime() const;

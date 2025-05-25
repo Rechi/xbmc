@@ -23,6 +23,9 @@ class XMLNode;
 class CMediaSourceSettings : public ISettingsHandler
 {
 public:
+  CMediaSourceSettings(const CMediaSourceSettings&) = delete;
+  CMediaSourceSettings& operator=(CMediaSourceSettings const&) = delete;
+
   static CMediaSourceSettings& GetInstance();
 
   static std::string GetSourcesFile();
@@ -47,8 +50,6 @@ public:
 
 protected:
   CMediaSourceSettings();
-  CMediaSourceSettings(const CMediaSourceSettings&) = delete;
-  CMediaSourceSettings& operator=(CMediaSourceSettings const&) = delete;
   ~CMediaSourceSettings() override;
 
 private:

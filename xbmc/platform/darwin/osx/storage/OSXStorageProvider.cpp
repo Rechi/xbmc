@@ -169,6 +169,7 @@ namespace
   {
   public:
     explicit DAOperationContext(const std::string& mountpath);
+    DAOperationContext() = delete;
     ~DAOperationContext();
 
     DADiskRef GetDisk() const { return m_disk; }
@@ -180,8 +181,6 @@ namespace
     static void CompletionCallback(DADiskRef disk, DADissenterRef dissenter, void* context);
 
   private:
-    DAOperationContext() = delete;
-
     static void RunloopPerformCallback(void* info) {}
     CFRunLoopSourceContext m_runLoopSourceContext = { .perform = RunloopPerformCallback };
 

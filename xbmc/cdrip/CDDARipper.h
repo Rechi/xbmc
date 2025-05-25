@@ -39,6 +39,9 @@ namespace CDRIP
 class CCDDARipper : public CJobQueue
 {
 public:
+  CCDDARipper(const CCDDARipper&) = delete;
+  CCDDARipper const& operator=(CCDDARipper const&) = delete;
+
   /*!
    * \brief The only way through which the global instance of the CDDARipper should be accessed.
    *
@@ -66,9 +69,7 @@ public:
 private:
   // private construction and no assignments
   CCDDARipper();
-  CCDDARipper(const CCDDARipper&) = delete;
   ~CCDDARipper() override;
-  CCDDARipper const& operator=(CCDDARipper const&) = delete;
 
   /*!
    * \brief Create folder where CD tracks will be stored

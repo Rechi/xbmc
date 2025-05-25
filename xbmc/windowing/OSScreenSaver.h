@@ -32,6 +32,8 @@ class COSScreenSaverInhibitor
 {
 public:
   COSScreenSaverInhibitor() noexcept = default;
+  COSScreenSaverInhibitor(COSScreenSaverInhibitor const& other) = delete;
+  COSScreenSaverInhibitor& operator=(COSScreenSaverInhibitor const& other) = delete;
   COSScreenSaverInhibitor(COSScreenSaverInhibitor&& other) noexcept;
   COSScreenSaverInhibitor& operator=(COSScreenSaverInhibitor&& other) noexcept;
   ~COSScreenSaverInhibitor() noexcept;
@@ -44,9 +46,6 @@ private:
   explicit COSScreenSaverInhibitor(COSScreenSaverManager* manager);
   bool m_active = false;
   COSScreenSaverManager* m_manager{};
-
-  COSScreenSaverInhibitor(COSScreenSaverInhibitor const& other) = delete;
-  COSScreenSaverInhibitor& operator=(COSScreenSaverInhibitor const& other) = delete;
 };
 
 /**

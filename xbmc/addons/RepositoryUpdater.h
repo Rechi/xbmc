@@ -39,6 +39,10 @@ class CRepositoryUpdater : private ITimerCallback,
 {
 public:
   explicit CRepositoryUpdater(CAddonMgr& addonMgr);
+  CRepositoryUpdater(const CRepositoryUpdater&) = delete;
+  CRepositoryUpdater(CRepositoryUpdater&&) = delete;
+  CRepositoryUpdater& operator=(const CRepositoryUpdater&) = delete;
+  CRepositoryUpdater& operator=(CRepositoryUpdater&&) = delete;
   ~CRepositoryUpdater() override;
 
   void Start();
@@ -86,11 +90,6 @@ public:
   CEventStream<RepositoryUpdated>& Events() { return m_events; }
 
 private:
-  CRepositoryUpdater(const CRepositoryUpdater&) = delete;
-  CRepositoryUpdater(CRepositoryUpdater&&) = delete;
-  CRepositoryUpdater& operator=(const CRepositoryUpdater&) = delete;
-  CRepositoryUpdater& operator=(CRepositoryUpdater&&) = delete;
-
   void OnJobComplete(unsigned int jobID, bool success, CJob *job) override;
 
   void OnTimeout() override;

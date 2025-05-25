@@ -23,6 +23,8 @@ class CPVRGUIActionsRecordings : public IPVRComponent
 {
 public:
   CPVRGUIActionsRecordings();
+  CPVRGUIActionsRecordings(const CPVRGUIActionsRecordings&) = delete;
+  CPVRGUIActionsRecordings const& operator=(CPVRGUIActionsRecordings const&) = delete;
   ~CPVRGUIActionsRecordings() override;
 
   /*!
@@ -90,9 +92,6 @@ public:
   bool MarkWatched(const CFileItem& item, bool watched) const;
 
 private:
-  CPVRGUIActionsRecordings(const CPVRGUIActionsRecordings&) = delete;
-  CPVRGUIActionsRecordings const& operator=(CPVRGUIActionsRecordings const&) = delete;
-
   /*!
    * @brief Open a dialog to confirm to delete a recording.
    * @param item the recording to delete.

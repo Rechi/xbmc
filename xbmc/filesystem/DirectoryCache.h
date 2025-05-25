@@ -25,6 +25,8 @@ namespace XFILE
     {
     public:
       explicit CDir(CacheType cacheType);
+      CDir(const CDir&) = delete;
+      CDir& operator=(const CDir&) = delete;
       CDir(CDir&& dir) = default;
       CDir& operator=(CDir&& dir) = default;
       virtual ~CDir();
@@ -36,8 +38,6 @@ namespace XFILE
       CacheType m_cacheType;
 
     private:
-      CDir(const CDir&) = delete;
-      CDir& operator=(const CDir&) = delete;
       unsigned int m_lastAccess;
     };
   public:

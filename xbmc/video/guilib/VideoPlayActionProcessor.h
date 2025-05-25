@@ -23,6 +23,7 @@ public:
     : CVideoActionProcessorBase(item)
   {
   }
+  CVideoPlayActionProcessor() = delete;
   virtual ~CVideoPlayActionProcessor() = default;
 
   void SetChoosePlayer() { m_choosePlayer = true; }
@@ -38,7 +39,6 @@ protected:
   virtual bool OnPlaySelected();
 
 private:
-  CVideoPlayActionProcessor() = delete;
   unsigned int ChooseStackPart() const;
   Action ChoosePlayOrResume() const;
   static Action ChoosePlayOrResume(const std::string& resumeString);

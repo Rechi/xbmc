@@ -516,6 +516,8 @@ public:
    be used.
    */
   CSettings() = default;
+  CSettings(const CSettings&) = delete;
+  CSettings const& operator=(CSettings const&) = delete;
   ~CSettings() override = default;
 
   CSettingsManager* GetSettingsManager() const { return m_settingsManager; }
@@ -620,9 +622,6 @@ protected:
   bool InitializeDefinitions() override;
 
 private:
-  CSettings(const CSettings&) = delete;
-  CSettings const& operator=(CSettings const&) = delete;
-
   bool Load(const TiXmlElement* root, bool& updated);
 
   // implementation of ISubSettings

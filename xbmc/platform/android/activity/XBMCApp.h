@@ -63,6 +63,10 @@ class CNativeWindow
 
 public:
   static std::shared_ptr<CNativeWindow> CreateFromSurface(CJNISurfaceHolder holder);
+
+  CNativeWindow() = delete;
+  CNativeWindow(const CNativeWindow&) = delete;
+  CNativeWindow& operator=(const CNativeWindow&) = delete;
   ~CNativeWindow();
 
   bool SetBuffersGeometry(int width, int height, int format);
@@ -71,10 +75,6 @@ public:
 
 private:
   explicit CNativeWindow(ANativeWindow* window);
-
-  CNativeWindow() = delete;
-  CNativeWindow(const CNativeWindow&) = delete;
-  CNativeWindow& operator=(const CNativeWindow&) = delete;
 
   ANativeWindow* m_window{nullptr};
 };

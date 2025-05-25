@@ -27,11 +27,11 @@ namespace XbmcThreads
   {
   private:
     std::condition_variable_any cond;
-    ConditionVariable(const ConditionVariable&) = delete;
-    ConditionVariable& operator=(const ConditionVariable&) = delete;
 
   public:
     ConditionVariable() = default;
+    ConditionVariable(const ConditionVariable&) = delete;
+    ConditionVariable& operator=(const ConditionVariable&) = delete;
 
     inline void wait(CCriticalSection& lock, std::function<bool()> predicate)
     {

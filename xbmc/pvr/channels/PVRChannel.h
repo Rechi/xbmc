@@ -46,6 +46,10 @@ public:
   CPVRChannel(bool bRadio, const std::string& iconPath);
   CPVRChannel(const PVR_CHANNEL& channel, unsigned int iClientId);
 
+  CPVRChannel() = delete;
+  CPVRChannel(const CPVRChannel& tag) = delete;
+  CPVRChannel& operator=(const CPVRChannel& channel) = delete;
+
   virtual ~CPVRChannel();
 
   bool operator==(const CPVRChannel& right) const;
@@ -490,10 +494,6 @@ public:
 
   //@}
 private:
-  CPVRChannel() = delete;
-  CPVRChannel(const CPVRChannel& tag) = delete;
-  CPVRChannel& operator=(const CPVRChannel& channel) = delete;
-
   /*!
    * @brief Update the encryption name after SetEncryptionSystem() has been called.
    */

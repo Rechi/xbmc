@@ -60,9 +60,6 @@ namespace XBMCAddon
     mutable std::atomic<long> refs;
     bool m_isDeallocating = false;
 
-    // no copying
-    inline AddonClass(const AddonClass&) = delete;
-
 #ifdef XBMC_ADDON_DEBUG_MEMORY
     bool isDeleted;
 #endif
@@ -93,6 +90,8 @@ namespace XBMCAddon
 
   public:
     AddonClass();
+    // no copying
+    inline AddonClass(const AddonClass&) = delete;
     virtual ~AddonClass();
 
     inline const char* GetClassname() const { return typeid(*this).name(); }

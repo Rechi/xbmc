@@ -47,6 +47,7 @@ class CGUIEPGGridContainerModel
 {
 public:
   explicit CGUIEPGGridContainerModel(unsigned int minutesPerBlock);
+  CGUIEPGGridContainerModel() = delete;
   virtual ~CGUIEPGGridContainerModel() = default;
 
   void Initialize(const CFileItemList& items,
@@ -110,8 +111,6 @@ public:
   std::unique_ptr<CFileItemList> GetCurrentTimeLineItems(int firstChannel, int numChannels) const;
 
 private:
-  CGUIEPGGridContainerModel() = delete;
-
   GridItem* GetGridItemPtr(int iChannel, int iBlock) const;
   std::shared_ptr<CFileItem> CreateGapItem(int iChannel) const;
   std::shared_ptr<CFileItem> GetItem(int iChannel, int iBlock) const;

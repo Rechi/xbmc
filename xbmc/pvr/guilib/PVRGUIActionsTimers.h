@@ -24,6 +24,8 @@ class CPVRGUIActionsTimers : public IPVRComponent
 {
 public:
   CPVRGUIActionsTimers();
+  CPVRGUIActionsTimers(const CPVRGUIActionsTimers&) = delete;
+  CPVRGUIActionsTimers const& operator=(CPVRGUIActionsTimers const&) = delete;
   ~CPVRGUIActionsTimers() override;
 
   /*!
@@ -160,9 +162,6 @@ public:
   void AnnounceReminders() const;
 
 private:
-  CPVRGUIActionsTimers(const CPVRGUIActionsTimers&) = delete;
-  CPVRGUIActionsTimers const& operator=(CPVRGUIActionsTimers const&) = delete;
-
   /*!
    * @brief Open the timer settings dialog.
    * @param timer containing the timer the settings shall be displayed for.
