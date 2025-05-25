@@ -13,7 +13,6 @@
 #include "ServiceBroker.h"
 #include "Texture.h"
 #include "TextureManager.h"
-#include "gui3d.h"
 #include "rendering/MatrixGL.h"
 #include "rendering/gl/RenderSystemGL.h"
 #include "settings/AdvancedSettings.h"

@@ -8,7 +8,6 @@
 
 #include "DRMLegacy.h"
 
-#include "guilib/gui3d.h"
 #include "settings/Settings.h"
 #include "utils/log.h"
 
