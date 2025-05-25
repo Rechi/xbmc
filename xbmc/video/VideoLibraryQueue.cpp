@@ -153,7 +153,7 @@ bool CVideoLibraryQueue::RefreshItemModal(std::shared_ptr<CFileItem> item,
 
 void CVideoLibraryQueue::MarkAsWatched(const std::shared_ptr<CFileItem>& item, bool watched)
 {
-  if (item == NULL)
+  if (item == nullptr)
     return;
 
   AddJob(new CVideoLibraryMarkWatchedJob(item, watched));

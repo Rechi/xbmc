@@ -111,8 +111,8 @@ JSONRPC_STATUS CAddonsOperations::GetAddons(const std::string &method, ITranspor
 
     if ((addons.at(index)->Type() <= AddonType::UNKNOWN ||
          addons.at(index)->Type() >= AddonType::MAX_TYPES) ||
-        ((content != CPluginSource::Content::UNKNOWN && plugin == NULL) ||
-         (plugin != NULL && !plugin->Provides(content))))
+        ((content != CPluginSource::Content::UNKNOWN && plugin == nullptr) ||
+         (plugin != nullptr && !plugin->Provides(content))))
     {
       addons.erase(addons.begin() + index);
       index--;

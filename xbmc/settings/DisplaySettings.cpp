@@ -221,7 +221,7 @@ void CDisplaySettings::Clear()
 
 void CDisplaySettings::OnSettingAction(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   const std::string &settingId = setting->GetId();
@@ -249,7 +249,7 @@ void CDisplaySettings::OnSettingAction(const std::shared_ptr<const CSetting>& se
 
 bool CDisplaySettings::OnSettingChanging(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   const std::string &settingId = setting->GetId();
@@ -358,7 +358,7 @@ bool CDisplaySettings::OnSettingUpdate(const std::shared_ptr<CSetting>& setting,
                                        const char* oldSettingId,
                                        const TiXmlNode* oldSettingNode)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   const std::string &settingId = setting->GetId();

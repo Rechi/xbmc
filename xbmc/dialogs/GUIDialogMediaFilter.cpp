@@ -389,14 +389,14 @@ void CGUIDialogMediaFilter::InitializeSettings()
   int handledRules = 0;
 
   const std::shared_ptr<CSettingCategory> category = AddCategory("filter", -1);
-  if (category == NULL)
+  if (category == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogMediaFilter: unable to setup filters");
     return;
   }
 
   const std::shared_ptr<CSettingGroup> group = AddGroup(category);
-  if (group == NULL)
+  if (group == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogMediaFilter: unable to setup filters");
     return;
@@ -527,7 +527,7 @@ void CGUIDialogMediaFilter::InitializeSettings()
       continue;
     }
 
-    if (filter.setting == NULL)
+    if (filter.setting == nullptr)
     {
       if (filter.rule != NULL)
         handledRules--;
@@ -607,7 +607,7 @@ void CGUIDialogMediaFilter::UpdateControls()
 
     std::string label = g_localizeStrings.Get(itFilter.second.label);
     BaseSettingControlPtr control = GetSettingControl(itFilter.second.setting->GetId());
-    if (control == NULL)
+    if (control == nullptr)
       continue;
 
     if (size <= 0 ||
@@ -764,7 +764,7 @@ void CGUIDialogMediaFilter::GetStringListOptions(const SettingConstPtr& setting,
                                                  std::string& current,
                                                  void* data)
 {
-  if (setting == NULL || data == NULL)
+  if (setting == nullptr || data == NULL)
     return;
 
   CGUIDialogMediaFilter *mediaFilter = static_cast<CGUIDialogMediaFilter*>(data);

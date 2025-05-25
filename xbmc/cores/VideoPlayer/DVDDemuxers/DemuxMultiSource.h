@@ -57,7 +57,7 @@ private:
   void Dispose();
   void SetMissingStreamDetails(const DemuxPtr& demuxer);
 
-  std::shared_ptr<InputStreamMultiStreams> m_pInput = NULL;
+  std::shared_ptr<InputStreamMultiStreams> m_pInput = nullptr;
   std::map<DemuxPtr, InputStreamPtr> m_DemuxerToInputStreamMap;
   DemuxQueue m_demuxerQueue;
   std::map<int64_t, DemuxPtr> m_demuxerMap;

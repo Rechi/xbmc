@@ -34,18 +34,18 @@ bool AddonHasSettings(const std::string& condition,
                       const SettingConstPtr& setting,
                       void* data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   std::shared_ptr<const CSettingAddon> settingAddon = std::dynamic_pointer_cast<const CSettingAddon>(setting);
-  if (settingAddon == NULL)
+  if (settingAddon == nullptr)
     return false;
 
   ADDON::AddonPtr addon;
   if (!CServiceBroker::GetAddonMgr().GetAddon(settingAddon->GetValue(), addon,
                                               settingAddon->GetAddonType(),
                                               ADDON::OnlyEnabled::CHOICE_YES) ||
-      addon == NULL)
+      addon == nullptr)
     return false;
 
   if (addon->Type() == ADDON::AddonType::SKIN)
@@ -285,11 +285,11 @@ bool GreaterThan(const std::string& condition,
                  const SettingConstPtr& setting,
                  void* data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   std::shared_ptr<const CSettingInt> settingInt = std::dynamic_pointer_cast<const CSettingInt>(setting);
-  if (settingInt == NULL)
+  if (settingInt == nullptr)
     return false;
 
   char* tmp = nullptr;
@@ -305,11 +305,11 @@ bool GreaterThanOrEqual(const std::string& condition,
                         const SettingConstPtr& setting,
                         void* data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   std::shared_ptr<const CSettingInt> settingInt = std::dynamic_pointer_cast<const CSettingInt>(setting);
-  if (settingInt == NULL)
+  if (settingInt == nullptr)
     return false;
 
   char* tmp = nullptr;
@@ -325,11 +325,11 @@ bool LessThan(const std::string& condition,
               const SettingConstPtr& setting,
               void* data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   std::shared_ptr<const CSettingInt> settingInt = std::dynamic_pointer_cast<const CSettingInt>(setting);
-  if (settingInt == NULL)
+  if (settingInt == nullptr)
     return false;
 
   char* tmp = nullptr;
@@ -345,11 +345,11 @@ bool LessThanOrEqual(const std::string& condition,
                      const SettingConstPtr& setting,
                      void* data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   std::shared_ptr<const CSettingInt> settingInt = std::dynamic_pointer_cast<const CSettingInt>(setting);
-  if (settingInt == NULL)
+  if (settingInt == nullptr)
     return false;
 
   char* tmp = nullptr;

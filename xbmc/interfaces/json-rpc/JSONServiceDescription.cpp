@@ -904,7 +904,7 @@ JSONRPC_STATUS JSONSchemaTypeDefinition::Check(const CVariant& value,
     {
       // If additional properties are allowed we need to check if
       // they match the defined schema
-      if (hasAdditionalProperties && additionalProperties != NULL)
+      if (hasAdditionalProperties && additionalProperties != nullptr)
       {
         CVariant::const_iterator_map iter;
         CVariant::const_iterator_map iterEnd = value.end_map();
@@ -933,7 +933,7 @@ JSONRPC_STATUS JSONSchemaTypeDefinition::Check(const CVariant& value,
       }
       // If we still have unchecked properties but additional
       // properties are not allowed, we have invalid parameters
-      else if (!hasAdditionalProperties || additionalProperties == NULL)
+      else if (!hasAdditionalProperties || additionalProperties == nullptr)
       {
         errorData["message"] = "Unexpected additional properties received";
         errorData.erase("property");
@@ -1188,7 +1188,7 @@ void JSONSchemaTypeDefinition::Print(bool isParameter, bool isGlobal, bool print
 
       if (!hasAdditionalProperties)
         output["additionalProperties"] = false;
-      else if (additionalProperties != NULL && additionalProperties->type != AnyValue)
+      else if (additionalProperties != nullptr && additionalProperties->type != AnyValue)
         additionalProperties->Print(false, false, true, printDescriptions, output["additionalProperties"]);
     }
   }

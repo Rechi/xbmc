@@ -1155,7 +1155,7 @@ AEAudioFormat CActiveAE::GetInputFormat(AEAudioFormat *desiredFmt)
     inputFormat = *desiredFmt;
   }
   // keep format when having multiple streams
-  else if (m_streams.size() > 1 && m_silenceBuffers == NULL)
+  else if (m_streams.size() > 1 && m_silenceBuffers == nullptr)
   {
     inputFormat = m_inputFormat;
   }
@@ -1216,7 +1216,7 @@ void CActiveAE::Configure(AEAudioFormat *desiredFmt)
   if (m_silenceBuffers)
   {
     m_discardBufferPools.push_back(std::move(m_silenceBuffers));
-    m_silenceBuffers = NULL;
+    m_silenceBuffers = nullptr;
   }
 
   // buffers for driving gui sounds if no streams are active
@@ -1479,7 +1479,7 @@ CActiveAEStream* CActiveAE::CreateStream(MsgStreamNew *streamMsg)
       std::make_unique<CActiveAEDataProtocol>("stream", &stream->m_inMsgEvent, &m_outMsgEvent);
 
   // create buffer pool
-  stream->m_inputBuffers = NULL; // create in Configure when we know the sink format
+  stream->m_inputBuffers = nullptr; // create in Configure when we know the sink format
   stream->m_fadingSamples = 0;
   stream->m_started = false;
   stream->m_resampleMode = 0;
@@ -3351,7 +3351,7 @@ IAE::StreamPtr CActiveAE::MakeStream(AEAudioFormat& audioFormat,
   }
 
   if (IsSuspended())
-    return NULL;
+    return nullptr;
 
   //! @todo pass number of samples in audio packet
 
@@ -3387,7 +3387,7 @@ IAE::StreamPtr CActiveAE::MakeStream(AEAudioFormat& audioFormat,
   }
 
   CLog::Log(LOGERROR, "ActiveAE::{} - could not create stream", __FUNCTION__);
-  return NULL;
+  return nullptr;
 }
 
 bool CActiveAE::FreeStream(IAEStream *stream, bool finish)

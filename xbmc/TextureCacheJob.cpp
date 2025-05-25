@@ -156,7 +156,7 @@ bool CTextureCacheJob::ResizeTexture(const std::string& url,
     return false;
 
   std::unique_ptr<CTexture> texture = LoadImage(imageURL);
-  if (texture == NULL)
+  if (texture == nullptr)
     return false;
 
   bool success = CPicture::ResizeTexture(image, texture.get(), width, height, result, result_size,

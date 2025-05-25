@@ -38,8 +38,7 @@ void CDemuxMultiSource::Dispose()
 
   m_demuxerMap.clear();
   m_DemuxerToInputStreamMap.clear();
-  m_pInput = NULL;
-
+  m_pInput = nullptr;
 }
 
 void CDemuxMultiSource::EnableStream(int64_t demuxerId, int id, bool enable)
