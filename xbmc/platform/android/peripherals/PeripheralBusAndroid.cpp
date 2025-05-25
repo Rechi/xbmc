@@ -185,7 +185,7 @@ std::string CPeripheralBusAndroid::GetAppearance(const CPeripheral& peripheral) 
   return joystick.GetAppearance();
 }
 
-void CPeripheralBusAndroid::Initialise(void)
+void CPeripheralBusAndroid::Initialise()
 {
   CPeripheralBus::Initialise();
   TriggerDeviceScan();

@@ -102,8 +102,8 @@ class CMusicDatabase : public CDatabase
   friend class TestDatabaseUtilsHelper;
 
 public:
-  CMusicDatabase(void);
-  ~CMusicDatabase(void) override;
+  CMusicDatabase();
+  ~CMusicDatabase() override;
 
   bool Open() override;
   bool CommitTransaction() override;

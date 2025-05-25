@@ -69,7 +69,7 @@ CPeripheralAddon::CPeripheralAddon(const ADDON::AddonInfoPtr& addonInfo, CPeriph
   ResetProperties();
 }
 
-CPeripheralAddon::~CPeripheralAddon(void)
+CPeripheralAddon::~CPeripheralAddon()
 {
   DestroyAddon();
 
@@ -82,7 +82,7 @@ CPeripheralAddon::~CPeripheralAddon(void)
   delete m_ifc.peripheral;
 }
 
-void CPeripheralAddon::ResetProperties(void)
+void CPeripheralAddon::ResetProperties()
 {
   // Initialise members
   m_strUserPath = CSpecialProtocol::TranslatePath(Profile());
@@ -100,7 +100,7 @@ void CPeripheralAddon::ResetProperties(void)
   memset(m_ifc.peripheral->toAddon, 0, sizeof(KodiToAddonFuncTable_Peripheral));
 }
 
-bool CPeripheralAddon::CreateAddon(void)
+bool CPeripheralAddon::CreateAddon()
 {
   std::unique_lock<CSharedSection> lock(m_dllSection);
 
@@ -147,7 +147,7 @@ void CPeripheralAddon::DestroyAddon()
   }
 }
 
-bool CPeripheralAddon::GetAddonProperties(void)
+bool CPeripheralAddon::GetAddonProperties()
 {
   PERIPHERAL_CAPABILITIES addonCapabilities = {};
 
@@ -314,7 +314,7 @@ unsigned int CPeripheralAddon::GetPeripheralsWithFeature(PeripheralVector& resul
   return iReturn;
 }
 
-unsigned int CPeripheralAddon::GetNumberOfPeripherals(void) const
+unsigned int CPeripheralAddon::GetNumberOfPeripherals() const
 {
   std::unique_lock lock(m_critSection);
   return static_cast<unsigned int>(m_peripherals.size());
@@ -408,7 +408,7 @@ bool CPeripheralAddon::PerformDeviceScan(PeripheralScanResults& results)
   return false;
 }
 
-bool CPeripheralAddon::ProcessEvents(void)
+bool CPeripheralAddon::ProcessEvents()
 {
   if (!m_bProvidesJoysticks)
     return false;

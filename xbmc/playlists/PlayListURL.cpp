@@ -24,9 +24,9 @@ using namespace XFILE;
 namespace KODI::PLAYLIST
 {
 
-CPlayListURL::CPlayListURL(void) = default;
+CPlayListURL::CPlayListURL() = default;
 
-CPlayListURL::~CPlayListURL(void) = default;
+CPlayListURL::~CPlayListURL() = default;
 
 bool CPlayListURL::Load(const std::string& strFileName)
 {

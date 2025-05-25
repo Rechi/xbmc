@@ -34,21 +34,21 @@ public:
   CPhysicalFeature(int labelId);
   CPhysicalFeature(const CPhysicalFeature& other) { *this = other; }
 
-  void Reset(void);
+  void Reset();
 
   CPhysicalFeature& operator=(const CPhysicalFeature& rhs);
 
-  JOYSTICK::FEATURE_TYPE Type(void) const { return m_type; }
-  JOYSTICK::FEATURE_CATEGORY Category(void) const { return m_category; }
-  const std::string& Name(void) const { return m_strName; }
+  JOYSTICK::FEATURE_TYPE Type() const { return m_type; }
+  JOYSTICK::FEATURE_CATEGORY Category() const { return m_category; }
+  const std::string& Name() const { return m_strName; }
 
   // GUI properties
-  std::string Label(void) const;
-  int LabelID(void) const { return m_labelId; }
-  std::string CategoryLabel(void) const;
+  std::string Label() const;
+  int LabelID() const { return m_labelId; }
+  std::string CategoryLabel() const;
 
   // Input properties
-  JOYSTICK::INPUT_TYPE InputType(void) const { return m_inputType; }
+  JOYSTICK::INPUT_TYPE InputType() const { return m_inputType; }
   KEYBOARD::XBMCKey Keycode() const { return m_keycode; }
 
   bool Deserialize(const tinyxml2::XMLElement* pElement,

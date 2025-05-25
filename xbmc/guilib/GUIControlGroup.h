@@ -27,7 +27,7 @@ public:
   CGUIControlGroup();
   CGUIControlGroup(int parentID, int controlID, float posX, float posY, float width, float height);
   explicit CGUIControlGroup(const CGUIControlGroup& from);
-  ~CGUIControlGroup(void) override;
+  ~CGUIControlGroup() override;
   CGUIControlGroup* Clone() const override { return new CGUIControlGroup(*this); }
 
   void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;

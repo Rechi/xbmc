@@ -46,12 +46,12 @@ class CPeripheralAddon : public ADDON::IAddonInstanceHandler
 {
 public:
   explicit CPeripheralAddon(const ADDON::AddonInfoPtr& addonInfo, CPeripherals& manager);
-  ~CPeripheralAddon(void) override;
+  ~CPeripheralAddon() override;
 
   /*!
    * @brief Initialise the instance of this add-on
    */
-  bool CreateAddon(void);
+  bool CreateAddon();
 
   /*!
    * \brief Deinitialize the instance of this add-on
@@ -68,21 +68,21 @@ public:
   bool SupportsFeature(PeripheralFeature feature) const;
   unsigned int GetPeripheralsWithFeature(PeripheralVector& results,
                                          const PeripheralFeature feature) const;
-  unsigned int GetNumberOfPeripherals(void) const;
+  unsigned int GetNumberOfPeripherals() const;
   unsigned int GetNumberOfPeripheralsWithId(const int iVendorId, const int iProductId) const;
   void GetDirectory(const std::string& strPath, CFileItemList& items) const;
 
   /** @name Peripheral add-on methods */
   //@{
   bool PerformDeviceScan(PeripheralScanResults& results);
-  bool ProcessEvents(void);
+  bool ProcessEvents();
   bool SendRumbleEvent(unsigned int index, unsigned int driverIndex, float magnitude);
   //@}
 
   /** @name Joystick methods */
   //@{
   bool GetJoystickProperties(unsigned int index, CPeripheralJoystick& joystick);
-  bool HasButtonMaps(void) const { return m_bProvidesButtonMaps; }
+  bool HasButtonMaps() const { return m_bProvidesButtonMaps; }
   bool GetAppearance(const CPeripheral* device, std::string& controllerId);
   bool SetAppearance(const CPeripheral* device, const std::string& controllerId);
   bool GetFeatures(const CPeripheral* device,
@@ -127,12 +127,12 @@ private:
   /*!
    * @brief Reset all class members to their defaults. Called by the constructors
    */
-  void ResetProperties(void);
+  void ResetProperties();
 
   /*!
    * @brief Retrieve add-on properties from the add-on
    */
-  bool GetAddonProperties(void);
+  bool GetAddonProperties();
 
   bool LogError(const PERIPHERAL_ERROR error, const char* strMethod) const;
 

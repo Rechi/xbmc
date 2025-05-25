@@ -38,7 +38,7 @@ public:
   bool InitializeButtonMap(const CPeripheral& peripheral,
                            KODI::JOYSTICK::IButtonMap& buttonMap) const override;
   std::string GetAppearance(const CPeripheral& peripheral) const override;
-  void Initialise(void) override;
+  void Initialise() override;
   void ProcessEvents() override;
 
   // implementations of IInputDeviceCallbacks

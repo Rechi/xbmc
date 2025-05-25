@@ -15,8 +15,8 @@ namespace XFILE
   class CHTTPDirectory : public IDirectory
   {
     public:
-      CHTTPDirectory(void);
-      ~CHTTPDirectory(void) override;
+      CHTTPDirectory();
+      ~CHTTPDirectory() override;
       bool GetDirectory(const CURL& url, CFileItemList &items) override;
       bool Exists(const CURL& url) override;
       CacheType GetCacheType(const CURL& url) const override { return CacheType::ONCE; }

@@ -15,9 +15,9 @@
 
 using namespace XFILE;
 
-CMusicDatabaseFile::CMusicDatabaseFile(void) = default;
+CMusicDatabaseFile::CMusicDatabaseFile() = default;
 
-CMusicDatabaseFile::~CMusicDatabaseFile(void)
+CMusicDatabaseFile::~CMusicDatabaseFile()
 {
   Close();
 }

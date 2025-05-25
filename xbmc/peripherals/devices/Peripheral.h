@@ -87,25 +87,25 @@ class CPeripheral : public KODI::JOYSTICK::IInputProvider,
 
 public:
   CPeripheral(CPeripherals& manager, const PeripheralScanResult& scanResult, CPeripheralBus* bus);
-  ~CPeripheral(void) override;
+  ~CPeripheral() override;
 
   bool operator==(const CPeripheral& right) const;
   bool operator!=(const CPeripheral& right) const;
   bool operator==(const PeripheralScanResult& right) const;
   bool operator!=(const PeripheralScanResult& right) const;
 
-  const std::string& FileLocation(void) const { return m_strFileLocation; }
-  const std::string& Location(void) const { return m_strLocation; }
-  int VendorId(void) const { return m_iVendorId; }
-  const char* VendorIdAsString(void) const { return m_strVendorId.c_str(); }
-  int ProductId(void) const { return m_iProductId; }
-  const char* ProductIdAsString(void) const { return m_strProductId.c_str(); }
-  PeripheralType Type(void) const { return m_type; }
-  PeripheralBusType GetBusType(void) const { return m_busType; }
-  const std::string& DeviceName(void) const { return m_strDeviceName; }
-  bool IsHidden(void) const { return m_bHidden; }
+  const std::string& FileLocation() const { return m_strFileLocation; }
+  const std::string& Location() const { return m_strLocation; }
+  int VendorId() const { return m_iVendorId; }
+  const char* VendorIdAsString() const { return m_strVendorId.c_str(); }
+  int ProductId() const { return m_iProductId; }
+  const char* ProductIdAsString() const { return m_strProductId.c_str(); }
+  PeripheralType Type() const { return m_type; }
+  PeripheralBusType GetBusType() const { return m_busType; }
+  const std::string& DeviceName() const { return m_strDeviceName; }
+  bool IsHidden() const { return m_bHidden; }
   void SetHidden(bool bSetTo = true) { m_bHidden = bSetTo; }
-  const std::string& GetVersionInfo(void) const { return m_strVersionInfo; }
+  const std::string& GetVersionInfo() const { return m_strVersionInfo; }
 
   /*!
    * @brief Get an icon for this peripheral
@@ -130,7 +130,7 @@ public:
    * @brief Initialises the peripheral.
    * @return True when the peripheral has been initialised successfully, false otherwise.
    */
-  bool Initialise(void);
+  bool Initialise();
 
   /*!
    * @brief Initialise one of the features of this peripheral.
@@ -160,7 +160,7 @@ public:
   /*!
    * @brief Called when this device is removed, before calling the destructor.
    */
-  virtual void OnDeviceRemoved(void) {}
+  virtual void OnDeviceRemoved() {}
 
   /*!
    * @brief Get all subdevices if this device is multifunctional.
@@ -171,7 +171,7 @@ public:
   /*!
    * @return True when this device is multifunctional, false otherwise.
    */
-  virtual bool IsMultiFunctional(void) const;
+  virtual bool IsMultiFunctional() const;
 
   /*!
    * @brief Add a setting to this peripheral. This will overwrite a previous setting with the same
@@ -193,12 +193,12 @@ public:
   /*!
    * @return True when this device has any settings, false otherwise.
    */
-  virtual bool HasSettings(void) const;
+  virtual bool HasSettings() const;
 
   /*!
    * @return True when this device has any configurable settings, false otherwise.
    */
-  virtual bool HasConfigurableSettings(void) const;
+  virtual bool HasConfigurableSettings() const;
 
   /*!
    * @brief Get the value of a setting.
@@ -222,12 +222,12 @@ public:
   virtual void SetAddonSetting(const std::string& strKey, const std::string& addonId);
 
   virtual void PersistSettings(bool bExiting = false);
-  virtual void LoadPersistedSettings(void);
-  virtual void ResetDefaultSettings(void);
+  virtual void LoadPersistedSettings();
+  virtual void ResetDefaultSettings();
 
-  virtual std::vector<std::shared_ptr<CSetting>> GetSettings(void) const;
+  virtual std::vector<std::shared_ptr<CSetting>> GetSettings() const;
 
-  virtual bool ErrorOccured(void) const { return m_bError; }
+  virtual bool ErrorOccured() const { return m_bError; }
 
   virtual void RegisterJoystickDriverHandler(KODI::JOYSTICK::IDriverHandler* handler,
                                              bool bPromiscuous)
@@ -306,7 +306,7 @@ public:
   virtual void SetControllerProfile(const KODI::GAME::ControllerPtr& controller);
 
 protected:
-  virtual void ClearSettings(void);
+  virtual void ClearSettings();
 
   // Helper functions
   void InstallController(

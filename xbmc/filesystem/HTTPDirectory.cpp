@@ -26,8 +26,8 @@
 
 using namespace XFILE;
 
-CHTTPDirectory::CHTTPDirectory(void) = default;
-CHTTPDirectory::~CHTTPDirectory(void) = default;
+CHTTPDirectory::CHTTPDirectory() = default;
+CHTTPDirectory::~CHTTPDirectory() = default;
 
 bool CHTTPDirectory::GetDirectory(const CURL& url, CFileItemList &items)
 {

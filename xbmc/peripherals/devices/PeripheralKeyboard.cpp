@@ -29,7 +29,7 @@ CPeripheralKeyboard::CPeripheralKeyboard(CPeripherals& manager,
   m_features.push_back(FEATURE_KEYBOARD);
 }
 
-CPeripheralKeyboard::~CPeripheralKeyboard(void)
+CPeripheralKeyboard::~CPeripheralKeyboard()
 {
   m_manager.GetInputManager().UnregisterKeyboardDriverHandler(this);
 }

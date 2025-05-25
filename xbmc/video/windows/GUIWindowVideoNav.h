@@ -30,9 +30,8 @@ enum class IncludeAllSeasonsAndSpecials
 class CGUIWindowVideoNav : public CGUIWindowVideoBase
 {
 public:
-
-  CGUIWindowVideoNav(void);
-  ~CGUIWindowVideoNav(void) override;
+  CGUIWindowVideoNav();
+  ~CGUIWindowVideoNav() override;
 
   bool OnAction(const CAction &action) override;
   bool OnMessage(CGUIMessage& message) override;

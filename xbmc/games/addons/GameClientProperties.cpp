@@ -44,7 +44,7 @@ CGameClientProperties::CGameClientProperties(const CGameClient& parent, AddonPro
 {
 }
 
-void CGameClientProperties::ReleaseResources(void)
+void CGameClientProperties::ReleaseResources()
 {
   for (auto& it : m_proxyDllPaths)
     delete[] it;
@@ -59,7 +59,7 @@ void CGameClientProperties::ReleaseResources(void)
   m_extensions.clear();
 }
 
-bool CGameClientProperties::InitializeProperties(void)
+bool CGameClientProperties::InitializeProperties()
 {
   ReleaseResources();
 
@@ -80,7 +80,7 @@ bool CGameClientProperties::InitializeProperties(void)
   return true;
 }
 
-const char* CGameClientProperties::GetLibraryPath(void)
+const char* CGameClientProperties::GetLibraryPath()
 {
   if (m_strLibraryPath.empty())
   {
@@ -106,12 +106,12 @@ const char** CGameClientProperties::GetProxyDllPaths(const ADDON::VECADDONS& add
   return nullptr;
 }
 
-unsigned int CGameClientProperties::GetProxyDllCount(void) const
+unsigned int CGameClientProperties::GetProxyDllCount() const
 {
   return static_cast<unsigned int>(m_proxyDllPaths.size());
 }
 
-const char** CGameClientProperties::GetResourceDirectories(void)
+const char** CGameClientProperties::GetResourceDirectories()
 {
   if (m_resourceDirectories.empty())
   {
@@ -171,12 +171,12 @@ const char** CGameClientProperties::GetResourceDirectories(void)
   return nullptr;
 }
 
-unsigned int CGameClientProperties::GetResourceDirectoryCount(void) const
+unsigned int CGameClientProperties::GetResourceDirectoryCount() const
 {
   return static_cast<unsigned int>(m_resourceDirectories.size());
 }
 
-const char* CGameClientProperties::GetProfileDirectory(void)
+const char* CGameClientProperties::GetProfileDirectory()
 {
   if (m_strProfileDirectory.empty())
   {
@@ -187,7 +187,7 @@ const char* CGameClientProperties::GetProfileDirectory(void)
   return m_strProfileDirectory.c_str();
 }
 
-const char** CGameClientProperties::GetExtensions(void)
+const char** CGameClientProperties::GetExtensions()
 {
   for (auto& extension : m_parent.GetExtensions())
   {
@@ -199,7 +199,7 @@ const char** CGameClientProperties::GetExtensions(void)
   return !m_extensions.empty() ? const_cast<const char**>(m_extensions.data()) : nullptr;
 }
 
-unsigned int CGameClientProperties::GetExtensionCount(void) const
+unsigned int CGameClientProperties::GetExtensionCount() const
 {
   return static_cast<unsigned int>(m_extensions.size());
 }

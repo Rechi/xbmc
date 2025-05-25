@@ -23,7 +23,7 @@ class CGUIFixedListContainer : public CGUIBaseContainer
 {
 public:
   CGUIFixedListContainer(int parentID, int controlID, float posX, float posY, float width, float height, ORIENTATION orientation, const CScroller& scroller, int preloadItems, int fixedPosition, int cursorRange);
-  ~CGUIFixedListContainer(void) override;
+  ~CGUIFixedListContainer() override;
   CGUIFixedListContainer* Clone() const override { return new CGUIFixedListContainer(*this); }
 
   bool OnAction(const CAction &action) override;

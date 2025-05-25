@@ -67,7 +67,7 @@ using namespace KODI::MESSAGING;
 class CGetInfoJob : public CJob
 {
 public:
-  ~CGetInfoJob(void) override = default;
+  ~CGetInfoJob() override = default;
 
   // Fetch full album/artist information including art types list
   bool DoWork() override
@@ -182,9 +182,9 @@ public:
     iUserrating(userrating)
   { }
 
-  ~CSetUserratingJob(void) override = default;
+  ~CSetUserratingJob() override = default;
 
-  bool DoWork(void) override
+  bool DoWork() override
   {
     // Asynchronously update userrating in library
     CMusicDatabase db;
@@ -209,7 +209,7 @@ public:
     SetAutoClose(true);
   }
 
-  ~CRefreshInfoJob(void) override = default;
+  ~CRefreshInfoJob() override = default;
 
   // Refresh album/artist information including art types list
   bool DoWork() override
@@ -319,7 +319,7 @@ public:
   }
 };
 
-CGUIDialogMusicInfo::CGUIDialogMusicInfo(void)
+CGUIDialogMusicInfo::CGUIDialogMusicInfo()
   : CGUIDialog(WINDOW_DIALOG_MUSIC_INFO, "DialogMusicInfo.xml"),
     m_albumSongs(new CFileItemList),
     m_item(new CFileItem),
@@ -328,7 +328,7 @@ CGUIDialogMusicInfo::CGUIDialogMusicInfo(void)
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIDialogMusicInfo::~CGUIDialogMusicInfo(void)
+CGUIDialogMusicInfo::~CGUIDialogMusicInfo()
 {
 }
 

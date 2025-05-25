@@ -18,8 +18,8 @@ class CGUIImage;
 class CGUIWindowSplash : public CGUIWindow
 {
 public:
-  CGUIWindowSplash(void);
-  ~CGUIWindowSplash(void) override;
+  CGUIWindowSplash();
+  ~CGUIWindowSplash() override;
   bool OnAction(const CAction& action) override { return false; }
   void Render() override;
 protected:

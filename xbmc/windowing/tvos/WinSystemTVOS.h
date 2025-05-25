@@ -78,7 +78,7 @@ public:
   std::vector<std::string> GetConnectedOutputs() override;
 
   bool InitDisplayLink(CVideoSyncTVos* syncImpl);
-  void DeinitDisplayLink(void);
+  void DeinitDisplayLink();
   void OnAppFocusChange(bool focus);
   bool IsBackgrounded() const { return m_bIsBackgrounded; }
   CVEAGLContext GetEAGLContextObj();

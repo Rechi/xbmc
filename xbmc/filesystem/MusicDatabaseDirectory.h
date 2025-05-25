@@ -22,8 +22,8 @@ class CQueryParams;
   class CMusicDatabaseDirectory : public IDirectory
   {
   public:
-    CMusicDatabaseDirectory(void);
-    ~CMusicDatabaseDirectory(void) override;
+    CMusicDatabaseDirectory();
+    ~CMusicDatabaseDirectory() override;
     bool GetDirectory(const CURL& url, CFileItemList &items) override;
     bool AllowAll() const override { return true; }
     bool Exists(const CURL& url) override;

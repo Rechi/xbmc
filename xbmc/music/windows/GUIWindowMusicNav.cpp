@@ -77,14 +77,13 @@ using namespace KODI::MESSAGING;
 
 #define CONTROL_UPDATE_LIBRARY    20
 
-CGUIWindowMusicNav::CGUIWindowMusicNav(void)
-    : CGUIWindowMusicBase(WINDOW_MUSIC_NAV, "MyMusicNav.xml")
+CGUIWindowMusicNav::CGUIWindowMusicNav() : CGUIWindowMusicBase(WINDOW_MUSIC_NAV, "MyMusicNav.xml")
 {
   m_vecItems->SetPath("?");
   m_searchWithEdit = false;
 }
 
-CGUIWindowMusicNav::~CGUIWindowMusicNav(void) = default;
+CGUIWindowMusicNav::~CGUIWindowMusicNav() = default;
 
 bool CGUIWindowMusicNav::OnMessage(CGUIMessage& message)
 {

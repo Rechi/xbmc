@@ -43,7 +43,7 @@ std::string FFMpegErrorToString(int err);
 
 // callback used for logging
 void ff_avutil_log(void* ptr, int level, const char* format, va_list va);
-void ff_flush_avutil_log_buffers(void);
+void ff_flush_avutil_log_buffers();
 
 class CFFmpegLog
 {

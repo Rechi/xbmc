@@ -45,7 +45,7 @@ void CGameClientJoystick::UnregisterInput(JOYSTICK::IInputProvider* inputProvide
   m_portInput->UnregisterInput(inputProvider);
 }
 
-std::string CGameClientJoystick::ControllerID(void) const
+std::string CGameClientJoystick::ControllerID() const
 {
   return m_controller->ID();
 }

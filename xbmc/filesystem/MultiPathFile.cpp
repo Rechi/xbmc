@@ -14,11 +14,10 @@
 
 using namespace XFILE;
 
-CMultiPathFile::CMultiPathFile(void)
-  : COverrideFile(false)
+CMultiPathFile::CMultiPathFile() : COverrideFile(false)
 { }
 
-CMultiPathFile::~CMultiPathFile(void) = default;
+CMultiPathFile::~CMultiPathFile() = default;
 
 bool CMultiPathFile::Open(const CURL& url)
 {

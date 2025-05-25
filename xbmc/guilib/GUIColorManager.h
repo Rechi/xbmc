@@ -30,8 +30,8 @@ class CXBMCTinyXML;
 class CGUIColorManager
 {
 public:
-  CGUIColorManager(void);
-  virtual ~CGUIColorManager(void);
+  CGUIColorManager();
+  virtual ~CGUIColorManager();
 
   void Load(const std::string &colorFile);
 

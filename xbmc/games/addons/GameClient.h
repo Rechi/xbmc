@@ -151,7 +151,7 @@ public:
   const std::string& GetPlatforms() const { return m_platforms; }
 
   // Start/stop gameplay
-  bool Initialize(void);
+  bool Initialize();
   void Unload();
   bool OpenFile(const CFileItem& file,
                 RETRO::IStreamManager& streamManager,
@@ -198,7 +198,7 @@ private:
   std::string GetMissingResource();
 
   // Helper functions
-  void LogAddonProperties(void) const;
+  void LogAddonProperties() const;
 
   /*!
    * @brief Callback functions from addon to kodi

@@ -41,8 +41,8 @@ namespace XFILE
       unsigned int m_lastAccess;
     };
   public:
-    CDirectoryCache(void);
-    virtual ~CDirectoryCache(void);
+    CDirectoryCache();
+    virtual ~CDirectoryCache();
     bool GetDirectory(const std::string& strPath, CFileItemList &items, bool retrieveAll = false);
     void SetDirectory(const std::string& strPath, const CFileItemList& items, CacheType cacheType);
     void ClearDirectory(const std::string& strPath);

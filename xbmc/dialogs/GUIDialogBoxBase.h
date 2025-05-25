@@ -29,7 +29,7 @@ class CGUIDialogBoxBase :
 {
 public:
   CGUIDialogBoxBase(int id, const std::string &xmlFile);
-  ~CGUIDialogBoxBase(void) override;
+  ~CGUIDialogBoxBase() override;
   bool OnMessage(CGUIMessage& message) override;
   bool IsConfirmed() const;
   void SetLine(unsigned int iLine, const CVariant& line);

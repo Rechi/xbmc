@@ -112,13 +112,12 @@ public:
    * Check is RegExp object is ready for matching
    * @return true if RegExp object is ready for matching, false otherwise
    */
-  inline bool IsCompiled(void) const
-  { return !m_pattern.empty(); }
+  inline bool IsCompiled() const { return !m_pattern.empty(); }
   CRegExp& operator= (const CRegExp& re);
-  static bool IsUtf8Supported(void);
-  static bool AreUnicodePropertiesSupported(void);
-  static bool LogCheckUtf8Support(void);
-  static bool IsJitSupported(void);
+  static bool IsUtf8Supported();
+  static bool AreUnicodePropertiesSupported();
+  static bool LogCheckUtf8Support();
+  static bool IsJitSupported();
 
 private:
   int PrivateRegFind(size_t bufferLen, const char *str, unsigned int startoffset = 0, int maxNumberOfCharsToTest = -1);

@@ -16,8 +16,8 @@ namespace PERIPHERALS
 class IEventScannerCallback
 {
 public:
-  virtual ~IEventScannerCallback(void) = default;
+  virtual ~IEventScannerCallback() = default;
 
-  virtual void ProcessEvents(void) = 0;
+  virtual void ProcessEvents() = 0;
 };
 } // namespace PERIPHERALS

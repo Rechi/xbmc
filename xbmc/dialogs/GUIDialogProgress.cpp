@@ -19,13 +19,13 @@
 
 using namespace std::chrono_literals;
 
-CGUIDialogProgress::CGUIDialogProgress(void)
-    : CGUIDialogBoxBase(WINDOW_DIALOG_PROGRESS, "DialogConfirm.xml")
+CGUIDialogProgress::CGUIDialogProgress()
+  : CGUIDialogBoxBase(WINDOW_DIALOG_PROGRESS, "DialogConfirm.xml")
 {
   Reset();
 }
 
-CGUIDialogProgress::~CGUIDialogProgress(void) = default;
+CGUIDialogProgress::~CGUIDialogProgress() = default;
 
 void CGUIDialogProgress::Reset()
 {

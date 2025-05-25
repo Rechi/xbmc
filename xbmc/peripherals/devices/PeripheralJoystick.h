@@ -52,7 +52,7 @@ public:
                       const PeripheralScanResult& scanResult,
                       CPeripheralBus* bus);
 
-  ~CPeripheralJoystick(void) override;
+  ~CPeripheralJoystick() override;
 
   // implementation of CPeripheral
   bool InitialiseFeature(const PeripheralFeature feature) override;
@@ -72,7 +72,7 @@ public:
   bool OnButtonMotion(unsigned int buttonIndex, bool bPressed);
   bool OnHatMotion(unsigned int hatIndex, KODI::JOYSTICK::HAT_STATE state);
   bool OnAxisMotion(unsigned int axisIndex, float position);
-  void OnInputFrame(void);
+  void OnInputFrame();
 
   // implementation of IDriverReceiver
   bool SetMotorState(unsigned int motorIndex, float magnitude) override;
@@ -80,7 +80,7 @@ public:
   /*!
    * \brief Get the name of the driver or API providing this joystick
    */
-  const std::string& Provider(void) const { return m_strProvider; }
+  const std::string& Provider() const { return m_strProvider; }
 
   /*!
    * \brief Get the specific port number requested by this joystick
@@ -91,16 +91,16 @@ public:
    *
    * \return The 0-indexed port number, or JOYSTICK_PORT_UNKNOWN if no port is requested
    */
-  int RequestedPort(void) const { return m_requestedPort; }
+  int RequestedPort() const { return m_requestedPort; }
 
   /*!
    * \brief Get the number of elements reported by the driver
    */
-  unsigned int ButtonCount(void) const { return m_buttonCount; }
-  unsigned int HatCount(void) const { return m_hatCount; }
-  unsigned int AxisCount(void) const { return m_axisCount; }
-  unsigned int MotorCount(void) const { return m_motorCount; }
-  bool SupportsPowerOff(void) const { return m_supportsPowerOff; }
+  unsigned int ButtonCount() const { return m_buttonCount; }
+  unsigned int HatCount() const { return m_hatCount; }
+  unsigned int AxisCount() const { return m_axisCount; }
+  unsigned int MotorCount() const { return m_motorCount; }
+  bool SupportsPowerOff() const { return m_supportsPowerOff; }
 
   /*!
    * \brief Set joystick properties

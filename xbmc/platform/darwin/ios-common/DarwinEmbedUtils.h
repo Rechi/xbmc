@@ -11,6 +11,6 @@
 class CDarwinEmbedUtils
 {
 public:
-  static const char* GetAppRootFolder(void);
-  static bool IsIosSandboxed(void);
+  static const char* GetAppRootFolder();
+  static bool IsIosSandboxed();
 };

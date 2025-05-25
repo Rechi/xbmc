@@ -65,8 +65,8 @@ struct CInstalledWithAvailable
 class CGUIDialogAddonInfo : public CGUIDialog
 {
 public:
-  CGUIDialogAddonInfo(void);
-  ~CGUIDialogAddonInfo(void) override;
+  CGUIDialogAddonInfo();
+  ~CGUIDialogAddonInfo() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction& action) override;
 

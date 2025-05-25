@@ -25,7 +25,7 @@ public:
   void GetLocalDrives(std::vector<CMediaSource>& localDrives) override;
   void GetRemovableDrives(std::vector<CMediaSource>& removableDrives) override {}
 
-  std::vector<std::string> GetDiskUsage(void) override;
+  std::vector<std::string> GetDiskUsage() override;
 
   bool Eject(const std::string& mountpath) override { return false; }
 

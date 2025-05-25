@@ -72,7 +72,7 @@ CGUIWindowFullScreen::CGUIWindowFullScreen()
   m_controlStats = new GUICONTROLSTATS;
 }
 
-CGUIWindowFullScreen::~CGUIWindowFullScreen(void)
+CGUIWindowFullScreen::~CGUIWindowFullScreen()
 {
   delete m_controlStats;
 }

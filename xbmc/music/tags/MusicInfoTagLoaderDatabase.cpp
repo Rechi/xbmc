@@ -16,7 +16,7 @@
 
 using namespace MUSIC_INFO;
 
-CMusicInfoTagLoaderDatabase::CMusicInfoTagLoaderDatabase(void) = default;
+CMusicInfoTagLoaderDatabase::CMusicInfoTagLoaderDatabase() = default;
 
 CMusicInfoTagLoaderDatabase::~CMusicInfoTagLoaderDatabase() = default;
 

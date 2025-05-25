@@ -44,8 +44,8 @@ class CGUIInfoLabel;
 class CGUIControlFactory
 {
 public:
-  CGUIControlFactory(void);
-  virtual ~CGUIControlFactory(void);
+  CGUIControlFactory();
+  virtual ~CGUIControlFactory();
   CGUIControl* Create(int parentID,
                       const CRect& rect,
                       TiXmlElement* pControlNode,

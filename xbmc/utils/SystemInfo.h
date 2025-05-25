@@ -120,7 +120,7 @@ public:
     Other = 100
   };
 
-  CSysInfo(void);
+  CSysInfo();
   ~CSysInfo() override;
 
   bool Load(const TiXmlNode *settings) override;
@@ -128,14 +128,16 @@ public:
 
   char MD5_Sign[32 + 1];
 
-  static const std::string& GetAppName(void); // the same name as CCompileInfo::GetAppName(), but const ref to std::string
+  static const std::string&
+  GetAppName(); // the same name as CCompileInfo::GetAppName(), but const ref to std::string
 
   static std::string GetKernelName(bool emptyIfUnknown = false);
-  static std::string GetKernelVersionFull(void); // full version string, including "-generic", "-RELEASE" etc.
-  static std::string GetKernelVersion(void); // only digits with dots
+  static std::string
+  GetKernelVersionFull(); // full version string, including "-generic", "-RELEASE" etc.
+  static std::string GetKernelVersion(); // only digits with dots
   static std::string GetOsName(bool emptyIfUnknown = false);
-  static std::string GetOsVersion(void);
-  static std::string GetOsPrettyNameWithVersion(void);
+  static std::string GetOsVersion();
+  static std::string GetOsPrettyNameWithVersion();
   static std::string GetUserAgent();
   static std::string GetDeviceName();
   static std::string GetVersion();
@@ -149,11 +151,11 @@ public:
   static bool IsWindowsVersion(WindowsVersion ver);
   static bool IsWindowsVersionAtLeast(WindowsVersion ver);
   static WindowsVersion GetWindowsVersion();
-  static int GetKernelBitness(void);
-  static int GetXbmcBitness(void);
-  static const std::string& GetKernelCpuFamily(void);
-  static std::string GetManufacturerName(void);
-  static std::string GetModelName(void);
+  static int GetKernelBitness();
+  static int GetXbmcBitness();
+  static const std::string& GetKernelCpuFamily();
+  static std::string GetManufacturerName();
+  static std::string GetModelName();
   bool GetDiskSpace(std::string drive,int& iTotal, int& iTotalFree, int& iTotalUsed, int& iPercentFree, int& iPercentUsed);
   std::string GetHddSpaceInfo(int& percent, int drive, bool shortText=false);
   std::string GetHddSpaceInfo(int drive, bool shortText=false);
@@ -161,12 +163,12 @@ public:
   int GetTotalUptime() const { return m_iSystemTimeTotalUp; }
   void SetTotalUptime(int uptime) { m_iSystemTimeTotalUp = uptime; }
 
-  static std::string GetBuildTargetPlatformName(void);
-  static std::string GetBuildTargetPlatformVersion(void);
-  static std::string GetBuildTargetPlatformVersionDecoded(void);
-  static std::string GetBuildTargetCpuFamily(void);
+  static std::string GetBuildTargetPlatformName();
+  static std::string GetBuildTargetPlatformVersion();
+  static std::string GetBuildTargetPlatformVersionDecoded();
+  static std::string GetBuildTargetCpuFamily();
 
-  static std::string GetUsedCompilerNameAndVer(void);
+  static std::string GetUsedCompilerNameAndVer();
   std::string GetPrivacyPolicy();
 
   static WindowsDeviceFamily GetWindowsDeviceFamily();

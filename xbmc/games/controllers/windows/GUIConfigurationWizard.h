@@ -79,13 +79,13 @@ protected:
   void Process() override;
 
 private:
-  void InitializeState(void);
+  void InitializeState();
 
   bool IsMapping() const;
   bool IsMapping(const std::string& location) const;
 
-  void InstallHooks(void);
-  void RemoveHooks(void);
+  void InstallHooks();
+  void RemoveHooks();
 
   void OnMotion(const JOYSTICK::IButtonMap* buttonMap);
   void OnMotionless(const JOYSTICK::IButtonMap* buttonMap);

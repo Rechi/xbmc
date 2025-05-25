@@ -22,7 +22,7 @@ public:
   CPeripheralHID(CPeripherals& manager,
                  const PeripheralScanResult& scanResult,
                  CPeripheralBus* bus);
-  ~CPeripheralHID(void) override;
+  ~CPeripheralHID() override;
   bool InitialiseFeature(const PeripheralFeature feature) override;
   virtual bool LookupSymAndUnicode(XBMC_keysym& keysym, uint8_t* key, char* unicode)
   {

@@ -44,9 +44,9 @@ using namespace KODI::MESSAGING;
 namespace XFILE
 {
 
-CAddonsDirectory::CAddonsDirectory(void) = default;
+CAddonsDirectory::CAddonsDirectory() = default;
 
-CAddonsDirectory::~CAddonsDirectory(void) = default;
+CAddonsDirectory::~CAddonsDirectory() = default;
 
 const auto CATEGORY_INFO_PROVIDERS = "category.infoproviders";
 const auto CATEGORY_LOOK_AND_FEEL = "category.lookandfeel";

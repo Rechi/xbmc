@@ -33,7 +33,7 @@ public:
                          const CTextureInfo& textureButton, const CTextureInfo& textureButtonFocus,
                          float textureHeight, float itemWidth, float itemHeight, float spaceBetweenItems);
   //#endif
-  ~CGUIListContainer(void) override;
+  ~CGUIListContainer() override;
   CGUIListContainer* Clone() const override { return new CGUIListContainer(*this); }
 
   bool OnAction(const CAction &action) override;

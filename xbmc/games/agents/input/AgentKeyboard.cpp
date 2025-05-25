@@ -58,7 +58,7 @@ float CAgentKeyboard::GetActivation() const
   return m_keyboardActivity->GetActivation();
 }
 
-std::string CAgentKeyboard::ControllerID(void) const
+std::string CAgentKeyboard::ControllerID() const
 {
   return DEFAULT_KEYBOARD_ID;
 }

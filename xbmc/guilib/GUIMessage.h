@@ -379,7 +379,7 @@ public:
               int64_t param2,
               const std::shared_ptr<CGUIListItem>& item);
   CGUIMessage(const CGUIMessage& msg);
-  ~CGUIMessage(void);
+  ~CGUIMessage();
   CGUIMessage& operator = (const CGUIMessage& msg);
 
   int GetControlId() const ;

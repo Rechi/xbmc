@@ -20,8 +20,8 @@
 class IWindowManagerCallback
 {
 public:
-  IWindowManagerCallback(void);
-  virtual ~IWindowManagerCallback(void);
+  IWindowManagerCallback();
+  virtual ~IWindowManagerCallback();
 
   virtual void FrameMove(bool processEvents, bool processGUI = true) = 0;
   virtual void Render() = 0;

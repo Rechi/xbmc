@@ -23,8 +23,8 @@ namespace XFILE
 class CUPnPDirectory :  public IDirectory
 {
 public:
-    CUPnPDirectory(void) = default;
-    ~CUPnPDirectory(void) override = default;
+  CUPnPDirectory() = default;
+  ~CUPnPDirectory() override = default;
 
     // IDirectory methods
     bool GetDirectory(const CURL& url, CFileItemList &items) override;

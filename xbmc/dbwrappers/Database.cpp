@@ -233,7 +233,7 @@ CDatabase::CDatabase()
   m_multipleExecute = false;
 }
 
-CDatabase::~CDatabase(void)
+CDatabase::~CDatabase()
 {
   Close();
 }

@@ -17,8 +17,8 @@
 class CGUIWindowSettingsScreenCalibration : public CGUIWindow
 {
 public:
-  CGUIWindowSettingsScreenCalibration(void);
-  ~CGUIWindowSettingsScreenCalibration(void) override;
+  CGUIWindowSettingsScreenCalibration();
+  ~CGUIWindowSettingsScreenCalibration() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction& action) override;
   void DoProcess(unsigned int currentTime, CDirtyRegionList& dirtyregions) override;

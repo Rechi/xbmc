@@ -33,7 +33,7 @@ public:
    *
    * \return The ID of the add-on extending kodi.game.controller
    */
-  virtual std::string ControllerID(void) const = 0;
+  virtual std::string ControllerID() const = 0;
 
   /*!
    * \brief Return true if the input handler accepts the given feature
@@ -160,8 +160,8 @@ public:
 
   // Input receiver interface
   void SetInputReceiver(IInputReceiver* receiver) { m_receiver = receiver; }
-  void ResetInputReceiver(void) { m_receiver = nullptr; }
-  IInputReceiver* InputReceiver(void) { return m_receiver; }
+  void ResetInputReceiver() { m_receiver = nullptr; }
+  IInputReceiver* InputReceiver() { return m_receiver; }
 
 private:
   IInputReceiver* m_receiver = nullptr;

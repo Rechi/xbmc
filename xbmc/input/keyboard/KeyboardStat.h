@@ -48,7 +48,7 @@ public:
   CKey TranslateKey(XBMC_keysym& keysym) const;
 
   void ProcessKeyDown(XBMC_keysym& keysym);
-  void ProcessKeyUp(void);
+  void ProcessKeyUp();
 
   std::string GetKeyName(int KeyID);
 

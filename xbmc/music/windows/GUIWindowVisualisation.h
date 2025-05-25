@@ -16,7 +16,7 @@ class CGUIWindowVisualisation :
       public CGUIWindow
 {
 public:
-  CGUIWindowVisualisation(void);
+  CGUIWindowVisualisation();
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;
   void FrameMove() override;

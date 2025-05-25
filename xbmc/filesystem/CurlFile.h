@@ -121,7 +121,7 @@ namespace XFILE
 
           /* returned http header */
           CHttpHeader m_httpheader;
-          bool IsHeaderDone(void) { return m_httpheader.IsHeaderDone(); }
+          bool IsHeaderDone() { return m_httpheader.IsHeaderDone(); }
 
           curl_slist* m_curlHeaderList;
           curl_slist* m_curlAliasList;
@@ -136,7 +136,7 @@ namespace XFILE
           int8_t FillBuffer(unsigned int want);
           void SetReadBuffer(const void* lpBuf, int64_t uiBufSize);
 
-          void SetResume(void);
+          void SetResume();
           long Connect(unsigned int size);
           void Disconnect();
       };

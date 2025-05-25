@@ -18,8 +18,8 @@
 class CGUIDialogKaiToast: public CGUIDialog
 {
 public:
-  CGUIDialogKaiToast(void);
-  ~CGUIDialogKaiToast(void) override;
+  CGUIDialogKaiToast();
+  ~CGUIDialogKaiToast() override;
 
   enum eMessageType { Default = 0, Info, Warning, Error };
 

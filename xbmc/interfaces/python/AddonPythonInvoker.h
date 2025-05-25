@@ -16,7 +16,7 @@ public:
   explicit CAddonPythonInvoker(ILanguageInvocationHandler *invocationHandler);
   ~CAddonPythonInvoker() override;
 
-  static void GlobalInitializeModules(void);
+  static void GlobalInitializeModules();
 
 protected:
   // overrides of CPythonInvoker

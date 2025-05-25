@@ -60,7 +60,7 @@ public:
   enum LOAD_TYPE { LOAD_EVERY_TIME, LOAD_ON_GUI_INIT, KEEP_IN_MEMORY };
 
   CGUIWindow(int id, const std::string &xmlFile);
-  ~CGUIWindow(void) override;
+  ~CGUIWindow() override;
 
   bool Initialize();  // loads the window
   bool Load(const std::string& strFileName, bool bContainsPath = false);

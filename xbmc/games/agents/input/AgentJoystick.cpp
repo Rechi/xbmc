@@ -59,7 +59,7 @@ float CAgentJoystick::GetActivation() const
   return m_controllerActivity->GetActivation();
 }
 
-std::string CAgentJoystick::ControllerID(void) const
+std::string CAgentJoystick::ControllerID() const
 {
   if (m_controllerAppearance)
     return m_controllerAppearance->ID();

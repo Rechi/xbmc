@@ -38,8 +38,8 @@ inline const std::string LANGUAGE_OLD_DEFAULT = "English";
 class CLocalizeStrings : public ILocalizer
 {
 public:
-  CLocalizeStrings(void);
-  ~CLocalizeStrings(void) override;
+  CLocalizeStrings();
+  ~CLocalizeStrings() override;
   bool Load(const std::string& strPathName, const std::string& strLanguage);
   bool LoadSkinStrings(const std::string& path, const std::string& language);
   bool LoadAddonStrings(const std::string& path, const std::string& language, const std::string& addonId);

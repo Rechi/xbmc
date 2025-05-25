@@ -27,9 +27,9 @@
 using namespace KODI;
 using namespace XFILE;
 
-CSourcesDirectory::CSourcesDirectory(void) = default;
+CSourcesDirectory::CSourcesDirectory() = default;
 
-CSourcesDirectory::~CSourcesDirectory(void) = default;
+CSourcesDirectory::~CSourcesDirectory() = default;
 
 bool CSourcesDirectory::GetDirectory(const CURL& url, CFileItemList &items)
 {

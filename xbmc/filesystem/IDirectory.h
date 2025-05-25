@@ -62,7 +62,7 @@ public:
   static void UnregisterProfileManager();
 
   IDirectory();
-  virtual ~IDirectory(void);
+  virtual ~IDirectory();
   /*!
    \brief Get the \e items of the directory \e strPath.
    \param url Directory to read.

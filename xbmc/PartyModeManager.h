@@ -31,7 +31,7 @@ enum class PartyModeContext
 class CPartyModeManager final
 {
 public:
-  CPartyModeManager(void);
+  CPartyModeManager();
 
   bool Enable(PartyModeContext context = PartyModeContext::MUSIC,
               const std::string& strXspPath = "");

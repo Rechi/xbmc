@@ -62,7 +62,7 @@ CGUIRSSControl::CGUIRSSControl(const CGUIRSSControl& from)
   ControlType = GUICONTROL_RSS;
 }
 
-CGUIRSSControl::~CGUIRSSControl(void)
+CGUIRSSControl::~CGUIRSSControl()
 {
   std::unique_lock lock(m_criticalSection);
   if (m_pReader)

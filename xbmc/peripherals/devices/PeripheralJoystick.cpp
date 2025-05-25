@@ -45,7 +45,7 @@ CPeripheralJoystick::CPeripheralJoystick(CPeripherals& manager,
   // FEATURE_RUMBLE conditionally added via SetMotorCount()
 }
 
-CPeripheralJoystick::~CPeripheralJoystick(void)
+CPeripheralJoystick::~CPeripheralJoystick()
 {
   if (m_rumbleGenerator)
   {
@@ -453,7 +453,7 @@ bool CPeripheralJoystick::OnAxisMotion(unsigned int axisIndex, float position)
   return bHandled;
 }
 
-void CPeripheralJoystick::OnInputFrame(void)
+void CPeripheralJoystick::OnInputFrame()
 {
   std::unique_lock lock(m_handlerMutex);
 

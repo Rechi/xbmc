@@ -37,8 +37,8 @@ public:
   bool PumpPowerEvents(IPowerEventsCallback* callback) override;
 
 private:
-          void CreateOSPowerCallBacks(void);
-          void DeleteOSPowerCallBacks(void);
+  void CreateOSPowerCallBacks();
+  void DeleteOSPowerCallBacks();
   static  void OSPowerCallBack(void *refcon, io_service_t service, natural_t msg_type, void *msg_arg);
   static  void OSPowerSourceCallBack(void *refcon);
 

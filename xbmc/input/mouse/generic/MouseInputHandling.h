@@ -32,7 +32,7 @@ class CMouseInputHandling : public IMouseDriverHandler
 public:
   CMouseInputHandling(IMouseInputHandler* handler, JOYSTICK::IButtonMap* buttonMap);
 
-  ~CMouseInputHandling(void) override = default;
+  ~CMouseInputHandling() override = default;
 
   // implementation of IMouseDriverHandler
   bool OnPosition(int x, int y) override;

@@ -30,7 +30,7 @@
 
 #include <inttypes.h>
 
-CGUIWindowDebugInfo::CGUIWindowDebugInfo(void)
+CGUIWindowDebugInfo::CGUIWindowDebugInfo()
   : CGUIDialog(WINDOW_DEBUG_INFO, "", DialogModalityType::MODELESS)
 {
   m_needsScaling = false;
@@ -38,7 +38,7 @@ CGUIWindowDebugInfo::CGUIWindowDebugInfo(void)
   m_renderOrder = RENDER_ORDER_WINDOW_DEBUG;
 }
 
-CGUIWindowDebugInfo::~CGUIWindowDebugInfo(void) = default;
+CGUIWindowDebugInfo::~CGUIWindowDebugInfo() = default;
 
 void CGUIWindowDebugInfo::UpdateVisibility()
 {

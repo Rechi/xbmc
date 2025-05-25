@@ -21,6 +21,6 @@ public:
   CPeripheralTuner(CPeripherals& manager,
                    const PeripheralScanResult& scanResult,
                    CPeripheralBus* bus);
-  ~CPeripheralTuner(void) override = default;
+  ~CPeripheralTuner() override = default;
 };
 } // namespace PERIPHERALS

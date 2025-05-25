@@ -33,7 +33,7 @@ CGUIFeatureButton::CGUIFeatureButton(const CGUIButtonControl& buttonTemplate,
   AllocResources();
 }
 
-void CGUIFeatureButton::OnUnFocus(void)
+void CGUIFeatureButton::OnUnFocus()
 {
   CGUIButtonControl::OnUnFocus();
   m_wizard->OnUnfocus(this);

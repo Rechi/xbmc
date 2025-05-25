@@ -20,7 +20,7 @@ namespace XFILE
   class CAudioBookFileDirectory : public IFileDirectory
   {
     public:
-      ~CAudioBookFileDirectory(void) override;
+      ~CAudioBookFileDirectory() override;
       bool GetDirectory(const CURL& url, CFileItemList &items) override;
       bool Exists(const CURL& url) override;
       bool ContainsFiles(const CURL& url) override;

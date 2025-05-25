@@ -219,7 +219,7 @@ using namespace std::chrono_literals;
 
 #define MAX_FFWD_SPEED 5
 
-CApplication::CApplication(void)
+CApplication::CApplication()
   :
 #ifdef HAS_OPTICAL_DRIVE
     m_Autorun(new CAutorun()),
@@ -244,7 +244,7 @@ CApplication::CApplication(void)
   RegisterComponent(std::make_shared<CApplicationStackHelper>());
 }
 
-CApplication::~CApplication(void)
+CApplication::~CApplication()
 {
   DeregisterComponent(typeid(CApplicationStackHelper));
   DeregisterComponent(typeid(CApplicationVolumeHandling));

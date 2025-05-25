@@ -29,7 +29,7 @@ CPeripheralMouse::CPeripheralMouse(CPeripherals& manager,
   m_features.push_back(FEATURE_MOUSE);
 }
 
-CPeripheralMouse::~CPeripheralMouse(void)
+CPeripheralMouse::~CPeripheralMouse()
 {
   m_manager.GetInputManager().UnregisterMouseDriverHandler(this);
 }

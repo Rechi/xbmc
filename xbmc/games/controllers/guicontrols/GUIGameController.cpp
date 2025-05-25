@@ -62,7 +62,7 @@ CGUIGameController::CGUIGameController(const CGUIGameController& from)
   SetAspectRatio(CAspectRatio::KEEP);
 }
 
-CGUIGameController* CGUIGameController::Clone(void) const
+CGUIGameController* CGUIGameController::Clone() const
 {
   return new CGUIGameController(*this);
 }

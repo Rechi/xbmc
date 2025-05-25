@@ -19,8 +19,8 @@ class CGUIDialogSongInfo :
       public CGUIDialog
 {
 public:
-  CGUIDialogSongInfo(void);
-  ~CGUIDialogSongInfo(void) override;
+  CGUIDialogSongInfo();
+  ~CGUIDialogSongInfo() override;
   bool OnMessage(CGUIMessage& message) override;
   bool SetSong(CFileItem* item);
   void SetArtTypeList(CFileItemList& artlist);
