@@ -26,7 +26,7 @@ class CWinSystemX11GLESContext : public CWinSystemX11, public CRenderSystemGLES
 {
 public:
   CWinSystemX11GLESContext() = default;
-  virtual ~CWinSystemX11GLESContext() override;
+  ~CWinSystemX11GLESContext() override;
 
   static void Register();
   static std::unique_ptr<CWinSystemBase> CreateWinSystem();

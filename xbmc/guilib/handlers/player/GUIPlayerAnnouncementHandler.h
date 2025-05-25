@@ -17,7 +17,7 @@ class CGUIPlayerAnnouncementHandler : public ANNOUNCEMENT::IAnnouncer
 {
 public:
   CGUIPlayerAnnouncementHandler();
-  ~CGUIPlayerAnnouncementHandler();
+  ~CGUIPlayerAnnouncementHandler() override;
 
   void Announce(ANNOUNCEMENT::AnnouncementFlag flag,
                 const std::string& sender,

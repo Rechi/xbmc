@@ -13,11 +13,11 @@
 class CCPUInfoPosix : public CCPUInfo
 {
 public:
-  virtual bool GetTemperature(CTemperature& temperature) override;
+  bool GetTemperature(CTemperature& temperature) override;
 
 protected:
   CCPUInfoPosix() = default;
-  virtual ~CCPUInfoPosix() = default;
+  ~CCPUInfoPosix() override = default;
 
   bool CheckUserTemperatureCommand(CTemperature& temperature);
 };

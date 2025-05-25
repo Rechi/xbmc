@@ -43,7 +43,7 @@ class CExtsMimeSupportList : public KODI::ADDONS::IAddonSupportList
 {
 public:
   CExtsMimeSupportList(ADDON::CAddonMgr& addonMgr);
-  ~CExtsMimeSupportList();
+  ~CExtsMimeSupportList() override;
 
   /*!
    * @brief Filter selection values.

@@ -20,7 +20,7 @@ class CALSAHControlMonitor : public IPlatformService
 {
 public:
   CALSAHControlMonitor();
-  ~CALSAHControlMonitor();
+  ~CALSAHControlMonitor() override;
 
   bool Add(const std::string& ctlHandleName,
            snd_ctl_elem_iface_t interface,

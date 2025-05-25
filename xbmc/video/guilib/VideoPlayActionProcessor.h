@@ -24,7 +24,7 @@ public:
   {
   }
   CVideoPlayActionProcessor() = delete;
-  virtual ~CVideoPlayActionProcessor() = default;
+  ~CVideoPlayActionProcessor() override = default;
 
   void SetChoosePlayer() { m_choosePlayer = true; }
   void SetChooseStackPart() { m_chooseStackPart = true; }

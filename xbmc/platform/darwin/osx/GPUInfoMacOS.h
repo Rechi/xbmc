@@ -14,7 +14,7 @@ class CGPUInfoMacOS : public CGPUInfoPosix
 {
 public:
   CGPUInfoMacOS() = default;
-  ~CGPUInfoMacOS() = default;
+  ~CGPUInfoMacOS() override = default;
 
 private:
   bool SupportsPlatformTemperature() const override;

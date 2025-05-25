@@ -54,7 +54,7 @@ class CVideoInfoTag : public IArchivable, public ISerializable, public ISortable
 {
 public:
   CVideoInfoTag() { Reset(); }
-  virtual ~CVideoInfoTag() = default;
+  ~CVideoInfoTag() override = default;
   virtual void Reset();
   /* \brief Load information to a videoinfotag from an XML element
    There are three types of tags supported:

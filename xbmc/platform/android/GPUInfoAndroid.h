@@ -14,7 +14,7 @@ class CGPUInfoAndroid : public CGPUInfoPosix
 {
 public:
   CGPUInfoAndroid() = default;
-  ~CGPUInfoAndroid() = default;
+  ~CGPUInfoAndroid() override = default;
 
 private:
   bool SupportsPlatformTemperature() const override;

@@ -28,13 +28,13 @@ class CWinSystemTVOS : public CWinSystemBase, public CRenderSystemGLES, public I
 {
 public:
   CWinSystemTVOS();
-  virtual ~CWinSystemTVOS();
+  ~CWinSystemTVOS() override;
 
   static void Register();
   static std::unique_ptr<CWinSystemBase> CreateWinSystem();
 
   // ITimerCallback interface
-  virtual void OnTimeout() override {}
+  void OnTimeout() override {}
 
   void MessagePush(XBMC_Event* newEvent);
   size_t GetQueueSize();
@@ -87,7 +87,7 @@ public:
   bool MessagePump() override;
 
 protected:
-  virtual std::unique_ptr<KODI::WINDOWING::IOSScreenSaver> GetOSScreenSaverImpl() override;
+  std::unique_ptr<KODI::WINDOWING::IOSScreenSaver> GetOSScreenSaverImpl() override;
   void PresentRenderImpl(bool rendered) override;
   void SetVSyncImpl(bool enable) override {}
 

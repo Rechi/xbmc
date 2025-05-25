@@ -23,7 +23,7 @@ class CApplicationStackHelper : public IApplicationComponent
 {
 public:
   CApplicationStackHelper();
-  ~CApplicationStackHelper() = default;
+  ~CApplicationStackHelper() override = default;
 
   void Clear();
   void OnPlayBackStarted(const CFileItem& item);

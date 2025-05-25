@@ -14,7 +14,7 @@ class CGPUInfoLinux : public CGPUInfoPosix
 {
 public:
   CGPUInfoLinux() = default;
-  ~CGPUInfoLinux() = default;
+  ~CGPUInfoLinux() override = default;
 
 private:
   bool SupportsPlatformTemperature() const override;

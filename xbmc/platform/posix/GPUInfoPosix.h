@@ -14,9 +14,9 @@ class CGPUInfoPosix : public CGPUInfo
 {
 protected:
   CGPUInfoPosix() = default;
-  virtual ~CGPUInfoPosix() = default;
+  ~CGPUInfoPosix() override = default;
 
-  virtual bool SupportsCustomTemperatureCommand() const override;
-  virtual bool GetGPUTemperatureFromCommand(CTemperature& temperature,
-                                            const std::string& cmd) const override;
+  bool SupportsCustomTemperatureCommand() const override;
+  bool GetGPUTemperatureFromCommand(CTemperature& temperature,
+                                    const std::string& cmd) const override;
 };
