@@ -1136,14 +1136,14 @@ void CFileStreamBuffer::Attach(IFile *file)
   m_frontsize = CFile::DetermineChunkSize(m_file->GetChunkSize(), 64 * 1024);
 
   m_buffer = new char[m_frontsize+m_backsize];
-  setg(0,0,0);
-  setp(0,0);
+  setg(nullptr, nullptr, nullptr);
+  setp(nullptr, nullptr);
 }
 
 void CFileStreamBuffer::Detach()
 {
-  setg(0,0,0);
-  setp(0,0);
+  setg(nullptr, nullptr, nullptr);
+  setp(nullptr, nullptr);
   delete[] m_buffer;
   m_buffer = NULL;
 }
@@ -1208,8 +1208,8 @@ CFileStreamBuffer::pos_type CFileStreamBuffer::seekoff(
 
   // reset our buffer pointer, will
   // start buffering on next read
-  setg(0,0,0);
-  setp(0,0);
+  setg(nullptr, nullptr, nullptr);
+  setp(nullptr, nullptr);
 
   int64_t position = -1;
   if(way == std::ios_base::cur)

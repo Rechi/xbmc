@@ -426,7 +426,7 @@ bool CDVDAudioCodecAndroidMediaCodec::AddData(const DemuxPacket &packet)
       else
         return false;
 
-      CJNIMediaCodecCryptoInfo *cryptoInfo(0);
+      CJNIMediaCodecCryptoInfo* cryptoInfo(nullptr);
       if (!!m_crypto->get_raw() && packet.cryptoInfo)
       {
         cryptoInfo = new CJNIMediaCodecCryptoInfo();

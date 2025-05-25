@@ -114,7 +114,7 @@ void CRPRendererDMAOpenGL::Render(uint8_t alpha)
               (colour[3] / 255.0f));
   glUniform1f(depthLoc, -1.0f);
 
-  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, 0);
+  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, nullptr);
 
   // Unbind VAO/VBO just to be safe
   glBindVertexArray(0);

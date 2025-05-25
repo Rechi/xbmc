@@ -273,7 +273,7 @@ bool CZeroconfBrowserDarwin::doAddServiceType(const std::string& fcr_service_typ
 bool CZeroconfBrowserDarwin::doRemoveServiceType(const std::string &fcr_service_type)
 {
   //search for this browser and remove it from the map
-  CFNetServiceBrowserRef browser = 0;
+  CFNetServiceBrowserRef browser = nullptr;
   {
     std::unique_lock lock(m_data_guard);
     tBrowserMap::iterator it = m_service_browsers.find(fcr_service_type);

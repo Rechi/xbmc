@@ -917,7 +917,7 @@ void MysqlDatabase::mysqlVXPrintf(StrAccum* pAccum, /* Accumulate results here *
   int nsd; /* Number of significant digits returned */
 
   length = 0;
-  bufpt = 0;
+  bufpt = nullptr;
   for (; (c = (*fmt)) != 0; ++fmt)
   {
     bool isLike = false;
@@ -1059,7 +1059,7 @@ void MysqlDatabase::mysqlVXPrintf(StrAccum* pAccum, /* Accumulate results here *
       break;
     }
 
-    zExtra = 0;
+    zExtra = nullptr;
 
     /* Limit the precision to prevent overflowing buf[] during conversion */
     if (precision > etBUFSIZE - 40 && (infop->flags & FLAG_STRING) == 0)
@@ -1429,7 +1429,7 @@ void MysqlDatabase::mysqlVXPrintf(StrAccum* pAccum, /* Accumulate results here *
       case etSTRING:
       case etDYNSTRING:
         bufpt = va_arg(ap, char*);
-        if (bufpt == 0)
+        if (bufpt == nullptr)
         {
           bufpt = const_cast<char*>("");
         }
@@ -1461,7 +1461,7 @@ void MysqlDatabase::mysqlVXPrintf(StrAccum* pAccum, /* Accumulate results here *
           StringUtils::Replace(arg, "\\", "\\\\");
         const char* escarg = arg.c_str();
 
-        isnull = escarg == 0;
+        isnull = escarg == nullptr;
         if (isnull)
           escarg = (xtype == etSQLESCAPE2 ? "NULL" : "(NULL)");
         k = precision;
@@ -1472,7 +1472,7 @@ void MysqlDatabase::mysqlVXPrintf(StrAccum* pAccum, /* Accumulate results here *
         if (n > etBUFSIZE)
         {
           bufpt = zExtra = (char*)malloc(n);
-          if (bufpt == 0)
+          if (bufpt == nullptr)
           {
             pAccum->mallocFailed = true;
             return;
@@ -1548,7 +1548,7 @@ bool MysqlDatabase::mysqlStrAccumAppend(StrAccum* p, const char* z, int N)
   {
     N = strlen(z);
   }
-  if (N == 0 || z == 0)
+  if (N == 0 || z == nullptr)
   {
     return false;
   }
@@ -1632,7 +1632,7 @@ void MysqlDatabase::mysqlStrAccumReset(StrAccum* p)
   {
     free(p->zText);
   }
-  p->zText = 0;
+  p->zText = nullptr;
 }
 
 /*

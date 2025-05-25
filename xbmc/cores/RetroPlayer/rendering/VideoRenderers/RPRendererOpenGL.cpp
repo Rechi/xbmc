@@ -82,7 +82,7 @@ CRPRendererOpenGL::CRPRendererOpenGL(const CRenderSettings& renderSettings,
   m_context.DisableGUIShader();
 
   glEnableVertexAttribArray(posLoc);
-  glVertexAttribPointer(posLoc, 3, GL_FLOAT, GL_FALSE, sizeof(Svertex), 0);
+  glVertexAttribPointer(posLoc, 3, GL_FLOAT, GL_FALSE, sizeof(Svertex), nullptr);
 
   // Unbind everything just to be safe
   glBindVertexArray(0);
@@ -329,7 +329,7 @@ void CRPRendererOpenGL::Render(uint8_t alpha)
               (colour[3] / 255.0f));
   glUniform1f(depthLoc, -1.0f);
 
-  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, 0);
+  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, nullptr);
 
   // Unbind VAO/VBO just to be safe
   glBindVertexArray(0);

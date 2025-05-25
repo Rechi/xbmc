@@ -220,7 +220,7 @@ void CRPRendererOpenGLES::DrawBlackBars()
   glBindBuffer(GL_ARRAY_BUFFER, m_blackbarsVertexVBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(Svertex) * count, &vertices[0], GL_STATIC_DRAW);
 
-  glVertexAttribPointer(posLoc, 3, GL_FLOAT, GL_FALSE, sizeof(Svertex), 0);
+  glVertexAttribPointer(posLoc, 3, GL_FLOAT, GL_FALSE, sizeof(Svertex), nullptr);
   glEnableVertexAttribArray(posLoc);
 
   glDrawArrays(GL_TRIANGLES, 0, count);
@@ -305,7 +305,7 @@ void CRPRendererOpenGLES::Render(uint8_t alpha)
   glUniform4f(uniColLoc, (colour[0] / 255.0f), (colour[1] / 255.0f), (colour[2] / 255.0f),
               (colour[3] / 255.0f));
   glUniform1f(depthLoc, -1.0f);
-  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, 0);
+  glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, nullptr);
 
   glDisableVertexAttribArray(vertLoc);
   glDisableVertexAttribArray(loc);

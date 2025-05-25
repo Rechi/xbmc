@@ -183,7 +183,7 @@ static const AVCodecHWConfig* FindHWConfig(const AVCodec* codec)
 static const AVCodec* FindDecoder(CDVDStreamInfo& hints)
 {
   const AVCodec* codec = nullptr;
-  void* i = 0;
+  void* i = nullptr;
 
   if (!(hints.codecOptions & CODEC_FORCE_SOFTWARE))
     while ((codec = av_codec_iterate(&i)))

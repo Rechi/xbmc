@@ -30,7 +30,7 @@ public:
   void SwapBuffers() override;
   void QueryExtensions() override;
   GLXWindow m_glxWindow = 0;
-  GLXContext m_glxContext = 0;
+  GLXContext m_glxContext = nullptr;
 
 protected:
   bool IsSuitableVisual(XVisualInfo *vInfo);

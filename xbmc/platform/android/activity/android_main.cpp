@@ -47,8 +47,8 @@ public:
   LogRedirector()
   {
     // make stdout line-buffered and stderr unbuffered
-    setvbuf(stdout, 0, _IOLBF, 0);
-    setvbuf(stderr, 0, _IONBF, 0);
+    setvbuf(stdout, nullptr, _IOLBF, 0);
+    setvbuf(stderr, nullptr, _IONBF, 0);
 
     // spawn the logging thread
     std::thread thread(&LogRedirector::Run);
