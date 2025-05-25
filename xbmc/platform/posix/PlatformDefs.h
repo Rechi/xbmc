@@ -57,7 +57,6 @@
 #define __stdcall
 #define __cdecl
 #define WINAPI      __stdcall
-#undef APIENTRY
 struct CXHandle; // forward declaration
 typedef CXHandle* HANDLE;
 
@@ -76,7 +75,7 @@ typedef union _LARGE_INTEGER
     int32_t HighPart;
   } u;
   long long QuadPart;
-} LARGE_INTEGER, *PLARGE_INTEGER;
+} LARGE_INTEGER;
 
  typedef union _ULARGE_INTEGER {
   struct {
@@ -95,9 +94,6 @@ typedef union _LARGE_INTEGER
 #define WSAECONNRESET ECONNRESET
 
 typedef int SOCKET;
-
-// Thread
-typedef int (*LPTHREAD_START_ROUTINE)(void *);
 
 // File
 #define O_BINARY 0
@@ -131,23 +127,6 @@ struct _stati64 {
   time_t _st_ctime;
 };
 
-#define FILE_BEGIN              0
-#define FILE_CURRENT            1
-#define FILE_END                2
-
 #define _S_IFREG  S_IFREG
 #define _S_IFDIR  S_IFDIR
 #define MAX_PATH PATH_MAX
-
-// CreateFile defines
-#define FILE_FLAG_NO_BUFFERING          0x20000000
-#define FILE_FLAG_DELETE_ON_CLOSE       0x04000000
-
-#define CREATE_NEW          1
-#define CREATE_ALWAYS       2
-#define OPEN_EXISTING       3
-#define OPEN_ALWAYS         4
-#define TRUNCATE_EXISTING   5
-
-#define FILE_READ_DATA   ( 0x0001 )
-#define FILE_WRITE_DATA  ( 0x0002 )
