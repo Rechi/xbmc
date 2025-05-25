@@ -418,7 +418,7 @@ int CZipFile::UnpackFromMemory(std::string& strDest, const std::string& strInput
 
         // search for the extended local header
         unsigned int i = iPos + LHDR_SIZE + mZipItem.flength + mZipItem.elength;
-        while (1)
+        while (true)
         {
           if (i + DREC_SIZE > strInput.size())
           {

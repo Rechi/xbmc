@@ -111,7 +111,7 @@ bool CImageDecoder::LoadInfoTag(const std::string& fileName, CPictureInfoTag* ta
     tag->m_imageMetadata.height = ifcTag.height;
     tag->m_imageMetadata.exifInfo.Distance = ifcTag.distance;
     tag->m_imageMetadata.exifInfo.Orientation = ifcTag.orientation;
-    tag->m_imageMetadata.isColor = ifcTag.color == ADDON_IMG_COLOR_COLORED ? 1 : 0;
+    tag->m_imageMetadata.isColor = ifcTag.color == ADDON_IMG_COLOR_COLORED ? true : false;
     tag->m_imageMetadata.exifInfo.ApertureFNumber = ifcTag.aperture_f_number;
     tag->m_imageMetadata.exifInfo.FlashUsed = ifcTag.flash_used ? 1 : 0;
     tag->m_imageMetadata.exifInfo.LightSource = ifcTag.light_source;
