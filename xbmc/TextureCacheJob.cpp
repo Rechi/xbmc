@@ -31,7 +31,7 @@
 #include <exception>
 #include <utility>
 
-#include "PlatformDefs.h"
+#include <sys/stat.h>
 
 CTextureCacheJob::CTextureCacheJob(const std::string &url, const std::string &oldHash):
   m_url(url),

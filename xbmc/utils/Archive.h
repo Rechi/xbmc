@@ -11,6 +11,7 @@
 #include <cstdint>
 #include <cstring>
 #include <memory>
+#include <string.h>
 #include <string>
 #include <vector>
 

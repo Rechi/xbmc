@@ -6,6 +6,8 @@
  *  See LICENSES/README.md for more information.
  */
 
+#import "DarwinUtils.h"
+
 #include "CompileInfo.h"
 #include "DllPaths.h"
 #include "GUIUserMessages.h"
@@ -14,22 +16,22 @@
 #include "utils/URIUtils.h"
 #include "utils/log.h"
 
-#if defined(TARGET_DARWIN_EMBEDDED)
-  #import <Foundation/Foundation.h>
-  #import <UIKit/UIKit.h>
-  #import <mach/mach_host.h>
-  #import <sys/sysctl.h>
-#else
-  #import <Cocoa/Cocoa.h>
-  #import <CoreFoundation/CoreFoundation.h>
-  #import <IOKit/IOKitLib.h>
-#endif
-
-#import "DarwinUtils.h"
-
 #include <mutex>
 
-#include "PlatformDefs.h"
+#if !defined(TARGET_DARWIN_EMBEDDED)
+#import <Cocoa/Cocoa.h>
+#import <CoreFoundation/CoreFoundation.h>
+#else
+#import <Foundation/Foundation.h>
+#endif
+#if !defined(TARGET_DARWIN_EMBEDDED)
+#import <IOKit/IOKitLib.h>
+#else
+#import <UIKit/UIKit.h>
+#include <mach/mach.h>
+#import <mach/mach_host.h>
+#endif
+#include <sys/sysctl.h>
 
 // platform strings are based on http://theiphonewiki.com/wiki/Models
 const char* CDarwinUtils::getIosPlatformString(void)

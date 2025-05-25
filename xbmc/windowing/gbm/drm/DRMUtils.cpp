@@ -15,7 +15,8 @@
 #include "utils/log.h"
 #include "windowing/GraphicContext.h"
 
-#include "PlatformDefs.h"
+#include <fcntl.h>
+#include <unistd.h>
 
 using namespace KODI::WINDOWING::GBM;
 

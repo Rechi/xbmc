@@ -23,6 +23,7 @@
 #include <mntent.h>
 #endif
 #include <sys/stat.h>
+#include <unistd.h>
 
 using namespace XFILE;
 
