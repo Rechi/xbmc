@@ -27,7 +27,7 @@
 #include <cstring>
 #include <sstream>
 
-CScraperUrl::CScraperUrl() : m_relevance(0.0), m_parsed(false)
+CScraperUrl::CScraperUrl()
 {
 }
 

@@ -154,7 +154,6 @@ std::shared_ptr<CPVRTimerType> CPVRTimerType::CreateFromAttributes(uint64_t iMus
 }
 
 CPVRTimerType::CPVRTimerType()
-  : m_iTypeId(PVR_TIMER_TYPE_NONE), m_iAttributes(PVR_TIMER_TYPE_ATTRIBUTE_NONE)
 {
 }
 

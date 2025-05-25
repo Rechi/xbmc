@@ -50,7 +50,7 @@ class InfoTagGame : public AddonClass
 private:
   KODI::GAME::CGameInfoTag* infoTag;
   bool offscreen;
-  bool owned;
+  bool owned = true;
 
 public:
 #ifndef SWIG

@@ -482,8 +482,8 @@ private:
   void InitCustomSettingDefinitions(const PVR_TIMER_TYPE& type);
 
   int m_iClientId = PVR_CLIENT_INVALID_UID;
-  unsigned int m_iTypeId;
-  uint64_t m_iAttributes;
+  unsigned int m_iTypeId = PVR_TIMER_TYPE_NONE;
+  uint64_t m_iAttributes = PVR_TIMER_TYPE_ATTRIBUTE_NONE;
   std::string m_strDescription;
   CPVRIntSettingValues m_priorityValues{DEFAULT_RECORDING_PRIORITY};
   CPVRIntSettingValues m_lifetimeValues{DEFAULT_RECORDING_LIFETIME};

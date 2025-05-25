@@ -42,14 +42,10 @@
 #endif
 
 CTextureBundleXBT::CTextureBundleXBT()
-  : m_TimeStamp{0}
-  , m_themeBundle{false}
 {
 }
 
-CTextureBundleXBT::CTextureBundleXBT(bool themeBundle)
-  : m_TimeStamp{0}
-  , m_themeBundle{themeBundle}
+CTextureBundleXBT::CTextureBundleXBT(bool themeBundle) : m_themeBundle{themeBundle}
 {
 }
 

@@ -860,7 +860,7 @@ namespace XBMCAddon
     private:
       CVideoInfoTag* infoTag;
       bool offscreen;
-      bool owned;
+      bool owned = true;
 
     public:
 #ifndef SWIG
