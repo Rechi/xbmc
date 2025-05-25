@@ -133,7 +133,6 @@ CRPBaseRenderer* CRPProcessInfo::CreateRenderer(IRenderBufferPool* renderBufferP
 void CRPProcessInfo::SetDataCache(CDataCacheCore* cache)
 {
   m_dataCache = cache;
-  ;
 }
 
 void CRPProcessInfo::ResetInfo()
