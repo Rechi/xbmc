@@ -19,8 +19,6 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
-#include "PlatformDefs.h"
-
 using namespace KODI::WINDOWING::GBM;
 
 std::unique_ptr<CBufferObject> CDumbBufferObject::Create()

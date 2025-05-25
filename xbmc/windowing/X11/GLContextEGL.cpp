@@ -24,7 +24,6 @@
 
 #include <unistd.h>
 
-#include "PlatformDefs.h"
 #include "system_gl.h"
 
 #include <EGL/eglext.h>

@@ -6,18 +6,17 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include "threads/SystemClock.h"
 #include "CacheStrategy.h"
+
 #include "IFile.h"
-#ifdef TARGET_POSIX
-#include "PlatformDefs.h"
-#include "platform/posix/ConvUtils.h"
-#endif
-#include "Util.h"
-#include "utils/log.h"
 #include "SpecialProtocol.h"
 #include "URL.h"
+#include "Util.h"
+#include "threads/SystemClock.h"
+#include "utils/log.h"
+
 #if defined(TARGET_POSIX)
+#include "platform/posix/ConvUtils.h"
 #include "platform/posix/filesystem/PosixFile.h"
 #define CacheLocalFile CPosixFile
 #elif defined(TARGET_WINDOWS)
@@ -25,8 +24,8 @@
 #define CacheLocalFile CWin32File
 #endif // TARGET_WINDOWS
 
-#include <cassert>
 #include <algorithm>
+#include <cassert>
 
 using namespace XFILE;
 

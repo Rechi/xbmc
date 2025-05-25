@@ -8,19 +8,16 @@
 
 #include "ZipManager.h"
 
-#include <algorithm>
-#include <utility>
-
 #include "File.h"
 #include "URL.h"
-#if defined(TARGET_POSIX)
-#include "PlatformDefs.h"
-#endif
 #include "utils/CharsetConverter.h"
 #include "utils/EndianSwap.h"
-#include "utils/log.h"
 #include "utils/RegExp.h"
 #include "utils/URIUtils.h"
+#include "utils/log.h"
+
+#include <algorithm>
+#include <utility>
 
 using namespace XFILE;
 

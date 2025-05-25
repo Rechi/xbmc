@@ -13,9 +13,8 @@
 #include <atomic>
 #include <math.h>
 
-#include "PlatformDefs.h"
-
-extern "C" {
+extern "C"
+{
 #include <libavutil/channel_layout.h>
 #include <libavutil/samplefmt.h>
 }

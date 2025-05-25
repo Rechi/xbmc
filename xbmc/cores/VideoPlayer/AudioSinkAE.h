@@ -16,9 +16,8 @@
 #include <atomic>
 #include <mutex>
 
-#include "PlatformDefs.h"
-
-extern "C" {
+extern "C"
+{
 #include <libavcodec/avcodec.h>
 }
 

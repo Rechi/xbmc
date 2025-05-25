@@ -26,8 +26,6 @@
 #include <sys/un.h>
 #include <unistd.h>
 
-#include "PlatformDefs.h"
-
 using namespace KODI;
 using namespace std::chrono_literals;
 

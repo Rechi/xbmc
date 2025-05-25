@@ -18,8 +18,6 @@
 
 #include <cstddef>
 
-#include "PlatformDefs.h"
-
 void CGUITextureGL::Register()
 {
   CGUITexture::Register(CGUITextureGL::CreateTexture, CGUITextureGL::DrawQuad);

@@ -8,6 +8,9 @@
 #include "Builtins.h"
 
 #include "AddonBuiltins.h"
+#if defined(TARGET_ANDROID)
+#include "AndroidBuiltins.h"
+#endif
 #include "ApplicationBuiltins.h"
 #include "CECBuiltins.h"
 #include "GUIBuiltins.h"
@@ -30,14 +33,6 @@
 #include "utils/ExecString.h"
 #include "utils/StringUtils.h"
 #include "utils/log.h"
-
-#if defined(TARGET_ANDROID)
-#include "AndroidBuiltins.h"
-#endif
-
-#if defined(TARGET_POSIX)
-#include "PlatformDefs.h"
-#endif
 
 CBuiltins::CBuiltins()
 {
