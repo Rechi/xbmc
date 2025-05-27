@@ -42,7 +42,7 @@ CLibInputSettings::CLibInputSettings(CLibInputHandler *handler) :
   if (!settings)
     return;
 
-  auto settingsManager = settings->GetSettingsManager();
+  auto* settingsManager = settings->GetSettingsManager();
   if (!settingsManager)
     return;
 

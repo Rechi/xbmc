@@ -30,7 +30,7 @@ void CFanart::Pack()
   // Take our data and pack it into the m_xml string
   m_xml.clear();
   tinyxml2::XMLDocument doc(false);
-  auto fanartElement = doc.NewElement("fanart");
+  auto* fanartElement = doc.NewElement("fanart");
   auto* fanartNode = doc.InsertEndChild(fanartElement);
   for (std::vector<SFanartData>::const_iterator it = m_fanart.begin(); it != m_fanart.end(); ++it)
   {

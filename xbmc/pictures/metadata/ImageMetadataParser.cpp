@@ -100,7 +100,7 @@ void CImageMetadataParser::ExtractCommonMetadata(Exiv2::Image& image)
 #if (EXIV2_MAJOR_VERSION >= 0) && (EXIV2_MINOR_VERSION >= 28) && (EXIV2_PATCH_VERSION >= 2)
   if (image.imageType() == Exiv2::ImageType::jpeg)
   {
-    auto jpegImage = dynamic_cast<Exiv2::JpegImage*>(&image);
+    auto* jpegImage = dynamic_cast<Exiv2::JpegImage*>(&image);
     m_imageMetadata->isColor = jpegImage->numColorComponents() == 3;
     m_imageMetadata->encodingProcess = jpegImage->encodingProcess();
   }

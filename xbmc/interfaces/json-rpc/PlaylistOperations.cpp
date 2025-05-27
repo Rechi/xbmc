@@ -122,7 +122,7 @@ JSONRPC_STATUS CPlaylistOperations::Add(const std::string &method, ITransportLay
     case PLAYLIST::Id::TYPE_VIDEO:
     case PLAYLIST::Id::TYPE_MUSIC:
     {
-      auto tmpList = new CFileItemList();
+      auto* tmpList = new CFileItemList();
       tmpList->Copy(list);
       CServiceBroker::GetAppMessenger()->PostMsg(
           TMSG_PLAYLISTPLAYER_ADD, static_cast<int>(playlistId), -1, static_cast<void*>(tmpList));
@@ -159,7 +159,7 @@ JSONRPC_STATUS CPlaylistOperations::Insert(const std::string &method, ITransport
   if (!HandleItemsParameter(playlistId, parameterObject["item"], list))
     return InvalidParams;
 
-  auto tmpList = new CFileItemList();
+  auto* tmpList = new CFileItemList();
   tmpList->Copy(list);
   CServiceBroker::GetAppMessenger()->PostMsg(
       TMSG_PLAYLISTPLAYER_INSERT, static_cast<int>(playlistId),
@@ -218,7 +218,7 @@ JSONRPC_STATUS CPlaylistOperations::Swap(const std::string &method, ITransportLa
   if (playlistId == PLAYLIST::Id::TYPE_PICTURE)
     return FailedToExecute;
 
-  auto tmpVec = new std::vector<int>();
+  auto* tmpVec = new std::vector<int>();
   tmpVec->push_back(static_cast<int>(parameterObject["position1"].asInteger()));
   tmpVec->push_back(static_cast<int>(parameterObject["position2"].asInteger()));
   CServiceBroker::GetAppMessenger()->PostMsg(TMSG_PLAYLISTPLAYER_SWAP, static_cast<int>(playlistId),

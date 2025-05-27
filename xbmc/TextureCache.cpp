@@ -362,7 +362,7 @@ bool CTextureCache::CleanAllUnusedImages()
   if (m_cleaningInProgress.test_and_set())
     return false;
 
-  auto progress = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogProgress>(
+  auto* progress = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogProgress>(
       WINDOW_DIALOG_PROGRESS);
   if (progress)
   {

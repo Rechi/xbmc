@@ -20,7 +20,7 @@ CGBMDPMSSupport::CGBMDPMSSupport()
 
 bool CGBMDPMSSupport::EnablePowerSaving(PowerSavingMode mode)
 {
-  auto winSystem = dynamic_cast<CWinSystemGbm*>(CServiceBroker::GetWinSystem());
+  auto* winSystem = dynamic_cast<CWinSystemGbm*>(CServiceBroker::GetWinSystem());
   if (!winSystem)
     return false;
 
@@ -35,7 +35,7 @@ bool CGBMDPMSSupport::EnablePowerSaving(PowerSavingMode mode)
 
 bool CGBMDPMSSupport::DisablePowerSaving()
 {
-  auto winSystem = dynamic_cast<CWinSystemGbm*>(CServiceBroker::GetWinSystem());
+  auto* winSystem = dynamic_cast<CWinSystemGbm*>(CServiceBroker::GetWinSystem());
   if (!winSystem)
     return false;
 

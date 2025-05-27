@@ -45,7 +45,7 @@ bool CGUIWindowEventLog::OnMessage(CGUIMessage& message)
     // check if we should clear all items
     if (iControl == CONTROL_BUTTON_CLEAR)
     {
-      auto eventLog = CServiceBroker::GetEventLog();
+      auto* eventLog = CServiceBroker::GetEventLog();
       if (eventLog)
         eventLog->Clear(CViewStateSettings::GetInstance().GetEventLevel(),
                         CViewStateSettings::GetInstance().ShowHigherEventLevels());
@@ -146,7 +146,7 @@ void CGUIWindowEventLog::GetContextButtons(int itemNumber, CContextButtons &butt
   if (eventIdentifier.empty())
     return;
 
-  auto eventLog = CServiceBroker::GetEventLog();
+  auto* eventLog = CServiceBroker::GetEventLog();
   if (!eventLog)
     return;
 
@@ -247,7 +247,7 @@ bool CGUIWindowEventLog::OnDelete(const CFileItemPtr& item)
   if (eventIdentifier.empty())
     return false;
 
-  auto eventLog = CServiceBroker::GetEventLog();
+  auto* eventLog = CServiceBroker::GetEventLog();
   if (!eventLog)
     return false;
 
@@ -264,7 +264,7 @@ bool CGUIWindowEventLog::OnExecute(const CFileItemPtr& item)
   if (eventIdentifier.empty())
     return false;
 
-  auto eventLog = CServiceBroker::GetEventLog();
+  auto* eventLog = CServiceBroker::GetEventLog();
   if (!eventLog)
     return false;
 

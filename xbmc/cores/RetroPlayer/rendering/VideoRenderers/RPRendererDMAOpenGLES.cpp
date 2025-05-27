@@ -51,7 +51,7 @@ CRPRendererDMAOpenGLES::CRPRendererDMAOpenGLES(const CRenderSettings& renderSett
 
 void CRPRendererDMAOpenGLES::Render(uint8_t alpha)
 {
-  auto renderBuffer = static_cast<CRenderBufferDMA*>(m_renderBuffer);
+  auto* renderBuffer = static_cast<CRenderBufferDMA*>(m_renderBuffer);
   assert(renderBuffer != nullptr);
 
   CRect rect = m_sourceRect;

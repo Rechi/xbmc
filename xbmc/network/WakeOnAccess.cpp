@@ -916,7 +916,7 @@ void CWakeOnAccess::LoadFromXML()
 void CWakeOnAccess::SaveToXML()
 {
   CXBMCTinyXML2 xmlDoc;
-  auto xmlRootElement = xmlDoc.NewElement("onaccesswakeup");
+  auto* xmlRootElement = xmlDoc.NewElement("onaccesswakeup");
   if (xmlRootElement == nullptr)
     return;
 

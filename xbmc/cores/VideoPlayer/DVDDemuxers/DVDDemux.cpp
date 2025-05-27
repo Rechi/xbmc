@@ -142,7 +142,7 @@ int CDVDDemux::GetNrOfStreams(StreamType streamType)
 {
   int iCounter = 0;
 
-  for (auto pStream : GetStreams())
+  for (auto* pStream : GetStreams())
   {
     if (pStream && pStream->type == streamType)
       iCounter++;

@@ -189,7 +189,7 @@ const char* CGameClientProperties::GetProfileDirectory(void)
 
 const char** CGameClientProperties::GetExtensions(void)
 {
-  for (auto& extension : m_parent.GetExtensions())
+  for (const auto& extension : m_parent.GetExtensions())
   {
     char* ext = new char[extension.length() + 1];
     std::strcpy(ext, extension.c_str());

@@ -469,7 +469,7 @@ void GetGetRecordingsSubDirectories(const CPVRRecordingsPath& recParentPath,
   }
 
   // Replace the incremental size of the recordings with a string equivalent
-  for (auto& item : results.GetList())
+  for (const auto& item : results.GetList())
   {
     int64_t size = item->GetProperty("sizeinbytes").asInteger();
     item->ClearProperty("sizeinbytes");
@@ -479,7 +479,7 @@ void GetGetRecordingsSubDirectories(const CPVRRecordingsPath& recParentPath,
   }
 
   // Change the watched overlay to unwatched for folders containing unwatched entries
-  for (auto& item : unwatchedFolders)
+  for (const auto& item : unwatchedFolders)
     item->SetOverlayImage(CGUIListItem::ICON_OVERLAY_UNWATCHED);
 }
 

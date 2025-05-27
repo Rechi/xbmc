@@ -343,7 +343,7 @@ void CWinSystemGbm::OnLostDevice()
   m_dispReset = true;
 
   std::unique_lock lock(m_resourceSection);
-  for (auto resource : m_resources)
+  for (auto* resource : m_resources)
     resource->OnLostDisplay();
 }
 
@@ -374,7 +374,7 @@ bool CWinSystemGbm::SetHDR(const VideoPicture* videoPicture)
   if (!drm)
     return false;
 
-  auto connector = drm->GetConnector();
+  auto* connector = drm->GetConnector();
   if (!connector)
     return false;
 
@@ -510,7 +510,7 @@ bool CWinSystemGbm::IsHDRDisplay()
   if (!drm)
     return false;
 
-  auto connector = drm->GetConnector();
+  auto* connector = drm->GetConnector();
   if (!connector)
     return false;
 

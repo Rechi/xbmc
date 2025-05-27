@@ -96,7 +96,7 @@ private:
   {
     ~IDCollectorList()
     {
-      for (auto item : m_items)
+      for (auto* item : m_items)
         delete item;
     }
 

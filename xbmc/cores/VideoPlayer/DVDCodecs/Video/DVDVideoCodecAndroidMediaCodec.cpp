@@ -238,7 +238,7 @@ CMediaCodecVideoBufferPool::~CMediaCodecVideoBufferPool()
   CLog::Log(LOGDEBUG,
             "CMediaCodecVideoBufferPool::~CMediaCodecVideoBufferPool Releasing {} buffers",
             static_cast<unsigned int>(m_videoBuffers.size()));
-  for (auto buffer : m_videoBuffers)
+  for (auto* buffer : m_videoBuffers)
     delete buffer;
 }
 

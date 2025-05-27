@@ -221,7 +221,7 @@ void CVisualization::GetProperties(struct KODI_ADDON_VISUALIZATION_PROPS* props)
   if (!props)
     return;
 
-  const auto winSystem = CServiceBroker::GetWinSystem();
+  auto* const winSystem = CServiceBroker::GetWinSystem();
   if (!winSystem)
     return;
 
