@@ -1188,7 +1188,7 @@ void CActiveAE::Configure(AEAudioFormat *desiredFmt)
 
   if ((!CompareFormat(m_sinkRequestFormat, m_sinkFormat) &&
        !CompareFormat(m_sinkRequestFormat, oldSinkRequestFormat)) ||
-      m_currDevice.compare(dev.name) != 0 || m_settings.driver.compare(dev.driver) != 0)
+      m_currDevice != dev.name || m_settings.driver != dev.driver)
   {
     FlushEngine();
     if (!InitSink())
@@ -1780,8 +1780,8 @@ bool CActiveAE::NeedReconfigureSink()
 
   const AESinkDevice dev = CAESinkFactory::ParseDevice(device);
 
-  return !CompareFormat(newFormat, m_sinkFormat) || m_currDevice.compare(dev.name) != 0 ||
-         m_settings.driver.compare(dev.driver) != 0;
+  return !CompareFormat(newFormat, m_sinkFormat) || m_currDevice != dev.name ||
+         m_settings.driver != dev.driver;
 }
 
 bool CActiveAE::InitSink()

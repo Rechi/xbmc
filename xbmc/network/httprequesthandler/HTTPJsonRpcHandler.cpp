@@ -22,7 +22,7 @@
 
 bool CHTTPJsonRpcHandler::CanHandleRequest(const HTTPRequest &request) const
 {
-  return (request.pathUrl.compare("/jsonrpc") == 0);
+  return (request.pathUrl == "/jsonrpc");
 }
 
 MHD_RESULT CHTTPJsonRpcHandler::HandleRequest()
@@ -40,8 +40,8 @@ MHD_RESULT CHTTPJsonRpcHandler::HandleRequest()
     std::string contentType = HTTPRequestHandlerUtils::GetRequestHeaderValue(m_request.connection, MHD_HEADER_KIND, MHD_HTTP_HEADER_CONTENT_TYPE);
     // If the content-type of the m_request was specified, it must be application/json-rpc, application/json, or application/jsonrequest
     // http://www.jsonrpc.org/historical/json-rpc-over-http.html
-    if (!contentType.empty() && contentType.compare("application/json-rpc") != 0 &&
-        contentType.compare("application/json") != 0 && contentType.compare("application/jsonrequest") != 0)
+    if (!contentType.empty() && contentType != "application/json-rpc" &&
+        contentType != "application/json" && contentType != "application/jsonrequest")
     {
       m_response.type = HTTPError;
       m_response.status = MHD_HTTP_UNSUPPORTED_MEDIA_TYPE;

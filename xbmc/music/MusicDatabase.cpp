@@ -1107,7 +1107,7 @@ int CMusicDatabase::AddSong(const int idSong,
         strSQL += PrepareSQL(",NULL");
       else
         strSQL += PrepareSQL(",'%s'", strMusicBrainzTrackID.c_str());
-      if (artistSort.empty() || artistSort.compare(artistDisp) == 0)
+      if (artistSort.empty() || artistSort == artistDisp)
         strSQL += PrepareSQL(",NULL");
       else
         strSQL += PrepareSQL(",'%s'", artistSort.c_str());
@@ -1341,7 +1341,7 @@ int CMusicDatabase::UpdateSong(int idSong,
     strSQL += PrepareSQL(", strMusicBrainzTrackID = NULL");
   else
     strSQL += PrepareSQL(", strMusicBrainzTrackID = '%s'", strMusicBrainzTrackID.c_str());
-  if (artistSort.empty() || artistSort.compare(artistDisp) == 0)
+  if (artistSort.empty() || artistSort == artistDisp)
     strSQL += PrepareSQL(", strArtistSort = NULL");
   else
     strSQL += PrepareSQL(", strArtistSort = '%s'", artistSort.c_str());
@@ -1428,7 +1428,7 @@ int CMusicDatabase::AddAlbum(const std::string& strAlbum,
         strSQL += PrepareSQL(", NULL");
       else
         strSQL += PrepareSQL(",'%s'", strReleaseGroupMBID.c_str());
-      if (strArtistSort.empty() || strArtistSort.compare(strArtist) == 0)
+      if (strArtistSort.empty() || strArtistSort == strArtist)
         strSQL += PrepareSQL(", NULL");
       else
         strSQL += PrepareSQL(", '%s'", strArtistSort.c_str());
@@ -1459,7 +1459,7 @@ int CMusicDatabase::AddAlbum(const std::string& strAlbum,
         strSQL += PrepareSQL(" strReleaseGroupMBID = NULL,");
       else
         strSQL += PrepareSQL(" strReleaseGroupMBID ='%s', ", strReleaseGroupMBID.c_str());
-      if (strArtistSort.empty() || strArtistSort.compare(strArtist) == 0)
+      if (strArtistSort.empty() || strArtistSort == strArtist)
         strSQL += PrepareSQL(" strArtistSort = NULL");
       else
         strSQL += PrepareSQL(" strArtistSort = '%s'", strArtistSort.c_str());
@@ -1550,7 +1550,7 @@ int CMusicDatabase::UpdateAlbum(int idAlbum,
     strSQL += PrepareSQL(", strReleaseGroupMBID = NULL");
   else
     strSQL += PrepareSQL(", strReleaseGroupMBID = '%s'", strReleaseGroupMBID.c_str());
-  if (strArtistSort.empty() || strArtistSort.compare(strArtist) == 0)
+  if (strArtistSort.empty() || strArtistSort == strArtist)
     strSQL += PrepareSQL(", strArtistSort = NULL");
   else
     strSQL += PrepareSQL(", strArtistSort = '%s'", strArtistSort.c_str());
@@ -1813,11 +1813,11 @@ int CMusicDatabase::AddArtist(const std::string& strArtist,
 
     if (!strArtistSort.empty())
     {
-      if (strSortName.compare(strArtistName) == 0)
+      if (strSortName == strArtistName)
         m_pDS->exec(
             PrepareSQL("UPDATE artist SET strSortName = NULL WHERE idArtist = %i", idArtist));
     }
-    else if (strSortName.compare(strArtistName) != 0)
+    else if (strSortName != strArtistName)
       m_pDS->exec(PrepareSQL("UPDATE artist SET strSortName = '%s' WHERE idArtist = %i",
                              strSortName.c_str(), idArtist));
 
@@ -1855,7 +1855,7 @@ int CMusicDatabase::AddArtist(const std::string& strArtist,
       if (m_pDS->num_rows() > 0)
       {
         int idArtist = m_pDS->fv("idArtist").get_asInt();
-        bool update = m_pDS->fv("strArtist").get_asString().compare(strMusicBrainzArtistID) == 0;
+        bool update = m_pDS->fv("strArtist").get_asString() == strMusicBrainzArtistID;
         m_pDS->close();
         if (update)
         {
@@ -2551,7 +2551,7 @@ void CMusicDatabase::AddSongContributors(int idSong,
     //Identify composer sort name if we have it
     if (countComposer < composerSort.size())
     {
-      if (credit.GetRoleDesc().compare("Composer") == 0)
+      if (credit.GetRoleDesc() == "Composer")
       {
         strSortName = composerSort[countComposer];
         countComposer++;
@@ -5011,7 +5011,7 @@ bool CMusicDatabase::GetGenresNav(const std::string& strBaseDir,
     if (!BuildSQL(strSQLExtra, extFilter, strSQLExtra))
       return false;
 
-    strSQL = PrepareSQL(strSQL, !extFilter.fields.empty() && extFilter.fields.compare("*") != 0
+    strSQL = PrepareSQL(strSQL, !extFilter.fields.empty() && extFilter.fields != "*"
                                     ? extFilter.fields.c_str()
                                     : "genre.*") +
              strSQLExtra;
@@ -5128,7 +5128,7 @@ bool CMusicDatabase::GetSourcesNav(const std::string& strBaseDir,
     if (!BuildSQL(strSQLExtra, extFilter, strSQLExtra))
       return false;
 
-    strSQL = PrepareSQL(strSQL, !extFilter.fields.empty() && extFilter.fields.compare("*") != 0
+    strSQL = PrepareSQL(strSQL, !extFilter.fields.empty() && extFilter.fields != "*"
                                     ? extFilter.fields.c_str()
                                     : "source.*") +
              strSQLExtra;
@@ -5598,7 +5598,7 @@ bool CMusicDatabase::GetArtistsByWhere(
 
     std::string strSQL;
     std::string strFields = "artistview.*";
-    if (!extFilter.fields.empty() && extFilter.fields.compare("*") != 0)
+    if (!extFilter.fields.empty() && extFilter.fields != "*")
       strFields = "artistview.*, " + extFilter.fields;
     strSQL = "SELECT " + strFields + " FROM artistview " + strSQLExtra;
 
@@ -5833,7 +5833,7 @@ bool CMusicDatabase::GetAlbumsByWhere(
 
     std::string strSQL;
     std::string strFields = "albumview.*";
-    if (!extFilter.fields.empty() && extFilter.fields.compare("*") != 0)
+    if (!extFilter.fields.empty() && extFilter.fields != "*")
       strFields = "albumview.*, " + extFilter.fields;
     strSQL = "SELECT " + strFields + " FROM albumview " + strSQLExtra;
 
@@ -6227,7 +6227,7 @@ bool CMusicDatabase::GetSongsFullByWhere(
     }
     else
       strFields = "songview.*, songartistview.*";
-    if (!extFilter.fields.empty() && extFilter.fields.compare("*") != 0)
+    if (!extFilter.fields.empty() && extFilter.fields != "*")
       strFields = strFields + ", " + extFilter.fields;
 
     std::string strSQL;
@@ -6428,10 +6428,10 @@ bool CMusicDatabase::GetSongsByWhere(
       strSQLExtra += DatabaseUtils::BuildLimitClause(sorting.limitEnd, sorting.limitStart);
     }
 
-    strSQL = PrepareSQL(strSQL, !filter.fields.empty() && filter.fields.compare("*") != 0
-                                    ? filter.fields.c_str()
-                                    : "songview.*") +
-             strSQLExtra;
+    strSQL =
+        PrepareSQL(strSQL, !filter.fields.empty() && filter.fields != "*" ? filter.fields.c_str()
+                                                                          : "songview.*") +
+        strSQLExtra;
 
     CLog::Log(LOGDEBUG, "{} query = {}", __FUNCTION__, strSQL);
     // run query
@@ -10050,14 +10050,14 @@ int CMusicDatabase::UpdateSource(const std::string& strOldName,
     }
 
     // Nothing changed? (that we hold in db, other source details could be modified)
-    bool pathschanged = strMultipath.compare(strSourceMultipath) != 0;
-    if (!pathschanged && strOldName.compare(strName) == 0)
+    bool pathschanged = strMultipath != strSourceMultipath;
+    if (!pathschanged && strOldName == strName)
       return idSource;
 
     if (!pathschanged)
     {
       // Name changed? Could be that none of the values held in db changed
-      if (strOldName.compare(strName) != 0)
+      if (strOldName != strName)
       {
         strSQL = PrepareSQL("UPDATE source SET strName = '%s' "
                             "WHERE idSource = %i",
@@ -10257,7 +10257,7 @@ bool CMusicDatabase::CheckSources(std::vector<CMediaSource>& sources)
       {
         // Check details. Encoded URLs of source.strPath matched to strMultipath
         // field, no need to look at individual paths of source_path table
-        if (source.strPath.compare(m_pDS->fv("strMultipath").get_asString()) != 0)
+        if (source.strPath != m_pDS->fv("strMultipath").get_asString())
         {
           // Paths not match
           m_pDS->close();
