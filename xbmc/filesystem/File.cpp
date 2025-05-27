@@ -1010,14 +1010,15 @@ int CFile::GetChunkSize()
   return 0;
 }
 
-const std::string CFile::GetProperty(XFILE::FileProperty type, const std::string &name) const
+std::string CFile::GetProperty(XFILE::FileProperty type, const std::string& name) const
 {
   if (!m_pFile)
     return "";
   return m_pFile->GetProperty(type, name);
 }
 
-const std::vector<std::string> CFile::GetPropertyValues(XFILE::FileProperty type, const std::string &name) const
+std::vector<std::string> CFile::GetPropertyValues(XFILE::FileProperty type,
+                                                  const std::string& name) const
 {
   if (!m_pFile)
   {

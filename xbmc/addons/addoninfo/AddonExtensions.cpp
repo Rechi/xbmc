@@ -17,7 +17,7 @@ bool SExtValue::asBoolean() const
   return StringUtils::EqualsNoCase(str, "true");
 }
 
-const SExtValue CAddonExtensions::GetValue(const std::string& id) const
+SExtValue CAddonExtensions::GetValue(const std::string& id) const
 {
   for (const auto& values : m_values)
   {
@@ -46,7 +46,7 @@ const CAddonExtensions* CAddonExtensions::GetElement(const std::string& id) cons
   return nullptr;
 }
 
-const EXT_ELEMENTS CAddonExtensions::GetElements(const std::string& id) const
+EXT_ELEMENTS CAddonExtensions::GetElements(const std::string& id) const
 {
   if (id.empty())
     return m_children;

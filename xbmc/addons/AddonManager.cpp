@@ -1273,7 +1273,7 @@ bool CAddonMgr::GetDisabledAddonInfos(std::vector<AddonInfoPtr>& addonInfos,
   return !addonInfos.empty();
 }
 
-const AddonInfoPtr CAddonMgr::GetAddonInfo(const std::string& id, AddonType type) const
+AddonInfoPtr CAddonMgr::GetAddonInfo(const std::string& id, AddonType type) const
 {
   std::unique_lock lock(m_critSection);
 

@@ -260,7 +260,7 @@ public:
   virtual void Reset() {}
   virtual unsigned GetAllowedReferences() { return 0; }
   virtual bool CanSkipDeint() {return false; }
-  virtual const std::string Name() = 0;
+  virtual std::string Name() = 0;
   virtual void SetCodecControl(int flags) {}
 };
 
