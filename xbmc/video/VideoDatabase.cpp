@@ -13260,7 +13260,7 @@ std::vector<std::string> CVideoDatabase::GetUsedImages(
     if (!m_pDB || !m_pDS)
       return imagesToCheck;
 
-    if (!imagesToCheck.size())
+    if (imagesToCheck.empty())
       return {};
 
     int artworkLevel = CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(
