@@ -79,7 +79,7 @@ private:
     AEDataFormat format;
   };
 
-  static snd_pcm_format_t AEFormatToALSAFormat(const enum AEDataFormat format);
+  static snd_pcm_format_t AEFormatToALSAFormat(enum AEDataFormat format);
 
   bool InitializeHW(const ALSAConfig &inconfig, ALSAConfig &outconfig);
   bool InitializeSW(const ALSAConfig &inconfig);

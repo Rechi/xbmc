@@ -64,11 +64,8 @@ public:
      * @return true The surface creation succeeded
      * @return false The surface creation failed
      */
-    bool CreateSurface(int width,
-                       int height,
-                       uint32_t format,
-                       const uint64_t* modifiers,
-                       const int modifiers_count);
+    bool CreateSurface(
+        int width, int height, uint32_t format, const uint64_t* modifiers, int modifiers_count);
 
     /**
      * @brief Get the underlying gbm_device

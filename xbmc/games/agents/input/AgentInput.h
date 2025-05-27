@@ -78,7 +78,7 @@ public:
   void Refresh();
 
   // Implementation of Observer
-  void Notify(const Observable& obs, const ObservableMessage msg) override;
+  void Notify(const Observable& obs, ObservableMessage msg) override;
 
   // Implementation of IKeyboardDriverHandler
   bool OnKeyPress(const CKey& key) override;
