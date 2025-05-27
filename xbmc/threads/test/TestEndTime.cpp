@@ -72,6 +72,7 @@ TEST(TestEndTime, SteadyClockDuration)
   endTime.SetExpired();
   EXPECT_EQ(std::chrono::steady_clock::duration::zero(), endTime.GetInitialTimeoutValue());
 
-  endTime.Set(endTime.Max());
+  endTime.Set(
+      XbmcThreads::EndTime<std::chrono::duration<long, std::ratio<1, 1000000000>>, true>::Max());
   EXPECT_EQ(std::chrono::steady_clock::duration::max(), endTime.GetInitialTimeoutValue());
 }

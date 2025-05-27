@@ -828,7 +828,7 @@ void CLangInfo::SetAudioLanguage(const std::string& language, bool isIso6392 /* 
     {
       // if following conversion (to ISO 639-2) fails it should be because
       // the language code has been defined by the user, so ignore it
-      g_LangCodeExpander.ConvertISO6391ToISO6392B(langISO6392, langISO6392);
+      CLangCodeExpander::ConvertISO6391ToISO6392B(langISO6392, langISO6392);
     }
   }
   m_audioLanguage = langISO6392; // empty value for error cases
@@ -862,7 +862,7 @@ void CLangInfo::SetSubtitleLanguage(const std::string& language, bool isIso6392 
     {
       // if following conversion (to ISO 639-2) fails it should be because
       // the language code has been defined by the user, so ignore it
-      g_LangCodeExpander.ConvertISO6391ToISO6392B(langISO6392, langISO6392);
+      CLangCodeExpander::ConvertISO6391ToISO6392B(langISO6392, langISO6392);
     }
   }
   m_subtitleLanguage = langISO6392; // empty value for error cases
