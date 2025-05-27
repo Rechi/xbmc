@@ -23,7 +23,7 @@
 namespace
 {
 // clang-format off
-static const std::map<KD_TEX_FMT, TextureFormat> TextureMapping
+const std::map<KD_TEX_FMT, TextureFormat> TextureMapping
 {
 #if defined(GL_EXT_texture_sRGB_R8) && (GL_EXT_texture_sRGB_RG8)
   {KD_TEX_FMT_SDR_R8, {GL_R8, GL_SR8_EXT, GL_RED}},
@@ -116,7 +116,7 @@ static const std::map<KD_TEX_FMT, TextureFormat> TextureMapping
 #endif
 };
 
-static const std::map<KD_TEX_SWIZ, Textureswizzle> SwizzleMap
+const std::map<KD_TEX_SWIZ, Textureswizzle> SwizzleMap
 {
   {KD_TEX_SWIZ_RGBA, {GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA}},
   {KD_TEX_SWIZ_RGB1, {GL_RED, GL_GREEN, GL_BLUE, GL_ONE}},
