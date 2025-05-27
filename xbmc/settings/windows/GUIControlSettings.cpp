@@ -1493,7 +1493,7 @@ std::string CGUIControlSliderSetting::GetText(const std::shared_ptr<CSetting>& s
                                               const CVariant& maximum,
                                               ILocalizer* localizer)
 {
-  if (setting == NULL || !(value.isInteger() || value.isDouble()))
+  if (setting == NULL || (!value.isInteger() && !value.isDouble()))
     return "";
 
   const auto control = std::static_pointer_cast<const CSettingControlSlider>(setting->GetControl());
