@@ -16,15 +16,11 @@ namespace XBMCAddon
   namespace xbmcwsgi
   {
     WsgiInputStreamIterator::WsgiInputStreamIterator()
-      : m_data(),
-        m_line()
     { }
 
 #ifndef SWIG
     WsgiInputStreamIterator::WsgiInputStreamIterator(const String& data, bool end /* = false */)
-      : m_data(data),
-        m_remaining(end ? 0 : data.size()),
-        m_line()
+      : m_data(data), m_remaining(end ? 0 : data.size())
     { }
 #endif
 

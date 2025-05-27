@@ -30,7 +30,7 @@
 
 using namespace std::chrono_literals;
 
-CRenderSystemGL::CRenderSystemGL() : CRenderSystemBase()
+CRenderSystemGL::CRenderSystemGL()
 {
 }
 

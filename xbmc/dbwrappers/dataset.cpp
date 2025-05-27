@@ -26,14 +26,7 @@ namespace dbiplus
 {
 //************* Database implementation ***************
 
-Database::Database()
-  : error(), //S_NO_CONNECTION,
-    host(),
-    port(),
-    db(),
-    login(),
-    passwd(),
-    sequence_table("db_sequence")
+Database::Database() : sequence_table("db_sequence")
 {
   active = false; // No connection yet
   compression = false;
