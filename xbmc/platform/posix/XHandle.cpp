@@ -70,17 +70,9 @@ CXHandle::~CXHandle()
     assert(false);
   }
 
-  if (m_hMutex) {
-    delete m_hMutex;
-  }
-
-  if (m_internalLock) {
-    delete m_internalLock;
-  }
-
-  if (m_hCond) {
-    delete m_hCond;
-  }
+  delete m_hMutex;
+  delete m_internalLock;
+  delete m_hCond;
 
   if ( fd != 0 ) {
     close(fd);
