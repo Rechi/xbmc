@@ -270,7 +270,7 @@ bool CCueDocument::Parse(CueReader& reader, const std::string& strFile)
     return false;
 
   std::string strLine;
-  std::string strCurrentFile = "";
+  std::string strCurrentFile;
   bool bCurrentFileChanged = false;
   int time;
   int totalTracks = -1;

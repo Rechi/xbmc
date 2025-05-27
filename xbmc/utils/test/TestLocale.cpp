@@ -185,7 +185,7 @@ TEST(TestLocale, FullStringLocale)
 
 TEST(TestLocale, FromString)
 {
-  std::string strLocale = "";
+  std::string strLocale;
   CLocale locale = CLocale::FromString(strLocale);
   ASSERT_FALSE(locale.IsValid());
   ASSERT_STREQ(strLocale.c_str(), locale.ToString().c_str());
@@ -238,7 +238,7 @@ TEST(TestLocale, EmptyLocale)
 
 TEST(TestLocale, Equals)
 {
-  std::string strLocale = "";
+  std::string strLocale;
   CLocale locale;
   ASSERT_TRUE(locale.Equals(strLocale));
 
