@@ -362,10 +362,8 @@ bool CGUIControlFactory::GetAspectRatio(const TiXmlNode* pRootNode,
   if (attribute)
   {
     std::string scale(attribute);
-    if (StringUtils::EqualsNoCase(scale, "true") || StringUtils::EqualsNoCase(scale, "yes"))
-      aspect.scaleDiffuse = true;
-    else
-      aspect.scaleDiffuse = false;
+    aspect.scaleDiffuse =
+        StringUtils::EqualsNoCase(scale, "true") || StringUtils::EqualsNoCase(scale, "yes");
   }
   return true;
 }

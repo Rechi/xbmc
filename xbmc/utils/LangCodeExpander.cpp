@@ -393,10 +393,7 @@ bool CLangCodeExpander::ReverseLookup(const std::string& desc, std::string& code
 
   // Find on language addons
   code = g_langInfo.ConvertEnglishNameToAddonLocale(descTmp);
-  if (!code.empty())
-    return true;
-
-  return false;
+  return !code.empty();
 }
 
 bool CLangCodeExpander::LookupInUserMap(const std::string& code, std::string& desc)

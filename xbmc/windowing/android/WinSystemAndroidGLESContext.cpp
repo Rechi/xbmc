@@ -73,12 +73,7 @@ bool CWinSystemAndroidGLESContext::InitWindowSystem()
   CEGLAttributesVec contextAttribs;
   contextAttribs.Add({{EGL_CONTEXT_CLIENT_VERSION, 2}});
 
-  if (!m_pGLContext.CreateContext(contextAttribs))
-  {
-    return false;
-  }
-
-  return true;
+  return m_pGLContext.CreateContext(contextAttribs);
 }
 
 bool CWinSystemAndroidGLESContext::CreateNewWindow(const std::string& name,

@@ -23,10 +23,7 @@ CRenderBufferPoolDMA::CRenderBufferPoolDMA(CRenderContext& context) : m_context(
 
 bool CRenderBufferPoolDMA::IsCompatible(const CRenderVideoSettings& renderSettings) const
 {
-  if (!CRPRendererDMAUtils::SupportsScalingMethod(renderSettings.GetScalingMethod()))
-    return false;
-
-  return true;
+  return CRPRendererDMAUtils::SupportsScalingMethod(renderSettings.GetScalingMethod());
 }
 
 IRenderBuffer* CRenderBufferPoolDMA::CreateRenderBuffer(void* header /* = nullptr */)

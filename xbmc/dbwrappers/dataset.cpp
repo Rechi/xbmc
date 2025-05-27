@@ -210,7 +210,7 @@ bool Dataset::seek(int pos)
 {
   frecno = (pos < num_rows() - 1) ? pos : num_rows() - 1;
   frecno = (frecno < 0) ? 0 : frecno;
-  fbof = feof = (num_rows() == 0) ? true : false;
+  fbof = feof = num_rows() == 0;
   return ((bool)frecno);
 }
 
@@ -232,7 +232,7 @@ void Dataset::first()
   if (ds_state == dsSelect)
   {
     frecno = 0;
-    feof = fbof = (num_rows() > 0) ? false : true;
+    feof = fbof = num_rows() <= 0;
   }
 }
 
@@ -275,7 +275,7 @@ void Dataset::last()
   if (ds_state == dsSelect)
   {
     frecno = (num_rows() > 0) ? num_rows() - 1 : 0;
-    feof = fbof = (num_rows() > 0) ? false : true;
+    feof = fbof = num_rows() <= 0;
   }
 }
 
