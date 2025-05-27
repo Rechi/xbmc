@@ -337,13 +337,13 @@ void CSMB::CheckIfIdle()
     if (m_OpenConnections == 0 /* check again - when locked */ && m_context != NULL)
     {
       if (m_IdleTimeout > 0)
-	  {
+      {
         m_IdleTimeout--;
       }
-	  else
-	  {
-            CLog::Log(LOGINFO, "Samba is idle. Closing the remaining connections");
-            smb.Deinit();
+      else
+      {
+        CLog::Log(LOGINFO, "Samba is idle. Closing the remaining connections");
+        smb.Deinit();
       }
     }
   }
