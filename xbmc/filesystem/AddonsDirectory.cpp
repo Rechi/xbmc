@@ -81,7 +81,7 @@ const std::set<AddonType> gameTypes = {
 
 static bool IsInfoProviderType(AddonType type)
 {
-  return infoProviderTypes.find(type) != infoProviderTypes.end();
+  return infoProviderTypes.contains(type);
 }
 
 static bool IsInfoProviderTypeAddon(const AddonPtr& addon)
@@ -91,7 +91,7 @@ static bool IsInfoProviderTypeAddon(const AddonPtr& addon)
 
 static bool IsLookAndFeelType(AddonType type)
 {
-  return lookAndFeelTypes.find(type) != lookAndFeelTypes.end();
+  return lookAndFeelTypes.contains(type);
 }
 
 static bool IsLookAndFeelTypeAddon(const AddonPtr& addon)
@@ -101,7 +101,7 @@ static bool IsLookAndFeelTypeAddon(const AddonPtr& addon)
 
 static bool IsGameType(AddonType type)
 {
-  return gameTypes.find(type) != gameTypes.end();
+  return gameTypes.contains(type);
 }
 
 static bool IsStandaloneGame(const AddonPtr& addon)
@@ -478,7 +478,7 @@ static void DependencyAddons(const CURL& path, CFileItemList &items)
 
   for (int i = 0; i < items.Size(); ++i)
   {
-    if (orphaned.find(items[i]->GetProperty("Addon.ID").asString()) != orphaned.end())
+    if (orphaned.contains(items[i]->GetProperty("Addon.ID").asString()))
     {
       items[i]->SetProperty("Addon.Status", g_localizeStrings.Get(24995));
       items[i]->SetProperty("Addon.Orphaned", true);
