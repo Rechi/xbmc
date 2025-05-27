@@ -481,7 +481,7 @@ std::vector<std::string> CWinSystemX11::GetConnectedOutputs()
 
 bool CWinSystemX11::IsCurrentOutput(const std::string& output)
 {
-  return (StringUtils::EqualsNoCase(output, "Default")) || (m_currentOutput.compare(output.c_str()) == 0);
+  return (StringUtils::EqualsNoCase(output, "Default")) || (m_currentOutput.compare(output) == 0);
 }
 
 void CWinSystemX11::ShowOSMouse(bool show)

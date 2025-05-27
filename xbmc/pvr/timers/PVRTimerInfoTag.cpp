@@ -463,7 +463,7 @@ void AppendDay(std::string& strReturn, unsigned int iId)
     strReturn += "-";
 
   if (iId > 0)
-    strReturn += g_localizeStrings.Get(iId).c_str();
+    strReturn += g_localizeStrings.Get(iId);
   else
     strReturn += "__";
 }

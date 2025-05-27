@@ -857,8 +857,7 @@ void CVideoInfoTag::ToSortable(SortItem& sortable, Field field) const
   {
     // seasons with a custom name/title need special handling as they should be sorted by season number
     if (m_type == MediaTypeSeason && !m_strOriginalTitle.empty())
-      sortable[FieldOriginalTitle] =
-          StringUtils::Format(g_localizeStrings.Get(20358).c_str(), m_iSeason);
+      sortable[FieldOriginalTitle] = StringUtils::Format(g_localizeStrings.Get(20358), m_iSeason);
     else
       sortable[FieldOriginalTitle] = m_strOriginalTitle;
     break;
@@ -997,7 +996,7 @@ std::string CVideoInfoTag::GetCast(const std::string& separator,
                                       it->strRole, sep);
     strLabel += character;
   }
-  return StringUtils::TrimRight(strLabel, sep.c_str());
+  return StringUtils::TrimRight(strLabel, sep);
 }
 
 void CVideoInfoTag::ParseNative(const TiXmlElement* movie, bool prioritise)

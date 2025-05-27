@@ -274,7 +274,7 @@ void CGUIDialogVideoInfo::OnInitWindow()
   const std::shared_ptr<CProfileManager> profileManager = CServiceBroker::GetSettingsComponent()->GetProfileManager();
 
   const std::string uniqueId = m_movieItem->GetProperty("xxuniqueid").asString();
-  if (uniqueId.empty() || !StringUtils::StartsWithNoCase(uniqueId.c_str(), "xx"))
+  if (uniqueId.empty() || !StringUtils::StartsWithNoCase(uniqueId, "xx"))
     CONTROL_ENABLE_ON_CONDITION(CONTROL_BTN_REFRESH,
         (profileManager->GetCurrentProfile().canWriteDatabases() ||
         g_passwordManager.bMasterUser));
@@ -283,12 +283,11 @@ void CGUIDialogVideoInfo::OnInitWindow()
 
   // @todo add support to edit video asset art. Until then edit art through Versions Manager.
   if (!VIDEO::IsVideoAssetFile(*m_movieItem))
-    CONTROL_ENABLE_ON_CONDITION(
-        CONTROL_BTN_GET_THUMB,
-        (profileManager->GetCurrentProfile().canWriteDatabases() ||
-         g_passwordManager.bMasterUser) &&
-            !StringUtils::StartsWithNoCase(m_movieItem->GetVideoInfoTag()->GetUniqueID().c_str(),
-                                           "plugin"));
+    CONTROL_ENABLE_ON_CONDITION(CONTROL_BTN_GET_THUMB,
+                                (profileManager->GetCurrentProfile().canWriteDatabases() ||
+                                 g_passwordManager.bMasterUser) &&
+                                    !StringUtils::StartsWithNoCase(
+                                        m_movieItem->GetVideoInfoTag()->GetUniqueID(), "plugin"));
   else
     CONTROL_DISABLE(CONTROL_BTN_GET_THUMB);
 
@@ -297,10 +296,11 @@ void CGUIDialogVideoInfo::OnInitWindow()
 
   VideoDbContentType type = m_movieItem->GetVideoContentType();
   if (type == VideoDbContentType::TVSHOWS || type == VideoDbContentType::MOVIES)
-    CONTROL_ENABLE_ON_CONDITION(CONTROL_BTN_GET_FANART, (profileManager->
-        GetCurrentProfile().canWriteDatabases() || g_passwordManager.bMasterUser) &&
-        !StringUtils::StartsWithNoCase(m_movieItem->GetVideoInfoTag()->
-        GetUniqueID().c_str(), "plugin"));
+    CONTROL_ENABLE_ON_CONDITION(CONTROL_BTN_GET_FANART,
+                                (profileManager->GetCurrentProfile().canWriteDatabases() ||
+                                 g_passwordManager.bMasterUser) &&
+                                    !StringUtils::StartsWithNoCase(
+                                        m_movieItem->GetVideoInfoTag()->GetUniqueID(), "plugin"));
   else
     CONTROL_DISABLE(CONTROL_BTN_GET_FANART);
 
@@ -1104,7 +1104,9 @@ int CGUIDialogVideoInfo::ManageVideoItem(const std::shared_ptr<CFileItem>& item)
       buttons.Add(
           CONTEXT_BUTTON_TAGS_ADD_ITEMS,
           StringUtils::Format(g_localizeStrings.Get(20460), GetLocalizedVideoType(mediaType)));
-      buttons.Add(CONTEXT_BUTTON_TAGS_REMOVE_ITEMS, StringUtils::Format(g_localizeStrings.Get(20461).c_str(), GetLocalizedVideoType(mediaType).c_str()));
+      buttons.Add(CONTEXT_BUTTON_TAGS_REMOVE_ITEMS,
+                  StringUtils::Format(g_localizeStrings.Get(20461),
+                                      GetLocalizedVideoType(mediaType).c_str()));
     }
   }
 
