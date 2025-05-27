@@ -34,10 +34,7 @@ static bool ReadChar(FILE* file, char& value)
   if (file == nullptr)
     return false;
 
-  if (fread(&value, sizeof(char), 1, file) != 1)
-    return false;
-
-  return true;
+  return fread(&value, sizeof(char), 1, file) == 1;
 }
 
 static bool ReadUInt32(FILE* file, uint32_t& value)
@@ -215,8 +212,6 @@ bool CXBTFReader::Load(const CXBTFFrame& frame, unsigned char* buffer) const
 #endif
     return false;
 
-  if (fread(buffer, 1, static_cast<size_t>(frame.GetPackedSize()), m_file) != frame.GetPackedSize())
-    return false;
-
-  return true;
+  return fread(buffer, 1, static_cast<size_t>(frame.GetPackedSize()), m_file) ==
+         frame.GetPackedSize();
 }

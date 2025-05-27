@@ -68,10 +68,7 @@ bool CInteropState::NeedInit(void *device, void *procFunc, int64_t ident)
     return true;
   if (m_procFunc != procFunc)
     return true;
-  if (m_ident != ident)
-    return true;
-
-  return false;
+  return m_ident != ident;
 }
 
 //-----------------------------------------------------------------------------
