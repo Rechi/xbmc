@@ -245,10 +245,7 @@ public:
 
   const CVideoInfoTag* GetVideoInfoTag() const;
 
-  inline bool HasEPGInfoTag() const
-  {
-    return m_epgInfoTag.get() != NULL;
-  }
+  inline bool HasEPGInfoTag() const { return m_epgInfoTag != NULL; }
 
   inline std::shared_ptr<PVR::CPVREpgInfoTag> GetEPGInfoTag() const { return m_epgInfoTag; }
 
@@ -258,7 +255,7 @@ public:
 
   inline bool HasPVRChannelGroupMemberInfoTag() const
   {
-    return m_pvrChannelGroupMemberInfoTag.get() != nullptr;
+    return m_pvrChannelGroupMemberInfoTag != nullptr;
   }
 
   inline std::shared_ptr<PVR::CPVRChannelGroupMember> GetPVRChannelGroupMemberInfoTag() const
@@ -269,10 +266,7 @@ public:
   bool HasPVRChannelInfoTag() const;
   std::shared_ptr<PVR::CPVRChannel> GetPVRChannelInfoTag() const;
 
-  inline bool HasPVRRecordingInfoTag() const
-  {
-    return m_pvrRecordingInfoTag.get() != NULL;
-  }
+  inline bool HasPVRRecordingInfoTag() const { return m_pvrRecordingInfoTag != NULL; }
 
   inline std::shared_ptr<PVR::CPVRRecording> GetPVRRecordingInfoTag() const
   {
