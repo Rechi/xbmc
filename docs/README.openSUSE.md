@@ -10,7 +10,7 @@ Several other distributions have **[specific build guides](README.md)** and a ge
 ## Table of Contents
 1. **[Document conventions](#1-document-conventions)**
 2. **[Get the source code](#2-get-the-source-code)**
-3. **[Install the required packages](#3-install-the-required-packages)**  
+3. **[Install the required packages](#3-install-the-required-packages)**
   3.1. **[Build missing dependencies](#31-build-missing-dependencies)**
 4. **[Build Kodi](#4-build-kodi)**
 
@@ -40,14 +40,14 @@ git clone -b Krypton https://github.com/xbmc/xbmc kodi
 ```
 
 Several different strategies are used to draw your attention to certain pieces of information. In order of how critical the information is, these items are marked as a note, tip, or warning. For example:
- 
-> [!NOTE]  
+
+> [!NOTE]
 > Linux is user friendly... It's just very particular about who its friends are.
 
 > [!TIP]
 > Algorithm is what developers call code they do not want to explain.
 
-> [!WARNING]  
+> [!WARNING]
 > Developers don't change light bulbs. It's a hardware problem.
 
 **[back to top](#table-of-contents)** | **[back to section top](#1-document-conventions)**
@@ -73,12 +73,12 @@ sudo zypper ar -f http://ftp.gwdg.de/pub/opensuse/repositories/multimedia:/libs/
 sudo zypper ref
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > A message will ask you to accept the key. Enter `a`, the *trust always* option.
 
 If you get a `package not found` type of message with the below command, remove the offending package(s) from the install list and reissue the command. Take a note of the missing dependencies and, after a successful step completion, **[build the missing dependencies manually](#31-build-missing-dependencies)**.
 
-> [!NOTE]  
+> [!NOTE]
 > Kodi requires a compiler with C++17 support, i.e. gcc >= 7 or clang >= 5
 
 Install build dependencies:
@@ -86,7 +86,7 @@ Install build dependencies:
 sudo zypper install alsa-devel autoconf automake bluez-devel boost-devel capi4linux-devel ccache cmake doxygen flac-devel fribidi-devel fstrcmp-devel gcc gcc-c++ gettext-devel giflib-devel glew-devel googletest gperf java-openjdk libass-devel libavahi-devel libbluray-devel libbz2-devel libcap-devel libcap-ng-devel libcdio-devel libcec-devel libcurl-devel libdvdread-devel libexiv2-devel libgudev-1_0-devel libidn2-devel libjasper-devel libjpeg-devel liblcms2-devel libmad-devel libmicrohttpd-devel libmodplug-devel libmpeg2-devel libmysqlclient-devel libnfs-devel libogg-devel libpcap-devel libplist-devel libpng12-devel libpulse-devel libsamplerate-devel libsmbclient-devel libtag-devel libtiff-devel libtool libudev-devel libuuid-devel libva-devel libvdpau-devel libvorbis-devel libXrandr-devel libXrender-devel libxslt-devel lirc-devel lzo-devel make Mesa-libEGL-devel Mesa-libGLESv2-devel Mesa-libGLESv3-devel nasm nlohmann_json patch pcre2-devel python3-devel python3-Pillow randrproto-devel renderproto-devel shairplay-devel sqlite3-devel swig tinyxml-devel tinyxml2-devel
 ```
 
-> [!WARNING]  
+> [!WARNING]
 > Make sure you copy paste the entire line or you might receive an error or miss a few dependencies.
 
 Building for Wayland requires some extra packages:
@@ -99,7 +99,7 @@ Similarly, building for GBM also requires some extra packages:
 sudo zypper install libgbm-devel libinput-devel libxkbcommon-devel
 ```
 
-> [!WARNING]  
+> [!WARNING]
 > Fedora repositories don't have install candidates for `libfmt`, and `waylandpp`. See **[build missing dependencies manually](#31-build-missing-dependencies)** section before you proceed.
 
 Optional packages that you might want to install for extra functionality (generating doxygen documentation, for instance):
@@ -107,7 +107,7 @@ Optional packages that you might want to install for extra functionality (genera
 sudo zypper install doxygen sndio-devel libmariadb-devel
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > For developers and anyone else who builds frequently it is recommended to install `ccache` to expedite subsequent builds of Kodi.
 
 You can install it with:

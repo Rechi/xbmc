@@ -7,14 +7,14 @@ This guide has been tested using Xcode 11.3.1 running on MacOS 10.14.4 (Mojave).
 1. **[Document conventions](#1-document-conventions)**
 2. **[Prerequisites](#2-prerequisites)**
 3. **[Get the source code](#3-get-the-source-code)**
-4. **[Configure and build tools and dependencies](#4-configure-and-build-tools-and-dependencies)**  
-  4.1. **[Advanced Configure Options](#41-advanced-configure-options)**  
-5. **[Build binary add-ons](#5-build-binary-add-ons)**  
-  5.1. **[Independent Add-on building](#51-independent-add-on-building)**  
-  5.2. **[Xcode project building](#52-xcode-project-building)**  
-6. **[Build Kodi](#6-build-kodi)**  
-  6.1. **[Generate Project Files](#61-generate-project-files)**  
-  6.2. **[Build with Xcode](#62-build)**  
+4. **[Configure and build tools and dependencies](#4-configure-and-build-tools-and-dependencies)**
+  4.1. **[Advanced Configure Options](#41-advanced-configure-options)**
+5. **[Build binary add-ons](#5-build-binary-add-ons)**
+  5.1. **[Independent Add-on building](#51-independent-add-on-building)**
+  5.2. **[Xcode project building](#52-xcode-project-building)**
+6. **[Build Kodi](#6-build-kodi)**
+  6.1. **[Generate Project Files](#61-generate-project-files)**
+  6.2. **[Build with Xcode](#62-build)**
 7. **[Package](#7-package)**
 8. **[Install](#8-install)**
 9. **[Gesture Handling](#9-gesture-handling)**
@@ -45,14 +45,14 @@ git clone -b Krypton https://github.com/xbmc/xbmc kodi
 ```
 
 Several different strategies are used to draw your attention to certain pieces of information. In order of how critical the information is, these items are marked as a note, tip, or warning. For example:
- 
-> [!NOTE]  
+
+> [!NOTE]
 > Linux is user friendly... It's just very particular about who its friends are.
 
 > [!TIP]
 > Algorithm is what developers call code they do not want to explain.
 
-> [!WARNING]  
+> [!WARNING]
 > Developers don't change light bulbs. It's a hardware problem.
 
 **[back to top](#table-of-contents)** | **[back to section top](#1-document-conventions)**
@@ -67,7 +67,7 @@ Building for iOS should work with the following constellations of Xcode and macO
   * Xcode 13.x against iOS SDK 15.5 on 12.x (Monterey)(recommended)
 
 Team Kodi CI infrastructure is limited, and therefore we only have the single combination tested. Newer xcode/macos combinations generally should work, however the team does not actively test/use pre-release versions, so use with caution. Earlier versions may work, however we dont actively support them, so use with caution.
-> [!WARNING]  
+> [!WARNING]
 > Start Xcode after installation finishes. You need to accept the licenses and install missing components.
 
 **[back to top](#table-of-contents)**
@@ -91,7 +91,7 @@ Kodi can be built as a 64bit program for iOS. The dependencies are built in `$HO
 > [!TIP]
 > Look for comments starting with `Or ...` and only execute the command(s) you need.
 
-> [!NOTE]  
+> [!NOTE]
 > `--with-platform` is mandatory for all Apple platforms
 
 Configure build:
@@ -109,10 +109,10 @@ make -j$(getconf _NPROCESSORS_ONLN)
 > [!TIP]
 > By adding `-j<number>` to the make command, you can choose how many concurrent jobs will be used and expedite the build process. It is recommended to use `-j$(getconf _NPROCESSORS_ONLN)` to compile on all available processor cores. The build machine can also be configured to do this automatically by adding `export MAKEFLAGS="-j$(getconf _NPROCESSORS_ONLN)"` to your shell config (e.g. `~/.bashrc`).
 
-> [!WARNING]  
+> [!WARNING]
 > Look for the `Dependencies built successfully.` success message. If in doubt run a single threaded `make` command until the message appears. If the single make fails, clean the specific library by issuing `make -C target/<name_of_failed_lib> distclean` and run `make`again.
 
-> [!NOTE]  
+> [!NOTE]
 > **Advanced developers** may want to specify an iOS SDK version (if multiple versions are installed) in the configure line(s) shown above. The example below would use the iOS SDK 11.0:
 
 ```
@@ -224,7 +224,7 @@ For additional information on regular expression usage for ADDONS_TO_BUILD, view
 
 ## 5.2. Xcode project building
 
-Binary addons will be built as a dependency in the Xcode project. You can choose the addons 
+Binary addons will be built as a dependency in the Xcode project. You can choose the addons
 you wish to build during the Xcode project generation step
 
 Generate Xcode project to build specific add-ons:
@@ -247,10 +247,10 @@ make -C tools/depends/target/cmakebuildsys CMAKE_EXTRA_ARGUMENTS="-DENABLE_XCODE
 > [!TIP]
 > If you wish to not automatically build addons added to your xcode project, omit
 `-DENABLE_XCODE_ADDONBUILD=ON`. The target will be added to the project, but the dependency
- will not be set to automatically build  
+ will not be set to automatically build
 
 > [!TIP]
-> Binary add-ons added to the generated Xcode project can be built independently of 
+> Binary add-ons added to the generated Xcode project can be built independently of
 the Kodi app by selecting the scheme/target `binary-addons` in the Xcode project.
 You can also build the binary-addons target via xcodebuild. This will not build the Kodi
 App, but will build any/all binary addons added for the project Generation.
@@ -290,18 +290,18 @@ cd $HOME/kodi-build
 /Users/Shared/xbmc-depends/x86_64-darwin17.5.0-native/bin/cmake -G Xcode -DCMAKE_TOOLCHAIN_FILE=/Users/Shared/xbmc-depends/iphoneos11.3_arm64-target-debug/share/Toolchain.cmake $HOME/kodi
 ```
 
-> [!WARNING]  
+> [!WARNING]
 > The toolchain file location differs depending on your iOS and SDK version. You have to replace `x86_64-darwin15.6.0-native` and `iphoneos11.3_arm64-target-debug` in the paths above with the correct ones on your system.
 
 You can check `Users/Shared/xbmc-depends` directory content with:
 ```
 ls -l /Users/Shared/xbmc-depends
 ```
-## 6.2 Build 
+## 6.2 Build
 
 **Start Xcode, open the Kodi project file** (`kodi.xcodeproj`) located in `$HOME/kodi-build` and hit `Build`.
 
-> [!WARNING]  
+> [!WARNING]
 > If you have selected a specific iOS SDK Version in step 4 then you might need to adapt the active target to use the same iOS SDK version, otherwise build will fail. Be sure to select a device configuration. Building for simulator is not supported.
 
 **Alternatively**, you can also build via Xcode from the command-line with `xcodebuild`:

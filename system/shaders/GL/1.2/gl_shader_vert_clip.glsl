@@ -21,7 +21,7 @@ uniform vec4 m_cordStep;
 uniform float m_depth;
 
 // this shader can be used in cases where clipping via glScissor() is not
-// possible (e.g. when rotating). it can't discard triangles, but it may 
+// possible (e.g. when rotating). it can't discard triangles, but it may
 // degenerate them.
 
 void main()

@@ -15,7 +15,7 @@ class CURL;
 class CAdvancedSettings;
 class CFileItem;
 
-/*! \brief Defines the methodology to find hosts on a given subnet 
+/*! \brief Defines the methodology to find hosts on a given subnet
     \sa IsHostOnLAN
 */
 enum class LanCheckMode

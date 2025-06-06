@@ -21,31 +21,31 @@ if(NOT TARGET ${APP_NAME_LC}::${CMAKE_FIND_PACKAGE_NAME})
     endif()
     find_package(ZLIB REQUIRED ${SEARCH_QUIET})
     find_package(Utfcpp REQUIRED ${SEARCH_QUIET})
-  
+
     set(${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_VERSION ${${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_VER})
-  
+
     if(WIN32 OR WINDOWS_STORE)
       set(patches "${CMAKE_SOURCE_DIR}/tools/depends/target/${${CMAKE_FIND_PACKAGE_NAME}_MODULE_LC}/001-cmake-pdb-debug.patch")
       generate_patchcommand("${patches}")
-  
+
       if(WINDOWS_STORE)
         set(EXTRA_ARGS -DPLATFORM_WINRT=ON)
       endif()
     endif()
-  
+
     # Debug postfix only used for windows
     if(WIN32 OR WINDOWS_STORE)
       set(${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_DEBUG_POSTFIX "d")
     endif()
-  
+
     set(CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF
                    -DBUILD_EXAMPLES=OFF
                    -DBUILD_TESTING=OFF
                    -DBUILD_BINDINGS=OFF
                    ${EXTRA_ARGS})
-  
+
     BUILD_DEP_TARGET()
-  
+
     add_dependencies(${${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_BUILD_NAME} LIBRARY::ZLIB
                                                                         LIBRARY::Utfcpp)
     set(${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_LINK_LIBRARIES "LIBRARY::ZLIB")
@@ -84,7 +84,7 @@ if(NOT TARGET ${APP_NAME_LC}::${CMAKE_FIND_PACKAGE_NAME})
       # Taglib installs a shell script for all platforms. This can provide version universally
       find_program(TAGLIB-CONFIG NAMES taglib-config taglib-config.cmd
                                  HINTS ${DEPENDS_PATH}/bin)
-    
+
       if(TAGLIB-CONFIG)
         execute_process(COMMAND "${TAGLIB-CONFIG}" --version
                         OUTPUT_VARIABLE ${${CMAKE_FIND_PACKAGE_NAME}_SEARCH_NAME}_VERSION

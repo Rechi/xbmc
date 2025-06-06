@@ -121,7 +121,7 @@ but have the timer resetting to 0 seconds if the user provides some input to Kod
 </timer>
 ~~~~~~~~~~~~~
 
-Finer conditional granularity can also be applied to the `onstop` or `onstart` actions. This allows the skinner to create generic timers which respect a 
+Finer conditional granularity can also be applied to the `onstop` or `onstart` actions. This allows the skinner to create generic timers which respect a
 limited set of conditions but trigger different actions depending on a condition applied only to the action.
 The following timer plays the trailer of a given item when the user is in the videos window, the item has a trailer, the player is not playing and the
 global idle time is greater than 3 seconds.

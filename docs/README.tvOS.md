@@ -7,23 +7,23 @@ This guide has been tested using Xcode 11.3.1 running on MacOS 10.15.2 (Catalina
 1. **[Document conventions](#1-document-conventions)**
 2. **[Prerequisites](#2-prerequisites)**
 3. **[Get the source code](#3-get-the-source-code)**
-4. **[Configure and build tools and dependencies](#4-configure-and-build-tools-and-dependencies)**  
-  4.1. **[Advanced Configure Options](#41-advanced-configure-options)**  
-5. **[Generate Kodi Build files](#5-generate-kodi-build-files)**  
-  5.1. **[Generate XCode Project Files](#51-generate-xcode-project-files)**  
-  5.2. **[Build with Xcode](#62-build)**  
-6. **[Build Kodi](#6-build-kodi)**  
-  6.1. **[Build with Xcode](#61-build-with-xcode)**  
-  6.2. **[Build with xcodebuild](#62-build-with-xcodebuild)**  
-7. **[Packaging to distribute as deb](#7-packaging-to-distribute-as-deb)**  
-  7.1. **[Package via Xcode](#71-package-via-xcode)**  
-  7.2. **[Package via Xcodebuild](#72-package-via-xcodebuild)**  
-8. **[Signing](#8-signing)**  
-  8.1. **[Signing using a developer account](#81-signing-using-a-developer-account)**  
-  8.2. **[Using iOS App Signer to install](#82-using-ios-app-signer-to-install)**  
-9. **[Install](#9-install)**  
-  9.1. **[Jailbroken devices](#91-jailbroken-devices)**  
-  9.2. **[Using Xcode to install](#92-using-xcode-to-install)**  
+4. **[Configure and build tools and dependencies](#4-configure-and-build-tools-and-dependencies)**
+  4.1. **[Advanced Configure Options](#41-advanced-configure-options)**
+5. **[Generate Kodi Build files](#5-generate-kodi-build-files)**
+  5.1. **[Generate XCode Project Files](#51-generate-xcode-project-files)**
+  5.2. **[Build with Xcode](#62-build)**
+6. **[Build Kodi](#6-build-kodi)**
+  6.1. **[Build with Xcode](#61-build-with-xcode)**
+  6.2. **[Build with xcodebuild](#62-build-with-xcodebuild)**
+7. **[Packaging to distribute as deb](#7-packaging-to-distribute-as-deb)**
+  7.1. **[Package via Xcode](#71-package-via-xcode)**
+  7.2. **[Package via Xcodebuild](#72-package-via-xcodebuild)**
+8. **[Signing](#8-signing)**
+  8.1. **[Signing using a developer account](#81-signing-using-a-developer-account)**
+  8.2. **[Using iOS App Signer to install](#82-using-ios-app-signer-to-install)**
+9. **[Install](#9-install)**
+  9.1. **[Jailbroken devices](#91-jailbroken-devices)**
+  9.2. **[Using Xcode to install](#92-using-xcode-to-install)**
 
 ## 1. Document conventions
 This guide assumes you are using `terminal`, also known as `console`, `command-line` or simply `cli`. Commands need to be run at the terminal, one at a time and in the provided order.
@@ -52,13 +52,13 @@ git clone -b Krypton https://github.com/xbmc/xbmc kodi
 
 Several different strategies are used to draw your attention to certain pieces of information. In order of how critical the information is, these items are marked as a note, tip, or warning. For example:
 
-> [!NOTE]  
+> [!NOTE]
 > Linux is user friendly... It's just very particular about who its friends are.
 
 > [!TIP]
 > Algorithm is what developers call code they do not want to explain.
 
-> [!WARNING]  
+> [!WARNING]
 > Developers don't change light bulbs. It's a hardware problem.
 
 **[back to top](#table-of-contents)** | **[back to section top](#1-document-conventions)**
@@ -73,7 +73,7 @@ Building for tvOS should work with the following combinations of Xcode and macOS
   * Xcode 13.x against tvOS SDK 15.4 on 12.x (Monterey)(recommended)
 
 Team Kodi CI infrastructure is limited, and therefore we only have the single combination tested. Newer xcode/macos combinations generally should work, however the team does not actively test/use pre-release versions, so use with caution. Earlier versions may work, however we dont actively support them, so use with caution.
-> [!WARNING]  
+> [!WARNING]
 > Start Xcode after installation finishes. You need to accept the licenses and install missing components.
 
 **[back to top](#table-of-contents)**
@@ -93,7 +93,7 @@ git clone https://github.com/xbmc/xbmc kodi
 
 ## 4. Configure and build tools and dependencies
 Kodi can be built as a 64bit program only for tvOS. The dependencies are built in `$HOME/kodi/tools/depends` and installed into `/Users/Shared/xbmc-depends`.
-> [!NOTE]  
+> [!NOTE]
 > `--with-platform` is mandatory for all Apple platforms
 
 Configure build:
@@ -111,10 +111,10 @@ make -j$(getconf _NPROCESSORS_ONLN)
 > [!TIP]
 > By adding `-j<number>` to the make command, you can choose how many concurrent jobs will be used and expedite the build process. It is recommended to use `-j$(getconf _NPROCESSORS_ONLN)` to compile on all available processor cores. The build machine can also be configured to do this automatically by adding `export MAKEFLAGS="-j$(getconf _NPROCESSORS_ONLN)"` to your shell config (e.g. `~/.bashrc`).
 
-> [!WARNING]  
+> [!WARNING]
 > Look for the `Dependencies built successfully.` success message. If in doubt run a single threaded `make` command until the message appears. If the single make fails, clean the specific library by issuing `make -C target/<name_of_failed_lib> distclean` and run `make`again.
 
-> [!NOTE]  
+> [!NOTE]
 > **Advanced developers** may want to specify an tvOS SDK version (if multiple versions are installed) in the configure line(s) shown above. The example below would use the tvOS SDK 11.0:
 
 ```
@@ -225,10 +225,10 @@ make -C tools/depends/target/cmakebuildsys CMAKE_EXTRA_ARGUMENTS="-DPLATFORM_BUN
 ````
 Available Signing arguments
 
-PLATFORM_BUNDLE_IDENTIFIER - bundle ID (used for the app, top shelf and entitlements)  
-DEVELOPMENT_TEAM - dev team ID  **OR** CODE_SIGN_IDENTITY - certificate name  
-PROVISIONING_PROFILE_APP - provprofile name for the app  
-PROVISIONING_PROFILE_TOPSHELF - provprofile name for the top shelf  
+PLATFORM_BUNDLE_IDENTIFIER - bundle ID (used for the app, top shelf and entitlements)
+DEVELOPMENT_TEAM - dev team ID  **OR** CODE_SIGN_IDENTITY - certificate name
+PROVISIONING_PROFILE_APP - provprofile name for the app
+PROVISIONING_PROFILE_TOPSHELF - provprofile name for the top shelf
 
 ## 5.2. Add Binary Addons to Project
 
@@ -282,10 +282,10 @@ This will create a `Kodi.app` file located in `$HOME/kodi-build/build/Debug-appl
 > [!TIP]
 > If you build as a release target, the location of the `Kodi.app` will be `$HOME/kodi-build/build/Release-appletvos`
 
-> [!WARNING]  
+> [!WARNING]
 > If you have selected a specific tvOS SDK Version in step 4 then you might need to adapt the active target to use the same tvOS SDK version, otherwise build will fail. Be sure to select a device configuration.
 
-> [!WARNING]  
+> [!WARNING]
 > Building for simulator is NOT supported.
 
 ### 6.2. Build with xcodebuild

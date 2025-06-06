@@ -98,7 +98,7 @@ public:
 
   /*!
    * \brief Add a map of events configuration
-   * \param configs The map of events configuration where key value is event id, 
+   * \param configs The map of events configuration where key value is event id,
    */
   void AddEventMapConfig(MapEventConfig& configs);
 

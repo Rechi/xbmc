@@ -135,7 +135,7 @@ if(NOT TARGET ${APP_NAME_LC}::${CMAKE_FIND_PACKAGE_NAME})
       # INTERFACE_LINK_OPTIONS is incorrectly populated when cmake generation is executed
       # when an existing build generation is already done. Just set this to blank
       set_target_properties(PkgConfig::${${CMAKE_FIND_PACKAGE_NAME}_SEARCH_NAME} PROPERTIES INTERFACE_LINK_OPTIONS "")
-  
+
       # First item is the full path of the library file found
       # pkg_check_modules does not populate a variable of the found library explicitly
       list(GET ${${CMAKE_FIND_PACKAGE_NAME}_SEARCH_NAME}_LINK_LIBRARIES 0 ${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_LIBRARY_RELEASE)

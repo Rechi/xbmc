@@ -23,7 +23,7 @@ Default font lacks support for all characters
         <row>'",.&lt;&gt;/?\|</row>
         <row>`~ÁÉÍÓÚÊÃ</row>
       </keyboard>
-  </layout> 
+  </layout>
   <layout language="Portuguese (Portugal)" layout="QWERTY">
     <keyboard>
       <row>\1234567890'</row>

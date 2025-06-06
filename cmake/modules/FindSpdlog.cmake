@@ -10,28 +10,28 @@ if(NOT TARGET ${APP_NAME_LC}::${CMAKE_FIND_PACKAGE_NAME})
   include(cmake/scripts/common/ModuleHelpers.cmake)
 
   macro(buildmacroSpdlog)
-  
+
     find_package(Fmt REQUIRED ${SEARCH_QUIET})
-  
+
     if(APPLE)
       set(EXTRA_ARGS "-DCMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES}")
     endif()
-  
+
     if(WIN32 OR WINDOWS_STORE)
       set(patches "${CMAKE_SOURCE_DIR}/tools/depends/target/${${CMAKE_FIND_PACKAGE_NAME}_MODULE_LC}/001-windows-pdb-symbol-gen.patch")
       generate_patchcommand("${patches}")
-  
+
       set(EXTRA_ARGS -DSPDLOG_WCHAR_SUPPORT=ON
                      -DSPDLOG_WCHAR_FILENAMES=ON)
-  
+
       set(${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_COMPILE_DEFINITIONS SPDLOG_WCHAR_FILENAMES
                                                                    SPDLOG_WCHAR_TO_UTF8_SUPPORT)
     endif()
-  
+
     set(SPDLOG_VERSION ${${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_VER})
     # spdlog debug uses postfix d for all platforms
     set(${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_DEBUG_POSTFIX d)
-  
+
     set(CMAKE_ARGS -DCMAKE_CXX_EXTENSIONS=${CMAKE_CXX_EXTENSIONS}
                    -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
                    -DSPDLOG_BUILD_EXAMPLE=OFF
@@ -39,14 +39,14 @@ if(NOT TARGET ${APP_NAME_LC}::${CMAKE_FIND_PACKAGE_NAME})
                    -DSPDLOG_BUILD_BENCH=OFF
                    -DSPDLOG_FMT_EXTERNAL=ON
                    ${EXTRA_ARGS})
-  
+
     # Set definitions that will be set in the built cmake config file
     # We dont import the config file if we build internal (chicken/egg scenario)
     list(APPEND ${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_COMPILE_DEFINITIONS SPDLOG_COMPILED_LIB
                                                                          SPDLOG_FMT_EXTERNAL)
-  
+
     BUILD_DEP_TARGET()
-  
+
     add_dependencies(${${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_BUILD_NAME} ${APP_NAME_LC}::Fmt)
   endmacro()
 

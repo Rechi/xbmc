@@ -210,7 +210,7 @@ macro(CLEAR_BUILD_VARS)
 endmacro()
 
 # Macro to create externalproject_add target
-# 
+#
 # Common usage
 #
 # CMAKE_ARGS: cmake(required)
@@ -389,7 +389,7 @@ macro(BUILD_DEP_TARGET)
   endif()
 
   # Defines if the build byproduct is a shared lib
-  # This sets up extension changes, and output paths. Both can be overridden by the 
+  # This sets up extension changes, and output paths. Both can be overridden by the
   # caller if required.
   # Unix platforms default to .so extension
   if(${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_SHARED_LIB)
@@ -424,7 +424,7 @@ macro(BUILD_DEP_TARGET)
     string(REGEX REPLACE "^.*\\." "" _LIBEXT ${${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_BYPRODUCT})
 
     if(DEFINED ${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_SHARED_LIB)
-      # Windows shared libs have both a .lib and a .dll artifact. 
+      # Windows shared libs have both a .lib and a .dll artifact.
       # IMPLIB_<CONFIG> is windows only for our use cases
       if(WIN32 OR WINDOWS_STORE)
         set(${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_IMPLIB_DEBUG ${DEP_LOCATION}/${${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_IMPLIB_PATH}/${_LIBNAME}${${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_DEBUG_POSTFIX}.${_LIBEXT})

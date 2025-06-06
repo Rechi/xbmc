@@ -464,7 +464,7 @@
 				</include>
 				<include content="MediaFlag">
 					<param name="flag_visible" value="!String.IsEmpty(ListItem.BitRate)" />
-					 <param name="flag_label" value="$INFO[ListItem.BitRate, ,kbps]" /> 
+					 <param name="flag_label" value="$INFO[ListItem.BitRate, ,kbps]" />
 				</include>
 				<include content="MediaFlag">
 					<param name="flag_visible" value="!String.IsEmpty(ListItem.MusicBitsPerSample)" />
@@ -507,7 +507,7 @@
 				</include>
 				<include content="MediaFlag">
 					<param name="flag_visible" value="!String.IsEmpty(MusicPlayer.BitRate)" />
-					 <param name="flag_label" value="$INFO[MusicPlayer.BitRate, ,kbps]" /> 
+					 <param name="flag_label" value="$INFO[MusicPlayer.BitRate, ,kbps]" />
 				</include>
 				<include content="MediaFlag">
 					<param name="flag_visible" value="!String.IsEmpty(MusicPlayer.BitsPerSample)" />

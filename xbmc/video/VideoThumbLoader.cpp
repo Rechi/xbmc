@@ -358,8 +358,8 @@ bool CVideoThumbLoader::FillLibraryArt(CFileItem &item)
 {
   CVideoInfoTag &tag = *item.GetVideoInfoTag();
   std::map<std::string, std::string> artwork;
-  // Video item can be an album - either a 
-  // a) search result with full details including music library album id, or 
+  // Video item can be an album - either a
+  // a) search result with full details including music library album id, or
   // b) musicvideo album that needs matching to a music album, storing id as well as fetch art.
   if (tag.m_type == MediaTypeAlbum)
   {

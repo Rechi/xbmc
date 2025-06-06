@@ -106,8 +106,8 @@ public:
   void ResetScreenParameters(RESOLUTION res);
   void CaptureStateBlock();
   void ApplyStateBlock();
-  /*! \brief Invalidates color buffer, clears the depth buffer (if used). 
-   Will result in undefined color buffer values which will have to be 
+  /*! \brief Invalidates color buffer, clears the depth buffer (if used).
+   Will result in undefined color buffer values which will have to be
    repainted. Has to be called at the beginning of a frame.
    */
   void Clear();
@@ -171,7 +171,7 @@ public:
    \returns float normalized -1 to 1
    */
   float GetTransformDepth(int32_t depthOffset = 0);
-  /*! \brief Gets the (normalized) depth information 
+  /*! \brief Gets the (normalized) depth information
    \param depth to be normalized
    \returns float normalized -1 to 1
    */

@@ -6,7 +6,7 @@ import android.os.Environment;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 
-public class Storage 
+public class Storage
 {
   public static String getPrimaryStorageVolumePath(Context context)
   {

@@ -112,21 +112,21 @@ public:
               const unsigned char* pixels,
               bool loadToGPU);
 
-  /*! 
-   * \brief Uploads the texture to the GPU. 
+  /*!
+   * \brief Uploads the texture to the GPU.
    */
   void LoadToGPUAsync();
 
   virtual void CreateTextureObject() = 0;
   virtual void DestroyTextureObject() = 0;
   virtual void LoadToGPU() = 0;
-  /*! 
+  /*!
    * \brief Blocks execution until the previous GFX commands have been processed.
    */
   virtual void SyncGPU(){};
   virtual void BindToUnit(unsigned int unit) = 0;
 
-  /*! 
+  /*!
    * \brief Checks if the processing pipeline can handle the texture format/swizzle
    \param format the format of the texture.
    \return true if the texturing pipeline supports the format

@@ -89,7 +89,7 @@ void CTVOSTopShelf::SetTopShelfItems(CFileItemList& items, TVOSTopShelfItemsCate
           // Store all old thumbs names of this category in array
           const auto thumbsPath = [storeUrl URLByAppendingPathComponent:categoryKey isDirectory:YES];
           auto thumbsToRemove = [NSMutableSet setWithArray:[fileManager contentsOfDirectoryAtPath:thumbsPath.path error:nil]];
-          
+
           if (items.Size() <= 0)
           {
             // If there is no item in this category, remove it from topshelfCategories
@@ -128,7 +128,7 @@ void CTVOSTopShelf::SetTopShelfItems(CFileItemList& items, TVOSTopShelfItemsCate
                 }
 
                 auto itemTitle = getTitleForItem(item);
-                
+
                 // Add item object in categoryItems
                 CLog::Log(LOGDEBUG, "[TopShelf] Adding item '{}' in category '{}'", itemTitle,
                           categoryKey.UTF8String);
@@ -146,7 +146,7 @@ void CTVOSTopShelf::SetTopShelfItems(CFileItemList& items, TVOSTopShelfItemsCate
             // Store category dict in topshelfCategories
             topshelfCategories[categoryKey] = categoryDict;
           }
-          
+
           // Remove unused thumbs of this TopShelf category from thumbsPath folder
           for (NSString* thumbFileName in thumbsToRemove)
             [fileManager removeItemAtURL:[thumbsPath URLByAppendingPathComponent:thumbFileName isDirectory:NO] error:nil];

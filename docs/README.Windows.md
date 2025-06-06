@@ -10,8 +10,8 @@ This guide has been tested with Windows 10 Pro x64, version 22H2, build 19045.45
 4. **[Set up the build environment](#4-set-up-the-build-environment)**
 5. **[Build Kodi automagically](#5-build-kodi-automagically)**
 6. **[Build Kodi manually](#6-build-kodi-manually)**
-7. **[Build binary add-ons manually](#7-build-binary-add-ons-manually)**  
-  7.1. **[In-tree building of binary add-ons](#71-in-tree-building-of-binary-add-ons)**  
+7. **[Build binary add-ons manually](#7-build-binary-add-ons-manually)**
+  7.1. **[In-tree building of binary add-ons](#71-in-tree-building-of-binary-add-ons)**
 
 ## 1. Document conventions
 This guide assumes you are using `Developer Command Prompt for VS 2022`, also known as `terminal`, `console`, `command-line` or simply `cli`. Commands need to be run at the terminal, one at a time and in the provided order.
@@ -40,13 +40,13 @@ git clone -b Matrix https://github.com/xbmc/xbmc kodi
 
 Several different strategies are used to draw your attention to certain pieces of information. In order of how critical the information is, these items are marked as a note, tip, or warning. For example:
 
-> [!NOTE]  
+> [!NOTE]
 > Linux is user friendly... It's just very particular about who its friends are.
 
 > [!TIP]
 > Algorithm is what developers call code they do not want to explain.
 
-> [!WARNING]  
+> [!WARNING]
 > Developers don't change light bulbs. It's a hardware problem.
 
 **[back to top](#table-of-contents)** | **[back to section top](#1-document-conventions)**
@@ -112,7 +112,7 @@ git clone https://github.com/xbmc/xbmc kodi
 ## 4. Set up the build environment
 To set up the build environment, several scripts must be called.
 
-> [!WARNING]  
+> [!WARNING]
 > The scripts may fail if you have a space in the path to the bat files.
 
 Kodi can be built as either a normal 32bit or 64bit program, UWP 32bit and 64bit and UWP ARM 32bit. Unless there is a reason to prefer 32bit builds, we advise you to build Kodi for 64bit.
@@ -177,7 +177,7 @@ BuildSetup.bat
 
 UWP builds generate `msix`, `appxsym` and `cer` files, located at `%userprofile%\kodi\project\UWPBuildSetup`. You can install them following this **[guide](https://kodi.wiki/view/HOW-TO:Install_Kodi_for_Universal_Windows_Platform)**.
 
-> [!NOTE]  
+> [!NOTE]
 > To generate an exact replica of the official Kodi Windows installer, some additional steps are required:
 
 Build built-in add-ons (peripheral.joystick only) with command line:

@@ -190,7 +190,7 @@ public class SyncProgramsJobService extends JobService
         if (cursor != null && cursor.moveToNext())
         {
           Channel channel = Channel.fromCursor(cursor);
-          
+
           XBMCJsonRPC jsonrpc = new XBMCJsonRPC(mContext);
           if (uri.isEmpty())
           {

@@ -6,7 +6,7 @@
 \tableofcontents
 
 The ranges control is used for showing multiple range UI elements on the same control. It is used
-in Kodi, for example, to show the intervals of a cutlist (EDL) or chapters in the video seekbar. 
+in Kodi, for example, to show the intervals of a cutlist (EDL) or chapters in the video seekbar.
 You can choose the position, size and look and feel of the control.
 
 --------------------------------------------------------------------------------

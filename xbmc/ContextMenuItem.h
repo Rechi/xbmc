@@ -74,9 +74,9 @@ public:
     const std::string& parent,
     const std::string& library,
     const std::string& condition,
-    const std::string& addonId, 
+    const std::string& addonId,
     const std::vector<std::string>& args = std::vector<std::string>());
-  
+
   friend class ADDON::CContextMenuAddon;
 
 private:

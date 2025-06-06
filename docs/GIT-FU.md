@@ -11,35 +11,35 @@ It is streamlined to Kodi's **[fork and pull](https://help.github.com/articles/a
 2. **[Document conventions](#2-document-conventions)**
 3. **[Prerequisites](#3-prerequisites)**
 4. **[Clone Kodi's repo into your machine](#4-clone-kodis-repo-into-your-machine)**
-5. **[Working with branches](#5-working-with-branches)**  
-  5.1. **[Create feature branch](#51-create-feature-branch)**  
-  5.2. **[Push feature branch to origin](#52-push-feature-branch-to-origin)**  
-  5.3. **[List branches](#53-list-branches)**  
-  5.4. **[Switch between branches](#54-switch-between-branches)**  
-  5.5. **[Backup branch](#55-backup-branch)**  
-  5.6. **[Check branch status](#56-check-branch-status)**  
-  5.7. **[Delete branch](#57-delete-branch)**  
+5. **[Working with branches](#5-working-with-branches)**
+  5.1. **[Create feature branch](#51-create-feature-branch)**
+  5.2. **[Push feature branch to origin](#52-push-feature-branch-to-origin)**
+  5.3. **[List branches](#53-list-branches)**
+  5.4. **[Switch between branches](#54-switch-between-branches)**
+  5.5. **[Backup branch](#55-backup-branch)**
+  5.6. **[Check branch status](#56-check-branch-status)**
+  5.7. **[Delete branch](#57-delete-branch)**
   5.8. **[Rebase branch](#58-rebase-branch)**
-6. **[Syncing branches](#6-syncing-branches)**  
-  6.1. **[Fetch master branch from upstream and sync local master branch with it](#61-fetch-master-branch-from-upstream-and-sync-local-master-branch-with-it)**  
-  6.2. **[Fetch feature branch from origin and sync local feature branch with it](#62-fetch-feature-branch-from-origin-and-sync-local-feature-branch-with-it)**  
+6. **[Syncing branches](#6-syncing-branches)**
+  6.1. **[Fetch master branch from upstream and sync local master branch with it](#61-fetch-master-branch-from-upstream-and-sync-local-master-branch-with-it)**
+  6.2. **[Fetch feature branch from origin and sync local feature branch with it](#62-fetch-feature-branch-from-origin-and-sync-local-feature-branch-with-it)**
   6.3. **[Push local feature branch to origin and sync remote feature branch with it](#63-push-local-feature-branch-to-origin-and-sync-remote-feature-branch-with-it)**
-7. **[Working with commits](#7-working-with-commits)**  
-  7.1. **[Create commit](#71-create-commit)**  
-  7.2. **[Amend last commit](#72-amend-last-commit)**  
-  7.3. **[Rename last commit](#73-rename-last-commit)**  
-  7.4. **[Delete last commit](#74-delete-last-commit)**  
-  7.5. **[Fix commit](#75-fix-commit)**  
-  7.6. **[List commits](#76-list-commits)**  
+7. **[Working with commits](#7-working-with-commits)**
+  7.1. **[Create commit](#71-create-commit)**
+  7.2. **[Amend last commit](#72-amend-last-commit)**
+  7.3. **[Rename last commit](#73-rename-last-commit)**
+  7.4. **[Delete last commit](#74-delete-last-commit)**
+  7.5. **[Fix commit](#75-fix-commit)**
+  7.6. **[List commits](#76-list-commits)**
   7.7. **[Cherry-pick commits](#77-cherry-pick-commits)**
-8. **[Examples with nice screenies](#8-examples-with-nice-screenies)**  
-  8.1. **[Rebase branch](#81-rebase-branch)**  
+8. **[Examples with nice screenies](#8-examples-with-nice-screenies)**
+  8.1. **[Rebase branch](#81-rebase-branch)**
   8.2. **[Fix commits](#82-fix-commits)**
-9. **[Going pro](#9-going-pro)**  
-  9.1. **[Fetch an upstream pull request](#91-fetch-an-upstream-pull-request)**  
-  9.2. **[Fetch a pull request someone submitted to your repository](#92-fetch-a-pull-request-someone-submitted-to-your-repository)**  
+9. **[Going pro](#9-going-pro)**
+  9.1. **[Fetch an upstream pull request](#91-fetch-an-upstream-pull-request)**
+  9.2. **[Fetch a pull request someone submitted to your repository](#92-fetch-a-pull-request-someone-submitted-to-your-repository)**
   9.3. **[Fetch a pull request or commit and apply them to another branch](#93-fetch-a-pull-request-or-commit-and-apply-them-to-another-branch)**
-10. **[Other resources](#10-other-resources)**  
+10. **[Other resources](#10-other-resources)**
   10.1. **[Using git alias](#101-using-git-alias)**
 
 ## 1. Introduction
@@ -85,14 +85,14 @@ git clone -b Krypton https://github.com/xbmc/xbmc kodi
 ```
 
 Several different strategies are used to draw your attention to certain pieces of information. In order of how critical the information is, these items are marked as a note, tip, or warning. For example:
- 
-> [!NOTE]  
+
+> [!NOTE]
 > Linux is user friendly... It's just very particular about who its friends are.
 
 > [!TIP]
 > Algorithm is what developers call code they do not want to explain.
 
-> [!WARNING]  
+> [!WARNING]
 > Developers don't change light bulbs. It's a hardware problem.
 
 **[back to top](#table-of-contents)** | **[back to section top](#2-document-conventions)**
@@ -203,7 +203,7 @@ Delete remote branch:
 git push origin -d <feature-branch>
 ```
 
-> [!WARNING]  
+> [!WARNING]
 > Be careful deleting branches. Make sure you don't need them anymore.
 
 ### 5.8. Rebase branch
@@ -243,7 +243,7 @@ git checkout <feature-branch> // switch to feature branch
 git push origin               // push updated feature branch to your personal remote repo
 ```
 
-> [!WARNING]  
+> [!WARNING]
 > Be **very careful** updating to and from origin. It can cause loss of work, specially if you work on more than one machine. Make sure your remote origin repo **always** holds the most up-to-date version of your code. **No, seriously**. Make a mental rule: *remote origin repo always holds the most up-to-date version of my code!* and **stick to it!** It's almost always possible to recover lost work with `git` but it's hard and unnecessary work if you follow some simple rules.
 
 **[back to top](#table-of-contents)** | **[back to section top](#6-syncing-branches)**

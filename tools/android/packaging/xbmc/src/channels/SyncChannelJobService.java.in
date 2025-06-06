@@ -162,7 +162,7 @@ public class SyncChannelJobService extends JobService
           if (sub.getChannelId() == 0)
           {
             long channelId = TvUtil.createChannel(mContext, sub);
-            sub.setChannelId(channelId);          
+            sub.setChannelId(channelId);
           }
         }
       }

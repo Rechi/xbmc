@@ -36,7 +36,7 @@ enum class ColorFormat
 /*!
  * \brief Given the color code from the close caption decoder, returns the corresponding
  * color in rgb format (striping the alpha channel from argb)
- * 
+ *
  * \param[in] ccColor - a given color from the cc decoder
  * \param[in] format - the color format
  * \return the corresponding Color in rgb

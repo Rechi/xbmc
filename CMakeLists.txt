@@ -287,7 +287,7 @@ core_optional_dep(${optional_deps})
 core_require_dep(${required_deps})
 
 # Check for any libs to be packaged with main app. eg libaacs
-# These libs are not directly linked with main app, but may be used if available from a 
+# These libs are not directly linked with main app, but may be used if available from a
 # dependency in the main app. eg libbluray can dyload libaacs for additional features
 if(PLATFORM_OPTIONAL_PACKAGES)
   core_optional_package_lib(${PLATFORM_OPTIONAL_PACKAGES})

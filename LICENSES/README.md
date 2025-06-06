@@ -43,7 +43,7 @@ Since most source files in Kodi are `GPL-2.0-or-later` licensed, the typical cop
  */
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > Kodi is developed and maintained by Kodi Team members and the open-source community. We thank all of our **[contributors](https://github.com/xbmc/xbmc/graphs/contributors)**! **For the detailed history of contributions** of a given file, use `git blame <filename>` to see line-by-line credits or `git log --follow <filename>` to see the changelog across renames, rewrites and code shuffle.
 
 ### License Files
