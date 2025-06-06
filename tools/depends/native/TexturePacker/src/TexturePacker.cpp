@@ -159,7 +159,7 @@ void TexturePacker::CreateSkeletonHeader(CXBTFWriter& xbtfWriter,
         }
         else if (decoderManager.IsSupportedGraphicsFile(dp->d_name))
         {
-          std::string fileName = "";
+          std::string fileName;
           if (!relativePath.empty())
           {
             fileName += relativePath;
