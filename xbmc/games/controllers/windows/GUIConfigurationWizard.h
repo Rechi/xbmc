@@ -72,7 +72,7 @@ public:
   void OnKeyRelease(const CKey& key) override {}
 
   // implementation of Observer
-  void Notify(const Observable& obs, const ObservableMessage msg) override;
+  void Notify(const Observable& obs, ObservableMessage msg) override;
 
 protected:
   // implementation of CThread

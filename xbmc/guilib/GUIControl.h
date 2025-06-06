@@ -186,7 +186,7 @@ public:
   virtual float GetHeight() const;
   virtual void AssignDepth();
 
-  void MarkDirtyRegion(const unsigned int dirtyState = DIRTY_STATE_CONTROL);
+  void MarkDirtyRegion(unsigned int dirtyState = DIRTY_STATE_CONTROL);
   bool IsControlDirty() const { return m_controlDirtyState != 0; }
 
   /*! \brief return the render region in screen coordinates of this control

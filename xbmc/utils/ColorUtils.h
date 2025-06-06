@@ -86,28 +86,28 @@ constexpr auto HTML_BASIC_COLORS = make_map<std::string_view, Color>({{"white", 
  * \param opacity The opacity value as a float
  * \return the original color with the changed opacity/alpha value
  */
-Color ChangeOpacity(const Color argb, const float opacity);
+Color ChangeOpacity(Color argb, float opacity);
 
 /*!
  * \brief Convert given ARGB color to RGBA color value
  * \param color The original color
  * \return the original color converted to RGBA value
  */
-Color ConvertToRGBA(const Color argb);
+Color ConvertToRGBA(Color argb);
 
 /*!
  * \brief Convert given RGBA color to ARGB color value
  * \param color The original color
  * \return the original color converted to ARGB value
  */
-Color ConvertToARGB(const Color rgba);
+Color ConvertToARGB(Color rgba);
 
 /*!
  * \brief Convert given ARGB color to BGR color value
  * \param color The original color
  * \return the original color converted to BGR value
 */
-Color ConvertToBGR(const Color argb);
+Color ConvertToBGR(Color argb);
 
 /*!
  * \brief Convert given hex value to Color value
@@ -154,13 +154,13 @@ bool comparePairColorInfo(const std::pair<std::string, ColorInfo>& a,
  * \param color The original color
  * \return the original color converted to ColorFloats
  */
-ColorFloats ConvertToFloats(const Color argb);
+ColorFloats ConvertToFloats(Color argb);
 
 /*!
  * \brief Convert given ARGB color to hex RGB color value
  * \param color The original color
  * \return The original color converted to hex RGB
  */
-std::string ConvertToHexRGB(const Color argb);
+std::string ConvertToHexRGB(Color argb);
 
 } // namespace KODI::UTILS::COLOR

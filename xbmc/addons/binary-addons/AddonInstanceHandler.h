@@ -95,31 +95,31 @@ protected:
 private:
   std::shared_ptr<CSetting> GetSetting(const std::string& setting);
 
-  static char* get_instance_user_path(const KODI_ADDON_INSTANCE_BACKEND_HDL hdl);
-  static bool is_instance_setting_using_default(const KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
+  static char* get_instance_user_path(KODI_ADDON_INSTANCE_BACKEND_HDL hdl);
+  static bool is_instance_setting_using_default(KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
                                                 const char* id);
-  static bool get_instance_setting_bool(const KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
+  static bool get_instance_setting_bool(KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
                                         const char* id,
                                         bool* value);
-  static bool get_instance_setting_int(const KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
+  static bool get_instance_setting_int(KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
                                        const char* id,
                                        int* value);
-  static bool get_instance_setting_float(const KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
+  static bool get_instance_setting_float(KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
                                          const char* id,
                                          float* value);
-  static bool get_instance_setting_string(const KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
+  static bool get_instance_setting_string(KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
                                           const char* id,
                                           char** value);
-  static bool set_instance_setting_bool(const KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
+  static bool set_instance_setting_bool(KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
                                         const char* id,
                                         bool value);
-  static bool set_instance_setting_int(const KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
+  static bool set_instance_setting_int(KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
                                        const char* id,
                                        int value);
-  static bool set_instance_setting_float(const KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
+  static bool set_instance_setting_float(KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
                                          const char* id,
                                          float value);
-  static bool set_instance_setting_string(const KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
+  static bool set_instance_setting_string(KODI_ADDON_INSTANCE_BACKEND_HDL hdl,
                                           const char* id,
                                           const char* value);
 

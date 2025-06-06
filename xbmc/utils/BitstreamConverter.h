@@ -103,7 +103,7 @@ public:
   void SetRemoveDovi(bool value) { m_removeDovi = value; }
   void SetRemoveHdr10Plus(bool value) { m_removeHdr10Plus = value; }
 
-  static bool       mpeg2_sequence_header(const uint8_t *data, const uint32_t size, mpeg2_sequence *sequence);
+  static bool mpeg2_sequence_header(const uint8_t* data, uint32_t size, mpeg2_sequence* sequence);
 
 protected:
   static int  avc_parse_nal_units(AVIOContext *pb, const uint8_t *buf_in, int size);
