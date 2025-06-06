@@ -287,7 +287,6 @@ bool CGUIWindowPVRGuideBase::GetDirectory(const std::string& strDirectory, CFile
 void CGUIWindowPVRGuideBase::FormatAndSort(CFileItemList& items)
 {
   // Speedup: Nothing to do here as sorting was already done in RefreshTimelineItems
-  return;
 }
 
 CFileItemPtr CGUIWindowPVRGuideBase::GetCurrentListItem(int offset /*= 0*/)
