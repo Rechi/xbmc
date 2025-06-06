@@ -362,4 +362,3 @@ From Xcode7 on this approach is also available for non paying app developers (Ap
 Gestures can be adapted in **[system/keymaps/touchscreen.xml](https://github.com/xbmc/xbmc/blob/master/system/keymaps/touchscreen.xml)**.
 
 **[back to top](#table-of-contents)**
-

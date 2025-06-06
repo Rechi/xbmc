@@ -298,4 +298,3 @@ function(add_addon_depends addon searchpath)
   # make the ${addon}_DEPS variable available to the calling script
   set(${addon}_DEPS "${${addon}_DEPS}" PARENT_SCOPE)
 endfunction()
-

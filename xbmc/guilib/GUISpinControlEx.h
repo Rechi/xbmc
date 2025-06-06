@@ -54,4 +54,3 @@ protected:
   CGUIButtonControl m_buttonControl;
   float m_spinPosX;
 };
-

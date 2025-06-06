@@ -161,4 +161,3 @@ However, when a bunch of ANDs and ORs are combined, sometimes it makes things mo
 The last commit shows how I was given a convoluted condition and played around with boolean algebra until I eventually settled on what I considered most readable, **[Improve logic in CGraphicContext::SetFullScreenVideo()](https://github.com/xbmc/xbmc/commit/2d85c66)**.
 
 **[back to top](#table-of-contents)**
-

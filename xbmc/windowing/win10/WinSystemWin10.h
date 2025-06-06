@@ -163,4 +163,3 @@ protected:
 };
 
 #pragma pack(pop)
-

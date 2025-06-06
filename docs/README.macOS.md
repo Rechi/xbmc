@@ -375,4 +375,3 @@ Generated `dmg` file will be inside `$HOME/kodi-build/tools/darwin/packaging/osx
 Kodi can be installed like any other app.
 
 **[back to top](#table-of-contents)**
-

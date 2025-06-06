@@ -90,4 +90,3 @@ protected:
 
   int InternalFindMovie(const std::string& movieTitle, int movieYear, MOVIELIST& movielist, bool cleanChars = true);
 };
-

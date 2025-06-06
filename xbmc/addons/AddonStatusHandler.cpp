@@ -127,4 +127,3 @@ void CAddonStatusHandler::Process()
 
 
 } /*namespace ADDON*/
-

@@ -99,4 +99,3 @@ class CRenderCapture
     bool m_asyncSupported{false};
     bool m_asyncChecked{false};
 };
-

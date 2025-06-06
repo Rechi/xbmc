@@ -178,4 +178,3 @@ protected:
   bool m_seekToKeyFrame = false;
   double m_startTime = 0;
 };
-

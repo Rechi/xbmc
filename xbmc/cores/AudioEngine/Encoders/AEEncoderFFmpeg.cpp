@@ -371,4 +371,3 @@ double CAEEncoderFFmpeg::GetDelay(unsigned int bufferSize)
 
   return ((double)frames + ((double)bufferSize * m_OutputRatio)) * m_SampleRateMul;
 }
-

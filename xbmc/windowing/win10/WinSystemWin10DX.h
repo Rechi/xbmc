@@ -87,4 +87,3 @@ protected:
   void ResizeDeviceBuffers() override;
   bool IsStereoEnabled() override;
 };
-

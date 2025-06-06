@@ -51,4 +51,3 @@ protected:
 template<typename T>
    static bool ParseTag(T *tag, EmbeddedArt *art, MUSIC_INFO::CMusicInfoTag& infoTag);
 };
-

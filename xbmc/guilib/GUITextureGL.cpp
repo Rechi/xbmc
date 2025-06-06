@@ -372,4 +372,3 @@ void CGUITextureGL::DrawQuad(const CRect& rect,
 
   renderSystem->DisableShader();
 }
-

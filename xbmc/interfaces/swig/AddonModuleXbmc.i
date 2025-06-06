@@ -59,5 +59,3 @@ using namespace xbmc;
 %feature("director") Monitor;
 
 %include "interfaces/legacy/Monitor.h"
-
-

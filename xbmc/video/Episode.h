@@ -48,4 +48,3 @@ namespace KODI::VIDEO
 
   typedef std::vector<EPISODE> EPISODELIST;
 }
-

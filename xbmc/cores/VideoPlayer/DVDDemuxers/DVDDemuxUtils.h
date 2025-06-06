@@ -21,4 +21,3 @@ public:
   static DemuxPacket* AllocateDemuxPacket(unsigned int iDataSize, unsigned int encryptedSubsampleCount);
   static void StoreSideData(DemuxPacket *pkt, AVPacket *src);
 };
-

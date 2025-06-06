@@ -62,4 +62,3 @@ protected:
 private:
   void Reset();
 };
-

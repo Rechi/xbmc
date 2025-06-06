@@ -122,4 +122,3 @@ private:
     std::vector<CGUIControl *> *m_collector;
   };
 };
-

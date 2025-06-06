@@ -21,4 +21,3 @@ namespace MUSIC_INFO
       bool Load(const std::string& strFileName, CMusicInfoTag& tag, EmbeddedArt *art = NULL) override;
   };
 }
-

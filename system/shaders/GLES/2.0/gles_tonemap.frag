@@ -47,4 +47,3 @@ vec3 inversePQ(vec3 x)
   return x;
 }
 #endif
-

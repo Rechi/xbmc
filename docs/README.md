@@ -21,4 +21,3 @@ Kodi uses CMake as its building system but instructions are highly dependent on 
   <a href="README.webOS.md" title="webOS"><img src="resources/webos.svg" height="78"></a>
   <a href="README.Windows.md" title="Windows"><img src="resources/windows.svg" height="78"></a>
 </p>
-

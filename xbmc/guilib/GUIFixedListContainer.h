@@ -57,4 +57,3 @@ private:
   int m_fixedCursor;    ///< default position the skinner wishes to use for the focused item
   int m_cursorRange;    ///< range that the focused item can vary when at the ends of the list
 };
-

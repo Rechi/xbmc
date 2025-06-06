@@ -249,5 +249,3 @@ private:
   bool m_waitForScrollEnd = false;
   float m_lastScrollValue = 0.0f;
 };
-
-

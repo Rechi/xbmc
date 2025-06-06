@@ -242,4 +242,3 @@ private:
   std::vector<CTextureDetails> m_useCounts; ///< Use count tracking
   CCriticalSection             m_useCountSection;
 };
-

@@ -752,4 +752,3 @@ typedef struct {
   c_adt_t        *vts_c_adt;
   vobu_admap_t   *vts_vobu_admap;
 } ifo_handle_t;
-

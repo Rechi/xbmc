@@ -128,4 +128,3 @@ protected:
   unsigned int m_currentFadeTime;
   unsigned int m_lastRenderTime;
 };
-

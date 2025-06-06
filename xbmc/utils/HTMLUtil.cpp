@@ -226,4 +226,3 @@ void CHTMLUtil::ConvertHTMLToW(const std::wstring& strHTML, std::wstring& strStr
     iPos = strStripped.find(L"&#", iStart);
   }
 }
-

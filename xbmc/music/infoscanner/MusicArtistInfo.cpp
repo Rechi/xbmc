@@ -31,4 +31,3 @@ bool CMusicArtistInfo::Load(CCurlFile& http, const ADDON::ScraperPtr& scraper,
 {
   return m_bLoaded = scraper->GetArtistDetails(http, m_artistURL, strSearch, m_artist);
 }
-

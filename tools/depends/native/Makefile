@@ -122,4 +122,3 @@ test-dependencies:
 
 distclean::
 	for d in $(NATIVE); do $(MAKE) -C $$d distclean; done
-

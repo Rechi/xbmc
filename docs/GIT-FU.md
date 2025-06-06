@@ -450,4 +450,3 @@ git config --global --add alias.fixer "rebase -i --autosquash" // git fixer HEAD
 ```
 
 **[back to top](#table-of-contents)** | **[back to section top](#10-other-resources)**
-

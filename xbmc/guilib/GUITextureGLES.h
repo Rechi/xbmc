@@ -60,4 +60,3 @@ private:
   CRenderSystemGLES *m_renderSystem;
   bool m_isGLES20{true};
 };
-

@@ -21,4 +21,3 @@ protected:
   std::string GetExtensions() override;
   std::vector<CMediaSource>& GetSources() override;
 };
-

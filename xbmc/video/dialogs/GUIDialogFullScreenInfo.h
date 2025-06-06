@@ -18,4 +18,3 @@ public:
   ~CGUIDialogFullScreenInfo(void) override;
   bool OnAction(const CAction &action) override;
 };
-

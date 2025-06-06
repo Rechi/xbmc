@@ -37,4 +37,3 @@ private:
   DXGI_OUTPUT_DESC m_outputDesc{};
   Microsoft::WRL::ComPtr<IDXGIFactory2> m_factory;
 };
-

@@ -84,4 +84,3 @@ bool CPluginSource::HasType(AddonType type) const
 }
 
 } /*namespace ADDON*/
-

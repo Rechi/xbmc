@@ -64,7 +64,3 @@ void BitstreamStats::CalculateBitrate()
     Start();
   }
 }
-
-
-
-

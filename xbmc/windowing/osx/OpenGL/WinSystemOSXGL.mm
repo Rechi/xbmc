@@ -70,4 +70,3 @@ bool CWinSystemOSXGL::SetFullScreen(bool fullScreen, RESOLUTION_INFO& res, bool 
 
   return true;
 }
-

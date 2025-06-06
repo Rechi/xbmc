@@ -482,4 +482,3 @@ namespace XBMCAddon
     }
   }
 }
-

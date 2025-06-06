@@ -273,4 +273,3 @@ void CStorageProvider::GetDrivesByType(std::vector<CMediaSource>& localDrives,
     AddOrReplace(localDrives, share);
   }
 }
-

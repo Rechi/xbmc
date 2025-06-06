@@ -67,4 +67,3 @@ namespace XBMCAddon
     inline operator const T2& () const { return later(); }
   };
 }
-

@@ -95,4 +95,3 @@ protected:
 
   HMODULE m_hDriverModule;
 };
-

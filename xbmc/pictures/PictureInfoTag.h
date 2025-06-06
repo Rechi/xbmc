@@ -61,4 +61,3 @@ private:
   CDateTime  m_dateTimeTaken;
   void ConvertDateTime();
 };
-

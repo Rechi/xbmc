@@ -15,4 +15,3 @@ public:
   static bool IsVP3CompatibleWidth(int width);
   static double NormalizeFrameduration(double frameduration, bool *match = nullptr);
 };
-

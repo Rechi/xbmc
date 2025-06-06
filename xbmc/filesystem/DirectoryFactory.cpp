@@ -221,4 +221,3 @@ IDirectory* CDirectoryFactory::Create(const CURL& url)
             url.GetRedacted());
   return NULL;
 }
-

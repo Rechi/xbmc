@@ -97,4 +97,3 @@ private:
 
   static void sndLibErrorHandler(const char *file, int line, const char *function, int err, const char *fmt, ...);
 };
-

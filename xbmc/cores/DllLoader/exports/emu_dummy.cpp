@@ -17,4 +17,3 @@ extern "C" void not_implement( const char* debuginfo)
     CLog::Log(LOGDEBUG, "{}", debuginfo);
   }
 }
-

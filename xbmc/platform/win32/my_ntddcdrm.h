@@ -26,4 +26,3 @@ typedef struct __RAW_READ_INFO
   TRACK_MODE_TYPE TrackMode;
 }
 RAW_READ_INFO, *PRAW_READ_INFO;
-

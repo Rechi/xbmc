@@ -958,4 +958,3 @@ bool CAddonsDirectory::GetScriptsAndPlugins(const std::string &content, CFileIte
 }
 
 }
-

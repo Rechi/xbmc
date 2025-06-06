@@ -19,4 +19,3 @@ namespace XbmcCommons
     CLog::Log(LOGERROR, "EXCEPTION Thrown ({}) : {}", classname, message);
   }
 }
-

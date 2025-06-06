@@ -204,4 +204,3 @@ void CVirtualDirectory::GetSources(std::vector<CMediaSource>& shares) const
 #endif
 }
 }
-

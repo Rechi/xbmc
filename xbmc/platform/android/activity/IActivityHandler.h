@@ -42,4 +42,3 @@ public:
   virtual void onGainFocus() {}
   virtual void onLostFocus() {}
 };
-

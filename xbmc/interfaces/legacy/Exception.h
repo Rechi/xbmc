@@ -52,4 +52,3 @@ namespace XBMCAddon
  *  languages. See the comment in AddonControl.h for more details.
  */
 #define THROW_UNIMP(classname) throw UnimplementedException(classname, __FUNCTION__)
-

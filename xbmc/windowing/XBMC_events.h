@@ -134,4 +134,3 @@ typedef struct XBMC_Event {
     XBMC_ScreenChangeEvent screen;
   };
 } XBMC_Event;
-

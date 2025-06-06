@@ -72,4 +72,3 @@ int CEnvironment::putenv(const std::string &envstring)
 
   return setenv(name, value);
 }
-

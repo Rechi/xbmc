@@ -228,6 +228,3 @@ private:
 };
 
 typedef std::vector<CMusicRole> VECMUSICROLES;
-
-
-

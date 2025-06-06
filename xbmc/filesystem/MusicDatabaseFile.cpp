@@ -87,4 +87,3 @@ int64_t CMusicDatabaseFile::GetLength()
 {
   return m_file.GetLength();
 }
-

@@ -197,4 +197,3 @@ private:
   ArtMap m_art;
   ArtMap m_artFallbacks;
 };
-

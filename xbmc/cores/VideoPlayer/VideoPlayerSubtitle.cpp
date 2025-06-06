@@ -210,4 +210,3 @@ bool CVideoPlayerSubtitle::AcceptsData() const
   // FIXME : This may still be causing problems + magic number :(
   return m_pOverlayContainer->GetSize() < 5;
 }
-

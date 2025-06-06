@@ -145,4 +145,3 @@ namespace XFILE
     std::string m_exportPath;
   };
 }
-

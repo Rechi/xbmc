@@ -383,4 +383,3 @@ GDB can be used to debug, though the support is rather primitive. Rather than us
 This will open the installed version of Kodi and break. The warnings can be ignored as we have the appropriate paths already setup.
 
 **[back to top](#table-of-contents)** | **[back to section top](#10-debugging-kodi)**
-

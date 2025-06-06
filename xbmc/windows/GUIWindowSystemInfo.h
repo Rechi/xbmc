@@ -28,4 +28,3 @@ private:
   std::vector<std::string> m_diskUsage;
   bool m_privacyPolicyLoaded{false};
 };
-

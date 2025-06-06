@@ -79,4 +79,3 @@ protected:
 
   uint32_t m_fadeDepth{0};
 };
-

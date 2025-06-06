@@ -416,4 +416,3 @@ private:
 
   static std::string empty_string;
 };
-

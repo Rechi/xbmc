@@ -84,4 +84,3 @@ void CJNIXBMCNsdManagerRegistrationListener::_onUnregistrationFailed(JNIEnv* env
   CLog::Log(LOGERROR, "ZeroconfAndroid: {}.{} unregistration failed: {}", si.getServiceName(),
             si.getServiceType(), errorCode);
 }
-

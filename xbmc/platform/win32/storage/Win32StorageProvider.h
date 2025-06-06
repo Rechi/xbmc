@@ -61,4 +61,3 @@ private:
   std::string  m_strPath;
   bool        m_bautorun;
 };
-

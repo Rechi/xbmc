@@ -9,4 +9,3 @@ if(TARGET ${APP_NAME_LC}::OpenGl)
 
   core_add_library(rendering_gl)
 endif()
-
