@@ -445,7 +445,7 @@ void CAdvancedSettings::Initialize()
 
   m_openGlDebugging = false;
 
-  m_userAgent = g_sysinfo.GetUserAgent();
+  m_userAgent = CSysInfo::GetUserAgent();
 
   m_nfsTimeout = 30;
   m_nfsRetries = -1;

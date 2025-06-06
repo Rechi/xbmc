@@ -200,7 +200,7 @@ bool CDVDSubtitlesLibass::CreateTrack()
     return false;
   }
 
-  m_track->track_type = m_track->TRACK_TYPE_ASS;
+  m_track->track_type = ass_track::TRACK_TYPE_ASS;
   m_track->Timer = 100.;
   // Set fixed values to PlayRes to allow the use of style override code for positioning
   m_track->PlayResX = static_cast<int>(VIEWPORT_WIDTH);

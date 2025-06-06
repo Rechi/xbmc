@@ -49,21 +49,21 @@ bool COverrideFile::Delete(const CURL& url)
 
   std::string strFileName = TranslatePath(url);
 
-  return m_file.Delete(strFileName);
+  return XFILE::CFile::Delete(strFileName);
 }
 
 bool COverrideFile::Exists(const CURL& url)
 {
   std::string strFileName = TranslatePath(url);
 
-  return m_file.Exists(strFileName);
+  return XFILE::CFile::Exists(strFileName);
 }
 
 int COverrideFile::Stat(const CURL& url, struct __stat64* buffer)
 {
   std::string strFileName = TranslatePath(url);
 
-  return m_file.Stat(strFileName, buffer);
+  return XFILE::CFile::Stat(strFileName, buffer);
 }
 
 bool COverrideFile::Rename(const CURL& url, const CURL& urlnew)
@@ -74,7 +74,7 @@ bool COverrideFile::Rename(const CURL& url, const CURL& urlnew)
   std::string strFileName = TranslatePath(url);
   std::string strFileName2 = TranslatePath(urlnew);
 
-  return m_file.Rename(strFileName, strFileName2);
+  return XFILE::CFile::Rename(strFileName, strFileName2);
 }
 
 int COverrideFile::Stat(struct __stat64* buffer)

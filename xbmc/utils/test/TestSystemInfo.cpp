@@ -28,23 +28,28 @@ protected:
 
 TEST_F(TestSystemInfo, Print_System_Info)
 {
-  std::cout << "'GetKernelName(false)': \"" << g_sysinfo.GetKernelName(true) << "\"\n";
-  std::cout << "'GetKernelVersion()': \"" << g_sysinfo.GetKernelVersion() << "\"\n";
-  std::cout << "'GetKernelVersionFull()': \"" << g_sysinfo.GetKernelVersionFull() << "\"\n";
-  std::cout << "'GetOsPrettyNameWithVersion()': \"" << g_sysinfo.GetOsPrettyNameWithVersion() << "\"\n";
-  std::cout << "'GetOsName(false)': \"" << g_sysinfo.GetOsName(false) << "\"\n";
-  std::cout << "'GetOsVersion()': \"" << g_sysinfo.GetOsVersion() << "\"\n";
-  std::cout << "'GetKernelCpuFamily()': \"" << g_sysinfo.GetKernelCpuFamily() << "\"\n";
-  std::cout << "'GetKernelBitness()': \"" << g_sysinfo.GetKernelBitness() << "\"\n";
-  std::cout << "'GetBuildTargetPlatformName()': \"" << g_sysinfo.GetBuildTargetPlatformName() << "\"\n";
-  std::cout << "'GetBuildTargetPlatformVersionDecoded()': \"" << g_sysinfo.GetBuildTargetPlatformVersionDecoded() << "\"\n";
-  std::cout << "'GetBuildTargetPlatformVersion()': \"" << g_sysinfo.GetBuildTargetPlatformVersion() << "\"\n";
-  std::cout << "'GetBuildTargetCpuFamily()': \"" << g_sysinfo.GetBuildTargetCpuFamily() << "\"\n";
-  std::cout << "'GetXbmcBitness()': \"" << g_sysinfo.GetXbmcBitness() << "\"\n";
-  std::cout << "'GetUsedCompilerNameAndVer()': \"" << g_sysinfo.GetUsedCompilerNameAndVer() << "\"\n";
-  std::cout << "'GetManufacturerName()': \"" << g_sysinfo.GetManufacturerName() << "\"\n";
-  std::cout << "'GetModelName()': \"" << g_sysinfo.GetModelName() << "\"\n";
-  std::cout << "'GetUserAgent()': \"" << g_sysinfo.GetUserAgent() << "\"\n";
+  std::cout << "'GetKernelName(false)': \"" << CSysInfo::GetKernelName(true) << "\"\n";
+  std::cout << "'GetKernelVersion()': \"" << CSysInfo::GetKernelVersion() << "\"\n";
+  std::cout << "'GetKernelVersionFull()': \"" << CSysInfo::GetKernelVersionFull() << "\"\n";
+  std::cout << "'GetOsPrettyNameWithVersion()': \"" << CSysInfo::GetOsPrettyNameWithVersion()
+            << "\"\n";
+  std::cout << "'GetOsName(false)': \"" << CSysInfo::GetOsName(false) << "\"\n";
+  std::cout << "'GetOsVersion()': \"" << CSysInfo::GetOsVersion() << "\"\n";
+  std::cout << "'GetKernelCpuFamily()': \"" << CSysInfo::GetKernelCpuFamily() << "\"\n";
+  std::cout << "'GetKernelBitness()': \"" << CSysInfo::GetKernelBitness() << "\"\n";
+  std::cout << "'GetBuildTargetPlatformName()': \"" << CSysInfo::GetBuildTargetPlatformName()
+            << "\"\n";
+  std::cout << "'GetBuildTargetPlatformVersionDecoded()': \""
+            << CSysInfo::GetBuildTargetPlatformVersionDecoded() << "\"\n";
+  std::cout << "'GetBuildTargetPlatformVersion()': \"" << CSysInfo::GetBuildTargetPlatformVersion()
+            << "\"\n";
+  std::cout << "'GetBuildTargetCpuFamily()': \"" << CSysInfo::GetBuildTargetCpuFamily() << "\"\n";
+  std::cout << "'GetXbmcBitness()': \"" << CSysInfo::GetXbmcBitness() << "\"\n";
+  std::cout << "'GetUsedCompilerNameAndVer()': \"" << CSysInfo::GetUsedCompilerNameAndVer()
+            << "\"\n";
+  std::cout << "'GetManufacturerName()': \"" << CSysInfo::GetManufacturerName() << "\"\n";
+  std::cout << "'GetModelName()': \"" << CSysInfo::GetModelName() << "\"\n";
+  std::cout << "'GetUserAgent()': \"" << CSysInfo::GetUserAgent() << "\"\n";
 }
 
 TEST_F(TestSystemInfo, GetKernelName)
@@ -192,7 +197,9 @@ TEST_F(TestSystemInfo, GetWindowsVersion)
 
 TEST_F(TestSystemInfo, GetKernelBitness)
 {
-  EXPECT_TRUE(g_sysinfo.GetKernelBitness() == 32 || g_sysinfo.GetKernelBitness() == 64) << "'GetKernelBitness()' must return '32' or '64', but not '" << g_sysinfo.GetKernelBitness() << "'";
+  EXPECT_TRUE(g_sysinfo.GetKernelBitness() == 32 || g_sysinfo.GetKernelBitness() == 64)
+      << "'GetKernelBitness()' must return '32' or '64', but not '" << CSysInfo::GetKernelBitness()
+      << "'";
   EXPECT_LE(g_sysinfo.GetXbmcBitness(), g_sysinfo.GetKernelBitness()) << "'GetKernelBitness()' must be greater or equal to 'GetXbmcBitness()'";
 }
 
@@ -208,7 +215,9 @@ TEST_F(TestSystemInfo, GetKernelCpuFamily)
 
 TEST_F(TestSystemInfo, GetXbmcBitness)
 {
-  EXPECT_TRUE(g_sysinfo.GetXbmcBitness() == 32 || g_sysinfo.GetXbmcBitness() == 64) << "'GetXbmcBitness()' must return '32' or '64', but not '" << g_sysinfo.GetXbmcBitness() << "'";
+  EXPECT_TRUE(g_sysinfo.GetXbmcBitness() == 32 || g_sysinfo.GetXbmcBitness() == 64)
+      << "'GetXbmcBitness()' must return '32' or '64', but not '" << CSysInfo::GetXbmcBitness()
+      << "'";
   EXPECT_GE(g_sysinfo.GetKernelBitness(), g_sysinfo.GetXbmcBitness()) << "'GetXbmcBitness()' must be not greater than 'GetKernelBitness()'";
 }
 
@@ -251,20 +260,32 @@ TEST_F(TestSystemInfo, GetUserAgent)
 
 TEST_F(TestSystemInfo, GetBuildTargetPlatformName)
 {
-  EXPECT_EQ(std::string::npos, g_sysinfo.GetBuildTargetPlatformName().find("Unknown")) << "'GetBuildTargetPlatformName()' must not contain 'Unknown', actual value: '" << g_sysinfo.GetBuildTargetPlatformName() << "'";
-  EXPECT_EQ(std::string::npos, g_sysinfo.GetBuildTargetPlatformName().find("unknown")) << "'GetBuildTargetPlatformName()' must not contain 'unknown', actual value: '" << g_sysinfo.GetBuildTargetPlatformName() << "'";
+  EXPECT_EQ(std::string::npos, g_sysinfo.GetBuildTargetPlatformName().find("Unknown"))
+      << "'GetBuildTargetPlatformName()' must not contain 'Unknown', actual value: '"
+      << CSysInfo::GetBuildTargetPlatformName() << "'";
+  EXPECT_EQ(std::string::npos, g_sysinfo.GetBuildTargetPlatformName().find("unknown"))
+      << "'GetBuildTargetPlatformName()' must not contain 'unknown', actual value: '"
+      << CSysInfo::GetBuildTargetPlatformName() << "'";
 }
 
 TEST_F(TestSystemInfo, GetBuildTargetPlatformVersion)
 {
-  EXPECT_EQ(std::string::npos, g_sysinfo.GetBuildTargetPlatformVersion().find("Unknown")) << "'GetBuildTargetPlatformVersion()' must not contain 'Unknown', actual value: '" << g_sysinfo.GetBuildTargetPlatformVersion() << "'";
-  EXPECT_EQ(std::string::npos, g_sysinfo.GetBuildTargetPlatformVersion().find("unknown")) << "'GetBuildTargetPlatformVersion()' must not contain 'unknown', actual value: '" << g_sysinfo.GetBuildTargetPlatformVersion() << "'";
+  EXPECT_EQ(std::string::npos, g_sysinfo.GetBuildTargetPlatformVersion().find("Unknown"))
+      << "'GetBuildTargetPlatformVersion()' must not contain 'Unknown', actual value: '"
+      << CSysInfo::GetBuildTargetPlatformVersion() << "'";
+  EXPECT_EQ(std::string::npos, g_sysinfo.GetBuildTargetPlatformVersion().find("unknown"))
+      << "'GetBuildTargetPlatformVersion()' must not contain 'unknown', actual value: '"
+      << CSysInfo::GetBuildTargetPlatformVersion() << "'";
 }
 
 TEST_F(TestSystemInfo, GetBuildTargetPlatformVersionDecoded)
 {
-  EXPECT_EQ(std::string::npos, g_sysinfo.GetBuildTargetPlatformVersionDecoded().find("Unknown")) << "'GetBuildTargetPlatformVersionDecoded()' must not contain 'Unknown', actual value: '" << g_sysinfo.GetBuildTargetPlatformVersion() << "'";
-  EXPECT_EQ(std::string::npos, g_sysinfo.GetBuildTargetPlatformVersionDecoded().find("unknown")) << "'GetBuildTargetPlatformVersionDecoded()' must not contain 'unknown', actual value: '" << g_sysinfo.GetBuildTargetPlatformVersion() << "'";
+  EXPECT_EQ(std::string::npos, g_sysinfo.GetBuildTargetPlatformVersionDecoded().find("Unknown"))
+      << "'GetBuildTargetPlatformVersionDecoded()' must not contain 'Unknown', actual value: '"
+      << CSysInfo::GetBuildTargetPlatformVersion() << "'";
+  EXPECT_EQ(std::string::npos, g_sysinfo.GetBuildTargetPlatformVersionDecoded().find("unknown"))
+      << "'GetBuildTargetPlatformVersionDecoded()' must not contain 'unknown', actual value: '"
+      << CSysInfo::GetBuildTargetPlatformVersion() << "'";
 #ifdef TARGET_ANDROID
   EXPECT_STREQ("API level ", g_sysinfo.GetBuildTargetPlatformVersionDecoded().substr(0, 10).c_str()) << "'GetBuildTargetPlatformVersionDecoded()' must start from 'API level '";
 #else

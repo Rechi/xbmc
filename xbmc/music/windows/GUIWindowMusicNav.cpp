@@ -398,7 +398,7 @@ bool CGUIWindowMusicNav::GetDirectory(const std::string &strDirectory, CFileItem
   if (StringUtils::StartsWithNoCase(strDirectory, "videodb://") || VIDEO::IsVideoDb(items))
   {
     CVideoDatabaseDirectory dir;
-    const auto node = dir.GetDirectoryChildType(items.GetPath());
+    const auto node = XFILE::CVideoDatabaseDirectory::GetDirectoryChildType(items.GetPath());
     switch (node)
     {
       case VIDEODATABASEDIRECTORY::NodeType::TITLE_MUSICVIDEOS:
@@ -437,7 +437,7 @@ bool CGUIWindowMusicNav::GetDirectory(const std::string &strDirectory, CFileItem
   else if (StringUtils::StartsWithNoCase(strDirectory, "musicdb://") || MUSIC::IsMusicDb(items))
   {
     CMusicDatabaseDirectory dir;
-    NodeType node = dir.GetDirectoryChildType(items.GetPath());
+    NodeType node = XFILE::CMusicDatabaseDirectory::GetDirectoryChildType(items.GetPath());
     switch (node)
     {
       case NodeType::ALBUM:
@@ -532,7 +532,7 @@ void CGUIWindowMusicNav::UpdateButtons()
   else
   {
     CMusicDatabaseDirectory dir;
-    dir.GetLabel(m_vecItems->GetPath(), strLabel);
+    XFILE::CMusicDatabaseDirectory::GetLabel(m_vecItems->GetPath(), strLabel);
   }
 
   SET_CONTROL_LABEL(CONTROL_FILTER, strLabel);
@@ -633,7 +633,7 @@ void CGUIWindowMusicNav::GetContextButtons(int itemNumber, CContextButtons &butt
 
       CMusicDatabaseDirectory dir;
 
-      if (!item->IsParentFolder() && !dir.IsAllItem(item->GetPath()))
+      if (!item->IsParentFolder() && !XFILE::CMusicDatabaseDirectory::IsAllItem(item->GetPath()))
       {
         if (item->m_bIsFolder && !VIDEO::IsVideoDb(*item) && !item->IsPlugin() &&
             !StringUtils::StartsWithNoCase(item->GetPath(), "musicsearch://"))
@@ -646,7 +646,7 @@ void CGUIWindowMusicNav::GetContextButtons(int itemNumber, CContextButtons &butt
             buttons.Add(CONTEXT_BUTTON_INFO_ALL, 21884);
 
           //Set default or clear default
-          NodeType nodetype = dir.GetDirectoryType(item->GetPath());
+          NodeType nodetype = XFILE::CMusicDatabaseDirectory::GetDirectoryType(item->GetPath());
           if (!inPlaylists && (nodetype == NodeType::ROOT || nodetype == NodeType::OVERVIEW ||
                                nodetype == NodeType::TOP100))
           {
