@@ -453,10 +453,7 @@ bool CWinSystemX11::HasCalibration(const RESOLUTION_INFO &resInfo)
     return true;
   if (resInfo.fPixelRatio != fPixRatio)
     return true;
-  if (resInfo.iSubtitles != resInfo.iHeight)
-    return true;
-
-  return false;
+  return resInfo.iSubtitles != resInfo.iHeight;
 }
 
 bool CWinSystemX11::UseLimitedColor()

@@ -41,5 +41,7 @@ CheckOptions:
     value: true
   - key:   readability-redundant-smartptr-get.IgnoreMacros
     value: false
+  - key:   readability-simplify-boolean-expr.ChainedConditionalReturn
+    value: true
   - key:   readability-simplify-boolean-expr.SimplifyDeMorgan
     value: false

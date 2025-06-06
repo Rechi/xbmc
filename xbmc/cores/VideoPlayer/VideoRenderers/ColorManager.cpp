@@ -62,9 +62,7 @@ bool CColorManager::IsValid() const
     std::string fileName = settings->GetString("videoscreen.cms3dlut");
     if (fileName.empty())
       return false;
-    if (!CFile::Exists(fileName))
-      return false;
-    return true;
+    return CFile::Exists(fileName);
   }
 #if defined(HAVE_LCMS2)
   case CMS_MODE_PROFILE:
