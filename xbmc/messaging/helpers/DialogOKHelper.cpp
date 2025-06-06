@@ -23,10 +23,8 @@ bool ShowOKDialogText(CVariant heading, CVariant text)
   options.heading = std::move(heading);
   options.text = std::move(text);
 
-  if (CServiceBroker::GetAppMessenger()->SendMsg(TMSG_GUI_DIALOG_OK, -1, -1,
-                                                 static_cast<void*>(&options)) > 0)
-    return true;
-  return false;
+  return CServiceBroker::GetAppMessenger()->SendMsg(TMSG_GUI_DIALOG_OK, -1, -1,
+                                                    static_cast<void*>(&options)) > 0;
 }
 
 void UpdateOKDialogText(CVariant heading, CVariant text)
@@ -48,10 +46,8 @@ bool ShowOKDialogLines(CVariant heading, CVariant line0, CVariant line1, CVarian
   options.lines[1] = std::move(line1);
   options.lines[2] = std::move(line2);
 
-  if (CServiceBroker::GetAppMessenger()->SendMsg(TMSG_GUI_DIALOG_OK, -1, -1,
-                                                 static_cast<void*>(&options)) > 0)
-    return true;
-  return false;
+  return CServiceBroker::GetAppMessenger()->SendMsg(TMSG_GUI_DIALOG_OK, -1, -1,
+                                                    static_cast<void*>(&options)) > 0;
 }
 
 }

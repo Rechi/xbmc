@@ -190,10 +190,7 @@ bool CRenderSystemGLES::BeginRender()
 
 bool CRenderSystemGLES::EndRender()
 {
-  if (!m_bRenderCreated)
-    return false;
-
-  return true;
+  return m_bRenderCreated;
 }
 
 void CRenderSystemGLES::InvalidateColorBuffer()

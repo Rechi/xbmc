@@ -355,7 +355,7 @@ bool CEventClient::OnPacketBUTTON(CEventPacket *packet)
     keycode = bcode;
 
   float famount = 0;
-  bool active = (flags & PTB_DOWN) ? true : false;
+  bool active = (flags & PTB_DOWN) != 0;
 
   if (flags & PTB_USE_NAME)
     CLog::Log(LOGDEBUG, "EventClient: button name \"{}\" map \"{}\" {}", button, map,
@@ -378,13 +378,9 @@ bool CEventClient::OnPacketBUTTON(CEventPacket *packet)
     /* find the last queued item of this type */
     std::unique_lock lock(m_critSection);
 
-    CEventButtonState state( keycode,
-                             map,
-                             button,
-                             famount,
-                             (flags & (PTB_AXIS|PTB_AXISSINGLE)) ? true  : false,
-                             (flags & PTB_NO_REPEAT)             ? false : true,
-                             (flags & PTB_USE_AMOUNT)            ? true : false );
+    CEventButtonState state(keycode, map, button, famount,
+                            (flags & (PTB_AXIS | PTB_AXISSINGLE)) != 0,
+                            (flags & PTB_NO_REPEAT) == 0, (flags & PTB_USE_AMOUNT) != 0);
 
     /* correct non active events so they work with rest of code */
     if(!active)
@@ -454,8 +450,8 @@ bool CEventClient::OnPacketBUTTON(CEventPacket *packet)
       m_currentButton.m_mapName    = map;
       m_currentButton.m_buttonName = button;
       m_currentButton.m_fAmount    = famount;
-      m_currentButton.m_bRepeat    = (flags & PTB_NO_REPEAT)  ? false : true;
-      m_currentButton.m_bAxis      = (flags & PTB_AXIS)       ? true : false;
+      m_currentButton.m_bRepeat = (flags & PTB_NO_REPEAT) == 0;
+      m_currentButton.m_bAxis = (flags & PTB_AXIS) != 0;
       m_currentButton.m_iNextRepeat = {};
       m_currentButton.SetActive();
       m_currentButton.Load();
@@ -783,7 +779,5 @@ bool CEventClient::CheckButtonRepeat(std::chrono::time_point<std::chrono::steady
 bool CEventClient::Alive() const
 {
   // 60 seconds timeout
-  if ( (time(NULL) - m_lastPing) > 60 )
-    return false;
-  return true;
+  return (time(NULL) - m_lastPing) <= 60;
 }

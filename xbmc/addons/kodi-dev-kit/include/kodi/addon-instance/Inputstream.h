@@ -297,9 +297,7 @@ public:
   /// @return true if they equal, false otherwise
   bool operator==(const kodi::addon::InputstreamMasteringMetadata& right) const
   {
-    if (memcmp(m_cStructure, right.m_cStructure, sizeof(INPUTSTREAM_MASTERING_METADATA)) == 0)
-      return true;
-    return false;
+    return memcmp(m_cStructure, right.m_cStructure, sizeof(INPUTSTREAM_MASTERING_METADATA)) == 0;
   }
 
   /// @brief Set the chromaticity coordinates of the red value in the
@@ -456,9 +454,7 @@ public:
   /// @return true if they equal, false otherwise
   bool operator==(const kodi::addon::InputstreamContentlightMetadata& right) const
   {
-    if (memcmp(m_cStructure, right.m_cStructure, sizeof(INPUTSTREAM_CONTENTLIGHT_METADATA)) == 0)
-      return true;
-    return false;
+    return memcmp(m_cStructure, right.m_cStructure, sizeof(INPUTSTREAM_CONTENTLIGHT_METADATA)) == 0;
   }
 
   /// @brief Set the maximum content light level (MaxCLL).
