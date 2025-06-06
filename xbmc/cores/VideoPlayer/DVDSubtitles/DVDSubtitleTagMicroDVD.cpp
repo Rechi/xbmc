@@ -71,8 +71,8 @@ void CDVDSubtitleTagMicroDVD::ConvertLine(std::string& strUTF8)
               for (int i = 1; i < 7; i++)
               {
                 char temp = tagValue[i];
-                if (!(('0' <= temp && temp <= '9') || ('a' <= temp && temp <= 'f') ||
-                      ('A' <= temp && temp <= 'F')))
+                if (('0' > temp || temp > '9') && ('a' > temp || temp > 'f') &&
+                    ('A' > temp || temp > 'F'))
                 {
                   bHex = false;
                   break;

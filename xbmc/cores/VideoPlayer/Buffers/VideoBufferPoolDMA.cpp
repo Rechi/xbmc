@@ -97,7 +97,7 @@ bool CVideoBufferPoolDMA::IsCompatible(AVPixelFormat format, int size)
 {
   std::unique_lock lock(m_critSection);
 
-  return !(m_fourcc != TranslateFormat(format) || m_size != static_cast<uint64_t>(size));
+  return m_fourcc == TranslateFormat(format) && m_size == static_cast<uint64_t>(size);
 }
 
 void CVideoBufferPoolDMA::Released(CVideoBufferManager& videoBufferManager)
