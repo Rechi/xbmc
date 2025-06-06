@@ -158,7 +158,6 @@ class CDemuxStreamAudio : public CDemuxStream
 {
 public:
   CDemuxStreamAudio()
-    : CDemuxStream()
   {
     iChannels = 0;
     iSampleRate = 0;
@@ -185,37 +184,25 @@ public:
 class CDemuxStreamSubtitle : public CDemuxStream
 {
 public:
-  CDemuxStreamSubtitle()
-    : CDemuxStream()
-  {
-    type = STREAM_SUBTITLE;
-  }
+  CDemuxStreamSubtitle() { type = STREAM_SUBTITLE; }
 };
 
 class CDemuxStreamTeletext : public CDemuxStream
 {
 public:
-  CDemuxStreamTeletext()
-    : CDemuxStream()
-  {
-    type = STREAM_TELETEXT;
-  }
+  CDemuxStreamTeletext() { type = STREAM_TELETEXT; }
 };
 
 class CDemuxStreamAudioID3 : public CDemuxStream
 {
 public:
-  CDemuxStreamAudioID3() : CDemuxStream() { type = STREAM_AUDIO_ID3; }
+  CDemuxStreamAudioID3() { type = STREAM_AUDIO_ID3; }
 };
 
 class CDemuxStreamRadioRDS : public CDemuxStream
 {
 public:
-  CDemuxStreamRadioRDS()
-    : CDemuxStream()
-  {
-    type = STREAM_RADIO_RDS;
-  }
+  CDemuxStreamRadioRDS() { type = STREAM_RADIO_RDS; }
 };
 
 class CDVDDemux

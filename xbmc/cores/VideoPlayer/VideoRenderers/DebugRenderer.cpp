@@ -112,7 +112,7 @@ void CDebugRenderer::Flush()
   m_adapter->FlushSubtitles();
 }
 
-CDebugRenderer::CRenderer::CRenderer() : OVERLAY::CRenderer()
+CDebugRenderer::CRenderer::CRenderer()
 {
 }
 

@@ -26,19 +26,11 @@
 
 static const std::string ImageBasePath = "/image/";
 
-CHTTPImageTransformationHandler::CHTTPImageTransformationHandler()
-  : m_url(),
-    m_lastModified(),
-    m_buffer(NULL),
-    m_responseData()
+CHTTPImageTransformationHandler::CHTTPImageTransformationHandler() : m_buffer(NULL)
 { }
 
-CHTTPImageTransformationHandler::CHTTPImageTransformationHandler(const HTTPRequest &request)
-  : IHTTPRequestHandler(request),
-    m_url(),
-    m_lastModified(),
-    m_buffer(NULL),
-    m_responseData()
+CHTTPImageTransformationHandler::CHTTPImageTransformationHandler(const HTTPRequest& request)
+  : IHTTPRequestHandler(request), m_buffer(NULL)
 {
   m_url = m_request.pathUrl.substr(ImageBasePath.size());
   if (m_url.empty())

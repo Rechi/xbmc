@@ -104,7 +104,7 @@ void CNetworkInterfacePosix::GetMacAddressRaw(char rawMac[6]) const
   memcpy(rawMac, m_interfaceMacAddrRaw, 6);
 }
 
-CNetworkPosix::CNetworkPosix() : CNetworkBase()
+CNetworkPosix::CNetworkPosix()
 {
   m_sock = socket(AF_INET, SOCK_DGRAM, 0);
 }

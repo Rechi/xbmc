@@ -57,7 +57,7 @@ private:
   DVDAudioFrame m_audioFrame{};
   int m_planes{0};
   bool m_needConvert{false};
-  AEAudioFormat m_srcFormat{};
+  AEAudioFormat m_srcFormat;
   int m_channels{0};
 
   std::unique_ptr<CProcessInfo> m_processInfo;

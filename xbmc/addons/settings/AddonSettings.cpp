@@ -154,8 +154,7 @@ namespace ADDON
 {
 
 CAddonSettings::CAddonSettings(const std::shared_ptr<IAddon>& addon, AddonInstanceId instanceId)
-  : CSettingsBase(),
-    m_addonId(addon->ID()),
+  : m_addonId(addon->ID()),
     m_addonPath(addon->Path()),
     m_addonProfile(addon->Profile()),
     m_instanceId(instanceId),

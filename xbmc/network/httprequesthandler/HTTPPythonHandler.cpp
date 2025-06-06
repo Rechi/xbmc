@@ -27,25 +27,9 @@
 #define MAX_STRING_POST_SIZE 20000
 
 CHTTPPythonHandler::CHTTPPythonHandler()
-  : IHTTPRequestHandler(),
-    m_scriptPath(),
-    m_addon(),
-    m_lastModified(),
-    m_requestData(),
-    m_responseData(),
-    m_responseRanges(),
-    m_redirectUrl()
 { }
 
-CHTTPPythonHandler::CHTTPPythonHandler(const HTTPRequest &request)
-  : IHTTPRequestHandler(request),
-    m_scriptPath(),
-    m_addon(),
-    m_lastModified(),
-    m_requestData(),
-    m_responseData(),
-    m_responseRanges(),
-    m_redirectUrl()
+CHTTPPythonHandler::CHTTPPythonHandler(const HTTPRequest& request) : IHTTPRequestHandler(request)
 {
   m_response.type = HTTPMemoryDownloadNoFreeCopy;
 
