@@ -20,5 +20,6 @@ Checks: "\
   readability-const-return-type,\
   readability-container-contains,\
   readability-container-data-pointer,\
+  readability-container-size-empty,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'
