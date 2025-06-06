@@ -1758,7 +1758,7 @@ bool CMusicDatabase::UpdateArtist(const CArtist& artist)
                artist.strBiography, //
                artist.strDied, //
                artist.strDisbanded, //
-               StringUtils::Join(artist.yearsActive, itemSeparator).c_str(), //
+               StringUtils::Join(artist.yearsActive, itemSeparator), //
                artist.thumbURL.GetData());
 
   DeleteArtistDiscography(artist.idArtist);
@@ -3480,7 +3480,7 @@ bool CMusicDatabase::SearchArtists(const std::string& search, CFileItemList& art
     if (nullptr == m_pDS)
       return false;
 
-    std::string strVariousArtists = g_localizeStrings.Get(340).c_str();
+    const std::string& strVariousArtists = g_localizeStrings.Get(340);
     std::string strSQL;
     if (search.size() >= MIN_FULL_SEARCH_LENGTH)
       strSQL = PrepareSQL("SELECT * FROM artist "
@@ -4402,7 +4402,7 @@ bool CMusicDatabase::CleanupPaths()
       // anything that isn't a parent path of a song path is to be deleted
       std::string path = m_pDS->fv("strPath").get_asString();
       sql = PrepareSQL("SELECT COUNT(idPath) FROM songpaths WHERE SUBSTR(strPath,1,%i)='%s'",
-                       StringUtils::utf8_strlen(path.c_str()), path.c_str());
+                       StringUtils::utf8_strlen(path), path.c_str());
       if (m_pDS2->query(sql) && m_pDS2->num_rows() == 1 && m_pDS2->fv(0).get_asInt() == 0)
         pathIds.push_back(m_pDS->fv("idPath").get_asString()); // nothing found, so delete
       m_pDS2->close();
@@ -9648,9 +9648,9 @@ bool CMusicDatabase::GetAlbumPath(int idAlbum, std::string& basePath)
   for (const auto& pathpair : paths)
   {
     if (basePath.empty())
-      basePath = pathpair.first.c_str();
+      basePath = pathpair.first;
     else
-      URIUtils::GetCommonPath(basePath, pathpair.first.c_str());
+      URIUtils::GetCommonPath(basePath, pathpair.first);
   }
   return true;
 }
@@ -11316,7 +11316,7 @@ bool CMusicDatabase::RemoveSongsFromPath(const std::string& path1, MAPSONGS& son
     if (exact)
       where = PrepareSQL(" WHERE strPath='%s'", path.c_str());
     else
-      where = PrepareSQL(" WHERE SUBSTR(strPath,1,%i)='%s'", StringUtils::utf8_strlen(path.c_str()),
+      where = PrepareSQL(" WHERE SUBSTR(strPath,1,%i)='%s'", StringUtils::utf8_strlen(path),
                          path.c_str());
     std::string sql = "SELECT * FROM songview" + where + " ORDER BY strFileName";
     if (!m_pDS->query(sql))
@@ -13940,7 +13940,7 @@ bool CMusicDatabase::SetResumeBookmarkForAudioBook(const CFileItem& item, int bo
   std::string strSQL = PrepareSQL("SELECT bookmark FROM audiobook "
                                   "WHERE file='%s'",
                                   item.GetDynPath().c_str());
-  if (!m_pDS->query(strSQL.c_str()) || m_pDS->num_rows() == 0)
+  if (!m_pDS->query(strSQL) || m_pDS->num_rows() == 0)
   {
     if (!AddAudioBook(item))
       return false;
@@ -13957,7 +13957,7 @@ bool CMusicDatabase::GetResumeBookmarkForAudioBook(const CFileItem& item, int& b
 {
   std::string strSQL =
       PrepareSQL("SELECT bookmark FROM audiobook WHERE file='%s'", item.GetDynPath().c_str());
-  if (!m_pDS->query(strSQL.c_str()) || m_pDS->num_rows() == 0)
+  if (!m_pDS->query(strSQL) || m_pDS->num_rows() == 0)
     return false;
 
   bookmark = m_pDS->fv(0).get_asInt();
