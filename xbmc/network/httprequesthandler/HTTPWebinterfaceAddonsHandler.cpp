@@ -18,7 +18,7 @@
 
 bool CHTTPWebinterfaceAddonsHandler::CanHandleRequest(const HTTPRequest &request) const
 {
-  return (request.pathUrl.compare("/addons") == 0 || request.pathUrl.compare("/addons/") == 0);
+  return (request.pathUrl == "/addons" || request.pathUrl == "/addons/");
 }
 
 MHD_RESULT CHTTPWebinterfaceAddonsHandler::HandleRequest()

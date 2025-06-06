@@ -1101,7 +1101,7 @@ bool CSettingsManager::LoadSetting(const TiXmlNode* node, const SettingPtr& sett
     while (settingElement != nullptr)
     {
       const auto* const id = settingElement->Attribute(SETTING_XML_ATTR_ID);
-      if (id != nullptr && settingId.compare(id) == 0)
+      if (id != nullptr && settingId == id)
         break;
 
       settingElement = settingElement->NextSiblingElement(SETTING_XML_ELM_SETTING);

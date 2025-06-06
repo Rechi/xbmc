@@ -123,7 +123,7 @@ bool CWinSystemX11GLESContext::SetWindow(int width, int height, bool fullscreen,
   CWinSystemX11::SetWindow(width, height, fullscreen, output, &newwin);
   if (newwin)
   {
-    RefreshGLContext(m_currentOutput.compare(output) != 0);
+    RefreshGLContext(m_currentOutput != output);
     XSync(m_dpy, false);
     CServiceBroker::GetWinSystem()->GetGfxContext().Clear(0);
     CServiceBroker::GetWinSystem()->GetGfxContext().Flip(true, false);
