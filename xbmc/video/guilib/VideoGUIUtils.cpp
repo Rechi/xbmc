@@ -236,7 +236,7 @@ void CAsyncGetItemsForPlaylist::GetItemsForPlaylist(const std::shared_ptr<CFileI
         if (!i->HasVideoInfoTag())
           continue;
 
-        const auto videoTag = i->GetVideoInfoTag();
+        auto* const videoTag = i->GetVideoInfoTag();
 
         const CBookmark& bookmark = videoTag->GetResumePoint();
         if (bookmark.IsSet())

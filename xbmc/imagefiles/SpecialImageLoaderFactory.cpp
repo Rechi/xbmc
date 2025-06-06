@@ -32,7 +32,7 @@ std::unique_ptr<CTexture> CSpecialImageLoaderFactory::Load(const CImageFileURL& 
 {
   if (!imageFile.IsSpecialImage())
     return {};
-  for (auto& loader : m_specialImageLoaders)
+  for (const auto& loader : m_specialImageLoaders)
   {
     if (loader->CanLoad(imageFile.GetSpecialType()))
     {

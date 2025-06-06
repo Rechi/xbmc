@@ -165,7 +165,7 @@ PeripheralPtr CPeripheralBus::GetPeripheral(const std::string& strLocation) cons
 {
   PeripheralPtr result;
   std::unique_lock lock(m_critSection);
-  for (auto& peripheral : m_peripherals)
+  for (const auto& peripheral : m_peripherals)
   {
     if (peripheral->Location() == strLocation)
     {
@@ -181,7 +181,7 @@ unsigned int CPeripheralBus::GetPeripheralsWithFeature(PeripheralVector& results
 {
   unsigned int iReturn = 0;
   std::unique_lock lock(m_critSection);
-  for (auto& peripheral : m_peripherals)
+  for (const auto& peripheral : m_peripherals)
   {
     if (peripheral->HasFeature(feature))
     {
@@ -339,7 +339,7 @@ PeripheralPtr CPeripheralBus::GetByPath(const std::string& strPath) const
   PeripheralPtr result;
 
   std::unique_lock lock(m_critSection);
-  for (auto& peripheral : m_peripherals)
+  for (const auto& peripheral : m_peripherals)
   {
     if (StringUtils::EqualsNoCase(strPath, peripheral->FileLocation()))
     {

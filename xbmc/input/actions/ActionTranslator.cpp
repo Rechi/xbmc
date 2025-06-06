@@ -264,7 +264,7 @@ static const std::map<ActionName, ActionID> ActionMappings = {
 void CActionTranslator::GetActions(std::vector<std::string>& actionList)
 {
   actionList.reserve(ActionMappings.size());
-  for (auto& actionMapping : ActionMappings)
+  for (const auto& actionMapping : ActionMappings)
     actionList.push_back(actionMapping.first);
 }
 

@@ -55,7 +55,7 @@ CRPRendererDMAOpenGL::CRPRendererDMAOpenGL(const CRenderSettings& renderSettings
 
 void CRPRendererDMAOpenGL::Render(uint8_t alpha)
 {
-  auto renderBuffer = static_cast<CRenderBufferDMA*>(m_renderBuffer);
+  auto* renderBuffer = static_cast<CRenderBufferDMA*>(m_renderBuffer);
   assert(renderBuffer != nullptr);
 
   RenderBufferTextures* rbTextures;

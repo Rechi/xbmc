@@ -1089,7 +1089,7 @@ void CGUIWindowManager::OnApplicationMessage(ThreadMessage* pMsg)
     if (!pMsg->lpVoid && pMsg->param1 < 0 && pMsg->param2 < 0)
       return;
 
-    auto dialog = static_cast<CGUIDialogYesNo*>(GetWindow(WINDOW_DIALOG_YES_NO));
+    auto* dialog = static_cast<CGUIDialogYesNo*>(GetWindow(WINDOW_DIALOG_YES_NO));
     if (!dialog)
       return;
 
@@ -1112,7 +1112,7 @@ void CGUIWindowManager::OnApplicationMessage(ThreadMessage* pMsg)
     if (!pMsg->lpVoid && pMsg->param1 < 0 && pMsg->param2 < 0)
       return;
 
-    auto dialogOK = static_cast<CGUIDialogOK*>(GetWindow(WINDOW_DIALOG_OK));
+    auto* dialogOK = static_cast<CGUIDialogOK*>(GetWindow(WINDOW_DIALOG_OK));
     if (!dialogOK)
       return;
 

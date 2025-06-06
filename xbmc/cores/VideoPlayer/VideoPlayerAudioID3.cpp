@@ -278,7 +278,7 @@ void CVideoPlayerAudioID3::ProcessID3v2(const ID3v2::Tag* tag) const
             // Loop through and look for the main (no description) comment
             for (const auto& ct : it.second)
             {
-              auto commentsFrame = dynamic_cast<const ID3v2::CommentsFrame*>(ct);
+              const auto* commentsFrame = dynamic_cast<const ID3v2::CommentsFrame*>(ct);
               if (commentsFrame && commentsFrame->description().isEmpty())
               {
                 currentMusic->SetComment(commentsFrame->text().to8Bit(true));
@@ -341,7 +341,7 @@ void CVideoPlayerAudioID3::ProcessID3v2(const ID3v2::Tag* tag) const
 
 std::vector<std::string> CVideoPlayerAudioID3::GetID3v2StringList(const ID3v2::FrameList& frameList)
 {
-  auto frame = dynamic_cast<const ID3v2::TextIdentificationFrame*>(frameList.front());
+  const auto* frame = dynamic_cast<const ID3v2::TextIdentificationFrame*>(frameList.front());
   if (frame)
     return StringListToVectorString(frame->fieldList());
   return {};

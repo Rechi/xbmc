@@ -160,7 +160,7 @@ bool CSystemGUIInfo::GetLabel(std::string& value, const CFileItem *item, int con
       return true;
     case SYSTEM_SCREEN_RESOLUTION:
     {
-      const auto winSystem = CServiceBroker::GetWinSystem();
+      auto* const winSystem = CServiceBroker::GetWinSystem();
       if (winSystem)
       {
         const RESOLUTION_INFO& resInfo = winSystem->GetGfxContext().GetResInfo();

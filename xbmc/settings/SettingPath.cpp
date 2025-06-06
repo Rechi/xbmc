@@ -53,7 +53,7 @@ bool CSettingPath::Deserialize(const TiXmlNode *node, bool update /* = false */)
     return false;
   }
 
-  auto constraints = node->FirstChild(XML_ELM_CONSTRAINTS);
+  const auto* constraints = node->FirstChild(XML_ELM_CONSTRAINTS);
   if (constraints != nullptr)
   {
     // get writable
@@ -62,14 +62,14 @@ bool CSettingPath::Deserialize(const TiXmlNode *node, bool update /* = false */)
     XMLUtils::GetBoolean(constraints, "hideextensions", m_hideExtension);
 
     // get sources
-    auto sources = constraints->FirstChild("sources");
+    const auto* sources = constraints->FirstChild("sources");
     if (sources != nullptr)
     {
       m_sources.clear();
-      auto source = sources->FirstChild("source");
+      const auto* source = sources->FirstChild("source");
       while (source != nullptr)
       {
-        auto child = source->FirstChild();
+        const auto* child = source->FirstChild();
         if (child != nullptr)
         {
           const std::string& strSource = child->ValueStr();
@@ -82,7 +82,7 @@ bool CSettingPath::Deserialize(const TiXmlNode *node, bool update /* = false */)
     }
 
     // get masking
-    auto masking = constraints->FirstChild("masking");
+    const auto* masking = constraints->FirstChild("masking");
     if (masking != nullptr)
       m_masking = masking->FirstChild()->ValueStr();
   }
@@ -109,7 +109,7 @@ std::string CSettingPath::GetMasking(const CFileExtensionProvider& fileExtension
   auto audioMask = fileExtensionProvider.GetMusicExtensions();
   auto videoMask = fileExtensionProvider.GetVideoExtensions();
   auto imageMask = fileExtensionProvider.GetPictureExtensions();
-  auto execMask = "";
+  const auto* execMask = "";
 #if defined(TARGET_WINDOWS)
   execMask = ".exe|.bat|.cmd|.py";
 #endif // defined(TARGET_WINDOWS)

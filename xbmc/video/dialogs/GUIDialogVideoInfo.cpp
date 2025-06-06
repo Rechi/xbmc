@@ -203,7 +203,9 @@ bool CGUIDialogVideoInfo::OnMessage(CGUIMessage& message)
           OnSearch(directors[0]);
         else
         {
-          auto pDlgSelect = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSelect>(WINDOW_DIALOG_SELECT);
+          auto* pDlgSelect =
+              CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSelect>(
+                  WINDOW_DIALOG_SELECT);
           if (pDlgSelect)
           {
             pDlgSelect->Reset();
@@ -894,7 +896,7 @@ void CArtTypeChooser::UpdateArtType(const std::string& type, const std::string& 
 {
   m_item->SetArt(type, art);
   if (!m_items.IsEmpty())
-    for (auto& item : m_items)
+    for (const auto& item : m_items)
       if (item->GetProperty("type") == type)
         item->SetArt("thumb", art);
 }
@@ -2081,7 +2083,8 @@ bool CGUIDialogVideoInfo::LinkMovieToTvShow(const std::shared_ptr<CFileItem>& it
 
 void CGUIDialogVideoInfo::ShowFor(const CFileItem& item)
 {
-  auto window = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIWindowVideoNav>(WINDOW_VIDEO_NAV);
+  auto* window =
+      CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIWindowVideoNav>(WINDOW_VIDEO_NAV);
   if (window)
     window->OnItemInfo(item);
 }

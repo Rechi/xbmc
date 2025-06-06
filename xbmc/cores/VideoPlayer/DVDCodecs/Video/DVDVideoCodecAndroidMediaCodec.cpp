@@ -238,7 +238,7 @@ CMediaCodecVideoBufferPool::~CMediaCodecVideoBufferPool()
   CLog::Log(LOGDEBUG,
             "CMediaCodecVideoBufferPool::~CMediaCodecVideoBufferPool Releasing {} buffers",
             static_cast<unsigned int>(m_videoBuffers.size()));
-  for (auto buffer : m_videoBuffers)
+  for (auto* buffer : m_videoBuffers)
     delete buffer;
 }
 
@@ -283,7 +283,7 @@ void CMediaCodecVideoBufferPool::ResetMediaCodec()
 void CMediaCodecVideoBufferPool::ReleaseMediaCodecBuffers()
 {
   std::unique_lock lock(m_criticalSection);
-  for (auto buffer : m_videoBuffers)
+  for (auto* buffer : m_videoBuffers)
     buffer->ReleaseOutputBuffer(false, 0, this);
 }
 
