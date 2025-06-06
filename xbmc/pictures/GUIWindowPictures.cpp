@@ -328,8 +328,8 @@ bool CGUIWindowPictures::ShowPicture(int iItem, bool startSlideShow)
   bool bShowVideos = CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_PICTURES_SHOWVIDEOS);
   for (const auto& pItem : *m_vecItems)
   {
-    if (!pItem->m_bIsFolder &&
-        !(URIUtils::IsRAR(pItem->GetPath()) || URIUtils::IsZIP(pItem->GetPath())) &&
+    if (!pItem->m_bIsFolder && !URIUtils::IsRAR(pItem->GetPath()) &&
+        !URIUtils::IsZIP(pItem->GetPath()) &&
         (pItem->IsPicture() || (bShowVideos && VIDEO::IsVideo(*pItem))))
     {
       slideShow.Add(pItem.get());
@@ -450,7 +450,8 @@ void CGUIWindowPictures::GetContextButtons(int itemNumber, CContextButtons &butt
     {
       if (item)
       {
-        if (!(item->m_bIsFolder || item->IsZIP() || item->IsRAR() || item->IsCBZ() || item->IsCBR() || item->IsScript()))
+        if (!item->m_bIsFolder && !item->IsZIP() && !item->IsRAR() && !item->IsCBZ() &&
+            !item->IsCBR() && !item->IsScript())
         {
           if (item->IsPicture())
             buttons.Add(CONTEXT_BUTTON_INFO, 13406); // picture info
@@ -557,7 +558,8 @@ void CGUIWindowPictures::LoadPlayList(const std::string& strPlayList)
     {
       CFileItemPtr pItem = playlist[i];
       //CLog::Log(LOGDEBUG,"-- playlist item: {}", pItem->GetPath());
-      if (pItem->IsPicture() && !(pItem->IsZIP() || pItem->IsRAR() || pItem->IsCBZ() || pItem->IsCBR()))
+      if (pItem->IsPicture() && !pItem->IsZIP() && !pItem->IsRAR() && !pItem->IsCBZ() &&
+          !pItem->IsCBR())
       {
         slideShow.Add(pItem.get());
       }
