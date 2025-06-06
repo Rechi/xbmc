@@ -53,7 +53,6 @@ private:
   void ToLargeInt(LARGE_INTEGER& time) const;
   void FromLargeInt(const LARGE_INTEGER& time);
 
-private:
   KODI::TIME::FileTime m_timeSpan;
 
   friend class CDateTime;
@@ -207,7 +206,6 @@ private:
   void ToLargeInt(LARGE_INTEGER& time) const;
   void FromLargeInt(const LARGE_INTEGER& time);
 
-private:
   KODI::TIME::FileTime m_time;
 
   enum class State

@@ -28,7 +28,6 @@ public:
   static const char *BandwidthMarker;
   static const char *OffsetMarker;
 
-public:
   CPlayListM3U(void);
   ~CPlayListM3U(void) override;
   bool Load(const std::string& strFileName) override;

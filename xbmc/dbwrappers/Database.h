@@ -311,7 +311,6 @@ protected:
   std::unique_ptr<dbiplus::Dataset> m_pDS;
   std::unique_ptr<dbiplus::Dataset> m_pDS2;
 
-protected:
   // Construction parameters
   const CProfileManager& m_profileManager;
 
