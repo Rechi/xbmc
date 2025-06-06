@@ -31,6 +31,7 @@
 #include "utils/TransformMatrix.h"
 #include "utils/log.h"
 
+#include <algorithm>
 #include <cstring>
 #include <mutex>
 
@@ -38,9 +39,6 @@ extern "C"
 {
 #include <libswscale/swscale.h>
 }
-
-#include <algorithm>
-#include <cstring>
 
 using namespace KODI;
 using namespace RETRO;
