@@ -760,7 +760,7 @@ std::chrono::milliseconds CEdl::GetTotalCutTime() const
   return m_totalCutTime; // ms
 }
 
-const std::vector<EDL::Edit> CEdl::GetEditList() const
+std::vector<EDL::Edit> CEdl::GetEditList() const
 {
   // the sum of cut durations while we iterate over them
   // note: edits are ordered by start time
@@ -789,7 +789,7 @@ const std::vector<EDL::Edit> CEdl::GetEditList() const
   return editList;
 }
 
-const std::vector<std::chrono::milliseconds> CEdl::GetCutMarkers() const
+std::vector<std::chrono::milliseconds> CEdl::GetCutMarkers() const
 {
   std::chrono::milliseconds surpassedSumOfCutDurations{0};
   std::vector<std::chrono::milliseconds> cutList;
@@ -804,7 +804,7 @@ const std::vector<std::chrono::milliseconds> CEdl::GetCutMarkers() const
   return cutList;
 }
 
-const std::vector<std::chrono::milliseconds> CEdl::GetSceneMarkers() const
+std::vector<std::chrono::milliseconds> CEdl::GetSceneMarkers() const
 {
   std::vector<std::chrono::milliseconds> sceneMarkers;
   sceneMarkers.reserve(m_vecSceneMarkers.size());

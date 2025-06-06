@@ -67,10 +67,7 @@ public:
   bool IsCurrentThread() const;
   bool Join(std::chrono::milliseconds duration);
 
-  inline static const std::thread::id GetCurrentThreadId()
-  {
-    return std::this_thread::get_id();
-  }
+  inline static std::thread::id GetCurrentThreadId() { return std::this_thread::get_id(); }
 
   /*!
    * \brief Set the threads priority. This uses the platforms

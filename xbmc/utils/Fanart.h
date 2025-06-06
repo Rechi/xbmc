@@ -55,7 +55,7 @@ public:
   ///
   /// Used to return a specified fanart theme color value
   /// \param index: 0 based index of the color to retrieve.  A fanart theme contains 3 colors, indices 0-2, arranged from darkest to lightest.
-  const std::string GetColor(unsigned int index) const;
+  std::string GetColor(unsigned int index) const;
   ///
   /// Sets a particular fanart to be the "primary" fanart, or in other words, sets which fanart is actually used by XBMC
   ///

@@ -38,7 +38,7 @@ public:
   void FreeResources(bool immediately = false) override;
   void DynamicResourceAlloc(bool bOnOff) override;
   void SetInvalid() override;
-  const std::string GetCurrentLabel() const;
+  std::string GetCurrentLabel() const;
   void SetText(const std::string& aLabel) { m_buttonControl.SetLabel(aLabel); }
   void SetEnabled(bool bEnable) override;
   float GetXPosition() const override { return m_buttonControl.GetXPosition(); }

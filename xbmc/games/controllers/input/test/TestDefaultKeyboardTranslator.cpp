@@ -31,7 +31,7 @@ KEYBOARD::XBMCKey GetKeycode(KEYBOARD::XBMCKey keysym,
   return controller->GetFeature(keyName).Keycode();
 }
 
-const GAME::ControllerPtr GetController()
+GAME::ControllerPtr GetController()
 {
   ADDON::CAddonMgr& addonManager = CServiceBroker::GetAddonMgr();
 

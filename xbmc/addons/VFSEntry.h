@@ -31,7 +31,7 @@ public:
   virtual ~CVFSAddonCache();
   void Init();
   void Deinit();
-  const std::vector<VFSEntryPtr> GetAddonInstances();
+  std::vector<VFSEntryPtr> GetAddonInstances();
   VFSEntryPtr GetAddonInstance(const std::string& strId);
 
 protected:

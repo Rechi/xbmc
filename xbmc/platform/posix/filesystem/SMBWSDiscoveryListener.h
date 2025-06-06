@@ -87,8 +87,8 @@ private:
 
 private:
   template<std::size_t SIZE>
-  const std::string wsd_tag_find(const std::string& xml,
-                                 const std::array<std::pair<std::string, std::string>, SIZE>& tag);
+  std::string wsd_tag_find(const std::string& xml,
+                           const std::array<std::pair<std::string, std::string>, SIZE>& tag);
 
   // Debug print WSD packet data
   void PrintWSDInfo(const WSDiscovery::wsd_req_info& info);
