@@ -226,6 +226,7 @@ class CAdvancedSettings : public ISettingCallback, public ISettingsHandler
     std::string m_tvshowMultiPartEnumRegExp;
     typedef std::vector< std::pair<std::string, std::string> > StringMapping;
     StringMapping m_pathSubstitutions;
+    StringMapping m_pathAlternatives;
     int m_remoteDelay; ///< \brief number of remote messages to ignore before repeating
     bool m_bScanIRServer;
 

@@ -1027,8 +1027,9 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
   if (pPathSubstitution)
   {
     m_pathSubstitutions.clear();
-    CLog::Log(LOGDEBUG,"Configuring path substitutions");
     TiXmlNode* pSubstitute = pPathSubstitution->FirstChildElement("substitute");
+    if (pSubstitute)
+      CLog::Log(LOGDEBUG, "Configuring path substitutions");
     while (pSubstitute)
     {
       std::string strFrom, strTo;
@@ -1057,6 +1058,39 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
 
       // get next one
       pSubstitute = pSubstitute->NextSiblingElement("substitute");
+    }
+
+    TiXmlNode* pAlternative = pPathSubstitution->FirstChildElement("alternative");
+    if (pAlternative)
+      CLog::Log(LOGDEBUG, "Configuring path alternative");
+    while (pAlternative)
+    {
+      std::string strFrom, strTo;
+      TiXmlNode* pFrom = pAlternative->FirstChild("from");
+      if (pFrom)
+        strFrom = CSpecialProtocol::TranslatePath(pFrom->FirstChild()->Value()).c_str();
+      TiXmlNode* pTo = pAlternative->FirstChild("to");
+      if (pTo)
+        strTo = pTo->FirstChild()->Value();
+
+      if (!strFrom.empty() && !strTo.empty())
+      {
+        CLog::Log(LOGDEBUG, "  Registering alternative pair:");
+        CLog::Log(LOGDEBUG, "    From: [%s]", strFrom.c_str());
+        CLog::Log(LOGDEBUG, "    To:   [%s]", strTo.c_str());
+        m_pathAlternatives.emplace_back(strFrom, strTo);
+      }
+      else
+      {
+        // error message about missing tag
+        if (strFrom.empty())
+          CLog::Log(LOGERROR, "  Missing <from> tag");
+        else
+          CLog::Log(LOGERROR, "  Missing <to> tag");
+      }
+
+      // get next one
+      pAlternative = pAlternative->NextSiblingElement("alternative");
     }
   }
 
