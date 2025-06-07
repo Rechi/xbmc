@@ -156,9 +156,9 @@ void CExternalPlayer::Process()
 
   if (!m_filenameReplacers.empty())
   {
-    for (unsigned int i = 0; i < m_filenameReplacers.size(); i++)
+    for (const std::string& filenameReplacer : m_filenameReplacers)
     {
-      std::vector<std::string> vecSplit = StringUtils::Split(m_filenameReplacers[i], " , ");
+      std::vector<std::string> vecSplit = StringUtils::Split(filenameReplacer, " , ");
 
       // something is wrong, go to next substitution
       if (vecSplit.size() != 4)
