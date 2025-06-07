@@ -59,17 +59,17 @@ protected:
   bool HasHardware() { return m_pHardware != nullptr; }
   void SetHardware(IHardwareDecoder *hardware);
 
-  AVFrame* m_pFrame = nullptr;;
-  AVFrame* m_pDecodedFrame = nullptr;;
-  AVCodecContext* m_pCodecContext = nullptr;;
+  AVFrame* m_pFrame = nullptr;
+  AVFrame* m_pDecodedFrame = nullptr;
+  AVCodecContext* m_pCodecContext = nullptr;
   std::shared_ptr<CVideoBufferPoolFFmpeg> m_videoBufferPool;
 
   std::string m_filters;
   std::string m_filters_next;
   AVFilterGraph* m_pFilterGraph = nullptr;
   AVFilterContext* m_pFilterIn = nullptr;
-  AVFilterContext* m_pFilterOut = nullptr;;
-  AVFrame* m_pFilterFrame = nullptr;;
+  AVFilterContext* m_pFilterOut = nullptr;
+  AVFrame* m_pFilterFrame = nullptr;
   bool m_filterEof = false;
   bool m_eof = false;
 

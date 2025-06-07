@@ -90,7 +90,6 @@ struct VideoClassifyTest
         break;
       case 4:
         item.GetPictureInfoTag()->SetInfo("foo", "bar");
-        ;
         break;
       default:
         break;

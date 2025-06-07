@@ -328,7 +328,7 @@ void CProcessInfo::ResetAudioCodecInfo()
 
   m_audioDecoderName = "unknown";
   m_audioChannels = "unknown";
-  m_audioSampleRate = 0;;
+  m_audioSampleRate = 0;
   m_audioBitsPerSample = 0;
 
   if (m_dataCache)
