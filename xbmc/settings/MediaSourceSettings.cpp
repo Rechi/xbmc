@@ -196,25 +196,25 @@ bool CMediaSourceSettings::UpdateSource(const std::string& strType,
   if (pShares == NULL)
     return false;
 
-  for (std::vector<CMediaSource>::iterator it = pShares->begin(); it != pShares->end(); ++it)
+  for (CMediaSource& share : *pShares)
   {
-    if (it->strName == strOldName)
+    if (share.strName == strOldName)
     {
       if (strUpdateChild == "name")
-        it->strName = strUpdateValue;
+        share.strName = strUpdateValue;
       else if (strUpdateChild == "lockmode")
-        it->m_iLockMode = static_cast<LockMode>(std::strtol(strUpdateValue.c_str(), nullptr, 10));
+        share.m_iLockMode = static_cast<LockMode>(std::strtol(strUpdateValue.c_str(), nullptr, 10));
       else if (strUpdateChild == "lockcode")
-        it->m_strLockCode = strUpdateValue;
+        share.m_strLockCode = strUpdateValue;
       else if (strUpdateChild == "badpwdcount")
-        it->m_iBadPwdCount = (int)std::strtol(strUpdateValue.c_str(), NULL, 10);
+        share.m_iBadPwdCount = (int)std::strtol(strUpdateValue.c_str(), NULL, 10);
       else if (strUpdateChild == "thumbnail")
-        it->m_strThumbnailImage = strUpdateValue;
+        share.m_strThumbnailImage = strUpdateValue;
       else if (strUpdateChild == "path")
       {
-        it->vecPaths.clear();
-        it->strPath = strUpdateValue;
-        it->vecPaths.push_back(strUpdateValue);
+        share.vecPaths.clear();
+        share.strPath = strUpdateValue;
+        share.vecPaths.push_back(strUpdateValue);
       }
       else
         return false;
@@ -301,14 +301,14 @@ bool CMediaSourceSettings::UpdateShare(const std::string& type,
 
   // update our current share list
   CMediaSource* pShare = NULL;
-  for (std::vector<CMediaSource>::iterator it = pShares->begin(); it != pShares->end(); ++it)
+  for (CMediaSource& it : *pShares)
   {
-    if (it->strName == oldName)
+    if (it.strName == oldName)
     {
-      it->strName = share.strName;
-      it->strPath = share.strPath;
-      it->vecPaths = share.vecPaths;
-      pShare = &(*it);
+      it.strName = share.strName;
+      it.strPath = share.strPath;
+      it.vecPaths = share.vecPaths;
+      pShare = &it;
       break;
     }
   }
@@ -379,9 +379,9 @@ bool CMediaSourceSettings::GetSource(const std::string& category,
   else // multiple paths?
   {
     // validate the paths
-    for (auto path = vecPaths.begin(); path != vecPaths.end(); ++path)
+    for (const std::string& path : vecPaths)
     {
-      CURL url(*path);
+      CURL url(path);
       bool isInvalid = false;
 
       // for my programs
@@ -390,18 +390,18 @@ bool CMediaSourceSettings::GetSource(const std::string& category,
       {
         // only allow HD and plugins
         if (url.IsLocal() || url.IsProtocol("plugin"))
-          verifiedPaths.push_back(*path);
+          verifiedPaths.push_back(path);
         else
           isInvalid = true;
       }
       // for others allow everything (if the user does something silly, we can't stop them)
       else
-        verifiedPaths.push_back(*path);
+        verifiedPaths.push_back(path);
 
       // error message
       if (isInvalid)
         CLog::Log(LOGERROR, "CMediaSourceSettings:    invalid path type ({}) for multipath source",
-                  *path);
+                  path);
     }
 
     // no valid paths? skip to next source
@@ -501,9 +501,8 @@ bool CMediaSourceSettings::SetSources(tinyxml2::XMLNode* root,
     return false;
 
   XMLUtils::SetPath(sectionNode, "default", defaultPath);
-  for (std::vector<CMediaSource>::const_iterator it = shares.begin(); it != shares.end(); ++it)
+  for (const CMediaSource& share : shares)
   {
-    const CMediaSource& share = *it;
     if (share.m_ignore)
       continue;
 
@@ -511,8 +510,8 @@ bool CMediaSourceSettings::SetSources(tinyxml2::XMLNode* root,
 
     XMLUtils::SetString(sourceElement, "name", share.strName);
 
-    for (unsigned int i = 0; i < share.vecPaths.size(); i++)
-      XMLUtils::SetPath(sourceElement, "path", share.vecPaths[i]);
+    for (const std::string& path : share.vecPaths)
+      XMLUtils::SetPath(sourceElement, "path", path);
 
     if (share.m_iHasLock)
     {

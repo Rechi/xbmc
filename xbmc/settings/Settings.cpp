@@ -488,13 +488,14 @@ void CSettings::InitializeConditions()
 
   // add basic conditions
   const std::set<std::string> &simpleConditions = CSettingConditions::GetSimpleConditions();
-  for (std::set<std::string>::const_iterator itCondition = simpleConditions.begin(); itCondition != simpleConditions.end(); ++itCondition)
-    GetSettingsManager()->AddCondition(*itCondition);
+  for (const std::string& simpleCondition : simpleConditions)
+    GetSettingsManager()->AddCondition(simpleCondition);
 
   // add more complex conditions
   const std::map<std::string, SettingConditionCheck> &complexConditions = CSettingConditions::GetComplexConditions();
-  for (std::map<std::string, SettingConditionCheck>::const_iterator itCondition = complexConditions.begin(); itCondition != complexConditions.end(); ++itCondition)
-    GetSettingsManager()->AddDynamicCondition(itCondition->first, itCondition->second);
+  for (const std::pair<const std::string, SettingConditionCheck>& complexCondition :
+       complexConditions)
+    GetSettingsManager()->AddDynamicCondition(complexCondition.first, complexCondition.second);
 }
 
 void CSettings::UninitializeConditions()

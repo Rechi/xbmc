@@ -460,8 +460,8 @@ bool CAdvancedSettings::Load(const CProfileManager &profileManager)
   //       don't take defaults in.  Defaults are set in the constructor above
   Initialize(); // In case of profile switch.
   ParseSettingsFile("special://xbmc/system/advancedsettings.xml");
-  for (unsigned int i = 0; i < m_settingsFiles.size(); i++)
-    ParseSettingsFile(m_settingsFiles[i]);
+  for (const std::string& settingsFile : m_settingsFiles)
+    ParseSettingsFile(settingsFile);
 
   ParseSettingsFile(profileManager.GetUserDataItem("advancedsettings.xml"));
 
@@ -1243,8 +1243,8 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
   {
     m_seekSteps.clear();
     std::vector<std::string> steps = StringUtils::Split(seekSteps, ',');
-    for(std::vector<std::string>::iterator it = steps.begin(); it != steps.end(); ++it)
-      m_seekSteps.push_back(atoi((*it).c_str()));
+    for (const std::string& step : steps)
+      m_seekSteps.push_back(atoi(step.c_str()));
   }
 
   XMLUtils::GetBoolean(pRootElement, "opengldebugging", m_openGlDebugging);
@@ -1387,11 +1387,11 @@ void CAdvancedSettings::GetCustomExtensions(TiXmlElement *pRootElement, std::str
   if (XMLUtils::GetString(pRootElement, "remove", extraExtensions) && !extraExtensions.empty())
   {
     std::vector<std::string> exts = StringUtils::Split(extraExtensions, '|');
-    for (std::vector<std::string>::const_iterator i = exts.begin(); i != exts.end(); ++i)
+    for (const std::string& ext : exts)
     {
-      size_t iPos = extensions.find(*i);
+      size_t iPos = extensions.find(ext);
       if (iPos != std::string::npos)
-        extensions.erase(iPos,i->size()+1);
+        extensions.erase(iPos, ext.size() + 1);
     }
   }
 }
