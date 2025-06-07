@@ -216,7 +216,7 @@ bool CGUIDialogContextMenu::SourcesMenu(const std::string &strType, const CFileI
 
   int button = ShowAndGetChoice(buttons);
   if (button >= 0)
-    return OnContextButton(strType, item, (CONTEXT_BUTTON)button);
+    return OnContextButton(strType, item, static_cast<CONTEXT_BUTTON>(button));
   return false;
 }
 
@@ -619,7 +619,7 @@ std::string CGUIDialogContextMenu::GetDefaultShareNameByType(const std::string &
 
   bool bIsSourceName(false);
   int iIndex = CUtil::GetMatchingSource(strDefault, *pShares, bIsSourceName);
-  if (iIndex < 0 || iIndex >= (int)pShares->size())
+  if (iIndex < 0 || iIndex >= static_cast<int>(pShares->size()))
     return "";
 
   return pShares->at(iIndex).strName;
