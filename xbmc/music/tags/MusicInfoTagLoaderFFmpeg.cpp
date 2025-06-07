@@ -47,7 +47,7 @@ bool CMusicInfoTagLoaderFFmpeg::Load(const std::string& strFileName, CMusicInfoT
   int blockSize = file.GetChunkSize();
   if (blockSize > 1)
     bufferSize = blockSize;
-  uint8_t* buffer = (uint8_t*)av_malloc(bufferSize);
+  uint8_t* buffer = static_cast<uint8_t*>(av_malloc(bufferSize));
   AVIOContext* ioctx = avio_alloc_context(buffer, bufferSize, 0,
                                           &file, vfs_file_read, NULL,
                                           vfs_file_seek);
