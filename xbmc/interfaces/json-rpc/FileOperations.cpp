@@ -43,7 +43,7 @@ JSONRPC_STATUS CFileOperations::GetRootDirectory(const std::string &method, ITra
   if (sources)
   {
     CFileItemList items;
-    for (unsigned int i = 0; i < (unsigned int)sources->size(); i++)
+    for (unsigned int i = 0; i < static_cast<unsigned int>(sources->size()); i++)
     {
       // Do not show sources which are locked
       if (sources->at(i).m_iHasLock == LOCK_STATE_LOCKED)
@@ -52,7 +52,7 @@ JSONRPC_STATUS CFileOperations::GetRootDirectory(const std::string &method, ITra
       items.Add(std::make_shared<CFileItem>(sources->at(i)));
     }
 
-    for (unsigned int i = 0; i < (unsigned int)items.Size(); i++)
+    for (unsigned int i = 0; i < static_cast<unsigned int>(items.Size()); i++)
     {
       if (items[i]->IsSmb())
       {
@@ -113,7 +113,7 @@ JSONRPC_STATUS CFileOperations::GetDirectory(const std::string &method, ITranspo
     }
 
     CFileItemList filteredFiles;
-    for (unsigned int i = 0; i < (unsigned int)items.Size(); i++)
+    for (unsigned int i = 0; i < static_cast<unsigned int>(items.Size()); i++)
     {
       if (CUtil::ExcludeFileOrFolder(items[i]->GetPath(), regexps))
         continue;
@@ -385,7 +385,7 @@ bool CFileOperations::FillFileItemList(const CVariant &parameterObject, CFileIte
           items.Sort(SortByFile, SortOrderAscending);
 
         CFileItemList filteredDirectories;
-        for (unsigned int i = 0; i < (unsigned int)items.Size(); i++)
+        for (unsigned int i = 0; i < static_cast<unsigned int>(items.Size()); i++)
         {
           if (CUtil::ExcludeFileOrFolder(items[i]->GetPath(), regexps))
             continue;

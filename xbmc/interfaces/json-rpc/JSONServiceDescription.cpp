@@ -560,8 +560,8 @@ bool JSONSchemaTypeDefinition::Parse(const CVariant &value, bool isParameter /* 
       }
     }
 
-    minItems = (unsigned int)value["minItems"].asUnsignedInteger(0);
-    maxItems = (unsigned int)value["maxItems"].asUnsignedInteger(0);
+    minItems = static_cast<unsigned int>(value["minItems"].asUnsignedInteger(0));
+    maxItems = static_cast<unsigned int>(value["maxItems"].asUnsignedInteger(0));
   }
 
   if (HasType(type, NumberValue) || HasType(type, IntegerValue))
@@ -573,19 +573,19 @@ bool JSONSchemaTypeDefinition::Parse(const CVariant &value, bool isParameter /* 
     }
     else if ((type  & IntegerValue) == IntegerValue)
     {
-      minimum = (double)value["minimum"].asInteger(std::numeric_limits<int>::min());
-      maximum = (double)value["maximum"].asInteger(std::numeric_limits<int>::max());
+      minimum = static_cast<double>(value["minimum"].asInteger(std::numeric_limits<int>::min()));
+      maximum = static_cast<double>(value["maximum"].asInteger(std::numeric_limits<int>::max()));
     }
 
     exclusiveMinimum = value["exclusiveMinimum"].asBoolean(false);
     exclusiveMaximum = value["exclusiveMaximum"].asBoolean(false);
-    divisibleBy = (unsigned int)value["divisibleBy"].asUnsignedInteger(0);
+    divisibleBy = static_cast<unsigned int>(value["divisibleBy"].asUnsignedInteger(0));
   }
 
   if (HasType(type, StringValue))
   {
-    minLength = (int)value["minLength"].asInteger(-1);
-    maxLength = (int)value["maxLength"].asInteger(-1);
+    minLength = static_cast<int>(value["minLength"].asInteger(-1));
+    maxLength = static_cast<int>(value["maxLength"].asInteger(-1));
   }
 
   // If the type definition is neither an
@@ -798,7 +798,8 @@ JSONRPC_STATUS JSONSchemaTypeDefinition::Check(const CVariant& value,
       // are either no more schemas in the "items"
       // array or no more elements in the value's array
       unsigned int arrayIndex;
-      for (arrayIndex = 0; arrayIndex < std::min(items.size(), (size_t)value.size()); arrayIndex++)
+      for (arrayIndex = 0; arrayIndex < std::min(items.size(), static_cast<size_t>(value.size()));
+           arrayIndex++)
       {
         JSONRPC_STATUS status = items.at(arrayIndex)->Check(value[arrayIndex], outputValue[arrayIndex], errorData["property"]);
         if (status != OK)
@@ -976,7 +977,7 @@ JSONRPC_STATUS JSONSchemaTypeDefinition::Check(const CVariant& value,
     if (value.isDouble())
       numberValue = value.asDouble();
     else
-      numberValue = (double)value.asInteger();
+      numberValue = static_cast<double>(value.asInteger());
     // Check minimum
     if ((exclusiveMinimum && numberValue <= minimum) || (!exclusiveMinimum && numberValue < minimum) ||
     // Check maximum
@@ -991,18 +992,19 @@ JSONRPC_STATUS JSONSchemaTypeDefinition::Check(const CVariant& value,
                                 exclusiveMaximum ? "exclusive" : "inclusive", numberValue);
       else
         errorMessage = StringUtils::Format(
-            "Value between {} ({}) and {} ({}) expected but {} received", (int)minimum,
-            exclusiveMinimum ? "exclusive" : "inclusive", (int)maximum,
-            exclusiveMaximum ? "exclusive" : "inclusive", (int)numberValue);
+            "Value between {} ({}) and {} ({}) expected but {} received", static_cast<int>(minimum),
+            exclusiveMinimum ? "exclusive" : "inclusive", static_cast<int>(maximum),
+            exclusiveMaximum ? "exclusive" : "inclusive", static_cast<int>(numberValue));
       errorData["message"] = errorMessage.c_str();
       return InvalidParams;
     }
     // Check divisibleBy
-    if ((HasType(type, IntegerValue) && divisibleBy > 0 && ((int)numberValue % divisibleBy) != 0))
+    if ((HasType(type, IntegerValue) && divisibleBy > 0 &&
+         (static_cast<int>(numberValue) % divisibleBy) != 0))
     {
       CLog::Log(LOGDEBUG, "JSONRPC: Value does not meet divisibleBy requirements in type {}", name);
       errorMessage = StringUtils::Format("Value should be divisible by {} but {} received",
-                                         divisibleBy, (int)numberValue);
+                                         divisibleBy, static_cast<int>(numberValue));
       errorData["message"] = errorMessage.c_str();
       return InvalidParams;
     }
@@ -1109,9 +1111,9 @@ void JSONSchemaTypeDefinition::Print(bool isParameter, bool isGlobal, bool print
       else
       {
         if (minimum > std::numeric_limits<int>::min())
-          output["minimum"] = (int)minimum;
+          output["minimum"] = static_cast<int>(minimum);
         if (maximum < std::numeric_limits<int>::max())
-          output["maximum"] = (int)maximum;
+          output["maximum"] = static_cast<int>(maximum);
       }
 
       if (exclusiveMinimum)
@@ -1302,7 +1304,7 @@ bool JsonRpcMethod::Parse(const CVariant &value)
     for (unsigned int index = 0; index < value["transport"].size(); index++)
       transport |= StringToTransportLayer(value["transport"][index].asString());
 
-    transportneed = (TransportLayerCapability)transport;
+    transportneed = static_cast<TransportLayerCapability>(transport);
   }
   else
     transportneed = StringToTransportLayer(value.isMember("transport") ? value["transport"].asString() : "");
@@ -1313,7 +1315,7 @@ bool JsonRpcMethod::Parse(const CVariant &value)
     for (unsigned int index = 0; index < value["permission"].size(); index++)
       permissions |= StringToPermission(value["permission"][index].asString());
 
-    permission = (OperationPermission)permissions;
+    permission = static_cast<OperationPermission>(permissions);
   }
   else
     permission = StringToPermission(value.isMember("permission") ? value["permission"].asString() : "");
@@ -1729,7 +1731,7 @@ bool CJSONServiceDescription::AddEnum(const std::string &name, const std::vector
   }
   definition->enums.insert(definition->enums.begin(), values.begin(), values.end());
 
-  int schemaType = (int)AnyValue;
+  int schemaType = static_cast<int>(AnyValue);
   for (unsigned int index = 0; index < types.size(); index++)
   {
     JSONSchemaType currentType;
@@ -1765,9 +1767,9 @@ bool CJSONServiceDescription::AddEnum(const std::string &name, const std::vector
     if (index == 0)
       schemaType = currentType;
     else
-      schemaType |= (int)currentType;
+      schemaType |= static_cast<int>(currentType);
   }
-  definition->type = (JSONSchemaType)schemaType;
+  definition->type = static_cast<JSONSchemaType>(schemaType);
 
   if (defaultValue.type() == CVariant::VariantTypeConstNull)
     definition->defaultValue = definition->enums.at(0);
@@ -1939,7 +1941,7 @@ JSONRPC_STATUS CJSONServiceDescription::Print(CVariant &result, ITransportLayer 
       for (int i = ReadData; i <= OPERATION_PERMISSION_ALL; i *= 2)
       {
         if ((methodIterator->second.permission & i) == i)
-          permissions.push_back(PermissionToString((OperationPermission)i));
+          permissions.push_back(PermissionToString(static_cast<OperationPermission>(i)));
       }
 
       if (permissions.size() == 1)
@@ -2026,7 +2028,7 @@ bool CJSONServiceDescription::parseJSONSchemaType(const CVariant &value, std::ve
 
     // If the type has not been set yet set it to "any"
     if (parsedType != 0)
-      schemaType = (JSONSchemaType)parsedType;
+      schemaType = static_cast<JSONSchemaType>(parsedType);
 
     return true;
   }
