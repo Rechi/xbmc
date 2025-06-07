@@ -502,8 +502,9 @@ void CPeripherals::GetSettingsFromMapping(CPeripheral& peripheral) const
 
     if (bBusMatch && bProductMatch && bClassMatch)
     {
-      for (auto itr = mapping.m_settings.begin(); itr != mapping.m_settings.end(); ++itr)
-        peripheral.AddSetting((*itr).first, (*itr).second.m_setting, (*itr).second.m_order);
+      for (const std::pair<const std::string, PeripheralDeviceSetting>& setting :
+           mapping.m_settings)
+        peripheral.AddSetting(setting.first, setting.second.m_setting, setting.second.m_order);
     }
   }
 }
@@ -622,8 +623,8 @@ void CPeripherals::GetSettingsFromMappingsFile(
         TranslatableIntegerSettingOptions enums;
         std::vector<std::string> valuesVec;
         StringUtils::Tokenize(strEnums, valuesVec, "|");
-        for (unsigned int i = 0; i < valuesVec.size(); i++)
-          enums.emplace_back(atoi(valuesVec[i].c_str()), atoi(valuesVec[i].c_str()));
+        for (const std::string& value : valuesVec)
+          enums.emplace_back(atoi(value.c_str()), atoi(value.c_str()));
         int iValue = currentNode->Attribute("value") ? atoi(currentNode->Attribute("value")) : 0;
         setting = std::make_shared<CSettingInt>(strKey, iLabelId, iValue, enums);
       }

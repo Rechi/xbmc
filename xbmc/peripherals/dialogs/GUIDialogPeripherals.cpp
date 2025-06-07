@@ -148,8 +148,8 @@ bool CGUIDialogPeripherals::OnMessage(CGUIMessage& message)
 void CGUIDialogPeripherals::FreeResources(bool immediately /* = false */)
 {
   // Free GUI resources
-  for (auto it = m_peripherals.begin(); it != m_peripherals.end(); ++it)
-    (*it)->FreeMemory();
+  for (const std::shared_ptr<CFileItem>& peripheral : m_peripherals)
+    peripheral->FreeMemory();
 
   // Free ancestor resources
   CGUIDialogSelect::FreeResources(immediately);

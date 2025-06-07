@@ -116,9 +116,9 @@ bool CPeripheral::HasFeature(const PeripheralFeature feature) const
 {
   bool bReturn(false);
 
-  for (unsigned int iFeaturePtr = 0; iFeaturePtr < m_features.size(); iFeaturePtr++)
+  for (const PeripheralFeature& m_feature : m_features)
   {
-    if (m_features.at(iFeaturePtr) == feature)
+    if (m_feature == feature)
     {
       bReturn = true;
       break;
@@ -127,9 +127,9 @@ bool CPeripheral::HasFeature(const PeripheralFeature feature) const
 
   if (!bReturn)
   {
-    for (unsigned int iSubdevicePtr = 0; iSubdevicePtr < m_subDevices.size(); iSubdevicePtr++)
+    for (const PeripheralPtr& subDevice : m_subDevices)
     {
-      if (m_subDevices.at(iSubdevicePtr)->HasFeature(feature))
+      if (subDevice->HasFeature(feature))
       {
         bReturn = true;
         break;
@@ -142,11 +142,11 @@ bool CPeripheral::HasFeature(const PeripheralFeature feature) const
 
 void CPeripheral::GetFeatures(std::vector<PeripheralFeature>& features) const
 {
-  for (unsigned int iFeaturePtr = 0; iFeaturePtr < m_features.size(); iFeaturePtr++)
-    features.push_back(m_features.at(iFeaturePtr));
+  for (const PeripheralFeature& feature : m_features)
+    features.push_back(feature);
 
-  for (unsigned int iSubdevicePtr = 0; iSubdevicePtr < m_subDevices.size(); iSubdevicePtr++)
-    m_subDevices.at(iSubdevicePtr)->GetFeatures(features);
+  for (const PeripheralPtr& subDevice : m_subDevices)
+    subDevice->GetFeatures(features);
 }
 
 bool CPeripheral::Initialise(void)
@@ -190,14 +190,13 @@ bool CPeripheral::Initialise(void)
   LoadPersistedSettings();
 
   // Initialize features
-  for (unsigned int iFeaturePtr = 0; iFeaturePtr < m_features.size(); iFeaturePtr++)
+  for (const PeripheralFeature& feature : m_features)
   {
-    PeripheralFeature feature = m_features.at(iFeaturePtr);
     bReturn &= InitialiseFeature(feature);
   }
 
-  for (unsigned int iSubdevicePtr = 0; iSubdevicePtr < m_subDevices.size(); iSubdevicePtr++)
-    bReturn &= m_subDevices.at(iSubdevicePtr)->Initialise();
+  for (const PeripheralPtr& subDevice : m_subDevices)
+    bReturn &= subDevice->Initialise();
 
   if (bReturn)
   {

@@ -113,9 +113,8 @@ void CPeripheralBus::UnregisterRemovedDevices(const PeripheralScanResults& resul
 
 void CPeripheralBus::RegisterNewDevices(const PeripheralScanResults& results)
 {
-  for (unsigned int iResultPtr = 0; iResultPtr < results.m_results.size(); iResultPtr++)
+  for (const PeripheralScanResult& result : results.m_results)
   {
-    const PeripheralScanResult& result = results.m_results.at(iResultPtr);
     if (!HasPeripheral(result.m_strLocation))
       m_manager.CreatePeripheral(*this, result);
   }
@@ -143,9 +142,9 @@ bool CPeripheralBus::HasFeature(const PeripheralFeature feature) const
 {
   bool bReturn(false);
   std::unique_lock lock(m_critSection);
-  for (unsigned int iPeripheralPtr = 0; iPeripheralPtr < m_peripherals.size(); iPeripheralPtr++)
+  for (const PeripheralPtr& peripheral : m_peripherals)
   {
-    if (m_peripherals.at(iPeripheralPtr)->HasFeature(feature))
+    if (peripheral->HasFeature(feature))
     {
       bReturn = true;
       break;
@@ -157,8 +156,8 @@ bool CPeripheralBus::HasFeature(const PeripheralFeature feature) const
 void CPeripheralBus::GetFeatures(std::vector<PeripheralFeature>& features) const
 {
   std::unique_lock lock(m_critSection);
-  for (unsigned int iPeripheralPtr = 0; iPeripheralPtr < m_peripherals.size(); iPeripheralPtr++)
-    m_peripherals.at(iPeripheralPtr)->GetFeatures(features);
+  for (const PeripheralPtr& peripheral : m_peripherals)
+    peripheral->GetFeatures(features);
 }
 
 PeripheralPtr CPeripheralBus::GetPeripheral(const std::string& strLocation) const

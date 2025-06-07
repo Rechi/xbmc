@@ -29,6 +29,7 @@
 #include "xbmc/interfaces/AnnouncementManager.h"
 
 #include <mutex>
+#include <ranges>
 
 #include <libcec/cec.h>
 
@@ -834,15 +835,14 @@ void CPeripheralCecAdapter::PushCecKeypress(const CecButtonPress& key)
     }
     // if we received a keypress with a duration set, try to find the same one without a duration
     // set, and replace it
-    for (std::vector<CecButtonPress>::reverse_iterator it = m_buttonQueue.rbegin();
-         it != m_buttonQueue.rend(); ++it)
+    for (CecButtonPress& button : std::ranges::reverse_view(m_buttonQueue))
     {
-      if ((*it).iButton == key.iButton)
+      if (button.iButton == key.iButton)
       {
-        if ((*it).iDuration == 0)
+        if (button.iDuration == 0)
         {
           // replace this entry
-          (*it).iDuration = key.iDuration;
+          button.iDuration = key.iDuration;
           return;
         }
         // add a new entry

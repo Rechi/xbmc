@@ -870,10 +870,10 @@ void CPeripheralAddon::RefreshButtonMaps(const std::string& strDeviceName /* = "
 {
   std::unique_lock lock(m_buttonMapMutex);
 
-  for (auto it = m_buttonMaps.begin(); it != m_buttonMaps.end(); ++it)
+  for (const std::pair<CPeripheral*, KODI::JOYSTICK::IButtonMap*>& buttonMap : m_buttonMaps)
   {
-    if (strDeviceName.empty() || strDeviceName == it->first->DeviceName())
-      it->second->Load();
+    if (strDeviceName.empty() || strDeviceName == buttonMap.first->DeviceName())
+      buttonMap.second->Load();
   }
 }
 
