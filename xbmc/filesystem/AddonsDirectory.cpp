@@ -886,19 +886,19 @@ bool CAddonsDirectory::GetScriptsAndPlugins(const std::string &content, VECADDON
 
   VECADDONS tempAddons;
   CServiceBroker::GetAddonMgr().GetAddons(tempAddons, AddonType::PLUGIN);
-  for (unsigned i=0; i<tempAddons.size(); i++)
+  for (const AddonPtr& tempAddon : tempAddons)
   {
-    const auto plugin = std::dynamic_pointer_cast<CPluginSource>(tempAddons[i]);
+    const auto plugin = std::dynamic_pointer_cast<CPluginSource>(tempAddon);
     if (plugin && plugin->Provides(type))
-      addons.push_back(tempAddons[i]);
+      addons.push_back(tempAddon);
   }
   tempAddons.clear();
   CServiceBroker::GetAddonMgr().GetAddons(tempAddons, AddonType::SCRIPT);
-  for (unsigned i=0; i<tempAddons.size(); i++)
+  for (const AddonPtr& tempAddon : tempAddons)
   {
-    const auto plugin = std::dynamic_pointer_cast<CPluginSource>(tempAddons[i]);
+    const auto plugin = std::dynamic_pointer_cast<CPluginSource>(tempAddon);
     if (plugin && plugin->Provides(type))
-      addons.push_back(tempAddons[i]);
+      addons.push_back(tempAddon);
   }
   tempAddons.clear();
 

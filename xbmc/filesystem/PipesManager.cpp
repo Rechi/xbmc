@@ -124,8 +124,8 @@ int  Pipe::Read(char *buf, int nMaxSize, int nWaitMillis)
 
     do
     {
-      for (size_t l=0; l<m_listeners.size(); l++)
-        m_listeners[l]->OnPipeUnderFlow();
+      for (XFILE::IPipeListener* listener : m_listeners)
+        listener->OnPipeUnderFlow();
 
       bHasData = m_readEvent.Wait(std::min(200ms, nMillisLeft));
       nMillisLeft -= 200ms;
@@ -167,8 +167,8 @@ bool Pipe::Write(const char *buf, int nSize, int nWaitMillis)
     while ( (int)m_buffer.getMaxWriteSize() < nSize && m_bOpen )
     {
       lock.unlock();
-      for (size_t l=0; l<m_listeners.size(); l++)
-        m_listeners[l]->OnPipeOverFlow();
+      for (XFILE::IPipeListener* listener : m_listeners)
+        listener->OnPipeOverFlow();
 
       bool bClear = nWaitMillis < 0 ? m_writeEvent.Wait()
                                     : m_writeEvent.Wait(std::chrono::milliseconds(nWaitMillis));
@@ -226,9 +226,9 @@ void Pipe::Close()
 void Pipe::AddListener(IPipeListener *l)
 {
   std::unique_lock lock(m_lock);
-  for (size_t i=0; i<m_listeners.size(); i++)
+  for (const XFILE::IPipeListener* listener : m_listeners)
   {
-    if (m_listeners[i] == l)
+    if (listener == l)
       return;
   }
   m_listeners.push_back(l);

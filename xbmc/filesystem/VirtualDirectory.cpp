@@ -119,9 +119,8 @@ bool CVirtualDirectory::IsSource(const std::string& strPath,
     shares = *sources;
   else
     GetSources(shares);
-  for (int i = 0; i < (int)shares.size(); ++i)
+  for (const CMediaSource& share : shares)
   {
-    const CMediaSource& share = shares.at(i);
     std::string strShare = share.strPath;
     StringUtils::TrimRight(strShare, "/\\");
     if(URIUtils::IsDOSPath(strShare))
@@ -152,9 +151,8 @@ bool CVirtualDirectory::IsInSource(const std::string &path) const
   if (URIUtils::IsOnDVD(path))
   { // check to see if our share path is still available and of the same type, as it changes during autodetect
     // and GetMatchingSource() is too naive at it's matching
-    for (unsigned int i = 0; i < shares.size(); i++)
+    for (const CMediaSource& share : shares)
     {
-      CMediaSource &share = shares[i];
       if (URIUtils::IsOnDVD(share.strPath) &&
           URIUtils::PathHasParent(path, share.strPath))
         return true;

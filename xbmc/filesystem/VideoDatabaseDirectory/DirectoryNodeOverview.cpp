@@ -94,10 +94,10 @@ bool CDirectoryNodeOverview::GetContent(CFileItemList& items) const
       vec.emplace_back("recentlyaddedmusicvideos", 20390); // Recently Added Music Videos
   }
   std::string path = BuildPath();
-  for (unsigned int i = 0; i < vec.size(); ++i)
+  for (const std::pair<const char*, int>& i : vec)
   {
-    CFileItemPtr pItem(new CFileItem(path + vec[i].first + "/", true));
-    pItem->SetLabel(g_localizeStrings.Get(vec[i].second));
+    CFileItemPtr pItem(new CFileItem(path + i.first + "/", true));
+    pItem->SetLabel(g_localizeStrings.Get(i.second));
     pItem->SetLabelPreformatted(true);
     pItem->SetCanQueue(false);
     items.Add(pItem);

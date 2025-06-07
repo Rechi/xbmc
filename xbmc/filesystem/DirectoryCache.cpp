@@ -254,9 +254,9 @@ void CDirectoryCache::PrintStats() const
   unsigned int oldest = UINT_MAX;
   unsigned int numItems = 0;
   unsigned int numDirs = 0;
-  for (auto i = m_cache.begin(); i != m_cache.end(); i++)
+  for (const std::pair<const std::string, CDir>& i : m_cache)
   {
-    const CDir& dir = i->second;
+    const CDir& dir = i.second;
     oldest = std::min(oldest, dir.GetLastAccess());
     numItems += dir.m_Items->Size();
     numDirs++;
