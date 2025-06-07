@@ -81,13 +81,13 @@ bool CFileUtils::RenameFile(const std::string &strFile)
       std::vector<std::string> paths;
       CMultiPathDirectory::GetPaths(strFileAndPath, paths);
       bool success = false;
-      for (unsigned int i = 0; i < paths.size(); ++i)
+      for (std::string& path : paths)
       {
-        std::string filePath(paths[i]);
+        std::string filePath(path);
         URIUtils::RemoveSlashAtEnd(filePath);
         filePath = URIUtils::GetDirectory(filePath);
         filePath = URIUtils::AddFileToFolder(filePath, strFileName);
-        if (CFile::Rename(paths[i], filePath))
+        if (CFile::Rename(path, filePath))
           success = true;
       }
       return success;

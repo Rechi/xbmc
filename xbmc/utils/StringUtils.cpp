@@ -588,11 +588,11 @@ std::string StringUtils::ReplaceSpecialCharactersWithSpace(std::string_view str)
 int StringUtils::Replace(std::string& str, char oldChar, char newChar) noexcept
 {
   int replacedChars = 0;
-  for (std::string::iterator it = str.begin(); it != str.end(); ++it)
+  for (char& it : str)
   {
-    if (*it == oldChar)
+    if (it == oldChar)
     {
-      *it = newChar;
+      it = newChar;
       replacedChars++;
     }
   }
@@ -714,11 +714,11 @@ template<typename StringLikeA, typename StringLikeB>
   {
     for (size_t di = 0; di < delimiters.size(); di++)
     {
-      for (size_t i = 0; i < results.size(); i++)
+      for (const std::string& result : results)
       {
-        std::vector<std::string> substrings = StringUtils::Split(results[i], delimiters[di]);
-        for (size_t j = 0; j < substrings.size(); j++)
-          strings1.push_back(substrings[j]);
+        std::vector<std::string> substrings = StringUtils::Split(result, delimiters[di]);
+        for (const std::string& substring : substrings)
+          strings1.push_back(substring);
       }
       results = strings1;
       strings1.clear();
@@ -731,17 +731,17 @@ template<typename StringLikeA, typename StringLikeB>
   int64_t iNew = iMaxStrings - results.size();
   for (size_t di = 0; di < delimiters.size(); di++)
   {
-    for (size_t i = 0; i < results.size(); i++)
+    for (const std::string& result : results)
     {
       if (iNew > 0)
       {
-        std::vector<std::string> substrings = StringUtils::Split(results[i], delimiters[di], iNew + 1);
+        std::vector<std::string> substrings = StringUtils::Split(result, delimiters[di], iNew + 1);
         iNew = iNew - substrings.size() + 1;
-        for (size_t j = 0; j < substrings.size(); j++)
-          strings1.push_back(substrings[j]);
+        for (const std::string& substring : substrings)
+          strings1.push_back(substring);
       }
       else
-        strings1.push_back(results[i]);
+        strings1.push_back(result);
     }
     results = strings1;
     iNew = iMaxStrings - results.size();
@@ -1670,16 +1670,16 @@ void StringUtils::WordToDigits(std::string& word) noexcept
 {
   static const char word_to_letter[] = "22233344455566677778889999";
   StringUtils::ToLower(word);
-  for (unsigned int i = 0; i < word.size(); ++i)
+  for (char& i : word)
   { // NB: This assumes ascii, which probably needs extending at some  point.
-    char letter = word[i];
+    char letter = i;
     if ((letter >= 'a' && letter <= 'z')) // assume contiguous letter range
     {
-      word[i] = word_to_letter[letter-'a'];
+      i = word_to_letter[letter - 'a'];
     }
     else if (letter < '0' || letter > '9') // We want to keep 0-9!
     {
-      word[i] = ' ';  // replace everything else with a space
+      i = ' '; // replace everything else with a space
     }
   }
 }

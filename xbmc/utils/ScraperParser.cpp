@@ -581,9 +581,9 @@ void CScraperParser::GetBufferParams(bool* result, const char* attribute, bool d
   {
     std::vector<std::string> vecBufs;
     StringUtils::Tokenize(attribute,vecBufs,",");
-    for (size_t nToken=0; nToken < vecBufs.size(); nToken++)
+    for (const std::string& buf : vecBufs)
     {
-      int index = atoi(vecBufs[nToken].c_str())-1;
+      int index = atoi(buf.c_str()) - 1;
       if (index < MAX_SCRAPER_BUFFERS)
         result[index] = !defvalue;
     }

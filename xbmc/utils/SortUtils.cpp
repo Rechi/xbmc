@@ -1000,18 +1000,18 @@ void SortUtils::Sort(SortBy sortBy, SortOrder sortOrder, SortAttribute attribute
       Fields sortingFields = GetFieldsForSorting(sortBy);
 
       // Prepare the string used for sorting and store it under FieldSort
-      for (DatabaseResults::iterator item = items.begin(); item != items.end(); ++item)
+      for (DatabaseResult& item : items)
       {
         // add all fields to the item that are required for sorting if they are currently missing
-        for (Fields::const_iterator field = sortingFields.begin(); field != sortingFields.end(); ++field)
+        for (const Field& sortingField : sortingFields)
         {
-          if (item->find(*field) == item->end())
-            item->insert(std::pair<Field, CVariant>(*field, CVariant::ConstNullVariant));
+          if (item.find(sortingField) == item.end())
+            item.insert(std::pair<Field, CVariant>(sortingField, CVariant::ConstNullVariant));
         }
 
         std::wstring sortLabel;
-        g_charsetConverter.utf8ToW(preparator(attributes, *item), sortLabel, false);
-        item->insert(std::pair<Field, CVariant>(FieldSort, CVariant(sortLabel)));
+        g_charsetConverter.utf8ToW(preparator(attributes, item), sortLabel, false);
+        item.insert(std::pair<Field, CVariant>(FieldSort, CVariant(sortLabel)));
       }
 
       // Do the sorting
@@ -1039,18 +1039,18 @@ void SortUtils::Sort(SortBy sortBy, SortOrder sortOrder, SortAttribute attribute
       Fields sortingFields = GetFieldsForSorting(sortBy);
 
       // Prepare the string used for sorting and store it under FieldSort
-      for (SortItems::iterator item = items.begin(); item != items.end(); ++item)
+      for (const SortItemPtr& item : items)
       {
         // add all fields to the item that are required for sorting if they are currently missing
-        for (Fields::const_iterator field = sortingFields.begin(); field != sortingFields.end(); ++field)
+        for (const Field& sortingField : sortingFields)
         {
-          if ((*item)->find(*field) == (*item)->end())
-            (*item)->insert(std::pair<Field, CVariant>(*field, CVariant::ConstNullVariant));
+          if (item->find(sortingField) == item->end())
+            item->insert(std::pair<Field, CVariant>(sortingField, CVariant::ConstNullVariant));
         }
 
         std::wstring sortLabel;
-        g_charsetConverter.utf8ToW(preparator(attributes, **item), sortLabel, false);
-        (*item)->insert(std::pair<Field, CVariant>(FieldSort, CVariant(sortLabel)));
+        g_charsetConverter.utf8ToW(preparator(attributes, *item), sortLabel, false);
+        item->insert(std::pair<Field, CVariant>(FieldSort, CVariant(sortLabel)));
       }
 
       // Do the sorting
@@ -1135,10 +1135,10 @@ const Fields& SortUtils::GetFieldsForSorting(SortBy sortBy)
 std::string SortUtils::RemoveArticles(const std::string &label)
 {
   std::set<std::string> sortTokens = g_langInfo.GetSortTokens();
-  for (std::set<std::string>::const_iterator token = sortTokens.begin(); token != sortTokens.end(); ++token)
+  for (const std::string& sortToken : sortTokens)
   {
-    if (token->size() < label.size() && StringUtils::StartsWithNoCase(label, *token))
-      return label.substr(token->size());
+    if (sortToken.size() < label.size() && StringUtils::StartsWithNoCase(label, sortToken))
+      return label.substr(sortToken.size());
   }
 
   return label;

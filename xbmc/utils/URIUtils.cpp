@@ -577,8 +577,8 @@ std::string URIUtils::GetBlurayPath(const std::string& path)
 std::string URLEncodePath(const std::string& strPath)
 {
   std::vector<std::string> segments = StringUtils::Split(strPath, "/");
-  for (std::vector<std::string>::iterator i = segments.begin(); i != segments.end(); ++i)
-    *i = CURL::Encode(*i);
+  for (std::string& segment : segments)
+    segment = CURL::Encode(segment);
 
   return StringUtils::Join(segments, "/");
 }
@@ -586,8 +586,8 @@ std::string URLEncodePath(const std::string& strPath)
 std::string URLDecodePath(const std::string& strPath)
 {
   std::vector<std::string> segments = StringUtils::Split(strPath, "/");
-  for (std::vector<std::string>::iterator i = segments.begin(); i != segments.end(); ++i)
-    *i = CURL::Decode(*i);
+  for (std::string& segment : segments)
+    segment = CURL::Decode(segment);
 
   return StringUtils::Join(segments, "/");
 }
@@ -715,8 +715,9 @@ bool URIUtils::IsRemote(const std::string& strFile)
     std::vector<std::string> paths;
     if (CMultiPathDirectory::GetPaths(strFile, paths))
     {
-      for (unsigned int i = 0; i < paths.size(); i++)
-        if (IsRemote(paths[i])) return true;
+      for (const std::string& path : paths)
+        if (IsRemote(path))
+          return true;
     }
     return false;
   }
@@ -1482,14 +1483,14 @@ std::string URIUtils::CanonicalizePath(const std::string& path, const char slash
   std::vector<std::string> pathVec, resultVec;
   StringUtils::Tokenize(path, pathVec, slashStr);
 
-  for (std::vector<std::string>::const_iterator it = pathVec.begin(); it != pathVec.end(); ++it)
+  for (const std::string& path : pathVec)
   {
-    if (*it == ".")
+    if (path == ".")
     { /* skip - do nothing */ }
-    else if (*it == ".." && !resultVec.empty() && resultVec.back() != "..")
+    else if (path == ".." && !resultVec.empty() && resultVec.back() != "..")
       resultVec.pop_back();
     else
-      resultVec.push_back(*it);
+      resultVec.push_back(path);
   }
 
   std::string result;
@@ -1598,27 +1599,27 @@ std::string URIUtils::resolvePath(const std::string &path)
   std::vector<std::string> parts = StringUtils::Split(path, delim);
   std::vector<std::string> realParts;
 
-  for (std::vector<std::string>::const_iterator part = parts.begin(); part != parts.end(); ++part)
+  for (const std::string& part : parts)
   {
-    if (part->empty() || part->compare(".") == 0)
+    if (part.empty() || part.compare(".") == 0)
       continue;
 
     // go one level back up
-    if (part->compare("..") == 0)
+    if (part.compare("..") == 0)
     {
       if (!realParts.empty())
         realParts.pop_back();
       continue;
     }
 
-    realParts.push_back(*part);
+    realParts.push_back(part);
   }
 
   std::string realPath;
   // re-add any / or \ at the beginning
-  for (std::string::const_iterator itPath = path.begin(); itPath != path.end(); ++itPath)
+  for (char itPath : path)
   {
-    if (*itPath != delim.at(0))
+    if (itPath != delim.at(0))
       break;
 
     realPath += delim;
@@ -1646,8 +1647,8 @@ bool URIUtils::UpdateUrlEncoding(std::string &strFilename)
     if (!CStackDirectory::GetPaths(strFilename, files))
       return false;
 
-    for (std::vector<std::string>::iterator file = files.begin(); file != files.end(); ++file)
-      UpdateUrlEncoding(*file);
+    for (std::string& file : files)
+      UpdateUrlEncoding(file);
 
     std::string stackPath;
     if (!CStackDirectory::ConstructStackPath(files, stackPath))

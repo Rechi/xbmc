@@ -84,10 +84,10 @@ void CRssManager::Stop()
 {
   std::unique_lock lock(m_critical);
   m_bActive = false;
-  for (unsigned int i = 0; i < m_readers.size(); i++)
+  for (const READERCONTROL& reader : m_readers)
   {
-    if (m_readers[i].reader)
-      delete m_readers[i].reader;
+    if (reader.reader)
+      delete reader.reader;
   }
   m_readers.clear();
 }
@@ -179,11 +179,11 @@ bool CRssManager::GetReader(int controlID, int windowID, IRssObserver* observer,
 {
   std::unique_lock lock(m_critical);
   // check to see if we've already created this reader
-  for (unsigned int i = 0; i < m_readers.size(); i++)
+  for (const READERCONTROL& m_reader : m_readers)
   {
-    if (m_readers[i].controlID == controlID && m_readers[i].windowID == windowID)
+    if (m_reader.controlID == controlID && m_reader.windowID == windowID)
     {
-      reader = m_readers[i].reader;
+      reader = m_reader.reader;
       reader->SetObserver(observer);
       reader->UpdateObserver();
       return true;

@@ -32,12 +32,12 @@ void CFanart::Pack()
   tinyxml2::XMLDocument doc(false);
   auto fanartElement = doc.NewElement("fanart");
   auto* fanartNode = doc.InsertEndChild(fanartElement);
-  for (std::vector<SFanartData>::const_iterator it = m_fanart.begin(); it != m_fanart.end(); ++it)
+  for (const SFanartData& it : m_fanart)
   {
     auto* thumbNode = doc.NewElement("thumb");
-    thumbNode->SetAttribute("colors", it->strColors.c_str());
-    thumbNode->SetAttribute("preview", it->strPreview.c_str());
-    auto* thumbText = doc.NewText(it->strImage.c_str());
+    thumbNode->SetAttribute("colors", it.strColors.c_str());
+    thumbNode->SetAttribute("preview", it.strPreview.c_str());
+    auto* thumbText = doc.NewText(it.strImage.c_str());
     thumbNode->InsertEndChild(thumbText);
     fanartNode->InsertEndChild(thumbNode);
   }

@@ -10,6 +10,8 @@
 
 #include "utils/StringUtils.h"
 
+#include <ranges>
+
 // header white space characters according to RFC 2616
 const char* const CHttpHeader::m_whitespaceChars = " \t";
 
@@ -131,10 +133,10 @@ std::string CHttpHeader::GetValue(const std::string& strParam) const
 std::string CHttpHeader::GetValueRaw(const std::string& strParam) const
 {
   // look in reverse to find last parameter (probably most important)
-  for (HeaderParams::const_reverse_iterator iter = m_params.rbegin(); iter != m_params.rend(); ++iter)
+  for (const std::pair<std::string, std::string>& param : std::ranges::reverse_view(m_params))
   {
-    if (iter->first == strParam)
-      return iter->second;
+    if (param.first == strParam)
+      return param.second;
   }
 
   return "";
@@ -145,10 +147,10 @@ std::vector<std::string> CHttpHeader::GetValues(std::string strParam) const
   StringUtils::ToLower(strParam);
   std::vector<std::string> values;
 
-  for (HeaderParams::const_iterator iter = m_params.begin(); iter != m_params.end(); ++iter)
+  for (const HeaderParamValue& param : m_params)
   {
-    if (iter->first == strParam)
-      values.push_back(iter->second);
+    if (param.first == strParam)
+      values.push_back(param.second);
   }
 
   return values;
@@ -161,8 +163,8 @@ std::string CHttpHeader::GetHeader(void) const
 
   std::string strHeader(m_protoLine + "\r\n");
 
-  for (HeaderParams::const_iterator iter = m_params.begin(); iter != m_params.end(); ++iter)
-    strHeader += ((*iter).first + ": " + (*iter).second + "\r\n");
+  for (const HeaderParamValue& param : m_params)
+    strHeader += (param.first + ": " + param.second + "\r\n");
 
   strHeader += "\r\n";
   return strHeader;

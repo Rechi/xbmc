@@ -184,8 +184,8 @@ bool CHttpRanges::GetLastPosition(uint64_t& position) const
 uint64_t CHttpRanges::GetLength() const
 {
   uint64_t length = 0;
-  for (HttpRanges::const_iterator range = m_ranges.begin(); range != m_ranges.end(); ++range)
-    length += range->GetLength();
+  for (const CHttpRange& range : m_ranges)
+    length += range.GetLength();
 
   return length;
 }
@@ -248,13 +248,13 @@ bool CHttpRanges::Parse(const std::string& header, uint64_t totalLength)
   // split the value of the "Range" header by ","
   std::vector<std::string> rangeValues = StringUtils::Split(rangesValue, ",");
 
-  for (std::vector<std::string>::const_iterator range = rangeValues.begin(); range != rangeValues.end(); ++range)
+  for (const std::string& rangeValue : rangeValues)
   {
     // there must be a "-" in the range definition
-    if (range->find("-") == std::string::npos)
+    if (rangeValue.find('-') == std::string::npos)
       return false;
 
-    std::vector<std::string> positions = StringUtils::Split(*range, "-");
+    std::vector<std::string> positions = StringUtils::Split(rangeValue, "-");
     if (positions.size() != 2)
       return false;
 

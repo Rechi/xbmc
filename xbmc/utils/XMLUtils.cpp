@@ -560,8 +560,8 @@ std::string XMLUtils::GetAttribute(const tinyxml2::XMLElement* element, const ch
 void XMLUtils::SetAdditiveString(TiXmlNode* pRootNode, const char *strTag, const std::string& strSeparator, const std::string& strValue)
 {
   std::vector<std::string> list = StringUtils::Split(strValue, strSeparator);
-  for (std::vector<std::string>::const_iterator i = list.begin(); i != list.end(); ++i)
-    SetString(pRootNode, strTag, *i);
+  for (const std::string& i : list)
+    SetString(pRootNode, strTag, i);
 }
 
 void XMLUtils::SetAdditiveString(tinyxml2::XMLNode* rootNode,
@@ -570,22 +570,22 @@ void XMLUtils::SetAdditiveString(tinyxml2::XMLNode* rootNode,
                                  const std::string& value)
 {
   std::vector<std::string> list = StringUtils::Split(value, separator);
-  for (auto i = list.begin(); i != list.end(); ++i)
-    SetString(rootNode, tag, *i);
+  for (const std::string& i : list)
+    SetString(rootNode, tag, i);
 }
 
 void XMLUtils::SetStringArray(TiXmlNode* pRootNode, const char *strTag, const std::vector<std::string>& arrayValue)
 {
-  for (unsigned int i = 0; i < arrayValue.size(); i++)
-    SetString(pRootNode, strTag, arrayValue.at(i));
+  for (const std::string& value : arrayValue)
+    SetString(pRootNode, strTag, value);
 }
 
 void XMLUtils::SetStringArray(tinyxml2::XMLNode* rootNode,
                               const char* tag,
                               const std::vector<std::string>& value)
 {
-  for (unsigned int i = 0; i < value.size(); i++)
-    SetString(rootNode, tag, value.at(i));
+  for (const std::string& i : value)
+    SetString(rootNode, tag, i);
 }
 
 TiXmlNode* XMLUtils::SetString(TiXmlNode* pRootNode, const char *strTag, const std::string& strValue)

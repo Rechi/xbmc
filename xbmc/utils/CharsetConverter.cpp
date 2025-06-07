@@ -904,6 +904,6 @@ void CCharsetConverter::SettingOptionsCharsetsFiller(const SettingConstPtr& sett
   sort(vecCharsets.begin(), vecCharsets.end(), sortstringbyname());
 
   list.emplace_back(g_localizeStrings.Get(13278), "DEFAULT"); // "Default"
-  for (int i = 0; i < (int) vecCharsets.size(); ++i)
-    list.emplace_back(vecCharsets[i], g_charsetConverter.getCharsetNameByLabel(vecCharsets[i]));
+  for (const std::string& charset : vecCharsets)
+    list.emplace_back(charset, g_charsetConverter.getCharsetNameByLabel(charset));
 }
