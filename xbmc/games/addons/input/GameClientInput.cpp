@@ -732,9 +732,9 @@ ControllerVector CGameClientInput::GetControllers(const CGameClient& gameClient)
   CGameServices& gameServices = CServiceBroker::GetGameServices();
 
   const auto& dependencies = gameClient.GetDependencies();
-  for (auto it = dependencies.begin(); it != dependencies.end(); ++it)
+  for (const ADDON::DependencyInfo& dependency : dependencies)
   {
-    ControllerPtr controller = gameServices.GetController(it->id);
+    ControllerPtr controller = gameServices.GetController(dependency.id);
     if (controller)
       controllers.push_back(controller);
   }

@@ -97,20 +97,20 @@ void CController::GetFeatures(std::vector<std::string>& features,
 
 JOYSTICK::FEATURE_TYPE CController::FeatureType(const std::string& feature) const
 {
-  for (auto it = m_features.begin(); it != m_features.end(); ++it)
+  for (const CPhysicalFeature& feat : m_features)
   {
-    if (feature == it->Name())
-      return it->Type();
+    if (feature == feat.Name())
+      return feat.Type();
   }
   return JOYSTICK::FEATURE_TYPE::UNKNOWN;
 }
 
 JOYSTICK::INPUT_TYPE CController::GetInputType(const std::string& feature) const
 {
-  for (auto it = m_features.begin(); it != m_features.end(); ++it)
+  for (const CPhysicalFeature& feat : m_features)
   {
-    if (feature == it->Name())
-      return it->InputType();
+    if (feature == feat.Name())
+      return feat.InputType();
   }
   return JOYSTICK::INPUT_TYPE::UNKNOWN;
 }

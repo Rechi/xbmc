@@ -438,9 +438,9 @@ std::string CGameClient::GetMissingResource()
   std::string strAddonId;
 
   const auto& dependencies = GetDependencies();
-  for (auto it = dependencies.begin(); it != dependencies.end(); ++it)
+  for (const DependencyInfo& dependency : dependencies)
   {
-    const std::string& strDependencyId = it->id;
+    const std::string& strDependencyId = dependency.id;
     if (StringUtils::StartsWith(strDependencyId, "resource.games"))
     {
       AddonPtr addon;
