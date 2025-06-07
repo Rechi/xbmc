@@ -195,7 +195,7 @@ CXBTFFrame TexturePacker::CreateXBTFFrame(DecodedFrame& decodedFrame, CXBTFWrite
   const uint32_t format = static_cast<uint32_t>(decodedFrame.rgbaImage.textureFormat) |
                           static_cast<uint32_t>(decodedFrame.rgbaImage.textureAlpha) |
                           static_cast<uint32_t>(decodedFrame.rgbaImage.textureSwizzle);
-  unsigned char* data = (unsigned char*)decodedFrame.rgbaImage.pixels.data();
+  unsigned char* data = static_cast<unsigned char*>(decodedFrame.rgbaImage.pixels.data());
 
   CXBTFFrame frame;
   lzo_uint packedSize = size;
@@ -517,7 +517,8 @@ int main(int argc, char* argv[])
       valid = true;
 #ifdef TARGET_POSIX
       char *c = NULL;
-      while ((c = (char *)strchr(OutputFilename.c_str(), '\\')) != NULL) *c = '/';
+      while ((c = const_cast<char*>(strchr(OutputFilename.c_str(), '\\'))) != NULL)
+        *c = '/';
 #endif
     }
     else
