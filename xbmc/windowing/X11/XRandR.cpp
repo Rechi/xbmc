@@ -184,15 +184,15 @@ bool CXRandR::TurnOnOutput(const std::string& name)
     return true;
 
   // get preferred mode
-  for (unsigned int j = 0; j < m_outputs.size(); j++)
+  for (const XOutput& m_output : m_outputs)
   {
-    if (m_outputs[j].name == output->name)
+    if (m_output.name == output->name)
     {
-      for (unsigned int i = 0; i < m_outputs[j].modes.size(); i++)
+      for (const XMode& i : m_output.modes)
       {
-        if (m_outputs[j].modes[i].isPreferred)
+        if (i.isPreferred)
         {
-          mode = m_outputs[j].modes[i];
+          mode = i;
           break;
         }
       }
@@ -242,12 +242,12 @@ bool CXRandR::SetMode(const XOutput& output, const XMode& mode)
   // Make sure the output exists, if not -- complain and exit
   bool isOutputFound = false;
   XOutput outputFound;
-  for (size_t i = 0; i < m_outputs.size(); i++)
+  for (const XOutput& m_output : m_outputs)
   {
-    if (m_outputs[i].name == output.name)
+    if (m_output.name == output.name)
     {
       isOutputFound = true;
-      outputFound = m_outputs[i];
+      outputFound = m_output;
     }
   }
 
@@ -262,16 +262,14 @@ bool CXRandR::SetMode(const XOutput& output, const XMode& mode)
   // try to find the same exact mode (same id, resolution, hz)
   bool isModeFound = false;
   XMode modeFound;
-  for (size_t i = 0; i < outputFound.modes.size(); i++)
+  for (const XMode& i : outputFound.modes)
   {
-    if (outputFound.modes[i].id == mode.id)
+    if (i.id == mode.id)
     {
-      if (outputFound.modes[i].w == mode.w &&
-          outputFound.modes[i].h == mode.h &&
-          outputFound.modes[i].hz == mode.hz)
+      if (i.w == mode.w && i.h == mode.h && i.hz == mode.hz)
       {
         isModeFound = true;
-        modeFound = outputFound.modes[i];
+        modeFound = i;
       }
       else
       {
@@ -286,32 +284,29 @@ bool CXRandR::SetMode(const XOutput& output, const XMode& mode)
 
   if (!isModeFound)
   {
-    for (size_t i = 0; i < outputFound.modes.size(); i++)
+    for (const XMode& i : outputFound.modes)
     {
-      if (outputFound.modes[i].w == mode.w &&
-          outputFound.modes[i].h == mode.h &&
-          outputFound.modes[i].hz == mode.hz)
+      if (i.w == mode.w && i.h == mode.h && i.hz == mode.hz)
       {
         isModeFound = true;
-        modeFound = outputFound.modes[i];
+        modeFound = i;
         CLog::Log(LOGWARNING, "CXRandR::SetMode: found alternative mode (same hz): {} mode: {}.",
-                  output.name, outputFound.modes[i].id);
+                  output.name, i.id);
       }
     }
   }
 
   if (!isModeFound)
   {
-    for (size_t i = 0; i < outputFound.modes.size(); i++)
+    for (const XMode& i : outputFound.modes)
     {
-      if (outputFound.modes[i].w == mode.w &&
-          outputFound.modes[i].h == mode.h)
+      if (i.w == mode.w && i.h == mode.h)
       {
         isModeFound = true;
-        modeFound = outputFound.modes[i];
+        modeFound = i;
         CLog::Log(LOGWARNING,
                   "CXRandR::SetMode: found alternative mode (different hz): {} mode: {}.",
-                  output.name, outputFound.modes[i].id);
+                  output.name, i.id);
       }
     }
   }
@@ -353,15 +348,15 @@ XMode CXRandR::GetCurrentMode(const std::string& outputName)
   Query();
   XMode result;
 
-  for (unsigned int j = 0; j < m_outputs.size(); j++)
+  for (const XOutput& output : m_outputs)
   {
-    if (m_outputs[j].name == outputName || outputName == "")
+    if (output.name == outputName || outputName == "")
     {
-      for (unsigned int i = 0; i < m_outputs[j].modes.size(); i++)
+      for (const XMode& mode : output.modes)
       {
-        if (m_outputs[j].modes[i].isCurrent)
+        if (mode.isCurrent)
         {
-          result = m_outputs[j].modes[i];
+          result = mode;
           break;
         }
       }
@@ -376,15 +371,15 @@ XMode CXRandR::GetPreferredMode(const std::string& outputName)
   Query();
   XMode result;
 
-  for (unsigned int j = 0; j < m_outputs.size(); j++)
+  for (const XOutput& output : m_outputs)
   {
-    if (m_outputs[j].name == outputName || outputName == "")
+    if (output.name == outputName || outputName == "")
     {
-      for (unsigned int i = 0; i < m_outputs[j].modes.size(); i++)
+      for (const XMode& mode : output.modes)
       {
-        if (m_outputs[j].modes[i].isPreferred)
+        if (mode.isPreferred)
         {
-          result = m_outputs[j].modes[i];
+          result = mode;
           break;
         }
       }
@@ -433,12 +428,12 @@ void CXRandR::LoadCustomModeLinesToAllOutputs(void)
         CLog::Log(LOGERROR, "Unable to create modeline \"{}\"", name);
     }
 
-    for (unsigned int i = 0; i < m_outputs.size(); i++)
+    for (const XOutput& output : m_outputs)
     {
       if (getenv("KODI_BIN_HOME"))
       {
-        snprintf(cmd, sizeof(cmd), "%s/%s-xrandr --addmode %s \"%s\"  > /dev/null 2>&1", getenv("KODI_BIN_HOME"),
-                 appname.c_str(), m_outputs[i].name.c_str(), name.c_str());
+        snprintf(cmd, sizeof(cmd), "%s/%s-xrandr --addmode %s \"%s\"  > /dev/null 2>&1",
+                 getenv("KODI_BIN_HOME"), appname.c_str(), output.name.c_str(), name.c_str());
         if (system(cmd) != 0)
           CLog::Log(LOGERROR, "Unable to add modeline \"{}\"", name);
       }
@@ -457,9 +452,9 @@ bool CXRandR::IsOutputConnected(const std::string& name)
   bool result = false;
   Query();
 
-  for (unsigned int i = 0; i < m_outputs.size(); ++i)
+  for (const XOutput& output : m_outputs)
   {
-    if (m_outputs[i].name == name)
+    if (output.name == name)
     {
       result = true;
       break;
@@ -472,11 +467,11 @@ XOutput* CXRandR::GetOutput(const std::string& outputName)
 {
   XOutput *result = 0;
   Query();
-  for (unsigned int i = 0; i < m_outputs.size(); ++i)
+  for (XOutput& output : m_outputs)
   {
-    if (m_outputs[i].name == outputName)
+    if (output.name == outputName)
     {
-      result = &m_outputs[i];
+      result = &output;
       break;
     }
   }
@@ -486,16 +481,16 @@ XOutput* CXRandR::GetOutput(const std::string& outputName)
 int CXRandR::GetCrtc(int x, int y, float &hz)
 {
   int crtc = 0;
-  for (unsigned int i = 0; i < m_outputs.size(); ++i)
+  for (const XOutput& output : m_outputs)
   {
-    if (!m_outputs[i].isConnected)
+    if (!output.isConnected)
       continue;
 
-    if ((m_outputs[i].x <= x && (m_outputs[i].x+m_outputs[i].w) > x) &&
-        (m_outputs[i].y <= y && (m_outputs[i].y+m_outputs[i].h) > y))
+    if ((output.x <= x && (output.x + output.w) > x) &&
+        (output.y <= y && (output.y + output.h) > y))
     {
-      crtc = m_outputs[i].crtc;
-      for (const auto& mode : m_outputs[i].modes)
+      crtc = output.crtc;
+      for (const auto& mode : output.modes)
       {
         if (mode.isCurrent)
         {

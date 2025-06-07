@@ -368,8 +368,8 @@ void CWinSystemIOS::OnAppFocusChange(bool focus)
   std::unique_lock lock(m_resourceSection);
   m_bIsBackgrounded = !focus;
   CLog::Log(LOGDEBUG, "CWinSystemIOS::OnAppFocusChange: {}", focus ? 1 : 0);
-  for (std::vector<IDispResource *>::iterator i = m_resources.begin(); i != m_resources.end(); i++)
-    (*i)->OnAppFocusChange(focus);
+  for (IDispResource* resource : m_resources)
+    resource->OnAppFocusChange(focus);
 }
 
 //--------------------------------------------------------------

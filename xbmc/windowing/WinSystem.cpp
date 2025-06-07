@@ -183,8 +183,8 @@ static void AddRefreshRate(std::vector<REFRESHRATE> &refreshrates, unsigned int 
 {
   float RefreshRate = CDisplaySettings::GetInstance().GetResolutionInfo(addindex).fRefreshRate;
 
-  for (unsigned int idx = 0; idx < refreshrates.size(); idx++)
-    if (   refreshrates[idx].RefreshRate == RefreshRate)
+  for (const REFRESHRATE& refreshrate : refreshrates)
+    if (refreshrate.RefreshRate == RefreshRate)
       return; // already taken care of.
 
   REFRESHRATE rr = {RefreshRate, (int)addindex};
@@ -220,14 +220,14 @@ REFRESHRATE CWinSystemBase::DefaultRefreshRate(const std::vector<REFRESHRATE>& r
   float bestfitness = -1.0f;
   float targetfps = CDisplaySettings::GetInstance().GetResolutionInfo(RES_DESKTOP).fRefreshRate;
 
-  for (unsigned i = 0; i < rates.size(); i++)
+  for (const REFRESHRATE& rate : rates)
   {
-    float fitness = fabs(targetfps - rates[i].RefreshRate);
+    float fitness = fabs(targetfps - rate.RefreshRate);
 
     if (bestfitness <0 || fitness < bestfitness)
     {
       bestfitness = fitness;
-      bestmatch = rates[i];
+      bestmatch = rate;
       if (bestfitness == 0.0f) // perfect match
         break;
     }
@@ -286,8 +286,8 @@ void CWinSystemBase::DriveRenderLoop()
 
   {
     std::unique_lock lock(m_renderLoopSection);
-    for (auto i = m_renderLoopClients.begin(); i != m_renderLoopClients.end(); ++i)
-      (*i)->FrameMove();
+    for (IRenderLoop* m_renderLoopClient : m_renderLoopClients)
+      m_renderLoopClient->FrameMove();
   }
 }
 

@@ -613,8 +613,8 @@ void CWinSystemOSX::AnnounceOnLostDevice()
   std::unique_lock lock(m_resourceSection);
   // tell any shared resources
   CLog::LogF(LOGDEBUG, "Lost Device Announce");
-  for (std::vector<IDispResource*>::iterator i = m_resources.begin(); i != m_resources.end(); ++i)
-    (*i)->OnLostDisplay();
+  for (IDispResource* resource : m_resources)
+    resource->OnLostDisplay();
 }
 
 void CWinSystemOSX::HandleOnResetDevice()
@@ -643,8 +643,8 @@ void CWinSystemOSX::AnnounceOnResetDevice()
   std::unique_lock lock(m_resourceSection);
   // tell any shared resources
   CLog::LogF(LOGDEBUG, "Reset Device Announce");
-  for (std::vector<IDispResource*>::iterator i = m_resources.begin(); i != m_resources.end(); ++i)
-    (*i)->OnResetDisplay();
+  for (IDispResource* resource : m_resources)
+    resource->OnResetDisplay();
 }
 
 #pragma mark - Timers
