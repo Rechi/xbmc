@@ -148,9 +148,9 @@ bool CGUIMediaWindow::Load(TiXmlElement *pRootElement)
   { // format is <views>50,29,51,95</views>
     const std::string &allViews = element->FirstChild()->ValueStr();
     std::vector<std::string> views = StringUtils::Split(allViews, ",");
-    for (std::vector<std::string>::const_iterator i = views.begin(); i != views.end(); ++i)
+    for (const std::string& view : views)
     {
-      int controlID = atol(i->c_str());
+      int controlID = atol(view.c_str());
       CGUIControl *control = GetControl(controlID);
       if (control && control->IsContainer())
         m_viewControl.AddView(control);
