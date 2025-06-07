@@ -109,16 +109,16 @@ void CImageMetadataParser::ExtractCommonMetadata(Exiv2::Image& image)
 
 void CImageMetadataParser::ExtractExif(Exiv2::ExifData& exifData)
 {
-  for (auto it = exifData.begin(); it != exifData.end(); ++it)
+  for (const Exiv2::Exifdatum& it : exifData)
   {
-    const std::string exifKey = it->key();
+    const std::string exifKey = it.key();
     if (exifKey == "Exif.Image.Make")
     {
-      m_imageMetadata->exifInfo.CameraMake = it->value().toString();
+      m_imageMetadata->exifInfo.CameraMake = it.value().toString();
     }
     else if (exifKey == "Exif.Image.ImageDescription")
     {
-      const std::string value = it->value().toString();
+      const std::string value = it.value().toString();
       if (!IsOnlySpaces(value))
       {
         m_imageMetadata->exifInfo.Description = value;
@@ -126,11 +126,11 @@ void CImageMetadataParser::ExtractExif(Exiv2::ExifData& exifData)
     }
     else if (exifKey == "Exif.Image.Model")
     {
-      m_imageMetadata->exifInfo.CameraModel = it->value().toString();
+      m_imageMetadata->exifInfo.CameraModel = it.value().toString();
     }
     else if (exifKey == "Exif.Image.Orientation")
     {
-      const int orientationValue = it->value().EXIV_toUint32();
+      const int orientationValue = it.value().EXIV_toUint32();
       if (orientationValue < 0 || orientationValue > 8)
       {
         CLog::LogF(LOGWARNING, "Exif: Undefined rotation value {}",
@@ -142,32 +142,32 @@ void CImageMetadataParser::ExtractExif(Exiv2::ExifData& exifData)
     else if ((exifKey == "Exif.Image.DateTime" || exifKey == "Exif.Photo.DateTimeDigitized"))
     {
       if (m_imageMetadata->exifInfo.DateTime.empty())
-        m_imageMetadata->exifInfo.DateTime = it->value().toString();
+        m_imageMetadata->exifInfo.DateTime = it.value().toString();
     }
     else if (exifKey == "Exif.Photo.ExposureTime")
     {
-      m_imageMetadata->exifInfo.ExposureTime = it->value().toFloat();
+      m_imageMetadata->exifInfo.ExposureTime = it.value().toFloat();
     }
     else if (exifKey == "Exif.Photo.FNumber")
     {
-      m_imageMetadata->exifInfo.ApertureFNumber = it->value().toFloat();
+      m_imageMetadata->exifInfo.ApertureFNumber = it.value().toFloat();
     }
     else if (exifKey == "Exif.Photo.ExposureProgram")
     {
-      m_imageMetadata->exifInfo.ExposureProgram = it->value().EXIV_toUint32();
+      m_imageMetadata->exifInfo.ExposureProgram = it.value().EXIV_toUint32();
     }
     else if (exifKey == "Exif.Photo.ISOSpeedRatings")
     {
-      m_imageMetadata->exifInfo.ISOequivalent = it->value().EXIV_toUint32();
+      m_imageMetadata->exifInfo.ISOequivalent = it.value().EXIV_toUint32();
     }
     else if (exifKey == "Exif.Photo.DateTimeOriginal")
     {
-      m_imageMetadata->exifInfo.DateTime = it->value().toString();
+      m_imageMetadata->exifInfo.DateTime = it.value().toString();
     }
     else if (exifKey == "Exif.Photo.ApertureValue")
     {
       m_imageMetadata->exifInfo.ApertureFNumber =
-          static_cast<double>(it->value().toFloat()) * log(2.0) * 0.5;
+          static_cast<double>(it.value().toFloat()) * log(2.0) * 0.5;
     }
     else if (exifKey == "Exif.Photo.MaxApertureValue")
     {
@@ -175,7 +175,7 @@ void CImageMetadataParser::ExtractExif(Exiv2::ExifData& exifData)
       // have appropriate aperture information yet.
       if (m_imageMetadata->exifInfo.ApertureFNumber == 0)
         m_imageMetadata->exifInfo.ApertureFNumber =
-            static_cast<double>(it->value().toFloat()) * log(2.0) * 0.5;
+            static_cast<double>(it.value().toFloat()) * log(2.0) * 0.5;
     }
     else if (exifKey == "Exif.Photo.ShutterSpeedValue")
     {
@@ -184,43 +184,43 @@ void CImageMetadataParser::ExtractExif(Exiv2::ExifData& exifData)
       if (m_imageMetadata->exifInfo.ExposureTime == 0)
       {
         m_imageMetadata->exifInfo.ExposureTime =
-            1 / exp(static_cast<double>(it->value().toFloat()) * log(2.0));
+            1 / exp(static_cast<double>(it.value().toFloat()) * log(2.0));
       }
     }
     else if (exifKey == "Exif.Photo.ExposureBiasValue")
     {
-      m_imageMetadata->exifInfo.ExposureBias = it->value().toFloat();
+      m_imageMetadata->exifInfo.ExposureBias = it.value().toFloat();
     }
     else if (exifKey == "Exif.Photo.MeteringMode")
     {
-      m_imageMetadata->exifInfo.MeteringMode = it->value().EXIV_toUint32();
+      m_imageMetadata->exifInfo.MeteringMode = it.value().EXIV_toUint32();
     }
     else if (exifKey == "Exif.Photo.Flash")
     {
-      m_imageMetadata->exifInfo.FlashUsed = it->value().EXIV_toUint32();
+      m_imageMetadata->exifInfo.FlashUsed = it.value().EXIV_toUint32();
     }
     else if (exifKey == "Exif.Photo.FocalLength")
     {
-      m_imageMetadata->exifInfo.FocalLength = it->value().toFloat();
+      m_imageMetadata->exifInfo.FocalLength = it.value().toFloat();
     }
     else if (exifKey == "Exif.Photo.SubjectDistance")
     {
-      m_imageMetadata->exifInfo.Distance = it->value().toFloat();
+      m_imageMetadata->exifInfo.Distance = it.value().toFloat();
     }
     else if (exifKey == "Exif.Image.XPComment")
     {
-      m_imageMetadata->exifInfo.XPComment = it->value().toString();
+      m_imageMetadata->exifInfo.XPComment = it.value().toString();
     }
     else if (exifKey == "Exif.Photo.UserComment")
     {
-      m_imageMetadata->exifInfo.Comments = it->value().toString();
+      m_imageMetadata->exifInfo.Comments = it.value().toString();
     }
     else if (exifKey == "Exif.Photo.PixelXDimension" || exifKey == "Exif.Photo.PixelYDimension")
     {
       // Use largest of height and width to deal with images that have been
       // rotated to portrait format.
       {
-        const int value = static_cast<int>(it->value().EXIV_toInt64());
+        const int value = static_cast<int>(it.value().EXIV_toInt64());
         if (m_imageWidth < value)
         {
           m_imageWidth = value;
@@ -229,11 +229,11 @@ void CImageMetadataParser::ExtractExif(Exiv2::ExifData& exifData)
     }
     else if (exifKey == "Exif.Photo.FocalPlaneXResolution")
     {
-      m_focalPlaneXRes = it->value().toFloat();
+      m_focalPlaneXRes = it.value().toFloat();
     }
     else if (exifKey == "Exif.Photo.FocalPlaneResolutionUnit")
     {
-      const uint32_t value = it->value().EXIV_toUint32();
+      const uint32_t value = it.value().EXIV_toUint32();
       // see: https://exiftool.org/TagNames/EXIF.html
       switch (value)
       {
@@ -256,68 +256,68 @@ void CImageMetadataParser::ExtractExif(Exiv2::ExifData& exifData)
     }
     else if (exifKey == "Exif.Photo.ExposureMode")
     {
-      m_imageMetadata->exifInfo.ExposureMode = it->value().EXIV_toUint32();
+      m_imageMetadata->exifInfo.ExposureMode = it.value().EXIV_toUint32();
     }
     else if (exifKey == "Exif.Photo.WhiteBalance")
     {
-      m_imageMetadata->exifInfo.Whitebalance = it->value().EXIV_toUint32();
+      m_imageMetadata->exifInfo.Whitebalance = it.value().EXIV_toUint32();
     }
     else if (exifKey == "Exif.Photo.LightSource")
     {
-      m_imageMetadata->exifInfo.LightSource = it->value().EXIV_toUint32();
+      m_imageMetadata->exifInfo.LightSource = it.value().EXIV_toUint32();
     }
     else if (exifKey == "Exif.Photo.DigitalZoomRatio")
     {
-      m_imageMetadata->exifInfo.DigitalZoomRatio = it->value().toFloat();
+      m_imageMetadata->exifInfo.DigitalZoomRatio = it.value().toFloat();
     }
     else if (exifKey == "Exif.Photo.FocalLengthIn35mmFilm")
     {
       // The focal length equivalent 35 mm is a 2.2 tag (defined as of April 2002)
       // if its present, use it to compute equivalent focal length instead of
       // computing it from sensor geometry and actual focal length.
-      m_imageMetadata->exifInfo.FocalLength35mmEquiv = it->value().EXIV_toUint32();
+      m_imageMetadata->exifInfo.FocalLength35mmEquiv = it.value().EXIV_toUint32();
     }
     else if (exifKey == "Exif.GPSInfo.GPSLatitudeRef")
     {
       if (m_imageMetadata->exifInfo.GpsLat.empty())
       {
-        m_imageMetadata->exifInfo.GpsLat = StringUtils::Format(" {}", it->value().toString());
+        m_imageMetadata->exifInfo.GpsLat = StringUtils::Format(" {}", it.value().toString());
       }
       else
       {
         m_imageMetadata->exifInfo.GpsLat =
-            StringUtils::Format("{} {}", m_imageMetadata->exifInfo.GpsLat, it->value().toString());
+            StringUtils::Format("{} {}", m_imageMetadata->exifInfo.GpsLat, it.value().toString());
       }
     }
     else if (exifKey == "Exif.GPSInfo.GPSLongitudeRef")
     {
       if (m_imageMetadata->exifInfo.GpsLong.empty())
       {
-        m_imageMetadata->exifInfo.GpsLong = StringUtils::Format(" {}", it->value().toString());
+        m_imageMetadata->exifInfo.GpsLong = StringUtils::Format(" {}", it.value().toString());
       }
       else
       {
         m_imageMetadata->exifInfo.GpsLong =
-            StringUtils::Format("{} {}", m_imageMetadata->exifInfo.GpsLong, it->value().toString());
+            StringUtils::Format("{} {}", m_imageMetadata->exifInfo.GpsLong, it.value().toString());
       }
     }
     else if (exifKey == "Exif.GPSInfo.GPSLatitude")
     {
       m_imageMetadata->exifInfo.GpsLat =
-          GetGPSString(it->value()) + m_imageMetadata->exifInfo.GpsLat;
+          GetGPSString(it.value()) + m_imageMetadata->exifInfo.GpsLat;
     }
     else if (exifKey == "Exif.GPSInfo.GPSLongitude")
     {
       m_imageMetadata->exifInfo.GpsLong =
-          GetGPSString(it->value()) + m_imageMetadata->exifInfo.GpsLong;
+          GetGPSString(it.value()) + m_imageMetadata->exifInfo.GpsLong;
     }
     else if (exifKey == "Exif.GPSInfo.GPSAltitude")
     {
-      m_imageMetadata->exifInfo.GpsAlt += StringUtils::Format("{}m", it->value().toFloat());
+      m_imageMetadata->exifInfo.GpsAlt += StringUtils::Format("{}m", it.value().toFloat());
     }
     else if (exifKey == "Exif.GPSInfo.GPSAltitudeRef")
     {
-      auto value = it->value().EXIV_toUint32();
+      auto value = it.value().EXIV_toUint32();
       if (value == 1) // below sea level
       {
         m_imageMetadata->exifInfo.GpsAlt = "-" + m_imageMetadata->exifInfo.GpsAlt;
@@ -353,119 +353,119 @@ void CImageMetadataParser::ExtractExif(Exiv2::ExifData& exifData)
 
 void CImageMetadataParser::ExtractIPTC(Exiv2::IptcData& iptcData)
 {
-  for (auto it = iptcData.begin(); it != iptcData.end(); ++it)
+  for (const Exiv2::Iptcdatum& it : iptcData)
   {
-    const std::string iptcKey = it->key();
+    const std::string iptcKey = it.key();
     if (iptcKey == "Iptc.Application2.RecordVersion")
     {
-      m_imageMetadata->iptcInfo.RecordVersion = it->value().toString();
+      m_imageMetadata->iptcInfo.RecordVersion = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.SuppCategory")
     {
-      m_imageMetadata->iptcInfo.SupplementalCategories = it->value().toString();
+      m_imageMetadata->iptcInfo.SupplementalCategories = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.Keywords")
     {
       if (m_imageMetadata->iptcInfo.Keywords.empty())
       {
-        m_imageMetadata->iptcInfo.Keywords = it->value().toString();
+        m_imageMetadata->iptcInfo.Keywords = it.value().toString();
       }
       else
       {
-        m_imageMetadata->iptcInfo.Keywords += ", " + it->value().toString();
+        m_imageMetadata->iptcInfo.Keywords += ", " + it.value().toString();
       }
     }
     else if (iptcKey == "Iptc.Application2.Caption")
     {
-      m_imageMetadata->iptcInfo.Caption = it->value().toString();
+      m_imageMetadata->iptcInfo.Caption = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.Writer")
     {
-      m_imageMetadata->iptcInfo.Author = it->value().toString();
+      m_imageMetadata->iptcInfo.Author = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.Headline")
     {
-      m_imageMetadata->iptcInfo.Headline = it->value().toString();
+      m_imageMetadata->iptcInfo.Headline = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.SpecialInstructions")
     {
-      m_imageMetadata->iptcInfo.SpecialInstructions = it->value().toString();
+      m_imageMetadata->iptcInfo.SpecialInstructions = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.Category")
     {
-      m_imageMetadata->iptcInfo.Category = it->value().toString();
+      m_imageMetadata->iptcInfo.Category = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.Byline")
     {
-      m_imageMetadata->iptcInfo.Byline = it->value().toString();
+      m_imageMetadata->iptcInfo.Byline = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.BylineTitle")
     {
-      m_imageMetadata->iptcInfo.BylineTitle = it->value().toString();
+      m_imageMetadata->iptcInfo.BylineTitle = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.Credit")
     {
-      m_imageMetadata->iptcInfo.Credit = it->value().toString();
+      m_imageMetadata->iptcInfo.Credit = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.Source")
     {
-      m_imageMetadata->iptcInfo.Source = it->value().toString();
+      m_imageMetadata->iptcInfo.Source = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.Copyright")
     {
-      m_imageMetadata->iptcInfo.CopyrightNotice = it->value().toString();
+      m_imageMetadata->iptcInfo.CopyrightNotice = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.ObjectName")
     {
-      m_imageMetadata->iptcInfo.ObjectName = it->value().toString();
+      m_imageMetadata->iptcInfo.ObjectName = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.City")
     {
-      m_imageMetadata->iptcInfo.City = it->value().toString();
+      m_imageMetadata->iptcInfo.City = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.ProvinceState")
     {
-      m_imageMetadata->iptcInfo.State = it->value().toString();
+      m_imageMetadata->iptcInfo.State = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.CountryName")
     {
-      m_imageMetadata->iptcInfo.Country = it->value().toString();
+      m_imageMetadata->iptcInfo.Country = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.TransmissionReference")
     {
-      m_imageMetadata->iptcInfo.TransmissionReference = it->value().toString();
+      m_imageMetadata->iptcInfo.TransmissionReference = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.Urgency")
     {
-      m_imageMetadata->iptcInfo.Urgency = it->value().toString();
+      m_imageMetadata->iptcInfo.Urgency = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.CountryCode")
     {
-      m_imageMetadata->iptcInfo.CountryCode = it->value().toString();
+      m_imageMetadata->iptcInfo.CountryCode = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.ReferenceService")
     {
-      m_imageMetadata->iptcInfo.ReferenceService = it->value().toString();
+      m_imageMetadata->iptcInfo.ReferenceService = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.SubLocation")
     {
-      m_imageMetadata->iptcInfo.SubLocation = it->value().toString();
+      m_imageMetadata->iptcInfo.SubLocation = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.ImageType")
     {
-      m_imageMetadata->iptcInfo.ImageType = it->value().toString();
+      m_imageMetadata->iptcInfo.ImageType = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.DateCreated")
     {
-      m_imageMetadata->iptcInfo.Date = it->value().toString();
+      m_imageMetadata->iptcInfo.Date = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.DateCreated")
     {
-      m_imageMetadata->iptcInfo.Date = it->value().toString();
+      m_imageMetadata->iptcInfo.Date = it.value().toString();
     }
     else if (iptcKey == "Iptc.Application2.TimeCreated")
     {
-      m_imageMetadata->iptcInfo.TimeCreated = it->value().toString();
+      m_imageMetadata->iptcInfo.TimeCreated = it.value().toString();
     }
   }
 }

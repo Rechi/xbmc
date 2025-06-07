@@ -371,8 +371,8 @@ void CGUIWindowSlideShow::Select(const std::string& strPicture)
 
 void CGUIWindowSlideShow::GetSlideShowContents(CFileItemList &list)
 {
-  for (size_t index = 0; index < m_slides.size(); index++)
-    list.Add(std::make_shared<CFileItem>(*m_slides.at(index)));
+  for (const CFileItemPtr& slide : m_slides)
+    list.Add(std::make_shared<CFileItem>(*slide));
 }
 
 std::shared_ptr<const CFileItem> CGUIWindowSlideShow::GetCurrentSlide()
