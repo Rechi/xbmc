@@ -189,9 +189,8 @@ bool CGUILargeTextureManager::GetImage(const std::string& path,
                                        const bool useCache)
 {
   std::unique_lock lock(m_listSection);
-  for (listIterator it = m_allocated.begin(); it != m_allocated.end(); ++it)
+  for (CLargeTexture* image : m_allocated)
   {
-    CLargeTexture *image = *it;
     if (image->GetPath() == path && image->GetTargetWidth() == width &&
         image->GetTargetHeight() == height && image->GetAspectRatio() == aspectRatio)
     {
@@ -253,9 +252,9 @@ void CGUILargeTextureManager::QueueImage(const std::string& path,
     return;
 
   std::unique_lock lock(m_listSection);
-  for (queueIterator it = m_queued.begin(); it != m_queued.end(); ++it)
+  for (const std::pair<unsigned int, CLargeTexture*>& it : m_queued)
   {
-    CLargeTexture *image = it->second;
+    CLargeTexture* image = it.second;
     if (image->GetPath() == path && image->GetTargetWidth() == width &&
         image->GetTargetHeight() == height && image->GetAspectRatio() == aspectRatio)
     {

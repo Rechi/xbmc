@@ -247,8 +247,8 @@ bool CTextureUseCountJob::DoWork()
   if (db.Open())
   {
     db.BeginTransaction();
-    for (std::vector<CTextureDetails>::const_iterator i = m_textures.begin(); i != m_textures.end(); ++i)
-      db.IncrementUseCount(*i);
+    for (const CTextureDetails& texture : m_textures)
+      db.IncrementUseCount(texture);
     db.CommitTransaction();
   }
   return true;

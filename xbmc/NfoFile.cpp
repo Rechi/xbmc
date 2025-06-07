@@ -82,8 +82,8 @@ CInfoScanner::InfoType CNfoFile::Create(const std::string& strPath,
 
   // search ..
   int res = -1;
-  for (unsigned int i=0; i<vecScrapers.size(); ++i)
-    if ((res = Scrape(vecScrapers[i], m_scurl, m_doc)) == 0 || res == 2)
+  for (ScraperPtr& scraper : vecScrapers)
+    if ((res = Scrape(scraper, m_scurl, m_doc)) == 0 || res == 2)
       break;
 
   if (res == 2)

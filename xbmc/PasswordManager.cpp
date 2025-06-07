@@ -191,7 +191,7 @@ void CPasswordManager::Save() const
   if (root == nullptr)
     return;
 
-  for (std::map<std::string, std::string>::const_iterator i = m_permanentCache.begin(); i != m_permanentCache.end(); ++i)
+  for (const std::pair<const std::string, std::string>& i : m_permanentCache)
   {
     auto* pathElement = doc.NewElement("path");
     if (pathElement == nullptr)
@@ -201,8 +201,8 @@ void CPasswordManager::Save() const
     if (path == nullptr)
       continue;
 
-    XMLUtils::SetPath(path, "from", i->first);
-    XMLUtils::SetPath(path, "to", i->second);
+    XMLUtils::SetPath(path, "from", i.first);
+    XMLUtils::SetPath(path, "to", i.second);
   }
 
   const std::shared_ptr<CProfileManager> profileManager = CServiceBroker::GetSettingsComponent()->GetProfileManager();

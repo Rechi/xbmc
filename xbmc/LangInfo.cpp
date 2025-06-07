@@ -621,8 +621,8 @@ void CLangInfo::LoadTokens(const TiXmlNode* pTokens, std::set<std::string>& vecT
         if (strSep.empty())
           vecTokens.insert(pToken->FirstChild()->ValueStr());
         else
-          for (unsigned int i=0;i<strSep.size();++i)
-            vecTokens.insert(pToken->FirstChild()->ValueStr() + strSep[i]);
+          for (char sep : strSep)
+            vecTokens.insert(pToken->FirstChild()->ValueStr() + sep);
       }
       pToken = pToken->NextSiblingElement();
     }
@@ -1298,9 +1298,8 @@ void CLangInfo::SettingOptionsRegionsFiller(const SettingConstPtr& setting,
   std::sort(regions.begin(), regions.end(), sortstringbyname());
 
   bool match = false;
-  for (unsigned int i = 0; i < regions.size(); ++i)
+  for (const std::string& region : regions)
   {
-    std::string region = regions[i];
     list.emplace_back(region, region);
 
     if (!match && region == std::static_pointer_cast<const CSettingString>(setting)->GetValue())

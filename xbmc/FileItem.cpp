@@ -1791,9 +1791,8 @@ void CFileItem::LoadEmbeddedCue()
     {
       std::vector<std::string> MediaFileVec;
       cuesheet->GetMediaFiles(MediaFileVec);
-      for (std::vector<std::string>::iterator itMedia = MediaFileVec.begin();
-           itMedia != MediaFileVec.end(); ++itMedia)
-        cuesheet->UpdateMediaFile(*itMedia, GetPath());
+      for (const std::string& mediaFile : MediaFileVec)
+        cuesheet->UpdateMediaFile(mediaFile, GetPath());
       SetCueDocument(cuesheet);
     }
     // Clear cuesheet tag having added it to item
