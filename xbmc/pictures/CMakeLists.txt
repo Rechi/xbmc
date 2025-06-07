@@ -7,7 +7,9 @@ set(SOURCES GUIDialogPictureInfo.cpp
             PictureFileItemClassify.cpp
             PictureFolderImageFileLoader.cpp
             PictureInfoLoader.cpp
+            PictureInfoScanner.cpp
             PictureInfoTag.cpp
+            PictureLibraryQueue.cpp
             PictureScalingAlgorithm.cpp
             PictureThumbLoader.cpp
             SlideShowDelegator.cpp
@@ -23,7 +25,9 @@ set(HEADERS interfaces/ISlideShowDelegate.h
             PictureFileItemClassify.h
             PictureFolderImageFileLoader.h
             PictureInfoLoader.h
+            PictureInfoScanner.h
             PictureInfoTag.h
+            PictureLibraryQueue.h
             PictureScalingAlgorithm.h
             PictureThumbLoader.h
             SlideShowDelegator.h

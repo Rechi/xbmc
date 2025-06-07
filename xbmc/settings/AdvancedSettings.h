@@ -276,6 +276,8 @@ class CAdvancedSettings : public ISettingCallback, public ISettingsHandler
     bool m_caseSensitiveLocalArtMatch{true};
     int m_minimumEpisodePlaylistDuration; // seconds
 
+    bool m_bPictureLibraryCleanOnUpdate;
+
     std::set<std::string> m_vecTokens;
 
     int m_iEpgUpdateCheckInterval;  // seconds

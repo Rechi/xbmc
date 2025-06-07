@@ -481,6 +481,8 @@ public:
   static constexpr auto SETTING_FILECACHE_MEMORYSIZE = "filecache.memorysize"; // in MBytes
   static constexpr auto SETTING_FILECACHE_READFACTOR = "filecache.readfactor"; // as integer (x100)
   static constexpr auto SETTING_FILECACHE_CHUNKSIZE = "filecache.chunksize"; // in Bytes
+  static constexpr auto SETTING_PICTURELIBRARY_BACKGROUNDUPDATE = "picturelibrary.backgroundupdate";
+  static constexpr auto SETTING_PICTURELIBRARY_UPDATEONSTARTUP = "picturelibrary.updateonstartup";
 
   // values for SETTING_VIDEOLIBRARY_SHOWUNWATCHEDPLOTS
   static const int VIDEOLIBRARY_PLOTS_SHOW_UNWATCHED_MOVIES = 0;

@@ -10,19 +10,23 @@
 
 #include "FileItem.h"
 #include "FileItemList.h"
+#include "PictureDatabase.h"
 #include "ServiceBroker.h"
 #include "filesystem/Directory.h"
+#include "filesystem/PictureDatabaseDirectory.h"
 #include "guilib/LocalizeStrings.h"
 #include "guilib/WindowIDs.h"
 #include "settings/MediaSourceSettings.h"
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
 #include "utils/FileExtensionProvider.h"
+#include "video/VideoFileItemClassify.h"
 #include "view/ViewState.h"
 #include "view/ViewStateSettings.h"
 
+using namespace KODI;
 using namespace XFILE;
-using namespace ADDON;
+using namespace PICTUREDATABASEDIRECTORY;
 
 CGUIViewStateWindowPictures::CGUIViewStateWindowPictures(const CFileItemList& items) : CGUIViewState(items)
 {
@@ -35,6 +39,20 @@ CGUIViewStateWindowPictures::CGUIViewStateWindowPictures(const CFileItemList& it
     SetViewAsControl(DEFAULT_VIEW_LIST);
 
     SetSortOrder(SortOrderAscending);
+  }
+  else if (VIDEO::IsVideoDb(items))
+  {
+    NODE_TYPE NodeType = CPictureDatabaseDirectory::GetDirectoryChildType(items.GetPath());
+
+    switch (NodeType)
+    {
+      case NODE_TYPE_TAGS:
+      {
+      }
+      break;
+      default:
+        break;
+    }
   }
   else
   {

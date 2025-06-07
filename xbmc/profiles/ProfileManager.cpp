@@ -41,6 +41,7 @@
 #include "music/MusicLibraryQueue.h"
 #include "network/Network.h" //! @todo Remove me
 #include "network/NetworkServices.h" //! @todo Remove me
+#include "pictures/PictureLibraryQueue.h"
 #include "pvr/PVRManager.h" //! @todo Remove me
 #include "settings/Settings.h"
 #include "settings/SettingsComponent.h"
@@ -444,6 +445,9 @@ void CProfileManager::LogOff()
 
   if (CMusicLibraryQueue::GetInstance().IsScanningLibrary())
     CMusicLibraryQueue::GetInstance().StopLibraryScanning();
+
+  if (CPictureLibraryQueue::GetInstance().IsScanningLibrary())
+    CPictureLibraryQueue::GetInstance().StopLibraryScanning();
 
   if (CVideoLibraryQueue::GetInstance().IsRunning())
     CVideoLibraryQueue::GetInstance().CancelAllJobs();

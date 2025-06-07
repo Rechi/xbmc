@@ -22,6 +22,7 @@ xbmc/imagefiles                                 imagefiles
 xbmc/messaging                                  messaging
 xbmc/messaging/helpers                          messagingHelpers
 xbmc/pictures                                   pictures
+xbmc/pictures/jobs                              pictures/jobs
 xbmc/pictures/metadata                          pictures_metadata
 xbmc/platform                                   platform
 xbmc/playlists                                  playlists

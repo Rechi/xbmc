@@ -498,7 +498,9 @@ constexpr uint32_t LIBRARY_HAS_COMPILATIONS          = 727;
 constexpr uint32_t LIBRARY_IS_SCANNING               = 728;
 constexpr uint32_t LIBRARY_IS_SCANNING_VIDEO         = 729;
 constexpr uint32_t LIBRARY_IS_SCANNING_MUSIC         = 730;
-// unused id 731 to 734
+constexpr uint32_t LIBRARY_IS_SCANNING_PICTURES = 731;
+constexpr uint32_t LIBRARY_HAS_PICTURES = 732;
+// unused id 733 to 734
 constexpr uint32_t LIBRARY_HAS_ROLE                  = 735;
 constexpr uint32_t LIBRARY_HAS_BOXSETS               = 736;
 constexpr uint32_t LIBRARY_HAS_NODE                  = 737;
