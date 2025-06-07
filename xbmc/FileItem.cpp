@@ -708,7 +708,7 @@ void CFileItem::Archive(CArchive& ar)
     ar >> m_mimetype;
     ar >> m_extrainfo;
     ar >> temp;
-    m_specialSort = (SortSpecial)temp;
+    m_specialSort = static_cast<SortSpecial>(temp);
     ar >> m_doContentLookup;
 
     int iType;

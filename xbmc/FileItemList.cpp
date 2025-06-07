@@ -352,7 +352,7 @@ void CFileItemList::Sort(SortDescription sortDescription)
   }
 
   const Fields fields = SortUtils::GetFieldsForSorting(sortDescription.sortBy);
-  SortItems sortItems((size_t)Size());
+  SortItems sortItems(static_cast<size_t>(Size()));
   for (int index = 0; index < Size(); index++)
   {
     sortItems[index] = std::make_shared<SortItem>();
