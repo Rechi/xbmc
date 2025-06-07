@@ -179,7 +179,7 @@ unsigned int CTouchTranslator::TranslateTouchCommand(const tinyxml2::XMLElement*
   int pointers = 1;
   attrVal = pButton->Attribute("pointers");
   if (attrVal != nullptr)
-    pointers = (int)strtol(attrVal, nullptr, 0);
+    pointers = static_cast<int>(strtol(attrVal, nullptr, 0));
 
   unsigned int touchActionKey = GetTouchActionKey(touchCommandId, pointers);
 

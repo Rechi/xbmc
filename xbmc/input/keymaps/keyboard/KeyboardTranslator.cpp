@@ -39,10 +39,10 @@ uint32_t CKeyboardTranslator::TranslateButton(const tinyxml2::XMLElement* pButto
       const char* str = strID;
       char* endptr;
       long int id = strtol(str, &endptr, 0);
-      if (endptr - str != (int)strlen(str) || id <= 0 || id > 0x00FFFFFF)
+      if (endptr - str != static_cast<int>(strlen(str)) || id <= 0 || id > 0x00FFFFFF)
         CLog::Log(LOGDEBUG, "{} - invalid key id {}", __FUNCTION__, strID);
       else
-        button_id = (uint32_t)id;
+        button_id = static_cast<uint32_t>(id);
     }
     else
       CLog::Log(LOGERROR, "Keyboard Translator: `key' button has no id");
