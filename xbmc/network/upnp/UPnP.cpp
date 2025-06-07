@@ -332,16 +332,15 @@ public:
     NPT_CHECK_LABEL(action->SetArgumentValue("ObjectID", url.GetFileName().c_str()), failed);
 
     // put together the current and the new value string
-    for (std::set<std::pair<NPT_String, NPT_String>>::const_iterator value = values.begin();
-         value != values.end(); ++value)
+    for (const std::pair<NPT_String, NPT_String>& value : values)
     {
       if (!curr_value.IsEmpty())
         curr_value.Append(",");
       if (!new_value.IsEmpty())
         new_value.Append(",");
 
-      curr_value.Append(value->first);
-      new_value.Append(value->second);
+      curr_value.Append(value.first);
+      new_value.Append(value.second);
     }
     NPT_CHECK_LABEL(action->SetArgumentValue("CurrentTagValue", curr_value), failed);
     NPT_CHECK_LABEL(action->SetArgumentValue("NewTagValue", new_value), failed);

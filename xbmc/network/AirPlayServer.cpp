@@ -358,11 +358,11 @@ void CAirPlayServer::Process()
         max_fd = socket;
     }
 
-    for (unsigned int i = 0; i < m_connections.size(); i++)
+    for (const CTCPClient& connection : m_connections)
     {
-      FD_SET(m_connections[i].m_socket, &rfds);
-      if (m_connections[i].m_socket > max_fd)
-        max_fd = m_connections[i].m_socket;
+      FD_SET(connection.m_socket, &rfds);
+      if (connection.m_socket > max_fd)
+        max_fd = connection.m_socket;
     }
 
     int res = select(max_fd+1, &rfds, NULL, NULL, &to);
@@ -452,8 +452,8 @@ bool CAirPlayServer::Initialize()
 void CAirPlayServer::Deinitialize()
 {
   std::unique_lock lock(m_connectionLock);
-  for (unsigned int i = 0; i < m_connections.size(); i++)
-    m_connections[i].Disconnect();
+  for (CTCPClient& connection : m_connections)
+    connection.Disconnect();
 
   m_connections.clear();
   m_reverseSockets.clear();
