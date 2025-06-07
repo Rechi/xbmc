@@ -69,7 +69,7 @@ bool in_ether (const char *bufp, unsigned char *addr)
     if (c != 0)
       bufp++;
 
-    *ptr++ = (unsigned char) (val & 0377);
+    *ptr++ = static_cast<unsigned char>(val & 0377);
     i++;
 
     if (*bufp == ':' || *bufp == '-')
@@ -102,8 +102,8 @@ int CNetworkBase::ParseHex(char *str, unsigned char *addr)
       int tmp;
       if (str[1] == 0)
          return -1;
-      if (sscanf(str, "%02x", (unsigned int *)&tmp) != 1)
-         return -1;
+      if (sscanf(str, "%02x", reinterpret_cast<unsigned int*>(&tmp)) != 1)
+        return -1;
       addr[len] = tmp;
       len++;
       str += 2;
@@ -253,7 +253,8 @@ bool CNetworkBase::WakeOnLan(const char* mac)
   saddr.sin_port = htons(9);
 
   unsigned int value = 1;
-  if (setsockopt (packet, SOL_SOCKET, SO_BROADCAST, (char*) &value, sizeof( unsigned int ) ) == SOCKET_ERROR)
+  if (setsockopt(packet, SOL_SOCKET, SO_BROADCAST, reinterpret_cast<char*>(&value),
+                 sizeof(unsigned int)) == SOCKET_ERROR)
   {
     CLog::Log(LOGERROR, "{} - Unable to set socket options ({})", __FUNCTION__, strerror(errno));
     closesocket(packet);
@@ -270,7 +271,8 @@ bool CNetworkBase::WakeOnLan(const char* mac)
       *ptr++ = ethaddr[i];
 
   // Send the magic packet
-  if (sendto (packet, (char *)buf, 102, 0, (struct sockaddr *)&saddr, sizeof (saddr)) < 0)
+  if (sendto(packet, reinterpret_cast<char*>(buf), 102, 0,
+             reinterpret_cast<struct sockaddr*>(&saddr), sizeof(saddr)) < 0)
   {
     CLog::Log(LOGERROR, "{} - Unable to send magic packet ({})", __FUNCTION__, strerror(errno));
     closesocket(packet);
@@ -296,7 +298,8 @@ static const char* ConnectHostPort(SOCKET soc, const struct sockaddr_in& addr, s
   if (result != 0)
     return "set non-blocking option failed";
 
-  result = connect(soc, (const struct sockaddr *)&addr, sizeof(addr)); // non-blocking connect, will fail ..
+  result = connect(soc, reinterpret_cast<const struct sockaddr*>(&addr),
+                   sizeof(addr)); // non-blocking connect, will fail ..
 
   if (result < 0)
   {
@@ -325,7 +328,7 @@ static const char* ConnectHostPort(SOCKET soc, const struct sockaddr_in& addr, s
       int err_code = -1;
       socklen_t code_len = sizeof (err_code);
 
-      result = getsockopt(soc, SOL_SOCKET, SO_ERROR, (char*) &err_code, &code_len);
+      result = getsockopt(soc, SOL_SOCKET, SO_ERROR, reinterpret_cast<char*>(&err_code), &code_len);
 
       if (result != 0)
         return "getsockopt fail";

@@ -48,7 +48,7 @@ CWebSocketFrame::CWebSocketFrame(const char* data, uint64_t length)
   m_extension |= (m_data[0] & MASK_RSV2) << 1;
   m_extension |= (m_data[0] & MASK_RSV3) << 2;
   // Get the opcode
-  m_opcode = (WebSocketFrameOpcode)(m_data[0] & MASK_OPCODE);
+  m_opcode = static_cast<WebSocketFrameOpcode>(m_data[0] & MASK_OPCODE);
   if (m_opcode >= WebSocketUnknownFrame)
   {
     CLog::Log(LOGINFO, "WebSocket: Frame with invalid opcode {:2X} received", m_opcode);
@@ -66,7 +66,7 @@ CWebSocketFrame::CWebSocketFrame(const char* data, uint64_t length)
   m_masked = ((m_data[1] & MASK_MASK) == MASK_MASK);
 
   // Get the payload length
-  m_length = (uint64_t)(m_data[1] & MASK_LENGTH);
+  m_length = static_cast<uint64_t>(m_data[1] & MASK_LENGTH);
   if ((m_length <= 125 && m_lengthFrame  < m_length + LENGTH_MIN) ||
       (m_length == 126 && m_lengthFrame < LENGTH_MIN + 2) ||
       (m_length == 127 && m_lengthFrame < LENGTH_MIN + 8))
@@ -125,7 +125,8 @@ CWebSocketFrame::CWebSocketFrame(const char* data, uint64_t length)
   if (m_masked)
   {
     for (uint64_t index = 0; index < m_length; index++)
-      m_applicationData[index] = m_applicationData[index] ^ ((char *)(&m_mask))[index % 4];
+      m_applicationData[index] =
+          m_applicationData[index] ^ (reinterpret_cast<char*>(&m_mask))[index % 4];
   }
 
   m_valid = true;
@@ -182,7 +183,7 @@ CWebSocketFrame::CWebSocketFrame(WebSocketFrameOpcode opcode, const char* data /
     buffer.push_back(dataByte);
 
     uint16_t dataLength = Endian_SwapBE16((uint16_t)m_length);
-    buffer.append((const char*)&dataLength, 2);
+    buffer.append(reinterpret_cast<const char*>(&dataLength), 2);
   }
   else
   {
@@ -190,7 +191,7 @@ CWebSocketFrame::CWebSocketFrame(WebSocketFrameOpcode opcode, const char* data /
     buffer.push_back(dataByte);
 
     uint64_t dataLength = Endian_SwapBE64(m_length);
-    buffer.append((const char*)&dataLength, 8);
+    buffer.append(reinterpret_cast<const char*>(&dataLength), 8);
   }
 
   uint64_t applicationDataOffset = 0;
@@ -199,23 +200,23 @@ CWebSocketFrame::CWebSocketFrame(WebSocketFrameOpcode opcode, const char* data /
     // Set masking key
     if (m_masked)
     {
-      buffer.append((char *)&m_mask, sizeof(m_mask));
+      buffer.append(reinterpret_cast<char*>(&m_mask), sizeof(m_mask));
       applicationDataOffset = buffer.size();
 
       for (uint64_t index = 0; index < m_length; index++)
-        buffer.push_back(data[index] ^ ((char *)(&m_mask))[index % 4]);
+        buffer.push_back(data[index] ^ (reinterpret_cast<char*>(&m_mask))[index % 4]);
     }
     else
     {
       applicationDataOffset = buffer.size();
-      buffer.append(data, (unsigned int)length);
+      buffer.append(data, static_cast<unsigned int>(length));
     }
   }
 
   // Get the whole data
   m_lengthFrame = buffer.size();
-  m_data = new char[(uint32_t)m_lengthFrame];
-  memcpy(const_cast<char *>(m_data), buffer.c_str(), (uint32_t)m_lengthFrame);
+  m_data = new char[static_cast<uint32_t>(m_lengthFrame)];
+  memcpy(const_cast<char*>(m_data), buffer.c_str(), static_cast<uint32_t>(m_lengthFrame));
 
   if (data)
   {
@@ -308,7 +309,7 @@ const CWebSocketMessage* CWebSocket::Handle(const char* &buffer, size_t &length,
         }
 
         // adjust the length and the buffer values
-        length -= (size_t)frame->GetFrameLength();
+        length -= static_cast<size_t>(frame->GetFrameLength());
         buffer += frame->GetFrameLength();
 
         if (frame->IsControlFrame())
@@ -383,7 +384,7 @@ const CWebSocketMessage* CWebSocket::Handle(const char* &buffer, size_t &length,
         if (frame->IsValid())
         {
           // adjust the length and the buffer values
-          length -= (size_t)frame->GetFrameLength();
+          length -= static_cast<size_t>(frame->GetFrameLength());
           buffer += frame->GetFrameLength();
         }
 
