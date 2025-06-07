@@ -651,7 +651,7 @@ CMime::EFileType CMime::GetFileTypeFromContent(const std::string& fileContent)
   if (len < 2)
     return FileTypeUnknown;
 
-  const unsigned char* const b = (const unsigned char*)fileContent.c_str();
+  const unsigned char* const b = reinterpret_cast<const unsigned char*>(fileContent.c_str());
 
   //! @todo add detection for text types
 

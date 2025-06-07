@@ -199,7 +199,7 @@ static const uint8_t* avc_find_startcode_internal(const uint8_t *p, const uint8_
 
   for (end -= 3; p < end; p += 4)
   {
-    uint32_t x = *(const uint32_t*)p;
+    uint32_t x = *reinterpret_cast<const uint32_t*>(p);
     if ((x - 0x01010101) & (~x) & 0x80808080) // generic
     {
       if (p[1] == 0)
@@ -707,7 +707,7 @@ bool CBitstreamConverter::BitstreamConvertInitAVC(void *in_extradata, int in_ext
   uint16_t unit_size;
   uint32_t total_size = 0;
   uint8_t *out = NULL, unit_nb, sps_done = 0, sps_seen = 0, pps_seen = 0;
-  const uint8_t *extradata = (uint8_t*)in_extradata + 4;
+  const uint8_t* extradata = static_cast<uint8_t*>(in_extradata) + 4;
   static const uint8_t nalu_header[4] = {0, 0, 0, 1};
 
   // retrieve length coded size
@@ -732,7 +732,7 @@ bool CBitstreamConverter::BitstreamConvertInitAVC(void *in_extradata, int in_ext
     total_size += unit_size + 4;
 
     if (total_size > INT_MAX - AV_INPUT_BUFFER_PADDING_SIZE ||
-      (extradata + 2 + unit_size) > ((uint8_t*)in_extradata + in_extrasize))
+        (extradata + 2 + unit_size) > (static_cast<uint8_t*>(in_extradata) + in_extrasize))
     {
       av_free(out);
       return false;
@@ -743,7 +743,7 @@ bool CBitstreamConverter::BitstreamConvertInitAVC(void *in_extradata, int in_ext
       av_free(out);
       return false;
     }
-    out = (uint8_t*)tmp;
+    out = static_cast<uint8_t*>(tmp);
     memcpy(out + total_size - unit_size - 4, nalu_header, 4);
     memcpy(out + total_size - unit_size, extradata + 2, unit_size);
     extradata += 2 + unit_size;
@@ -785,7 +785,7 @@ bool CBitstreamConverter::BitstreamConvertInitHEVC(void *in_extradata, int in_ex
   uint16_t unit_nb, unit_size;
   uint32_t total_size = 0;
   uint8_t *out = NULL, array_nb, nal_type, sps_seen = 0, pps_seen = 0;
-  const uint8_t *extradata = (uint8_t*)in_extradata + 21;
+  const uint8_t* extradata = static_cast<uint8_t*>(in_extradata) + 21;
   static const uint8_t nalu_header[4] = {0, 0, 0, 1};
 
   // retrieve length coded size
@@ -822,7 +822,7 @@ bool CBitstreamConverter::BitstreamConvertInitHEVC(void *in_extradata, int in_ex
       total_size += unit_size + 4;
 
       if (total_size > INT_MAX - AV_INPUT_BUFFER_PADDING_SIZE ||
-        (extradata + unit_size) > ((uint8_t*)in_extradata + in_extrasize))
+          (extradata + unit_size) > (static_cast<uint8_t*>(in_extradata) + in_extrasize))
       {
         av_free(out);
         return false;
@@ -833,7 +833,7 @@ bool CBitstreamConverter::BitstreamConvertInitHEVC(void *in_extradata, int in_ex
         av_free(out);
         return false;
       }
-      out = (uint8_t*)tmp;
+      out = static_cast<uint8_t*>(tmp);
       memcpy(out + total_size - unit_size - 4, nalu_header, 4);
       memcpy(out + total_size - unit_size, extradata, unit_size);
       extradata += unit_size;
@@ -1079,7 +1079,7 @@ void CBitstreamConverter::BitstreamAllocAndCopy(uint8_t** poutbuf,
   tmp = av_realloc(*poutbuf, *poutbuf_size);
   if (!tmp)
     return;
-  *poutbuf = (uint8_t*)tmp;
+  *poutbuf = static_cast<uint8_t*>(tmp);
   if (sps_pps)
     memcpy(*poutbuf + offset, sps_pps, sps_pps_size);
 

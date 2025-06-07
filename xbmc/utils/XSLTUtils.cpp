@@ -66,7 +66,7 @@ bool XSLTUtils::XSLTTransform(std::string& output)
     return false;
   }
 
-  output.append((const char *)xmlResultBuffer, xmlResultLength);
+  output.append(reinterpret_cast<const char*>(xmlResultBuffer), xmlResultLength);
   xmlFree(xmlResultBuffer);
 
   return true;

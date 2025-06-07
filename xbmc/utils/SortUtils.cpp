@@ -78,7 +78,7 @@ std::string ByLastPlayed(SortAttribute attributes, const SortItem &values)
 
 std::string ByPlaycount(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("{} {}", (int)values.at(FieldPlaycount).asInteger(),
+  return StringUtils::Format("{} {}", static_cast<int>(values.at(FieldPlaycount).asInteger()),
                              ByLabel(attributes, values));
 }
 
@@ -90,7 +90,7 @@ std::string ByDate(SortAttribute attributes, const SortItem &values)
 std::string ByDateAdded(SortAttribute attributes, const SortItem &values)
 {
   return StringUtils::Format("{} {}", values.at(FieldDateAdded).asString(),
-                             (int)values.at(FieldId).asInteger());
+                             static_cast<int>(values.at(FieldId).asInteger()));
 }
 
 std::string BySize(SortAttribute attributes, const SortItem &values)
@@ -100,7 +100,7 @@ std::string BySize(SortAttribute attributes, const SortItem &values)
 
 std::string ByDriveType(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("{} {}", (int)values.at(FieldDriveType).asInteger(),
+  return StringUtils::Format("{} {}", static_cast<int>(values.at(FieldDriveType).asInteger()),
                              ByLabel(attributes, values));
 }
 
@@ -123,7 +123,7 @@ std::string ByAlbum(SortAttribute attributes, const SortItem &values)
 
   const CVariant &track = values.at(FieldTrackNumber);
   if (!track.isNull())
-    label += StringUtils::Format(" {}", (int)track.asInteger());
+    label += StringUtils::Format(" {}", static_cast<int>(track.asInteger()));
 
   return label;
 }
@@ -151,7 +151,7 @@ std::string ByArtist(SortAttribute attributes, const SortItem &values)
 
   const CVariant &track = values.at(FieldTrackNumber);
   if (!track.isNull())
-    label += StringUtils::Format(" {}", (int)track.asInteger());
+    label += StringUtils::Format(" {}", static_cast<int>(track.asInteger()));
 
   return label;
 }
@@ -178,14 +178,14 @@ std::string ByArtistThenYear(SortAttribute attributes, const SortItem &values)
 
   const CVariant &track = values.at(FieldTrackNumber);
   if (!track.isNull())
-    label += StringUtils::Format(" {}", (int)track.asInteger());
+    label += StringUtils::Format(" {}", static_cast<int>(track.asInteger()));
 
   return label;
 }
 
 std::string ByTrackNumber(SortAttribute attributes, const SortItem &values)
 {
-  return std::to_string((int)values.at(FieldTrackNumber).asInteger());
+  return std::to_string(static_cast<int>(values.at(FieldTrackNumber).asInteger()));
 }
 
 std::string ByTotalDiscs(SortAttribute attributes, const SortItem& values)
@@ -198,7 +198,7 @@ std::string ByTime(SortAttribute attributes, const SortItem &values)
   std::string label;
   const CVariant &time = values.at(FieldTime);
   if (time.isInteger())
-    label = std::to_string((int)time.asInteger());
+    label = std::to_string(static_cast<int>(time.asInteger()));
   else
     label = time.asString();
   return label;
@@ -206,7 +206,7 @@ std::string ByTime(SortAttribute attributes, const SortItem &values)
 
 std::string ByProgramCount(SortAttribute attributes, const SortItem &values)
 {
-  return std::to_string((int)values.at(FieldProgramCount).asInteger());
+  return std::to_string(static_cast<int>(values.at(FieldProgramCount).asInteger()));
 }
 
 std::string ByPlaylistOrder(SortAttribute attributes, const SortItem &values)
@@ -232,7 +232,7 @@ std::string ByYear(SortAttribute attributes, const SortItem &values)
   if (!airDate.isNull() && !airDate.asString().empty())
     label = airDate.asString() + " ";
 
-  label += std::to_string((int)values.at(FieldYear).asInteger());
+  label += std::to_string(static_cast<int>(values.at(FieldYear).asInteger()));
 
   const CVariant &album = values.at(FieldAlbum);
   if (!album.isNull())
@@ -240,7 +240,7 @@ std::string ByYear(SortAttribute attributes, const SortItem &values)
 
   const CVariant &track = values.at(FieldTrackNumber);
   if (!track.isNull())
-    label += StringUtils::Format(" {}", (int)track.asInteger());
+    label += StringUtils::Format(" {}", static_cast<int>(track.asInteger()));
 
   label += " " + ByLabel(attributes, values);
 
@@ -307,13 +307,13 @@ std::string ByUserRating(SortAttribute attributes, const SortItem &values)
 
 std::string ByVotes(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("{} {}", (int)values.at(FieldVotes).asInteger(),
+  return StringUtils::Format("{} {}", static_cast<int>(values.at(FieldVotes).asInteger()),
                              ByLabel(attributes, values));
 }
 
 std::string ByTop250(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("{} {}", (int)values.at(FieldTop250).asInteger(),
+  return StringUtils::Format("{} {}", static_cast<int>(values.at(FieldTop250).asInteger()),
                              ByLabel(attributes, values));
 }
 
@@ -342,9 +342,12 @@ std::string ByEpisodeNumber(SortAttribute attributes, const SortItem &values)
   const CVariant &seasonSpecial = values.at(FieldSeasonSpecialSort);
   if (!episodeSpecial.isNull() && !seasonSpecial.isNull() &&
      (episodeSpecial.asInteger() > 0 || seasonSpecial.asInteger() > 0))
-    num = ((uint64_t)seasonSpecial.asInteger() << 32) + (episodeSpecial.asInteger() << 16) - ((2 << 15) - values.at(FieldEpisodeNumber).asInteger());
+    num = (static_cast<uint64_t>(seasonSpecial.asInteger()) << 32) +
+          (episodeSpecial.asInteger() << 16) -
+          ((2 << 15) - values.at(FieldEpisodeNumber).asInteger());
   else
-    num = ((uint64_t)values.at(FieldSeason).asInteger() << 32) + (values.at(FieldEpisodeNumber).asInteger() << 16);
+    num = (static_cast<uint64_t>(values.at(FieldSeason).asInteger()) << 32) +
+          (values.at(FieldEpisodeNumber).asInteger() << 16);
 
   std::string title;
   if (values.find(FieldMediaType) != values.end() && values.at(FieldMediaType).asString() == MediaTypeMovie)
@@ -371,13 +374,15 @@ std::string BySeason(SortAttribute attributes, const SortItem &values)
 
 std::string ByNumberOfEpisodes(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("{} {}", (int)values.at(FieldNumberOfEpisodes).asInteger(),
+  return StringUtils::Format("{} {}",
+                             static_cast<int>(values.at(FieldNumberOfEpisodes).asInteger()),
                              ByLabel(attributes, values));
 }
 
 std::string ByNumberOfWatchedEpisodes(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("{} {}", (int)values.at(FieldNumberOfWatchedEpisodes).asInteger(),
+  return StringUtils::Format("{} {}",
+                             static_cast<int>(values.at(FieldNumberOfWatchedEpisodes).asInteger()),
                              ByLabel(attributes, values));
 }
 
@@ -398,7 +403,7 @@ std::string ByProductionCode(SortAttribute attributes, const SortItem &values)
 
 std::string ByVideoResolution(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("{} {}", (int)values.at(FieldVideoResolution).asInteger(),
+  return StringUtils::Format("{} {}", static_cast<int>(values.at(FieldVideoResolution).asInteger()),
                              ByLabel(attributes, values));
 }
 
@@ -416,7 +421,7 @@ std::string ByVideoAspectRatio(SortAttribute attributes, const SortItem &values)
 
 std::string ByAudioChannels(SortAttribute attributes, const SortItem &values)
 {
-  return StringUtils::Format("{} {}", (int)values.at(FieldAudioChannels).asInteger(),
+  return StringUtils::Format("{} {}", static_cast<int>(values.at(FieldAudioChannels).asInteger()),
                              ByLabel(attributes, values));
 }
 
@@ -485,7 +490,7 @@ std::string ByDateTaken(SortAttribute attributes, const SortItem &values)
 
 std::string ByRelevance(SortAttribute attributes, const SortItem &values)
 {
-  return std::to_string((int)values.at(FieldRelevance).asInteger());
+  return std::to_string(static_cast<int>(values.at(FieldRelevance).asInteger()));
 }
 
 std::string ByInstallDate(SortAttribute attributes, const SortItem &values)
@@ -528,10 +533,12 @@ bool preliminarySort(const SortItem &left, const SortItem &right, bool handleFol
   SortItem::const_iterator itLeft, itRight;
   SortSpecial leftSortSpecial = SortSpecialNone;
   SortSpecial rightSortSpecial = SortSpecialNone;
-  if ((itLeft = left.find(FieldSortSpecial)) != left.end() && itLeft->second.asInteger() <= (int64_t)SortSpecialOnBottom)
-    leftSortSpecial = (SortSpecial)itLeft->second.asInteger();
-  if ((itRight = right.find(FieldSortSpecial)) != right.end() && itRight->second.asInteger() <= (int64_t)SortSpecialOnBottom)
-    rightSortSpecial = (SortSpecial)itRight->second.asInteger();
+  if ((itLeft = left.find(FieldSortSpecial)) != left.end() &&
+      itLeft->second.asInteger() <= static_cast<int64_t>(SortSpecialOnBottom))
+    leftSortSpecial = static_cast<SortSpecial>(itLeft->second.asInteger());
+  if ((itRight = right.find(FieldSortSpecial)) != right.end() &&
+      itRight->second.asInteger() <= static_cast<int64_t>(SortSpecialOnBottom))
+    rightSortSpecial = static_cast<SortSpecial>(itRight->second.asInteger());
 
   // one has a special sort
   if (leftSortSpecial != rightSortSpecial)
@@ -1019,12 +1026,12 @@ void SortUtils::Sort(SortBy sortBy, SortOrder sortOrder, SortAttribute attribute
     }
   }
 
-  if (limitStart > 0 && (size_t)limitStart < items.size())
+  if (limitStart > 0 && static_cast<size_t>(limitStart) < items.size())
   {
     items.erase(items.begin(), items.begin() + limitStart);
     limitEnd -= limitStart;
   }
-  if (limitEnd > 0 && (size_t)limitEnd < items.size())
+  if (limitEnd > 0 && static_cast<size_t>(limitEnd) < items.size())
     items.erase(items.begin() + limitEnd, items.end());
 }
 
@@ -1058,12 +1065,12 @@ void SortUtils::Sort(SortBy sortBy, SortOrder sortOrder, SortAttribute attribute
     }
   }
 
-  if (limitStart > 0 && (size_t)limitStart < items.size())
+  if (limitStart > 0 && static_cast<size_t>(limitStart) < items.size())
   {
     items.erase(items.begin(), items.begin() + limitStart);
     limitEnd -= limitStart;
   }
-  if (limitEnd > 0 && (size_t)limitEnd < items.size())
+  if (limitEnd > 0 && static_cast<size_t>(limitEnd) < items.size())
     items.erase(items.begin() + limitEnd, items.end());
 }
 
@@ -1182,9 +1189,9 @@ const sort_map table[] = {
   { SortByUserRating,               SortMethod::SONG_USER_RATING,             SortAttributeIgnoreFolders, 38018 },
   { SortByUserRating,               SortMethod::VIDEO_USER_RATING,            SortAttributeIgnoreFolders, 38018 },
   { SortBySortTitle,                SortMethod::VIDEO_SORT_TITLE,             SortAttributeIgnoreFolders, 171 },
-  { SortBySortTitle,                SortMethod::VIDEO_SORT_TITLE_IGNORE_THE,  SortAttribute(SortAttributeIgnoreFolders | SortAttributeIgnoreArticle), 171 },
+  { SortBySortTitle,                SortMethod::VIDEO_SORT_TITLE_IGNORE_THE,  static_cast<SortAttribute>(SortAttributeIgnoreFolders | SortAttributeIgnoreArticle), 171 },
   { SortByOriginalTitle,            SortMethod::VIDEO_ORIGINAL_TITLE,         SortAttributeIgnoreFolders, 20376 },
-  { SortByOriginalTitle,            SortMethod::VIDEO_ORIGINAL_TITLE_IGNORE_THE, SortAttribute(SortAttributeIgnoreFolders | SortAttributeIgnoreArticle), 20376 },
+  { SortByOriginalTitle,            SortMethod::VIDEO_ORIGINAL_TITLE_IGNORE_THE, static_cast<SortAttribute>(SortAttributeIgnoreFolders | SortAttributeIgnoreArticle), 20376 },
   { SortByYear,                     SortMethod::YEAR,                         SortAttributeIgnoreFolders, 562 },
   { SortByProductionCode,           SortMethod::PRODUCTIONCODE,               SortAttributeNone,          20368 },
   { SortByProgramCount,             SortMethod::PROGRAM_COUNT,                SortAttributeNone,          567 }, // label is "play count"

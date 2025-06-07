@@ -61,5 +61,5 @@ TEST(TestMap, EnumConstexpr)
   static_assert(map.find(ENUM::TWO)->second == "TWO");
   static_assert(map.find(ENUM::THREE)->second == "THREE");
   static_assert(map.find(ENUM::ENUM_MAX) == map.cend());
-  static_assert(map.size() == size_t(ENUM::ENUM_MAX));
+  static_assert(map.size() == static_cast<size_t>(ENUM::ENUM_MAX));
 }

@@ -255,7 +255,7 @@ bool CFileOperationJob::CFileOperation::ExecuteOperation(CFileOperationJob *base
   base->m_currentFile = CURL(m_strFileA).GetFileNameWithoutPath();
   base->m_currentOperation = GetActionString(m_action);
 
-  if (base->ShouldCancel((unsigned int)current, 100))
+  if (base->ShouldCancel(static_cast<unsigned int>(current), 100))
     return false;
 
   base->SetText(base->GetCurrentFile());
@@ -296,7 +296,7 @@ bool CFileOperationJob::CFileOperation::ExecuteOperation(CFileOperationJob *base
       break;
   }
 
-  current += (double)m_time * opWeight;
+  current += static_cast<double>(m_time) * opWeight;
 
   return bResult;
 }
@@ -321,7 +321,9 @@ inline bool CFileOperationJob::CanBeRenamed(const std::string &strFileA, const s
 bool CFileOperationJob::CFileOperation::OnFileCallback(void* pContext, int ipercent, float avgSpeed)
 {
   DataHolder *data = static_cast<DataHolder*>(pContext);
-  double current = data->current + ((double)ipercent * data->opWeight * (double)m_time)/ 100.0;
+  double current =
+      data->current +
+      (static_cast<double>(ipercent) * data->opWeight * static_cast<double>(m_time)) / 100.0;
 
   if (avgSpeed > 1000000.0f)
     data->base->m_avgSpeed = StringUtils::Format("{:.1f} MB/s", avgSpeed / 1000000.0f);
@@ -332,7 +334,7 @@ bool CFileOperationJob::CFileOperation::OnFileCallback(void* pContext, int iperc
   line =
       StringUtils::Format("{} ({})", data->base->GetCurrentFile(), data->base->GetAverageSpeed());
   data->base->SetText(line);
-  return !data->base->ShouldCancel((unsigned)current, 100);
+  return !data->base->ShouldCancel(static_cast<unsigned>(current), 100);
 }
 
 bool CFileOperationJob::operator==(const CJob* job) const

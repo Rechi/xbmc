@@ -33,7 +33,7 @@ CRingBuffer::~CRingBuffer()
 bool CRingBuffer::Create(unsigned int size)
 {
   std::unique_lock lock(m_critSection);
-  m_buffer = (char*)malloc(size);
+  m_buffer = static_cast<char*>(malloc(size));
   if (m_buffer != NULL)
   {
     m_size = size;

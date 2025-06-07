@@ -506,7 +506,8 @@ bool DatabaseUtils::GetDatabaseResults(const MediaType &mediaType, const FieldLi
     else if (mediaType == MediaTypeEpisode)
     {
       std::ostringstream label;
-      label << (int)(result.at(FieldSeason).asInteger() * 100 + result.at(FieldEpisodeNumber).asInteger());
+      label << static_cast<int>(result.at(FieldSeason).asInteger() * 100 +
+                                result.at(FieldEpisodeNumber).asInteger());
       label << ". ";
       label << result.at(FieldTitle).asString();
       result[FieldLabel] = label.str();
@@ -516,7 +517,7 @@ bool DatabaseUtils::GetDatabaseResults(const MediaType &mediaType, const FieldLi
     else if (mediaType == MediaTypeSong)
     {
       std::ostringstream label;
-      label << (int)result.at(FieldTrackNumber).asInteger();
+      label << static_cast<int>(result.at(FieldTrackNumber).asInteger());
       label << ". ";
       label << result.at(FieldTitle).asString();
       result[FieldLabel] = label.str();
