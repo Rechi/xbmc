@@ -195,7 +195,8 @@ void CWSDiscoveryListenerUDP::Process()
 
   // set socket reuse
   int enable = 1;
-  if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, (char*)&enable, sizeof(enable)) < 0)
+  if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&enable), sizeof(enable)) <
+      0)
   {
     CLog::Log(LOGDEBUG, LOGWSDISCOVERY, "CWSDiscoveryListenerUDP::Process - Reuse Option failed");
     Cleanup(true);
@@ -210,7 +211,7 @@ void CWSDiscoveryListenerUDP::Process()
   addr.sin_port = htons(wsdUDP);
 
   // bind to receive address
-  if (bind(fd, (struct sockaddr*)&addr, sizeof(addr)) < 0)
+  if (bind(fd, reinterpret_cast<struct sockaddr*>(&addr), sizeof(addr)) < 0)
   {
     CLog::Log(LOGDEBUG, LOGWSDISCOVERY, "CWSDiscoveryListenerUDP::Process - Bind failed");
     Cleanup(true);
@@ -222,7 +223,8 @@ void CWSDiscoveryListenerUDP::Process()
   struct ip_mreq mreq;
   mreq.imr_multiaddr.s_addr = inet_addr(WDSIPv4MultiGroup);
   mreq.imr_interface.s_addr = htonl(INADDR_ANY);
-  if (setsockopt(fd, IPPROTO_IP, IP_ADD_MEMBERSHIP, (char*)&mreq, sizeof(mreq)) < 0)
+  if (setsockopt(fd, IPPROTO_IP, IP_ADD_MEMBERSHIP, reinterpret_cast<char*>(&mreq), sizeof(mreq)) <
+      0)
   {
     CLog::Log(LOGDEBUG, LOGWSDISCOVERY,
               "CWSDiscoveryListenerUDP::Process - Multicast Option failed");
@@ -233,7 +235,8 @@ void CWSDiscoveryListenerUDP::Process()
   // Disable receiving broadcast messages on loopback
   // So we dont receive messages we send.
   int disable = 0;
-  if (setsockopt(fd, IPPROTO_IP, IP_MULTICAST_LOOP, (char*)&disable, sizeof(disable)) < 0)
+  if (setsockopt(fd, IPPROTO_IP, IP_MULTICAST_LOOP, reinterpret_cast<char*>(&disable),
+                 sizeof(disable)) < 0)
   {
     CLog::Log(LOGDEBUG, LOGWSDISCOVERY,
               "CWSDiscoveryListenerUDP::Process - Loopback Disable Option failed");
@@ -274,7 +277,8 @@ void CWSDiscoveryListenerUDP::Process()
       bufferoutput = "";
       char msgbuf[UDPBUFFSIZE];
       socklen_t addrlen = sizeof(addr);
-      int nbytes = recvfrom(fd, msgbuf, UDPBUFFSIZE, 0, (struct sockaddr*)&addr, &addrlen);
+      int nbytes =
+          recvfrom(fd, msgbuf, UDPBUFFSIZE, 0, reinterpret_cast<struct sockaddr*>(&addr), &addrlen);
       msgbuf[nbytes] = '\0';
       // turn msgbuf into std::string
       bufferoutput.append(msgbuf, nbytes);
@@ -340,7 +344,8 @@ bool CWSDiscoveryListenerUDP::DispatchCommand()
     do
     {
       ret = sendto(fd, sendCommand.commandMsg.c_str(), sendCommand.commandMsg.size(), 0,
-                   (struct sockaddr*)&sendCommand.address, sizeof(sendCommand.address));
+                   reinterpret_cast<struct sockaddr*>(&sendCommand.address),
+                   sizeof(sendCommand.address));
     } while (ret == -1 && !m_bStop);
     std::chrono::seconds sec(1);
     CThread::Sleep(sec);

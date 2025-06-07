@@ -52,17 +52,25 @@ void CJNIXBMCMediaSession::RegisterNatives(JNIEnv* env)
   jclass cClass = env->FindClass(s_className.c_str());
   if(cClass)
   {
-    JNINativeMethod methods[] =
-    {
-      {"_onPlayRequested", "()V", (void*)&CJNIXBMCMediaSession::_onPlayRequested},
-      {"_onPauseRequested", "()V", (void*)&CJNIXBMCMediaSession::_onPauseRequested},
-      {"_onNextRequested", "()V", (void*)&CJNIXBMCMediaSession::_onNextRequested},
-      {"_onPreviousRequested", "()V", (void*)&CJNIXBMCMediaSession::_onPreviousRequested},
-      {"_onForwardRequested", "()V", (void*)&CJNIXBMCMediaSession::_onForwardRequested},
-      {"_onRewindRequested", "()V", (void*)&CJNIXBMCMediaSession::_onRewindRequested},
-      {"_onStopRequested", "()V", (void*)&CJNIXBMCMediaSession::_onStopRequested},
-      {"_onSeekRequested", "(J)V", (void*)&CJNIXBMCMediaSession::_onSeekRequested},
-      {"_onMediaButtonEvent", "(Landroid/content/Intent;)Z", (void*)&CJNIXBMCMediaSession::_onMediaButtonEvent},
+    JNINativeMethod methods[] = {
+        {"_onPlayRequested", "()V",
+         reinterpret_cast<void*>(&CJNIXBMCMediaSession::_onPlayRequested)},
+        {"_onPauseRequested", "()V",
+         reinterpret_cast<void*>(&CJNIXBMCMediaSession::_onPauseRequested)},
+        {"_onNextRequested", "()V",
+         reinterpret_cast<void*>(&CJNIXBMCMediaSession::_onNextRequested)},
+        {"_onPreviousRequested", "()V",
+         reinterpret_cast<void*>(&CJNIXBMCMediaSession::_onPreviousRequested)},
+        {"_onForwardRequested", "()V",
+         reinterpret_cast<void*>(&CJNIXBMCMediaSession::_onForwardRequested)},
+        {"_onRewindRequested", "()V",
+         reinterpret_cast<void*>(&CJNIXBMCMediaSession::_onRewindRequested)},
+        {"_onStopRequested", "()V",
+         reinterpret_cast<void*>(&CJNIXBMCMediaSession::_onStopRequested)},
+        {"_onSeekRequested", "(J)V",
+         reinterpret_cast<void*>(&CJNIXBMCMediaSession::_onSeekRequested)},
+        {"_onMediaButtonEvent", "(Landroid/content/Intent;)Z",
+         reinterpret_cast<void*>(&CJNIXBMCMediaSession::_onMediaButtonEvent)},
     };
 
     env->RegisterNatives(cClass, methods, sizeof(methods)/sizeof(methods[0]));
@@ -74,9 +82,7 @@ void CJNIXBMCMediaSession::activate(bool state)
   if (state == m_isActive)
     return;
 
-  call_method<void>(m_object,
-                    "activate", "(Z)V",
-                    (jboolean)state);
+  call_method<void>(m_object, "activate", "(Z)V", static_cast<jboolean>(state));
   m_isActive = state;
 }
 

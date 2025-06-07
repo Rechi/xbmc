@@ -113,7 +113,8 @@ int SystemTimeToFileTime(const SystemTime* systemTime, FileTime* fileTime)
 #endif
 
   LARGE_INTEGER result;
-  result.QuadPart = (long long)t * 10000000 + (long long)systemTime->milliseconds * 10000;
+  result.QuadPart = static_cast<long long>(t) * 10000000 +
+                    static_cast<long long>(systemTime->milliseconds) * 10000;
   result.QuadPart += WIN32_TIME_OFFSET;
 
   fileTime->lowDateTime = result.u.LowPart;
@@ -173,7 +174,7 @@ int LocalFileTimeToFileTime(const FileTime* localFileTime, FileTime* fileTime)
   l.u.LowPart = localFileTime->lowDateTime;
   l.u.HighPart = localFileTime->highDateTime;
 
-  l.QuadPart += (unsigned long long) timezone * 10000000;
+  l.QuadPart += static_cast<unsigned long long>(timezone) * 10000000;
 
   fileTime->lowDateTime = l.u.LowPart;
   fileTime->highDateTime = l.u.HighPart;
@@ -210,7 +211,7 @@ int TimeTToFileTime(time_t timeT, FileTime* localFileTime)
     return false;
 
   ULARGE_INTEGER result;
-  result.QuadPart = (unsigned long long) timeT * 10000000;
+  result.QuadPart = static_cast<unsigned long long>(timeT) * 10000000;
   result.QuadPart += WIN32_TIME_OFFSET;
 
   localFileTime->lowDateTime = result.u.LowPart;

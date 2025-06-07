@@ -25,9 +25,9 @@ void CJNIXBMCJsonHandler::RegisterNatives(JNIEnv *env)
   jclass cClass = env->FindClass(s_className.c_str());
   if(cClass)
   {
-    JNINativeMethod methods[] =
-    {
-      {"_requestJSON", "(Ljava/lang/String;)Ljava/lang/String;", (void*)&CJNIXBMCJsonHandler::_requestJSON},
+    JNINativeMethod methods[] = {
+        {"_requestJSON", "(Ljava/lang/String;)Ljava/lang/String;",
+         reinterpret_cast<void*>(&CJNIXBMCJsonHandler::_requestJSON)},
     };
 
     env->RegisterNatives(cClass, methods, sizeof(methods)/sizeof(methods[0]));

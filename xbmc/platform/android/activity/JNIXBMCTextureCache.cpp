@@ -25,7 +25,7 @@ void CJNIXBMCTextureCache::RegisterNatives(JNIEnv* env)
   {
     JNINativeMethod methods[] = {
         {"_unwrapImageURL", "(Ljava/lang/String;)Ljava/lang/String;",
-         (void*)&CJNIXBMCTextureCache::_unwrapImageURL},
+         reinterpret_cast<void*>(&CJNIXBMCTextureCache::_unwrapImageURL)},
     };
 
     env->RegisterNatives(cClass, methods, sizeof(methods) / sizeof(methods[0]));

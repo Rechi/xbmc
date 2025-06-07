@@ -24,12 +24,12 @@ CNetworkInterfacePosix::CNetworkInterfacePosix(CNetworkPosix* network,
                                                char interfaceMacAddrRaw[6])
   : m_interfaceName(std::move(interfaceName)),
     m_interfaceMacAdr(StringUtils::Format("{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}",
-                                          (uint8_t)interfaceMacAddrRaw[0],
-                                          (uint8_t)interfaceMacAddrRaw[1],
-                                          (uint8_t)interfaceMacAddrRaw[2],
-                                          (uint8_t)interfaceMacAddrRaw[3],
-                                          (uint8_t)interfaceMacAddrRaw[4],
-                                          (uint8_t)interfaceMacAddrRaw[5]))
+                                          static_cast<uint8_t>(interfaceMacAddrRaw[0]),
+                                          static_cast<uint8_t>(interfaceMacAddrRaw[1]),
+                                          static_cast<uint8_t>(interfaceMacAddrRaw[2]),
+                                          static_cast<uint8_t>(interfaceMacAddrRaw[3]),
+                                          static_cast<uint8_t>(interfaceMacAddrRaw[4]),
+                                          static_cast<uint8_t>(interfaceMacAddrRaw[5])))
 {
   m_network = network;
   memcpy(m_interfaceMacAddrRaw, interfaceMacAddrRaw, sizeof(m_interfaceMacAddrRaw));
@@ -73,7 +73,7 @@ std::string CNetworkInterfacePosix::GetCurrentIPAddress() const
   ifr.ifr_addr.sa_family = AF_INET;
   if (ioctl(m_network->GetSocket(), SIOCGIFADDR, &ifr) >= 0)
   {
-    result = inet_ntoa((*((struct sockaddr_in*)&ifr.ifr_addr)).sin_addr);
+    result = inet_ntoa((*(reinterpret_cast<struct sockaddr_in*>(&ifr.ifr_addr))).sin_addr);
   }
 
   return result;
@@ -88,7 +88,7 @@ std::string CNetworkInterfacePosix::GetCurrentNetmask() const
   ifr.ifr_addr.sa_family = AF_INET;
   if (ioctl(m_network->GetSocket(), SIOCGIFNETMASK, &ifr) >= 0)
   {
-    result = inet_ntoa((*((struct sockaddr_in*)&ifr.ifr_addr)).sin_addr);
+    result = inet_ntoa((*(reinterpret_cast<struct sockaddr_in*>(&ifr.ifr_addr))).sin_addr);
   }
 
   return result;

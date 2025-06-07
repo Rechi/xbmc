@@ -96,7 +96,7 @@ void CJNIMainActivity::_callNative(JNIEnv *env, jobject context, jlong funcAddr,
 {
   (void)env;
   (void)context;
-  ((void (*)(CVariant *))funcAddr)((CVariant *)variantAddr);
+  reinterpret_cast<void (*)(CVariant*)>(funcAddr)(reinterpret_cast<CVariant*>(variantAddr));
 }
 
 void CJNIMainActivity::_onVisibleBehindCanceled(JNIEnv* env, jobject context)
@@ -109,8 +109,8 @@ void CJNIMainActivity::_onVisibleBehindCanceled(JNIEnv* env, jobject context)
 
 void CJNIMainActivity::runNativeOnUiThread(void (*callback)(void*), void* variant)
 {
-  call_method<void>(m_context,
-                    "runNativeOnUiThread", "(JJ)V", (jlong)callback, (jlong)variant);
+  call_method<void>(m_context, "runNativeOnUiThread", "(JJ)V", reinterpret_cast<jlong>(callback),
+                    reinterpret_cast<jlong>(variant));
 }
 
 void CJNIMainActivity::_onVolumeChanged(JNIEnv *env, jobject context, jint volume)

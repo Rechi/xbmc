@@ -151,7 +151,7 @@ void CEventLoop::activityCallback(android_app* application, int32_t command)
   if (application == NULL || application->userData == NULL)
     return;
 
-  CEventLoop& eventLoop = *((CEventLoop*)application->userData);
+  CEventLoop& eventLoop = *(static_cast<CEventLoop*>(application->userData));
   eventLoop.processActivity(command);
 }
 
@@ -160,7 +160,7 @@ int32_t CEventLoop::inputCallback(android_app* application, AInputEvent* event)
   if (application == NULL || application->userData == NULL || event == NULL)
     return 0;
 
-  CEventLoop& eventLoop = *((CEventLoop*)application->userData);
+  CEventLoop& eventLoop = *(static_cast<CEventLoop*>(application->userData));
 
   return eventLoop.processInput(event);
 }

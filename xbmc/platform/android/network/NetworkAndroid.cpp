@@ -77,10 +77,11 @@ std::string CNetworkInterfaceAndroid::GetMacAddress() const
   }
   if (interfaceMacAddrRaw.size() >= 6)
   {
-    return (StringUtils::Format("{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}",
-                                (uint8_t)interfaceMacAddrRaw[0], (uint8_t)interfaceMacAddrRaw[1],
-                                (uint8_t)interfaceMacAddrRaw[2], (uint8_t)interfaceMacAddrRaw[3],
-                                (uint8_t)interfaceMacAddrRaw[4], (uint8_t)interfaceMacAddrRaw[5]));
+    return (StringUtils::Format(
+        "{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}", static_cast<uint8_t>(interfaceMacAddrRaw[0]),
+        static_cast<uint8_t>(interfaceMacAddrRaw[1]), static_cast<uint8_t>(interfaceMacAddrRaw[2]),
+        static_cast<uint8_t>(interfaceMacAddrRaw[3]), static_cast<uint8_t>(interfaceMacAddrRaw[4]),
+        static_cast<uint8_t>(interfaceMacAddrRaw[5])));
   }
   return "";
 }
@@ -105,11 +106,11 @@ bool CNetworkInterfaceAndroid::GetHostMacAddress(unsigned long host_ip, std::str
 
   memset(&areq, 0x0, sizeof(areq));
 
-  sin = (struct sockaddr_in *) &areq.arp_pa;
+  sin = reinterpret_cast<struct sockaddr_in*>(&areq.arp_pa);
   sin->sin_family = AF_INET;
   sin->sin_addr.s_addr = host_ip;
 
-  sin = (struct sockaddr_in *) &areq.arp_ha;
+  sin = reinterpret_cast<struct sockaddr_in*>(&areq.arp_ha);
   sin->sin_family = ARPHRD_ETHER;
 
   strncpy(areq.arp_dev, m_name.c_str(), sizeof(areq.arp_dev));
@@ -118,7 +119,7 @@ bool CNetworkInterfaceAndroid::GetHostMacAddress(unsigned long host_ip, std::str
   int sock = socket(AF_INET, SOCK_DGRAM, 0);
   if (sock != -1)
   {
-    int result = ioctl (sock, SIOCGARP, (caddr_t) &areq);
+    int result = ioctl(sock, SIOCGARP, reinterpret_cast<caddr_t>(&areq));
     close(sock);
 
     if (result != 0)
@@ -131,10 +132,11 @@ bool CNetworkInterfaceAndroid::GetHostMacAddress(unsigned long host_ip, std::str
     return false;
 
   struct sockaddr* res = &areq.arp_ha;
-  mac = StringUtils::Format("{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}", (uint8_t)res->sa_data[0],
-                            (uint8_t)res->sa_data[1], (uint8_t)res->sa_data[2],
-                            (uint8_t)res->sa_data[3], (uint8_t)res->sa_data[4],
-                            (uint8_t)res->sa_data[5]);
+  mac = StringUtils::Format(
+      "{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}", static_cast<uint8_t>(res->sa_data[0]),
+      static_cast<uint8_t>(res->sa_data[1]), static_cast<uint8_t>(res->sa_data[2]),
+      static_cast<uint8_t>(res->sa_data[3]), static_cast<uint8_t>(res->sa_data[4]),
+      static_cast<uint8_t>(res->sa_data[5]));
 
   for (int i=0; i<6; ++i)
     if (res->sa_data[i])

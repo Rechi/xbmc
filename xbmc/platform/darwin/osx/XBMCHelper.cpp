@@ -473,7 +473,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     // Allocate an appropriately sized buffer based on the results from the previous call.
     if (err == 0)
     {
-      result = (kinfo_proc*) malloc(length);
+      result = static_cast<kinfo_proc*>(malloc(length));
       if (result == NULL)
         err = ENOMEM;
     }

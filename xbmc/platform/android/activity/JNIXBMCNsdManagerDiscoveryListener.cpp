@@ -45,14 +45,19 @@ void CJNIXBMCNsdManagerDiscoveryListener::RegisterNatives(JNIEnv* env)
   jclass cClass = env->FindClass(s_className.c_str());
   if(cClass)
   {
-    JNINativeMethod methods[] =
-    {
-      {"_onDiscoveryStarted", "(Ljava/lang/String;)V", (void*)&CJNIXBMCNsdManagerDiscoveryListener::_onDiscoveryStarted},
-      {"_onDiscoveryStopped", "(Ljava/lang/String;)V", (void*)&CJNIXBMCNsdManagerDiscoveryListener::_onDiscoveryStopped},
-      {"_onServiceFound", "(Landroid/net/nsd/NsdServiceInfo;)V", (void*)&CJNIXBMCNsdManagerDiscoveryListener::_onServiceFound},
-      {"_onServiceLost", "(Landroid/net/nsd/NsdServiceInfo;)V", (void*)&CJNIXBMCNsdManagerDiscoveryListener::_onServiceLost},
-      {"_onStartDiscoveryFailed", "(Ljava/lang/String;I)V", (void*)&CJNIXBMCNsdManagerDiscoveryListener::_onStartDiscoveryFailed},
-      {"_onStopDiscoveryFailed", "(Ljava/lang/String;I)V", (void*)&CJNIXBMCNsdManagerDiscoveryListener::_onStopDiscoveryFailed},
+    JNINativeMethod methods[] = {
+        {"_onDiscoveryStarted", "(Ljava/lang/String;)V",
+         reinterpret_cast<void*>(&CJNIXBMCNsdManagerDiscoveryListener::_onDiscoveryStarted)},
+        {"_onDiscoveryStopped", "(Ljava/lang/String;)V",
+         reinterpret_cast<void*>(&CJNIXBMCNsdManagerDiscoveryListener::_onDiscoveryStopped)},
+        {"_onServiceFound", "(Landroid/net/nsd/NsdServiceInfo;)V",
+         reinterpret_cast<void*>(&CJNIXBMCNsdManagerDiscoveryListener::_onServiceFound)},
+        {"_onServiceLost", "(Landroid/net/nsd/NsdServiceInfo;)V",
+         reinterpret_cast<void*>(&CJNIXBMCNsdManagerDiscoveryListener::_onServiceLost)},
+        {"_onStartDiscoveryFailed", "(Ljava/lang/String;I)V",
+         reinterpret_cast<void*>(&CJNIXBMCNsdManagerDiscoveryListener::_onStartDiscoveryFailed)},
+        {"_onStopDiscoveryFailed", "(Ljava/lang/String;I)V",
+         reinterpret_cast<void*>(&CJNIXBMCNsdManagerDiscoveryListener::_onStopDiscoveryFailed)},
     };
 
     env->RegisterNatives(cClass, methods, sizeof(methods)/sizeof(methods[0]));

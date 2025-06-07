@@ -28,12 +28,12 @@ void CJNIXBMCVideoView::RegisterNatives(JNIEnv* env)
   jclass cClass = env->FindClass(s_className.c_str());
   if(cClass)
   {
-    JNINativeMethod methods[] =
-    {
-      {"_surfaceChanged", "(Landroid/view/SurfaceHolder;III)V", (void*)&CJNIXBMCVideoView::_surfaceChanged},
-      {"_surfaceCreated", "(Landroid/view/SurfaceHolder;)V", (void*)&CJNIXBMCVideoView::_surfaceCreated},
-      {"_surfaceDestroyed", "(Landroid/view/SurfaceHolder;)V", (void*)&CJNIXBMCVideoView::_surfaceDestroyed}
-    };
+    JNINativeMethod methods[] = {{"_surfaceChanged", "(Landroid/view/SurfaceHolder;III)V",
+                                  reinterpret_cast<void*>(&CJNIXBMCVideoView::_surfaceChanged)},
+                                 {"_surfaceCreated", "(Landroid/view/SurfaceHolder;)V",
+                                  reinterpret_cast<void*>(&CJNIXBMCVideoView::_surfaceCreated)},
+                                 {"_surfaceDestroyed", "(Landroid/view/SurfaceHolder;)V",
+                                  reinterpret_cast<void*>(&CJNIXBMCVideoView::_surfaceDestroyed)}};
 
     env->RegisterNatives(cClass, methods, sizeof(methods)/sizeof(methods[0]));
   }
@@ -144,8 +144,9 @@ const CRect& CJNIXBMCVideoView::getSurfaceRect()
 
 void CJNIXBMCVideoView::setSurfaceRect(const CRect& rect)
 {
-  call_method<void>(m_object,
-                    "setSurfaceRect", "(IIII)V", int(rect.x1), int(rect.y1), int(rect.x2), int(rect.y2));
+  call_method<void>(m_object, "setSurfaceRect", "(IIII)V", static_cast<int>(rect.x1),
+                    static_cast<int>(rect.y1), static_cast<int>(rect.x2),
+                    static_cast<int>(rect.y2));
   m_surfaceRect = rect;
 }
 
