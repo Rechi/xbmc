@@ -506,7 +506,7 @@ void CVideoInfoTag::Archive(CArchive& ar)
     ar << m_strSortTitle;
     ar << m_studio;
     ar << m_strTrailer;
-    ar << (int)m_cast.size();
+    ar << static_cast<int>(m_cast.size());
     for (unsigned int i=0;i<m_cast.size();++i)
     {
       ar << m_cast[i].strName;
@@ -544,14 +544,14 @@ void CVideoInfoTag::Archive(CArchive& ar)
     ar << m_iTop250;
     ar << m_iSeason;
     ar << m_iEpisode;
-    ar << (int)m_uniqueIDs.size();
+    ar << static_cast<int>(m_uniqueIDs.size());
     for (const auto& i : m_uniqueIDs)
     {
       ar << i.first;
       ar << (i.first == m_strDefaultUniqueID);
       ar << i.second;
     }
-    ar << (int)m_ratings.size();
+    ar << static_cast<int>(m_ratings.size());
     for (const auto& i : m_ratings)
     {
       ar << i.first;
@@ -1463,7 +1463,7 @@ unsigned int CVideoInfoTag::GetStaticDuration() const
 
 unsigned int CVideoInfoTag::GetDurationFromMinuteString(const std::string &runtime)
 {
-  unsigned int duration = (unsigned int)str2uint64(runtime);
+  unsigned int duration = static_cast<unsigned int>(str2uint64(runtime));
   if (!duration)
   { // failed for some reason, or zero
     duration = strtoul(runtime.c_str(), NULL, 10);
