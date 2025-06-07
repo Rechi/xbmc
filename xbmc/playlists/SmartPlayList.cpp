@@ -806,7 +806,7 @@ std::string CSmartPlaylistRule::GetLocalizedRule() const
 std::string CSmartPlaylistRule::GetVideoResolutionQuery(const std::string &parameter) const
 {
   std::string retVal(" IN (SELECT DISTINCT idFile FROM streamdetails WHERE iVideoWidth ");
-  int iRes = (int)std::strtol(parameter.c_str(), NULL, 10);
+  int iRes = static_cast<int>(std::strtol(parameter.c_str(), NULL, 10));
 
   int min, max;
   if (iRes >= 2160)
@@ -1140,7 +1140,8 @@ std::string CSmartPlaylistRule::FormatWhereClause(const std::string &negate, con
 std::string CSmartPlaylistRule::GetField(int field, const std::string &type) const
 {
   if (field >= FieldUnknown && field < FieldMax)
-    return DatabaseUtils::GetField((Field)field, CMediaTypes::FromString(type), DatabaseQueryPartWhere);
+    return DatabaseUtils::GetField(static_cast<Field>(field), CMediaTypes::FromString(type),
+                                   DatabaseQueryPartWhere);
   return "";
 }
 
@@ -1385,7 +1386,7 @@ bool CSmartPlaylist::Load(const CVariant &obj)
 
   // now any limits
   if (obj.isMember("limit") && (obj["limit"].isInteger() || obj["limit"].isUnsignedInteger()) && obj["limit"].asUnsignedInteger() > 0)
-    m_limit = (unsigned int)obj["limit"].asUnsignedInteger();
+    m_limit = static_cast<unsigned int>(obj["limit"].asUnsignedInteger());
 
   // and order
   if (obj.isMember("order") && obj["order"].isMember("method") && obj["order"]["method"].isString())
