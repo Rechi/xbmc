@@ -312,9 +312,9 @@ int CCPUInfoLinux::GetUsedPercentage()
 
       ss >> info.cpu;
 
-      for (int i = 0; i < STATE_MAX; i++)
+      for (std::size_t& state : info.state)
       {
-        ss >> info.state[i];
+        ss >> state;
       }
 
       cpuData.emplace_back(info);

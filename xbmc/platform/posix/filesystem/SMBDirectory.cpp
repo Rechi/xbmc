@@ -124,10 +124,8 @@ bool CSMBDirectory::GetDirectory(const CURL& url, CFileItemList &items)
   smbc_closedir(fd);
   lock.unlock();
 
-  for (size_t i=0; i<vecEntries.size(); i++)
+  for (const CachedDirEntry& aDir : vecEntries)
   {
-    const CachedDirEntry& aDir = vecEntries[i];
-
     // We use UTF-8 internally, as does SMB
     strFile = aDir.name;
 

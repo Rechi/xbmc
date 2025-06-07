@@ -85,8 +85,8 @@
   std::vector<kodi::addon::PeripheralEvent> events;
   std::unique_lock lock(m_eventMutex);
 
-  for (unsigned int i = 0; i < m_axisEvents.size(); i++)
-    events.emplace_back(m_axisEvents[i]);
+  for (const kodi::addon::PeripheralEvent& axisEvent : m_axisEvents)
+    events.emplace_back(axisEvent);
 
   m_axisEvents.clear();
 

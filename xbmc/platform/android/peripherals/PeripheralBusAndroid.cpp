@@ -287,10 +287,9 @@ void CPeripheralBusAndroid::OnInputDeviceChanged(int deviceId)
   {
     std::unique_lock lock(m_critSectionResults);
     // change the device in the cached result list
-    for (auto result = m_scanResults.m_results.begin(); result != m_scanResults.m_results.end();
-         ++result)
+    for (PeripheralScanResult& result : m_scanResults.m_results)
     {
-      if (result->m_strLocation == deviceLocation)
+      if (result.m_strLocation == deviceLocation)
       {
         const CJNIViewInputDevice device = CXBMCApp::GetInputDevice(deviceId);
         if (!device)
@@ -298,15 +297,15 @@ void CPeripheralBusAndroid::OnInputDeviceChanged(int deviceId)
           CLog::Log(LOGWARNING,
                     "CPeripheralBusAndroid: failed to update input device \"{}\" with ID {} "
                     "because it couldn't be found",
-                    result->m_strDeviceName, deviceId);
+                    result.m_strDeviceName, deviceId);
           return;
         }
 
-        if (!ConvertToPeripheralScanResult(device, *result))
+        if (!ConvertToPeripheralScanResult(device, result))
           return;
 
         CLog::Log(LOGINFO, "CPeripheralBusAndroid: input device \"{}\" with ID {} updated",
-                  result->m_strDeviceName, deviceId);
+                  result.m_strDeviceName, deviceId);
         changed = true;
         break;
       }

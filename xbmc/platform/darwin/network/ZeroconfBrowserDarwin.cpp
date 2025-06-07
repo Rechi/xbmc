@@ -309,9 +309,9 @@ std::vector<CZeroconfBrowser::ZeroconfService> CZeroconfBrowserDarwin::doGetFoun
   for (const auto& it : m_discovered_services)
   {
     const auto& services = it.second;
-    for(unsigned int i = 0; i < services.size(); ++i)
+    for (const std::pair<CZeroconfBrowser::ZeroconfService, unsigned int>& service : services)
     {
-      ret.push_back(services[i].first);
+      ret.push_back(service.first);
     }
   }
 
