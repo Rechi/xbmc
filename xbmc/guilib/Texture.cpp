@@ -269,19 +269,19 @@ bool CTexture::LoadIImage(IImage* pImage,
   }
   else
   {
-    float aspect = (float)(pImage->Width()) / pImage->Height();
-    unsigned int heightFromWidth = (unsigned int)(width / aspect + 0.5f);
+    float aspect = static_cast<float>(pImage->Width()) / pImage->Height();
+    unsigned int heightFromWidth = static_cast<unsigned int>(width / aspect + 0.5f);
     if (aspectRatio == CAspectRatio::SCALE)
     {
       if (heightFromWidth > height)
         height = heightFromWidth;
       else
-        width = (unsigned int)(height * aspect + 0.5f);
+        width = static_cast<unsigned int>(height * aspect + 0.5f);
     }
     else if (aspectRatio == CAspectRatio::KEEP)
     {
       if (heightFromWidth > height)
-        width = (unsigned int)(height * aspect + 0.5f);
+        width = static_cast<unsigned int>(height * aspect + 0.5f);
       else
         height = heightFromWidth;
     }
@@ -289,16 +289,16 @@ bool CTexture::LoadIImage(IImage* pImage,
 
   if (width > maxTextureSize || height > maxTextureSize)
   {
-    float aspect = (float)width / height;
+    float aspect = static_cast<float>(width) / height;
     if (width >= height)
     {
       width = maxTextureSize;
-      height = (unsigned int)(width / aspect + 0.5f);
+      height = static_cast<unsigned int>(width / aspect + 0.5f);
     }
     else
     {
       height = maxTextureSize;
-      width = (unsigned int)(height * aspect + 0.5f);
+      width = static_cast<unsigned int>(height * aspect + 0.5f);
     }
   }
 

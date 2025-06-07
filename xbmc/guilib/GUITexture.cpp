@@ -369,8 +369,8 @@ bool CGUITexture::AllocResources()
       if (m_requestWidth == REQUEST_SIZE_UNSET && m_requestHeight == REQUEST_SIZE_UNSET)
       {
         CGraphicContext& gfxContext = CServiceBroker::GetWinSystem()->GetGfxContext();
-        m_requestWidth = (int)(m_width / gfxContext.GetGUIScaleX() + 0.5f);
-        m_requestHeight = (int)(m_height / gfxContext.GetGUIScaleY() + 0.5f);
+        m_requestWidth = static_cast<int>(m_width / gfxContext.GetGUIScaleX() + 0.5f);
+        m_requestHeight = static_cast<int>(m_height / gfxContext.GetGUIScaleY() + 0.5f);
         CServiceBroker::GetGUI()->GetTextureCallbackManager().RegisterOnWindowResizeCallback(*this);
       }
       if (CServiceBroker::GetGUI()->GetLargeTextureManager().GetImage(
@@ -402,8 +402,8 @@ bool CGUITexture::AllocResources()
     m_texture = texture;
     changed = true;
   }
-  m_frameWidth = (float)m_texture.m_width;
-  m_frameHeight = (float)m_texture.m_height;
+  m_frameWidth = static_cast<float>(m_texture.m_width);
+  m_frameHeight = static_cast<float>(m_texture.m_height);
 
   // load the diffuse texture (if necessary)
   if (!m_info.diffuse.empty())
@@ -483,13 +483,14 @@ bool CGUITexture::CalculateSize()
   { // calculate scaling for the texcoords
     if (m_diffuse.m_texCoordsArePixels)
     {
-      m_diffuseU = float(m_diffuse.m_width);
-      m_diffuseV = float(m_diffuse.m_height);
+      m_diffuseU = static_cast<float>(m_diffuse.m_width);
+      m_diffuseV = static_cast<float>(m_diffuse.m_height);
     }
     else
     {
-      m_diffuseU = float(m_diffuse.m_width) / float(m_diffuse.m_texWidth);
-      m_diffuseV = float(m_diffuse.m_height) / float(m_diffuse.m_texHeight);
+      m_diffuseU = static_cast<float>(m_diffuse.m_width) / static_cast<float>(m_diffuse.m_texWidth);
+      m_diffuseV =
+          static_cast<float>(m_diffuse.m_height) / static_cast<float>(m_diffuse.m_texHeight);
     }
 
     if (m_aspect.scaleDiffuse)
@@ -765,5 +766,5 @@ int CGUITexture::GetOrientation() const
                                  5, 6, 7, 4, 1, 2, 3, 0,
                                  6, 5, 4, 7, 2, 1, 0, 3,
                                  7, 4, 5, 6, 3, 0, 1, 2 };
-  return (int)orient_table[8 * m_info.orientation + m_texture.m_orientation];
+  return static_cast<int>(orient_table[8 * m_info.orientation + m_texture.m_orientation]);
 }

@@ -129,7 +129,8 @@ void CGUIRSSControl::Process(unsigned int currentTime, CDirtyRegionList &dirtyre
         }
         // use half the width of the control as spacing between feeds, and double this between feed sets
         float spaceWidth = (m_label.font) ? m_label.font->GetCharWidth(L' ') : 15;
-        m_pReader->Create(this, m_vecUrls, m_vecIntervals, (int)(0.5f*GetWidth() / spaceWidth) + 1, m_rtl);
+        m_pReader->Create(this, m_vecUrls, m_vecIntervals,
+                          static_cast<int>(0.5f * GetWidth() / spaceWidth) + 1, m_rtl);
       }
     }
 

@@ -43,7 +43,8 @@ void CGUILabelControl::SetCursorPos(int iPos)
   std::string labelUTF8 = m_infoLabel.GetLabel(m_parentID);
   std::wstring label;
   g_charsetConverter.utf8ToW(labelUTF8, label);
-  if (iPos > (int)label.length()) iPos = label.length();
+  if (iPos > static_cast<int>(label.length()))
+    iPos = label.length();
   if (iPos < 0) iPos = 0;
 
   if (m_iCursorPos != iPos)
@@ -96,7 +97,8 @@ void CGUILabelControl::UpdateInfo(const CGUIListItem *item)
         ch |= (1 << 16);
       text.push_back(ch);
     }
-    if (m_bShowCursor && m_iCursorPos >= 0 && (unsigned int)m_iCursorPos <= utf16.size())
+    if (m_bShowCursor && m_iCursorPos >= 0 &&
+        static_cast<unsigned int>(m_iCursorPos) <= utf16.size())
     {
       uint32_t ch = L'|' | style;
       if ((++m_dwCounter % 50) <= 25)
@@ -160,7 +162,7 @@ void CGUILabelControl::SetLabel(const std::string &strLabel)
   if (m_infoLabel.GetLabel(GetParentID(), false) != strLabel)
   {
     m_infoLabel.SetLabel(strLabel, "", GetParentID());
-    if (m_iCursorPos > (int)strLabel.size())
+    if (m_iCursorPos > static_cast<int>(strLabel.size()))
       m_iCursorPos = strLabel.size();
 
     SetInvalid();

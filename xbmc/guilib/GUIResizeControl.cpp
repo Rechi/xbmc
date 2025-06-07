@@ -71,7 +71,7 @@ void CGUIResizeControl::Process(unsigned int currentTime, CDirtyRegionList &dirt
       alphaChannel = 63 - (alphaCounter % 64);
 
     alphaChannel += 192;
-    if (SetAlpha( (unsigned char)alphaChannel ))
+    if (SetAlpha(static_cast<unsigned char>(alphaChannel)))
       MarkDirtyRegion();
     m_imgFocus->SetVisible(true);
     m_imgNoFocus->SetVisible(false);

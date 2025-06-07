@@ -507,7 +507,7 @@ bool CGUIWindowManager::SendMessage(CGUIMessage& message)
   bool handled = false;
   //  CLog::Log(LOGDEBUG,"SendMessage: mess={} send={} control={} param1={}", message.GetMessage(), message.GetSenderId(), message.GetControlId(), message.GetParam1());
   // Send the message to all none window targets
-  for (int i = 0; i < int(m_vecMsgTargets.size()); i++)
+  for (int i = 0; i < static_cast<int>(m_vecMsgTargets.size()); i++)
   {
     IMsgTargetCallback* pMsgTarget = m_vecMsgTargets[i];
 
@@ -1249,7 +1249,9 @@ void CGUIWindowManager::Process(unsigned int currentTime)
 
 void CGUIWindowManager::MarkDirty()
 {
-  MarkDirty(CRect(0, 0, float(CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth()), float(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight())));
+  MarkDirty(CRect(0, 0,
+                  static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetWidth()),
+                  static_cast<float>(CServiceBroker::GetWinSystem()->GetGfxContext().GetHeight())));
 }
 
 void CGUIWindowManager::MarkDirty(const CRect& rect)
@@ -1535,7 +1537,7 @@ void CGUIWindowManager::DeInitialize()
   m_vecMsgTargets.erase( m_vecMsgTargets.begin(), m_vecMsgTargets.end() );
 
   // destroy our custom windows...
-  for (int i = 0; i < int(m_vecCustomWindows.size()); i++)
+  for (int i = 0; i < static_cast<int>(m_vecCustomWindows.size()); i++)
   {
     CGUIWindow *pWindow = m_vecCustomWindows[i];
     RemoveFromWindowHistory(pWindow->GetID());

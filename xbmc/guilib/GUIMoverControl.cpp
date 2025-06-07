@@ -75,7 +75,7 @@ void CGUIMoverControl::Process(unsigned int currentTime, CDirtyRegionList &dirty
       alphaChannel = 63 - (alphaCounter % 64);
 
     alphaChannel += 192;
-    if (SetAlpha( (unsigned char)alphaChannel ))
+    if (SetAlpha(static_cast<unsigned char>(alphaChannel)))
       MarkDirtyRegion();
     m_imgFocus->SetVisible(true);
     m_imgNoFocus->SetVisible(false);
@@ -118,7 +118,8 @@ bool CGUIMoverControl::OnAction(const CAction &action)
     //  else if (m_dwAllowedDirections == ALLOWED_DIRECTIONS_LEFTRIGHT)
     //   Move((int)(m_fAnalogSpeed*action.GetAmount()), 0);
     //  else // ALLOWED_DIRECTIONS_ALL
-    Move((int)(m_fAnalogSpeed*action.GetAmount()), (int)( -m_fAnalogSpeed*action.GetAmount(1)));
+    Move(static_cast<int>(m_fAnalogSpeed * action.GetAmount()),
+         static_cast<int>(-m_fAnalogSpeed * action.GetAmount(1)));
     return true;
   }
   // base class
@@ -163,7 +164,7 @@ EVENT_RESULT CGUIMoverControl::OnMouseEvent(const CPoint& point, const MOUSE::CM
       CGUIMessage msg(GUI_MSG_EXCLUSIVE_MOUSE, 0, GetParentID());
       SendWindowMessage(msg);
     }
-    Move((int)event.m_offsetX, (int)event.m_offsetY);
+    Move(static_cast<int>(event.m_offsetX), static_cast<int>(event.m_offsetY));
     return EVENT_RESULT_HANDLED;
   }
   return EVENT_RESULT_UNHANDLED;
