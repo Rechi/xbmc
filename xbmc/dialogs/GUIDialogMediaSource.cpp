@@ -155,10 +155,10 @@ bool CGUIDialogMediaSource::ShowAndEditMediaSource(const std::string &type, cons
   std::vector<CMediaSource>* pShares = CMediaSourceSettings::GetInstance().GetSources(type);
   if (pShares)
   {
-    for (unsigned int i = 0;i<pShares->size();++i)
+    for (const CMediaSource& pShare : *pShares)
     {
-      if (StringUtils::EqualsNoCase((*pShares)[i].strName, share))
-        return ShowAndEditMediaSource(type, (*pShares)[i]);
+      if (StringUtils::EqualsNoCase(pShare.strName, share))
+        return ShowAndEditMediaSource(type, pShare);
     }
   }
   return false;
@@ -501,9 +501,9 @@ void CGUIDialogMediaSource::UpdateButtons()
 void CGUIDialogMediaSource::SetShare(const CMediaSource &share)
 {
   m_paths->Clear();
-  for (unsigned int i = 0; i < share.vecPaths.size(); i++)
+  for (const std::string& path : share.vecPaths)
   {
-    CFileItemPtr item(new CFileItem(share.vecPaths[i], true));
+    CFileItemPtr item(new CFileItem(path, true));
     m_paths->Add(item);
   }
   if (0 == share.vecPaths.size())

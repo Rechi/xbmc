@@ -95,9 +95,9 @@ bool CGUIDialogFileBrowser::OnAction(const CAction &action)
       // need to make sure this source is not an auto added location
       // as users locations might have the same paths
       CFileItemPtr pItem = (*m_vecItems)[iItem];
-      for (unsigned int i=0;i<m_shares.size();++i)
+      for (const CMediaSource& share : m_shares)
       {
-        if (StringUtils::EqualsNoCase(m_shares[i].strName, pItem->GetLabel()) && m_shares[i].m_ignore)
+        if (StringUtils::EqualsNoCase(share.strName, pItem->GetLabel()) && share.m_ignore)
           return false;
       }
 
@@ -680,10 +680,10 @@ bool CGUIDialogFileBrowser::ShowAndGetDirectory(const std::vector<CMediaSource>&
   if (bWriteOnly)
   {
     std::vector<CMediaSource> shareWritable;
-    for (unsigned int i=0;i<shares.size();++i)
+    for (const CMediaSource& share : shares)
     {
-      if (shares[i].IsWritable())
-        shareWritable.push_back(shares[i]);
+      if (share.IsWritable())
+        shareWritable.push_back(share);
     }
 
     return ShowAndGetFile(shareWritable, "/w", heading, path);
@@ -974,13 +974,14 @@ bool CGUIDialogFileBrowser::OnPopupMenu(int iItem)
       {
         CServiceBroker::GetMediaManager().SetLocationPath(strOldPath, newPath);
         CURL url(newPath);
-        for (unsigned int i=0;i<shares.size();++i)
+        for (CMediaSource& share : shares)
         {
-          if (URIUtils::CompareWithoutSlashAtEnd(shares[i].strPath, strOldPath))//getPath().Equals(strOldPath))
+          if (URIUtils::CompareWithoutSlashAtEnd(share.strPath,
+                                                 strOldPath)) //getPath().Equals(strOldPath))
           {
-            shares[i].strName = url.GetWithoutUserDetails();
-            shares[i].strPath = newPath;
-            URIUtils::RemoveSlashAtEnd(shares[i].strName);
+            share.strName = url.GetWithoutUserDetails();
+            share.strPath = newPath;
+            URIUtils::RemoveSlashAtEnd(share.strName);
             break;
           }
         }

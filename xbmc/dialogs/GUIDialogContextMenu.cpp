@@ -550,9 +550,8 @@ CMediaSource *CGUIDialogContextMenu::GetShare(const std::string &type, const CFi
   std::vector<CMediaSource>* shares = CMediaSourceSettings::GetInstance().GetSources(type);
   if (!shares || !item)
     return nullptr;
-  for (unsigned int i = 0; i < shares->size(); i++)
+  for (CMediaSource& testShare : *shares)
   {
-    CMediaSource &testShare = shares->at(i);
     if (URIUtils::IsDVD(testShare.strPath))
     {
       if (!item->IsDVD())
