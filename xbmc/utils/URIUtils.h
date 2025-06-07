@@ -166,6 +166,9 @@ public:
   static CURL SubstitutePath(const CURL& url, bool reverse = false);
   static std::string SubstitutePath(const std::string& strPath, bool reverse = false);
 
+  static std::vector<CURL> AlternativePaths(const CURL& url);
+  static std::vector<std::string> AlternativePaths(const std::string& strPath);
+
   /*! \brief Check whether a URL is a given URL scheme.
    Comparison is case-insensitive as per RFC1738
    \param url a std::string path.
