@@ -478,10 +478,9 @@ int SqliteDatabase::drop_analytics(void)
   if ((last_err = sqlite3_exec(conn, sqlcmd, &callback, &res, NULL)) != SQLITE_OK)
     return DB_UNEXPECTED_RESULT;
 
-  for (size_t i = 0; i < res.records.size(); i++)
+  for (const sql_record* record : res.records)
   {
-    snprintf(sqlcmd, sizeof(sqlcmd), "DROP INDEX '%s'",
-             res.records[i]->at(0).get_asString().c_str());
+    snprintf(sqlcmd, sizeof(sqlcmd), "DROP INDEX '%s'", record->at(0).get_asString().c_str());
     if ((last_err = sqlite3_exec(conn, sqlcmd, NULL, NULL, NULL)) != SQLITE_OK)
       return DB_UNEXPECTED_RESULT;
   }
@@ -492,10 +491,9 @@ int SqliteDatabase::drop_analytics(void)
   if ((last_err = sqlite3_exec(conn, sqlcmd, &callback, &res, NULL)) != SQLITE_OK)
     return DB_UNEXPECTED_RESULT;
 
-  for (size_t i = 0; i < res.records.size(); i++)
+  for (const sql_record* record : res.records)
   {
-    snprintf(sqlcmd, sizeof(sqlcmd), "DROP VIEW '%s'",
-             res.records[i]->at(0).get_asString().c_str());
+    snprintf(sqlcmd, sizeof(sqlcmd), "DROP VIEW '%s'", record->at(0).get_asString().c_str());
     if ((last_err = sqlite3_exec(conn, sqlcmd, NULL, NULL, NULL)) != SQLITE_OK)
       return DB_UNEXPECTED_RESULT;
   }
@@ -506,10 +504,9 @@ int SqliteDatabase::drop_analytics(void)
   if ((last_err = sqlite3_exec(conn, sqlcmd, &callback, &res, NULL)) != SQLITE_OK)
     return DB_UNEXPECTED_RESULT;
 
-  for (size_t i = 0; i < res.records.size(); i++)
+  for (const sql_record* record : res.records)
   {
-    snprintf(sqlcmd, sizeof(sqlcmd), "DROP TRIGGER '%s'",
-             res.records[i]->at(0).get_asString().c_str());
+    snprintf(sqlcmd, sizeof(sqlcmd), "DROP TRIGGER '%s'", record->at(0).get_asString().c_str());
     if ((last_err = sqlite3_exec(conn, sqlcmd, NULL, NULL, NULL)) != SQLITE_OK)
       return DB_UNEXPECTED_RESULT;
   }
