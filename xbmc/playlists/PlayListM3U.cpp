@@ -234,9 +234,8 @@ void CPlayListM3U::Save(const std::string& strFileName) const
   if (file.Write(strLine.c_str(), strLine.size()) != static_cast<ssize_t>(strLine.size()))
     return; // error
 
-  for (int i = 0; i < (int)m_vecItems.size(); ++i)
+  for (const CFileItemPtr& item : m_vecItems)
   {
-    CFileItemPtr item = m_vecItems[i];
     std::string strDescription=item->GetLabel();
     if (!utf8)
       g_charsetConverter.utf8ToStringCharset(strDescription);
@@ -273,11 +272,11 @@ std::map< std::string, std::string > CPlayListM3U::ParseStreamLine(const std::st
 
   // separate the parameters
   std::vector<std::string> vecParams = StringUtils::Split(strParams, ",");
-  for (std::vector<std::string>::iterator i = vecParams.begin(); i != vecParams.end(); ++i)
+  for (std::string& param : vecParams)
   {
     // split the param, ensure there was an =
-    StringUtils::Trim(*i);
-    std::vector<std::string> vecTuple = StringUtils::Split(*i, "=");
+    StringUtils::Trim(param);
+    std::vector<std::string> vecTuple = StringUtils::Split(param, "=");
     if (vecTuple.size() < 2)
       continue;
 
