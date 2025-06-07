@@ -17,6 +17,7 @@
 #include "input/keymaps/Keymap.h"
 
 #include <algorithm>
+#include <ranges>
 #include <utility>
 
 using namespace KODI;
@@ -96,8 +97,9 @@ void CKeymapHandling::UnloadKeymaps()
 {
   if (m_inputProvider != nullptr)
   {
-    for (auto it = m_inputHandlers.rbegin(); it != m_inputHandlers.rend(); ++it)
-      m_inputProvider->UnregisterInputHandler(it->get());
+    for (const std::unique_ptr<JOYSTICK::IInputHandler>& inputHandler :
+         std::ranges::reverse_view(m_inputHandlers))
+      m_inputProvider->UnregisterInputHandler(inputHandler.get());
   }
   m_inputHandlers.clear();
   m_keymaps.clear();
