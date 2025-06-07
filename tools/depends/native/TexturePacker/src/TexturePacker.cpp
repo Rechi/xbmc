@@ -419,9 +419,9 @@ int TexturePacker::createBundle(const std::string& InputDir, const std::string& 
     bool skip=false;
     if (m_dupecheck)
     {
-      for (unsigned int j = 0; j < frames.frameList.size(); j++)
-        MD5Update(&ctx, (const uint8_t*)frames.frameList[j].rgbaImage.pixels.data(),
-                  frames.frameList[j].rgbaImage.height * frames.frameList[j].rgbaImage.pitch);
+      for (const DecodedFrame& frame : frames.frameList)
+        MD5Update(&ctx, (const uint8_t*)frame.rgbaImage.pixels.data(),
+                  frame.rgbaImage.height * frame.rgbaImage.pitch);
 
       if (CheckDupe(&ctx, i))
       {

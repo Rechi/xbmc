@@ -51,16 +51,16 @@ bool GIFDecoder::LoadFile(const std::string &filename, DecodedFrames &frames)
       unsigned int width = gifImage.GetWidth();
       unsigned int pitch = gifImage.GetPitch();
 
-      for (unsigned int i = 0; i < extractedFrames.size(); i++)
+      for (const std::shared_ptr<GifFrame>& extractedFrame : extractedFrames)
       {
         DecodedFrame frame;
 
-        frame.rgbaImage.pixels = extractedFrames[i]->m_pImage;
+        frame.rgbaImage.pixels = extractedFrame->m_pImage;
         frame.rgbaImage.height = height;
         frame.rgbaImage.width = width;
         frame.rgbaImage.bbp = 32;
         frame.rgbaImage.pitch = pitch;
-        frame.delay = extractedFrames[i]->m_delay;
+        frame.delay = extractedFrame->m_delay;
 
         frames.frameList.push_back(frame);
       }
