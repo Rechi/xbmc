@@ -75,8 +75,8 @@ void CVideoLibraryQueue::StopLibraryScanning()
   VideoLibraryJobs tmpScanningJobs(scanningJobs->second.begin(), scanningJobs->second.end());
 
   // cancel all scanning jobs
-  for (VideoLibraryJobs::const_iterator job = tmpScanningJobs.begin(); job != tmpScanningJobs.end(); ++job)
-    CancelJob(*job);
+  for (CVideoLibraryJob* tmpScanningJob : tmpScanningJobs)
+    CancelJob(tmpScanningJob);
   Refresh();
 }
 

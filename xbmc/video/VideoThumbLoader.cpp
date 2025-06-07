@@ -218,9 +218,8 @@ bool CVideoThumbLoader::LoadItemCached(CFileItem* pItem)
     std::vector<std::string> artTypes = GetArtTypes(pItem->HasVideoInfoTag() ? pItem->GetVideoInfoTag()->m_type : "");
     if (find(artTypes.begin(), artTypes.end(), "thumb") == artTypes.end())
       artTypes.emplace_back("thumb"); // always look for "thumb" art for files
-    for (std::vector<std::string>::const_iterator i = artTypes.begin(); i != artTypes.end(); ++i)
+    for (const std::string& type : artTypes)
     {
-      std::string type = *i;
       std::string art = GetCachedImage(*pItem, type);
       if (!art.empty())
         artwork.insert(std::make_pair(type, art));
@@ -259,9 +258,8 @@ bool CVideoThumbLoader::LoadItemLookup(CFileItem* pItem)
         GetArtTypes(pItem->HasVideoInfoTag() ? pItem->GetVideoInfoTag()->m_type : "");
     if (find(artTypes.begin(), artTypes.end(), "thumb") == artTypes.end())
       artTypes.emplace_back("thumb"); // always look for "thumb" art for files
-    for (std::vector<std::string>::const_iterator i = artTypes.begin(); i != artTypes.end(); ++i)
+    for (const std::string& type : artTypes)
     {
-      std::string type = *i;
       if (!pItem->HasArt(type))
       {
         std::string art = GetLocalArt(*pItem, type, type == "fanart");

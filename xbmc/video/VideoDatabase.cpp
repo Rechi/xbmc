@@ -4766,10 +4766,10 @@ CVideoInfoTag CVideoDatabase::GetDetailsForMovie(const dbiplus::sql_record* cons
       // create tvshowlink string
       std::vector<int> links;
       GetLinksToTvShow(idMovie, links);
-      for (unsigned int i = 0; i < links.size(); ++i)
+      for (int link : links)
       {
-        std::string strSQL = PrepareSQL("select c%02d from tvshow where idShow=%i",
-          VIDEODB_ID_TV_TITLE, links[i]);
+        std::string strSQL =
+            PrepareSQL("select c%02d from tvshow where idShow=%i", VIDEODB_ID_TV_TITLE, link);
         m_pDS2->query(strSQL);
         if (!m_pDS2->eof())
           details.m_showLink.emplace_back(m_pDS2->fv(0).get_asString());
@@ -5868,8 +5868,8 @@ void CVideoDatabase::RemoveContentForPath(const std::string& strPath, CGUIDialog
     std::vector<std::string> paths;
     CMultiPathDirectory::GetPaths(strPath, paths);
 
-    for(unsigned i=0;i<paths.size();i++)
-      RemoveContentForPath(paths[i], progress);
+    for (const std::string& path : paths)
+      RemoveContentForPath(path, progress);
   }
 
   try
@@ -5957,8 +5957,8 @@ void CVideoDatabase::SetScraperForPath(const std::string& filePath, const Scrape
     std::vector<std::string> paths;
     CMultiPathDirectory::GetPaths(filePath, paths);
 
-    for(unsigned i=0;i<paths.size();i++)
-      SetScraperForPath(paths[i],scraper,settings);
+    for (const std::string& path : paths)
+      SetScraperForPath(path, scraper, settings);
 
     return;
   }
@@ -6161,18 +6161,22 @@ void CVideoDatabase::UpdateTables(int iVersion)
     }
     m_pDS->close();
     // update these
-    for (auto i = shows.begin(); i != shows.end(); ++i)
+    for (const CShowLink& show : shows)
     {
       std::vector<std::string> paths;
-      CMultiPathDirectory::GetPaths(i->path, paths);
-      for (auto j = paths.begin(); j != paths.end(); ++j)
+      CMultiPathDirectory::GetPaths(show.path, paths);
+      for (const std::string& path : paths)
       {
-        int idPath = AddPath(*j, URIUtils::GetParentPath(*j));
+        int idPath = AddPath(path, URIUtils::GetParentPath(path));
         /* we can't rely on REPLACE INTO here as analytics (indices) aren't online yet */
-        if (GetSingleValue(PrepareSQL("SELECT 1 FROM tvshowlinkpath WHERE idShow=%i AND idPath=%i", i->show, idPath)).empty())
-          m_pDS->exec(PrepareSQL("INSERT INTO tvshowlinkpath(idShow, idPath) VALUES(%i,%i)", i->show, idPath));
+        if (GetSingleValue(PrepareSQL("SELECT 1 FROM tvshowlinkpath WHERE idShow=%i AND idPath=%i",
+                                      show.show, idPath))
+                .empty())
+          m_pDS->exec(PrepareSQL("INSERT INTO tvshowlinkpath(idShow, idPath) VALUES(%i,%i)",
+                                 show.show, idPath));
       }
-      m_pDS->exec(PrepareSQL("DELETE FROM tvshowlinkpath WHERE idShow=%i AND idPath=%i", i->show, i->pathId));
+      m_pDS->exec(PrepareSQL("DELETE FROM tvshowlinkpath WHERE idShow=%i AND idPath=%i", show.show,
+                             show.pathId));
     }
   }
   if (iVersion < 85)
@@ -6870,8 +6874,8 @@ bool CVideoDatabase::GetPlayCounts(const std::string &strPath, CFileItemList &it
     CMultiPathDirectory::GetPaths(strPath, paths);
 
     bool ret = false;
-    for(unsigned i=0;i<paths.size();i++)
-      ret |= GetPlayCounts(paths[i], items);
+    for (const std::string& path : paths)
+      ret |= GetPlayCounts(path, items);
 
     return ret;
   }
@@ -12107,8 +12111,8 @@ bool CVideoDatabase::GetItemsForPath(const std::string &content, const std::stri
     std::vector<std::string> paths;
     CMultiPathDirectory::GetPaths(path, paths);
 
-    for(unsigned i=0;i<paths.size();i++)
-      GetItemsForPath(content, paths[i], items);
+    for (const std::string& path : paths)
+      GetItemsForPath(content, path, items);
 
     return items.Size() > 0;
   }

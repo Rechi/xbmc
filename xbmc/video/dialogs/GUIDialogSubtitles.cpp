@@ -282,12 +282,12 @@ void CGUIDialogSubtitles::FillServices()
     defaultService = CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_SUBTITLES_MOVIE);
 
   std::string service = addons.front()->ID();
-  for (VECADDONS::const_iterator addonIt = addons.begin(); addonIt != addons.end(); ++addonIt)
+  for (const AddonPtr& addon : addons)
   {
-    CFileItemPtr item(CAddonsDirectory::FileItemFromAddon(*addonIt, "plugin://" + (*addonIt)->ID(), false));
+    CFileItemPtr item(CAddonsDirectory::FileItemFromAddon(addon, "plugin://" + addon->ID(), false));
     m_serviceItems->Add(item);
-    if ((*addonIt)->ID() == defaultService)
-      service = (*addonIt)->ID();
+    if (addon->ID() == defaultService)
+      service = addon->ID();
   }
 
   // Bind our services to the UI

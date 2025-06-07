@@ -362,11 +362,11 @@ void CGUIDialogVideoInfo::SetMovie(const CFileItem *item)
     CMusicDatabase database;
     database.Open();
     const std::vector<std::string> &artists = m_movieItem->GetVideoInfoTag()->m_artist;
-    for (std::vector<std::string>::const_iterator it = artists.begin(); it != artists.end(); ++it)
+    for (const std::string& artist : artists)
     {
-      int idArtist = database.GetArtistByName(*it);
+      int idArtist = database.GetArtistByName(artist);
       std::string thumb = database.GetArtForItem(idArtist, MediaTypeArtist, "thumb");
-      CFileItemPtr item(new CFileItem(*it));
+      CFileItemPtr item(new CFileItem(artist));
       if (!thumb.empty())
         item->SetArt("thumb", thumb);
       item->SetArt("icon", "DefaultArtist.png");
@@ -2026,10 +2026,10 @@ bool CGUIDialogVideoInfo::LinkMovieToTvShow(const std::shared_ptr<CFileItem>& it
     if (!database.GetLinksToTvShow(dbId, ids))
       return false;
 
-    for (unsigned int i = 0; i < ids.size(); ++i)
+    for (int id : ids)
     {
       CVideoInfoTag tag;
-      database.GetTvShowInfo("", tag, ids[i], 0 , VideoDbDetailsNone);
+      database.GetTvShowInfo("", tag, id, 0, VideoDbDetailsNone);
       CFileItemPtr show(new CFileItem(tag));
       list.Add(show);
     }

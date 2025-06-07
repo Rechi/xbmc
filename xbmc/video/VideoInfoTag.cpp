@@ -280,15 +280,15 @@ bool CVideoInfoTag::Save(TiXmlNode *node, const std::string &tag, bool savePathI
   }  /* if has stream details */
 
   // cast
-  for (iCast it = m_cast.begin(); it != m_cast.end(); ++it)
+  for (const SActorInfo& it : m_cast)
   {
     // add a <actor> tag
     TiXmlElement cast("actor");
     TiXmlNode *node = movie->InsertEndChild(cast);
-    XMLUtils::SetString(node, "name", it->strName);
-    XMLUtils::SetString(node, "role", it->strRole);
-    XMLUtils::SetInt(node, "order", it->order);
-    XMLUtils::SetString(node, "thumb", it->thumbUrl.GetFirstUrlByType().m_url);
+    XMLUtils::SetString(node, "name", it.strName);
+    XMLUtils::SetString(node, "role", it.strRole);
+    XMLUtils::SetInt(node, "order", it.order);
+    XMLUtils::SetString(node, "thumb", it.thumbUrl.GetFirstUrlByType().m_url);
   }
   XMLUtils::SetStringArray(movie, "artist", m_artist);
   XMLUtils::SetStringArray(movie, "showlink", m_showLink);
@@ -507,13 +507,13 @@ void CVideoInfoTag::Archive(CArchive& ar)
     ar << m_studio;
     ar << m_strTrailer;
     ar << (int)m_cast.size();
-    for (unsigned int i=0;i<m_cast.size();++i)
+    for (const SActorInfo& i : m_cast)
     {
-      ar << m_cast[i].strName;
-      ar << m_cast[i].strRole;
-      ar << m_cast[i].order;
-      ar << m_cast[i].thumb;
-      ar << m_cast[i].thumbUrl.GetData();
+      ar << i.strName;
+      ar << i.strRole;
+      ar << i.order;
+      ar << i.thumb;
+      ar << i.thumbUrl.GetData();
     }
 
     ar << m_set.title;
@@ -737,14 +737,14 @@ void CVideoInfoTag::Serialize(CVariant& value) const
   value["studio"] = m_studio;
   value["trailer"] = m_strTrailer;
   value["cast"] = CVariant(CVariant::VariantTypeArray);
-  for (unsigned int i = 0; i < m_cast.size(); ++i)
+  for (const SActorInfo& i : m_cast)
   {
     CVariant actor;
-    actor["name"] = m_cast[i].strName;
-    actor["role"] = m_cast[i].strRole;
-    actor["order"] = m_cast[i].order;
-    if (!m_cast[i].thumb.empty())
-      actor["thumbnail"] = IMAGE_FILES::URLFromFile(m_cast[i].thumb);
+    actor["name"] = i.strName;
+    actor["role"] = i.strRole;
+    actor["order"] = i.order;
+    if (!i.thumb.empty())
+      actor["thumbnail"] = IMAGE_FILES::URLFromFile(i.thumb);
     value["cast"].push_back(actor);
   }
   value["set"] = m_set.title;
@@ -978,14 +978,14 @@ const std::string CVideoInfoTag::GetCast(const std::string& separator,
 {
   const std::string sep{separator.empty() ? "\n" : separator};
   std::string strLabel;
-  for (iCast it = m_cast.begin(); it != m_cast.end(); ++it)
+  for (const SActorInfo& it : m_cast)
   {
     std::string character;
-    if (it->strRole.empty() || !bIncludeRole)
-      character = StringUtils::Format("{}{}", it->strName, sep);
+    if (it.strRole.empty() || !bIncludeRole)
+      character = StringUtils::Format("{}{}", it.strName, sep);
     else
-      character = StringUtils::Format("{} {} {}{}", it->strName, g_localizeStrings.Get(20347),
-                                      it->strRole, sep);
+      character = StringUtils::Format("{} {} {}{}", it.strName, g_localizeStrings.Get(20347),
+                                      it.strRole, sep);
     strLabel += character;
   }
   return StringUtils::TrimRight(strLabel, sep);
