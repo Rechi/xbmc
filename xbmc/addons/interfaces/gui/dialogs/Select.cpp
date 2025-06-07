@@ -130,10 +130,10 @@ bool Interface_GUIDialogSelect::open_multi_select(KODI_HANDLE kodiBase,
 
     selectedIndexes = dialog->GetSelectedItems();
 
-    for (unsigned int i = 0; i < selectedIndexes.size(); ++i)
+    for (int selectedIndex : selectedIndexes)
     {
-      if (selectedIndexes[i])
-        entriesSelected[selectedIndexes[i]] = true;
+      if (selectedIndex)
+        entriesSelected[selectedIndex] = true;
     }
   }
 

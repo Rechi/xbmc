@@ -46,9 +46,9 @@ void CPluginSource::SetProvides(const std::string &content)
   if (!content.empty())
   {
     std::vector<std::string> provides = StringUtils::Split(content, ' ');
-    for (std::vector<std::string>::const_iterator i = provides.begin(); i != provides.end(); ++i)
+    for (const std::string& provide : provides)
     {
-      Content content = Translate(*i);
+      Content content = Translate(provide);
       if (content != Content::UNKNOWN)
         m_providedContent.insert(content);
     }

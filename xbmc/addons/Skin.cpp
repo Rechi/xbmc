@@ -312,9 +312,9 @@ int CSkinInfo::GetStartWindow() const
 {
   int windowID = CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_LOOKANDFEEL_STARTUPWINDOW);
   assert(m_startupWindows.size());
-  for (std::vector<CStartupWindow>::const_iterator it = m_startupWindows.begin(); it != m_startupWindows.end(); ++it)
+  for (const CStartupWindow& startupWindow : m_startupWindows)
   {
-    if (windowID == (*it).m_id)
+    if (windowID == startupWindow.m_id)
       return windowID;
   }
   // return our first one
@@ -480,8 +480,8 @@ void CSkinInfo::SettingOptionsSkinColorsFiller(const SettingConstPtr& setting,
     }
   }
   sort(vecColors.begin(), vecColors.end(), sortstringbyname());
-  for (int i = 0; i < (int) vecColors.size(); ++i)
-    list.emplace_back(vecColors[i], vecColors[i]);
+  for (const std::string& color : vecColors)
+    list.emplace_back(color, color);
 
   // try to find the best matching value
   for (const auto& elem : list)
@@ -581,8 +581,8 @@ void CSkinInfo::SettingOptionsSkinThemesFiller(const SettingConstPtr& setting,
   CUtil::GetSkinThemes(vecTheme);
 
   // sort the themes for GUI and list them
-  for (int i = 0; i < (int) vecTheme.size(); ++i)
-    list.emplace_back(vecTheme[i], vecTheme[i]);
+  for (const std::string& theme : vecTheme)
+    list.emplace_back(theme, theme);
 
   // try to find the best matching value
   for (const auto& elem : list)
@@ -604,12 +604,12 @@ void CSkinInfo::SettingOptionsStartupWindowsFiller(const SettingConstPtr& settin
 
   const std::vector<CStartupWindow> &startupWindows = g_SkinInfo->GetStartupWindows();
 
-  for (std::vector<CStartupWindow>::const_iterator it = startupWindows.begin(); it != startupWindows.end(); ++it)
+  for (const CStartupWindow& startupWindow : startupWindows)
   {
-    std::string windowName = it->m_name;
+    std::string windowName = startupWindow.m_name;
     if (StringUtils::IsNaturalNumber(windowName))
       windowName = g_localizeStrings.Get(atoi(windowName.c_str()));
-    int windowID = it->m_id;
+    int windowID = startupWindow.m_id;
 
     list.emplace_back(windowName, windowID);
 

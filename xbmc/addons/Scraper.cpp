@@ -461,10 +461,10 @@ CScraperUrl CScraper::NfoUrl(const std::string &sNfoContent)
 
   // parse returned XML: either <error> element on error, blank on failure,
   // or <url>...</url> or <url>...</url><id>...</id> on success
-  for (size_t i = 0; i < vcsOut.size(); ++i)
+  for (const std::string& i : vcsOut)
   {
     CXBMCTinyXML doc;
-    doc.Parse(vcsOut[i], TIXML_ENCODING_UTF8);
+    doc.Parse(i, TIXML_ENCODING_UTF8);
     CheckScraperError(doc.RootElement());
 
     if (doc.RootElement())
@@ -537,10 +537,10 @@ CScraperUrl CScraper::ResolveIDToUrl(const std::string &externalID)
 
   // parse returned XML: either <error> element on error, blank on failure,
   // or <url>...</url> or <url>...</url><id>...</id> on success
-  for (size_t i = 0; i < vcsOut.size(); ++i)
+  for (const std::string& i : vcsOut)
   {
     CXBMCTinyXML doc;
-    doc.Parse(vcsOut[i], TIXML_ENCODING_UTF8);
+    doc.Parse(i, TIXML_ENCODING_UTF8);
     CheckScraperError(doc.RootElement());
 
     if (doc.RootElement())
@@ -968,10 +968,10 @@ std::vector<CScraperUrl> CScraper::FindMovie(XFILE::CCurlFile &fcurl,
   bool fSort(true);
   std::set<std::string> stsDupeCheck;
   bool fResults(false);
-  for (std::vector<std::string>::const_iterator i = vcsOut.begin(); i != vcsOut.end(); ++i)
+  for (const std::string& i : vcsOut)
   {
     CXBMCTinyXML doc;
-    doc.Parse(*i, TIXML_ENCODING_UTF8);
+    doc.Parse(i, TIXML_ENCODING_UTF8);
     if (!doc.RootElement())
     {
       CLog::Log(LOGERROR, "{}: Unable to parse XML", __FUNCTION__);
@@ -1110,10 +1110,10 @@ std::vector<CMusicAlbumInfo> CScraper::FindAlbum(CCurlFile &fcurl,
   vcsOut = RunNoThrow("GetAlbumSearchResults", scurl, fcurl);
 
   // parse the returned XML into a vector of album objects
-  for (std::vector<std::string>::const_iterator i = vcsOut.begin(); i != vcsOut.end(); ++i)
+  for (const std::string& i : vcsOut)
   {
     CXBMCTinyXML doc;
-    doc.Parse(*i, TIXML_ENCODING_UTF8);
+    doc.Parse(i, TIXML_ENCODING_UTF8);
     TiXmlHandle xhDoc(&doc);
 
     for (TiXmlElement *pxeAlbum = xhDoc.FirstChild("results").FirstChild("entity").Element();
@@ -1207,10 +1207,10 @@ std::vector<CMusicArtistInfo> CScraper::FindArtist(CCurlFile &fcurl, const std::
   vcsOut = RunNoThrow("GetArtistSearchResults", scurl, fcurl);
 
   // parse the returned XML into a vector of artist objects
-  for (std::vector<std::string>::const_iterator i = vcsOut.begin(); i != vcsOut.end(); ++i)
+  for (const std::string& i : vcsOut)
   {
     CXBMCTinyXML doc;
-    doc.Parse(*i, TIXML_ENCODING_UTF8);
+    doc.Parse(i, TIXML_ENCODING_UTF8);
     if (!doc.RootElement())
     {
       CLog::Log(LOGERROR, "{}: Unable to parse XML", __FUNCTION__);
@@ -1298,10 +1298,10 @@ VIDEO::EPISODELIST CScraper::GetEpisodeList(XFILE::CCurlFile& fcurl, const CScra
   std::vector<std::string> vcsOut = RunNoThrow("GetEpisodeList", scurl, fcurl, &vcsIn);
 
   // parse the XML response
-  for (std::vector<std::string>::const_iterator i = vcsOut.begin(); i != vcsOut.end(); ++i)
+  for (const std::string& i : vcsOut)
   {
     CXBMCTinyXML doc;
-    doc.Parse(*i);
+    doc.Parse(i);
     if (!doc.RootElement())
     {
       CLog::Log(LOGERROR, "{}: Unable to parse XML", __FUNCTION__);
@@ -1378,10 +1378,10 @@ bool CScraper::GetVideoDetails(XFILE::CCurlFile& fcurl,
 
   // parse XML output
   bool fRet(false);
-  for (std::vector<std::string>::const_iterator i = vcsOut.begin(); i != vcsOut.end(); ++i)
+  for (const std::string& i : vcsOut)
   {
     CXBMCTinyXML doc;
-    doc.Parse(*i, TIXML_ENCODING_UTF8);
+    doc.Parse(i, TIXML_ENCODING_UTF8);
     if (!doc.RootElement())
     {
       CLog::Log(LOGERROR, "{}: Unable to parse XML", __FUNCTION__);

@@ -39,6 +39,7 @@
 #include <algorithm>
 #include <array>
 #include <mutex>
+#include <ranges>
 #include <set>
 #include <utility>
 
@@ -940,8 +941,8 @@ bool CAddonMgr::EnableAddon(const std::string& id)
               "CAddonMgr: '{}' required by '{}' is missing. Add-on may not function "
               "correctly",
               dep, id);
-  for (auto it = needed.rbegin(); it != needed.rend(); ++it)
-    EnableSingle(*it);
+  for (const std::string& it : std::ranges::reverse_view(needed))
+    EnableSingle(it);
 
   return true;
 }
