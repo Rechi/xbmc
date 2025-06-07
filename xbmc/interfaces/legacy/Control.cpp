@@ -792,10 +792,8 @@ namespace XBMCAddon
 
       std::vector<CAnimation> animations;
 
-      for (unsigned int anim = 0; anim < eventAttr.size(); anim++)
+      for (const Tuple<String, String>& pTuple : eventAttr)
       {
-        const Tuple<String,String>& pTuple = eventAttr[anim];
-
         if (pTuple.GetNumValuesSet() != 2)
           throw WindowException("Error unpacking tuple found in list");
 
@@ -1439,10 +1437,8 @@ namespace XBMCAddon
 
       std::vector<CGUIStaticItemPtr> items;
 
-      for (unsigned int item = 0; item < vecItems.size(); item++)
+      for (const ListItem* pItem : vecItems)
       {
-        ListItem* pItem = vecItems[item];
-
         // NOTE: This code has likely not worked fully correctly for some time
         //       In particular, the click behaviour won't be working.
         CGUIStaticItemPtr newItem(new CGUIStaticItem(*pItem->item));

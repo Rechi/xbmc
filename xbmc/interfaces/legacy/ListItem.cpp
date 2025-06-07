@@ -735,10 +735,10 @@ namespace XBMCAddon
       for (const auto& dictionary : actors)
       {
         SActorInfo info;
-        for (auto it = dictionary.begin(); it != dictionary.end(); ++it)
+        for (const std::pair<const std::string, std::string>& it : dictionary)
         {
-          const String& key = it->first;
-          const String& value = it->second;
+          const String& key = it.first;
+          const String& value = it.second;
           if (key == "name")
             info.strName = value;
           else if (key == "role")
