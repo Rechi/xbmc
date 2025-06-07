@@ -118,8 +118,8 @@ void CWeatherJob::LocalizeOverviewToken(std::string &token)
 void CWeatherJob::LocalizeOverview(std::string &str)
 {
   std::vector<std::string> words = StringUtils::Split(str, " ");
-  for (std::vector<std::string>::iterator i = words.begin(); i != words.end(); ++i)
-    LocalizeOverviewToken(*i);
+  for (std::string& word : words)
+    LocalizeOverviewToken(word);
   str = StringUtils::Join(words, " ");
 }
 
