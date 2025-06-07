@@ -43,7 +43,7 @@ void CVideoBufferVTB::SetRef(AVFrame *frame)
 {
   av_frame_unref(m_pFrame);
   av_frame_ref(m_pFrame, frame);
-  m_pbRef = (CVPixelBufferRef)m_pFrame->data[3];
+  m_pbRef = reinterpret_cast<CVPixelBufferRef>(m_pFrame->data[3]);
 }
 
 void CVideoBufferVTB::Unref()
@@ -173,7 +173,7 @@ bool CDecoder::Open(AVCodecContext *avctx, AVCodecContext* mainctx, enum AVPixel
 
   AVBufferRef *deviceRef =  av_hwdevice_ctx_alloc(AV_HWDEVICE_TYPE_VIDEOTOOLBOX);
   AVBufferRef *framesRef = av_hwframe_ctx_alloc(deviceRef);
-  AVHWFramesContext *framesCtx = (AVHWFramesContext*)framesRef->data;
+  AVHWFramesContext* framesCtx = reinterpret_cast<AVHWFramesContext*>(framesRef->data);
   framesCtx->format = AV_PIX_FMT_VIDEOTOOLBOX;
   framesCtx->sw_format = AV_PIX_FMT_NV12;
   avctx->hw_frames_ctx = framesRef;
@@ -211,7 +211,7 @@ CDVDVideoCodec::VCReturn CDecoder::Decode(AVCodecContext* avctx, AVFrame* frame)
 
 bool CDecoder::GetPicture(AVCodecContext* avctx, VideoPicture* picture)
 {
-  ((ICallbackHWAccel*)avctx->opaque)->GetPictureCommon(picture);
+  (static_cast<ICallbackHWAccel*>(avctx->opaque))->GetPictureCommon(picture);
 
   if (picture->videoBuffer)
     picture->videoBuffer->Release();

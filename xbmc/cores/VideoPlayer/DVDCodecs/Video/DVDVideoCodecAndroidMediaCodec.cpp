@@ -1084,7 +1084,8 @@ bool CDVDVideoCodecAndroidMediaCodec::AddData(const DemuxPacket &packet)
                   out_size);
         iSize = out_size;
       }
-      uint8_t* dst_ptr = (uint8_t*)xbmc_jnienv()->GetDirectBufferAddress(buffer.get_raw());
+      uint8_t* dst_ptr =
+          static_cast<uint8_t*>(xbmc_jnienv()->GetDirectBufferAddress(buffer.get_raw()));
 
       CJNIMediaCodecCryptoInfo* cryptoInfo(nullptr);
       if (m_crypto && packet.cryptoInfo)
@@ -1799,11 +1800,13 @@ void CDVDVideoCodecAndroidMediaCodec::ConfigureOutputFormat(CJNIMediaFormat& med
 
   if (m_hints.aspect > 1.0 && !m_hints.forced_aspect)
   {
-    m_videobuffer.iDisplayWidth  = ((int)lrint(m_videobuffer.iHeight * m_hints.aspect)) & ~3;
+    m_videobuffer.iDisplayWidth =
+        (static_cast<int>(lrint(m_videobuffer.iHeight * m_hints.aspect))) & ~3;
     if (m_videobuffer.iDisplayWidth > m_videobuffer.iWidth)
     {
       m_videobuffer.iDisplayWidth  = m_videobuffer.iWidth;
-      m_videobuffer.iDisplayHeight = ((int)lrint(m_videobuffer.iWidth / m_hints.aspect)) & ~3;
+      m_videobuffer.iDisplayHeight =
+          (static_cast<int>(lrint(m_videobuffer.iWidth / m_hints.aspect))) & ~3;
     }
   }
 
@@ -1853,7 +1856,7 @@ void CDVDVideoCodecAndroidMediaCodec::InitSurfaceTexture(void)
   {
     ThreadMessageCallback callbackData;
     callbackData.callback = &CallbackInitSurfaceTexture;
-    callbackData.userptr  = (void*)this;
+    callbackData.userptr = static_cast<void*>(this);
 
     // wait for it.
     CServiceBroker::GetAppMessenger()->SendMsg(TMSG_CALLBACK, -1, -1,

@@ -72,7 +72,7 @@ public:
   void SelectButton(int iButton) override
   {
     if(iButton < 10)
-      UserInput((bd_vk_key_e)(BD_VK_0 + iButton));
+      UserInput(static_cast<bd_vk_key_e>(BD_VK_0 + iButton));
   }
   int  GetCurrentButton() override { return 0; }
   int  GetTotalButtons() override { return 0; }

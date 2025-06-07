@@ -156,7 +156,7 @@ bool CColorManager::GetVideo3dLut(AVColorPrimaries srcPrimaries, int* cmsToken,
 {
   const std::shared_ptr<CSettings> settings = CServiceBroker::GetSettingsComponent()->GetSettings();
   CMS_PRIMARIES videoPrimaries = avColorToCmsPrimaries(srcPrimaries);
-  CLog::Log(LOGDEBUG, "ColorManager: video primaries: {}", (int)videoPrimaries);
+  CLog::Log(LOGDEBUG, "ColorManager: video primaries: {}", static_cast<int>(videoPrimaries));
   switch (settings->GetInt("videoscreen.cmsmode"))
   {
   case CMS_MODE_3DLUT:
@@ -197,10 +197,12 @@ bool CColorManager::GetVideo3dLut(AVColorPrimaries srcPrimaries, int* cmsToken,
       // create source profile
       m_curIccWhitePoint = static_cast<CMS_WHITEPOINT>(settings->GetInt("videoscreen.cmswhitepoint"));
       m_curIccPrimaries = static_cast<CMS_PRIMARIES>(settings->GetInt("videoscreen.cmsprimaries"));
-      CLog::Log(LOGDEBUG, "ColorManager: primaries setting: {}", (int)m_curIccPrimaries);
+      CLog::Log(LOGDEBUG, "ColorManager: primaries setting: {}",
+                static_cast<int>(m_curIccPrimaries));
       if (m_curIccPrimaries == CMS_PRIMARIES_AUTO)
         m_curIccPrimaries = videoPrimaries;
-      CLog::Log(LOGDEBUG, "ColorManager: source profile primaries: {}", (int)m_curIccPrimaries);
+      CLog::Log(LOGDEBUG, "ColorManager: source profile primaries: {}",
+                static_cast<int>(m_curIccPrimaries));
       cmsHPROFILE sourceProfile = CreateSourceProfile(m_curIccPrimaries, gammaCurve, m_curIccWhitePoint);
 
       // link profiles
@@ -493,7 +495,7 @@ cmsToneCurve* CColorManager::CreateToneCurve(CMS_TRC_TYPE gammaType,
       double gain = pow(wtipow - bkipow, gammaValue);
       for (int i=0; i<tableSize; i++)
       {
-        gammaTable[i] = gain * pow(((double) i)/(tableSize-1) + lift, gammaValue);
+        gammaTable[i] = gain * pow(static_cast<double>(i) / (tableSize - 1) + lift, gammaValue);
       }
     }
     break;
@@ -506,7 +508,8 @@ cmsToneCurve* CColorManager::CreateToneCurve(CMS_TRC_TYPE gammaType,
       double adjustedGamma = log(gain/(gain+pow(2,-gammaValue)-1))/log(2);
       for (int i=0; i<tableSize; i++)
       {
-        gammaTable[i] = gain * pow(((double) i)/(tableSize-1), adjustedGamma) + blackPoint.Y;
+        gammaTable[i] =
+            gain * pow(static_cast<double>(i) / (tableSize - 1), adjustedGamma) + blackPoint.Y;
       }
     }
     break;
@@ -515,7 +518,8 @@ cmsToneCurve* CColorManager::CreateToneCurve(CMS_TRC_TYPE gammaType,
     {
       for (int i=0; i<tableSize; i++)
       {
-        gammaTable[i] = fmax(blackPoint.Y, pow(((double) i)/(tableSize-1), gammaValue));
+        gammaTable[i] =
+            fmax(blackPoint.Y, pow(static_cast<double>(i) / (tableSize - 1), gammaValue));
       }
     }
     break;
@@ -607,9 +611,10 @@ void CColorManager::Create3dLut(cmsHTRANSFORM transform, CMS_DATA_FORMAT format,
   for (int y=0; y<lutResolution; y+=1)
   {
     int index = components*(y*lutResolution*lutResolution + y*lutResolution + y);
-    CLog::Log(LOGDEBUG, "  {} ({}): {} {} {}", (int)round(y * 255 / (lutResolution - 1.0)), y,
-              (int)round(clutData[index + 0]), (int)round(clutData[index + 1]),
-              (int)round(clutData[index + 2]));
+    CLog::Log(
+        LOGDEBUG, "  {} ({}): {} {} {}", static_cast<int>(round(y * 255 / (lutResolution - 1.0))),
+        y, static_cast<int>(round(clutData[index + 0])),
+        static_cast<int>(round(clutData[index + 1])), static_cast<int>(round(clutData[index + 2])));
   }
   delete[] input;
   delete[] output;

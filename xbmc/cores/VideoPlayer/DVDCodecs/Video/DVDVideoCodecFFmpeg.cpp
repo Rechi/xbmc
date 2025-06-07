@@ -110,7 +110,7 @@ void CVideoBufferFFmpeg::SetRef(AVFrame *frame)
 {
   av_frame_unref(m_pFrame);
   av_frame_move_ref(m_pFrame, frame);
-  m_pixFormat = (AVPixelFormat)m_pFrame->format;
+  m_pixFormat = static_cast<AVPixelFormat>(m_pFrame->format);
 }
 
 void CVideoBufferFFmpeg::Unref()
@@ -403,7 +403,7 @@ bool CDVDVideoCodecFFmpeg::Open(CDVDStreamInfo &hints, CDVDCodecOptions &options
   if (hints.extradata)
   {
     m_pCodecContext->extradata =
-        (uint8_t*)av_mallocz(hints.extradata.GetSize() + AV_INPUT_BUFFER_PADDING_SIZE);
+        static_cast<uint8_t*>(av_mallocz(hints.extradata.GetSize() + AV_INPUT_BUFFER_PADDING_SIZE));
     if (m_pCodecContext->extradata)
     {
       m_pCodecContext->extradata_size = hints.extradata.GetSize();
@@ -964,12 +964,14 @@ bool CDVDVideoCodecFFmpeg::GetPictureCommon(VideoPicture* pVideoPicture)
   pVideoPicture->iHeight = m_pFrame->height;
 
   /* crop of 10 pixels if demuxer asked it */
-  if(m_pCodecContext->coded_width  && m_pCodecContext->coded_width  < (int)pVideoPicture->iWidth
-                                   && m_pCodecContext->coded_width  > (int)pVideoPicture->iWidth  - 10)
+  if (m_pCodecContext->coded_width &&
+      m_pCodecContext->coded_width < static_cast<int>(pVideoPicture->iWidth) &&
+      m_pCodecContext->coded_width > static_cast<int>(pVideoPicture->iWidth) - 10)
     pVideoPicture->iWidth = m_pCodecContext->coded_width;
 
-  if(m_pCodecContext->coded_height && m_pCodecContext->coded_height < (int)pVideoPicture->iHeight
-                                   && m_pCodecContext->coded_height > (int)pVideoPicture->iHeight - 10)
+  if (m_pCodecContext->coded_height &&
+      m_pCodecContext->coded_height < static_cast<int>(pVideoPicture->iHeight) &&
+      m_pCodecContext->coded_height > static_cast<int>(pVideoPicture->iHeight) - 10)
     pVideoPicture->iHeight = m_pCodecContext->coded_height;
 
   double aspect_ratio;
@@ -993,11 +995,13 @@ bool CDVDVideoCodecFFmpeg::GetPictureCommon(VideoPicture* pVideoPicture)
 
   /* XXX: we suppose the screen has a 1.0 pixel ratio */ // CDVDVideo will compensate it.
   pVideoPicture->iDisplayHeight = pVideoPicture->iHeight;
-  pVideoPicture->iDisplayWidth  = ((int)RINT(pVideoPicture->iHeight * aspect_ratio)) & -3;
+  pVideoPicture->iDisplayWidth =
+      (static_cast<int>(RINT(pVideoPicture->iHeight * aspect_ratio))) & -3;
   if (pVideoPicture->iDisplayWidth > pVideoPicture->iWidth)
   {
     pVideoPicture->iDisplayWidth  = pVideoPicture->iWidth;
-    pVideoPicture->iDisplayHeight = ((int)RINT(pVideoPicture->iWidth / aspect_ratio)) & -3;
+    pVideoPicture->iDisplayHeight =
+        (static_cast<int>(RINT(pVideoPicture->iWidth / aspect_ratio))) & -3;
   }
 
 
@@ -1099,7 +1103,7 @@ bool CDVDVideoCodecFFmpeg::GetPictureCommon(VideoPicture* pVideoPicture)
   sd = av_frame_get_side_data(m_pFrame, AV_FRAME_DATA_MASTERING_DISPLAY_METADATA);
   if (sd)
   {
-    pVideoPicture->displayMetadata = *(AVMasteringDisplayMetadata *)sd->data;
+    pVideoPicture->displayMetadata = *reinterpret_cast<AVMasteringDisplayMetadata*>(sd->data);
     pVideoPicture->hasDisplayMetadata = true;
   }
   else if (m_hints.masteringMetadata)
@@ -1110,7 +1114,7 @@ bool CDVDVideoCodecFFmpeg::GetPictureCommon(VideoPicture* pVideoPicture)
   sd = av_frame_get_side_data(m_pFrame, AV_FRAME_DATA_CONTENT_LIGHT_LEVEL);
   if (sd)
   {
-    pVideoPicture->lightMetadata = *(AVContentLightMetadata *)sd->data;
+    pVideoPicture->lightMetadata = *reinterpret_cast<AVContentLightMetadata*>(sd->data);
     pVideoPicture->hasLightMetadata = true;
   }
   else if (m_hints.contentLightMetadata)
@@ -1129,7 +1133,7 @@ bool CDVDVideoCodecFFmpeg::GetPictureCommon(VideoPicture* pVideoPicture)
   int64_t bpts = m_pFrame->best_effort_timestamp;
   if (bpts != AV_NOPTS_VALUE)
   {
-    pVideoPicture->pts = (double)bpts * DVD_TIME_BASE / AV_TIME_BASE;
+    pVideoPicture->pts = static_cast<double>(bpts) * DVD_TIME_BASE / AV_TIME_BASE;
     if (pVideoPicture->pts == m_decoderPts)
     {
       pVideoPicture->iRepeatPicture = -0.5;

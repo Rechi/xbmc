@@ -411,7 +411,8 @@ bool CDVDAudioCodecAndroidMediaCodec::AddData(const DemuxPacket &packet)
         return packet.iSize;
       }
       // fetch a pointer to the ByteBuffer backing store
-      uint8_t *dst_ptr = (uint8_t*)xbmc_jnienv()->GetDirectBufferAddress(buffer.get_raw());
+      uint8_t* dst_ptr =
+          static_cast<uint8_t*>(xbmc_jnienv()->GetDirectBufferAddress(buffer.get_raw()));
 
       if (dst_ptr)
       {
@@ -634,7 +635,8 @@ void CDVDAudioCodecAndroidMediaCodec::GetData(DVDAudioFrame &frame)
   frame.profile = GetProfile();
   // compute duration.
   if (frame.format.m_sampleRate)
-    frame.duration = ((double)frame.nb_frames * DVD_TIME_BASE) / frame.format.m_sampleRate;
+    frame.duration =
+        (static_cast<double>(frame.nb_frames) * DVD_TIME_BASE) / frame.format.m_sampleRate;
   else
     frame.duration = 0.0;
   if (frame.nb_frames > 0 && CServiceBroker::GetLogging().CanLogComponent(LOGAUDIO))
@@ -701,13 +703,14 @@ int CDVDAudioCodecAndroidMediaCodec::GetData(uint8_t** dst)
 
     if (size && buffer.capacity())
     {
-      uint8_t *src_ptr = (uint8_t*)xbmc_jnienv()->GetDirectBufferAddress(buffer.get_raw());
+      uint8_t* src_ptr =
+          static_cast<uint8_t*>(xbmc_jnienv()->GetDirectBufferAddress(buffer.get_raw()));
       src_ptr += offset;
 
       if (size > m_bufferSize)
       {
         m_bufferSize = size;
-        m_buffer = (uint8_t*)realloc(m_buffer, m_bufferSize);
+        m_buffer = static_cast<uint8_t*>(realloc(m_buffer, m_bufferSize));
         if (m_buffer == nullptr)
           throw std::runtime_error("Failed to realloc memory, insufficient memory available");
       }
@@ -729,7 +732,9 @@ int CDVDAudioCodecAndroidMediaCodec::GetData(uint8_t** dst)
     CLog::Log(LOGDEBUG, LOGAUDIO, "CDVDAudioCodecAndroidMediaCodec::GetData index({}), size({})",
               index, m_bufferUsed);
 
-    m_currentPts = bufferInfo.presentationTimeUs() == (int64_t)DVD_NOPTS_VALUE ? DVD_NOPTS_VALUE :  bufferInfo.presentationTimeUs();
+    m_currentPts = bufferInfo.presentationTimeUs() == static_cast<int64_t>(DVD_NOPTS_VALUE)
+                       ? DVD_NOPTS_VALUE
+                       : bufferInfo.presentationTimeUs();
 
     // always, check/clear jni exceptions.
     if (xbmc_jnienv()->ExceptionCheck())

@@ -74,7 +74,7 @@ void convert_rgba(const CDVDOverlaySpu& o,
 
   uint32_t  color;
   uint32_t* trg;
-  uint16_t* src;
+  const uint16_t* src;
 
   int len, idx, draw;
 
@@ -97,7 +97,7 @@ void convert_rgba(const CDVDOverlaySpu& o,
   max_y = 0;
 
   trg = rgba.data();
-  src = (uint16_t*)o.result;
+  src = reinterpret_cast<const uint16_t*>(o.result);
 
   for (int y = 0; y < o.height; y++)
   {

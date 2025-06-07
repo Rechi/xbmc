@@ -150,7 +150,8 @@ void CDVDClock::SetSpeed(int iSpeed)
     m_pauseClock = 0;
   }
 
-  m_startClock = current - (int64_t)((double)(current - m_startClock) * newfreq / m_systemUsed);
+  m_startClock = current - static_cast<int64_t>(static_cast<double>(current - m_startClock) *
+                                                newfreq / m_systemUsed);
   m_systemUsed = newfreq;
 }
 
@@ -268,12 +269,12 @@ bool CDVDClock::GetClockInfo(int& MissedVblanks, double& ClockSpeed, double& Ref
 
 double CDVDClock::SystemToAbsolute(int64_t system)
 {
-  return DVD_TIME_BASE * (double)(system - m_systemOffset) / m_systemFrequency;
+  return DVD_TIME_BASE * static_cast<double>(system - m_systemOffset) / m_systemFrequency;
 }
 
 int64_t CDVDClock::AbsoluteToSystem(double absolute)
 {
-  return (int64_t)(absolute / DVD_TIME_BASE * m_systemFrequency) + m_systemOffset;
+  return static_cast<int64_t>(absolute / DVD_TIME_BASE * m_systemFrequency) + m_systemOffset;
 }
 
 double CDVDClock::SystemToPlaying(int64_t system)
@@ -298,13 +299,15 @@ double CDVDClock::SystemToPlaying(int64_t system)
   else
     current = system;
 
-  return DVD_TIME_BASE * (double)(current - m_startClock + m_systemAdjust) / m_systemUsed + m_iDisc;
+  return DVD_TIME_BASE * static_cast<double>(current - m_startClock + m_systemAdjust) /
+             m_systemUsed +
+         m_iDisc;
 }
 
 double CDVDClock::GetClockSpeed()
 {
   std::unique_lock lock(m_critSection);
 
-  double speed = (double)m_systemFrequency / m_systemUsed;
+  double speed = static_cast<double>(m_systemFrequency) / m_systemUsed;
   return m_videoRefClock->GetSpeed() * speed + m_speedAdjust;
 }

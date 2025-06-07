@@ -916,7 +916,7 @@ std::optional<std::chrono::milliseconds> CEdl::GetNextSceneMarker(Direction dire
 
   if (direction == Direction::FORWARD) // Find closest scene forwards
   {
-    for (int i = 0; i < (int)m_vecSceneMarkers.size(); i++)
+    for (int i = 0; i < static_cast<int>(m_vecSceneMarkers.size()); i++)
     {
       if ((m_vecSceneMarkers[i] > seekTime) && ((m_vecSceneMarkers[i] - seekTime) < diff))
       {
@@ -927,7 +927,7 @@ std::optional<std::chrono::milliseconds> CEdl::GetNextSceneMarker(Direction dire
   }
   else if (direction == Direction::BACKWARD) // Find closest scene backwards
   {
-    for (int i = 0; i < (int)m_vecSceneMarkers.size(); i++)
+    for (int i = 0; i < static_cast<int>(m_vecSceneMarkers.size()); i++)
     {
       if ((m_vecSceneMarkers[i] < seekTime) && ((seekTime - m_vecSceneMarkers[i]) < diff))
       {

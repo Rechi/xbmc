@@ -57,14 +57,14 @@ OverlayMessage CDVDOverlayCodecSSA::Decode(DemuxPacket* pPacket)
   if (duration == DVD_NOPTS_VALUE)
     duration = 0.0;
 
-  if (strncmp((const char*)data, "Dialogue:", 9) == 0)
+  if (strncmp(reinterpret_cast<const char*>(data), "Dialogue:", 9) == 0)
   {
     int sh, sm, ss, sc, eh, em, es, ec;
     double beg, end;
     size_t pos;
     std::string line, line2;
     std::vector<std::string> lines;
-    StringUtils::Tokenize((const char*)data, lines, "\r\n");
+    StringUtils::Tokenize(reinterpret_cast<const char*>(data), lines, "\r\n");
     for (size_t i = 0; i < lines.size(); i++)
     {
       line = lines[i];
@@ -91,7 +91,7 @@ OverlayMessage CDVDOverlayCodecSSA::Decode(DemuxPacket* pPacket)
   }
   else
   {
-    m_libass->DecodeDemuxPkt((char*)data, size, pts, duration);
+    m_libass->DecodeDemuxPkt(reinterpret_cast<char*>(data), size, pts, duration);
   }
 
   return m_pOverlay ? OverlayMessage::OC_DONE : OverlayMessage::OC_OVERLAY;

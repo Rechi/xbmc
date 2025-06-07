@@ -160,7 +160,7 @@ class CCaptionBlock
 public:
   explicit CCaptionBlock(int size)
   {
-    m_data = (uint8_t*)malloc(size);
+    m_data = static_cast<uint8_t*>(malloc(size));
     m_size = size;
     m_pts = 0.0; //silence coverity uninitialized warning, is set elsewhere
   }

@@ -105,7 +105,8 @@ std::shared_ptr<CDVDOverlaySpu> CDVDDemuxSPU::AddData(uint8_t* data, int iSize, 
   // or allocate some more if 16384 bytes is not enough
   if ((pSPUData->iSize + iSize) > pSPUData->iAllocatedSize)
   {
-    uint8_t* tmpptr = (uint8_t*)realloc(pSPUData->data, ALIGN(pSPUData->iSize + iSize, 0x4000));
+    uint8_t* tmpptr =
+        static_cast<uint8_t*>(realloc(pSPUData->data, ALIGN(pSPUData->iSize + iSize, 0x4000)));
     if (!tmpptr)
     {
       free(pSPUData->data);
@@ -192,7 +193,7 @@ std::shared_ptr<CDVDOverlaySpu> CDVDDemuxSPU::ParsePacket(SPUData* pSPUData)
     // skip 4 bytes
     p += 4;
 
-    while (*p != CMD_END && (unsigned int)(p - pSPUData->data) <= pSPUData->iSize)
+    while (*p != CMD_END && static_cast<unsigned int>(p - pSPUData->data) <= pSPUData->iSize)
     {
       switch (*p)
       {
@@ -208,7 +209,7 @@ std::shared_ptr<CDVDOverlaySpu> CDVDDemuxSPU::ParsePacket(SPUData* pSPUData)
         {
           p++;
           pSPUInfo->iPTSStartTime = pSPUData->pts;
-          pSPUInfo->iPTSStartTime += (double)delay * 1024 * DVD_TIME_BASE / 90000;
+          pSPUInfo->iPTSStartTime += static_cast<double>(delay) * 1024 * DVD_TIME_BASE / 90000;
           DebugLog("    GetPacket, STA_DSP: Start Display, delay: %i", ((delay * 1024) / 90000));
         }
         break;
@@ -216,7 +217,7 @@ std::shared_ptr<CDVDOverlaySpu> CDVDDemuxSPU::ParsePacket(SPUData* pSPUData)
         {
           p++;
           pSPUInfo->iPTSStopTime = pSPUData->pts;
-          pSPUInfo->iPTSStopTime += (double)delay * 1024 * DVD_TIME_BASE / 90000;
+          pSPUInfo->iPTSStopTime += static_cast<double>(delay) * 1024 * DVD_TIME_BASE / 90000;
           DebugLog("    GetPacket, STP_DSP: Stop Display, delay: %i", ((delay * 1024) / 90000));
         }
         break;
@@ -359,7 +360,7 @@ std::shared_ptr<CDVDOverlaySpu> CDVDDemuxSPU::ParseRLE(std::shared_ptr<CDVDOverl
   unsigned int i_x, i_y;
 
   // allocate a buffer for the result
-  uint16_t* p_dest = (uint16_t*)pSPU->result;
+  uint16_t* p_dest = reinterpret_cast<uint16_t*>(pSPU->result);
 
   /* The subtitles are interlaced, we need two offsets */
   unsigned int i_id = 0;                   /* Start on the even SPU layer */
@@ -432,10 +433,10 @@ std::shared_ptr<CDVDOverlaySpu> CDVDDemuxSPU::ParseRLE(std::shared_ptr<CDVDOverl
       /* Check we aren't overwriting our data range
          This occurs on "The Triplets of BelleVille" region 4 disk (NTSC)"
          where we use around 96k rather than 64k + 20bytes */
-      if ((uint8_t *)p_dest >= pSPU->result + sizeof(pSPU->result))
+      if (reinterpret_cast<uint8_t*>(p_dest) >= pSPU->result + sizeof(pSPU->result))
       {
         CLog::Log(LOGERROR, "ParseRLE: Overrunning our data range.  Need {} bytes",
-                  (long)((uint8_t*)p_dest - pSPU->result));
+                  (long)(reinterpret_cast<uint8_t*>(p_dest) - pSPU->result));
         return NULL;
       }
       *p_dest++ = i_code;
@@ -470,10 +471,10 @@ std::shared_ptr<CDVDOverlaySpu> CDVDDemuxSPU::ParseRLE(std::shared_ptr<CDVDOverl
       /* Check we aren't overwriting our data range
          This occurs on "The Triplets of BelleVille" region 4 disk (NTSC)"
          where we use around 96k rather than 64k + 20bytes */
-      if ((uint8_t *)p_dest >= pSPU->result + sizeof(pSPU->result))
+      if (reinterpret_cast<uint8_t*>(p_dest) >= pSPU->result + sizeof(pSPU->result))
       {
         CLog::Log(LOGERROR, "ParseRLE: Overrunning our data range.  Need {} bytes",
-                  (long)((uint8_t*)p_dest - pSPU->result));
+                  (long)(reinterpret_cast<uint8_t*>(p_dest) - pSPU->result));
         return NULL;
       }
       *p_dest++ = i_width << 2;

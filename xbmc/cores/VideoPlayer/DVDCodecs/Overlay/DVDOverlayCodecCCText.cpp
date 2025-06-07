@@ -23,7 +23,7 @@ namespace
 // or, the start PTS of the next subtitle without text -if any-,
 // otherwise we fallback to 20 secs duration (long duration so as not
 // to cause side effects on texts that expand like karaoke, but slowly)
-constexpr double DEFAULT_DURATION = 20.0 * (double)DVD_TIME_BASE;
+constexpr double DEFAULT_DURATION = 20.0 * static_cast<double>(DVD_TIME_BASE);
 } // namespace
 
 CDVDOverlayCodecCCText::CDVDOverlayCodecCCText()
@@ -47,7 +47,7 @@ OverlayMessage CDVDOverlayCodecCCText::Decode(DemuxPacket* pPacket)
     return OverlayMessage::OC_ERROR;
 
   uint8_t* data = pPacket->pData;
-  std::string text((char*)data, (char*)(data + pPacket->iSize));
+  std::string text(reinterpret_cast<char*>(data), reinterpret_cast<char*>(data + pPacket->iSize));
 
   // We delete some old Events to avoid allocating too much,
   // this can easily happen with karaoke text or live videos

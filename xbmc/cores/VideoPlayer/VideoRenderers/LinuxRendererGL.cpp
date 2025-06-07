@@ -196,7 +196,7 @@ bool CLinuxRendererGL::ValidateRenderTarget()
     }
 
     // trigger update of video filters
-    m_scalingMethodGui = (ESCALINGMETHOD)-1;
+    m_scalingMethodGui = static_cast<ESCALINGMETHOD>(-1);
 
      // create the yuv textures
     UpdateVideoFilter();
@@ -238,7 +238,7 @@ bool CLinuxRendererGL::Configure(const VideoPicture &picture, float fps, unsigne
   ManageRenderArea();
 
   m_bConfigured = true;
-  m_scalingMethodGui = (ESCALINGMETHOD)-1;
+  m_scalingMethodGui = static_cast<ESCALINGMETHOD>(-1);
 
   // Ensure that textures are recreated and rendering starts only after the 1st
   // frame is loaded after every call to Configure().
@@ -437,16 +437,12 @@ void CLinuxRendererGL::LoadPlane(CYuvPlane& plane, int type,
 
   /* check if we need to load any border pixels */
   if (height < plane.texheight)
-    glTexSubImage2D( m_textureTarget, 0
-                   , 0, height, width, 1
-                   , type, datatype
-                   , (unsigned char*)data + stride * (height-1));
+    glTexSubImage2D(m_textureTarget, 0, 0, height, width, 1, type, datatype,
+                    static_cast<unsigned char*>(data) + stride * (height - 1));
 
   if (width  < plane.texwidth)
-    glTexSubImage2D( m_textureTarget, 0
-                   , width, 0, 1, height
-                   , type, datatype
-                   , (unsigned char*)data + bps * (width-1));
+    glTexSubImage2D(m_textureTarget, 0, width, 0, 1, height, type, datatype,
+                    static_cast<unsigned char*>(data) + bps * (width - 1));
 
   glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
   glBindTexture(m_textureTarget, 0);
@@ -484,7 +480,7 @@ void CLinuxRendererGL::Update()
   if (!m_bConfigured)
     return;
   ManageRenderArea();
-  m_scalingMethodGui = (ESCALINGMETHOD)-1;
+  m_scalingMethodGui = static_cast<ESCALINGMETHOD>(-1);
 
   ValidateRenderTarget();
 }
@@ -826,7 +822,8 @@ void CLinuxRendererGL::UpdateVideoFilter()
   if (m_scalingMethod == VS_SCALINGMETHOD_AUTO)
   {
     bool scaleSD = m_sourceHeight < 720 && m_sourceWidth < 1280;
-    bool scaleUp = (int)m_sourceHeight < m_viewRect.Height() && (int)m_sourceWidth < m_viewRect.Width();
+    bool scaleUp = static_cast<int>(m_sourceHeight) < m_viewRect.Height() &&
+                   static_cast<int>(m_sourceWidth) < m_viewRect.Width();
     bool scaleFps = m_fps < CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_videoAutoScaleMaxFps + 0.01f;
 
     if (Supports(VS_SCALINGMETHOD_LANCZOS3_FAST) && scaleSD && scaleUp && scaleFps)
@@ -1600,8 +1597,8 @@ void CLinuxRendererGL::RenderFromFBO()
 
 void CLinuxRendererGL::RenderProgressiveWeave(int index, int field)
 {
-  bool scale = (int)m_sourceHeight != m_destRect.Height() ||
-               (int)m_sourceWidth != m_destRect.Width();
+  bool scale = static_cast<int>(m_sourceHeight) != m_destRect.Height() ||
+               static_cast<int>(m_sourceWidth) != m_destRect.Width();
 
   if (m_fbo.fbo.IsSupported() && (scale || m_renderQuality == RQ_MULTIPASS))
   {
@@ -1745,7 +1742,8 @@ bool CLinuxRendererGL::RenderCapture(int index, CRenderCapture* capture)
   saveRotatedCoords();//backup current m_rotatedDestCoords
 
   // new video rect is capture size
-  m_destRect.SetRect(0, 0, (float)capture->GetWidth(), (float)capture->GetHeight());
+  m_destRect.SetRect(0, 0, static_cast<float>(capture->GetWidth()),
+                     static_cast<float>(capture->GetHeight()));
   MarkDirty();
   syncDestRectToRotatedPoints();//syncs the changed destRect to m_rotatedDestCoords
 
@@ -1947,7 +1945,7 @@ bool CLinuxRendererGL::CreateYV12Texture(int index)
       void* pboPtr = glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
       if (pboPtr)
       {
-        im.plane[i] = (uint8_t*) pboPtr + PBO_OFFSET;
+        im.plane[i] = static_cast<uint8_t*>(pboPtr) + PBO_OFFSET;
         memset(im.plane[i], 0, im.planesize[i]);
       }
       else
@@ -2253,7 +2251,7 @@ bool CLinuxRendererGL::CreateNV12Texture(int index)
       void* pboPtr = glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
       if (pboPtr)
       {
-        im.plane[i] = (uint8_t*)pboPtr + PBO_OFFSET;
+        im.plane[i] = static_cast<uint8_t*>(pboPtr) + PBO_OFFSET;
         memset(im.plane[i], 0, im.planesize[i]);
       }
       else
@@ -2519,7 +2517,7 @@ bool CLinuxRendererGL::CreateYUV422PackedTexture(int index)
     void* pboPtr = glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
     if (pboPtr)
     {
-      im.plane[0] = (uint8_t*)pboPtr + PBO_OFFSET;
+      im.plane[0] = static_cast<uint8_t*>(pboPtr) + PBO_OFFSET;
       memset(im.plane[0], 0, im.planesize[0]);
     }
     else
@@ -2661,8 +2659,10 @@ bool CLinuxRendererGL::Supports(ESCALINGMETHOD method) const
       method == VS_SCALINGMETHOD_LANCZOS3)
   {
     // if scaling is below level, avoid hq scaling
-    float scaleX = fabs(((float)m_sourceWidth - m_destRect.Width())/m_sourceWidth)*100;
-    float scaleY = fabs(((float)m_sourceHeight - m_destRect.Height())/m_sourceHeight)*100;
+    float scaleX =
+        fabs((static_cast<float>(m_sourceWidth) - m_destRect.Width()) / m_sourceWidth) * 100;
+    float scaleY =
+        fabs((static_cast<float>(m_sourceHeight) - m_destRect.Height()) / m_sourceHeight) * 100;
     int minScale = CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_VIDEOPLAYER_HQSCALERS);
     if (scaleX < minScale && scaleY < minScale)
       return false;
@@ -2710,7 +2710,8 @@ void CLinuxRendererGL::UnBindPbo(CPictureBuffer& buff)
 
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, buff.pbo[plane]);
     glBufferData(GL_PIXEL_UNPACK_BUFFER, buff.image.planesize[plane] + PBO_OFFSET, NULL, GL_STREAM_DRAW);
-    buff.image.plane[plane] = (uint8_t*)glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY) + PBO_OFFSET;
+    buff.image.plane[plane] =
+        static_cast<uint8_t*>(glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY)) + PBO_OFFSET;
   }
   if (pbo)
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
