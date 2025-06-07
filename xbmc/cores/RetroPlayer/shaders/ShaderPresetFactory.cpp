@@ -106,11 +106,8 @@ void CShaderPresetFactory::UpdateAddons()
 
   // Look for removed/disabled add-ons
   auto oldAddons = std::move(m_shaderAddons);
-  for (auto it = oldAddons.begin(); it != oldAddons.end(); ++it)
+  for (auto& [addonId, shaderAddon] : oldAddons)
   {
-    const std::string& addonId = it->first;
-    std::unique_ptr<ADDON::CShaderPresetAddon>& shaderAddon = it->second;
-
     const bool bIsDisabled =
         std::find_if(addonInfo.begin(), addonInfo.end(), [&addonId](const AddonInfoPtr& addon)
                      { return addonId == addon->ID(); }) == addonInfo.end();
