@@ -75,11 +75,10 @@ AEDeviceType CActiveAESink::GetDeviceType(const std::string &device)
 {
   const AESinkDevice dev = CAESinkFactory::ParseDevice(device);
 
-  for (auto itt = m_sinkInfoList.begin(); itt != m_sinkInfoList.end(); ++itt)
+  for (const AESinkInfo& sinkInfo : m_sinkInfoList)
   {
-    for (AEDeviceInfoList::iterator itt2 = itt->m_deviceInfoList.begin(); itt2 != itt->m_deviceInfoList.end(); ++itt2)
+    for (const CAEDeviceInfo& info : sinkInfo.m_deviceInfoList)
     {
-      CAEDeviceInfo& info = *itt2;
       if (info.m_deviceName == dev.name)
         return info.m_deviceType;
     }
@@ -89,11 +88,10 @@ AEDeviceType CActiveAESink::GetDeviceType(const std::string &device)
 
 bool CActiveAESink::HasPassthroughDevice()
 {
-  for (auto itt = m_sinkInfoList.begin(); itt != m_sinkInfoList.end(); ++itt)
+  for (const AESinkInfo& sinkInfo : m_sinkInfoList)
   {
-    for (AEDeviceInfoList::iterator itt2 = itt->m_deviceInfoList.begin(); itt2 != itt->m_deviceInfoList.end(); ++itt2)
+    for (const CAEDeviceInfo& info : sinkInfo.m_deviceInfoList)
     {
-      CAEDeviceInfo& info = *itt2;
       if (info.m_deviceType != AE_DEVTYPE_PCM && !info.m_streamTypes.empty())
         return true;
     }
@@ -105,13 +103,12 @@ bool CActiveAESink::SupportsFormat(const std::string &device, AEAudioFormat &for
 {
   const AESinkDevice dev = CAESinkFactory::ParseDevice(device);
 
-  for (auto itt = m_sinkInfoList.begin(); itt != m_sinkInfoList.end(); ++itt)
+  for (AESinkInfo& sinkInfo : m_sinkInfoList)
   {
-    if (dev.driver == itt->m_sinkName)
+    if (dev.driver == sinkInfo.m_sinkName)
     {
-      for (auto itt2 = itt->m_deviceInfoList.begin(); itt2 != itt->m_deviceInfoList.end(); ++itt2)
+      for (CAEDeviceInfo& info : sinkInfo.m_deviceInfoList)
       {
-        CAEDeviceInfo& info = *itt2;
         if (info.m_deviceName == dev.name)
         {
           bool isRaw = format.m_dataFormat == AE_FMT_RAW;
@@ -183,13 +180,12 @@ bool CActiveAESink::NeedIECPacking()
 {
   const AESinkDevice dev = CAESinkFactory::ParseDevice(m_device);
 
-  for (auto itt = m_sinkInfoList.begin(); itt != m_sinkInfoList.end(); ++itt)
+  for (const AESinkInfo& sinkInfo : m_sinkInfoList)
   {
-    if (dev.driver == itt->m_sinkName)
+    if (dev.driver == sinkInfo.m_sinkName)
     {
-      for (auto itt2 = itt->m_deviceInfoList.begin(); itt2 != itt->m_deviceInfoList.end(); ++itt2)
+      for (const CAEDeviceInfo& info : sinkInfo.m_deviceInfoList)
       {
-        CAEDeviceInfo& info = *itt2;
         if (info.m_deviceName == dev.name)
         {
           return info.m_wantsIECPassthrough;
@@ -709,17 +705,16 @@ void CActiveAESink::EnumerateSinkList(bool force, std::string driver)
 
 void CActiveAESink::PrintSinks(std::string& driver)
 {
-  for (auto itt = m_sinkInfoList.begin(); itt != m_sinkInfoList.end(); ++itt)
+  for (const AESinkInfo& sinkInfo : m_sinkInfoList)
   {
-    if (!driver.empty() && itt->m_sinkName != driver)
+    if (!driver.empty() && sinkInfo.m_sinkName != driver)
       continue;
 
-    CLog::Log(LOGINFO, "Enumerated {} devices:", itt->m_sinkName);
+    CLog::Log(LOGINFO, "Enumerated {} devices:", sinkInfo.m_sinkName);
     int count = 0;
-    for (auto itt2 = itt->m_deviceInfoList.begin(); itt2 != itt->m_deviceInfoList.end(); ++itt2)
+    for (const CAEDeviceInfo& info : sinkInfo.m_deviceInfoList)
     {
       CLog::Log(LOGINFO, "    Device {}", ++count);
-      CAEDeviceInfo& info = *itt2;
       std::stringstream ss((std::string)info);
       std::string line;
       while(std::getline(ss, line, '\n'))
@@ -842,9 +837,8 @@ void CActiveAESink::EnumerateOutputDevices(AEDeviceList &devices, bool passthrou
 {
   EnumerateSinkList(false, "");
 
-  for (auto itt = m_sinkInfoList.begin(); itt != m_sinkInfoList.end(); ++itt)
+  for (AESinkInfo& sinkInfo : m_sinkInfoList)
   {
-    AESinkInfo sinkInfo = *itt;
     for (AEDeviceInfoList::iterator itt2 = sinkInfo.m_deviceInfoList.begin(); itt2 != sinkInfo.m_deviceInfoList.end(); ++itt2)
     {
       const CAEDeviceInfo& devInfo = *itt2;
@@ -881,12 +875,10 @@ void CActiveAESink::GetDeviceFriendlyName(const std::string& device)
 {
   m_deviceFriendlyName = "Device not found";
   /* Match the device and find its friendly name */
-  for (auto itt = m_sinkInfoList.begin(); itt != m_sinkInfoList.end(); ++itt)
+  for (const AESinkInfo& sinkInfo : m_sinkInfoList)
   {
-    AESinkInfo sinkInfo = *itt;
-    for (AEDeviceInfoList::iterator itt2 = sinkInfo.m_deviceInfoList.begin(); itt2 != sinkInfo.m_deviceInfoList.end(); ++itt2)
+    for (const CAEDeviceInfo& devInfo : sinkInfo.m_deviceInfoList)
     {
-      CAEDeviceInfo& devInfo = *itt2;
       if (devInfo.m_deviceName == device)
       {
         m_deviceFriendlyName = devInfo.m_displayName;

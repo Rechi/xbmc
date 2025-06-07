@@ -45,7 +45,7 @@ public:
   bool m_onlyPassthrough{false}; // sink only only should be used for passthrough (audio PT device)
   bool m_onlyPCM{false}; // sink only should be used for PCM (audio device)
 
-  operator std::string();
+  operator std::string() const;
   static std::string DeviceTypeToString(enum AEDeviceType deviceType);
   std::string GetFriendlyName() const;
   std::string ToDeviceString(const std::string& driver) const;
