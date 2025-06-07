@@ -303,8 +303,8 @@ void CGUIViewState::AddSortMethod(SortBy sortBy, int buttonLabel, const LABEL_MA
 
 void CGUIViewState::AddSortMethod(SortBy sortBy, SortAttribute sortAttributes, int buttonLabel, const LABEL_MASKS &labelMasks, SortOrder sortOrder /* = SortOrderNone */)
 {
-  for (size_t i = 0; i < m_sortMethods.size(); ++i)
-    if (m_sortMethods[i].m_sortDescription.sortBy == sortBy)
+  for (const GUIViewSortDetails& sortMethod : m_sortMethods)
+    if (sortMethod.m_sortDescription.sortBy == sortBy)
       return;
 
   // handle unspecified sort order
@@ -472,14 +472,14 @@ std::vector<CMediaSource>& CGUIViewState::GetSources()
 void CGUIViewState::AddLiveTVSources()
 {
   std::vector<CMediaSource>* sources = CMediaSourceSettings::GetInstance().GetSources("video");
-  for (std::vector<CMediaSource>::iterator it = sources->begin(); it != sources->end(); ++it)
+  for (const CMediaSource& it : *sources)
   {
-    if (URIUtils::IsLiveTV((*it).strPath))
+    if (URIUtils::IsLiveTV(it.strPath))
     {
       CMediaSource source;
-      source.strPath = (*it).strPath;
-      source.strName = (*it).strName;
-      source.vecPaths = (*it).vecPaths;
+      source.strPath = it.strPath;
+      source.strName = it.strName;
+      source.vecPaths = it.vecPaths;
       source.m_strThumbnailImage = "";
       source.FromNameAndPaths(source.strName, source.vecPaths);
       m_sources.push_back(source);
@@ -570,9 +570,8 @@ CGUIViewStateGeneral::CGUIViewStateGeneral(const CFileItemList& items) : CGUIVie
 CGUIViewStateFromItems::CGUIViewStateFromItems(const CFileItemList &items) : CGUIViewState(items)
 {
   const std::vector<GUIViewSortDetails> &details = items.GetSortDetails();
-  for (unsigned int i = 0; i < details.size(); i++)
+  for (const GUIViewSortDetails& sort : details)
   {
-    const GUIViewSortDetails& sort = details[i];
     AddSortMethod(sort.m_sortDescription, sort.m_buttonLabel, sort.m_labelMasks);
   }
   //! @todo Should default sort/view mode be specified?

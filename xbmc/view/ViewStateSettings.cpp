@@ -82,13 +82,14 @@ bool CViewStateSettings::Load(const TiXmlNode *settings)
     return false;
   }
 
-  for (std::map<std::string, CViewState*>::iterator viewState = m_viewStates.begin(); viewState != m_viewStates.end(); ++viewState)
+  for (const std::pair<const std::string, CViewState*>& viewState : m_viewStates)
   {
-    const TiXmlNode* pViewState = pElement->FirstChildElement(viewState->first);
+    const TiXmlNode* pViewState = pElement->FirstChildElement(viewState.first);
     if (pViewState == NULL)
       continue;
 
-    XMLUtils::GetInt(pViewState, XML_VIEWMODE, viewState->second->m_viewMode, DEFAULT_VIEW_LIST, DEFAULT_VIEW_MAX);
+    XMLUtils::GetInt(pViewState, XML_VIEWMODE, viewState.second->m_viewMode, DEFAULT_VIEW_LIST,
+                     DEFAULT_VIEW_MAX);
 
     // keep backwards compatibility to the old sorting methods
     if (pViewState->FirstChild(XML_SORTATTRIBUTES) == NULL)
@@ -97,21 +98,21 @@ bool CViewStateSettings::Load(const TiXmlNode *settings)
       if (XMLUtils::GetInt(pViewState, XML_SORTMETHOD, sortMethod,
                            static_cast<int>(SortMethod::NONE),
                            static_cast<int>(SortMethod::SM_MAX)))
-        viewState->second->m_sortDescription =
+        viewState.second->m_sortDescription =
             SortUtils::TranslateOldSortMethod(static_cast<SortMethod>(sortMethod));
     }
     else
     {
       int sortMethod;
       if (XMLUtils::GetInt(pViewState, XML_SORTMETHOD, sortMethod, SortByNone, SortByLastUsed))
-        viewState->second->m_sortDescription.sortBy = (SortBy)sortMethod;
+        viewState.second->m_sortDescription.sortBy = (SortBy)sortMethod;
       if (XMLUtils::GetInt(pViewState, XML_SORTATTRIBUTES, sortMethod, SortAttributeNone, SortAttributeIgnoreFolders))
-        viewState->second->m_sortDescription.sortAttributes = (SortAttribute)sortMethod;
+        viewState.second->m_sortDescription.sortAttributes = (SortAttribute)sortMethod;
     }
 
     int sortOrder;
     if (XMLUtils::GetInt(pViewState, XML_SORTORDER, sortOrder, SortOrderNone, SortOrderDescending))
-      viewState->second->m_sortDescription.sortOrder = (SortOrder)sortOrder;
+      viewState.second->m_sortDescription.sortOrder = (SortOrder)sortOrder;
   }
 
   pElement = settings->FirstChild(XML_GENERAL);
@@ -155,17 +156,18 @@ bool CViewStateSettings::Save(TiXmlNode *settings) const
     return false;
   }
 
-  for (std::map<std::string, CViewState*>::const_iterator viewState = m_viewStates.begin(); viewState != m_viewStates.end(); ++viewState)
+  for (const std::pair<const std::string, CViewState*>& m_viewState : m_viewStates)
   {
-    TiXmlElement newElement(viewState->first);
+    TiXmlElement newElement(m_viewState.first);
     TiXmlNode *pNewNode = pViewStateNode->InsertEndChild(newElement);
     if (pNewNode == NULL)
       continue;
 
-    XMLUtils::SetInt(pNewNode, XML_VIEWMODE, viewState->second->m_viewMode);
-    XMLUtils::SetInt(pNewNode, XML_SORTMETHOD, (int)viewState->second->m_sortDescription.sortBy);
-    XMLUtils::SetInt(pNewNode, XML_SORTORDER, (int)viewState->second->m_sortDescription.sortOrder);
-    XMLUtils::SetInt(pNewNode, XML_SORTATTRIBUTES, (int)viewState->second->m_sortDescription.sortAttributes);
+    XMLUtils::SetInt(pNewNode, XML_VIEWMODE, m_viewState.second->m_viewMode);
+    XMLUtils::SetInt(pNewNode, XML_SORTMETHOD, (int)m_viewState.second->m_sortDescription.sortBy);
+    XMLUtils::SetInt(pNewNode, XML_SORTORDER, (int)m_viewState.second->m_sortDescription.sortOrder);
+    XMLUtils::SetInt(pNewNode, XML_SORTATTRIBUTES,
+                     (int)m_viewState.second->m_sortDescription.sortAttributes);
   }
 
   TiXmlNode *generalNode = settings->FirstChild(XML_GENERAL);
