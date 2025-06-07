@@ -7566,8 +7566,8 @@ bool CMusicDatabase::GetAlbumsByWhereJSON(
             std::vector<std::string> sources =
                 StringUtils::Split(albumObj["sourceid"].asString(), ";");
             albumObj["sourceid"] = CVariant(CVariant::VariantTypeArray);
-            for (size_t i = 0; i < sources.size(); i++)
-              albumObj["sourceid"].append(atoi(sources[i].c_str()));
+            for (const std::string& source : sources)
+              albumObj["sourceid"].append(atoi(source.c_str()));
           }
           result["albums"].append(albumObj);
           albumObj.clear();
@@ -8039,9 +8039,8 @@ bool CMusicDatabase::GetSongsByWhereJSON(
         else
         { // Get just roles for  "displaycomposer", "displayconductor" etc.
           std::string where;
-          for (size_t i = 0; i < roleidlist.size(); i++)
+          for (int idRole : roleidlist)
           {
-            int idRole = roleidlist[i];
             if (idRole <= 1)
               continue;
             if (where.empty())
@@ -8232,8 +8231,8 @@ bool CMusicDatabase::GetSongsByWhereJSON(
           std::vector<std::string> sources =
               StringUtils::Split(songObj["sourceid"].asString(), ";");
           songObj["sourceid"] = CVariant(CVariant::VariantTypeArray);
-          for (size_t i = 0; i < sources.size(); i++)
-            songObj["sourceid"].append(atoi(sources[i].c_str()));
+          for (const std::string& source : sources)
+            songObj["sourceid"].append(atoi(source.c_str()));
         }
       }
 

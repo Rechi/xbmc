@@ -131,98 +131,97 @@ bool CTagLoaderTagLib::ParseTag(ASF::Tag *asf, EmbeddedArt *art, CMusicInfoTag& 
   ReplayGain replayGainInfo;
   tag.SetTitle(asf->title().to8Bit(true));
   const ASF::AttributeListMap& attributeListMap = asf->attributeListMap();
-  for (ASF::AttributeListMap::ConstIterator it = attributeListMap.begin(); it != attributeListMap.end(); ++it)
+  for (const std::pair<const String, ASF::AttributeList>& it : attributeListMap)
   {
-    if (it->first == "Author")
-      SetArtist(tag, GetASFStringList(it->second));
-    else if (it->first == "WM/ArtistSortOrder")
-      SetArtistSort(tag, GetASFStringList(it->second));
-    else if (it->first == "WM/AlbumArtist")
-      SetAlbumArtist(tag, GetASFStringList(it->second));
-    else if (it->first == "WM/AlbumArtistSortOrder")
-      SetAlbumArtistSort(tag, GetASFStringList(it->second));
-    else if (it->first == "WM/ComposerSortOrder")
-      SetComposerSort(tag, GetASFStringList(it->second));
-    else if (it->first == "WM/AlbumTitle")
-      tag.SetAlbum(it->second.front().toString().to8Bit(true));
-    else if (it->first == "WM/TrackNumber" ||
-             it->first == "WM/Track")
+    if (it.first == "Author")
+      SetArtist(tag, GetASFStringList(it.second));
+    else if (it.first == "WM/ArtistSortOrder")
+      SetArtistSort(tag, GetASFStringList(it.second));
+    else if (it.first == "WM/AlbumArtist")
+      SetAlbumArtist(tag, GetASFStringList(it.second));
+    else if (it.first == "WM/AlbumArtistSortOrder")
+      SetAlbumArtistSort(tag, GetASFStringList(it.second));
+    else if (it.first == "WM/ComposerSortOrder")
+      SetComposerSort(tag, GetASFStringList(it.second));
+    else if (it.first == "WM/AlbumTitle")
+      tag.SetAlbum(it.second.front().toString().to8Bit(true));
+    else if (it.first == "WM/TrackNumber" || it.first == "WM/Track")
     {
-      if (it->second.front().type() == ASF::Attribute::DWordType)
-        tag.SetTrackNumber(it->second.front().toUInt());
+      if (it.second.front().type() == ASF::Attribute::DWordType)
+        tag.SetTrackNumber(it.second.front().toUInt());
       else
-        tag.SetTrackNumber(atoi(it->second.front().toString().toCString(true)));
+        tag.SetTrackNumber(atoi(it.second.front().toString().toCString(true)));
     }
-    else if (it->first == "WM/PartOfSet")
-      tag.SetDiscNumber(atoi(it->second.front().toString().toCString(true)));
-    else if (it->first == "WM/Genre")
-      SetGenre(tag, GetASFStringList(it->second));
-    else if (it->first == "WM/Mood")
-      tag.SetMood(it->second.front().toString().to8Bit(true));
-    else if (it->first == "WM/Composer")
-      AddArtistRole(tag, "Composer", GetASFStringList(it->second));
-    else if (it->first == "WM/Conductor")
-      AddArtistRole(tag, "Conductor", GetASFStringList(it->second));
+    else if (it.first == "WM/PartOfSet")
+      tag.SetDiscNumber(atoi(it.second.front().toString().toCString(true)));
+    else if (it.first == "WM/Genre")
+      SetGenre(tag, GetASFStringList(it.second));
+    else if (it.first == "WM/Mood")
+      tag.SetMood(it.second.front().toString().to8Bit(true));
+    else if (it.first == "WM/Composer")
+      AddArtistRole(tag, "Composer", GetASFStringList(it.second));
+    else if (it.first == "WM/Conductor")
+      AddArtistRole(tag, "Conductor", GetASFStringList(it.second));
     //No ASF/WMA tag from Taglib for "ensemble"
-    else if (it->first == "WM/Writer")
-      AddArtistRole(tag, "Lyricist", GetASFStringList(it->second));
-    else if (it->first == "WM/ModifiedBy")
-      AddArtistRole(tag, "Remixer", GetASFStringList(it->second));
-    else if (it->first == "WM/Engineer")
-      AddArtistRole(tag, "Engineer", GetASFStringList(it->second));
-    else if (it->first == "WM/Producer")
-      AddArtistRole(tag, "Producer", GetASFStringList(it->second));
-    else if (it->first == "WM/DJMixer")
-      AddArtistRole(tag, "DJMixer", GetASFStringList(it->second));
-    else if (it->first == "WM/Mixer")
-      AddArtistRole(tag, "mixer", GetASFStringList(it->second));
-    else if (it->first == "WM/Publisher")
-      tag.SetRecordLabel(it->second.front().toString().to8Bit(true));
-    else if (it->first == "WM/Script")
+    else if (it.first == "WM/Writer")
+      AddArtistRole(tag, "Lyricist", GetASFStringList(it.second));
+    else if (it.first == "WM/ModifiedBy")
+      AddArtistRole(tag, "Remixer", GetASFStringList(it.second));
+    else if (it.first == "WM/Engineer")
+      AddArtistRole(tag, "Engineer", GetASFStringList(it.second));
+    else if (it.first == "WM/Producer")
+      AddArtistRole(tag, "Producer", GetASFStringList(it.second));
+    else if (it.first == "WM/DJMixer")
+      AddArtistRole(tag, "DJMixer", GetASFStringList(it.second));
+    else if (it.first == "WM/Mixer")
+      AddArtistRole(tag, "mixer", GetASFStringList(it.second));
+    else if (it.first == "WM/Publisher")
+      tag.SetRecordLabel(it.second.front().toString().to8Bit(true));
+    else if (it.first == "WM/Script")
     {} // Known unsupported, suppress warnings
-    else if (it->first == "WM/Year")
-      tag.SetReleaseDate(it->second.front().toString().to8Bit(true));
-    else if (it->first == "WM/OriginalReleaseYear")
-      tag.SetOriginalDate(it->second.front().toString().to8Bit(true));
-    else if (it->first == "WM/SetSubTitle")
-      tag.SetDiscSubtitle(it->second.front().toString().to8Bit(true));
-    else if (it->first == "MusicBrainz/Artist Id")
-      tag.SetMusicBrainzArtistID(SplitMBID(GetASFStringList(it->second)));
-    else if (it->first == "MusicBrainz/Album Id")
-      tag.SetMusicBrainzAlbumID(it->second.front().toString().to8Bit(true));
-    else if (it->first == "MusicBrainz/Release Group Id")
-      tag.SetMusicBrainzReleaseGroupID(it->second.front().toString().to8Bit(true));
-    else if (it->first == "MusicBrainz/Album Artist")
-      SetAlbumArtist(tag, GetASFStringList(it->second));
-    else if (it->first == "MusicBrainz/Album Artist Id")
-      tag.SetMusicBrainzAlbumArtistID(SplitMBID(GetASFStringList(it->second)));
-    else if (it->first == "MusicBrainz/Track Id")
-      tag.SetMusicBrainzTrackID(it->second.front().toString().to8Bit(true));
-    else if (it->first == "MusicBrainz/Album Status")
-      tag.SetAlbumReleaseStatus(it->second.front().toString().toCString(true));
-    else if (it->first == "MusicBrainz/Album Type")
-      SetReleaseType(tag, GetASFStringList(it->second));
-    else if (it->first == "MusicIP/PUID")
+    else if (it.first == "WM/Year")
+      tag.SetReleaseDate(it.second.front().toString().to8Bit(true));
+    else if (it.first == "WM/OriginalReleaseYear")
+      tag.SetOriginalDate(it.second.front().toString().to8Bit(true));
+    else if (it.first == "WM/SetSubTitle")
+      tag.SetDiscSubtitle(it.second.front().toString().to8Bit(true));
+    else if (it.first == "MusicBrainz/Artist Id")
+      tag.SetMusicBrainzArtistID(SplitMBID(GetASFStringList(it.second)));
+    else if (it.first == "MusicBrainz/Album Id")
+      tag.SetMusicBrainzAlbumID(it.second.front().toString().to8Bit(true));
+    else if (it.first == "MusicBrainz/Release Group Id")
+      tag.SetMusicBrainzReleaseGroupID(it.second.front().toString().to8Bit(true));
+    else if (it.first == "MusicBrainz/Album Artist")
+      SetAlbumArtist(tag, GetASFStringList(it.second));
+    else if (it.first == "MusicBrainz/Album Artist Id")
+      tag.SetMusicBrainzAlbumArtistID(SplitMBID(GetASFStringList(it.second)));
+    else if (it.first == "MusicBrainz/Track Id")
+      tag.SetMusicBrainzTrackID(it.second.front().toString().to8Bit(true));
+    else if (it.first == "MusicBrainz/Album Status")
+      tag.SetAlbumReleaseStatus(it.second.front().toString().toCString(true));
+    else if (it.first == "MusicBrainz/Album Type")
+      SetReleaseType(tag, GetASFStringList(it.second));
+    else if (it.first == "MusicIP/PUID")
     {}
-    else if (it->first == "WM/BeatsPerMinute")
-      tag.SetBPM(atoi(it->second.front().toString().toCString(true)));
-    else if (it->first == "replaygain_track_gain" || it->first == "REPLAYGAIN_TRACK_GAIN")
-      replayGainInfo.ParseGain(ReplayGain::TRACK, it->second.front().toString().toCString(true));
-    else if (it->first == "replaygain_album_gain" || it->first == "REPLAYGAIN_ALBUM_GAIN")
-      replayGainInfo.ParseGain(ReplayGain::ALBUM, it->second.front().toString().toCString(true));
-    else if (it->first == "replaygain_track_peak" || it->first == "REPLAYGAIN_TRACK_PEAK")
-      replayGainInfo.ParsePeak(ReplayGain::TRACK, it->second.front().toString().toCString(true));
-    else if (it->first == "replaygain_album_peak" || it->first == "REPLAYGAIN_ALBUM_PEAK")
-      replayGainInfo.ParsePeak(ReplayGain::ALBUM, it->second.front().toString().toCString(true));
-    else if (it->first == "WM/Picture")
+    else if (it.first == "WM/BeatsPerMinute")
+      tag.SetBPM(atoi(it.second.front().toString().toCString(true)));
+    else if (it.first == "replaygain_track_gain" || it.first == "REPLAYGAIN_TRACK_GAIN")
+      replayGainInfo.ParseGain(ReplayGain::TRACK, it.second.front().toString().toCString(true));
+    else if (it.first == "replaygain_album_gain" || it.first == "REPLAYGAIN_ALBUM_GAIN")
+      replayGainInfo.ParseGain(ReplayGain::ALBUM, it.second.front().toString().toCString(true));
+    else if (it.first == "replaygain_track_peak" || it.first == "REPLAYGAIN_TRACK_PEAK")
+      replayGainInfo.ParsePeak(ReplayGain::TRACK, it.second.front().toString().toCString(true));
+    else if (it.first == "replaygain_album_peak" || it.first == "REPLAYGAIN_ALBUM_PEAK")
+      replayGainInfo.ParsePeak(ReplayGain::ALBUM, it.second.front().toString().toCString(true));
+    else if (it.first == "WM/Picture")
     { // picture
-      ASF::Picture pic = it->second.front().toPicture();
+      ASF::Picture pic = it.second.front().toPicture();
       tag.SetCoverArtInfo(pic.picture().size(), pic.mimeType().toCString());
       if (art)
         art->Set(reinterpret_cast<const uint8_t *>(pic.picture().data()), pic.picture().size(), pic.mimeType().toCString());
     }
     else if (CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_logLevel == LOG_LEVEL_MAX)
-      CLog::Log(LOGDEBUG, "unrecognized ASF tag name: {}", it->first.toCString(true));
+      CLog::Log(LOGDEBUG, "unrecognized ASF tag name: {}", it.first.toCString(true));
   }
   // artist may be specified in the ContentDescription block rather than using the 'Author' attribute.
   if (tag.GetArtist().empty())
@@ -500,108 +499,108 @@ bool CTagLoaderTagLib::ParseTag(APE::Tag *ape, EmbeddedArt *art, CMusicInfoTag& 
 
   ReplayGain replayGainInfo;
   const APE::ItemListMap& itemListMap = ape->itemListMap();
-  for (APE::ItemListMap::ConstIterator it = itemListMap.begin(); it != itemListMap.end(); ++it)
+  for (const std::pair<const String, APE::Item>& it : itemListMap)
   {
-    if (it->first == "ARTIST")
-      SetArtist(tag, StringListToVectorString(it->second.values()));
-    else if (it->first == "ARTISTSORT")
-      SetArtistSort(tag, StringListToVectorString(it->second.values()));
-    else if (it->first == "ARTISTS")
-      SetArtistHints(tag, StringListToVectorString(it->second.values()));
-    else if (it->first == "ALBUMARTIST" || it->first == "ALBUM ARTIST")
-      SetAlbumArtist(tag, StringListToVectorString(it->second.values()));
-    else if (it->first == "ALBUMARTISTSORT")
-      SetAlbumArtistSort(tag, StringListToVectorString(it->second.values()));
-    else if (it->first == "ALBUMARTISTS" || it->first == "ALBUM ARTISTS")
-      SetAlbumArtistHints(tag, StringListToVectorString(it->second.values()));
-    else if (it->first == "COMPOSERSORT")
-      SetComposerSort(tag, StringListToVectorString(it->second.values()));
-    else if (it->first == "ALBUM")
-      tag.SetAlbum(it->second.toString().to8Bit(true));
-    else if (it->first == "TITLE")
-      tag.SetTitle(it->second.toString().to8Bit(true));
-    else if (it->first == "TRACKNUMBER" || it->first == "TRACK")
-      tag.SetTrackNumber(it->second.toString().toInt());
-    else if (it->first == "DISCNUMBER" || it->first == "DISC")
-      tag.SetDiscNumber(it->second.toString().toInt());
-    else if (it->first == "YEAR")
-      tag.SetReleaseDate(it->second.toString().to8Bit(true));
-    else if (it->first == "DISCSUBTITLE")
-      tag.SetDiscSubtitle(it->second.toString().to8Bit(true));
-    else if (it->first == "ORIGINALYEAR")
-      tag.SetOriginalDate(it->second.toString().to8Bit(true));
-    else if (it->first == "GENRE")
-      SetGenre(tag, StringListToVectorString(it->second.values()));
-    else if (it->first == "MOOD")
-      tag.SetMood(it->second.toString().to8Bit(true));
-    else if (it->first == "COMMENT")
-      tag.SetComment(it->second.toString().to8Bit(true));
-    else if (it->first == "CUESHEET")
-      tag.SetCueSheet(it->second.toString().to8Bit(true));
-    else if (it->first == "ENCODEDBY")
+    if (it.first == "ARTIST")
+      SetArtist(tag, StringListToVectorString(it.second.values()));
+    else if (it.first == "ARTISTSORT")
+      SetArtistSort(tag, StringListToVectorString(it.second.values()));
+    else if (it.first == "ARTISTS")
+      SetArtistHints(tag, StringListToVectorString(it.second.values()));
+    else if (it.first == "ALBUMARTIST" || it.first == "ALBUM ARTIST")
+      SetAlbumArtist(tag, StringListToVectorString(it.second.values()));
+    else if (it.first == "ALBUMARTISTSORT")
+      SetAlbumArtistSort(tag, StringListToVectorString(it.second.values()));
+    else if (it.first == "ALBUMARTISTS" || it.first == "ALBUM ARTISTS")
+      SetAlbumArtistHints(tag, StringListToVectorString(it.second.values()));
+    else if (it.first == "COMPOSERSORT")
+      SetComposerSort(tag, StringListToVectorString(it.second.values()));
+    else if (it.first == "ALBUM")
+      tag.SetAlbum(it.second.toString().to8Bit(true));
+    else if (it.first == "TITLE")
+      tag.SetTitle(it.second.toString().to8Bit(true));
+    else if (it.first == "TRACKNUMBER" || it.first == "TRACK")
+      tag.SetTrackNumber(it.second.toString().toInt());
+    else if (it.first == "DISCNUMBER" || it.first == "DISC")
+      tag.SetDiscNumber(it.second.toString().toInt());
+    else if (it.first == "YEAR")
+      tag.SetReleaseDate(it.second.toString().to8Bit(true));
+    else if (it.first == "DISCSUBTITLE")
+      tag.SetDiscSubtitle(it.second.toString().to8Bit(true));
+    else if (it.first == "ORIGINALYEAR")
+      tag.SetOriginalDate(it.second.toString().to8Bit(true));
+    else if (it.first == "GENRE")
+      SetGenre(tag, StringListToVectorString(it.second.values()));
+    else if (it.first == "MOOD")
+      tag.SetMood(it.second.toString().to8Bit(true));
+    else if (it.first == "COMMENT")
+      tag.SetComment(it.second.toString().to8Bit(true));
+    else if (it.first == "CUESHEET")
+      tag.SetCueSheet(it.second.toString().to8Bit(true));
+    else if (it.first == "ENCODEDBY")
     {}
-    else if (it->first == "COMPOSER")
-      AddArtistRole(tag, "Composer", StringListToVectorString(it->second.values()));
-    else if (it->first == "CONDUCTOR")
-      AddArtistRole(tag, "Conductor", StringListToVectorString(it->second.values()));
-    else if (it->first == "BAND")
-      AddArtistRole(tag, "Band", StringListToVectorString(it->second.values()));
-    else if (it->first == "ENSEMBLE")
-      AddArtistRole(tag, "Ensemble", StringListToVectorString(it->second.values()));
-    else if (it->first == "LYRICIST")
-      AddArtistRole(tag, "Lyricist", StringListToVectorString(it->second.values()));
-    else if (it->first == "WRITER")
-      AddArtistRole(tag, "Writer", StringListToVectorString(it->second.values()));
-    else if ((it->first == "MIXARTIST") || (it->first == "REMIXER"))
-      AddArtistRole(tag, "Remixer", StringListToVectorString(it->second.values()));
-    else if (it->first == "ARRANGER")
-      AddArtistRole(tag, "Arranger", StringListToVectorString(it->second.values()));
-    else if (it->first == "ENGINEER")
-      AddArtistRole(tag, "Engineer", StringListToVectorString(it->second.values()));
-    else if (it->first == "PRODUCER")
-      AddArtistRole(tag, "Producer", StringListToVectorString(it->second.values()));
-    else if (it->first == "DJMIXER")
-      AddArtistRole(tag, "DJMixer", StringListToVectorString(it->second.values()));
-    else if (it->first == "MIXER")
-      AddArtistRole(tag, "Mixer", StringListToVectorString(it->second.values()));
-    else if (it->first == "PERFORMER")
+    else if (it.first == "COMPOSER")
+      AddArtistRole(tag, "Composer", StringListToVectorString(it.second.values()));
+    else if (it.first == "CONDUCTOR")
+      AddArtistRole(tag, "Conductor", StringListToVectorString(it.second.values()));
+    else if (it.first == "BAND")
+      AddArtistRole(tag, "Band", StringListToVectorString(it.second.values()));
+    else if (it.first == "ENSEMBLE")
+      AddArtistRole(tag, "Ensemble", StringListToVectorString(it.second.values()));
+    else if (it.first == "LYRICIST")
+      AddArtistRole(tag, "Lyricist", StringListToVectorString(it.second.values()));
+    else if (it.first == "WRITER")
+      AddArtistRole(tag, "Writer", StringListToVectorString(it.second.values()));
+    else if ((it.first == "MIXARTIST") || (it.first == "REMIXER"))
+      AddArtistRole(tag, "Remixer", StringListToVectorString(it.second.values()));
+    else if (it.first == "ARRANGER")
+      AddArtistRole(tag, "Arranger", StringListToVectorString(it.second.values()));
+    else if (it.first == "ENGINEER")
+      AddArtistRole(tag, "Engineer", StringListToVectorString(it.second.values()));
+    else if (it.first == "PRODUCER")
+      AddArtistRole(tag, "Producer", StringListToVectorString(it.second.values()));
+    else if (it.first == "DJMIXER")
+      AddArtistRole(tag, "DJMixer", StringListToVectorString(it.second.values()));
+    else if (it.first == "MIXER")
+      AddArtistRole(tag, "Mixer", StringListToVectorString(it.second.values()));
+    else if (it.first == "PERFORMER")
       // Picard uses PERFORMER tag as musician credits list formatted "name (instrument)"
-      AddArtistInstrument(tag, StringListToVectorString(it->second.values()));
-    else if (it->first == "LABEL")
-      tag.SetRecordLabel(it->second.toString().to8Bit(true));
-    else if (it->first == "COMPILATION")
-      tag.SetCompilation(it->second.toString().toInt() == 1);
-    else if (it->first == "LYRICS")
-      tag.SetLyrics(it->second.toString().to8Bit(true));
-    else if (it->first == "REPLAYGAIN_TRACK_GAIN")
-      replayGainInfo.ParseGain(ReplayGain::TRACK, it->second.toString().toCString(true));
-    else if (it->first == "REPLAYGAIN_ALBUM_GAIN")
-      replayGainInfo.ParseGain(ReplayGain::ALBUM, it->second.toString().toCString(true));
-    else if (it->first == "REPLAYGAIN_TRACK_PEAK")
-      replayGainInfo.ParsePeak(ReplayGain::TRACK, it->second.toString().toCString(true));
-    else if (it->first == "REPLAYGAIN_ALBUM_PEAK")
-      replayGainInfo.ParsePeak(ReplayGain::ALBUM, it->second.toString().toCString(true));
-    else if (it->first == "MUSICBRAINZ_ARTISTID")
-      tag.SetMusicBrainzArtistID(SplitMBID(StringListToVectorString(it->second.values())));
-    else if (it->first == "MUSICBRAINZ_ALBUMARTISTID")
-      tag.SetMusicBrainzAlbumArtistID(SplitMBID(StringListToVectorString(it->second.values())));
-    else if (it->first == "MUSICBRAINZ_ALBUMARTIST")
-      SetAlbumArtist(tag, StringListToVectorString(it->second.values()));
-    else if (it->first == "MUSICBRAINZ_ALBUMID")
-      tag.SetMusicBrainzAlbumID(it->second.toString().to8Bit(true));
-    else if (it->first == "MUSICBRAINZ_RELEASEGROUPID")
-      tag.SetMusicBrainzReleaseGroupID(it->second.toString().to8Bit(true));
-    else if (it->first == "MUSICBRAINZ_TRACKID")
-      tag.SetMusicBrainzTrackID(it->second.toString().to8Bit(true));
-    else if (it->first == "MUSICBRAINZ_ALBUMTYPE")
-      SetReleaseType(tag, StringListToVectorString(it->second.values()));
-    else if (it->first == "BPM")
-      tag.SetBPM(it->second.toString().toInt());
-    else if (it->first == "MUSICBRAINZ_ALBUMSTATUS")
-      tag.SetAlbumReleaseStatus(it->second.toString().to8Bit(true));
-    else if (it->first == "COVER ART (FRONT)")
+      AddArtistInstrument(tag, StringListToVectorString(it.second.values()));
+    else if (it.first == "LABEL")
+      tag.SetRecordLabel(it.second.toString().to8Bit(true));
+    else if (it.first == "COMPILATION")
+      tag.SetCompilation(it.second.toString().toInt() == 1);
+    else if (it.first == "LYRICS")
+      tag.SetLyrics(it.second.toString().to8Bit(true));
+    else if (it.first == "REPLAYGAIN_TRACK_GAIN")
+      replayGainInfo.ParseGain(ReplayGain::TRACK, it.second.toString().toCString(true));
+    else if (it.first == "REPLAYGAIN_ALBUM_GAIN")
+      replayGainInfo.ParseGain(ReplayGain::ALBUM, it.second.toString().toCString(true));
+    else if (it.first == "REPLAYGAIN_TRACK_PEAK")
+      replayGainInfo.ParsePeak(ReplayGain::TRACK, it.second.toString().toCString(true));
+    else if (it.first == "REPLAYGAIN_ALBUM_PEAK")
+      replayGainInfo.ParsePeak(ReplayGain::ALBUM, it.second.toString().toCString(true));
+    else if (it.first == "MUSICBRAINZ_ARTISTID")
+      tag.SetMusicBrainzArtistID(SplitMBID(StringListToVectorString(it.second.values())));
+    else if (it.first == "MUSICBRAINZ_ALBUMARTISTID")
+      tag.SetMusicBrainzAlbumArtistID(SplitMBID(StringListToVectorString(it.second.values())));
+    else if (it.first == "MUSICBRAINZ_ALBUMARTIST")
+      SetAlbumArtist(tag, StringListToVectorString(it.second.values()));
+    else if (it.first == "MUSICBRAINZ_ALBUMID")
+      tag.SetMusicBrainzAlbumID(it.second.toString().to8Bit(true));
+    else if (it.first == "MUSICBRAINZ_RELEASEGROUPID")
+      tag.SetMusicBrainzReleaseGroupID(it.second.toString().to8Bit(true));
+    else if (it.first == "MUSICBRAINZ_TRACKID")
+      tag.SetMusicBrainzTrackID(it.second.toString().to8Bit(true));
+    else if (it.first == "MUSICBRAINZ_ALBUMTYPE")
+      SetReleaseType(tag, StringListToVectorString(it.second.values()));
+    else if (it.first == "BPM")
+      tag.SetBPM(it.second.toString().toInt());
+    else if (it.first == "MUSICBRAINZ_ALBUMSTATUS")
+      tag.SetAlbumReleaseStatus(it.second.toString().to8Bit(true));
+    else if (it.first == "COVER ART (FRONT)")
     {
-      TagLib::ByteVector tdata = it->second.binaryData();
+      TagLib::ByteVector tdata = it.second.binaryData();
       // The image data follows a null byte, which can optionally be preceded by a filename
       const unsigned int offset = tdata.find('\0') + 1;
       ByteVector bv(tdata.data() + offset, tdata.size() - offset);
@@ -623,7 +622,7 @@ bool CTagLoaderTagLib::ParseTag(APE::Tag *ape, EmbeddedArt *art, CMusicInfoTag& 
       }
     }
     else if (CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_logLevel == LOG_LEVEL_MAX)
-      CLog::Log(LOGDEBUG, "unrecognized APE tag: {}", it->first.toCString(true));
+      CLog::Log(LOGDEBUG, "unrecognized APE tag: {}", it.first.toCString(true));
   }
 
   tag.SetReplayGain(replayGainInfo);
@@ -642,121 +641,121 @@ bool CTagLoaderTagLib::ParseTag(Ogg::XiphComment *xiph, EmbeddedArt *art, CMusic
   ReplayGain replayGainInfo;
 
   const Ogg::FieldListMap& fieldListMap = xiph->fieldListMap();
-  for (Ogg::FieldListMap::ConstIterator it = fieldListMap.begin(); it != fieldListMap.end(); ++it)
+  for (const std::pair<const String, StringList>& it : fieldListMap)
   {
-    if (it->first == "ARTIST")
-      SetArtist(tag, StringListToVectorString(it->second));
-    else if (it->first == "ARTISTSORT")
-      SetArtistSort(tag, StringListToVectorString(it->second));
-    else if (it->first == "ARTISTS")
-      SetArtistHints(tag, StringListToVectorString(it->second));
-    else if (it->first == "ALBUMARTIST" || it->first == "ALBUM ARTIST")
-      SetAlbumArtist(tag, StringListToVectorString(it->second));
-    else if (it->first == "ALBUMARTISTSORT" || it->first == "ALBUM ARTIST SORT")
-      SetAlbumArtistSort(tag, StringListToVectorString(it->second));
-    else if (it->first == "ALBUMARTISTS" || it->first == "ALBUM ARTISTS")
-      SetAlbumArtistHints(tag, StringListToVectorString(it->second));
-    else if (it->first == "COMPOSERSORT")
-      SetComposerSort(tag, StringListToVectorString(it->second));
-    else if (it->first == "ALBUM")
-      tag.SetAlbum(it->second.front().to8Bit(true));
-    else if (it->first == "TITLE")
-      tag.SetTitle(it->second.front().to8Bit(true));
-    else if (it->first == "TRACKNUMBER")
-      tag.SetTrackNumber(it->second.front().toInt());
-    else if (it->first == "DISCNUMBER")
-      tag.SetDiscNumber(it->second.front().toInt());
-    else if (it->first == "YEAR" || it->first == "DATE")
-      tag.AddReleaseDate(it->second.front().to8Bit(true));
-    else if (it->first == "GENRE")
-      SetGenre(tag, StringListToVectorString(it->second));
-    else if (it->first == "MOOD")
-      tag.SetMood(it->second.front().to8Bit(true));
-    else if (it->first == "COMMENT")
-      tag.SetComment(it->second.front().to8Bit(true));
-    else if (it->first == "ORIGINALYEAR" || it->first == "ORIGINALDATE")
-      tag.AddOriginalDate(it->second.front().to8Bit(true));
-    else if (it->first == "CUESHEET")
-      tag.SetCueSheet(it->second.front().to8Bit(true));
-    else if (it->first == "DISCSUBTITLE")
-      tag.SetDiscSubtitle(it->second.front().to8Bit(true));
-    else if (it->first == "ENCODEDBY")
+    if (it.first == "ARTIST")
+      SetArtist(tag, StringListToVectorString(it.second));
+    else if (it.first == "ARTISTSORT")
+      SetArtistSort(tag, StringListToVectorString(it.second));
+    else if (it.first == "ARTISTS")
+      SetArtistHints(tag, StringListToVectorString(it.second));
+    else if (it.first == "ALBUMARTIST" || it.first == "ALBUM ARTIST")
+      SetAlbumArtist(tag, StringListToVectorString(it.second));
+    else if (it.first == "ALBUMARTISTSORT" || it.first == "ALBUM ARTIST SORT")
+      SetAlbumArtistSort(tag, StringListToVectorString(it.second));
+    else if (it.first == "ALBUMARTISTS" || it.first == "ALBUM ARTISTS")
+      SetAlbumArtistHints(tag, StringListToVectorString(it.second));
+    else if (it.first == "COMPOSERSORT")
+      SetComposerSort(tag, StringListToVectorString(it.second));
+    else if (it.first == "ALBUM")
+      tag.SetAlbum(it.second.front().to8Bit(true));
+    else if (it.first == "TITLE")
+      tag.SetTitle(it.second.front().to8Bit(true));
+    else if (it.first == "TRACKNUMBER")
+      tag.SetTrackNumber(it.second.front().toInt());
+    else if (it.first == "DISCNUMBER")
+      tag.SetDiscNumber(it.second.front().toInt());
+    else if (it.first == "YEAR" || it.first == "DATE")
+      tag.AddReleaseDate(it.second.front().to8Bit(true));
+    else if (it.first == "GENRE")
+      SetGenre(tag, StringListToVectorString(it.second));
+    else if (it.first == "MOOD")
+      tag.SetMood(it.second.front().to8Bit(true));
+    else if (it.first == "COMMENT")
+      tag.SetComment(it.second.front().to8Bit(true));
+    else if (it.first == "ORIGINALYEAR" || it.first == "ORIGINALDATE")
+      tag.AddOriginalDate(it.second.front().to8Bit(true));
+    else if (it.first == "CUESHEET")
+      tag.SetCueSheet(it.second.front().to8Bit(true));
+    else if (it.first == "DISCSUBTITLE")
+      tag.SetDiscSubtitle(it.second.front().to8Bit(true));
+    else if (it.first == "ENCODEDBY")
     {} // Known but unsupported, suppress warnings
-    else if (it->first == "COMPOSER")
-      AddArtistRole(tag, "Composer", StringListToVectorString(it->second));
-    else if (it->first == "CONDUCTOR")
-      AddArtistRole(tag, "Conductor", StringListToVectorString(it->second));
-    else if (it->first == "BAND")
-      AddArtistRole(tag, "Band", StringListToVectorString(it->second));
-    else if (it->first == "ENSEMBLE")
-      AddArtistRole(tag, "Ensemble", StringListToVectorString(it->second));
-    else if (it->first == "LYRICIST")
-      AddArtistRole(tag, "Lyricist", StringListToVectorString(it->second));
-    else if (it->first == "WRITER")
-      AddArtistRole(tag, "Writer", StringListToVectorString(it->second));
-    else if ((it->first == "MIXARTIST") || (it->first == "REMIXER"))
-      AddArtistRole(tag, "Remixer", StringListToVectorString(it->second));
-    else if (it->first == "ARRANGER")
-      AddArtistRole(tag, "Arranger", StringListToVectorString(it->second));
-    else if (it->first == "ENGINEER")
-      AddArtistRole(tag, "Engineer", StringListToVectorString(it->second));
-    else if (it->first == "PRODUCER")
-      AddArtistRole(tag, "Producer", StringListToVectorString(it->second));
-    else if (it->first == "DJMIXER")
-      AddArtistRole(tag, "DJMixer", StringListToVectorString(it->second));
-    else if (it->first == "MIXER")
-      AddArtistRole(tag, "Mixer", StringListToVectorString(it->second));
-    else if (it->first == "PERFORMER")
+    else if (it.first == "COMPOSER")
+      AddArtistRole(tag, "Composer", StringListToVectorString(it.second));
+    else if (it.first == "CONDUCTOR")
+      AddArtistRole(tag, "Conductor", StringListToVectorString(it.second));
+    else if (it.first == "BAND")
+      AddArtistRole(tag, "Band", StringListToVectorString(it.second));
+    else if (it.first == "ENSEMBLE")
+      AddArtistRole(tag, "Ensemble", StringListToVectorString(it.second));
+    else if (it.first == "LYRICIST")
+      AddArtistRole(tag, "Lyricist", StringListToVectorString(it.second));
+    else if (it.first == "WRITER")
+      AddArtistRole(tag, "Writer", StringListToVectorString(it.second));
+    else if ((it.first == "MIXARTIST") || (it.first == "REMIXER"))
+      AddArtistRole(tag, "Remixer", StringListToVectorString(it.second));
+    else if (it.first == "ARRANGER")
+      AddArtistRole(tag, "Arranger", StringListToVectorString(it.second));
+    else if (it.first == "ENGINEER")
+      AddArtistRole(tag, "Engineer", StringListToVectorString(it.second));
+    else if (it.first == "PRODUCER")
+      AddArtistRole(tag, "Producer", StringListToVectorString(it.second));
+    else if (it.first == "DJMIXER")
+      AddArtistRole(tag, "DJMixer", StringListToVectorString(it.second));
+    else if (it.first == "MIXER")
+      AddArtistRole(tag, "Mixer", StringListToVectorString(it.second));
+    else if (it.first == "PERFORMER")
       // Picard uses PERFORMER tag as musician credits list formatted "name (instrument)"
-      AddArtistInstrument(tag, StringListToVectorString(it->second));
-    else if (it->first == "LABEL")
-      tag.SetRecordLabel(it->second.front().to8Bit(true));
-    else if (it->first == "COMPILATION")
-      tag.SetCompilation(it->second.front().toInt() == 1);
-    else if (it->first == "LYRICS")
-      tag.SetLyrics(it->second.front().to8Bit(true));
-    else if (it->first == "REPLAYGAIN_TRACK_GAIN")
-      replayGainInfo.ParseGain(ReplayGain::TRACK, it->second.front().toCString(true));
-    else if (it->first == "REPLAYGAIN_ALBUM_GAIN")
-      replayGainInfo.ParseGain(ReplayGain::ALBUM, it->second.front().toCString(true));
-    else if (it->first == "REPLAYGAIN_TRACK_PEAK")
-      replayGainInfo.ParsePeak(ReplayGain::TRACK, it->second.front().toCString(true));
-    else if (it->first == "REPLAYGAIN_ALBUM_PEAK")
-      replayGainInfo.ParsePeak(ReplayGain::ALBUM, it->second.front().toCString(true));
-    else if (it->first == "MUSICBRAINZ_ARTISTID")
-      tag.SetMusicBrainzArtistID(SplitMBID(StringListToVectorString(it->second)));
-    else if (it->first == "MUSICBRAINZ_ALBUMARTISTID")
-      tag.SetMusicBrainzAlbumArtistID(SplitMBID(StringListToVectorString(it->second)));
-    else if (it->first == "MUSICBRAINZ_ALBUMARTIST")
-      SetAlbumArtist(tag, StringListToVectorString(it->second));
-    else if (it->first == "MUSICBRAINZ_ALBUMID")
-      tag.SetMusicBrainzAlbumID(it->second.front().to8Bit(true));
-    else if (it->first == "MUSICBRAINZ_RELEASEGROUPID")
-      tag.SetMusicBrainzReleaseGroupID(it->second.front().to8Bit(true));
-    else if (it->first == "MUSICBRAINZ_TRACKID")
-      tag.SetMusicBrainzTrackID(it->second.front().to8Bit(true));
-    else if (it->first == "RELEASETYPE")
-      SetReleaseType(tag, StringListToVectorString(it->second));
-    else if (it->first == "BPM")
-      tag.SetBPM(strtol(it->second.front().toCString(true), nullptr, 10));
-    else if (it->first == "RELEASESTATUS")
-      tag.SetAlbumReleaseStatus(it->second.front().toCString(true));
-    else if (it->first == "RATING")
+      AddArtistInstrument(tag, StringListToVectorString(it.second));
+    else if (it.first == "LABEL")
+      tag.SetRecordLabel(it.second.front().to8Bit(true));
+    else if (it.first == "COMPILATION")
+      tag.SetCompilation(it.second.front().toInt() == 1);
+    else if (it.first == "LYRICS")
+      tag.SetLyrics(it.second.front().to8Bit(true));
+    else if (it.first == "REPLAYGAIN_TRACK_GAIN")
+      replayGainInfo.ParseGain(ReplayGain::TRACK, it.second.front().toCString(true));
+    else if (it.first == "REPLAYGAIN_ALBUM_GAIN")
+      replayGainInfo.ParseGain(ReplayGain::ALBUM, it.second.front().toCString(true));
+    else if (it.first == "REPLAYGAIN_TRACK_PEAK")
+      replayGainInfo.ParsePeak(ReplayGain::TRACK, it.second.front().toCString(true));
+    else if (it.first == "REPLAYGAIN_ALBUM_PEAK")
+      replayGainInfo.ParsePeak(ReplayGain::ALBUM, it.second.front().toCString(true));
+    else if (it.first == "MUSICBRAINZ_ARTISTID")
+      tag.SetMusicBrainzArtistID(SplitMBID(StringListToVectorString(it.second)));
+    else if (it.first == "MUSICBRAINZ_ALBUMARTISTID")
+      tag.SetMusicBrainzAlbumArtistID(SplitMBID(StringListToVectorString(it.second)));
+    else if (it.first == "MUSICBRAINZ_ALBUMARTIST")
+      SetAlbumArtist(tag, StringListToVectorString(it.second));
+    else if (it.first == "MUSICBRAINZ_ALBUMID")
+      tag.SetMusicBrainzAlbumID(it.second.front().to8Bit(true));
+    else if (it.first == "MUSICBRAINZ_RELEASEGROUPID")
+      tag.SetMusicBrainzReleaseGroupID(it.second.front().to8Bit(true));
+    else if (it.first == "MUSICBRAINZ_TRACKID")
+      tag.SetMusicBrainzTrackID(it.second.front().to8Bit(true));
+    else if (it.first == "RELEASETYPE")
+      SetReleaseType(tag, StringListToVectorString(it.second));
+    else if (it.first == "BPM")
+      tag.SetBPM(strtol(it.second.front().toCString(true), nullptr, 10));
+    else if (it.first == "RELEASESTATUS")
+      tag.SetAlbumReleaseStatus(it.second.front().toCString(true));
+    else if (it.first == "RATING")
     {
       // Vorbis ratings are a mess because the standard forgot to mention anything about them.
       // If you want to see how emotive the issue is and the varying standards, check here:
       // http://forums.winamp.com/showthread.php?t=324512
       // The most common standard in that thread seems to be a 0-100 scale for 1-5 stars.
       // So, that's what we'll support for now.
-      int iUserrating = it->second.front().toInt();
+      int iUserrating = it.second.front().toInt();
       if (iUserrating > 0 && iUserrating <= 100)
         tag.SetUserrating((iUserrating / 10));
     }
 #if TAGLIB_MAJOR_VERSION <= 1 && TAGLIB_MINOR_VERSION < 11
-    else if (it->first == "METADATA_BLOCK_PICTURE")
+    else if (it.first == "METADATA_BLOCK_PICTURE")
     {
-      const char* b64 = it->second.front().toCString();
-      std::string decoded_block = Base64::Decode(b64, it->second.front().size());
+      const char* b64 = it.second.front().toCString();
+      std::string decoded_block = Base64::Decode(b64, it.second.front().size());
       ByteVector bv(decoded_block.data(), decoded_block.size());
       TagLib::FLAC::Picture* pictureFrame = new TagLib::FLAC::Picture(bv);
 
@@ -765,23 +764,23 @@ bool CTagLoaderTagLib::ParseTag(Ogg::XiphComment *xiph, EmbeddedArt *art, CMusic
 
       delete pictureFrame;
     }
-    else if (it->first == "COVERART")
+    else if (it.first == "COVERART")
     {
-      const char* b64 = it->second.front().toCString();
-      std::string decoded_block = Base64::Decode(b64, it->second.front().size());
+      const char* b64 = it.second.front().toCString();
+      std::string decoded_block = Base64::Decode(b64, it.second.front().size());
       ByteVector bv(decoded_block.data(), decoded_block.size());
       pictures[2].setData(bv);
       // Assume jpeg
       if (pictures[2].mimeType().isEmpty())
         pictures[2].setMimeType("image/jpeg");
     }
-    else if (it->first == "COVERARTMIME")
+    else if (it.first == "COVERARTMIME")
     {
-      pictures[2].setMimeType(it->second.front());
+      pictures[2].setMimeType(it.second.front());
     }
 #endif
     else if (CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_logLevel == LOG_LEVEL_MAX)
-      CLog::Log(LOGDEBUG, "unrecognized XipComment name: {}", it->first.toCString(true));
+      CLog::Log(LOGDEBUG, "unrecognized XipComment name: {}", it.first.toCString(true));
   }
 
 #if TAGLIB_MAJOR_VERSION <= 1 && TAGLIB_MINOR_VERSION < 11
@@ -842,98 +841,99 @@ bool CTagLoaderTagLib::ParseTag(MP4::Tag *mp4, EmbeddedArt *art, CMusicInfoTag& 
 
   ReplayGain replayGainInfo;
   const MP4::ItemMap& itemMap = mp4->itemMap();
-  for (auto it = itemMap.begin(); it != itemMap.end(); ++it)
+  for (const std::pair<const String, MP4::Item>& it : itemMap)
   {
-    if (it->first == "\251nam")
-      tag.SetTitle(it->second.toStringList().front().to8Bit(true));
-    else if (it->first == "\251ART")
-      SetArtist(tag, StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "soar")
-      SetArtistSort(tag, StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "----:com.apple.iTunes:ARTISTS")
-      SetArtistHints(tag, StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "\251alb")
-      tag.SetAlbum(it->second.toStringList().front().to8Bit(true));
-    else if (it->first == "aART")
-      SetAlbumArtist(tag, StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "soaa")
-      SetAlbumArtistSort(tag, StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "----:com.apple.iTunes:albumartists" ||
-             it->first == "----:com.apple.iTunes:ALBUMARTISTS")
-      SetAlbumArtistHints(tag, StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "soco")
-      SetComposerSort(tag, StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "\251gen")
-      SetGenre(tag, StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "----:com.apple.iTunes:MOOD")
-      tag.SetMood(it->second.toStringList().front().to8Bit(true));
-    else if (it->first == "\251cmt")
-      tag.SetComment(it->second.toStringList().front().to8Bit(true));
-    else if (it->first == "\251wrt")
-      AddArtistRole(tag, "Composer", StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "----:com.apple.iTunes:CONDUCTOR")
-      AddArtistRole(tag, "Conductor", StringListToVectorString(it->second.toStringList()));
+    if (it.first == "\251nam")
+      tag.SetTitle(it.second.toStringList().front().to8Bit(true));
+    else if (it.first == "\251ART")
+      SetArtist(tag, StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "soar")
+      SetArtistSort(tag, StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "----:com.apple.iTunes:ARTISTS")
+      SetArtistHints(tag, StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "\251alb")
+      tag.SetAlbum(it.second.toStringList().front().to8Bit(true));
+    else if (it.first == "aART")
+      SetAlbumArtist(tag, StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "soaa")
+      SetAlbumArtistSort(tag, StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "----:com.apple.iTunes:albumartists" ||
+             it.first == "----:com.apple.iTunes:ALBUMARTISTS")
+      SetAlbumArtistHints(tag, StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "soco")
+      SetComposerSort(tag, StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "\251gen")
+      SetGenre(tag, StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "----:com.apple.iTunes:MOOD")
+      tag.SetMood(it.second.toStringList().front().to8Bit(true));
+    else if (it.first == "\251cmt")
+      tag.SetComment(it.second.toStringList().front().to8Bit(true));
+    else if (it.first == "\251wrt")
+      AddArtistRole(tag, "Composer", StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "----:com.apple.iTunes:CONDUCTOR")
+      AddArtistRole(tag, "Conductor", StringListToVectorString(it.second.toStringList()));
     //No MP4 standard tag for "ensemble"
-    else if (it->first == "----:com.apple.iTunes:LYRICIST")
-      AddArtistRole(tag, "Lyricist", StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "----:com.apple.iTunes:REMIXER")
-      AddArtistRole(tag, "Remixer", StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "----:com.apple.iTunes:ENGINEER")
-      AddArtistRole(tag, "Engineer", StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "----:com.apple.iTunes:PRODUCER")
-      AddArtistRole(tag, "Producer", StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "----:com.apple.iTunes:DJMIXER")
-      AddArtistRole(tag, "DJMixer", StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "----:com.apple.iTunes:MIXER")
-      AddArtistRole(tag, "Mixer", StringListToVectorString(it->second.toStringList()));
+    else if (it.first == "----:com.apple.iTunes:LYRICIST")
+      AddArtistRole(tag, "Lyricist", StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "----:com.apple.iTunes:REMIXER")
+      AddArtistRole(tag, "Remixer", StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "----:com.apple.iTunes:ENGINEER")
+      AddArtistRole(tag, "Engineer", StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "----:com.apple.iTunes:PRODUCER")
+      AddArtistRole(tag, "Producer", StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "----:com.apple.iTunes:DJMIXER")
+      AddArtistRole(tag, "DJMixer", StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "----:com.apple.iTunes:MIXER")
+      AddArtistRole(tag, "Mixer", StringListToVectorString(it.second.toStringList()));
     //No MP4 standard tag for musician credits
-    else if (it->first == "----:com.apple.iTunes:LABEL")
-      tag.SetRecordLabel(it->second.toStringList().front().to8Bit(true));
-    else if (it->first == "----:com.apple.iTunes:DISCSUBTITLE")
-      tag.SetDiscSubtitle(it->second.toStringList().front().to8Bit(true));
-    else if (it->first == "cpil")
-      tag.SetCompilation(it->second.toBool());
-    else if (it->first == "trkn")
-      tag.SetTrackNumber(it->second.toIntPair().first);
-    else if (it->first == "disk")
-      tag.SetDiscNumber(it->second.toIntPair().first);
-    else if (it->first == "\251day")
-      tag.SetReleaseDate(it->second.toStringList().front().to8Bit(true));
-    else if (it->first == "----:com.apple.iTunes:originaldate")
-      tag.SetOriginalDate(it->second.toStringList().front().to8Bit(true));
-    else if (it->first == "----:com.apple.iTunes:replaygain_track_gain" ||
-             it->first == "----:com.apple.iTunes:REPLAYGAIN_TRACK_GAIN")
-      replayGainInfo.ParseGain(ReplayGain::TRACK, it->second.toStringList().front().toCString());
-    else if (it->first == "----:com.apple.iTunes:replaygain_album_gain" ||
-             it->first == "----:com.apple.iTunes:REPLAYGAIN_ALBUM_GAIN")
-      replayGainInfo.ParseGain(ReplayGain::ALBUM, it->second.toStringList().front().toCString());
-    else if (it->first == "----:com.apple.iTunes:replaygain_track_peak" ||
-             it->first == "----:com.apple.iTunes:REPLAYGAIN_TRACK_PEAK")
-      replayGainInfo.ParsePeak(ReplayGain::TRACK, it->second.toStringList().front().toCString());
-    else if (it->first == "----:com.apple.iTunes:replaygain_album_peak" ||
-             it->first == "----:com.apple.iTunes:REPLAYGAIN_ALBUM_PEAK")
-      replayGainInfo.ParsePeak(ReplayGain::ALBUM, it->second.toStringList().front().toCString());
-    else if (it->first == "----:com.apple.iTunes:MusicBrainz Artist Id")
-      tag.SetMusicBrainzArtistID(SplitMBID(StringListToVectorString(it->second.toStringList())));
-    else if (it->first == "----:com.apple.iTunes:MusicBrainz Album Artist Id")
-      tag.SetMusicBrainzAlbumArtistID(SplitMBID(StringListToVectorString(it->second.toStringList())));
-    else if (it->first == "----:com.apple.iTunes:MusicBrainz Album Artist")
-      SetAlbumArtist(tag, StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "----:com.apple.iTunes:MusicBrainz Album Id")
-      tag.SetMusicBrainzAlbumID(it->second.toStringList().front().to8Bit(true));
-    else if (it->first == "----:com.apple.iTunes:MusicBrainz Release Group Id")
-      tag.SetMusicBrainzReleaseGroupID(it->second.toStringList().front().to8Bit(true));
-    else if (it->first == "----:com.apple.iTunes:MusicBrainz Track Id")
-      tag.SetMusicBrainzTrackID(it->second.toStringList().front().to8Bit(true));
-    else if (it->first == "----:com.apple.iTunes:MusicBrainz Album Type")
-      SetReleaseType(tag, StringListToVectorString(it->second.toStringList()));
-    else if (it->first == "----:com.apple.iTunes:MusicBrainz Album Status")
-      tag.SetAlbumReleaseStatus(it->second.toStringList().front().to8Bit(true));
-    else if (it->first == "tmpo")
-      tag.SetBPM(it->second.toIntPair().first);
-    else if (it->first == "covr")
+    else if (it.first == "----:com.apple.iTunes:LABEL")
+      tag.SetRecordLabel(it.second.toStringList().front().to8Bit(true));
+    else if (it.first == "----:com.apple.iTunes:DISCSUBTITLE")
+      tag.SetDiscSubtitle(it.second.toStringList().front().to8Bit(true));
+    else if (it.first == "cpil")
+      tag.SetCompilation(it.second.toBool());
+    else if (it.first == "trkn")
+      tag.SetTrackNumber(it.second.toIntPair().first);
+    else if (it.first == "disk")
+      tag.SetDiscNumber(it.second.toIntPair().first);
+    else if (it.first == "\251day")
+      tag.SetReleaseDate(it.second.toStringList().front().to8Bit(true));
+    else if (it.first == "----:com.apple.iTunes:originaldate")
+      tag.SetOriginalDate(it.second.toStringList().front().to8Bit(true));
+    else if (it.first == "----:com.apple.iTunes:replaygain_track_gain" ||
+             it.first == "----:com.apple.iTunes:REPLAYGAIN_TRACK_GAIN")
+      replayGainInfo.ParseGain(ReplayGain::TRACK, it.second.toStringList().front().toCString());
+    else if (it.first == "----:com.apple.iTunes:replaygain_album_gain" ||
+             it.first == "----:com.apple.iTunes:REPLAYGAIN_ALBUM_GAIN")
+      replayGainInfo.ParseGain(ReplayGain::ALBUM, it.second.toStringList().front().toCString());
+    else if (it.first == "----:com.apple.iTunes:replaygain_track_peak" ||
+             it.first == "----:com.apple.iTunes:REPLAYGAIN_TRACK_PEAK")
+      replayGainInfo.ParsePeak(ReplayGain::TRACK, it.second.toStringList().front().toCString());
+    else if (it.first == "----:com.apple.iTunes:replaygain_album_peak" ||
+             it.first == "----:com.apple.iTunes:REPLAYGAIN_ALBUM_PEAK")
+      replayGainInfo.ParsePeak(ReplayGain::ALBUM, it.second.toStringList().front().toCString());
+    else if (it.first == "----:com.apple.iTunes:MusicBrainz Artist Id")
+      tag.SetMusicBrainzArtistID(SplitMBID(StringListToVectorString(it.second.toStringList())));
+    else if (it.first == "----:com.apple.iTunes:MusicBrainz Album Artist Id")
+      tag.SetMusicBrainzAlbumArtistID(
+          SplitMBID(StringListToVectorString(it.second.toStringList())));
+    else if (it.first == "----:com.apple.iTunes:MusicBrainz Album Artist")
+      SetAlbumArtist(tag, StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "----:com.apple.iTunes:MusicBrainz Album Id")
+      tag.SetMusicBrainzAlbumID(it.second.toStringList().front().to8Bit(true));
+    else if (it.first == "----:com.apple.iTunes:MusicBrainz Release Group Id")
+      tag.SetMusicBrainzReleaseGroupID(it.second.toStringList().front().to8Bit(true));
+    else if (it.first == "----:com.apple.iTunes:MusicBrainz Track Id")
+      tag.SetMusicBrainzTrackID(it.second.toStringList().front().to8Bit(true));
+    else if (it.first == "----:com.apple.iTunes:MusicBrainz Album Type")
+      SetReleaseType(tag, StringListToVectorString(it.second.toStringList()));
+    else if (it.first == "----:com.apple.iTunes:MusicBrainz Album Status")
+      tag.SetAlbumReleaseStatus(it.second.toStringList().front().to8Bit(true));
+    else if (it.first == "tmpo")
+      tag.SetBPM(it.second.toIntPair().first);
+    else if (it.first == "covr")
     {
-      MP4::CoverArtList coverArtList = it->second.toCoverArtList();
+      MP4::CoverArtList coverArtList = it.second.toCoverArtList();
       for (MP4::CoverArtList::ConstIterator pt = coverArtList.begin(); pt != coverArtList.end(); ++pt)
       {
         std::string mime;
@@ -1166,17 +1166,17 @@ void CTagLoaderTagLib::AddArtistInstrument(CMusicInfoTag &tag, const std::vector
   // Vector of possible separators
   const std::vector<std::string> separators{";", "/", ",", "&", " and "};
 
-  for (size_t i = 0; i < values.size(); ++i)
+  for (const std::string& value : values)
   {
     std::vector<std::string> roles;
-    std::string strArtist = values[i];
-    size_t firstLim = values[i].find_first_of('(');
-    size_t lastLim = values[i].find_last_of(')');
+    std::string strArtist = value;
+    size_t firstLim = value.find_first_of('(');
+    size_t lastLim = value.find_last_of(')');
     if (lastLim != std::string::npos && firstLim != std::string::npos && firstLim < lastLim - 1)
     {
       //Pair of brackets with something between them
       strArtist.erase(firstLim, lastLim - firstLim + 1);
-      std::string strRole = values[i].substr(firstLim + 1, lastLim - firstLim - 1);
+      std::string strRole = value.substr(firstLim + 1, lastLim - firstLim - 1);
       //Split into individual roles
       roles = StringUtils::Split(strRole, separators);
     }

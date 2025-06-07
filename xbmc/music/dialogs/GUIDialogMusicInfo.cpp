@@ -514,9 +514,8 @@ void CGUIDialogMusicInfo::SetSongs(const VECSONGS &songs) const
 {
   m_albumSongs->Clear();
   CMusicThumbLoader loader;
-  for (unsigned int i = 0; i < songs.size(); i++)
+  for (const CSong& song : songs)
   {
-    const CSong& song = songs[i];
     CFileItemPtr item(new CFileItem(song));
     // Load the song art and related artist(s) (that may be different from album artist) art
     loader.LoadItem(item.get());

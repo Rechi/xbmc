@@ -370,11 +370,11 @@ void CGUIWindowMusicBase::RetrieveMusicInfo()
       itemsForRemove.push_back(pItem->GetPath());
     }
   }
-  for (size_t i = 0; i < itemsForRemove.size(); ++i)
+  for (const std::string& itemForRemove : itemsForRemove)
   {
     for (int j = 0; j < m_vecItems->Size(); ++j)
     {
-      if ((*m_vecItems)[j]->GetPath() == itemsForRemove[i])
+      if ((*m_vecItems)[j]->GetPath() == itemForRemove)
       {
         m_vecItems->Remove(j);
         break;

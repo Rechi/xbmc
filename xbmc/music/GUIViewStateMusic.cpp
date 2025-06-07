@@ -574,13 +574,6 @@ void CGUIViewStateWindowMusicNav::AddOnlineShares()
 {
   if (!CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_bVirtualShares)
     return;
-
-  std::vector<CMediaSource>* musicSources = CMediaSourceSettings::GetInstance().GetSources("music");
-
-  for (int i = 0; i < (int)musicSources->size(); ++i)
-  {
-    CMediaSource share = musicSources->at(i);
-  }
 }
 
 std::vector<CMediaSource>& CGUIViewStateWindowMusicNav::GetSources()
