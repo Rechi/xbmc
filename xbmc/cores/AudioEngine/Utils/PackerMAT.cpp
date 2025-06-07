@@ -78,7 +78,8 @@ bool CPackerMAT::PackTrueHD(const uint8_t* data, int size)
 
   // compute final padded size for the previous frame, if any
   if (m_state.prevFrametimeValid)
-    spaceSize = uint16_t(frameTime - m_state.prevFrametime) * (64 >> (m_state.ratebits & 7));
+    spaceSize =
+        static_cast<uint16_t>(frameTime - m_state.prevFrametime) * (64 >> (m_state.ratebits & 7));
 
   // compute padding (ie. difference to the size of the previous frame)
   assert(!m_state.prevFrametimeValid || spaceSize >= m_state.prevMatFramesize);

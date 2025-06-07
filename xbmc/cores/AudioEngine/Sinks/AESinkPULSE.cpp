@@ -611,7 +611,7 @@ static bool SetupContext(const char* host,
 
   pa_context_set_state_callback(*context, ContextStateCallback, *mainloop);
 
-  if (pa_context_connect(*context, host, (pa_context_flags_t)0, nullptr) < 0)
+  if (pa_context_connect(*context, host, static_cast<pa_context_flags_t>(0), nullptr) < 0)
   {
     CLog::Log(LOGERROR, "PulseAudio: Failed to connect context");
     return false;
@@ -713,7 +713,8 @@ bool CDriverMonitor::Start(bool allowPipeWireCompatServer)
   std::unique_lock lock(m_sec);
   // Register Callback for Sink changes
   pa_context_set_subscribe_callback(m_pContext, SinkCallback, this);
-  const pa_subscription_mask_t mask = pa_subscription_mask_t(PA_SUBSCRIPTION_MASK_SINK);
+  const pa_subscription_mask_t mask =
+      static_cast<pa_subscription_mask_t>(PA_SUBSCRIPTION_MASK_SINK);
   pa_operation* op = pa_context_subscribe(m_pContext, mask, nullptr, this);
   if (op != nullptr)
     pa_operation_unref(op);
@@ -964,16 +965,17 @@ bool CAESinkPULSE::Initialize(AEAudioFormat &format, std::string &device)
 
   pa_buffer_attr buffer_attr;
   buffer_attr.fragsize = latency;
-  buffer_attr.maxlength = (uint32_t) -1;
+  buffer_attr.maxlength = static_cast<uint32_t>(-1);
   buffer_attr.minreq = process_time;
-  buffer_attr.prebuf = (uint32_t) -1;
+  buffer_attr.prebuf = static_cast<uint32_t>(-1);
   buffer_attr.tlength = latency;
   int flags = (PA_STREAM_INTERPOLATE_TIMING | PA_STREAM_AUTO_TIMING_UPDATE | PA_STREAM_ADJUST_LATENCY);
 
   if (m_passthrough)
     flags |= PA_STREAM_PASSTHROUGH;
 
-  if (pa_stream_connect_playback(m_Stream, isDefaultDevice ? NULL : device.c_str(), &buffer_attr, (pa_stream_flags) flags, NULL, NULL) < 0)
+  if (pa_stream_connect_playback(m_Stream, isDefaultDevice ? NULL : device.c_str(), &buffer_attr,
+                                 static_cast<pa_stream_flags>(flags), NULL, NULL) < 0)
   {
     CLog::Log(LOGERROR, "PulseAudio: Failed to connect stream to output");
     pa_threaded_mainloop_unlock(m_MainLoop);
@@ -1021,7 +1023,8 @@ bool CAESinkPULSE::Initialize(AEAudioFormat &format, std::string &device)
     std::unique_lock lock(m_sec);
     // Register Callback for Sink changes
     pa_context_set_subscribe_callback(m_Context, SinkChangedCallback, this);
-    const pa_subscription_mask_t mask = pa_subscription_mask_t(PA_SUBSCRIPTION_MASK_SINK_INPUT);
+    const pa_subscription_mask_t mask =
+        static_cast<pa_subscription_mask_t>(PA_SUBSCRIPTION_MASK_SINK_INPUT);
     pa_operation *op = pa_context_subscribe(m_Context, mask, NULL, this);
     if (op != NULL)
       pa_operation_unref(op);

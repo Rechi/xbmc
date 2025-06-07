@@ -529,7 +529,7 @@ OSStatus CAAudioUnitSink::renderCallback(void* inRefCon,
                                          UInt32 inNumberFrames,
                                          AudioBufferList* ioData)
 {
-  CAAudioUnitSink* sink = (CAAudioUnitSink*)inRefCon;
+  CAAudioUnitSink* sink = static_cast<CAAudioUnitSink*>(inRefCon);
 
   sink->m_render_section.enter();
   sink->m_started = true;
@@ -739,7 +739,7 @@ bool CAESinkDARWINTVOS::Initialize(AEAudioFormat& format, std::string& device)
     audioFormat.mChannelsPerFrame = format.m_channelLayout.Count();
     // clamp number of channels to what tvOS reports
     if (maxChannels == 2)
-      audioFormat.mChannelsPerFrame = (UInt32)maxChannels;
+      audioFormat.mChannelsPerFrame = static_cast<UInt32>(maxChannels);
 
     audioFormat.mBitsPerChannel = CAEUtil::DataFormatToBits(format.m_dataFormat);
     audioFormat.mBytesPerFrame = audioFormat.mChannelsPerFrame * (audioFormat.mBitsPerChannel >> 3);
