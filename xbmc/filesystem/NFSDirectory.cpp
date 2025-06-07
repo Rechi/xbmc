@@ -279,8 +279,8 @@ bool CNFSDirectory::GetDirectory(const CURL& url, CFileItemList &items)
       long long ll = lTimeDate & 0xffffffff;
       ll *= 10000000ll;
       ll += 116444736000000000ll;
-      fileTime.lowDateTime = (DWORD)(ll & 0xffffffff);
-      fileTime.highDateTime = (DWORD)(ll >> 32);
+      fileTime.lowDateTime = static_cast<DWORD>(ll & 0xffffffff);
+      fileTime.highDateTime = static_cast<DWORD>(ll >> 32);
       KODI::TIME::FileTimeToLocalFileTime(&fileTime, &localTime);
 
       CFileItemPtr pItem(new CFileItem(tmpDirent.name));

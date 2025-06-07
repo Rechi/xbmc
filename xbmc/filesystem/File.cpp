@@ -138,7 +138,7 @@ bool CFile::Copy(const CURL& url2, const CURL& dest, XFILE::IFileCallback* pCall
       else if (iRead < 0)
       {
         CLog::Log(LOGERROR, "{} - Failed read from file {}", __FUNCTION__, url.GetRedacted());
-        llFileSize = (uint64_t)-1;
+        llFileSize = static_cast<uint64_t>(-1);
         break;
       }
 
@@ -155,7 +155,7 @@ bool CFile::Copy(const CURL& url2, const CURL& dest, XFILE::IFileCallback* pCall
       if (iWrite != iRead)
       {
         CLog::Log(LOGERROR, "{} - Failed write to file {}", __FUNCTION__, dest.GetRedacted());
-        llFileSize = (uint64_t)-1;
+        llFileSize = static_cast<uint64_t>(-1);
         break;
       }
 
@@ -176,7 +176,7 @@ bool CFile::Copy(const CURL& url2, const CURL& dest, XFILE::IFileCallback* pCall
         if(!pCallback->OnFileCallback(pContext, ipercent, averageSpeed))
         {
           CLog::Log(LOGERROR, "{} - User aborted copy", __FUNCTION__);
-          llFileSize = (uint64_t)-1;
+          llFileSize = static_cast<uint64_t>(-1);
           break;
         }
       }
@@ -615,16 +615,17 @@ ssize_t CFile::Read(void *lpBuf, size_t uiBufSize)
   {
     if(m_flags & READ_TRUNCATED)
     {
-      const ssize_t nBytes = m_pBuffer->sgetn(
-        (char *)lpBuf, std::min<std::streamsize>((std::streamsize)uiBufSize,
-                                                  m_pBuffer->in_avail()));
+      const ssize_t nBytes =
+          m_pBuffer->sgetn(static_cast<char*>(lpBuf),
+                           std::min<std::streamsize>(static_cast<std::streamsize>(uiBufSize),
+                                                     m_pBuffer->in_avail()));
       if (m_bitStreamStats && nBytes>0)
         m_bitStreamStats->AddSampleBytes(nBytes);
       return nBytes;
     }
     else
     {
-      const ssize_t nBytes = m_pBuffer->sgetn((char*)lpBuf, uiBufSize);
+      const ssize_t nBytes = m_pBuffer->sgetn(static_cast<char*>(lpBuf), uiBufSize);
       if (m_bitStreamStats && nBytes>0)
         m_bitStreamStats->AddSampleBytes(nBytes);
       return nBytes;
@@ -645,7 +646,7 @@ ssize_t CFile::Read(void *lpBuf, size_t uiBufSize)
       ssize_t done = 0;
       while((uiBufSize-done) > 0)
       {
-        const ssize_t curr = m_pFile->Read((char*)lpBuf+done, uiBufSize-done);
+        const ssize_t curr = m_pFile->Read(static_cast<char*>(lpBuf) + done, uiBufSize - done);
         if (curr <= 0)
         {
           if (curr < 0 && done == 0)
@@ -1063,7 +1064,7 @@ try
   than max_chunk_size.
   */
   int64_t filesize = GetLength();
-  if (filesize > (int64_t)max_file_size)
+  if (filesize > static_cast<int64_t>(max_file_size))
     return 0; /* file is too large for this function */
 
   size_t chunksize = (filesize > 0) ? static_cast<size_t>(filesize + 1)
@@ -1159,7 +1160,8 @@ CFileStreamBuffer::int_type CFileStreamBuffer::underflow()
   size_t backsize = 0;
   if(m_backsize)
   {
-    backsize = (size_t)std::min<ptrdiff_t>((ptrdiff_t)m_backsize, egptr()-eback());
+    backsize = static_cast<size_t>(
+        std::min<ptrdiff_t>(static_cast<ptrdiff_t>(m_backsize), egptr() - eback()));
     memmove(m_buffer, egptr()-backsize, backsize);
   }
 

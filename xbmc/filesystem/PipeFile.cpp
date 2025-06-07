@@ -77,7 +77,7 @@ ssize_t CPipeFile::Read(void* lpBuf, size_t uiBufSize)
   if (uiBufSize > SSIZE_MAX)
     uiBufSize = SSIZE_MAX;
 
-  return m_pipe->Read((char *)lpBuf,(int)uiBufSize);
+  return m_pipe->Read(static_cast<char*>(lpBuf), static_cast<int>(uiBufSize));
 }
 
 ssize_t CPipeFile::Write(const void* lpBuf, size_t uiBufSize)
@@ -86,7 +86,7 @@ ssize_t CPipeFile::Write(const void* lpBuf, size_t uiBufSize)
     return -1;
 
   // m_pipe->Write return bool. either all was written or not.
-  return m_pipe->Write((const char *)lpBuf,uiBufSize) ? uiBufSize : -1;
+  return m_pipe->Write(static_cast<const char*>(lpBuf), uiBufSize) ? uiBufSize : -1;
 }
 
 void CPipeFile::SetEof()

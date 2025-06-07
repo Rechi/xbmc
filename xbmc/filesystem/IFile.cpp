@@ -39,7 +39,7 @@ IFile::ReadLineResult IFile::ReadLine(char* szLine, std::size_t bufferSize)
     return {ReadLineResult::FAILURE, 0};
 
   int64_t iFilePos = GetPosition();
-  size_t iBytesRead = Read((unsigned char*)szLine, bufferSize - 1);
+  size_t iBytesRead = Read(reinterpret_cast<unsigned char*>(szLine), bufferSize - 1);
   if (iBytesRead <= 0)
     return {ReadLineResult::FAILURE, 0};
 

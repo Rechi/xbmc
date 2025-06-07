@@ -371,7 +371,8 @@ bool CNfsConnection::Connect(const CURL& url, std::string &relativePath)
 
     if (contextRet == CNfsConnection::ContextStatus::NEW)
     {
-      CLog::Log(LOGDEBUG, "NFS: chunks: r/w {}/{}", (int)m_readChunkSize, (int)m_writeChunkSize);
+      CLog::Log(LOGDEBUG, "NFS: chunks: r/w {}/{}", static_cast<int>(m_readChunkSize),
+                static_cast<int>(m_writeChunkSize));
     }
   }
   return ret;
@@ -747,7 +748,7 @@ ssize_t CNFSFile::Read(void *lpBuf, size_t uiBufSize)
 #ifdef LIBNFS_API_V2
   numberOfBytesRead = nfs_read(m_pNfsContext, m_pFileHandle, lpBuf, uiBufSize);
 #else
-  numberOfBytesRead = nfs_read(m_pNfsContext, m_pFileHandle, uiBufSize, (char *)lpBuf);
+  numberOfBytesRead = nfs_read(m_pNfsContext, m_pFileHandle, uiBufSize, static_cast<char*>(lpBuf));
 #endif
 
   lock.unlock(); //no need to keep the connection lock after that
@@ -756,8 +757,8 @@ ssize_t CNFSFile::Read(void *lpBuf, size_t uiBufSize)
 
   //something went wrong ...
   if (numberOfBytesRead < 0)
-    CLog::Log(LOGERROR, "{} - Error( {}, {} )", __FUNCTION__, (int64_t)numberOfBytesRead,
-              nfs_get_error(m_pNfsContext));
+    CLog::Log(LOGERROR, "{} - Error( {}, {} )", __FUNCTION__,
+              static_cast<int64_t>(numberOfBytesRead), nfs_get_error(m_pNfsContext));
 
   return numberOfBytesRead;
 }
@@ -778,7 +779,7 @@ int64_t CNFSFile::Seek(int64_t iFilePosition, int iWhence)
               iFilePosition, iWhence, m_fileSize, nfs_get_error(m_pNfsContext));
     return -1;
   }
-  return (int64_t)offset;
+  return static_cast<int64_t>(offset);
 }
 
 int CNFSFile::Truncate(int64_t iSize)
@@ -833,7 +834,9 @@ ssize_t CNFSFile::Write(const void* lpBuf, size_t uiBufSize)
   int writtenBytes = 0;
   size_t leftBytes = uiBufSize;
   //clamp max write chunksize to 32kb - fixme - this might be superfluous with future libnfs versions
-  size_t chunkSize = gNfsConnection.GetMaxWriteChunkSize() > 32768 ? 32768 : (size_t)gNfsConnection.GetMaxWriteChunkSize();
+  size_t chunkSize = gNfsConnection.GetMaxWriteChunkSize() > 32768
+                         ? 32768
+                         : static_cast<size_t>(gNfsConnection.GetMaxWriteChunkSize());
 
   std::unique_lock lock(gNfsConnection);
 
@@ -853,10 +856,9 @@ ssize_t CNFSFile::Write(const void* lpBuf, size_t uiBufSize)
 #else
     //write chunk
     //! @bug libnfs < 2.0.0 isn't const correct
-    writtenBytes = nfs_write(m_pNfsContext,
-                                  m_pFileHandle,
-                                  chunkSize,
-                                  const_cast<char*>((const char *)lpBuf) + numberOfBytesWritten);
+    writtenBytes =
+        nfs_write(m_pNfsContext, m_pFileHandle, chunkSize,
+                  const_cast<char*>(static_cast<const char*>(lpBuf)) + numberOfBytesWritten);
 #endif
     //decrease left bytes
     leftBytes-= writtenBytes;
