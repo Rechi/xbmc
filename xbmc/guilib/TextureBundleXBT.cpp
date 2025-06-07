@@ -139,9 +139,9 @@ std::vector<std::string> CTextureBundleXBT::GetTexturesFromPath(const std::strin
 
   std::vector<std::string> textures;
   std::vector<CXBTFFile> files = m_XBTFReader->GetFiles();
-  for (size_t i = 0; i < files.size(); i++)
+  for (const CXBTFFile& file : files)
   {
-    std::string filePath = files[i].GetPath();
+    std::string filePath = file.GetPath();
     if (StringUtils::StartsWithNoCase(filePath, testPath))
       textures.emplace_back(std::move(filePath));
   }

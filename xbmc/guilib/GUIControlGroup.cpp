@@ -12,6 +12,7 @@
 #include "input/mouse/MouseEvent.h"
 
 #include <cassert>
+#include <ranges>
 #include <utility>
 
 using namespace KODI;
@@ -111,12 +112,12 @@ void CGUIControlGroup::Render()
   if (CServiceBroker::GetWinSystem()->GetGfxContext().GetRenderOrder() ==
       RENDER_ORDER_FRONT_TO_BACK)
   {
-    for (auto it = m_children.rbegin(); it != m_children.rend(); ++it)
+    for (CGUIControl* it : std::ranges::reverse_view(m_children))
     {
-      if (m_renderFocusedLast && (*it)->HasFocus())
-        focusedControl = (*it);
+      if (m_renderFocusedLast && it->HasFocus())
+        focusedControl = it;
       else
-        (*it)->DoRender();
+        it->DoRender();
     }
   }
   else
@@ -395,9 +396,8 @@ EVENT_RESULT CGUIControlGroup::SendMouseEvent(const CPoint& point, const MOUSE::
   {
     CPoint pos(GetPosition());
     // run through our controls in reverse order (so that last rendered is checked first)
-    for (rControls i = m_children.rbegin(); i != m_children.rend(); ++i)
+    for (CGUIControl* child : std::ranges::reverse_view(m_children))
     {
-      CGUIControl *child = *i;
       EVENT_RESULT ret = child->SendMouseEvent(childPoint - pos, event);
       if (ret)
       { // we've handled the action, and/or have focused an item

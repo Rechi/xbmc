@@ -258,9 +258,8 @@ bool CGUITextureManager::HasTexture(const std::string &textureName, std::string 
 
   // Check our loaded and bundled textures - we store in bundles using \\.
   std::string bundledName = CTextureBundle::Normalize(textureName);
-  for (int i = 0; i < (int)m_vecTextures.size(); ++i)
+  for (const CTextureMap* pMap : m_vecTextures)
   {
-    CTextureMap *pMap = m_vecTextures[i];
     if (pMap->GetName() == textureName)
     {
       if (size) *size = 1;
@@ -299,9 +298,8 @@ const CTextureArray& CGUITextureManager::Load(const std::string& strTextureName,
 
   if (size) // we found the texture
   {
-    for (int i = 0; i < (int)m_vecTextures.size(); ++i)
+    for (CTextureMap* pMap : m_vecTextures)
     {
-      CTextureMap *pMap = m_vecTextures[i];
       if (pMap->GetName() == strTextureName)
       {
         //CLog::Log(LOGDEBUG, "Total memusage {}", GetMemoryUsage());
@@ -517,16 +515,16 @@ void CGUITextureManager::FreeUnusedTextures(unsigned int timeDelay)
   }
 
 #if defined(HAS_GL) || defined(HAS_GLES)
-  for (unsigned int i = 0; i < m_unusedHwTextures.size(); ++i)
+  for (unsigned int& unusedHwTexture : m_unusedHwTextures)
   {
     // on ios/tvos the hw textures might be deleted from the os
     // when XBMC is backgrounded (e.x. for backgrounded music playback)
     // sanity check before delete in that case.
 #if defined(TARGET_DARWIN_EMBEDDED)
     auto winSystem = dynamic_cast<WIN_SYSTEM_CLASS*>(CServiceBroker::GetWinSystem());
-    if (!winSystem->IsBackgrounded() || glIsTexture(m_unusedHwTextures[i]))
+    if (!winSystem->IsBackgrounded() || glIsTexture(unusedHwTexture))
 #endif
-      glDeleteTextures(1, (GLuint*) &m_unusedHwTextures[i]);
+      glDeleteTextures(1, (GLuint*)&unusedHwTexture);
   }
 #endif
   m_unusedHwTextures.clear();
@@ -562,9 +560,8 @@ void CGUITextureManager::Dump() const
 {
   CLog::Log(LOGDEBUG, "{0}: total texturemaps size: {1}", __FUNCTION__, m_vecTextures.size());
 
-  for (int i = 0; i < (int)m_vecTextures.size(); ++i)
+  for (const CTextureMap* pMap : m_vecTextures)
   {
-    const CTextureMap* pMap = m_vecTextures[i];
     if (!pMap->IsEmpty())
       pMap->Dump();
   }
@@ -595,9 +592,9 @@ void CGUITextureManager::Flush()
 unsigned int CGUITextureManager::GetMemoryUsage() const
 {
   unsigned int memUsage = 0;
-  for (int i = 0; i < (int)m_vecTextures.size(); ++i)
+  for (const CTextureMap* texture : m_vecTextures)
   {
-    memUsage += m_vecTextures[i]->GetMemoryUsage();
+    memUsage += texture->GetMemoryUsage();
   }
   return memUsage;
 }

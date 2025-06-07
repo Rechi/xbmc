@@ -17,6 +17,7 @@
 #include "utils/StringUtils.h"
 
 #include <cassert>
+#include <ranges>
 
 CGUIPanelContainer::CGUIPanelContainer(int parentID, int controlID, float posX, float posY, float width, float height, ORIENTATION orientation, const CScroller& scroller, int preloadItems)
     : CGUIBaseContainer(parentID, controlID, posX, posY, width, height, orientation, scroller, preloadItems)
@@ -164,9 +165,9 @@ void CGUIPanelContainer::Render()
     if (CServiceBroker::GetWinSystem()->GetGfxContext().GetRenderOrder() ==
         RENDER_ORDER_FRONT_TO_BACK)
     {
-      for (auto it = std::crbegin(renderitems); it != std::crend(renderitems); it++)
+      for (const RENDERITEM& renderitem : std::ranges::reverse_view(renderitems))
       {
-        RenderItem(it->posX, it->posY, it->item.get(), it->focused);
+        RenderItem(renderitem.posX, renderitem.posY, renderitem.item.get(), renderitem.focused);
       }
     }
     else

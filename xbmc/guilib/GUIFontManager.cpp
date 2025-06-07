@@ -42,6 +42,7 @@
 #include "utils/log.h"
 
 #include <algorithm>
+#include <ranges>
 #include <set>
 
 using namespace XFILE;
@@ -557,8 +558,8 @@ void GUIFontManager::SettingOptionsFontsFiller(const SettingConstPtr& setting,
                                   KODI::UTILS::FONT::SUPPORTED_EXTENSIONS_MASK,
                                   XFILE::DIR_FLAG_NO_FILE_DIRS | XFILE::DIR_FLAG_NO_FILE_INFO);
 
-  for (auto itItem = itemsRoot.rbegin(); itItem != itemsRoot.rend(); ++itItem)
-    items.AddFront(*itItem, 0);
+  for (const CFileItemPtr& itItem : std::ranges::reverse_view(itemsRoot))
+    items.AddFront(itItem, 0);
 
   for (const auto& item : items)
   {

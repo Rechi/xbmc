@@ -170,15 +170,15 @@ void CGUIFontTTFGLES::LastEnd()
     CGraphicContext& context = winSystem->GetGfxContext();
     CRect scissor = context.StereoCorrection(context.GetScissors());
 
-    for (size_t i = 0; i < m_vertexTrans.size(); i++)
+    for (const CTranslatedVertices& vertexTran : m_vertexTrans)
     {
-      if (m_vertexTrans[i].m_vertexBuffer->bufferHandle == 0)
+      if (vertexTran.m_vertexBuffer->bufferHandle == 0)
       {
         continue;
       }
 
       // Apply the clip rectangle
-      CRect clip = renderSystem->ClipRectToScissorRect(m_vertexTrans[i].m_clip);
+      CRect clip = renderSystem->ClipRectToScissorRect(vertexTran.m_clip);
       if (!clip.IsEmpty())
       {
         // intersect with current scissor
@@ -198,17 +198,13 @@ void CGUIFontTTFGLES::LastEnd()
         renderSystem->ResetScissors();
 
         const float clipBoundaries[4] = {
-            (m_vertexTrans[i].m_clip.x1 - m_vertexTrans[i].m_translateX -
-             m_vertexTrans[i].m_offsetX) /
+            (vertexTran.m_clip.x1 - vertexTran.m_translateX - vertexTran.m_offsetX) /
                 context.GetGUIScaleX(),
-            (m_vertexTrans[i].m_clip.y1 - m_vertexTrans[i].m_translateY -
-             m_vertexTrans[i].m_offsetY) /
+            (vertexTran.m_clip.y1 - vertexTran.m_translateY - vertexTran.m_offsetY) /
                 context.GetGUIScaleY(),
-            (m_vertexTrans[i].m_clip.x2 - m_vertexTrans[i].m_translateX -
-             m_vertexTrans[i].m_offsetX) /
+            (vertexTran.m_clip.x2 - vertexTran.m_translateX - vertexTran.m_offsetX) /
                 context.GetGUIScaleX(),
-            (m_vertexTrans[i].m_clip.y2 - m_vertexTrans[i].m_translateY -
-             m_vertexTrans[i].m_offsetY) /
+            (vertexTran.m_clip.y2 - vertexTran.m_translateY - vertexTran.m_offsetY) /
                 context.GetGUIScaleY()};
 
         glUniform4fv(clipUniformLoc, 1, clipBoundaries);
@@ -220,10 +216,8 @@ void CGUIFontTTFGLES::LastEnd()
       }
 
       // calculate the fractional offset to the ideal position
-      float fractX =
-          context.ScaleFinalXCoord(m_vertexTrans[i].m_translateX, m_vertexTrans[i].m_translateY);
-      float fractY =
-          context.ScaleFinalYCoord(m_vertexTrans[i].m_translateX, m_vertexTrans[i].m_translateY);
+      float fractX = context.ScaleFinalXCoord(vertexTran.m_translateX, vertexTran.m_translateY);
+      float fractY = context.ScaleFinalYCoord(vertexTran.m_translateX, vertexTran.m_translateY);
       fractX = -fractX + std::round(fractX);
       fractY = -fractY + std::round(fractY);
 
@@ -231,8 +225,8 @@ void CGUIFontTTFGLES::LastEnd()
       CMatrixGL matrix = glMatrixProject.Get();
       matrix.MultMatrixf(glMatrixModview.Get());
       matrix.MultMatrixf(CMatrixGL(context.GetGUIMatrix()));
-      matrix.Translatef(m_vertexTrans[i].m_offsetX, m_vertexTrans[i].m_offsetY, 0.0f);
-      matrix.Translatef(m_vertexTrans[i].m_translateX, m_vertexTrans[i].m_translateY, 0.0f);
+      matrix.Translatef(vertexTran.m_offsetX, vertexTran.m_offsetY, 0.0f);
+      matrix.Translatef(vertexTran.m_translateX, vertexTran.m_translateY, 0.0f);
       // the gui matrix messes with the scale. correct it here for now.
       matrix.Scalef(context.GetGUIScaleX(), context.GetGUIScaleY(), 1.0f);
       // the gui matrix doesn't align to exact pixel coords atm. correct it here for now.
@@ -245,14 +239,14 @@ void CGUIFontTTFGLES::LastEnd()
       glUniformMatrix4fv(matrixUniformLoc, 1, GL_FALSE, matrix);
 
       // Bind the buffer to the OpenGL context's GL_ARRAY_BUFFER binding point
-      glBindBuffer(GL_ARRAY_BUFFER, m_vertexTrans[i].m_vertexBuffer->bufferHandle);
+      glBindBuffer(GL_ARRAY_BUFFER, vertexTran.m_vertexBuffer->bufferHandle);
 
       // Do the actual drawing operation, split into groups of characters no
       // larger than the pre-determined size of the element array
-      for (size_t character = 0; m_vertexTrans[i].m_vertexBuffer->size > character;
+      for (size_t character = 0; vertexTran.m_vertexBuffer->size > character;
            character += ELEMENT_ARRAY_MAX_CHAR_INDEX)
       {
-        size_t count = m_vertexTrans[i].m_vertexBuffer->size - character;
+        size_t count = vertexTran.m_vertexBuffer->size - character;
         count = std::min<size_t>(count, ELEMENT_ARRAY_MAX_CHAR_INDEX);
 
         // Set up the offsets of the various vertex attributes within the buffer

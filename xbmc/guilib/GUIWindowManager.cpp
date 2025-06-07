@@ -67,6 +67,7 @@
 #include "windows/GUIWindowSystemInfo.h"
 
 #include <mutex>
+#include <ranges>
 
 // Dialog includes
 #include "music/dialogs/GUIDialogMusicOSD.h"
@@ -507,10 +508,8 @@ bool CGUIWindowManager::SendMessage(CGUIMessage& message)
   bool handled = false;
   //  CLog::Log(LOGDEBUG,"SendMessage: mess={} send={} control={} param1={}", message.GetMessage(), message.GetSenderId(), message.GetControlId(), message.GetParam1());
   // Send the message to all none window targets
-  for (int i = 0; i < int(m_vecMsgTargets.size()); i++)
+  for (IMsgTargetCallback* pMsgTarget : m_vecMsgTargets)
   {
-    IMsgTargetCallback* pMsgTarget = m_vecMsgTargets[i];
-
     if (pMsgTarget)
     {
       if (pMsgTarget->OnMessage( message )) handled = true;
@@ -523,9 +522,9 @@ bool CGUIWindowManager::SendMessage(CGUIMessage& message)
   {
     std::unique_lock lock(CServiceBroker::GetWinSystem()->GetGfxContext());
 
-    for (auto it = m_activeDialogs.rbegin(); it != m_activeDialogs.rend(); ++it)
+    for (CGUIWindow* activeDialog : std::ranges::reverse_view(m_activeDialogs))
     {
-      (*it)->OnMessage(message);
+      activeDialog->OnMessage(message);
     }
 
     for (const auto& entry : m_mapWindows)
@@ -1306,10 +1305,10 @@ void CGUIWindowManager::RenderPassDual() const
 
   // first the opaque pass, rendering from front to back
   CServiceBroker::GetWinSystem()->GetGfxContext().SetRenderOrder(RENDER_ORDER_FRONT_TO_BACK);
-  for (auto it = renderList.rbegin(); it != renderList.rend(); ++it)
+  for (CGUIWindow* it : std::ranges::reverse_view(renderList))
   {
-    if ((*it)->IsDialogRunning())
-      (*it)->DoRender();
+    if (it->IsDialogRunning())
+      it->DoRender();
   }
 
   if (pWindow)
@@ -1535,9 +1534,8 @@ void CGUIWindowManager::DeInitialize()
   m_vecMsgTargets.erase( m_vecMsgTargets.begin(), m_vecMsgTargets.end() );
 
   // destroy our custom windows...
-  for (int i = 0; i < int(m_vecCustomWindows.size()); i++)
+  for (const CGUIWindow* pWindow : m_vecCustomWindows)
   {
-    CGUIWindow *pWindow = m_vecCustomWindows[i];
     RemoveFromWindowHistory(pWindow->GetID());
     Remove(pWindow->GetID());
     delete pWindow;
@@ -1584,9 +1582,8 @@ bool CGUIWindowManager::HasVisibleModalDialog() const
 int CGUIWindowManager::GetTopmostDialog(bool modal, bool ignoreClosing) const
 {
   std::unique_lock lock(CServiceBroker::GetWinSystem()->GetGfxContext());
-  for (auto it = m_activeDialogs.rbegin(); it != m_activeDialogs.rend(); ++it)
+  for (CGUIWindow* dialog : std::ranges::reverse_view(m_activeDialogs))
   {
-    CGUIWindow *dialog = *it;
     if ((!modal || dialog->IsModalDialog()) && (!ignoreClosing || !dialog->IsAnimating(ANIM_TYPE_WINDOW_CLOSE)))
       return dialog->GetID();
   }
