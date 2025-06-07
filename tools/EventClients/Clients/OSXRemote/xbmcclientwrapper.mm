@@ -39,10 +39,9 @@ public:
 
   std::string str() const{
     std::stringstream ss;
-    for(std::vector<eATVClientEvent>::const_iterator it = m_stream.begin();
-        it != m_stream.end();
-        ++it){
-      ss << *it;
+    for (const eATVClientEvent& it : m_stream)
+    {
+      ss << it;
     }
     return ss.str();
   }
