@@ -30,6 +30,7 @@
 #include <memory>
 #include <mutex>
 #include <numeric>
+#include <ranges>
 #include <string>
 #include <utility>
 #include <vector>
@@ -908,9 +909,9 @@ bool CPVRTimers::DeleteTimersOnChannel(const std::shared_ptr<CPVRChannel>& chann
   {
     std::unique_lock lock(m_critSection);
 
-    for (auto it = m_tags.crbegin(); it != m_tags.crend(); ++it)
+    for (const std::pair<const CDateTime, VecTimerInfoTag>& tag : std::ranges::reverse_view(m_tags))
     {
-      for (const auto& timersEntry : (*it).second)
+      for (const auto& timersEntry : tag.second)
       {
         bool bDeleteActiveItem = !bCurrentlyActiveOnly || timersEntry->IsRecording();
         bool bDeleteTimerRuleItem = bDeleteTimerRules || !timersEntry->IsTimerRule();

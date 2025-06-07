@@ -33,6 +33,7 @@
 #include <memory>
 #include <mutex>
 #include <numeric>
+#include <ranges>
 #include <string>
 #include <vector>
 
@@ -509,9 +510,8 @@ std::shared_ptr<CPVRChannelGroup> CPVRChannelGroups::GetGroupAll() const
 std::shared_ptr<CPVRChannelGroup> CPVRChannelGroups::GetLastGroup() const
 {
   std::unique_lock lock(m_critSection);
-  for (auto it = m_groups.crbegin(); it != m_groups.crend(); ++it)
+  for (const auto& group : std::ranges::reverse_view(m_groups))
   {
-    const auto& group{*it};
     if (!group->ShouldBeIgnored(m_groups))
       return group;
   }
@@ -585,10 +585,8 @@ std::shared_ptr<CPVRChannelGroup> CPVRChannelGroups::GetPreviousGroup(
     bool bReturnNext = false;
 
     std::unique_lock lock(m_critSection);
-    for (auto it = m_groups.crbegin(); it != m_groups.crend(); ++it)
+    for (const auto& currentGroup : std::ranges::reverse_view(m_groups))
     {
-      const auto& currentGroup{*it};
-
       // return this entry
       if (bReturnNext && !currentGroup->IsHidden() && !currentGroup->ShouldBeIgnored(m_groups))
         return currentGroup;
@@ -599,9 +597,8 @@ std::shared_ptr<CPVRChannelGroup> CPVRChannelGroups::GetPreviousGroup(
     }
 
     // no match return last visible group
-    for (auto it = m_groups.crbegin(); it != m_groups.crend(); ++it)
+    for (const auto& currentGroup : std::ranges::reverse_view(m_groups))
     {
-      const auto& currentGroup{*it};
       if (!currentGroup->IsHidden() && !currentGroup->ShouldBeIgnored(m_groups))
         return currentGroup;
     }
@@ -618,10 +615,8 @@ std::shared_ptr<CPVRChannelGroup> CPVRChannelGroups::GetNextGroup(
     bool bReturnNext = false;
 
     std::unique_lock lock(m_critSection);
-    for (auto it = m_groups.cbegin(); it != m_groups.cend(); ++it)
+    for (const std::shared_ptr<CPVRChannelGroup>& currentGroup : m_groups)
     {
-      const auto& currentGroup{*it};
-
       // return this entry
       if (bReturnNext && !currentGroup->IsHidden() && !currentGroup->ShouldBeIgnored(m_groups))
         return currentGroup;
@@ -632,9 +627,8 @@ std::shared_ptr<CPVRChannelGroup> CPVRChannelGroups::GetNextGroup(
     }
 
     // no match return first visible group
-    for (auto it = m_groups.cbegin(); it != m_groups.cend(); ++it)
+    for (const std::shared_ptr<CPVRChannelGroup>& currentGroup : m_groups)
     {
-      const auto& currentGroup{*it};
       if (!currentGroup->IsHidden() && !currentGroup->ShouldBeIgnored(m_groups))
         return currentGroup;
     }
