@@ -174,9 +174,9 @@ bool CGraphicContext::SetViewPort(float fx, float fy, float fwidth, float fheigh
   x[1] = x[2] = fx + fwidth;
   y[0] = y[1] = fy;
   y[2] = y[3] = fy + fheight;
-  float minX = (float)m_iScreenWidth;
+  float minX = static_cast<float>(m_iScreenWidth);
   float maxX = 0;
-  float minY = (float)m_iScreenHeight;
+  float minY = static_cast<float>(m_iScreenHeight);
   float maxY = 0;
   for (int i = 0; i < 4; i++)
   {
@@ -188,18 +188,18 @@ bool CGraphicContext::SetViewPort(float fx, float fy, float fwidth, float fheigh
     if (y[i] > maxY) maxY = y[i];
   }
 
-  int newLeft = (int)(minX + 0.5f);
-  int newTop = (int)(minY + 0.5f);
-  int newRight = (int)(maxX + 0.5f);
-  int newBottom = (int)(maxY + 0.5f);
+  int newLeft = static_cast<int>(minX + 0.5f);
+  int newTop = static_cast<int>(minY + 0.5f);
+  int newRight = static_cast<int>(maxX + 0.5f);
+  int newBottom = static_cast<int>(maxY + 0.5f);
   if (intersectPrevious)
   {
     CRect oldviewport = m_viewStack.top();
     // do the intersection
-    int oldLeft = (int)oldviewport.x1;
-    int oldTop = (int)oldviewport.y1;
-    int oldRight = (int)oldviewport.x2;
-    int oldBottom = (int)oldviewport.y2;
+    int oldLeft = static_cast<int>(oldviewport.x1);
+    int oldTop = static_cast<int>(oldviewport.y1);
+    int oldRight = static_cast<int>(oldviewport.x2);
+    int oldBottom = static_cast<int>(oldviewport.y2);
     if (newLeft >= oldRight || newTop >= oldBottom || newRight <= oldLeft || newBottom <= oldTop)
     { // empty intersection - return false to indicate no rendering should occur
       return false;
@@ -226,7 +226,8 @@ bool CGraphicContext::SetViewPort(float fx, float fy, float fwidth, float fheigh
   assert(newLeft < newRight);
   assert(newTop < newBottom);
 
-  CRect newviewport((float)newLeft, (float)newTop, (float)newRight, (float)newBottom);
+  CRect newviewport(static_cast<float>(newLeft), static_cast<float>(newTop),
+                    static_cast<float>(newRight), static_cast<float>(newBottom));
 
   m_viewStack.push(newviewport);
 
@@ -280,7 +281,8 @@ CRect CGraphicContext::StereoCorrection(const CRect &rect) const
 void CGraphicContext::SetScissors(const CRect &rect)
 {
   m_scissors = rect;
-  m_scissors.Intersect(CRect(0,0,(float)m_iScreenWidth, (float)m_iScreenHeight));
+  m_scissors.Intersect(
+      CRect(0, 0, static_cast<float>(m_iScreenWidth), static_cast<float>(m_iScreenHeight)));
   CServiceBroker::GetRenderSystem()->SetScissors(StereoCorrection(m_scissors));
 }
 
@@ -291,7 +293,7 @@ const CRect &CGraphicContext::GetScissors() const
 
 void CGraphicContext::ResetScissors()
 {
-  m_scissors.SetRect(0, 0, (float)m_iScreenWidth, (float)m_iScreenHeight);
+  m_scissors.SetRect(0, 0, static_cast<float>(m_iScreenWidth), static_cast<float>(m_iScreenHeight));
   CServiceBroker::GetRenderSystem()->SetScissors(StereoCorrection(m_scissors));
 }
 
@@ -301,10 +303,10 @@ const CRect CGraphicContext::GetViewWindow() const
   {
     CRect rect;
     RESOLUTION_INFO info = GetResInfo();
-    rect.x1 = (float)info.Overscan.left;
-    rect.y1 = (float)info.Overscan.top;
-    rect.x2 = (float)info.Overscan.right;
-    rect.y2 = (float)info.Overscan.bottom;
+    rect.x1 = static_cast<float>(info.Overscan.left);
+    rect.y1 = static_cast<float>(info.Overscan.top);
+    rect.x2 = static_cast<float>(info.Overscan.right);
+    rect.y2 = static_cast<float>(info.Overscan.bottom);
     return rect;
   }
   return m_videoRect;
@@ -376,7 +378,8 @@ void CGraphicContext::SetCalibrating(bool bOnOff)
 
 bool CGraphicContext::IsValidResolution(RESOLUTION res)
 {
-  if (res >= RES_WINDOW && (size_t) res < CDisplaySettings::GetInstance().ResolutionInfoSize())
+  if (res >= RES_WINDOW &&
+      static_cast<size_t>(res) < CDisplaySettings::GetInstance().ResolutionInfoSize())
   {
     return true;
   }
@@ -456,7 +459,8 @@ void CGraphicContext::SetVideoResolutionInternal(RESOLUTION res, bool forceUpdat
 
   if (switched)
   {
-    m_scissors.SetRect(0, 0, (float)m_iScreenWidth, (float)m_iScreenHeight);
+    m_scissors.SetRect(0, 0, static_cast<float>(m_iScreenWidth),
+                       static_cast<float>(m_iScreenHeight));
 
     // make sure all stereo stuff are correctly setup
     SetStereoView(RENDER_STEREO_VIEW_OFF);
@@ -514,7 +518,7 @@ void CGraphicContext::ApplyVideoResolution(RESOLUTION res)
 
   UpdateInternalStateWithResolution(res);
 
-  m_scissors.SetRect(0, 0, (float)m_iScreenWidth, (float)m_iScreenHeight);
+  m_scissors.SetRect(0, 0, static_cast<float>(m_iScreenWidth), static_cast<float>(m_iScreenHeight));
 
   // make sure all stereo stuff are correctly setup
   SetStereoView(RENDER_STEREO_VIEW_OFF);
@@ -676,8 +680,8 @@ void CGraphicContext::GetGUIScaling(const RESOLUTION_INFO &res, float &scaleX, f
   {
     // calculate necessary scalings
     RESOLUTION_INFO info = GetResInfo();
-    float fFromWidth  = (float)res.iWidth;
-    float fFromHeight = (float)res.iHeight;
+    float fFromWidth = static_cast<float>(res.iWidth);
+    float fFromHeight = static_cast<float>(res.iHeight);
     auto fToPosX = info.Overscan.left + info.guiInsets.left;
     auto fToPosY = info.Overscan.top + info.guiInsets.top;
     auto fToWidth = info.Overscan.right - info.guiInsets.right - fToPosX;
@@ -752,7 +756,8 @@ void CGraphicContext::SetStereoView(RENDER_STEREO_VIEW view)
   while(!m_viewStack.empty())
     m_viewStack.pop();
 
-  CRect viewport(0.0f, 0.0f, (float)m_iScreenWidth, (float)m_iScreenHeight);
+  CRect viewport(0.0f, 0.0f, static_cast<float>(m_iScreenWidth),
+                 static_cast<float>(m_iScreenHeight));
 
   m_viewStack.push(viewport);
 
@@ -802,8 +807,8 @@ void CGraphicContext::SetCameraPosition(const CPoint &camera)
   if (!m_origins.empty())
     cam += m_origins.top();
 
-  cam.x *= (float)m_iScreenWidth / m_windowResolution.iWidth;
-  cam.y *= (float)m_iScreenHeight / m_windowResolution.iHeight;
+  cam.x *= static_cast<float>(m_iScreenWidth) / m_windowResolution.iWidth;
+  cam.y *= static_cast<float>(m_iScreenHeight) / m_windowResolution.iHeight;
 
   m_cameras.push(cam);
   UpdateCameraPosition(m_cameras.top(), m_stereoFactors.top());
@@ -1023,9 +1028,10 @@ void CGraphicContext::GetAllowedResolutions(std::vector<RESOLUTION> &res)
 
   res.push_back(RES_WINDOW);
   res.push_back(RES_DESKTOP);
-  for (size_t r = (size_t) RES_CUSTOM; r < CDisplaySettings::GetInstance().ResolutionInfoSize(); r++)
+  for (size_t r = static_cast<size_t>(RES_CUSTOM);
+       r < CDisplaySettings::GetInstance().ResolutionInfoSize(); r++)
   {
-    res.push_back((RESOLUTION) r);
+    res.push_back(static_cast<RESOLUTION>(r));
   }
 }
 

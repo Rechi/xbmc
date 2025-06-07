@@ -159,7 +159,7 @@ bool CWinEventsX11::Init(Display *dpy, Window win)
   m_display = dpy;
   m_window = win;
   m_keybuf_len = 32*sizeof(char);
-  m_keybuf = (char*)malloc(m_keybuf_len);
+  m_keybuf = static_cast<char*>(malloc(m_keybuf_len));
   m_keymodState = 0;
   m_wmDeleteMessage = XInternAtom(dpy, "WM_DELETE_WINDOW", False);
   m_structureChanged = false;
@@ -177,13 +177,13 @@ bool CWinEventsX11::Init(Display *dpy, Window win)
   p = setlocale(LC_ALL, NULL);
   if (p)
   {
-    old_locale = (char*)malloc(strlen(p) +1);
+    old_locale = static_cast<char*>(malloc(strlen(p) + 1));
     strcpy(old_locale, p);
   }
   p = XSetLocaleModifiers(NULL);
   if (p)
   {
-    old_modifiers = (char*)malloc(strlen(p) +1);
+    old_modifiers = static_cast<char*>(malloc(strlen(p) + 1));
     strcpy(old_modifiers, p);
   }
 
@@ -395,7 +395,7 @@ bool CWinEventsX11::MessagePump()
 
       case ClientMessage:
       {
-        if ((unsigned int)xevent.xclient.data.l[0] == m_wmDeleteMessage)
+        if (static_cast<unsigned int>(xevent.xclient.data.l[0]) == m_wmDeleteMessage)
           if (!g_application.m_bStop)
             CServiceBroker::GetAppMessenger()->PostMsg(TMSG_QUIT);
         break;
@@ -431,7 +431,7 @@ bool CWinEventsX11::MessagePump()
         if (status == XBufferOverflow)
         {
           m_keybuf_len = len;
-          m_keybuf = (char*)realloc(m_keybuf, m_keybuf_len);
+          m_keybuf = static_cast<char*>(realloc(m_keybuf, m_keybuf_len));
           if (m_keybuf == nullptr)
             throw std::runtime_error("Failed to realloc memory, insufficient memory available");
           len = Xutf8LookupString(m_xic, &xevent.xkey,
@@ -526,8 +526,8 @@ bool CWinEventsX11::MessagePump()
           break;
         XBMC_Event newEvent = {};
         newEvent.type = XBMC_MOUSEMOTION;
-        newEvent.motion.x = (int16_t)xevent.xmotion.x;
-        newEvent.motion.y = (int16_t)xevent.xmotion.y;
+        newEvent.motion.x = static_cast<int16_t>(xevent.xmotion.x);
+        newEvent.motion.y = static_cast<int16_t>(xevent.xmotion.y);
         if (appPort)
           ret |= appPort->OnEvent(newEvent);
         break;
@@ -537,9 +537,9 @@ bool CWinEventsX11::MessagePump()
       {
         XBMC_Event newEvent = {};
         newEvent.type = XBMC_MOUSEBUTTONDOWN;
-        newEvent.button.button = (unsigned char)xevent.xbutton.button;
-        newEvent.button.x = (int16_t)xevent.xbutton.x;
-        newEvent.button.y = (int16_t)xevent.xbutton.y;
+        newEvent.button.button = static_cast<unsigned char>(xevent.xbutton.button);
+        newEvent.button.x = static_cast<int16_t>(xevent.xbutton.x);
+        newEvent.button.y = static_cast<int16_t>(xevent.xbutton.y);
         if (appPort)
           ret |= appPort->OnEvent(newEvent);
         break;
@@ -549,9 +549,9 @@ bool CWinEventsX11::MessagePump()
       {
         XBMC_Event newEvent = {};
         newEvent.type = XBMC_MOUSEBUTTONUP;
-        newEvent.button.button = (unsigned char)xevent.xbutton.button;
-        newEvent.button.x = (int16_t)xevent.xbutton.x;
-        newEvent.button.y = (int16_t)xevent.xbutton.y;
+        newEvent.button.button = static_cast<unsigned char>(xevent.xbutton.button);
+        newEvent.button.x = static_cast<int16_t>(xevent.xbutton.x);
+        newEvent.button.y = static_cast<int16_t>(xevent.xbutton.y);
         if (appPort)
           ret |= appPort->OnEvent(newEvent);
         break;
@@ -611,7 +611,7 @@ bool CWinEventsX11::ProcessKey(XBMC_Event &event)
       default:
         break;
     }
-    event.key.keysym.mod = (XBMCMod)m_keymodState;
+    event.key.keysym.mod = static_cast<XBMCMod>(m_keymodState);
   }
   else if (event.type == XBMC_KEYUP)
   {
@@ -647,7 +647,7 @@ bool CWinEventsX11::ProcessKey(XBMC_Event &event)
       default:
         break;
     }
-    event.key.keysym.mod = (XBMCMod)m_keymodState;
+    event.key.keysym.mod = static_cast<XBMCMod>(m_keymodState);
   }
 
   std::shared_ptr<CAppInboundProtocol> appPort = CServiceBroker::GetAppPort();
@@ -663,12 +663,12 @@ XBMCKey CWinEventsX11::LookupXbmcKeySym(KeySym keysym)
   it = m_symLookupTable.find(keysym);
   if (it != m_symLookupTable.end())
   {
-    return (XBMCKey)(it->second);
+    return static_cast<XBMCKey>(it->second);
   }
 
   // try ascii mappings
   if (keysym>>8 == 0x00)
-    return (XBMCKey)tolower(keysym & 0xFF);
+    return static_cast<XBMCKey>(tolower(keysym & 0xFF));
 
-  return (XBMCKey)keysym;
+  return static_cast<XBMCKey>(keysym);
 }

@@ -42,7 +42,7 @@ RESOLUTION_INFO::RESOLUTION_INFO(int width, int height, float aspect, const std:
   iBlanking = 0;
   iScreenWidth = width;
   iScreenHeight = height;
-  fPixelRatio = aspect ? ((float)width)/height / aspect : 1.0f;
+  fPixelRatio = aspect ? (static_cast<float>(width)) / height / aspect : 1.0f;
   bFullScreen = true;
   fRefreshRate = 0;
   dwFlags = iSubtitles = 0;
@@ -325,7 +325,10 @@ bool CResolutionUtils::FindResolutionFromOverride(float fps, int width, bool is3
   RESOLUTION_INFO curr = CServiceBroker::GetWinSystem()->GetGfxContext().GetResInfo(resolution);
 
   //try to find a refreshrate from the override
-  for (int i = 0; i < (int)CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_videoAdjustRefreshOverrides.size(); i++)
+  for (int i = 0; i < static_cast<int>(CServiceBroker::GetSettingsComponent()
+                                           ->GetAdvancedSettings()
+                                           ->m_videoAdjustRefreshOverrides.size());
+       i++)
   {
     RefreshOverride& override = CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_videoAdjustRefreshOverrides[i];
 
@@ -336,9 +339,11 @@ bool CResolutionUtils::FindResolutionFromOverride(float fps, int width, bool is3
     if (!fallback && (fps < override.fpsmin || fps > override.fpsmax))
       continue;
 
-    for (size_t j = (int)RES_DESKTOP; j < CDisplaySettings::GetInstance().ResolutionInfoSize(); j++)
+    for (size_t j = static_cast<int>(RES_DESKTOP);
+         j < CDisplaySettings::GetInstance().ResolutionInfoSize(); j++)
     {
-      RESOLUTION_INFO info = CServiceBroker::GetWinSystem()->GetGfxContext().GetResInfo((RESOLUTION)j);
+      RESOLUTION_INFO info =
+          CServiceBroker::GetWinSystem()->GetGfxContext().GetResInfo(static_cast<RESOLUTION>(j));
 
       if (info.iScreenWidth  == curr.iScreenWidth &&
           info.iScreenHeight == curr.iScreenHeight &&
@@ -347,7 +352,7 @@ bool CResolutionUtils::FindResolutionFromOverride(float fps, int width, bool is3
         if (info.fRefreshRate <= override.refreshmax &&
             info.fRefreshRate >= override.refreshmin)
         {
-          resolution = (RESOLUTION)j;
+          resolution = static_cast<RESOLUTION>(j);
 
           if (fallback)
           {
@@ -387,7 +392,7 @@ float CResolutionUtils::RefreshWeight(float refresh, float fps)
   if (round < 1)
     weight = (fps - refresh) / fps;
   else
-    weight = fabs(div / round - 1.0f);
+    weight = static_cast<float>(fabs(div / round - 1.0f));
 
   // punish higher refreshrates and prefer better matching
   // e.g. 30 fps content at 60 hz is better than
