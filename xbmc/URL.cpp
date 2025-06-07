@@ -169,18 +169,10 @@ void CURL::Parse(std::string strURL1)
 
   //! @todo fix all Addon paths
   std::string strProtocol2 = GetTranslatedProtocol();
-  if(IsProtocol("rss") ||
-     IsProtocol("rsss") ||
-     IsProtocol("rar") ||
-     IsProtocol("apk") ||
-     IsProtocol("xbt") ||
-     IsProtocol("zip") ||
-     IsProtocol("addons") ||
-     IsProtocol("image") ||
-     IsProtocol("videodb") ||
-     IsProtocol("musicdb") ||
-     IsProtocol("androidapp") ||
-     IsProtocol("pvr"))
+  if (IsProtocol("rss") || IsProtocol("rsss") || IsProtocol("rar") || IsProtocol("apk") ||
+      IsProtocol("xbt") || IsProtocol("zip") || IsProtocol("addons") || IsProtocol("image") ||
+      IsProtocol("videodb") || IsProtocol("musicdb") || IsProtocol("picturedb") ||
+      IsProtocol("androidapp") || IsProtocol("pvr"))
     sep = "?";
   else
   if(  IsProtocolEqual(strProtocol2, "http")
@@ -289,7 +281,8 @@ void CURL::Parse(std::string strURL1)
       m_strFileName = strURL.substr(iPos, iEnd - iPos);
   }
 
-  if (IsProtocol("musicdb") || IsProtocol("videodb") || IsProtocol("sources") || IsProtocol("pvr"))
+  if (IsProtocol("musicdb") || IsProtocol("videodb") || IsProtocol("picturedb") ||
+      IsProtocol("sources") || IsProtocol("pvr"))
   {
     if (m_strHostName != "" && m_strFileName != "")
     {

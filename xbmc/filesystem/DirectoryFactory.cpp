@@ -6,86 +6,84 @@
  *  See LICENSES/README.md for more information.
  */
 
-#include <stdlib.h>
-#include "network/Network.h"
 #include "DirectoryFactory.h"
-#include "SpecialProtocolDirectory.h"
-#include "MultiPathDirectory.h"
-#include "StackDirectory.h"
-#include "FileDirectoryFactory.h"
-#include "PlaylistDirectory.h"
-#include "MusicDatabaseDirectory.h"
-#include "MusicSearchDirectory.h"
-#include "VideoDatabaseDirectory.h"
-#include "FavouritesDirectory.h"
-#include "LibraryDirectory.h"
-#include "EventsDirectory.h"
-#include "AddonsDirectory.h"
-#include "SourcesDirectory.h"
-#include "FTPDirectory.h"
-#include "HTTPDirectory.h"
-#include "DAVDirectory.h"
-#if defined(HAS_UDFREAD)
-#include "UDFDirectory.h"
-#endif
-#include "utils/log.h"
-#include "network/WakeOnAccess.h"
 
-#ifdef TARGET_POSIX
-#include "platform/posix/filesystem/PosixDirectory.h"
-#elif defined(TARGET_WINDOWS)
-#include "platform/win32/filesystem/Win32Directory.h"
-#ifdef TARGET_WINDOWS_STORE
-#include "platform/win10/filesystem/WinLibraryDirectory.h"
-#endif
-#endif
-#ifdef HAS_FILESYSTEM_SMB
-#ifdef TARGET_WINDOWS
-#include "platform/win32/filesystem/Win32SMBDirectory.h"
-#else
-#include "platform/posix/filesystem/SMBDirectory.h"
-#endif
-#endif
-#ifdef HAS_OPTICAL_DRIVE
-#include "CDDADirectory.h"
-#endif // HAS_OPTICAL_DRIVE
-#include "PluginDirectory.h"
-#if defined(HAS_ISO9660PP)
-#include "ISO9660Directory.h"
-#endif
-#ifdef HAS_UPNP
-#include "UPnPDirectory.h"
-#endif
-#include "PVRDirectory.h"
-#if defined(TARGET_ANDROID)
-#include "platform/android/filesystem/APKDirectory.h"
-#elif defined(TARGET_DARWIN_TVOS)
-#include "platform/darwin/tvos/filesystem/TVOSDirectory.h"
-#endif
-#include "XbtDirectory.h"
-#include "ZipDirectory.h"
-#include "FileItem.h"
-#include "URL.h"
-#include "RSSDirectory.h"
-#ifdef HAS_ZEROCONF
-#include "ZeroconfDirectory.h"
-#endif
-#ifdef HAS_FILESYSTEM_NFS
-#include "NFSDirectory.h"
-#endif
+#include "AddonsDirectory.h"
 #ifdef HAVE_LIBBLURAY
 #include "BlurayDirectory.h"
 #endif
 #ifdef HAS_OPTICAL_DRIVE
+#include "CDDADirectory.h"
+#endif // HAS_OPTICAL_DRIVE
+#include "DAVDirectory.h"
+#ifdef HAS_OPTICAL_DRIVE
 #include "DVDDirectory.h"
 #endif
-#if defined(TARGET_ANDROID)
-#include "platform/android/filesystem/AndroidAppDirectory.h"
+#include "EventsDirectory.h"
+#include "FTPDirectory.h"
+#include "FavouritesDirectory.h"
+#include "FileDirectoryFactory.h"
+#include "FileItem.h"
+#include "HTTPDirectory.h"
+#if defined(HAS_ISO9660PP)
+#include "ISO9660Directory.h"
 #endif
+#include "LibraryDirectory.h"
+#include "MultiPathDirectory.h"
+#include "MusicDatabaseDirectory.h"
+#include "MusicSearchDirectory.h"
+#ifdef HAS_FILESYSTEM_NFS
+#include "NFSDirectory.h"
+#endif
+#include "PVRDirectory.h"
+#include "PictureDatabaseDirectory.h"
+#include "PlaylistDirectory.h"
+#include "PluginDirectory.h"
+#include "RSSDirectory.h"
 #include "ResourceDirectory.h"
 #include "ServiceBroker.h"
+#include "SourcesDirectory.h"
+#include "SpecialProtocolDirectory.h"
+#include "StackDirectory.h"
+#if defined(HAS_UDFREAD)
+#include "UDFDirectory.h"
+#endif
+#ifdef HAS_UPNP
+#include "UPnPDirectory.h"
+#endif
+#include "URL.h"
+#include "VideoDatabaseDirectory.h"
+#include "XbtDirectory.h"
+#ifdef HAS_ZEROCONF
+#include "ZeroconfDirectory.h"
+#endif
+#include "ZipDirectory.h"
 #include "addons/VFSEntry.h"
+#include "network/Network.h"
+#include "network/WakeOnAccess.h"
 #include "utils/StringUtils.h"
+#include "utils/log.h"
+
+#if defined(TARGET_ANDROID)
+#include "platform/android/filesystem/APKDirectory.h"
+#include "platform/android/filesystem/AndroidAppDirectory.h"
+#elif defined(TARGET_DARWIN_TVOS)
+#include "platform/darwin/tvos/filesystem/TVOSDirectory.h"
+#endif
+#ifdef TARGET_POSIX
+#include "platform/posix/filesystem/PosixDirectory.h"
+#ifdef HAS_FILESYSTEM_SMB
+#include "platform/posix/filesystem/SMBDirectory.h"
+#endif
+#endif
+#ifdef TARGET_WINDOWS_STORE
+#include "platform/win10/filesystem/WinLibraryDirectory.h"
+#elif defined(TARGET_WINDOWS)
+#include "platform/win32/filesystem/Win32Directory.h"
+#include "platform/win32/filesystem/Win32SMBDirectory.h"
+#endif
+
+#include <stdlib.h>
 
 using namespace ADDON;
 

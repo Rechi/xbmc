@@ -4,6 +4,7 @@ set(SOURCES GUIDialogPictureInfo.cpp
             GUIWindowSlideShow.cpp
             Picture.cpp
             PictureDatabase.cpp
+            PictureFileItemClassify.cpp
             PictureFolderImageFileLoader.cpp
             PictureInfoLoader.cpp
             PictureInfoTag.cpp
@@ -19,6 +20,7 @@ set(HEADERS interfaces/ISlideShowDelegate.h
             GUIWindowSlideShow.h
             Picture.h
             PictureDatabase.h
+            PictureFileItemClassify.h
             PictureFolderImageFileLoader.h
             PictureInfoLoader.h
             PictureInfoTag.h

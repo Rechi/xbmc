@@ -33,6 +33,7 @@ set(SOURCES AddonsDirectory.cpp
             MusicSearchDirectory.cpp
             OverrideDirectory.cpp
             OverrideFile.cpp
+            PictureDatabaseDirectory.cpp
             PipeFile.cpp
             PipesManager.cpp
             PlaylistDirectory.cpp
@@ -98,6 +99,7 @@ set(HEADERS AddonsDirectory.h
             MusicSearchDirectory.h
             OverrideDirectory.h
             OverrideFile.h
+            PictureDatabaseDirectory.h
             PVRDirectory.h
             PipeFile.h
             PipesManager.h
