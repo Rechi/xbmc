@@ -444,7 +444,7 @@ int CApplicationPowerHandling::GlobalIdleTime()
 {
   if (!m_idleTimer.IsRunning())
     m_idleTimer.StartZero();
-  return (int)m_idleTimer.GetElapsedSeconds();
+  return static_cast<int>(m_idleTimer.GetElapsedSeconds());
 }
 
 float CApplicationPowerHandling::NavigationIdleTime()
