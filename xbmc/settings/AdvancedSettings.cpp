@@ -422,6 +422,7 @@ void CAdvancedSettings::Initialize()
 
   m_databaseMusic.Reset();
   m_databaseVideo.Reset();
+  m_databasePicture.Reset();
 
   m_useLocaleCollation = true;
 
@@ -1216,6 +1217,17 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
     XMLUtils::GetString(pDatabase, "ciphers", m_databaseEpg.ciphers);
     XMLUtils::GetUInt(pDatabase, "connecttimeout", m_databaseEpg.connecttimeout, 1, 300);
     XMLUtils::GetBoolean(pDatabase, "compression", m_databaseEpg.compression);
+  }
+
+  pDatabase = pRootElement->FirstChildElement("picturedatabase");
+  if (pDatabase)
+  {
+    XMLUtils::GetString(pDatabase, "type", m_databasePicture.type);
+    XMLUtils::GetString(pDatabase, "host", m_databasePicture.host);
+    XMLUtils::GetString(pDatabase, "port", m_databasePicture.port);
+    XMLUtils::GetString(pDatabase, "user", m_databasePicture.user);
+    XMLUtils::GetString(pDatabase, "pass", m_databasePicture.pass);
+    XMLUtils::GetString(pDatabase, "name", m_databasePicture.name);
   }
 
   pElement = pRootElement->FirstChildElement("enablemultimediakeys");

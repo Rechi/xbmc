@@ -12,6 +12,7 @@
 #include "TextureDatabase.h"
 #include "addons/AddonDatabase.h"
 #include "music/MusicDatabase.h"
+#include "pictures/PictureDatabase.h"
 #include "pvr/PVRDatabase.h"
 #include "pvr/epg/EpgDatabase.h"
 #include "settings/AdvancedSettings.h"
@@ -57,6 +58,10 @@ bool CDatabaseManager::Initialize()
   { CVideoDatabase db; UpdateDatabase(db, &advancedSettings->m_databaseVideo); }
   { CPVRDatabase db; UpdateDatabase(db, &advancedSettings->m_databaseTV); }
   { CPVREpgDatabase db; UpdateDatabase(db, &advancedSettings->m_databaseEpg); }
+  {
+    CPictureDatabase db;
+    UpdateDatabase(db, &advancedSettings->m_databasePicture);
+  }
 
   CLog::Log(LOGDEBUG, "{}, updating databases... DONE", __FUNCTION__);
 
