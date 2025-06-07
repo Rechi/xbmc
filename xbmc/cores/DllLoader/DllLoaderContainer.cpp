@@ -157,9 +157,8 @@ LibraryLoader* DllLoaderContainer::FindModule(const char* sName, const char* sCu
 #endif
   LibraryLoader* pDll = NULL;
 
-  for (std::vector<std::string>::const_iterator i = vecEnv.begin(); i != vecEnv.end(); ++i)
+  for (std::string strPath : vecEnv)
   {
-    std::string strPath = *i;
     URIUtils::AddSlashAtEnd(strPath);
 
 #ifdef LOGALL
