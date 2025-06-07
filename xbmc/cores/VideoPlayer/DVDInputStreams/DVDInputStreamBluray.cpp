@@ -768,10 +768,10 @@ void CDVDInputStreamBluray::OverlayClear(SPlane& plane, int x, int y, int w, int
     }
 
     SOverlays add;
-    for(std::vector<CRectInt>::iterator itr = rem.begin(); itr != rem.end(); ++itr)
+    for (const CRectInt& itr : rem)
     {
       SOverlay overlay =
-          std::make_shared<CDVDOverlayImage>(*(*it), itr->x1, itr->y1, itr->Width(), itr->Height());
+          std::make_shared<CDVDOverlayImage>(*(*it), itr.x1, itr.y1, itr.Width(), itr.Height());
       add.push_back(overlay);
     }
 
@@ -791,8 +791,8 @@ void CDVDInputStreamBluray::OverlayFlush(int64_t pts)
 
   for(SPlane& plane : m_planes)
   {
-    for(SOverlays::iterator it = plane.o.begin(); it != plane.o.end(); ++it)
-      group->m_overlays.push_back(*it);
+    for (const SOverlay& it : plane.o)
+      group->m_overlays.push_back(it);
   }
 
   m_player->OnDiscNavResult(static_cast<void*>(&group), BD_EVENT_MENU_OVERLAY);

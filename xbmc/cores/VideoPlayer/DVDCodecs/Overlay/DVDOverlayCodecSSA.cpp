@@ -62,12 +62,11 @@ OverlayMessage CDVDOverlayCodecSSA::Decode(DemuxPacket* pPacket)
     int sh, sm, ss, sc, eh, em, es, ec;
     double beg, end;
     size_t pos;
-    std::string line, line2;
+    std::string line2;
     std::vector<std::string> lines;
     StringUtils::Tokenize((const char*)data, lines, "\r\n");
-    for (size_t i = 0; i < lines.size(); i++)
+    for (std::string line : lines)
     {
-      line = lines[i];
       StringUtils::Trim(line);
       std::unique_ptr<char[]> layer(new char[line.length() + 1]);
 

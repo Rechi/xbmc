@@ -143,11 +143,11 @@ void CRenderer::Render(int idx, float depth)
   std::unique_lock lock(m_section);
 
   std::vector<SElement>& list = m_buffers[idx];
-  for(std::vector<SElement>::iterator it = list.begin(); it != list.end(); ++it)
+  for (const SElement& it : list)
   {
-    if (it->overlay_dvd)
+    if (it.overlay_dvd)
     {
-      std::shared_ptr<COverlay> o = Convert(*(it->overlay_dvd), it->pts);
+      std::shared_ptr<COverlay> o = Convert(*(it.overlay_dvd), it.pts);
 
       if (o)
         Render(o.get());
@@ -253,9 +253,9 @@ bool CRenderer::HasOverlay(int idx)
   std::unique_lock lock(m_section);
 
   std::vector<SElement>& list = m_buffers[idx];
-  for(std::vector<SElement>::iterator it = list.begin(); it != list.end(); ++it)
+  for (const SElement& it : list)
   {
-    if (it->overlay_dvd)
+    if (it.overlay_dvd)
     {
       hasOverlay = true;
       break;

@@ -659,9 +659,9 @@ bool CEdl::AddEdit(const Edit& newEdit)
     return false;
   }
 
-  for (size_t i = 0; i < m_vecEdits.size(); ++i)
+  for (const Edit& vecEdit : m_vecEdits)
   {
-    if (edit.start < m_vecEdits[i].start && edit.end > m_vecEdits[i].end)
+    if (edit.start < vecEdit.start && edit.end > vecEdit.end)
     {
       CLog::Log(LOGERROR, "{} - Edit surrounds an existing edit! [{} - {}], {}", __FUNCTION__,
                 StringUtils::MillisecondsToTimeString(edit.start),
@@ -865,13 +865,13 @@ bool CEdl::HasSceneMarker() const
 
 std::optional<std::unique_ptr<EDL::Edit>> CEdl::InEdit(std::chrono::milliseconds seekTime)
 {
-  for (size_t i = 0; i < m_vecEdits.size(); ++i)
+  for (const Edit& edit : m_vecEdits)
   {
-    if (seekTime < m_vecEdits[i].start) // Early exit if not even up to the edit start time.
+    if (seekTime < edit.start) // Early exit if not even up to the edit start time.
       return std::nullopt;
 
-    if (seekTime >= m_vecEdits[i].start && seekTime <= m_vecEdits[i].end) // Inside edit.
-      return std::make_unique<EDL::Edit>(m_vecEdits[i]);
+    if (seekTime >= edit.start && seekTime <= edit.end) // Inside edit.
+      return std::make_unique<EDL::Edit>(edit);
   }
 
   return std::nullopt;
@@ -916,23 +916,23 @@ std::optional<std::chrono::milliseconds> CEdl::GetNextSceneMarker(Direction dire
 
   if (direction == Direction::FORWARD) // Find closest scene forwards
   {
-    for (int i = 0; i < (int)m_vecSceneMarkers.size(); i++)
+    for (const std::chrono::milliseconds& vecSceneMarker : m_vecSceneMarkers)
     {
-      if ((m_vecSceneMarkers[i] > seekTime) && ((m_vecSceneMarkers[i] - seekTime) < diff))
+      if ((vecSceneMarker > seekTime) && ((vecSceneMarker - seekTime) < diff))
       {
-        diff = m_vecSceneMarkers[i] - seekTime;
-        sceneMarker = m_vecSceneMarkers[i];
+        diff = vecSceneMarker - seekTime;
+        sceneMarker = vecSceneMarker;
       }
     }
   }
   else if (direction == Direction::BACKWARD) // Find closest scene backwards
   {
-    for (int i = 0; i < (int)m_vecSceneMarkers.size(); i++)
+    for (const std::chrono::milliseconds& vecSceneMarker : m_vecSceneMarkers)
     {
-      if ((m_vecSceneMarkers[i] < seekTime) && ((seekTime - m_vecSceneMarkers[i]) < diff))
+      if ((vecSceneMarker < seekTime) && ((seekTime - vecSceneMarker) < diff))
       {
-        diff = seekTime - m_vecSceneMarkers[i];
-        sceneMarker = m_vecSceneMarkers[i];
+        diff = seekTime - vecSceneMarker;
+        sceneMarker = vecSceneMarker;
       }
     }
   }

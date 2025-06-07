@@ -181,10 +181,10 @@ bool CRendererMediaCodec::RenderHook(int index)
     tex[2][1] = tex[3][1] = planef.rect.y1 * 2.0f;
   }
 
-  for(int i = 0; i < 4; i++)
+  for (GLfloat(&i)[4] : tex)
   {
-    tex[i][2] = 0.0f;
-    tex[i][3] = 1.0f;
+    i[2] = 0.0f;
+    i[3] = 1.0f;
   }
 
   glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_BYTE, idx);
@@ -216,9 +216,9 @@ bool CRendererMediaCodec::CreateTexture(int index)
   buf.image.height = m_sourceHeight;
   buf.image.width  = m_sourceWidth;
 
-  for (int f=0; f<3; ++f)
+  for (CYuvPlane(&field)[3] : buf.fields)
   {
-    CYuvPlane  &plane  = buf.fields[f][0];
+    CYuvPlane& plane = field[0];
 
     plane.texwidth  = m_sourceWidth;
     plane.texheight = m_sourceHeight;

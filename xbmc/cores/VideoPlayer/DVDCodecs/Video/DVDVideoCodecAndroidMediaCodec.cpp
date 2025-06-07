@@ -849,9 +849,9 @@ bool CDVDVideoCodecAndroidMediaCodec::Open(CDVDStreamInfo &hints, CDVDCodecOptio
 
     std::vector<std::string> types = codec_info.getSupportedTypes();
     // return the 1st one we find, that one is typically 'the best'
-    for (size_t j = 0; j < types.size(); ++j)
+    for (const std::string& type : types)
     {
-      if (types[j] == m_mime)
+      if (type == m_mime)
       {
         m_codec = std::make_shared<CJNIMediaCodec>(CJNIMediaCodec::createByCodecName(m_codecname));
         if (xbmc_jnienv()->ExceptionCheck())

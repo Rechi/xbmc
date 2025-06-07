@@ -119,11 +119,11 @@ CDebugRenderer::CRenderer::CRenderer() : OVERLAY::CRenderer()
 void CDebugRenderer::CRenderer::Render(int idx, float depth)
 {
   std::vector<SElement>& list = m_buffers[idx];
-  for (std::vector<SElement>::iterator it = list.begin(); it != list.end(); ++it)
+  for (const SElement& it : list)
   {
-    if (it->overlay_dvd)
+    if (it.overlay_dvd)
     {
-      auto ovAss = std::static_pointer_cast<CDVDOverlayLibass>(it->overlay_dvd);
+      auto ovAss = std::static_pointer_cast<CDVDOverlayLibass>(it.overlay_dvd);
       if (!ovAss || !ovAss->GetLibassHandler())
         continue;
 
@@ -131,8 +131,7 @@ void CDebugRenderer::CRenderer::Render(int idx, float depth)
       if (updateStyle)
         CreateSubtitlesStyle();
 
-      std::shared_ptr<COverlay> o =
-          ConvertLibass(*ovAss, it->pts, updateStyle, m_debugOverlayStyle);
+      std::shared_ptr<COverlay> o = ConvertLibass(*ovAss, it.pts, updateStyle, m_debugOverlayStyle);
 
       if (o)
         OVERLAY::CRenderer::Render(o.get());

@@ -102,10 +102,10 @@ bool CRendererVTB::CreateTexture(int index)
   planes[2].texwidth  = planes[1].texwidth;
   planes[2].texheight = planes[1].texheight;
 
-  for (int p = 0; p < 3; p++)
+  for (CYuvPlane& plane : planes)
   {
-    planes[p].pixpertex_x = 1;
-    planes[p].pixpertex_y = 1;
+    plane.pixpertex_x = 1;
+    plane.pixpertex_y = 1;
   }
 
   glGenTextures(1, &planes[0].id);
