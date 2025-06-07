@@ -1,4 +1,5 @@
 Checks: "\
+  google-readability-casting,\
   modernize-make-shared,\
   modernize-make-unique,\
   modernize-use-default-member-init,\

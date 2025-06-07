@@ -174,6 +174,9 @@ if(NOT MSVC)
     -g
     -D_DEBUG
   )
+  add_options(CXX DEBUG
+    -Wold-style-cast
+  )
 
   # these options affect only core code
   if(NOT CORE_COMPILE_OPTIONS)
