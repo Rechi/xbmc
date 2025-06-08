@@ -423,7 +423,7 @@ float CPeripheral::GetSettingFloat(const std::string& strKey) const
   return 0;
 }
 
-const std::string CPeripheral::GetSettingString(const std::string& strKey) const
+std::string CPeripheral::GetSettingString(const std::string& strKey) const
 {
   std::map<std::string, PeripheralDeviceSetting>::const_iterator it = m_settings.find(strKey);
   if (it != m_settings.end() && (*it).second.m_setting->GetType() == SettingType::String)

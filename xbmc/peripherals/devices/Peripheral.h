@@ -205,7 +205,7 @@ public:
    * @param strKey The key to search.
    * @return The value or an empty string if it wasn't found.
    */
-  virtual const std::string GetSettingString(const std::string& strKey) const;
+  virtual std::string GetSettingString(const std::string& strKey) const;
   virtual bool SetSetting(const std::string& strKey, const std::string& strValue);
   virtual void SetSettingVisible(const std::string& strKey, bool bSetTo);
   virtual bool IsSettingVisible(const std::string& strKey) const;

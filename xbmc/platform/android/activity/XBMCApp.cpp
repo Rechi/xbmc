@@ -942,7 +942,7 @@ void CXBMCApp::OnPlayBackStopped()
   ReleaseAudioFocus();
 }
 
-const CJNIViewInputDevice CXBMCApp::GetInputDevice(int deviceId)
+CJNIViewInputDevice CXBMCApp::GetInputDevice(int deviceId)
 {
   CJNIInputManager inputManager(getSystemService(CJNIContext::INPUT_SERVICE));
   return inputManager.getInputDevice(deviceId);

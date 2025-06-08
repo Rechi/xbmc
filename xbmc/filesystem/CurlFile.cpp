@@ -2120,7 +2120,7 @@ int CCurlFile::IoControl(IOControl request, void* param)
   return -1;
 }
 
-const std::string CCurlFile::GetProperty(XFILE::FileProperty type, const std::string &name) const
+std::string CCurlFile::GetProperty(XFILE::FileProperty type, const std::string& name) const
 {
   switch (type)
   {
@@ -2145,7 +2145,8 @@ const std::string CCurlFile::GetProperty(XFILE::FileProperty type, const std::st
   }
 }
 
-const std::vector<std::string> CCurlFile::GetPropertyValues(XFILE::FileProperty type, const std::string &name) const
+std::vector<std::string> CCurlFile::GetPropertyValues(XFILE::FileProperty type,
+                                                      const std::string& name) const
 {
   if (type == FileProperty::RESPONSE_HEADER)
   {
