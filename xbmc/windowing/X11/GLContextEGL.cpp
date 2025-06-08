@@ -361,7 +361,7 @@ bool CGLContextEGL::SuitableCheck(EGLDisplay eglDisplay, EGLConfig config)
     return false;
   if (!eglGetConfigAttrib(eglDisplay, config, EGL_BLUE_SIZE, &value) || value < 8)
     return false;
-  return !(!eglGetConfigAttrib(eglDisplay, config, EGL_DEPTH_SIZE, &value) || value < 16);
+  return eglGetConfigAttrib(eglDisplay, config, EGL_DEPTH_SIZE, &value) && value >= 16;
 }
 
 EGLConfig CGLContextEGL::GetEGLConfig(EGLDisplay eglDisplay, XVisualInfo *vInfo)

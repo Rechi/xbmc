@@ -245,7 +245,7 @@ bool CGUIEditControl::OnAction(const CAction &action)
       // input from the keyboard
       int ch = action.GetUnicode();
       // ignore non-printing characters
-      if ( !((0 <= ch && ch < 0x8) || (0xE <= ch && ch < 0x1B) || (0x1C <= ch && ch < 0x20)) )
+      if ((0 > ch || ch >= 0x8) && (0xE > ch || ch >= 0x1B) && (0x1C > ch || ch >= 0x20))
       {
       switch (ch)
       {
@@ -681,7 +681,9 @@ std::string CGUIEditControl::GetLabel2() const
 
 bool CGUIEditControl::ClearMD5()
 {
-  if (!(m_inputType == INPUT_TYPE_PASSWORD_MD5 || m_inputType == INPUT_TYPE_PASSWORD_NUMBER_VERIFY_NEW) || !m_isMD5)
+  if ((m_inputType != INPUT_TYPE_PASSWORD_MD5 &&
+       m_inputType != INPUT_TYPE_PASSWORD_NUMBER_VERIFY_NEW) ||
+      !m_isMD5)
     return false;
 
   m_text2.clear();

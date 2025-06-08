@@ -82,7 +82,8 @@ void CSaveFileState::DoWork(CFileItem& item,
       }
       else
       {
-        if (URIUtils::IsPlugin(progressTrackingFile) && !(item.HasVideoInfoTag() && item.GetVideoInfoTag()->m_iDbId >= 0))
+        if (URIUtils::IsPlugin(progressTrackingFile) &&
+            (!item.HasVideoInfoTag() || item.GetVideoInfoTag()->m_iDbId < 0))
         {
           // FileItem from plugin can lack information, make sure all needed fields are set
           CVideoInfoTag *tag = item.GetVideoInfoTag();
@@ -211,7 +212,7 @@ void CSaveFileState::DoWork(CFileItem& item,
         const CVideoInfoTag* tag{item.HasVideoInfoTag() ? item.GetVideoInfoTag() : nullptr};
 
         if (tag && tag->m_iFileId >= 0 &&
-            !(tag->m_iDbId < 0 && item.GetVideoContentType() != VideoDbContentType::UNKNOWN) &&
+            (tag->m_iDbId >= 0 || item.GetVideoContentType() == VideoDbContentType::UNKNOWN) &&
             URIUtils::IsBlurayPath(item.GetDynPath()) &&
             tag->m_strFileNameAndPath != item.GetDynPath())
         {

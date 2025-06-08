@@ -178,7 +178,7 @@ std::unique_ptr<CTexture> CTextureCacheJob::LoadImage(const IMAGE_FILES::CImageF
   // Validate file URL to see if it is an image
   CFileItem file(imageURL.GetTargetFile(), false);
   file.FillInMimeType();
-  if (!(file.IsPicture() && !(file.IsZIP() || file.IsRAR() || file.IsCBR() || file.IsCBZ())) &&
+  if ((!file.IsPicture() || (file.IsZIP() || file.IsRAR() || file.IsCBR() || file.IsCBZ())) &&
       !StringUtils::StartsWithNoCase(file.GetMimeType(), "image/") &&
       !StringUtils::EqualsNoCase(file.GetMimeType(),
                                  "application/octet-stream")) // ignore non-pictures
