@@ -998,7 +998,7 @@ int CVideoDatabase::AddFile(const std::string& strFileNameAndPath,
                             int playcount /* = 0 */,
                             const CDateTime& lastPlayed /* = CDateTime() */)
 {
-  std::string strSQL = "";
+  std::string strSQL;
   try
   {
     int idFile;
