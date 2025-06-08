@@ -170,7 +170,7 @@ void CWinSystemGbmGLESContext::PresentRender(bool rendered, bool videoLayer)
       m_dispReset = false;
       std::unique_lock lock(m_resourceSection);
 
-      for (auto resource : m_resources)
+      for (auto* resource : m_resources)
         resource->OnResetDisplay();
     }
   }

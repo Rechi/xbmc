@@ -76,7 +76,7 @@ void CControllerSelect::Process()
 
   CGUIWindowManager& windowManager = gui->GetWindowManager();
 
-  auto pSelectDialog = windowManager.GetWindow<CGUIDialogSelect>(WINDOW_DIALOG_SELECT);
+  auto* pSelectDialog = windowManager.GetWindow<CGUIDialogSelect>(WINDOW_DIALOG_SELECT);
   if (pSelectDialog == nullptr)
     return;
 

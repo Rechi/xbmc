@@ -637,7 +637,7 @@ NPT_Result CUPnPRenderer::OnSetNextAVTransportURI(PLT_ActionReference& action)
       playlistId = PLAYLIST::Id::TYPE_VIDEO;
 
     // note: auto-deleted when the message is consumed
-    auto playlist = new CFileItemList();
+    auto* playlist = new CFileItemList();
     playlist->AddFront(item, 0);
     CServiceBroker::GetAppMessenger()->PostMsg(
         TMSG_PLAYLISTPLAYER_ADD, static_cast<int>(playlistId), -1, static_cast<void*>(playlist));

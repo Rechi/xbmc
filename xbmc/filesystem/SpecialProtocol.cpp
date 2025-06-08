@@ -169,7 +169,7 @@ std::string CSpecialProtocol::TranslatePath(const CURL &url)
     translatedPath = URIUtils::AddFileToFolder(CUtil::VideoPlaylistsLocation(), FileName);
   else if (RootDir == "skin")
   {
-    auto winSystem = CServiceBroker::GetWinSystem();
+    auto* winSystem = CServiceBroker::GetWinSystem();
     // windowing may not have been initialized yet
     if (winSystem)
       translatedPath = URIUtils::AddFileToFolder(winSystem->GetGfxContext().GetMediaDir(), FileName);

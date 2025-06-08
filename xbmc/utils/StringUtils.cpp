@@ -1042,7 +1042,7 @@ static wchar_t GetCollationWeight(const wchar_t& r)
   auto index = r >> 8;
   if (index > 255)
     return 0xFFFD;
-  auto plane = planemap[index];
+  const auto* plane = planemap[index];
   if (plane == nullptr)
     return r;
   return static_cast<wchar_t>(plane[r & 0xFF]);
@@ -1054,21 +1054,21 @@ static wchar_t GetCollationWeight(const wchar_t& r)
 // See also the equivalent StringUtils::AlphaNumericCollation() for UFT8 data
 int64_t StringUtils::AlphaNumericCompare(std::wstring_view left, std::wstring_view right) noexcept
 {
-  auto l{left.cbegin()};
-  auto r{right.cbegin()};
+  const auto* l{left.cbegin()};
+  const auto* r{right.cbegin()};
   while (l != left.end() && r != right.end())
   {
     // check if we have a numerical value
     if (*l >= L'0' && *l <= L'9' && *r >= L'0' && *r <= L'9')
     {
-      auto ld = l;
+      const auto* ld = l;
       int64_t lnum{*ld++ - L'0'};
       while (ld != left.end() && *ld >= L'0' && *ld <= L'9' && std::distance(l, ld) < 15)
       { // compare only up to 15 digits
         lnum *= 10;
         lnum += *ld++ - L'0';
       }
-      auto rd = r;
+      const auto* rd = r;
       int64_t rnum{*rd++ - L'0'};
       while (rd != right.end() && *rd >= L'0' && *rd <= L'9' && std::distance(r, rd) < 15)
       { // compare only up to 15 digits
@@ -1545,7 +1545,7 @@ std::string StringUtils::BinaryStringToString(std::string_view in)
 {
   std::string out;
   out.reserve(in.size() / 2);
-  for (auto cur = in.begin(); cur != in.end(); ++cur)
+  for (const auto* cur = in.begin(); cur != in.end(); ++cur)
   {
     if (*cur == '\\') {
       ++cur;
@@ -1651,7 +1651,7 @@ int StringUtils::FindEndBracket(std::string_view str,
                                 int startPos /*=0*/) noexcept
 {
   int blocks = 1;
-  for (auto iter = str.begin() + startPos; iter != str.end(); ++iter)
+  for (const auto* iter = str.begin() + startPos; iter != str.end(); ++iter)
   {
     if (*iter == opener)
       blocks++;
@@ -1900,10 +1900,9 @@ bool StringUtils::Contains(std::string_view str,
 {
   if (isCaseInsensitive)
   {
-    auto itStr = std::search(str.begin(), str.end(), keyword.begin(), keyword.end(),
-                             [](unsigned char ch1, unsigned char ch2) {
-                               return std::toupper(ch1) == std::toupper(ch2);
-                             });
+    const auto* itStr = std::search(str.begin(), str.end(), keyword.begin(), keyword.end(),
+                                    [](unsigned char ch1, unsigned char ch2)
+                                    { return std::toupper(ch1) == std::toupper(ch2); });
     return (itStr != str.end());
   }
 

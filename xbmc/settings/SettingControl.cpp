@@ -61,16 +61,16 @@ bool CSettingControlFormattedRange::Deserialize(const TiXmlNode *node, bool upda
     XMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_FORMATLABEL, m_formatLabel);
 
     // get the minimum label from <setting><constraints><minimum label="X" />
-    auto settingNode = node->Parent();
+    const auto* settingNode = node->Parent();
     if (settingNode != nullptr)
     {
-      auto constraintsNode = settingNode->FirstChild(SETTING_XML_ELM_CONSTRAINTS);
+      const auto* constraintsNode = settingNode->FirstChild(SETTING_XML_ELM_CONSTRAINTS);
       if (constraintsNode != nullptr)
       {
-        auto minimumNode = constraintsNode->FirstChild(SETTING_XML_ELM_MINIMUM);
+        const auto* minimumNode = constraintsNode->FirstChild(SETTING_XML_ELM_MINIMUM);
         if (minimumNode != nullptr)
         {
-          auto minimumElem = minimumNode->ToElement();
+          const auto* minimumElem = minimumNode->ToElement();
           if (minimumElem != nullptr)
           {
             if (minimumElem->QueryIntAttribute(SETTING_XML_ATTR_LABEL, &m_minimumLabel) != TIXML_SUCCESS)
@@ -172,7 +172,7 @@ bool CSettingControlButton::Deserialize(const TiXmlNode *node, bool update /* = 
       else
         CLog::Log(LOGWARNING, "CSettingControlButton: invalid <show>");
 
-      auto show = node->FirstChildElement("show");
+      const auto* show = node->FirstChildElement("show");
       if (show != nullptr)
       {
         const char *strShowDetails = nullptr;
@@ -304,14 +304,14 @@ bool CSettingControlRange::Deserialize(const TiXmlNode *node, bool update /* = f
   if (!ISettingControl::Deserialize(node, update))
     return false;
 
-  auto formatLabel = node->FirstChildElement(SETTING_XML_ELM_CONTROL_FORMATLABEL);
+  const auto* formatLabel = node->FirstChildElement(SETTING_XML_ELM_CONTROL_FORMATLABEL);
   if (formatLabel != nullptr)
   {
     XMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_FORMATLABEL, m_formatLabel);
     if (m_formatLabel < 0)
       return false;
 
-    auto formatValue = formatLabel->Attribute(SETTING_XML_ELM_CONTROL_FORMATVALUE);
+    const auto* formatValue = formatLabel->Attribute(SETTING_XML_ELM_CONTROL_FORMATVALUE);
     if (formatValue != nullptr)
     {
       if (StringUtils::IsInteger(formatValue))

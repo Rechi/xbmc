@@ -1045,7 +1045,7 @@ JSONRPC_STATUS CPlayerOperations::Open(const std::string &method, ITransportLaye
         if (list.Size() == 1)
           HandleResumeOption(optionResume, *list[0]);
 
-        auto l = new CFileItemList(); //don't delete
+        auto* l = new CFileItemList(); //don't delete
         l->Copy(list);
         CServiceBroker::GetAppMessenger()->PostMsg(TMSG_MEDIA_PLAY, -1, -1, static_cast<void*>(l),
                                                    playername);

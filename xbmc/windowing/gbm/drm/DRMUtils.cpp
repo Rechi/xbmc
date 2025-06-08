@@ -323,7 +323,7 @@ bool CDRMUtils::OpenDrm(bool needConnector)
     return false;
   }
 
-  for (const auto device : devices)
+  for (auto* const device : devices)
   {
     if (!(device->available_nodes & 1 << DRM_NODE_PRIMARY))
       continue;
@@ -335,7 +335,7 @@ bool CDRMUtils::OpenDrm(bool needConnector)
 
     if (needConnector)
     {
-      auto resources = drmModeGetResources(m_fd);
+      auto* resources = drmModeGetResources(m_fd);
       if (!resources)
         continue;
 
@@ -407,7 +407,7 @@ bool CDRMUtils::InitDrm()
               __FUNCTION__, strerror(errno));
 #endif
 
-  auto resources = drmModeGetResources(m_fd);
+  auto* resources = drmModeGetResources(m_fd);
   if (!resources)
   {
     CLog::Log(LOGERROR, "CDRMUtils::{} - failed to get drm resources: {}", __FUNCTION__,
@@ -429,7 +429,7 @@ bool CDRMUtils::InitDrm()
 
   drmModeFreeResources(resources);
 
-  auto planeResources = drmModeGetPlaneResources(m_fd);
+  auto* planeResources = drmModeGetPlaneResources(m_fd);
   if (!planeResources)
   {
     CLog::Log(LOGERROR, "CDRMUtils::{} - failed to get drm plane resources: {}", __FUNCTION__,

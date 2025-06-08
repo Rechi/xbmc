@@ -1003,7 +1003,7 @@ void CWindowDecorator::CommitAllBuffers()
     if (emplaceResult.second)
     {
       // Buffer was not pending already
-      auto wlBufferC = reinterpret_cast<wl_buffer*> (wlBuffer.c_ptr());
+      auto* wlBufferC = reinterpret_cast<wl_buffer*>(wlBuffer.c_ptr());
       // We can refer to the buffer neither by iterator (might be invalidated) nor by
       // capturing the C++ instance in the lambda (would create a reference loop and
       // never allow the object to be freed), so use the raw pointer for now

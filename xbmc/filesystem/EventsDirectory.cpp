@@ -23,7 +23,7 @@ bool CEventsDirectory::GetDirectory(const CURL& url, CFileItemList &items)
   items.ClearProperties();
   items.SetContent("events");
 
-  auto log = CServiceBroker::GetEventLog();
+  auto* log = CServiceBroker::GetEventLog();
   Events events;
 
   std::string hostname = url.GetHostName();

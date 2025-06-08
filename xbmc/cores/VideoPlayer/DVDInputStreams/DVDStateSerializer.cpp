@@ -62,7 +62,7 @@ bool CDVDStateSerializer::XMLToDVDState(DVDState& state, const std::string& xmls
     return false;
   }
 
-  auto version = hRoot.ToElement()->Attribute("version");
+  const auto* version = hRoot.ToElement()->Attribute("version");
   if (!version || !StringUtils::EqualsNoCase(version, std::to_string(DVDSTATESERIALIZER_VERSION)))
   {
     CLog::LogF(LOGERROR, "Failed to deserialize dvd state - incompatible serializer version.");

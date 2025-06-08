@@ -105,13 +105,13 @@ bool CPlayListASX::LoadData(std::istream& stream)
     std::string value = srcRootElement->Value();
 
     StringUtils::ToLower(value);
-    auto targetRootElement = targetDoc.NewElement(value.c_str());
+    auto* targetRootElement = targetDoc.NewElement(value.c_str());
 
-    auto* rootAttrib = srcRootElement->ToElement()->FirstAttribute();
+    const auto* rootAttrib = srcRootElement->ToElement()->FirstAttribute();
     while (rootAttrib)
     {
       std::string attribName = rootAttrib->Name();
-      auto attribValue = rootAttrib->Value();
+      const auto* attribValue = rootAttrib->Value();
       StringUtils::ToLower(attribName);
       targetRootElement->SetAttribute(attribName.c_str(), attribValue);
       rootAttrib = rootAttrib->Next();
@@ -192,11 +192,11 @@ void CPlayListASX::recurseLowercaseNames(tinyxml2::XMLNode& targetNode,
     StringUtils::ToLower(strNodeValue);
     auto* targetElement = targetNode.GetDocument()->NewElement(strNodeValue.c_str());
 
-    auto* attrib = sourceNode->ToElement()->FirstAttribute();
+    const auto* attrib = sourceNode->ToElement()->FirstAttribute();
     while (attrib)
     {
       std::string attribName = attrib->Name();
-      auto attribValue = attrib->Value();
+      const auto* attribValue = attrib->Value();
       StringUtils::ToLower(attribName);
       targetElement->SetAttribute(attribName.c_str(), attribValue);
       attrib = attrib->Next();
@@ -216,7 +216,7 @@ void CPlayListASX::recurseLowercaseNames(tinyxml2::XMLNode& targetNode,
   else if (sourceNode->ToText())
   {
     auto* sourceTextElement = sourceNode->ToText();
-    auto* sourceText = sourceTextElement->Value();
+    const auto* sourceText = sourceTextElement->Value();
     auto* targetText = targetNode.GetDocument()->NewText(sourceText);
 
     if (!sourceNode->NoChildren())

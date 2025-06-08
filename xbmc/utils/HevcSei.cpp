@@ -160,7 +160,7 @@ std::pair<bool, const std::vector<uint8_t>> CHevcSei::RemoveHdr10PlusFromSeiNalu
 
   if (auto res = CHevcSei::FindHdr10PlusSeiMessage(buf, messages))
   {
-    auto msg = *res;
+    const auto* msg = *res;
 
     containsHdr10Plus = true;
     if (messages.size() > 1)
