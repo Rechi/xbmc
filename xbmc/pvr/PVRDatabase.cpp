@@ -1309,9 +1309,9 @@ std::vector<std::shared_ptr<CPVRTimerInfoTag>> CPVRDatabase::GetTimers(
         newTag->SetTimerType(CPVRTimerType::CreateFromIds(m_pDS->fv("iTimerType").get_asInt(),
                                                           PVR_CLIENT_INVALID_UID));
         newTag->m_state = static_cast<PVR_TIMER_STATE>(m_pDS->fv("iState").get_asInt());
-        newTag->m_strTitle = m_pDS->fv("sTitle").get_asString().c_str();
+        newTag->m_strTitle = m_pDS->fv("sTitle").get_asString();
         newTag->m_iClientChannelUid = m_pDS->fv("iClientChannelUid").get_asInt();
-        newTag->m_strSeriesLink = m_pDS->fv("sSeriesLink").get_asString().c_str();
+        newTag->m_strSeriesLink = m_pDS->fv("sSeriesLink").get_asString();
         newTag->SetStartFromUTC(CDateTime::FromDBDateTime(m_pDS->fv("sStartTime").get_asString()));
         newTag->m_bStartAnyTime = m_pDS->fv("bStartAnyTime").get_asBool();
         newTag->SetEndFromUTC(CDateTime::FromDBDateTime(m_pDS->fv("sEndTime").get_asString()));
@@ -1322,7 +1322,7 @@ std::vector<std::shared_ptr<CPVRTimerInfoTag>> CPVRDatabase::GetTimers(
         newTag->m_iEpgUid = m_pDS->fv("iEpgUid").get_asInt();
         newTag->m_iMarginStart = m_pDS->fv("iMarginStart").get_asInt();
         newTag->m_iMarginEnd = m_pDS->fv("iMarginEnd").get_asInt();
-        newTag->m_strEpgSearchString = m_pDS->fv("sEpgSearchString").get_asString().c_str();
+        newTag->m_strEpgSearchString = m_pDS->fv("sEpgSearchString").get_asString();
         newTag->m_bFullTextEpgSearch = m_pDS->fv("bFullTextEpgSearch").get_asBool();
         newTag->m_iPreventDupEpisodes = m_pDS->fv("iPreventDuplicates").get_asInt();
         newTag->m_iPriority = m_pDS->fv("iPrority").get_asInt();

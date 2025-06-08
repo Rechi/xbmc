@@ -1758,7 +1758,7 @@ bool CMusicDatabase::UpdateArtist(const CArtist& artist)
                artist.strBiography, //
                artist.strDied, //
                artist.strDisbanded, //
-               StringUtils::Join(artist.yearsActive, itemSeparator).c_str(), //
+               StringUtils::Join(artist.yearsActive, itemSeparator), //
                artist.thumbURL.GetData());
 
   DeleteArtistDiscography(artist.idArtist);
@@ -3480,7 +3480,7 @@ bool CMusicDatabase::SearchArtists(const std::string& search, CFileItemList& art
     if (nullptr == m_pDS)
       return false;
 
-    std::string strVariousArtists = g_localizeStrings.Get(340).c_str();
+    const std::string& strVariousArtists = g_localizeStrings.Get(340);
     std::string strSQL;
     if (search.size() >= MIN_FULL_SEARCH_LENGTH)
       strSQL = PrepareSQL("SELECT * FROM artist "
@@ -9648,9 +9648,9 @@ bool CMusicDatabase::GetAlbumPath(int idAlbum, std::string& basePath)
   for (const auto& pathpair : paths)
   {
     if (basePath.empty())
-      basePath = pathpair.first.c_str();
+      basePath = pathpair.first;
     else
-      URIUtils::GetCommonPath(basePath, pathpair.first.c_str());
+      URIUtils::GetCommonPath(basePath, pathpair.first);
   }
   return true;
 }
@@ -13940,7 +13940,7 @@ bool CMusicDatabase::SetResumeBookmarkForAudioBook(const CFileItem& item, int bo
   std::string strSQL = PrepareSQL("SELECT bookmark FROM audiobook "
                                   "WHERE file='%s'",
                                   item.GetDynPath().c_str());
-  if (!m_pDS->query(strSQL.c_str()) || m_pDS->num_rows() == 0)
+  if (!m_pDS->query(strSQL) || m_pDS->num_rows() == 0)
   {
     if (!AddAudioBook(item))
       return false;
@@ -13957,7 +13957,7 @@ bool CMusicDatabase::GetResumeBookmarkForAudioBook(const CFileItem& item, int& b
 {
   std::string strSQL =
       PrepareSQL("SELECT bookmark FROM audiobook WHERE file='%s'", item.GetDynPath().c_str());
-  if (!m_pDS->query(strSQL.c_str()) || m_pDS->num_rows() == 0)
+  if (!m_pDS->query(strSQL) || m_pDS->num_rows() == 0)
     return false;
 
   bookmark = m_pDS->fv(0).get_asInt();
