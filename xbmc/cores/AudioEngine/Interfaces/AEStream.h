@@ -64,7 +64,6 @@ public:
     double centerMixLevel = 1;
   };
 
-public:
   /**
    * Returns the amount of space available in the stream
    * @return The number of bytes AddData will consume

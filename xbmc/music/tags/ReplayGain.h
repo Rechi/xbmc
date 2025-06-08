@@ -21,7 +21,6 @@ public:
     ALBUM,
     TRACK
   };
-public:
   class Info
   {
   public:

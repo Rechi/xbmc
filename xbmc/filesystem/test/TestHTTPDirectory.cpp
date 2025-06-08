@@ -80,7 +80,6 @@ protected:
 
   ~TestHTTPDirectory() override = default;
 
-protected:
   void SetUp() override
   {
     CServiceBroker::RegisterDNSNameCache(std::make_shared<CDNSNameCache>());

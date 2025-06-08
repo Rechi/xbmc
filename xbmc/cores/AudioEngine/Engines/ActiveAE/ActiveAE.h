@@ -301,7 +301,6 @@ protected:
   void SetStreamFFmpegInfo(CActiveAEStream *stream, int profile, enum AVMatrixEncoding matrix_encoding, enum AVAudioServiceType audio_service_type);
   void SetStreamFade(CActiveAEStream *stream, float from, float target, unsigned int millis);
 
-protected:
   void Process() override;
   void StateMachine(int signal, Protocol *port, Message *msg);
   bool InitSink();

@@ -26,5 +26,6 @@ Checks: "\
   readability-misleading-indentation,\
   readability-non-const-parameter,\
   readability-qualified-auto,\
+  readability-redundant-access-specifiers,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'
