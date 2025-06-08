@@ -46,7 +46,13 @@ public:
   void ResetTimer();
 
 protected:
-  static void AddToQueue(const std::string& aImageFile, const eMessageType eType, const std::string& aCaption, const std::string& aDescription, unsigned int displayTime, bool withSound, unsigned int messageTime);
+  static void AddToQueue(const std::string& aImageFile,
+                         eMessageType eType,
+                         const std::string& aCaption,
+                         const std::string& aDescription,
+                         unsigned int displayTime,
+                         bool withSound,
+                         unsigned int messageTime);
 
   unsigned int m_timer;
 

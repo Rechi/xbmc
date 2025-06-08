@@ -125,7 +125,7 @@ public:
   uint8_t* GetMemPtr() override;
   void GetPlanes(uint8_t*(&planes)[YuvImage::MAX_PLANES]) override;
   void GetStrides(int(&strides)[YuvImage::MAX_PLANES]) override;
-  void SetPixelFormat(const AVPixelFormat pixFormat) override;
+  void SetPixelFormat(AVPixelFormat pixFormat) override;
   void SetDimensions(int width, int height, const int (&strides)[YuvImage::MAX_PLANES]) override;
   void SetDimensions(int width, int height, const int (&strides)[YuvImage::MAX_PLANES], const int (&planeOffsets)[YuvImage::MAX_PLANES]) override;
   bool Alloc();

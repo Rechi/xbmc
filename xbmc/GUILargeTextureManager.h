@@ -35,7 +35,7 @@ public:
                unsigned int targetWidth,
                unsigned int targetHeight,
                CAspectRatio::AspectRatio aspectRatio,
-               const bool useCache);
+               bool useCache);
   ~CImageLoader() override;
 
   /*!

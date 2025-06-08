@@ -42,7 +42,7 @@ public:
   void Refresh() override;
 
   // Implementation of Observer
-  void Notify(const Observable& obs, const ObservableMessage msg) override;
+  void Notify(const Observable& obs, ObservableMessage msg) override;
 
 private:
   // Add-on API

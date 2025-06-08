@@ -26,7 +26,7 @@ namespace XFILE
   class CFileCache : public IFile, public CThread
   {
   public:
-    explicit CFileCache(const unsigned int flags);
+    explicit CFileCache(unsigned int flags);
     ~CFileCache() override;
 
     // CThread methods

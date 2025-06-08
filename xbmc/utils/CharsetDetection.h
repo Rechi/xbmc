@@ -21,7 +21,7 @@ public:
    * @param contentLength       length of text
    * @return detected encoding or empty string if BOM not detected
    */
-  static std::string GetBomEncoding(const char* const content, const size_t contentLength);
+  static std::string GetBomEncoding(const char* content, size_t contentLength);
   /**
    * Detect text encoding by Byte Order Mark
    * Multibyte encodings (UTF-16/32) always ends with explicit endianness (LE/BE)
@@ -34,7 +34,9 @@ public:
   static inline bool DetectXmlEncoding(const std::string& xmlContent, std::string& detectedEncoding)
   { return DetectXmlEncoding(xmlContent.c_str(), xmlContent.length(), detectedEncoding); }
 
-  static bool DetectXmlEncoding(const char* const xmlContent, const size_t contentLength, std::string& detectedEncoding);
+  static bool DetectXmlEncoding(const char* xmlContent,
+                                size_t contentLength,
+                                std::string& detectedEncoding);
 
   /**
    * Detect HTML charset and HTML convert to UTF-8
@@ -69,7 +71,9 @@ public:
   static bool ConvertPlainTextToUtf8(const std::string& textContent, std::string& converted, const std::string& serverReportedCharset, std::string& usedCharset);
 
 private:
-  static bool GetXmlEncodingFromDeclaration(const char* const xmlContent, const size_t contentLength, std::string& declaredEncoding);
+  static bool GetXmlEncodingFromDeclaration(const char* xmlContent,
+                                            size_t contentLength,
+                                            std::string& declaredEncoding);
   /**
    * Try to guess text encoding by searching for '<?xml' mark in different encodings
    * Multibyte encodings (UTF/UCS) always ends with explicit endianness (LE/BE)
@@ -78,14 +82,16 @@ private:
    * @param detectedEncoding    reference to variable that receive supposed encoding
    * @return true if any encoding supposed, false otherwise
    */
-  static bool GuessXmlEncoding(const char* const xmlContent, const size_t contentLength, std::string& supposedEncoding);
+  static bool GuessXmlEncoding(const char* xmlContent,
+                               size_t contentLength,
+                               std::string& supposedEncoding);
 
   static std::string GetHtmlEncodingFromHead(const std::string& htmlContent);
   static size_t GetHtmlAttribute(const std::string& htmlContent, size_t pos, std::string& atrName, std::string& strValue);
   static std::string ExtractEncodingFromHtmlMeta(const std::string& metaContent, size_t pos = 0);
 
   static bool checkConversion(const std::string& srcCharset, const std::string& src, std::string& dst);
-  static void appendCharAsAsciiUpperCase(std::string& str, const char chr);
+  static void appendCharAsAsciiUpperCase(std::string& str, char chr);
 
   static const size_t m_XmlDeclarationMaxLength;
   static const size_t m_HtmlCharsetEndSearchPos;

@@ -100,7 +100,7 @@ public:
    \param parentSize the size of the parent.
    \sa GetPosition
    */
-  static float ParsePosition(const char* pos, const float parentSize);
+  static float ParsePosition(const char* pos, float parentSize);
 
   static bool GetInfoLabelFromElement(const TiXmlElement* element,
                                       KODI::GUILIB::GUIINFO::CGUIInfoLabel& infoLabel,
@@ -157,10 +157,7 @@ protected:
    \param value [out] the returned value.
    \sa ParsePosition, GetDimension, GetDimensions.
    */
-  static bool GetPosition(const TiXmlNode* node,
-                          const char* tag,
-                          const float parentSize,
-                          float& value);
+  static bool GetPosition(const TiXmlNode* node, const char* tag, float parentSize, float& value);
 
   /*! \brief grab a dimension out of the XML
 
@@ -177,7 +174,7 @@ protected:
    \sa GetPosition, GetDimensions, ParsePosition.
    */
   static bool GetDimension(
-      const TiXmlNode* node, const char* strTag, const float parentSize, float& value, float& min);
+      const TiXmlNode* node, const char* strTag, float parentSize, float& value, float& min);
 
   /*! \brief Retrieve the dimensions for a control.
 
@@ -202,7 +199,7 @@ protected:
                             const char* centerLeftTag,
                             const char* centerRightTag,
                             const char* widthTag,
-                            const float parentSize,
+                            float parentSize,
                             float& left,
                             float& width,
                             float& min_width);

@@ -30,7 +30,7 @@ public:
   ~CPeripheralMouse(void) override;
 
   // implementation of CPeripheral
-  bool InitialiseFeature(const PeripheralFeature feature) override;
+  bool InitialiseFeature(PeripheralFeature feature) override;
   void RegisterMouseDriverHandler(KODI::MOUSE::IMouseDriverHandler* handler,
                                   bool bPromiscuous) override;
   void UnregisterMouseDriverHandler(KODI::MOUSE::IMouseDriverHandler* handler) override;

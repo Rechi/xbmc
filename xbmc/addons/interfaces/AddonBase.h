@@ -53,33 +53,27 @@ struct Interface_Base
    * class.
    */
   //@{
-  static void addon_log_msg(const KODI_ADDON_BACKEND_HDL hdl,
-                            const int addonLogLevel,
-                            const char* strMessage);
-  static char* get_type_version(const KODI_ADDON_BACKEND_HDL hdl, int type);
-  static char* get_addon_path(const KODI_ADDON_BACKEND_HDL hdl);
-  static char* get_lib_path(const KODI_ADDON_BACKEND_HDL hdl);
-  static char* get_user_path(const KODI_ADDON_BACKEND_HDL hdl);
-  static char* get_temp_path(const KODI_ADDON_BACKEND_HDL hdl);
-  static char* get_localized_string(const KODI_ADDON_BACKEND_HDL hdl, long label_id);
-  static char* get_addon_info(const KODI_ADDON_BACKEND_HDL hdl, const char* id);
-  static bool open_settings_dialog(const KODI_ADDON_BACKEND_HDL hdl);
-  static bool is_setting_using_default(const KODI_ADDON_BACKEND_HDL hdl, const char* id);
-  static bool get_setting_bool(const KODI_ADDON_BACKEND_HDL hdl, const char* id, bool* value);
-  static bool get_setting_int(const KODI_ADDON_BACKEND_HDL hdl, const char* id, int* value);
-  static bool get_setting_float(const KODI_ADDON_BACKEND_HDL hdl, const char* id, float* value);
-  static bool get_setting_string(const KODI_ADDON_BACKEND_HDL hdl, const char* id, char** value);
-  static bool set_setting_bool(const KODI_ADDON_BACKEND_HDL hdl, const char* id, bool value);
-  static bool set_setting_int(const KODI_ADDON_BACKEND_HDL hdl, const char* id, int value);
-  static bool set_setting_float(const KODI_ADDON_BACKEND_HDL hdl, const char* id, float value);
-  static bool set_setting_string(const KODI_ADDON_BACKEND_HDL hdl,
-                                 const char* id,
-                                 const char* value);
-  static void free_string(const KODI_ADDON_BACKEND_HDL hdl, char* str);
-  static void free_string_array(const KODI_ADDON_BACKEND_HDL hdl, char** arr, int numElements);
-  static void* get_interface(const KODI_ADDON_BACKEND_HDL hdl,
-                             const char* name,
-                             const char* version);
+  static void addon_log_msg(KODI_ADDON_BACKEND_HDL hdl, int addonLogLevel, const char* strMessage);
+  static char* get_type_version(KODI_ADDON_BACKEND_HDL hdl, int type);
+  static char* get_addon_path(KODI_ADDON_BACKEND_HDL hdl);
+  static char* get_lib_path(KODI_ADDON_BACKEND_HDL hdl);
+  static char* get_user_path(KODI_ADDON_BACKEND_HDL hdl);
+  static char* get_temp_path(KODI_ADDON_BACKEND_HDL hdl);
+  static char* get_localized_string(KODI_ADDON_BACKEND_HDL hdl, long label_id);
+  static char* get_addon_info(KODI_ADDON_BACKEND_HDL hdl, const char* id);
+  static bool open_settings_dialog(KODI_ADDON_BACKEND_HDL hdl);
+  static bool is_setting_using_default(KODI_ADDON_BACKEND_HDL hdl, const char* id);
+  static bool get_setting_bool(KODI_ADDON_BACKEND_HDL hdl, const char* id, bool* value);
+  static bool get_setting_int(KODI_ADDON_BACKEND_HDL hdl, const char* id, int* value);
+  static bool get_setting_float(KODI_ADDON_BACKEND_HDL hdl, const char* id, float* value);
+  static bool get_setting_string(KODI_ADDON_BACKEND_HDL hdl, const char* id, char** value);
+  static bool set_setting_bool(KODI_ADDON_BACKEND_HDL hdl, const char* id, bool value);
+  static bool set_setting_int(KODI_ADDON_BACKEND_HDL hdl, const char* id, int value);
+  static bool set_setting_float(KODI_ADDON_BACKEND_HDL hdl, const char* id, float value);
+  static bool set_setting_string(KODI_ADDON_BACKEND_HDL hdl, const char* id, const char* value);
+  static void free_string(KODI_ADDON_BACKEND_HDL hdl, char* str);
+  static void free_string_array(KODI_ADDON_BACKEND_HDL hdl, char** arr, int numElements);
+  static void* get_interface(KODI_ADDON_BACKEND_HDL hdl, const char* name, const char* version);
   //@}
 };
 
