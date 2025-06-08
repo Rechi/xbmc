@@ -188,7 +188,7 @@ struct FallbackWindowMapping
   int target;
 };
 
-static const std::vector<FallbackWindowMapping> FallbackWindows = {
+const std::vector<FallbackWindowMapping> FallbackWindows = {
     {WINDOW_FULLSCREEN_LIVETV, WINDOW_FULLSCREEN_VIDEO},
     {WINDOW_FULLSCREEN_LIVETV_INPUT, WINDOW_FULLSCREEN_LIVETV},
     {WINDOW_FULLSCREEN_LIVETV_PREVIEW, WINDOW_FULLSCREEN_LIVETV},

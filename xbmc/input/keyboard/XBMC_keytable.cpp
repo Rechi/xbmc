@@ -20,7 +20,7 @@ namespace
 // The array of XBMCKEYTABLEs used in XBMC.
 // sym, unicode, ascii, vkey, keyname
 // clang-format off
-static const XBMCKEYTABLE XBMCKeyTable[] = {
+const XBMCKEYTABLE XBMCKeyTable[] = {
     {XBMCK_BACKSPACE, 0, 0, XBMCVK_BACK, "backspace"},
     {XBMCK_TAB, 0, 0, XBMCVK_TAB, "tab"},
     {XBMCK_RETURN, 0, 0, XBMCVK_RETURN, "return"},
@@ -302,7 +302,7 @@ static const XBMCKEYTABLE XBMCKeyTable[] = {
 };
 // clang-format on
 
-static int XBMCKeyTableSize = sizeof(XBMCKeyTable) / sizeof(XBMCKEYTABLE);
+int XBMCKeyTableSize = sizeof(XBMCKeyTable) / sizeof(XBMCKEYTABLE);
 } // namespace
 
 bool KeyTable::LookupName(std::string keyname, XBMCKEYTABLE* keytable)
