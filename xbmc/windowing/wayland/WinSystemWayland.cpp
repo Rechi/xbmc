@@ -133,8 +133,7 @@ struct MsgBufferScale
 
 }
 
-CWinSystemWayland::CWinSystemWayland()
-: CWinSystemBase{}, m_protocol{"WinSystemWaylandInternal"}
+CWinSystemWayland::CWinSystemWayland() : m_protocol{"WinSystemWaylandInternal"}
 {
   m_winEvents = std::make_unique<CWinEventsWayland>();
 }

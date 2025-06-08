@@ -83,9 +83,8 @@ class CDVDMediaCodecOnFrameAvailable : public CEvent,
                                        public jni::CJNIXBMCSurfaceTextureOnFrameAvailableListener
 {
 public:
-  CDVDMediaCodecOnFrameAvailable(std::shared_ptr<CJNISurfaceTexture> &surfaceTexture)
-    : CJNIXBMCSurfaceTextureOnFrameAvailableListener()
-    , m_surfaceTexture(surfaceTexture)
+  CDVDMediaCodecOnFrameAvailable(std::shared_ptr<CJNISurfaceTexture>& surfaceTexture)
+    : m_surfaceTexture(surfaceTexture)
   {
     m_surfaceTexture->setOnFrameAvailableListener(*this);
   }

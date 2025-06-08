@@ -93,7 +93,7 @@ private:
 
   // Savestate functionality
   std::unique_ptr<CSavestateDatabase> m_savestateDatabase;
-  std::string m_autosavePath{};
+  std::string m_autosavePath;
   std::vector<std::future<void>> m_savestateThreads;
   CCriticalSection m_savestateMutex;
 

@@ -39,8 +39,7 @@ CGUIImage::CGUIImage(const CGUIImage& left)
     m_image(left.m_image),
     m_info(left.m_info),
     m_textureCurrent(left.m_textureCurrent->Clone()),
-    m_textureNext(left.m_textureNext->Clone()),
-    m_currentFallback()
+    m_textureNext(left.m_textureNext->Clone())
 {
   m_crossFadeTime = left.m_crossFadeTime;
   // defaults

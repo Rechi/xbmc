@@ -137,8 +137,6 @@ KD_TEX_SWIZ CXBTFFrame::GetKDSwizzle() const
 }
 
 CXBTFFile::CXBTFFile()
-  : m_path(),
-    m_frames()
 { }
 
 const std::string& CXBTFFile::GetPath() const

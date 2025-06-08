@@ -29,5 +29,9 @@ Checks: "\
   readability-redundant-access-specifiers,\
   readability-redundant-control-flow,\
   readability-redundant-declaration,\
+  readability-redundant-member-init,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'
+CheckOptions:
+  - key:   readability-redundant-member-init.IgnoreBaseInCopyConstructors
+    value: true
