@@ -22,5 +22,6 @@ Checks: "\
   readability-container-data-pointer,\
   readability-container-size-empty,\
   readability-delete-null-pointer,\
+  readability-duplicate-include,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'
