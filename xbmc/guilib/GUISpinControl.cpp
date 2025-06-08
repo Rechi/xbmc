@@ -293,10 +293,7 @@ bool CGUISpinControl::OnMessage(CGUIMessage& message)
       break;
 
     case GUI_MSG_SHOWRANGE:
-      if (message.GetParam1() )
-        m_bShowRange = true;
-      else
-        m_bShowRange = false;
+      m_bShowRange = message.GetParam1() != 0;
       break;
 
     case GUI_MSG_SET_LABELS:
@@ -711,25 +708,19 @@ bool CGUISpinControl::CanMoveUp(bool bTestReverse)
     return m_currentItem > 0;
   case SPIN_CONTROL_TYPE_INT:
     {
-      if (m_iValue - 1 >= m_iStart)
-        return true;
-      return false;
+      return m_iValue - 1 >= m_iStart;
     }
     break;
 
   case SPIN_CONTROL_TYPE_FLOAT:
     {
-      if (m_fValue - m_fInterval >= m_fStart)
-        return true;
-      return false;
+      return m_fValue - m_fInterval >= m_fStart;
     }
     break;
 
   case SPIN_CONTROL_TYPE_TEXT:
     {
-      if (m_iValue - 1 >= 0)
-        return true;
-      return false;
+      return m_iValue - 1 >= 0;
     }
     break;
   }
@@ -746,25 +737,19 @@ bool CGUISpinControl::CanMoveDown(bool bTestReverse)
     return m_currentItem < m_numItems;
   case SPIN_CONTROL_TYPE_INT:
     {
-      if (m_iValue + 1 <= m_iEnd)
-        return true;
-      return false;
+      return m_iValue + 1 <= m_iEnd;
     }
     break;
 
   case SPIN_CONTROL_TYPE_FLOAT:
     {
-      if (m_fValue + m_fInterval <= m_fEnd)
-        return true;
-      return false;
+      return m_fValue + m_fInterval <= m_fEnd;
     }
     break;
 
   case SPIN_CONTROL_TYPE_TEXT:
     {
-      if (m_iValue + 1 < (int)m_vecLabels.size())
-        return true;
-      return false;
+      return m_iValue + 1 < (int)m_vecLabels.size();
     }
     break;
   }

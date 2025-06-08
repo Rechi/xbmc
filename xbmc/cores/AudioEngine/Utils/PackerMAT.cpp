@@ -111,7 +111,7 @@ bool CPackerMAT::PackTrueHD(const uint8_t* data, int size)
     WriteHeader();
 
     // initial header, don't count it for the frame size
-    if (m_state.init == false)
+    if (!m_state.init)
     {
       m_state.init = true;
       m_state.matFramesize = 0;
