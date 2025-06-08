@@ -61,7 +61,7 @@ int Interface_GUIDialogContextMenu::open(KODI_HANDLE kodiBase,
   for (unsigned int i = 0; i < size; ++i)
     choices.Add(i, entries[i]);
 
-  return dialog->Show(choices);
+  return CGUIDialogContextMenu::Show(choices);
 }
 
 } /* namespace ADDON */

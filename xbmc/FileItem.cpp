@@ -2035,7 +2035,8 @@ bool CFileItem::LoadMusicTag()
   // load tag from file
   CLog::Log(LOGDEBUG, "{}: loading tag information for file: {}", __FUNCTION__, m_strPath);
   CMusicInfoTagLoaderFactory factory;
-  std::unique_ptr<IMusicInfoTagLoader> pLoader (factory.CreateLoader(*this));
+  std::unique_ptr<IMusicInfoTagLoader> pLoader(
+      MUSIC_INFO::CMusicInfoTagLoaderFactory::CreateLoader(*this));
   if (pLoader)
   {
     if (pLoader->Load(m_strPath, *GetMusicInfoTag()))
@@ -2362,7 +2363,7 @@ VideoDbContentType CFileItem::GetVideoContentType() const
 
   CVideoDatabaseDirectory dir;
   VIDEODATABASEDIRECTORY::CQueryParams params;
-  dir.GetQueryParams(m_strPath, params);
+  XFILE::CVideoDatabaseDirectory::GetQueryParams(m_strPath, params);
   if (params.GetSetId() != -1 && params.GetMovieId() == -1) // movie set
     return VideoDbContentType::MOVIE_SETS;
 

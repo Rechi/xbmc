@@ -84,9 +84,9 @@ namespace XBMCAddon
       if (pDialog == nullptr)
         throw WindowException("Error: Window is null");
 
-      return pDialog->ShowAndGetInput(CVariant{heading}, CVariant{message}, CVariant{nolabel},
-                                      CVariant{yeslabel}, CVariant{customlabel}, autoclose,
-                                      defaultbutton);
+      return CGUIDialogYesNo::ShowAndGetInput(CVariant{heading}, CVariant{message},
+                                              CVariant{nolabel}, CVariant{yeslabel},
+                                              CVariant{customlabel}, autoclose, defaultbutton);
     }
 
     bool Dialog::info(const ListItem* item)
@@ -118,7 +118,7 @@ namespace XBMCAddon
       {
         choices.Add(i, list[i]);
       }
-      return pDialog->Show(choices);
+      return CGUIDialogContextMenu::Show(choices);
     }
 
 
