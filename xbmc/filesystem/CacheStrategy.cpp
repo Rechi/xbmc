@@ -100,8 +100,7 @@ int CSimpleFileCache::Open()
 
 void CSimpleFileCache::Close()
 {
-  if (m_hDataAvailEvent)
-    delete m_hDataAvailEvent;
+  delete m_hDataAvailEvent;
 
   m_hDataAvailEvent = NULL;
 
