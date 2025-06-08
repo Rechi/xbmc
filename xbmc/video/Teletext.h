@@ -174,11 +174,19 @@ private:
   void Eval_NumberedObject(int p, int s, int packet, int triplet, int high,
                            unsigned char *pAPx, unsigned char *pAPy,
                            unsigned char *pAPx0, unsigned char *pAPy0, unsigned char* page_char, TextPageAttr_t* PageAtrb);
-  int Eval_Triplet(int iOData, TextCachedPage_t *pstCachedPage,
-                   unsigned char *pAPx, unsigned char *pAPy,
-                   unsigned char *pAPx0, unsigned char *pAPy0,
-                   unsigned char *drcssubp, unsigned char *gdrcssubp,
-                   signed char *endcol, TextPageAttr_t *attrPassive, unsigned char* pagedata, unsigned char* page_char, TextPageAttr_t* PageAtrb);
+  int Eval_Triplet(int iOData,
+                   TextCachedPage_t* pstCachedPage,
+                   unsigned char* pAPx,
+                   unsigned char* pAPy,
+                   const unsigned char* pAPx0,
+                   const unsigned char* pAPy0,
+                   unsigned char* drcssubp,
+                   unsigned char* gdrcssubp,
+                   signed char* endcol,
+                   TextPageAttr_t* attrPassive,
+                   unsigned char* pagedata,
+                   unsigned char* page_char,
+                   TextPageAttr_t* PageAtrb);
   int iTripletNumber2Data(int iONr, TextCachedPage_t *pstCachedPage, unsigned char* pagedata);
   int SetNational(unsigned char sec);
   int NextHex(int i);
