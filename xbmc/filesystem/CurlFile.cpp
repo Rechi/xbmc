@@ -1237,7 +1237,7 @@ bool CCurlFile::OpenForWrite(const CURL& url, bool bOverWrite)
 
 ssize_t CCurlFile::Write(const void* lpBuf, size_t uiBufSize)
 {
-  if (!(m_opened && m_forWrite) || m_inError)
+  if (!m_opened || !m_forWrite || m_inError)
     return -1;
 
   assert(m_state->m_multiHandle);
