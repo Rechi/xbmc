@@ -135,10 +135,8 @@ bool CLocale::Matches(const std::string& locale) const
     return false;
   if (!m_codeset.empty() && !other.m_codeset.empty() && !StringUtils::EqualsNoCase(m_codeset, other.m_codeset))
     return false;
-  if (!m_modifier.empty() && !other.m_modifier.empty() && !StringUtils::EqualsNoCase(m_modifier, other.m_modifier))
-    return false;
-
-  return true;
+  return !(!m_modifier.empty() && !other.m_modifier.empty() &&
+           !StringUtils::EqualsNoCase(m_modifier, other.m_modifier));
 }
 
 std::string CLocale::FindBestMatch(const std::set<std::string>& locales) const
