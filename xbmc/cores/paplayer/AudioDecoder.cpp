@@ -190,7 +190,8 @@ unsigned int CAudioDecoder::GetDataSize(bool checkPktSize)
       else if (checkPktSize && m_pcmBuffer.getMaxReadSize() < PACKET_SIZE)
         m_status = STATUS_ENDED;
     }
-    return std::min(m_pcmBuffer.getMaxReadSize() / (m_codec->m_bitsPerSample >> 3), (unsigned int)OUTPUT_SAMPLES);
+    return std::min(m_pcmBuffer.getMaxReadSize() / (m_codec->m_bitsPerSample >> 3),
+                    static_cast<unsigned int>(OUTPUT_SAMPLES));
   }
   else
   {
@@ -218,7 +219,7 @@ void *CAudioDecoder::GetData(unsigned int samples)
     size = m_pcmBuffer.getMaxReadSize();
   }
 
-  if (m_pcmBuffer.ReadData((char *)m_outputBuffer, size))
+  if (m_pcmBuffer.ReadData(reinterpret_cast<char*>(m_outputBuffer), size))
   {
     if (m_status == STATUS_ENDING && m_pcmBuffer.getMaxReadSize() == 0)
       m_status = STATUS_ENDED;
@@ -272,7 +273,7 @@ int CAudioDecoder::ReadSamples(int numsamples)
       if (result != READ_ERROR && readSize)
       {
         // move it into our buffer
-        m_pcmBuffer.WriteData((char *)m_pcmInputBuffer, readSize);
+        m_pcmBuffer.WriteData(reinterpret_cast<char*>(m_pcmInputBuffer), readSize);
 
         // update status
         if (m_status == STATUS_QUEUING && m_pcmBuffer.getMaxReadSize() > m_pcmBuffer.getSize() * 0.9)
@@ -357,20 +358,22 @@ float CAudioDecoder::GetReplayGain(float &peakVal)
     return 1.0f;
 
   // Compute amount of gain
-  float replaydB = (float)replayGainSettings.iNoGainPreAmp;
+  float replaydB = static_cast<float>(replayGainSettings.iNoGainPreAmp);
   float peak = 1.0f;
   const ReplayGain& rgInfo = m_codec->m_tag.GetReplayGain();
   if (replayGainSettings.iType == ReplayGain::ALBUM)
   {
     if (rgInfo.Get(ReplayGain::ALBUM).HasGain())
     {
-      replaydB = (float)replayGainSettings.iPreAmp + rgInfo.Get(ReplayGain::ALBUM).Gain();
+      replaydB =
+          static_cast<float>(replayGainSettings.iPreAmp) + rgInfo.Get(ReplayGain::ALBUM).Gain();
       if (rgInfo.Get(ReplayGain::ALBUM).HasPeak())
         peak = rgInfo.Get(ReplayGain::ALBUM).Peak();
     }
     else if (rgInfo.Get(ReplayGain::TRACK).HasGain())
     {
-      replaydB = (float)replayGainSettings.iPreAmp + rgInfo.Get(ReplayGain::TRACK).Gain();
+      replaydB =
+          static_cast<float>(replayGainSettings.iPreAmp) + rgInfo.Get(ReplayGain::TRACK).Gain();
       if (rgInfo.Get(ReplayGain::TRACK).HasPeak())
         peak = rgInfo.Get(ReplayGain::TRACK).Peak();
     }
@@ -379,13 +382,15 @@ float CAudioDecoder::GetReplayGain(float &peakVal)
   {
     if (rgInfo.Get(ReplayGain::TRACK).HasGain())
     {
-      replaydB = (float)replayGainSettings.iPreAmp + rgInfo.Get(ReplayGain::TRACK).Gain();
+      replaydB =
+          static_cast<float>(replayGainSettings.iPreAmp) + rgInfo.Get(ReplayGain::TRACK).Gain();
       if (rgInfo.Get(ReplayGain::TRACK).HasPeak())
         peak = rgInfo.Get(ReplayGain::TRACK).Peak();
     }
     else if (rgInfo.Get(ReplayGain::ALBUM).HasGain())
     {
-      replaydB = (float)replayGainSettings.iPreAmp + rgInfo.Get(ReplayGain::ALBUM).Gain();
+      replaydB =
+          static_cast<float>(replayGainSettings.iPreAmp) + rgInfo.Get(ReplayGain::ALBUM).Gain();
       if (rgInfo.Get(ReplayGain::ALBUM).HasPeak())
         peak = rgInfo.Get(ReplayGain::ALBUM).Peak();
     }
