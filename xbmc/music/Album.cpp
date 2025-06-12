@@ -85,7 +85,8 @@ void CAlbum::SetArtistCredits(const std::vector<std::string>& names, const std::
     {
       // Tags mismatch - report it and then try to fix
       CLog::Log(LOGDEBUG, "Mismatch in song file albumartist tags: {} mbid {} name album: {} {}",
-                (int)mbids.size(), (int)names.size(), strAlbum, strArtistDesc);
+                static_cast<int>(mbids.size()), static_cast<int>(names.size()), strAlbum,
+                strArtistDesc);
       /*
       Most likely we have no hints and a single artist name like "Artist1 feat. Artist2"
       or "Composer; Conductor, Orchestra, Soloist" or "Artist1/Artist2" where the

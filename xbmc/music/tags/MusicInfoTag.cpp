@@ -945,7 +945,7 @@ void CMusicInfoTag::Serialize(CVariant& value) const
     contributor["name"] = role.GetArtist();
     contributor["role"] = role.GetRoleDesc();
     contributor["roleid"] = role.GetRoleId();
-    contributor["artistid"] = (int)(role.GetArtistId());
+    contributor["artistid"] = static_cast<int>(role.GetArtistId());
     value["contributors"].push_back(contributor);
   }
   value["displaycomposer"] = GetArtistStringForRole("composer");   //TCOM
@@ -1018,7 +1018,9 @@ void CMusicInfoTag::ToSortable(SortItem& sortable, Field field) const
   case FieldLastPlayed:  sortable[FieldLastPlayed] = m_lastPlayed.IsValid() ? m_lastPlayed.GetAsDBDateTime() : StringUtils::Empty; break;
   case FieldDateAdded:   sortable[FieldDateAdded] = m_dateAdded.IsValid() ? m_dateAdded.GetAsDBDateTime() : StringUtils::Empty; break;
   case FieldListeners:   sortable[FieldListeners] = m_listeners; break;
-  case FieldId:          sortable[FieldId] = (int64_t)m_iDbId; break;
+  case FieldId:
+    sortable[FieldId] = static_cast<int64_t>(m_iDbId);
+    break;
   case FieldOrigDate:    sortable[FieldOrigDate] = m_strOriginalDate; break;
   case FieldBPM:         sortable[FieldBPM] = m_iBPM; break;
   default: break;
@@ -1055,7 +1057,7 @@ void CMusicInfoTag::Archive(CArchive& ar)
     ar << m_lastPlayed;
     ar << m_dateAdded;
     ar << m_strComment;
-    ar << (int)m_musicRoles.size();
+    ar << static_cast<int>(m_musicRoles.size());
     for (const auto& credit : m_musicRoles)
     {
       ar << credit.GetRoleId();

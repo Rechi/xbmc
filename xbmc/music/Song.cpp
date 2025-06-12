@@ -104,8 +104,9 @@ void CSong::SetArtistCredits(const std::vector<std::string>& names, const std::v
     if (mbids.size() != artistHints.size() && mbids.size() != names.size())
     {
       // Tags mismatch - report it and then try to fix
-      CLog::Log(LOGDEBUG, "Mismatch in song file tags: {} mbid {} names {} {}", (int)mbids.size(),
-                (int)names.size(), strTitle, strArtistDesc);
+      CLog::Log(LOGDEBUG, "Mismatch in song file tags: {} mbid {} names {} {}",
+                static_cast<int>(mbids.size()), static_cast<int>(names.size()), strTitle,
+                strArtistDesc);
       /*
         Most likely we have no hints and a single artist name like "Artist1 feat. Artist2"
         or "Composer; Conductor, Orchestra, Soloist" or "Artist1/Artist2" where the
