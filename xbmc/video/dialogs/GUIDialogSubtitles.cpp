@@ -539,7 +539,9 @@ void CGUIDialogSubtitles::OnDownloadComplete(const CFileItemList *items, const s
     return;
   }
 
-  SUBTITLE_STORAGEMODE storageMode = (SUBTITLE_STORAGEMODE) CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_SUBTITLES_STORAGEMODE);
+  SUBTITLE_STORAGEMODE storageMode = static_cast<SUBTITLE_STORAGEMODE>(
+      CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(
+          CSettings::SETTING_SUBTITLES_STORAGEMODE));
 
   // Get (unstacked) path
   std::string strCurrentFile = g_application.CurrentUnstackedItem().GetDynPath();
@@ -575,7 +577,7 @@ void CGUIDialogSubtitles::OnDownloadComplete(const CFileItemList *items, const s
     {
       CStackDirectory::GetPaths(g_application.CurrentFileItem().GetPath(), vecFiles);
       // Make sure (stack) size is the same as the size of the items handed to us, else fallback to single item
-      if (items->Size() != (int) vecFiles.size())
+      if (items->Size() != static_cast<int>(vecFiles.size()))
       {
         vecFiles.clear();
         vecFiles.push_back(strCurrentFile);
@@ -602,7 +604,7 @@ void CGUIDialogSubtitles::OnDownloadComplete(const CFileItemList *items, const s
   g_LangCodeExpander.ConvertToISO6391(language, strSubLang);
 
   // Iterate over all items to transfer
-  for (unsigned int i = 0; i < vecFiles.size() && i < (unsigned int) items->Size(); i++)
+  for (unsigned int i = 0; i < vecFiles.size() && i < static_cast<unsigned int>(items->Size()); i++)
   {
     std::string strUrl = items->Get(i)->GetPath();
     std::string strFileName = URIUtils::GetFileName(vecFiles[i]);

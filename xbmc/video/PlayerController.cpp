@@ -490,7 +490,7 @@ bool CPlayerController::OnAction(const CAction &action)
         vs.m_VolumeAmplification =
           std::max(std::min(vs.m_VolumeAmplification, sliderMax), sliderMin);
 
-        appPlayer->SetDynamicRangeCompression((long)(vs.m_VolumeAmplification * 100));
+        appPlayer->SetDynamicRangeCompression(static_cast<long>(vs.m_VolumeAmplification * 100));
 
         ShowSlider(action.GetID(), 660, vs.m_VolumeAmplification, sliderMin, 1.0f, sliderMax);
         return true;
@@ -632,7 +632,7 @@ void CPlayerController::OnSliderChange(void *data, CGUISliderControl *slider)
     }
     else if (m_sliderAction == ACTION_VOLAMP)
     {
-      appPlayer->SetDynamicRangeCompression((long)(slider->GetFloatValue() * 100));
+      appPlayer->SetDynamicRangeCompression(static_cast<long>(slider->GetFloatValue() * 100));
     }
   }
 }

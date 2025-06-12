@@ -117,7 +117,7 @@ void CGUIDialogTeletext::Render()
       Close();
   }
 
-  unsigned char* textureBuffer = (unsigned char*)m_TextDecoder.GetTextureBuffer();
+  unsigned char* textureBuffer = reinterpret_cast<unsigned char*>(m_TextDecoder.GetTextureBuffer());
   if (!m_bClose && m_TextDecoder.NeedRendering() && textureBuffer)
   {
     m_pTxtTexture->Update(m_TextDecoder.GetWidth(), m_TextDecoder.GetHeight(), m_TextDecoder.GetWidth()*4, XB_FMT_A8R8G8B8, textureBuffer, false);
@@ -174,9 +174,11 @@ void CGUIDialogTeletext::SetCoordinates()
   CServiceBroker::GetWinSystem()->GetGfxContext().SetScalingResolution(m_coordsRes, m_needsScaling);
 
   left = CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalXCoord(0, 0);
-  right = CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalXCoord((float)m_coordsRes.iWidth, 0);
+  right = CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalXCoord(
+      static_cast<float>(m_coordsRes.iWidth), 0);
   top = CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalYCoord(0, 0);
-  bottom = CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalYCoord(0, (float)m_coordsRes.iHeight);
+  bottom = CServiceBroker::GetWinSystem()->GetGfxContext().ScaleFinalYCoord(
+      0, static_cast<float>(m_coordsRes.iHeight));
 
   if (CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_VIDEOPLAYER_TELETEXTSCALE))
   {
