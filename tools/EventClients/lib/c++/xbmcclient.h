@@ -116,7 +116,7 @@ public:
     else
     {
       m_Addr.sin_family = h->h_addrtype;
-      m_Addr.sin_addr = *((struct in_addr *)h->h_addr);
+      m_Addr.sin_addr = *(reinterpret_cast<struct in_addr*>(h->h_addr));
     }
     memset(m_Addr.sin_zero, '\0', sizeof m_Addr.sin_zero);
   }
@@ -126,14 +126,11 @@ public:
     m_Addr.sin_port = htons(port);
   }
 
-  const sockaddr *GetAddress()
-  {
-    return ((struct sockaddr *)&m_Addr);
-  }
+  const sockaddr* GetAddress() { return (reinterpret_cast<struct sockaddr*>(&m_Addr)); }
 
   bool Bind(int Sockfd)
   {
-    return (bind(Sockfd, (struct sockaddr *)&m_Addr, sizeof m_Addr) == 0);
+    return (bind(Sockfd, reinterpret_cast<struct sockaddr*>(&m_Addr), sizeof m_Addr) == 0);
   }
 };
 

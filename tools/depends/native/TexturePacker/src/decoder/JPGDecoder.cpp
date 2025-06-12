@@ -105,7 +105,7 @@ bool JPGDecoder::LoadFile(const std::string &filename, DecodedFrames &frames)
   std::vector<unsigned char> scanlinebuff;
   scanlinebuff.resize(3 * cinfo.image_width);
 
-  unsigned char* dst = (unsigned char*)frame.rgbaImage.pixels.data();
+  unsigned char* dst = static_cast<unsigned char*>(frame.rgbaImage.pixels.data());
   while (cinfo.output_scanline < cinfo.output_height)
   {
     unsigned char* src2 = scanlinebuff.data();
