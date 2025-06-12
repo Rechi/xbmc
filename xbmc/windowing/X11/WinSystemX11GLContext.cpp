@@ -290,7 +290,7 @@ bool CWinSystemX11GLContext::RefreshGLContext(bool force)
   CScreenshotSurfaceGL::Register();
 
   std::string gpuvendor;
-  const char* vend = (const char*) glGetString(GL_VENDOR);
+  const char* vend = reinterpret_cast<const char*>(glGetString(GL_VENDOR));
   if (vend)
     gpuvendor = vend;
   std::transform(gpuvendor.begin(), gpuvendor.end(), gpuvendor.begin(), ::tolower);

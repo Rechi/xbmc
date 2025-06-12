@@ -187,7 +187,7 @@ static void AddRefreshRate(std::vector<REFRESHRATE> &refreshrates, unsigned int 
     if (   refreshrates[idx].RefreshRate == RefreshRate)
       return; // already taken care of.
 
-  REFRESHRATE rr = {RefreshRate, (int)addindex};
+  REFRESHRATE rr = {RefreshRate, static_cast<int>(addindex)};
   refreshrates.push_back(rr);
 }
 
