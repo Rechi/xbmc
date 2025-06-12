@@ -125,7 +125,7 @@ bool Xcddb::closeSocket()
 bool Xcddb::Send( const void *buffer, int bytes )
 {
   std::unique_ptr<char[]> tmp_buffer(new char[bytes + 10]);
-  strcpy(tmp_buffer.get(), (const char*)buffer);
+  strcpy(tmp_buffer.get(), static_cast<const char*>(buffer));
   tmp_buffer.get()[bytes] = 0x0d;
   tmp_buffer.get()[bytes + 1] = 0x0a;
   tmp_buffer.get()[bytes + 2] = 0x00;
@@ -165,7 +165,7 @@ std::string Xcddb::Recv(bool wait4point)
     int lenRead;
 
     prevChar=tmpbuffer[0];
-    lenRead = recv((SOCKET)m_cddb_socket, (char*) & tmpbuffer, 1, 0);
+    lenRead = recv((SOCKET)m_cddb_socket, reinterpret_cast<char*>(&tmpbuffer), 1, 0);
 
     //Check if there was any error reading the buffer
     if(lenRead == 0 || lenRead == SOCKET_ERROR  || WSAGetLastError() == WSAECONNRESET)
@@ -520,7 +520,7 @@ void Xcddb::parseData(const char *buffer)
       // DTITLE may contain artist and disc title, separated with " / ",
       // for example: DTITLE=Modern Talking / Album: Victory (The 11th Album)
       bool found = false;
-      for (int i = 0; i < (int)strValue.size() - 2; i++)
+      for (int i = 0; i < static_cast<int>(strValue.size()) - 2; i++)
       {
         if (strValue[i] == ' ' && strValue[i + 1] == '/' && strValue[i + 2] == ' ')
         {
@@ -770,7 +770,8 @@ bool Xcddb::writeCacheFile( const char* pBuffer, uint32_t discid )
   XFILE::CFile file;
   if (file.OpenForWrite(GetCacheFile(discid), true))
   {
-    const bool ret = ( (size_t) file.Write((const void*)pBuffer, strlen(pBuffer) + 1) == strlen(pBuffer) + 1);
+    const bool ret = (static_cast<size_t>(file.Write((const void*)pBuffer, strlen(pBuffer) + 1)) ==
+                      strlen(pBuffer) + 1);
     file.Close();
     return ret;
   }

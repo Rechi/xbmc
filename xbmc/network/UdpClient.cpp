@@ -47,7 +47,8 @@ bool CUdpClient::Create(void)
   CLog::Log(UDPCLIENT_DEBUG_LEVEL, "UDPCLIENT: Setting broadcast socket option...");
 
   unsigned int value = 1;
-  if ( setsockopt( client_socket, SOL_SOCKET, SO_BROADCAST, (char*) &value, sizeof( unsigned int ) ) == SOCKET_ERROR)
+  if (setsockopt(client_socket, SOL_SOCKET, SO_BROADCAST, reinterpret_cast<char*>(&value),
+                 sizeof(unsigned int)) == SOCKET_ERROR)
   {
     CLog::Log(UDPCLIENT_DEBUG_LEVEL, "UDPCLIENT: Unable to set socket option.");
     return false;
@@ -147,7 +148,7 @@ void CUdpClient::Process()
     FD_ZERO(&readset);    FD_SET(client_socket, &readset);
     FD_ZERO(&exceptset);  FD_SET(client_socket, &exceptset);
 
-    int nfds = (int)(client_socket);
+    int nfds = static_cast<int>(client_socket);
     timeval tv = { 0, 100000 };
     if (select(nfds, &readset, NULL, &exceptset, &tv) < 0)
     {
@@ -171,7 +172,8 @@ void CUdpClient::Process()
 #endif
       remoteAddressSize = sizeof(remoteAddress);
 
-      int ret = recvfrom(client_socket, messageBuffer, messageLength, 0, (struct sockaddr *) & remoteAddress, &remoteAddressSize);
+      int ret = recvfrom(client_socket, messageBuffer, messageLength, 0,
+                         reinterpret_cast<struct sockaddr*>(&remoteAddress), &remoteAddressSize);
       if (ret != SOCKET_ERROR)
       {
         // Packet received
@@ -237,7 +239,9 @@ bool CUdpClient::DispatchNextCommand()
 
     do
     {
-      ret = sendto(client_socket, (const char*) command.binary, command.binarySize, 0, (struct sockaddr *) & command.address, sizeof(command.address));
+      ret =
+          sendto(client_socket, reinterpret_cast<const char*>(command.binary), command.binarySize,
+                 0, reinterpret_cast<struct sockaddr*>(&command.address), sizeof(command.address));
     }
     while (ret == -1);
 
@@ -254,7 +258,8 @@ bool CUdpClient::DispatchNextCommand()
 
     do
     {
-      ret = sendto(client_socket, command.message.c_str(), command.message.size(), 0, (struct sockaddr *) & command.address, sizeof(command.address));
+      ret = sendto(client_socket, command.message.c_str(), command.message.size(), 0,
+                   reinterpret_cast<struct sockaddr*>(&command.address), sizeof(command.address));
     }
     while (ret == -1 && !m_bStop);
   }

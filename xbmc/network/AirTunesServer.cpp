@@ -275,16 +275,18 @@ bool IsJPEG(const char *buffer, unsigned int size)
 
   //JPEG image files begin with FF D8 and end with FF D9.
   // check for FF D8 big + little endian on start
-  if ((buffer[0] == (char)0xd8 && buffer[1] == (char)0xff) ||
-      (buffer[1] == (char)0xd8 && buffer[0] == (char)0xff))
+  if ((buffer[0] == static_cast<char>(0xd8) && buffer[1] == static_cast<char>(0xff)) ||
+      (buffer[1] == static_cast<char>(0xd8) && buffer[0] == static_cast<char>(0xff)))
     ret = true;
 
   if (ret)
   {
     ret = false;
     //check on FF D9 big + little endian on end
-    if ((buffer[size - 2] == (char)0xd9 && buffer[size - 1] == (char)0xff) ||
-       (buffer[size - 1] == (char)0xd9 && buffer[size - 2] == (char)0xff))
+    if ((buffer[size - 2] == static_cast<char>(0xd9) &&
+         buffer[size - 1] == static_cast<char>(0xff)) ||
+        (buffer[size - 1] == static_cast<char>(0xd9) &&
+         buffer[size - 2] == static_cast<char>(0xff)))
         ret = true;
   }
 
@@ -350,19 +352,19 @@ LAuE4Pu13aKiJnfft7hIjbK+5kyb3TysZvoyDnb3HOKvInK7vXbKuU4ISgxB2bB3HcYzQMGsz1qJ\
 
 void CAirTunesServer::AudioOutputFunctions::audio_set_metadata(void *cls, void *session, const void *buffer, int buflen)
 {
-  CAirTunesServer::SetMetadataFromBuffer((const char *)buffer, buflen);
+  CAirTunesServer::SetMetadataFromBuffer(static_cast<const char*>(buffer), buflen);
 }
 
 void CAirTunesServer::AudioOutputFunctions::audio_set_coverart(void *cls, void *session, const void *buffer, int buflen)
 {
-  CAirTunesServer::SetCoverArtFromBuffer((const char *)buffer, buflen);
+  CAirTunesServer::SetCoverArtFromBuffer(static_cast<const char*>(buffer), buflen);
 }
 
 char session[]="Kodi-AirTunes";
 
 void* CAirTunesServer::AudioOutputFunctions::audio_init(void *cls, int bits, int channels, int samplerate)
 {
-  XFILE::CPipeFile *pipe=(XFILE::CPipeFile *)cls;
+  XFILE::CPipeFile* pipe = static_cast<XFILE::CPipeFile*>(cls);
   const CURL pathToUrl(XFILE::PipesManager::GetInstance().GetUniquePipeName());
   pipe->OpenForWrite(pathToUrl);
   pipe->SetOpenThreshold(300);
@@ -504,7 +506,7 @@ void  CAirTunesServer::AudioOutputFunctions::audio_set_volume(void *cls, void *s
 
 void  CAirTunesServer::AudioOutputFunctions::audio_process(void *cls, void *session, const void *buffer, int buflen)
 {
-  XFILE::CPipeFile *pipe=(XFILE::CPipeFile *)cls;
+  XFILE::CPipeFile* pipe = static_cast<XFILE::CPipeFile*>(cls);
   pipe->Write(buffer, buflen);
 
   // in case there are some play times cached that are not yet sent to the player - do it here
@@ -513,7 +515,7 @@ void  CAirTunesServer::AudioOutputFunctions::audio_process(void *cls, void *sess
 
 void  CAirTunesServer::AudioOutputFunctions::audio_destroy(void *cls, void *session)
 {
-  XFILE::CPipeFile *pipe=(XFILE::CPipeFile *)cls;
+  XFILE::CPipeFile* pipe = static_cast<XFILE::CPipeFile*>(cls);
   pipe->SetEof();
   pipe->Close();
 
@@ -717,7 +719,7 @@ bool CAirTunesServer::Initialize(const std::string &password)
   if (m_pRaop)
   {
     char macAdr[6];
-    unsigned short port = (unsigned short)m_port;
+    unsigned short port = static_cast<unsigned short>(m_port);
 
     raop_set_log_level(m_pRaop, RAOP_LOG_WARNING);
     if (CServiceBroker::GetLogging().CanLogComponent(LOGAIRTUNES))

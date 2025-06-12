@@ -119,7 +119,7 @@ EClientQuirks GetClientQuirks(const PLT_HttpRequestContext* context)
       quirks |= ECLIENTQUIRKS_ONLYSTORAGEFOLDER | ECLIENTQUIRKS_BASICVIDEOCLASS;
   }
 
-  return (EClientQuirks)quirks;
+  return static_cast<EClientQuirks>(quirks);
 }
 
 /*----------------------------------------------------------------------
@@ -135,7 +135,7 @@ EMediaControllerQuirks GetMediaControllerQuirks(const PLT_DeviceData* device)
   if (device->m_Manufacturer.Find("Samsung Electronics") >= 0)
     quirks |= EMEDIACONTROLLERQUIRKS_X_MKV;
 
-  return (EMediaControllerQuirks)quirks;
+  return static_cast<EMediaControllerQuirks>(quirks);
 }
 
 /*----------------------------------------------------------------------
@@ -451,7 +451,7 @@ NPT_Result PopulateObjectFromTag(CVideoInfoTag& tag,
   object.m_Description.description = tag.m_strTagLine.c_str();
   object.m_Description.long_description = tag.m_strPlot.c_str();
   object.m_Description.rating = tag.m_strMPAARating.c_str();
-  object.m_MiscInfo.last_position = (NPT_UInt32)tag.GetResumePoint().timeInSeconds;
+  object.m_MiscInfo.last_position = static_cast<NPT_UInt32>(tag.GetResumePoint().timeInSeconds);
   object.m_XbmcInfo.last_playerstate = tag.GetResumePoint().playerState.c_str();
   object.m_MiscInfo.last_time = tag.m_lastPlayed.GetAsW3CDateTime().c_str();
   object.m_MiscInfo.play_count = tag.GetPlayCount();
@@ -564,7 +564,7 @@ PLT_MediaObject* BuildObject(CFileItem& item,
     // Set the resource file size
     resource.m_Size = item.m_dwSize;
     if (resource.m_Size == 0)
-      resource.m_Size = (NPT_LargeSize)-1;
+      resource.m_Size = static_cast<NPT_LargeSize>(-1);
 
     // set date
     if (object->m_Date.IsEmpty() && item.m_dateTime.IsValid())
@@ -734,7 +734,7 @@ PLT_MediaObject* BuildObject(CFileItem& item,
       {
         NPT_LargeSize count = 0;
         NPT_CHECK_LABEL(NPT_File::GetSize(file_path, count), failure);
-        container->m_ChildrenCount = (NPT_Int32)count;
+        container->m_ChildrenCount = static_cast<NPT_Int32>(count);
       }
       else
       {
@@ -948,7 +948,7 @@ const std::string& CorrectAllItemsSortHack(const std::string& item)
   // This looks nasty if we attempt to render it to the GUI, thus this (further)
   // workaround
   if ((item.size() == 1 && item[0] == 0x01) ||
-      (item.size() > 1 && ((unsigned char)item[1]) == 0xff))
+      (item.size() > 1 && (static_cast<unsigned char>(item[1])) == 0xff))
     return StringUtils::Empty;
 
   return item;
@@ -1017,7 +1017,8 @@ int PopulateTagFromObject(CVideoInfoTag& tag,
 
     int episode;
     int season;
-    if (object.m_Recorded.episode_number > 0 && object.m_Recorded.episode_season < (NPT_UInt32)-1)
+    if (object.m_Recorded.episode_number > 0 &&
+        object.m_Recorded.episode_season < static_cast<NPT_UInt32>(-1))
     {
       tag.m_iEpisode = object.m_Recorded.episode_number;
       tag.m_iSeason = object.m_Recorded.episode_season;
@@ -1211,7 +1212,7 @@ std::shared_ptr<CFileItem> BuildObject(PLT_MediaObject* entry,
     {
 
       // set metadata
-      if (resource.m_Size != (NPT_LargeSize)-1)
+      if (resource.m_Size != static_cast<NPT_LargeSize>(-1))
       {
         pItem->m_dwSize = resource.m_Size;
       }

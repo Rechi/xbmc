@@ -307,7 +307,7 @@ MHD_RESULT CWebServer::HandlePostField(void* cls,
                                        uint64_t off,
                                        size_t size)
 {
-  ConnectionHandler* conHandler = (ConnectionHandler*)cls;
+  ConnectionHandler* conHandler = static_cast<ConnectionHandler*>(cls);
 
   if (conHandler == nullptr || conHandler->requestHandler == nullptr || key == nullptr ||
       data == nullptr || size == 0)
@@ -1010,7 +1010,7 @@ void CWebServer::LogRequest(const char* uri) const
 
 ssize_t CWebServer::ContentReaderCallback(void* cls, uint64_t pos, char* buf, size_t max)
 {
-  HttpFileDownloadContext* context = (HttpFileDownloadContext*)cls;
+  HttpFileDownloadContext* context = static_cast<HttpFileDownloadContext*>(cls);
   if (context == nullptr || context->file == nullptr)
     return -1;
 
@@ -1023,7 +1023,7 @@ ssize_t CWebServer::ContentReaderCallback(void* cls, uint64_t pos, char* buf, si
   {
     // put together the end-boundary
     std::string endBoundary = HttpRangeUtils::GenerateMultipartBoundaryEnd(context->boundary);
-    if ((unsigned int)max != endBoundary.size())
+    if (static_cast<unsigned int>(max) != endBoundary.size())
       return -1;
 
     // copy the boundary into the buffer
@@ -1037,7 +1037,7 @@ ssize_t CWebServer::ContentReaderCallback(void* cls, uint64_t pos, char* buf, si
 
   uint64_t start = range.GetFirstPosition();
   uint64_t end = range.GetLastPosition();
-  uint64_t maximum = (uint64_t)max;
+  uint64_t maximum = static_cast<uint64_t>(max);
   int written = 0;
 
   if (context->rangeCountTotal > 1 && !context->boundaryWritten)
@@ -1107,7 +1107,7 @@ ssize_t CWebServer::ContentReaderCallback(void* cls, uint64_t pos, char* buf, si
 
 void CWebServer::ContentReaderFreeCallback(void* cls)
 {
-  HttpFileDownloadContext* context = (HttpFileDownloadContext*)cls;
+  HttpFileDownloadContext* context = static_cast<HttpFileDownloadContext*>(cls);
   delete context;
 
   if (CServiceBroker::GetLogging().CanLogComponent(LOGWEBSERVER))
