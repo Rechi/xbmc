@@ -89,7 +89,7 @@ bool CCoreAudioChannelLayout::CopyLayout(AudioChannelLayout& layout)
   if (layout.mChannelLayoutTag == kAudioChannelLayoutTag_UseChannelDescriptions)
   {
     // We can copy the whole layout
-    m_pLayout = (AudioChannelLayout*)malloc(size);
+    m_pLayout = static_cast<AudioChannelLayout*>(malloc(size));
     memcpy(m_pLayout, &layout, size);
   }
   else if (layout.mChannelLayoutTag == kAudioChannelLayoutTag_UseChannelBitmap)
@@ -97,7 +97,7 @@ bool CCoreAudioChannelLayout::CopyLayout(AudioChannelLayout& layout)
     // Deconstruct the bitmap to get the layout
     UInt32 propSize = 0;
     AudioFormatGetPropertyInfo(kAudioFormatProperty_ChannelLayoutForBitmap, sizeof(layout.mChannelBitmap), &layout.mChannelBitmap, &propSize);
-    m_pLayout = (AudioChannelLayout*)malloc(propSize);
+    m_pLayout = static_cast<AudioChannelLayout*>(malloc(propSize));
     ret = AudioFormatGetProperty(kAudioFormatProperty_ChannelLayoutForBitmap, sizeof(layout.mChannelBitmap), &layout.mChannelBitmap, &propSize, m_pLayout);
     m_pLayout->mChannelLayoutTag = kAudioChannelLayoutTag_UseChannelDescriptions;
   }
@@ -107,7 +107,7 @@ bool CCoreAudioChannelLayout::CopyLayout(AudioChannelLayout& layout)
     UInt32 propSize = 0;
     AudioFormatGetPropertyInfo(kAudioFormatProperty_ChannelLayoutForTag,
       sizeof(layout.mChannelLayoutTag), &layout.mChannelLayoutTag, &propSize);
-    m_pLayout = (AudioChannelLayout*)malloc(propSize);
+    m_pLayout = static_cast<AudioChannelLayout*>(malloc(propSize));
     ret = AudioFormatGetProperty(kAudioFormatProperty_ChannelLayoutForTag,
       sizeof(layout.mChannelLayoutTag), &layout.mChannelLayoutTag, &propSize, m_pLayout);
     m_pLayout->mChannelLayoutTag = kAudioChannelLayoutTag_UseChannelDescriptions;
@@ -128,7 +128,7 @@ bool CCoreAudioChannelLayout::CopyLayoutForStereo(UInt32 layout[2])
   UInt32 channels = 2;
   UInt32 size = sizeof(AudioChannelLayout) + (channels - kVariableLengthArray_deprecated) * sizeof(AudioChannelDescription);
 
-  m_pLayout = (AudioChannelLayout*)malloc(size);
+  m_pLayout = static_cast<AudioChannelLayout*>(malloc(size));
   m_pLayout->mChannelLayoutTag = kAudioChannelLayoutTag_UseChannelDescriptions;
   m_pLayout->mNumberChannelDescriptions = 2;//stereo
 
@@ -193,7 +193,7 @@ const char* CCoreAudioChannelLayout::ChannelLayoutToString(AudioChannelLayout& l
     UInt32 propSize = 0;
     AudioFormatGetPropertyInfo(kAudioFormatProperty_ChannelLayoutForBitmap,
       sizeof(layout.mChannelBitmap), &layout.mChannelBitmap, &propSize);
-    pLayout = (AudioChannelLayout*)calloc(propSize, 1);
+    pLayout = static_cast<AudioChannelLayout*>(calloc(propSize, 1));
     AudioFormatGetProperty(kAudioFormatProperty_ChannelLayoutForBitmap,
       sizeof(layout.mChannelBitmap), &layout.mChannelBitmap, &propSize, pLayout);
   }
@@ -203,7 +203,7 @@ const char* CCoreAudioChannelLayout::ChannelLayoutToString(AudioChannelLayout& l
     UInt32 propSize = 0;
     AudioFormatGetPropertyInfo(kAudioFormatProperty_ChannelLayoutForTag,
       sizeof(layout.mChannelLayoutTag), &layout.mChannelLayoutTag, &propSize);
-    pLayout = (AudioChannelLayout*)calloc(propSize, 1);
+    pLayout = static_cast<AudioChannelLayout*>(calloc(propSize, 1));
     AudioFormatGetProperty(kAudioFormatProperty_ChannelLayoutForTag,
       sizeof(layout.mChannelLayoutTag), &layout.mChannelLayoutTag, &propSize, pLayout);
   }
@@ -242,7 +242,7 @@ bool CCoreAudioChannelLayout::AllChannelUnknown()
     UInt32 propSize = 0;
     AudioFormatGetPropertyInfo(kAudioFormatProperty_ChannelLayoutForBitmap,
       sizeof(m_pLayout->mChannelBitmap), &m_pLayout->mChannelBitmap, &propSize);
-    pLayout = (AudioChannelLayout*)calloc(propSize, 1);
+    pLayout = static_cast<AudioChannelLayout*>(calloc(propSize, 1));
     AudioFormatGetProperty(kAudioFormatProperty_ChannelLayoutForBitmap,
       sizeof(m_pLayout->mChannelBitmap), &m_pLayout->mChannelBitmap, &propSize, pLayout);
   }
@@ -252,7 +252,7 @@ bool CCoreAudioChannelLayout::AllChannelUnknown()
     UInt32 propSize = 0;
     AudioFormatGetPropertyInfo(kAudioFormatProperty_ChannelLayoutForTag,
       sizeof(m_pLayout->mChannelLayoutTag), &m_pLayout->mChannelLayoutTag, &propSize);
-    pLayout = (AudioChannelLayout*)calloc(propSize, 1);
+    pLayout = static_cast<AudioChannelLayout*>(calloc(propSize, 1));
     AudioFormatGetProperty(kAudioFormatProperty_ChannelLayoutForTag,
       sizeof(m_pLayout->mChannelLayoutTag), &m_pLayout->mChannelLayoutTag, &propSize, pLayout);
   }

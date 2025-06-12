@@ -149,7 +149,7 @@ bool CAAudioUnitSink::open(AudioStreamBasicDescription outputFormat)
   m_outputLatency = 0.0;
   m_bufferDuration= 0.0;
   m_outputVolume  = 1.0;
-  m_sampleRate    = (unsigned int)outputFormat.mSampleRate;
+  m_sampleRate = static_cast<unsigned int>(outputFormat.mSampleRate);
   m_frameSize     = outputFormat.mChannelsPerFrame * outputFormat.mBitsPerChannel / 8;
 
   /* TODO: Reduce the size of this buffer, pre-calculate the size based on how large
@@ -205,8 +205,8 @@ void CAAudioUnitSink::getDelay(AEDelayStatus& status)
   CAESpinLock lock(m_render_section);
   do
   {
-    status.delay  = (double)m_buffer->GetReadSize() / m_frameSize;
-    status.delay += (double)m_render_frames;
+    status.delay = static_cast<double>(m_buffer->GetReadSize()) / m_frameSize;
+    status.delay += static_cast<double>(m_render_frames);
     status.tick   = m_render_timestamp;
   } while(lock.retry());
 
@@ -216,7 +216,8 @@ void CAAudioUnitSink::getDelay(AEDelayStatus& status)
 
 double CAAudioUnitSink::cacheSize()
 {
-  return (double)m_buffer->GetMaxSize() / (double)(m_frameSize * m_sampleRate);
+  return static_cast<double>(m_buffer->GetMaxSize()) /
+         static_cast<double>(m_frameSize * m_sampleRate);
 }
 
 CCriticalSection mutex;
@@ -284,7 +285,8 @@ void CAAudioUnitSink::setCoreAudioBuffersize()
   [session setPreferredIOBufferDuration:preferredBufferSize error:&status];
   if (status)
   {
-    CLog::LogF(LOGWARNING, "PreferredBufferSize couldn't be set (error: {})", (int)status.code);
+    CLog::LogF(LOGWARNING, "PreferredBufferSize couldn't be set (error: {})",
+               static_cast<int>(status.code));
   }
 
 #endif
@@ -299,7 +301,7 @@ bool CAAudioUnitSink::setCoreAudioInputFormat()
   if (status != noErr)
   {
     CLog::Log(LOGERROR, "{} error setting stream format on audioUnit (error: {})",
-              __PRETTY_FUNCTION__, (int)status);
+              __PRETTY_FUNCTION__, static_cast<int>(status));
     return false;
   }
   return true;
@@ -316,7 +318,8 @@ void CAAudioUnitSink::setCoreAudioPreferredSampleRate()
   [session setPreferredSampleRate:preferredSampleRate error:&status];
   if (status)
   {
-    CLog::LogF(LOGWARNING, "preferredSampleRate couldn't be set (error: {})", (int)status.code);
+    CLog::LogF(LOGWARNING, "preferredSampleRate couldn't be set (error: {})",
+               static_cast<int>(status));
   }
 }
 
@@ -351,7 +354,7 @@ bool CAAudioUnitSink::setupAudio()
   if (status != noErr)
   {
     CLog::Log(LOGERROR, "{} error creating audioUnit (error: {})", __PRETTY_FUNCTION__,
-              (int)status);
+              static_cast<int>(status));
     return false;
   }
 
@@ -363,7 +366,8 @@ bool CAAudioUnitSink::setupAudio()
   {
     CLog::Log(LOGINFO,
               "{} couldn't set requested samplerate {}, coreaudio will resample to {} instead",
-              __PRETTY_FUNCTION__, (int)m_outputFormat.mSampleRate, (int)realisedSampleRate);
+              __PRETTY_FUNCTION__, static_cast<int>(m_outputFormat.mSampleRate),
+              static_cast<int>(realisedSampleRate));
     // if we don't ca to resample - but instead let activeae resample -
     // reflect the realised samplerate to the outputformat here
     // well maybe it is handy in the future - as of writing this
@@ -386,7 +390,7 @@ bool CAAudioUnitSink::setupAudio()
   if (status != noErr)
   {
     CLog::Log(LOGERROR, "{} error setting render callback for audioUnit (error: {})",
-              __PRETTY_FUNCTION__, (int)status);
+              __PRETTY_FUNCTION__, static_cast<int>(status));
     return false;
   }
 
@@ -394,7 +398,7 @@ bool CAAudioUnitSink::setupAudio()
 	if (status != noErr)
   {
     CLog::Log(LOGERROR, "{} error initializing audioUnit (error: {})", __PRETTY_FUNCTION__,
-              (int)status);
+              static_cast<int>(status));
     return false;
   }
 
@@ -465,7 +469,7 @@ void CAAudioUnitSink::deactivateAudioSession()
 void CAAudioUnitSink::sessionPropertyCallback(void *inClientData,
   AudioSessionPropertyID inID, UInt32 inDataSize, const void *inData)
 {
-  CAAudioUnitSink *sink = (CAAudioUnitSink*)inClientData;
+  CAAudioUnitSink* sink = static_cast<CAAudioUnitSink*>(inClientData);
 
   if (inID == kAudioSessionProperty_AudioRouteChange)
   {
@@ -498,7 +502,7 @@ inline void LogLevel(unsigned int got, unsigned int wanted)
 OSStatus CAAudioUnitSink::renderCallback(void *inRefCon, AudioUnitRenderActionFlags *ioActionFlags,
   const AudioTimeStamp *inTimeStamp, UInt32 inOutputBusNumber, UInt32 inNumberFrames, AudioBufferList *ioData)
 {
-  CAAudioUnitSink *sink = (CAAudioUnitSink*)inRefCon;
+  CAAudioUnitSink* sink = static_cast<CAAudioUnitSink*>(inRefCon);
 
   sink->m_render_section.enter();
   sink->m_started = true;
@@ -508,7 +512,7 @@ OSStatus CAAudioUnitSink::renderCallback(void *inRefCon, AudioUnitRenderActionFl
     // buffers come from CA already zero'd, so just copy what is wanted
     unsigned int wanted = ioData->mBuffers[i].mDataByteSize;
     unsigned int bytes = std::min(sink->m_buffer->GetReadSize(), wanted);
-    sink->m_buffer->Read((unsigned char*)ioData->mBuffers[i].mData, bytes);
+    sink->m_buffer->Read(static_cast<unsigned char*>(ioData->mBuffers[i].mData), bytes);
     LogLevel(bytes, wanted);
 
     if (bytes == 0)
