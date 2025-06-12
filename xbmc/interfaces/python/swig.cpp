@@ -80,7 +80,8 @@ namespace PythonBindings
 #endif
     };
 
-    static int size = (long*)&(py_type_object_header.tp_name) - (long*)&py_type_object_header;
+    static int size = reinterpret_cast<long*>(&(py_type_object_header.tp_name)) -
+                      reinterpret_cast<long*>(&py_type_object_header);
     memcpy(&(this->pythonType), &py_type_object_header, size);
   }
 
@@ -422,7 +423,7 @@ namespace PythonBindings
     self->pSelf = api;
     if (incrementRefCount)
       Py_INCREF((PyObject*)self);
-    return (PyObject*)self;
+    return reinterpret_cast<PyObject*>(self);
   }
 
   std::map<std::type_index, const TypeInfo*> typeInfoLookup;

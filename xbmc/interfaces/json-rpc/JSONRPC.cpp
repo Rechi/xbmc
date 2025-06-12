@@ -142,11 +142,11 @@ JSONRPC_STATUS CJSONRPC::Version(const std::string &method, ITransportLayer *tra
   {
     std::vector<std::string> parts = StringUtils::Split(version, ".");
     if (!parts.empty())
-      result["version"]["major"] = (int)strtol(parts[0].c_str(), NULL, 10);
+      result["version"]["major"] = static_cast<int>(strtol(parts[0].c_str(), NULL, 10));
     if (parts.size() > 1)
-      result["version"]["minor"] = (int)strtol(parts[1].c_str(), NULL, 10);
+      result["version"]["minor"] = static_cast<int>(strtol(parts[1].c_str(), NULL, 10));
     if (parts.size() > 2)
-      result["version"]["patch"] = (int)strtol(parts[2].c_str(), NULL, 10);
+      result["version"]["patch"] = static_cast<int>(strtol(parts[2].c_str(), NULL, 10));
   }
 
   return OK;
@@ -157,7 +157,7 @@ JSONRPC_STATUS CJSONRPC::Permission(const std::string &method, ITransportLayer *
   int flags = client->GetPermissionFlags();
 
   for (int i = 1; i <= OPERATION_PERMISSION_ALL; i *= 2)
-    result[PermissionToString((OperationPermission)i)] = (flags & i) == i;
+    result[PermissionToString(static_cast<OperationPermission>(i))] = (flags & i) == i;
 
   return OK;
 }
@@ -174,7 +174,9 @@ JSONRPC_STATUS CJSONRPC::GetConfiguration(const std::string &method, ITransportL
   int flags = client->GetAnnouncementFlags();
 
   for (int i = 1; i <= ANNOUNCEMENT::ANNOUNCE_ALL; i *= 2)
-    result["notifications"][AnnouncementFlagToString((ANNOUNCEMENT::AnnouncementFlag)i)] = (flags & i) == i;
+    result["notifications"]
+          [AnnouncementFlagToString(static_cast<ANNOUNCEMENT::AnnouncementFlag>(i))] =
+              (flags & i) == i;
 
   return OK;
 }

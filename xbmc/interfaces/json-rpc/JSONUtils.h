@@ -69,8 +69,8 @@ namespace JSONRPC
       if (size < 0)
         size = 0;
 
-      start = (int)parameterObject["limits"]["start"].asInteger();
-      end   = (int)parameterObject["limits"]["end"].asInteger();
+      start = static_cast<int>(parameterObject["limits"]["start"].asInteger());
+      end = static_cast<int>(parameterObject["limits"]["end"].asInteger());
       end = (end <= 0 || end > size) ? size : end;
       start = start > end ? end : start;
 
@@ -106,8 +106,8 @@ namespace JSONRPC
 
     static void ParseLimits(const CVariant &parameterObject, int &limitStart, int &limitEnd)
     {
-      limitStart = (int)parameterObject["limits"]["start"].asInteger();
-      limitEnd = (int)parameterObject["limits"]["end"].asInteger();
+      limitStart = static_cast<int>(parameterObject["limits"]["start"].asInteger());
+      limitEnd = static_cast<int>(parameterObject["limits"]["end"].asInteger());
     }
 
     /*!
@@ -259,10 +259,10 @@ namespace JSONRPC
     static inline std::string SchemaValueTypeToString(JSONSchemaType valueType)
     {
       std::vector<JSONSchemaType> types = std::vector<JSONSchemaType>();
-      for (unsigned int value = 0x01; value <= (unsigned int)AnyValue; value *= 2)
+      for (unsigned int value = 0x01; value <= static_cast<unsigned int>(AnyValue); value *= 2)
       {
-        if (HasType(valueType, (JSONSchemaType)value))
-          types.push_back((JSONSchemaType)value);
+        if (HasType(valueType, static_cast<JSONSchemaType>(value)))
+          types.push_back(static_cast<JSONSchemaType>(value));
       }
 
       std::string strType;
@@ -320,10 +320,10 @@ namespace JSONRPC
     static inline void SchemaValueTypeToJson(JSONSchemaType valueType, CVariant &jsonObject)
     {
       jsonObject = CVariant(CVariant::VariantTypeArray);
-      for (unsigned int value = 0x01; value <= (unsigned int)AnyValue; value *= 2)
+      for (unsigned int value = 0x01; value <= static_cast<unsigned int>(AnyValue); value *= 2)
       {
-        if (HasType(valueType, (JSONSchemaType)value))
-          jsonObject.append(SchemaValueTypeToString((JSONSchemaType)value));
+        if (HasType(valueType, static_cast<JSONSchemaType>(value)))
+          jsonObject.append(SchemaValueTypeToString(static_cast<JSONSchemaType>(value)));
       }
 
       if (jsonObject.size() == 1)
