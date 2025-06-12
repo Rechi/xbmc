@@ -36,7 +36,7 @@ inline static bool waitForThread(std::atomic<long>& mutex,
   CCriticalSection sec;
   for (auto i = std::chrono::milliseconds::zero(); i < duration; i++)
   {
-    if (mutex == (long)numWaiters)
+    if (mutex == static_cast<long>(numWaiters))
       return true;
 
     {
