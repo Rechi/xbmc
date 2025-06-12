@@ -1035,7 +1035,7 @@ bool CGUIFontTTF::CacheCharacter(FT_UInt glyphIndex, uint32_t style, Character* 
     return false;
   }
 
-  FT_BitmapGlyph bitGlyph = (FT_BitmapGlyph)glyph;
+  FT_BitmapGlyph bitGlyph = reinterpret_cast<FT_BitmapGlyph>(glyph);
   FT_Bitmap bitmap = bitGlyph->bitmap;
   bool isEmptyGlyph = (bitmap.width == 0 || bitmap.rows == 0);
 

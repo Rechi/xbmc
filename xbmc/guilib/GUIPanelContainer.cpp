@@ -40,13 +40,13 @@ void CGUIPanelContainer::Process(unsigned int currentTime, CDirtyRegionList &dir
 
   UpdateScrollOffset(currentTime);
 
-  int offset = (int)(m_scroller.GetValue() / m_layout->Size(m_orientation));
+  int offset = static_cast<int>(m_scroller.GetValue() / m_layout->Size(m_orientation));
 
   int cacheBefore, cacheAfter;
   GetCacheOffsets(cacheBefore, cacheAfter);
 
   // Free memory not used on screen
-  if ((int)m_items.size() > m_itemsPerPage + cacheBefore + cacheAfter)
+  if (static_cast<int>(m_items.size()) > m_itemsPerPage + cacheBefore + cacheAfter)
     FreeMemory(CorrectOffset(offset - cacheBefore, 0), CorrectOffset(offset + m_itemsPerPage + 1 + cacheAfter, 0));
 
   CPoint origin = CPoint(m_posX, m_posY) + m_renderOffset;
@@ -59,7 +59,7 @@ void CGUIPanelContainer::Process(unsigned int currentTime, CDirtyRegionList &dir
   int col = 0;
   while (pos < end && m_items.size())
   {
-    if (current >= (int)m_items.size())
+    if (current >= static_cast<int>(m_items.size()))
       break;
     if (current >= 0)
     {
@@ -96,7 +96,7 @@ void CGUIPanelContainer::Render()
   if (!m_layout || !m_focusedLayout)
     return;
 
-  int offset = (int)(m_scroller.GetValue() / m_layout->Size(m_orientation));
+  int offset = static_cast<int>(m_scroller.GetValue() / m_layout->Size(m_orientation));
 
   int cacheBefore, cacheAfter;
   GetCacheOffsets(cacheBefore, cacheAfter);
@@ -117,7 +117,7 @@ void CGUIPanelContainer::Render()
     std::vector<RENDERITEM> renderitems;
     while (pos < end && m_items.size())
     {
-      if (current >= (int)m_items.size())
+      if (current >= static_cast<int>(m_items.size()))
         break;
       if (current >= 0)
       {
@@ -201,7 +201,8 @@ bool CGUIPanelContainer::OnAction(const CAction &action)
     break;
   case ACTION_PAGE_DOWN:
     {
-      if ((GetOffset() + m_itemsPerPage) * m_itemsPerRow >= (int)m_items.size() || (int)m_items.size() < m_itemsPerPage)
+      if ((GetOffset() + m_itemsPerPage) * m_itemsPerRow >= static_cast<int>(m_items.size()) ||
+          static_cast<int>(m_items.size()) < m_itemsPerPage)
       { // already at the last page, so move to the last item.
         SetCursor(m_items.size() - GetOffset() * m_itemsPerRow - 1);
       }
@@ -241,11 +242,14 @@ bool CGUIPanelContainer::OnAction(const CAction &action)
       {
         handled = true;
         m_analogScrollCount -= AnalogScrollSpeed();
-        if ((GetOffset() + m_itemsPerPage) * m_itemsPerRow < (int)m_items.size())// && GetCursor() >= m_itemsPerPage * m_itemsPerRow / 2)
+        if ((GetOffset() + m_itemsPerPage) * m_itemsPerRow <
+            static_cast<int>(
+                m_items.size())) // && GetCursor() >= m_itemsPerPage * m_itemsPerRow / 2)
         {
           Scroll(1);
         }
-        else if (GetCursor() < m_itemsPerPage * m_itemsPerRow - 1 && GetOffset() * m_itemsPerRow + GetCursor() < (int)m_items.size() - 1)
+        else if (GetCursor() < m_itemsPerPage * m_itemsPerRow - 1 &&
+                 GetOffset() * m_itemsPerRow + GetCursor() < static_cast<int>(m_items.size()) - 1)
         {
           SetCursor(GetCursor() + 1);
         }
@@ -316,17 +320,20 @@ void CGUIPanelContainer::OnDown()
 
 bool CGUIPanelContainer::MoveDown(bool wrapAround)
 {
-  if (GetCursor() + m_itemsPerRow < m_itemsPerPage * m_itemsPerRow && (GetOffset() + 1 + GetCursor() / m_itemsPerRow) * m_itemsPerRow < (int)m_items.size())
+  if (GetCursor() + m_itemsPerRow < m_itemsPerPage * m_itemsPerRow &&
+      (GetOffset() + 1 + GetCursor() / m_itemsPerRow) * m_itemsPerRow <
+          static_cast<int>(m_items.size()))
   { // move to last item if necessary
-    if ((GetOffset() + 1)*m_itemsPerRow + GetCursor() >= (int)m_items.size())
-      SetCursor((int)m_items.size() - 1 - GetOffset()*m_itemsPerRow);
+    if ((GetOffset() + 1) * m_itemsPerRow + GetCursor() >= static_cast<int>(m_items.size()))
+      SetCursor(static_cast<int>(m_items.size()) - 1 - GetOffset() * m_itemsPerRow);
     else
       SetCursor(GetCursor() + m_itemsPerRow);
   }
-  else if ((GetOffset() + 1 + GetCursor() / m_itemsPerRow) * m_itemsPerRow < (int)m_items.size())
+  else if ((GetOffset() + 1 + GetCursor() / m_itemsPerRow) * m_itemsPerRow <
+           static_cast<int>(m_items.size()))
   { // we scroll to the next row, and move to last item if necessary
-    if ((GetOffset() + 1)*m_itemsPerRow + GetCursor() >= (int)m_items.size())
-      SetCursor((int)m_items.size() - 1 - (GetOffset() + 1)*m_itemsPerRow);
+    if ((GetOffset() + 1) * m_itemsPerRow + GetCursor() >= static_cast<int>(m_items.size()))
+      SetCursor(static_cast<int>(m_items.size()) - 1 - (GetOffset() + 1) * m_itemsPerRow);
     ScrollToOffset(GetOffset() + 1);
   }
   else if (wrapAround)
@@ -349,10 +356,10 @@ bool CGUIPanelContainer::MoveUp(bool wrapAround)
   else if (wrapAround)
   { // move last item in list in this column
     SetCursor((GetCursor() % m_itemsPerRow) + (m_itemsPerPage - 1) * m_itemsPerRow);
-    int offset = std::max((int)GetRows() - m_itemsPerPage, 0);
+    int offset = std::max(static_cast<int>(GetRows()) - m_itemsPerPage, 0);
     // should check here whether cursor is actually allowed here, and reduce accordingly
-    if (offset * m_itemsPerRow + GetCursor() >= (int)m_items.size())
-      SetCursor((int)m_items.size() - offset * m_itemsPerRow - 1);
+    if (offset * m_itemsPerRow + GetCursor() >= static_cast<int>(m_items.size()))
+      SetCursor(static_cast<int>(m_items.size()) - offset * m_itemsPerRow - 1);
     ScrollToOffset(offset);
     SetContainerMoving(-1);
   }
@@ -369,8 +376,8 @@ bool CGUIPanelContainer::MoveLeft(bool wrapAround)
   else if (wrapAround)
   { // wrap around
     SetCursor(GetCursor() + m_itemsPerRow - 1);
-    if (GetOffset() * m_itemsPerRow + GetCursor() >= (int)m_items.size())
-      SetCursor((int)m_items.size() - GetOffset() * m_itemsPerRow - 1);
+    if (GetOffset() * m_itemsPerRow + GetCursor() >= static_cast<int>(m_items.size()))
+      SetCursor(static_cast<int>(m_items.size()) - GetOffset() * m_itemsPerRow - 1);
   }
   else
     return false;
@@ -380,7 +387,8 @@ bool CGUIPanelContainer::MoveLeft(bool wrapAround)
 bool CGUIPanelContainer::MoveRight(bool wrapAround)
 {
   int col = GetCursor() % m_itemsPerRow;
-  if (col + 1 < m_itemsPerRow && GetOffset() * m_itemsPerRow + GetCursor() + 1 < (int)m_items.size())
+  if (col + 1 < m_itemsPerRow &&
+      GetOffset() * m_itemsPerRow + GetCursor() + 1 < static_cast<int>(m_items.size()))
     SetCursor(GetCursor() + 1);
   else if (wrapAround) // move first item in row
     SetCursor(GetCursor() - col);
@@ -394,9 +402,9 @@ void CGUIPanelContainer::Scroll(int amount)
 {
   // increase or decrease the offset
   int offset = GetOffset() + amount;
-  if (offset > ((int)GetRows() - m_itemsPerPage) * m_itemsPerRow)
+  if (offset > (static_cast<int>(GetRows()) - m_itemsPerPage) * m_itemsPerRow)
   {
-    offset = ((int)GetRows() - m_itemsPerPage) * m_itemsPerRow;
+    offset = (static_cast<int>(GetRows()) - m_itemsPerPage) * m_itemsPerRow;
   }
   if (offset < 0) offset = 0;
   ScrollToOffset(offset);
@@ -407,9 +415,12 @@ void CGUIPanelContainer::ValidateOffset()
   if (!m_layout) return;
   // first thing is we check the range of our offset
   // don't validate offset if we are scrolling in case the tween image exceed <0, 1> range
-  if (GetOffset() > (int)GetRows() - m_itemsPerPage || (!m_scroller.IsScrolling() && m_scroller.GetValue() > ((int)GetRows() - m_itemsPerPage) * m_layout->Size(m_orientation)))
+  if (GetOffset() > static_cast<int>(GetRows()) - m_itemsPerPage ||
+      (!m_scroller.IsScrolling() &&
+       m_scroller.GetValue() >
+           (static_cast<int>(GetRows()) - m_itemsPerPage) * m_layout->Size(m_orientation)))
   {
-    SetOffset(std::max(0, (int)GetRows() - m_itemsPerPage));
+    SetOffset(std::max(0, static_cast<int>(GetRows()) - m_itemsPerPage));
     m_scroller.SetValue(GetOffset() * m_layout->Size(m_orientation));
   }
   if (GetOffset() < 0 || (!m_scroller.IsScrolling() && m_scroller.GetValue() < 0))
@@ -446,13 +457,13 @@ void CGUIPanelContainer::CalculateLayout()
   // calculate the number of items to display
   if (m_orientation == HORIZONTAL)
   {
-    m_itemsPerRow = (int)(m_height / m_layout->Size(VERTICAL));
-    m_itemsPerPage = (int)(m_width / m_layout->Size(HORIZONTAL));
+    m_itemsPerRow = static_cast<int>(m_height / m_layout->Size(VERTICAL));
+    m_itemsPerPage = static_cast<int>(m_width / m_layout->Size(HORIZONTAL));
   }
   else
   {
-    m_itemsPerRow = (int)(m_width / m_layout->Size(HORIZONTAL));
-    m_itemsPerPage = (int)(m_height / m_layout->Size(VERTICAL));
+    m_itemsPerRow = static_cast<int>(m_width / m_layout->Size(HORIZONTAL));
+    m_itemsPerPage = static_cast<int>(m_height / m_layout->Size(VERTICAL));
   }
   if (m_itemsPerRow < 1) m_itemsPerRow = 1;
   if (m_itemsPerPage < 1) m_itemsPerPage = 1;
@@ -492,7 +503,7 @@ int CGUIPanelContainer::GetCursorFromPoint(const CPoint &point, CPoint *itemPoin
     for (int x = 0; x < m_itemsPerRow; x++)
     {
       int item = x + y * m_itemsPerRow;
-      if (posX < sizeX && posY < sizeY && item + GetOffset() < (int)m_items.size())
+      if (posX < sizeX && posY < sizeY && item + GetOffset() < static_cast<int>(m_items.size()))
       { // found
         return item;
       }
@@ -566,7 +577,7 @@ void CGUIPanelContainer::SelectItem(int item)
   // Check that our offset is valid
   ValidateOffset();
   // only select an item if it's in a valid range
-  if (item >= 0 && item < (int)m_items.size())
+  if (item >= 0 && item < static_cast<int>(m_items.size()))
   {
     // Select the item requested
     if (item >= GetOffset() * m_itemsPerRow && item < (GetOffset() + m_itemsPerPage) * m_itemsPerRow)
@@ -593,7 +604,8 @@ bool CGUIPanelContainer::HasPreviousPage() const
 
 bool CGUIPanelContainer::HasNextPage() const
 {
-  return (GetOffset() != (int)GetRows() - m_itemsPerPage && (int)GetRows() > m_itemsPerPage);
+  return (GetOffset() != static_cast<int>(GetRows()) - m_itemsPerPage &&
+          static_cast<int>(GetRows()) > m_itemsPerPage);
 }
 
 void CGUIPanelContainer::ScrollToOffset(int offset)

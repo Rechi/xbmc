@@ -156,14 +156,14 @@ bool CGUISpinControl::OnAction(const CAction &action)
 
       case SPIN_CONTROL_TYPE_TEXT:
         {
-          if (iValue < 0 || iValue >= (int)m_vecLabels.size())
+          if (iValue < 0 || iValue >= static_cast<int>(m_vecLabels.size()))
           {
             m_iTypedPos = 0;
             m_szTyped[m_iTypedPos] = iNumber + '0';
             m_iTypedPos++;
             m_szTyped[m_iTypedPos] = 0;
             sscanf(m_szTyped, "%i", &iValue);
-            if (iValue < 0 || iValue >= (int)m_vecLabels.size())
+            if (iValue < 0 || iValue >= static_cast<int>(m_vecLabels.size()))
             {
               m_iTypedPos = 0;
               strcpy(m_szTyped, "");
@@ -325,7 +325,7 @@ bool CGUISpinControl::OnMessage(CGUIMessage& message)
 
         if (m_iType == SPIN_CONTROL_TYPE_TEXT)
         {
-          if ( m_iValue >= 0 && m_iValue < (int)m_vecLabels.size() )
+          if (m_iValue >= 0 && m_iValue < static_cast<int>(m_vecLabels.size()))
             message.SetLabel( m_vecLabels[m_iValue]);
         }
         return true;
@@ -461,11 +461,11 @@ void CGUISpinControl::Process(unsigned int currentTime, CDirtyRegionList &dirtyr
   }
   else
   {
-    if (m_iValue >= 0 && m_iValue < (int)m_vecLabels.size() )
+    if (m_iValue >= 0 && m_iValue < static_cast<int>(m_vecLabels.size()))
     {
       if (m_bShowRange)
       {
-        text = StringUtils::Format("({}/{}) {}", m_iValue + 1, (int)m_vecLabels.size(),
+        text = StringUtils::Format("({}/{}) {}", m_iValue + 1, static_cast<int>(m_vecLabels.size()),
                                    m_vecLabels[m_iValue]);
       }
       else
@@ -638,7 +638,7 @@ int CGUISpinControl::GetValue() const
 {
   if (m_iType == SPIN_CONTROL_TYPE_TEXT)
   {
-    if (m_iValue >= 0 && m_iValue < (int)m_vecValues.size())
+    if (m_iValue >= 0 && m_iValue < static_cast<int>(m_vecValues.size()))
       return m_vecValues[m_iValue];
   }
   return m_iValue;
@@ -651,9 +651,10 @@ float CGUISpinControl::GetFloatValue() const
 
 std::string CGUISpinControl::GetStringValue() const
 {
-  if (m_iType == SPIN_CONTROL_TYPE_TEXT && m_iValue >= 0 && m_iValue < (int)m_vecLabels.size())
+  if (m_iType == SPIN_CONTROL_TYPE_TEXT && m_iValue >= 0 &&
+      m_iValue < static_cast<int>(m_vecLabels.size()))
   {
-    if (m_iValue < (int)m_vecStrValues.size())
+    if (m_iValue < static_cast<int>(m_vecStrValues.size()))
       return m_vecStrValues[m_iValue];
 
     return m_vecLabels[m_iValue];
@@ -675,7 +676,7 @@ void CGUISpinControl::AddLabel(const std::string& strLabel, const std::string& s
 
 const std::string CGUISpinControl::GetLabel() const
 {
-  if (m_iValue >= 0 && m_iValue < (int)m_vecLabels.size())
+  if (m_iValue >= 0 && m_iValue < static_cast<int>(m_vecLabels.size()))
   {
     return m_vecLabels[m_iValue];
   }
@@ -762,7 +763,7 @@ bool CGUISpinControl::CanMoveDown(bool bTestReverse)
 
   case SPIN_CONTROL_TYPE_TEXT:
     {
-      if (m_iValue + 1 < (int)m_vecLabels.size())
+      if (m_iValue + 1 < static_cast<int>(m_vecLabels.size()))
         return true;
       return false;
     }
@@ -824,7 +825,7 @@ void CGUISpinControl::PageDown()
     break;
   case SPIN_CONTROL_TYPE_TEXT:
     {
-      if (m_iValue + 10 < (int)m_vecLabels.size() )
+      if (m_iValue + 10 < static_cast<int>(m_vecLabels.size()))
         m_iValue += 10;
       CGUIMessage msg(GUI_MSG_CLICKED, GetID(), GetParentID());
       SendWindowMessage(msg);
@@ -875,7 +876,7 @@ void CGUISpinControl::MoveUp(bool bTestReverse)
       if (m_iValue - 1 >= 0)
         m_iValue--;
       else if (m_iValue == 0)
-        m_iValue = (int)m_vecLabels.size() - 1;
+        m_iValue = static_cast<int>(m_vecLabels.size()) - 1;
       CGUIMessage msg(GUI_MSG_CLICKED, GetID(), GetParentID());
       SendWindowMessage(msg);
       return ;
@@ -923,9 +924,9 @@ void CGUISpinControl::MoveDown(bool bTestReverse)
 
   case SPIN_CONTROL_TYPE_TEXT:
     {
-      if (m_iValue + 1 < (int)m_vecLabels.size() )
+      if (m_iValue + 1 < static_cast<int>(m_vecLabels.size()))
         m_iValue++;
-      else if (m_iValue == (int)m_vecLabels.size() - 1)
+      else if (m_iValue == static_cast<int>(m_vecLabels.size()) - 1)
         m_iValue = 0;
       CGUIMessage msg(GUI_MSG_CLICKED, GetID(), GetParentID());
       SendWindowMessage(msg);
@@ -964,7 +965,7 @@ int CGUISpinControl::GetMinimum() const
     break;
 
   case SPIN_CONTROL_TYPE_FLOAT:
-    return (int)(m_fStart*10.0f);
+    return static_cast<int>(m_fStart * 10.0f);
     break;
   }
   return 0;
@@ -981,11 +982,11 @@ int CGUISpinControl::GetMaximum() const
     break;
 
   case SPIN_CONTROL_TYPE_TEXT:
-    return (int)m_vecLabels.size();
+    return static_cast<int>(m_vecLabels.size());
     break;
 
   case SPIN_CONTROL_TYPE_FLOAT:
-    return (int)(m_fEnd*10.0f);
+    return static_cast<int>(m_fEnd * 10.0f);
     break;
   }
   return 100;
