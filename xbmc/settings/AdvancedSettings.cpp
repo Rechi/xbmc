@@ -1138,8 +1138,8 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
         if (XMLUtils::GetInt(pSortDecription, XML_SORTORDER, sortOrder, SortOrderAscending,
                              SortOrderDescending))
         {
-          m_PVRDefaultSortOrder.sortBy = (SortBy)sortMethod;
-          m_PVRDefaultSortOrder.sortOrder = (SortOrder)sortOrder;
+          m_PVRDefaultSortOrder.sortBy = static_cast<SortBy>(sortMethod);
+          m_PVRDefaultSortOrder.sortOrder = static_cast<SortOrder>(sortOrder);
         }
       }
     }

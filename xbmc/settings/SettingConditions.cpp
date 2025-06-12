@@ -267,7 +267,7 @@ bool GreaterThan(const std::string& condition,
   char* tmp = nullptr;
 
   int lhs = settingInt->GetValue();
-  int rhs = StringUtils::IsInteger(value) ? (int)strtol(value.c_str(), &tmp, 0) : 0;
+  int rhs = StringUtils::IsInteger(value) ? static_cast<int>(strtol(value.c_str(), &tmp, 0)) : 0;
 
   return lhs > rhs;
 }
@@ -286,7 +286,7 @@ bool GreaterThanOrEqual(const std::string& condition,
   char* tmp = nullptr;
 
   int lhs = settingInt->GetValue();
-  int rhs = StringUtils::IsInteger(value) ? (int)strtol(value.c_str(), &tmp, 0) : 0;
+  int rhs = StringUtils::IsInteger(value) ? static_cast<int>(strtol(value.c_str(), &tmp, 0)) : 0;
 
   return lhs >= rhs;
 }
@@ -305,7 +305,7 @@ bool LessThan(const std::string& condition,
   char* tmp = nullptr;
 
   int lhs = settingInt->GetValue();
-  int rhs = StringUtils::IsInteger(value) ? (int)strtol(value.c_str(), &tmp, 0) : 0;
+  int rhs = StringUtils::IsInteger(value) ? static_cast<int>(strtol(value.c_str(), &tmp, 0)) : 0;
 
   return lhs < rhs;
 }
@@ -324,7 +324,7 @@ bool LessThanOrEqual(const std::string& condition,
   char* tmp = nullptr;
 
   int lhs = settingInt->GetValue();
-  int rhs = StringUtils::IsInteger(value) ? (int)strtol(value.c_str(), &tmp, 0) : 0;
+  int rhs = StringUtils::IsInteger(value) ? static_cast<int>(strtol(value.c_str(), &tmp, 0)) : 0;
 
   return lhs <= rhs;
 }

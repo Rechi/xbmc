@@ -80,11 +80,11 @@ bool CMediaSettings::Load(const TiXmlNode *settings)
     int interlaceMethod;
     XMLUtils::GetInt(pElement, "interlacemethod", interlaceMethod, VS_INTERLACEMETHOD_NONE, VS_INTERLACEMETHOD_MAX);
 
-    m_defaultVideoSettings.m_InterlaceMethod = (EINTERLACEMETHOD)interlaceMethod;
+    m_defaultVideoSettings.m_InterlaceMethod = static_cast<EINTERLACEMETHOD>(interlaceMethod);
     int scalingMethod;
     if (!XMLUtils::GetInt(pElement, "scalingmethod", scalingMethod, VS_SCALINGMETHOD_NEAREST, VS_SCALINGMETHOD_MAX))
-      scalingMethod = (int)VS_SCALINGMETHOD_LINEAR;
-    m_defaultVideoSettings.m_ScalingMethod = (ESCALINGMETHOD)scalingMethod;
+      scalingMethod = static_cast<int>(VS_SCALINGMETHOD_LINEAR);
+    m_defaultVideoSettings.m_ScalingMethod = static_cast<ESCALINGMETHOD>(scalingMethod);
 
     XMLUtils::GetInt(pElement, "viewmode", m_defaultVideoSettings.m_ViewMode, ViewModeNormal, ViewModeZoom110Width);
     if (!XMLUtils::GetFloat(pElement, "zoomamount", m_defaultVideoSettings.m_CustomZoomAmount, 0.5f, 2.0f))
@@ -175,12 +175,15 @@ bool CMediaSettings::Load(const TiXmlNode *settings)
   if (pElement != NULL)
   {
     int tmp;
-    if (XMLUtils::GetInt(pElement, "watchmodemovies", tmp, (int)WatchedModeAll, (int)WatchedModeWatched))
-      m_watchedModes["movies"] = (WatchedMode)tmp;
-    if (XMLUtils::GetInt(pElement, "watchmodetvshows", tmp, (int)WatchedModeAll, (int)WatchedModeWatched))
-      m_watchedModes["tvshows"] = (WatchedMode)tmp;
-    if (XMLUtils::GetInt(pElement, "watchmodemusicvideos", tmp, (int)WatchedModeAll, (int)WatchedModeWatched))
-      m_watchedModes["musicvideos"] = (WatchedMode)tmp;
+    if (XMLUtils::GetInt(pElement, "watchmodemovies", tmp, static_cast<int>(WatchedModeAll),
+                         static_cast<int>(WatchedModeWatched)))
+      m_watchedModes["movies"] = static_cast<WatchedMode>(tmp);
+    if (XMLUtils::GetInt(pElement, "watchmodetvshows", tmp, static_cast<int>(WatchedModeAll),
+                         static_cast<int>(WatchedModeWatched)))
+      m_watchedModes["tvshows"] = static_cast<WatchedMode>(tmp);
+    if (XMLUtils::GetInt(pElement, "watchmodemusicvideos", tmp, static_cast<int>(WatchedModeAll),
+                         static_cast<int>(WatchedModeWatched)))
+      m_watchedModes["musicvideos"] = static_cast<WatchedMode>(tmp);
     if (XMLUtils::GetInt(pElement, "watchmoderecordings", tmp, static_cast<int>(WatchedModeAll), static_cast<int>(WatchedModeWatched)))
       m_watchedModes["recordings"] = static_cast<WatchedMode>(tmp);
 
@@ -407,7 +410,7 @@ void CMediaSettings::CycleWatchedMode(const std::string &content)
   WatchedModes::iterator it = m_watchedModes.find(GetWatchedContent(content));
   if (it != m_watchedModes.end())
   {
-    it->second = (WatchedMode)((int)it->second + 1);
+    it->second = static_cast<WatchedMode>(static_cast<int>(it->second) + 1);
     if (it->second > WatchedModeWatched)
       it->second = WatchedModeAll;
   }

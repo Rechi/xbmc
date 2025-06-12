@@ -135,7 +135,8 @@ bool CGUIDialogSettingsBase::OnMessage(CGUIMessage& message)
       }
       // update the value of the previous setting (in case it was invalid)
       else if (m_iSetting >= CONTROL_SETTINGS_START_CONTROL &&
-               m_iSetting < (int)(CONTROL_SETTINGS_START_CONTROL + m_settingControls.size()))
+               m_iSetting <
+                   static_cast<int>(CONTROL_SETTINGS_START_CONTROL + m_settingControls.size()))
       {
         BaseSettingControlPtr control = GetSettingControl(m_iSetting);
         if (control != NULL && control->GetSetting() != NULL && !control->IsValid())
@@ -151,7 +152,7 @@ bool CGUIDialogSettingsBase::OnMessage(CGUIMessage& message)
 
       // check if we have changed the category and need to create new setting controls
       if (m_focusedControl >= CONTROL_SETTINGS_START_BUTTONS &&
-          m_focusedControl < (int)(CONTROL_SETTINGS_START_BUTTONS + m_categories.size()))
+          m_focusedControl < static_cast<int>(CONTROL_SETTINGS_START_BUTTONS + m_categories.size()))
       {
         int categoryIndex = m_focusedControl - CONTROL_SETTINGS_START_BUTTONS;
         SettingCategoryPtr category = m_categories.at(categoryIndex);
@@ -171,7 +172,8 @@ bool CGUIDialogSettingsBase::OnMessage(CGUIMessage& message)
         description = category->GetHelp();
       }
       else if (m_focusedControl >= CONTROL_SETTINGS_START_CONTROL &&
-               m_focusedControl < (int)(CONTROL_SETTINGS_START_CONTROL + m_settingControls.size()))
+               m_focusedControl <
+                   static_cast<int>(CONTROL_SETTINGS_START_CONTROL + m_settingControls.size()))
       {
         m_iSetting = m_focusedControl;
         std::shared_ptr<CSetting> setting = GetSettingControl(m_focusedControl)->GetSetting();
@@ -234,7 +236,8 @@ bool CGUIDialogSettingsBase::OnMessage(CGUIMessage& message)
       }
 
       if (message.GetControlId() >= CONTROL_SETTINGS_START_CONTROL &&
-          message.GetControlId() < (int)(CONTROL_SETTINGS_START_CONTROL + m_settingControls.size()))
+          message.GetControlId() <
+              static_cast<int>(CONTROL_SETTINGS_START_CONTROL + m_settingControls.size()))
       {
         BaseSettingControlPtr settingControl = GetSettingControl(message.GetControlId());
         if (settingControl.get() != NULL && settingControl->GetSetting() != NULL)
@@ -277,7 +280,7 @@ bool CGUIDialogSettingsBase::OnAction(const CAction& action)
     case ACTION_DELETE_ITEM:
     {
       if (m_iSetting >= CONTROL_SETTINGS_START_CONTROL &&
-          m_iSetting < (int)(CONTROL_SETTINGS_START_CONTROL + m_settingControls.size()))
+          m_iSetting < static_cast<int>(CONTROL_SETTINGS_START_CONTROL + m_settingControls.size()))
       {
         auto settingControl = GetSettingControl(m_iSetting);
         if (settingControl != nullptr)
@@ -408,7 +411,7 @@ void CGUIDialogSettingsBase::SetupControls(bool createSettings /* = true */)
     SetHeading(section->GetLabel());
 
   // get the categories we need
-  m_categories = section->GetCategories((SettingLevel)GetSettingLevel());
+  m_categories = section->GetCategories(static_cast<SettingLevel>(GetSettingLevel()));
   if (m_categories.empty())
     m_categories.push_back(m_dummyCategory);
 
@@ -544,7 +547,7 @@ SettingsContainer CGUIDialogSettingsBase::CreateSettings()
   if (m_categories.size() <= 0)
     return settingMap;
 
-  if (m_iCategory < 0 || m_iCategory >= (int)m_categories.size())
+  if (m_iCategory < 0 || m_iCategory >= static_cast<int>(m_categories.size()))
     m_iCategory = 0;
 
   CGUIControlGroupList* group = dynamic_cast<CGUIControlGroupList*>(GetControl(SETTINGS_GROUP_ID));
@@ -558,7 +561,8 @@ SettingsContainer CGUIDialogSettingsBase::CreateSettings()
   // set the description of the current category
   SetDescription(category->GetHelp());
 
-  const SettingGroupList& groups = category->GetGroups((SettingLevel)GetSettingLevel());
+  const SettingGroupList& groups =
+      category->GetGroups(static_cast<SettingLevel>(GetSettingLevel()));
   int iControlID = CONTROL_SETTINGS_START_CONTROL;
   bool first = true;
   for (SettingGroupList::const_iterator groupIt = groups.begin(); groupIt != groups.end();
@@ -567,7 +571,8 @@ SettingsContainer CGUIDialogSettingsBase::CreateSettings()
     if (*groupIt == NULL)
       continue;
 
-    const SettingList& settings = (*groupIt)->GetSettings((SettingLevel)GetSettingLevel());
+    const SettingList& settings =
+        (*groupIt)->GetSettings(static_cast<SettingLevel>(GetSettingLevel()));
     if (settings.size() <= 0)
       continue;
 
@@ -963,7 +968,7 @@ BaseSettingControlPtr CGUIDialogSettingsBase::GetSettingControl(const std::strin
 BaseSettingControlPtr CGUIDialogSettingsBase::GetSettingControl(int controlId)
 {
   if (controlId < CONTROL_SETTINGS_START_CONTROL ||
-      controlId >= (int)(CONTROL_SETTINGS_START_CONTROL + m_settingControls.size()))
+      controlId >= static_cast<int>(CONTROL_SETTINGS_START_CONTROL + m_settingControls.size()))
     return BaseSettingControlPtr();
 
   return m_settingControls[controlId - CONTROL_SETTINGS_START_CONTROL];

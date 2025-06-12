@@ -196,7 +196,7 @@ static bool GetIntegerOptions(const SettingConstPtr& setting,
     std::vector<CVariant> list =
         CSettingUtils::GetList(std::static_pointer_cast<const CSettingList>(setting));
     for (const auto& itValue : list)
-      selectedOptions.insert((int)itValue.asInteger());
+      selectedOptions.insert(static_cast<int>(itValue.asInteger()));
   }
   else
     return false;
@@ -546,7 +546,7 @@ void CGUIControlSpinExSetting::FillControl(bool updateValues)
   {
     std::shared_ptr<CSettingNumber> pSettingNumber =
         std::static_pointer_cast<CSettingNumber>(m_pSetting);
-    m_pSpin->SetFloatValue((float)pSettingNumber->GetValue());
+    m_pSpin->SetFloatValue(static_cast<float>(pSettingNumber->GetValue()));
   }
   else if (controlFormat == "integer")
     FillIntegerSettingControl(updateValues);
@@ -767,7 +767,7 @@ bool CGUIControlListSetting::OnClick()
       if (values.size() > 1)
         return false;
       ret = std::static_pointer_cast<CSettingInt>(m_pSetting)
-                ->SetValue((int)values.at(0).asInteger());
+                ->SetValue(static_cast<int>(values.at(0).asInteger()));
       break;
 
     case SettingType::String:
@@ -1015,19 +1015,19 @@ bool CGUIControlButtonSetting::OnClick()
     if (m_pSetting->GetType() == SettingType::Integer)
     {
       std::shared_ptr<CSettingInt> settingInt = std::static_pointer_cast<CSettingInt>(m_pSetting);
-      value = (float)settingInt->GetValue();
-      min = (float)settingInt->GetMinimum();
-      step = (float)settingInt->GetStep();
-      max = (float)settingInt->GetMaximum();
+      value = static_cast<float>(settingInt->GetValue());
+      min = static_cast<float>(settingInt->GetMinimum());
+      step = static_cast<float>(settingInt->GetStep());
+      max = static_cast<float>(settingInt->GetMaximum());
     }
     else if (m_pSetting->GetType() == SettingType::Number)
     {
       std::shared_ptr<CSettingNumber> settingNumber =
           std::static_pointer_cast<CSettingNumber>(m_pSetting);
-      value = (float)settingNumber->GetValue();
-      min = (float)settingNumber->GetMinimum();
-      step = (float)settingNumber->GetStep();
-      max = (float)settingNumber->GetMaximum();
+      value = static_cast<float>(settingNumber->GetValue());
+      min = static_cast<float>(settingNumber->GetMinimum());
+      step = static_cast<float>(settingNumber->GetStep());
+      max = static_cast<float>(settingNumber->GetMaximum());
     }
     else
       return false;
@@ -1469,7 +1469,7 @@ void CGUIControlSliderSetting::Update(bool fromControl, bool updateDisplayOnly)
       else
       {
         value = std::static_pointer_cast<CSettingNumber>(m_pSetting)->GetValue();
-        m_pSlider->SetFloatValue((float)value);
+        m_pSlider->SetFloatValue(static_cast<float>(value));
       }
 
       strText = CGUIControlSliderSetting::GetText(m_pSetting, value, settingNumber->GetMinimum(),
@@ -1675,8 +1675,8 @@ void CGUIControlRangeSetting::Update(bool fromControl, bool updateDisplayOnly)
 
       if (controlFormat == "date" || controlFormat == "time")
       {
-        CDateTime dateLower((time_t)valueLower);
-        CDateTime dateUpper((time_t)valueUpper);
+        CDateTime dateLower(static_cast<time_t>(valueLower));
+        CDateTime dateUpper(static_cast<time_t>(valueUpper));
 
         if (controlFormat == "date")
         {
@@ -1727,8 +1727,10 @@ void CGUIControlRangeSetting::Update(bool fromControl, bool updateDisplayOnly)
       {
         valueLower = std::static_pointer_cast<CSettingNumber>(settingListValues[0])->GetValue();
         valueUpper = std::static_pointer_cast<CSettingNumber>(settingListValues[1])->GetValue();
-        m_pSlider->SetFloatValue((float)valueLower, CGUISliderControl::RangeSelectorLower);
-        m_pSlider->SetFloatValue((float)valueUpper, CGUISliderControl::RangeSelectorUpper);
+        m_pSlider->SetFloatValue(static_cast<float>(valueLower),
+                                 CGUISliderControl::RangeSelectorLower);
+        m_pSlider->SetFloatValue(static_cast<float>(valueUpper),
+                                 CGUISliderControl::RangeSelectorUpper);
       }
 
       strTextLower = StringUtils::Format(valueFormat, valueLower);
