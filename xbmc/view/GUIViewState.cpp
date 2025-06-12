@@ -215,7 +215,7 @@ SortOrder CGUIViewState::SetNextSortOrder()
 
 SortOrder CGUIViewState::GetSortOrder() const
 {
-  if (m_currentSortMethod >= 0 && m_currentSortMethod < (int)m_sortMethods.size())
+  if (m_currentSortMethod >= 0 && m_currentSortMethod < static_cast<int>(m_sortMethods.size()))
     return m_sortMethods[m_currentSortMethod].m_sortDescription.sortOrder;
 
   return SortOrderAscending;
@@ -223,7 +223,7 @@ SortOrder CGUIViewState::GetSortOrder() const
 
 int CGUIViewState::GetSortOrderLabel() const
 {
-  if (m_currentSortMethod >= 0 && m_currentSortMethod < (int)m_sortMethods.size())
+  if (m_currentSortMethod >= 0 && m_currentSortMethod < static_cast<int>(m_sortMethods.size()))
     if (m_sortMethods[m_currentSortMethod].m_sortDescription.sortOrder == SortOrderDescending)
       return 585;
 
@@ -252,7 +252,7 @@ void CGUIViewState::SaveViewAsControl(int viewAsControl)
 SortDescription CGUIViewState::GetSortMethod() const
 {
   SortDescription sorting;
-  if (m_currentSortMethod >= 0 && m_currentSortMethod < (int)m_sortMethods.size())
+  if (m_currentSortMethod >= 0 && m_currentSortMethod < static_cast<int>(m_sortMethods.size()))
     sorting = m_sortMethods[m_currentSortMethod].m_sortDescription;
 
   return sorting;
@@ -265,7 +265,7 @@ bool CGUIViewState::HasMultipleSortMethods() const
 
 int CGUIViewState::GetSortMethodLabel() const
 {
-  if (m_currentSortMethod >= 0 && m_currentSortMethod < (int)m_sortMethods.size())
+  if (m_currentSortMethod >= 0 && m_currentSortMethod < static_cast<int>(m_sortMethods.size()))
     return m_sortMethods[m_currentSortMethod].m_buttonLabel;
 
   return 551; // default sort method label 'Name'
@@ -273,7 +273,7 @@ int CGUIViewState::GetSortMethodLabel() const
 
 void CGUIViewState::GetSortMethodLabelMasks(LABEL_MASKS& masks) const
 {
-  if (m_currentSortMethod >= 0 && m_currentSortMethod < (int)m_sortMethods.size())
+  if (m_currentSortMethod >= 0 && m_currentSortMethod < static_cast<int>(m_sortMethods.size()))
   {
     masks = m_sortMethods[m_currentSortMethod].m_labelMasks;
     return;
@@ -338,7 +338,7 @@ void CGUIViewState::AddSortMethod(const SortDescription& sortDescription,
 
 void CGUIViewState::SetCurrentSortMethod(int method)
 {
-  SortBy sortBy = (SortBy)method;
+  SortBy sortBy = static_cast<SortBy>(method);
   if (sortBy < SortByNone || sortBy > SortByLastUsed)
     return; // invalid
 
@@ -348,7 +348,7 @@ void CGUIViewState::SetCurrentSortMethod(int method)
 
 void CGUIViewState::SetSortMethod(SortBy sortBy, SortOrder sortOrder /* = SortOrderNone */)
 {
-  for (int i = 0; i < (int)m_sortMethods.size(); ++i)
+  for (int i = 0; i < static_cast<int>(m_sortMethods.size()); ++i)
   {
     if (m_sortMethods[i].m_sortDescription.sortBy == sortBy)
     {
@@ -392,10 +392,10 @@ SortDescription CGUIViewState::SetNextSortMethod(int direction /* = 1 */)
 {
   m_currentSortMethod += direction;
 
-  if (m_currentSortMethod >= (int)m_sortMethods.size())
+  if (m_currentSortMethod >= static_cast<int>(m_sortMethods.size()))
     m_currentSortMethod = 0;
   if (m_currentSortMethod < 0)
-    m_currentSortMethod = m_sortMethods.size() ? (int)m_sortMethods.size() - 1 : 0;
+    m_currentSortMethod = m_sortMethods.size() ? static_cast<int>(m_sortMethods.size()) - 1 : 0;
 
   SaveViewState();
 
@@ -492,7 +492,7 @@ void CGUIViewState::SetSortOrder(SortOrder sortOrder)
   if (sortOrder == SortOrderNone)
     return;
 
-  if (m_currentSortMethod < 0 || m_currentSortMethod >= (int)m_sortMethods.size())
+  if (m_currentSortMethod < 0 || m_currentSortMethod >= static_cast<int>(m_sortMethods.size()))
     return;
 
   m_sortMethods[m_currentSortMethod].m_sortDescription.sortOrder = sortOrder;
@@ -547,7 +547,7 @@ void CGUIViewState::AddPlaylistOrder(const CFileItemList& items, const LABEL_MAS
   SortOrder sortOrder = SortOrderAscending;
   if (items.HasProperty(PROPERTY_SORT_ORDER))
   {
-    sortBy = (SortBy)items.GetProperty(PROPERTY_SORT_ORDER).asInteger();
+    sortBy = static_cast<SortBy>(items.GetProperty(PROPERTY_SORT_ORDER).asInteger());
     if (sortBy != SortByNone)
     {
       sortLabel = SortUtils::GetSortLabel(sortBy);
