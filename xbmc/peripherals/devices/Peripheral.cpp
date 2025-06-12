@@ -202,7 +202,8 @@ bool CPeripheral::Initialise(void)
   if (bReturn)
   {
     CLog::Log(LOGDEBUG, "{} - initialised peripheral on '{}' with {} features and {} sub devices",
-              __FUNCTION__, m_strLocation, (int)m_features.size(), (int)m_subDevices.size());
+              __FUNCTION__, m_strLocation, static_cast<int>(m_features.size()),
+              static_cast<int>(m_subDevices.size()));
     m_bInitialised = true;
   }
 
@@ -417,7 +418,7 @@ float CPeripheral::GetSettingFloat(const std::string& strKey) const
     std::shared_ptr<CSettingNumber> floatSetting =
         std::static_pointer_cast<CSettingNumber>((*it).second.m_setting);
     if (floatSetting)
-      return (float)floatSetting->GetValue();
+      return static_cast<float>(floatSetting->GetValue());
   }
 
   return 0;
@@ -543,7 +544,8 @@ bool CPeripheral::SetSetting(const std::string& strKey, const std::string& strVa
     else if ((*it).second.m_setting->GetType() == SettingType::Integer)
       bChanged = SetSetting(strKey, strValue.empty() ? 0 : atoi(strValue.c_str()));
     else if ((*it).second.m_setting->GetType() == SettingType::Number)
-      bChanged = SetSetting(strKey, (float)(strValue.empty() ? 0 : atof(strValue.c_str())));
+      bChanged =
+          SetSetting(strKey, static_cast<float>(strValue.empty() ? 0 : atof(strValue.c_str())));
     else if ((*it).second.m_setting->GetType() == SettingType::Boolean)
       bChanged = SetSetting(strKey, strValue == "1" || StringUtils::EqualsNoCase(strValue, "true"));
   }

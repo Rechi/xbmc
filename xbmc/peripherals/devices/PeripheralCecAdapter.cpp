@@ -296,7 +296,7 @@ void CPeripheralCecAdapter::SetVersionInfo(const libcec_configuration& configura
   // append firmware build date
   if (configuration.iFirmwareBuildDate != CEC_FW_BUILD_UNKNOWN)
   {
-    CDateTime dt((time_t)configuration.iFirmwareBuildDate);
+    CDateTime dt(static_cast<time_t>(configuration.iFirmwareBuildDate));
     m_strVersionInfo += StringUtils::Format(" ({})", dt.GetAsDBDate());
   }
 }
@@ -776,7 +776,7 @@ void CPeripheralCecAdapter::CecAlert(void* cbParam,
   {
     std::string strLog(g_localizeStrings.Get(iAlertString));
     if (data.paramType == CEC_PARAMETER_TYPE_STRING && data.paramData)
-      strLog += StringUtils::Format(" - {}", (const char*)data.paramData);
+      strLog += StringUtils::Format(" - {}", static_cast<const char*>(data.paramData));
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, g_localizeStrings.Get(36000),
                                           strLog);
   }
@@ -1338,13 +1338,16 @@ void CPeripheralCecAdapter::SetConfigurationFromLibCEC(const CEC::libcec_configu
   bChanged |= SetSetting("activate_source", m_configuration.bActivateSource == 1);
 
   m_configuration.iDoubleTapTimeoutMs = config.iDoubleTapTimeoutMs;
-  bChanged |= SetSetting("double_tap_timeout_ms", (int)m_configuration.iDoubleTapTimeoutMs);
+  bChanged |=
+      SetSetting("double_tap_timeout_ms", static_cast<int>(m_configuration.iDoubleTapTimeoutMs));
 
   m_configuration.iButtonRepeatRateMs = config.iButtonRepeatRateMs;
-  bChanged |= SetSetting("button_repeat_rate_ms", (int)m_configuration.iButtonRepeatRateMs);
+  bChanged |=
+      SetSetting("button_repeat_rate_ms", static_cast<int>(m_configuration.iButtonRepeatRateMs));
 
   m_configuration.iButtonReleaseDelayMs = config.iButtonReleaseDelayMs;
-  bChanged |= SetSetting("button_release_delay_ms", (int)m_configuration.iButtonReleaseDelayMs);
+  bChanged |= SetSetting("button_release_delay_ms",
+                         static_cast<int>(m_configuration.iButtonReleaseDelayMs));
 
   m_configuration.bPowerOffOnStandby = config.bPowerOffOnStandby;
 
@@ -1470,7 +1473,7 @@ void CPeripheralCecAdapter::ReadLogicalAddresses(const std::string& strString,
     {
       int iDevice(0);
       if (sscanf(strDevice.c_str(), "%x", &iDevice) == 1 && iDevice >= 0 && iDevice <= 0xF)
-        addresses.Set((cec_logical_address)iDevice);
+        addresses.Set(static_cast<cec_logical_address>(iDevice));
     }
   }
 }
