@@ -1151,8 +1151,8 @@ std::vector<CMusicAlbumInfo> CScraper::FindAlbum(CCurlFile &fcurl,
         if (pxeRel && pxeRel->FirstChild())
         {
           const char *szScale = pxeRel->Attribute("scale");
-          float flScale = szScale ? float(atof(szScale)) : 1;
-          ali.SetRelevance(float(atof(pxeRel->FirstChild()->Value())) / flScale);
+          float flScale = szScale ? static_cast<float>(atof(szScale)) : 1;
+          ali.SetRelevance(static_cast<float>(atof(pxeRel->FirstChild()->Value())) / flScale);
         }
 
         vcali.push_back(ali);

@@ -178,7 +178,7 @@ CSkinInfo::CSkinInfo(const AddonInfoPtr& addonInfo) : CAddon(addonInfo, AddonTyp
 
     std::vector<std::string> fracs = StringUtils::Split(strAspect, ':');
     if (fracs.size() == 2)
-      aspect = (float)(atof(fracs[0].c_str()) / atof(fracs[1].c_str()));
+      aspect = static_cast<float>(atof(fracs[0].c_str()) / atof(fracs[1].c_str()));
     if (width > 0 && height > 0)
     {
       RESOLUTION_INFO res(width, height, aspect, folder);
@@ -209,10 +209,12 @@ struct closestRes
     float diff = fabs(i.DisplayRatio() - m_target.DisplayRatio()) - fabs(j.DisplayRatio() - m_target.DisplayRatio());
     if (diff < 0) return true;
     if (diff > 0) return false;
-    diff = fabs((float)i.iHeight - m_target.iHeight) - fabs((float)j.iHeight - m_target.iHeight);
+    diff = fabs(static_cast<float>(i.iHeight) - m_target.iHeight) -
+           fabs(static_cast<float>(j.iHeight) - m_target.iHeight);
     if (diff < 0) return true;
     if (diff > 0) return false;
-    return fabs((float)i.iWidth - m_target.iWidth) < fabs((float)j.iWidth - m_target.iWidth);
+    return fabs(static_cast<float>(i.iWidth) - m_target.iWidth) <
+           fabs(static_cast<float>(j.iWidth) - m_target.iWidth);
   }
   RESOLUTION_INFO m_target;
 };
@@ -480,7 +482,7 @@ void CSkinInfo::SettingOptionsSkinColorsFiller(const SettingConstPtr& setting,
     }
   }
   sort(vecColors.begin(), vecColors.end(), sortstringbyname());
-  for (int i = 0; i < (int) vecColors.size(); ++i)
+  for (int i = 0; i < static_cast<int>(vecColors.size()); ++i)
     list.emplace_back(vecColors[i], vecColors[i]);
 
   // try to find the best matching value
@@ -581,7 +583,7 @@ void CSkinInfo::SettingOptionsSkinThemesFiller(const SettingConstPtr& setting,
   CUtil::GetSkinThemes(vecTheme);
 
   // sort the themes for GUI and list them
-  for (int i = 0; i < (int) vecTheme.size(); ++i)
+  for (int i = 0; i < static_cast<int>(vecTheme.size()); ++i)
     list.emplace_back(vecTheme[i], vecTheme[i]);
 
   // try to find the best matching value
