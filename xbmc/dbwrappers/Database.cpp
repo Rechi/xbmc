@@ -809,7 +809,8 @@ bool CDatabase::CreateDatabase()
   }
   catch (...)
   {
-    CLog::Log(LOGERROR, "{} unable to create database:{}", __FUNCTION__, (int)GetLastError());
+    CLog::Log(LOGERROR, "%s unable to create database:{}", __FUNCTION__,
+              static_cast<int>(GetLastError()));
     RollbackTransaction();
     return false;
   }
