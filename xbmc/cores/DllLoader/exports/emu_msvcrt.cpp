@@ -1495,7 +1495,7 @@ extern "C"
 
     ret = dll_fgetpos64(stream, &tmpPos);
 #if !defined(TARGET_POSIX) || defined(TARGET_DARWIN) || defined(TARGET_FREEBSD) || defined(TARGET_ANDROID)
-    *pos = (fpos_t)tmpPos;
+    *pos = static_cast<fpos_t>(tmpPos);
 #else
     pos->__pos = (off_t)tmpPos.__pos;
 #endif
