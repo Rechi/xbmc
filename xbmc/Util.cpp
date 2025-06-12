@@ -857,16 +857,16 @@ void CUtil::StatToStatI64(struct _stati64 *result, struct stat *stat)
   result->st_uid = stat->st_uid;
   result->st_gid = stat->st_gid;
   result->st_rdev = stat->st_rdev;
-  result->st_size = (int64_t)stat->st_size;
+  result->st_size = static_cast<int64_t>(stat->st_size);
 
 #ifndef TARGET_POSIX
   result->st_atime = (long)(stat->st_atime & 0xFFFFFFFF);
   result->st_mtime = (long)(stat->st_mtime & 0xFFFFFFFF);
   result->st_ctime = (long)(stat->st_ctime & 0xFFFFFFFF);
 #else
-  result->_st_atime = (long)(stat->st_atime & 0xFFFFFFFF);
-  result->_st_mtime = (long)(stat->st_mtime & 0xFFFFFFFF);
-  result->_st_ctime = (long)(stat->st_ctime & 0xFFFFFFFF);
+  result->_st_atime = static_cast<long>(stat->st_atime & 0xFFFFFFFF);
+  result->_st_mtime = static_cast<long>(stat->st_mtime & 0xFFFFFFFF);
+  result->_st_ctime = static_cast<long>(stat->st_ctime & 0xFFFFFFFF);
 #endif
 }
 
@@ -885,9 +885,9 @@ void CUtil::Stat64ToStatI64(struct _stati64 *result, struct __stat64 *stat)
   result->st_mtime = (long)(stat->st_mtime & 0xFFFFFFFF);
   result->st_ctime = (long)(stat->st_ctime & 0xFFFFFFFF);
 #else
-  result->_st_atime = (long)(stat->st_atime & 0xFFFFFFFF);
-  result->_st_mtime = (long)(stat->st_mtime & 0xFFFFFFFF);
-  result->_st_ctime = (long)(stat->st_ctime & 0xFFFFFFFF);
+  result->_st_atime = static_cast<long>(stat->st_atime & 0xFFFFFFFF);
+  result->_st_mtime = static_cast<long>(stat->st_mtime & 0xFFFFFFFF);
+  result->_st_ctime = static_cast<long>(stat->st_ctime & 0xFFFFFFFF);
 #endif
 }
 
@@ -949,9 +949,9 @@ void CUtil::Stat64ToStat(struct stat *result, struct __stat64 *stat)
     result->st_size = 0;
     CLog::Log(LOGWARNING, "WARNING: File is larger than 32bit stat can handle, file size will be reported as 0 bytes");
   }
-  result->st_atime = (time_t)(stat->st_atime & 0xFFFFFFFF);
-  result->st_mtime = (time_t)(stat->st_mtime & 0xFFFFFFFF);
-  result->st_ctime = (time_t)(stat->st_ctime & 0xFFFFFFFF);
+  result->st_atime = static_cast<time_t>(stat->st_atime & 0xFFFFFFFF);
+  result->st_mtime = static_cast<time_t>(stat->st_mtime & 0xFFFFFFFF);
+  result->st_ctime = static_cast<time_t>(stat->st_ctime & 0xFFFFFFFF);
 }
 
 #ifdef TARGET_WINDOWS
@@ -1551,7 +1551,7 @@ bool CUtil::MakeShortenPath(std::string StrInput, std::string& StrOutput, size_t
   }
   // replace any additional /../../ with just /../ if necessary
   std::string replaceDots = StringUtils::Format("..{}..", cDelim);
-  while (StrInput.size() > (unsigned int)iTextMaxLength)
+  while (StrInput.size() > static_cast<unsigned int>(iTextMaxLength))
     if (!StringUtils::Replace(StrInput, replaceDots, ".."))
       break;
   // finally, truncate our string to force inside our max text length,
@@ -1559,7 +1559,7 @@ bool CUtil::MakeShortenPath(std::string StrInput, std::string& StrOutput, size_t
 
   // eg end up with:
   // "smb://../Playboy Swimsuit Cal.."
-  if (iTextMaxLength > 2 && StrInput.size() > (unsigned int)iTextMaxLength)
+  if (iTextMaxLength > 2 && StrInput.size() > static_cast<unsigned int>(iTextMaxLength))
   {
     StrInput.erase(iTextMaxLength - 2);
     StrInput += "..";
@@ -1709,7 +1709,7 @@ bool CUtil::Command(const std::vector<std::string>& arrArgs, bool waitExit)
     close(2);
     if (!arrArgs.empty())
     {
-      char **args = (char **)alloca(sizeof(char *) * (arrArgs.size() + 3));
+      char** args = static_cast<char**>(alloca(sizeof(char*) * (arrArgs.size() + 3)));
       memset(args, 0, (sizeof(char *) * (arrArgs.size() + 3)));
       for (size_t i=0; i<arrArgs.size(); i++)
         args[i] = const_cast<char *>(arrArgs[i].c_str());
