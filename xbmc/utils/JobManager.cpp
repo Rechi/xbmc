@@ -297,7 +297,8 @@ CJob *CJobManager::PopJob()
     if (priority == CJob::PRIORITY_LOW_PAUSABLE && m_pauseJobs)
       continue;
 
-    if (m_jobQueue[priority].size() && m_processing.size() < GetMaxWorkers(CJob::PRIORITY(priority)))
+    if (m_jobQueue[priority].size() &&
+        m_processing.size() < GetMaxWorkers(static_cast<CJob::PRIORITY>(priority)))
     {
       // pop the job off the queue
       CWorkItem job = m_jobQueue[priority].front();

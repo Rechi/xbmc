@@ -87,7 +87,7 @@ void CRssReader::requestRefresh()
 void CRssReader::AddToQueue(int iAdd)
 {
   std::unique_lock lock(m_critical);
-  if (iAdd < (int)m_vecUrls.size())
+  if (iAdd < static_cast<int>(m_vecUrls.size()))
     m_vecQueue.push_back(iAdd);
   if (!m_bIsRunning)
   {

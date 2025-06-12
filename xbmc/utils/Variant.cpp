@@ -667,7 +667,7 @@ unsigned int CVariant::size() const
                                [](const VariantArray& a) { return a.size(); },
                                [](const std::string& s) { return s.size(); },
                                [](const std::wstring& w) { return w.size(); },
-                               [](const auto&) { return std::size_t(0); }},
+                               [](const auto&) { return static_cast<std::size_t>(0); }},
                     m_data);
 }
 
