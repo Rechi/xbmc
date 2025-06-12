@@ -657,7 +657,7 @@ void CGUIMediaWindow::SortItems(CFileItemList &items)
     // SortBy.
     if ((sorting.sortBy == SortByPlaylistOrder) && items.HasProperty(PROPERTY_SORT_ORDER))
     {
-      SortBy sortBy = (SortBy)items.GetProperty(PROPERTY_SORT_ORDER).asInteger();
+      SortBy sortBy = static_cast<SortBy>(items.GetProperty(PROPERTY_SORT_ORDER).asInteger());
       if (sortBy != SortByNone && sortBy != SortByPlaylistOrder && sortBy != SortByProgramCount)
       {
         sorting.sortBy = sortBy;

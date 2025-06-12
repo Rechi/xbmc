@@ -1312,7 +1312,7 @@ void CGUIWindowFileManager::SetInitialPath(const std::string &path)
       {
         // set current directory to matching share
         std::string path;
-        if (bIsSourceName && iIndex < (int)shares.size())
+        if (bIsSourceName && iIndex < static_cast<int>(shares.size()))
           path = shares[iIndex].strPath;
         else
           path = strDestination;
