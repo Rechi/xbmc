@@ -597,7 +597,8 @@ std::vector<CGUIDialogSmartPlaylistEditor::PLAYLIST_TYPE> CGUIDialogSmartPlaylis
 
 void CGUIDialogSmartPlaylistEditor::OnRuleRemove(int item)
 {
-  if (item < 0 || item >= (int)m_playlist.m_ruleCombination.m_rules.size()) return;
+  if (item < 0 || item >= static_cast<int>(m_playlist.m_ruleCombination.m_rules.size()))
+    return;
   m_playlist.m_ruleCombination.m_rules.erase(m_playlist.m_ruleCombination.m_rules.begin() + item);
 
   UpdateButtons();
