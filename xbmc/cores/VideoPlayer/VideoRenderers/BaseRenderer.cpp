@@ -247,7 +247,7 @@ void CBaseRenderer::CalcNormalRenderRect(float offsetX,
 //***************************************************************************************
 void CBaseRenderer::CalculateFrameAspectRatio(unsigned int desired_width, unsigned int desired_height)
 {
-  m_sourceFrameRatio = (float)desired_width / desired_height;
+  m_sourceFrameRatio = static_cast<float>(desired_width) / desired_height;
 
   // Check whether mplayer has decided that the size of the video file should be changed
   // This indicates either a scaling has taken place (which we didn't ask for) or it has
@@ -257,7 +257,7 @@ void CBaseRenderer::CalculateFrameAspectRatio(unsigned int desired_width, unsign
     return ;
 
   // mplayer is scaling in one or both directions.  We must alter our Source Pixel Ratio
-  float imageFrameRatio = (float)m_sourceWidth / m_sourceHeight;
+  float imageFrameRatio = static_cast<float>(m_sourceWidth) / m_sourceHeight;
 
   // OK, most sources will be correct now, except those that are intended
   // to be displayed on non-square pixel based output devices (ie PAL or NTSC TVs)
@@ -308,8 +308,8 @@ void CBaseRenderer::ManageRenderArea()
 
   m_sourceRect.x1 = 0.0f;
   m_sourceRect.y1 = 0.0f;
-  m_sourceRect.x2 = (float)m_sourceWidth;
-  m_sourceRect.y2 = (float)m_sourceHeight;
+  m_sourceRect.x2 = static_cast<float>(m_sourceWidth);
+  m_sourceRect.y2 = static_cast<float>(m_sourceHeight);
 
   unsigned int stereo_mode  = CONF_FLAGS_STEREO_MODE_MASK(m_iFlags);
   int          stereo_view  = CServiceBroker::GetWinSystem()->GetGfxContext().GetStereoView();
@@ -383,8 +383,8 @@ void CBaseRenderer::SetViewMode(int viewMode)
 
   // get our calibrated full screen resolution
   RESOLUTION_INFO info = CServiceBroker::GetWinSystem()->GetGfxContext().GetResInfo();
-  float screenWidth  = (float)(info.Overscan.right  - info.Overscan.left);
-  float screenHeight = (float)(info.Overscan.bottom - info.Overscan.top);
+  float screenWidth = static_cast<float>(info.Overscan.right - info.Overscan.left);
+  float screenHeight = static_cast<float>(info.Overscan.bottom - info.Overscan.top);
 
   // and the source frame ratio
   float sourceFrameRatio = GetAspectRatio();
@@ -393,8 +393,8 @@ void CBaseRenderer::SetViewMode(int viewMode)
               m_videoSettings.m_ViewMode == ViewModeNormal);
 
   // Splitres scaling factor
-  float xscale = (float)info.iScreenWidth  / (float)info.iWidth;
-  float yscale = (float)info.iScreenHeight / (float)info.iHeight;
+  float xscale = static_cast<float>(info.iScreenWidth) / static_cast<float>(info.iWidth);
+  float yscale = static_cast<float>(info.iScreenHeight) / static_cast<float>(info.iHeight);
 
   screenWidth   *= xscale;
   screenHeight  *= yscale;
@@ -430,9 +430,10 @@ void CBaseRenderer::SetViewMode(int viewMode)
            (is43 && CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_VIDEOPLAYER_STRETCH43) == ViewModeWideZoom))
   { // super zoom
     float stretchAmount = (screenWidth / screenHeight) * info.fPixelRatio / sourceFrameRatio;
-    CDisplaySettings::GetInstance().SetPixelRatio(pow(stretchAmount, float(2.0/3.0)));
+    CDisplaySettings::GetInstance().SetPixelRatio(
+        pow(stretchAmount, static_cast<float>(2.0 / 3.0)));
     CDisplaySettings::GetInstance().SetZoomAmount(
-        pow(stretchAmount, float((stretchAmount < 1.0f) ? -1.0 / 3.0 : 1.0 / 3.0)));
+        pow(stretchAmount, static_cast<float>((stretchAmount < 1.0f) ? -1.0 / 3.0 : 1.0 / 3.0)));
     CDisplaySettings::GetInstance().SetNonLinearStretched(true);
   }
   else if (m_videoSettings.m_ViewMode == ViewModeStretch16x9 ||

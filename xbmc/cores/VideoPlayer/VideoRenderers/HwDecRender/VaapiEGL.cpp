@@ -67,7 +67,7 @@ bool CVaapi1Texture::Map(CVaapiRenderPicture *pic)
       *attrib++ = EGL_HEIGHT;
       *attrib++ = m_glSurface.vaImage.height;
       *attrib++ = EGL_DMA_BUF_PLANE0_FD_EXT;
-      *attrib++ = (intptr_t)m_glSurface.vBufInfo.handle;
+      *attrib++ = static_cast<intptr_t>(m_glSurface.vBufInfo.handle);
       *attrib++ = EGL_DMA_BUF_PLANE0_OFFSET_EXT;
       *attrib++ = m_glSurface.vaImage.offsets[0];
       *attrib++ = EGL_DMA_BUF_PLANE0_PITCH_EXT;
@@ -91,7 +91,7 @@ bool CVaapi1Texture::Map(CVaapiRenderPicture *pic)
       *attrib++ = EGL_HEIGHT;
       *attrib++ = (m_glSurface.vaImage.height + 1) >> 1;
       *attrib++ = EGL_DMA_BUF_PLANE0_FD_EXT;
-      *attrib++ = (intptr_t)m_glSurface.vBufInfo.handle;
+      *attrib++ = static_cast<intptr_t>(m_glSurface.vBufInfo.handle);
       *attrib++ = EGL_DMA_BUF_PLANE0_OFFSET_EXT;
       *attrib++ = m_glSurface.vaImage.offsets[1];
       *attrib++ = EGL_DMA_BUF_PLANE0_PITCH_EXT;
@@ -137,7 +137,7 @@ bool CVaapi1Texture::Map(CVaapiRenderPicture *pic)
       *attrib++ = EGL_HEIGHT;
       *attrib++ = m_glSurface.vaImage.height;
       *attrib++ = EGL_DMA_BUF_PLANE0_FD_EXT;
-      *attrib++ = (intptr_t)m_glSurface.vBufInfo.handle;
+      *attrib++ = static_cast<intptr_t>(m_glSurface.vBufInfo.handle);
       *attrib++ = EGL_DMA_BUF_PLANE0_OFFSET_EXT;
       *attrib++ = m_glSurface.vaImage.offsets[0];
       *attrib++ = EGL_DMA_BUF_PLANE0_PITCH_EXT;
@@ -161,7 +161,7 @@ bool CVaapi1Texture::Map(CVaapiRenderPicture *pic)
       *attrib++ = EGL_HEIGHT;
       *attrib++ = (m_glSurface.vaImage.height + 1) >> 1;
       *attrib++ = EGL_DMA_BUF_PLANE0_FD_EXT;
-      *attrib++ = (intptr_t)m_glSurface.vBufInfo.handle;
+      *attrib++ = static_cast<intptr_t>(m_glSurface.vBufInfo.handle);
       *attrib++ = EGL_DMA_BUF_PLANE0_OFFSET_EXT;
       *attrib++ = m_glSurface.vaImage.offsets[1];
       *attrib++ = EGL_DMA_BUF_PLANE0_PITCH_EXT;
@@ -295,8 +295,10 @@ void CVaapi1Texture::TestInterop(VADisplay vaDpy, EGLDisplay eglDisplay, bool &g
   general = false;
   deepColor = false;
 
-  PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR = (PFNEGLCREATEIMAGEKHRPROC)eglGetProcAddress("eglCreateImageKHR");
-  PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR = (PFNEGLDESTROYIMAGEKHRPROC)eglGetProcAddress("eglDestroyImageKHR");
+  PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR =
+      reinterpret_cast<PFNEGLCREATEIMAGEKHRPROC>(eglGetProcAddress("eglCreateImageKHR"));
+  PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR =
+      reinterpret_cast<PFNEGLDESTROYIMAGEKHRPROC>(eglGetProcAddress("eglDestroyImageKHR"));
   if (!eglCreateImageKHR || !eglDestroyImageKHR)
   {
     return;
@@ -362,8 +364,10 @@ bool CVaapi1Texture::TestInteropDeepColor(VADisplay vaDpy, EGLDisplay eglDisplay
 {
   bool ret = false;
 
-  PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR = (PFNEGLCREATEIMAGEKHRPROC)eglGetProcAddress("eglCreateImageKHR");
-  PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR = (PFNEGLDESTROYIMAGEKHRPROC)eglGetProcAddress("eglDestroyImageKHR");
+  PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR =
+      reinterpret_cast<PFNEGLCREATEIMAGEKHRPROC>(eglGetProcAddress("eglCreateImageKHR"));
+  PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR =
+      reinterpret_cast<PFNEGLDESTROYIMAGEKHRPROC>(eglGetProcAddress("eglDestroyImageKHR"));
   if (!eglCreateImageKHR || !eglDestroyImageKHR)
   {
     return false;
@@ -604,8 +608,10 @@ bool CVaapi2Texture::TestEsh(VADisplay vaDpy, EGLDisplay eglDisplay, std::uint32
   int width = 1920;
   int height = 1080;
 
-  PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR = (PFNEGLCREATEIMAGEKHRPROC) eglGetProcAddress("eglCreateImageKHR");
-  PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR = (PFNEGLDESTROYIMAGEKHRPROC) eglGetProcAddress("eglDestroyImageKHR");
+  PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR =
+      reinterpret_cast<PFNEGLCREATEIMAGEKHRPROC>(eglGetProcAddress("eglCreateImageKHR"));
+  PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR =
+      reinterpret_cast<PFNEGLDESTROYIMAGEKHRPROC>(eglGetProcAddress("eglDestroyImageKHR"));
   if (!eglCreateImageKHR || !eglDestroyImageKHR)
   {
     return false;

@@ -436,7 +436,7 @@ VASurfaceID CVideoSurfaces::GetFree(VASurfaceID surf)
 
 VASurfaceID CVideoSurfaces::GetAtIndex(int idx)
 {
-  if ((size_t) idx >= m_state.size())
+  if (static_cast<size_t>(idx) >= m_state.size())
     return VA_INVALID_SURFACE;
 
   auto it = m_state.begin();
@@ -732,17 +732,18 @@ bool CDecoder::Open(AVCodecContext* avctx, AVCodecContext* mainctx, const enum A
   m_deviceRef = std::unique_ptr<AVBufferRef, AVBufferRefDeleter>(
       av_hwdevice_ctx_alloc(AV_HWDEVICE_TYPE_VAAPI), AVBufferRefDeleter());
 
-  AVHWDeviceContext* deviceCtx = (AVHWDeviceContext*)m_deviceRef->data;
-  AVVAAPIDeviceContext *vaapiDeviceCtx = (AVVAAPIDeviceContext*)deviceCtx->hwctx;
+  AVHWDeviceContext* deviceCtx = reinterpret_cast<AVHWDeviceContext*>(m_deviceRef->data);
+  AVVAAPIDeviceContext* vaapiDeviceCtx = static_cast<AVVAAPIDeviceContext*>(deviceCtx->hwctx);
   AVBufferRef* framesRef = av_hwframe_ctx_alloc(m_deviceRef.get());
-  AVHWFramesContext *framesCtx = (AVHWFramesContext*)framesRef->data;
-  AVVAAPIFramesContext *vaapiFramesCtx = (AVVAAPIFramesContext*)framesCtx->hwctx;
+  AVHWFramesContext* framesCtx = reinterpret_cast<AVHWFramesContext*>(framesRef->data);
+  AVVAAPIFramesContext* vaapiFramesCtx = static_cast<AVVAAPIFramesContext*>(framesCtx->hwctx);
 
   vaapiDeviceCtx->display = m_vaapiConfig.dpy;
   vaapiDeviceCtx->driver_quirks = AV_VAAPI_DRIVER_QUIRK_RENDER_PARAM_BUFFERS;
   vaapiFramesCtx->nb_attributes = 0;
   vaapiFramesCtx->nb_surfaces = m_videoSurfaces.Size();
-  VASurfaceID *surfaceIds = (VASurfaceID*)av_malloc(vaapiFramesCtx->nb_surfaces *  sizeof(VASurfaceID));
+  VASurfaceID* surfaceIds =
+      static_cast<VASurfaceID*>(av_malloc(vaapiFramesCtx->nb_surfaces * sizeof(VASurfaceID)));
   for (int i=0; i<vaapiFramesCtx->nb_surfaces; ++i)
     surfaceIds[i] = m_videoSurfaces.GetAtIndex(i);
   vaapiFramesCtx->surface_ids = surfaceIds;
@@ -833,7 +834,7 @@ int CDecoder::FFGetBuffer(AVCodecContext *avctx, AVFrame *pic, int flags)
     return -1;
   }
 
-  VASurfaceID surf = (VASurfaceID)(uintptr_t)pic->data[3];
+  VASurfaceID surf = static_cast<VASurfaceID>((uintptr_t)pic->data[3]);
   surf = va->m_videoSurfaces.GetFree(surf != 0 ? surf : VA_INVALID_SURFACE);
 
   if (surf == VA_INVALID_SURFACE)
@@ -850,8 +851,8 @@ int CDecoder::FFGetBuffer(AVCodecContext *avctx, AVFrame *pic, int flags)
   va->m_getBufferError = 0;
 
   pic->data[1] = pic->data[2] = NULL;
-  pic->data[0] = (uint8_t*)(uintptr_t)surf;
-  pic->data[3] = (uint8_t*)(uintptr_t)surf;
+  pic->data[0] = (uint8_t*)static_cast<uintptr_t>(surf);
+  pic->data[3] = (uint8_t*)static_cast<uintptr_t>(surf);
   pic->linesize[0] = pic->linesize[1] =  pic->linesize[2] = 0;
   AVBufferRef *buffer = av_buffer_create(pic->data[3], 0, CVAAPIContext::FFReleaseBuffer, va, 0);
   if (!buffer)
@@ -876,7 +877,7 @@ void CDecoder::FFReleaseBuffer(uint8_t *data)
 
     std::unique_lock lock(m_DecoderSection);
 
-    surf = (VASurfaceID)(uintptr_t)data;
+    surf = static_cast<VASurfaceID>((uintptr_t)data);
     m_videoSurfaces.ClearReference(surf);
   }
 
@@ -902,7 +903,7 @@ CDVDVideoCodec::VCReturn CDecoder::Decode(AVCodecContext* avctx, AVFrame* pFrame
   if (pFrame)
   { // we have a new frame from decoder
 
-    VASurfaceID surf = (VASurfaceID)(uintptr_t)pFrame->data[3];
+    VASurfaceID surf = static_cast<VASurfaceID>((uintptr_t)pFrame->data[3]);
     // ffmpeg vc-1 decoder does not flush, make sure the data buffer is still valid
     if (!m_videoSurfaces.IsValid(surf))
     {
@@ -959,7 +960,7 @@ CDVDVideoCodec::VCReturn CDecoder::Decode(AVCodecContext* avctx, AVFrame* pFrame
           m_presentPicture = nullptr;
         }
 
-        m_presentPicture = *(CVaapiRenderPicture**)msg->data;
+        m_presentPicture = *reinterpret_cast<CVaapiRenderPicture**>(msg->data);
         m_bufferStats.DecRender();
         m_bufferStats.SetParams(0, m_codecControl);
         msg->Release();
@@ -1586,12 +1587,12 @@ void COutput::StateMachine(int signal, Protocol *port, Message *msg)
         {
         case COutputDataProtocol::RETURNPIC:
           CVaapiRenderPicture *pic;
-          pic = *((CVaapiRenderPicture**)msg->data);
+          pic = *(reinterpret_cast<CVaapiRenderPicture**>(msg->data));
           QueueReturnPicture(pic);
           return;
         case COutputDataProtocol::RETURNPROCPIC:
           int id;
-          id = *((int*)msg->data);
+          id = *(reinterpret_cast<int*>(msg->data));
           ProcessReturnProcPicture(id);
           return;
         default:
@@ -1669,14 +1670,14 @@ void COutput::StateMachine(int signal, Protocol *port, Message *msg)
           return;
         case COutputDataProtocol::RETURNPIC:
           CVaapiRenderPicture *pic;
-          pic = *((CVaapiRenderPicture**)msg->data);
+          pic = *(reinterpret_cast<CVaapiRenderPicture**>(msg->data));
           QueueReturnPicture(pic);
           m_controlPort.SendInMessage(COutputControlProtocol::STATS);
           m_extTimeout = 0ms;
           return;
         case COutputDataProtocol::RETURNPROCPIC:
           int id;
-          id = *((int*)msg->data);
+          id = *(reinterpret_cast<int*>(msg->data));
           ProcessReturnProcPicture(id);
           m_extTimeout = 0ms;
           return;
@@ -1967,7 +1968,7 @@ void COutput::Flush()
     else if (msg->signal == COutputDataProtocol::RETURNPIC)
     {
       CVaapiRenderPicture *pic;
-      pic = *((CVaapiRenderPicture**)msg->data);
+      pic = *(reinterpret_cast<CVaapiRenderPicture**>(msg->data));
       QueueReturnPicture(pic);
     }
     msg->Release();
@@ -1978,7 +1979,7 @@ void COutput::Flush()
     if (msg->signal == COutputDataProtocol::PICTURE)
     {
       CVaapiRenderPicture *pic;
-      pic = *((CVaapiRenderPicture**)msg->data);
+      pic = *(reinterpret_cast<CVaapiRenderPicture**>(msg->data));
       pic->Release();
     }
     msg->Release();
@@ -2665,8 +2666,9 @@ bool CVppPostproc::Filter(CVaapiProcessedPicture &outPic)
   {
     return false;
   }
-  if (!CheckSuccess(vaMapBuffer(m_config.dpy, pipelineBuf, (void**) &pipelineParams),
-      "vaMapBuffer"))
+  if (!CheckSuccess(
+          vaMapBuffer(m_config.dpy, pipelineBuf, reinterpret_cast<void**>(&pipelineParams)),
+          "vaMapBuffer"))
   {
     return false;
   }
@@ -2713,7 +2715,8 @@ bool CVppPostproc::Filter(CVaapiProcessedPicture &outPic)
           flags |= VA_DEINTERLACING_BOTTOM_FIELD;
       }
     }
-    if (!CheckSuccess(vaMapBuffer(m_config.dpy, m_filter, (void**) &filterParams), "vaMapBuffer"))
+    if (!CheckSuccess(vaMapBuffer(m_config.dpy, m_filter, reinterpret_cast<void**>(&filterParams)),
+                      "vaMapBuffer"))
     {
       return false;
     }
@@ -3062,7 +3065,8 @@ bool CFFmpegPostproc::AddPicture(CVaapiDecodedPicture &inPic)
   if (!CheckSuccess(vaDeriveImage(m_config.dpy, surf, &image), "vaDeriveImage"))
     goto error;
 
-  if (!CheckSuccess(vaMapBuffer(m_config.dpy, image.buf, (void**) &buf), "vaMapBuffer"))
+  if (!CheckSuccess(vaMapBuffer(m_config.dpy, image.buf, reinterpret_cast<void**>(&buf)),
+                    "vaMapBuffer"))
     goto error;
 
   m_pFilterFrameIn->format = AV_PIX_FMT_NV12;
@@ -3162,7 +3166,7 @@ bool CFFmpegPostproc::Filter(CVaapiProcessedPicture &outPic)
   int64_t bpts = outPic.frame->best_effort_timestamp;
   if(bpts != AV_NOPTS_VALUE)
   {
-    outPic.DVDPic.pts = (double)bpts * DVD_TIME_BASE / AV_TIME_BASE;
+    outPic.DVDPic.pts = static_cast<double>(bpts) * DVD_TIME_BASE / AV_TIME_BASE;
   }
   else
     outPic.DVDPic.pts = DVD_NOPTS_VALUE;

@@ -211,10 +211,11 @@ std::unique_ptr<CTexture> CDVDFileInfo::ExtractThumbToTexture(const CFileItem& f
           unsigned int nWidth =
               std::min(picture.iDisplayWidth,
                        CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_imageRes);
-          double aspect = (double)picture.iDisplayWidth / (double)picture.iDisplayHeight;
+          double aspect = static_cast<double>(picture.iDisplayWidth) /
+                          static_cast<double>(picture.iDisplayHeight);
           if (hint.forced_aspect && hint.aspect != 0)
             aspect = hint.aspect;
-          unsigned int nHeight = (unsigned int)((double)nWidth / aspect);
+          unsigned int nHeight = static_cast<unsigned int>(static_cast<double>(nWidth) / aspect);
 
           result = CTexture::CreateTexture(nWidth, nHeight);
           result->SetAlpha(false);
@@ -366,7 +367,7 @@ bool CDVDFileInfo::DemuxerToStreamDetails(const std::shared_ptr<CDVDInputStream>
       p->m_iHeight = vstream->iHeight;
       p->m_fAspect = static_cast<float>(vstream->fAspect);
       if (p->m_fAspect == 0.0f && p->m_iHeight > 0)
-        p->m_fAspect = (float)p->m_iWidth / p->m_iHeight;
+        p->m_fAspect = static_cast<float>(p->m_iWidth) / p->m_iHeight;
       p->m_strCodec = pDemux->GetStreamCodecName(stream->demuxerId, stream->uniqueId);
       p->m_iDuration = pDemux->GetStreamLength();
       p->m_strStereoMode = vstream->stereo_mode;

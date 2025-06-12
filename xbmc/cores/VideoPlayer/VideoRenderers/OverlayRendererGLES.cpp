@@ -77,13 +77,13 @@ static void LoadTexture(GLenum target,
 
   if (!alpha && !bgraSupported)
   {
-    pixelVector = (char*)malloc(bytesPerLine * height);
+    pixelVector = static_cast<char*>(malloc(bytesPerLine * height));
 
-    const char* src = (const char*)pixels;
+    const char* src = static_cast<const char*>(pixels);
     char* dst = pixelVector;
     for (int y = 0; y < height; ++y)
     {
-      src = (const char*)pixels + y * stride;
+      src = static_cast<const char*>(pixels) + y * stride;
       dst = pixelVector + y * bytesPerLine;
 
       for (GLsizei i = 0; i < width; i++, src += 4, dst += 4)
@@ -101,9 +101,9 @@ static void LoadTexture(GLenum target,
   /** OpenGL ES does not support strided texture input. Make a copy without stride **/
   else if (stride != bytesPerLine)
   {
-    pixelVector = (char*)malloc(bytesPerLine * height);
+    pixelVector = static_cast<char*>(malloc(bytesPerLine * height));
 
-    const char* src = (const char*)pixels;
+    const char* src = static_cast<const char*>(pixels);
     char* dst = pixelVector;
     for (int y = 0; y < height; ++y)
     {
@@ -125,16 +125,16 @@ static void LoadTexture(GLenum target,
 
   if (height < height2)
     glTexSubImage2D(target, 0, 0, height, width, 1, externalFormat, GL_UNSIGNED_BYTE,
-                    (const unsigned char*)pixelData + stride * (height - 1));
+                    static_cast<const unsigned char*>(pixelData) + stride * (height - 1));
 
   if (width < width2)
     glTexSubImage2D(target, 0, width, 0, 1, height, externalFormat, GL_UNSIGNED_BYTE,
-                    (const unsigned char*)pixelData + bytesPerPixel * (width - 1));
+                    static_cast<const unsigned char*>(pixelData) + bytesPerPixel * (width - 1));
 
   free(pixelVector);
 
-  *u = (GLfloat)width / width2;
-  *v = (GLfloat)height / height2;
+  *u = static_cast<GLfloat>(width) / width2;
+  *v = static_cast<GLfloat>(height) / height2;
 }
 
 std::shared_ptr<COverlay> COverlay::Create(const CDVDOverlayImage& o, CRect& rSource)
@@ -377,11 +377,11 @@ void COverlayGlyphGLES::Render(SRenderState& state)
   vertices = vecVertices.data();
 
   glVertexAttribPointer(posLoc, 3, GL_FLOAT, GL_FALSE, sizeof(VERTEX),
-                        (char*)vertices + offsetof(VERTEX, x));
+                        reinterpret_cast<char*>(vertices) + offsetof(VERTEX, x));
   glVertexAttribPointer(colLoc, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(VERTEX),
-                        (char*)vertices + offsetof(VERTEX, r));
+                        reinterpret_cast<char*>(vertices) + offsetof(VERTEX, r));
   glVertexAttribPointer(tex0Loc, 2, GL_FLOAT, GL_FALSE, sizeof(VERTEX),
-                        (char*)vertices + offsetof(VERTEX, u));
+                        reinterpret_cast<char*>(vertices) + offsetof(VERTEX, u));
 
   glEnableVertexAttribArray(posLoc);
   glEnableVertexAttribArray(colLoc);

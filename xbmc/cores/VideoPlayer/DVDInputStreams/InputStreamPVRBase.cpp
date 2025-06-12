@@ -343,7 +343,7 @@ void CInputStreamPVRBase::UpdateStreamMap()
     else
       dStream = std::make_shared<CDemuxStream>();
 
-    dStream->codec = (AVCodecID)stream.iCodecId;
+    dStream->codec = static_cast<AVCodecID>(stream.iCodecId);
     dStream->uniqueId = stream.iPID;
     dStream->language = stream.strLanguage;
 

@@ -218,7 +218,7 @@ MsgQueueReturnCode CDVDMessageQueue::Get(std::shared_ptr<CDVDMsg>& pMsg,
   if (m_bAbortRequest)
     return MSGQ_ABORT;
 
-  return (MsgQueueReturnCode)ret;
+  return static_cast<MsgQueueReturnCode>(ret);
 }
 
 void CDVDMessageQueue::UpdateTimeFront()
