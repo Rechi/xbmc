@@ -128,7 +128,7 @@ void CPlayListB4S::Save(const std::string& strFileName) const
   write += StringUtils::Format("<WinampXML>\n");
   write += StringUtils::Format("  <playlist num_entries=\"{0}\" label=\"{1}\">\n",
                                m_vecItems.size(), m_strPlayListName);
-  for (int i = 0; i < (int)m_vecItems.size(); ++i)
+  for (int i = 0; i < static_cast<int>(m_vecItems.size()); ++i)
   {
     const CFileItemPtr item = m_vecItems[i];
     write += StringUtils::Format("    <entry Playstring={}file:{}{}>\n", 34, item->GetPath(), 34);
