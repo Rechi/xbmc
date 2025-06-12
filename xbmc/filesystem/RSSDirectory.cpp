@@ -196,7 +196,7 @@ static void ParseItemMRSS(CFileItem* item,
   {
     std::string scheme = XMLUtils::GetAttribute(item_child, "scheme");
     if(scheme == "urn:user")
-      vtag->SetRating((float)atof(text.c_str()));
+      vtag->SetRating(static_cast<float>(atof(text.c_str())));
     else
       vtag->m_strMPAARating = text;
   }
@@ -331,7 +331,7 @@ static void ParseItemVoddler(CFileItem* item,
   else if(name == "year")
     vtag->SetYear(atoi(text.c_str()));
   else if(name == "rating")
-    vtag->SetRating((float)atof(text.c_str()));
+    vtag->SetRating(static_cast<float>(atof(text.c_str())));
   else if(name == "tagline")
     vtag->m_strTagLine = text;
   else if(name == "posterwall")
@@ -392,7 +392,7 @@ static void ParseItemZink(CFileItem* item,
   else if(name == "airdate")
     vtag->m_firstAired.SetFromDateString(text);
   else if(name == "userrating")
-    vtag->SetRating((float)atof(text.c_str()));
+    vtag->SetRating(static_cast<float>(atof(text.c_str())));
   else if(name == "duration")
     vtag->SetDuration(atoi(text.c_str()));
   else if(name == "durationstr")

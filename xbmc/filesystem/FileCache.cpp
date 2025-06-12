@@ -482,11 +482,11 @@ ssize_t CFileCache::Read(void* lpBuf, size_t uiBufSize)
 
 retry:
   // attempt to read
-  iRc = m_pCache->ReadFromCache((char *)lpBuf, uiBufSize);
+  iRc = m_pCache->ReadFromCache(static_cast<char*>(lpBuf), uiBufSize);
   if (iRc > 0)
   {
     m_readPos += iRc;
-    return (int)iRc;
+    return static_cast<int>(iRc);
   }
 
   if (iRc == CACHE_RC_WOULD_BLOCK)
@@ -509,7 +509,7 @@ retry:
 
   // unknown error code
   CLog::Log(LOGERROR, "CFileCache::{} - <{}> cache strategy returned unknown error code {}",
-            __FUNCTION__, m_sourcePath, (int)iRc);
+            __FUNCTION__, m_sourcePath, static_cast<int>(iRc));
   return -1;
 }
 
@@ -542,7 +542,7 @@ int64_t CFileCache::Seek(int64_t iFilePosition, int iWhence)
       return m_nSeekResult;
 
     // Never request closer to end than one chunk. Speeds up tag reading
-    m_seekPos = std::min(iTarget, std::max((int64_t)0, m_fileSize - m_chunkSize));
+    m_seekPos = std::min(iTarget, std::max(static_cast<int64_t>(0), m_fileSize - m_chunkSize));
 
     m_seekEvent.Set();
     while (!m_seekEnded.Wait(100ms))
@@ -616,7 +616,7 @@ int CFileCache::IoControl(IOControl request, void* param)
 {
   if (request == IOControl::CACHE_STATUS)
   {
-    SCacheStatus* status = (SCacheStatus*)param;
+    SCacheStatus* status = static_cast<SCacheStatus*>(param);
     status->maxforward = m_maxForward;
     status->forward = m_pCache->WaitForData(0, 0ms);
     status->maxrate = m_writeRate;

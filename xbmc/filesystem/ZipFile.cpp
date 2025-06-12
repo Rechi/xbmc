@@ -93,7 +93,7 @@ bool CZipFile::InitDecompress()
       return false;
     }
   }
-  m_ZStream.next_in = (Bytef*)m_szBuffer;
+  m_ZStream.next_in = reinterpret_cast<Bytef*>(m_szBuffer);
   m_ZStream.avail_in = 0;
   m_ZStream.total_out = 0;
 
@@ -175,7 +175,7 @@ int64_t CZipFile::Seek(int64_t iFilePosition, int iWhence)
         inflateEnd(&m_ZStream);
         inflateInit2(&m_ZStream,-MAX_WBITS); // simply restart zlib
         mFile.Seek(mZipItem.offset,SEEK_SET);
-        m_ZStream.next_in = (Bytef*)m_szBuffer;
+        m_ZStream.next_in = reinterpret_cast<Bytef*>(m_szBuffer);
         m_ZStream.avail_in = 0;
         m_ZStream.total_out = 0;
         while (m_iFilePos < iFilePosition)
@@ -299,7 +299,7 @@ ssize_t CZipFile::Read(void* lpBuf, size_t uiBufSize)
     uLong prevOut = m_ZStream.total_out;
     while ((iDecompressed < uiBufSize) && ((m_iZipFilePos < mZipItem.csize) || (m_bFlush)))
     {
-      m_ZStream.next_out = (Bytef*)(lpBuf)+iDecompressed;
+      m_ZStream.next_out = static_cast<Bytef*>(lpBuf) + iDecompressed;
       m_ZStream.avail_out = static_cast<uInt>(uiBufSize-iDecompressed);
       if (m_bFlush) // need to flush buffer !
       {
@@ -386,7 +386,7 @@ void CZipFile::DestroyBuffer(void* lpBuffer, int iBufSize)
   int iMessage = Z_OK;
   while ((iMessage == Z_OK) && (m_ZStream.avail_out == 0))
   {
-    m_ZStream.next_out = (Bytef*)lpBuffer;
+    m_ZStream.next_out = static_cast<Bytef*>(lpBuffer);
     m_ZStream.avail_out = iBufSize;
     iMessage = inflate(&m_ZStream,Z_SYNC_FLUSH);
   }
@@ -453,14 +453,15 @@ int CZipFile::UnpackFromMemory(std::string& strDest, const std::string& strInput
     if (isGZ)
     {
       m_ZStream.avail_in = static_cast<unsigned int>(strInput.size());
-      m_ZStream.next_in = const_cast<Bytef*>((const Bytef*)strInput.data());
+      m_ZStream.next_in = const_cast<Bytef*>(reinterpret_cast<const Bytef*>(strInput.data()));
       temp = new char[8192];
       toRead = 8191;
     }
     else
     {
       m_ZStream.avail_in = mZipItem.csize;
-      m_ZStream.next_in = const_cast<Bytef*>((const Bytef*)strInput.data())+iPos+LHDR_SIZE+mZipItem.flength+mZipItem.elength;
+      m_ZStream.next_in = const_cast<Bytef*>(reinterpret_cast<const Bytef*>(strInput.data())) +
+                          iPos + LHDR_SIZE + mZipItem.flength + mZipItem.elength;
       // init m_zipitem
       strDest.reserve(mZipItem.usize);
       temp = new char[mZipItem.usize+1];
@@ -522,7 +523,7 @@ bool CZipFile::DecompressGzip(const std::string& in, std::string& out)
         return false;
     }
     int read = bufferSize - strm.avail_out;
-    out.append((char*)buffer, read);
+    out.append(reinterpret_cast<char*>(buffer), read);
   }
   while (strm.avail_out == 0);
 

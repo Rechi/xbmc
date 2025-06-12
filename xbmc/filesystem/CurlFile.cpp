@@ -154,7 +154,7 @@ size_t CCurlFile::CReadState::HeaderCallback(void *ptr, size_t size, size_t nmem
 {
   std::string inString;
   // libcurl doc says that this info is not always \0 terminated
-  const char* strBuf = (const char*)ptr;
+  const char* strBuf = static_cast<const char*>(ptr);
   const size_t iSize = size * nmemb;
   if (strBuf[iSize - 1] == 0)
     inString.assign(strBuf, iSize - 1); // skip last char if it's zero
@@ -177,7 +177,7 @@ size_t CCurlFile::CReadState::ReadCallback(char *buffer, size_t size, size_t nit
     return CURL_READFUNC_PAUSE;
   }
 
-  int64_t retSize = std::min(m_fileSize - m_filePos, int64_t(nitems * size));
+  int64_t retSize = std::min(m_fileSize - m_filePos, static_cast<int64_t>(nitems * size));
   memcpy(buffer, m_readBuffer + m_filePos, retSize);
   m_filePos += retSize;
 
@@ -208,7 +208,7 @@ size_t CCurlFile::CReadState::WriteCallback(char *buffer, size_t size, size_t ni
       m_overflowSize -= maxWriteable;
 
       // Shrink memory:
-      m_overflowBuffer = (char*)realloc_simple(m_overflowBuffer, m_overflowSize);
+      m_overflowBuffer = static_cast<char*>(realloc_simple(m_overflowBuffer, m_overflowSize));
     }
   }
   // ok, now copy the data into our ring buffer
@@ -231,7 +231,8 @@ size_t CCurlFile::CReadState::WriteCallback(char *buffer, size_t size, size_t ni
   if (amount)
   {
     //! @todo Limit max. amount of the overflowbuffer
-    m_overflowBuffer = (char*)realloc_simple(m_overflowBuffer, amount + m_overflowSize);
+    m_overflowBuffer =
+        static_cast<char*>(realloc_simple(m_overflowBuffer, amount + m_overflowSize));
     if(m_overflowBuffer == NULL)
     {
       CLog::Log(LOGWARNING,
@@ -280,7 +281,7 @@ bool CCurlFile::CReadState::Seek(int64_t pos)
   if(pos == m_filePos)
     return true;
 
-  if(FITS_INT(pos - m_filePos) && m_buffer.SkipBytes((int)(pos - m_filePos)))
+  if (FITS_INT(pos - m_filePos) && m_buffer.SkipBytes(static_cast<int>(pos - m_filePos)))
   {
     m_filePos = pos;
     return true;
@@ -302,7 +303,7 @@ bool CCurlFile::CReadState::Seek(int64_t pos)
       return false;
     }
 
-    if(!FITS_INT(pos - m_filePos) || !m_buffer.SkipBytes((int)(pos - m_filePos)))
+    if (!FITS_INT(pos - m_filePos) || !m_buffer.SkipBytes(static_cast<int>(pos - m_filePos)))
     {
       CLog::Log(
           LOGERROR,
@@ -380,7 +381,7 @@ long CCurlFile::CReadState::Connect(unsigned int size)
   {
     if (length < 0)
       length = 0.0;
-    m_fileSize = m_filePos + (int64_t)length;
+    m_fileSize = m_filePos + static_cast<int64_t>(length);
   }
 
   long response;
@@ -853,7 +854,7 @@ void CCurlFile::ParseAndCorrectUrl(CURL &url2)
       !s->GetString(CSettings::SETTING_NETWORK_HTTPPROXYSERVER).empty() &&
       s->GetInt(CSettings::SETTING_NETWORK_HTTPPROXYPORT) > 0)
     {
-      m_proxytype = (ProxyType)s->GetInt(CSettings::SETTING_NETWORK_HTTPPROXYTYPE);
+      m_proxytype = static_cast<ProxyType>(s->GetInt(CSettings::SETTING_NETWORK_HTTPPROXYTYPE));
       m_proxyhost = s->GetString(CSettings::SETTING_NETWORK_HTTPPROXYSERVER);
       m_proxyport = s->GetInt(CSettings::SETTING_NETWORK_HTTPPROXYPORT);
       m_proxyuser = s->GetString(CSettings::SETTING_NETWORK_HTTPPROXYUSERNAME);
@@ -1275,7 +1276,7 @@ ssize_t CCurlFile::Write(const void* lpBuf, size_t uiBufSize)
 
 CCurlFile::ReadLineResult CCurlFile::CReadState::ReadLine(char* buffer, std::size_t bufferSize)
 {
-  unsigned int want = (unsigned int)bufferSize;
+  unsigned int want = static_cast<unsigned int>(bufferSize);
 
   if((m_fileSize == 0 || m_filePos < m_fileSize) && FillBuffer(want) != FILLBUFFER_OK)
     return {ReadLineResult::FAILURE, 0};
@@ -1685,7 +1686,7 @@ ssize_t CCurlFile::CReadState::Read(void* lpBuf, size_t uiBufSize)
   unsigned int want = std::min<unsigned int>(m_buffer.getMaxReadSize(), uiBufSize);
 
   /* xfer data to caller */
-  if (m_buffer.ReadData((char *)lpBuf, want))
+  if (m_buffer.ReadData(static_cast<char*>(lpBuf), want))
   {
     m_filePos += want;
     return want;
@@ -1730,7 +1731,7 @@ int8_t CCurlFile::CReadState::FillBuffer(unsigned int want)
 
       m_overflowSize -= amount;
       // Shrink memory:
-      m_overflowBuffer = (char*)realloc_simple(m_overflowBuffer, m_overflowSize);
+      m_overflowBuffer = static_cast<char*>(realloc_simple(m_overflowBuffer, m_overflowSize));
       continue;
     }
 
@@ -1891,7 +1892,8 @@ int8_t CCurlFile::CReadState::FillBuffer(unsigned int want)
           else
           {
             unsigned int time_left = endTime.GetTimeLeft().count();
-            struct timeval wait = { (int)time_left / 1000, ((int)time_left % 1000) * 1000 };
+            struct timeval wait = {static_cast<int>(time_left) / 1000,
+                                   (static_cast<int>(time_left) % 1000) * 1000};
             rc = select(maxfd + 1, &fdread, &fdwrite, &fdexcep, &wait);
           }
 #ifdef TARGET_WINDOWS
@@ -1940,7 +1942,7 @@ int8_t CCurlFile::CReadState::FillBuffer(unsigned int want)
 
 void CCurlFile::CReadState::SetReadBuffer(const void* lpBuf, int64_t uiBufSize)
 {
-  m_readBuffer = const_cast<char*>((const char*)lpBuf);
+  m_readBuffer = const_cast<char*>(static_cast<const char*>(lpBuf));
   m_fileSize = uiBufSize;
   m_filePos = 0;
 }
@@ -2113,7 +2115,7 @@ int CCurlFile::IoControl(IOControl request, void* param)
 
   if (request == IOControl::SET_RETRY)
   {
-    m_allowRetry = *(bool*) param;
+    m_allowRetry = *static_cast<bool*>(param);
     return 0;
   }
 
