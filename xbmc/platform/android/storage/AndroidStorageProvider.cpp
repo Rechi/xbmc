@@ -114,9 +114,10 @@ std::string CAndroidStorageProvider::unescape(const std::string& str)
           uint8_t val = 0;
           for (int j=octString.length()-1; j>=0; --j)
           {
-            val += ((uint8_t)(octString[j] - '0')) * (1 << ((octString.length() - (j+1)) * 3));
+            val += (static_cast<uint8_t>(octString[j] - '0')) *
+                   (1 << ((octString.length() - (j + 1)) * 3));
           }
-          retString += (char)val;
+          retString += static_cast<char>(val);
           i -= 1;
         }
       }
@@ -270,7 +271,7 @@ std::set<std::string> CAndroidStorageProvider::GetRemovableDrivesLinux()
     char*   new_buf;
     size_t  buf_len = 4096;
 
-    while ((new_buf = (char*)realloc(buf, buf_len * sizeof(char))))
+    while ((new_buf = static_cast<char*>(realloc(buf, buf_len * sizeof(char)))))
     {
       size_t nread;
 

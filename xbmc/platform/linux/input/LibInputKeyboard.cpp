@@ -379,7 +379,8 @@ void CLibInputKeyboard::ProcessKey(libinput_event_keyboard *e)
 
   int mod = XBMCKMOD_NONE;
 
-  xkb_state_component modtype = xkb_state_component(XKB_STATE_MODS_DEPRESSED | XKB_STATE_MODS_LATCHED);
+  xkb_state_component modtype =
+      static_cast<xkb_state_component>(XKB_STATE_MODS_DEPRESSED | XKB_STATE_MODS_LATCHED);
   if (xkb_state_mod_index_is_active(m_state.get(), m_modindex[0], modtype) &&
       ((keysym != XBMCK_LCTRL) || !pressed))
     mod |= XBMCKMOD_CTRL;
@@ -443,7 +444,7 @@ void CLibInputKeyboard::ProcessKey(libinput_event_keyboard *e)
 
   XBMC_Event event = {};
   event.type = pressed ? XBMC_KEYDOWN : XBMC_KEYUP;
-  event.key.keysym.mod = XBMCMod(mod);
+  event.key.keysym.mod = static_cast<XBMCMod>(mod);
   event.key.keysym.sym = XBMCKeyForKeysym(keysym, scancode);
   event.key.keysym.scancode = scancode;
   event.key.keysym.unicode = unicode;
@@ -486,7 +487,7 @@ XBMCKey CLibInputKeyboard::XBMCKeyForKeysym(xkb_keysym_t sym, uint32_t scancode)
   }
   else if (sym >= XKB_KEY_F1 && sym <= XKB_KEY_F15)
   {
-    return static_cast<XBMCKey> (XBMCK_F1 + ((int)sym - XKB_KEY_F1));
+    return static_cast<XBMCKey>(XBMCK_F1 + (static_cast<int>(sym) - XKB_KEY_F1));
   }
 
   auto xkbmapping = xkbMap.find(sym);

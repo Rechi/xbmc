@@ -159,10 +159,9 @@ void CDarwinUtils::SetScheduling(bool realtime)
     theFixedPolicy.timeshare = false;
   }
 
-  thread_policy_set(pthread_mach_thread_np(this_pthread_self),
-    THREAD_EXTENDED_POLICY,
-    (thread_policy_t)&theFixedPolicy,
-    THREAD_EXTENDED_POLICY_COUNT);
+  thread_policy_set(pthread_mach_thread_np(this_pthread_self), THREAD_EXTENDED_POLICY,
+                    reinterpret_cast<thread_policy_t>(&theFixedPolicy),
+                    THREAD_EXTENDED_POLICY_COUNT);
 
   pthread_setschedparam(this_pthread_self, policy, &param );
 }
@@ -230,7 +229,9 @@ const std::string& CDarwinUtils::GetManufacturer(void)
             manufName = static_cast<const char*>([NSString stringWithString:(__bridge NSString*)manufacturer].UTF8String);
           else if (typeId == CFDataGetTypeID())
           {
-            manufName.assign(reinterpret_cast<const char*>(CFDataGetBytePtr((CFDataRef)manufacturer)), CFDataGetLength((CFDataRef)manufacturer));
+            manufName.assign(reinterpret_cast<const char*>(
+                                 CFDataGetBytePtr(static_cast<CFDataRef>(manufacturer))),
+                             CFDataGetLength(static_cast<CFDataRef>(manufacturer)));
             if (!manufName.empty() && manufName[manufName.length() - 1] == 0)
               manufName.erase(manufName.length() - 1); // remove extra null at the end if any
           }
@@ -300,7 +301,7 @@ void CDarwinUtils::TranslateAliasShortcut(std::string& path)
       if (resolvedURL)
       {
         // [resolvedURL path] returns a path as /dir/dir/file ...
-        path = (const char*)[[resolvedURL path] UTF8String];
+        path = static_cast<const char*>([[resolvedURL path] UTF8String]);
       }
     }
   }

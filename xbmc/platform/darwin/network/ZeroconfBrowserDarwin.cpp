@@ -43,19 +43,16 @@ namespace
           CFStringRef keys[numValues];
           CFDataRef values[numValues];
 
-          CFDictionaryGetKeysAndValues(dict, (const void **)&keys,  (const void **)&values);
+          CFDictionaryGetKeysAndValues(dict, reinterpret_cast<const void**>(&keys),
+                                       reinterpret_cast<const void**>(&values));
 
           for(idx = 0; idx < numValues; idx++)
           {
             std::string key;
             if (CDarwinUtils::CFStringRefToUTF8String(keys[idx], key))
             {
-              recordMap.insert(
-                std::make_pair(
-                  key,
-                  std::string((const char *)CFDataGetBytePtr(values[idx]))
-                )
-              );
+              recordMap.insert(std::make_pair(
+                  key, std::string(reinterpret_cast<const char*>(CFDataGetBytePtr(values[idx])))));
             }
           }
         }
@@ -82,14 +79,16 @@ namespace
 
       for ( idx = 0; idx < numAddressResults; idx++ )
       {
-        sockAddrRef = (CFDataRef)CFArrayGetValueAtIndex( addressResults, idx );
+        sockAddrRef = static_cast<CFDataRef>(CFArrayGetValueAtIndex(addressResults, idx));
         if ( sockAddrRef != NULL )
         {
-          CFDataGetBytes( sockAddrRef, CFRangeMake(0, sizeof(sockHdr)), (UInt8*)&sockHdr );
+          CFDataGetBytes(sockAddrRef, CFRangeMake(0, sizeof(sockHdr)),
+                         reinterpret_cast<UInt8*>(&sockHdr));
           switch ( sockHdr.sa_family )
           {
             case AF_INET:
-              CFDataGetBytes( sockAddrRef, CFRangeMake(0, sizeof(address)), (UInt8*)&address );
+              CFDataGetBytes(sockAddrRef, CFRangeMake(0, sizeof(address)),
+                             reinterpret_cast<UInt8*>(&address));
               if ( inet_ntop(sockHdr.sa_family, &address.sin_addr, buffer, sizeof(buffer)) != NULL )
               {
                 fr_address = buffer;
@@ -175,7 +174,7 @@ void CZeroconfBrowserDarwin::BrowserCallback(CFNetServiceBrowserRef browser, CFO
     CLog::Log(LOGERROR,
               "CZeroconfBrowserDarwin::BrowserCallback returned"
               "(domain = {}, error = {})",
-              (int)error->domain, (int64_t)error->error);
+              static_cast<int>(error->domain), static_cast<int64_t>(error->error));
   }
 }
 
@@ -258,7 +257,7 @@ bool CZeroconfBrowserDarwin::doAddServiceType(const std::string& fcr_service_typ
     CLog::Log(LOGERROR,
               "CFNetServiceBrowserSearchForServices returned"
               "(domain = {}, error = {})",
-              (int)error.domain, (int64_t)error.error);
+              static_cast<int>(error.domain), static_cast<int64_t>(error.error));
   }
   else
   {

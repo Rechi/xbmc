@@ -67,7 +67,7 @@ const CGFloat timeFadeSecs                    = 2.0;
     [descriptionLabel setTextAlignment:NSTextAlignmentCenter];
     [descriptionLabel setContentMode:UIViewContentModeCenter];
     //setup multiline behaviour
-    [descriptionLabel setLineBreakMode:(NSLineBreakMode)NSLineBreakByTruncatingTail];
+    [descriptionLabel setLineBreakMode:static_cast<NSLineBreakMode>(NSLineBreakByTruncatingTail)];
 
     [descriptionLabel setNumberOfLines:5];
     std::string descText    = g_localizeStrings.Get(34404) + "\n";
@@ -180,8 +180,10 @@ const CGFloat timeFadeSecs                    = 2.0;
   [[self view] addGestureRecognizer:doubleFingerSingleTap];
 
   //1 finger single long tab - right mouse - alternative
-  UITapGestureRecognizer *singleFingerSingleLongTap = (UITapGestureRecognizer*)[[UILongPressGestureRecognizer alloc]
-                                                        initWithTarget:self action:@selector(handleSingleFingerSingleLongTap:)];
+  UITapGestureRecognizer* singleFingerSingleLongTap =
+      reinterpret_cast<UITapGestureRecognizer*>([[UILongPressGestureRecognizer alloc]
+          initWithTarget:self
+                  action:@selector(handleSingleFingerSingleLongTap:)]);
   singleFingerSingleLongTap.delaysTouchesBegan = YES;
   singleFingerSingleLongTap.delaysTouchesEnded = YES;
   singleFingerSingleLongTap.numberOfTouchesRequired = 1;

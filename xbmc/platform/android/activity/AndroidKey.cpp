@@ -322,9 +322,9 @@ void CAndroidKey::XBMC_Key(
   unsigned char type = up ? XBMC_KEYUP : XBMC_KEYDOWN;
   newEvent.type = type;
   newEvent.key.keysym.scancode = code;
-  newEvent.key.keysym.sym = (XBMCKey)key;
+  newEvent.key.keysym.sym = static_cast<XBMCKey>(key);
   newEvent.key.keysym.unicode = unicode;
-  newEvent.key.keysym.mod = (XBMCMod)modifiers;
+  newEvent.key.keysym.mod = static_cast<XBMCMod>(modifiers);
 
   //CXBMCApp::android_printf("XBMC_Key(%u, %u, 0x%04X, %d)", code, key, modifiers, up);
   winSystem->MessagePush(&newEvent);

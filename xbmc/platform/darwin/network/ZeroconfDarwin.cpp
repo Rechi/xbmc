@@ -99,7 +99,7 @@ bool CZeroconfDarwin::doPublishService(const std::string& fcr_identifier,
     CLog::Log(LOGERROR,
               "CZeroconfDarwin::doPublishService CFNetServiceRegister returned "
               "(domain = {}, error = {})",
-              (int)error.domain, (int64_t)error.error);
+              static_cast<int>(error.domain), static_cast<int64_t>(error.error));
   } else
   {
     std::unique_lock lock(m_data_guard);
@@ -170,7 +170,7 @@ void CZeroconfDarwin::registerCallback(CFNetServiceRef theService, CFStreamError
         CLog::Log(LOGERROR,
                   "CZeroconfDarwin::registerCallback returned "
                   "(domain = {}, error = {})",
-                  (int)error->domain, (int64_t)error->error);
+                  static_cast<int>(error->domain), static_cast<int64_t>(error->error));
         break;
     }
     p_this->cancelRegistration(theService);

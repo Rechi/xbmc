@@ -191,7 +191,7 @@ public:
   if (currentKey == '\n' || currentKey == '\r')
     currentKey = XBMCK_RETURN;
 
-  newEvent.key.keysym.sym = (XBMCKey)currentKey;
+  newEvent.key.keysym.sym = static_cast<XBMCKey>(currentKey);
   newEvent.key.keysym.unicode = currentKey;
 
   [self sendKeypressEvent:newEvent];
@@ -462,13 +462,15 @@ public:
       {
         if( !touchBeginSignaled )
         {
-          CGenericTouchActionHandler::GetInstance().OnTouchGestureStart((float)point.x, (float)point.y);
+          CGenericTouchActionHandler::GetInstance().OnTouchGestureStart(
+              static_cast<float>(point.x), static_cast<float>(point.y));
           touchBeginSignaled = true;
         }
 
-        CGenericTouchActionHandler::GetInstance().OnTouchGesturePan((float)point.x, (float)point.y,
-                                                            (float)xMovement, (float)yMovement,
-                                                            (float)velocity.x, (float)velocity.y);
+        CGenericTouchActionHandler::GetInstance().OnTouchGesturePan(
+            static_cast<float>(point.x), static_cast<float>(point.y), static_cast<float>(xMovement),
+            static_cast<float>(yMovement), static_cast<float>(velocity.x),
+            static_cast<float>(velocity.y));
         lastGesturePoint = point;
       }
     }
@@ -476,9 +478,10 @@ public:
     if( touchBeginSignaled && ([sender state] == UIGestureRecognizerStateEnded || [sender state] == UIGestureRecognizerStateCancelled))
     {
       //signal end of pan - this will start inertial scrolling with deacceleration in CApplication
-      CGenericTouchActionHandler::GetInstance().OnTouchGestureEnd((float)lastGesturePoint.x, (float)lastGesturePoint.y,
-                                                             (float)0.0, (float)0.0,
-                                                             (float)velocity.x, (float)velocity.y);
+      CGenericTouchActionHandler::GetInstance().OnTouchGestureEnd(
+          static_cast<float>(lastGesturePoint.x), static_cast<float>(lastGesturePoint.y),
+          static_cast<float>(0.0), static_cast<float>(0.0), static_cast<float>(velocity.x),
+          static_cast<float>(velocity.y));
 
       touchBeginSignaled = false;
     }
@@ -531,7 +534,8 @@ public:
     point.x *= screenScale;
     point.y *= screenScale;
     //NSLog(@"%s singleTap", __PRETTY_FUNCTION__);
-    CGenericTouchActionHandler::GetInstance().OnTap((float)point.x, (float)point.y, [sender numberOfTouches]);
+    CGenericTouchActionHandler::GetInstance().OnTap(
+        static_cast<float>(point.x), static_cast<float>(point.y), [sender numberOfTouches]);
   }
 }
 //--------------------------------------------------------------
@@ -552,12 +556,15 @@ public:
 
     if (sender.state == UIGestureRecognizerStateEnded)
     {
-      CGenericTouchActionHandler::GetInstance().OnSingleTouchMove((float)point.x, (float)point.y, point.x - lastGesturePoint.x, point.y - lastGesturePoint.y, 0, 0);
+      CGenericTouchActionHandler::GetInstance().OnSingleTouchMove(
+          static_cast<float>(point.x), static_cast<float>(point.y), point.x - lastGesturePoint.x,
+          point.y - lastGesturePoint.y, 0, 0);
     }
 
     if (sender.state == UIGestureRecognizerStateEnded)
     {
-      CGenericTouchActionHandler::GetInstance().OnLongPress((float)point.x, (float)point.y);
+      CGenericTouchActionHandler::GetInstance().OnLongPress(static_cast<float>(point.x),
+                                                            static_cast<float>(point.y));
     }
   }
 }

@@ -126,7 +126,8 @@ void COSXStorageProvider::GetRemovableDrives(std::vector<CMediaSource>& removabl
             // needs to be ejectable
             if (kCFBooleanTrue == CFDictionaryGetValue(details, kDADiskDescriptionMediaEjectableKey))
             {
-              CFStringRef mediaKind = (CFStringRef)CFDictionaryGetValue(details, kDADiskDescriptionMediaKindKey);
+              CFStringRef mediaKind = static_cast<CFStringRef>(
+                  CFDictionaryGetValue(details, kDADiskDescriptionMediaKindKey));
               // and either cd or dvd kind of media in it
               if (mediaKind != NULL &&
                   (CFStringCompare(mediaKind, CFSTR(kIOCDMediaClass), 0) == kCFCompareEqualTo ||
@@ -202,7 +203,9 @@ namespace
   {
     if (m_session && m_runloop && m_runloopSource)
     {
-      CFURLRef url = CFURLCreateFromFileSystemRepresentation(kCFAllocatorDefault, (const UInt8 *)mountpath.c_str(), mountpath.size(), TRUE);
+      CFURLRef url = CFURLCreateFromFileSystemRepresentation(
+          kCFAllocatorDefault, reinterpret_cast<const UInt8*>(mountpath.c_str()), mountpath.size(),
+          TRUE);
       if (url)
       {
         m_disk = DADiskCreateFromVolumePath(kCFAllocatorDefault, m_session, url);

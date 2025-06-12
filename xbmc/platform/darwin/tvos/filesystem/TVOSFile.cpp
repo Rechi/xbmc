@@ -59,7 +59,7 @@ int CTVOSFile::CacheStat(const CURL& url, struct __stat64* buffer)
       buffer->st_flags = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IWOTH | S_IFREG;
       buffer->st_size = size;
       buffer->st_blocks = 1; // we mimic one block
-      buffer->st_blksize = (blksize_t)size; // with full size
+      buffer->st_blksize = static_cast<blksize_t>(size); // with full size
       return 0;
     }
   }

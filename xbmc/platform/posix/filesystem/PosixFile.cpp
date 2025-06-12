@@ -169,9 +169,9 @@ int64_t CPosixFile::Seek(int64_t iFilePosition, int iWhence /* = SEEK_SET*/)
 #ifdef TARGET_ANDROID
   //! @todo properly support with detection in configure
   //! Android special case: Android doesn't substitute off64_t for off_t and similar functions
-  m_filePos = lseek64(m_fd, (off64_t)iFilePosition, iWhence);
+  m_filePos = lseek64(m_fd, static_cast<off64_t>(iFilePosition), iWhence);
 #else  // !TARGET_ANDROID
-  const off_t filePosOffT = (off_t) iFilePosition;
+  const off_t filePosOffT = static_cast<off_t>(iFilePosition);
   // check for parameter overflow
   if (sizeof(int64_t) != sizeof(off_t) && iFilePosition != filePosOffT)
     return -1;
@@ -187,7 +187,7 @@ int CPosixFile::Truncate(int64_t size)
   if (m_fd < 0)
     return -1;
 
-  const off_t sizeOffT = (off_t) size;
+  const off_t sizeOffT = static_cast<off_t>(size);
   // check for parameter overflow
   if (sizeof(int64_t) != sizeof(off_t) && size != sizeOffT)
     return -1;
@@ -233,7 +233,8 @@ int CPosixFile::IoControl(IOControl request, void* param)
   {
     if(!param)
       return -1;
-    return ioctl(m_fd, ((SNativeIoControl*)param)->request, ((SNativeIoControl*)param)->param);
+    return ioctl(m_fd, (static_cast<SNativeIoControl*>(param))->request,
+                 (static_cast<SNativeIoControl*>(param))->param);
   }
   else if (request == IOControl::SEEK_POSSIBLE)
   {

@@ -221,7 +221,7 @@ void CLogindUPowerSyscall::UpdateBatteryLevel()
 
   if (batteryCount > 0)
   {
-    m_batteryLevel = (int)(batteryLevelSum / (double)batteryCount);
+    m_batteryLevel = static_cast<int>(batteryLevelSum / static_cast<double>(batteryCount));
     m_lowBattery = CDBusUtil::GetVariant("org.freedesktop.UPower", "/org/freedesktop/UPower", "org.freedesktop.UPower", "OnLowBattery").asBoolean();
   }
 }
@@ -243,7 +243,8 @@ bool CLogindUPowerSyscall::PumpPowerEvents(IPowerEventsCallback *callback)
         dbus_bool_t arg;
         // the boolean argument defines whether we are going to sleep (true) or just woke up (false)
         dbus_message_get_args(msg.get(), NULL, DBUS_TYPE_BOOLEAN, &arg, DBUS_TYPE_INVALID);
-        CLog::Log(LOGDEBUG, "LogindUPowerSyscall: Received PrepareForSleep with arg {}", (int)arg);
+        CLog::Log(LOGDEBUG, "LogindUPowerSyscall: Received PrepareForSleep with arg {}",
+                  static_cast<int>(arg));
         if (arg)
         {
           callback->OnSleep();

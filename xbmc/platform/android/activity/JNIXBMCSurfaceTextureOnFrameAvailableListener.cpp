@@ -42,9 +42,10 @@ void CJNIXBMCSurfaceTextureOnFrameAvailableListener::RegisterNatives(JNIEnv* env
   jclass cClass = env->FindClass(s_className.c_str());
   if(cClass)
   {
-    JNINativeMethod methods[] =
-    {
-      {"_onFrameAvailable", "(Landroid/graphics/SurfaceTexture;)V", (void*)&CJNIXBMCSurfaceTextureOnFrameAvailableListener::_onFrameAvailable},
+    JNINativeMethod methods[] = {
+        {"_onFrameAvailable", "(Landroid/graphics/SurfaceTexture;)V",
+         reinterpret_cast<void*>(
+             &CJNIXBMCSurfaceTextureOnFrameAvailableListener::_onFrameAvailable)},
     };
 
     env->RegisterNatives(cClass, methods, sizeof(methods)/sizeof(methods[0]));

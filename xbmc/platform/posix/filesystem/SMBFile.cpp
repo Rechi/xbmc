@@ -600,13 +600,13 @@ ssize_t CSMBFile::Read(void *lpBuf, size_t uiBufSize)
     return -1;
   smb.SetActivityTime();
 
-  ssize_t bytesRead = smbc_read(m_fd, lpBuf, (int)uiBufSize);
+  ssize_t bytesRead = smbc_read(m_fd, lpBuf, static_cast<int>(uiBufSize));
 
   if (m_allowRetry && bytesRead < 0 && errno == EINVAL )
   {
     CLog::Log(LOGERROR, "{} - Error( {}, {}, {} ) - Retrying", __FUNCTION__, bytesRead, errno,
               strerror(errno));
-    bytesRead = smbc_read(m_fd, lpBuf, (int)uiBufSize);
+    bytesRead = smbc_read(m_fd, lpBuf, static_cast<int>(uiBufSize));
   }
 
   if ( bytesRead < 0 )
@@ -755,7 +755,7 @@ int CSMBFile::IoControl(IOControl request, void* param)
 
   if (request == IOControl::SET_RETRY)
   {
-    m_allowRetry = *(bool*) param;
+    m_allowRetry = *static_cast<bool*>(param);
     return 0;
   }
 
