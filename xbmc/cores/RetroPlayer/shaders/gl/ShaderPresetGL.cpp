@@ -204,7 +204,7 @@ bool CShaderPresetGL::CreateShaderTextures()
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapType);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapType);
       glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, textureSize.x, textureSize.y, 0, pixelFormat,
-                   internalFormat == GL_RGBA32F ? GL_FLOAT : GL_UNSIGNED_BYTE, (void*)0);
+                   internalFormat == GL_RGBA32F ? GL_FLOAT : GL_UNSIGNED_BYTE, nullptr);
 
       GLfloat blackBorder[4] = {0.0f, 0.0f, 0.0f, 0.0f};
       glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, blackBorder);
@@ -229,10 +229,10 @@ void CShaderPresetGL::RenderShader(IShader& shader, IShaderTexture& source, ISha
   if (static_cast<CShaderTextureGL&>(target).BindFBO())
   {
     const CRect newViewPort(0.f, 0.f, target.GetWidth(), target.GetHeight());
-    glViewport((GLsizei)newViewPort.x1, (GLsizei)newViewPort.y1, (GLsizei)newViewPort.x2,
-               (GLsizei)newViewPort.y2);
-    glScissor((GLsizei)newViewPort.x1, (GLsizei)newViewPort.y1, (GLsizei)newViewPort.x2,
-              (GLsizei)newViewPort.y2);
+    glViewport(static_cast<GLsizei>(newViewPort.x1), static_cast<GLsizei>(newViewPort.y1),
+               static_cast<GLsizei>(newViewPort.x2), static_cast<GLsizei>(newViewPort.y2));
+    glScissor(static_cast<GLsizei>(newViewPort.x1), static_cast<GLsizei>(newViewPort.y1),
+              static_cast<GLsizei>(newViewPort.x2), static_cast<GLsizei>(newViewPort.y2));
     shader.Render(source, target);
     static_cast<CShaderTextureGL&>(target).UnbindFBO();
   }
