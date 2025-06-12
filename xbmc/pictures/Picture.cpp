@@ -147,13 +147,13 @@ bool CPicture::ResizeTexture(const std::string &image, uint8_t *pixels, uint32_t
   }
   else if (dest_width == 0)
   {
-    double factor = (double)dest_height / (double)height;
-    dest_width = (uint32_t)(width * factor);
+    double factor = static_cast<double>(dest_height) / static_cast<double>(height);
+    dest_width = static_cast<uint32_t>(width * factor);
   }
   else if (dest_height == 0)
   {
-    double factor = (double)dest_width / (double)width;
-    dest_height = (uint32_t)(height * factor);
+    double factor = static_cast<double>(dest_width) / static_cast<double>(width);
+    dest_height = static_cast<uint32_t>(height * factor);
   }
 
   // nothing special to do if the dimensions already match
@@ -169,8 +169,8 @@ bool CPicture::ResizeTexture(const std::string &image, uint8_t *pixels, uint32_t
   uint32_t stride = dest_width_aligned * sizeof(uint32_t);
 
   uint32_t* buffer = new uint32_t[dest_width_aligned * dest_height + 4];
-  if (!ScaleImage(pixels, width, height, pitch, AV_PIX_FMT_BGRA, (uint8_t*)buffer, dest_width,
-                  dest_height, stride, AV_PIX_FMT_BGRA, scalingAlgorithm))
+  if (!ScaleImage(pixels, width, height, pitch, AV_PIX_FMT_BGRA, reinterpret_cast<uint8_t*>(buffer),
+                  dest_width, dest_height, stride, AV_PIX_FMT_BGRA, scalingAlgorithm))
   {
     delete[] buffer;
     result = NULL;
@@ -178,8 +178,8 @@ bool CPicture::ResizeTexture(const std::string &image, uint8_t *pixels, uint32_t
     return false;
   }
 
-  bool success = GetThumbnailFromSurface((unsigned char*)buffer, dest_width, dest_height, stride,
-                                         image, result, result_size);
+  bool success = GetThumbnailFromSurface(reinterpret_cast<unsigned char*>(buffer), dest_width,
+                                         dest_height, stride, image, result, result_size);
   delete[] buffer;
 
   if (!success)
@@ -335,11 +335,11 @@ std::unique_ptr<CTexture> CPicture::CreateTiledThumb(const std::vector<std::stri
 
 void CPicture::GetScale(unsigned int width, unsigned int height, unsigned int &out_width, unsigned int &out_height)
 {
-  float aspect = (float)width / height;
-  if ((unsigned int)(out_width / aspect + 0.5f) > out_height)
-    out_width = (unsigned int)(out_height * aspect + 0.5f);
+  float aspect = static_cast<float>(width) / height;
+  if (static_cast<unsigned int>(out_width / aspect + 0.5f) > out_height)
+    out_width = static_cast<unsigned int>(out_height * aspect + 0.5f);
   else
-    out_height = (unsigned int)(out_width / aspect + 0.5f);
+    out_height = static_cast<unsigned int>(out_width / aspect + 0.5f);
 }
 
 bool CPicture::ScaleImage(uint8_t* in_pixels,
@@ -360,9 +360,9 @@ bool CPicture::ScaleImage(uint8_t* in_pixels,
                      CPictureScalingAlgorithm::ToSwscale(scalingAlgorithm), NULL, NULL, NULL);
 
   uint8_t *src[] = { in_pixels, 0, 0, 0 };
-  int     srcStride[] = { (int)in_pitch, 0, 0, 0 };
+  int srcStride[] = {static_cast<int>(in_pitch), 0, 0, 0};
   uint8_t *dst[] = { out_pixels , 0, 0, 0 };
-  int     dstStride[] = { (int)out_pitch, 0, 0, 0 };
+  int dstStride[] = {static_cast<int>(out_pitch), 0, 0, 0};
 
   if (context)
   {

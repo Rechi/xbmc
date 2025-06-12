@@ -44,8 +44,8 @@ void CSlideShowPicGLES::Render(float* x,
   float u1 = 0, u2 = 1, v1 = 0, v2 = 1;
   if (pTexture)
   {
-    u2 = (float)pTexture->GetWidth() / pTexture->GetTextureWidth();
-    v2 = (float)pTexture->GetHeight() / pTexture->GetTextureHeight();
+    u2 = static_cast<float>(pTexture->GetWidth()) / pTexture->GetTextureWidth();
+    v2 = static_cast<float>(pTexture->GetHeight()) / pTexture->GetTextureHeight();
   }
 
   GLubyte col[4];
