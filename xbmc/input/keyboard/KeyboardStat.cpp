@@ -162,7 +162,7 @@ CKey CKeyboardStat::TranslateKey(XBMC_keysym& keysym) const
         vkey = 0xa3;
       else if (keysym.unicode > 32 && keysym.unicode < 128)
         // only TRUE ASCII! (Otherwise XBMC crashes! No unicode not even latin 1!)
-        ascii = (char)(keysym.unicode & 0xff);
+        ascii = static_cast<char>(keysym.unicode & 0xff);
     }
   }
 
