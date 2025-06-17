@@ -23,7 +23,7 @@ namespace
 using ActionName = std::string;
 using ActionID = unsigned int;
 
-static const std::map<ActionName, ActionID> ActionMappings = {
+const std::map<ActionName, ActionID> ActionMappings = {
     {"left", ACTION_MOVE_LEFT},
     {"right", ACTION_MOVE_RIGHT},
     {"up", ACTION_MOVE_UP},

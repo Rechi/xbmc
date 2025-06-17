@@ -48,7 +48,7 @@ using KODI::MESSAGING::HELPERS::DialogResponse;
 namespace
 {
 // 0.1 second increments
-static constexpr int MAX_REFRESH_CHANGE_DELAY = 200;
+constexpr int MAX_REFRESH_CHANGE_DELAY = 200;
 
 const RESOLUTION_INFO EmptyResolution;
 RESOLUTION_INFO EmptyModifiableResolution;
