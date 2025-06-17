@@ -203,7 +203,7 @@ void CSettings::Clear()
 
   GetSettingsManager()->Clear();
 
-  for (auto& subSetting : m_subSettings)
+  for (const auto& subSetting : m_subSettings)
     subSetting->Clear();
 
   m_initialized = false;

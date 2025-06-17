@@ -284,7 +284,7 @@ void CSettingsManager::AddSection(const SettingSectionPtr& section)
   for (const auto& category : section->GetCategories())
   {
     category->CheckRequirements();
-    for (auto& group : category->GetGroups())
+    for (const auto& group : category->GetGroups())
     {
       group->CheckRequirements();
       for (const auto& setting : group->GetSettings())
@@ -831,7 +831,7 @@ bool CSettingsManager::OnSettingChanging(const std::shared_ptr<const CSetting>& 
   // now that we have a copy of the setting's data, we can leave the lock
   settingsLock.unlock();
 
-  for (auto& callback : settingData.callbacks)
+  for (const auto& callback : settingData.callbacks)
   {
     if (!callback->OnSettingChanging(setting))
       return false;
@@ -865,7 +865,7 @@ bool CSettingsManager::OnSettingChanging(const std::shared_ptr<const CSetting>& 
     // now that we have a copy of the setting's data, we can leave the lock
     lock.unlock();
 
-    for (auto& referenceSetting : referenceSettings)
+    for (const auto& referenceSetting : referenceSettings)
       referenceSetting->FromString(setting->ToString());
   }
 
@@ -886,7 +886,7 @@ void CSettingsManager::OnSettingChanged(const std::shared_ptr<const CSetting>& s
   // now that we have a copy of the setting's data, we can leave the lock
   lock.unlock();
 
-  for (auto& callback : settingData.callbacks)
+  for (const auto& callback : settingData.callbacks)
     callback->OnSettingChanged(setting);
 
   // now handle any settings which depend on the changed setting
@@ -912,7 +912,7 @@ void CSettingsManager::OnSettingAction(const std::shared_ptr<const CSetting>& se
   // now that we have a copy of the setting's data, we can leave the lock
   lock.unlock();
 
-  for (auto& callback : settingData.callbacks)
+  for (const auto& callback : settingData.callbacks)
     callback->OnSettingAction(setting);
 }
 
@@ -933,7 +933,7 @@ bool CSettingsManager::OnSettingUpdate(const SettingPtr& setting,
   lock.unlock();
 
   bool ret = false;
-  for (auto& callback : settingData.callbacks)
+  for (const auto& callback : settingData.callbacks)
     ret |= callback->OnSettingUpdate(setting, oldSettingId, oldSettingNode);
 
   return ret;
@@ -954,7 +954,7 @@ void CSettingsManager::OnSettingPropertyChanged(const std::shared_ptr<const CSet
   // now that we have a copy of the setting's data, we can leave the lock
   lock.unlock();
 
-  for (auto& callback : settingData.callbacks)
+  for (const auto& callback : settingData.callbacks)
     callback->OnSettingPropertyChanged(setting, propertyName);
 
   // check the changed property and if it may have an influence on the

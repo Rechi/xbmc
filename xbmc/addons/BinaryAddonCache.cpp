@@ -97,7 +97,7 @@ void CBinaryAddonCache::OnEvent(const AddonEvent& event)
       typeid(event) == typeid(AddonEvents::Disabled) ||
       typeid(event) == typeid(AddonEvents::ReInstalled))
   {
-    for (auto &type : ADDONS_TO_CACHE)
+    for (const auto& type : ADDONS_TO_CACHE)
     {
       if (CServiceBroker::GetAddonMgr().HasType(event.addonId, type))
       {
@@ -117,7 +117,7 @@ void CBinaryAddonCache::Update()
   using AddonMap = std::multimap<AddonType, VECADDONS>;
   AddonMap addonmap;
 
-  for (auto &addonType : ADDONS_TO_CACHE)
+  for (const auto& addonType : ADDONS_TO_CACHE)
   {
     VECADDONS addons;
     CServiceBroker::GetAddonMgr().GetInstalledAddons(addons, addonType);

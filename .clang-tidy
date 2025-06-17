@@ -25,5 +25,6 @@ Checks: "\
   readability-duplicate-include,\
   readability-misleading-indentation,\
   readability-non-const-parameter,\
+  readability-qualified-auto,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'

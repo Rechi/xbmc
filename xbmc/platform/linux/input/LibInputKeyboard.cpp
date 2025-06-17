@@ -207,7 +207,7 @@ constexpr auto XkbDeadKeyXBMCMapping =
 
 std::optional<XBMCKey> TranslateDeadKey(uint32_t keySym)
 {
-  auto mapping = XkbDeadKeyXBMCMapping.find(keySym);
+  const auto* mapping = XkbDeadKeyXBMCMapping.find(keySym);
   return mapping != XkbDeadKeyXBMCMapping.cend() ? std::optional<XBMCKey>(mapping->second)
                                                  : std::nullopt;
 }
@@ -218,7 +218,7 @@ static void xkbLogger(xkb_context* context,
                       va_list args)
 {
   const std::string message = StringUtils::FormatV(format, args);
-  auto logLevel = logLevelMap.find(priority);
+  const auto* logLevel = logLevelMap.find(priority);
   CLog::Log(logLevel != logLevelMap.cend() ? logLevel->second : LOGDEBUG, "[xkb] {}", message);
 }
 } // namespace
@@ -489,7 +489,7 @@ XBMCKey CLibInputKeyboard::XBMCKeyForKeysym(xkb_keysym_t sym, uint32_t scancode)
     return static_cast<XBMCKey> (XBMCK_F1 + ((int)sym - XKB_KEY_F1));
   }
 
-  auto xkbmapping = xkbMap.find(sym);
+  const auto* xkbmapping = xkbMap.find(sym);
   if (xkbmapping != xkbMap.cend())
     return xkbmapping->second;
 

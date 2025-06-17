@@ -197,7 +197,8 @@ void CGUIDialogSubtitleSettings::OnSettingAction(const std::shared_ptr<const CSe
   }
   else if (settingId == SETTING_SUBTITLE_SEARCH)
   {
-    auto dialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSubtitles>(WINDOW_DIALOG_SUBTITLES);
+    auto* dialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSubtitles>(
+        WINDOW_DIALOG_SUBTITLES);
     if (dialog)
     {
       dialog->Open();
