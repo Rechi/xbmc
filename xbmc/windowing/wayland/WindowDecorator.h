@@ -116,7 +116,7 @@ public:
   {
     void* data{};
     std::size_t dataSize{};
-    CSizeInt size{};
+    CSizeInt size;
     wayland::buffer_t wlBuffer;
 
     Buffer() noexcept {}

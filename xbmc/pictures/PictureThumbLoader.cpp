@@ -33,7 +33,7 @@
 using namespace KODI;
 using namespace XFILE;
 
-CPictureThumbLoader::CPictureThumbLoader() : CThumbLoader()
+CPictureThumbLoader::CPictureThumbLoader()
 {
   m_regenerateThumbs = false;
 }

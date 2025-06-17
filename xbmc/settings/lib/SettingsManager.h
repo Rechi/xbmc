@@ -43,8 +43,8 @@ enum class SettingOptionsFillerType
 
 struct SettingOptionsFiller
 {
-  IntegerSettingOptionsFiller intFiller{};
-  StringSettingOptionsFiller stringFiller{};
+  IntegerSettingOptionsFiller intFiller;
+  StringSettingOptionsFiller stringFiller;
   SettingOptionsFillerType type{SettingOptionsFillerType::Unknown};
 
   SettingOptionsFiller() = default;

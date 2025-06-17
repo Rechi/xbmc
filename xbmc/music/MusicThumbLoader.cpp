@@ -19,7 +19,7 @@
 
 using namespace MUSIC_INFO;
 
-CMusicThumbLoader::CMusicThumbLoader() : CThumbLoader()
+CMusicThumbLoader::CMusicThumbLoader()
 {
   m_musicDatabase = new CMusicDatabase;
 }

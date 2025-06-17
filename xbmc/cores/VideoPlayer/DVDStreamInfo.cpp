@@ -13,16 +13,16 @@
 
 #include <cstring>
 
-CDVDStreamInfo::CDVDStreamInfo() : extradata{}
+CDVDStreamInfo::CDVDStreamInfo()
 {
   Clear();
 }
-CDVDStreamInfo::CDVDStreamInfo(const CDVDStreamInfo& right, bool withextradata) : extradata{}
+CDVDStreamInfo::CDVDStreamInfo(const CDVDStreamInfo& right, bool withextradata)
 {
   Clear();
   Assign(right, withextradata);
 }
-CDVDStreamInfo::CDVDStreamInfo(const CDemuxStream& right, bool withextradata) : extradata{}
+CDVDStreamInfo::CDVDStreamInfo(const CDemuxStream& right, bool withextradata)
 {
   Clear();
   Assign(right, withextradata);

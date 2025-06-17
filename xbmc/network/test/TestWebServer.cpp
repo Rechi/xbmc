@@ -46,9 +46,7 @@ using namespace XFILE;
 class TestWebServer : public testing::Test
 {
 protected:
-  TestWebServer()
-    : webserver(),
-      sourcePath(XBMC_REF_FILE_PATH("xbmc/network/test/data/webserver/"))
+  TestWebServer() : sourcePath(XBMC_REF_FILE_PATH("xbmc/network/test/data/webserver/"))
   {
     static uint16_t port;
     if (port == 0)
