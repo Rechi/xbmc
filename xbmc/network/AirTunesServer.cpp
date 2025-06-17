@@ -318,8 +318,7 @@ void CAirTunesServer::SetCoverArtFromBuffer(const char *buffer, unsigned int siz
 void CAirTunesServer::FreeDACPRemote()
 {
   std::unique_lock lock(m_dacpLock);
-  if (m_pDACP)
-    delete m_pDACP;
+  delete m_pDACP;
   m_pDACP = NULL;
 }
 
