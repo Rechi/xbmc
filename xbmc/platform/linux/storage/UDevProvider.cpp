@@ -268,7 +268,7 @@ bool CUDevProvider::PumpDriveChangeEvents(IStorageEventsCallback *callback)
       }
       // browse disk dialog is not wanted for blu-rays
       const char *bd = udev_device_get_property_value(dev, "ID_CDROM_MEDIA_BD");
-      if (strcmp(action, "change") == 0 && !(bd && strcmp(bd, "1") == 0))
+      if (strcmp(action, "change") == 0 && (!bd || strcmp(bd, "1") != 0))
       {
         const char *optical = udev_device_get_property_value(dev, "ID_CDROM");
         const bool isOptical = optical && (strcmp(optical, "1") == 0);

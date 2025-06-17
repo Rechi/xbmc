@@ -1142,7 +1142,7 @@ bool CSettingInt::fromString(const std::string &strValue, int &value)
 
   char *end = nullptr;
   value = static_cast<int>(std::strtol(strValue.c_str(), &end, 10));
-  return !(end && *end != '\0');
+  return !end || *end == '\0';
 }
 
 Logger CSettingNumber::s_logger;
@@ -1276,7 +1276,7 @@ bool CSettingNumber::CheckValidity(const std::string &value) const
 bool CSettingNumber::CheckValidity(double value) const
 {
   std::shared_lock<CSharedSection> lock(m_critical);
-  return !(m_min != m_max && (value < m_min || value > m_max));
+  return m_min == m_max || (value >= m_min && value <= m_max);
 }
 
 bool CSettingNumber::SetValue(double value)
@@ -1337,7 +1337,7 @@ bool CSettingNumber::fromString(const std::string &strValue, double &value)
 
   char *end = nullptr;
   value = strtod(strValue.c_str(), &end);
-  return !(end && *end != '\0');
+  return !end || *end == '\0';
 }
 
 const CSettingString::Value CSettingString::DefaultValue;

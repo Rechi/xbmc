@@ -715,7 +715,8 @@ void CGUIDialogNumeric::OnCancel()
 
 void CGUIDialogNumeric::HandleInputIP(uint32_t num)
 {
-  if (m_dirty && ((m_ip[m_block] < 25) || (m_ip[m_block] == 25 && num < 6) || !(m_block == 0 && num == 0)))
+  if (m_dirty &&
+      ((m_ip[m_block] < 25) || (m_ip[m_block] == 25 && num < 6) || m_block != 0 || num != 0))
   {
     m_ip[m_block] *= 10;
     m_ip[m_block] += num;
