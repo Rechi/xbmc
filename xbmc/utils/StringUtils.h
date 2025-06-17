@@ -443,11 +443,8 @@ public:
   static void Tokenize(std::string_view input,
                        std::vector<std::string>& tokens,
                        std::string_view delimiters);
-  [[nodiscard]] static std::vector<std::string> Tokenize(std::string_view input,
-                                                         const char delimiter);
-  static void Tokenize(std::string_view input,
-                       std::vector<std::string>& tokens,
-                       const char delimiter);
+  [[nodiscard]] static std::vector<std::string> Tokenize(std::string_view input, char delimiter);
+  static void Tokenize(std::string_view input, std::vector<std::string>& tokens, char delimiter);
 
   /*!
    * \brief Converts a string to a unsigned int number.

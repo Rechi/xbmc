@@ -112,35 +112,35 @@ private:
       const std::string& settingType,
       const TiXmlElement* settingElement,
       const std::string& defaultValue,
-      const int settingLabel);
+      int settingLabel);
   std::shared_ptr<CSetting> InitializeFromOldSettingNumber(const std::string& settingId,
                                                            const TiXmlElement* settingElement,
                                                            const std::string& defaultValue,
-                                                           const int settingLabel);
+                                                           int settingLabel);
   std::shared_ptr<CSetting> InitializeFromOldSettingPath(const std::string& settingId,
                                                          const std::string& settingType,
                                                          const TiXmlElement* settingElement,
                                                          const std::string& defaultValue,
-                                                         const int settingLabel);
+                                                         int settingLabel);
   std::shared_ptr<CSetting> InitializeFromOldSettingDate(const std::string& settingId,
                                                          const TiXmlElement* settingElement,
                                                          const std::string& defaultValue,
-                                                         const int settingLabel);
+                                                         int settingLabel);
   std::shared_ptr<CSetting> InitializeFromOldSettingTime(const std::string& settingId,
                                                          const TiXmlElement* settingElement,
                                                          const std::string& defaultValue,
-                                                         const int settingLabel);
+                                                         int settingLabel);
   std::shared_ptr<CSetting> InitializeFromOldSettingSelect(
       const std::string& settingId,
       const TiXmlElement* settingElement,
       const std::string& defaultValue,
-      const int settingLabel,
+      int settingLabel,
       const std::string& settingValues,
       const std::vector<std::string>& settingLValues);
   std::shared_ptr<CSetting> InitializeFromOldSettingAddon(const std::string& settingId,
                                                           const TiXmlElement* settingElement,
                                                           const std::string& defaultValue,
-                                                          const int settingLabel);
+                                                          int settingLabel);
   std::shared_ptr<CSetting> InitializeFromOldSettingEnums(
       const std::string& settingId,
       const std::string& settingType,

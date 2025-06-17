@@ -98,7 +98,7 @@ public:
   void SetArtistSort(const std::string& strArtistsort);
   void SetComposerSort(const std::string& strComposerSort);
   void SetAlbum(const std::string& strAlbum);
-  void SetAlbumId(const int iAlbumId);
+  void SetAlbumId(int iAlbumId);
   void SetAlbumArtist(const std::string& strAlbumArtist);
   void SetAlbumArtist(const std::vector<std::string>& albumArtists, bool FillDesc = false);
   void SetAlbumArtistDesc(const std::string& strAlbumArtistDesc);

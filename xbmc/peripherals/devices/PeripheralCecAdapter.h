@@ -122,7 +122,7 @@ public:
   bool ToggleDeviceState(CecStateChange mode = STATE_SWITCH_TOGGLE, bool forceType = false);
 
 private:
-  bool InitialiseFeature(const PeripheralFeature feature) override;
+  bool InitialiseFeature(PeripheralFeature feature) override;
   void ResetMembers(void);
   void Process(void) override;
   bool IsRunning(void) const;
@@ -157,12 +157,8 @@ private:
   static void CecLogMessage(void* cbParam, const CEC::cec_log_message* message);
   static void CecCommand(void* cbParam, const CEC::cec_command* command);
   static void CecConfiguration(void* cbParam, const CEC::libcec_configuration* config);
-  static void CecAlert(void* cbParam,
-                       const CEC::libcec_alert alert,
-                       const CEC::libcec_parameter data);
-  static void CecSourceActivated(void* param,
-                                 const CEC::cec_logical_address address,
-                                 const uint8_t activated);
+  static void CecAlert(void* cbParam, CEC::libcec_alert alert, CEC::libcec_parameter data);
+  static void CecSourceActivated(void* param, CEC::cec_logical_address address, uint8_t activated);
   static void CecKeyPress(void* cbParam, const CEC::cec_keypress* key);
 
   CEC::ICECAdapter* m_cecAdapter;

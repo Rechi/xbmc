@@ -1144,7 +1144,7 @@ public:
   int AddSeason(int showID, int season, const std::string& name = "");
   int AddSet(const std::string& strSet,
              const std::string& strOverview = "",
-             const bool updateOverview = true);
+             bool updateOverview = true);
   void ClearMovieSet(int idMovie);
   void SetMovieSet(int idMovie, int idSet);
   bool SetVideoUserRating(int dbId, int rating, const MediaType& mediaType);
@@ -1294,15 +1294,20 @@ protected:
   void AddCast(int mediaId, const char *mediaType, const std::vector<SActorInfo> &cast);
 
   CVideoInfoTag GetDetailsForMovie(std::unique_ptr<dbiplus::Dataset> &pDS, int getDetails = VideoDbDetailsNone);
-  CVideoInfoTag GetDetailsForMovie(const dbiplus::sql_record* const record, int getDetails = VideoDbDetailsNone);
+  CVideoInfoTag GetDetailsForMovie(const dbiplus::sql_record* record,
+                                   int getDetails = VideoDbDetailsNone);
   CVideoInfoTag GetDetailsForTvShow(std::unique_ptr<dbiplus::Dataset> &pDS, int getDetails = VideoDbDetailsNone, CFileItem* item = NULL);
-  CVideoInfoTag GetDetailsForTvShow(const dbiplus::sql_record* const record, int getDetails = VideoDbDetailsNone, CFileItem* item = NULL);
+  CVideoInfoTag GetDetailsForTvShow(const dbiplus::sql_record* record,
+                                    int getDetails = VideoDbDetailsNone,
+                                    CFileItem* item = NULL);
   CVideoInfoTag GetBasicDetailsForEpisode(std::unique_ptr<dbiplus::Dataset> &pDS);
-  CVideoInfoTag GetBasicDetailsForEpisode(const dbiplus::sql_record* const record);
+  CVideoInfoTag GetBasicDetailsForEpisode(const dbiplus::sql_record* record);
   CVideoInfoTag GetDetailsForEpisode(std::unique_ptr<dbiplus::Dataset> &pDS, int getDetails = VideoDbDetailsNone);
-  CVideoInfoTag GetDetailsForEpisode(const dbiplus::sql_record* const record, int getDetails = VideoDbDetailsNone);
+  CVideoInfoTag GetDetailsForEpisode(const dbiplus::sql_record* record,
+                                     int getDetails = VideoDbDetailsNone);
   CVideoInfoTag GetDetailsForMusicVideo(std::unique_ptr<dbiplus::Dataset> &pDS, int getDetails = VideoDbDetailsNone);
-  CVideoInfoTag GetDetailsForMusicVideo(const dbiplus::sql_record* const record, int getDetails = VideoDbDetailsNone);
+  CVideoInfoTag GetDetailsForMusicVideo(const dbiplus::sql_record* record,
+                                        int getDetails = VideoDbDetailsNone);
   bool GetPeopleNav(const std::string& strBaseDir,
                     CFileItemList& items,
                     const char* type,
@@ -1321,7 +1326,12 @@ protected:
   void GetUniqueIDs(int media_id, const std::string &media_type, CVideoInfoTag& details);
 
   void GetDetailsFromDB(std::unique_ptr<dbiplus::Dataset> &pDS, int min, int max, const SDbTableOffsets *offsets, CVideoInfoTag &details, int idxOffset = 2);
-  void GetDetailsFromDB(const dbiplus::sql_record* const record, int min, int max, const SDbTableOffsets *offsets, CVideoInfoTag &details, int idxOffset = 2);
+  void GetDetailsFromDB(const dbiplus::sql_record* record,
+                        int min,
+                        int max,
+                        const SDbTableOffsets* offsets,
+                        CVideoInfoTag& details,
+                        int idxOffset = 2);
   std::string GetValueString(const CVideoInfoTag &details, int min, int max, const SDbTableOffsets *offsets) const;
 
   bool SetFileForEpisode(const std::string& fileAndPath, int idEpisode, int oldIdFile);
