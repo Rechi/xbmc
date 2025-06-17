@@ -104,7 +104,7 @@ bool CAddRemoveFavourite::IsVisible(const CFileItem& item) const
 
 bool CAddRemoveFavourite::Execute(const std::shared_ptr<CFileItem>& item) const
 {
-  return CServiceBroker::GetFavouritesService().AddOrRemove(*item.get(), GetTargetWindowID(*item));
+  return CServiceBroker::GetFavouritesService().AddOrRemove(*item, GetTargetWindowID(*item));
 }
 
 } // namespace CONTEXTMENU

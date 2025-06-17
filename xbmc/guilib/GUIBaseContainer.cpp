@@ -783,7 +783,8 @@ std::shared_ptr<CGUIListItem> CGUIBaseContainer::GetListItem(int offset, unsigne
 CGUIListItemLayout *CGUIBaseContainer::GetFocusedLayout() const
 {
   std::shared_ptr<CGUIListItem> item = GetListItem(0);
-  if (item.get()) return item->GetFocusedLayout();
+  if (item)
+    return item->GetFocusedLayout();
   return NULL;
 }
 
