@@ -518,10 +518,7 @@ bool CMusicGUIInfo::GetLabel(std::string& value, const CFileItem *item, int cont
   ///////////////////////////////////////////////////////////////////////////////////////////////
   // MUSICPM_*
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  if (GetPartyModeLabel(value, info))
-    return true;
-
-  return false;
+  return GetPartyModeLabel(value, info);
 }
 
 bool CMusicGUIInfo::GetPartyModeLabel(std::string& value, const CGUIInfo &info) const
@@ -728,7 +725,7 @@ bool CMusicGUIInfo::GetBool(bool& value, const CGUIListItem *gitem, int contextW
     case LISTITEM_IS_BOXSET:
       if (tag)
       {
-        value = tag->GetBoxset() == true;
+        value = tag->GetBoxset();
         return true;
       }
       break;

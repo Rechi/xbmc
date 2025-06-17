@@ -35,9 +35,7 @@ bool CXBMCTinyXML2::LoadFile(const std::string& filename)
 
   Parse(std::string_view(reinterpret_cast<char*>(buffer.data()), buffer.size()));
 
-  if (Error())
-    return false;
-  return true;
+  return !Error();
 }
 
 bool CXBMCTinyXML2::LoadFile(FILE* file)

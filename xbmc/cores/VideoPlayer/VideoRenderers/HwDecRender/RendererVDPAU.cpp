@@ -47,10 +47,7 @@ CRendererVDPAU::~CRendererVDPAU()
 bool CRendererVDPAU::Configure(const VideoPicture &picture, float fps, unsigned int orientation)
 {
   CVdpauRenderPicture *pic = dynamic_cast<CVdpauRenderPicture*>(picture.videoBuffer);
-  if (pic->procPic.isYuv)
-    m_isYuv = true;
-  else
-    m_isYuv = false;
+  m_isYuv = pic->procPic.isYuv;
 
   if (!m_interopState.Init(pic->device, pic->procFunc, pic->ident))
     return false;

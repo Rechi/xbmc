@@ -183,10 +183,7 @@ public:
   bool CanSkipDeint()
   {
     std::unique_lock l(m_sec);
-    if (canSkipDeint)
-      return true;
-    else
-      return false;
+    return canSkipDeint;
   }
   void SetDraining(bool drain)
   {
@@ -196,10 +193,7 @@ public:
   bool IsDraining()
   {
     std::unique_lock l(m_sec);
-    if (draining)
-      return true;
-    else
-      return false;
+    return draining;
   }
 
 private:

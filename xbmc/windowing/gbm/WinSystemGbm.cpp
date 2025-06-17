@@ -255,10 +255,7 @@ bool CWinSystemGbm::SetFullScreen(bool fullScreen, RESOLUTION_INFO& res, bool bl
 bool CWinSystemGbm::DisplayHardwareScalingEnabled()
 {
   auto drmAtomic = std::dynamic_pointer_cast<CDRMAtomic>(m_DRM);
-  if (drmAtomic && drmAtomic->DisplayHardwareScalingEnabled())
-    return true;
-
-  return false;
+  return drmAtomic && drmAtomic->DisplayHardwareScalingEnabled();
 }
 
 void CWinSystemGbm::UpdateDisplayHardwareScaling(const RESOLUTION_INFO& resInfo)

@@ -36,10 +36,7 @@ bool UTILS::DISCS::GetDiscInfo(UTILS::DISCS::DiscInfo& info, const std::string& 
 
   // try to probe as Blu-ray
   info = ProbeBlurayDiscInfo(mediaPath);
-  if (!info.empty())
-    return true;
-
-  return false;
+  return !info.empty();
 }
 
 UTILS::DISCS::DiscInfo UTILS::DISCS::ProbeDVDDiscInfo(const std::string& mediaPath)

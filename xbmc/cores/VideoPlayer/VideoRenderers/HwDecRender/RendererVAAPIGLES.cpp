@@ -80,10 +80,7 @@ CRendererVAAPIGLES::~CRendererVAAPIGLES()
 bool CRendererVAAPIGLES::Configure(const VideoPicture& picture, float fps, unsigned int orientation)
 {
   CVaapiRenderPicture *pic = dynamic_cast<CVaapiRenderPicture*>(picture.videoBuffer);
-  if (pic->procPic.videoSurface != VA_INVALID_ID)
-    m_isVAAPIBuffer = true;
-  else
-    m_isVAAPIBuffer = false;
+  m_isVAAPIBuffer = pic->procPic.videoSurface != VA_INVALID_ID;
 
   InteropInfo interop;
   interop.textureTarget = GL_TEXTURE_2D;
@@ -119,10 +116,7 @@ bool CRendererVAAPIGLES::Configure(const VideoPicture& picture, float fps, unsig
 bool CRendererVAAPIGLES::ConfigChanged(const VideoPicture& picture)
 {
   CVaapiRenderPicture *pic = dynamic_cast<CVaapiRenderPicture*>(picture.videoBuffer);
-  if (pic->procPic.videoSurface != VA_INVALID_ID && !m_isVAAPIBuffer)
-    return true;
-
-  return false;
+  return pic->procPic.videoSurface != VA_INVALID_ID && !m_isVAAPIBuffer;
 }
 
 EShaderFormat CRendererVAAPIGLES::GetShaderFormat()
