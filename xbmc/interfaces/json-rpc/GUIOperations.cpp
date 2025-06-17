@@ -76,11 +76,11 @@ JSONRPC_STATUS CGUIOperations::ShowNotification(const std::string &method, ITran
   std::string message = parameterObject["message"].asString();
   unsigned int displaytime = (unsigned int)parameterObject["displaytime"].asUnsignedInteger();
 
-  if (image.compare("info") == 0)
+  if (image == "info")
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, title, message, displaytime);
-  else if (image.compare("warning") == 0)
+  else if (image == "warning")
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, title, message, displaytime);
-  else if (image.compare("error") == 0)
+  else if (image == "error")
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, title, message, displaytime);
   else
     CGUIDialogKaiToast::QueueNotification(image, title, message, displaytime);
@@ -91,7 +91,7 @@ JSONRPC_STATUS CGUIOperations::ShowNotification(const std::string &method, ITran
 JSONRPC_STATUS CGUIOperations::SetFullscreen(const std::string &method, ITransportLayer *transport, IClient *client, const CVariant &parameterObject, CVariant &result)
 {
   if ((parameterObject["fullscreen"].isString() &&
-       parameterObject["fullscreen"].asString().compare("toggle") == 0) ||
+       parameterObject["fullscreen"].asString() == "toggle") ||
       (parameterObject["fullscreen"].isBoolean() &&
        parameterObject["fullscreen"].asBoolean() != g_application.IsFullScreen()))
   {
