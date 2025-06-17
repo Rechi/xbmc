@@ -30,10 +30,7 @@ bool CLibExportSettings::operator!=(const CLibExportSettings &right) const
     return true;
   if (m_unscraped != right.m_unscraped)
     return true;
-  if (m_skipnfo != right.m_skipnfo)
-    return true;
-
-  return false;
+  return m_skipnfo != right.m_skipnfo;
 }
 
 bool CLibExportSettings::IsItemExported(ELIBEXPORTOPTIONS item) const

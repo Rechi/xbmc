@@ -70,10 +70,7 @@ bool CRendererVDPAU::ConfigChanged(const VideoPicture &picture)
   if (pic->procPic.isYuv && !m_isYuv)
     return true;
 
-  if (m_interopState.NeedInit(pic->device, pic->procFunc, pic->ident))
-    return true;
-
-  return false;
+  return m_interopState.NeedInit(pic->device, pic->procFunc, pic->ident);
 }
 
 bool CRendererVDPAU::NeedBuffer(int idx)
