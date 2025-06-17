@@ -133,7 +133,7 @@ void CNfsConnection::destroyOpenContexts()
 void CNfsConnection::destroyContext(const std::string &exportName)
 {
   std::unique_lock lock(openContextLock);
-  tOpenContextMap::iterator it = m_openContextMap.find(exportName.c_str());
+  tOpenContextMap::iterator it = m_openContextMap.find(exportName);
   if (it != m_openContextMap.end())
   {
     nfs_destroy_context(it->second.pContext);
@@ -146,7 +146,7 @@ struct nfs_context *CNfsConnection::getContextFromMap(const std::string &exportn
   struct nfs_context *pRet = NULL;
   std::unique_lock lock(openContextLock);
 
-  tOpenContextMap::iterator it = m_openContextMap.find(exportname.c_str());
+  tOpenContextMap::iterator it = m_openContextMap.find(exportname);
   if (it != m_openContextMap.end())
   {
     //check if context has timed out already

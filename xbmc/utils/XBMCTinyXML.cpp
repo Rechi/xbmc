@@ -52,7 +52,7 @@ bool CXBMCTinyXML::LoadFile(const char *_filename, TiXmlEncoding encoding)
 
 bool CXBMCTinyXML::LoadFile(const std::string& _filename, TiXmlEncoding encoding)
 {
-  value = _filename.c_str();
+  value = _filename;
 
   XFILE::CFile file;
   std::vector<uint8_t> buffer;
