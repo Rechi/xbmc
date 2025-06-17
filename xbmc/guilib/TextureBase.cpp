@@ -399,7 +399,7 @@ void CTextureBase::SetKDFormat(XB_FMT xbFMT)
   }
 }
 
-bool CTextureBase::ConvertToLegacy(uint32_t width, uint32_t height, uint8_t* src)
+bool CTextureBase::ConvertToLegacy(uint32_t width, uint32_t height, const uint8_t* src)
 {
   if (m_textureFormat == KD_TEX_FMT_SDR_BGRA8 && m_textureSwizzle == KD_TEX_SWIZ_RGBA)
   {
