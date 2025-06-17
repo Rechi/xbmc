@@ -114,7 +114,7 @@ public:
   bool operator<(const CDriverPrimitive& rhs) const;
 
   bool operator!=(const CDriverPrimitive& rhs) const { return !operator==(rhs); }
-  bool operator>(const CDriverPrimitive& rhs) const { return !(operator<(rhs) || operator==(rhs)); }
+  bool operator>(const CDriverPrimitive& rhs) const { return !operator<(rhs) && !operator==(rhs); }
   bool operator<=(const CDriverPrimitive& rhs) const { return operator<(rhs) || operator==(rhs); }
   bool operator>=(const CDriverPrimitive& rhs) const { return !operator<(rhs); }
 
