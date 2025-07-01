@@ -58,7 +58,7 @@ public:
   // Access render system interface
   virtual CRenderSystemBase *GetRenderSystem() { return nullptr; }
 
-  virtual const std::string GetName() { return "platform default"; }
+  virtual std::string GetName() { return "platform default"; }
 
   // windowing interfaces
   virtual bool InitWindowSystem();

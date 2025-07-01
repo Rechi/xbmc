@@ -33,7 +33,7 @@ public:
     \param item The CFileItem to process
     \return the preferred art image
   */
-  static const std::string GetPreferredArtImage(const CFileItem& item);
+  static std::string GetPreferredArtImage(const CFileItem& item);
 
   /*! \brief Gets a trailer playable file item for a given item. Essentially this creates a new item which contains
    the original item infotag and has the playable path and label changed.

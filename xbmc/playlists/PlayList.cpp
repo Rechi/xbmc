@@ -233,7 +233,7 @@ int CPlayList::size() const
   return (int)m_vecItems.size();
 }
 
-const std::shared_ptr<CFileItem> CPlayList::operator[](int iItem) const
+std::shared_ptr<CFileItem> CPlayList::operator[](int iItem) const
 {
   if (iItem < 0 || iItem >= size())
   {

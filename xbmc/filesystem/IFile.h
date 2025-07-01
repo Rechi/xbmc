@@ -137,12 +137,13 @@ public:
 
   virtual int IoControl(IOControl request, void* param) { return -1; }
 
-  virtual const std::string GetProperty(XFILE::FileProperty type, const std::string &name = "") const
+  virtual std::string GetProperty(XFILE::FileProperty type, const std::string& name = "") const
   {
     return type == XFILE::FileProperty::CONTENT_TYPE ? "application/octet-stream" : "";
   };
 
-  virtual const std::vector<std::string> GetPropertyValues(XFILE::FileProperty type, const std::string &name = "") const
+  virtual std::vector<std::string> GetPropertyValues(XFILE::FileProperty type,
+                                                     const std::string& name = "") const
   {
     std::vector<std::string> values;
     std::string value = GetProperty(type, name);
