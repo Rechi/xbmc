@@ -203,7 +203,7 @@ bool CNFSDirectory::GetDirectory(const CURL& url, CFileItemList &items)
   int ret = 0;
   KODI::TIME::FileTime fileTime, localTime;
   std::unique_lock lock(gNfsConnection);
-  std::string strDirName="";
+  std::string strDirName;
   std::string myStrPath(url.Get());
   URIUtils::AddSlashAtEnd(myStrPath); //be sure the dir ends with a slash
 

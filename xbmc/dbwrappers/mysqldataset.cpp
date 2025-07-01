@@ -652,7 +652,7 @@ bool MysqlDatabase::exists()
 std::string MysqlDatabase::vprepare(const char* format, va_list args)
 {
   std::string strFormat = format;
-  std::string strResult = "";
+  std::string strResult;
   size_t pos;
 
   //  %q is the sqlite format string for %s.

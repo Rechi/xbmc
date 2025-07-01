@@ -319,7 +319,7 @@ void CGUIWindowMusicPlayList::SavePlayList()
 
     // get selected item
     int iItem = m_viewControl.GetSelectedItem();
-    std::string strSelectedItem = "";
+    std::string strSelectedItem;
     if (iItem >= 0 && iItem < m_vecItems->Size())
     {
       CFileItemPtr pItem = m_vecItems->Get(iItem);

@@ -624,7 +624,7 @@ void SqliteDatabase::rollback_transaction()
 std::string SqliteDatabase::vprepare(const char* format, va_list args)
 {
   std::string strFormat = format;
-  std::string strResult = "";
+  std::string strResult;
   char* p;
   size_t pos;
 
