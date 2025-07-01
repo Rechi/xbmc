@@ -226,8 +226,7 @@ bool CDVDAudioCodecAndroidMediaCodec::Open(CDVDStreamInfo &hints, CDVDCodecOptio
 
 PROCESSDECODER:
 
-  if (m_crypto)
-    delete m_crypto;
+  delete m_crypto;
 
   if (m_hints.cryptoSession)
   {
