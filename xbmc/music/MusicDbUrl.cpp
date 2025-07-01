@@ -20,7 +20,6 @@ using namespace XFILE;
 using namespace XFILE::MUSICDATABASEDIRECTORY;
 
 CMusicDbUrl::CMusicDbUrl()
-  : CDbUrl()
 { }
 
 CMusicDbUrl::~CMusicDbUrl() = default;

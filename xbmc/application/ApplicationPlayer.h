@@ -206,7 +206,7 @@ private:
   struct SNextItem
   {
     std::shared_ptr<CFileItem> pItem;
-    CPlayerOptions options = {};
+    CPlayerOptions options;
     std::string playerName;
     IPlayerCallback *callback = nullptr;
   } m_nextItem;

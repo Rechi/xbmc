@@ -187,7 +187,7 @@ private:
     }
   }
 
-  std::atomic_flag m_pvrStarted{};
+  std::atomic_flag m_pvrStarted;
 };
 
 class CFavouritesSubscriber : public CDirectoryProvider::CSubscriber

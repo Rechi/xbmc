@@ -128,9 +128,9 @@ protected:
   std::unique_ptr<CGUITexture> m_textureCurrent;
   std::unique_ptr<CGUITexture> m_textureNext;
 
-  std::string m_nameCurrent{};
-  std::string m_nameNext{};
-  std::string m_nameStaging{};
+  std::string m_nameCurrent;
+  std::string m_nameNext;
+  std::string m_nameStaging;
 
   std::string m_currentFallback;
 

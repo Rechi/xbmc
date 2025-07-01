@@ -346,7 +346,7 @@ private:
   TranslatableIntegerSettingOptions m_translatableOptions;
   IntegerSettingOptions m_options;
   std::string m_optionsFillerName;
-  IntegerSettingOptionsFiller m_optionsFiller{};
+  IntegerSettingOptionsFiller m_optionsFiller;
   IntegerSettingOptions m_dynamicOptions;
   SettingOptionsSort m_optionsSort = SettingOptionsSort::NoSorting;
 
@@ -482,7 +482,7 @@ protected:
   TranslatableStringSettingOptions m_translatableOptions;
   StringSettingOptions m_options;
   std::string m_optionsFillerName;
-  StringSettingOptionsFiller m_optionsFiller{};
+  StringSettingOptionsFiller m_optionsFiller;
   StringSettingOptions m_dynamicOptions;
   SettingOptionsSort m_optionsSort = SettingOptionsSort::NoSorting;
 
