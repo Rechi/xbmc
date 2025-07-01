@@ -554,7 +554,7 @@ void CDatabase::InitSettings(DatabaseSettings& dbSettings)
   if (dbSettings.type == "mysql")
   {
     // check we have all information before we cancel the fallback
-    if (!(dbSettings.host.empty() || dbSettings.user.empty() || dbSettings.pass.empty()))
+    if (!dbSettings.host.empty() && !dbSettings.user.empty() && !dbSettings.pass.empty())
       m_sqlite = false;
     else
       CLog::Log(LOGINFO, "Essential mysql database information is missing. Require at least host, "
