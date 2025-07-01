@@ -508,7 +508,8 @@ void CGUIDialogSongInfo::ShowFor(CFileItem* pItem)
       dialog->Open();
       if (dialog->HasUpdatedUserrating())
       {
-        auto window = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIWindowMusicBase>(WINDOW_MUSIC_NAV);
+        auto* window = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIWindowMusicBase>(
+            WINDOW_MUSIC_NAV);
         if (window)
           window->RefreshContent("songs");
       }

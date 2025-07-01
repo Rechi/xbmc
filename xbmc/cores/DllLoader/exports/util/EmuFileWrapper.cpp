@@ -176,7 +176,7 @@ EmuFileObject* CEmuFileWrapper::GetFileObjectByStream(FILE* stream)
 
 XFILE::CFile* CEmuFileWrapper::GetFileXbmcByDescriptor(int fd)
 {
-  auto object = GetFileObjectByDescriptor(fd);
+  auto* object = GetFileObjectByDescriptor(fd);
   if (object != nullptr && object->used)
   {
     return object->file_xbmc;
@@ -213,7 +213,7 @@ int CEmuFileWrapper::GetDescriptorByStream(FILE* stream)
 
 FILE* CEmuFileWrapper::GetStreamByDescriptor(int fd)
 {
-  auto object = GetFileObjectByDescriptor(fd);
+  auto* object = GetFileObjectByDescriptor(fd);
   if (object != nullptr && object->used)
   {
     return reinterpret_cast<FILE*>(object);

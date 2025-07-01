@@ -147,34 +147,39 @@ void CSeat::HandleKeyboardCapability()
     KODI::UTILS::POSIX::CFileHandle fdGuard{fd};
     KODI::UTILS::POSIX::CMmap mmap{nullptr, size, PROT_READ, MAP_PRIVATE, fd, 0};
     std::string keymap{static_cast<const char*> (mmap.Data()), size};
-    for (auto handler : m_rawKeyboardHandlers)
+    for (auto* handler : m_rawKeyboardHandlers)
     {
       handler->OnKeyboardKeymap(this, format, keymap);
     }
   };
-  m_keyboard.on_enter() = [this](std::uint32_t serial, const wayland::surface_t& surface,
-                                 const wayland::array_t& keys) {
-    for (auto handler : m_rawKeyboardHandlers)
+  m_keyboard.on_enter() =
+      [this](std::uint32_t serial, const wayland::surface_t& surface, const wayland::array_t& keys)
+  {
+    for (auto* handler : m_rawKeyboardHandlers)
     {
       handler->OnKeyboardEnter(this, serial, surface, keys);
     }
   };
-  m_keyboard.on_leave() = [this](std::uint32_t serial, const wayland::surface_t& surface) {
-    for (auto handler : m_rawKeyboardHandlers)
+  m_keyboard.on_leave() = [this](std::uint32_t serial, const wayland::surface_t& surface)
+  {
+    for (auto* handler : m_rawKeyboardHandlers)
     {
       handler->OnKeyboardLeave(this, serial, surface);
     }
   };
-  m_keyboard.on_key() = [this](std::uint32_t serial, std::uint32_t time, std::uint32_t key, wayland::keyboard_key_state state)
+  m_keyboard.on_key() = [this](std::uint32_t serial, std::uint32_t time, std::uint32_t key,
+                               wayland::keyboard_key_state state)
   {
-    for (auto handler : m_rawKeyboardHandlers)
+    for (auto* handler : m_rawKeyboardHandlers)
     {
       handler->OnKeyboardKey(this, serial, time, key, state);
     }
   };
-  m_keyboard.on_modifiers() = [this](std::uint32_t serial, std::uint32_t modsDepressed, std::uint32_t modsLatched, std::uint32_t modsLocked, std::uint32_t group)
+  m_keyboard.on_modifiers() = [this](std::uint32_t serial, std::uint32_t modsDepressed,
+                                     std::uint32_t modsLatched, std::uint32_t modsLocked,
+                                     std::uint32_t group)
   {
-    for (auto handler : m_rawKeyboardHandlers)
+    for (auto* handler : m_rawKeyboardHandlers)
     {
       handler->OnKeyboardModifiers(this, serial, modsDepressed, modsLatched, modsLocked, group);
     }
@@ -186,7 +191,7 @@ void CSeat::InstallKeyboardRepeatInfo()
 {
   m_keyboard.on_repeat_info() = [this](std::int32_t rate, std::int32_t delay)
   {
-    for (auto handler : m_rawKeyboardHandlers)
+    for (auto* handler : m_rawKeyboardHandlers)
     {
       handler->OnKeyboardRepeatInfo(this, rate, delay);
     }
@@ -196,35 +201,38 @@ void CSeat::InstallKeyboardRepeatInfo()
 void CSeat::HandlePointerCapability()
 {
   m_pointer.on_enter() = [this](std::uint32_t serial, const wayland::surface_t& surface,
-                                double surfaceX, double surfaceY) {
-    for (auto handler : m_rawPointerHandlers)
+                                double surfaceX, double surfaceY)
+  {
+    for (auto* handler : m_rawPointerHandlers)
     {
       handler->OnPointerEnter(this, serial, surface, surfaceX, surfaceY);
     }
   };
-  m_pointer.on_leave() = [this](std::uint32_t serial, const wayland::surface_t& surface) {
-    for (auto handler : m_rawPointerHandlers)
+  m_pointer.on_leave() = [this](std::uint32_t serial, const wayland::surface_t& surface)
+  {
+    for (auto* handler : m_rawPointerHandlers)
     {
       handler->OnPointerLeave(this, serial, surface);
     }
   };
   m_pointer.on_motion() = [this](std::uint32_t time, double surfaceX, double surfaceY)
   {
-    for (auto handler : m_rawPointerHandlers)
+    for (auto* handler : m_rawPointerHandlers)
     {
       handler->OnPointerMotion(this, time, surfaceX, surfaceY);
     }
   };
-  m_pointer.on_button() = [this](std::uint32_t serial, std::uint32_t time, std::uint32_t button, wayland::pointer_button_state state)
+  m_pointer.on_button() = [this](std::uint32_t serial, std::uint32_t time, std::uint32_t button,
+                                 wayland::pointer_button_state state)
   {
-    for (auto handler : m_rawPointerHandlers)
+    for (auto* handler : m_rawPointerHandlers)
     {
       handler->OnPointerButton(this, serial, time, button, state);
     }
   };
   m_pointer.on_axis() = [this](std::uint32_t time, wayland::pointer_axis axis, double value)
   {
-    for (auto handler : m_rawPointerHandlers)
+    for (auto* handler : m_rawPointerHandlers)
     {
       handler->OnPointerAxis(this, time, axis, value);
     }
@@ -241,37 +249,37 @@ void CSeat::HandlePointerCapability()
 void CSeat::HandleTouchCapability()
 {
   m_touch.on_down() = [this](std::uint32_t serial, std::uint32_t time,
-                             const wayland::surface_t& surface, std::int32_t id, double x,
-                             double y) {
-    for (auto handler : m_rawTouchHandlers)
+                             const wayland::surface_t& surface, std::int32_t id, double x, double y)
+  {
+    for (auto* handler : m_rawTouchHandlers)
     {
       handler->OnTouchDown(this, serial, time, surface, id, x, y);
     }
   };
   m_touch.on_up() = [this](std::uint32_t serial, std::uint32_t time, std::int32_t id)
   {
-    for (auto handler : m_rawTouchHandlers)
+    for (auto* handler : m_rawTouchHandlers)
     {
       handler->OnTouchUp(this, serial, time, id);
     }
   };
   m_touch.on_motion() = [this](std::uint32_t time, std::int32_t id, double x, double y)
   {
-    for (auto handler : m_rawTouchHandlers)
+    for (auto* handler : m_rawTouchHandlers)
     {
       handler->OnTouchMotion(this, time, id, x, y);
     }
   };
   m_touch.on_cancel() = [this]()
   {
-    for (auto handler : m_rawTouchHandlers)
+    for (auto* handler : m_rawTouchHandlers)
     {
       handler->OnTouchCancel(this);
     }
   };
   m_touch.on_shape() = [this](std::int32_t id, double major, double minor)
   {
-    for (auto handler : m_rawTouchHandlers)
+    for (auto* handler : m_rawTouchHandlers)
     {
       handler->OnTouchShape(this, id, major, minor);
     }

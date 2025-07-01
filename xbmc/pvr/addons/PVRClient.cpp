@@ -2415,7 +2415,7 @@ void CPVRClient::cb_recording_notification(void* kodiInstance,
         // display a notification for 5 seconds
         CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, strLine1, strLine2, 5000,
                                               false);
-        auto eventLog = CServiceBroker::GetEventLog();
+        auto* eventLog = CServiceBroker::GetEventLog();
         if (eventLog)
           eventLog->Add(EventPtr(std::make_shared<CNotificationEvent>(
               client->GetFullClientName(), strLine1, client->Icon(), strLine2)));

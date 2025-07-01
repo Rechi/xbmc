@@ -30,7 +30,7 @@ std::string TranslateColorValue(std::string value)
   //! @todo: is needed to implement a common way to get color resources
   //!        in order to find the color name on CSS colors list
   StringUtils::ToLower(value);
-  const auto itHtmlColor = KODI::UTILS::COLOR::HTML_BASIC_COLORS.find(value);
+  const auto* const itHtmlColor = KODI::UTILS::COLOR::HTML_BASIC_COLORS.find(value);
   if (itHtmlColor != KODI::UTILS::COLOR::HTML_BASIC_COLORS.cend())
     return KODI::UTILS::COLOR::ConvertToHexRGB(itHtmlColor->second);
 

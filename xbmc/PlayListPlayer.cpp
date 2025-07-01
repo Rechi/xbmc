@@ -928,7 +928,7 @@ void PLAYLIST::CPlayListPlayer::OnApplicationMessage(KODI::MESSAGING::ThreadMess
   case TMSG_PLAYLISTPLAYER_SWAP:
     if (pMsg->lpVoid)
     {
-      auto indexes = static_cast<std::vector<int>*>(pMsg->lpVoid);
+      auto* indexes = static_cast<std::vector<int>*>(pMsg->lpVoid);
       if (indexes->size() == 2)
         Swap(Id{pMsg->param1}, indexes->at(0), indexes->at(1));
       delete indexes;

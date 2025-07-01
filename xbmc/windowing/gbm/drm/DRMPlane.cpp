@@ -56,7 +56,7 @@ bool CDRMPlane::SupportsFormatAndModifier(uint32_t format, uint64_t modifier)
   }
   else
   {
-    auto formatModifiers = &m_modifiers_map[format];
+    auto* formatModifiers = &m_modifiers_map[format];
     if (formatModifiers->empty())
     {
       CLog::Log(LOGDEBUG, "CDRMPlane::{} - format not supported: {}", __FUNCTION__,
