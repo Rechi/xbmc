@@ -81,7 +81,7 @@ namespace
 {
 
 #ifdef HAS_GL
-static ShaderMethodGL TranslateShaderMethodGL(GL_SHADER_METHOD method)
+ShaderMethodGL TranslateShaderMethodGL(GL_SHADER_METHOD method)
 {
   switch (method)
   {
@@ -97,7 +97,7 @@ static ShaderMethodGL TranslateShaderMethodGL(GL_SHADER_METHOD method)
 }
 #endif
 #ifdef HAS_GLES
-static ShaderMethodGLES TranslateShaderMethodGLES(GL_SHADER_METHOD method)
+ShaderMethodGLES TranslateShaderMethodGLES(GL_SHADER_METHOD method)
 {
   switch (method)
   {

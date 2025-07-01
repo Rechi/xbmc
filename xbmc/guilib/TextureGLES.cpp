@@ -26,7 +26,7 @@ namespace
 // GLES 2.0 texture formats.
 // Any extension used here is in the core 3.0 profile (except BGRA)
 // format = (unsized) internalFormat (with core 2.0)
-static const std::map<KD_TEX_FMT, TextureFormat> TextureMappingGLES20
+const std::map<KD_TEX_FMT, TextureFormat> TextureMappingGLES20
 {
 #if defined(GL_EXT_texture_rg)
   {KD_TEX_FMT_SDR_R8, {GL_RED_EXT}},
@@ -94,7 +94,7 @@ std::map<KD_TEX_FMT, TextureFormat> TextureMappingGLES30
 #endif // GL_ES_VERSION_3_0
 
 // Common GLES extensions (texture compression)
-static const std::map<KD_TEX_FMT, TextureFormat> TextureMappingGLESExtensions
+const std::map<KD_TEX_FMT, TextureFormat> TextureMappingGLESExtensions
 {
 #if defined(GL_EXT_texture_compression_s3tc) && (GL_EXT_texture_compression_s3tc_srgb)
   {KD_TEX_FMT_S3TC_RGB8, {GL_COMPRESSED_RGB_S3TC_DXT1_EXT, GL_COMPRESSED_SRGB_S3TC_DXT1_EXT}},
@@ -154,7 +154,7 @@ static const std::map<KD_TEX_FMT, TextureFormat> TextureMappingGLESExtensions
 #endif
 };
 
-static const std::map<KD_TEX_SWIZ, TextureSwizzle> SwizzleMapGLES
+const std::map<KD_TEX_SWIZ, TextureSwizzle> SwizzleMapGLES
 {
   {KD_TEX_SWIZ_RGBA, {GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA}},
   {KD_TEX_SWIZ_RGB1, {GL_RED, GL_GREEN, GL_BLUE, GL_ONE}},
