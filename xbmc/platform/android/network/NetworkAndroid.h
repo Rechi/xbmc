@@ -26,7 +26,6 @@ public:
   std::vector<std::string> GetNameServers();
 
   // CNetworkInterface interface
-public:
   bool IsEnabled() const override;
   bool IsConnected() const override;
   std::string GetMacAddress() const override;
@@ -53,7 +52,6 @@ public:
   ~CNetworkAndroid() override;
 
   // CNetwork interface
-public:
   bool GetHostName(std::string& hostname) override;
   std::vector<CNetworkInterface*>& GetInterfaceList() override;
   CNetworkInterface* GetFirstConnectedInterface() override;
