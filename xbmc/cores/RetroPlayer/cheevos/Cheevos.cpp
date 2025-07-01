@@ -67,7 +67,7 @@ bool CCheevos::LoadData()
 
     std::string hash;
     if (!m_gameClient->Cheevos().RCGenerateHashFromFile(hash, m_consoleID,
-                                                        m_gameClient->GetGamePath().c_str()))
+                                                        m_gameClient->GetGamePath()))
     {
       return false;
     }

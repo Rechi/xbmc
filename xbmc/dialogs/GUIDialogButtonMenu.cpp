@@ -12,8 +12,8 @@
 
 #define CONTROL_BUTTON_LABEL  3100
 
-CGUIDialogButtonMenu::CGUIDialogButtonMenu(int id, const std::string &xmlFile)
-: CGUIDialog(id, xmlFile.c_str())
+CGUIDialogButtonMenu::CGUIDialogButtonMenu(int id, const std::string& xmlFile)
+  : CGUIDialog(id, xmlFile)
 {
   m_loadType = KEEP_IN_MEMORY;
 }

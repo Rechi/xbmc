@@ -42,7 +42,7 @@ bool CAndroidAppDirectory::GetDirectory(const CURL& url, CFileItemList &items)
     }
     for (const auto& i : applications)
     {
-      if (i.packageName == className.c_str())
+      if (i.packageName == className)
         continue;
       CFileItemPtr pItem(new CFileItem(i.packageName));
       pItem->SetFolder(false);

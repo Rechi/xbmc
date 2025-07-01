@@ -818,7 +818,7 @@ namespace XBMCAddon
         for (const auto& it : dictionary)
         {
           const String& key = it.first;
-          const String value(it.second.c_str());
+          const String value(it.second);
 
           if (key == "codec")
             video->m_strCodec = value;

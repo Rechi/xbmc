@@ -9985,8 +9985,7 @@ bool CVideoDatabase::GetMusicVideosByWhere(const std::string &baseDir, const Fil
     {
       idArtist = static_cast<int>(option->second.asInteger());
       strArtist = GetSingleValue(
-                      PrepareSQL("SELECT name FROM actor where actor_id = '%i'", idArtist), *m_pDS)
-                      .c_str();
+          PrepareSQL("SELECT name FROM actor where actor_id = '%i'", idArtist), *m_pDS);
     }
     Filter extFilter = filter;
     SortDescription sorting = sortDescription;
