@@ -185,8 +185,6 @@ void CAddonDatabaseSerializer::DeserializeExtensions(const CVariant& variant,
     std::string id = (*child)["id"].asString();
     addonType.m_children.emplace_back(id, childExt);
   }
-
-  return;
 }
 
 CAddonDatabase::CAddonDatabase() = default;
