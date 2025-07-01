@@ -1662,19 +1662,19 @@ bool CGUIDialogVideoInfo::GetItemsForTag(const std::string &strHeading, const st
   MediaType mediaType = MediaTypeNone;
   std::string baseDir = "videodb://";
   std::string idColumn;
-  if (type.compare(MediaTypeMovie) == 0)
+  if (type == MediaTypeMovie)
   {
     mediaType = MediaTypeMovie;
     baseDir += "movies";
     idColumn = "idMovie";
   }
-  else if (type.compare(MediaTypeTvShow) == 0)
+  else if (type == MediaTypeTvShow)
   {
     mediaType = MediaTypeTvShow;
     baseDir += "tvshows";
     idColumn = "idShow";
   }
-  else if (type.compare(MediaTypeMusicVideo) == 0)
+  else if (type == MediaTypeMusicVideo)
   {
     mediaType = MediaTypeMusicVideo;
     baseDir += "musicvideos";

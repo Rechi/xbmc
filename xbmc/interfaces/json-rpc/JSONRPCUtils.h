@@ -128,29 +128,29 @@ namespace JSONRPC
     */
   inline OperationPermission StringToPermission(const std::string& permission)
   {
-    if (permission.compare("ControlPlayback") == 0)
+    if (permission == "ControlPlayback")
       return ControlPlayback;
-    if (permission.compare("ControlNotify") == 0)
+    if (permission == "ControlNotify")
       return ControlNotify;
-    if (permission.compare("ControlPower") == 0)
+    if (permission == "ControlPower")
       return ControlPower;
-    if (permission.compare("UpdateData") == 0)
+    if (permission == "UpdateData")
       return UpdateData;
-    if (permission.compare("RemoveData") == 0)
+    if (permission == "RemoveData")
       return RemoveData;
-    if (permission.compare("Navigate") == 0)
+    if (permission == "Navigate")
       return Navigate;
-    if (permission.compare("WriteFile") == 0)
+    if (permission == "WriteFile")
       return WriteFile;
-    if (permission.compare("ControlSystem") == 0)
+    if (permission == "ControlSystem")
       return ControlSystem;
-    if (permission.compare("ControlGUI") == 0)
+    if (permission == "ControlGUI")
       return ControlGUI;
-    if (permission.compare("ManageAddon") == 0)
+    if (permission == "ManageAddon")
       return ManageAddon;
-    if (permission.compare("ExecuteAddon") == 0)
+    if (permission == "ExecuteAddon")
       return ExecuteAddon;
-    if (permission.compare("ControlPVR") == 0)
+    if (permission == "ControlPVR")
       return ControlPVR;
 
     return ReadData;
