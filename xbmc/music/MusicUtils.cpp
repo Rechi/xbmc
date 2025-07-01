@@ -931,10 +931,7 @@ bool IsItemPlayable(const CFileItem& item)
   {
     // Exclude top level nodes - eg can't play 'genres' just a specific genre etc
     const auto node = XFILE::CMusicDatabaseDirectory::GetDirectoryParentType(item.GetPath());
-    if (node == XFILE::MUSICDATABASEDIRECTORY::NodeType::OVERVIEW)
-      return false;
-
-    return true;
+    return node != XFILE::MUSICDATABASEDIRECTORY::NodeType::OVERVIEW;
   }
 
   if (item.IsPlugin() && MUSIC::IsAudio(item) && !IsEmptyMusicItem(item) &&

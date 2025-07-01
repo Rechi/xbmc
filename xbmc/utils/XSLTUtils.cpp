@@ -76,9 +76,7 @@ bool XSLTUtils::SetInput(const std::string& input)
 {
   m_xmlInput = xmlReadMemory(input.c_str(), input.size(), NULL, NULL, XML_PARSE_NOENT);
 
-  if (!m_xmlInput)
-    return false;
-  return true;
+  return m_xmlInput != nullptr;
 }
 
 bool XSLTUtils::SetStylesheet(const std::string& stylesheet)

@@ -178,10 +178,7 @@ bool CControllerNode::Serialize(tinyxml2::XMLElement& controllerElement) const
   controllerElement.SetAttribute(XML_ATTR_CONTROLLER, m_controller->ID().c_str());
 
   // Serialize hub
-  if (!m_hub->Serialize(controllerElement))
-    return false;
-
-  return true;
+  return m_hub->Serialize(controllerElement);
 }
 
 bool CControllerNode::Deserialize(const tinyxml2::XMLElement& controllerElement)
@@ -206,10 +203,7 @@ bool CControllerNode::Deserialize(const tinyxml2::XMLElement& controllerElement)
   m_controller = std::static_pointer_cast<CController>(addon);
 
   // Deserialize hub
-  if (!m_hub->Deserialize(controllerElement))
-    return false;
-
-  return true;
+  return m_hub->Deserialize(controllerElement);
 }
 
 std::string CControllerNode::GetDigest(UTILITY::CDigest::Type digestType) const

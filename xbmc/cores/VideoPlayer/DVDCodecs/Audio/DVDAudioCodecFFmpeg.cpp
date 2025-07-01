@@ -189,12 +189,7 @@ bool CDVDAudioCodecFFmpeg::AddData(const DemuxPacket &packet)
   av_free(avpkt);
 
   // try again
-  if (ret == AVERROR(EAGAIN))
-  {
-    return false;
-  }
-
-  return true;
+  return ret != AVERROR(EAGAIN);
 }
 
 void CDVDAudioCodecFFmpeg::GetData(DVDAudioFrame &frame)

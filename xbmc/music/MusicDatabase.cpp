@@ -2683,10 +2683,7 @@ bool CMusicDatabase::AddSongGenres(int idSong, const std::vector<std::string>& g
         CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_musicItemSeparator);
     strSQL = PrepareSQL("UPDATE song SET strGenres = '%s' WHERE idSong = %i", //
                         strGenres.c_str(), idSong);
-    if (!ExecuteQuery(strSQL))
-      return false;
-
-    return true;
+    return ExecuteQuery(strSQL);
   }
   catch (...)
   {
@@ -10766,7 +10763,7 @@ bool CMusicDatabase::IsAlbumBoxset(int idAlbum) const
 {
   std::string strSQL = PrepareSQL("SELECT bBoxedSet FROM album WHERE idAlbum = %i", idAlbum);
   int isBoxSet = GetSingleValueInt(strSQL);
-  return (isBoxSet == 1 ? true : false);
+  return (isBoxSet == 1);
 }
 
 int CMusicDatabase::GetAlbumByName(const std::string& strAlbum, const std::string& strArtist)

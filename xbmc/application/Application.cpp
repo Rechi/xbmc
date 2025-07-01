@@ -1750,7 +1750,7 @@ void CApplication::OnApplicationMessage(ThreadMessage* pMsg)
 
   case TMSG_SET_MUTE:
   {
-    GetComponent<CApplicationVolumeHandling>()->SetMute(pMsg->param3 == 1 ? true : false);
+    GetComponent<CApplicationVolumeHandling>()->SetMute(pMsg->param3 == 1);
   }
   break;
 

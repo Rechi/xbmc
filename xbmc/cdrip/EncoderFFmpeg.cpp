@@ -332,7 +332,7 @@ bool CEncoderFFmpeg::WriteFrame()
       if (err == AVERROR(EAGAIN) || err == AVERROR_EOF)
       {
         av_packet_free(&pkt);
-        return (err == AVERROR(EAGAIN)) ? false : true;
+        return err != AVERROR(EAGAIN);
       }
       else if (err < 0)
       {
@@ -354,7 +354,7 @@ bool CEncoderFFmpeg::WriteFrame()
 
   av_packet_free(&pkt);
 
-  return (err) ? false : true;
+  return err == 0;
 }
 
 bool CEncoderFFmpeg::Close()

@@ -153,10 +153,7 @@ bool CGUIWindowMusicBase::OnMessage(CGUIMessage& message)
 
       m_musicdatabase.Open();
 
-      if (!CGUIMediaWindow::OnMessage(message))
-        return false;
-
-      return true;
+      return CGUIMediaWindow::OnMessage(message);
     }
     break;
   case GUI_MSG_DIRECTORY_SCANNED:
@@ -891,12 +888,10 @@ bool CGUIWindowMusicBase::GetDirectory(const std::string &strDirectory, CFileIte
 bool CGUIWindowMusicBase::CheckFilterAdvanced(CFileItemList &items) const
 {
   const std::string& content = items.GetContent();
-  if ((MUSIC::IsMusicDb(items) || CanContainFilter(m_strFilterPath)) &&
-      (StringUtils::EqualsNoCase(content, "artists") ||
-       StringUtils::EqualsNoCase(content, "albums") || StringUtils::EqualsNoCase(content, "songs")))
-    return true;
-
-  return false;
+  return (MUSIC::IsMusicDb(items) || CanContainFilter(m_strFilterPath)) &&
+         (StringUtils::EqualsNoCase(content, "artists") ||
+          StringUtils::EqualsNoCase(content, "albums") ||
+          StringUtils::EqualsNoCase(content, "songs"));
 }
 
 bool CGUIWindowMusicBase::CanContainFilter(const std::string &strDirectory) const

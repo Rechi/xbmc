@@ -1056,10 +1056,10 @@ JSONRPC_STATUS CAudioLibrary::Export(const std::string &method, ITransportLayer 
   {
     cmd = "exportlibrary2(music, library, dummy, albums, albumartists";
     if (parameterObject["options"]["images"].isBoolean() &&
-        parameterObject["options"]["images"].asBoolean() == true)
+        parameterObject["options"]["images"].asBoolean())
       cmd += ", artwork";
     if (parameterObject["options"]["overwrite"].isBoolean() &&
-        parameterObject["options"]["overwrite"].asBoolean() == true)
+        parameterObject["options"]["overwrite"].asBoolean())
       cmd += ", overwrite";
     cmd += ")";
   }

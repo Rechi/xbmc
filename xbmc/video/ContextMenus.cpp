@@ -423,11 +423,8 @@ bool CVideoPlayAndQueue::IsVisible(const CFileItem& item) const
     return false;
 
   const int windowId = CServiceBroker::GetGUI()->GetWindowManager().GetActiveWindow();
-  if ((windowId == WINDOW_TV_RECORDINGS || windowId == WINDOW_RADIO_RECORDINGS) &&
-      item.IsUsablePVRRecording())
-    return true;
-
-  return false; //! @todo implement
+  return (windowId == WINDOW_TV_RECORDINGS || windowId == WINDOW_RADIO_RECORDINGS) &&
+         item.IsUsablePVRRecording(); //! @todo implement
 }
 
 bool CVideoPlayAndQueue::Execute(const std::shared_ptr<CFileItem>& item) const

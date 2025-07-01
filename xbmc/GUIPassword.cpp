@@ -596,11 +596,8 @@ bool CGUIPassword::IsDatabasePathUnlocked(const std::string& strPath,
   bool bName = false;
   int iIndex = CUtil::GetMatchingSource(strPath, sources, bName);
 
-  if (iIndex > -1 && iIndex < static_cast<int>(sources.size()) &&
-      sources[iIndex].GetLockInfo().GetState() < LOCK_STATE_LOCKED)
-    return true;
-
-  return false;
+  return iIndex > -1 && iIndex < static_cast<int>(sources.size()) &&
+         sources[iIndex].GetLockInfo().GetState() < LOCK_STATE_LOCKED;
 }
 
 bool CGUIPassword::IsMediaPathUnlocked(const std::shared_ptr<CProfileManager>& profileManager,
