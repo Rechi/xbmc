@@ -947,9 +947,7 @@ bool CGUIWindowFileManager::CanRename(int iList)
   //! @todo Renaming of shares (requires writing to sources.xml)
   //! this might be able to be done via the webserver code stuff...
   if (m_Directory[iList]->IsVirtualDirectoryRoot()) return false;
-  if (m_Directory[iList]->IsReadOnly()) return false;
-
-  return true;
+  return !m_Directory[iList]->IsReadOnly();
 }
 
 bool CGUIWindowFileManager::CanCopy(int iList)
@@ -961,30 +959,26 @@ bool CGUIWindowFileManager::CanCopy(int iList)
   if (m_Directory[iList]->IsVirtualDirectoryRoot()) return false;
   if (m_Directory[1 - iList]->IsVirtualDirectoryRoot()) return false;
   if (m_Directory[iList]->IsVirtualDirectoryRoot()) return false;
-  if (m_Directory[1 -iList]->IsReadOnly()) return false;
-  return true;
+  return !m_Directory[1 - iList]->IsReadOnly();
 }
 
 bool CGUIWindowFileManager::CanMove(int iList)
 {
   // can't move if the destination is not writeable, or if the source is a share or not writeable!
   if (m_Directory[0]->IsVirtualDirectoryRoot() || m_Directory[0]->IsReadOnly()) return false;
-  if (m_Directory[1]->IsVirtualDirectoryRoot() || m_Directory[1]->IsReadOnly()) return false;
-  return true;
+  return !(m_Directory[1]->IsVirtualDirectoryRoot() || m_Directory[1]->IsReadOnly());
 }
 
 bool CGUIWindowFileManager::CanDelete(int iList)
 {
   if (m_Directory[iList]->IsVirtualDirectoryRoot()) return false;
-  if (m_Directory[iList]->IsReadOnly()) return false;
-  return true;
+  return !m_Directory[iList]->IsReadOnly();
 }
 
 bool CGUIWindowFileManager::CanNewFolder(int iList)
 {
   if (m_Directory[iList]->IsVirtualDirectoryRoot()) return false;
-  if (m_Directory[iList]->IsReadOnly()) return false;
-  return true;
+  return !m_Directory[iList]->IsReadOnly();
 }
 
 int CGUIWindowFileManager::NumSelected(int iList)

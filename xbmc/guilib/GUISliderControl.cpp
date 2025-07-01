@@ -640,9 +640,7 @@ bool CGUISliderControl::HitTest(const CPoint &point) const
     return true;
   if (m_guiSelectorLower->HitTest(point))
     return true;
-  if (m_rangeSelection && m_guiSelectorUpper->HitTest(point))
-    return true;
-  return false;
+  return m_rangeSelection && m_guiSelectorUpper->HitTest(point);
 }
 
 void CGUISliderControl::SetFromPosition(const CPoint &point, bool guessSelector /* = false */)

@@ -1685,11 +1685,7 @@ bool CSmartPlaylist::CheckTypeCompatibility(const std::string &typeLeft, const s
      (typeRight == "songs" || typeRight == "musicvideos"))
     return true;
 
-  if (typeRight == "mixed" &&
-     (typeLeft == "songs" || typeLeft == "musicvideos"))
-    return true;
-
-  return false;
+  return typeRight == "mixed" && (typeLeft == "songs" || typeLeft == "musicvideos");
 }
 
 CDatabaseQueryRule *CSmartPlaylist::CreateRule() const

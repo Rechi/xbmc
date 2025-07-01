@@ -41,8 +41,7 @@ bool CMusicInfoTag::operator !=(const CMusicInfoTag& tag) const
     return true;
   if (m_iTrack != tag.m_iTrack)
     return true;
-  if (m_albumReleaseType != tag.m_albumReleaseType) return true;
-  return false;
+  return m_albumReleaseType != tag.m_albumReleaseType;
 }
 
 int CMusicInfoTag::GetTrackNumber() const

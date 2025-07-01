@@ -621,10 +621,7 @@ bool CGUIDialogVideoManagerVersions::GetSimilarMovies(const std::shared_ptr<CFil
     return true;
   }
 
-  if (!PostProcessList(list, item->GetVideoInfoTag()->m_iDbId))
-    return false;
-
-  return true;
+  return PostProcessList(list, item->GetVideoInfoTag()->m_iDbId);
 }
 
 bool CGUIDialogVideoManagerVersions::AddSimilarMovieAsVersion(

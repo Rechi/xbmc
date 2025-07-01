@@ -1706,20 +1706,11 @@ bool CLinuxRendererGLES::Supports(ERENDERFEATURE feature) const
     return false;
   }
 
-  if (feature == RENDERFEATURE_STRETCH ||
-      feature == RENDERFEATURE_ZOOM ||
-      feature == RENDERFEATURE_VERTICAL_SHIFT ||
-      feature == RENDERFEATURE_PIXEL_RATIO ||
-      feature == RENDERFEATURE_POSTPROCESS ||
-      feature == RENDERFEATURE_ROTATION ||
-      feature == RENDERFEATURE_BRIGHTNESS ||
-      feature == RENDERFEATURE_CONTRAST ||
-      feature == RENDERFEATURE_TONEMAP)
-  {
-    return true;
-  }
-
-  return false;
+  return feature == RENDERFEATURE_STRETCH || feature == RENDERFEATURE_ZOOM ||
+         feature == RENDERFEATURE_VERTICAL_SHIFT || feature == RENDERFEATURE_PIXEL_RATIO ||
+         feature == RENDERFEATURE_POSTPROCESS || feature == RENDERFEATURE_ROTATION ||
+         feature == RENDERFEATURE_BRIGHTNESS || feature == RENDERFEATURE_CONTRAST ||
+         feature == RENDERFEATURE_TONEMAP;
 }
 
 bool CLinuxRendererGLES::SupportsMultiPassRendering()
