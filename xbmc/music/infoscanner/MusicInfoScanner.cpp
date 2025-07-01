@@ -357,7 +357,7 @@ void CMusicInfoScanner::FetchAlbumInfo(const std::string& strDirectory,
       else
       {
         CMusicDatabaseDirectory dir;
-        NodeType childtype = dir.GetDirectoryChildType(strDirectory);
+        NodeType childtype = XFILE::CMusicDatabaseDirectory::GetDirectoryChildType(strDirectory);
         if (childtype == NodeType::ALBUM)
           dir.GetDirectory(pathToUrl, items);
       }
@@ -419,7 +419,7 @@ void CMusicInfoScanner::FetchArtistInfo(const std::string& strDirectory,
       else
       {
         CMusicDatabaseDirectory dir;
-        NodeType childtype = dir.GetDirectoryChildType(strDirectory);
+        NodeType childtype = XFILE::CMusicDatabaseDirectory::GetDirectoryChildType(strDirectory);
         if (childtype == NodeType::ARTIST)
           dir.GetDirectory(pathToUrl, items);
       }

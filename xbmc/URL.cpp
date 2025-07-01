@@ -481,7 +481,7 @@ std::string CURL::GetWithoutUserDetails(bool redact) const
       items[i]->SetPath(url.GetWithoutUserDetails(redact));
       newItems.push_back(items[i]->GetPath());
     }
-    dir.ConstructStackPath(newItems, strURL);
+    XFILE::CStackDirectory::ConstructStackPath(newItems, strURL);
     return strURL;
   }
 

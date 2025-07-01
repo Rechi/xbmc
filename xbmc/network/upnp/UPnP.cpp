@@ -525,7 +525,7 @@ CUPnP::CUPnP()
 {
   NPT_LogManager::GetDefault().Configure("plist:.level=FINE;.handlers=CustomHandler;");
   NPT_LogHandler::Create("xbmc", "CustomHandler", m_LogHandler);
-  m_LogHandler->SetCustomHandlerFunction(&UPnPLogger);
+  NPT_LogHandler::SetCustomHandlerFunction(&UPnPLogger);
 
   // initialize upnp context
   m_UPnP = new PLT_UPnP();

@@ -472,7 +472,7 @@ std::string StringUtils::Left(std::string_view str, size_t count)
 
 std::string StringUtils::Mid(std::string_view str, size_t first, size_t count /* = string::npos */)
 {
-  if (count == str.npos || first + count > str.size())
+  if (count == std::string_view::npos || first + count > str.size())
     count = str.size() - first;
 
   if (first > str.size())
@@ -532,7 +532,7 @@ std::string& StringUtils::TrimRight(std::string& str) noexcept
 std::string& StringUtils::TrimRight(std::string& str, std::string_view chars) noexcept
 {
   size_t nidx = str.find_last_not_of(chars);
-  str.erase(str.npos == nidx ? 0 : ++nidx);
+  str.erase(std::string::npos == nidx ? 0 : ++nidx);
   return str;
 }
 
@@ -1757,7 +1757,7 @@ template<typename StringLike>
 {
   for (auto it = keywords.begin(); it != keywords.end(); ++it)
   {
-    if (str.find(*it) != str.npos)
+    if (str.find(*it) != std::string::npos)
       return true;
   }
   return false;
