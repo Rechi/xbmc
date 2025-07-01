@@ -6117,7 +6117,7 @@ bool CMusicDatabase::GetDiscsByWhere(CMusicDbUrl& musicUrl,
 
     // Finally do any sorting in items list we have not been able to do before in SQL or dataset,
     // that is when have join with songartistview and sorting other than random with limit
-    if (sorting.sortBy != SortByNone && !(limitedInSQL && sorting.sortBy == SortByRandom))
+    if (sorting.sortBy != SortByNone && (!limitedInSQL || sorting.sortBy != SortByRandom))
       items.Sort(sorting);
 
     auto end = std::chrono::steady_clock::now();
@@ -12943,7 +12943,7 @@ bool CMusicDatabase::GetArtForItem(
   std::string strSQL;
   try
   {
-    if (!(songId > 0 || albumId > 0 || artistId > 0))
+    if (songId <= 0 && albumId <= 0 && artistId <= 0)
       return false;
     if (nullptr == m_pDB)
       return false;
