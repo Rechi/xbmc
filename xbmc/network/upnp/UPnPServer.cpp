@@ -472,7 +472,7 @@ PLT_MediaObject* CUPnPServer::Build(const std::shared_ptr<CFileItem>& item,
     }
 
     // not a virtual path directory, new system
-    object = BuildObject(*item.get(), file_path, with_count, thumb_loader, &context, this,
+    object = BuildObject(*item, file_path, with_count, thumb_loader, &context, this,
                          UPnPContentDirectory);
 
     // set parent id if passed, otherwise it should have been determined

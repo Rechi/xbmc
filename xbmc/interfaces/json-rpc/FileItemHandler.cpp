@@ -368,7 +368,7 @@ void CFileItemHandler::HandleFileItem(const char* ID,
   CVariant object;
   std::set<std::string> fields(validFields.begin(), validFields.end());
 
-  if (item.get())
+  if (item)
   {
     std::set<std::string>::const_iterator fileField = fields.find("file");
     if (fileField != fields.end())
