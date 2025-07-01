@@ -245,8 +245,8 @@ public:
   void OnSettingsChange();
 
   float GetVolume() override;
-  void SetVolume(const float volume) override;
-  void SetMute(const bool enabled) override;
+  void SetVolume(float volume) override;
+  void SetMute(bool enabled) override;
   bool IsMuted() override;
 
   /* returns a new stream for data in the specified format */

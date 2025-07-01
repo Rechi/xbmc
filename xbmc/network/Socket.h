@@ -169,13 +169,11 @@ namespace SOCKETS
         m_Type = ST_UDP;
       }
     // I/O functions
-    virtual int SendTo(const CAddress& addr, const int bufferlength,
-                       const void* buffer) = 0;
+    virtual int SendTo(const CAddress& addr, int bufferlength, const void* buffer) = 0;
 
     // read datagrams, return no. of bytes read or -1 or error
-    virtual int Read(CAddress& addr, const int buffersize, void *buffer) = 0;
-    virtual bool Broadcast(const CAddress& addr, const int datasize,
-                           const void* data) = 0;
+    virtual int Read(CAddress& addr, int buffersize, void* buffer) = 0;
+    virtual bool Broadcast(const CAddress& addr, int datasize, const void* data) = 0;
   };
 
   // Implementation specific classes
@@ -195,8 +193,8 @@ namespace SOCKETS
     bool Bind(bool localOnly, int port, int range=0) override;
     bool Connect() override { return false; }
     bool Listen(int timeout);
-    int SendTo(const CAddress& addr, const int datasize, const void* data) override;
-    int Read(CAddress& addr, const int buffersize, void *buffer) override;
+    int SendTo(const CAddress& addr, int datasize, const void* data) override;
+    int Read(CAddress& addr, int buffersize, void* buffer) override;
     bool Broadcast(const CAddress& addr, const int datasize, const void* data) override
     {
       //! @todo implement

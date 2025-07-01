@@ -39,7 +39,7 @@ enum class ColorChannel
   B,
 };
 
-uint8_t GetChannelFromARGB(const ColorChannel colorChannel, const uint32_t argb);
+uint8_t GetChannelFromARGB(ColorChannel colorChannel, uint32_t argb);
 }
 }
 }

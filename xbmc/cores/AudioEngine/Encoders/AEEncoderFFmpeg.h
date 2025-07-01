@@ -35,7 +35,7 @@ public:
   int GetData(uint8_t **data) override;
   double GetDelay(unsigned int bufferSize) override;
 private:
-  unsigned int BuildChannelLayout(const int64_t ffmap, CAEChannelInfo& layout);
+  unsigned int BuildChannelLayout(int64_t ffmap, CAEChannelInfo& layout);
 
   std::string m_CodecName;
   AVCodecID m_CodecID;

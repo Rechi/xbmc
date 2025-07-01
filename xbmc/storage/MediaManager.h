@@ -90,9 +90,9 @@ public:
   void SetHasOpticalDrive(bool bstatus);
 
   bool Eject(const std::string& mountpath);
-  void EjectTray( const bool bEject=true, const char cDriveLetter='\0' );
-  void CloseTray(const char cDriveLetter='\0');
-  void ToggleTray(const char cDriveLetter='\0');
+  void EjectTray(bool bEject = true, char cDriveLetter = '\0');
+  void CloseTray(char cDriveLetter = '\0');
+  void ToggleTray(char cDriveLetter = '\0');
 
   void ProcessEvents();
 

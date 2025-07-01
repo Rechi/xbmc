@@ -83,5 +83,5 @@ protected:
    */
   void DetectAndAddMissingItemData(CFileItem &item);
 
-  const KODI::ART::Artwork& GetArtFromCache(const std::string& mediaType, const int id);
+  const KODI::ART::Artwork& GetArtFromCache(const std::string& mediaType, int id);
 };

@@ -39,7 +39,7 @@ public:
   void FreeResources(bool immediately = false) override;
 
   // implementation of Observer
-  void Notify(const Observable& obs, const ObservableMessage msg) override;
+  void Notify(const Observable& obs, ObservableMessage msg) override;
 
 private:
   // implementation of CGUIWindow via CGUIDialogSelect
