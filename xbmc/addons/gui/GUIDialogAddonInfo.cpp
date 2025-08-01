@@ -66,14 +66,14 @@ using namespace KODI::ADDONS;
 using namespace XFILE;
 using namespace KODI::MESSAGING;
 
-CGUIDialogAddonInfo::CGUIDialogAddonInfo(void)
+CGUIDialogAddonInfo::CGUIDialogAddonInfo()
   : CGUIDialog(WINDOW_DIALOG_ADDON_INFO, "DialogAddonInfo.xml"),
     m_item(std::make_shared<CFileItem>())
 {
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIDialogAddonInfo::~CGUIDialogAddonInfo(void) = default;
+CGUIDialogAddonInfo::~CGUIDialogAddonInfo() = default;
 
 bool CGUIDialogAddonInfo::OnMessage(CGUIMessage& message)
 {

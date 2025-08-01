@@ -14,8 +14,8 @@ class CGUIWindowPointer :
       public CGUIDialog
 {
 public:
-  CGUIWindowPointer(void);
-  ~CGUIWindowPointer(void) override;
+  CGUIWindowPointer();
+  ~CGUIWindowPointer() override;
   void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;
 protected:
   void SetPointer(int pointer);

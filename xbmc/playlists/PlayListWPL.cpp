@@ -44,10 +44,9 @@ using namespace XFILE;
 namespace KODI::PLAYLIST
 {
 
-CPlayListWPL::CPlayListWPL(void) = default;
+CPlayListWPL::CPlayListWPL() = default;
 
-CPlayListWPL::~CPlayListWPL(void) = default;
-
+CPlayListWPL::~CPlayListWPL() = default;
 
 bool CPlayListWPL::LoadData(std::istream& stream)
 {

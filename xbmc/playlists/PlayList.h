@@ -24,7 +24,7 @@ class CPlayList
 {
 public:
   explicit CPlayList(Id id = Id::TYPE_NONE);
-  virtual ~CPlayList(void) = default;
+  virtual ~CPlayList() = default;
   virtual bool Load(const std::string& strFileName);
   virtual bool LoadData(std::istream &stream);
   virtual bool LoadData(const std::string& strData);

@@ -118,10 +118,10 @@ public:
   uint32_t GetKey() const;
 
   HoldAction GetHold(int ButtonID) const;
-  inline int GetX(void) const { return m_mouseState.x; }
-  inline int GetY(void) const { return m_mouseState.y; }
-  inline int GetDX(void) const { return m_mouseState.dx; }
-  inline int GetDY(void) const { return m_mouseState.dy; }
+  inline int GetX() const { return m_mouseState.x; }
+  inline int GetY() const { return m_mouseState.y; }
+  inline int GetDX() const { return m_mouseState.dx; }
+  inline int GetDY() const { return m_mouseState.dy; }
   MousePosition GetPosition() { return MousePosition{m_mouseState.x, m_mouseState.y}; }
 
 private:

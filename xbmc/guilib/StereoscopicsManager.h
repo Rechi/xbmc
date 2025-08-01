@@ -39,11 +39,11 @@ class CStereoscopicsManager : public ISettingCallback,
 public:
   CStereoscopicsManager();
 
-  ~CStereoscopicsManager(void) override;
+  ~CStereoscopicsManager() override;
 
   void Initialize();
 
-  RENDER_STEREO_MODE GetStereoMode(void) const;
+  RENDER_STEREO_MODE GetStereoMode() const;
   std::string DetectStereoModeByString(const std::string &needle) const;
   std::string GetLabelForStereoMode(const RENDER_STEREO_MODE &mode) const;
 
@@ -72,15 +72,15 @@ public:
 private:
   RENDER_STEREO_MODE GetNextSupportedStereoMode(const RENDER_STEREO_MODE &currentMode, int step = 1) const;
   RENDER_STEREO_MODE GetStereoModeByUserChoice() const;
-  RENDER_STEREO_MODE GetStereoModeOfPlayingVideo(void) const;
-  RENDER_STEREO_MODE GetPreferredPlaybackMode(void) const;
+  RENDER_STEREO_MODE GetStereoModeOfPlayingVideo() const;
+  RENDER_STEREO_MODE GetPreferredPlaybackMode() const;
   std::string GetVideoStereoMode() const;
   bool IsVideoStereoscopic() const;
 
   void SetStereoModeByUser(const RENDER_STEREO_MODE &mode);
 
   void ApplyStereoMode(const RENDER_STEREO_MODE &mode, bool notify = true);
-  void OnPlaybackStopped(void);
+  void OnPlaybackStopped();
 
   /**
    * @brief will convert a string representation into a GUI stereo mode

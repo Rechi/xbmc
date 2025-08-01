@@ -16,8 +16,8 @@ namespace XFILE
 class CMusicDatabaseFile : public IFile
 {
 public:
-  CMusicDatabaseFile(void);
-  ~CMusicDatabaseFile(void) override;
+  CMusicDatabaseFile();
+  ~CMusicDatabaseFile() override;
   bool Open(const CURL& url) override;
   bool Exists(const CURL& url) override;
   int Stat(const CURL& url, struct __stat64* buffer) override;

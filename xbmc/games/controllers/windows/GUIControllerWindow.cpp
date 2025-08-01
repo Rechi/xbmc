@@ -34,7 +34,7 @@
 using namespace KODI;
 using namespace GAME;
 
-CGUIControllerWindow::CGUIControllerWindow(void)
+CGUIControllerWindow::CGUIControllerWindow()
   : CGUIDialog(WINDOW_DIALOG_GAME_CONTROLLERS, "DialogGameControllers.xml"),
     m_installer(new CControllerInstaller)
 {
@@ -42,7 +42,7 @@ CGUIControllerWindow::CGUIControllerWindow(void)
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIControllerWindow::~CGUIControllerWindow(void)
+CGUIControllerWindow::~CGUIControllerWindow()
 {
   delete m_controllerList;
   delete m_featureList;
@@ -198,7 +198,7 @@ bool CGUIControllerWindow::OnMessage(CGUIMessage& message)
   return bHandled;
 }
 
-void CGUIControllerWindow::OnInitWindow(void)
+void CGUIControllerWindow::OnInitWindow()
 {
   // Get active game add-on
   GameClientPtr gameClient;
@@ -315,7 +315,7 @@ void CGUIControllerWindow::OnFeatureSelected(unsigned int buttonIndex)
     m_featureList->OnSelect(buttonIndex);
 }
 
-void CGUIControllerWindow::UpdateButtons(void)
+void CGUIControllerWindow::UpdateButtons()
 {
   using namespace ADDON;
 
@@ -335,7 +335,7 @@ void CGUIControllerWindow::UpdateButtons(void)
   }
 }
 
-void CGUIControllerWindow::GetMoreControllers(void)
+void CGUIControllerWindow::GetMoreControllers()
 {
   std::string strAddonId;
   if (CGUIWindowAddonBrowser::SelectAddonID(ADDON::AddonType::GAME_CONTROLLER, strAddonId, false,
@@ -356,20 +356,20 @@ void CGUIControllerWindow::GetAllControllers()
   m_installer->Create(false);
 }
 
-void CGUIControllerWindow::ResetController(void)
+void CGUIControllerWindow::ResetController()
 {
   if (m_controllerList)
     m_controllerList->ResetController();
 }
 
-void CGUIControllerWindow::ShowHelp(void)
+void CGUIControllerWindow::ShowHelp()
 {
   // "Help"
   // <help text>
   MESSAGING::HELPERS::ShowOKDialogText(CVariant{10043}, CVariant{35055});
 }
 
-void CGUIControllerWindow::ShowButtonCaptureDialog(void)
+void CGUIControllerWindow::ShowButtonCaptureDialog()
 {
   CGUIDialogIgnoreInput dialog;
   dialog.Show();

@@ -16,8 +16,8 @@ class CGUIDialogProgress;
 class CGUIWindowPictures : public CGUIMediaWindow, public IBackgroundLoaderObserver
 {
 public:
-  CGUIWindowPictures(void);
-  ~CGUIWindowPictures(void) override;
+  CGUIWindowPictures();
+  ~CGUIWindowPictures() override;
   bool OnMessage(CGUIMessage& message) override;
   void OnInitWindow() override;
 

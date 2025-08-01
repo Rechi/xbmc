@@ -17,8 +17,8 @@ class CFileItemList;
 class CGUIWindowLoginScreen : public CGUIWindow
 {
 public:
-  CGUIWindowLoginScreen(void);
-  ~CGUIWindowLoginScreen(void) override;
+  CGUIWindowLoginScreen();
+  ~CGUIWindowLoginScreen() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;
   bool OnBack(int actionID) override;

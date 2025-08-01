@@ -27,7 +27,7 @@ class CGUIListLabel :
 public:
   CGUIListLabel(int parentID, int controlID, float posX, float posY, float width, float height,
                 const CLabelInfo& labelInfo, const KODI::GUILIB::GUIINFO::CGUIInfoLabel &label, CGUIControl::GUISCROLLVALUE scroll);
-  ~CGUIListLabel(void) override;
+  ~CGUIListLabel() override;
   CGUIListLabel* Clone() const override { return new CGUIListLabel(*this); }
 
   void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;

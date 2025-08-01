@@ -233,7 +233,7 @@ CDatabase::CDatabase()
 {
 }
 
-CDatabase::~CDatabase(void)
+CDatabase::~CDatabase()
 {
   Close();
 }

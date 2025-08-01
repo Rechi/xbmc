@@ -43,7 +43,7 @@ CProfile::CProfile(const std::string &directory, const std::string &name, const 
   m_bAddons = true;
 }
 
-CProfile::~CProfile(void) = default;
+CProfile::~CProfile() = default;
 
 void CProfile::setDate()
 {

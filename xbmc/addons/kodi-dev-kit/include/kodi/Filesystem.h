@@ -611,7 +611,7 @@ public:
   ///
   /// @return Name of the entry
   ///
-  const std::string& Label(void) const { return m_label; }
+  const std::string& Label() const { return m_label; }
   //----------------------------------------------------------------------------
 
   //============================================================================
@@ -619,7 +619,7 @@ public:
   ///
   /// @return Title of the entry, if exists
   ///
-  const std::string& Title(void) const { return m_title; }
+  const std::string& Title() const { return m_title; }
   //----------------------------------------------------------------------------
 
   //============================================================================
@@ -627,7 +627,7 @@ public:
   ///
   /// @return File system path of the entry
   ///
-  const std::string& Path(void) const { return m_path; }
+  const std::string& Path() const { return m_path; }
   //----------------------------------------------------------------------------
 
   //============================================================================
@@ -635,7 +635,7 @@ public:
   ///
   /// @return true if entry is a folder
   ///
-  bool IsFolder(void) const { return m_folder; }
+  bool IsFolder() const { return m_folder; }
   //----------------------------------------------------------------------------
 
   //============================================================================
@@ -643,7 +643,7 @@ public:
   ///
   /// @return Defined file size
   ///
-  int64_t Size(void) const { return m_size; }
+  int64_t Size() const { return m_size; }
   //----------------------------------------------------------------------------
 
   //============================================================================

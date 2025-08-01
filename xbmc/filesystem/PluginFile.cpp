@@ -12,11 +12,11 @@
 
 using namespace XFILE;
 
-CPluginFile::CPluginFile(void) : COverrideFile(false)
+CPluginFile::CPluginFile() : COverrideFile(false)
 {
 }
 
-CPluginFile::~CPluginFile(void) = default;
+CPluginFile::~CPluginFile() = default;
 
 bool CPluginFile::Open(const CURL& url)
 {

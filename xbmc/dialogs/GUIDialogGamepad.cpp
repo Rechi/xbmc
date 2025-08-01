@@ -26,8 +26,8 @@
 using namespace KODI::MESSAGING;
 using KODI::UTILITY::CDigest;
 
-CGUIDialogGamepad::CGUIDialogGamepad(void)
-    : CGUIDialogBoxBase(WINDOW_DIALOG_GAMEPAD, "DialogConfirm.xml")
+CGUIDialogGamepad::CGUIDialogGamepad()
+  : CGUIDialogBoxBase(WINDOW_DIALOG_GAMEPAD, "DialogConfirm.xml")
 {
   m_bCanceled = false;
   m_iRetries = 0;
@@ -36,7 +36,7 @@ CGUIDialogGamepad::CGUIDialogGamepad(void)
   m_cHideInputChar = '*';
 }
 
-CGUIDialogGamepad::~CGUIDialogGamepad(void) = default;
+CGUIDialogGamepad::~CGUIDialogGamepad() = default;
 
 void CGUIDialogGamepad::OnInitWindow()
 {

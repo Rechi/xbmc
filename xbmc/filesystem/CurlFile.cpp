@@ -322,7 +322,7 @@ bool CCurlFile::CReadState::Seek(int64_t pos)
   return false;
 }
 
-void CCurlFile::CReadState::SetResume(void)
+void CCurlFile::CReadState::SetResume()
 {
   /*
    * Explicitly set RANGE header when filepos=0 as some http servers require us to always send the range

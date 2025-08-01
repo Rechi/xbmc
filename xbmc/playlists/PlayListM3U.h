@@ -29,8 +29,8 @@ public:
   static const char *OffsetMarker;
 
 public:
-  CPlayListM3U(void);
-  ~CPlayListM3U(void) override;
+  CPlayListM3U();
+  ~CPlayListM3U() override;
   bool Load(const std::string& strFileName) override;
   void Save(const std::string& strFileName) const override;
 

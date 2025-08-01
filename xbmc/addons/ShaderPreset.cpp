@@ -72,12 +72,12 @@ CShaderPresetAddon::CShaderPresetAddon(const AddonInfoPtr& addonInfo)
       addonInfo->Type(ADDON::AddonType::SHADERDLL)->GetValue("@extensions").asString(), "|");
 }
 
-CShaderPresetAddon::~CShaderPresetAddon(void)
+CShaderPresetAddon::~CShaderPresetAddon()
 {
   DestroyAddon();
 }
 
-bool CShaderPresetAddon::CreateAddon(void)
+bool CShaderPresetAddon::CreateAddon()
 {
   std::unique_lock lock(m_dllSection);
 
@@ -100,7 +100,7 @@ void CShaderPresetAddon::DestroyAddon()
   DestroyInstance();
 }
 
-void CShaderPresetAddon::ResetProperties(void)
+void CShaderPresetAddon::ResetProperties()
 {
   m_ifc.shaderpreset->props->user_path = m_strUserPath.c_str();
   m_ifc.shaderpreset->props->addon_path = m_strClientPath.c_str();

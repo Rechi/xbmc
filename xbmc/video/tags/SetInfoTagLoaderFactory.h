@@ -24,7 +24,7 @@ public:
 
 protected:
   // No instancing of this class
-  CSetInfoTagLoaderFactory(void) = delete;
+  CSetInfoTagLoaderFactory() = delete;
   virtual ~CSetInfoTagLoaderFactory() = delete;
 };
 } // namespace KODI::VIDEO

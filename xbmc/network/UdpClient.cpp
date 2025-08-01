@@ -25,12 +25,12 @@ using namespace std::chrono_literals;
 
 #define UDPCLIENT_DEBUG_LEVEL LOGDEBUG
 
-CUdpClient::CUdpClient(void) : CThread("UDPClient")
+CUdpClient::CUdpClient() : CThread("UDPClient")
 {}
 
-CUdpClient::~CUdpClient(void) = default;
+CUdpClient::~CUdpClient() = default;
 
-bool CUdpClient::Create(void)
+bool CUdpClient::Create()
 {
   m_bStop = false;
 

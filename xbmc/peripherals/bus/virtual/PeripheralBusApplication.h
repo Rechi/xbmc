@@ -24,10 +24,10 @@ class CPeripheralBusApplication : public CPeripheralBus
 {
 public:
   explicit CPeripheralBusApplication(CPeripherals& manager);
-  ~CPeripheralBusApplication(void) override = default;
+  ~CPeripheralBusApplication() override = default;
 
   // implementation of CPeripheralBus
-  void Initialise(void) override;
+  void Initialise() override;
   void GetDirectory(const std::string& strPath, CFileItemList& items) const override;
 
 protected:

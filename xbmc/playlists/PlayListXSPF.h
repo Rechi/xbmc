@@ -15,8 +15,8 @@ namespace KODI::PLAYLIST
 class CPlayListXSPF : public CPlayList
 {
 public:
-  CPlayListXSPF(void);
-  ~CPlayListXSPF(void) override;
+  CPlayListXSPF();
+  ~CPlayListXSPF() override;
 
   // Implementation of CPlayList
   bool Load(const std::string& strFileName) override;

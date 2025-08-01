@@ -86,7 +86,7 @@ public:
   CGUIControl();
   CGUIControl(int parentID, int controlID, float posX, float posY, float width, float height);
   CGUIControl(const CGUIControl &);
-  virtual ~CGUIControl(void);
+  virtual ~CGUIControl();
   virtual CGUIControl *Clone() const=0;
 
   virtual void DoProcess(unsigned int currentTime, CDirtyRegionList &dirtyregions);
@@ -162,7 +162,7 @@ public:
   virtual bool HitTest(const CPoint &point) const;
 
   virtual bool OnMessage(CGUIMessage& message);
-  virtual int GetID(void) const;
+  virtual int GetID() const;
   virtual void SetID(int id) { m_controlID = id; }
   int GetParentID() const;
   virtual bool HasFocus() const;
@@ -255,7 +255,7 @@ public:
   virtual bool GetCondition(int condition, int data) const { return false; }
 
   void SetParentControl(CGUIControl* control) { m_parentControl = control; }
-  CGUIControl* GetParentControl(void) const { return m_parentControl; }
+  CGUIControl* GetParentControl() const { return m_parentControl; }
   virtual void SaveStates(std::vector<CControlState> &states);
   virtual CGUIControl *GetControl(int id, std::vector<CGUIControl*> *idCollector = nullptr);
 

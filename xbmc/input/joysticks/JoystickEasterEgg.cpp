@@ -93,7 +93,7 @@ bool CJoystickEasterEgg::IsCapturing()
   return m_state > 8;
 }
 
-void CJoystickEasterEgg::OnFinish(void)
+void CJoystickEasterEgg::OnFinish()
 {
   GAME::CGameSettings& gameSettings = CServiceBroker::GetGameServices().GameSettings();
   gameSettings.ToggleGames();

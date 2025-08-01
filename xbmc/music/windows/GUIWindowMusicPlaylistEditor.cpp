@@ -42,14 +42,14 @@
 
 using namespace KODI;
 
-CGUIWindowMusicPlaylistEditor::CGUIWindowMusicPlaylistEditor(void)
-    : CGUIWindowMusicBase(WINDOW_MUSIC_PLAYLIST_EDITOR, "MyMusicPlaylistEditor.xml")
+CGUIWindowMusicPlaylistEditor::CGUIWindowMusicPlaylistEditor()
+  : CGUIWindowMusicBase(WINDOW_MUSIC_PLAYLIST_EDITOR, "MyMusicPlaylistEditor.xml")
 {
   m_playlistThumbLoader.SetObserver(this);
   m_playlist = new CFileItemList;
 }
 
-CGUIWindowMusicPlaylistEditor::~CGUIWindowMusicPlaylistEditor(void)
+CGUIWindowMusicPlaylistEditor::~CGUIWindowMusicPlaylistEditor()
 {
   delete m_playlist;
 }

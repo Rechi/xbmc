@@ -123,7 +123,7 @@ bool CScalarFeature::OnAnalogMotion(const CDriverPrimitive& source, float magnit
   return bHandled;
 }
 
-void CScalarFeature::ProcessMotions(void)
+void CScalarFeature::ProcessMotions()
 {
   if (m_inputType == INPUT_TYPE::DIGITAL && m_bDigitalState)
     ProcessDigitalMotion();
@@ -231,7 +231,7 @@ bool CAxisFeature::OnDigitalMotion(const CDriverPrimitive& source, bool bPressed
   return OnAnalogMotion(source, bPressed ? 1.0f : 0.0f);
 }
 
-void CAxisFeature::ProcessMotions(void)
+void CAxisFeature::ProcessMotions()
 {
   const float newState = m_axis.GetPosition();
 
@@ -432,7 +432,7 @@ bool CAnalogStick::OnAnalogMotion(const CDriverPrimitive& source, float magnitud
   return bHandled;
 }
 
-void CAnalogStick::ProcessMotions(void)
+void CAnalogStick::ProcessMotions()
 {
   const float newVertState = m_vertAxis.GetPosition();
   const float newHorizState = m_horizAxis.GetPosition();
@@ -517,7 +517,7 @@ bool CAccelerometer::OnAnalogMotion(const CDriverPrimitive& source, float magnit
   return bHandled;
 }
 
-void CAccelerometer::ProcessMotions(void)
+void CAccelerometer::ProcessMotions()
 {
   const float newXAxis = m_xAxis.GetPosition();
   const float newYAxis = m_yAxis.GetPosition();

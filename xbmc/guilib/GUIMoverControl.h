@@ -38,7 +38,7 @@ public:
                    const CTextureInfo& textureNoFocus,
                    KODI::UTILS::MOVING_SPEED::MapEventConfig& movingSpeedCfg);
 
-  ~CGUIMoverControl(void) override = default;
+  ~CGUIMoverControl() override = default;
   CGUIMoverControl* Clone() const override { return new CGUIMoverControl(*this); }
 
   void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;

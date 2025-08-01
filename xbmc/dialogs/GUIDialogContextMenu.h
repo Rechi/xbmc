@@ -99,8 +99,8 @@ class CGUIDialogContextMenu :
       public CGUIDialog
 {
 public:
-  CGUIDialogContextMenu(void);
-  ~CGUIDialogContextMenu(void) override;
+  CGUIDialogContextMenu();
+  ~CGUIDialogContextMenu() override;
   bool OnMessage(CGUIMessage &message) override;
   bool OnAction(const CAction& action) override;
   void SetPosition(float posX, float posY) override;

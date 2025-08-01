@@ -28,7 +28,7 @@ namespace MUSIC_INFO
 class CMusicInfoTag final : public IArchivable, public ISerializable, public ISortable
 {
 public:
-  CMusicInfoTag(void);
+  CMusicInfoTag();
   bool operator !=(const CMusicInfoTag& tag) const;
   bool Loaded() const;
   const std::string& GetTitle() const;

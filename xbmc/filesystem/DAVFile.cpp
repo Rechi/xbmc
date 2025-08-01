@@ -18,12 +18,11 @@
 using namespace XFILE;
 using namespace XCURL;
 
-CDAVFile::CDAVFile(void)
-  : CCurlFile()
+CDAVFile::CDAVFile() : CCurlFile()
 {
 }
 
-CDAVFile::~CDAVFile(void) = default;
+CDAVFile::~CDAVFile() = default;
 
 bool CDAVFile::Execute(const CURL& url)
 {

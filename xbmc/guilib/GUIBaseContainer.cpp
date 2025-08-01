@@ -111,7 +111,7 @@ CGUIBaseContainer::CGUIBaseContainer(const CGUIBaseContainer& other)
     m_focusedLayouts.emplace_back(focusedLayout, this);
 }
 
-CGUIBaseContainer::~CGUIBaseContainer(void)
+CGUIBaseContainer::~CGUIBaseContainer()
 {
   // release the container from items
   for (const auto& item : m_items)

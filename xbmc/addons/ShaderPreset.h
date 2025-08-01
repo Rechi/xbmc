@@ -98,7 +98,7 @@ private:
   /*!
    * \brief Reset all class members to their defaults. Called by the constructors
    */
-  void ResetProperties(void);
+  void ResetProperties();
 
   static void TranslateShaderPreset(const video_shader& shader,
                                     KODI::SHADER::IShaderPreset& shaderPreset);

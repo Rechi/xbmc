@@ -31,18 +31,18 @@ public:
                   const std::string& strControllerId,
                   CPeripherals& manager);
 
-  ~CAddonButtonMap(void) override;
+  ~CAddonButtonMap() override;
 
   // Implementation of IButtonMap
-  std::string ControllerID(void) const override { return m_strControllerId; }
+  std::string ControllerID() const override { return m_strControllerId; }
 
-  std::string Location(void) const override;
+  std::string Location() const override;
 
-  bool Load(void) override;
+  bool Load() override;
 
-  void Reset(void) override;
+  void Reset() override;
 
-  bool IsEmpty(void) const override;
+  bool IsEmpty() const override;
 
   std::string GetAppearance() const override;
 

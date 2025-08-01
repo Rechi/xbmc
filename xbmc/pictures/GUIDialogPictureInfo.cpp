@@ -84,7 +84,7 @@ constexpr std::array slideShowInfoTranslationList{std::pair{SLIDESHOW_FILE_NAME,
                                                   std::pair{SLIDESHOW_IPTC_REF_SERVICE, 21880}};
 } // namespace
 
-CGUIDialogPictureInfo::CGUIDialogPictureInfo(void)
+CGUIDialogPictureInfo::CGUIDialogPictureInfo()
   : CGUIDialog(WINDOW_DIALOG_PICTURE_INFO, "DialogPictureInfo.xml"),
     m_pictureInfo{std::make_unique<CFileItemList>()}
 {

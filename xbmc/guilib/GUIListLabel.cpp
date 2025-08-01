@@ -27,7 +27,7 @@ CGUIListLabel::CGUIListLabel(int parentID, int controlID, float posX, float posY
   ControlType = GUICONTROL_LISTLABEL;
 }
 
-CGUIListLabel::~CGUIListLabel(void) = default;
+CGUIListLabel::~CGUIListLabel() = default;
 
 void CGUIListLabel::SetSelected(bool selected)
 {

@@ -22,7 +22,7 @@ class CFileItemList;
 class CApplicationStackHelper : public IApplicationComponent
 {
 public:
-  CApplicationStackHelper(void);
+  CApplicationStackHelper();
   ~CApplicationStackHelper() = default;
 
   void Clear();

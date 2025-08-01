@@ -18,7 +18,7 @@
 #include "utils/ColorUtils.h"
 #include "windowing/GraphicContext.h"
 
-CGUIWindowScreensaverDim::CGUIWindowScreensaverDim(void)
+CGUIWindowScreensaverDim::CGUIWindowScreensaverDim()
   : CGUIDialog(WINDOW_SCREENSAVER_DIM, "", DialogModalityType::MODELESS)
 {
   m_needsScaling = false;

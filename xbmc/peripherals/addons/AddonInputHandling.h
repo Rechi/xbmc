@@ -66,7 +66,7 @@ public:
                       std::shared_ptr<CPeripheralAddon> addon,
                       KODI::MOUSE::IMouseInputHandler* handler);
 
-  ~CAddonInputHandling(void) override;
+  ~CAddonInputHandling() override;
 
   bool Load();
 
@@ -77,7 +77,7 @@ public:
                     float position,
                     int center,
                     unsigned int range) override;
-  void OnInputFrame(void) override;
+  void OnInputFrame() override;
 
   // implementation of IKeyboardDriverHandler
   bool OnKeyPress(const CKey& key) override;

@@ -100,8 +100,8 @@ protected:
 class CGUITextureManager
 {
 public:
-  CGUITextureManager(void);
-  virtual ~CGUITextureManager(void);
+  CGUITextureManager();
+  virtual ~CGUITextureManager();
 
   bool HasTexture(const std::string &textureName, std::string *path = NULL, int *bundle = NULL, int *size = NULL);
   static bool CanLoad(const std::string &texturePath); ///< Returns true if the texture manager can load this texture

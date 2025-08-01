@@ -46,9 +46,9 @@ using namespace KODI::ADDONS;
 using namespace XFILE;
 using namespace PLAYLIST;
 
-CFileDirectoryFactory::CFileDirectoryFactory(void) = default;
+CFileDirectoryFactory::CFileDirectoryFactory() = default;
 
-CFileDirectoryFactory::~CFileDirectoryFactory(void) = default;
+CFileDirectoryFactory::~CFileDirectoryFactory() = default;
 
 // return NULL + set pItem->IsFolder() to remove it completely from list.
 IFileDirectory* CFileDirectoryFactory::Create(const CURL& url, CFileItem* pItem, const std::string& strMask)

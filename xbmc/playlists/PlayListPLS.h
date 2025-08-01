@@ -18,8 +18,8 @@ namespace KODI::PLAYLIST
 class CPlayListPLS : public CPlayList
 {
 public:
-  CPlayListPLS(void);
-  ~CPlayListPLS(void) override;
+  CPlayListPLS();
+  ~CPlayListPLS() override;
   bool Load(const std::string& strFileName) override;
   void Save(const std::string& strFileName) const override;
   virtual bool Resize(std::vector<int>::size_type newSize);

@@ -48,7 +48,7 @@ using namespace KODI;
 class CGetSongInfoJob : public CJob
 {
 public:
-  ~CGetSongInfoJob(void) override = default;
+  ~CGetSongInfoJob() override = default;
 
   // Fetch full song information including art types list
   bool DoWork() override
@@ -110,9 +110,8 @@ public:
   }
 };
 
-CGUIDialogSongInfo::CGUIDialogSongInfo(void)
-    : CGUIDialog(WINDOW_DIALOG_SONG_INFO, "DialogMusicInfo.xml")
-    , m_song(new CFileItem)
+CGUIDialogSongInfo::CGUIDialogSongInfo()
+  : CGUIDialog(WINDOW_DIALOG_SONG_INFO, "DialogMusicInfo.xml"), m_song(new CFileItem)
 {
   m_cancelled = false;
   m_hasUpdatedUserrating = false;
@@ -121,7 +120,7 @@ CGUIDialogSongInfo::CGUIDialogSongInfo(void)
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIDialogSongInfo::~CGUIDialogSongInfo(void) = default;
+CGUIDialogSongInfo::~CGUIDialogSongInfo() = default;
 
 bool CGUIDialogSongInfo::OnMessage(CGUIMessage& message)
 {

@@ -29,7 +29,7 @@ CInputHandling::CInputHandling(IInputHandler* handler, IButtonMap* buttonMap)
 {
 }
 
-CInputHandling::~CInputHandling(void) = default;
+CInputHandling::~CInputHandling() = default;
 
 bool CInputHandling::OnButtonMotion(unsigned int buttonIndex, bool bPressed)
 {
@@ -86,7 +86,7 @@ bool CInputHandling::OnAxisMotion(unsigned int axisIndex,
   return bHandled;
 }
 
-void CInputHandling::OnInputFrame(void)
+void CInputHandling::OnInputFrame()
 {
   // Handle driver input
   for (auto& it : m_features)

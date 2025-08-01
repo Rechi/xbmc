@@ -42,14 +42,14 @@ constexpr int CONTROL_GROUP_SYSTEM_BAR = 104;
 constexpr int CONTROL_START = CONTROL_BT_STORAGE;
 constexpr int CONTROL_END = CONTROL_BT_DONATE;
 
-CGUIWindowSystemInfo::CGUIWindowSystemInfo(void) :
-    CGUIWindow(WINDOW_SYSTEM_INFORMATION, "SettingsSystemInfo.xml")
+CGUIWindowSystemInfo::CGUIWindowSystemInfo()
+  : CGUIWindow(WINDOW_SYSTEM_INFORMATION, "SettingsSystemInfo.xml")
 {
   m_section = CONTROL_BT_DEFAULT;
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIWindowSystemInfo::~CGUIWindowSystemInfo(void) = default;
+CGUIWindowSystemInfo::~CGUIWindowSystemInfo() = default;
 
 bool CGUIWindowSystemInfo::OnMessage(CGUIMessage& message)
 {

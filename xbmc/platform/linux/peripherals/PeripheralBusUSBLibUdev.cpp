@@ -75,7 +75,7 @@ CPeripheralBusUSB::CPeripheralBusUSB(CPeripherals& manager) :
   m_udevMon       = NULL;
 }
 
-CPeripheralBusUSB::~CPeripheralBusUSB(void)
+CPeripheralBusUSB::~CPeripheralBusUSB()
 {
   StopThread(true);
 }
@@ -178,7 +178,7 @@ PeripheralType CPeripheralBusUSB::GetType(int iDeviceClass)
   }
 }
 
-void CPeripheralBusUSB::Process(void)
+void CPeripheralBusUSB::Process()
 {
   if (!(m_udev = udev_new()))
   {
@@ -210,7 +210,7 @@ void CPeripheralBusUSB::Process(void)
   udev_unref(m_udev);
 }
 
-void CPeripheralBusUSB::Clear(void)
+void CPeripheralBusUSB::Clear()
 {
   StopThread(false);
 

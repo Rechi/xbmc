@@ -27,7 +27,7 @@ public:
                    const PeripheralScanResult& scanResult,
                    CPeripheralBus* bus);
 
-  ~CPeripheralMouse(void) override;
+  ~CPeripheralMouse() override;
 
   // implementation of CPeripheral
   bool InitialiseFeature(const PeripheralFeature feature) override;

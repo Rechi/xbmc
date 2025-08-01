@@ -43,9 +43,9 @@ Length2=5
 NumberOfEntries=2
 Version=2
 ----------------------------------------------------------------------*/
-CPlayListPLS::CPlayListPLS(void) = default;
+CPlayListPLS::CPlayListPLS() = default;
 
-CPlayListPLS::~CPlayListPLS(void) = default;
+CPlayListPLS::~CPlayListPLS() = default;
 
 bool CPlayListPLS::Load(const std::string &strFile)
 {

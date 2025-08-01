@@ -73,7 +73,7 @@ public:
   /*!
    * \brief Construct an invalid driver primitive
    */
-  CDriverPrimitive(void);
+  CDriverPrimitive();
 
   /*!
    * \brief Construct a driver primitive representing a button or motor
@@ -121,7 +121,7 @@ public:
   /*!
    * \brief The type of driver primitive
    */
-  PRIMITIVE_TYPE Type(void) const { return m_type; }
+  PRIMITIVE_TYPE Type() const { return m_type; }
 
   /*!
    * \brief The index used by the joystick driver
@@ -132,12 +132,12 @@ public:
    *   - semiaxes
    *   - motors
    */
-  unsigned int Index(void) const { return m_driverIndex; }
+  unsigned int Index() const { return m_driverIndex; }
 
   /*!
    * \brief The direction arrow (valid for hat directions)
    */
-  HAT_DIRECTION HatDirection(void) const { return m_hatDirection; }
+  HAT_DIRECTION HatDirection() const { return m_hatDirection; }
 
   /*!
    * \brief The location of the zero point of the semiaxis
@@ -147,7 +147,7 @@ public:
   /*!
    * \brief The semiaxis direction (valid for semiaxes)
    */
-  SEMIAXIS_DIRECTION SemiAxisDirection(void) const { return m_semiAxisDirection; }
+  SEMIAXIS_DIRECTION SemiAxisDirection() const { return m_semiAxisDirection; }
 
   /*!
    * \brief The distance between the center and the farthest valid value (valid for semiaxes)
@@ -178,7 +178,7 @@ public:
    *   2) for semi-axes, it is a positive or negative direction
    *   3) for keys, the keycode is non-empty
    */
-  bool IsValid(void) const;
+  bool IsValid() const;
 
   /*!
    * \brief Convert primitive to a string suitable for logging

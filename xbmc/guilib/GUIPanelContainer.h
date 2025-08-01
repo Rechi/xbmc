@@ -23,7 +23,7 @@ class CGUIPanelContainer : public CGUIBaseContainer
 {
 public:
   CGUIPanelContainer(int parentID, int controlID, float posX, float posY, float width, float height, ORIENTATION orientation, const CScroller& scroller, int preloadItems);
-  ~CGUIPanelContainer(void) override;
+  ~CGUIPanelContainer() override;
   CGUIPanelContainer* Clone() const override { return new CGUIPanelContainer(*this); }
 
   void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;

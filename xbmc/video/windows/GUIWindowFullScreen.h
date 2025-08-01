@@ -18,7 +18,7 @@ class CGUIWindowFullScreen : public CGUIWindow
 {
 public:
   CGUIWindowFullScreen();
-  ~CGUIWindowFullScreen(void) override;
+  ~CGUIWindowFullScreen() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;
   void ClearBackground() override;

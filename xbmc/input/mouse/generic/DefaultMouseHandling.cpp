@@ -21,7 +21,7 @@ CDefaultMouseHandling::CDefaultMouseHandling(PERIPHERALS::CPeripheral* periphera
 {
 }
 
-CDefaultMouseHandling::~CDefaultMouseHandling(void)
+CDefaultMouseHandling::~CDefaultMouseHandling()
 {
   m_driverHandler.reset();
   m_buttonMap.reset();

@@ -24,8 +24,8 @@ enum class AddonType;
 class CGUIWindowAddonBrowser : public CGUIMediaWindow
 {
 public:
-  CGUIWindowAddonBrowser(void);
-  ~CGUIWindowAddonBrowser(void) override;
+  CGUIWindowAddonBrowser();
+  ~CGUIWindowAddonBrowser() override;
   bool OnMessage(CGUIMessage& message) override;
 
   /*!

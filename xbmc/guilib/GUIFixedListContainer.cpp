@@ -22,7 +22,7 @@ CGUIFixedListContainer::CGUIFixedListContainer(int parentID, int controlID, floa
   SetCursor(m_fixedCursor);
 }
 
-CGUIFixedListContainer::~CGUIFixedListContainer(void) = default;
+CGUIFixedListContainer::~CGUIFixedListContainer() = default;
 
 bool CGUIFixedListContainer::OnAction(const CAction &action)
 {

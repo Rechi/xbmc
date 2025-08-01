@@ -28,7 +28,7 @@ CGUIVideoControl::CGUIVideoControl(int parentID, int controlID, float posX, floa
   ControlType = GUICONTROL_VIDEO;
 }
 
-CGUIVideoControl::~CGUIVideoControl(void) = default;
+CGUIVideoControl::~CGUIVideoControl() = default;
 
 void CGUIVideoControl::Process(unsigned int currentTime, CDirtyRegionList &dirtyregions)
 {

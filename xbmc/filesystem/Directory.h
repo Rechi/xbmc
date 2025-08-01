@@ -25,8 +25,8 @@ namespace XFILE
 class CDirectory
 {
 public:
-  CDirectory(void);
-  virtual ~CDirectory(void);
+  CDirectory();
+  virtual ~CDirectory();
 
   class CHints
   {

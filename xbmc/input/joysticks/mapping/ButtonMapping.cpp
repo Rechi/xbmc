@@ -110,7 +110,7 @@ bool CButtonMapping::OnAxisMotion(unsigned int axisIndex,
   return GetAxis(axisIndex, position).OnMotion(position);
 }
 
-void CButtonMapping::OnInputFrame(void)
+void CButtonMapping::OnInputFrame()
 {
   for (auto& axis : m_axes)
     axis.second.ProcessMotion();

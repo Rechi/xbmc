@@ -81,8 +81,8 @@ class CWeatherManager
 : public CInfoLoader, public ISettingCallback
 {
 public:
-  CWeatherManager(void);
-  ~CWeatherManager(void) override;
+  CWeatherManager();
+  ~CWeatherManager() override;
   static bool GetSearchResults(const std::string &strSearch, std::string &strResult);
 
   std::string GetLocation(int iLocation);

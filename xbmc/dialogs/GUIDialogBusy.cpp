@@ -105,14 +105,14 @@ bool CGUIDialogBusy::WaitOnEvent(CEvent &event, unsigned int displaytime /* = 10
   return !cancelled;
 }
 
-CGUIDialogBusy::CGUIDialogBusy(void)
+CGUIDialogBusy::CGUIDialogBusy()
   : CGUIDialog(WINDOW_DIALOG_BUSY, "DialogBusy.xml", DialogModalityType::MODAL)
 {
   m_loadType = LOAD_ON_GUI_INIT;
   m_bCanceled = false;
 }
 
-CGUIDialogBusy::~CGUIDialogBusy(void) = default;
+CGUIDialogBusy::~CGUIDialogBusy() = default;
 
 void CGUIDialogBusy::Open_Internal(bool bProcessRenderLoop, const std::string& param /* = "" */)
 {

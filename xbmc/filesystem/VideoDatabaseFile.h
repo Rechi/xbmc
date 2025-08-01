@@ -19,8 +19,8 @@ namespace XFILE
 class CVideoDatabaseFile : public COverrideFile
 {
 public:
-  CVideoDatabaseFile(void);
-  ~CVideoDatabaseFile(void) override;
+  CVideoDatabaseFile();
+  ~CVideoDatabaseFile() override;
 
   static CVideoInfoTag GetVideoTag(const CURL& url);
 

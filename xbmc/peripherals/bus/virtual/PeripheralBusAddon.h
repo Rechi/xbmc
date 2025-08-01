@@ -29,9 +29,9 @@ class CPeripheralBusAddon : public CPeripheralBus
 {
 public:
   explicit CPeripheralBusAddon(CPeripherals& manager);
-  ~CPeripheralBusAddon(void) override;
+  ~CPeripheralBusAddon() override;
 
-  void UpdateAddons(void);
+  void UpdateAddons();
 
   /*!
    * \brief Get peripheral add-on that can provide button maps
@@ -66,11 +66,11 @@ public:
   bool SupportsFeature(PeripheralFeature feature) const override;
   unsigned int GetPeripheralsWithFeature(PeripheralVector& results,
                                          const PeripheralFeature feature) const override;
-  unsigned int GetNumberOfPeripherals(void) const override;
+  unsigned int GetNumberOfPeripherals() const override;
   unsigned int GetNumberOfPeripheralsWithId(const int iVendorId,
                                             const int iProductId) const override;
   void GetDirectory(const std::string& strPath, CFileItemList& items) const override;
-  void ProcessEvents(void) override;
+  void ProcessEvents() override;
   void EnableButtonMapping() override;
   void PowerOff(const std::string& strLocation) override;
 

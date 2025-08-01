@@ -67,8 +67,8 @@ static const translateType types[] = { { CGUIDialogSmartPlaylistEditor::TYPE_SON
                                        { CGUIDialogSmartPlaylistEditor::TYPE_EPISODES, "episodes", 20360 }
                                      };
 
-CGUIDialogSmartPlaylistEditor::CGUIDialogSmartPlaylistEditor(void)
-    : CGUIDialog(WINDOW_DIALOG_SMART_PLAYLIST_EDITOR, "SmartPlaylistEditor.xml")
+CGUIDialogSmartPlaylistEditor::CGUIDialogSmartPlaylistEditor()
+  : CGUIDialog(WINDOW_DIALOG_SMART_PLAYLIST_EDITOR, "SmartPlaylistEditor.xml")
 {
   m_cancelled = false;
   m_ruleLabels = new CFileItemList;

@@ -39,12 +39,12 @@
 
 using namespace KODI::MESSAGING;
 
-CGUIPassword::CGUIPassword(void)
+CGUIPassword::CGUIPassword()
 {
   iMasterLockRetriesLeft = -1;
   bMasterUser = false;
 }
-CGUIPassword::~CGUIPassword(void) = default;
+CGUIPassword::~CGUIPassword() = default;
 
 template<typename T>
 bool CGUIPassword::IsItemUnlocked(T pItem,

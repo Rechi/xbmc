@@ -97,7 +97,7 @@ CStereoscopicsManager::CStereoscopicsManager()
       this, {CSettings::SETTING_VIDEOSCREEN_STEREOSCOPICMODE});
 }
 
-CStereoscopicsManager::~CStereoscopicsManager(void)
+CStereoscopicsManager::~CStereoscopicsManager()
 {
   m_settings->GetSettingsManager()->UnregisterCallback(this);
 }
@@ -108,7 +108,7 @@ void CStereoscopicsManager::Initialize()
   SetStereoMode(RENDER_STEREO_MODE_OFF);
 }
 
-RENDER_STEREO_MODE CStereoscopicsManager::GetStereoMode(void) const
+RENDER_STEREO_MODE CStereoscopicsManager::GetStereoMode() const
 {
   return static_cast<RENDER_STEREO_MODE>(m_settings->GetInt(CSettings::SETTING_VIDEOSCREEN_STEREOSCOPICMODE));
 }
@@ -246,7 +246,7 @@ RENDER_STEREO_MODE CStereoscopicsManager::GetStereoModeByUserChoice() const
   return mode;
 }
 
-RENDER_STEREO_MODE CStereoscopicsManager::GetStereoModeOfPlayingVideo(void) const
+RENDER_STEREO_MODE CStereoscopicsManager::GetStereoModeOfPlayingVideo() const
 {
   RENDER_STEREO_MODE mode = RENDER_STEREO_MODE_OFF;
   std::string playerMode = GetVideoStereoMode();
@@ -292,7 +292,7 @@ std::string CStereoscopicsManager::GetLabelForStereoMode(const RENDER_STEREO_MOD
   return g_localizeStrings.Get(msgId);
 }
 
-RENDER_STEREO_MODE CStereoscopicsManager::GetPreferredPlaybackMode(void) const
+RENDER_STEREO_MODE CStereoscopicsManager::GetPreferredPlaybackMode() const
 {
   return static_cast<RENDER_STEREO_MODE>(m_settings->GetInt(CSettings::SETTING_VIDEOSCREEN_PREFEREDSTEREOSCOPICMODE));
 }
@@ -619,7 +619,7 @@ void CStereoscopicsManager::OnStreamChange()
   }
 }
 
-void CStereoscopicsManager::OnPlaybackStopped(void)
+void CStereoscopicsManager::OnPlaybackStopped()
 {
   RENDER_STEREO_MODE mode = GetStereoMode();
 

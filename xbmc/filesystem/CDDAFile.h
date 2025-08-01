@@ -16,8 +16,8 @@ namespace XFILE
 class CFileCDDA : public IFile
 {
 public:
-  CFileCDDA(void);
-  ~CFileCDDA(void) override;
+  CFileCDDA();
+  ~CFileCDDA() override;
   bool Open(const CURL& url) override;
   bool Exists(const CURL& url) override;
   int Stat(const CURL& url, struct __stat64* buffer) override;

@@ -20,8 +20,8 @@ class CGUIDialogOK :
       public CGUIDialogBoxBase
 {
 public:
-  CGUIDialogOK(void);
-  ~CGUIDialogOK(void) override;
+  CGUIDialogOK();
+  ~CGUIDialogOK() override;
   bool OnMessage(CGUIMessage& message) override;
   static bool ShowAndGetInput(const CVariant& heading, const CVariant& text);
   static bool ShowAndGetInput(const CVariant& heading,

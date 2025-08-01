@@ -228,7 +228,7 @@ std::string CGUIProgressControl::GetDescription() const
   return StringUtils::Format("{:1.0f}", m_fPercent);
 }
 
-bool CGUIProgressControl::UpdateLayout(void)
+bool CGUIProgressControl::UpdateLayout()
 {
   bool bChanged(false);
 

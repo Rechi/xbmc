@@ -33,7 +33,7 @@ public:
   bool OnButtonPress(const FeatureName& feature) override;
   bool IsCapturing() override;
 
-  static void OnFinish(void);
+  static void OnFinish();
 
 private:
   // Construction parameters

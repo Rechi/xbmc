@@ -19,15 +19,15 @@ class CGUIFontTTFGL : public CGUIFontTTF
 {
 public:
   explicit CGUIFontTTFGL(const std::string& fontIdent);
-  ~CGUIFontTTFGL(void) override;
+  ~CGUIFontTTFGL() override;
 
   bool FirstBegin() override;
   void LastEnd() override;
 
   CVertexBuffer CreateVertexBuffer(const std::vector<SVertex>& vertices) const override;
   void DestroyVertexBuffer(CVertexBuffer& bufferHandle) const override;
-  static void CreateStaticVertexBuffers(void);
-  static void DestroyStaticVertexBuffers(void);
+  static void CreateStaticVertexBuffers();
+  static void DestroyStaticVertexBuffers();
 
 protected:
   std::unique_ptr<CTexture> ReallocTexture(unsigned int& newHeight) override;

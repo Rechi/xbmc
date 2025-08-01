@@ -28,7 +28,7 @@ class IFeatureList;
 class CGUIControllerWindow : public CGUIDialog
 {
 public:
-  CGUIControllerWindow(void);
+  CGUIControllerWindow();
   ~CGUIControllerWindow() override;
 
   // implementation of CGUIControl via CGUIDialog
@@ -45,14 +45,14 @@ private:
   void OnControllerSelected(unsigned int controllerIndex);
   void OnFeatureFocused(unsigned int featureIndex);
   void OnFeatureSelected(unsigned int featureIndex);
-  void UpdateButtons(void);
+  void UpdateButtons();
 
   // Action for the available button
-  void GetMoreControllers(void);
+  void GetMoreControllers();
   void GetAllControllers();
-  void ResetController(void);
-  void ShowHelp(void);
-  void ShowButtonCaptureDialog(void);
+  void ResetController();
+  void ShowHelp();
+  void ShowButtonCaptureDialog();
 
   IControllerList* m_controllerList = nullptr;
   IFeatureList* m_featureList = nullptr;

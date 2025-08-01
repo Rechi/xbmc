@@ -22,7 +22,7 @@ namespace MOUSE
 class IMouseDriverHandler
 {
 public:
-  virtual ~IMouseDriverHandler(void) = default;
+  virtual ~IMouseDriverHandler() = default;
 
   /*!
    * \brief Handle mouse position updates

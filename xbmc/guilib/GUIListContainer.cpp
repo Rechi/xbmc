@@ -25,7 +25,7 @@ CGUIListContainer::CGUIListContainer(const CGUIListContainer& other) : CGUIBaseC
 {
 }
 
-CGUIListContainer::~CGUIListContainer(void) = default;
+CGUIListContainer::~CGUIListContainer() = default;
 
 bool CGUIListContainer::OnAction(const CAction &action)
 {

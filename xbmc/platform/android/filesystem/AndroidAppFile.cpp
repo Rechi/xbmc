@@ -29,13 +29,13 @@
 #include <sys/stat.h>
 using namespace XFILE;
 
-CFileAndroidApp::CFileAndroidApp(void)
+CFileAndroidApp::CFileAndroidApp()
 {
   m_iconWidth = 0;
   m_iconHeight = 0;
 }
 
-CFileAndroidApp::~CFileAndroidApp(void)
+CFileAndroidApp::~CFileAndroidApp()
 {
   Close();
 }

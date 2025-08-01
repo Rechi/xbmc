@@ -17,8 +17,8 @@ class CFileItemList;
 class CGUIDialogVideoBookmarks : public CGUIDialog
 {
 public:
-  CGUIDialogVideoBookmarks(void);
-  ~CGUIDialogVideoBookmarks(void) override;
+  CGUIDialogVideoBookmarks();
+  ~CGUIDialogVideoBookmarks() override;
   bool OnMessage(CGUIMessage& message) override;
   void OnWindowLoaded() override;
   void OnWindowUnload() override;

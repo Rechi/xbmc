@@ -25,8 +25,8 @@ class CGUIDialogNumeric :
 {
 public:
   enum INPUT_MODE { INPUT_TIME = 1, INPUT_DATE, INPUT_IP_ADDRESS, INPUT_PASSWORD, INPUT_NUMBER, INPUT_TIME_SECONDS };
-  CGUIDialogNumeric(void);
-  ~CGUIDialogNumeric(void) override;
+  CGUIDialogNumeric();
+  ~CGUIDialogNumeric() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;
   bool OnBack(int actionID) override;

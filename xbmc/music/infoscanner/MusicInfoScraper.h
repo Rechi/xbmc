@@ -26,7 +26,7 @@ class CMusicInfoScraper : public CThread
 {
 public:
   explicit CMusicInfoScraper(const ADDON::ScraperPtr &scraper);
-  ~CMusicInfoScraper(void) override;
+  ~CMusicInfoScraper() override;
   void FindAlbumInfo(const std::string& strAlbum, const std::string& strArtist = "");
   void LoadAlbumInfo(int iAlbum);
   void FindArtistInfo(const std::string& strArtist);

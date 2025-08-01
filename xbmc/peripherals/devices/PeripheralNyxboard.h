@@ -21,7 +21,7 @@ public:
   CPeripheralNyxboard(CPeripherals& manager,
                       const PeripheralScanResult& scanResult,
                       CPeripheralBus* bus);
-  ~CPeripheralNyxboard(void) override = default;
+  ~CPeripheralNyxboard() override = default;
   bool LookupSymAndUnicode(XBMC_keysym& keysym, uint8_t* key, char* unicode) override;
 };
 } // namespace PERIPHERALS

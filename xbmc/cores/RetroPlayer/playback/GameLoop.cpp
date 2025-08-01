@@ -52,7 +52,7 @@ void CGameLoop::PauseAsync()
   SetSpeed(0.0);
 }
 
-void CGameLoop::Process(void)
+void CGameLoop::Process()
 {
   while (!m_bStop)
   {

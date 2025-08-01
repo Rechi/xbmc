@@ -54,7 +54,7 @@ class CGUIWindowSlideShow : public CGUIDialog,
                             public ANNOUNCEMENT::IAnnouncer
 {
 public:
-  CGUIWindowSlideShow(void);
+  CGUIWindowSlideShow();
   ~CGUIWindowSlideShow() override;
 
   // Implementation of ISlideShowDelegate

@@ -42,9 +42,9 @@ std::string GetXMLText(const tinyxml2::XMLElement* pXmlElement)
 namespace KODI::PLAYLIST
 {
 
-CPlayListXSPF::CPlayListXSPF(void) = default;
+CPlayListXSPF::CPlayListXSPF() = default;
 
-CPlayListXSPF::~CPlayListXSPF(void) = default;
+CPlayListXSPF::~CPlayListXSPF() = default;
 
 bool CPlayListXSPF::Load(const std::string& strFileName)
 {

@@ -67,7 +67,7 @@ enum RENDER_ORDER
 class CGraphicContext : public CCriticalSection
 {
 public:
-  CGraphicContext(void);
+  CGraphicContext();
   virtual ~CGraphicContext();
 
   // methods related to windowing

@@ -20,17 +20,17 @@ class CNetworkInterface
 public:
    virtual ~CNetworkInterface() = default;
 
-   virtual bool IsEnabled(void) const = 0;
-   virtual bool IsConnected(void) const = 0;
+   virtual bool IsEnabled() const = 0;
+   virtual bool IsConnected() const = 0;
 
-   virtual std::string GetMacAddress(void) const = 0;
+   virtual std::string GetMacAddress() const = 0;
    virtual void GetMacAddressRaw(char rawMac[6]) const = 0;
 
    virtual bool GetHostMacAddress(unsigned long host, std::string& mac) const = 0;
 
    virtual std::string GetCurrentIPAddress() const = 0;
    virtual std::string GetCurrentNetmask() const = 0;
-   virtual std::string GetCurrentDefaultGateway(void) const = 0;
+   virtual std::string GetCurrentDefaultGateway() const = 0;
 };
 
 class CSettings;
@@ -58,19 +58,19 @@ public:
   virtual bool GetHostName(std::string& hostname);
 
   // Return the list of interfaces
-  virtual std::vector<CNetworkInterface*>& GetInterfaceList(void) = 0;
+  virtual std::vector<CNetworkInterface*>& GetInterfaceList() = 0;
 
   // Return the first interface which is active
-  virtual CNetworkInterface* GetFirstConnectedInterface(void);
+  virtual CNetworkInterface* GetFirstConnectedInterface();
 
   // Return true if there is a interface for the same network as address
   bool HasInterfaceForIP(unsigned long address);
 
   // Return true if there's at least one defined network interface
-  bool IsAvailable(void);
+  bool IsAvailable();
 
   // Return true if there's at least one interface which is connected
-  bool IsConnected(void);
+  bool IsConnected();
 
   // Return true if the magic packet was send
   bool WakeOnLan(const char* mac);
@@ -83,7 +83,7 @@ public:
   virtual bool PingHost(unsigned long host, unsigned int timeout_ms = 2000) = 0;
 
   // Get/set the nameserver(s)
-  virtual std::vector<std::string> GetNameServers(void) = 0;
+  virtual std::vector<std::string> GetNameServers() = 0;
 
   // callback from application controlled thread to handle any setup
   void NetworkMessage(EMESSAGE message, int param);

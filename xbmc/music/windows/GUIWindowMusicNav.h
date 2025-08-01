@@ -16,9 +16,8 @@ class CFileItemList;
 class CGUIWindowMusicNav : public CGUIWindowMusicBase
 {
 public:
-
-  CGUIWindowMusicNav(void);
-  ~CGUIWindowMusicNav(void) override;
+  CGUIWindowMusicNav();
+  ~CGUIWindowMusicNav() override;
 
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction& action) override;

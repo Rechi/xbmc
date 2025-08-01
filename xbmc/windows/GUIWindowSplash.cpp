@@ -16,12 +16,12 @@
 
 #include <memory>
 
-CGUIWindowSplash::CGUIWindowSplash(void) : CGUIWindow(WINDOW_SPLASH, ""), m_image(nullptr)
+CGUIWindowSplash::CGUIWindowSplash() : CGUIWindow(WINDOW_SPLASH, ""), m_image(nullptr)
 {
   m_loadType = LOAD_ON_GUI_INIT;
 }
 
-CGUIWindowSplash::~CGUIWindowSplash(void) = default;
+CGUIWindowSplash::~CGUIWindowSplash() = default;
 
 void CGUIWindowSplash::OnInitWindow()
 {

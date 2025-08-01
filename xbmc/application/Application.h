@@ -92,8 +92,8 @@ public:
   // of currently playing item, otherwise it will seek to start of the previous item in playlist
   static const unsigned int ACTION_PREV_ITEM_THRESHOLD = 3; // seconds;
 
-  CApplication(void);
-  ~CApplication(void) override;
+  CApplication();
+  ~CApplication() override;
 
   bool Create();
   bool Initialize();

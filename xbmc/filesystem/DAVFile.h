@@ -15,8 +15,8 @@ namespace XFILE
   class CDAVFile : public CCurlFile
   {
   public:
-    CDAVFile(void);
-    ~CDAVFile(void) override;
+    CDAVFile();
+    ~CDAVFile() override;
 
     virtual bool Execute(const CURL& url);
 

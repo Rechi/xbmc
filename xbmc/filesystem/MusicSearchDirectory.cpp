@@ -17,9 +17,9 @@
 
 using namespace XFILE;
 
-CMusicSearchDirectory::CMusicSearchDirectory(void) = default;
+CMusicSearchDirectory::CMusicSearchDirectory() = default;
 
-CMusicSearchDirectory::~CMusicSearchDirectory(void) = default;
+CMusicSearchDirectory::~CMusicSearchDirectory() = default;
 
 bool CMusicSearchDirectory::GetDirectory(const CURL& url, CFileItemList &items)
 {

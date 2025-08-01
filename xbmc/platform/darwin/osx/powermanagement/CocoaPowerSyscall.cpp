@@ -83,7 +83,7 @@ CCocoaPowerSyscall::~CCocoaPowerSyscall()
     DeleteOSPowerCallBacks();
 }
 
-bool CCocoaPowerSyscall::Powerdown(void)
+bool CCocoaPowerSyscall::Powerdown()
 {
   bool result;
   CLog::Log(LOGDEBUG, "CCocoaPowerSyscall::Powerdown");
@@ -97,7 +97,7 @@ bool CCocoaPowerSyscall::Powerdown(void)
   return result;
 }
 
-bool CCocoaPowerSyscall::Suspend(void)
+bool CCocoaPowerSyscall::Suspend()
 {
   CLog::Log(LOGDEBUG, "CCocoaPowerSyscall::Suspend");
   m_OnSuspend = true;
@@ -111,14 +111,14 @@ bool CCocoaPowerSyscall::Suspend(void)
   return (error == noErr);
 }
 
-bool CCocoaPowerSyscall::Hibernate(void)
+bool CCocoaPowerSyscall::Hibernate()
 {
   CLog::Log(LOGDEBUG, "CCocoaPowerSyscall::Hibernate");
   // just in case hibernate is ever called
   return Suspend();
 }
 
-bool CCocoaPowerSyscall::Reboot(void)
+bool CCocoaPowerSyscall::Reboot()
 {
   bool result;
   CLog::Log(LOGDEBUG, "CCocoaPowerSyscall::Reboot");
@@ -131,33 +131,33 @@ bool CCocoaPowerSyscall::Reboot(void)
   return result;
 }
 
-bool CCocoaPowerSyscall::CanPowerdown(void)
+bool CCocoaPowerSyscall::CanPowerdown()
 {
   // All Apple products can power down
   return true;
 }
 
-bool CCocoaPowerSyscall::CanSuspend(void)
+bool CCocoaPowerSyscall::CanSuspend()
 {
   bool result;
   result =IOPMSleepEnabled();
   return(result);
 }
 
-bool CCocoaPowerSyscall::CanHibernate(void)
+bool CCocoaPowerSyscall::CanHibernate()
 {
   // Darwin does "sleep" which automatically handles hibernate
   // so always return false so the GUI does not show hibernate
   return false;
 }
 
-bool CCocoaPowerSyscall::CanReboot(void)
+bool CCocoaPowerSyscall::CanReboot()
 {
   // All Apple products except iOS can reboot
   return true;
 }
 
-bool CCocoaPowerSyscall::HasBattery(void)
+bool CCocoaPowerSyscall::HasBattery()
 {
   bool result;
   result = true;
@@ -180,7 +180,7 @@ bool CCocoaPowerSyscall::HasBattery(void)
   return result;
 }
 
-int CCocoaPowerSyscall::BatteryLevel(void)
+int CCocoaPowerSyscall::BatteryLevel()
 {
   double batteryLevel = 0;
   CFTypeRef powerSourceInfo = IOPSCopyPowerSourcesInfo();
@@ -232,7 +232,7 @@ bool CCocoaPowerSyscall::PumpPowerEvents(IPowerEventsCallback *callback)
   return true;
 }
 
-void CCocoaPowerSyscall::CreateOSPowerCallBacks(void)
+void CCocoaPowerSyscall::CreateOSPowerCallBacks()
 {
   // we want sleep/wake notifications, register to receive system power notifications
   m_root_port = IORegisterForSystemPower(this, &m_notify_port, OSPowerCallBack, &m_notifier_object);
@@ -258,7 +258,7 @@ void CCocoaPowerSyscall::CreateOSPowerCallBacks(void)
   }
 }
 
-void CCocoaPowerSyscall::DeleteOSPowerCallBacks(void)
+void CCocoaPowerSyscall::DeleteOSPowerCallBacks()
 {
   // we no longer want sleep/wake notifications
   // remove the sleep notification port from the application runloop

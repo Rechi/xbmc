@@ -14,12 +14,11 @@
 #include "guilib/WindowIDs.h"
 #include "input/actions/Action.h"
 
-CGUIWindowStartup::CGUIWindowStartup(void)
-    : CGUIWindow(WINDOW_STARTUP_ANIM, "Startup.xml")
+CGUIWindowStartup::CGUIWindowStartup() : CGUIWindow(WINDOW_STARTUP_ANIM, "Startup.xml")
 {
 }
 
-CGUIWindowStartup::~CGUIWindowStartup(void) = default;
+CGUIWindowStartup::~CGUIWindowStartup() = default;
 
 bool CGUIWindowStartup::OnAction(const CAction &action)
 {

@@ -13,7 +13,7 @@
 
 using namespace MUSIC_INFO;
 
-CMusicInfoTagLoaderSHN::CMusicInfoTagLoaderSHN(void) = default;
+CMusicInfoTagLoaderSHN::CMusicInfoTagLoaderSHN() = default;
 
 CMusicInfoTagLoaderSHN::~CMusicInfoTagLoaderSHN() = default;
 

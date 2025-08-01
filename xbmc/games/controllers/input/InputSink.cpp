@@ -17,7 +17,7 @@ CInputSink::CInputSink(JOYSTICK::IInputHandler* gameInput) : m_gameInput(gameInp
 {
 }
 
-std::string CInputSink::ControllerID(void) const
+std::string CInputSink::ControllerID() const
 {
   return DEFAULT_CONTROLLER_ID;
 }

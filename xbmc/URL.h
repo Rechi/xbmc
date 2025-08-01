@@ -24,7 +24,7 @@ public:
   explicit CURL(std::string strURL) { Parse(std::move(strURL)); }
 
   CURL() = default;
-  virtual ~CURL(void);
+  virtual ~CURL();
 
   // explicit equals operator for std::string comparison
   bool operator==(const std::string &url) const { return Get() == url; }

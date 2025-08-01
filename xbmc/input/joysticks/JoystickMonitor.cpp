@@ -99,7 +99,7 @@ bool CJoystickMonitor::OnThrottleMotion(const FeatureName& feature,
   return false;
 }
 
-bool CJoystickMonitor::ResetTimers(void)
+bool CJoystickMonitor::ResetTimers()
 {
   auto& components = CServiceBroker::GetAppComponents();
   const auto appPower = components.GetComponent<CApplicationPowerHandling>();

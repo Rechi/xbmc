@@ -45,7 +45,7 @@ static const char *options = "hs:umt:vxa:z:";
 
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-void usage(void)
+void usage()
 {
   printf("%s (version %s)\n", PROGNAME, PROGVERS);
   printf("   Sends Apple Remote events to Kodi.\n\n");

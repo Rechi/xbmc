@@ -45,18 +45,18 @@ class CPeripheralBus : protected CThread
 {
 public:
   CPeripheralBus(const std::string& threadname, CPeripherals& manager, PeripheralBusType type);
-  ~CPeripheralBus(void) override { Clear(); }
+  ~CPeripheralBus() override { Clear(); }
 
   /*!
    * @return The bus type
    */
-  PeripheralBusType Type(void) const { return m_type; }
+  PeripheralBusType Type() const { return m_type; }
 
   /*!
    * @return True if this bus needs to be polled for changes, false if this bus performs updates via
    * callbacks
    */
-  bool NeedsPolling(void) const
+  bool NeedsPolling() const
   {
     std::unique_lock lock(m_critSection);
     return m_bNeedsPolling;
@@ -149,17 +149,17 @@ public:
   /*!
    * @brief Initialise this bus and start a polling thread if this bus needs polling.
    */
-  virtual void Initialise(void);
+  virtual void Initialise();
 
   /*!
    * @brief Stop the polling thread and clear all known devices on this bus.
    */
-  virtual void Clear(void);
+  virtual void Clear();
 
   /*!
    * @brief Scan for devices.
    */
-  virtual void TriggerDeviceScan(void);
+  virtual void TriggerDeviceScan();
 
   /*!
    * @brief Get all fileitems for a path.
@@ -186,7 +186,7 @@ public:
   /*!
    * \brief Poll for events
    */
-  virtual void ProcessEvents(void) {}
+  virtual void ProcessEvents() {}
 
   /*!
    * \brief Initialize button mapping
@@ -201,8 +201,8 @@ public:
   virtual void PowerOff(const std::string& strLocation) {}
 
 protected:
-  void Process(void) override;
-  virtual bool ScanForDevices(void);
+  void Process() override;
+  virtual bool ScanForDevices();
   virtual void UnregisterRemovedDevices(const PeripheralScanResults& results);
   virtual void RegisterNewDevices(const PeripheralScanResults& results);
 

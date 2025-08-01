@@ -28,7 +28,7 @@ namespace KODI::VIDEO
 
   protected:
     // No instancing of this class
-    CVideoInfoTagLoaderFactory(void) = delete;
+    CVideoInfoTagLoaderFactory() = delete;
     virtual ~CVideoInfoTagLoaderFactory() = delete;
   };
   } // namespace KODI::VIDEO

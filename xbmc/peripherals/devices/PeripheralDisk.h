@@ -21,6 +21,6 @@ public:
   CPeripheralDisk(CPeripherals& manager,
                   const PeripheralScanResult& scanResult,
                   CPeripheralBus* bus);
-  ~CPeripheralDisk(void) override = default;
+  ~CPeripheralDisk() override = default;
 };
 } // namespace PERIPHERALS

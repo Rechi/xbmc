@@ -24,14 +24,14 @@ namespace MOUSE
 class IMouseInputHandler
 {
 public:
-  virtual ~IMouseInputHandler(void) = default;
+  virtual ~IMouseInputHandler() = default;
 
   /*!
    * \brief The controller profile for this mouse input handler
    *
    * \return The ID of the add-on extending kodi.game.controller
    */
-  virtual std::string ControllerID(void) const = 0;
+  virtual std::string ControllerID() const = 0;
 
   /*!
    * \brief A relative pointer has moved to a new absolute position

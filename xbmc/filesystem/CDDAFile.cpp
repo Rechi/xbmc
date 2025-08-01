@@ -21,13 +21,13 @@
 using namespace MEDIA_DETECT;
 using namespace XFILE;
 
-CFileCDDA::CFileCDDA(void) : m_cdio(CLibcdio::GetInstance())
+CFileCDDA::CFileCDDA() : m_cdio(CLibcdio::GetInstance())
 {
   m_pCdIo = NULL;
   m_iSectorCount = 52;
 }
 
-CFileCDDA::~CFileCDDA(void)
+CFileCDDA::~CFileCDDA()
 {
   Close();
 }

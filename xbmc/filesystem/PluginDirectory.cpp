@@ -60,7 +60,7 @@ CPluginDirectory::CPluginDirectory()
 {
 }
 
-CPluginDirectory::~CPluginDirectory(void)
+CPluginDirectory::~CPluginDirectory()
 {
 }
 

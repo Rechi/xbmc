@@ -14,7 +14,7 @@ CEventLockHandle::CEventLockHandle(IEventLockCallback& callback) : m_callback(ca
 {
 }
 
-CEventLockHandle::~CEventLockHandle(void)
+CEventLockHandle::~CEventLockHandle()
 {
   m_callback.ReleaseLock(*this);
 }

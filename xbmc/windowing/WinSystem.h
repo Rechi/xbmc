@@ -177,7 +177,7 @@ public:
   virtual bool HasCalibration(const RESOLUTION_INFO& resInfo) { return true; }
 
   // text input interface
-  virtual std::string GetClipboardText(void);
+  virtual std::string GetClipboardText();
 
   // Display event callback
   virtual void Register(IDispResource *resource) = 0;

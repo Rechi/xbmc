@@ -19,9 +19,9 @@
 using namespace XFILE;
 using namespace MEDIA_DETECT;
 
-CCDDADirectory::CCDDADirectory(void) = default;
+CCDDADirectory::CCDDADirectory() = default;
 
-CCDDADirectory::~CCDDADirectory(void) = default;
+CCDDADirectory::~CCDDADirectory() = default;
 
 
 bool CCDDADirectory::GetDirectory(const CURL& url, CFileItemList &items)

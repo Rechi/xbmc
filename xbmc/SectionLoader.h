@@ -29,8 +29,8 @@ public:
     std::chrono::time_point<std::chrono::steady_clock> m_unloadDelayStartTick;
     bool m_bDelayUnload;
   };
-  CSectionLoader(void);
-  virtual ~CSectionLoader(void);
+  CSectionLoader();
+  virtual ~CSectionLoader();
 
   static LibraryLoader* LoadDLL(const std::string& strSection, bool bDelayUnload=true, bool bLoadSymbols=false);
   static void UnloadDLL(const std::string& strSection);

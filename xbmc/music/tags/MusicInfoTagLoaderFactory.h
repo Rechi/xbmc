@@ -17,7 +17,7 @@ namespace MUSIC_INFO
   class CMusicInfoTagLoaderFactory
   {
     public:
-      CMusicInfoTagLoaderFactory(void);
+      CMusicInfoTagLoaderFactory();
       virtual ~CMusicInfoTagLoaderFactory();
 
       static IMusicInfoTagLoader* CreateLoader(const CFileItem& item);

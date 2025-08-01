@@ -377,7 +377,7 @@ bool CWinSystemTVOS::InitDisplayLink(CVideoSyncTVos* syncImpl)
   return m_pDisplayLink->impl != nil;
 }
 
-void CWinSystemTVOS::DeinitDisplayLink(void)
+void CWinSystemTVOS::DeinitDisplayLink()
 {
   if (m_pDisplayLink->impl)
   {

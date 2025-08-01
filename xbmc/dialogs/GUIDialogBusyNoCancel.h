@@ -13,8 +13,8 @@
 class CGUIDialogBusyNoCancel: public CGUIDialog
 {
 public:
-  CGUIDialogBusyNoCancel(void);
-  ~CGUIDialogBusyNoCancel(void) override;
+  CGUIDialogBusyNoCancel();
+  ~CGUIDialogBusyNoCancel() override;
   void DoProcess(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;
   void Render() override;
 

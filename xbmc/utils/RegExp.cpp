@@ -564,7 +564,7 @@ inline bool CRegExp::IsValidSubNumber(int iSub) const
 }
 
 
-bool CRegExp::IsUtf8Supported(void)
+bool CRegExp::IsUtf8Supported()
 {
   if (m_Utf8Supported == -1)
   {
@@ -575,7 +575,7 @@ bool CRegExp::IsUtf8Supported(void)
   return m_Utf8Supported == 1;
 }
 
-bool CRegExp::AreUnicodePropertiesSupported(void)
+bool CRegExp::AreUnicodePropertiesSupported()
 {
   if (m_UcpSupported == -1)
   {
@@ -586,7 +586,7 @@ bool CRegExp::AreUnicodePropertiesSupported(void)
   return m_UcpSupported == 1;
 }
 
-bool CRegExp::LogCheckUtf8Support(void)
+bool CRegExp::LogCheckUtf8Support()
 {
   bool utf8FullSupport = true;
 
@@ -616,7 +616,7 @@ bool CRegExp::LogCheckUtf8Support(void)
   return utf8FullSupport;
 }
 
-bool CRegExp::IsJitSupported(void)
+bool CRegExp::IsJitSupported()
 {
   if (m_JitSupported == -1)
   {

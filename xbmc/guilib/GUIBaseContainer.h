@@ -37,7 +37,7 @@ class CGUIBaseContainer : public IGUIContainer
 public:
   CGUIBaseContainer(int parentID, int controlID, float posX, float posY, float width, float height, ORIENTATION orientation, const CScroller& scroller, int preloadItems);
   explicit CGUIBaseContainer(const CGUIBaseContainer& other);
-  ~CGUIBaseContainer(void) override;
+  ~CGUIBaseContainer() override;
 
   bool OnAction(const CAction &action) override;
   void OnDown() override;

@@ -11,13 +11,13 @@
 #include "input/actions/Action.h"
 #include "input/actions/ActionIDs.h"
 
-CGUIDialogFullScreenInfo::CGUIDialogFullScreenInfo(void)
-    : CGUIDialog(WINDOW_DIALOG_FULLSCREEN_INFO, "DialogFullScreenInfo.xml")
+CGUIDialogFullScreenInfo::CGUIDialogFullScreenInfo()
+  : CGUIDialog(WINDOW_DIALOG_FULLSCREEN_INFO, "DialogFullScreenInfo.xml")
 {
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIDialogFullScreenInfo::~CGUIDialogFullScreenInfo(void) = default;
+CGUIDialogFullScreenInfo::~CGUIDialogFullScreenInfo() = default;
 
 bool CGUIDialogFullScreenInfo::OnAction(const CAction &action)
 {

@@ -18,8 +18,8 @@ class CGUIKeyboardFactory
 {
 
   public:
-    CGUIKeyboardFactory(void);
-    virtual ~CGUIKeyboardFactory(void);
+    CGUIKeyboardFactory();
+    virtual ~CGUIKeyboardFactory();
 
     static bool ShowAndGetInput(std::string& aTextString, bool allowEmptyResult, unsigned int autoCloseMs = 0);
     static bool ShowAndGetInput(std::string& aTextString,

@@ -81,12 +81,12 @@ public:
   explicit CXRandR(bool query=false);
   bool Query(bool force=false, bool ignoreoff=true);
   bool Query(bool force, int screennum, bool ignoreoff=true);
-  std::vector<XOutput> GetModes(void);
+  std::vector<XOutput> GetModes();
   XMode GetCurrentMode(const std::string& outputName);
   XMode GetPreferredMode(const std::string& outputName);
   XOutput *GetOutput(const std::string& outputName);
   bool SetMode(const XOutput& output, const XMode& mode);
-  void LoadCustomModeLinesToAllOutputs(void);
+  void LoadCustomModeLinesToAllOutputs();
   void SaveState();
   void SetNumScreens(unsigned int num);
   bool IsOutputConnected(const std::string& name);

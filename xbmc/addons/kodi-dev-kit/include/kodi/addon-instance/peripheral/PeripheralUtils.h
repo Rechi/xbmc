@@ -256,7 +256,7 @@ public:
   }
 
   /// @brief Destructor.
-  virtual ~Peripheral(void) = default;
+  virtual ~Peripheral() = default;
 
   /// @brief Comparison operator
   ///
@@ -275,34 +275,34 @@ public:
   /// @brief Get peripheral type.
   ///
   /// @return Type defined with @ref PERIPHERAL_TYPE
-  PERIPHERAL_TYPE Type(void) const { return m_type; }
+  PERIPHERAL_TYPE Type() const { return m_type; }
 
   /// @brief Get peripheral name.
   ///
   /// @return Name string of peripheral
-  const std::string& Name(void) const { return m_strName; }
+  const std::string& Name() const { return m_strName; }
 
   /// @brief Get peripheral vendor id.
   ///
   /// @return Vendor id
-  uint16_t VendorID(void) const { return m_vendorId; }
+  uint16_t VendorID() const { return m_vendorId; }
 
   /// @brief Get peripheral product id.
   ///
   /// @return Product id
-  uint16_t ProductID(void) const { return m_productId; }
+  uint16_t ProductID() const { return m_productId; }
 
   /// @brief Get peripheral index identifier.
   ///
   /// @return Index number
-  unsigned int Index(void) const { return m_index; }
+  unsigned int Index() const { return m_index; }
 
   /// @brief Check VID and PID are known.
   ///
   /// @return true if VID and PID are not 0
   ///
   /// @note Derived property: VID and PID are `0x0000` if unknown
-  bool IsVidPidKnown(void) const { return m_vendorId != 0 || m_productId != 0; }
+  bool IsVidPidKnown() const { return m_vendorId != 0 || m_productId != 0; }
 
   /// @brief Set peripheral type.
   ///
@@ -449,37 +449,37 @@ public:
   /// @brief Get type of event.
   ///
   /// @return Type defined with @ref PERIPHERAL_EVENT_TYPE
-  PERIPHERAL_EVENT_TYPE Type(void) const { return m_type; }
+  PERIPHERAL_EVENT_TYPE Type() const { return m_type; }
 
   /// @brief Get peripheral index.
   ///
   /// @return %Peripheral index number
-  unsigned int PeripheralIndex(void) const { return m_peripheralIndex; }
+  unsigned int PeripheralIndex() const { return m_peripheralIndex; }
 
   /// @brief Get driver index.
   ///
   /// @return Driver index number
-  unsigned int DriverIndex(void) const { return m_driverIndex; }
+  unsigned int DriverIndex() const { return m_driverIndex; }
 
   /// @brief Get button state.
   ///
   /// @return Button state as @ref JOYSTICK_STATE_BUTTON
-  JOYSTICK_STATE_BUTTON ButtonState(void) const { return m_buttonState; }
+  JOYSTICK_STATE_BUTTON ButtonState() const { return m_buttonState; }
 
   /// @brief Get hat state.
   ///
   /// @return Hat state
-  JOYSTICK_STATE_HAT HatState(void) const { return m_hatState; }
+  JOYSTICK_STATE_HAT HatState() const { return m_hatState; }
 
   /// @brief Get axis state.
   ///
   /// @return Axis state
-  JOYSTICK_STATE_AXIS AxisState(void) const { return m_axisState; }
+  JOYSTICK_STATE_AXIS AxisState() const { return m_axisState; }
 
   /// @brief Get motor state.
   ///
   /// @return Motor state
-  JOYSTICK_STATE_MOTOR MotorState(void) const { return m_motorState; }
+  JOYSTICK_STATE_MOTOR MotorState() const { return m_motorState; }
 
   /// @brief Set type of event.
   ///
@@ -629,7 +629,7 @@ public:
 
   /// @brief Destructor.
   ///
-  ~Joystick(void) override = default;
+  ~Joystick() override = default;
 
   /// @brief Copy data from another @ref Joystick class to here.
   ///
@@ -669,37 +669,37 @@ public:
   /// @brief Get provider name.
   ///
   /// @return Name of provider
-  const std::string& Provider(void) const { return m_provider; }
+  const std::string& Provider() const { return m_provider; }
 
   /// @brief Get requested port number.
   ///
   /// @return Port
-  int RequestedPort(void) const { return m_requestedPort; }
+  int RequestedPort() const { return m_requestedPort; }
 
   /// @brief Get button count.
   ///
   /// @return Button count
-  unsigned int ButtonCount(void) const { return m_buttonCount; }
+  unsigned int ButtonCount() const { return m_buttonCount; }
 
   /// @brief Get hat count.
   ///
   /// @return Hat count
-  unsigned int HatCount(void) const { return m_hatCount; }
+  unsigned int HatCount() const { return m_hatCount; }
 
   /// @brief Get axis count.
   ///
   /// @return Axis count
-  unsigned int AxisCount(void) const { return m_axisCount; }
+  unsigned int AxisCount() const { return m_axisCount; }
 
   /// @brief Get motor count.
   ///
   /// @return Motor count
-  unsigned int MotorCount(void) const { return m_motorCount; }
+  unsigned int MotorCount() const { return m_motorCount; }
 
   /// @brief Get supports power off.
   ///
   /// @return True if power off is supported, false otherwise
-  bool SupportsPowerOff(void) const { return m_supportsPowerOff; }
+  bool SupportsPowerOff() const { return m_supportsPowerOff; }
 
   /// @brief Set provider name.
   ///
@@ -847,7 +847,7 @@ public:
   ///@{
 
   /// @brief Construct an invalid driver primitive.
-  DriverPrimitive(void) = default;
+  DriverPrimitive() = default;
 
   /// @brief Construct a driver primitive representing a joystick button.
   ///
@@ -928,42 +928,42 @@ public:
   /// @brief Get type of primitive.
   ///
   /// @return The with @ref JOYSTICK_DRIVER_PRIMITIVE_TYPE defined type
-  JOYSTICK_DRIVER_PRIMITIVE_TYPE Type(void) const { return m_type; }
+  JOYSTICK_DRIVER_PRIMITIVE_TYPE Type() const { return m_type; }
 
   /// @brief Get driver index.
   ///
   /// @return Index number
-  unsigned int DriverIndex(void) const { return m_driverIndex; }
+  unsigned int DriverIndex() const { return m_driverIndex; }
 
   /// @brief Get hat direction
   ///
   /// @return The with @ref JOYSTICK_DRIVER_HAT_DIRECTION defined direction
-  JOYSTICK_DRIVER_HAT_DIRECTION HatDirection(void) const { return m_hatDirection; }
+  JOYSTICK_DRIVER_HAT_DIRECTION HatDirection() const { return m_hatDirection; }
 
   /// @brief Get center
   ///
   /// @return Center
-  int Center(void) const { return m_center; }
+  int Center() const { return m_center; }
 
   /// @brief Get semi axis direction
   ///
   /// @return With @ref JOYSTICK_DRIVER_SEMIAXIS_DIRECTION defined direction
-  JOYSTICK_DRIVER_SEMIAXIS_DIRECTION SemiAxisDirection(void) const { return m_semiAxisDirection; }
+  JOYSTICK_DRIVER_SEMIAXIS_DIRECTION SemiAxisDirection() const { return m_semiAxisDirection; }
 
   /// @brief Get range.
   ///
   /// @return Range
-  unsigned int Range(void) const { return m_range; }
+  unsigned int Range() const { return m_range; }
 
   /// @brief Get key code as string.
   ///
   /// @return Key code
-  const std::string& Keycode(void) const { return m_keycode; }
+  const std::string& Keycode() const { return m_keycode; }
 
   /// @brief Get mouse index
   ///
   /// @return With @ref JOYSTICK_DRIVER_MOUSE_INDEX defined mouse index
-  JOYSTICK_DRIVER_MOUSE_INDEX MouseIndex(void) const
+  JOYSTICK_DRIVER_MOUSE_INDEX MouseIndex() const
   {
     return static_cast<JOYSTICK_DRIVER_MOUSE_INDEX>(m_driverIndex);
   }
@@ -971,10 +971,7 @@ public:
   /// @brief Get relative pointer direction.
   ///
   /// @return With @ref JOYSTICK_DRIVER_RELPOINTER_DIRECTION defined direction
-  JOYSTICK_DRIVER_RELPOINTER_DIRECTION RelPointerDirection(void) const
-  {
-    return m_relPointerDirection;
-  }
+  JOYSTICK_DRIVER_RELPOINTER_DIRECTION RelPointerDirection() const { return m_relPointerDirection; }
 
   /// @brief Compare this with another class of this type.
   ///
@@ -1213,12 +1210,12 @@ public:
   /// @brief Get name of feature.
   ///
   /// @return Name of feature
-  const std::string& Name(void) const { return m_name; }
+  const std::string& Name() const { return m_name; }
 
   /// @brief Get name of feature.
   ///
   /// @return Type of feature defined with @ref JOYSTICK_FEATURE_TYPE
-  JOYSTICK_FEATURE_TYPE Type(void) const { return m_type; }
+  JOYSTICK_FEATURE_TYPE Type() const { return m_type; }
 
   /// @brief Check this feature is valid.
   ///
@@ -1236,7 +1233,7 @@ public:
   void SetType(JOYSTICK_FEATURE_TYPE type) { m_type = type; }
 
   /// @brief Set type as invalid.
-  void SetInvalid(void) { m_type = JOYSTICK_FEATURE_TYPE_UNKNOWN; }
+  void SetInvalid() { m_type = JOYSTICK_FEATURE_TYPE_UNKNOWN; }
 
   /// @brief Get primitive of feature by wanted type.
   ///

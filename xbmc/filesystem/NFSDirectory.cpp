@@ -40,12 +40,12 @@ using namespace XFILE;
 #define S_ISREG(m) ((m & _S_IFREG) != 0)
 #endif
 
-CNFSDirectory::CNFSDirectory(void)
+CNFSDirectory::CNFSDirectory()
 {
   gNfsConnection.AddActiveConnection();
 }
 
-CNFSDirectory::~CNFSDirectory(void)
+CNFSDirectory::~CNFSDirectory()
 {
   gNfsConnection.AddIdleConnection();
 }

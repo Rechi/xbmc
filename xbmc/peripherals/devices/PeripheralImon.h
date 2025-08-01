@@ -25,7 +25,7 @@ public:
   CPeripheralImon(CPeripherals& manager,
                   const PeripheralScanResult& scanResult,
                   CPeripheralBus* bus);
-  ~CPeripheralImon(void) override = default;
+  ~CPeripheralImon() override = default;
   bool InitialiseFeature(const PeripheralFeature feature) override;
   void OnSettingChanged(const std::string& strChangedSetting) override;
   void OnDeviceRemoved() override;

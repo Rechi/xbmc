@@ -55,7 +55,7 @@ public:
 
   CGUIImage(int parentID, int controlID, float posX, float posY, float width, float height, const CTextureInfo& texture);
   CGUIImage(const CGUIImage &left);
-  ~CGUIImage(void) override;
+  ~CGUIImage() override;
   CGUIImage* Clone() const override { return new CGUIImage(*this); }
 
   void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions) override;

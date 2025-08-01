@@ -14,8 +14,8 @@ class CGUIDialogTextViewer :
       public CGUIDialog
 {
 public:
-  CGUIDialogTextViewer(void);
-  ~CGUIDialogTextViewer(void) override;
+  CGUIDialogTextViewer();
+  ~CGUIDialogTextViewer() override;
   bool OnMessage(CGUIMessage& message) override;
   void SetText(const std::string& strText) { m_strText = strText; }
   void SetHeading(const std::string& strHeading) { m_strHeading = strHeading; }

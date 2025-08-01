@@ -15,8 +15,8 @@ namespace XFILE
   class CPlaylistDirectory : public IDirectory
   {
   public:
-    CPlaylistDirectory(void);
-    ~CPlaylistDirectory(void) override;
+    CPlaylistDirectory();
+    ~CPlaylistDirectory() override;
     bool GetDirectory(const CURL& url, CFileItemList &items) override;
     bool AllowAll() const override { return true; }
   };

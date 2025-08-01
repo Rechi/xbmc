@@ -14,8 +14,8 @@ class CGUIDialogGamepad :
       public CGUIDialogBoxBase
 {
 public:
-  CGUIDialogGamepad(void);
-  ~CGUIDialogGamepad(void) override;
+  CGUIDialogGamepad();
+  ~CGUIDialogGamepad() override;
   bool OnMessage(CGUIMessage& message) override;
   bool IsCanceled() const;
   std::string m_strUserInput;

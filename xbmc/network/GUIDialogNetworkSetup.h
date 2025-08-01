@@ -27,8 +27,8 @@ public:
     std::string addonId; //!< Addon identifier, leaved empty if inside Kodi
   };
 
-  CGUIDialogNetworkSetup(void);
-  ~CGUIDialogNetworkSetup(void) override;
+  CGUIDialogNetworkSetup();
+  ~CGUIDialogNetworkSetup() override;
   bool OnMessage(CGUIMessage& message) override;
   bool OnBack(int actionID) override;
   void OnInitWindow() override;
