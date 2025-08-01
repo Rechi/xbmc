@@ -115,7 +115,7 @@ std::unique_ptr<CTexture> CTexture::LoadFromFile(const std::string& texturePath,
       unsigned int inputBuffSize = file.ReadIcon(&inputBuff, &width, &height);
       file.Close();
       if (!inputBuffSize)
-        return NULL;
+        return nullptr;
 
       std::unique_ptr<CTexture> texture = CTexture::CreateTexture();
       texture->LoadFromMemory(width, height, width*4, XB_FMT_RGBA8, true, inputBuff);

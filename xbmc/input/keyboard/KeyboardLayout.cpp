@@ -59,7 +59,7 @@ bool CKeyboardLayout::Load(const tinyxml2::XMLElement* element)
     m_codingtable = IInputCodingTablePtr(
         CInputCodingTableFactory::CreateCodingTable(element->Attribute("codingtable")));
   else
-    m_codingtable = NULL;
+    m_codingtable = nullptr;
   while (keyboard != nullptr)
   {
     // parse modifiers keys

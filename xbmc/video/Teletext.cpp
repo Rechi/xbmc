@@ -408,7 +408,7 @@ CTeletextDecoder::CTeletextDecoder()
 
   m_teletextFont                 = CSpecialProtocol::TranslatePath(TeletextFont);
   m_TextureBuffer                = NULL;
-  m_txtCache                     = NULL;
+  m_txtCache = nullptr;
   m_Manager                      = NULL;
   m_Library                      = NULL;
   m_RenderInfo.ShowFlof          = true;
@@ -471,7 +471,7 @@ bool CTeletextDecoder::Changed()
 
 bool CTeletextDecoder::HandleAction(const CAction &action)
 {
-  if (m_txtCache == NULL)
+  if (m_txtCache == nullptr)
   {
     CLog::Log(LOGERROR, "CTeletextDecoder::HandleAction called without teletext cache");
     return false;

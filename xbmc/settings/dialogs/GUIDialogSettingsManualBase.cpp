@@ -864,7 +864,7 @@ std::shared_ptr<CSettingList> CGUIDialogSettingsManualBase::AddList(
 
   SettingList settingValues;
   if (!CSettingUtils::ValuesToList(setting, valueList, settingValues))
-    return NULL;
+    return nullptr;
   // setting the default will also set the actual value on an unchanged setting
   setting->SetDefault(settingValues);
 

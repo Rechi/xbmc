@@ -61,7 +61,7 @@ void CDVDDemuxCDDA::Dispose()
   delete m_stream;
   m_stream = NULL;
 
-  m_pInput = NULL;
+  m_pInput = nullptr;
   m_bytes  = 0;
 }
 

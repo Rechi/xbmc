@@ -282,7 +282,7 @@ void CGUILargeTextureManager::OnJobComplete(unsigned int jobID, bool success, CJ
       CImageLoader *loader = static_cast<CImageLoader*>(job);
       CLargeTexture *image = it->second;
       image->SetTexture(std::move(loader->m_texture));
-      loader->m_texture = NULL; // we want to keep the texture, and jobs are auto-deleted.
+      loader->m_texture = nullptr; // we want to keep the texture, and jobs are auto-deleted.
       m_queued.erase(it);
       m_allocated.push_back(image);
       return;

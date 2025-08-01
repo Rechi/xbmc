@@ -374,7 +374,7 @@ bool PAPlayer::QueueNextFileEx(const CFileItem &file, bool fadeIn)
   si->m_framesSent = 0;
   si->m_seekNextAtFrame = 0;
   si->m_seekFrame = -1;
-  si->m_stream = NULL;
+  si->m_stream = nullptr;
   si->m_volume = (fadeIn && m_upcomingCrossfadeMS) ? 0.0f : 1.0f;
   si->m_fadeOutTriggered = false;
   si->m_isSlaved = false;

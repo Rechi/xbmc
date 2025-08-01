@@ -1161,7 +1161,7 @@ bool CVideoPlayer::ReadPacket(DemuxPacket*& packet, CDemuxStream*& stream)
       if (stream->source == STREAM_SOURCE_NONE)
       {
         m_SelectionStreams.Clear(STREAM_NONE, STREAM_SOURCE_DEMUX_SUB);
-        m_SelectionStreams.Update(NULL, m_pSubtitleDemuxer.get());
+        m_SelectionStreams.Update(nullptr, m_pSubtitleDemuxer.get());
         UpdateContent();
       }
       return true;
@@ -1711,7 +1711,7 @@ void CVideoPlayer::Process()
           if (m_pCCDemuxer->GetNrOfStreams() != m_SelectionStreams.CountTypeOfSource(STREAM_SUBTITLE, STREAM_SOURCE_VIDEOMUX))
           {
             m_SelectionStreams.Clear(STREAM_SUBTITLE, STREAM_SOURCE_VIDEOMUX);
-            m_SelectionStreams.Update(NULL, m_pCCDemuxer.get(), "");
+            m_SelectionStreams.Update(nullptr, m_pCCDemuxer.get(), "");
             UpdateContent();
             OpenDefaultStreams(false);
           }

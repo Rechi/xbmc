@@ -451,7 +451,7 @@ CGUIWindowVideoBase::ShowInfoResult CGUIWindowVideoBase::ShowInfo(
       return (pDlgInfo->HasUpdatedThumb() || pDlgInfo->HasUpdatedItems()) ? RESULT_OK_UPDATED
                                                                           : RESULT_OK_NOT_UPDATED;
     // check if the item in the video info dialog has changed and if so, get the new item
-    else if (pDlgInfo->GetCurrentListItem() != NULL)
+    else if (pDlgInfo->GetCurrentListItem() != nullptr)
     {
       item = pDlgInfo->GetCurrentListItem();
 

@@ -150,7 +150,7 @@ void CWeatherManager::OnJobComplete(unsigned int jobID, bool success, CJob *job)
 
 void CWeatherManager::OnSettingChanged(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   const std::string settingId = setting->GetId();
@@ -166,7 +166,7 @@ void CWeatherManager::OnSettingChanged(const std::shared_ptr<const CSetting>& se
 
 void CWeatherManager::OnSettingAction(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   const std::string settingId = setting->GetId();
@@ -177,7 +177,7 @@ void CWeatherManager::OnSettingAction(const std::shared_ptr<const CSetting>& set
             CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(
                 CSettings::SETTING_WEATHER_ADDON),
             addon, AddonType::SCRIPT_WEATHER, OnlyEnabled::CHOICE_YES) &&
-        addon != NULL)
+        addon != nullptr)
     { //! @todo maybe have ShowAndGetInput return a bool if settings changed, then only reset weather if true.
       CGUIDialogAddonSettings::ShowForAddon(addon);
       Refresh();

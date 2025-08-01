@@ -385,7 +385,7 @@ void CVideoPlayerAudio::Process()
     {
       auto msg = std::static_pointer_cast<CDVDMsgAudioCodecChange>(pMsg);
       OpenStream(msg->m_hints, std::move(msg->m_codec));
-      msg->m_codec = NULL;
+      msg->m_codec = nullptr;
     }
     else if (pMsg->IsType(CDVDMsg::GENERAL_PAUSE))
     {

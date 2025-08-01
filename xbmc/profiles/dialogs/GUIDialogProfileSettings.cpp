@@ -198,7 +198,7 @@ void CGUIDialogProfileSettings::OnWindowLoaded()
 
 void CGUIDialogProfileSettings::OnSettingChanged(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   CGUIDialogSettingsManualBase::OnSettingChanged(setting);
@@ -218,7 +218,7 @@ void CGUIDialogProfileSettings::OnSettingChanged(const std::shared_ptr<const CSe
 
 void CGUIDialogProfileSettings::OnSettingAction(const std::shared_ptr<const CSetting>& setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   CGUIDialogSettingsManualBase::OnSettingAction(setting);
@@ -316,14 +316,14 @@ void CGUIDialogProfileSettings::InitializeSettings()
   CGUIDialogSettingsManualBase::InitializeSettings();
 
   const std::shared_ptr<CSettingCategory> category = AddCategory("profilesettings", -1);
-  if (category == NULL)
+  if (category == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogProfileSettings: unable to setup settings");
     return;
   }
 
   const std::shared_ptr<CSettingGroup> group = AddGroup(category);
-  if (group == NULL)
+  if (group == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogProfileSettings: unable to setup settings");
     return;
@@ -344,7 +344,7 @@ void CGUIDialogProfileSettings::InitializeSettings()
   if (!m_isDefault && m_showDetails)
   {
     const std::shared_ptr<CSettingGroup> groupMedia = AddGroup(category);
-    if (groupMedia == NULL)
+    if (groupMedia == nullptr)
     {
       CLog::Log(LOGERROR, "CGUIDialogProfileSettings: unable to setup settings");
       return;
@@ -389,13 +389,13 @@ bool CGUIDialogProfileSettings::GetProfilePath(std::string &directory, bool isDe
 void CGUIDialogProfileSettings::UpdateProfileImage()
 {
   BaseSettingControlPtr settingControl = GetSettingControl(SETTING_PROFILE_IMAGE);
-  if (settingControl != NULL && settingControl->GetControl() != NULL)
+  if (settingControl != nullptr && settingControl->GetControl() != NULL)
     SET_CONTROL_LABEL2(settingControl->GetID(), URIUtils::GetFileName(m_thumb));
 }
 
 void CGUIDialogProfileSettings::updateProfileDirectory()
 {
   BaseSettingControlPtr settingControl = GetSettingControl(SETTING_PROFILE_DIRECTORY);
-  if (settingControl != NULL && settingControl->GetControl() != NULL)
+  if (settingControl != nullptr && settingControl->GetControl() != NULL)
     SET_CONTROL_LABEL2(settingControl->GetID(), m_directory);
 }
