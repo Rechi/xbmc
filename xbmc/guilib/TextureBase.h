@@ -94,7 +94,7 @@ protected:
 
   /*! \brief Textures might be in a single/dual channel format with L/A/I/LA swizzle. DX and GLES 2.0 don't 
   handle some/all at the moment. This function can convert the texture into a traditional BGRA format.*/
-  bool ConvertToLegacy(uint32_t width, uint32_t height, uint8_t* src);
+  bool ConvertToLegacy(uint32_t width, uint32_t height, const uint8_t* src);
 
   uint32_t m_imageWidth{0};
   uint32_t m_imageHeight{0};

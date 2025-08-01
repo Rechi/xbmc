@@ -70,7 +70,7 @@ private:
   inline unsigned int DecodeMS(const uint8_t* msgElement);
   inline unsigned int DecodePTY(const uint8_t* msgElement);
   inline unsigned int DecodePTYN(uint8_t *msgElement);
-  inline unsigned int DecodeRT(uint8_t *msgElement, unsigned int len);
+  inline unsigned int DecodeRT(const uint8_t* msgElement, unsigned int len);
   inline unsigned int DecodeRTC(uint8_t *msgElement);
   inline unsigned int DecodeODA(uint8_t *msgElement, unsigned int len);
   inline unsigned int DecodeRTPlus(uint8_t *msgElement, unsigned int len);
@@ -79,9 +79,9 @@ private:
   inline unsigned int DecodeSlowLabelingCodes(const uint8_t* msgElement);
   inline unsigned int DecodeDABDynLabelCmd(const uint8_t* msgElement, unsigned int len);
   inline unsigned int DecodeDABDynLabelMsg(const uint8_t* msgElement, unsigned int len);
-  inline unsigned int DecodeAF(uint8_t *msgElement, unsigned int len);
-  inline unsigned int DecodeEonAF(uint8_t *msgElement, unsigned int len);
-  inline unsigned int DecodeTDC(uint8_t *msgElement, unsigned int len);
+  inline unsigned int DecodeAF(const uint8_t* msgElement, unsigned int len);
+  inline unsigned int DecodeEonAF(const uint8_t* msgElement, unsigned int len);
+  inline unsigned int DecodeTDC(const uint8_t* msgElement, unsigned int len);
 
   void SendTMCSignal(unsigned int flags, uint8_t *data);
   void SetRadioStyle(const std::string& genre);

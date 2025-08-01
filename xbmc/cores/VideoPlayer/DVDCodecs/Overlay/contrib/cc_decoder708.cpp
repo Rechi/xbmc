@@ -331,7 +331,7 @@ how many bytes would be consumed if these codes were supported, as defined in th
 Note: EXT1 not included */
 // C2: Extended Miscellaneous Control Codes
 //! @todo This code is completely untested due to lack of samples. Just following specs!
-int handle_708_C2 (cc708_service_decoder *decoder, unsigned char *data, int data_length)
+int handle_708_C2(cc708_service_decoder* decoder, const unsigned char* data, int data_length)
 {
   if (data[0]<=0x07) // 00-07...
     return 1; // ... Single-byte control bytes (0 additional bytes)
@@ -342,7 +342,7 @@ int handle_708_C2 (cc708_service_decoder *decoder, unsigned char *data, int data
   return 4; // 18-1F => four-byte control codes (3 additional bytes)
 }
 
-int handle_708_C3 (cc708_service_decoder *decoder, unsigned char *data, int data_length)
+int handle_708_C3(cc708_service_decoder* decoder, const unsigned char* data, int data_length)
 {
   if (data[0] < 0x80 || data[0] > 0x9F)
     CLog::Log(LOGERROR, "{} - Entry in handle_708_C3 with an out of range value", __FUNCTION__);
@@ -430,7 +430,7 @@ void process_cr (cc708_service_decoder *decoder)
   }
 }
 
-int handle_708_C0 (cc708_service_decoder *decoder, unsigned char *data, int data_length)
+int handle_708_C0(cc708_service_decoder* decoder, const unsigned char* data, int data_length)
 {
   const char *name=COMMANDS_C0[data[0]];
   if (name==NULL)
@@ -716,7 +716,7 @@ void handle_708_DFx_DefineWindow (cc708_service_decoder *decoder, int window, un
   memcpy (decoder->windows[window].commands, data+1, 6);
 }
 
-void handle_708_SWA_SetWindowAttributes (cc708_service_decoder *decoder, unsigned char *data)
+void handle_708_SWA_SetWindowAttributes(cc708_service_decoder* decoder, const unsigned char* data)
 {
   int fill_color    = (data[1]   ) & 0x3f;
   int fill_opacity  = (data[1]>>6) & 0x03;
@@ -794,7 +794,7 @@ void handle_708_DLW_DeleteWindows (cc708_service_decoder *decoder, int windows_b
 /*-------------------------------------------------------
                     WINDOW COMMANDS
   ------------------------------------------------------- */
-void handle_708_SPA_SetPenAttributes (cc708_service_decoder *decoder, unsigned char *data)
+void handle_708_SPA_SetPenAttributes(cc708_service_decoder* decoder, const unsigned char* data)
 {
   int pen_size  = (data[1]   ) & 0x3;
   int offset    = (data[1]>>2) & 0x3;
@@ -817,7 +817,7 @@ void handle_708_SPA_SetPenAttributes (cc708_service_decoder *decoder, unsigned c
   decoder->windows[decoder->current_window].pen.italic=italic;
 }
 
-void handle_708_SPC_SetPenColor (cc708_service_decoder *decoder, unsigned char *data)
+void handle_708_SPC_SetPenColor(cc708_service_decoder* decoder, const unsigned char* data)
 {
   int fg_color   = (data[1]   ) & 0x3f;
   int fg_opacity = (data[1]>>6) & 0x03;
@@ -837,8 +837,7 @@ void handle_708_SPC_SetPenColor (cc708_service_decoder *decoder, unsigned char *
   decoder->windows[decoder->current_window].pen_color.edge_color=edge_color;
 }
 
-
-void handle_708_SPL_SetPenLocation (cc708_service_decoder *decoder, unsigned char *data)
+void handle_708_SPL_SetPenLocation(cc708_service_decoder* decoder, const unsigned char* data)
 {
   int row = data[1] & 0x0f;
   int col = data[2] & 0x3f;

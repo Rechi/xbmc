@@ -1027,7 +1027,7 @@ inline void rtrim_str(std::string &text)
   }
 }
 
-unsigned int CDVDRadioRDSData::DecodeRT(uint8_t *msgElement, unsigned int len)
+unsigned int CDVDRadioRDSData::DecodeRT(const uint8_t* msgElement, unsigned int len)
 {
   m_currentInfoTag->SetPlayingRadioText(true);
 
@@ -1616,7 +1616,7 @@ unsigned int CDVDRadioRDSData::DecodeDABDynLabelMsg(const uint8_t* msgElement, u
 /*!
  *  unused processed here to have length of it
  */
-unsigned int CDVDRadioRDSData::DecodeAF(uint8_t *msgElement, unsigned int len)
+unsigned int CDVDRadioRDSData::DecodeAF(const uint8_t* msgElement, unsigned int len)
 {
   unsigned int msgElementLength = msgElement[3];
   if (msgElementLength < 3 || msgElementLength + 4 > len)
@@ -1631,7 +1631,7 @@ unsigned int CDVDRadioRDSData::DecodeAF(uint8_t *msgElement, unsigned int len)
 /*!
  *  unused processed here to have length of it
  */
-unsigned int CDVDRadioRDSData::DecodeEonAF(uint8_t *msgElement, unsigned int len)
+unsigned int CDVDRadioRDSData::DecodeEonAF(const uint8_t* msgElement, unsigned int len)
 {
   unsigned int msgElementLength = msgElement[3];
   if (msgElementLength < 4 || msgElementLength + 4 > len)
@@ -1646,7 +1646,7 @@ unsigned int CDVDRadioRDSData::DecodeEonAF(uint8_t *msgElement, unsigned int len
 /*!
  *  unused processed here to have length of it
  */
-unsigned int CDVDRadioRDSData::DecodeTDC(uint8_t *msgElement, unsigned int len)
+unsigned int CDVDRadioRDSData::DecodeTDC(const uint8_t* msgElement, unsigned int len)
 {
   unsigned int msgElementLength = msgElement[1];
   if (msgElementLength < 2 || msgElementLength+2 > len)

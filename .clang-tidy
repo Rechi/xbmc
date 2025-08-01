@@ -24,5 +24,6 @@ Checks: "\
   readability-delete-null-pointer,\
   readability-duplicate-include,\
   readability-misleading-indentation,\
+  readability-non-const-parameter,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'

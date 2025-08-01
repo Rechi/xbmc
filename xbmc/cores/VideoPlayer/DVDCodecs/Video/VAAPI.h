@@ -470,7 +470,7 @@ public:
   std::string Name() override { return "vaapi"; }
   void SetCodecControl(int flags) override;
 
-  void FFReleaseBuffer(uint8_t *data);
+  void FFReleaseBuffer(const uint8_t* data);
   static int FFGetBuffer(AVCodecContext *avctx, AVFrame *pic, int flags);
 
   static IHardwareDecoder* Create(CDVDStreamInfo &hint, CProcessInfo &processInfo, AVPixelFormat fmt);
