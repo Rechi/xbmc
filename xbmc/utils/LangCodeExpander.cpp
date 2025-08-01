@@ -170,7 +170,7 @@ bool CLangCodeExpander::ConvertToISO6392B(const std::string& strCharCode,
     return true;
 
   if (strCharCode.size() == 2)
-    return g_LangCodeExpander.ConvertISO6391ToISO6392B(strCharCode, strISO6392B, checkWin32Locales);
+    return CLangCodeExpander::ConvertISO6391ToISO6392B(strCharCode, strISO6392B, checkWin32Locales);
 
   if (strCharCode.size() == 3)
   {

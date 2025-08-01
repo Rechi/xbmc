@@ -60,7 +60,7 @@ bool CMusicDatabaseFile::Exists(const CURL& url)
 
 int CMusicDatabaseFile::Stat(const CURL& url, struct __stat64* buffer)
 {
-  return m_file.Stat(TranslateUrl(url), buffer);
+  return XFILE::CFile::Stat(TranslateUrl(url), buffer);
 }
 
 ssize_t CMusicDatabaseFile::Read(void* lpBuf, size_t uiBufSize)

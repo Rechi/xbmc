@@ -534,19 +534,17 @@ bool CAutorun::RunDisc(IDirectory* pDir,
 void CAutorun::HandleAutorun()
 {
 #if !defined(TARGET_WINDOWS) && defined(HAS_OPTICAL_DRIVE)
-  const CDetectDVDMedia& mediadetect = CServiceBroker::GetDetectDVDMedia();
-
   if (!m_bEnable)
   {
-    mediadetect.m_evAutorun.Reset();
+    MEDIA_DETECT::CDetectDVDMedia::m_evAutorun.Reset();
     return ;
   }
 
-  if (mediadetect.m_evAutorun.Wait(0ms))
+  if (MEDIA_DETECT::CDetectDVDMedia::m_evAutorun.Wait(0ms))
   {
     if (!ExecuteAutorun(""))
       CLog::Log(LOGDEBUG, "{}: Could not execute autorun", __func__);
-    mediadetect.m_evAutorun.Reset();
+    MEDIA_DETECT::CDetectDVDMedia::m_evAutorun.Reset();
   }
 #endif
 }

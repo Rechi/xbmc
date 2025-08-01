@@ -575,8 +575,8 @@ bool CApplication::Initialize()
   const std::shared_ptr<CProfileManager> profileManager = CServiceBroker::GetSettingsComponent()->GetProfileManager();
 
   profileManager->GetEventLog().Add(EventPtr(new CNotificationEvent(
-      StringUtils::Format(g_localizeStrings.Get(177), g_sysinfo.GetAppName()),
-      StringUtils::Format(g_localizeStrings.Get(178), g_sysinfo.GetAppName()),
+      StringUtils::Format(g_localizeStrings.Get(177), CSysInfo::GetAppName()),
+      StringUtils::Format(g_localizeStrings.Get(178), CSysInfo::GetAppName()),
       "special://xbmc/media/icon256x256.png", EventLevel::Basic)));
 
   m_ServiceManager->GetNetwork().WaitForNet();
@@ -2842,7 +2842,7 @@ bool CApplication::OnMessage(CGUIMessage& message)
             CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogBusy>(
                 WINDOW_DIALOG_BUSY);
         if (dialog && !dialog->IsDialogRunning())
-          dialog->WaitOnEvent(m_playerEvent);
+          CGUIDialogBusy::WaitOnEvent(m_playerEvent);
       }
 
       return true;
@@ -3705,8 +3705,8 @@ void CApplication::PrintStartupLog()
 {
   CLog::Log(LOGINFO, "-----------------------------------------------------------------------");
   CLog::Log(LOGINFO, "Starting {} ({}). Platform: {} {} {}-bit", CSysInfo::GetAppName(),
-            CSysInfo::GetVersion(), g_sysinfo.GetBuildTargetPlatformName(),
-            g_sysinfo.GetBuildTargetCpuFamily(), g_sysinfo.GetXbmcBitness());
+            CSysInfo::GetVersion(), CSysInfo::GetBuildTargetPlatformName(),
+            CSysInfo::GetBuildTargetCpuFamily(), CSysInfo::GetXbmcBitness());
 
   std::string buildType;
 #if defined(_DEBUG)
@@ -3718,27 +3718,27 @@ void CApplication::PrintStartupLog()
 #endif
 
   CLog::Log(LOGINFO, "Using {} {} x{}", buildType, CSysInfo::GetAppName(),
-            g_sysinfo.GetXbmcBitness());
+            CSysInfo::GetXbmcBitness());
   CLog::Log(LOGINFO, "{} compiled {} by {} for {} {} {}-bit {} ({})", CSysInfo::GetAppName(),
-            CSysInfo::GetBuildDate(), g_sysinfo.GetUsedCompilerNameAndVer(),
-            g_sysinfo.GetBuildTargetPlatformName(), g_sysinfo.GetBuildTargetCpuFamily(),
-            g_sysinfo.GetXbmcBitness(), g_sysinfo.GetBuildTargetPlatformVersionDecoded(),
-            g_sysinfo.GetBuildTargetPlatformVersion());
+            CSysInfo::GetBuildDate(), CSysInfo::GetUsedCompilerNameAndVer(),
+            CSysInfo::GetBuildTargetPlatformName(), CSysInfo::GetBuildTargetCpuFamily(),
+            CSysInfo::GetXbmcBitness(), CSysInfo::GetBuildTargetPlatformVersionDecoded(),
+            CSysInfo::GetBuildTargetPlatformVersion());
 
-  std::string deviceModel(g_sysinfo.GetModelName());
-  if (!g_sysinfo.GetManufacturerName().empty())
-    deviceModel = g_sysinfo.GetManufacturerName() + " " +
+  std::string deviceModel(CSysInfo::GetModelName());
+  if (!CSysInfo::GetManufacturerName().empty())
+    deviceModel = CSysInfo::GetManufacturerName() + " " +
                   (deviceModel.empty() ? std::string("device") : deviceModel);
   if (!deviceModel.empty())
     CLog::Log(LOGINFO, "Running on {} with {}, kernel: {} {} {}-bit version {}", deviceModel,
-              g_sysinfo.GetOsPrettyNameWithVersion(), g_sysinfo.GetKernelName(),
-              g_sysinfo.GetKernelCpuFamily(), g_sysinfo.GetKernelBitness(),
-              g_sysinfo.GetKernelVersionFull());
+              CSysInfo::GetOsPrettyNameWithVersion(), CSysInfo::GetKernelName(),
+              CSysInfo::GetKernelCpuFamily(), CSysInfo::GetKernelBitness(),
+              CSysInfo::GetKernelVersionFull());
   else
     CLog::Log(LOGINFO, "Running on {}, kernel: {} {} {}-bit version {}",
-              g_sysinfo.GetOsPrettyNameWithVersion(), g_sysinfo.GetKernelName(),
-              g_sysinfo.GetKernelCpuFamily(), g_sysinfo.GetKernelBitness(),
-              g_sysinfo.GetKernelVersionFull());
+              CSysInfo::GetOsPrettyNameWithVersion(), CSysInfo::GetKernelName(),
+              CSysInfo::GetKernelCpuFamily(), CSysInfo::GetKernelBitness(),
+              CSysInfo::GetKernelVersionFull());
 
   CLog::Log(LOGINFO, "FFmpeg version/source: {}", av_version_info());
 

@@ -183,7 +183,7 @@ CVariant CGUIOperations::GetStereoModeObjectFromGuiMode(const RENDER_STEREO_MODE
   const CStereoscopicsManager &stereoscopicsManager = CServiceBroker::GetGUI()->GetStereoscopicsManager();
 
   CVariant modeObj(CVariant::VariantTypeObject);
-  modeObj["mode"] = stereoscopicsManager.ConvertGuiStereoModeToString(mode);
+  modeObj["mode"] = CStereoscopicsManager::ConvertGuiStereoModeToString(mode);
   modeObj["label"] = stereoscopicsManager.GetLabelForStereoMode(mode);
   return modeObj;
 }

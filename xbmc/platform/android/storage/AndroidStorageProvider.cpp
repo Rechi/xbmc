@@ -470,7 +470,7 @@ bool CAndroidStorageProvider::GetExternalStorage(std::string& path,
   else
   {
     CJNIStorageManager manager =
-        (CJNIStorageManager)CXBMCApp::Get().getSystemService(CJNIContext::STORAGE_SERVICE);
+        (CJNIStorageManager)CJNIContext::getSystemService(CJNIContext::STORAGE_SERVICE);
     CJNIStorageVolume volume = manager.getPrimaryStorageVolume();
     path = volume.getDirectory().getAbsolutePath();
   }

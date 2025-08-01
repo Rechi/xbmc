@@ -543,7 +543,7 @@ extern "C"
       }
       object->mode = iMode;
       FILE* f = reinterpret_cast<FILE*>(object);
-      return g_emuFileWrapper.GetDescriptorByStream(f);
+      return CEmuFileWrapper::GetDescriptorByStream(f);
     }
     delete pFile;
     return -1;
@@ -551,7 +551,7 @@ extern "C"
 
   FILE* dll_freopen(const char *path, const char *mode, FILE *stream)
   {
-    if (g_emuFileWrapper.StreamIsEmulatedFile(stream))
+    if (CEmuFileWrapper::StreamIsEmulatedFile(stream))
     {
       dll_fclose(stream);
       return dll_fopen(path, mode);
@@ -684,7 +684,7 @@ extern "C"
 
   __off_t dll_lseek(int fd, __off_t lPos, int iWhence)
   {
-    if (g_emuFileWrapper.DescriptorIsEmulatedFile(fd))
+    if (CEmuFileWrapper::DescriptorIsEmulatedFile(fd))
     {
       return (__off_t)dll_lseeki64(fd, lPos, iWhence);
     }
@@ -700,7 +700,7 @@ extern "C"
 
   void dll_rewind(FILE* stream)
   {
-    int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
+    int fd = CEmuFileWrapper::GetDescriptorByStream(stream);
     if (fd >= 0)
     {
       dll_lseeki64(fd, 0, SEEK_SET);
@@ -714,7 +714,7 @@ extern "C"
   //---------------------------------------------------------------------------------------------------------
   void dll_flockfile(FILE *stream)
   {
-    int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
+    int fd = CEmuFileWrapper::GetDescriptorByStream(stream);
     if (fd >= 0)
     {
       g_emuFileWrapper.LockFileObjectByDescriptor(fd);
@@ -725,7 +725,7 @@ extern "C"
 
   int dll_ftrylockfile(FILE *stream)
   {
-    int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
+    int fd = CEmuFileWrapper::GetDescriptorByStream(stream);
     if (fd >= 0)
     {
       if (g_emuFileWrapper.TryLockFileObjectByDescriptor(fd))
@@ -738,7 +738,7 @@ extern "C"
 
   void dll_funlockfile(FILE *stream)
   {
-    int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
+    int fd = CEmuFileWrapper::GetDescriptorByStream(stream);
     if (fd >= 0)
     {
       g_emuFileWrapper.UnlockFileObjectByDescriptor(fd);
@@ -749,7 +749,7 @@ extern "C"
 
   int dll_fclose(FILE * stream)
   {
-    int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
+    int fd = CEmuFileWrapper::GetDescriptorByStream(stream);
     if (fd >= 0)
     {
       return dll_close(fd) == 0 ? 0 : EOF;
@@ -1114,7 +1114,7 @@ extern "C"
 
   int dll_fgetc(FILE* stream)
   {
-    if (g_emuFileWrapper.StreamIsEmulatedFile(stream))
+    if (CEmuFileWrapper::StreamIsEmulatedFile(stream))
     {
       // it is a emulated file
       unsigned char buf;
@@ -1130,7 +1130,7 @@ extern "C"
 
   int dll_getc(FILE* stream)
   {
-    if (g_emuFileWrapper.StreamIsEmulatedFile(stream))
+    if (CEmuFileWrapper::StreamIsEmulatedFile(stream))
     {
       // This routine is normally implemented as a macro with the same result as fgetc().
       return dll_fgetc(stream);
@@ -1175,7 +1175,7 @@ extern "C"
 
   int dll_putc(int c, FILE *stream)
   {
-    if (g_emuFileWrapper.StreamIsEmulatedFile(stream) || IS_STD_STREAM(stream))
+    if (CEmuFileWrapper::StreamIsEmulatedFile(stream) || IS_STD_STREAM(stream))
     {
       return dll_fputc(c, stream);
     }
@@ -1197,9 +1197,9 @@ extern "C"
     }
     else
     {
-      if (g_emuFileWrapper.StreamIsEmulatedFile(stream))
+      if (CEmuFileWrapper::StreamIsEmulatedFile(stream))
       {
-        int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
+        int fd = CEmuFileWrapper::GetDescriptorByStream(stream);
         if (fd >= 0)
         {
           unsigned char c = (unsigned char)character;
@@ -1222,7 +1222,7 @@ extern "C"
     }
     else
     {
-      if (g_emuFileWrapper.StreamIsEmulatedFile(stream))
+      if (CEmuFileWrapper::StreamIsEmulatedFile(stream))
       {
         size_t len = strlen(szLine);
         return dll_fwrite(static_cast<const void*>(szLine), sizeof(char), len, stream);
@@ -1235,7 +1235,7 @@ extern "C"
 
   int dll_fseek64(FILE* stream, off64_t offset, int origin)
   {
-    int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
+    int fd = CEmuFileWrapper::GetDescriptorByStream(stream);
     if (fd >= 0)
     {
       if (dll_lseeki64(fd, offset, origin) != -1)
@@ -1255,7 +1255,7 @@ extern "C"
 
   int dll_ungetc(int c, FILE* stream)
   {
-    if (g_emuFileWrapper.StreamIsEmulatedFile(stream))
+    if (CEmuFileWrapper::StreamIsEmulatedFile(stream))
     {
       // it is a emulated file
       int d;
@@ -1519,7 +1519,7 @@ extern "C"
 
   int dll_fsetpos64(FILE* stream, const fpos64_t* pos)
   {
-    int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
+    int fd = CEmuFileWrapper::GetDescriptorByStream(stream);
     if (fd >= 0)
     {
 #if !defined(TARGET_POSIX) || defined(TARGET_DARWIN) || defined(TARGET_FREEBSD) || defined(TARGET_ANDROID)
@@ -1541,7 +1541,7 @@ extern "C"
 
   int dll_fsetpos(FILE* stream, const fpos_t* pos)
   {
-    int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
+    int fd = CEmuFileWrapper::GetDescriptorByStream(stream);
     if (fd >= 0)
     {
       fpos64_t tmpPos;
@@ -1558,7 +1558,7 @@ extern "C"
 
   int dll_fileno(FILE* stream)
   {
-    int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
+    int fd = CEmuFileWrapper::GetDescriptorByStream(stream);
     if (fd >= 0)
     {
       return fd;
@@ -1585,7 +1585,7 @@ extern "C"
 
   void dll_clearerr(FILE* stream)
   {
-    if (g_emuFileWrapper.StreamIsEmulatedFile(stream))
+    if (CEmuFileWrapper::StreamIsEmulatedFile(stream))
     {
       // not implemented
     }

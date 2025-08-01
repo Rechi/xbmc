@@ -1843,7 +1843,7 @@ CDemuxStream* CDVDDemuxFFmpeg::AddStream(int streamIdx)
       AVDictionaryEntry* title = av_dict_get(pStream->metadata, "title", NULL, 0);
       if (title && title->value)
       {
-        const std::string langCode = g_LangCodeExpander.FindLanguageCodeWithSubtag(title->value);
+        const std::string langCode = CLangCodeExpander::FindLanguageCodeWithSubtag(title->value);
         if (!langCode.empty())
           stream->language = langCode;
       }

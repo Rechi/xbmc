@@ -288,9 +288,9 @@ std::string GetLocalFanart(const CFileItem& item)
     URIUtils::GetParentPath(item.GetPath(), path);
     CStackDirectory dir;
     std::string path2;
-    path2 = dir.GetStackedTitlePath(file);
+    path2 = XFILE::CStackDirectory::GetStackedTitlePath(file);
     file = URIUtils::AddFileToFolder(path, URIUtils::GetFileName(path2));
-    CFileItem fan_item(dir.GetFirstStackedFile(item.GetPath()), false);
+    CFileItem fan_item(XFILE::CStackDirectory::GetFirstStackedFile(item.GetPath()), false);
     std::string TBNFile(URIUtils::ReplaceExtension(GetTBNFile(fan_item), "-fanart"));
     file2 = URIUtils::AddFileToFolder(path, URIUtils::GetFileName(TBNFile));
   }

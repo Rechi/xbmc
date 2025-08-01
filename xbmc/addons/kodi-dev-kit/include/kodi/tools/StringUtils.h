@@ -1207,7 +1207,7 @@ public:
   inline static std::string& TrimRight(std::string& str, const char* const chars)
   {
     size_t nidx = str.find_last_not_of(chars);
-    str.erase(str.npos == nidx ? 0 : ++nidx);
+    str.erase(std::string::npos == nidx ? 0 : ++nidx);
     return str;
   }
   //----------------------------------------------------------------------------
@@ -2265,7 +2265,7 @@ public:
   {
     for (const auto& it : keywords)
     {
-      if (str.find(it) != str.npos)
+      if (str.find(it) != std::string::npos)
         return true;
     }
     return false;

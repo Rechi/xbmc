@@ -209,21 +209,21 @@ TEST_F(TestTagLoaderTagLib, SplitMBID)
   // two valid with various separators
   values.clear();
   values.emplace_back("0383dadf-2a4e-4d10-a46a-e9e041da8eb3;53b106e7-0cc6-42cc-ac95-ed8d30a3a98e");
-  std::vector<std::string> result = lib.SplitMBID(values);
+  std::vector<std::string> result = CTagLoaderTagLib::SplitMBID(values);
   EXPECT_EQ(result.size(), 2u);
   EXPECT_STREQ(result[0].c_str(), "0383dadf-2a4e-4d10-a46a-e9e041da8eb3");
   EXPECT_STREQ(result[1].c_str(), "53b106e7-0cc6-42cc-ac95-ed8d30a3a98e");
 
   values.clear();
   values.emplace_back("0383dadf-2a4e-4d10-a46a-e9e041da8eb3/53b106e7-0cc6-42cc-ac95-ed8d30a3a98e");
-  result = lib.SplitMBID(values);
+  result = CTagLoaderTagLib::SplitMBID(values);
   EXPECT_EQ(result.size(), 2u);
   EXPECT_STREQ(result[0].c_str(), "0383dadf-2a4e-4d10-a46a-e9e041da8eb3");
   EXPECT_STREQ(result[1].c_str(), "53b106e7-0cc6-42cc-ac95-ed8d30a3a98e");
 
   values.clear();
   values.emplace_back("0383dadf-2a4e-4d10-a46a-e9e041da8eb3 / 53b106e7-0cc6-42cc-ac95-ed8d30a3a98e; ");
-  result = lib.SplitMBID(values);
+  result = CTagLoaderTagLib::SplitMBID(values);
   EXPECT_EQ(result.size(), 2u);
   EXPECT_STREQ(result[0].c_str(), "0383dadf-2a4e-4d10-a46a-e9e041da8eb3");
   EXPECT_STREQ(result[1].c_str(), "53b106e7-0cc6-42cc-ac95-ed8d30a3a98e");

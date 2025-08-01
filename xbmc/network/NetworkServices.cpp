@@ -1107,7 +1107,7 @@ bool CNetworkServices::StartUPnPRenderer()
 bool CNetworkServices::IsUPnPRendererRunning()
 {
 #ifdef HAS_UPNP
-  return CUPnP::GetInstance()->IsInstantiated();
+  return CUPnP::IsInstantiated();
 #endif // HAS_UPNP
   return false;
 }
@@ -1142,7 +1142,7 @@ bool CNetworkServices::StartUPnPServer()
 bool CNetworkServices::IsUPnPServerRunning()
 {
 #ifdef HAS_UPNP
-  return CUPnP::GetInstance()->IsInstantiated();
+  return CUPnP::IsInstantiated();
 #endif // HAS_UPNP
   return false;
 }

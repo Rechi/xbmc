@@ -187,7 +187,7 @@ bool BaseYUV2RGBGLSLShader::OnEnabled()
 
       param *= m_toneMappingParam;
 
-      Matrix3x1 coefs = m_convMatrix.GetRGBYuvCoefs(AVColorSpace::AVCOL_SPC_BT709);
+      Matrix3x1 coefs = CConvertMatrix::GetRGBYuvCoefs(AVColorSpace::AVCOL_SPC_BT709);
       glUniform3f(m_hCoefsDst, coefs[0], coefs[1], coefs[2]);
       glUniform1f(m_hToneP1, param);
     }

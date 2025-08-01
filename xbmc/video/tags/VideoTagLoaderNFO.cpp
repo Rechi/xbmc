@@ -125,14 +125,14 @@ std::string CVideoTagLoaderNFO::FindNFO(const CFileItem& item,
     {
       // first try .nfo file matching first file in stack
       CStackDirectory dir;
-      std::string firstFile = dir.GetFirstStackedFile(item.GetPath());
+      std::string firstFile = XFILE::CStackDirectory::GetFirstStackedFile(item.GetPath());
       CFileItem item2;
       item2.SetPath(firstFile);
       nfoFile = FindNFO(item2, movieFolder);
       // else try .nfo file matching stacked title
       if (nfoFile.empty())
       {
-        std::string stackedTitlePath = dir.GetStackedTitlePath(item.GetPath());
+        std::string stackedTitlePath = XFILE::CStackDirectory::GetStackedTitlePath(item.GetPath());
         item2.SetPath(stackedTitlePath);
         nfoFile = FindNFO(item2, movieFolder);
       }

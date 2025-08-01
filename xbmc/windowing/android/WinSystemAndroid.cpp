@@ -268,7 +268,7 @@ void CWinSystemAndroid::UpdateDisplayModes()
 
 bool CWinSystemAndroid::Minimize()
 {
-  return CXBMCApp::Get().moveTaskToBack(true);
+  return CXBMCApp::moveTaskToBack(true);
 }
 
 bool CWinSystemAndroid::Hide()

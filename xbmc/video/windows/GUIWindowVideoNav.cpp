@@ -392,8 +392,8 @@ bool CGUIWindowVideoNav::GetDirectory(const std::string &strDirectory, CFileItem
     {
       XFILE::CVideoDatabaseDirectory dir;
       CQueryParams params;
-      dir.GetQueryParams(items.GetPath(),params);
-      const auto node = dir.GetDirectoryChildType(items.GetPath());
+      XFILE::CVideoDatabaseDirectory::GetQueryParams(items.GetPath(), params);
+      const auto node = XFILE::CVideoDatabaseDirectory::GetDirectoryChildType(items.GetPath());
 
       int iFlatten = CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(CSettings::SETTING_VIDEOLIBRARY_FLATTENTVSHOWS);
       int itemsSize = items.GetObjectCount();
@@ -579,7 +579,7 @@ void CGUIWindowVideoNav::UpdateButtons()
   else if (VIDEO::IsVideoDb(*m_vecItems))
   {
     CVideoDatabaseDirectory dir;
-    dir.GetLabel(m_vecItems->GetPath(), strLabel);
+    XFILE::CVideoDatabaseDirectory::GetLabel(m_vecItems->GetPath(), strLabel);
   }
   else
     strLabel = URIUtils::GetFileName(m_vecItems->GetPath());
@@ -681,19 +681,21 @@ void CGUIWindowVideoNav::DoSearch(const std::string& strSearch, CFileItemList& i
             [&strSearch, &tempItems, this]() { m_database.GetMoviesByPlot(strSearch, tempItems); }},
   };
 
-  std::for_each(entries.begin(), entries.end(), [this, &items, &tempItems](const auto& entry) {
-    entry.func();
-    std::string msg;
-    if (entry.prefix > 0)
-    {
-      msg = fmt::format("[{} - {}] ", g_localizeStrings.Get(entry.prefix),
-                        g_localizeStrings.Get(entry.id));
-    }
-    else
-      msg = fmt::format("[{}] ", g_localizeStrings.Get(entry.id));
+  std::for_each(entries.begin(), entries.end(),
+                [&items, &tempItems](const auto& entry)
+                {
+                  entry.func();
+                  std::string msg;
+                  if (entry.prefix > 0)
+                  {
+                    msg = fmt::format("[{} - {}] ", g_localizeStrings.Get(entry.prefix),
+                                      g_localizeStrings.Get(entry.id));
+                  }
+                  else
+                    msg = fmt::format("[{}] ", g_localizeStrings.Get(entry.id));
 
-    this->AppendAndClearSearchItems(tempItems, msg, items);
-  });
+                  CGUIWindowVideoNav::AppendAndClearSearchItems(tempItems, msg, items);
+                });
 }
 
 void CGUIWindowVideoNav::OnDeleteItem(const CFileItemPtr& pItem)
@@ -730,7 +732,7 @@ void CGUIWindowVideoNav::OnDeleteItem(const CFileItemPtr& pItem)
 
       CVideoDatabaseDirectory dir;
       CQueryParams params;
-      dir.GetQueryParams(pItem->GetPath(),params);
+      XFILE::CVideoDatabaseDirectory::GetQueryParams(pItem->GetPath(), params);
       m_database.DeleteSet(params.GetSetId());
     }
   }
@@ -761,7 +763,7 @@ void CGUIWindowVideoNav::GetContextButtons(int itemNumber, CContextButtons &butt
   CGUIWindowVideoBase::GetContextButtons(itemNumber, buttons);
 
   CVideoDatabaseDirectory dir;
-  const auto node = dir.GetDirectoryChildType(m_vecItems->GetPath());
+  const auto node = XFILE::CVideoDatabaseDirectory::GetDirectoryChildType(m_vecItems->GetPath());
 
   const std::shared_ptr<CProfileManager> profileManager = CServiceBroker::GetSettingsComponent()->GetProfileManager();
 
@@ -1086,7 +1088,7 @@ bool CGUIWindowVideoNav::ApplyWatchedFilter(CFileItemList &items)
 {
   bool listchanged = false;
   CVideoDatabaseDirectory dir;
-  auto node = dir.GetDirectoryChildType(items.GetPath());
+  auto node = XFILE::CVideoDatabaseDirectory::GetDirectoryChildType(items.GetPath());
 
   // now filter watched items as necessary
   bool filterWatched=false;

@@ -377,7 +377,7 @@ bool CFileOperations::FillFileItemList(const CVariant &parameterObject, CFileIte
       }
 
       CDirectory directory;
-      if (directory.GetDirectory(strPath, items, extensions, DIR_FLAG_DEFAULTS))
+      if (XFILE::CDirectory::GetDirectory(strPath, items, extensions, DIR_FLAG_DEFAULTS))
       {
         // Sort folders and files by filename to avoid reverse item order bug on some platforms,
         // but leave items from a playlist, smartplaylist or upnp container in order supplied
