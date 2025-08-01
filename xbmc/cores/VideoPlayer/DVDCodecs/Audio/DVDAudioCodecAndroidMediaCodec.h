@@ -35,7 +35,6 @@ public:
   static bool Register();
 
   // required overrides
-public:
   bool Open(CDVDStreamInfo &hints, CDVDCodecOptions &options) override;
   void Dispose() override;
   bool AddData(const DemuxPacket &packet) override;

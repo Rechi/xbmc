@@ -102,7 +102,6 @@ protected:
   // return true if the zeroconf daemon is running
   virtual bool IsZCdaemonRunning() { return  true; }
 
-protected:
   //singleton: we don't want to get instantiated nor copied or deleted from outside
   CZeroconf();
   CZeroconf(const CZeroconf&);

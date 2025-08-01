@@ -151,7 +151,6 @@ namespace XFILE
       bool Service(const std::string& strURL, std::string& strHTML);
       std::string GetInfoString(int infoType);
 
-    protected:
       CReadState* m_state;
       CReadState* m_oldState;
       unsigned int m_bufferSize;

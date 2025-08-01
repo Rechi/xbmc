@@ -33,7 +33,6 @@ protected:
   bool IsValidFile(const CURL& url);
   int GetTrackNum(const CURL& url);
 
-protected:
   CdIo_t* m_pCdIo;
   lsn_t m_lsnStart = CDIO_INVALID_LSN; // Start of m_iTrack in logical sector number
   lsn_t m_lsnCurrent = CDIO_INVALID_LSN; // Position inside the track in logical sector number

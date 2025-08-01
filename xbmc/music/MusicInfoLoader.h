@@ -34,7 +34,6 @@ protected:
   void LoadCache(const std::string& strFileName, CFileItemList& items);
   void SaveCache(const std::string& strFileName, const CFileItemList& items);
 
-protected:
   std::string m_strCacheFileName;
   CFileItemList* m_mapFileItems;
   MAPSONGS m_songsMap;

@@ -25,7 +25,6 @@ public:
   static void RegisterNatives(JNIEnv* env);
 
   // CJNINsdManagerDiscoveryListener interface
-public:
   void onDiscoveryStarted(const std::string& serviceType) override = 0;
   void onDiscoveryStopped(const std::string& serviceType) override = 0;
   void onServiceFound(const CJNINsdServiceInfo& serviceInfo) override = 0;

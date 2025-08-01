@@ -48,8 +48,6 @@ protected:
   {
   }
 
-protected:
-
   struct UdpCommand
   {
     struct sockaddr_in address;

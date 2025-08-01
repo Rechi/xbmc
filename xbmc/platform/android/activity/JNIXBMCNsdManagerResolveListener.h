@@ -17,7 +17,6 @@ namespace jni
 class CJNIXBMCNsdManagerResolveListener : public CJNINsdManagerResolveListener, public CJNIInterfaceImplem<CJNIXBMCNsdManagerResolveListener>
 {
 public:
-public:
   CJNIXBMCNsdManagerResolveListener();
   CJNIXBMCNsdManagerResolveListener(const CJNIXBMCNsdManagerResolveListener& other);
   explicit CJNIXBMCNsdManagerResolveListener(const jni::jhobject &object) : CJNIBase(object) {}

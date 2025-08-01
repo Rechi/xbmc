@@ -26,7 +26,6 @@ public:
   bool IsActive() { return m_isActive; }
 
   // CJNINsdManagerDiscoveryListener interface
-public:
   void onDiscoveryStarted(const std::string& serviceType) override;
   void onDiscoveryStopped(const std::string& serviceType) override;
   void onServiceFound(const jni::CJNINsdServiceInfo& serviceInfo) override;
@@ -45,7 +44,6 @@ public:
   CZeroconfBrowserAndroidResolve();
 
   // CJNINsdManagerResolveListener interface
-public:
   void onResolveFailed(const jni::CJNINsdServiceInfo& serviceInfo, int errorCode) override;
   void onServiceResolved(const jni::CJNINsdServiceInfo& serviceInfo) override;
 

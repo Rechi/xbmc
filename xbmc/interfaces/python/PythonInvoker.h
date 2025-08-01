@@ -69,7 +69,6 @@ private:
 
   static CCriticalSection s_critical;
 
-private:
   struct PyObjectDeleter
   {
     void operator()(PyObject* p) const;

@@ -51,7 +51,6 @@ namespace SOCKETS
     } saddr;
     socklen_t size;
 
-  public:
     CAddress()
     {
       memset(&saddr, 0, sizeof(saddr));
@@ -151,7 +150,6 @@ namespace SOCKETS
     virtual void SetBound(bool set=true) { m_bBound = set; }
     virtual void SetReady(bool set=true) { m_bReady = set; }
 
-  protected:
     SocketType m_Type;
     bool m_bReady;
     bool m_bBound;
