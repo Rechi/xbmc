@@ -1977,7 +1977,7 @@ void CPVRGUIInfo::CharInfoBackendNumber(std::string& strValue) const
 
 void CPVRGUIInfo::CharInfoTotalDiskSpace(std::string& strValue) const
 {
-  strValue = StringUtils::SizeToString(m_iBackendDiskTotal).c_str();
+  strValue = StringUtils::SizeToString(m_iBackendDiskTotal);
 }
 
 void CPVRGUIInfo::CharInfoSignal(std::string& strValue) const

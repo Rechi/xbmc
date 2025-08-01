@@ -2027,10 +2027,10 @@ bool CMusicInfoScanner::AddAlbumArtwork(CAlbum& album)
   for (const auto& pathpair : paths)
   {
     if (album.strPath.empty())
-      album.strPath = pathpair.first.c_str();
+      album.strPath = pathpair.first;
     else
       // When more than one album path is the common path
-      URIUtils::GetCommonPath(album.strPath, pathpair.first.c_str());
+      URIUtils::GetCommonPath(album.strPath, pathpair.first);
   }
 
   if (!album.thumbURL.HasUrls() && album.strPath.empty())
@@ -2090,7 +2090,7 @@ bool CMusicInfoScanner::AddAlbumArtwork(CAlbum& album)
       {
         // Handle thumbs separately. Get thumb for path from textures db cached during scan
         // (could be embedded or local file from multiple configurable file names)
-        CFileItem item(pathpair.first.c_str(), true);
+        CFileItem item(pathpair.first, true);
         std::string strArtType = StringUtils::Format("{}{}", "thumb", discnum);
         strArt = loader.GetCachedImage(item, "thumb");
         if (strArt.empty())

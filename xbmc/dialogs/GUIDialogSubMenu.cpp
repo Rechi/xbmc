@@ -10,8 +10,7 @@
 
 #include "guilib/GUIMessage.h"
 
-CGUIDialogSubMenu::CGUIDialogSubMenu(int id, const std::string &xmlFile)
-    : CGUIDialog(id, xmlFile.c_str())
+CGUIDialogSubMenu::CGUIDialogSubMenu(int id, const std::string& xmlFile) : CGUIDialog(id, xmlFile)
 {
 }
 

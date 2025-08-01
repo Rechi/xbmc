@@ -422,8 +422,8 @@ std::vector<std::shared_ptr<CPVREpg>> CPVREpgDatabase::GetAll()
       while (!m_pDS->eof())
       {
         int iEpgID = m_pDS->fv("idEpg").get_asInt();
-        std::string strName = m_pDS->fv("sName").get_asString().c_str();
-        std::string strScraperName = m_pDS->fv("sScraperName").get_asString().c_str();
+        std::string strName = m_pDS->fv("sName").get_asString();
+        std::string strScraperName = m_pDS->fv("sScraperName").get_asString();
 
         result.emplace_back(new CPVREpg(iEpgID, strName, strScraperName, shared_from_this()));
         m_pDS->next();

@@ -3484,7 +3484,7 @@ bool CMusicDatabase::SearchArtists(const std::string& search, CFileItemList& art
     if (nullptr == m_pDS)
       return false;
 
-    std::string strVariousArtists = g_localizeStrings.Get(340).c_str();
+    const std::string& strVariousArtists = g_localizeStrings.Get(340);
     std::string strSQL;
     if (search.size() >= MIN_FULL_SEARCH_LENGTH)
       strSQL = PrepareSQL("SELECT * FROM artist "

@@ -32,12 +32,12 @@ bool CDVDStateSerializer::DVDStateToXML(std::string& xmlstate, const DVDState& s
 
   eRoot->SetAttribute("version", DVDSTATESERIALIZER_VERSION);
 
-  AddXMLElement(*eRoot, "title", std::to_string(state.title).c_str());
-  AddXMLElement(*eRoot, "pgn", std::to_string(state.pgn).c_str());
-  AddXMLElement(*eRoot, "pgcn", std::to_string(state.pgcn).c_str());
-  AddXMLElement(*eRoot, "current_angle", std::to_string(state.current_angle).c_str());
-  AddXMLElement(*eRoot, "audio_num", std::to_string(state.audio_num).c_str());
-  AddXMLElement(*eRoot, "subp_num", std::to_string(state.subp_num).c_str());
+  AddXMLElement(*eRoot, "title", std::to_string(state.title));
+  AddXMLElement(*eRoot, "pgn", std::to_string(state.pgn));
+  AddXMLElement(*eRoot, "pgcn", std::to_string(state.pgcn));
+  AddXMLElement(*eRoot, "current_angle", std::to_string(state.current_angle));
+  AddXMLElement(*eRoot, "audio_num", std::to_string(state.audio_num));
+  AddXMLElement(*eRoot, "subp_num", std::to_string(state.subp_num));
   AddXMLElement(*eRoot, "sub_enabled", state.sub_enabled ? "true" : "false");
   xmlDoc.InsertEndChild(eRoot);
 

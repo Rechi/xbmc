@@ -1036,7 +1036,7 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
       std::string strFrom, strTo;
       const TiXmlNode* pFrom = pSubstitute->FirstChild("from");
       if (pFrom && !pFrom->NoChildren())
-        strFrom = CSpecialProtocol::TranslatePath(pFrom->FirstChild()->Value()).c_str();
+        strFrom = CSpecialProtocol::TranslatePath(pFrom->FirstChild()->Value());
       const TiXmlNode* pTo = pSubstitute->FirstChild("to");
       if (pTo && !pTo->NoChildren())
         strTo = pTo->FirstChild()->Value();

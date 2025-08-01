@@ -603,7 +603,7 @@ void CWebVTTHandler::GetCueSettings(std::string& cueSettings)
   else
   {
     settings.position.isAuto = false;
-    settings.position.value = std::stod(cuePos.c_str());
+    settings.position.value = std::stod(cuePos);
     if (settings.position.value > 100) // Not valid
       settings.position.value = 50;
   }
@@ -623,7 +623,7 @@ void CWebVTTHandler::GetCueSettings(std::string& cueSettings)
     settings.positionAlign = WebvttAlign::AUTO;
 
   const std::string cueSize = GetCueSettingValue("size", cueSettings, "100.00");
-  settings.size = std::stod(cueSize.c_str());
+  settings.size = std::stod(cueSize);
   if (settings.size > 100.0) // Not valid
     settings.size = 100.0;
 
@@ -644,7 +644,7 @@ void CWebVTTHandler::GetCueSettings(std::string& cueSettings)
     if (cueLinePercPos != std::string::npos)
       cueLine.pop_back(); // Remove % at the end
   }
-  settings.line.value = std::stod(cueLine.c_str());
+  settings.line.value = std::stod(cueLine);
 
   // The optional "alignment" property of "line" setting is not supported.
 

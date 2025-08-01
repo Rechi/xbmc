@@ -852,8 +852,8 @@ bool CMediaManager::playStubFile(const CFileItem& item)
   std::string strLine1, strLine2;
 
   // use generic message by default
-  strLine1 = g_localizeStrings.Get(435).c_str();
-  strLine2 = g_localizeStrings.Get(436).c_str();
+  strLine1 = g_localizeStrings.Get(435);
+  strLine2 = g_localizeStrings.Get(436);
 
   CXBMCTinyXML2 discStubXML;
   if (discStubXML.LoadFile(item.GetPath()))
