@@ -16,8 +16,7 @@
 
 using namespace KODI;
 
-CThumbLoader::CThumbLoader() :
-  CBackgroundInfoLoader()
+CThumbLoader::CThumbLoader()
 {
   m_textureDatabase = new CTextureDatabase();
 }

@@ -57,7 +57,7 @@ class CDemuxStreamClientInternalTpl : public CDemuxStreamClientInternal, public 
 {
 };
 
-CDVDDemuxClient::CDVDDemuxClient() : CDVDDemux()
+CDVDDemuxClient::CDVDDemuxClient()
 {
   m_streams.clear();
 }

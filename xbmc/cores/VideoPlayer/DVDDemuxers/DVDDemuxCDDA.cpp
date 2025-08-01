@@ -19,7 +19,7 @@ class CDemuxStreamAudioCDDA
 {
 };
 
-CDVDDemuxCDDA::CDVDDemuxCDDA() : CDVDDemux()
+CDVDDemuxCDDA::CDVDDemuxCDDA()
 {
   m_stream = NULL;
   m_bytes  = 0;

@@ -51,7 +51,7 @@ namespace
 {
 struct InfoMap
 {
-  std::string_view str{};
+  std::string_view str;
   int val{0};
 };
 

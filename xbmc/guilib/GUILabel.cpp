@@ -21,7 +21,6 @@ CGUILabel::CGUILabel(float posX,
     m_scrolling(overflow == OVER_FLOW_SCROLL),
     m_overflowType(overflow),
     m_scrollInfo(50, 0, labelInfo.scrollSpeed, labelInfo.scrollSuffix),
-    m_renderRect(),
     m_maxRect(posX, posY, posX + width, posY + height)
 {
 }

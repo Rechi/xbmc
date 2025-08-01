@@ -13,7 +13,6 @@ namespace XBMCAddon
   namespace xbmcwsgi
   {
     WsgiResponseBody::WsgiResponseBody()
-      : m_data()
     { }
 
     WsgiResponseBody::~WsgiResponseBody() = default;

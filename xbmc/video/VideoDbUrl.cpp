@@ -20,7 +20,6 @@ using namespace XFILE;
 using namespace VIDEODATABASEDIRECTORY;
 
 CVideoDbUrl::CVideoDbUrl()
-  : CDbUrl()
 { }
 
 CVideoDbUrl::~CVideoDbUrl() = default;

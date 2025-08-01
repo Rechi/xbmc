@@ -40,7 +40,7 @@ using namespace std::chrono_literals;
 
 #define EGL_NO_CONFIG (EGLConfig)0
 
-CWinSystemX11::CWinSystemX11() : CWinSystemBase()
+CWinSystemX11::CWinSystemX11()
 {
   m_dpy = NULL;
   m_bWasFullScreenBeforeMinimize = false;

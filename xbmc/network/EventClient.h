@@ -47,7 +47,7 @@ namespace EVENTCLIENT
   class CEventButtonState
   {
   public:
-    CEventButtonState() : m_iNextRepeat{}
+    CEventButtonState()
     {
       m_iKeyCode   = 0;
       m_fAmount    = 0.0f;
@@ -65,7 +65,7 @@ namespace EVENTCLIENT
                       bool isAxis,
                       bool bRepeat,
                       bool bUseAmount)
-      : m_buttonName(std::move(buttonName)), m_mapName(std::move(mapName)), m_iNextRepeat{}
+      : m_buttonName(std::move(buttonName)), m_mapName(std::move(mapName))
     {
       m_iKeyCode   = iKeyCode;
       m_fAmount    = fAmount;

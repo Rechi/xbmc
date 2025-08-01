@@ -19,8 +19,6 @@ namespace XBMCAddon
   namespace xbmcwsgi
   {
     WsgiResponse::WsgiResponse()
-      : m_responseHeaders(),
-        m_body()
     { }
 
     WsgiResponse::~WsgiResponse() = default;

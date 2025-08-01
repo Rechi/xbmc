@@ -54,7 +54,7 @@ extern HWND g_hWnd;
 #endif
 
 CExternalPlayer::CExternalPlayer(IPlayerCallback& callback)
-  : IPlayer(callback), CThread("ExternalPlayer"), m_playbackStartTime{}
+  : IPlayer(callback), CThread("ExternalPlayer")
 {
   m_bAbortRequest = false;
   m_bIsPlaying = false;

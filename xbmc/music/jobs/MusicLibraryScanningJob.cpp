@@ -10,11 +10,10 @@
 
 #include "music/MusicDatabase.h"
 
-CMusicLibraryScanningJob::CMusicLibraryScanningJob(const std::string& directory, int flags, bool showProgress /* = true */)
-  : m_scanner(),
-    m_directory(directory),
-    m_showProgress(showProgress),
-    m_flags(flags)
+CMusicLibraryScanningJob::CMusicLibraryScanningJob(const std::string& directory,
+                                                   int flags,
+                                                   bool showProgress /* = true */)
+  : m_directory(directory), m_showProgress(showProgress), m_flags(flags)
 { }
 
 CMusicLibraryScanningJob::~CMusicLibraryScanningJob() = default;

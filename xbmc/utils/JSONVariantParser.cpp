@@ -59,7 +59,7 @@ private:
 };
 
 CJSONVariantParserHandler::CJSONVariantParserHandler(CVariant& parsedObject)
-  : m_parsedObject(parsedObject), m_parse(), m_key()
+  : m_parsedObject(parsedObject)
 { }
 
 bool CJSONVariantParserHandler::null()

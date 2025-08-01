@@ -296,7 +296,7 @@ enum class InfoFormat
 
 struct InfoFormatData
 {
-  std::string_view str{};
+  std::string_view str;
   InfoFormat val{0};
 };
 

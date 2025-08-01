@@ -43,8 +43,8 @@ CGUIMultiImage::CGUIMultiImage(int parentID, int controlID, float posX, float po
   m_jobID = 0;
 }
 
-CGUIMultiImage::CGUIMultiImage(const CGUIMultiImage &from)
-  : CGUIControl(from), m_texturePath(from.m_texturePath), m_imageTimer(), m_files(), m_image(from.m_image)
+CGUIMultiImage::CGUIMultiImage(const CGUIMultiImage& from)
+  : CGUIControl(from), m_texturePath(from.m_texturePath), m_image(from.m_image)
 {
   m_timePerImage = from.m_timePerImage;
   m_timeToPauseAtEnd = from.m_timeToPauseAtEnd;

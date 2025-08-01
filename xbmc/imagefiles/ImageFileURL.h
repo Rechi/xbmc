@@ -70,7 +70,7 @@ private:
   std::string m_filePath;
   std::string m_specialType;
 
-  std::map<std::string, std::string> m_options{};
+  std::map<std::string, std::string> m_options;
 };
 
 /*!

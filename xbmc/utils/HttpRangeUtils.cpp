@@ -67,9 +67,7 @@ bool CHttpRange::IsValid() const
   return m_last >= m_first;
 }
 
-CHttpResponseRange::CHttpResponseRange()
-  : CHttpRange(),
-    m_data(NULL)
+CHttpResponseRange::CHttpResponseRange() : m_data(NULL)
 { }
 
 CHttpResponseRange::CHttpResponseRange(uint64_t firstPosition, uint64_t lastPosition)
@@ -127,7 +125,6 @@ bool CHttpResponseRange::IsValid() const
 }
 
 CHttpRanges::CHttpRanges()
-: m_ranges()
 { }
 
 CHttpRanges::CHttpRanges(const HttpRanges& httpRanges)

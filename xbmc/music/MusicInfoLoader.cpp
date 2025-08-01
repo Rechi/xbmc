@@ -35,7 +35,7 @@ using namespace MUSIC_INFO;
 using namespace XFILE;
 
 // HACK until we make this threadable - specify 1 thread only for now
-CMusicInfoLoader::CMusicInfoLoader() : CBackgroundInfoLoader()
+CMusicInfoLoader::CMusicInfoLoader()
 {
   m_mapFileItems = new CFileItemList;
 

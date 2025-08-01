@@ -231,7 +231,7 @@ std::unique_ptr<CNetworkBase> CNetworkBase::GetNetwork()
   return std::make_unique<CNetworkAndroid>();
 }
 
-CNetworkAndroid::CNetworkAndroid() : CNetworkBase(), CJNIXBMCConnectivityManagerNetworkCallback()
+CNetworkAndroid::CNetworkAndroid()
 {
   RetrieveInterfaces();
 

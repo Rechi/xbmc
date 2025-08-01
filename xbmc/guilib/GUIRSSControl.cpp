@@ -46,13 +46,10 @@ CGUIRSSControl::CGUIRSSControl(int parentID,
 
 CGUIRSSControl::CGUIRSSControl(const CGUIRSSControl& from)
   : CGUIControl(from),
-    m_feed(),
     m_strRSSTags(from.m_strRSSTags),
     m_label(from.m_label),
     m_channelColor(from.m_channelColor),
     m_headlineColor(from.m_headlineColor),
-    m_vecUrls(),
-    m_vecIntervals(),
     m_scrollInfo(from.m_scrollInfo)
 {
   m_pReader = NULL;

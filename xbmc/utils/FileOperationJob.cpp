@@ -27,23 +27,16 @@
 using namespace XFILE;
 
 CFileOperationJob::CFileOperationJob()
-  : m_items(),
-    m_strDestFile(),
-    m_avgSpeed(),
-    m_currentOperation(),
-    m_currentFile()
 { }
 
-CFileOperationJob::CFileOperationJob(FileAction action, CFileItemList & items,
-                                    const std::string& strDestFile,
-                                    bool displayProgress /* = false */,
-                                    int heading /* = 0 */, int line /* = 0 */)
+CFileOperationJob::CFileOperationJob(FileAction action,
+                                     CFileItemList& items,
+                                     const std::string& strDestFile,
+                                     bool displayProgress /* = false */,
+                                     int heading /* = 0 */,
+                                     int line /* = 0 */)
   : m_action(action),
-    m_items(),
     m_strDestFile(strDestFile),
-    m_avgSpeed(),
-    m_currentOperation(),
-    m_currentFile(),
     m_displayProgress(displayProgress),
     m_heading(heading),
     m_line(line)

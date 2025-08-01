@@ -63,7 +63,7 @@ Linux Specific Arguments:
 
 } // namespace
 
-CAppParamParserLinux::CAppParamParserLinux() : CAppParamParser()
+CAppParamParserLinux::CAppParamParserLinux()
 {
 }
 

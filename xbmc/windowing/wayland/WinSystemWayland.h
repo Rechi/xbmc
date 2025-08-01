@@ -250,7 +250,7 @@ private:
   std::atomic<float> m_latencyMovingAverage;
   CSignalHandlerList<PresentationFeedbackHandler> m_presentationFeedbackHandlers;
 
-  std::chrono::steady_clock::time_point m_frameStartTime{};
+  std::chrono::steady_clock::time_point m_frameStartTime;
 
   // IDispResource
   // -------------

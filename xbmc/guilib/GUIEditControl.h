@@ -131,7 +131,7 @@ protected:
   // visible cursor chars
   std::vector<std::uint32_t> m_cursorChars{'|'};
   // cursor char buffer
-  std::vector<std::uint32_t> m_cursorCharsBuffer{};
+  std::vector<std::uint32_t> m_cursorCharsBuffer;
 
   std::string m_inputHeading;
   INPUT_TYPE m_inputType;

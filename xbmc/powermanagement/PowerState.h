@@ -37,5 +37,5 @@ public:
   bool IsAwake() const { return !IsSleeping(); }
 
 private:
-  std::atomic_flag m_sleeping{};
+  std::atomic_flag m_sleeping;
 };

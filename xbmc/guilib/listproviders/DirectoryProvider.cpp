@@ -184,7 +184,7 @@ public:
   bool IsReadyToUse() const override { return m_pvrStarted.test(); }
 
 private:
-  std::atomic_flag m_pvrStarted{};
+  std::atomic_flag m_pvrStarted;
 };
 
 class CFavouritesSubscriber : public CDirectoryProvider::CSubscriber

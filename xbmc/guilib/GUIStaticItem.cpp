@@ -17,7 +17,7 @@
 
 using namespace KODI::GUILIB;
 
-CGUIStaticItem::CGUIStaticItem(const TiXmlElement *item, int parentID) : CFileItem()
+CGUIStaticItem::CGUIStaticItem(const TiXmlElement* item, int parentID)
 {
   m_visState = false;
 
