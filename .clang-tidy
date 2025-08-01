@@ -45,3 +45,5 @@ CheckOptions:
     value: true
   - key:   readability-simplify-boolean-expr.SimplifyDeMorgan
     value: true
+  - key:   readability-simplify-boolean-expr.SimplifyDeMorganRelaxed
+    value: true

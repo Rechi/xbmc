@@ -457,7 +457,7 @@ std::string CURL::GetWithoutOptions() const
 
   // Prevent double slash when concatenating host part and filename part
   if (!m_strFileName.empty() && (m_strFileName[0] == '/' || m_strFileName[0] == '\\') &&
-      URIUtils::HasSlashAtEnd(strGet) && !(IsProtocol("http") || IsProtocol("https")))
+      URIUtils::HasSlashAtEnd(strGet) && !IsProtocol("http") && !IsProtocol("https"))
   {
     URIUtils::RemoveSlashAtEnd(strGet);
   }

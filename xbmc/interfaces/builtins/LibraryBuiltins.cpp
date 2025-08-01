@@ -96,7 +96,7 @@ static int CleanLibrary(const std::vector<std::string>& params)
   {
     if (!CMusicLibraryQueue::GetInstance().IsScanningLibrary())
     {
-      if (!(userInitiated && CMusicLibraryQueue::GetInstance().IsRunning()))
+      if (!userInitiated || !CMusicLibraryQueue::GetInstance().IsRunning())
         CMusicLibraryQueue::GetInstance().CleanLibrary(userInitiated);
     }
     else

@@ -259,7 +259,7 @@ bool CGUIWindowVideoBase::OnItemInfo(const CFileItem& fileItem)
   bool foundDirectly = false;
   const ADDON::ScraperPtr scraper = m_database.GetScraperForPath(strDir, settings, foundDirectly);
 
-  if (!fileItem.HasVideoInfoTag() && !scraper && !(fileItem.IsPlugin() || fileItem.IsScript()) &&
+  if (!fileItem.HasVideoInfoTag() && !scraper && !fileItem.IsPlugin() && !fileItem.IsScript() &&
       !KODI::VIDEO::UTILS::HasItemVideoDbInformation(fileItem))
   {
     // We have no chance to fill a video info tag, neither scraper nor db data available.
@@ -808,7 +808,7 @@ void CGUIWindowVideoBase::GetContextButtons(int itemNumber, CContextButtons &but
       // if the item isn't a folder or script, is not explicitly marked as not playable,
       // is a member of a list rather than a single item and we're not on the last element of the list,
       // then add either 'play from here' or 'play only this' depending on default behaviour
-      if (!(item->IsFolder() || item->IsScript()) &&
+      if (!item->IsFolder() && !item->IsScript() &&
           (!item->HasProperty("IsPlayable") || item->GetProperty("IsPlayable").asBoolean()) &&
           m_vecItems->Size() > 1 && itemNumber < m_vecItems->Size() - 1)
       {
@@ -1067,7 +1067,7 @@ bool CGUIWindowVideoBase::PlayItem(const std::shared_ptr<CFileItem>& pItem,
 
   //! @todo get rid of "videos with versions as folder" hack!
   if (pItem->IsFolder() && !pItem->IsPlugin() &&
-      !(pItem->HasVideoInfoTag() && pItem->GetVideoInfoTag()->IsDefaultVideoVersion()))
+      (!pItem->HasVideoInfoTag() || !pItem->GetVideoInfoTag()->IsDefaultVideoVersion()))
   {
     // take a copy so we can alter the queue state
     const auto item{std::make_shared<CFileItem>(*pItem)};
@@ -1162,9 +1162,9 @@ bool CGUIWindowVideoBase::GetDirectory(const std::string &strDirectory, CFileIte
 bool CGUIWindowVideoBase::StackingAvailable(const CFileItemList &items)
 {
   CURL url(items.GetPath());
-  return !(items.IsPlugin() || items.IsAddonsPath() || items.IsRSS() ||
-           NETWORK::IsInternetStream(items) || VIDEO::IsVideoDb(items) ||
-           url.IsProtocol("playlistvideo"));
+  return !items.IsPlugin() && !items.IsAddonsPath() && !items.IsRSS() &&
+         !NETWORK::IsInternetStream(items) && !VIDEO::IsVideoDb(items) &&
+         !url.IsProtocol("playlistvideo");
 }
 
 void CGUIWindowVideoBase::GetGroupedItems(CFileItemList &items)

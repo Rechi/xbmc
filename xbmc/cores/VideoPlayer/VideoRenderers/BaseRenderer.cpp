@@ -216,8 +216,8 @@ void CBaseRenderer::CalcNormalRenderRect(float offsetX,
     return;
 
   // clip as needed
-  if (m_alwaysClip || !(CServiceBroker::GetWinSystem()->GetGfxContext().IsFullScreenVideo() ||
-                        CServiceBroker::GetWinSystem()->GetGfxContext().IsCalibrating()))
+  if (m_alwaysClip || (!CServiceBroker::GetWinSystem()->GetGfxContext().IsFullScreenVideo() &&
+                       !CServiceBroker::GetWinSystem()->GetGfxContext().IsCalibrating()))
   {
     CRect original(m_destRect);
     m_destRect.Intersect(CRect(offsetX, offsetY, offsetX + width, offsetY + height));

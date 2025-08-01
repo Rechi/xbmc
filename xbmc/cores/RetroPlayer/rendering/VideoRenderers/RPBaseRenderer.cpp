@@ -231,7 +231,7 @@ void CRPBaseRenderer::ManageRenderArea(const IRenderBuffer& renderBuffer)
   m_sourceRect.y2 = static_cast<float>(sourceHeight);
 
   // Clip as needed
-  if (!(m_context.IsFullScreenVideo() || m_context.IsCalibrating()))
+  if (!m_context.IsFullScreenVideo() && !m_context.IsCalibrating())
     CRenderUtils::ClipRect(viewRect, m_sourceRect, destRect);
 
   if (stretchMode == STRETCHMODE::Zoom)

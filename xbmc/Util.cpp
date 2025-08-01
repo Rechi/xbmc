@@ -2017,8 +2017,9 @@ int CUtil::ScanArchiveForAssociatedItems(const std::string& strArchivePath,
     size_t fnl = videoNameNoExt.size();
     // NOTE: We don't know if videoNameNoExt is URL-encoded, so try both
     if (fnl &&
-      !(StringUtils::StartsWithNoCase(URIUtils::GetFileName(strPathInRar), videoNameNoExt) ||
-        StringUtils::StartsWithNoCase(URIUtils::GetFileName(strPathInRar), CURL::Decode(videoNameNoExt))))
+        !StringUtils::StartsWithNoCase(URIUtils::GetFileName(strPathInRar), videoNameNoExt) &&
+        !StringUtils::StartsWithNoCase(URIUtils::GetFileName(strPathInRar),
+                                       CURL::Decode(videoNameNoExt)))
       continue;
 
     for (const auto& ext : item_exts)

@@ -168,7 +168,7 @@ public:
     }
     else if (m_isPrefForced)
     {
-      return !((ss.flags & StreamFlags::FLAG_FORCED) && isSameSubLang);
+      return !(ss.flags & StreamFlags::FLAG_FORCED) || !isSameSubLang;
     }
 
     // can fall here only when "forced" and "impaired" are disabled,

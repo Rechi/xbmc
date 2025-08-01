@@ -966,7 +966,7 @@ bool CGUIWindowFileManager::CanMove(int iList)
 {
   // can't move if the destination is not writeable, or if the source is a share or not writeable!
   if (m_Directory[0]->IsVirtualDirectoryRoot() || m_Directory[0]->IsReadOnly()) return false;
-  return !(m_Directory[1]->IsVirtualDirectoryRoot() || m_Directory[1]->IsReadOnly());
+  return !m_Directory[1]->IsVirtualDirectoryRoot() && !m_Directory[1]->IsReadOnly();
 }
 
 bool CGUIWindowFileManager::CanDelete(int iList)
