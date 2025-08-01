@@ -77,19 +77,30 @@ static AEChannel AUDIOTRACKChannelToAEChannel(int atChannel)
   AEChannel aeChannel;
 
   /* cannot use switch since CJNIAudioFormat is populated at runtime */
-
-       if (atChannel == CJNIAudioFormat::CHANNEL_OUT_FRONT_LEFT)            aeChannel = AE_CH_FL;
-  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_FRONT_RIGHT)           aeChannel = AE_CH_FR;
-  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_FRONT_CENTER)          aeChannel = AE_CH_FC;
-  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_LOW_FREQUENCY)         aeChannel = AE_CH_LFE;
-  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_BACK_LEFT)             aeChannel = AE_CH_BL;
-  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_BACK_RIGHT)            aeChannel = AE_CH_BR;
-  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_SIDE_LEFT)             aeChannel = AE_CH_SL;
-  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_SIDE_RIGHT)            aeChannel = AE_CH_SR;
-  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_FRONT_LEFT_OF_CENTER)  aeChannel = AE_CH_FLOC;
-  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_FRONT_RIGHT_OF_CENTER) aeChannel = AE_CH_FROC;
-  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_BACK_CENTER)           aeChannel = AE_CH_BC;
-  else                                                                      aeChannel = AE_CH_UNKNOWN1;
+  if (atChannel == CJNIAudioFormat::CHANNEL_OUT_FRONT_LEFT)
+    aeChannel = AE_CH_FL;
+  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_FRONT_RIGHT)
+    aeChannel = AE_CH_FR;
+  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_FRONT_CENTER)
+    aeChannel = AE_CH_FC;
+  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_LOW_FREQUENCY)
+    aeChannel = AE_CH_LFE;
+  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_BACK_LEFT)
+    aeChannel = AE_CH_BL;
+  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_BACK_RIGHT)
+    aeChannel = AE_CH_BR;
+  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_SIDE_LEFT)
+    aeChannel = AE_CH_SL;
+  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_SIDE_RIGHT)
+    aeChannel = AE_CH_SR;
+  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_FRONT_LEFT_OF_CENTER)
+    aeChannel = AE_CH_FLOC;
+  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_FRONT_RIGHT_OF_CENTER)
+    aeChannel = AE_CH_FROC;
+  else if (atChannel == CJNIAudioFormat::CHANNEL_OUT_BACK_CENTER)
+    aeChannel = AE_CH_BC;
+  else
+    aeChannel = AE_CH_UNKNOWN1;
 
   return aeChannel;
 }

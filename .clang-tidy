@@ -23,5 +23,6 @@ Checks: "\
   readability-container-size-empty,\
   readability-delete-null-pointer,\
   readability-duplicate-include,\
+  readability-misleading-indentation,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'
