@@ -30,7 +30,8 @@ public:
   ~CBackgroundPicLoader() override;
 
   void Create(CGUIWindowSlideShow *pCallback);
-  void LoadPic(int iPic, int iSlideNumber, const std::string &strFileName, const int maxWidth, const int maxHeight);
+  void LoadPic(
+      int iPic, int iSlideNumber, const std::string& strFileName, int maxWidth, int maxHeight);
   bool IsLoading() { return m_isLoading; }
   int SlideNumber() const { return m_iSlideNumber; }
   int Pic() const { return m_iPic; }

@@ -38,11 +38,11 @@ public:
   size_t m_payloadOffset{0};
 
   // Parses SEI payload assumed to not have emulation prevention 3 bytes
-  static std::vector<CHevcSei> ParseSeiRbsp(const uint8_t* buf, const size_t len);
+  static std::vector<CHevcSei> ParseSeiRbsp(const uint8_t* buf, size_t len);
 
   // Clears emulation prevention 3 bytes and fills in the passed buf
   static std::vector<CHevcSei> ParseSeiRbspUnclearedEmulation(const uint8_t* inData,
-                                                              const size_t inDataLen,
+                                                              size_t inDataLen,
                                                               std::vector<uint8_t>& buf);
 
   // Returns a HDR10+ SEI message if present in the list
@@ -55,11 +55,11 @@ public:
   //      When not empty: the new NALU containing all but the HDR10+ SEI message.
   //      Otherwise: the NALU contained only one HDR10+ SEI and can be discarded.
   static std::pair<bool, const std::vector<uint8_t>> RemoveHdr10PlusFromSeiNalu(
-      const uint8_t* inData, const size_t inDataLen);
+      const uint8_t* inData, size_t inDataLen);
 
 private:
   // Parses single SEI message from the reader and pushes it to the list
   static int ParseSeiMessage(CBitstreamReader& br, std::vector<CHevcSei>& messages);
 
-  static std::vector<CHevcSei> ParseSeiRbspInternal(const uint8_t* buf, const size_t len);
+  static std::vector<CHevcSei> ParseSeiRbspInternal(const uint8_t* buf, size_t len);
 };

@@ -119,7 +119,7 @@ public:
    * @return The number of devices that have been found.
    */
   int GetPeripheralsWithFeature(PeripheralVector& results,
-                                const PeripheralFeature feature,
+                                PeripheralFeature feature,
                                 PeripheralBusType busType = PERIPHERAL_BUS_UNKNOWN) const;
 
   size_t GetNumberOfPeripherals() const;
@@ -130,7 +130,7 @@ public:
    * @param busType The bus to query. Default (PERIPHERAL_BUS_UNKNOWN) searches all busses.
    * @return True when at least one device was found with this feature, false otherwise.
    */
-  bool HasPeripheralWithFeature(const PeripheralFeature feature,
+  bool HasPeripheralWithFeature(PeripheralFeature feature,
                                 PeripheralBusType busType = PERIPHERAL_BUS_UNKNOWN) const;
 
   /*!
@@ -165,14 +165,14 @@ public:
   /*!
    * @brief Trigger a device scan on all known busses
    */
-  void TriggerDeviceScan(const PeripheralBusType type = PERIPHERAL_BUS_UNKNOWN);
+  void TriggerDeviceScan(PeripheralBusType type = PERIPHERAL_BUS_UNKNOWN);
 
   /*!
    * @brief Get the instance of a bus given it's type.
    * @param type The bus type.
    * @return The bus or NULL if it wasn't found.
    */
-  PeripheralBusPtr GetBusByType(const PeripheralBusType type) const;
+  PeripheralBusPtr GetBusByType(PeripheralBusType type) const;
 
   /*!
    * @brief Get all fileitems for a path.
@@ -214,7 +214,7 @@ public:
    * @param mode Whether to activate, put on standby or toggle the source.
    * @return True when the playing device has been switched on, false otherwise.
    */
-  bool ToggleDeviceState(const CecStateChange mode = STATE_SWITCH_TOGGLE);
+  bool ToggleDeviceState(CecStateChange mode = STATE_SWITCH_TOGGLE);
 
   /*!
    * @brief Try to mute the audio via a peripheral.

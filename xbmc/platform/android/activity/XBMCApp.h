@@ -172,7 +172,7 @@ public:
 
   void SetDisplayMode(int mode, float rate);
   int GetDPI() const;
-  void SetVideoLayoutBackgroundColor(const int color);
+  void SetVideoLayoutBackgroundColor(int color);
 
   CRect MapRenderToDroid(const CRect& srcRect);
 

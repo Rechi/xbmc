@@ -169,7 +169,7 @@ public:
     \param name will hold the name of the profile when a valid profile index has been provided
     \return false if profileId is an invalid index, true if the name parameter is set
     */
-  bool GetProfileName(const unsigned int profileId, std::string& name) const;
+  bool GetProfileName(unsigned int profileId, std::string& name) const;
 
   std::string GetUserDataFolder() const;
   std::string GetProfileUserDataFolder() const;

@@ -63,7 +63,7 @@ public:
    * \param level Level the settings should be assigned to
    * \return True if there are visible settings belonging to the setting group, otherwise false
    */
-  bool ContainsVisibleSettings(const SettingLevel level) const;
+  bool ContainsVisibleSettings(SettingLevel level) const;
 
   void AddSetting(const std::shared_ptr<CSetting>& setting);
   void AddSettings(const SettingList &settings);

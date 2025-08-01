@@ -127,9 +127,9 @@ public:
 
   void GetStreamInfo(int pid, std::string &language);
 
-  void OverlayCallback(const BD_OVERLAY * const);
+  void OverlayCallback(const BD_OVERLAY*);
 #ifdef HAVE_LIBBLURAY_BDJ
-  void OverlayCallbackARGB(const struct bd_argb_overlay_s * const);
+  void OverlayCallbackARGB(const struct bd_argb_overlay_s*);
 #endif
 
   BLURAY_TITLE_INFO* GetTitleFromState(const std::string& xmlstate);

@@ -55,8 +55,8 @@ public:
   * except if flag READ_REOPEN is set and the underlying
   * file has an implementation of ReOpen().
   */
-  bool Open(const CURL& file, const unsigned int flags = 0);
-  bool Open(const std::string& strFileName, const unsigned int flags = 0);
+  bool Open(const CURL& file, unsigned int flags = 0);
+  bool Open(const std::string& strFileName, unsigned int flags = 0);
 
   bool OpenForWrite(const CURL& file, bool bOverWrite = false);
   bool OpenForWrite(const std::string& strFileName, bool bOverWrite = false);
@@ -120,7 +120,7 @@ public:
   const std::vector<std::string> GetPropertyValues(XFILE::FileProperty type, const std::string &name = "") const;
   ssize_t LoadFile(const std::string& filename, std::vector<uint8_t>& outputBuffer);
 
-  static int DetermineChunkSize(const int srcChunkSize, const int reqChunkSize);
+  static int DetermineChunkSize(int srcChunkSize, int reqChunkSize);
 
   const std::unique_ptr<BitstreamStats>& GetBitstreamStats() const { return m_bitStreamStats; }
 

@@ -100,7 +100,7 @@ public:
   void SetArtistSort(std::string_view strArtistsort);
   void SetComposerSort(std::string_view strComposerSort);
   void SetAlbum(const std::string& strAlbum);
-  void SetAlbumId(const int iAlbumId);
+  void SetAlbumId(int iAlbumId);
   void SetAlbumArtist(const std::string& strAlbumArtist);
   void SetAlbumArtist(const std::vector<std::string>& albumArtists, bool FillDesc = false);
   void SetAlbumArtistDesc(std::string_view strAlbumArtistDesc);

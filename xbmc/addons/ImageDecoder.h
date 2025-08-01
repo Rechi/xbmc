@@ -44,7 +44,7 @@ public:
                            unsigned int bufSize,
                            unsigned int width,
                            unsigned int height) override;
-  bool Decode(unsigned char* const pixels,
+  bool Decode(unsigned char* pixels,
               unsigned int width,
               unsigned int height,
               unsigned int pitch,

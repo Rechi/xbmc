@@ -37,8 +37,8 @@ public:
                        KODI::UTILS::COLOR::Color color,
                        CTexture* texture = nullptr,
                        const CRect* texCoords = nullptr,
-                       const float depth = 1.0,
-                       const bool blending = true);
+                       float depth = 1.0,
+                       bool blending = true);
 
   CGUITextureGLES(float posX, float posY, float width, float height, const CTextureInfo& texture);
   ~CGUITextureGLES() override = default;

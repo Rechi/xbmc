@@ -36,7 +36,7 @@ public:
                 const float2& prevTextureSize,
                 const float2& nextSize) override;
   void PrepareParameters(const RETRO::ViewportCoordinates& dest,
-                         const float2 fullDestSize,
+                         float2 fullDestSize,
                          IShaderTexture& sourceTexture,
                          const std::vector<std::unique_ptr<IShaderTexture>>& pShaderTextures,
                          const std::vector<std::unique_ptr<IShader>>& pShaders,

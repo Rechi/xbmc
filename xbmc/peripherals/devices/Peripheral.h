@@ -118,7 +118,7 @@ public:
    * @param feature The feature to check for.
    * @return True when the device has the feature, false otherwise.
    */
-  bool HasFeature(const PeripheralFeature feature) const;
+  bool HasFeature(PeripheralFeature feature) const;
 
   /*!
    * @brief Get all features that are supported by this device.

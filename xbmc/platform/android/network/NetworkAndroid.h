@@ -72,6 +72,6 @@ protected:
   std::unique_ptr<CNetworkInterface> m_defaultInterface;
 
 public:
-  void onAvailable(const CJNINetwork network) override;
-  void onLost(const CJNINetwork network) override;
+  void onAvailable(CJNINetwork network) override;
+  void onLost(CJNINetwork network) override;
 };

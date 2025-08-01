@@ -42,10 +42,10 @@ public:
   bool DeleteTempFile(XFILE::CFile *tempfile);
 
   /* Function to get path of a tempfile */
-  std::string TempFilePath(XFILE::CFile const* const tempfile);
+  std::string TempFilePath(XFILE::CFile const* tempfile);
 
   /* Get the containing directory of a tempfile */
-  std::string TempFileDirectory(XFILE::CFile const* const tempfile);
+  std::string TempFileDirectory(XFILE::CFile const* tempfile);
 
   /* Functions to get variables used in the TestFileFactory tests. */
   std::vector<std::string> &getTestFileFactoryReadUrls();

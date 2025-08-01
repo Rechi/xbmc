@@ -76,8 +76,8 @@ public:
                        KODI::UTILS::COLOR::Color color,
                        CTexture* texture = nullptr,
                        const CRect* texCoords = nullptr,
-                       const float depth = 1.0,
-                       const bool blending = true);
+                       float depth = 1.0,
+                       bool blending = true);
 
   bool Process(unsigned int currentTime);
   void Render(int32_t depthOffset = 0, int32_t overrideDepth = -1);
@@ -95,7 +95,7 @@ public:
   bool SetWidth(float width);
   bool SetHeight(float height);
   bool SetFileName(const std::string &filename);
-  void SetUseCache(const bool useCache = true);
+  void SetUseCache(bool useCache = true);
   bool SetAspectRatio(const CAspectRatio &aspect);
   void SetScalingMethod(TEXTURE_SCALING scalingMethod);
   void SetDiffuseScalingMethod(TEXTURE_SCALING scalingMethod);

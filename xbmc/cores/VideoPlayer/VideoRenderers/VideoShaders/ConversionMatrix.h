@@ -120,8 +120,8 @@ public:
 protected:
   PrimaryToXYZ() = default;
   float CalcBy(const float p[3][2], const float w[2]);
-  float CalcGy(const float p[3][2], const float w[2], const float By);
-  float CalcRy(const float By, const float Gy);
+  float CalcGy(const float p[3][2], const float w[2], float By);
+  float CalcRy(float By, float Gy);
 };
 
 class PrimaryToRGB : public PrimaryToXYZ

@@ -110,8 +110,7 @@ public:
   explicit CFileItem(const std::shared_ptr<PVR::CPVRChannelGroupMember>& channelGroupMember);
   explicit CFileItem(const std::shared_ptr<PVR::CPVRRecording>& record);
   explicit CFileItem(const std::shared_ptr<PVR::CPVRTimerInfoTag>& timer);
-  explicit CFileItem(const std::string_view path,
-                     const std::shared_ptr<PVR::CPVRProvider>& provider);
+  explicit CFileItem(std::string_view path, const std::shared_ptr<PVR::CPVRProvider>& provider);
   explicit CFileItem(const CMediaSource& share);
   explicit CFileItem(const std::shared_ptr<const ADDON::IAddon>& addonInfo);
   explicit CFileItem(const std::shared_ptr<const IEvent>& eventLogEntry);

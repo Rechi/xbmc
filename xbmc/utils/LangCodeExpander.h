@@ -45,7 +45,7 @@ public:
   void Clear();
 
   bool Lookup(const std::string& code, std::string& desc);
-  bool Lookup(const int code, std::string& desc);
+  bool Lookup(int code, std::string& desc);
 
   /** \brief Determines if two english language names represent the same language.
   *   \param[in] lang1 The first language string to compare given as english language name.

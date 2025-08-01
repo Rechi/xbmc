@@ -34,7 +34,7 @@ public:
 protected:
   void Drain();
   void SetPictureParams(VideoPicture* pVideoPicture);
-  void UpdateProcessInfo(struct AVCodecContext* avctx, const enum AVPixelFormat fmt);
+  void UpdateProcessInfo(struct AVCodecContext* avctx, enum AVPixelFormat fmt);
   static enum AVPixelFormat GetFormat(struct AVCodecContext* avctx, const enum AVPixelFormat* fmt);
   static int GetBuffer(struct AVCodecContext* avctx, AVFrame* frame, int flags);
 

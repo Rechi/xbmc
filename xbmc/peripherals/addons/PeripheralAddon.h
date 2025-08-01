@@ -62,14 +62,14 @@ public:
   void UnregisterRemovedDevices(const PeripheralScanResults& results,
                                 PeripheralVector& removedPeripherals);
   void GetFeatures(std::vector<PeripheralFeature>& features) const;
-  bool HasFeature(const PeripheralFeature feature) const;
+  bool HasFeature(PeripheralFeature feature) const;
   PeripheralPtr GetPeripheral(unsigned int index) const;
   PeripheralPtr GetByPath(const std::string& strPath) const;
   bool SupportsFeature(PeripheralFeature feature) const;
   unsigned int GetPeripheralsWithFeature(PeripheralVector& results,
-                                         const PeripheralFeature feature) const;
+                                         PeripheralFeature feature) const;
   unsigned int GetNumberOfPeripherals(void) const;
-  unsigned int GetNumberOfPeripheralsWithId(const int iVendorId, const int iProductId) const;
+  unsigned int GetNumberOfPeripheralsWithId(int iVendorId, int iProductId) const;
   void GetDirectory(const std::string& strPath, CFileItemList& items) const;
 
   /** @name Peripheral add-on methods */
@@ -134,7 +134,7 @@ private:
    */
   bool GetAddonProperties(void);
 
-  bool LogError(const PERIPHERAL_ERROR error, const char* strMethod) const;
+  bool LogError(PERIPHERAL_ERROR error, const char* strMethod) const;
 
   static std::string GetDeviceName(PeripheralType type);
   static std::string GetProvider(PeripheralType type);

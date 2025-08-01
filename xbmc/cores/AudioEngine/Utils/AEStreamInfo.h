@@ -97,6 +97,6 @@ private:
   unsigned int SyncDTS(uint8_t *data, unsigned int size);
   unsigned int SyncTrueHD(uint8_t *data, unsigned int size);
 
-  static unsigned int GetTrueHDChannels(const uint16_t chanmap);
+  static unsigned int GetTrueHDChannels(uint16_t chanmap);
 };
 

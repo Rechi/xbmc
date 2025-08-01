@@ -68,7 +68,9 @@ private:
   // functions for retrieving content based on our mask vectors
   std::string GetContent(unsigned int label, const CFileItem *item) const;
   std::string GetMaskContent(const CMaskString &mask, const CFileItem *item) const;
-  void FillMusicMaskContent(const char mask, const std::string &value, MUSIC_INFO::CMusicInfoTag *tag) const;
+  void FillMusicMaskContent(char mask,
+                            const std::string& value,
+                            MUSIC_INFO::CMusicInfoTag* tag) const;
 
   std::vector<std::string>   m_staticContent[2];
   std::vector<CMaskString>  m_dynamicContent[2];

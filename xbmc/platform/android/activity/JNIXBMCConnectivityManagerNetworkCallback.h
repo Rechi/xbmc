@@ -24,8 +24,8 @@ public:
 
   static void RegisterNatives(JNIEnv* env);
 
-  virtual void onAvailable(const CJNINetwork network) = 0;
-  virtual void onLost(const CJNINetwork network) = 0;
+  virtual void onAvailable(CJNINetwork network) = 0;
+  virtual void onLost(CJNINetwork network) = 0;
 
 protected:
   static void _onAvailable(JNIEnv* env, jobject thiz, jobject network);

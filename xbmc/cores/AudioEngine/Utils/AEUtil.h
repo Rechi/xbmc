@@ -94,17 +94,16 @@ private:
 class CAEUtil
 {
 private:
-
-  static float SoftClamp(const float x);
+  static float SoftClamp(float x);
 
 public:
-  static CAEChannelInfo          GuessChLayout     (const unsigned int channels);
-  static const char*             GetStdChLayoutName(const enum AEStdChLayout layout);
-  static unsigned int      DataFormatToBits  (const enum AEDataFormat dataFormat);
-  static unsigned int      DataFormatToUsedBits (const enum AEDataFormat dataFormat);
-  static unsigned int      DataFormatToDitherBits(const enum AEDataFormat dataFormat);
-  static const char*             DataFormatToStr   (const enum AEDataFormat dataFormat);
-  static const char* StreamTypeToStr(const enum CAEStreamInfo::DataType dataType);
+  static CAEChannelInfo GuessChLayout(unsigned int channels);
+  static const char* GetStdChLayoutName(enum AEStdChLayout layout);
+  static unsigned int DataFormatToBits(enum AEDataFormat dataFormat);
+  static unsigned int DataFormatToUsedBits(enum AEDataFormat dataFormat);
+  static unsigned int DataFormatToDitherBits(enum AEDataFormat dataFormat);
+  static const char* DataFormatToStr(enum AEDataFormat dataFormat);
+  static const char* StreamTypeToStr(enum CAEStreamInfo::DataType dataType);
 
   /*! \brief convert a volume percentage (as a proportion) to a dB gain
    We assume a dB range of 60dB, i.e. assume that 0% volume corresponds
@@ -165,8 +164,8 @@ public:
   }
 
   #if defined(HAVE_SSE) && defined(__SSE__)
-  static void SSEMulArray     (float *data, const float mul, uint32_t count);
-  static void SSEMulAddArray  (float *data, float *add, const float mul, uint32_t count);
+  static void SSEMulArray(float* data, float mul, uint32_t count);
+  static void SSEMulAddArray(float* data, float* add, float mul, uint32_t count);
   #endif
   static void ClampArray(float *data, uint32_t count);
 

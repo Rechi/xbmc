@@ -48,7 +48,7 @@ public:
   */
   void SetSelectedItem(const std::string& strSelectedItem,
                        const std::string& strDirectory,
-                       const int indexItem = -1);
+                       int indexItem = -1);
   const std::string& GetSelectedItem(const std::string& strDirectory) const;
   int GetSelectedItemIndex(const std::string& strDirectory) const;
   void RemoveSelectedItem(const std::string& strDirectory);

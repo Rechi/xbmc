@@ -109,11 +109,10 @@ public:
    * @return The number of devices that have been found.
    */
   virtual unsigned int GetPeripheralsWithFeature(PeripheralVector& results,
-                                                 const PeripheralFeature feature) const;
+                                                 PeripheralFeature feature) const;
 
   virtual unsigned int GetNumberOfPeripherals() const;
-  virtual unsigned int GetNumberOfPeripheralsWithId(const int iVendorId,
-                                                    const int iProductId) const;
+  virtual unsigned int GetNumberOfPeripheralsWithId(int iVendorId, int iProductId) const;
 
   /*!
    * @brief Get all features that are supported by devices on this bus.
@@ -126,7 +125,7 @@ public:
    * @param feature The feature to check for.
    * @return True when at least one device was found with this feature, false otherwise.
    */
-  virtual bool HasFeature(const PeripheralFeature feature) const;
+  virtual bool HasFeature(PeripheralFeature feature) const;
 
   /*!
    * @brief Callback method for when a device has been added. Will perform a device scan.

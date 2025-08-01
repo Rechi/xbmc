@@ -457,7 +457,7 @@ public:
   explicit CDecoder(CProcessInfo& processInfo);
   ~CDecoder() override;
 
-  bool Open (AVCodecContext* avctx, AVCodecContext* mainctx, const enum AVPixelFormat) override;
+  bool Open(AVCodecContext* avctx, AVCodecContext* mainctx, enum AVPixelFormat) override;
   CDVDVideoCodec::VCReturn Decode (AVCodecContext* avctx, AVFrame* frame) override;
   bool GetPicture(AVCodecContext* avctx, VideoPicture* picture) override;
   void Reset() override;

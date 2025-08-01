@@ -33,10 +33,11 @@ public:
     return checkStrForUtf8(str) != hiAscii;
   }
 
-  static size_t FindValidUtf8Char(const std::string& str, const size_t startPos = 0);
-  static size_t RFindValidUtf8Char(const std::string& str, const size_t startPos);
+  static size_t FindValidUtf8Char(const std::string& str, size_t startPos = 0);
+  static size_t RFindValidUtf8Char(const std::string& str, size_t startPos);
 
-  static size_t SizeOfUtf8Char(const std::string& str, const size_t charStart = 0);
+  static size_t SizeOfUtf8Char(const std::string& str, size_t charStart = 0);
+
 private:
-  static size_t SizeOfUtf8Char(const char* const str);
+  static size_t SizeOfUtf8Char(const char* str);
 };

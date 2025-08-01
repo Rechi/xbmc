@@ -41,7 +41,7 @@ public:
   // Implementation of IShaderPreset
   bool ReadPresetFile(const std::string& presetPath) override;
   bool RenderUpdate(const RETRO::ViewportCoordinates& dest,
-                    const float2 fullDestSize,
+                    float2 fullDestSize,
                     IShaderTexture& source,
                     IShaderTexture& target) override;
   void SetSpeed(double speed) override { m_speed = speed; }
@@ -61,7 +61,7 @@ protected:
 
   // Helper functions
   bool Update();
-  void UpdateViewPort(CRect viewPort, const float2 fullDestSize);
+  void UpdateViewPort(CRect viewPort, float2 fullDestSize);
   void UpdateMVPs();
   void PrepareParameters(const RETRO::ViewportCoordinates& dest, IShaderTexture& source);
   void CalculateScaledSize(const KODI::SHADER::ShaderPass& pass,

@@ -46,7 +46,7 @@ public:
    * \return Returns false if updating or rendering failed, true if both succeeded
    */
   virtual bool RenderUpdate(const RETRO::ViewportCoordinates& dest,
-                            const float2 fullDestSize,
+                            float2 fullDestSize,
                             IShaderTexture& source,
                             IShaderTexture& target) = 0;
 

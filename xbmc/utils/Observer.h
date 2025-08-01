@@ -38,7 +38,7 @@ public:
    * @param obs The observable that sends the message.
    * @param msg The message.
    */
-  virtual void Notify(const Observable &obs, const ObservableMessage msg) = 0;
+  virtual void Notify(const Observable& obs, ObservableMessage msg) = 0;
 };
 
 class Observable
@@ -66,7 +66,7 @@ public:
    * @brief Send a message to all observers when m_bObservableChanged is true.
    * @param message The message to send.
    */
-  virtual void NotifyObservers(const ObservableMessage message = ObservableMessageNone);
+  virtual void NotifyObservers(ObservableMessage message = ObservableMessageNone);
 
   /*!
    * @brief Mark an observable changed.
@@ -87,7 +87,7 @@ protected:
    * @param obs The observer that sends the message.
    * @param message The message to send.
    */
-  void SendMessage(const ObservableMessage message);
+  void SendMessage(ObservableMessage message);
 
   std::atomic<bool>       m_bObservableChanged{false}; /*!< true when the observable is marked as changed, false otherwise */
   std::vector<Observer *> m_observers;                 /*!< all observers */

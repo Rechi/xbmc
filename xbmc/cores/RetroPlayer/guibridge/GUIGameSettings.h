@@ -33,7 +33,7 @@ public:
   CRenderSettings GetSettings() const override;
 
   // implementation of Observer
-  void Notify(const Observable& obs, const ObservableMessage msg) override;
+  void Notify(const Observable& obs, ObservableMessage msg) override;
 
 private:
   void UpdateSettings();

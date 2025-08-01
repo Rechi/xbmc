@@ -65,12 +65,11 @@ public:
     static void   ReleaseInstance(bool bWait);
     static bool   IsInstantiated() { return upnp != NULL; }
 
-    static bool MarkWatched(const CFileItem& item,
-                            const bool watched);
+    static bool MarkWatched(const CFileItem& item, bool watched);
 
     static bool SaveFileState(const CFileItem& item,
                               const CBookmark& bookmark,
-                              const bool updatePlayCount);
+                              bool updatePlayCount);
     static bool UpdateItem(const std::string& path,
                            const CFileItem& item);
 

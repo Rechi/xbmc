@@ -273,7 +273,9 @@ public:
   static bool HasSlashAtEnd(const std::string& strFile, bool checkURL = false);
   static void RemoveSlashAtEnd(std::string& strFolder);
   static bool CompareWithoutSlashAtEnd(const std::string& strPath1, const std::string& strPath2);
-  static std::string FixSlashesAndDups(const std::string& path, const char slashCharacter = '/', const size_t startFrom = 0);
+  static std::string FixSlashesAndDups(const std::string& path,
+                                       char slashCharacter = '/',
+                                       size_t startFrom = 0);
   /**
    * Convert path to form without duplicated slashes and without relative directories
    * Strip duplicated slashes
@@ -285,7 +287,7 @@ public:
    * @param slashCharacter character to use as directory delimiter
    * @return transformed path
    */
-  static std::string CanonicalizePath(const std::string& path, const char slashCharacter = '\\');
+  static std::string CanonicalizePath(const std::string& path, char slashCharacter = '\\');
 
   static CURL CreateArchivePath(const std::string& type,
                                 const CURL& archiveUrl,

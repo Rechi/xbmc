@@ -51,7 +51,7 @@ public:
   void OnSelect() override;
 
   // Implementation of Observer
-  void Notify(const Observable& obs, const ObservableMessage msg) override;
+  void Notify(const Observable& obs, ObservableMessage msg) override;
 
 private:
   // GUI functions

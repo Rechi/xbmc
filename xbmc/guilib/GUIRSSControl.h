@@ -45,7 +45,7 @@ public:
   void OnFocus() override;
   void OnUnFocus() override;
 
-  void SetUrlSet(const int urlset);
+  void SetUrlSet(int urlset);
 
 protected:
   bool UpdateColors(const CGUIListItem* item) override;

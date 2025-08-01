@@ -45,7 +45,7 @@ public:
   void OnLateAxis(const JOYSTICK::IButtonMap* buttonMap, unsigned int axisIndex) override {}
 
   // implementation of Observer
-  void Notify(const Observable& obs, const ObservableMessage msg) override;
+  void Notify(const Observable& obs, ObservableMessage msg) override;
 
   /*!
    * \brief Show the dialog

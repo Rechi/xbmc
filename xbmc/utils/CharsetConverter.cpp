@@ -271,7 +271,7 @@ public:
   static bool logicalToVisualBiDi(const std::u32string& stringSrc,
                                   std::u32string& stringDst,
                                   FriBidiCharType base = FRIBIDI_TYPE_LTR,
-                                  const bool failOnBadString = false,
+                                  bool failOnBadString = false,
                                   int* visualToLogicalMap = nullptr);
   static bool isBidiDirectionRTL(const std::string& stringSrc);
 

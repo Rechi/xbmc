@@ -144,6 +144,6 @@ private:
 };
 
 template<>
-void CDBusMessage::AppendArgument<bool>(const bool arg);
+void CDBusMessage::AppendArgument<bool>(bool arg);
 template<>
-void CDBusMessage::AppendArgument<std::string>(const std::string arg);
+void CDBusMessage::AppendArgument<std::string>(std::string arg);
