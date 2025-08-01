@@ -16,7 +16,7 @@ using namespace KEYBOARD;
 
 namespace
 {
-static const std::map<std::string_view, XBMCKey> KeyboardSymbols = {
+const std::map<std::string_view, XBMCKey> KeyboardSymbols = {
     {KEY_SYMBOL_BACKSPACE, XBMCK_BACKSPACE},
     {KEY_SYMBOL_TAB, XBMCK_TAB},
     {KEY_SYMBOL_CLEAR, XBMCK_CLEAR},

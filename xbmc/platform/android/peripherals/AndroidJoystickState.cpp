@@ -30,7 +30,7 @@ using namespace PERIPHERALS;
 namespace
 {
 // clang-format off
-static const std::vector<int> ButtonKeycodes{
+const std::vector<int> ButtonKeycodes{
     // add the usual suspects
     AKEYCODE_BUTTON_A,
     AKEYCODE_BUTTON_B,
@@ -78,7 +78,7 @@ static const std::vector<int> ButtonKeycodes{
 // clang-format on
 
 // clang-format off
-static const std::vector<int> AxisIDs{
+const std::vector<int> AxisIDs{
     AMOTION_EVENT_AXIS_HAT_X,
     AMOTION_EVENT_AXIS_HAT_Y,
     AMOTION_EVENT_AXIS_X,
@@ -113,10 +113,7 @@ static const std::vector<int> AxisIDs{
 };
 // clang-format on
 
-static void MapAxisIds(int axisId,
-                       int primaryAxisId,
-                       int secondaryAxisId,
-                       std::vector<int>& axisIds)
+void MapAxisIds(int axisId, int primaryAxisId, int secondaryAxisId, std::vector<int>& axisIds)
 {
   if (axisId != primaryAxisId && axisId != secondaryAxisId)
     return;

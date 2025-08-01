@@ -39,13 +39,13 @@ namespace
 
 constexpr const char* SETTING_VIDEOPLAYER_USEPRIMEDECODERFORHW{"videoplayer.useprimedecoderforhw"};
 
-static void ReleaseBuffer(void* opaque, uint8_t* data)
+void ReleaseBuffer(void* opaque, uint8_t* data)
 {
   CVideoBufferDMA* buffer = static_cast<CVideoBufferDMA*>(opaque);
   buffer->Release();
 }
 
-static void AlignedSize(AVCodecContext* avctx, int& width, int& height)
+void AlignedSize(AVCodecContext* avctx, int& width, int& height)
 {
   int w = width;
   int h = height;

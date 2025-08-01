@@ -24,16 +24,13 @@ using namespace KODI::WINDOWING::WAYLAND;
 
 namespace
 {
-static const std::unordered_map<xkb_log_level, int> logLevelMap = {
+const std::unordered_map<xkb_log_level, int> logLevelMap = {
     {XKB_LOG_LEVEL_CRITICAL, LOGERROR},  {XKB_LOG_LEVEL_ERROR, LOGERROR},
     {XKB_LOG_LEVEL_WARNING, LOGWARNING}, {XKB_LOG_LEVEL_INFO, LOGINFO},
     {XKB_LOG_LEVEL_DEBUG, LOGDEBUG},
 };
 
-static void xkbLogger(xkb_context* context,
-                      xkb_log_level priority,
-                      const char* format,
-                      va_list args)
+void xkbLogger(xkb_context* context, xkb_log_level priority, const char* format, va_list args)
 {
   const std::string message = StringUtils::FormatV(format, args);
   auto logLevel = logLevelMap.find(priority);
@@ -46,7 +43,7 @@ struct ModifierNameXBMCMapping
   XBMCMod xbmc;
 };
 
-static const std::vector<ModifierNameXBMCMapping> ModifierNameXBMCMappings = {
+const std::vector<ModifierNameXBMCMapping> ModifierNameXBMCMappings = {
     {XKB_MOD_NAME_CTRL, XBMCKMOD_LCTRL},
     {XKB_MOD_NAME_SHIFT, XBMCKMOD_LSHIFT},
     {XKB_MOD_NAME_LOGO, XBMCKMOD_LSUPER},
@@ -60,7 +57,7 @@ static const std::vector<ModifierNameXBMCMapping> ModifierNameXBMCMappings = {
     {XKB_LED_NAME_NUM, XBMCKMOD_NUM},
     {XKB_LED_NAME_SCROLL, XBMCKMOD_MODE}};
 
-static const std::map<xkb_keycode_t, XBMCKey> XkbKeycodeXBMCMappings = {
+const std::map<xkb_keycode_t, XBMCKey> XkbKeycodeXBMCMappings = {
     // Function keys before start of ASCII printable character range
     {XKB_KEY_BackSpace, XBMCK_BACKSPACE},
     {XKB_KEY_Tab, XBMCK_TAB},
@@ -217,7 +214,7 @@ static const std::map<xkb_keycode_t, XBMCKey> XkbKeycodeXBMCMappings = {
 #endif
 };
 
-static const std::unordered_map<xkb_keycode_t, XBMCKey> XkbDeadKeyXBMCMapping = {
+const std::unordered_map<xkb_keycode_t, XBMCKey> XkbDeadKeyXBMCMapping = {
     {XKB_KEY_dead_grave, XBMCK_GRAVE},
     {XKB_KEY_dead_tilde, XBMCK_TILDE},
     {XKB_KEY_dead_acute, XBMCK_ACUTE},

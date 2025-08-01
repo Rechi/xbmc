@@ -30,7 +30,7 @@ std::array<const char*, 3> DMA_HEAP_PATHS = {
     "/dev/dma_heap/system",
 };
 
-static const char* DMA_HEAP_PATH;
+const char* DMA_HEAP_PATH;
 
 } // namespace
 

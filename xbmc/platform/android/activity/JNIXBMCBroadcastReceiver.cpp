@@ -17,7 +17,7 @@ using namespace jni;
 namespace
 {
 
-static std::string className = std::string(CCompileInfo::GetClass()) + "/XBMCBroadcastReceiver";
+std::string className = std::string(CCompileInfo::GetClass()) + "/XBMCBroadcastReceiver";
 
 } // namespace
 

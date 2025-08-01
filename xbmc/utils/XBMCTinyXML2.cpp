@@ -17,8 +17,8 @@
 
 namespace
 {
-static constexpr int MAX_ENTITY_LENGTH = 8; // size of largest entity "&#xNNNN;"
-static constexpr size_t BUFFER_SIZE = 4096;
+constexpr int MAX_ENTITY_LENGTH = 8; // size of largest entity "&#xNNNN;"
+constexpr size_t BUFFER_SIZE = 4096;
 } // namespace
 
 bool CXBMCTinyXML2::LoadFile(const std::string& filename)

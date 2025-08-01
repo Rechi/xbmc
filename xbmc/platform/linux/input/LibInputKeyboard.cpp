@@ -212,10 +212,7 @@ std::optional<XBMCKey> TranslateDeadKey(uint32_t keySym)
                                                  : std::nullopt;
 }
 
-static void xkbLogger(xkb_context* context,
-                      xkb_log_level priority,
-                      const char* format,
-                      va_list args)
+void xkbLogger(xkb_context* context, xkb_log_level priority, const char* format, va_list args)
 {
   const std::string message = StringUtils::FormatV(format, args);
   const auto* logLevel = logLevelMap.find(priority);

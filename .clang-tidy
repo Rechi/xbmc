@@ -35,6 +35,7 @@ Checks: "\
   readability-redundant-string-init,\
   readability-simplify-boolean-expr,\
   readability-static-accessed-through-instance,\
+  readability-static-definition-in-anonymous-namespace,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'
 CheckOptions:
