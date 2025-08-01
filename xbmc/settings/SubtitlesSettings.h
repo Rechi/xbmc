@@ -71,6 +71,7 @@ class CSubtitlesSettings : public ISettingCallback, public Observable
 {
 public:
   explicit CSubtitlesSettings(const std::shared_ptr<CSettings>& settings);
+  CSubtitlesSettings() = delete;
   ~CSubtitlesSettings() override;
 
   // Inherited from ISettingCallback
@@ -207,8 +208,6 @@ public:
                                                 std::string& current);
 
 private:
-  CSubtitlesSettings() = delete;
-
   const std::shared_ptr<CSettings> m_settings;
 };
 

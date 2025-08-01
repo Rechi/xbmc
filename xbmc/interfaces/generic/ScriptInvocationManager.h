@@ -23,6 +23,9 @@ typedef std::shared_ptr<CLanguageInvokerThread> CLanguageInvokerThreadPtr;
 class CScriptInvocationManager
 {
 public:
+  CScriptInvocationManager(const CScriptInvocationManager&) = delete;
+  CScriptInvocationManager const& operator=(CScriptInvocationManager const&) = delete;
+
   static CScriptInvocationManager& GetInstance();
 
   void Process();
@@ -131,8 +134,6 @@ protected:
 
 private:
   CScriptInvocationManager() = default;
-  CScriptInvocationManager(const CScriptInvocationManager&) = delete;
-  CScriptInvocationManager const& operator=(CScriptInvocationManager const&) = delete;
   virtual ~CScriptInvocationManager();
 
   typedef struct {

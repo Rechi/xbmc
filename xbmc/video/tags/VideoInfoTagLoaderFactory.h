@@ -18,6 +18,10 @@ namespace KODI::VIDEO
   class CVideoInfoTagLoaderFactory
   {
   public:
+    // No instancing of this class
+    CVideoInfoTagLoaderFactory() = delete;
+    virtual ~CVideoInfoTagLoaderFactory() = delete;
+
     //! \brief Returns a tag loader for the given item.
     //! \param item The item to find tag loader for
     //! \param type Type of tag loader. In particular used for tvshows
@@ -25,10 +29,5 @@ namespace KODI::VIDEO
                                              const ADDON::ScraperPtr& info,
                                              bool lookInFolder,
                                              bool forceRefresh = false);
-
-  protected:
-    // No instancing of this class
-    CVideoInfoTagLoaderFactory() = delete;
-    virtual ~CVideoInfoTagLoaderFactory() = delete;
   };
   } // namespace KODI::VIDEO

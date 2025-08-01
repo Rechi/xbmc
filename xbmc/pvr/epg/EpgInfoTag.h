@@ -63,6 +63,10 @@ public:
                  const CDateTime& end,
                  bool bIsGapTag);
 
+  CPVREpgInfoTag() = delete;
+  CPVREpgInfoTag(const CPVREpgInfoTag& tag) = delete;
+  CPVREpgInfoTag& operator=(const CPVREpgInfoTag& other) = delete;
+
   /*!
    * @brief Create a new EPG infotag.
    * @param iEpgID The id of the EPG this tag belongs to.
@@ -504,10 +508,6 @@ public:
   static std::string DeTokenize(const std::vector<std::string>& tokens);
 
 private:
-  CPVREpgInfoTag() = delete;
-  CPVREpgInfoTag(const CPVREpgInfoTag& tag) = delete;
-  CPVREpgInfoTag& operator=(const CPVREpgInfoTag& other) = delete;
-
   /*!
      * @brief Get current time, taking timeshifting into account.
      * @return The playing time.

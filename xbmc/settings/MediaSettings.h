@@ -34,6 +34,9 @@ enum WatchedMode
 class CMediaSettings : public ISettingCallback, public ISettingsHandler, public ISubSettings
 {
 public:
+  CMediaSettings(const CMediaSettings&) = delete;
+  CMediaSettings& operator=(CMediaSettings const&) = delete;
+
   static CMediaSettings& GetInstance();
 
   bool Load(const TiXmlNode *settings) override;
@@ -88,8 +91,6 @@ public:
 
 protected:
   CMediaSettings() = default;
-  CMediaSettings(const CMediaSettings&) = delete;
-  CMediaSettings& operator=(CMediaSettings const&) = delete;
   ~CMediaSettings() override = default;
 
   static std::string GetWatchedContent(const std::string &content);

@@ -16,6 +16,8 @@ class CConvolutionKernel
 {
   public:
     CConvolutionKernel(ESCALINGMETHOD method, int size);
+    CConvolutionKernel(const CConvolutionKernel&) = delete;
+    CConvolutionKernel& operator=(const CConvolutionKernel&) = delete;
     ~CConvolutionKernel();
 
     int      GetSize()           { return m_size; }
@@ -24,8 +26,6 @@ class CConvolutionKernel
     uint8_t* GetUint8Pixels()    { return m_uint8pixels; }
 
   private:
-    CConvolutionKernel(const CConvolutionKernel&) = delete;
-    CConvolutionKernel& operator=(const CConvolutionKernel&) = delete;
     void Lanczos2();
     void Lanczos3Fast();
     void Lanczos3();

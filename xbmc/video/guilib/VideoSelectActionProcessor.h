@@ -20,6 +20,7 @@ class CVideoSelectActionProcessor : public CVideoActionProcessorBase
 {
 public:
   using CVideoActionProcessorBase::CVideoActionProcessorBase;
+  CVideoSelectActionProcessor() = delete;
 
 protected:
   Action GetDefaultAction() override;
@@ -29,8 +30,5 @@ protected:
   virtual bool OnQueueSelected();
   virtual bool OnInfoSelected();
   virtual bool OnChooseSelected();
-
-private:
-  CVideoSelectActionProcessor() = delete;
 };
 } // namespace KODI::VIDEO::GUILIB

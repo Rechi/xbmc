@@ -23,6 +23,8 @@ class CPVRGUIActionsEPG : public IPVRComponent
 {
 public:
   CPVRGUIActionsEPG() = default;
+  CPVRGUIActionsEPG(const CPVRGUIActionsEPG&) = delete;
+  CPVRGUIActionsEPG const& operator=(CPVRGUIActionsEPG const&) = delete;
   ~CPVRGUIActionsEPG() override = default;
 
   /*!
@@ -98,10 +100,6 @@ public:
    * by the EPG data provider otherwise.
    */
   std::string GetTitleForEpgTag(const std::shared_ptr<const CPVREpgInfoTag>& tag) const;
-
-private:
-  CPVRGUIActionsEPG(const CPVRGUIActionsEPG&) = delete;
-  CPVRGUIActionsEPG const& operator=(CPVRGUIActionsEPG const&) = delete;
 };
 
 namespace GUI

@@ -40,6 +40,8 @@ class ATTR_DLL_LOCAL VideoCodecInitdata : public CStructHdl<VideoCodecInitdata, 
   /*! \endcond */
 
 public:
+  VideoCodecInitdata() = delete;
+
   /// @defgroup cpp_kodi_addon_videocodec_Defs_VideoCodecInitdata_Help Value Help
   /// @ingroup cpp_kodi_addon_videocodec_Defs_VideoCodecInitdata
   ///
@@ -109,7 +111,6 @@ public:
   ///@}
 
 private:
-  VideoCodecInitdata() = delete;
   VideoCodecInitdata(const VideoCodecInitdata& session) = default;
   VideoCodecInitdata(const VIDEOCODEC_INITDATA* session) : CStructHdl(session) {}
   VideoCodecInitdata(VIDEOCODEC_INITDATA* session) : CStructHdl(session) {}

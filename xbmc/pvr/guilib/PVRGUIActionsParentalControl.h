@@ -28,6 +28,8 @@ class CPVRGUIActionsParentalControl : public IPVRComponent
 {
 public:
   CPVRGUIActionsParentalControl();
+  CPVRGUIActionsParentalControl(const CPVRGUIActionsParentalControl&) = delete;
+  CPVRGUIActionsParentalControl const& operator=(CPVRGUIActionsParentalControl const&) = delete;
   ~CPVRGUIActionsParentalControl() override;
 
   /*!
@@ -44,9 +46,6 @@ public:
   ParentalCheckResult CheckParentalPIN() const;
 
 private:
-  CPVRGUIActionsParentalControl(const CPVRGUIActionsParentalControl&) = delete;
-  CPVRGUIActionsParentalControl const& operator=(CPVRGUIActionsParentalControl const&) = delete;
-
   std::unique_ptr<CPVRSettings> m_settings;
 };
 

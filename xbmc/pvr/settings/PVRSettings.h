@@ -29,6 +29,8 @@ namespace PVR
   {
   public:
     explicit CPVRSettings(const SettingsContainer& settingNames);
+    CPVRSettings(const CPVRSettings&) = delete;
+    CPVRSettings& operator=(CPVRSettings const&) = delete;
     ~CPVRSettings() override;
 
     void RegisterCallback(ISettingCallback* callback);
@@ -60,9 +62,6 @@ namespace PVR
                                  const std::shared_ptr<const CSetting>& setting);
 
   private:
-    CPVRSettings(const CPVRSettings&) = delete;
-    CPVRSettings& operator=(CPVRSettings const&) = delete;
-
     void Init(const SettingsContainer& settingNames);
 
     mutable CCriticalSection m_critSection;

@@ -24,6 +24,8 @@ namespace XFILE
 class CXbtManager
 {
 public:
+  CXbtManager(const CXbtManager&) = delete;
+  CXbtManager& operator=(const CXbtManager&) = delete;
   ~CXbtManager();
 
   static CXbtManager& GetInstance();
@@ -37,8 +39,6 @@ public:
 
 private:
   CXbtManager();
-  CXbtManager(const CXbtManager&) = delete;
-  CXbtManager& operator=(const CXbtManager&) = delete;
 
   struct XBTFReader
   {

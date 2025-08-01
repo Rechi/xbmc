@@ -23,6 +23,7 @@ class CGUIDialogVideoManager : public CGUIDialog
 {
 public:
   explicit CGUIDialogVideoManager(int windowId);
+  CGUIDialogVideoManager() = delete;
   ~CGUIDialogVideoManager() override = default;
 
   virtual void SetVideoAsset(const std::shared_ptr<CFileItem>& item);
@@ -66,8 +67,6 @@ protected:
   bool m_hasUpdatedItems{false};
 
 private:
-  CGUIDialogVideoManager() = delete;
-
   void CloseAll();
   bool UpdateSelectedAsset();
 };

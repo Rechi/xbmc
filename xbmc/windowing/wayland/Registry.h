@@ -36,6 +36,8 @@ class CRegistry
 {
 public:
   explicit CRegistry(CConnection& connection);
+  CRegistry(CRegistry const& other) = delete;
+  CRegistry& operator=(CRegistry const& other) = delete;
 
   /**
    * Request a static singleton global to be bound to a proxy
@@ -109,9 +111,6 @@ public:
   void UnbindSingletons();
 
 private:
-  CRegistry(CRegistry const& other) = delete;
-  CRegistry& operator=(CRegistry const& other) = delete;
-
   void RequestSingletonInternal(wayland::proxy_t& target, std::string const& interfaceName, std::uint32_t minVersion, std::uint32_t maxVersion, bool required);
   void RequestInternal(std::function<wayland::proxy_t()> constructor, std::string const& interfaceName, std::uint32_t minVersion, std::uint32_t maxVersion, AddHandler addHandler, RemoveHandler removeHandler);
   void CheckRequired();

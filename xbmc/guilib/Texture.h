@@ -32,6 +32,8 @@ class CTexture : public CTextureBase
 
 public:
   CTexture(unsigned int width = 0, unsigned int height = 0, XB_FMT format = XB_FMT_A8R8G8B8);
+  // no copy constructor
+  CTexture(const CTexture& copy) = delete;
   virtual ~CTexture();
 
   static std::unique_ptr<CTexture> CreateTexture(unsigned int width = 0,
@@ -135,10 +137,6 @@ public:
   {
     return !(textureFormat & KD_TEX_FMT_TYPE_MASK) && textureSwizzle == KD_TEX_SWIZ_RGBA;
   }
-
-private:
-  // no copy constructor
-  CTexture(const CTexture& copy) = delete;
 
 protected:
   bool LoadFromFileInMem(unsigned char* buffer,

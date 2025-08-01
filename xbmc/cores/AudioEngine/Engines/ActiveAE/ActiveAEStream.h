@@ -95,6 +95,8 @@ class CActiveAEStreamBuffers
 {
 public:
   CActiveAEStreamBuffers(const AEAudioFormat& inputFormat, const AEAudioFormat& outputFormat, AEQuality quality);
+  CActiveAEStreamBuffers(const CActiveAEStreamBuffers&) = delete;
+  CActiveAEStreamBuffers& operator=(const CActiveAEStreamBuffers&) = delete;
   virtual ~CActiveAEStreamBuffers() = default;
   bool Create(
       unsigned int totaltime, bool remap, bool upmix, bool normalize = true, float sublevel = 0.0f);
@@ -125,10 +127,6 @@ public:
 protected:
   std::unique_ptr<CActiveAEBufferPoolResample> m_resampleBuffers;
   std::unique_ptr<CActiveAEBufferPoolAtempo> m_atempoBuffers;
-
-private:
-  CActiveAEStreamBuffers(const CActiveAEStreamBuffers&) = delete;
-  CActiveAEStreamBuffers& operator=(const CActiveAEStreamBuffers&) = delete;
 };
 
 class CActiveAEStream : public IAEStream

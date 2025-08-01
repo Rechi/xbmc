@@ -13,6 +13,9 @@
 class CTVOSInputSettings : public ISettingCallback
 {
 public:
+  CTVOSInputSettings(CTVOSInputSettings const&) = delete;
+  CTVOSInputSettings& operator=(CTVOSInputSettings const&) = delete;
+
   static CTVOSInputSettings& GetInstance();
 
   void Initialize();
@@ -21,8 +24,6 @@ public:
 
 private:
   CTVOSInputSettings() = default;
-  CTVOSInputSettings(CTVOSInputSettings const&);
-  CTVOSInputSettings& operator=(CTVOSInputSettings const&);
 
   static CTVOSInputSettings* m_instance;
 };

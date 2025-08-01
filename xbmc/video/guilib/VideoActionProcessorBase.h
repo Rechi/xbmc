@@ -20,6 +20,7 @@ class CVideoActionProcessorBase
 {
 public:
   explicit CVideoActionProcessorBase(const std::shared_ptr<CFileItem>& item) : m_item(item) {}
+  CVideoActionProcessorBase() = delete;
   virtual ~CVideoActionProcessorBase() = default;
 
   bool ProcessDefaultAction();
@@ -36,8 +37,6 @@ protected:
   virtual bool Process(Action action) = 0;
 
 private:
-  CVideoActionProcessorBase() = delete;
-
   std::shared_ptr<CFileItem> m_item;
   bool m_userCancelled{false};
 };

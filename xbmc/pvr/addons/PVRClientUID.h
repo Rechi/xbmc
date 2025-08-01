@@ -22,6 +22,8 @@ public:
   {
   }
 
+  CPVRClientUID() = delete;
+
   /*!
    * @brief Return the numeric UID.
    * @return The numeric UID, or PVR_CLIENT_INVALID_UID on error.
@@ -40,8 +42,6 @@ public:
   static void ClearCache();
 
 private:
-  CPVRClientUID() = delete;
-
   std::string m_addonID;
   ADDON::AddonInstanceId m_instanceID{ADDON::ADDON_SINGLETON_INSTANCE_ID};
 

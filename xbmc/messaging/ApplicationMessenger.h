@@ -235,6 +235,8 @@ class CApplicationMessenger
 {
 public:
   CApplicationMessenger();
+  CApplicationMessenger(const CApplicationMessenger&) = delete;
+  CApplicationMessenger const& operator=(CApplicationMessenger const&) = delete;
   ~CApplicationMessenger();
 
   void Cleanup();
@@ -425,9 +427,6 @@ public:
   bool IsProcessThread() const;
 
 private:
-  CApplicationMessenger(const CApplicationMessenger&) = delete;
-  CApplicationMessenger const& operator=(CApplicationMessenger const&) = delete;
-
   int SendMsg(ThreadMessage&& msg, bool wait);
   void ProcessMessage(ThreadMessage *pMsg);
 

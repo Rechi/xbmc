@@ -48,6 +48,9 @@ public:
 class CGUIControlProfiler
 {
 public:
+  CGUIControlProfiler(const CGUIControlProfiler& that) = delete;
+  CGUIControlProfiler& operator=(const CGUIControlProfiler& that) = delete;
+
   static CGUIControlProfiler& Instance();
   static bool IsRunning();
 
@@ -68,8 +71,6 @@ public:
 private:
   CGUIControlProfiler();
   ~CGUIControlProfiler() = default;
-  CGUIControlProfiler(const CGUIControlProfiler &that) = delete;
-  CGUIControlProfiler &operator=(const CGUIControlProfiler &that) = delete;
 
   CGUIControlProfilerItem m_ItemHead;
   CGUIControlProfilerItem *m_pLastItem;

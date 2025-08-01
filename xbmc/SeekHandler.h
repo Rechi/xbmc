@@ -29,6 +29,8 @@ class CSeekHandler : public ISettingCallback, public KODI::ACTION::IActionListen
 {
 public:
   CSeekHandler() = default;
+  CSeekHandler(const CSeekHandler&) = delete;
+  CSeekHandler& operator=(CSeekHandler const&) = delete;
   ~CSeekHandler() override;
 
   static void SettingOptionsSeekStepsFiller(const std::shared_ptr<const CSetting>& setting,
@@ -55,8 +57,6 @@ public:
   int GetTimeCodeSeconds() const;
 
 protected:
-  CSeekHandler(const CSeekHandler&) = delete;
-  CSeekHandler& operator=(CSeekHandler const&) = delete;
   bool SeekTimeCode(const CAction &action);
   void ChangeTimeCode(int remote);
 

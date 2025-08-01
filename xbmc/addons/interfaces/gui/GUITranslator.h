@@ -20,9 +20,9 @@ namespace ADDON
  */
 class CAddonGUITranslator
 {
+public:
   CAddonGUITranslator() = delete;
 
-public:
   /*!
    * \brief Translate Kodi's action id's to addon
    * \param kodiId Kodi's action identifier

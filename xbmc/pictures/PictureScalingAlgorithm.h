@@ -14,6 +14,8 @@
 class CPictureScalingAlgorithm
 {
 public:
+  CPictureScalingAlgorithm() = delete;
+
   typedef enum Algorithm
   {
     NoAlgorithm,
@@ -38,8 +40,6 @@ public:
   static int ToSwscale(Algorithm scalingAlgorithm);
 
 private:
-  CPictureScalingAlgorithm();
-
   typedef struct ScalingAlgorithm
   {
     std::string name;

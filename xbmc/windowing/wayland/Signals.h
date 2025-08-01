@@ -41,11 +41,10 @@ class CSignalRegistration
   {
   }
 
-  CSignalRegistration(CSignalRegistration const& other) = delete;
-  CSignalRegistration& operator=(CSignalRegistration const& other) = delete;
-
 public:
   CSignalRegistration() noexcept = default;
+  CSignalRegistration(CSignalRegistration const& other) = delete;
+  CSignalRegistration& operator=(CSignalRegistration const& other) = delete;
 
   CSignalRegistration(CSignalRegistration&& other) noexcept
   {
@@ -99,13 +98,13 @@ class CSignalHandlerList
   std::shared_ptr<Data> m_data;
   RegistrationIdentifierType m_lastRegistrationId{};
 
-  CSignalHandlerList(CSignalHandlerList const& other) = delete;
-  CSignalHandlerList& operator=(CSignalHandlerList const& other) = delete;
-
 public:
   CSignalHandlerList()
   : m_data{new Data}
   {}
+
+  CSignalHandlerList(CSignalHandlerList const& other) = delete;
+  CSignalHandlerList& operator=(CSignalHandlerList const& other) = delete;
 
   CSignalRegistration Register(ManagedT const& handler)
   {

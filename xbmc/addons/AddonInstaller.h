@@ -78,6 +78,9 @@ enum class RecurseOrphaned : bool
 class CAddonInstaller : public IJobCallback
 {
 public:
+  CAddonInstaller(const CAddonInstaller&) = delete;
+  CAddonInstaller const& operator=(CAddonInstaller const&) = delete;
+
   static CAddonInstaller &GetInstance();
 
   bool IsDownloading() const;
@@ -198,8 +201,6 @@ public:
 private:
   // private construction, and no assignments; use the provided singleton methods
   CAddonInstaller();
-  CAddonInstaller(const CAddonInstaller&) = delete;
-  CAddonInstaller const& operator=(CAddonInstaller const&) = delete;
   ~CAddonInstaller() override;
 
   /*! \brief Install an addon from a repository or zip

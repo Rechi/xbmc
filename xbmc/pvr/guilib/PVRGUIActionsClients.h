@@ -16,6 +16,8 @@ class CPVRGUIActionsClients : public IPVRComponent
 {
 public:
   CPVRGUIActionsClients() = default;
+  CPVRGUIActionsClients(const CPVRGUIActionsClients&) = delete;
+  CPVRGUIActionsClients const& operator=(CPVRGUIActionsClients const&) = delete;
   ~CPVRGUIActionsClients() override = default;
 
   /*!
@@ -23,10 +25,6 @@ public:
    * @return true on success, false otherwise.
    */
   bool ProcessSettingsMenuHooks() const;
-
-private:
-  CPVRGUIActionsClients(const CPVRGUIActionsClients&) = delete;
-  CPVRGUIActionsClients const& operator=(CPVRGUIActionsClients const&) = delete;
 };
 
 namespace GUI

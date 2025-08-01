@@ -38,6 +38,8 @@ class CInputProcessorKeyboard final : public IRawInputHandlerKeyboard
 {
 public:
   CInputProcessorKeyboard(IInputHandlerKeyboard& handler);
+  CInputProcessorKeyboard(CInputProcessorKeyboard const& other) = delete;
+  CInputProcessorKeyboard& operator=(CInputProcessorKeyboard const& other) = delete;
 
   void OnKeyboardKeymap(CSeat* seat, wayland::keyboard_keymap_format format, std::string const& keymap) override;
   void OnKeyboardEnter(CSeat* seat,
@@ -52,9 +54,6 @@ public:
   void OnKeyboardRepeatInfo(CSeat* seat, std::int32_t rate, std::int32_t delay) override;
 
 private:
-  CInputProcessorKeyboard(CInputProcessorKeyboard const& other) = delete;
-  CInputProcessorKeyboard& operator=(CInputProcessorKeyboard const& other) = delete;
-
   void ConvertAndSendKey(std::uint32_t scancode, bool pressed);
   XBMC_Event SendKey(uint32_t scancode, XBMCKey key, std::uint16_t unicodeCodepoint, bool pressed);
   /**

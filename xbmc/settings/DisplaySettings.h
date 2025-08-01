@@ -27,6 +27,9 @@ class CDisplaySettings : public ISettingCallback, public ISubSettings,
                          public Observable
 {
 public:
+  CDisplaySettings(const CDisplaySettings&) = delete;
+  CDisplaySettings& operator=(CDisplaySettings const&) = delete;
+
   static CDisplaySettings& GetInstance();
 
   bool Load(const TiXmlNode *settings) override;
@@ -136,8 +139,6 @@ public:
 
 protected:
   CDisplaySettings();
-  CDisplaySettings(const CDisplaySettings&) = delete;
-  CDisplaySettings& operator=(CDisplaySettings const&) = delete;
   ~CDisplaySettings() override;
 
   DisplayMode GetCurrentDisplayMode() const;

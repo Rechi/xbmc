@@ -34,6 +34,8 @@ class CKeyboardLayoutManager
 {
 public:
   CKeyboardLayoutManager() = default;
+  CKeyboardLayoutManager(const CKeyboardLayoutManager&) = delete;
+  CKeyboardLayoutManager const& operator=(CKeyboardLayoutManager const&) = delete;
   virtual ~CKeyboardLayoutManager();
 
   bool Load(const std::string& path = "");
@@ -47,9 +49,6 @@ public:
                                                   std::string& current);
 
 private:
-  CKeyboardLayoutManager(const CKeyboardLayoutManager&) = delete;
-  CKeyboardLayoutManager const& operator=(CKeyboardLayoutManager const&) = delete;
-
   KeyboardLayouts m_layouts;
 };
 } // namespace KEYBOARD

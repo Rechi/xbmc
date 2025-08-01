@@ -54,6 +54,9 @@ class ATTR_DLL_LOCAL VFSUrl : public CStructHdl<VFSUrl, VFSURL>
   /*! \endcond */
 
 public:
+  VFSUrl() = delete;
+  VFSUrl(const VFSUrl& channel) = delete;
+
   /// @defgroup cpp_kodi_addon_vfs_Defs_VFSUrl_Help Value Help
   /// @ingroup cpp_kodi_addon_vfs_Defs_VFSUrl
   ///
@@ -142,8 +145,6 @@ public:
   ///@}
 
 private:
-  VFSUrl() = delete;
-  VFSUrl(const VFSUrl& channel) = delete;
   VFSUrl(const VFSURL* channel) : CStructHdl(channel) {}
   VFSUrl(VFSURL* channel) : CStructHdl(channel) {}
 };

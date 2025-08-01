@@ -51,6 +51,8 @@ class CWebSocketFrame
 public:
   CWebSocketFrame(const char* data, uint64_t length);
   CWebSocketFrame(WebSocketFrameOpcode opcode, const char* data = NULL, uint32_t length = 0, bool final = true, bool masked = false, int32_t mask = 0, int8_t extension = 0);
+  CWebSocketFrame(const CWebSocketFrame&) = delete;
+  CWebSocketFrame& operator=(const CWebSocketFrame&) = delete;
   virtual ~CWebSocketFrame();
 
   virtual bool IsValid() const { return m_valid; }
@@ -80,8 +82,6 @@ protected:
 
 private:
   void reset();
-  CWebSocketFrame(const CWebSocketFrame&) = delete;
-  CWebSocketFrame& operator=(const CWebSocketFrame&) = delete;
 };
 
 class CWebSocketMessage

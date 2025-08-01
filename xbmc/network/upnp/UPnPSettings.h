@@ -17,6 +17,9 @@
 class CUPnPSettings : public ISettingsHandler
 {
 public:
+  CUPnPSettings(const CUPnPSettings&) = delete;
+  CUPnPSettings& operator=(CUPnPSettings const&) = delete;
+
   static CUPnPSettings& GetInstance();
 
   void OnSettingsUnloaded() override;
@@ -39,8 +42,6 @@ public:
 
 protected:
   CUPnPSettings();
-  CUPnPSettings(const CUPnPSettings&) = delete;
-  CUPnPSettings& operator=(CUPnPSettings const&) = delete;
   ~CUPnPSettings() override;
 
 private:

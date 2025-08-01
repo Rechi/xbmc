@@ -45,6 +45,7 @@ public:
     }
   }
 
+  CMap() = delete;
   ~CMap() = default;
 
   constexpr const Value& at(const Key& key) const
@@ -88,8 +89,6 @@ public:
   constexpr auto end() const { return m_map.end(); }
 
 private:
-  CMap() = delete;
-
   std::array<std::pair<Key, Value>, Size> m_map;
 };
 

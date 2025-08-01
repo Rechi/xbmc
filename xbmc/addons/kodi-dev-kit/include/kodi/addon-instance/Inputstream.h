@@ -129,6 +129,9 @@ class ATTR_DLL_LOCAL InputstreamProperty
   /*! \endcond */
 
 public:
+  InputstreamProperty() = delete;
+  InputstreamProperty(const InputstreamProperty& stream) = delete;
+
   /// @defgroup cpp_kodi_addon_inputstream_Defs_InputstreamProperty_Help Value Help
   /// @ingroup cpp_kodi_addon_inputstream_Defs_InputstreamProperty
   ///
@@ -179,8 +182,6 @@ public:
   ///@}
 
 private:
-  InputstreamProperty() = delete;
-  InputstreamProperty(const InputstreamProperty& stream) = delete;
   InputstreamProperty(const INPUTSTREAM_PROPERTY* stream) : CStructHdl(stream) {}
   InputstreamProperty(INPUTSTREAM_PROPERTY* stream) : CStructHdl(stream) {}
 };

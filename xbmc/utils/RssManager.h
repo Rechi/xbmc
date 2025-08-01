@@ -30,6 +30,9 @@ typedef std::map<int, RssSet> RssUrls;
 class CRssManager : public ISettingCallback, public ISettingsHandler
 {
 public:
+  CRssManager(const CRssManager&) = delete;
+  CRssManager& operator=(const CRssManager&) = delete;
+
   static CRssManager& GetInstance();
 
   void OnSettingsLoaded() override;
@@ -52,8 +55,6 @@ protected:
   ~CRssManager() override;
 
 private:
-  CRssManager(const CRssManager&) = delete;
-  CRssManager& operator=(const CRssManager&) = delete;
   struct READERCONTROL
   {
     int controlID;

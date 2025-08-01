@@ -34,6 +34,8 @@ class COutput
 {
 public:
   COutput(std::uint32_t globalName, wayland::output_t const & output, std::function<void()> doneHandler);
+  COutput(COutput const& other) = delete;
+  COutput& operator=(COutput const& other) = delete;
   ~COutput() noexcept;
 
   wayland::output_t const& GetWaylandOutput() const
@@ -124,9 +126,6 @@ public:
   float GetCurrentDpi() const;
 
 private:
-  COutput(COutput const& other) = delete;
-  COutput& operator=(COutput const& other) = delete;
-
   std::uint32_t m_globalName;
   wayland::output_t m_output;
   std::function<void()> m_doneHandler;

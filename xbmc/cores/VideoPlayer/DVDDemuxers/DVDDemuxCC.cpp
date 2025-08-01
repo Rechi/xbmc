@@ -155,9 +155,9 @@ private:
 
 class CCaptionBlock
 {
+public:
   CCaptionBlock(const CCaptionBlock&) = delete;
   CCaptionBlock& operator=(const CCaptionBlock&) = delete;
-public:
   explicit CCaptionBlock(int size)
   {
     m_data = (uint8_t*)malloc(size);

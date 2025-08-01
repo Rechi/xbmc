@@ -34,6 +34,9 @@ class IShellSurfaceHandler;
 class IShellSurface
 {
 public:
+  IShellSurface(IShellSurface const& other) = delete;
+  IShellSurface& operator=(IShellSurface const& other) = delete;
+
   // Not enum class since it must be used like a bitfield
   enum State
   {
@@ -72,10 +75,6 @@ public:
 
 protected:
   IShellSurface() noexcept = default;
-
-private:
-  IShellSurface(IShellSurface const& other) = delete;
-  IShellSurface& operator=(IShellSurface const& other) = delete;
 };
 
 class IShellSurfaceHandler
