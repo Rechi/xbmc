@@ -37,7 +37,7 @@ CPVREpgInfoTag::CPVREpgInfoTag(int iEpgID,
                                const std::string& iconPath,
                                const std::string& parentalRatingIconPath)
   : m_parentalRatingIcon(parentalRatingIconPath, StringUtils::Format(IMAGE_OWNER_PATTERN, iEpgID)),
-    m_iUniqueBroadcastID(EPG_TAG_INVALID_UID),
+    m_iUniqueBroadcastID(EPG_TAG_INVALID_UID), // NOLINT(modernize-use-default-member-init)
     m_iconPath(iconPath, StringUtils::Format(IMAGE_OWNER_PATTERN, iEpgID)),
     m_iFlags(EPG_TAG_FLAG_UNDEFINED),
     m_channelData(std::make_shared<CPVREpgChannelData>()),
@@ -51,7 +51,7 @@ CPVREpgInfoTag::CPVREpgInfoTag(const std::shared_ptr<CPVREpgChannelData>& channe
                                const CDateTime& end,
                                bool bIsGapTag)
   : m_parentalRatingIcon(StringUtils::Format(IMAGE_OWNER_PATTERN, iEpgID)),
-    m_iUniqueBroadcastID(EPG_TAG_INVALID_UID),
+    m_iUniqueBroadcastID(EPG_TAG_INVALID_UID), // NOLINT(modernize-use-default-member-init)
     m_iconPath(StringUtils::Format(IMAGE_OWNER_PATTERN, iEpgID)),
     m_iFlags(EPG_TAG_FLAG_UNDEFINED),
     m_bIsGapTag(bIsGapTag),

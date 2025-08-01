@@ -422,6 +422,7 @@ extern "C"
   //============================================================================
   /// @brief **Hardware framebuffer process function address**
   ///
+  // NOLINTNEXTLINE(modernize-redundant-void-arg)
   typedef void (*game_proc_address_t)(void);
   //----------------------------------------------------------------------------
 
