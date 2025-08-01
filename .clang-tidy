@@ -1,8 +1,16 @@
 Checks: "\
+  modernize-avoid-bind,\
   modernize-make-shared,\
   modernize-make-unique,\
+  modernize-redundant-void-arg,\
+  modernize-use-bool-literals,\
   modernize-use-default-member-init,\
   modernize-use-emplace,\
+  modernize-use-equals-default,\
+  modernize-use-equals-delete,\
+  modernize-use-noexcept,\
+  modernize-use-nullptr,\
+  modernize-use-override,\
   performance-faster-string-find,\
   performance-for-range-copy,\
   performance-implicit-conversion-in-loop,\
@@ -21,3 +29,6 @@ Checks: "\
   readability-container-size-empty,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'
+CheckOptions:
+  - key: modernize-use-nullptr.NullMacros
+    value: ''
