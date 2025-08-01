@@ -158,10 +158,7 @@ public:
         return false;
       }
       // fallback to regular subtitles
-      if (isSameSubLang && (ss.flags & FLAG_FORCED) == 0)
-        return false;
-
-      return true;
+      return !(isSameSubLang && (ss.flags & FLAG_FORCED) == 0);
     }
 
     if (m_isPrefOriginal)
@@ -176,13 +173,8 @@ public:
 
     // can fall here only when "forced" and "impaired" are disabled,
     // it always enable subs if language is unknown for external and CC
-    if ((isSameSubLang || (isCC && (ss.language.empty() || ss.language == "und"))) &&
-        (ss.flags & FLAG_FORCED) == 0 && (ss.flags & FLAG_HEARING_IMPAIRED) == 0)
-    {
-      return false;
-    }
-
-    return true;
+    return !((isSameSubLang || (isCC && (ss.language.empty() || ss.language == "und"))) &&
+             (ss.flags & FLAG_FORCED) == 0 && (ss.flags & FLAG_HEARING_IMPAIRED) == 0);
   }
 };
 
@@ -1227,9 +1219,7 @@ bool CVideoPlayer::IsValidStream(const CCurrentStream& stream)
     CDemuxStream* st = m_pSubtitleDemuxer->GetStream(stream.demuxerId, stream.id);
     if(st == NULL || st->disabled)
       return false;
-    if(st->type != stream.type)
-      return false;
-    return true;
+    return st->type == stream.type;
   }
   if (source == STREAM_SOURCE_DEMUX)
   {
@@ -1254,9 +1244,7 @@ bool CVideoPlayer::IsValidStream(const CCurrentStream& stream)
     CDemuxStream* st = m_pCCDemuxer->GetStream(stream.id);
     if (st == NULL || st->disabled)
       return false;
-    if (st->type != stream.type)
-      return false;
-    return true;
+    return st->type == stream.type;
   }
 
   return false;

@@ -601,10 +601,7 @@ bool CActiveAEStreamBuffers::Create(
   if (!m_resampleBuffers->Create(totaltime, remap, upmix, normalize, sublevel))
     return false;
 
-  if (!m_atempoBuffers->Create(totaltime))
-    return false;
-
-  return true;
+  return m_atempoBuffers->Create(totaltime);
 }
 
 void CActiveAEStreamBuffers::SetExtraData(int profile, enum AVMatrixEncoding matrix_encoding, enum AVAudioServiceType audio_service_type)
@@ -765,8 +762,5 @@ bool CActiveAEStreamBuffers::HasWork()
     return true;
   if (!m_atempoBuffers->m_inputSamples.empty())
     return true;
-  if (!m_atempoBuffers->m_outputSamples.empty())
-    return true;
-
-  return false;
+  return !m_atempoBuffers->m_outputSamples.empty();
 }

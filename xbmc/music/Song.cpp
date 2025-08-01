@@ -364,8 +364,7 @@ void CSong::AppendArtistRole(const CMusicRole& musicRole)
 bool CSong::HasArt() const
 {
   if (!strThumb.empty()) return true;
-  if (!embeddedArt.Empty()) return true;
-  return false;
+  return !embeddedArt.Empty();
 }
 
 bool CSong::ArtMatches(const CSong &right) const

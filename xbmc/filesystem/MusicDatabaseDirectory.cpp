@@ -281,9 +281,7 @@ bool CMusicDatabaseDirectory::ContainsSongs(const std::string &path)
     return true;
   if (type == NodeType::SONG_TOP100)
     return true;
-  if (type == NodeType::DISC)
-    return true;
-  return false;
+  return type == NodeType::DISC;
 }
 
 bool CMusicDatabaseDirectory::Exists(const CURL& url)
@@ -294,10 +292,7 @@ bool CMusicDatabaseDirectory::Exists(const CURL& url)
   if (!pNode)
     return false;
 
-  if (pNode->GetChildType() == NodeType::NONE)
-    return false;
-
-  return true;
+  return pNode->GetChildType() != NodeType::NONE;
 }
 
 bool CMusicDatabaseDirectory::CanCache(const std::string& strPath)

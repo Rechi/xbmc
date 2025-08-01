@@ -17,8 +17,8 @@ bool CRenderCapture::UseOcclusionQuery()
 {
   if (m_flags & CAPTUREFLAG_IMMEDIATELY)
     return false;
-  else if (CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_videoCaptureUseOcclusionQuery == 0)
-    return false;
   else
-    return true;
+    return CServiceBroker::GetSettingsComponent()
+               ->GetAdvancedSettings()
+               ->m_videoCaptureUseOcclusionQuery != 0;
 }

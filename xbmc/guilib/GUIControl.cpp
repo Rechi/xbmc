@@ -412,8 +412,7 @@ bool CGUIControl::OnMessage(CGUIMessage& message)
 bool CGUIControl::CanFocus() const
 {
   if (!IsVisible() && !m_allowHiddenFocus) return false;
-  if (IsDisabled()) return false;
-  return true;
+  return !IsDisabled();
 }
 
 bool CGUIControl::IsVisible() const

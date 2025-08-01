@@ -125,10 +125,7 @@ bool CSettingsBase::SaveValuesToXml(CXBMCTinyXML& xml) const
   if (!m_settingsManager->Save(xmlSerializer.get(), serializedSettings))
     return false;
 
-  if (!xml.Parse(serializedSettings))
-    return false;
-
-  return true;
+  return xml.Parse(serializedSettings);
 }
 
 void CSettingsBase::Unload()

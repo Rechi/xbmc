@@ -129,10 +129,7 @@ bool CShaderPreset::SetShaderPreset(const std::string& shaderPresetPath)
       return updateFailed("Failed to create samplers");
   }
 
-  if (m_pShaders.empty())
-    return false;
-
-  return true;
+  return !m_pShaders.empty();
 }
 
 const std::string& CShaderPreset::GetShaderPreset() const

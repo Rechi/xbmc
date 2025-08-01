@@ -2001,10 +2001,7 @@ bool COutput::HasWork()
   if (m_pp)
     ppWantsPic = m_pp->WantsPic();
 
-  if (!m_bufferPool->decodedPics.empty() && m_bufferPool->processedPics.size() < 4 && ppWantsPic)
-    return true;
-
-  return false;
+  return !m_bufferPool->decodedPics.empty() && m_bufferPool->processedPics.size() < 4 && ppWantsPic;
 }
 
 bool COutput::PreferPP()

@@ -69,8 +69,7 @@ public:
   {
     if (strFileName < song.strFileName) return true;
     if (strFileName > song.strFileName) return false;
-    if (iTrack < song.iTrack) return true;
-    return false;
+    return iTrack < song.iTrack;
   }
 
   /*! \brief Get artist names from the vector of artistcredits objects

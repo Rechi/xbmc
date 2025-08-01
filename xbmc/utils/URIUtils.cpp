@@ -963,10 +963,7 @@ bool URIUtils::IsRAR(const std::string& strFile)
   if (StringUtils::EqualsNoCase(strExtension, ".cbr"))
     return true;
 
-  if (StringUtils::EqualsNoCase(strExtension, ".rar"))
-    return true;
-
-  return false;
+  return StringUtils::EqualsNoCase(strExtension, ".rar");
 }
 
 bool URIUtils::IsInArchive(const std::string &strFile)
@@ -1253,10 +1250,7 @@ bool URIUtils::IsStreamedFilesystem(const std::string& strPath)
     return true;
 
   //! @todo sftp/ssh special case has to be handled by vfs addon
-  if (url.IsProtocol("sftp") || url.IsProtocol("ssh"))
-    return true;
-
-  return false;
+  return url.IsProtocol("sftp") || url.IsProtocol("ssh");
 }
 
 bool URIUtils::IsNetworkFilesystem(const std::string& strPath)
@@ -1272,10 +1266,7 @@ bool URIUtils::IsNetworkFilesystem(const std::string& strPath)
   if (IsStreamedFilesystem(strPath))
     return true;
 
-  if (IsSmb(strPath) || IsNfs(strPath))
-    return true;
-
-  return false;
+  return IsSmb(strPath) || IsNfs(strPath);
 }
 
 bool URIUtils::IsUPnP(const std::string& strFile)
@@ -1393,10 +1384,7 @@ bool URIUtils::IsDOSPath(const std::string &path)
     return true;
 
   // windows network drives
-  if (path.size() > 1 && path[0] == '\\' && path[1] == '\\')
-    return true;
-
-  return false;
+  return path.size() > 1 && path[0] == '\\' && path[1] == '\\';
 }
 
 std::string URIUtils::AppendSlash(std::string strFolder)

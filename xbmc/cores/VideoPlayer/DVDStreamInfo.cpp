@@ -172,10 +172,7 @@ bool CDVDStreamInfo::Equal(const CDVDStreamInfo& right, int compare)
   if ((cryptoSession == nullptr) != (right.cryptoSession == nullptr))
     return false;
 
-  if (cryptoSession && !(*cryptoSession == *right.cryptoSession))
-    return false;
-
-  return true;
+  return !(cryptoSession && !(*cryptoSession == *right.cryptoSession));
 }
 
 bool CDVDStreamInfo::Equal(const CDemuxStream& right, bool withextradata)

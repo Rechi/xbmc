@@ -89,9 +89,7 @@ bool CAEStreamInfo::operator==(const CAEStreamInfo& info) const
     return false;
   if (m_dataIsLE != info.m_dataIsLE)
     return false;
-  if (m_repeat != info.m_repeat)
-    return false;
-  return true;
+  return m_repeat == info.m_repeat;
 }
 
 void CAEStreamParser::Reset()

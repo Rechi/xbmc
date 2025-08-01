@@ -395,10 +395,7 @@ bool CFile::ShouldUseStreamBuffer(const CURL& url)
     return true;
 
   // file size > 200 MB but not in optical disk
-  if (m_pFile->GetLength() > 200 * 1024 * 1024 && !URIUtils::IsDVD(url.GetShareName()))
-    return true;
-
-  return false;
+  return m_pFile->GetLength() > 200 * 1024 * 1024 && !URIUtils::IsDVD(url.GetShareName());
 }
 
 bool CFile::OpenForWrite(const std::string& strFileName, bool bOverWrite)

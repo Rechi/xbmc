@@ -36,9 +36,7 @@ public:
       return false;
     if (w != mode.w)
       return false;
-    if (h != mode.h)
-      return false;
-    return true;
+    return h == mode.h;
   }
   bool IsInterlaced()
   {

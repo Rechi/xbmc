@@ -417,10 +417,7 @@ bool CAddonMgr::GetInstallableAddons(VECADDONS& addons, AddonType type)
                   if (type != AddonType::UNKNOWN && addon->Type() != type && !addon->HasType(type))
                     return true;
 
-                  if (!CanAddonBeInstalled(addon))
-                    return true;
-
-                  return false;
+                  return !CanAddonBeInstalled(addon);
                 });
 
   return true;
@@ -958,10 +955,7 @@ bool CAddonMgr::CanAddonBeDisabled(const std::string& ID)
     return false;
 
   // can't disable an addon that is in use
-  if (localAddon->IsInUse())
-    return false;
-
-  return true;
+  return !localAddon->IsInUse();
 }
 
 bool CAddonMgr::CanAddonBeEnabled(const std::string& id) const

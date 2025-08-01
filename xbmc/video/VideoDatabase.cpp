@@ -2074,10 +2074,7 @@ bool CVideoDatabase::LoadVideoInfo(const std::string& strFilenameAndPath, CVideo
     return true;
   if (GetMusicVideoInfo(strFilenameAndPath, details))
     return true;
-  if (GetFileInfo(strFilenameAndPath, details))
-    return true;
-
-  return false;
+  return GetFileInfo(strFilenameAndPath, details);
 }
 
 bool CVideoDatabase::HasMovieInfo(const std::string& strFilenameAndPath)

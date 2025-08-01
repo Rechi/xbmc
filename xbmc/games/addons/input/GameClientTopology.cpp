@@ -31,10 +31,7 @@ bool ContainsOnlySeparator(const std::string& address,
   if (firstSep == std::string::npos)
     return true;
 
-  if (firstSep == lastSep && address[firstSep] == CONTROLLER_ADDRESS_SEPARATOR)
-    return true;
-
-  return false;
+  return firstSep == lastSep && address[firstSep] == CONTROLLER_ADDRESS_SEPARATOR;
 }
 } // namespace
 

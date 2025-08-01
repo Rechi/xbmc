@@ -339,10 +339,7 @@ bool CPVRGUIActionsRecordings::DeleteAllRecordingsFromTrash() const
   if (!ConfirmDeleteAllRecordingsFromTrash())
     return false;
 
-  if (!AsyncEmptyRecordingsTrash().Execute({}))
-    return false;
-
-  return true;
+  return AsyncEmptyRecordingsTrash().Execute({});
 }
 
 bool CPVRGUIActionsRecordings::ConfirmDeleteAllRecordingsFromTrash() const

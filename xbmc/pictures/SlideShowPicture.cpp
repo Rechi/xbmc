@@ -77,9 +77,8 @@ bool CSlideShowPic::DisplayEffectNeedChange(DISPLAY_EFFECT newDispEffect) const
 {
   if (m_displayEffect == newDispEffect)
     return false;
-  if (newDispEffect == EFFECT_RANDOM && m_displayEffect != EFFECT_NONE && m_displayEffect != EFFECT_NO_TIMEOUT)
-    return false;
-  return true;
+  return !(newDispEffect == EFFECT_RANDOM && m_displayEffect != EFFECT_NONE &&
+           m_displayEffect != EFFECT_NO_TIMEOUT);
 }
 
 bool CSlideShowPic::IsFinished() const

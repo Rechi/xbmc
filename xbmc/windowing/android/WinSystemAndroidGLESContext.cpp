@@ -92,12 +92,7 @@ bool CWinSystemAndroidGLESContext::CreateNewWindow(const std::string& name,
     return false;
   }
 
-  if (!m_pGLContext.BindContext())
-  {
-    return false;
-  }
-
-  return true;
+  return m_pGLContext.BindContext();
 }
 
 bool CWinSystemAndroidGLESContext::ResizeWindow(int newWidth, int newHeight, int newLeft, int newTop)

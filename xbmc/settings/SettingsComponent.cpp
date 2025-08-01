@@ -350,14 +350,8 @@ bool CSettingsComponent::Load()
     m_state = State::LOADED;
     return true;
   }
-  else if (m_state == State::LOADED)
-  {
-    return true;
-  }
   else
-  {
-    return false;
-  }
+    return m_state == State::LOADED;
 }
 
 void CSettingsComponent::Deinitialize()

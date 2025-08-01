@@ -69,10 +69,7 @@ bool CRenderBufferPoolGuiTexture::IsCompatible(const CRenderVideoSettings& rende
     return false;
 
   // Shaders not supported
-  if (!renderSettings.GetShaderPreset().empty())
-    return false;
-
-  return true;
+  return renderSettings.GetShaderPreset().empty();
 }
 
 IRenderBuffer* CRenderBufferPoolGuiTexture::CreateRenderBuffer(void* header /* = nullptr */)
