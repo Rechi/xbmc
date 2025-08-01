@@ -261,7 +261,7 @@ bool CGUIDialogKeyboardGeneric::OnAction(const CAction &action)
     OnVoiceRecognition();
   else
   {
-    std::wstring wch = L"";
+    std::wstring wch;
     wch.insert(wch.begin(), action.GetUnicode());
     std::string ch;
     g_charsetConverter.wToUTF8(wch, ch);
@@ -748,7 +748,7 @@ void CGUIDialogKeyboardGeneric::ChangeWordList(int direct)
 void CGUIDialogKeyboardGeneric::ShowWordList(int direct)
 {
   std::unique_lock lock(m_CS);
-  std::wstring hzlist = L"";
+  std::wstring hzlist;
   CServiceBroker::GetWinSystem()->GetGfxContext().SetScalingResolution(m_coordsRes, true);
   float width = m_listfont->GetCharWidth(L'<') + m_listfont->GetCharWidth(L'>');
   float spacewidth = m_listfont->GetCharWidth(L' ');

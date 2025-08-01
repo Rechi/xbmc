@@ -162,7 +162,7 @@ bool VideoPlayerCodec::Init(const CFileItem &file, unsigned int filecache)
 
   //  Extract ReplayGain info
   // tagLoaderTagLib.Load will try to determine tag type by file extension, so set fallback by contentType
-  std::string strFallbackFileExtension = "";
+  std::string strFallbackFileExtension;
   if (m_strContentType == "audio/aacp" ||
       m_strContentType == "audio/aac")
     strFallbackFileExtension = "m4a";

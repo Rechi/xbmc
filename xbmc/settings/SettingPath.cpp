@@ -112,7 +112,7 @@ std::string CSettingPath::GetMasking(const CFileExtensionProvider& fileExtension
   std::string audioMask = fileExtensionProvider.GetMusicExtensions();
   std::string videoMask = fileExtensionProvider.GetVideoExtensions();
   std::string imageMask = fileExtensionProvider.GetPictureExtensions();
-  std::string execMask = "";
+  std::string execMask;
 #if defined(TARGET_WINDOWS)
   execMask = ".exe|.bat|.cmd|.py";
 #endif // defined(TARGET_WINDOWS)

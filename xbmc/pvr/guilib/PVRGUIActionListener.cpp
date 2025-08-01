@@ -331,7 +331,7 @@ void CPVRGUIActionListener::OnSettingChanged(const std::shared_ptr<const CSettin
             ->GetString(CSettings::SETTING_PVRPARENTAL_PIN)
             .empty())
     {
-      std::string newPassword = "";
+      std::string newPassword;
       // password set... save it
       if (CGUIDialogNumeric::ShowAndVerifyNewPassword(newPassword))
         CServiceBroker::GetSettingsComponent()->GetSettings()->SetString(

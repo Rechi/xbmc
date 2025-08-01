@@ -332,7 +332,7 @@ void CGUIPassword::UpdateMasterLockRetryCount(bool bResetCount)
         return;
       }
     }
-    std::string dlgLine1 = "";
+    std::string dlgLine1;
     if (0 < g_passwordManager.iMasterLockRetriesLeft)
       dlgLine1 = StringUtils::Format("{} {}", g_passwordManager.iMasterLockRetriesLeft,
                                      g_localizeStrings.Get(12343)); // "retries left"

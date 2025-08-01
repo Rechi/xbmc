@@ -60,11 +60,7 @@ constexpr auto SETTING_NFS_CHUNKSIZE = "nfs.chunksize";
 } // unnamed namespace
 
 CNfsConnection::CNfsConnection()
-  : m_pNfsContext(NULL),
-    m_exportPath(""),
-    m_hostName(""),
-    m_resolvedHostName(""),
-    m_IdleTimeout(std::chrono::steady_clock::now() + IDLE_TIMEOUT)
+  : m_pNfsContext(NULL), m_IdleTimeout(std::chrono::steady_clock::now() + IDLE_TIMEOUT)
 {
 }
 
