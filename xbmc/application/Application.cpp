@@ -1313,7 +1313,7 @@ bool CApplication::OnAction(const CAction &action)
     if (appPlayer->IsPlaying())
     {
       std::vector<std::string> players;
-      CFileItem item(*m_itemCurrentFile.get());
+      CFileItem item(*m_itemCurrentFile);
       playerCoreFactory.GetPlayers(item, players);
       std::string player = playerCoreFactory.SelectPlayerDialog(players);
       if (!player.empty())

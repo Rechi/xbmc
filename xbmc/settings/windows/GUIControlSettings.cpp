@@ -400,7 +400,7 @@ bool CGUIControlColorButtonSetting::OnClick()
   dialog->LoadColors();
   std::string hexColor;
   if (settingHexColor)
-    hexColor = settingHexColor.get()->GetValue();
+    hexColor = settingHexColor->GetValue();
   dialog->SetSelectedColor(hexColor);
   dialog->Open();
 

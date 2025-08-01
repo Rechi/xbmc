@@ -2365,7 +2365,7 @@ void CUtil::ScanForExternalAudio(const std::string& videoPath, std::vector<std::
   {
     for (const auto& audioItem : items.GetList())
     {
-      vecAudio.push_back(audioItem.get()->GetPath());
+      vecAudio.push_back(audioItem->GetPath());
     }
   }
   else

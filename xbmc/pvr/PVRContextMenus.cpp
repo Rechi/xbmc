@@ -203,14 +203,14 @@ bool ShowInformation::IsVisible(const CFileItem& item) const
 {
   const std::shared_ptr<const CPVRChannel> channel(item.GetPVRChannelInfoTag());
   if (channel)
-    return channel->GetEPGNow().get() != nullptr;
+    return channel->GetEPGNow() != nullptr;
 
   if (item.HasEPGInfoTag())
     return !item.GetEPGInfoTag()->IsGapTag();
 
   const std::shared_ptr<const CPVRTimerInfoTag> timer(item.GetPVRTimerInfoTag());
   if (timer && !URIUtils::PathEquals(item.GetPath(), CPVRTimersPath::PATH_ADDTIMER))
-    return timer->GetEpgInfoTag().get() != nullptr;
+    return timer->GetEpgInfoTag() != nullptr;
 
   if (item.GetPVRRecordingInfoTag())
     return true;
@@ -233,7 +233,7 @@ bool ShowChannelGuide::IsVisible(const CFileItem& item) const
 {
   const std::shared_ptr<const CPVRChannel> channel(item.GetPVRChannelInfoTag());
   if (channel)
-    return channel->GetEPGNow().get() != nullptr;
+    return channel->GetEPGNow() != nullptr;
 
   return false;
 }
@@ -250,14 +250,14 @@ bool FindSimilar::IsVisible(const CFileItem& item) const
 {
   const std::shared_ptr<const CPVRChannel> channel(item.GetPVRChannelInfoTag());
   if (channel)
-    return channel->GetEPGNow().get() != nullptr;
+    return channel->GetEPGNow() != nullptr;
 
   if (item.HasEPGInfoTag())
     return !item.GetEPGInfoTag()->IsGapTag();
 
   const std::shared_ptr<const CPVRTimerInfoTag> timer(item.GetPVRTimerInfoTag());
   if (timer && !URIUtils::PathEquals(item.GetPath(), CPVRTimersPath::PATH_ADDTIMER))
-    return timer->GetEpgInfoTag().get() != nullptr;
+    return timer->GetEpgInfoTag() != nullptr;
 
   const std::shared_ptr<const CPVRRecording> recording(item.GetPVRRecordingInfoTag());
   if (recording)

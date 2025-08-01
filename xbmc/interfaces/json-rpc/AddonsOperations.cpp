@@ -272,7 +272,7 @@ void CAddonsOperations::FillDetails(const std::shared_ptr<ADDON::IAddon>& addon,
                                     CVariant& result,
                                     bool append)
 {
-  if (addon.get() == NULL)
+  if (addon == NULL)
     return;
 
   CVariant addonInfo = Serialize(addon);

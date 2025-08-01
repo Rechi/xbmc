@@ -2721,7 +2721,7 @@ CVideoInfoScanner::~CVideoInfoScanner()
             GetArtwork(item.get(), content, true, true, "");
 
             if (m_database.AddVideoAsset(ContentToVideoDbType(content), dbId, idVideoAssetType,
-                                         VideoAssetType::EXTRA, *item.get()))
+                                         VideoAssetType::EXTRA, *item))
             {
               CLog::Log(LOGDEBUG, "VideoInfoScanner: Added video extra {}",
                         CURL::GetRedacted(item->GetPath()));

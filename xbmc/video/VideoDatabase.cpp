@@ -4578,7 +4578,7 @@ void CVideoDatabase::GetSameVideoItems(const CFileItem& item, CFileItemList& ite
     for (const auto id : itemIds)
     {
       auto current = std::make_shared<CFileItem>();
-      if (GetDetailsByTypeAndId(*current.get(), itemType, id))
+      if (GetDetailsByTypeAndId(*current, itemType, id))
         items.Add(current);
     }
   }

@@ -30,8 +30,11 @@ Checks: "\
   readability-redundant-control-flow,\
   readability-redundant-declaration,\
   readability-redundant-member-init,\
+  readability-redundant-smartptr-get,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'
 CheckOptions:
   - key:   readability-redundant-member-init.IgnoreBaseInCopyConstructors
     value: true
+  - key:   readability-redundant-smartptr-get.IgnoreMacros
+    value: false

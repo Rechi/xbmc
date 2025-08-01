@@ -1316,7 +1316,7 @@ std::shared_ptr<CPVREpgInfoTag> CPVRTimerInfoTag::GetEpgInfoTag(bool bCreate /* 
 
 bool CPVRTimerInfoTag::HasChannel() const
 {
-  return m_channel.get() != nullptr;
+  return m_channel != nullptr;
 }
 
 std::shared_ptr<CPVRChannel> CPVRTimerInfoTag::Channel() const
