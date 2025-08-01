@@ -20,7 +20,7 @@ class CUDFDirectory : public IFileDirectory
 {
 public:
   CUDFDirectory() = default;
-  ~CUDFDirectory() = default;
+  ~CUDFDirectory() override = default;
   bool GetDirectory(const CURL& url, CFileItemList& items) override;
   bool Exists(const CURL& url) override;
   bool ContainsFiles(const CURL& url) override { return true; }

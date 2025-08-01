@@ -31,7 +31,7 @@ class CEncoder : public IEncoder
 {
 public:
   CEncoder();
-  virtual ~CEncoder();
+  ~CEncoder() override;
 
   bool EncoderInit(const std::string& strFile, int iInChannels, int iInRate, int iInBits);
   ssize_t EncoderEncode(uint8_t* pbtStream, size_t nNumBytesRead);

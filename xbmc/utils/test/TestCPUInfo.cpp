@@ -23,7 +23,7 @@ struct TestCPUInfo : public ::testing::Test
 {
   TestCPUInfo() { CServiceBroker::RegisterCPUInfo(CCPUInfo::GetCPUInfo()); }
 
-  ~TestCPUInfo() { CServiceBroker::UnregisterCPUInfo(); }
+  ~TestCPUInfo() override { CServiceBroker::UnregisterCPUInfo(); }
 };
 
 TEST_F(TestCPUInfo, GetUsedPercentage)

@@ -18,7 +18,7 @@ class CSlideShowDelegator : public ISlideShowDelegate
 {
 public:
   CSlideShowDelegator() = default;
-  ~CSlideShowDelegator() = default;
+  ~CSlideShowDelegator() override = default;
 
   void SetDelegate(ISlideShowDelegate* delegate);
   void ResetDelegate();

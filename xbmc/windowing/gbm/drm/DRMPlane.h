@@ -27,7 +27,7 @@ public:
   explicit CDRMPlane(int fd, uint32_t plane);
   CDRMPlane(const CDRMPlane&) = delete;
   CDRMPlane& operator=(const CDRMPlane&) = delete;
-  ~CDRMPlane() = default;
+  ~CDRMPlane() override = default;
 
   uint32_t GetPlaneId() const { return m_plane->plane_id; }
   uint32_t GetPossibleCrtcs() const { return m_plane->possible_crtcs; }

@@ -33,7 +33,7 @@ class CPictureInfoTag : public IArchivable, public ISerializable, public ISortab
 
 public:
   CPictureInfoTag() { Reset(); }
-  virtual ~CPictureInfoTag() = default;
+  ~CPictureInfoTag() override = default;
   void Reset();
   void Archive(CArchive& ar) override;
   void Serialize(CVariant& value) const override;

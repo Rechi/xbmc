@@ -33,7 +33,7 @@ class CVaapiProxy : public VAAPI::IVaapiWinSystem
 {
 public:
   CVaapiProxy(int fd) : m_fd(fd){};
-  virtual ~CVaapiProxy() = default;
+  ~CVaapiProxy() override = default;
   VADisplay GetVADisplay() override;
   void* GetEGLDisplay() override { return eglDisplay; };
 

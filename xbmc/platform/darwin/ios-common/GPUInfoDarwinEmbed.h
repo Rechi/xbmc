@@ -14,7 +14,7 @@ class CGPUInfoDarwinEmbed : public CGPUInfoPosix
 {
 public:
   CGPUInfoDarwinEmbed() = default;
-  ~CGPUInfoDarwinEmbed() = default;
+  ~CGPUInfoDarwinEmbed() override = default;
 
 private:
   bool SupportsPlatformTemperature() const override;

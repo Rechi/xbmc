@@ -17,7 +17,7 @@ class CGUISourcesAnnouncementHandler : public ANNOUNCEMENT::IAnnouncer
 {
 public:
   CGUISourcesAnnouncementHandler();
-  ~CGUISourcesAnnouncementHandler();
+  ~CGUISourcesAnnouncementHandler() override;
 
   void Announce(ANNOUNCEMENT::AnnouncementFlag flag,
                 const std::string& sender,

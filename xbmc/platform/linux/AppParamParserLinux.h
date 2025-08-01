@@ -14,7 +14,7 @@ class CAppParamParserLinux : public CAppParamParser
 {
 public:
   CAppParamParserLinux();
-  ~CAppParamParserLinux();
+  ~CAppParamParserLinux() override;
 
 protected:
   void ParseArg(const std::string& arg) override;

@@ -31,7 +31,7 @@ class CTVOSDirectory : public CPosixDirectory
 {
 public:
   CTVOSDirectory() = default;
-  ~CTVOSDirectory() = default;
+  ~CTVOSDirectory() override = default;
 
   bool static WantsDirectory(const CURL& url);
 

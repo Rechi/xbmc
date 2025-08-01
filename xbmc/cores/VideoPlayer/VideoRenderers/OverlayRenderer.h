@@ -93,7 +93,7 @@ namespace OVERLAY {
   {
   public:
     CRenderer();
-    virtual ~CRenderer();
+    ~CRenderer() override;
 
     // Implementation of Observer
     void Notify(const Observable& obs, const ObservableMessage msg) override;
