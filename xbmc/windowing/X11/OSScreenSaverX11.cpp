@@ -13,7 +13,7 @@
 using namespace std::chrono_literals;
 
 COSScreenSaverX11::COSScreenSaverX11(Display* dpy)
-: m_dpy(dpy), m_screensaverResetTimer(std::bind(&COSScreenSaverX11::ResetScreenSaver, this))
+  : m_dpy(dpy), m_screensaverResetTimer([this] { ResetScreenSaver(); })
 {
   assert(m_dpy);
 }

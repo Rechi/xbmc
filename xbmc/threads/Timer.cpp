@@ -16,8 +16,7 @@ CTimer::CTimer(std::function<void()> const& callback)
   : CThread("Timer"), m_callback(callback), m_timeout(0ms), m_interval(false)
 { }
 
-CTimer::CTimer(ITimerCallback *callback)
-  : CTimer(std::bind(&ITimerCallback::OnTimeout, callback))
+CTimer::CTimer(ITimerCallback* callback) : CTimer([callback] { callback->OnTimeout(); })
 { }
 
 CTimer::~CTimer()

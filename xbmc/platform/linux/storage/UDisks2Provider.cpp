@@ -537,9 +537,12 @@ bool CUDisks2Provider::DrivePropertiesChanged(const char *object, DBusMessageIte
   {
     auto drive = m_drives[object];
     CLog::Log(LOGDEBUG, LOGDBUS, "UDisks2: Before update: {}", drive->ToString());
-    auto ParseDriveProperty = std::bind(&CUDisks2Provider::ParseDriveProperty, this, std::placeholders::_1,
-                                        std::placeholders::_2, std::placeholders::_3);
-    ParseProperties(drive, propsIter, ParseDriveProperty);
+    auto parseDriveProperty = [this](auto&& PH1, auto&& PH2, auto&& PH3)
+    {
+      ParseDriveProperty(std::forward<decltype(PH1)>(PH1), std::forward<decltype(PH2)>(PH2),
+                         std::forward<decltype(PH3)>(PH3));
+    };
+    ParseProperties(drive, propsIter, parseDriveProperty);
     CLog::Log(LOGDEBUG, LOGDBUS, "UDisks2: After update: {}", drive->ToString());
   }
   return false;
@@ -551,9 +554,12 @@ bool CUDisks2Provider::BlockPropertiesChanged(const char *object, DBusMessageIte
   {
     auto block = m_blocks[object];
     CLog::Log(LOGDEBUG, LOGDBUS, "UDisks2: Before update: {}", block->ToString());
-    auto ParseBlockProperty = std::bind(&CUDisks2Provider::ParseBlockProperty, this, std::placeholders::_1,
-                                        std::placeholders::_2, std::placeholders::_3);
-    ParseProperties(block, propsIter, ParseBlockProperty);
+    auto parseBlockProperty = [this](auto&& PH1, auto&& PH2, auto&& PH3)
+    {
+      ParseBlockProperty(std::forward<decltype(PH1)>(PH1), std::forward<decltype(PH2)>(PH2),
+                         std::forward<decltype(PH3)>(PH3));
+    };
+    ParseProperties(block, propsIter, parseBlockProperty);
     CLog::Log(LOGDEBUG, LOGDBUS, "UDisks2: After update: {}", block->ToString());
   }
   return false;
@@ -566,10 +572,12 @@ bool CUDisks2Provider::FilesystemPropertiesChanged(const char *object, DBusMessa
     auto fs = m_filesystems[object];
     CLog::Log(LOGDEBUG, LOGDBUS, "UDisks2: Before update: {}", fs->ToString());
     bool wasMounted = fs->IsMounted();
-    auto ParseFilesystemProperty = std::bind(&CUDisks2Provider::ParseFilesystemProperty, this,
-                                             std::placeholders::_1,
-                                             std::placeholders::_2, std::placeholders::_3);
-    ParseProperties(fs, propsIter, ParseFilesystemProperty);
+    auto parseFilesystemProperty = [this](auto&& PH1, auto&& PH2, auto&& PH3)
+    {
+      ParseFilesystemProperty(std::forward<decltype(PH1)>(PH1), std::forward<decltype(PH2)>(PH2),
+                              std::forward<decltype(PH3)>(PH3));
+    };
+    ParseProperties(fs, propsIter, parseFilesystemProperty);
     CLog::Log(LOGDEBUG, LOGDBUS, "UDisks2: After update: {}", fs->ToString());
 
     if (!wasMounted && fs->IsMounted() && fs->IsApproved())
@@ -636,24 +644,33 @@ void CUDisks2Provider::ParseInterface(const char *object, const char *iface, DBu
   if (strcmp(iface, UDISKS2_INTERFACE_DRIVE) == 0)
   {
     auto *drive = new Drive(object);
-    auto f = std::bind(&CUDisks2Provider::ParseDriveProperty, this, std::placeholders::_1,
-                       std::placeholders::_2, std::placeholders::_3);
+    auto f = [this](auto&& PH1, auto&& PH2, auto&& PH3)
+    {
+      ParseDriveProperty(std::forward<decltype(PH1)>(PH1), std::forward<decltype(PH2)>(PH2),
+                         std::forward<decltype(PH3)>(PH3));
+    };
     ParseProperties(drive, propsIter, f);
     DriveAdded(drive);
   }
   else if (strcmp(iface, UDISKS2_INTERFACE_BLOCK) == 0)
   {
     auto *block = new Block(object);
-    auto f = std::bind(&CUDisks2Provider::ParseBlockProperty, this, std::placeholders::_1,
-                       std::placeholders::_2, std::placeholders::_3);
+    auto f = [this](auto&& PH1, auto&& PH2, auto&& PH3)
+    {
+      ParseBlockProperty(std::forward<decltype(PH1)>(PH1), std::forward<decltype(PH2)>(PH2),
+                         std::forward<decltype(PH3)>(PH3));
+    };
     ParseProperties(block, propsIter, f);
     BlockAdded(block);
   }
   else if (strcmp(iface, UDISKS2_INTERFACE_FILESYSTEM) == 0)
   {
     auto *fs = new Filesystem(object);
-    auto f = std::bind(&CUDisks2Provider::ParseFilesystemProperty, this, std::placeholders::_1,
-                       std::placeholders::_2, std::placeholders::_3);
+    auto f = [this](auto&& PH1, auto&& PH2, auto&& PH3)
+    {
+      ParseFilesystemProperty(std::forward<decltype(PH1)>(PH1), std::forward<decltype(PH2)>(PH2),
+                              std::forward<decltype(PH3)>(PH3));
+    };
     ParseProperties(fs, propsIter, f);
     FilesystemAdded(fs);
   }

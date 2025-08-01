@@ -225,7 +225,7 @@ static void xkbLogger(xkb_context* context,
 
 CLibInputKeyboard::CLibInputKeyboard()
   : m_ctx(std::unique_ptr<xkb_context, XkbContextDeleter>{xkb_context_new(XKB_CONTEXT_NO_FLAGS)}),
-    m_repeatTimer(std::bind(&CLibInputKeyboard::KeyRepeatTimeout, this))
+    m_repeatTimer([this] { KeyRepeatTimeout(); })
 {
   if (!m_ctx)
   {

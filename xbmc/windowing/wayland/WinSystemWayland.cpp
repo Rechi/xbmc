@@ -92,8 +92,11 @@ struct OutputCurrentRefreshRateComparer
 class MessageHandle : public KODI::UTILS::CScopeGuard<Actor::Message*, nullptr, void(Actor::Message*)>
 {
 public:
-  MessageHandle() : CScopeGuard{std::bind(&Actor::Message::Release, std::placeholders::_1), nullptr} {}
-  explicit MessageHandle(Actor::Message* message) : CScopeGuard{std::bind(&Actor::Message::Release, std::placeholders::_1), message} {}
+  MessageHandle() : CScopeGuard{[](auto&& PH1) { PH1->Release(); }, nullptr} {}
+  explicit MessageHandle(Actor::Message* message)
+    : CScopeGuard{[](auto&& PH1) { PH1->Release(); }, message}
+  {
+  }
   Actor::Message* Get() { return static_cast<Actor::Message*> (*this); }
 };
 
@@ -168,7 +171,10 @@ bool CWinSystemWayland::InitWindowSystem()
   m_registry->RequestSingleton(m_presentation, 1, 1, false);
   // version 2 adds done() -> required
   // version 3 adds destructor -> optional
-  m_registry->Request<wayland::output_t>(2, 3, std::bind(&CWinSystemWayland::OnOutputAdded, this, _1, _2), std::bind(&CWinSystemWayland::OnOutputRemoved, this, _1));
+  m_registry->Request<wayland::output_t>(
+      2, 3, [this](auto&& PH1, auto&& PH2)
+      { OnOutputAdded(std::forward<decltype(PH1)>(PH1), std::forward<decltype(PH2)>(PH2)); },
+      [this](auto&& PH1) { OnOutputRemoved(std::forward<decltype(PH1)>(PH1)); });
 
   m_registry->Bind();
 
@@ -280,7 +286,10 @@ bool CWinSystemWayland::CreateNewWindow(const std::string& name,
   // version 2 adds name event -> optional
   // version 4 adds wl_keyboard repeat_info -> optional
   // version 5 adds discrete axis events in wl_pointer -> unused
-  m_seatRegistry->Request<wayland::seat_t>(1, 5, std::bind(&CWinSystemWayland::OnSeatAdded, this, _1, _2), std::bind(&CWinSystemWayland::OnSeatRemoved, this, _1));
+  m_seatRegistry->Request<wayland::seat_t>(
+      1, 5, [this](auto&& PH1, auto&& PH2)
+      { OnSeatAdded(std::forward<decltype(PH1)>(PH1), std::forward<decltype(PH2)>(PH2)); },
+      [this](auto&& PH1) { OnSeatRemoved(std::forward<decltype(PH1)>(PH1)); });
   m_seatRegistry->Bind();
 
   if (m_seats.empty())
@@ -1170,7 +1179,8 @@ void CWinSystemWayland::OnOutputAdded(std::uint32_t name, wayland::proxy_t&& pro
 {
   wayland::output_t output(proxy);
   // This is not accessed from multiple threads
-  m_outputsInPreparation.emplace(name, std::make_shared<COutput>(name, output, std::bind(&CWinSystemWayland::OnOutputDone, this, name)));
+  m_outputsInPreparation.emplace(
+      name, std::make_shared<COutput>(name, output, [this, name] { OnOutputDone(name); }));
 }
 
 void CWinSystemWayland::OnOutputDone(std::uint32_t name)
