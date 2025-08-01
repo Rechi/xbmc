@@ -256,7 +256,7 @@ std::string GetLocalArtBaseFilename(const CFileItem& item,
       useFolder = false;
     }
   }
-  else if (useFolder && !(item.IsFolder() && !item.IsFileFolder()))
+  else if (useFolder && (!item.IsFolder() || item.IsFileFolder()))
   {
     file = strFile.empty() ? item.GetPath() : strFile;
     strFile = URIUtils::GetDirectory(file);

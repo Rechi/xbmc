@@ -1039,13 +1039,13 @@ void CTeletextDecoder::CatchNextPage(int firstlineinc, int inc)
     unsigned char *p = &(m_RenderInfo.PageChar[m_CatchRow*40 + m_CatchCol]);
     TextPageAttr_t a = m_RenderInfo.PageAtrb[m_CatchRow*40 + m_CatchCol];
 
-    if (!(a.charset == C_G1C || a.charset == C_G1S) && /* no mosaic */
-       (a.fg != a.bg) && /* not hidden */
-       (*p >= '1' && *p <= '8' && /* valid page number */
-        *(p+1) >= '0' && *(p+1) <= '9' &&
-        *(p+2) >= '0' && *(p+2) <= '9') &&
-       (m_CatchRow == 0 || (*(p-1) < '0' || *(p-1) > '9')) && /* non-numeric char before and behind */
-       (m_CatchRow == 37 || (*(p+3) < '0' || *(p+3) > '9')))
+    if (a.charset != C_G1C && a.charset != C_G1S && /* no mosaic */
+        (a.fg != a.bg) && /* not hidden */
+        (*p >= '1' && *p <= '8' && /* valid page number */
+         *(p + 1) >= '0' && *(p + 1) <= '9' && *(p + 2) >= '0' && *(p + 2) <= '9') &&
+        (m_CatchRow == 0 ||
+         (*(p - 1) < '0' || *(p - 1) > '9')) && /* non-numeric char before and behind */
+        (m_CatchRow == 37 || (*(p + 3) < '0' || *(p + 3) > '9')))
     {
       tmp_page = ((*p - '0')<<8) | ((*(p+1) - '0')<<4) | (*(p+2) - '0');
 
@@ -3209,7 +3209,7 @@ TextPageinfo_t* CTeletextDecoder::DecodePage(bool showl25,             // 1=deco
           PageChar[index + 40] = 0xFF;
 
       }
-      if (!(charset == C_G1C || charset == C_G1S))
+      if (charset != C_G1C && charset != C_G1S)
         held_mosaic = ' '; /* forget if outside mosaic */
 
     } /* for col */

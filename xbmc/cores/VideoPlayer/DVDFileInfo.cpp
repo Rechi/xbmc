@@ -269,8 +269,8 @@ bool CDVDFileInfo::CanExtract(const CFileItem& fileItem)
     return false;
 
   // For HTTP/FTP we only allow extraction when on a LAN
-  return !(URIUtils::IsRemote(fileItem.GetPath()) && !URIUtils::IsOnLAN(fileItem.GetPath()) &&
-           (URIUtils::IsFTP(fileItem.GetPath()) || URIUtils::IsHTTP(fileItem.GetPath())));
+  return !URIUtils::IsRemote(fileItem.GetPath()) || URIUtils::IsOnLAN(fileItem.GetPath()) ||
+         (!URIUtils::IsFTP(fileItem.GetPath()) && !URIUtils::IsHTTP(fileItem.GetPath()));
 }
 
 /**

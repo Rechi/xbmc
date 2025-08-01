@@ -41,8 +41,8 @@ std::string TranslateColorValue(std::string value)
     for (size_t i = 0; i < 6; i++)
     {
       const char currChar = value[i];
-      if (!(('0' <= currChar && currChar <= '9') || ('a' <= currChar && currChar <= 'f') ||
-            ('A' <= currChar && currChar <= 'F')))
+      if (('0' > currChar || currChar > '9') && ('a' > currChar || currChar > 'f') &&
+          ('A' > currChar || currChar > 'F'))
       {
         isHex = false;
         break;

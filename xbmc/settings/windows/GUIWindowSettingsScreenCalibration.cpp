@@ -211,9 +211,9 @@ bool CGUIWindowSettingsScreenCalibration::OnMessage(CGUIMessage& message)
       m_iControl = CONTROL_TOP_LEFT;
 
       m_isSubtitleBarEnabled =
-          !(CServiceBroker::GetSettingsComponent()->GetSubtitlesSettings()->GetAlignment() !=
-                SUBTITLES::Align::MANUAL &&
-            isPlayingVideo);
+          CServiceBroker::GetSettingsComponent()->GetSubtitlesSettings()->GetAlignment() ==
+              SUBTITLES::Align::MANUAL ||
+          !isPlayingVideo;
 
       ResetControls();
       return true;

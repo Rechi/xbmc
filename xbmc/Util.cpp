@@ -1095,8 +1095,8 @@ std::string CUtil::ValidatePath(std::string path, bool bFixDoubleSlashes /* = fa
       // Fixup for double forward slashes(/) but don't touch the :// of URLs
       for (size_t x = 2; x < path.size() - 1; x++)
       {
-        if (path[x] == '/' && path[x + 1] == '/' &&
-            !(path[x - 1] == ':' || (path[x - 1] == '/' && path[x - 2] == ':')))
+        if (path[x] == '/' && path[x + 1] == '/' && path[x - 1] != ':' &&
+            (path[x - 1] != '/' || path[x - 2] != ':'))
           path.erase(x, 1);
       }
     }

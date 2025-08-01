@@ -54,7 +54,7 @@ bool CDecoderFilter::isValid(const CDVDStreamInfo& streamInfo) const
     return false;
 
   // remove codec pitch for comparison
-  return !(m_minHeight && (streamInfo.height & ~31) < m_minHeight);
+  return !m_minHeight || (streamInfo.height & ~31) >= m_minHeight;
 }
 
 bool CDecoderFilter::Load(const tinyxml2::XMLNode* node)

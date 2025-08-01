@@ -319,10 +319,8 @@ bool CColorManager::Probe3dLut(const std::string& filename, int* clutSize)
     return false;
   }
 
-  if ( !(header.signature[0]=='3'
-        && header.signature[1]=='D'
-        && header.signature[2]=='L'
-        && header.signature[3]=='T') )
+  if (header.signature[0] != '3' || header.signature[1] != 'D' || header.signature[2] != 'L' ||
+      header.signature[3] != 'T')
   {
     CLog::Log(LOGERROR, "{}: Not a 3DLUT file: {}", __FUNCTION__, filename);
     return false;

@@ -75,7 +75,7 @@ bool CFile::Copy(const CURL& url2, const CURL& dest, XFILE::IFileCallback* pCall
       std::vector<std::string> tokens;
       std::string strDirectory = URIUtils::GetDirectory(pathToUrl);
       URIUtils::RemoveSlashAtEnd(strDirectory);  // for the test below
-      if (!(strDirectory.size() == 2 && strDirectory[1] == ':'))
+      if (strDirectory.size() != 2 || strDirectory[1] != ':')
       {
         CURL url(strDirectory);
         std::string pathsep;

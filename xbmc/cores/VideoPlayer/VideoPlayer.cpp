@@ -158,7 +158,7 @@ public:
         return false;
       }
       // fallback to regular subtitles
-      return !(isSameSubLang && (ss.flags & FLAG_FORCED) == 0);
+      return !isSameSubLang || (ss.flags & FLAG_FORCED) != 0;
     }
 
     if (m_isPrefOriginal)
@@ -173,8 +173,8 @@ public:
 
     // can fall here only when "forced" and "impaired" are disabled,
     // it always enable subs if language is unknown for external and CC
-    return !((isSameSubLang || (isCC && (ss.language.empty() || ss.language == "und"))) &&
-             (ss.flags & FLAG_FORCED) == 0 && (ss.flags & FLAG_HEARING_IMPAIRED) == 0);
+    return (!isSameSubLang && (!isCC || (!ss.language.empty() && ss.language != "und"))) ||
+           (ss.flags & FLAG_FORCED) != 0 || (ss.flags & FLAG_HEARING_IMPAIRED) != 0;
   }
 };
 
@@ -1349,8 +1349,8 @@ void CVideoPlayer::Prepare()
   {
     CLog::Log(LOGINFO, "VideoPlayer: playing a file with menus");
 
-    if (!m_playerOptions.state.empty() && !(m_pInputStream->IsStreamType(DVDSTREAM_TYPE_BLURAY) &&
-                                            m_State.menuType == MenuType::NONE))
+    if (!m_playerOptions.state.empty() && (!m_pInputStream->IsStreamType(DVDSTREAM_TYPE_BLURAY) ||
+                                           m_State.menuType != MenuType::NONE))
 
     {
       discStateRestored = ptr->SetState(m_playerOptions.state);

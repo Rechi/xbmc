@@ -609,15 +609,15 @@ bool CInputManager::HandleKey(const CKey& key)
       // use the virtualkeyboard section of the keymap, and send keyboard-specific or navigation
       // actions through if that's what they are
       CAction action = m_buttonTranslator->GetAction(WINDOW_DIALOG_KEYBOARD, key);
-      if (!(action.GetID() == ACTION_MOVE_LEFT || action.GetID() == ACTION_MOVE_RIGHT ||
-            action.GetID() == ACTION_MOVE_UP || action.GetID() == ACTION_MOVE_DOWN ||
-            action.GetID() == ACTION_SELECT_ITEM || action.GetID() == ACTION_ENTER ||
-            action.GetID() == ACTION_PREVIOUS_MENU || action.GetID() == ACTION_NAV_BACK ||
-            action.GetID() == ACTION_VOICE_RECOGNIZE))
+      if (action.GetID() != ACTION_MOVE_LEFT && action.GetID() != ACTION_MOVE_RIGHT &&
+          action.GetID() != ACTION_MOVE_UP && action.GetID() != ACTION_MOVE_DOWN &&
+          action.GetID() != ACTION_SELECT_ITEM && action.GetID() != ACTION_ENTER &&
+          action.GetID() != ACTION_PREVIOUS_MENU && action.GetID() != ACTION_NAV_BACK &&
+          action.GetID() != ACTION_VOICE_RECOGNIZE)
       {
         // the action isn't plain navigation - check for a keyboard-specific keymap
         action = m_buttonTranslator->GetAction(WINDOW_DIALOG_KEYBOARD, key, false);
-        if (!(action.GetID() >= REMOTE_0 && action.GetID() <= REMOTE_9) ||
+        if (action.GetID() < REMOTE_0 || action.GetID() > REMOTE_9 ||
             action.GetID() == ACTION_BACKSPACE || action.GetID() == ACTION_SHIFT ||
             action.GetID() == ACTION_SYMBOLS || action.GetID() == ACTION_CURSOR_LEFT ||
             action.GetID() == ACTION_CURSOR_RIGHT)

@@ -145,7 +145,7 @@ bool CGLContextGLX::IsSuitableVisual(XVisualInfo *vInfo)
     return false;
   if (glXGetConfig(m_dpy, vInfo, GLX_BLUE_SIZE, &value) || value < 8)
     return false;
-  return !(glXGetConfig(m_dpy, vInfo, GLX_DEPTH_SIZE, &value) || value < 24);
+  return !glXGetConfig(m_dpy, vInfo, GLX_DEPTH_SIZE, &value) && value >= 24;
 }
 
 void CGLContextGLX::SetVSync(bool enable)

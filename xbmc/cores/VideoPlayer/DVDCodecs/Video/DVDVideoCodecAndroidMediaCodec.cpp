@@ -1031,7 +1031,7 @@ bool CDVDVideoCodecAndroidMediaCodec::AddData(const DemuxPacket &packet)
   {
     if (m_indexInputBuffer >= 0)
     {
-      if (!(m_state == MEDIACODEC_STATE_FLUSHED || m_state == MEDIACODEC_STATE_RUNNING))
+      if (m_state != MEDIACODEC_STATE_FLUSHED && m_state != MEDIACODEC_STATE_RUNNING)
       {
         CLog::Log(LOGERROR, "CDVDVideoCodecAndroidMediaCodec::AddData: Wrong state ({})", m_state);
         return false;

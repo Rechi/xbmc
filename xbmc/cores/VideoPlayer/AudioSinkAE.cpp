@@ -245,7 +245,7 @@ bool CAudioSinkAE::IsValidFormat(const DVDAudioFrame &audioframe)
       m_channelLayout != audioframe.format.m_channelLayout)
     return false;
 
-  return !(m_bPassthrough && m_dataType != audioframe.format.m_streamInfo.m_type);
+  return !m_bPassthrough || m_dataType == audioframe.format.m_streamInfo.m_type;
 }
 
 double CAudioSinkAE::GetCacheTime()

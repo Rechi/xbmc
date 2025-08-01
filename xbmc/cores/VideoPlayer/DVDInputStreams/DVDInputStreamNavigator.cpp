@@ -843,7 +843,7 @@ void CDVDInputStreamNavigator::OnBack()
 // we don't allow skipping in menu's cause it will remove menu overlays
 void CDVDInputStreamNavigator::OnNext()
 {
-  if (m_dvdnav && !(IsInMenu() && GetTotalButtons() > 0))
+  if (m_dvdnav && (!IsInMenu() || GetTotalButtons() <= 0))
   {
     m_dll.dvdnav_next_pg_search(m_dvdnav);
   }
@@ -852,7 +852,7 @@ void CDVDInputStreamNavigator::OnNext()
 // we don't allow skipping in menu's cause it will remove menu overlays
 void CDVDInputStreamNavigator::OnPrevious()
 {
-  if (m_dvdnav && !(IsInMenu() && GetTotalButtons() > 0))
+  if (m_dvdnav && (!IsInMenu() || GetTotalButtons() <= 0))
   {
     m_dll.dvdnav_prev_pg_search(m_dvdnav);
   }

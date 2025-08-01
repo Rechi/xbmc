@@ -589,8 +589,8 @@ bool CGUIPassword::IsDatabasePathUnlocked(const std::string& strPath,
   // navigation screen (must have passed lock by then)
   CURL url{strPath};
   if (url.IsProtocol("plugin"))
-    return !(profileManager->GetCurrentProfile().videoLocked() &&
-             CServiceBroker::GetGUI()->GetWindowManager().GetActiveWindow() != WINDOW_VIDEO_NAV);
+    return !profileManager->GetCurrentProfile().videoLocked() ||
+           CServiceBroker::GetGUI()->GetWindowManager().GetActiveWindow() == WINDOW_VIDEO_NAV;
 
   // try to find the best matching source
   bool bName = false;

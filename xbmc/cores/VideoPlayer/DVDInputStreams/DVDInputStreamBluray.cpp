@@ -163,7 +163,7 @@ bool CDVDInputStreamBluray::Open()
 
     // check for a menu call for an image file
     if (StringUtils::EqualsNoCase(filename, "menu") &&
-        !(m_item.GetStartOffset() == STARTOFFSET_RESUME && m_item.IsResumable()))
+        (m_item.GetStartOffset() != STARTOFFSET_RESUME || !m_item.IsResumable()))
     {
       resumable = false;
 

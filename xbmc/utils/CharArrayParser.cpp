@@ -141,7 +141,7 @@ bool CCharArrayParser::ReadNextLine(std::string& line)
   }
 
   int lineLimit = m_position;
-  while (lineLimit < m_limit && !(m_data[lineLimit] == '\n' || m_data[lineLimit] == '\r'))
+  while (lineLimit < m_limit && m_data[lineLimit] != '\n' && m_data[lineLimit] != '\r')
   {
     lineLimit++;
   }

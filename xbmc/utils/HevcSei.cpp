@@ -36,7 +36,7 @@ void HevcClearStartCodeEmulationPrevention3Byte(const uint8_t* buf,
 
     for (i = 2; i < len; i++)
     {
-      if (!(buf[i - 2] == 0 && buf[i - 1] == 0 && buf[i] == 3))
+      if (buf[i - 2] != 0 || buf[i - 1] != 0 || buf[i] != 3)
         out.emplace_back(buf[i]);
     }
   }
