@@ -27,5 +27,6 @@ Checks: "\
   readability-non-const-parameter,\
   readability-qualified-auto,\
   readability-redundant-access-specifiers,\
+  readability-redundant-control-flow,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'

@@ -985,7 +985,6 @@ void SortUtils::GetFieldsForSQLSort(const MediaType& mediaType,
 
   // Add sort by id to define order when other fields same or sort none
   fields.emplace_back(FieldId);
-  return;
 }
 
 
