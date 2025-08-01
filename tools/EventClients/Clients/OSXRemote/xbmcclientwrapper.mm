@@ -89,7 +89,7 @@ private:
   std::string	m_address;
   int         m_port;
   XBMCClientEventSequence m_sequence;
-  CFRunLoopTimerRef m_timer = 0;
+  CFRunLoopTimerRef m_timer = nullptr;
   double m_sequence_timeout = 0.5;
   int m_device_id = 150;
   bool m_verbose_mode;
@@ -144,7 +144,7 @@ void XBMCClientWrapperImpl::restartTimer(){
 	if (m_timer)
     resetTimer();
 
-	CFRunLoopTimerContext context = { 0, this, 0, 0, 0 };
+  CFRunLoopTimerContext context = {0, this, nullptr, nullptr, nullptr};
 	m_timer = CFRunLoopTimerCreate(kCFAllocatorDefault, CFAbsoluteTimeGetCurrent() + m_sequence_timeout, 0, 0, 0, timerCallBack, &context);
 	CFRunLoopAddTimer(CFRunLoopGetCurrent(), m_timer, kCFRunLoopCommonModes);
 }
@@ -203,7 +203,7 @@ bool XBMCClientWrapperImpl::isStartToken(eATVClientEvent f_event){
 }
 
 void XBMCClientWrapperImpl::sendButton(eATVClientEvent f_event){
-  CPacketBUTTON* lp_packet = 0;
+  CPacketBUTTON* lp_packet = nullptr;
   if(m_mode == MULTIREMOTE_MODE){
     tMultiRemoteMap::iterator it = m_multiremote_map.find(std::make_pair(m_device_id, f_event));
     if(it == m_multiremote_map.end()){

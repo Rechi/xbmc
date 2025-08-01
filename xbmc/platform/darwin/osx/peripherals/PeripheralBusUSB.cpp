@@ -61,7 +61,7 @@ CPeripheralBusUSB::~CPeripheralBusUSB()
     CFRunLoopRemoveSource( CFRunLoopGetCurrent(),
       IONotificationPortGetRunLoopSource(m_notify_port), kCFRunLoopDefaultMode );
     IONotificationPortDestroy(m_notify_port);
-    m_notify_port = 0;
+    m_notify_port = nullptr;
   }
   if (m_attach_iterator)
   {

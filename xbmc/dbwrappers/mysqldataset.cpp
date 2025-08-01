@@ -954,7 +954,7 @@ void CStrAccum::VXPrintf(MYSQL* conn,
   int nsd; /* Number of significant digits returned */
 
   length = 0;
-  bufpt = 0;
+  bufpt = nullptr;
   for (; (c = (*fmt)) != 0; ++fmt)
   {
     bool isLike = false;
@@ -1465,7 +1465,7 @@ void CStrAccum::VXPrintf(MYSQL* conn,
       case etSTRING:
       case etDYNSTRING:
         bufpt = va_arg(ap, char*);
-        if (bufpt == 0)
+        if (bufpt == nullptr)
         {
           bufpt = const_cast<char*>("");
         }
@@ -1501,7 +1501,7 @@ void CStrAccum::VXPrintf(MYSQL* conn,
           StringUtils::Replace(arg, "\\", "\\\\");
         const char* escarg = arg.c_str();
 
-        isnull = escarg == 0;
+        isnull = escarg == nullptr;
         if (isnull)
           escarg = (xtype == etSQLESCAPE2 ? "NULL" : "(NULL)");
         k = precision;
@@ -1512,7 +1512,7 @@ void CStrAccum::VXPrintf(MYSQL* conn,
         if (n > etBUFSIZE)
         {
           bufpt = zExtra = (char*)malloc(n);
-          if (bufpt == 0)
+          if (bufpt == nullptr)
           {
             m_mallocFailed = true;
             return;

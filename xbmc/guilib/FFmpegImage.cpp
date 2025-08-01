@@ -661,7 +661,9 @@ bool CFFmpegImage::CreateThumbnailFromSurface(unsigned char* bufferin, unsigned 
   int srcStride[] = { (int) pitch, 0, 0, 0};
 
   //input size == output size which means only pix_fmt conversion
-  tdm.sws = sws_getContext(width, height, AV_PIX_FMT_RGB32, width, height, jpg_output ? AV_PIX_FMT_YUV420P : AV_PIX_FMT_RGBA, 0, 0, 0, 0);
+  tdm.sws = sws_getContext(width, height, AV_PIX_FMT_RGB32, width, height,
+                           jpg_output ? AV_PIX_FMT_YUV420P : AV_PIX_FMT_RGBA, 0, nullptr, nullptr,
+                           nullptr);
   if (!tdm.sws)
   {
     CLog::Log(LOGERROR, "Could not setup scaling context for thumbnail: {}", destFile);

@@ -234,7 +234,7 @@ void CRendererDRMPRIMEGLES::DrawBlackBars()
   glBindBuffer(GL_ARRAY_BUFFER, vertexVBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(Svertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
 
-  glVertexAttribPointer(posLoc, 2, GL_FLOAT, GL_FALSE, sizeof(Svertex), 0);
+  glVertexAttribPointer(posLoc, 2, GL_FLOAT, GL_FALSE, sizeof(Svertex), nullptr);
   glEnableVertexAttribArray(posLoc);
 
   glDrawArrays(GL_TRIANGLES, 0, vertices.size());

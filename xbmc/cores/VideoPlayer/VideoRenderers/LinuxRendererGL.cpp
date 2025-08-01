@@ -595,7 +595,7 @@ void CLinuxRendererGL::ClearBackBufferQuad()
   glBindBuffer(GL_ARRAY_BUFFER, vertexVBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(Svertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
 
-  glVertexAttribPointer(posLoc, 2, GL_FLOAT, GL_FALSE, sizeof(Svertex), 0);
+  glVertexAttribPointer(posLoc, 2, GL_FLOAT, GL_FALSE, sizeof(Svertex), nullptr);
   glEnableVertexAttribArray(posLoc);
 
   glDrawArrays(GL_TRIANGLES, 0, vertices.size());
@@ -719,7 +719,7 @@ void CLinuxRendererGL::DrawBlackBars()
   glBindBuffer(GL_ARRAY_BUFFER, vertexVBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(Svertex)*count, &vertices[0], GL_STATIC_DRAW);
 
-  glVertexAttribPointer(posLoc, 3, GL_FLOAT, GL_FALSE, sizeof(Svertex), 0);
+  glVertexAttribPointer(posLoc, 3, GL_FLOAT, GL_FALSE, sizeof(Svertex), nullptr);
   glEnableVertexAttribArray(posLoc);
 
   glDrawArrays(GL_TRIANGLES, 0, count);
@@ -1943,7 +1943,7 @@ bool CLinuxRendererGL::CreateYV12Texture(int index)
     for (int i = 0; i < 3; i++)
     {
       glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo[i]);
-      glBufferData(GL_PIXEL_UNPACK_BUFFER, im.planesize[i] + PBO_OFFSET, 0, GL_STREAM_DRAW);
+      glBufferData(GL_PIXEL_UNPACK_BUFFER, im.planesize[i] + PBO_OFFSET, nullptr, GL_STREAM_DRAW);
       void* pboPtr = glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
       if (pboPtr)
       {
@@ -2249,7 +2249,7 @@ bool CLinuxRendererGL::CreateNV12Texture(int index)
     for (int i = 0; i < 2; i++)
     {
       glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo[i]);
-      glBufferData(GL_PIXEL_UNPACK_BUFFER, im.planesize[i] + PBO_OFFSET, 0, GL_STREAM_DRAW);
+      glBufferData(GL_PIXEL_UNPACK_BUFFER, im.planesize[i] + PBO_OFFSET, nullptr, GL_STREAM_DRAW);
       void* pboPtr = glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
       if (pboPtr)
       {
@@ -2515,7 +2515,7 @@ bool CLinuxRendererGL::CreateYUV422PackedTexture(int index)
     glGenBuffers(1, pbo);
 
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo[0]);
-    glBufferData(GL_PIXEL_UNPACK_BUFFER, im.planesize[0] + PBO_OFFSET, 0, GL_STREAM_DRAW);
+    glBufferData(GL_PIXEL_UNPACK_BUFFER, im.planesize[0] + PBO_OFFSET, nullptr, GL_STREAM_DRAW);
     void* pboPtr = glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
     if (pboPtr)
     {

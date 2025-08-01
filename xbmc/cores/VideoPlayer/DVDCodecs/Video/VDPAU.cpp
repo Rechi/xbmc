@@ -79,14 +79,14 @@ static float studioCSCKCoeffs709[3] = {0.2126, 0.7152, 0.0722}; //BT709 {Kr, Kg,
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-CVDPAUContext *CVDPAUContext::m_context = 0;
+CVDPAUContext* CVDPAUContext::m_context = nullptr;
 CCriticalSection CVDPAUContext::m_section;
-Display *CVDPAUContext::m_display = 0;
-void *CVDPAUContext::m_dlHandle = 0;
+Display* CVDPAUContext::m_display = nullptr;
+void* CVDPAUContext::m_dlHandle = nullptr;
 
 CVDPAUContext::CVDPAUContext()
 {
-  m_context = 0;
+  m_context = nullptr;
   m_refCount = 0;
 }
 
@@ -99,7 +99,7 @@ void CVDPAUContext::Release()
   {
     Close();
     delete this;
-    m_context = 0;
+    m_context = nullptr;
   }
 }
 
@@ -127,7 +127,7 @@ bool CVDPAUContext::EnsureContext(CVDPAUContext **ctx)
     if (!m_context->LoadSymbols() || !m_context->CreateContext())
     {
       delete m_context;
-      m_context = 0;
+      m_context = nullptr;
       *ctx = NULL;
       return false;
     }
@@ -484,7 +484,7 @@ CDecoder::CDecoder(CProcessInfo& processInfo) :
 
   m_vdpauConfigured = false;
   m_DisplayState = VDPAU_OPEN;
-  m_vdpauConfig.context = 0;
+  m_vdpauConfig.context = nullptr;
   m_vdpauConfig.processInfo = &m_processInfo;
   m_vdpauConfig.resetCounter = 0;
 }
@@ -556,7 +556,7 @@ bool CDecoder::Open(AVCodecContext* avctx, AVCodecContext* mainctx, const enum A
   m_DisplayState = VDPAU_OPEN;
   m_vdpauConfigured = false;
 
-  m_presentPicture = 0;
+  m_presentPicture = nullptr;
 
   {
     VdpDecoderProfile profile = 0;
@@ -639,7 +639,7 @@ void CDecoder::Close()
 
   if (m_vdpauConfig.context)
     m_vdpauConfig.context->Release();
-  m_vdpauConfig.context = 0;
+  m_vdpauConfig.context = nullptr;
 }
 
 long CDecoder::Release()
@@ -722,7 +722,7 @@ void CDecoder::OnLostDisplay()
   FiniVDPAUOutput();
   if (m_vdpauConfig.context)
     m_vdpauConfig.context->Release();
-  m_vdpauConfig.context = 0;
+  m_vdpauConfig.context = nullptr;
 
   m_DisplayState = VDPAU_LOST;
   lock.unlock();
@@ -778,7 +778,7 @@ CDVDVideoCodec::VCReturn CDecoder::Check(AVCodecContext* avctx)
     FiniVDPAUOutput();
     if (m_vdpauConfig.context)
       m_vdpauConfig.context->Release();
-    m_vdpauConfig.context = 0;
+    m_vdpauConfig.context = nullptr;
 
     if (CVDPAUContext::EnsureContext(&m_vdpauConfig.context))
     {
@@ -1891,7 +1891,7 @@ void CMixer::Process()
     {
       msg = m_controlPort.GetMessage();
       msg->signal = CMixerControlProtocol::TIMEOUT;
-      port = 0;
+      port = nullptr;
       // signal timeout to state machine
       StateMachine(msg->signal, port, msg);
       if (!m_bStateMachineSelfTrigger)
@@ -2772,21 +2772,10 @@ void CMixer::ProcessPicture()
   destRect.y1 = m_config.outHeight;
 
   // start vdpau video mixer
-  vdp_st = m_config.context->GetProcs().vdp_video_mixer_render(m_videoMixer,
-                                VDP_INVALID_HANDLE,
-                                0,
-                                m_mixerfield,
-                                pastCount,
-                                past_surfaces,
-                                m_mixerInput[1].videoSurface,
-                                futuCount,
-                                futu_surfaces,
-                                &sourceRect,
-                                m_processPicture.outputSurface,
-                                &destRect,
-                                &destRect,
-                                0,
-                                NULL);
+  vdp_st = m_config.context->GetProcs().vdp_video_mixer_render(
+      m_videoMixer, VDP_INVALID_HANDLE, nullptr, m_mixerfield, pastCount, past_surfaces,
+      m_mixerInput[1].videoSurface, futuCount, futu_surfaces, &sourceRect,
+      m_processPicture.outputSurface, &destRect, &destRect, 0, NULL);
   CheckStatus(vdp_st, __LINE__);
 }
 
@@ -3132,7 +3121,7 @@ void COutput::Process()
     {
       msg = m_controlPort.GetMessage();
       msg->signal = COutputControlProtocol::TIMEOUT;
-      port = 0;
+      port = nullptr;
       // signal timeout to state machine
       StateMachine(msg->signal, port, msg);
       if (!m_bStateMachineSelfTrigger)

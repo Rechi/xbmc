@@ -260,7 +260,7 @@ CCurlFile::CReadState::CReadState()
   m_bFirstLoop = true;
   m_sendRange = true;
   m_bLastError = false;
-  m_readBuffer = 0;
+  m_readBuffer = nullptr;
   m_isPaused = false;
   m_bRetry = true;
   m_curlHeaderList = NULL;
@@ -402,7 +402,7 @@ void CCurlFile::CReadState::Disconnect()
   m_filePos = 0;
   m_fileSize = 0;
   m_bufferSize = 0;
-  m_readBuffer = 0;
+  m_readBuffer = nullptr;
 
   /* cleanup */
   if( m_curlHeaderList )

@@ -92,7 +92,7 @@ CRPRendererOpenGL::CRPRendererOpenGL(const CRenderSettings& renderSettings,
   m_context.DisableGUIShader();
 
   glEnableVertexAttribArray(posLoc);
-  glVertexAttribPointer(posLoc, 3, GL_FLOAT, GL_FALSE, sizeof(Svertex), 0);
+  glVertexAttribPointer(posLoc, 3, GL_FLOAT, GL_FALSE, sizeof(Svertex), nullptr);
 
   glBindVertexArray(0);
   glBindBuffer(GL_ARRAY_BUFFER, 0);

@@ -376,7 +376,7 @@ void* CAirTunesServer::AudioOutputFunctions::audio_init(void *cls, int bits, int
   header.durationMs = 0;
 
   if (pipe->Write(&header, sizeof(header)) == 0)
-    return 0;
+    return nullptr;
 
   CServiceBroker::GetAppMessenger()->SendMsg(TMSG_MEDIA_STOP);
 

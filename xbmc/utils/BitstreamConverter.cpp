@@ -1150,7 +1150,7 @@ int CBitstreamConverter::isom_write_avcc(AVIOContext *pb, const uint8_t *data, i
     {
       uint8_t *buf=NULL, *end, *start;
       uint32_t sps_size=0, pps_size=0;
-      uint8_t *sps=0, *pps=0;
+      uint8_t *sps = nullptr, *pps = nullptr;
 
       int ret = avc_parse_nal_units_buf(data, &buf, &len);
       if (ret < 0)

@@ -81,12 +81,12 @@ void VAAPI::VaInfoCallback(void *user_context, const char *message)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-CVAAPIContext *CVAAPIContext::m_context = 0;
+CVAAPIContext* CVAAPIContext::m_context = nullptr;
 CCriticalSection CVAAPIContext::m_section;
 
 CVAAPIContext::CVAAPIContext()
 {
-  m_context = 0;
+  m_context = nullptr;
   m_refCount = 0;
   m_profiles = NULL;
 }
@@ -104,7 +104,7 @@ void CVAAPIContext::Release(CDecoder *decoder)
   {
     Close();
     delete this;
-    m_context = 0;
+    m_context = nullptr;
   }
 }
 
@@ -139,7 +139,7 @@ bool CVAAPIContext::EnsureContext(CVAAPIContext **ctx, CDecoder *decoder)
     if (!m_context->CreateContext())
     {
       delete m_context;
-      m_context = 0;
+      m_context = nullptr;
       *ctx = NULL;
       return false;
     }
@@ -516,7 +516,7 @@ CDecoder::CDecoder(CProcessInfo& processInfo) :
 
   m_vaapiConfigured = false;
   m_DisplayState = VAAPI_OPEN;
-  m_vaapiConfig.context = 0;
+  m_vaapiConfig.context = nullptr;
   m_vaapiConfig.configId = VA_INVALID_ID;
   m_vaapiConfig.processInfo = &m_processInfo;
   m_getBufferError = 0;
@@ -769,7 +769,7 @@ void CDecoder::Close()
 
   if (m_vaapiConfig.context)
     m_vaapiConfig.context->Release(this);
-  m_vaapiConfig.context = 0;
+  m_vaapiConfig.context = nullptr;
 }
 
 long CDecoder::Release()
@@ -1030,7 +1030,7 @@ CDVDVideoCodec::VCReturn CDecoder::Check(AVCodecContext* avctx)
     FiniVAAPIOutput();
     if (m_vaapiConfig.context)
       m_vaapiConfig.context->Release(this);
-    m_vaapiConfig.context = 0;
+    m_vaapiConfig.context = nullptr;
 
     if (CVAAPIContext::EnsureContext(&m_vaapiConfig.context, this) && ConfigVAAPI())
     {
@@ -1892,7 +1892,7 @@ void COutput::Process()
     {
       msg = m_controlPort.GetMessage();
       msg->signal = COutputControlProtocol::TIMEOUT;
-      port = 0;
+      port = nullptr;
       // signal timeout to state machine
       StateMachine(msg->signal, port, msg);
       if (!m_bStateMachineSelfTrigger)

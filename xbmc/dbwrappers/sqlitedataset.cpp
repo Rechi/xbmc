@@ -358,7 +358,8 @@ int SqliteDatabase::connect(bool create)
         CLog::Log(LOGFATAL, "SqliteDatabase: {} is read only", db_fullpath);
         throw std::runtime_error("SqliteDatabase: " + db_fullpath + " is read only");
       }
-      errorCode = sqlite3_create_collation(conn, "ALPHANUM", SQLITE_UTF8, 0, AlphaNumericCollation);
+      errorCode =
+          sqlite3_create_collation(conn, "ALPHANUM", SQLITE_UTF8, nullptr, AlphaNumericCollation);
       if (errorCode != SQLITE_OK)
       {
         CLog::Log(LOGFATAL, "SqliteDatabase: can not register collation");

@@ -255,7 +255,7 @@ XVisualInfo* CWinSystemX11GLESContext::GetVisual()
     EGL_NONE
   };
   EGLint numConfigs;
-  EGLConfig eglConfig = 0;
+  EGLConfig eglConfig = nullptr;
   if (!eglChooseConfig(eglDisplay, att, &eglConfig, 1, &numConfigs) || numConfigs == 0)
   {
     CLog::Log(LOGERROR, "Failed to choose a config {}", eglGetError());

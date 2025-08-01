@@ -143,7 +143,7 @@ void CGUITextureGL::End()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexVBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ushort)*m_idx.size(), m_idx.data(), GL_STATIC_DRAW);
 
-    glDrawElements(GL_TRIANGLES, m_packedVertices.size()*6 / 4, GL_UNSIGNED_SHORT, 0);
+    glDrawElements(GL_TRIANGLES, m_packedVertices.size() * 6 / 4, GL_UNSIGNED_SHORT, nullptr);
 
     if (m_diffuse.size())
       glDisableVertexAttribArray(tex1Loc);

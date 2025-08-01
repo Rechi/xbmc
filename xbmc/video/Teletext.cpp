@@ -1627,7 +1627,9 @@ void CTeletextDecoder::Decode_BTT()
 
   std::unique_lock lock(m_txtCache->m_critSection);
 
-  if (m_txtCache->SubPageTable[0x1f0] == 0xff || 0 == m_txtCache->astCachetable[0x1f0][m_txtCache->SubPageTable[0x1f0]]) /* not yet received */
+  if (m_txtCache->SubPageTable[0x1f0] == 0xff ||
+      nullptr ==
+          m_txtCache->astCachetable[0x1f0][m_txtCache->SubPageTable[0x1f0]]) /* not yet received */
     return;
 
   auto& components = CServiceBroker::GetAppComponents();
@@ -1701,7 +1703,10 @@ void CTeletextDecoder::Decode_ADIP() /* additional information table */
   for (i = 0; i <= m_txtCache->ADIP_PgMax; i++)
   {
     p = m_txtCache->ADIP_Pg[i];
-    if (!p || m_txtCache->SubPageTable[p] == 0xff || 0 == m_txtCache->astCachetable[p][m_txtCache->SubPageTable[p]]) /* not cached (avoid segfault) */
+    if (!p || m_txtCache->SubPageTable[p] == 0xff ||
+        nullptr ==
+            m_txtCache
+                ->astCachetable[p][m_txtCache->SubPageTable[p]]) /* not cached (avoid segfault) */
       continue;
 
     appPlayer->LoadPage(p, m_txtCache->SubPageTable[p], padip);
@@ -3009,7 +3014,7 @@ TextPageinfo_t* CTeletextDecoder::DecodePage(bool showl25,             // 1=deco
     IgnoreAtBlackBgSubst = 0;
     mosaic_pending = esc_pending = 0; // we need to render at least one mosaic char if 'esc' is received immediately after mosaic charset switch on
 
-    if (boxed && memchr(&PageChar[row*40], start_box, 40) == 0)
+    if (boxed && memchr(&PageChar[row * 40], start_box, 40) == nullptr)
     {
       foreground = TXT_ColorTransp;
       background = TXT_ColorTransp;
@@ -3592,7 +3597,7 @@ void CTeletextDecoder::Eval_NumberedObject(int p, int s, int packet, int triplet
 {
   std::unique_lock lock(m_txtCache->m_critSection);
 
-  if (!packet || 0 == m_txtCache->astCachetable[p][s])
+  if (!packet || nullptr == m_txtCache->astCachetable[p][s])
     return;
 
   unsigned char pagedata[23*40];
@@ -4023,7 +4028,7 @@ int CTeletextDecoder::Eval_Triplet(int iOData, TextCachedPage_t *pstCachedPage,
 /* out: 18 bit triplet data, <0 if invalid number, not cached, or hamming error */
 int CTeletextDecoder::iTripletNumber2Data(int iONr, TextCachedPage_t *pstCachedPage, unsigned char* pagedata)
 {
-  if (iONr > 506 || 0 == pstCachedPage)
+  if (iONr > 506 || nullptr == pstCachedPage)
     return -1;
 
   unsigned char *p;
@@ -4034,16 +4039,16 @@ int CTeletextDecoder::iTripletNumber2Data(int iONr, TextCachedPage_t *pstCachedP
     p = pagedata + 40*(packet-1) + packetoffset + 1;
   else if (packet <= 25)
   {
-    if (0 == pstCachedPage->pageinfo.p24)
+    if (nullptr == pstCachedPage->pageinfo.p24)
       return -1;
     p = pstCachedPage->pageinfo.p24 + 40*(packet-24) + packetoffset + 1;
   }
   else
   {
     int descode = packet - 26;
-    if (0 == pstCachedPage->pageinfo.ext)
+    if (nullptr == pstCachedPage->pageinfo.ext)
       return -1;
-    if (0 == pstCachedPage->pageinfo.ext->p26[descode])
+    if (nullptr == pstCachedPage->pageinfo.ext->p26[descode])
       return -1;
     p = pstCachedPage->pageinfo.ext->p26[descode] + packetoffset;  /* first byte (=designation code) is not cached */
   }

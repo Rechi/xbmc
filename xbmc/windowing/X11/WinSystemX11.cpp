@@ -885,7 +885,7 @@ bool CWinSystemX11::CreateIconPixmap()
   int outIndex = 0;
   unsigned int i,j;
   unsigned char *buf;
-  uint32_t *newBuf = 0;
+  uint32_t* newBuf = nullptr;
   size_t numNewBufBytes;
 
   // Get visual Info

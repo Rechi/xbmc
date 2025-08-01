@@ -1125,7 +1125,7 @@ void CActiveAE::Process()
     {
       msg = m_controlPort.GetMessage();
       msg->signal = CActiveAEControlProtocol::TIMEOUT;
-      port = 0;
+      port = nullptr;
       // signal timeout to state machine
       StateMachine(msg->signal, port, msg);
       if (!m_bStateMachineSelfTrigger)
