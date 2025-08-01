@@ -21,7 +21,7 @@ namespace XBMCAddon
   namespace xbmc
   {
     InfoTagMusic::InfoTagMusic(bool offscreen /* = false */)
-      : infoTag(new MUSIC_INFO::CMusicInfoTag()), offscreen(offscreen), owned(true)
+      : infoTag(new MUSIC_INFO::CMusicInfoTag()), offscreen(offscreen)
     {
     }
 

@@ -110,12 +110,12 @@ namespace XBMCAddon
     }
 
     InfoTagVideo::InfoTagVideo(bool offscreen /* = false */)
-      : infoTag(new CVideoInfoTag), offscreen(offscreen), owned(true)
+      : infoTag(new CVideoInfoTag), offscreen(offscreen)
     {
     }
 
     InfoTagVideo::InfoTagVideo(const CVideoInfoTag* tag)
-      : infoTag(new CVideoInfoTag(*tag)), offscreen(true), owned(true)
+      : infoTag(new CVideoInfoTag(*tag)), offscreen(true)
     {
     }
 

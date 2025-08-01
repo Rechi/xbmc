@@ -629,8 +629,10 @@ private:
   std::string m_strSummary; /*!< @brief summary string with the time to show inside a GUI list */
   PVR_TIMER_STATE m_state = PVR_TIMER_STATE_SCHEDULED; /*!< @brief the state of this timer */
   int m_iClientId; /*!< @brief ID of the backend */
-  int m_iClientIndex; /*!< @brief index number of the tag, given by the backend, PVR_TIMER_NO_CLIENT_INDEX for new */
-  int m_iParentClientIndex; /*!< @brief for timers scheduled by a timer rule, the index number of the parent, given by the backend, PVR_TIMER_NO_PARENT for no parent */
+  int m_iClientIndex =
+      PVR_TIMER_NO_CLIENT_INDEX; /*!< @brief index number of the tag, given by the backend, PVR_TIMER_NO_CLIENT_INDEX for new */
+  int m_iParentClientIndex =
+      PVR_TIMER_NO_PARENT; /*!< @brief for timers scheduled by a timer rule, the index number of the parent, given by the backend, PVR_TIMER_NO_PARENT for no parent */
   int m_iClientChannelUid; /*!< @brief channel uid */
   bool m_bStartAnyTime =
       false; /*!< @brief Ignore start date and time clock. Record at 'Any Time' */

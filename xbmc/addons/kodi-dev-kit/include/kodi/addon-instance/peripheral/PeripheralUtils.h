@@ -616,9 +616,7 @@ public:
   /// @param[in] provider [optional] Provide name
   /// @param[in] strName [optional] Name of related joystick
   Joystick(const std::string& provider = "", const std::string& strName = "")
-    : Peripheral(PERIPHERAL_TYPE_JOYSTICK, strName),
-      m_provider(provider),
-      m_requestedPort(NO_PORT_REQUESTED)
+    : Peripheral(PERIPHERAL_TYPE_JOYSTICK, strName), m_provider(provider)
   {
   }
 
@@ -774,7 +772,7 @@ public:
 
 private:
   std::string m_provider;
-  int m_requestedPort;
+  int m_requestedPort = NO_PORT_REQUESTED;
   unsigned int m_buttonCount = 0;
   unsigned int m_hatCount = 0;
   unsigned int m_axisCount = 0;

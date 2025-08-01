@@ -20,12 +20,11 @@ namespace xbmc
 {
 
 InfoTagGame::InfoTagGame(bool offscreen /* = false */)
-  : infoTag(new CGameInfoTag), offscreen(offscreen), owned(true)
+  : infoTag(new CGameInfoTag), offscreen(offscreen)
 {
 }
 
-InfoTagGame::InfoTagGame(const CGameInfoTag* tag)
-  : infoTag(new CGameInfoTag(*tag)), offscreen(true), owned(true)
+InfoTagGame::InfoTagGame(const CGameInfoTag* tag) : infoTag(new CGameInfoTag(*tag)), offscreen(true)
 {
 }
 

@@ -40,8 +40,6 @@ using namespace PVR;
 CPVRTimerInfoTag::CPVRTimerInfoTag(bool bRadio /* = false */)
   : m_strTitle(g_localizeStrings.Get(19056)), // New Timer
     m_iClientId(CServiceBroker::GetPVRManager().Clients()->GetFirstCreatedClientID()),
-    m_iClientIndex(PVR_TIMER_NO_CLIENT_INDEX),
-    m_iParentClientIndex(PVR_TIMER_NO_PARENT),
     m_iClientChannelUid(PVR_CHANNEL_INVALID_UID),
     m_iPriority(DEFAULT_RECORDING_PRIORITY),
     m_iLifetime(DEFAULT_RECORDING_LIFETIME),

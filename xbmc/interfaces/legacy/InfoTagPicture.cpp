@@ -22,12 +22,12 @@ namespace xbmc
 {
 
 InfoTagPicture::InfoTagPicture(bool offscreen /* = false */)
-  : infoTag(new CPictureInfoTag), offscreen(offscreen), owned(true)
+  : infoTag(new CPictureInfoTag), offscreen(offscreen)
 {
 }
 
 InfoTagPicture::InfoTagPicture(const CPictureInfoTag* tag)
-  : infoTag(new CPictureInfoTag(*tag)), offscreen(true), owned(true)
+  : infoTag(new CPictureInfoTag(*tag)), offscreen(true)
 {
 }
 

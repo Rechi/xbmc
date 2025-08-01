@@ -45,7 +45,6 @@ void COSScreenSaverManager::RemoveInhibitor()
 }
 
 COSScreenSaverInhibitor::COSScreenSaverInhibitor() noexcept
-: m_active{false}, m_manager{}
 {
 }
 
@@ -55,7 +54,6 @@ COSScreenSaverInhibitor::COSScreenSaverInhibitor(COSScreenSaverManager* manager)
 }
 
 COSScreenSaverInhibitor::COSScreenSaverInhibitor(COSScreenSaverInhibitor&& other) noexcept
-: m_active{false}, m_manager{}
 {
   *this = std::move(other);
 }
