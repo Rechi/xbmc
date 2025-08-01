@@ -537,7 +537,7 @@ bool CWSDiscoveryListenerUDP::buildSoapMessage(const std::string& action,
 }
 
 template<std::size_t SIZE>
-const std::string CWSDiscoveryListenerUDP::wsd_tag_find(
+std::string CWSDiscoveryListenerUDP::wsd_tag_find(
     const std::string& xml, const std::array<std::pair<std::string, std::string>, SIZE>& tag)
 {
   for (const auto& tagpair : tag)

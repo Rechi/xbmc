@@ -447,8 +447,7 @@ void CScraperParser::ParseNext(TiXmlElement* element)
   }
 }
 
-const std::string CScraperParser::Parse(const std::string& strTag,
-                                       CScraper* scraper)
+std::string CScraperParser::Parse(const std::string& strTag, CScraper* scraper)
 {
   TiXmlElement* pChildElement = m_pRootElement->FirstChildElement(strTag.c_str());
   if(pChildElement == NULL)

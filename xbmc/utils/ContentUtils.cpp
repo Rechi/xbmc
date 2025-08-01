@@ -33,7 +33,7 @@ std::string GetPreferredArtType(const MediaType& type)
 }
 } // namespace
 
-const std::string ContentUtils::GetPreferredArtImage(const CFileItem& item)
+std::string ContentUtils::GetPreferredArtImage(const CFileItem& item)
 {
   if (HasPreferredArtType(item))
   {

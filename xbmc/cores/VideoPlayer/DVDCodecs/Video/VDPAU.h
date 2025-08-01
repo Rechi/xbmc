@@ -597,7 +597,7 @@ public:
   unsigned GetAllowedReferences() override { return 5; }
 
   CDVDVideoCodec::VCReturn Check(AVCodecContext* avctx) override;
-  const std::string Name() override { return "vdpau"; }
+  std::string Name() override { return "vdpau"; }
   void SetCodecControl(int flags) override;
 
   bool Supports(VdpVideoMixerFeature feature);

@@ -50,7 +50,7 @@ public:
   const CScraperUrl& ScraperUrl() const { return m_url; }
 
   //! \brief Returns current scaper info.
-  const ADDON::ScraperPtr GetAddonInfo() const { return m_info; }
+  ADDON::ScraperPtr GetAddonInfo() const { return m_info; }
 
 protected:
   const CFileItem& m_item; //!< Reference to item to load for

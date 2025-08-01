@@ -37,8 +37,7 @@ public:
   const std::string& GetFilename() const { return m_strFile; }
   std::string GetSearchStringEncoding() const
     { return m_SearchStringEncoding; }
-  const std::string Parse(const std::string& strTag,
-                         ADDON::CScraper* scraper);
+  std::string Parse(const std::string& strTag, ADDON::CScraper* scraper);
 
   void AddDocument(const CXBMCTinyXML* doc);
 

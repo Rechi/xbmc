@@ -332,7 +332,7 @@ bool CGUIDialogSubtitles::SetService(const std::string &service)
   return false;
 }
 
-const CFileItemPtr CGUIDialogSubtitles::GetService() const
+CFileItemPtr CGUIDialogSubtitles::GetService() const
 {
   for (int i = 0; i < m_serviceItems->Size(); i++)
   {

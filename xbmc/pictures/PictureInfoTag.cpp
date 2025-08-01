@@ -263,7 +263,7 @@ void CPictureInfoTag::ToSortable(SortItem& sortable, Field field) const
     sortable[FieldDateTaken] = m_dateTimeTaken.GetAsDBDateTime();
 }
 
-const std::string CPictureInfoTag::GetInfo(int info) const
+std::string CPictureInfoTag::GetInfo(int info) const
 {
   if (!m_isLoaded && !m_isInfoSetExternally) // If no metadata has been loaded from the picture file or set with SetInfo(), just return
     return "";

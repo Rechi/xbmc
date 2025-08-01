@@ -137,9 +137,9 @@ public:
    */
   void SetSubtitleLanguage(const std::string& language, bool isIso6392 = false);
 
-  const std::string GetDVDMenuLanguage() const;
-  const std::string GetDVDAudioLanguage() const;
-  const std::string GetDVDSubtitleLanguage() const;
+  std::string GetDVDMenuLanguage() const;
+  std::string GetDVDAudioLanguage() const;
+  std::string GetDVDSubtitleLanguage() const;
   const std::string& GetTimeZone() const;
 
   const std::string& GetRegionLocale() const;

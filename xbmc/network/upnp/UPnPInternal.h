@@ -76,8 +76,9 @@ namespace UPNP
   const char* GetMimeTypeFromExtension(const char* extension, const PLT_HttpRequestContext* context = NULL);
   NPT_String  GetMimeType(const CFileItem& item, const PLT_HttpRequestContext* context = NULL);
   NPT_String  GetMimeType(const char* filename, const PLT_HttpRequestContext* context = NULL);
-  const NPT_String GetProtocolInfo(const CFileItem& item, const char* protocol, const PLT_HttpRequestContext* context = NULL);
-
+  NPT_String GetProtocolInfo(const CFileItem& item,
+                             const char* protocol,
+                             const PLT_HttpRequestContext* context = NULL);
 
   const std::string& CorrectAllItemsSortHack(const std::string &item);
 

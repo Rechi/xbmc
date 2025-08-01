@@ -155,7 +155,7 @@ public:
   unsigned int GetPropertiesAmount() const { return m_cStructure->m_nCountInfoValues; }
 
   /// @brief List of available properties-
-  const std::map<std::string, std::string> GetProperties() const
+  std::map<std::string, std::string> GetProperties() const
   {
     std::map<std::string, std::string> props;
     for (unsigned int i = 0; i < m_cStructure->m_nCountInfoValues; ++i)

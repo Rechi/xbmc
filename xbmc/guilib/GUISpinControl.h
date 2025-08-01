@@ -60,7 +60,7 @@ public:
   std::string GetStringValue() const;
   void AddLabel(const std::string& strLabel, int iValue);
   void AddLabel(const std::string& strLabel, const std::string& strValue);
-  const std::string GetLabel() const;
+  std::string GetLabel() const;
   void SetReverse(bool bOnOff);
   int GetMaximum() const;
   int GetMinimum() const;

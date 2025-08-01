@@ -30,7 +30,7 @@ public:
   int  Add(const std::string& strLabel);
   int  Add(const CFileItem& item);
   void SetItems(const CFileItemList& items);
-  const CFileItemPtr GetSelectedFileItem() const;
+  CFileItemPtr GetSelectedFileItem() const;
   int GetSelectedItem() const;
   const std::vector<int>& GetSelectedItems() const;
   void EnableButton(bool enable, int label);

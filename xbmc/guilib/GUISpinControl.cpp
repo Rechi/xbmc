@@ -673,7 +673,7 @@ void CGUISpinControl::AddLabel(const std::string& strLabel, const std::string& s
   m_vecStrValues.push_back(strValue);
 }
 
-const std::string CGUISpinControl::GetLabel() const
+std::string CGUISpinControl::GetLabel() const
 {
   if (m_iValue >= 0 && m_iValue < (int)m_vecLabels.size())
   {

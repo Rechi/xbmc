@@ -49,7 +49,7 @@ public:
   int size() const;
   int RemoveDVDItems();
 
-  const std::shared_ptr<CFileItem> operator[](int iItem) const;
+  std::shared_ptr<CFileItem> operator[](int iItem) const;
   std::shared_ptr<CFileItem> operator[](int iItem);
 
   void Shuffle(int iPosition = 0);

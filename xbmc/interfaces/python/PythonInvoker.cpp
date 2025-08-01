@@ -64,7 +64,7 @@ extern "C" FILE* fopen_utf8(const char* _Filename, const char* _Mode);
 using namespace XFILE;
 using namespace std::chrono_literals;
 
-static const std::string getListOfAddonClassesAsString(
+static std::string getListOfAddonClassesAsString(
     XBMCAddon::AddonClass::Ref<XBMCAddon::Python::PythonLanguageHook>& languageHook)
 {
   std::string message;

@@ -2320,7 +2320,7 @@ public:
   /// @param[in] name The name of a named property value (e.g. Header)
   /// @return value of requested property, empty on failure / non-existance
   ///
-  const std::string GetPropertyValue(FilePropertyTypes type, const std::string& name) const
+  std::string GetPropertyValue(FilePropertyTypes type, const std::string& name) const
   {
     using namespace kodi::addon;
 
@@ -2347,8 +2347,7 @@ public:
   /// @param[in] name The name of the named property (e.g. Header)
   /// @return values of requested property, empty vector on failure / non-existance
   ///
-  const std::vector<std::string> GetPropertyValues(FilePropertyTypes type,
-                                                   const std::string& name) const
+  std::vector<std::string> GetPropertyValues(FilePropertyTypes type, const std::string& name) const
   {
     using namespace kodi::addon;
 

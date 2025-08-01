@@ -66,7 +66,7 @@ public:
 
   const std::string& GetConnectedIp() const {return m_resolvedHostName;}
   const std::string& GetConnectedExport() const {return m_exportPath;}
-  const std::string GetContextMapId() const {return m_hostName + m_exportPath;}
+  std::string GetContextMapId() const { return m_hostName + m_exportPath; }
 
 private:
   enum class ContextStatus

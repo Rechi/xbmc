@@ -116,8 +116,9 @@ public:
   int64_t GetLength();
   void Close();
   int GetChunkSize();
-  const std::string GetProperty(XFILE::FileProperty type, const std::string &name = "") const;
-  const std::vector<std::string> GetPropertyValues(XFILE::FileProperty type, const std::string &name = "") const;
+  std::string GetProperty(XFILE::FileProperty type, const std::string& name = "") const;
+  std::vector<std::string> GetPropertyValues(XFILE::FileProperty type,
+                                             const std::string& name = "") const;
   ssize_t LoadFile(const std::string& filename, std::vector<uint8_t>& outputBuffer);
 
   static int DetermineChunkSize(int srcChunkSize, int reqChunkSize);

@@ -28,7 +28,7 @@ constexpr int STREAM_ID_DISABLE = -2; // Stream id referred to item that disable
 constexpr int STREAM_ID_NONE = -1; // Stream id referred to item for "none" stream
 
 // \brief Make a FileItem entry with "Disable" label, allow to disable a stream
-const std::shared_ptr<CFileItem> MakeFileItemDisable(bool isSelected)
+std::shared_ptr<CFileItem> MakeFileItemDisable(bool isSelected)
 {
   const auto fileItem{std::make_shared<CFileItem>(g_localizeStrings.Get(24021))};
   fileItem->Select(isSelected);
@@ -37,7 +37,7 @@ const std::shared_ptr<CFileItem> MakeFileItemDisable(bool isSelected)
 }
 
 // \brief Make a FileItem entry with "None" label, signal an empty list
-const std::shared_ptr<CFileItem> MakeFileItemNone()
+std::shared_ptr<CFileItem> MakeFileItemNone()
 {
   const auto fileItem{std::make_shared<CFileItem>(g_localizeStrings.Get(231))};
   fileItem->SetProperty("stream.id", STREAM_ID_NONE);

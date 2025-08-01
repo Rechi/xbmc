@@ -40,7 +40,7 @@ class CExtValues : public EXT_VALUE
 public:
   CExtValues(const EXT_VALUE& values) : EXT_VALUE(values) { }
 
-  const SExtValue GetValue(const std::string& id) const
+  SExtValue GetValue(const std::string& id) const
   {
     for (const auto& value : *this)
     {
@@ -57,10 +57,10 @@ public:
   CAddonExtensions() = default;
   ~CAddonExtensions() = default;
 
-  const SExtValue GetValue(const std::string& id) const;
+  SExtValue GetValue(const std::string& id) const;
   const EXT_VALUES& GetValues() const;
   const CAddonExtensions* GetElement(const std::string& id) const;
-  const EXT_ELEMENTS GetElements(const std::string& id = "") const;
+  EXT_ELEMENTS GetElements(const std::string& id = "") const;
 
   void Insert(const std::string& id, const std::string& value);
 

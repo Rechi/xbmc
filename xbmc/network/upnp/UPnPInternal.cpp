@@ -232,9 +232,9 @@ NPT_String GetMimeType(const CFileItem& item, const PLT_HttpRequestContext* cont
 /*----------------------------------------------------------------------
 |   GetProtocolInfo
 +---------------------------------------------------------------------*/
-const NPT_String GetProtocolInfo(const CFileItem& item,
-                                 const char* protocol,
-                                 const PLT_HttpRequestContext* context /* = NULL */)
+NPT_String GetProtocolInfo(const CFileItem& item,
+                           const char* protocol,
+                           const PLT_HttpRequestContext* context /* = NULL */)
 {
   NPT_String proto = protocol;
 

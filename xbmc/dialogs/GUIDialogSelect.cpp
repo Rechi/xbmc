@@ -215,7 +215,7 @@ int CGUIDialogSelect::GetSelectedItem() const
   return !m_selectedItems.empty() ? m_selectedItems[0] : -1;
 }
 
-const CFileItemPtr CGUIDialogSelect::GetSelectedFileItem() const
+CFileItemPtr CGUIDialogSelect::GetSelectedFileItem() const
 {
   if (m_selectedItem)
     return m_selectedItem;

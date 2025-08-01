@@ -118,7 +118,7 @@ std::string CFanart::GetPreviewURL(unsigned int index) const
   return m_fanart[index].strPreview.empty() ? m_fanart[index].strImage : m_fanart[index].strPreview;
 }
 
-const std::string CFanart::GetColor(unsigned int index) const
+std::string CFanart::GetColor(unsigned int index) const
 {
   if (index >= max_fanart_colors || m_fanart.empty() ||
       m_fanart[0].strColors.size() < index*9+8)

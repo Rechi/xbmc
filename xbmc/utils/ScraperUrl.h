@@ -67,8 +67,8 @@ public:
   void SetUrls(std::vector<SUrlEntry> urls) { m_urls = std::move(urls); }
   void AppendUrl(SUrlEntry url) { m_urls.push_back(std::move(url)); }
 
-  const SUrlEntry GetFirstUrlByType(const std::string& type = "") const;
-  const SUrlEntry GetSeasonUrl(int season, const std::string& type = "") const;
+  SUrlEntry GetFirstUrlByType(const std::string& type = "") const;
+  SUrlEntry GetSeasonUrl(int season, const std::string& type = "") const;
   unsigned int GetMaxSeasonUrl() const;
 
   std::string GetFirstThumbUrl() const;

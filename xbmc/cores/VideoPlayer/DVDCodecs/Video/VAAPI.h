@@ -467,7 +467,7 @@ public:
   unsigned GetAllowedReferences() override { return 4; }
 
   CDVDVideoCodec::VCReturn Check(AVCodecContext* avctx) override;
-  const std::string Name() override { return "vaapi"; }
+  std::string Name() override { return "vaapi"; }
   void SetCodecControl(int flags) override;
 
   void FFReleaseBuffer(uint8_t *data);
