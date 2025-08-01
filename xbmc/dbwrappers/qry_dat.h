@@ -262,8 +262,7 @@ public:
   void clear()
   {
     for (const auto* record : records)
-      if (record)
-        delete record;
+      delete record;
     records.clear();
     record_header.clear();
   };

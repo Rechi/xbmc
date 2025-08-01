@@ -21,5 +21,6 @@ Checks: "\
   readability-container-contains,\
   readability-container-data-pointer,\
   readability-container-size-empty,\
+  readability-delete-null-pointer,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'

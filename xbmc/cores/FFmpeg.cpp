@@ -59,8 +59,7 @@ void CFFmpegLog::ClearLogLevel()
 {
   CFFmpegLog* log = CFFmpegLogTls;
   CFFmpegLogTls = nullptr;
-  if (log)
-    delete log;
+  delete log;
 }
 
 static CCriticalSection m_logSection;

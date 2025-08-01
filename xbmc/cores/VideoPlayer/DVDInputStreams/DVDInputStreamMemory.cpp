@@ -39,7 +39,7 @@ bool CDVDInputStreamMemory::Open()
 // close file and reset everything
 void CDVDInputStreamMemory::Close()
 {
-  if (m_pData) delete[] m_pData;
+  delete[] m_pData;
   m_pData = NULL;
   m_iDataSize = 0;
   m_iDataPos = 0;

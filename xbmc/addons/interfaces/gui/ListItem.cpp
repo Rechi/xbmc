@@ -77,8 +77,7 @@ void Interface_GUIListItem::destroy(KODI_HANDLE kodiBase, KODI_GUI_LISTITEM_HAND
   }
 
   CFileItemPtr* item = static_cast<CFileItemPtr*>(handle);
-  if (item)
-    delete item;
+  delete item;
 }
 
 char* Interface_GUIListItem::get_label(KODI_HANDLE kodiBase, KODI_GUI_LISTITEM_HANDLE handle)
