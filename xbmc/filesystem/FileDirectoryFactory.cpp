@@ -8,26 +8,17 @@
 
 #include "FileDirectoryFactory.h"
 
-#include "music/MusicFileItemClassify.h"
-
-#if defined(HAS_ISO9660PP)
-#include "ISO9660Directory.h"
-#endif
-#if defined(HAS_UDFREAD)
-#include "UDFDirectory.h"
-#endif
-#include "RSSDirectory.h"
-#include "UDFDirectory.h"
-#include "utils/URIUtils.h"
-#if defined(TARGET_ANDROID)
-#include "platform/android/filesystem/APKDirectory.h"
-#endif
 #include "AudioBookFileDirectory.h"
 #include "Directory.h"
 #include "FileItem.h"
+#if defined(HAS_ISO9660PP)
+#include "ISO9660Directory.h"
+#endif
 #include "PlaylistFileDirectory.h"
+#include "RSSDirectory.h"
 #include "ServiceBroker.h"
 #include "SmartPlaylistDirectory.h"
+#include "UDFDirectory.h"
 #include "URL.h"
 #include "XbtDirectory.h"
 #include "ZipDirectory.h"
@@ -35,10 +26,16 @@
 #include "addons/ExtsMimeSupportList.h"
 #include "addons/VFSEntry.h"
 #include "addons/addoninfo/AddonInfo.h"
+#include "music/MusicFileItemClassify.h"
 #include "playlists/PlayListFactory.h"
 #include "playlists/SmartPlayList.h"
 #include "utils/StringUtils.h"
+#include "utils/URIUtils.h"
 #include "utils/log.h"
+
+#if defined(TARGET_ANDROID)
+#include "platform/android/filesystem/APKDirectory.h"
+#endif
 
 using namespace ADDON;
 using namespace KODI;

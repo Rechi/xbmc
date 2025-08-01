@@ -16,8 +16,6 @@
 #include "threads/Thread.h"
 #include "utils/log.h"
 
-#include <mutex>
-
 #if !defined(TARGET_WINDOWS)
 #include "platform/posix/ConvUtils.h"
 #endif
@@ -26,10 +24,7 @@
 #include <cassert>
 #include <inttypes.h>
 #include <memory>
-
-#ifdef TARGET_POSIX
-#include "platform/posix/ConvUtils.h"
-#endif
+#include <mutex>
 
 using namespace XFILE;
 
