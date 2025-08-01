@@ -84,7 +84,7 @@ JSONRPC_STATUS CFavouritesOperations::GetFavourites(const std::string &method, I
     else
       object["type"] = "unknown";
 
-    if (type.empty() || type.compare(object["type"].asString()) == 0)
+    if (type.empty() || type == object["type"].asString())
       result["favourites"].append(object);
   }
 
@@ -98,10 +98,11 @@ JSONRPC_STATUS CFavouritesOperations::AddFavourite(const std::string &method, IT
 {
   std::string type = parameterObject["type"].asString();
 
-  if (type.compare("unknown") == 0)
+  if (type == "unknown")
     return InvalidParams;
 
-  if ((type.compare("media") == 0 || type.compare("script") == 0 || type.compare("androidapp") == 0) && !ParameterNotNull(parameterObject, "path"))
+  if ((type == "media" || type == "script" || type == "androidapp") &&
+      !ParameterNotNull(parameterObject, "path"))
   {
     result["method"] = "Favourites.AddFavourite";
     result["stack"]["message"] = "Missing parameter";
@@ -110,7 +111,7 @@ JSONRPC_STATUS CFavouritesOperations::AddFavourite(const std::string &method, IT
     return InvalidParams;
   }
 
-  if (type.compare("window") == 0 && !ParameterNotNull(parameterObject, "window"))
+  if (type == "window" && !ParameterNotNull(parameterObject, "window"))
   {
     result["method"] = "Favourites.AddFavourite";
     result["stack"]["message"] = "Missing parameter";
@@ -124,26 +125,26 @@ JSONRPC_STATUS CFavouritesOperations::AddFavourite(const std::string &method, IT
 
   CFileItem item;
   int contextWindow = 0;
-  if (type.compare("window") == 0)
+  if (type == "window")
   {
     item = CFileItem(parameterObject["windowparameter"].asString(), true);
     contextWindow = CWindowTranslator::TranslateWindow(parameterObject["window"].asString());
     if (contextWindow == WINDOW_INVALID)
       return InvalidParams;
   }
-  else if (type.compare("script") == 0)
+  else if (type == "script")
   {
     if (!URIUtils::IsScript(path))
       path = "script://" + path;
     item = CFileItem(path, false);
   }
-  else if (type.compare("androidapp") == 0)
+  else if (type == "androidapp")
   {
     if (!URIUtils::IsAndroidApp(path))
       path = "androidapp://" + path;
     item = CFileItem(path, false);
   }
-  else if (type.compare("media") == 0)
+  else if (type == "media")
   {
     item = CFileItem(path, false);
   }

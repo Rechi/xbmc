@@ -133,8 +133,7 @@ bool CWebServer::IsAuthenticated(const HTTPRequest& request) const
     return false;
 
   // compare the received username and password
-  bool authenticated = m_authenticationUsername.compare(username) == 0 &&
-                       m_authenticationPassword.compare(password) == 0;
+  bool authenticated = m_authenticationUsername == username && m_authenticationPassword == password;
 
   free(username);
   free(password);
@@ -467,7 +466,7 @@ bool CWebServer::IsRequestCacheable(const HTTPRequest& request) const
       control = StringUtils::Trim(control);
 
       // handle no-cache
-      if (control.compare(HEADER_VALUE_NO_CACHE) == 0)
+      if (control == HEADER_VALUE_NO_CACHE)
         return false;
     }
   }
@@ -475,7 +474,7 @@ bool CWebServer::IsRequestCacheable(const HTTPRequest& request) const
   // handle Pragma
   std::string pragma = HTTPRequestHandlerUtils::GetRequestHeaderValue(
       request.connection, MHD_HEADER_KIND, MHD_HTTP_HEADER_PRAGMA);
-  return pragma.compare(HEADER_VALUE_NO_CACHE) != 0;
+  return pragma != HEADER_VALUE_NO_CACHE;
 }
 
 bool CWebServer::IsRequestRanged(const HTTPRequest& request, const CDateTime& lastModified) const

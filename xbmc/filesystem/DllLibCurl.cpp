@@ -183,7 +183,7 @@ void DllLibCurlGlobal::easy_acquire(const char* protocol,
     {
       /* allow reuse of requester is trying to connect to same host */
       /* curl will take care of any differences in username/password */
-      if (it.m_protocol.compare(protocol) == 0 && it.m_hostname.compare(hostname) == 0)
+      if (it.m_protocol == protocol && it.m_hostname == hostname)
       {
         it.m_busy = true;
         if (easy_handle)

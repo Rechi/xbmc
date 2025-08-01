@@ -256,13 +256,13 @@ bool CDVDDemuxFFmpeg::Open(const std::shared_ptr<CDVDInputStream>& pInput, bool 
     StringUtils::ToLower(content);
 
     /* check if we can get a hint from content */
-    if (content.compare("video/x-vobsub") == 0)
+    if (content == "video/x-vobsub")
       iformat = av_find_input_format("mpeg");
-    else if (content.compare("video/x-dvd-mpeg") == 0)
+    else if (content == "video/x-dvd-mpeg")
       iformat = av_find_input_format("mpeg");
-    else if (content.compare("video/mp2t") == 0)
+    else if (content == "video/mp2t")
       iformat = av_find_input_format("mpegts");
-    else if (content.compare("multipart/x-mixed-replace") == 0)
+    else if (content == "multipart/x-mixed-replace")
       iformat = av_find_input_format("mjpeg");
   }
 
@@ -381,13 +381,13 @@ bool CDVDDemuxFFmpeg::Open(const std::shared_ptr<CDVDInputStream>& pInput, bool 
         std::string content = m_pInput->GetContent();
 
         /* check if we can get a hint from content */
-        if (content.compare("audio/aacp") == 0)
+        if (content == "audio/aacp")
           iformat = av_find_input_format("aac");
-        else if (content.compare("audio/aac") == 0)
+        else if (content == "audio/aac")
           iformat = av_find_input_format("aac");
-        else if (content.compare("video/flv") == 0)
+        else if (content == "video/flv")
           iformat = av_find_input_format("flv");
-        else if (content.compare("video/x-flv") == 0)
+        else if (content == "video/x-flv")
           iformat = av_find_input_format("flv");
       }
 

@@ -48,7 +48,7 @@ bool CMediaTypes::IsMediaType(const std::string &strMediaType, const MediaType &
   std::map<std::string, MediaTypeInfo>::const_iterator mediaTypeIt = findMediaType(mediaType);
 
   return strMediaTypeIt != m_mediaTypes.end() && mediaTypeIt != m_mediaTypes.end() &&
-         strMediaTypeIt->first.compare(mediaTypeIt->first) == 0;
+         strMediaTypeIt->first == mediaTypeIt->first;
 }
 
 MediaType CMediaTypes::FromString(const std::string &strMediaType)
@@ -89,7 +89,7 @@ std::map<std::string, CMediaTypes::MediaTypeInfo>::const_iterator CMediaTypes::f
 
   for (it = m_mediaTypes.begin(); it != m_mediaTypes.end(); ++it)
   {
-    if (strMediaType.compare(it->second.plural) == 0)
+    if (strMediaType == it->second.plural)
       return it;
   }
 

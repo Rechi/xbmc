@@ -214,11 +214,11 @@ namespace JSONRPC
      */
     static inline TransportLayerCapability StringToTransportLayer(const std::string& transport)
     {
-      if (transport.compare("Announcing") == 0)
+      if (transport == "Announcing")
         return Announcing;
-      if (transport.compare("FileDownloadDirect") == 0)
+      if (transport == "FileDownloadDirect")
         return FileDownloadDirect;
-      if (transport.compare("FileDownloadRedirect") == 0)
+      if (transport == "FileDownloadRedirect")
         return FileDownloadRedirect;
 
       return Response;
@@ -232,19 +232,19 @@ namespace JSONRPC
      */
     static inline JSONSchemaType StringToSchemaValueType(const std::string& valueType)
     {
-      if (valueType.compare("null") == 0)
+      if (valueType == "null")
         return NullValue;
-      if (valueType.compare("string") == 0)
+      if (valueType == "string")
         return StringValue;
-      if (valueType.compare("number") == 0)
+      if (valueType == "number")
         return NumberValue;
-      if (valueType.compare("integer") == 0)
+      if (valueType == "integer")
         return IntegerValue;
-      if (valueType.compare("boolean") == 0)
+      if (valueType == "boolean")
         return BooleanValue;
-      if (valueType.compare("array") == 0)
+      if (valueType == "array")
         return ArrayValue;
-      if (valueType.compare("object") == 0)
+      if (valueType == "object")
         return ObjectValue;
 
       return AnyValue;

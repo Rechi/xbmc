@@ -62,12 +62,12 @@ JSONRPC_STATUS CApplicationOperations::SetVolume(const std::string &method, ITra
   {
     JSONRPC_STATUS ret;
     std::string direction = parameterObject["volume"].asString();
-    if (direction.compare("increment") == 0)
+    if (direction == "increment")
     {
       ret = CInputOperations::SendAction(ACTION_VOLUME_UP, false, true);
       up = true;
     }
-    else if (direction.compare("decrement") == 0)
+    else if (direction == "decrement")
     {
       ret = CInputOperations::SendAction(ACTION_VOLUME_DOWN, false, true);
       up = false;
@@ -91,8 +91,7 @@ JSONRPC_STATUS CApplicationOperations::SetMute(const std::string &method, ITrans
 {
   const auto& components = CServiceBroker::GetAppComponents();
   const auto appVolume = components.GetComponent<CApplicationVolumeHandling>();
-  if ((parameterObject["mute"].isString() &&
-       parameterObject["mute"].asString().compare("toggle") == 0) ||
+  if ((parameterObject["mute"].isString() && parameterObject["mute"].asString() == "toggle") ||
       (parameterObject["mute"].isBoolean() &&
        parameterObject["mute"].asBoolean() != appVolume->IsMuted()))
     CServiceBroker::GetAppMessenger()->SendMsg(TMSG_GUI_ACTION, WINDOW_INVALID, -1,

@@ -216,7 +216,7 @@ bool CMusicThumbLoader::FillLibraryArt(CFileItem &item)
         ++iOrder;
       }
       // Album artist art
-      if (!tag.GetAlbumArtist().empty() && tag.GetArtistString().compare(tag.GetAlbumArtistString()) != 0)
+      if (!tag.GetAlbumArtist().empty() && tag.GetArtistString() != tag.GetAlbumArtistString())
       {
         // Split song artist names correctly into artist credits from various tag
         // arrays, inc. fallback to song artist names

@@ -915,7 +915,7 @@ void CMusicInfoTag::Serialize(CVariant& value) const
 {
   value["url"] = m_strURL;
   value["title"] = m_strTitle;
-  if (m_type.compare(MediaTypeArtist) == 0 && m_artist.size() == 1)
+  if (m_type == MediaTypeArtist && m_artist.size() == 1)
     value["artist"] = m_artist[0];
   else
     value["artist"] = m_artist;
@@ -976,9 +976,9 @@ void CMusicInfoTag::Serialize(CVariant& value) const
   value["albumid"] = m_iAlbumId;
   value["compilationartist"] = m_bCompilation;
   value["compilation"] = m_bCompilation;
-  if (m_type.compare(MediaTypeAlbum) == 0)
+  if (m_type == MediaTypeAlbum)
     value["releasetype"] = CAlbum::ReleaseTypeToString(m_albumReleaseType);
-  else if (m_type.compare(MediaTypeSong) == 0)
+  else if (m_type == MediaTypeSong)
     value["albumreleasetype"] = CAlbum::ReleaseTypeToString(m_albumReleaseType);
   value["isboxset"] = m_bBoxset;
   value["totaldiscs"] = m_iDiscTotal;

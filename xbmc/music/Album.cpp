@@ -232,9 +232,9 @@ void CAlbum::MergeScrapedAlbum(const CAlbum& source, bool override /* = true */)
    artist credits and songs need to be updated too.
   */
 
-  bArtistSongMerge = override && !bScrapedMBID
-    && !source.strMusicBrainzAlbumID.empty() && !strMusicBrainzAlbumID.empty()
-    && (strMusicBrainzAlbumID.compare(source.strMusicBrainzAlbumID) == 0);
+  bArtistSongMerge = override && !bScrapedMBID && !source.strMusicBrainzAlbumID.empty() &&
+                     !strMusicBrainzAlbumID.empty() &&
+                     (strMusicBrainzAlbumID == source.strMusicBrainzAlbumID);
 
   /*
    Musicbrainz album (release) ID and release group ID values derived from music file tags are

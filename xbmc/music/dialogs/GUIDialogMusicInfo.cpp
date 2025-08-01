@@ -726,7 +726,7 @@ void CGUIDialogMusicInfo::AddItemPathToFileBrowserSources(std::vector<CMediaSour
     if (item.GetMusicInfoTag()->GetType() == MediaTypeArtist)
     {
       artistFolder = CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_MUSICLIBRARY_ARTISTSFOLDER);
-      if (!artistFolder.empty() && artistFolder.compare(itemDir) == 0)
+      if (!artistFolder.empty() && artistFolder == itemDir)
         itemDir.clear();  // skip *item when artist not have a unique path
     }
   }

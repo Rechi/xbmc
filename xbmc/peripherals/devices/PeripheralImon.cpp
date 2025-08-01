@@ -61,14 +61,14 @@ void CPeripheralImon::AddSetting(const std::string& strKey,
                                  int order)
 {
 #if !defined(TARGET_WINDOWS)
-  if (strKey.compare("disable_winjoystick") != 0)
+  if (strKey != "disable_winjoystick")
 #endif // !TARGET_WINDOWS
     CPeripheralHID::AddSetting(strKey, setting, order);
 }
 
 void CPeripheralImon::OnSettingChanged(const std::string& strChangedSetting)
 {
-  if (strChangedSetting.compare("disable_winjoystick") == 0)
+  if (strChangedSetting == "disable_winjoystick")
   {
     if (m_bImonConflictsWithDInput && !GetSettingBool("disable_winjoystick"))
     {

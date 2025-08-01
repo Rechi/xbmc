@@ -1523,7 +1523,7 @@ bool CJSONServiceDescription::addMethod(const std::string &jsonMethod, MethodCal
   }
 
   std::string type = GetString(descriptionObject[methodName]["type"], "");
-  if (type.compare("method") != 0)
+  if (type != "method")
   {
     CLog::Log(LOGERROR, "JSONRPC: Invalid JSON type for method \"{}\"", methodName);
     return false;
@@ -1534,7 +1534,7 @@ bool CJSONServiceDescription::addMethod(const std::string &jsonMethod, MethodCal
     unsigned int size = sizeof(m_methodMaps) / sizeof(JsonRpcMethodMap);
     for (unsigned int index = 0; index < size; index++)
     {
-      if (methodName.compare(m_methodMaps[index].name) == 0)
+      if (methodName == m_methodMaps[index].name)
       {
         method = m_methodMaps[index].method;
         break;
@@ -1675,7 +1675,7 @@ bool CJSONServiceDescription::AddNotification(const std::string &jsonNotificatio
   }
 
   std::string type = GetString(descriptionObject[notificationName]["type"], "");
-  if (type.compare("notification") != 0)
+  if (type != "notification")
   {
     CLog::Log(LOGERROR, "JSONRPC: Invalid JSON type for notification \"{}\"", notificationName);
     return false;

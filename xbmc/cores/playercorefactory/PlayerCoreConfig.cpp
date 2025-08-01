@@ -44,25 +44,25 @@ std::shared_ptr<IPlayer> CPlayerCoreConfig::CreatePlayer(IPlayerCallback& callba
 {
   std::shared_ptr<IPlayer> player;
 
-  if (m_type.compare("video") == 0)
+  if (m_type == "video")
   {
     player = std::make_shared<CVideoPlayer>(callback);
   }
-  else if (m_type.compare("music") == 0)
+  else if (m_type == "music")
   {
     player = std::make_shared<PAPlayer>(callback);
   }
-  else if (m_type.compare("game") == 0)
+  else if (m_type == "game")
   {
     player = std::make_shared<KODI::RETRO::CRetroPlayer>(callback);
   }
-  else if (m_type.compare("external") == 0)
+  else if (m_type == "external")
   {
     player = std::make_shared<CExternalPlayer>(callback);
   }
 
 #if defined(HAS_UPNP)
-  else if (m_type.compare("remote") == 0)
+  else if (m_type == "remote")
   {
     player = std::make_shared<UPNP::CUPnPPlayer>(callback, m_id.c_str());
   }

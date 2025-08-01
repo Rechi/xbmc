@@ -855,7 +855,7 @@ bool CSkinInfo::SettingsFromXML(const CXBMCTinyXML& doc,
                                 AddonInstanceId id /* = ADDON_SETTINGS_ID */)
 {
   const TiXmlElement *rootElement = doc.RootElement();
-  if (rootElement == nullptr || rootElement->ValueStr().compare(XML_SETTINGS) != 0)
+  if (rootElement == nullptr || rootElement->ValueStr() != XML_SETTINGS)
   {
     CLog::Log(LOGWARNING, "CSkinInfo: no <settings> tag found");
     return false;

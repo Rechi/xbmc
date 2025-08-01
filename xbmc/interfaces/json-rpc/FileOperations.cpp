@@ -152,7 +152,7 @@ JSONRPC_STATUS CFileOperations::GetDirectory(const std::string &method, ITranspo
     for (CVariant::const_iterator_array itr = param["properties"].begin_array();
          itr != param["properties"].end_array(); ++itr)
     {
-      if (itr->asString().compare("file") == 0)
+      if (itr->asString() == "file")
       {
         hasFileField = true;
         break;
@@ -206,7 +206,7 @@ JSONRPC_STATUS CFileOperations::GetFileDetails(const std::string &method, ITrans
   for (CVariant::const_iterator_array itr = param["properties"].begin_array();
        itr != param["properties"].end_array(); ++itr)
   {
-    if (itr->asString().compare("file") == 0)
+    if (itr->asString() == "file")
     {
       hasFileField = true;
       break;
@@ -226,7 +226,7 @@ JSONRPC_STATUS CFileOperations::SetFileDetails(const std::string &method, ITrans
   std::string media = parameterObject["media"].asString();
   StringUtils::ToLower(media);
 
-  if (media.compare("video") != 0)
+  if (media != "video")
     return InvalidParams;
 
   std::string file = parameterObject["file"].asString();

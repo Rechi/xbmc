@@ -82,7 +82,7 @@ std::string CHttpResponse::Create()
     m_buffer.append(m_headers[index].second);
     m_buffer.append(LINEBREAK);
 
-    if (m_headers[index].first.compare(HEADER_CONTENT_LENGTH) == 0)
+    if (m_headers[index].first == HEADER_CONTENT_LENGTH)
       hasContentLengthHeader = true;
   }
 
