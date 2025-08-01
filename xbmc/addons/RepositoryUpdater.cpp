@@ -175,7 +175,7 @@ void CRepositoryUpdater::OnJobComplete(unsigned int jobID, bool success, CJob* j
                                               g_localizeStrings.Get(24061), TOAST_DISPLAY_TIME,
                                               false, TOAST_DISPLAY_TIME);
 
-      auto eventLog = CServiceBroker::GetEventLog();
+      auto* eventLog = CServiceBroker::GetEventLog();
       for (const auto& addon : updates)
       {
         if (eventLog)
@@ -211,7 +211,9 @@ bool CRepositoryUpdater::CheckForUpdates(bool showProgress)
 
 static void SetProgressIndicator(CRepositoryUpdateJob* job)
 {
-  auto dialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogExtendedProgressBar>(WINDOW_DIALOG_EXT_PROGRESS);
+  auto* dialog =
+      CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogExtendedProgressBar>(
+          WINDOW_DIALOG_EXT_PROGRESS);
   if (dialog)
     job->SetProgressIndicators(dialog->GetHandle(g_localizeStrings.Get(24092)), nullptr);
 }

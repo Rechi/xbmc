@@ -487,7 +487,7 @@ int SqliteDatabase::drop_analytics()
     return DB_UNEXPECTED_RESULT;
 
   std::string sqlcmd;
-  for (const auto record : res.records)
+  for (auto* const record : res.records)
   {
     sqlcmd = StringUtils::Format("DROP INDEX '{}'", record->at(0).get_asString().c_str());
     last_err = sqlite3_exec(conn, sqlcmd.c_str(), nullptr, nullptr, nullptr);

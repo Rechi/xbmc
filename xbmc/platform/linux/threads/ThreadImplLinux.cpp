@@ -41,7 +41,7 @@ static_assert(static_cast<size_t>(ThreadPriority::PRIORITY_COUNT) == nativeThrea
 
 constexpr int ThreadPriorityToNativePriority(const ThreadPriority& priority)
 {
-  const auto it = nativeThreadPriorityMap.find(priority);
+  const auto* const it = nativeThreadPriorityMap.find(priority);
   if (it != nativeThreadPriorityMap.cend())
   {
     return it->second;

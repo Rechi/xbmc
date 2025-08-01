@@ -29,7 +29,7 @@ bool ISetting::Deserialize(const TiXmlNode *node, bool update /* = false */)
   if (XMLUtils::GetBoolean(node, SETTING_XML_ELM_VISIBLE, value))
     m_visible = value;
 
-  auto element = node->ToElement();
+  const auto* element = node->ToElement();
   if (element == nullptr)
     return false;
 
@@ -39,7 +39,7 @@ bool ISetting::Deserialize(const TiXmlNode *node, bool update /* = false */)
   if (element->QueryIntAttribute(SETTING_XML_ATTR_HELP, &iValue) == TIXML_SUCCESS && iValue > 0)
     m_help = iValue;
 
-  auto requirementNode = node->FirstChild(SETTING_XML_ELM_REQUIREMENT);
+  const auto* requirementNode = node->FirstChild(SETTING_XML_ELM_REQUIREMENT);
   if (requirementNode == nullptr)
     return true;
 
@@ -58,11 +58,11 @@ bool ISetting::DeserializeIdentificationFromAttribute(const TiXmlNode* node,
   if (node == nullptr)
     return false;
 
-  auto element = node->ToElement();
+  const auto* element = node->ToElement();
   if (element == nullptr)
     return false;
 
-  auto idAttribute = element->Attribute(attribute);
+  const auto* idAttribute = element->Attribute(attribute);
   if (idAttribute == nullptr || idAttribute->empty())
     return false;
 

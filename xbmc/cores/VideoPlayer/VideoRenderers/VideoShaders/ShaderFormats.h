@@ -34,7 +34,7 @@ struct fmt::formatter<EShaderFormat> : fmt::formatter<std::string_view>
   template<typename FormatContext>
   constexpr auto format(const EShaderFormat& shaderFormat, FormatContext& ctx)
   {
-    const auto it = shaderFormatMap.find(shaderFormat);
+    const auto* const it = shaderFormatMap.find(shaderFormat);
     if (it == shaderFormatMap.cend())
       throw std::range_error("no shader format string found");
 

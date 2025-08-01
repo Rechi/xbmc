@@ -58,7 +58,8 @@ bool CRetroPlayerAudio::OpenStream(const StreamProperties& properties)
   }
 
   CAEChannelInfo channelLayout;
-  for (auto it = audioProperties.channelMap.begin(); it != audioProperties.channelMap.end(); ++it)
+  for (const auto* it = audioProperties.channelMap.begin(); it != audioProperties.channelMap.end();
+       ++it)
   {
     AEChannel channel = CAudioTranslator::TranslateAudioChannel(*it);
     if (channel == AE_CH_NULL)

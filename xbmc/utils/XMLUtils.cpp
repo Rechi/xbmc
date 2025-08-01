@@ -21,7 +21,7 @@ bool XMLUtils::GetHex(const TiXmlNode* pRootNode, const char* strTag, uint32_t& 
 
 bool XMLUtils::GetHex(const tinyxml2::XMLNode* rootNode, const char* tag, uint32_t& value)
 {
-  auto* node = rootNode->FirstChildElement(tag);
+  const auto* node = rootNode->FirstChildElement(tag);
   if (!node || !node->FirstChild())
     return false;
 
@@ -38,7 +38,7 @@ bool XMLUtils::GetUInt(const TiXmlNode* pRootNode, const char* strTag, uint32_t&
 
 bool XMLUtils::GetUInt(const tinyxml2::XMLNode* rootNode, const char* tag, uint32_t& value)
 {
-  auto* node = rootNode->FirstChildElement(tag);
+  const auto* node = rootNode->FirstChildElement(tag);
   if (!node || !node->FirstChild())
     return false;
 
@@ -84,7 +84,7 @@ bool XMLUtils::GetLong(const TiXmlNode* pRootNode, const char* strTag, long& lLo
 
 bool XMLUtils::GetLong(const tinyxml2::XMLNode* rootNode, const char* tag, long& value)
 {
-  auto* node = rootNode->FirstChildElement(tag);
+  const auto* node = rootNode->FirstChildElement(tag);
   if (!node || !node->FirstChild())
     return false;
 
@@ -102,7 +102,7 @@ bool XMLUtils::GetInt(const TiXmlNode* pRootNode, const char* strTag, int& iIntV
 
 bool XMLUtils::GetInt(const tinyxml2::XMLNode* rootNode, const char* tag, int& value)
 {
-  auto* node = rootNode->FirstChildElement(tag);
+  const auto* node = rootNode->FirstChildElement(tag);
   if (!node || !node->FirstChild())
     return false;
 
@@ -145,7 +145,7 @@ bool XMLUtils::GetDouble(const TiXmlNode* root, const char* tag, double& value)
 
 bool XMLUtils::GetDouble(const tinyxml2::XMLNode* rootNode, const char* tag, double& value)
 {
-  auto* node = rootNode->FirstChildElement(tag);
+  const auto* node = rootNode->FirstChildElement(tag);
   if (!node || !node->FirstChild())
     return false;
 
@@ -163,7 +163,7 @@ bool XMLUtils::GetFloat(const TiXmlNode* pRootNode, const char* strTag, float& v
 
 bool XMLUtils::GetFloat(const tinyxml2::XMLNode* rootNode, const char* tag, float& value)
 {
-  auto* node = rootNode->FirstChildElement(tag);
+  const auto* node = rootNode->FirstChildElement(tag);
   if (!node || !node->FirstChild())
     return false;
 
@@ -224,7 +224,7 @@ bool XMLUtils::GetBoolean(const TiXmlNode* pRootNode, const char* strTag, bool& 
 
 bool XMLUtils::GetBoolean(const tinyxml2::XMLNode* rootNode, const char* tag, bool& value)
 {
-  auto* node = rootNode->FirstChildElement(tag);
+  const auto* node = rootNode->FirstChildElement(tag);
   if (!node || !node->FirstChild())
     return false;
 
@@ -264,12 +264,12 @@ bool XMLUtils::GetString(const TiXmlNode* pRootNode, const char* strTag, std::st
 
 bool XMLUtils::GetString(const tinyxml2::XMLNode* rootNode, const char* tag, std::string& value)
 {
-  auto* element = rootNode->FirstChildElement(tag);
+  const auto* element = rootNode->FirstChildElement(tag);
   if (!element)
     return false;
 
-  auto* encoded = element->Attribute("urlencoded");
-  auto* node = element->FirstChild();
+  const auto* encoded = element->Attribute("urlencoded");
+  const auto* node = element->FirstChild();
   if (node)
   {
     value = node->Value();
@@ -347,7 +347,7 @@ bool XMLUtils::GetAdditiveString(const tinyxml2::XMLNode* rootNode,
                                  bool clear)
 {
   std::string temp;
-  auto* node = rootNode->FirstChildElement(tag);
+  const auto* node = rootNode->FirstChildElement(tag);
   bool result = false;
   if (node && node->FirstChild() && clear)
     value.clear();
@@ -358,7 +358,7 @@ bool XMLUtils::GetAdditiveString(const tinyxml2::XMLNode* rootNode,
     {
       result = true;
       temp = node->FirstChild()->Value();
-      auto* clear = node->Attribute("clear");
+      const auto* clear = node->Attribute("clear");
       if (value.empty() || (clear && StringUtils::CompareNoCase(clear, "true") == 0))
         value = temp;
       else
@@ -416,7 +416,7 @@ bool XMLUtils::GetStringArray(const tinyxml2::XMLNode* rootNode,
                               const std::string& separator /* = "" */)
 {
   std::string temp;
-  auto* node = rootNode->FirstChildElement(tag);
+  const auto* node = rootNode->FirstChildElement(tag);
   bool result = false;
   if (node && node->FirstChild() && clear)
     value.clear();
@@ -428,7 +428,7 @@ bool XMLUtils::GetStringArray(const tinyxml2::XMLNode* rootNode,
       result = true;
       temp = node->FirstChild()->Value();
 
-      auto clearAttr = node->Attribute("clear");
+      const auto* clearAttr = node->Attribute("clear");
       if (clearAttr && StringUtils::CompareNoCase(clearAttr, "true") == 0)
         value.clear();
 
@@ -471,12 +471,12 @@ bool XMLUtils::GetPath(const TiXmlNode* pRootNode, const char* strTag, std::stri
 
 bool XMLUtils::GetPath(const tinyxml2::XMLNode* rootNode, const char* tag, std::string& value)
 {
-  auto* element = rootNode->FirstChildElement(tag);
+  const auto* element = rootNode->FirstChildElement(tag);
   if (!element)
     return false;
 
-  auto encoded = element->Attribute("urlencoded");
-  auto* node = element->FirstChild();
+  const auto* encoded = element->Attribute("urlencoded");
+  const auto* node = element->FirstChild();
   if (node)
   {
     value = node->Value();
@@ -550,7 +550,7 @@ std::string XMLUtils::GetAttribute(const tinyxml2::XMLElement* element, const ch
 {
   if (element)
   {
-    auto attribute = element->Attribute(tag);
+    const auto* attribute = element->Attribute(tag);
     if (attribute)
       return attribute;
   }
@@ -697,7 +697,7 @@ void XMLUtils::SetPath(TiXmlNode* pRootNode, const char *strTag, const std::stri
 
 void XMLUtils::SetPath(tinyxml2::XMLNode* rootNode, const char* tag, const std::string& value)
 {
-  auto element = rootNode->GetDocument()->NewElement(tag);
+  auto* element = rootNode->GetDocument()->NewElement(tag);
   element->SetAttribute("pathversion", path_version);
   auto* node = rootNode->InsertEndChild(element);
   if (node)

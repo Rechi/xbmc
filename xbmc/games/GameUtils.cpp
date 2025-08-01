@@ -175,7 +175,7 @@ void CGameUtils::GetGameClients(const ADDON::VECADDONS& addons,
   const bool bIsLocalFile =
       (translatedUrl.GetProtocol() == "file" || translatedUrl.GetProtocol().empty());
 
-  for (auto& addon : addons)
+  for (const auto& addon : addons)
   {
     GameClientPtr gameClient = std::static_pointer_cast<CGameClient>(addon);
 

@@ -38,14 +38,14 @@ bool CUDFDirectory::GetDirectory(const CURL& url, CFileItemList& items)
   URIUtils::AddSlashAtEnd(strRoot);
   URIUtils::AddSlashAtEnd(strSub);
 
-  auto udf = udfread_init();
+  auto* udf = udfread_init();
 
   if (!udf)
     return false;
 
   CUDFBlockInput udfbi;
 
-  auto bi = udfbi.GetBlockInput(url2.GetHostName());
+  auto* bi = udfbi.GetBlockInput(url2.GetHostName());
 
   if (udfread_open_input(udf, bi) < 0)
   {
@@ -53,7 +53,7 @@ bool CUDFDirectory::GetDirectory(const CURL& url, CFileItemList& items)
     return false;
   }
 
-  auto path = udfread_opendir(udf, strSub.c_str());
+  auto* path = udfread_opendir(udf, strSub.c_str());
   if (!path)
   {
     udfread_close(udf);
@@ -82,7 +82,7 @@ bool CUDFDirectory::GetDirectory(const CURL& url, CFileItemList& items)
     {
       std::string filename = dirent.d_name;
       std::string filenameWithPath{strSub + filename};
-      auto file = udfread_file_open(udf, filenameWithPath.c_str());
+      auto* file = udfread_file_open(udf, filenameWithPath.c_str());
       if (!file)
         continue;
 

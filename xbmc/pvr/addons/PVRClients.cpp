@@ -413,7 +413,7 @@ std::vector<CVariant> CPVRClients::GetClientProviderInfos() const
           !CServiceBroker::GetAddonMgr().IsAddonDisabled(addonInfo->ID());
       clientProviderInfo["name"] = addonInfo->Name();
       clientProviderInfo["icon"] = addonInfo->Icon();
-      auto& artMap = addonInfo->Art();
+      const auto& artMap = addonInfo->Art();
       auto thumbEntry = artMap.find("thumb");
       if (thumbEntry != artMap.end())
         clientProviderInfo["thumb"] = thumbEntry->second;

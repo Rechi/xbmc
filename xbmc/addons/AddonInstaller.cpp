@@ -493,7 +493,7 @@ bool CAddonInstaller::InstallFromZip(const std::string &path)
   //! @bug some zip files return a single item (root folder) that we think is stored, so we don't use the zip:// protocol
   CURL pathToUrl(path);
   CURL zipDir = URIUtils::CreateArchivePath("zip", pathToUrl, "");
-  auto eventLog = CServiceBroker::GetEventLog();
+  auto* eventLog = CServiceBroker::GetEventLog();
   if (!CDirectory::GetDirectory(zipDir, items, "", DIR_FLAG_DEFAULTS) || items.Size() != 1 ||
       !items[0]->IsFolder())
   {
@@ -950,7 +950,7 @@ bool CAddonInstallJob::DoWork()
                      CSettings::SETTING_ADDONS_NOTIFICATIONS) ||
                  m_isAutoUpdate == AutoUpdateJob::CHOICE_NO) &&
                 !IsModal() && m_dependsInstall == DependencyJob::CHOICE_NO;
-  auto eventLog = CServiceBroker::GetEventLog();
+  auto* eventLog = CServiceBroker::GetEventLog();
   if (eventLog)
     eventLog->Add(
         std::make_shared<const CAddonManagementEvent>(m_addon, m_isUpdate ? 24065 : 24084), notify,
@@ -1206,7 +1206,7 @@ void CAddonInstallJob::ReportInstallError(const std::string& addonID, const std:
       HELPERS::ShowOKDialogText(CVariant{fileName}, CVariant{msg});
   }
 
-  auto eventLog = CServiceBroker::GetEventLog();
+  auto* eventLog = CServiceBroker::GetEventLog();
   if (eventLog)
     eventLog->Add(activity, !IsModal(), false);
 }
@@ -1249,7 +1249,7 @@ bool CAddonUnInstallJob::DoWork()
     addon = m_addon;
   }
 
-  auto eventLog = CServiceBroker::GetEventLog();
+  auto* eventLog = CServiceBroker::GetEventLog();
   if (eventLog)
     eventLog->Add(
         std::make_shared<const CAddonManagementEvent>(addon, 24144)); // Add-on uninstalled

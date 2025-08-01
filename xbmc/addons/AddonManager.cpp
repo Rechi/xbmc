@@ -66,14 +66,14 @@ bool LoadManifest(std::set<std::string, std::less<>>& system,
     return false;
   }
 
-  auto root = doc.RootElement();
+  auto* root = doc.RootElement();
   if (!root || root->ValueStr() != "addons")
   {
     CLog::Log(LOGERROR, "ADDONS: malformed manifest");
     return false;
   }
 
-  auto elem = root->FirstChildElement("addon");
+  auto* elem = root->FirstChildElement("addon");
   while (elem)
   {
     if (elem->FirstChild())
@@ -846,7 +846,7 @@ bool CAddonMgr::DisableAddon(const std::string& id, AddonDisabledReason disabled
   AddonPtr addon;
   if (GetAddon(id, addon, AddonType::UNKNOWN, OnlyEnabled::CHOICE_NO) && addon != nullptr)
   {
-    auto eventLog = CServiceBroker::GetEventLog();
+    auto* eventLog = CServiceBroker::GetEventLog();
     if (eventLog)
       eventLog->Add(std::make_shared<CAddonManagementEvent>(addon, 24141));
   }
@@ -882,7 +882,7 @@ bool CAddonMgr::EnableSingle(const std::string& id)
   if (!GetAddon(id, addon, AddonType::UNKNOWN, OnlyEnabled::CHOICE_NO) || addon == nullptr)
     return false;
 
-  auto eventLog = CServiceBroker::GetEventLog();
+  auto* eventLog = CServiceBroker::GetEventLog();
 
   if (!IsCompatible(addon))
   {
@@ -1362,7 +1362,7 @@ bool CAddonMgr::AddonsFromRepoXML(const RepositoryDirInfo& repo,
   }
 
   // each addon XML should have a UTF-8 declaration
-  auto element = doc.RootElement()->FirstChildElement("addon");
+  auto* element = doc.RootElement()->FirstChildElement("addon");
   while (element)
   {
     auto addonInfo = CAddonInfoBuilder::Generate(element, repo);

@@ -44,7 +44,7 @@ void CPipewireProxy::Bound(void* userdata, uint32_t id)
 {
   CLog::Log(LOGDEBUG, "CPipewireProxy::{} - id={}", __FUNCTION__, id);
 
-  auto AE = CServiceBroker::GetActiveAE();
+  auto* AE = CServiceBroker::GetActiveAE();
   if (AE)
     AE->DeviceCountChange("PIPEWIRE");
 }
@@ -53,7 +53,7 @@ void CPipewireProxy::Removed(void* userdata)
 {
   CLog::Log(LOGDEBUG, "CPipewireProxy::{}", __FUNCTION__);
 
-  auto AE = CServiceBroker::GetActiveAE();
+  auto* AE = CServiceBroker::GetActiveAE();
   if (AE)
     AE->DeviceCountChange("PIPEWIRE");
 }

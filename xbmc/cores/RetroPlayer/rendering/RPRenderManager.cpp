@@ -75,17 +75,17 @@ void CRPRenderManager::Deinitialize()
   }
   m_scalers.clear();
 
-  for (auto renderBuffer : m_renderBuffers)
+  for (auto* renderBuffer : m_renderBuffers)
     renderBuffer->Release();
   m_renderBuffers.clear();
 
-  for (auto buffer : m_pendingBuffers)
+  for (auto* buffer : m_pendingBuffers)
     buffer->Release();
   m_pendingBuffers.clear();
 
   for (auto& [savestatePath, renderBuffers] : m_savestateBuffers)
   {
-    for (auto renderBuffer : renderBuffers)
+    for (auto* renderBuffer : renderBuffers)
       renderBuffer->Release();
   }
   m_savestateBuffers.clear();
@@ -225,12 +225,12 @@ void CRPRenderManager::AddFrame(const uint8_t* data,
     std::unique_lock lock(m_bufferMutex);
 
     // Set render buffers
-    for (auto renderBuffer : m_renderBuffers)
+    for (auto* renderBuffer : m_renderBuffers)
       renderBuffer->Release();
     m_renderBuffers = std::move(renderBuffers);
 
     // Apply video properties to render buffers
-    for (auto renderBuffer : m_renderBuffers)
+    for (auto* renderBuffer : m_renderBuffers)
     {
       renderBuffer->SetDisplayAspectRatio(displayAspectRatio);
       renderBuffer->SetRotation(orientationDegCCW);
@@ -324,7 +324,7 @@ void CRPRenderManager::FrameMove()
 
   if (bIsConfigured)
   {
-    for (auto& renderer : m_renderers)
+    for (const auto& renderer : m_renderers)
       renderer->FrameMove();
   }
 }
@@ -335,7 +335,7 @@ void CRPRenderManager::CheckFlush()
   {
     {
       std::unique_lock lock(m_bufferMutex);
-      for (auto renderBuffer : m_renderBuffers)
+      for (auto* renderBuffer : m_renderBuffers)
         renderBuffer->Release();
       m_renderBuffers.clear();
 
@@ -959,7 +959,7 @@ void CRPRenderManager::ClearVideoFrame(const std::string& savestatePath)
   auto it = m_savestateBuffers.find(savestatePath);
   if (it != m_savestateBuffers.end())
   {
-    for (auto renderBuffer : it->second)
+    for (auto* renderBuffer : it->second)
       renderBuffer->Release();
     m_savestateBuffers.erase(it);
   }

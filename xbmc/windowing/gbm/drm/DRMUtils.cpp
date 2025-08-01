@@ -315,7 +315,7 @@ bool CDRMUtils::OpenDrm(bool needConnector)
     return false;
   }
 
-  for (const auto device : devices)
+  for (auto* const device : devices)
   {
     if (!(device->available_nodes & 1 << DRM_NODE_PRIMARY))
       continue;
@@ -327,7 +327,7 @@ bool CDRMUtils::OpenDrm(bool needConnector)
 
     if (needConnector)
     {
-      auto resources = drmModeGetResources(m_fd);
+      auto* resources = drmModeGetResources(m_fd);
       if (!resources)
         continue;
 
@@ -395,7 +395,7 @@ bool CDRMUtils::InitDrm()
     CLog::LogF(LOGERROR, "Aspect ratio capability is not supported: {}", strerror(errno));
 #endif
 
-  auto resources = drmModeGetResources(m_fd);
+  auto* resources = drmModeGetResources(m_fd);
   if (!resources)
   {
     CLog::LogF(LOGERROR, "Failed to get drm resources: {}", strerror(errno));
@@ -416,7 +416,7 @@ bool CDRMUtils::InitDrm()
 
   drmModeFreeResources(resources);
 
-  auto planeResources = drmModeGetPlaneResources(m_fd);
+  auto* planeResources = drmModeGetPlaneResources(m_fd);
   if (!planeResources)
   {
     CLog::LogF(LOGERROR, "Failed to get drm plane resources: {}", strerror(errno));

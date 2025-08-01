@@ -740,7 +740,8 @@ void CWinSystemWayland::ProcessMessages()
     // output for example
     // It is very important that the EGL native module and the rendering system use the
     // Wayland-announced size for rendering or corrupted graphics output will result.
-    auto configure = reinterpret_cast<WinSystemWaylandProtocol::MsgConfigure*> (lastConfigureMessage.Get()->data);
+    auto* configure =
+        reinterpret_cast<WinSystemWaylandProtocol::MsgConfigure*>(lastConfigureMessage.Get()->data);
     CLog::LogF(LOGDEBUG, "Configure serial {}: size {}x{} state {}", configure->serial,
                configure->surfaceSize.Width(), configure->surfaceSize.Height(),
                IShellSurface::StateToString(configure->state));
@@ -1211,7 +1212,7 @@ void CWinSystemWayland::SendFocusChange(bool focus)
 {
   g_application.m_AppFocused = focus;
   std::unique_lock lock(m_dispResourcesMutex);
-  for (auto dispResource : m_dispResources)
+  for (auto* dispResource : m_dispResources)
   {
     dispResource->OnAppFocusChange(focus);
   }

@@ -158,7 +158,7 @@ void CDialogGameVideoFilter::InitVideoFilters()
   if (!xml)
     return;
 
-  auto root = xml->RootElement();
+  auto* root = xml->RootElement();
   TiXmlNode* child = nullptr;
 
   while ((child = root->IterateChildren(child)))

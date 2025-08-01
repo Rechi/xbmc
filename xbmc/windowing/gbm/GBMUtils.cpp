@@ -21,7 +21,7 @@ std::once_flag flag;
 
 bool CGBMUtils::CreateDevice(int fd)
 {
-  auto device = gbm_create_device(fd);
+  auto* device = gbm_create_device(fd);
   if (!device)
   {
     CLog::Log(LOGERROR, "CGBMUtils::{} - failed to create device: {}", __FUNCTION__,

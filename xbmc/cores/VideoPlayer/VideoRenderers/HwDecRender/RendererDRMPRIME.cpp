@@ -38,11 +38,11 @@ CBaseRenderer* CRendererDRMPRIME::Create(CVideoBuffer* buffer)
   if (buffer && CServiceBroker::GetSettingsComponent()->GetSettings()->GetInt(
                     SETTING_VIDEOPLAYER_USEPRIMERENDERER) == 0)
   {
-    auto buf = dynamic_cast<CVideoBufferDRMPRIME*>(buffer);
+    auto* buf = dynamic_cast<CVideoBufferDRMPRIME*>(buffer);
     if (!buf)
       return nullptr;
 
-    auto winSystem = static_cast<CWinSystemGbm*>(CServiceBroker::GetWinSystem());
+    auto* winSystem = static_cast<CWinSystemGbm*>(CServiceBroker::GetWinSystem());
     if (!winSystem)
       return nullptr;
 
@@ -66,14 +66,14 @@ CBaseRenderer* CRendererDRMPRIME::Create(CVideoBuffer* buffer)
 
     buf->ReleaseDescriptor();
 
-    auto gui = drm->GetGuiPlane();
+    auto* gui = drm->GetGuiPlane();
     if (!gui)
       return nullptr;
 
     if (!gui->SupportsFormat(CDRMUtils::FourCCWithAlpha(gui->GetFormat())))
       return nullptr;
 
-    auto plane = drm->GetVideoPlane();
+    auto* plane = drm->GetVideoPlane();
     if (!plane)
       return nullptr;
 

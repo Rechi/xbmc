@@ -105,7 +105,7 @@ CPVRGUIChannelNavigator::CPVRGUIChannelNavigator()
 
 CPVRGUIChannelNavigator::~CPVRGUIChannelNavigator()
 {
-  const auto gui = CServiceBroker::GetGUI();
+  auto* const gui = CServiceBroker::GetGUI();
   if (!gui)
     return;
 

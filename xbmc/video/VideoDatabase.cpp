@@ -1061,7 +1061,7 @@ int CVideoDatabase::AddFile(const CFileItem& item)
     return AddFile(item.GetDynPath());
   if (IsVideoDb(item) && item.HasVideoInfoTag())
   {
-    const auto videoInfoTag = item.GetVideoInfoTag();
+    const auto* const videoInfoTag = item.GetVideoInfoTag();
     if (videoInfoTag->m_iFileId != -1)
       return videoInfoTag->m_iFileId;
     else
@@ -13519,7 +13519,7 @@ bool CVideoDatabase::GetVideoVersionsNav(const std::string& strBaseDir,
 
       const auto item{std::make_shared<CFileItem>(itemUrl.ToString(), true)};
       item->SetLabel(m_pDS->fv("name").get_asString());
-      auto tag{item->GetVideoInfoTag()};
+      auto* tag{item->GetVideoInfoTag()};
       tag->m_type = MediaTypeVideoVersion;
       tag->m_iDbId = id;
 

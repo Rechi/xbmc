@@ -61,7 +61,7 @@ void CDemuxMultiSource::Flush()
 int CDemuxMultiSource::GetNrOfStreams() const
 {
   int streamsCount = 0;
-  for (auto& iter : m_demuxerMap)
+  for (const auto& iter : m_demuxerMap)
     streamsCount += iter.second->GetNrOfStreams();
 
   return streamsCount;
@@ -82,7 +82,7 @@ std::vector<CDemuxStream*> CDemuxMultiSource::GetStreams() const
 {
   std::vector<CDemuxStream*> streams;
 
-  for (auto& iter : m_demuxerMap)
+  for (const auto& iter : m_demuxerMap)
   {
     for (auto& stream : iter.second->GetStreams())
     {

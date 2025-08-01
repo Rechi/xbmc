@@ -132,7 +132,7 @@ void CLog::Initialize(const std::string& path)
     return;
 
   // register setting callbacks
-  auto settingsManager =
+  auto* settingsManager =
       CServiceBroker::GetSettingsComponent()->GetSettings()->GetSettingsManager();
   settingsManager->RegisterSettingOptionsFiller("loggingcomponents",
                                                 SettingOptionsLoggingComponentsFiller);
@@ -177,7 +177,7 @@ void CLog::Initialize(const std::string& path)
 void CLog::UnregisterFromSettings()
 {
   // unregister setting callbacks
-  auto settingsManager =
+  auto* settingsManager =
       CServiceBroker::GetSettingsComponent()->GetSettings()->GetSettingsManager();
   settingsManager->UnregisterSettingOptionsFiller("loggingcomponents");
   settingsManager->UnregisterSettingsHandler(this);
@@ -257,7 +257,7 @@ Logger CLog::GetLoggerById(uint32_t component)
 {
   if (component != LOG_COMPONENT_GENERAL)
   {
-    const auto it{componentMap.find(component)};
+    const auto* const it{componentMap.find(component)};
     if (it != componentMap.cend())
       return GetLogger((*it).second.name);
   }

@@ -258,7 +258,7 @@ int CDVDVideoCodecDRMPRIME::GetBuffer(struct AVCodecContext* avctx, AVFrame* fra
     }
 
     CDVDVideoCodecDRMPRIME* ctx = static_cast<CDVDVideoCodecDRMPRIME*>(avctx->opaque);
-    auto buffer = dynamic_cast<CVideoBufferDMA*>(
+    auto* buffer = dynamic_cast<CVideoBufferDMA*>(
         ctx->m_processInfo.GetVideoBufferManager().Get(avctx->pix_fmt, size, nullptr));
     if (!buffer)
       return -1;
@@ -307,7 +307,7 @@ bool CDVDVideoCodecDRMPRIME::Open(CDVDStreamInfo& hints, CDVDCodecOptions& optio
         device = getenv("KODI_RENDER_NODE");
 
 #if defined(HAVE_GBM)
-      auto winSystem =
+      auto* winSystem =
           dynamic_cast<KODI::WINDOWING::GBM::CWinSystemGbm*>(CServiceBroker::GetWinSystem());
 
       if (winSystem)

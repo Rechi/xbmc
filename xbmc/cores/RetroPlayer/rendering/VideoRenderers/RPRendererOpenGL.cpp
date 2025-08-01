@@ -276,7 +276,7 @@ void CRPRendererOpenGL::Render(uint8_t alpha)
 {
   const ViewportCoordinates dest{m_rotatedDestCoords};
 
-  auto renderBuffer = static_cast<CRenderBufferOpenGL*>(m_renderBuffer);
+  auto* renderBuffer = static_cast<CRenderBufferOpenGL*>(m_renderBuffer);
   if (renderBuffer == nullptr)
     return;
 

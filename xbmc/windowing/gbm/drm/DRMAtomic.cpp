@@ -89,7 +89,7 @@ void CDRMAtomic::DrmAtomicCommit(int fb_id, int flags, bool rendered, bool video
               "request",
               __FUNCTION__, strerror(errno));
 
-    auto oldRequest = m_atomicRequestQueue.front().get();
+    auto* oldRequest = m_atomicRequestQueue.front().get();
     CDRMAtomicRequest::LogAtomicDiff(m_req, oldRequest);
     m_req = oldRequest;
 

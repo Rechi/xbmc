@@ -232,7 +232,7 @@ bool CAddonSettings::AddInstanceSettings()
     return true;
   }
 
-  auto mgr = GetSettingsManager();
+  auto* mgr = GetSettingsManager();
   if (!mgr)
     return false;
 
@@ -340,7 +340,7 @@ bool CAddonSettings::Load(const CXBMCTinyXML& doc)
       auto settingId = categoryId;
       if (!settingId.empty())
         settingId += ".";
-      auto id = setting->ToElement()->Attribute("id");
+      const auto* id = setting->ToElement()->Attribute("id");
       if (id)
         settingId += id;
 
@@ -354,14 +354,14 @@ bool CAddonSettings::Load(const CXBMCTinyXML& doc)
     };
 
     // check if there were any setting values without a definition
-    auto category = doc.RootElement()->FirstChild();
+    const auto* category = doc.RootElement()->FirstChild();
     while (category != nullptr)
     {
       // check if this really is a category with setting elements
       if (category->FirstChild() && category->FirstChild()->Type() == CXBMCTinyXML::TINYXML_ELEMENT)
       {
         const auto& categoryId = category->ValueStr();
-        auto setting = category->FirstChild();
+        const auto* setting = category->FirstChild();
         while (setting != nullptr)
         {
           parseSettingValue(setting, categoryId);
@@ -995,7 +995,7 @@ SettingPtr CAddonSettings::InitializeFromOldSettingPath(const std::string& setti
   const auto audioMask = CServiceBroker::GetFileExtensionProvider().GetMusicExtensions();
   const auto videoMask = CServiceBroker::GetFileExtensionProvider().GetVideoExtensions();
   const auto imageMask = CServiceBroker::GetFileExtensionProvider().GetPictureExtensions();
-  auto execMask = "";
+  const auto* execMask = "";
 #if defined(TARGET_WINDOWS)
   execMask = ".exe|.bat|.cmd|.py";
 #endif // defined(TARGET_WINDOWS)

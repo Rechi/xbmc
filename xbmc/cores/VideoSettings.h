@@ -46,7 +46,7 @@ struct fmt::formatter<EINTERLACEMETHOD> : fmt::formatter<std::string_view>
   template<typename FormatContext>
   constexpr auto format(const EINTERLACEMETHOD& interlaceMethod, FormatContext& ctx)
   {
-    const auto it = interlaceMethodMap.find(interlaceMethod);
+    const auto* const it = interlaceMethodMap.find(interlaceMethod);
     if (it == interlaceMethodMap.cend())
       throw std::range_error("no interlace method string found");
 
@@ -106,7 +106,7 @@ public:
   template<typename FormatContext>
   constexpr auto format(const ESCALINGMETHOD& scalingMethod, FormatContext& ctx)
   {
-    const auto it = scalingMethodMap.find(scalingMethod);
+    const auto* const it = scalingMethodMap.find(scalingMethod);
     if (it == scalingMethodMap.cend())
       throw std::range_error("no scaling method string found");
 
@@ -157,7 +157,7 @@ public:
   template<typename FormatContext>
   constexpr auto format(const ETONEMAPMETHOD& tonemapMethod, FormatContext& ctx)
   {
-    const auto it = tonemapMethodMap.find(tonemapMethod);
+    const auto* const it = tonemapMethodMap.find(tonemapMethod);
     if (it == tonemapMethodMap.cend())
       throw std::range_error("no tonemap method string found");
 

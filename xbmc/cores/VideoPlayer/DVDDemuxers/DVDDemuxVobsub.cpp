@@ -36,7 +36,7 @@ std::vector<CDemuxStream*> CDVDDemuxVobsub::GetStreams() const
   std::vector<CDemuxStream*> streams;
 
   streams.reserve(m_Streams.size());
-  for (auto iter : m_Streams)
+  for (auto* iter : m_Streams)
     streams.push_back(iter);
 
   return streams;

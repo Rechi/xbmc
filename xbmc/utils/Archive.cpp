@@ -436,7 +436,7 @@ void CArchive::FillBuffer()
 
 CArchive &CArchive::streamin_bufferwrap(uint8_t *ptr, size_t size)
 {
-  auto orig_ptr = ptr;
+  auto* orig_ptr = ptr;
   auto orig_size = size;
   do
   {

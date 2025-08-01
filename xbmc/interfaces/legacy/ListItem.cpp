@@ -380,7 +380,7 @@ namespace XBMCAddon
       if (StringUtils::CompareNoCase(type, "video") == 0)
       {
         using InfoTagVideo = xbmc::InfoTagVideo;
-        auto videotag = GetVideoInfoTag();
+        auto* videotag = GetVideoInfoTag();
         for (const auto& it : infoLabels)
         {
           const auto key = StringUtils::ToLower(it.first);
@@ -553,7 +553,7 @@ namespace XBMCAddon
         int dbId = -1;
 
         using InfoTagMusic = xbmc::InfoTagMusic;
-        auto musictag = GetMusicInfoTag();
+        auto* musictag = GetMusicInfoTag();
         for (const auto& it : infoLabels)
         {
           const auto key = StringUtils::ToLower(it.first);
@@ -684,7 +684,7 @@ namespace XBMCAddon
       }
       else if (StringUtils::EqualsNoCase(type, "game"))
       {
-        auto gametag = item->GetGameInfoTag();
+        auto* gametag = item->GetGameInfoTag();
         for (const auto& it : infoLabels)
         {
           const auto key = StringUtils::ToLower(it.first);
@@ -761,7 +761,7 @@ namespace XBMCAddon
     void ListItem::setAvailableFanart(const std::vector<Properties>& images)
     {
       XBMCAddonUtils::GuiLock lock(languageHook, m_offscreen);
-      auto infoTag = GetVideoInfoTag();
+      auto* infoTag = GetVideoInfoTag();
       infoTag->m_fanart.Clear();
       for (const auto& dictionary : images)
       {
@@ -811,7 +811,7 @@ namespace XBMCAddon
 
       XBMCAddonUtils::GuiLock lock(languageHook, m_offscreen);
 
-      auto infoTag = GetVideoInfoTag();
+      auto* infoTag = GetVideoInfoTag();
       if (StringUtils::CompareNoCase(cType, "video") == 0)
       {
         CStreamDetailVideo* video = new CStreamDetailVideo;
@@ -874,7 +874,7 @@ namespace XBMCAddon
     {
       for (size_t i = 0; i < items.size(); ++i)
       {
-        auto& tuple = items[i];
+        const auto& tuple = items[i];
         if (tuple.GetNumValuesSet() != 2)
           throw ListItemException("Must pass in a list of tuples of pairs of strings. One entry in the list only has %d elements.",tuple.GetNumValuesSet());
 

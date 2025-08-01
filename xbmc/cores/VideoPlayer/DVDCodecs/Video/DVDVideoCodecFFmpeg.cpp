@@ -137,7 +137,7 @@ protected:
 
 CVideoBufferPoolFFmpeg::~CVideoBufferPoolFFmpeg()
 {
-  for (auto buf : m_all)
+  for (auto* buf : m_all)
   {
     delete buf;
   }
@@ -1078,7 +1078,7 @@ bool CDVDVideoCodecFFmpeg::GetPictureCommon(VideoPicture* pVideoPicture)
     unsigned int nb_mb = mb_h * mb_w;
     unsigned int block_idx;
 
-    auto par = reinterpret_cast<AVVideoEncParams*>(sd->data);
+    auto* par = reinterpret_cast<AVVideoEncParams*>(sd->data);
     if (par->type == AV_VIDEO_ENC_PARAMS_MPEG2 && (par->nb_blocks == 0 || par->nb_blocks == nb_mb))
     {
       pVideoPicture->qstride = mb_w;

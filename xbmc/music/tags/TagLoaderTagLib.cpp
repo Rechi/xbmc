@@ -87,7 +87,7 @@ std::vector<std::string> GetASFStringList(const List<ASF::Attribute>& list)
 
 std::vector<std::string> GetID3v2StringList(const ID3v2::FrameList& frameList)
 {
-  auto frame = dynamic_cast<const ID3v2::TextIdentificationFrame *>(frameList.front());
+  const auto* frame = dynamic_cast<const ID3v2::TextIdentificationFrame*>(frameList.front());
   if (frame)
     return StringListToVectorString(frame->fieldList());
   return std::vector<std::string>();
@@ -340,7 +340,7 @@ bool CTagLoaderTagLib::ParseTag(ID3v2::Tag* id3v2,
       // Loop through any lyrics frames. Could there be multiple frames, how to choose?
       for (ID3v2::FrameList::ConstIterator lt = it->second.begin(); lt != it->second.end(); ++lt)
       {
-        auto lyricsFrame = dynamic_cast<ID3v2::UnsynchronizedLyricsFrame *> (*lt);
+        auto* lyricsFrame = dynamic_cast<ID3v2::UnsynchronizedLyricsFrame*>(*lt);
         if (lyricsFrame)
           tag.SetLyrics(lyricsFrame->text().to8Bit(true));
       }
@@ -410,7 +410,7 @@ bool CTagLoaderTagLib::ParseTag(ID3v2::Tag* id3v2,
       // In fieldlist every odd field is a function, and every even is an artist or a comma delimited list of artists.
       for (ID3v2::FrameList::ConstIterator ip = it->second.begin(); ip != it->second.end(); ++ip)
       {
-        auto tiplframe = dynamic_cast<ID3v2::TextIdentificationFrame*> (*ip);
+        auto* tiplframe = dynamic_cast<ID3v2::TextIdentificationFrame*>(*ip);
         if (tiplframe)
           AddArtistRole(tag, StringListToVectorString(tiplframe->fieldList()));
       }
@@ -420,7 +420,7 @@ bool CTagLoaderTagLib::ParseTag(ID3v2::Tag* id3v2,
       // In fieldlist every odd field is an instrument, and every even is an artist or a comma delimited list of artists.
       for (ID3v2::FrameList::ConstIterator ip = it->second.begin(); ip != it->second.end(); ++ip)
       {
-        auto tiplframe = dynamic_cast<ID3v2::TextIdentificationFrame*> (*ip);
+        auto* tiplframe = dynamic_cast<ID3v2::TextIdentificationFrame*>(*ip);
         if (tiplframe)
           AddArtistRole(tag, StringListToVectorString(tiplframe->fieldList()));
       }
@@ -428,7 +428,7 @@ bool CTagLoaderTagLib::ParseTag(ID3v2::Tag* id3v2,
       // Loop through any UFID frames and set them
       for (ID3v2::FrameList::ConstIterator ut = it->second.begin(); ut != it->second.end(); ++ut)
       {
-        auto ufid = dynamic_cast<ID3v2::UniqueFileIdentifierFrame*> (*ut);
+        auto* ufid = dynamic_cast<ID3v2::UniqueFileIdentifierFrame*>(*ut);
         if (ufid && ufid->owner() == "http://musicbrainz.org")
         {
           // MusicBrainz pads with a \0, but the spec requires binary, be cautious
@@ -443,7 +443,7 @@ bool CTagLoaderTagLib::ParseTag(ID3v2::Tag* id3v2,
       // Loop through all pictures and store the frame pointers for the picture types we want
       for (ID3v2::FrameList::ConstIterator pi = it->second.begin(); pi != it->second.end(); ++pi)
       {
-        auto pictureFrame = dynamic_cast<ID3v2::AttachedPictureFrame *> (*pi);
+        auto* pictureFrame = dynamic_cast<ID3v2::AttachedPictureFrame*>(*pi);
         if (!pictureFrame) continue;
 
         if      (pictureFrame->type() == ID3v2::AttachedPictureFrame::FrontCover) pictures[0] = pictureFrame;
@@ -454,7 +454,7 @@ bool CTagLoaderTagLib::ParseTag(ID3v2::Tag* id3v2,
       // Loop through and process ratings
       for (ID3v2::FrameList::ConstIterator ct = it->second.begin(); ct != it->second.end(); ++ct)
       {
-        auto popFrame = dynamic_cast<ID3v2::PopularimeterFrame *> (*ct);
+        auto* popFrame = dynamic_cast<ID3v2::PopularimeterFrame*>(*ct);
         if (!popFrame) continue;
 
         // @xbmc.org ratings trump others (of course)
@@ -863,7 +863,7 @@ bool CTagLoaderTagLib::ParseTag(Ogg::XiphComment* xiph,
   auto pictureList = xiph->pictureList();
   FLAC::Picture *cover[2] = {};
 
-  for (auto i: pictureList)
+  for (auto* i : pictureList)
   {
     FLAC::Picture *picture = i;
     if (picture->type() == FLAC::Picture::FrontCover)

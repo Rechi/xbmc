@@ -66,7 +66,7 @@ namespace XBMCAddon
 
     CStreamDetailVideo* VideoStreamDetail::ToStreamDetailVideo() const
     {
-      auto streamDetail = new CStreamDetailVideo();
+      auto* streamDetail = new CStreamDetailVideo();
       streamDetail->m_iWidth = m_width;
       streamDetail->m_iHeight = m_height;
       streamDetail->m_fAspect = m_aspect;
@@ -88,7 +88,7 @@ namespace XBMCAddon
 
     CStreamDetailAudio* AudioStreamDetail::ToStreamDetailAudio() const
     {
-      auto streamDetail = new CStreamDetailAudio();
+      auto* streamDetail = new CStreamDetailAudio();
       streamDetail->m_iChannels = m_channels;
       streamDetail->m_strCodec = m_codec;
       streamDetail->m_strLanguage = m_language;
@@ -103,7 +103,7 @@ namespace XBMCAddon
 
     CStreamDetailSubtitle* SubtitleStreamDetail::ToStreamDetailSubtitle() const
     {
-      auto streamDetail = new CStreamDetailSubtitle();
+      auto* streamDetail = new CStreamDetailSubtitle();
       streamDetail->m_strLanguage = m_language;
 
       return streamDetail;
@@ -702,7 +702,7 @@ namespace XBMCAddon
       if (stream == nullptr)
         return;
 
-      auto streamDetail = stream->ToStreamDetailVideo();
+      auto* streamDetail = stream->ToStreamDetailVideo();
       {
         XBMCAddonUtils::GuiLock lock(languageHook, offscreen);
         addStreamRaw(infoTag, streamDetail);
@@ -714,7 +714,7 @@ namespace XBMCAddon
       if (stream == nullptr)
         return;
 
-      auto streamDetail = stream->ToStreamDetailAudio();
+      auto* streamDetail = stream->ToStreamDetailAudio();
       {
         XBMCAddonUtils::GuiLock lock(languageHook, offscreen);
         addStreamRaw(infoTag, streamDetail);
@@ -726,7 +726,7 @@ namespace XBMCAddon
       if (stream == nullptr)
         return;
 
-      auto streamDetail = stream->ToStreamDetailSubtitle();
+      auto* streamDetail = stream->ToStreamDetailSubtitle();
       {
         XBMCAddonUtils::GuiLock lock(languageHook, offscreen);
         addStreamRaw(infoTag, streamDetail);

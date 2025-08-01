@@ -34,7 +34,7 @@ CDAVDirectory::~CDAVDirectory(void) = default;
 void CDAVDirectory::ParseResponse(const tinyxml2::XMLElement* element, CFileItem& item)
 {
   /* Iterate response children elements */
-  for (auto* responseChild = element->FirstChildElement(); responseChild;
+  for (const auto* responseChild = element->FirstChildElement(); responseChild;
        responseChild = responseChild->NextSiblingElement())
   {
     if (CDAVCommon::ValueWithoutNamespace(responseChild, "href") && !responseChild->NoChildren())
@@ -48,13 +48,13 @@ void CDAVDirectory::ParseResponse(const tinyxml2::XMLElement* element, CFileItem
       if (CDAVCommon::GetStatusTag(responseChild->ToElement()).find("200 OK") != std::string::npos)
       {
         /* Iterate propstat children elements */
-        for (auto* propstatChild = responseChild->FirstChild(); propstatChild;
+        for (const auto* propstatChild = responseChild->FirstChild(); propstatChild;
              propstatChild = propstatChild->NextSibling())
         {
           if (CDAVCommon::ValueWithoutNamespace(propstatChild, "prop"))
           {
             /* Iterate all properties available */
-            for (auto* propChild = propstatChild->FirstChildElement(); propChild;
+            for (const auto* propChild = propstatChild->FirstChildElement(); propChild;
                  propChild = propChild->NextSiblingElement())
             {
               if (CDAVCommon::ValueWithoutNamespace(propChild, "getcontentlength") &&

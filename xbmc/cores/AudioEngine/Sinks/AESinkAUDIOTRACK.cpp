@@ -303,7 +303,7 @@ bool CAESinkAUDIOTRACK::Initialize(AEAudioFormat &format, std::string &device)
   }
 
   uint32_t distance = UINT32_MAX; // max upper distance, update at least ones to use one of our samplerates
-  for (auto& s : m_sink_sampleRates)
+  for (const auto& s : m_sink_sampleRates)
   {
      // prefer best match or alternatively something that divides nicely and
      // is not too far away

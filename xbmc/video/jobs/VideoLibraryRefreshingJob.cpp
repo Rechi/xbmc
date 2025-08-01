@@ -527,7 +527,7 @@ bool CVideoLibraryRefreshingJob::Work(CVideoDatabase &db)
 
     if (hasAdditionalAssets)
     {
-      const auto videoTag{m_item->GetVideoInfoTag()};
+      auto* const videoTag{m_item->GetVideoInfoTag()};
       db.UpdateAssetsOwner(videoTag->m_type, origDbId, videoTag->m_iDbId);
     }
 

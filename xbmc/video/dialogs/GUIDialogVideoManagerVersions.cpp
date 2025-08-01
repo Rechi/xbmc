@@ -240,7 +240,7 @@ bool CGUIDialogVideoManagerVersions::AddVideoVersion()
         if (!GetAllOtherMovies(m_videoAsset, items, videoDb))
           return false;
 
-        const auto tag{m_videoAsset->GetVideoInfoTag()};
+        auto* const tag{m_videoAsset->GetVideoInfoTag()};
 
         return ChooseVideoAndConvertToVideoVersion(items, m_videoAsset->GetVideoContentType(),
                                                    tag->m_type, tag->m_iDbId, videoDb,
@@ -296,7 +296,7 @@ bool CGUIDialogVideoManagerVersions::AddVideoVersion()
     if (!GetAllOtherMovies(m_videoAsset, items, videoDb))
       return false;
 
-    const auto tag{m_videoAsset->GetVideoInfoTag()};
+    auto* const tag{m_videoAsset->GetVideoInfoTag()};
 
     return ChooseVideoAndConvertToVideoVersion(items, m_videoAsset->GetVideoContentType(),
                                                tag->m_type, tag->m_iDbId, videoDb,
@@ -666,7 +666,7 @@ bool CGUIDialogVideoManagerVersions::PostProcessList(CFileItemList& list, int db
   while (i < list.Size())
   {
     const auto item{list[i]};
-    const auto itemtag{item->GetVideoInfoTag()};
+    auto* const itemtag{item->GetVideoInfoTag()};
 
     if (itemtag->m_iDbId == dbId)
     {

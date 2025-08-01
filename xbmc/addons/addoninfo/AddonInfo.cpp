@@ -156,8 +156,8 @@ AddonType CAddonInfo::TranslateSubContent(const std::string& content)
 
 AddonInstanceSupport CAddonInfo::InstanceSupportType(AddonType type)
 {
-  const auto it = std::find_if(types.begin(), types.end(),
-                               [type](const TypeMapping& entry) { return entry.type == type; });
+  const auto* const it = std::find_if(types.begin(), types.end(), [type](const TypeMapping& entry)
+                                      { return entry.type == type; });
   if (it != types.end())
     return it->instance_support;
 
@@ -178,7 +178,7 @@ const CAddonType* CAddonInfo::Type(AddonType type) const
     if (type == AddonType::UNKNOWN)
       return m_types.data();
 
-    for (auto& addonType : m_types)
+    for (const auto& addonType : m_types)
     {
       if (addonType.Type() == type)
         return &addonType;

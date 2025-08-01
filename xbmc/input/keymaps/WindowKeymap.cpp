@@ -41,7 +41,7 @@ const KeymapActionGroup& CWindowKeymap::GetActions(int windowId, const std::stri
   auto it = m_windowKeymap.find(windowId);
   if (it != m_windowKeymap.end())
   {
-    auto& keymap = it->second;
+    const auto& keymap = it->second;
     auto it2 = keymap.find(keyName);
     if (it2 != keymap.end())
       return it2->second;

@@ -579,7 +579,7 @@ bool CPluginDirectory::IsMediaLibraryScanningAllowed(const std::string& content,
   if (!plugin)
     return false;
 
-  auto& paths = plugin->MediaLibraryScanPaths();
+  const auto& paths = plugin->MediaLibraryScanPaths();
   if (paths.empty())
     return false;
   auto it = paths.find(content);

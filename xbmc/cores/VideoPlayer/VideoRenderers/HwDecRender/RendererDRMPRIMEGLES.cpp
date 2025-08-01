@@ -36,7 +36,7 @@ CBaseRenderer* CRendererDRMPRIMEGLES::Create(CVideoBuffer* buffer)
   if (!buffer)
     return nullptr;
 
-  auto buf = dynamic_cast<CVideoBufferDRMPRIME*>(buffer);
+  auto* buf = dynamic_cast<CVideoBufferDRMPRIME*>(buffer);
   if (!buf)
     return nullptr;
 
@@ -44,7 +44,7 @@ CBaseRenderer* CRendererDRMPRIMEGLES::Create(CVideoBuffer* buffer)
   if (!buf->AcquireDescriptor())
     return nullptr;
 
-  auto desc = buf->GetDescriptor();
+  auto* desc = buf->GetDescriptor();
   if (!desc)
   {
     buf->ReleaseDescriptor();
@@ -56,7 +56,7 @@ CBaseRenderer* CRendererDRMPRIMEGLES::Create(CVideoBuffer* buffer)
 
   buf->ReleaseDescriptor();
 
-  auto winSystemEGL =
+  auto* winSystemEGL =
       dynamic_cast<KODI::WINDOWING::LINUX::CWinSystemEGL*>(CServiceBroker::GetWinSystem());
   if (!winSystemEGL)
     return nullptr;
@@ -95,12 +95,12 @@ bool CRendererDRMPRIMEGLES::Configure(const VideoPicture& picture,
 
   Flush(false);
 
-  auto winSystem = CServiceBroker::GetWinSystem();
+  auto* winSystem = CServiceBroker::GetWinSystem();
 
   if (!winSystem)
     return false;
 
-  auto winSystemEGL = dynamic_cast<KODI::WINDOWING::LINUX::CWinSystemEGL*>(winSystem);
+  auto* winSystemEGL = dynamic_cast<KODI::WINDOWING::LINUX::CWinSystemEGL*>(winSystem);
 
   if (!winSystemEGL)
     return false;

@@ -33,7 +33,7 @@ bool CWinSystemGbmEGLContext::InitWindowSystemEGL(EGLint renderableType, EGLint 
     return false;
   }
 
-  auto plane = m_DRM->GetGuiPlane();
+  auto* plane = m_DRM->GetGuiPlane();
   uint32_t visualId = plane != nullptr ? plane->GetFormat() : DRM_FORMAT_XRGB2101010;
 
   // prefer alpha visual id, fallback to non-alpha visual id
@@ -94,7 +94,7 @@ bool CWinSystemGbmEGLContext::CreateNewWindow(const std::string& name,
 
   std::vector<uint64_t> modifiers;
 
-  auto plane = m_DRM->GetGuiPlane();
+  auto* plane = m_DRM->GetGuiPlane();
   if (plane)
     modifiers = plane->GetModifiersForFormat(format);
 

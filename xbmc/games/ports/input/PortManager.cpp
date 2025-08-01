@@ -272,10 +272,10 @@ void CPortManager::DeserializeController(const tinyxml2::XMLElement* pController
 
 void CPortManager::SerializePorts(tinyxml2::XMLElement& node, const PortVec& ports)
 {
-  auto doc = node.GetDocument();
+  auto* doc = node.GetDocument();
   for (const CPortNode& port : ports)
   {
-    auto portNode = doc->NewElement(XML_ELM_PORT);
+    auto* portNode = doc->NewElement(XML_ELM_PORT);
     if (portNode == nullptr)
       continue;
 
@@ -316,7 +316,7 @@ void CPortManager::SerializeControllers(tinyxml2::XMLElement& portNode,
     if (!HasState(controller))
       continue;
 
-    auto controllerNode = portNode.GetDocument()->NewElement(XML_ELM_CONTROLLER);
+    auto* controllerNode = portNode.GetDocument()->NewElement(XML_ELM_CONTROLLER);
     if (controllerNode == nullptr)
       continue;
 

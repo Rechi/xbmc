@@ -27,11 +27,11 @@ bool CSettingUpdate::Deserialize(const TiXmlNode *node)
   if (node == nullptr)
     return false;
 
-  auto elem = node->ToElement();
+  const auto* elem = node->ToElement();
   if (elem == nullptr)
     return false;
 
-  auto strType = elem->Attribute(SETTING_XML_ATTR_TYPE);
+  const auto* strType = elem->Attribute(SETTING_XML_ATTR_TYPE);
   if (strType == nullptr || strlen(strType) <= 0 || !setType(strType))
   {
     s_logger->warn("missing or unknown update type definition");

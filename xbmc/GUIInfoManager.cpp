@@ -11716,7 +11716,7 @@ void CGUIInfoManager::Clear()
   do
   {
     swapList.clear();
-    for (auto &item : m_bools)
+    for (const auto& item : m_bools)
       if (item.use_count() > 1)
         swapList.insert(item);
     m_bools.swap(swapList);
@@ -12084,7 +12084,7 @@ void CGUIInfoManager::OnApplicationMessage(KODI::MESSAGING::ThreadMessage* pMsg)
   {
     if (pMsg->lpVoid)
     {
-      auto infoLabels = static_cast<std::vector<std::string>*>(pMsg->lpVoid);
+      auto* infoLabels = static_cast<std::vector<std::string>*>(pMsg->lpVoid);
       for (const auto& param : pMsg->params)
         infoLabels->emplace_back(GetLabel(TranslateString(param), DEFAULT_CONTEXT));
     }
@@ -12095,7 +12095,7 @@ void CGUIInfoManager::OnApplicationMessage(KODI::MESSAGING::ThreadMessage* pMsg)
   {
     if (pMsg->lpVoid)
     {
-      auto infoLabels = static_cast<std::vector<bool>*>(pMsg->lpVoid);
+      auto* infoLabels = static_cast<std::vector<bool>*>(pMsg->lpVoid);
       for (const auto& param : pMsg->params)
         infoLabels->push_back(EvaluateBool(param, DEFAULT_CONTEXT));
     }

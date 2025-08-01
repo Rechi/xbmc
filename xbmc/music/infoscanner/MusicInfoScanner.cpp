@@ -1333,7 +1333,7 @@ CInfoScanner::InfoRet CMusicInfoScanner::UpdateDatabaseAlbumInfo(
       }
       else
       {
-        auto eventLog = CServiceBroker::GetEventLog();
+        auto* eventLog = CServiceBroker::GetEventLog();
         if (eventLog)
           eventLog->Add(EventPtr(new CMediaLibraryEvent(
               MediaTypeAlbum, album.strPath, 24146,
@@ -1403,7 +1403,7 @@ CInfoScanner::InfoRet CMusicInfoScanner::UpdateDatabaseArtistInfo(
       }
       else
       {
-        auto eventLog = CServiceBroker::GetEventLog();
+        auto* eventLog = CServiceBroker::GetEventLog();
         if (eventLog)
           eventLog->Add(EventPtr(new CMediaLibraryEvent(
               MediaTypeArtist, artist.strPath, 24146,
@@ -2311,7 +2311,7 @@ bool CMusicInfoScanner::AddRemoteArtwork(std::map<std::string, std::string>& art
 void CMusicInfoScanner::Run()
 {
   int count = 0;
-  for (auto& it : m_pathsToScan)
+  for (const auto& it : m_pathsToScan)
   {
     count += CountFilesRecursively(it);
   }

@@ -609,7 +609,7 @@ CVideoInfoScanner::~CVideoInfoScanner()
 
       // If art specified in set.nfo use that next
       if (movieSetArt.empty() && tag.m_set.HasArt())
-        for (auto& art : tag.m_set.GetArt())
+        for (const auto& art : tag.m_set.GetArt())
           if (CVideoThumbLoader::IsArtTypeInWhitelist(art.first, movieSetArtTypes, false))
             movieSetArt.insert(art);
     }
@@ -716,7 +716,7 @@ CVideoInfoScanner::~CVideoInfoScanner()
         else if (info2->Content() == ContentType::MUSICVIDEOS)
           mediaType = MediaTypeMusicVideo;
 
-        auto eventLog = CServiceBroker::GetEventLog();
+        auto* eventLog = CServiceBroker::GetEventLog();
         if (eventLog)
         {
           const std::string itemlogpath = (info2->Content() == ContentType::TVSHOWS)

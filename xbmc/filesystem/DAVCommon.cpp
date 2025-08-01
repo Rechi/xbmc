@@ -27,7 +27,7 @@ bool CDAVCommon::ValueWithoutNamespace(const tinyxml2::XMLNode* node, const std:
     return false;
   }
 
-  auto* element = node->ToElement();
+  const auto* element = node->ToElement();
 
   if (!element)
   {
@@ -58,7 +58,7 @@ bool CDAVCommon::ValueWithoutNamespace(const tinyxml2::XMLNode* node, const std:
  */
 std::string CDAVCommon::GetStatusTag(const tinyxml2::XMLElement* element)
 {
-  for (auto* child = element->FirstChildElement(); child; child = child->NextSiblingElement())
+  for (const auto* child = element->FirstChildElement(); child; child = child->NextSiblingElement())
   {
     if (ValueWithoutNamespace(child, "status"))
     {

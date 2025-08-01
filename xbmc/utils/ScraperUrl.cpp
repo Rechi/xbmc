@@ -140,7 +140,7 @@ bool CScraperUrl::ParseFromData(const std::string& data)
    * so strUrl is always in UTF-8 */
   doc.Parse(data, TIXML_ENCODING_UTF8);
 
-  auto pElement = doc.RootElement();
+  auto* pElement = doc.RootElement();
   if (pElement == nullptr)
   {
     m_urls.emplace_back(data);
@@ -225,7 +225,7 @@ bool CScraperUrl::ParseAndAppendUrlsFromEpisodeGuide(const std::string& episodeG
   bool wasEmpty = m_data.empty();
 
   TiXmlHandle docHandle(&doc);
-  auto link = docHandle.FirstChild("episodeguide").Element();
+  auto* link = docHandle.FirstChild("episodeguide").Element();
   if (link->FirstChildElement("url"))
   {
     for (link = link->FirstChildElement("url"); link; link = link->NextSiblingElement("url"))

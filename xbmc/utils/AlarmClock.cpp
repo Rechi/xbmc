@@ -63,7 +63,7 @@ void CAlarmClock::Start(const std::string& strName, float n_secs, const std::str
       StringUtils::Format(g_localizeStrings.Get(labelStarted), static_cast<int>(event.m_fSecs) / 60,
                           static_cast<int>(event.m_fSecs) % 60)));
 
-  auto eventLog = CServiceBroker::GetEventLog();
+  auto* eventLog = CServiceBroker::GetEventLog();
   if (eventLog)
   {
     if (bSilent)
@@ -113,7 +113,7 @@ void CAlarmClock::Stop(const std::string& strName, bool bSilent /* false */)
   if (iter->second.m_strCommand.empty() || static_cast<float>(iter->second.m_fSecs) > elapsed)
   {
     EventPtr alarmClockActivity(new CNotificationEvent(labelAlarmClock, strMessage));
-    auto eventLog = CServiceBroker::GetEventLog();
+    auto* eventLog = CServiceBroker::GetEventLog();
     if (eventLog)
     {
       if (bSilent)

@@ -248,7 +248,7 @@ void CRPRendererOpenGLES::Render(uint8_t alpha)
 {
   const ViewportCoordinates dest{m_rotatedDestCoords};
 
-  auto renderBuffer = static_cast<CRenderBufferOpenGLES*>(m_renderBuffer);
+  auto* renderBuffer = static_cast<CRenderBufferOpenGLES*>(m_renderBuffer);
   if (renderBuffer == nullptr)
     return;
 

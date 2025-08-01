@@ -171,7 +171,7 @@ void CVAAPIContext::SetValidDRMVaDisplayFromRenderNode()
       continue;
     }
 
-    auto display = vaGetDisplayDRM(fd);
+    auto* display = vaGetDisplayDRM(fd);
 
     if (display != nullptr)
     {
@@ -1286,7 +1286,7 @@ void CDecoder::Register(IVaapiWinSystem *winSystem, bool deepColor)
       SETTING_VIDEOPLAYER_USEVAAPIHEVC, SETTING_VIDEOPLAYER_PREFERVAAPIRENDER,
       SETTING_VIDEOPLAYER_USEVAAPIAV1,  SETTING_VIDEOPLAYER_USEVAAPIAVC};
 
-  for (const auto vaapiSetting : vaapiSettings)
+  for (const auto* const vaapiSetting : vaapiSettings)
   {
     auto setting = settings->GetSetting(vaapiSetting);
     if (!setting)

@@ -57,7 +57,7 @@ void CRPRendererDMAOpenGL::Render(uint8_t alpha)
 {
   const ViewportCoordinates dest{m_rotatedDestCoords};
 
-  auto renderBuffer = static_cast<CRenderBufferDMA*>(m_renderBuffer);
+  auto* renderBuffer = static_cast<CRenderBufferDMA*>(m_renderBuffer);
   assert(renderBuffer != nullptr);
 
   RenderBufferTextures* rbTextures;

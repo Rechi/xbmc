@@ -1377,7 +1377,7 @@ std::vector<CDemuxStream*> CDVDDemuxFFmpeg::GetStreams() const
   std::vector<CDemuxStream*> streams;
 
   streams.reserve(m_streams.size());
-  for (auto& iter : m_streams)
+  for (const auto& iter : m_streams)
     streams.push_back(iter.second);
 
   return streams;

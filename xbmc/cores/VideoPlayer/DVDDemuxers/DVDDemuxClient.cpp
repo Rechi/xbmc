@@ -394,7 +394,7 @@ std::vector<CDemuxStream*> CDVDDemuxClient::GetStreams() const
   std::vector<CDemuxStream*> streams;
 
   streams.reserve(m_streams.size());
-  for (auto &st : m_streams)
+  for (const auto& st : m_streams)
     streams.push_back(st.second.get());
 
   return streams;
@@ -403,7 +403,7 @@ std::vector<CDemuxStream*> CDVDDemuxClient::GetStreams() const
 void CDVDDemuxClient::RequestStreams()
 {
   std::map<int, std::shared_ptr<CDemuxStream>> newStreamMap;
-  for (auto stream : m_IDemux->GetStreams())
+  for (auto* stream : m_IDemux->GetStreams())
     SetStreamProps(stream, newStreamMap, false);
   m_streams = newStreamMap;
 }

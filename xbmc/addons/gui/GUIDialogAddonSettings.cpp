@@ -492,7 +492,7 @@ int CGUIDialogAddonSettings::GetSettingLevel() const
 
 std::shared_ptr<CSettingSection> CGUIDialogAddonSettings::GetSection()
 {
-  const auto settingsManager = GetSettingsManager();
+  auto* const settingsManager = GetSettingsManager();
   if (settingsManager == nullptr)
     return nullptr;
 

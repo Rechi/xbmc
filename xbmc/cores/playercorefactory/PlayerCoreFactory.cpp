@@ -72,7 +72,7 @@ void CPlayerCoreFactory::GetPlayers(std::vector<std::string>&players) const
 {
   std::unique_lock lock(m_section);
   players.clear();
-  for (auto& conf : m_vecPlayerConfigs)
+  for (const auto& conf : m_vecPlayerConfigs)
   {
     if (conf->m_bPlaysAudio || conf->m_bPlaysVideo)
       players.emplace_back(conf->m_name);
@@ -84,7 +84,7 @@ void CPlayerCoreFactory::GetPlayers(std::vector<std::string>&players, const bool
   std::unique_lock lock(m_section);
   CLog::Log(LOGDEBUG, "CPlayerCoreFactory::GetPlayers: for video={}, audio={}", video, audio);
 
-  for (auto& conf : m_vecPlayerConfigs)
+  for (const auto& conf : m_vecPlayerConfigs)
   {
     if (audio == conf->m_bPlaysAudio && video == conf->m_bPlaysVideo)
     {
@@ -131,7 +131,7 @@ void CPlayerCoreFactory::GetPlayers(const CFileItem& item, std::vector<std::stri
   GetPlayers(validPlayers);
 
   // Process rules
-  for (auto& rule : m_vecCoreSelectionRules)
+  for (const auto& rule : m_vecCoreSelectionRules)
     rule->GetPlayers(item, validPlayers, players);
 
   CLog::Log(LOGDEBUG, "CPlayerCoreFactory::GetPlayers: matched {0} rules with players", players.size());
@@ -228,7 +228,7 @@ std::string CPlayerCoreFactory::GetPlayerName(size_t idx) const
 void CPlayerCoreFactory::GetPlayers(std::vector<std::string>&players, std::string &type) const
 {
   std::unique_lock lock(m_section);
-  for (auto& config : m_vecPlayerConfigs)
+  for (const auto& config : m_vecPlayerConfigs)
   {
     if (config->m_type != type)
       continue;
@@ -239,7 +239,7 @@ void CPlayerCoreFactory::GetPlayers(std::vector<std::string>&players, std::strin
 void CPlayerCoreFactory::GetRemotePlayers(std::vector<std::string>&players) const
 {
   std::unique_lock lock(m_section);
-  for (auto& config : m_vecPlayerConfigs)
+  for (const auto& config : m_vecPlayerConfigs)
   {
     if (config->m_type != "remote")
       continue;

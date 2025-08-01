@@ -41,7 +41,7 @@ CRecentlyAddedJob::CRecentlyAddedJob(int flag)
 
 bool CRecentlyAddedJob::UpdateVideo()
 {
-  auto home = CServiceBroker::GetGUI()->GetWindowManager().GetWindow(WINDOW_HOME);
+  auto* home = CServiceBroker::GetGUI()->GetWindowManager().GetWindow(WINDOW_HOME);
 
   if ( home == nullptr )
     return false;
@@ -199,7 +199,7 @@ bool CRecentlyAddedJob::UpdateVideo()
 
 bool CRecentlyAddedJob::UpdateMusic()
 {
-  auto home = CServiceBroker::GetGUI()->GetWindowManager().GetWindow(WINDOW_HOME);
+  auto* home = CServiceBroker::GetGUI()->GetWindowManager().GetWindow(WINDOW_HOME);
 
   if ( home == nullptr )
     return false;
@@ -323,7 +323,7 @@ bool CRecentlyAddedJob::UpdateMusic()
 
 bool CRecentlyAddedJob::UpdateTotal()
 {
-  auto home = CServiceBroker::GetGUI()->GetWindowManager().GetWindow(WINDOW_HOME);
+  auto* home = CServiceBroker::GetGUI()->GetWindowManager().GetWindow(WINDOW_HOME);
 
   if ( home == nullptr )
     return false;

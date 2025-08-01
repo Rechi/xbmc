@@ -616,7 +616,7 @@ void CSelectionStreams::Update(const std::shared_ptr<CDVDInputStream>& input,
     else
       source = Source(STREAM_SOURCE_VIDEOMUX, filename);
 
-    for (auto stream : demuxer->GetStreams())
+    for (auto* stream : demuxer->GetStreams())
     {
       /* skip streams with no type */
       if (stream->type == STREAM_NONE)
@@ -4880,7 +4880,7 @@ int CVideoPlayer::AddSubtitleFile(const std::string& filename, const std::string
     ExternalStreamInfo info =
         CUtil::GetExternalStreamDetailsFromFilename(m_item.GetDynPath(), filename);
 
-    for (auto sub : pDemux->GetStreams())
+    for (auto* sub : pDemux->GetStreams())
     {
       if (sub->type != STREAM_SUBTITLE)
         continue;

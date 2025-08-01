@@ -372,7 +372,7 @@ bool CInputManager::OnEvent(XBMC_Event& newEvent)
     {
       bool handled = false;
 
-      for (auto driverHandler : m_mouseHandlers)
+      for (auto* driverHandler : m_mouseHandlers)
       {
         switch (newEvent.type)
         {
@@ -440,7 +440,7 @@ bool CInputManager::OnEvent(XBMC_Event& newEvent)
       if ((actionId >= ACTION_TOUCH_TAP && actionId <= ACTION_GESTURE_END) ||
           (actionId >= ACTION_MOUSE_START && actionId <= ACTION_MOUSE_END))
       {
-        auto action =
+        auto* action =
             new CAction(actionId, 0, newEvent.touch.x, newEvent.touch.y, newEvent.touch.x2,
                         newEvent.touch.y2, newEvent.touch.x3, newEvent.touch.y3);
         CServiceBroker::GetAppMessenger()->PostMsg(TMSG_GUI_ACTION, WINDOW_INVALID, -1,
@@ -479,7 +479,7 @@ bool CInputManager::OnKey(const CKey& key)
 {
   bool bHandled = false;
 
-  for (auto handler : m_keyboardHandlers)
+  for (auto* handler : m_keyboardHandlers)
   {
     if (handler->OnKeyPress(key))
     {
@@ -679,7 +679,7 @@ bool CInputManager::HandleKey(const CKey& key)
 
 void CInputManager::OnKeyUp(const CKey& key)
 {
-  for (auto handler : m_keyboardHandlers)
+  for (auto* handler : m_keyboardHandlers)
     handler->OnKeyRelease(key);
 
   if (m_LastKey.GetButtonCode() != KEY_INVALID &&

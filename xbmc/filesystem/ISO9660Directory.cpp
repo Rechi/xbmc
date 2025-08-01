@@ -42,7 +42,7 @@ bool CISO9660Directory::GetDirectory(const CURL& url, CFileItemList& items)
 
   if (iso->readdir(strSub.c_str(), isoFiles))
   {
-    for (const auto file : isoFiles)
+    for (auto* const file : isoFiles)
     {
       std::string filename(file->p_stat->filename);
 

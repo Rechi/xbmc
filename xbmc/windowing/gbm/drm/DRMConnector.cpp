@@ -119,7 +119,7 @@ std::vector<uint8_t> CDRMConnector::GetEDID() const
   if (!blob)
     return {};
 
-  auto data = static_cast<uint8_t*>(blob->data);
+  auto* data = static_cast<uint8_t*>(blob->data);
   auto edid = std::vector<uint8_t>(data, data + blob->length);
 
   drmModeFreePropertyBlob(blob);

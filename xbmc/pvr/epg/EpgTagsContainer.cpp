@@ -258,7 +258,7 @@ std::shared_ptr<CPVREpgInfoTag> CPVREpgTagsContainer::CreateEntry(
 std::vector<std::shared_ptr<CPVREpgInfoTag>> CPVREpgTagsContainer::CreateEntries(
     const std::vector<std::shared_ptr<CPVREpgInfoTag>>& tags) const
 {
-  for (auto& tag : tags)
+  for (const auto& tag : tags)
   {
     tag->SetChannelData(m_channelData);
   }

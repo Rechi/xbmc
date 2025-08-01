@@ -60,7 +60,7 @@ bool CEncoderFFmpeg::Init()
     if (!m_formatCtx)
       throw FFMpegException("Could not allocate output format context");
 
-    auto buffer = static_cast<uint8_t*>(av_malloc(BUFFER_SIZE + AV_INPUT_BUFFER_PADDING_SIZE));
+    auto* buffer = static_cast<uint8_t*>(av_malloc(BUFFER_SIZE + AV_INPUT_BUFFER_PADDING_SIZE));
     if (!buffer)
       throw FFMpegException("Could not allocate buffer");
 

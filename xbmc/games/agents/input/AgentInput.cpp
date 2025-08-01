@@ -622,7 +622,7 @@ void CAgentInput::UpdateConnectedJoysticks(
     PERIPHERALS::EventLockHandlePtr& inputHandlingLock,
     std::set<PERIPHERALS::PeripheralPtr>& disconnectedPeripherals)
 {
-  for (auto& peripheralJoystick : joysticks)
+  for (const auto& peripheralJoystick : joysticks)
   {
     // Upcast peripheral to input interface
     JOYSTICK::IInputProvider* inputProvider = peripheralJoystick.get();

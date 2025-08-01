@@ -45,7 +45,7 @@ bool CPVREventLogJob::DoWork()
                                             event.m_label, event.m_msg, 5000, true);
 
     // Write event log entry.
-    auto eventLog = CServiceBroker::GetEventLog();
+    auto* eventLog = CServiceBroker::GetEventLog();
     if (eventLog)
       eventLog->Add(std::make_shared<CNotificationEvent>(event.m_label, event.m_msg, event.m_icon,
                                                          event.m_eLevel));

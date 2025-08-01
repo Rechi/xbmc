@@ -40,7 +40,7 @@ bool CAndroidAppDirectory::GetDirectory(const CURL& url, CFileItemList &items)
       CLog::Log(LOGERROR, "CAndroidAppDirectory::GetDirectory Application lookup listing failed");
       return false;
     }
-    for (auto& i : applications)
+    for (const auto& i : applications)
     {
       if (i.packageName == className.c_str())
         continue;

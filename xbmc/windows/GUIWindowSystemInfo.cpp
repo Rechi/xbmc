@@ -157,7 +157,7 @@ void CGUIWindowSystemInfo::FrameMove()
                                SYSTEM_VIDEO_ENCODER_INFO, INFO::DEFAULT_CONTEXT));
     SetControlLabel(i++, "{} {}", 13287, SYSTEM_SCREEN_RESOLUTION);
 
-    auto renderingSystem = CServiceBroker::GetRenderSystem();
+    auto* renderingSystem = CServiceBroker::GetRenderSystem();
     if (renderingSystem)
     {
       static std::string vendor = renderingSystem->GetRenderVendor();
@@ -175,7 +175,7 @@ void CGUIWindowSystemInfo::FrameMove()
             i++, StringUtils::Format("{} {}", g_localizeStrings.Get(renderVersionLabel), version));
     }
 
-    auto windowSystem = CServiceBroker::GetWinSystem();
+    auto* windowSystem = CServiceBroker::GetWinSystem();
     if (windowSystem)
     {
       static std::string platform = windowSystem->GetName();

@@ -179,7 +179,7 @@ NPT_String GetMimeType(const CFileItem& item, const PLT_HttpRequestContext* cont
     /* We look first to our extensions/overrides of libplatinum mimetypes. If not found, fallback to
          Platinum definitions.
       */
-    const auto kodiOverrideMimeType = std::find_if(
+    const auto* const kodiOverrideMimeType = std::find_if(
         std::begin(kodiPlatinumMimeTypeExtensions), std::end(kodiPlatinumMimeTypeExtensions),
         [&](const auto& mimeTypeEntry) { return mimeTypeEntry.extension == ext; });
     if (kodiOverrideMimeType != std::end(kodiPlatinumMimeTypeExtensions))

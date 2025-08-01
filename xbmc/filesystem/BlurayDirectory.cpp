@@ -1848,7 +1848,7 @@ bool CBlurayDirectory::InitializeBluray(const std::string& root)
 
   m_realPath = root;
 
-  if (const auto fileHandler{CDirectoryFactory::Create(CURL{root})}; fileHandler)
+  if (auto* const fileHandler{CDirectoryFactory::Create(CURL{root})}; fileHandler)
     m_realPath = fileHandler->ResolveMountPoint(root);
 
   if (!bd_open_files(m_bd, &m_realPath, CBlurayCallback::dir_open, CBlurayCallback::file_open))

@@ -40,11 +40,11 @@ void CControllerInstaller::Process()
 
   CGUIWindowManager& windowManager = gui->GetWindowManager();
 
-  auto pSelectDialog = windowManager.GetWindow<CGUIDialogSelect>(WINDOW_DIALOG_SELECT);
+  auto* pSelectDialog = windowManager.GetWindow<CGUIDialogSelect>(WINDOW_DIALOG_SELECT);
   if (pSelectDialog == nullptr)
     return;
 
-  auto pProgressDialog = windowManager.GetWindow<CGUIDialogProgress>(WINDOW_DIALOG_PROGRESS);
+  auto* pProgressDialog = windowManager.GetWindow<CGUIDialogProgress>(WINDOW_DIALOG_PROGRESS);
   if (pProgressDialog == nullptr)
     return;
 

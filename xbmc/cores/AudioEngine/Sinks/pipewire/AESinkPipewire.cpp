@@ -105,8 +105,8 @@ constexpr std::string_view PWFormatToString(spa_audio_format format)
 
 spa_audio_format AEFormatToPWFormat(AEDataFormat& format)
 {
-  const auto it = std::find_if(formatMap.cbegin(), formatMap.cend(),
-                               [&format](auto p) { return p.second == format; });
+  const auto* const it = std::find_if(formatMap.cbegin(), formatMap.cend(),
+                                      [&format](auto p) { return p.second == format; });
   if (it != formatMap.cend())
     return it->first;
 
@@ -149,7 +149,7 @@ std::vector<spa_audio_channel> AEChannelMapToPWChannelMap(CAEChannelInfo& channe
   std::vector<spa_audio_channel> channels;
   for (uint32_t count = 0; count < channelInfo.Count(); count++)
   {
-    const auto it =
+    const auto* const it =
         std::find_if(channelMap.cbegin(), channelMap.cend(),
                      [&channelInfo, &count](auto p) { return p.second == channelInfo[count]; });
 
@@ -188,7 +188,7 @@ constexpr auto iec958CodecMap = make_map<CAEStreamInfo::DataType, spa_audio_iec9
 constexpr spa_audio_iec958_codec AEStreamInfoDataTypeToPWIEC958Codec(
     const CAEStreamInfo::DataType& type)
 {
-  const auto it = iec958CodecMap.find(type);
+  const auto* const it = iec958CodecMap.find(type);
   if (it != iec958CodecMap.cend())
     return it->second;
 
@@ -337,7 +337,7 @@ void CAESinkPipewire::EnumerateDevicesEx(AEDeviceInfoList& list, bool force)
 
     for (const auto& channel : channels)
     {
-      const auto ch = channelMap.find(channel);
+      const auto* const ch = channelMap.find(channel);
       if (ch != channelMap.cend())
         device.m_channels += ch->second;
     }

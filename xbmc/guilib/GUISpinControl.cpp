@@ -302,7 +302,7 @@ bool CGUISpinControl::OnMessage(CGUIMessage& message)
     case GUI_MSG_SET_LABELS:
       if (message.GetPointer())
       {
-        auto labels =
+        const auto* labels =
             static_cast<const std::vector<std::pair<std::string, int>>*>(message.GetPointer());
         Clear();
         for (const auto& i : *labels)

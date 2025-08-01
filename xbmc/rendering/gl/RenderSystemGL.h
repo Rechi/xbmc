@@ -39,7 +39,7 @@ struct fmt::formatter<ShaderMethodGL> : fmt::formatter<std::string_view>
   template<typename FormatContext>
   constexpr auto format(const ShaderMethodGL& shaderMethod, FormatContext& ctx)
   {
-    const auto it = ShaderMethodGLMap.find(shaderMethod);
+    const auto* const it = ShaderMethodGLMap.find(shaderMethod);
     if (it == ShaderMethodGLMap.cend())
       throw std::range_error("no string mapping found for shader method");
 
