@@ -27,10 +27,7 @@ using namespace XFILE::VIDEODATABASEDIRECTORY;
 
 bool CVideoFileItemListModifier::CanModify(const CFileItemList &items) const
 {
-  if (IsVideoDb(items))
-    return true;
-
-  return false;
+  return IsVideoDb(items);
 }
 
 bool CVideoFileItemListModifier::Modify(CFileItemList &items) const

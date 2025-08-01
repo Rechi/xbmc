@@ -48,10 +48,7 @@ CAudioDecoder::~CAudioDecoder()
 
 bool CAudioDecoder::CreateDecoder()
 {
-  if (CreateInstance() != ADDON_STATUS_OK)
-    return false;
-
-  return true;
+  return CreateInstance() == ADDON_STATUS_OK;
 }
 
 bool CAudioDecoder::SupportsFile(const std::string& filename)

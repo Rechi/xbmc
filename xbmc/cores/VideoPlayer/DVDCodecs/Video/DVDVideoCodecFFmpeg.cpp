@@ -549,7 +549,7 @@ void CDVDVideoCodecFFmpeg::UpdateName()
   if(m_pHardware)
     m_name += "-" + m_pHardware->Name();
 
-  m_processInfo.SetVideoDecoderName(m_name, m_pHardware ? true : false);
+  m_processInfo.SetVideoDecoderName(m_name, m_pHardware != nullptr);
 
   CLog::Log(LOGDEBUG, "CDVDVideoCodecFFmpeg - Updated codec: {}", m_name);
 }
@@ -798,10 +798,7 @@ CDVDVideoCodec::VCReturn CDVDVideoCodecFFmpeg::GetPicture(VideoPicture* pVideoPi
     m_started = true;
     m_iLastKeyframe = m_pCodecContext->has_b_frames + 2;
   }
-  if (m_pDecodedFrame->flags & AV_FRAME_FLAG_INTERLACED)
-    m_interlaced = true;
-  else
-    m_interlaced = false;
+  m_interlaced = (m_pDecodedFrame->flags & AV_FRAME_FLAG_INTERLACED) != 0;
 
   if (!m_processInfo.GetVideoInterlaced() && m_interlaced)
     m_processInfo.SetVideoInterlaced(m_interlaced);

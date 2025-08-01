@@ -33,7 +33,7 @@ inline HAT_STATE& operator|=(HAT_STATE& lhs, HAT_STATE rhs)
 
 inline bool operator&(HAT_STATE lhs, HAT_DIRECTION rhs)
 {
-  return (static_cast<int>(lhs) & static_cast<int>(rhs)) ? true : false;
+  return (static_cast<int>(lhs) & static_cast<int>(rhs)) != 0;
 }
 
 inline SEMIAXIS_DIRECTION operator*(SEMIAXIS_DIRECTION lhs, int rhs)

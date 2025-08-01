@@ -1211,14 +1211,11 @@ void CGUIWindowVideoBase::GetGroupedItems(CFileItemList &items)
 bool CGUIWindowVideoBase::CheckFilterAdvanced(CFileItemList &items) const
 {
   const std::string& content = items.GetContent();
-  if ((VIDEO::IsVideoDb(items) || CanContainFilter(m_strFilterPath)) &&
-      (StringUtils::EqualsNoCase(content, "movies") ||
-       StringUtils::EqualsNoCase(content, "tvshows") ||
-       StringUtils::EqualsNoCase(content, "episodes") ||
-       StringUtils::EqualsNoCase(content, "musicvideos")))
-    return true;
-
-  return false;
+  return (VIDEO::IsVideoDb(items) || CanContainFilter(m_strFilterPath)) &&
+         (StringUtils::EqualsNoCase(content, "movies") ||
+          StringUtils::EqualsNoCase(content, "tvshows") ||
+          StringUtils::EqualsNoCase(content, "episodes") ||
+          StringUtils::EqualsNoCase(content, "musicvideos"));
 }
 
 bool CGUIWindowVideoBase::CanContainFilter(const std::string &strDirectory) const

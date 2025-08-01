@@ -583,13 +583,10 @@ bool IsItemPlayable(const CFileItem& item)
   {
     // Exclude top level nodes - eg can't play 'genres' just a specific genre etc
     const auto node = XFILE::CVideoDatabaseDirectory::GetDirectoryParentType(item.GetPath());
-    if (node == XFILE::VIDEODATABASEDIRECTORY::NodeType::OVERVIEW ||
-        node == XFILE::VIDEODATABASEDIRECTORY::NodeType::MOVIES_OVERVIEW ||
-        node == XFILE::VIDEODATABASEDIRECTORY::NodeType::TVSHOWS_OVERVIEW ||
-        node == XFILE::VIDEODATABASEDIRECTORY::NodeType::MUSICVIDEOS_OVERVIEW)
-      return false;
-
-    return true;
+    return !(node == XFILE::VIDEODATABASEDIRECTORY::NodeType::OVERVIEW ||
+             node == XFILE::VIDEODATABASEDIRECTORY::NodeType::MOVIES_OVERVIEW ||
+             node == XFILE::VIDEODATABASEDIRECTORY::NodeType::TVSHOWS_OVERVIEW ||
+             node == XFILE::VIDEODATABASEDIRECTORY::NodeType::MUSICVIDEOS_OVERVIEW);
   }
 
   if (item.IsPlugin() && IsVideo(item) && !IsEmptyVideoItem(item) &&

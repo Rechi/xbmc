@@ -171,10 +171,7 @@ bool CGUIFont::UpdateScrollInfo(const vecText& text, CScrollInfo& scrollInfo)
   if (scrollInfo.m_pixelPos < old.m_pixelPos)
     ++scrollInfo.m_loopCount;
 
-  if (scrollInfo.m_pixelPos != old.m_pixelPos)
-    return true;
-
-  return false;
+  return scrollInfo.m_pixelPos != old.m_pixelPos;
 }
 
 void CGUIFont::DrawScrollingText(float x,

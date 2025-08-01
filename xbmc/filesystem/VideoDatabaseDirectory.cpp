@@ -190,9 +190,7 @@ void CVideoDatabaseDirectory::ClearDirectoryCache(const std::string& strDirector
 
 bool CVideoDatabaseDirectory::IsAllItem(const std::string& strDirectory)
 {
-  if (StringUtils::EndsWith(strDirectory, "/-1/"))
-    return true;
-  return false;
+  return StringUtils::EndsWith(strDirectory, "/-1/");
 }
 
 bool CVideoDatabaseDirectory::GetLabel(const std::string& strDirectory, std::string& strLabel)
@@ -398,10 +396,8 @@ std::string CVideoDatabaseDirectory::GetIcon(const std::string &strDirectory)
 bool CVideoDatabaseDirectory::ContainsMovies(const std::string &path)
 {
   const auto type = GetDirectoryChildType(path);
-  if (type == NodeType::TITLE_MOVIES || type == NodeType::EPISODES ||
-      type == NodeType::TITLE_MUSICVIDEOS || type == NodeType::VIDEOVERSIONS)
-    return true;
-  return false;
+  return type == NodeType::TITLE_MOVIES || type == NodeType::EPISODES ||
+         type == NodeType::TITLE_MUSICVIDEOS || type == NodeType::VIDEOVERSIONS;
 }
 
 bool CVideoDatabaseDirectory::Exists(const CURL& url)

@@ -467,13 +467,8 @@ bool CAddonRepos::FindDependencyByParentRepo(const std::string& dependsId,
                                              std::shared_ptr<IAddon>& dependencyToInstall) const
 {
   const auto repoEntryIt = m_latestVersionsByRepo.find(parentRepoId);
-  if (repoEntryIt != m_latestVersionsByRepo.end() &&
-      GetLatestVersionByMap(dependsId, repoEntryIt->second, dependencyToInstall))
-  {
-    return true;
-  }
-
-  return false;
+  return repoEntryIt != m_latestVersionsByRepo.end() &&
+         GetLatestVersionByMap(dependsId, repoEntryIt->second, dependencyToInstall);
 }
 
 void CAddonRepos::BuildCompatibleVersionsList(

@@ -130,9 +130,7 @@ bool CVFSAddonCache::IsInUse(const std::string& id)
 
   const auto itAddon = std::ranges::find_if(m_addonsInstances, [&id](const VFSEntryPtr& addon)
                                             { return addon->ID() == id; });
-  if (itAddon != m_addonsInstances.end() && (*itAddon).use_count() > 1)
-    return true;
-  return false;
+  return itAddon != m_addonsInstances.end() && (*itAddon).use_count() > 1;
 }
 
 void CVFSAddonCache::Update(const std::string& id)

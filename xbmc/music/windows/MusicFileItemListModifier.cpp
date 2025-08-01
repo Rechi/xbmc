@@ -26,10 +26,7 @@ using namespace XFILE::MUSICDATABASEDIRECTORY;
 
 bool CMusicFileItemListModifier::CanModify(const CFileItemList &items) const
 {
-  if (MUSIC::IsMusicDb(items))
-    return true;
-
-  return false;
+  return MUSIC::IsMusicDb(items);
 }
 
 bool CMusicFileItemListModifier::Modify(CFileItemList &items) const

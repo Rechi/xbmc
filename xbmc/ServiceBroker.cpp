@@ -58,7 +58,7 @@ void CServiceBroker::CreateLogging()
 
 bool CServiceBroker::IsLoggingUp()
 {
-  return g_serviceBroker.m_logging ? true : false;
+  return static_cast<bool>(g_serviceBroker.m_logging);
 }
 
 void CServiceBroker::DestroyLogging()

@@ -675,7 +675,7 @@ namespace XBMCAddon
           {
             {
               DelayedCallGuard dcguard(languageHook);
-              stillWaiting = WaitForActionEvent(100) ? false : true;
+              stillWaiting = !WaitForActionEvent(100);
             }
 
             // If application has quit, close the window

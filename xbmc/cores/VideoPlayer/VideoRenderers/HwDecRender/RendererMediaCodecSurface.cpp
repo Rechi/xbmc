@@ -129,12 +129,9 @@ void CRendererMediaCodecSurface::ReleaseBuffer(int idx)
 
 bool CRendererMediaCodecSurface::Supports(ERENDERFEATURE feature) const
 {
-  if (feature == RENDERFEATURE_ZOOM || feature == RENDERFEATURE_STRETCH ||
-      feature == RENDERFEATURE_PIXEL_RATIO || feature == RENDERFEATURE_VERTICAL_SHIFT ||
-      feature == RENDERFEATURE_ROTATION)
-    return true;
-
-  return false;
+  return feature == RENDERFEATURE_ZOOM || feature == RENDERFEATURE_STRETCH ||
+         feature == RENDERFEATURE_PIXEL_RATIO || feature == RENDERFEATURE_VERTICAL_SHIFT ||
+         feature == RENDERFEATURE_ROTATION;
 }
 
 void CRendererMediaCodecSurface::Reset()

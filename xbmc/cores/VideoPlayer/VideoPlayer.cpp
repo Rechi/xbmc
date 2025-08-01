@@ -171,10 +171,7 @@ public:
     }
     else if (m_isPrefForced)
     {
-      if ((ss.flags & StreamFlags::FLAG_FORCED) && isSameSubLang)
-        return false;
-      else
-        return true;
+      return !((ss.flags & StreamFlags::FLAG_FORCED) && isSameSubLang);
     }
 
     // can fall here only when "forced" and "impaired" are disabled,
@@ -1511,7 +1508,7 @@ void CVideoPlayer::Process()
     // should we open a new input stream?
     if (!m_pInputStream)
     {
-      if (OpenInputStream() == false)
+      if (!OpenInputStream())
       {
         m_bAbortRequest = true;
         break;
@@ -1527,7 +1524,7 @@ void CVideoPlayer::Process()
       if (m_pInputStream->IsEOF())
         break;
 
-      if (OpenDemuxStream() == false)
+      if (!OpenDemuxStream())
       {
         m_bAbortRequest = true;
         break;
@@ -1749,13 +1746,8 @@ bool CVideoPlayer::CheckIsCurrent(const CCurrentStream& current,
                                   CDemuxStream* stream,
                                   DemuxPacket* pkg)
 {
-  if(current.id == pkg->iStreamId &&
-     current.demuxerId == stream->demuxerId &&
-     current.source == stream->source &&
-     current.type == stream->type)
-    return true;
-  else
-    return false;
+  return current.id == pkg->iStreamId && current.demuxerId == stream->demuxerId &&
+         current.source == stream->source && current.type == stream->type;
 }
 
 void CVideoPlayer::ProcessPacket(CDemuxStream* pStream, DemuxPacket* pPacket)
@@ -2263,7 +2255,7 @@ void CVideoPlayer::HandlePlaySpeed()
       if (m_CurrentVideo.id < 0 || m_CurrentVideo.syncState != IDVDStreamPlayer::SYNC_INSYNC)
         check = false;
       // video message queue either initiated or already seen eof
-      else if (m_CurrentVideo.inited == false && m_playSpeed >= 0)
+      else if (!m_CurrentVideo.inited && m_playSpeed >= 0)
         check = false;
       // don't check if time has not advanced since last check
       else if (m_SpeedState.lasttime == GetTime())
@@ -2502,7 +2494,7 @@ bool CVideoPlayer::CheckSceneSkip(const CCurrentStream& current)
   if(current.dts == DVD_NOPTS_VALUE)
     return false;
 
-  if(current.inited == false)
+  if (!current.inited)
     return false;
 
   const auto hasEdit =
@@ -2522,8 +2514,7 @@ void CVideoPlayer::CheckAutoSceneSkip()
 
   // If there is a startpts defined for either the audio or video stream then VideoPlayer is still
   // still decoding frames to get to the previously requested seek point.
-  if (m_CurrentAudio.inited == false ||
-      m_CurrentVideo.inited == false)
+  if (!m_CurrentAudio.inited || !m_CurrentVideo.inited)
     return;
 
   const std::chrono::milliseconds clock{GetTime()};
@@ -3607,7 +3598,7 @@ bool CVideoPlayer::SeekTimeRelative(int64_t iTime)
   CDVDMsgPlayerSeek::CMode mode;
   mode.time = (int)iTime;
   mode.relative = true;
-  mode.backward = (iTime < 0) ? true : false;
+  mode.backward = iTime < 0;
   mode.accurate = false;
   mode.trickplay = false;
   mode.sync = true;
@@ -5070,15 +5061,9 @@ void CVideoPlayer::UpdatePlayState(double timeout)
 
     bool realtime = m_pInputStream->IsRealtime();
 
-    if (CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(CSettings::SETTING_VIDEOPLAYER_USEDISPLAYASCLOCK) &&
-        !realtime)
-    {
-      state.cantempo = true;
-    }
-    else
-    {
-      state.cantempo = false;
-    }
+    state.cantempo = CServiceBroker::GetSettingsComponent()->GetSettings()->GetBool(
+                         CSettings::SETTING_VIDEOPLAYER_USEDISPLAYASCLOCK) &&
+                     !realtime;
 
     m_processInfo->SetStateRealtime(realtime);
   }
@@ -5090,10 +5075,7 @@ void CVideoPlayer::UpdatePlayState(double timeout)
     state.timeMax = state.timeMax - static_cast<double>(m_Edl.GetTotalCutTime().count());
   }
 
-  if (m_caching > CACHESTATE_DONE && m_caching < CACHESTATE_PLAY)
-    state.caching = true;
-  else
-    state.caching = false;
+  state.caching = m_caching > CACHESTATE_DONE && m_caching < CACHESTATE_PLAY;
 
   double queueTime = GetQueueTime();
   CacheInfo cache = GetCachingTimes();

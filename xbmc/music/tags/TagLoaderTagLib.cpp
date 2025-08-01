@@ -317,7 +317,8 @@ bool CTagLoaderTagLib::ParseTag(ID3v2::Tag* id3v2,
     else if (it->first == "TDOR" || it->first == "TORY") // TDOR - ID3v2.4, TORY - ID3v2.3
       tag.SetOriginalDate(it->second.front()->toString().to8Bit(true));
     else if (it->first == "TDAT")   {} // empty as taglib has moved the value to TDRC
-    else if (it->first == "TCMP")   tag.SetCompilation((strtol(it->second.front()->toString().toCString(true), nullptr, 10) == 0) ? false : true);
+    else if (it->first == "TCMP")
+      tag.SetCompilation(strtol(it->second.front()->toString().toCString(true), nullptr, 10) != 0);
     else if (it->first == "TENC")   {} // EncodedBy
     else if (it->first == "TCOM")   AddArtistRole(tag, "Composer", GetID3v2StringList(it->second));
     else if (it->first == "TPE3")   AddArtistRole(tag, "Conductor", GetID3v2StringList(it->second));

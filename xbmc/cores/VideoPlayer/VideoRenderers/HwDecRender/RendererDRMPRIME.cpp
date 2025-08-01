@@ -176,10 +176,7 @@ void CRendererDRMPRIME::ReleaseBuffer(int index)
 
 bool CRendererDRMPRIME::NeedBuffer(int index)
 {
-  if (m_iLastRenderBuffer == index)
-    return true;
-
-  return false;
+  return m_iLastRenderBuffer == index;
 }
 
 CRenderInfo CRendererDRMPRIME::GetRenderInfo()
@@ -238,10 +235,7 @@ bool CRendererDRMPRIME::RenderCapture(int index, CRenderCapture* capture)
 
 bool CRendererDRMPRIME::ConfigChanged(const VideoPicture& picture)
 {
-  if (picture.videoBuffer->GetFormat() != m_format)
-    return true;
-
-  return false;
+  return picture.videoBuffer->GetFormat() != m_format;
 }
 
 bool CRendererDRMPRIME::Supports(ERENDERFEATURE feature) const

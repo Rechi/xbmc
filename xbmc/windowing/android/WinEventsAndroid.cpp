@@ -30,10 +30,7 @@ enum {
 static bool different_event(XBMC_Event &curEvent, XBMC_Event &newEvent)
 {
   // different type
-  if (curEvent.type != newEvent.type)
-    return true;
-
-  return false;
+  return curEvent.type != newEvent.type;
 }
 
 /************************************************************************/

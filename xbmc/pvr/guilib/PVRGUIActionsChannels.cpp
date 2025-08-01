@@ -214,11 +214,8 @@ bool CPVRGUIActionsChannels::HideChannel(const CFileItem& item) const
     return false;
 
   const auto groups{CServiceBroker::GetPVRManager().ChannelGroups()};
-  if (!groups->Get(channel->IsRadio())
-           ->RemoveFromGroup(groups->GetGroupAll(channel->IsRadio()), groupMember))
-    return false;
-
-  return true;
+  return groups->Get(channel->IsRadio())
+      ->RemoveFromGroup(groups->GetGroupAll(channel->IsRadio()), groupMember);
 }
 
 bool CPVRGUIActionsChannels::StartChannelScan()

@@ -276,10 +276,7 @@ bool CProcessInfo::Supports(EINTERLACEMETHOD method) const
   std::unique_lock lock(m_videoCodecSection);
 
   auto it = std::find(m_deintMethods.begin(), m_deintMethods.end(), method);
-  if (it != m_deintMethods.end())
-    return true;
-
-  return false;
+  return it != m_deintMethods.end();
 }
 
 void CProcessInfo::SetDeinterlacingMethodDefault(EINTERLACEMETHOD method)
@@ -592,11 +589,9 @@ float CProcessInfo::MaxTempoPlatform()
 
 bool CProcessInfo::IsTempoAllowed(float tempo)
 {
-  if (tempo > MinTempoPlatform() &&
-      (tempo < MaxTempoPlatform() || tempo < CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_maxTempo))
-    return true;
-
-  return false;
+  return tempo > MinTempoPlatform() &&
+         (tempo < MaxTempoPlatform() ||
+          tempo < CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_maxTempo);
 }
 
 unsigned int CProcessInfo::GetMaxPassthroughOffSyncDuration() const

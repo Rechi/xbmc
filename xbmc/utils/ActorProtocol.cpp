@@ -259,10 +259,7 @@ bool Protocol::SendOutMessageSync(int signal,
 
   msg->Release();
 
-  if (*retMsg)
-    return true;
-  else
-    return false;
+  return *retMsg != nullptr;
 }
 
 bool Protocol::SendOutMessageSync(int signal,
@@ -293,10 +290,7 @@ bool Protocol::SendOutMessageSync(int signal,
 
   msg->Release();
 
-  if (*retMsg)
-    return true;
-  else
-    return false;
+  return *retMsg != nullptr;
 }
 
 bool Protocol::ReceiveOutMessage(Message **msg)

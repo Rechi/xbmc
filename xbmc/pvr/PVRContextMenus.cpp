@@ -212,10 +212,7 @@ bool ShowInformation::IsVisible(const CFileItem& item) const
   if (timer && !URIUtils::PathEquals(item.GetPath(), CPVRTimersPath::PATH_ADDTIMER))
     return timer->GetEpgInfoTag() != nullptr;
 
-  if (item.GetPVRRecordingInfoTag())
-    return true;
-
-  return false;
+  return static_cast<bool>(item.GetPVRRecordingInfoTag());
 }
 
 bool ShowInformation::Execute(const CFileItemPtr& item) const
@@ -430,10 +427,7 @@ bool DeleteRecording::Execute(const CFileItemPtr& item) const
 bool UndeleteRecording::IsVisible(const CFileItem& item) const
 {
   const std::shared_ptr<const CPVRRecording> recording(item.GetPVRRecordingInfoTag());
-  if (recording && recording->IsDeleted())
-    return true;
-
-  return false;
+  return recording && recording->IsDeleted();
 }
 
 bool UndeleteRecording::Execute(const CFileItemPtr& item) const
@@ -464,11 +458,8 @@ bool DeleteWatchedRecordings::Execute(const std::shared_ptr<CFileItem>& item) co
 bool AddReminder::IsVisible(const CFileItem& item) const
 {
   const std::shared_ptr<const CPVREpgInfoTag> epg = item.GetEPGInfoTag();
-  if (epg && !CServiceBroker::GetPVRManager().Timers()->GetTimerForEpgTag(epg) &&
-      epg->StartAsLocalTime() > CDateTime::GetCurrentDateTime())
-    return true;
-
-  return false;
+  return epg && !CServiceBroker::GetPVRManager().Timers()->GetTimerForEpgTag(epg) &&
+         epg->StartAsLocalTime() > CDateTime::GetCurrentDateTime();
 }
 
 bool AddReminder::Execute(const std::shared_ptr<CFileItem>& item) const

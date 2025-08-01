@@ -87,10 +87,7 @@ bool CShaderPresetAddon::CreateAddon(void)
   // Initialise the add-on
   CLog::LogF(LOGDEBUG, "Creating ShaderPreset add-on instance '{}'", Name());
 
-  if (CreateInstance() != ADDON_STATUS_OK)
-    return false;
-
-  return true;
+  return CreateInstance() == ADDON_STATUS_OK;
 }
 
 void CShaderPresetAddon::DestroyAddon()

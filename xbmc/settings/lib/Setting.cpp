@@ -689,7 +689,7 @@ void CSettingBool::MergeDetails(const CSetting& other)
     return;
 
   const auto& boolSetting = static_cast<const CSettingBool&>(other);
-  if (m_default == false && boolSetting.m_default == true)
+  if (!m_default && boolSetting.m_default)
     m_default = boolSetting.m_default;
   if (m_value == m_default && boolSetting.m_value != m_default)
     m_value = boolSetting.m_value;
@@ -1144,10 +1144,7 @@ bool CSettingInt::fromString(const std::string &strValue, int &value)
 
   char *end = nullptr;
   value = static_cast<int>(std::strtol(strValue.c_str(), &end, 10));
-  if (end && *end != '\0')
-    return false;
-
-  return true;
+  return !(end && *end != '\0');
 }
 
 Logger CSettingNumber::s_logger;
@@ -1281,11 +1278,7 @@ bool CSettingNumber::CheckValidity(const std::string &value) const
 bool CSettingNumber::CheckValidity(double value) const
 {
   std::shared_lock<CSharedSection> lock(m_critical);
-  if (m_min != m_max &&
-     (value < m_min || value > m_max))
-    return false;
-
-  return true;
+  return !(m_min != m_max && (value < m_min || value > m_max));
 }
 
 bool CSettingNumber::SetValue(double value)
@@ -1346,10 +1339,7 @@ bool CSettingNumber::fromString(const std::string &strValue, double &value)
 
   char *end = nullptr;
   value = strtod(strValue.c_str(), &end);
-  if (end && *end != '\0')
-    return false;
-
-  return true;
+  return !(end && *end != '\0');
 }
 
 const CSettingString::Value CSettingString::DefaultValue;
@@ -1393,9 +1383,9 @@ void CSettingString::MergeDetails(const CSetting& other)
     m_default = stringSetting.m_default;
   if (m_value == m_default && stringSetting.m_value != m_default)
     m_value = stringSetting.m_value;
-  if (m_allowEmpty == false && stringSetting.m_allowEmpty == true)
+  if (!m_allowEmpty && stringSetting.m_allowEmpty)
     m_allowEmpty = stringSetting.m_allowEmpty;
-  if (m_allowNewOption == false && stringSetting.m_allowNewOption == true)
+  if (!m_allowNewOption && stringSetting.m_allowNewOption)
     m_allowNewOption = stringSetting.m_allowNewOption;
   if (m_translatableOptions.empty() && !stringSetting.m_translatableOptions.empty())
     m_translatableOptions = stringSetting.m_translatableOptions;

@@ -929,10 +929,8 @@ void CTeletextDecoder::SwitchTranspMode()
   std::unique_lock lock(m_txtCache->m_critSection);
 
   /* toggle mode */
-  if (!m_RenderInfo.TranspMode)
-    m_RenderInfo.TranspMode = true;
-  else
-    m_RenderInfo.TranspMode = false; /* backward to immediately switch to TV-screen */
+  m_RenderInfo.TranspMode =
+      !m_RenderInfo.TranspMode; /* backward to immediately switch to TV-screen */
 
   /* set mode */
   if (!m_RenderInfo.TranspMode) /* normal text-only */
@@ -2574,7 +2572,7 @@ int CTeletextDecoder::RenderChar(
     Attribute->bg = t;
   }
   fgcolor = GetColorRGB((enumTeletextColor)Attribute->fg);
-  if (transpmode == true && PosY < 24*FontHeight)
+  if (transpmode && PosY < 24 * FontHeight)
   {
     bgcolor = GetColorRGB(TXT_ColorTransp);
   }
@@ -2889,11 +2887,7 @@ TextPageinfo_t* CTeletextDecoder::DecodePage(bool showl25,             // 1=deco
 
   bool boxed;
   /* check for newsflash & subtitle */
-  if (PageInfo->boxed && IsDec(m_txtCache->Page))
-    boxed = true;
-  else
-    boxed = false;
-
+  boxed = PageInfo->boxed && IsDec(m_txtCache->Page);
 
   /* modify header */
   if (boxed)

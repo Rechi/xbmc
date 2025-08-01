@@ -34,8 +34,5 @@ bool CProcessInfoAndroid::WantsRawPassthrough()
   const std::string device = CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(
       CSettings::SETTING_AUDIOOUTPUT_PASSTHROUGHDEVICE);
 
-  if (std::string::npos != device.find("(RAW)"))
-    return true;
-
-  return false;
+  return std::string::npos != device.find("(RAW)");
 }

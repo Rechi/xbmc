@@ -109,14 +109,9 @@ bool CXRandR::Query(bool force, int screennum, bool ignoreoff)
     xoutput.crtc = (output->Attribute("crtc") != NULL ? atoi(output->Attribute("crtc")) : 0);
     xoutput.wmm = (output->Attribute("wmm") != NULL ? atoi(output->Attribute("wmm")) : 0);
     xoutput.hmm = (output->Attribute("hmm") != NULL ? atoi(output->Attribute("hmm")) : 0);
-    if (output->Attribute("rotation") != NULL &&
-        (StringUtils::CompareNoCase(output->Attribute("rotation"), "left") == 0 ||
-         StringUtils::CompareNoCase(output->Attribute("rotation"), "right") == 0))
-    {
-      xoutput.isRotated = true;
-    }
-    else
-      xoutput.isRotated = false;
+    xoutput.isRotated = output->Attribute("rotation") != NULL &&
+                        (StringUtils::CompareNoCase(output->Attribute("rotation"), "left") == 0 ||
+                         StringUtils::CompareNoCase(output->Attribute("rotation"), "right") == 0);
 
     if (!xoutput.isConnected)
        continue;

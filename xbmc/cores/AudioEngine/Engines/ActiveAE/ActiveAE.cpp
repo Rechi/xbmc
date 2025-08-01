@@ -2820,10 +2820,7 @@ bool CActiveAE::HasHDAudioChannelCount()
 
 bool CActiveAE::SupportsQualityLevel(enum AEQuality level)
 {
-  if (level == AE_QUALITY_LOW || level == AE_QUALITY_MID || level == AE_QUALITY_HIGH)
-    return true;
-
-  return false;
+  return level == AE_QUALITY_LOW || level == AE_QUALITY_MID || level == AE_QUALITY_HIGH;
 }
 
 bool CActiveAE::IsSettingVisible(const std::string &settingId)

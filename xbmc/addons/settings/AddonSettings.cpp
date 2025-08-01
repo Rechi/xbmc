@@ -274,10 +274,7 @@ bool CAddonSettings::AddInstanceSettings()
   const std::shared_ptr<CSettingBool> enabled = std::make_shared<CSettingBool>(
       ADDON_SETTING_INSTANCE_ENABLED_VALUE, 305, true, mgr); // Enabled
   enabled->SetControl(std::make_shared<CSettingControlCheckmark>());
-  if (!mgr->AddSetting(enabled, section, category, group))
-    return false;
-
-  return true;
+  return mgr->AddSetting(enabled, section, category, group);
 }
 
 bool CAddonSettings::Initialize(const CXBMCTinyXML& doc, bool allowEmpty /* = false */)

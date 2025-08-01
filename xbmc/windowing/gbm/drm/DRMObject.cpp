@@ -125,8 +125,5 @@ bool CDRMObject::SupportsProperty(const std::string& name)
   auto property = std::find_if(m_propsInfo.begin(), m_propsInfo.end(),
                                [&name](const auto& prop) { return prop->name == name; });
 
-  if (property != m_propsInfo.end())
-    return true;
-
-  return false;
+  return property != m_propsInfo.end();
 }

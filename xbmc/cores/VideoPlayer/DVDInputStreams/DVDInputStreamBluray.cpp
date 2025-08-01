@@ -1184,9 +1184,7 @@ bool CDVDInputStreamBluray::IsInMenu()
   // since there is no way to tell in a BD-J blu-ray when a popup menu actually is visible,
   // we have to assume that the blu-ray is in menu/navigation mode when there is an overlay
   // on screen, even if it might be invisible (which is impossible to detect)
-  if(m_menu || m_hasOverlay)
-    return true;
-  return false;
+  return m_menu || m_hasOverlay;
 }
 
 void CDVDInputStreamBluray::SkipStill()

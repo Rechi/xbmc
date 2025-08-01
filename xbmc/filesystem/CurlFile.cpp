@@ -996,9 +996,7 @@ bool CCurlFile::ReadData(std::string& strHTML)
     buffer[size_read] = 0;
     strHTML.append(buffer, size_read);
   }
-  if (m_state->m_cancelled)
-    return false;
-  return true;
+  return !m_state->m_cancelled;
 }
 
 bool CCurlFile::Download(const std::string& strURL, const std::string& strFileName, unsigned int* pdwSize)

@@ -194,9 +194,6 @@ bool CGUIWindowFavourites::RemoveItem(int item)
   if (item < 0 || item >= m_vecItems->Size())
     return false;
 
-  if (FAVOURITES_UTILS::RemoveItem(*m_vecItems, (*m_vecItems)[item]) &&
-      CServiceBroker::GetFavouritesService().Save(*m_vecItems))
-    return true;
-
-  return false;
+  return FAVOURITES_UTILS::RemoveItem(*m_vecItems, (*m_vecItems)[item]) &&
+         CServiceBroker::GetFavouritesService().Save(*m_vecItems);
 }

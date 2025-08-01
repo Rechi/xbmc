@@ -275,10 +275,7 @@ bool CRenderSystemGL::BeginRender()
 
 bool CRenderSystemGL::EndRender()
 {
-  if (!m_bRenderCreated)
-    return false;
-
-  return true;
+  return m_bRenderCreated;
 }
 
 void CRenderSystemGL::InvalidateColorBuffer()
@@ -378,7 +375,7 @@ void CRenderSystemGL::PresentRender(bool rendered, bool videoLayer)
 
 void CRenderSystemGL::SetVSync(bool enable)
 {
-  if (m_bVSync == enable && m_bVsyncInit == true)
+  if (m_bVSync == enable && m_bVsyncInit)
     return;
 
   if (!m_bRenderCreated)

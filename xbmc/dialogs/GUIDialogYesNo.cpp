@@ -125,7 +125,7 @@ bool CGUIDialogYesNo::ShowAndGetInput(const CVariant& heading,
   dialog->Open();
 
   bCanceled = dialog->m_bCanceled;
-  return (dialog->IsConfirmed()) ? true : false;
+  return dialog->IsConfirmed();
 }
 
 bool CGUIDialogYesNo::ShowAndGetInput(const CVariant& heading, const CVariant& text)
