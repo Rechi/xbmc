@@ -28,5 +28,6 @@ Checks: "\
   readability-qualified-auto,\
   readability-redundant-access-specifiers,\
   readability-redundant-control-flow,\
+  readability-redundant-declaration,\
 "
 HeaderFilterRegex: '(^|/)(tools|xbmc)/'
