@@ -294,9 +294,7 @@ CVariant::CVariant(std::map<std::string, CVariant>&& variantMap)
 {
 }
 
-CVariant::CVariant(const CVariant& variant) : m_data(variant.m_data)
-{
-}
+CVariant::CVariant(const CVariant& variant) = default;
 
 CVariant::CVariant(CVariant&& rhs) noexcept : m_data(std::move(rhs.m_data))
 {

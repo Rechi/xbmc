@@ -24,7 +24,7 @@ class CXBTFFrame;
 class CTextureBundleXBT
 {
 public:
-  CTextureBundleXBT();
+  CTextureBundleXBT() = default;
   explicit CTextureBundleXBT(bool themeBundle);
   ~CTextureBundleXBT();
 

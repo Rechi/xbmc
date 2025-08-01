@@ -580,7 +580,7 @@ protected:
 class CVppPostproc : public CPostproc
 {
 public:
-  CVppPostproc();
+  CVppPostproc() = default;
   ~CVppPostproc() override;
   bool PreInit(CVaapiConfig &config, SDiMethods *methods = NULL) override;
   bool Init(EINTERLACEMETHOD method) override;

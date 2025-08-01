@@ -73,7 +73,7 @@ protected:
   virtual void ProcessText();
 
 private:
-  CGUISettingsSliderControl(const CGUISettingsSliderControl& control);
+  CGUISettingsSliderControl(const CGUISettingsSliderControl& control) = default;
 
   CGUIButtonControl m_buttonControl;
   CGUILabel m_label;

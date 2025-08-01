@@ -119,7 +119,7 @@ public:
     CSizeInt size{};
     wayland::buffer_t wlBuffer;
 
-    Buffer() noexcept {}
+    Buffer() noexcept = default;
 
     Buffer(void* data, std::size_t dataSize, CSizeInt size, wayland::buffer_t&& buffer)
     : data{data}, dataSize{dataSize}, size{size}, wlBuffer{std::move(buffer)}

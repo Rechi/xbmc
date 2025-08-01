@@ -38,10 +38,6 @@ CImageFileURL::CImageFileURL(const std::string& imageFileURL)
   }
 }
 
-CImageFileURL::CImageFileURL()
-{
-}
-
 CImageFileURL CImageFileURL::FromFile(const std::string& filePath, std::string specialType)
 {
   if (URIUtils::IsProtocol(filePath, "image"))

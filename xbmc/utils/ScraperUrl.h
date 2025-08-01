@@ -42,7 +42,7 @@ public:
     int m_season = -1;
   };
 
-  CScraperUrl();
+  CScraperUrl() = default;
   explicit CScraperUrl(const std::string& strUrl);
   explicit CScraperUrl(const TiXmlElement* element);
   ~CScraperUrl();

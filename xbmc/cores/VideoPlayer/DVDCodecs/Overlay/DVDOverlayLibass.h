@@ -22,7 +22,7 @@ public:
   {
   }
 
-  CDVDOverlayLibass(const CDVDOverlayLibass& src) : CDVDOverlay(src), m_libass(src.m_libass) {}
+  CDVDOverlayLibass(const CDVDOverlayLibass& src) = default;
 
   ~CDVDOverlayLibass() override = default;
 

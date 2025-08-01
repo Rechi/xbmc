@@ -110,7 +110,7 @@ public:
 
 private:
   VideoCodecInitdata() = delete;
-  VideoCodecInitdata(const VideoCodecInitdata& session) : CStructHdl(session) {}
+  VideoCodecInitdata(const VideoCodecInitdata& session) = default;
   VideoCodecInitdata(const VIDEOCODEC_INITDATA* session) : CStructHdl(session) {}
   VideoCodecInitdata(VIDEOCODEC_INITDATA* session) : CStructHdl(session) {}
 };

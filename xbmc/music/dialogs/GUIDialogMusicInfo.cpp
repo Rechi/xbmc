@@ -329,10 +329,6 @@ CGUIDialogMusicInfo::CGUIDialogMusicInfo()
   m_loadType = KEEP_IN_MEMORY;
 }
 
-CGUIDialogMusicInfo::~CGUIDialogMusicInfo()
-{
-}
-
 bool CGUIDialogMusicInfo::OnMessage(CGUIMessage& message)
 {
   switch ( message.GetMessage() )

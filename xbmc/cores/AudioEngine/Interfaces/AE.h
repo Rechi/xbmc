@@ -297,7 +297,7 @@ private:
   bool m_finish = true;
 
 public:
-  IAEStreamDeleter() {}
+  IAEStreamDeleter() = default;
   explicit IAEStreamDeleter(IAE& iae) : m_iae(&iae) {}
   void setFinish(bool finish) { m_finish = finish; }
   void operator()(IAEStream* stream)
@@ -313,7 +313,7 @@ private:
   IAE* m_iae = nullptr;
 
 public:
-  IAESoundDeleter() {}
+  IAESoundDeleter() = default;
   explicit IAESoundDeleter(IAE& iae) : m_iae(&iae) {}
   void operator()(IAESound* sound)
   {

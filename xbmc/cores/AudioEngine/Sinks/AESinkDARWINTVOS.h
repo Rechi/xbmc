@@ -29,7 +29,7 @@ class CAESinkDARWINTVOS : public IAESink
 public:
   const char* GetName() override { return "DARWINTVOS"; }
 
-  CAESinkDARWINTVOS();
+  CAESinkDARWINTVOS() = default;
   ~CAESinkDARWINTVOS() override = default;
 
   static void Register();

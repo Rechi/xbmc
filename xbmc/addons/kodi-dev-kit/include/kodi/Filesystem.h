@@ -97,7 +97,7 @@ class ATTR_DLL_LOCAL FileStatus : public kodi::addon::CStructHdl<FileStatus, STA
 public:
   /*! \cond PRIVATE */
   FileStatus() { memset(m_cStructure, 0, sizeof(STAT_STRUCTURE)); }
-  FileStatus(const FileStatus& channel) : CStructHdl(channel) {}
+  FileStatus(const FileStatus& channel) = default;
   FileStatus(const STAT_STRUCTURE* channel) : CStructHdl(channel) {}
   FileStatus(STAT_STRUCTURE* channel) : CStructHdl(channel) {}
   /*! \endcond */
@@ -230,7 +230,7 @@ class ATTR_DLL_LOCAL CacheStatus
 public:
   /*! \cond PRIVATE */
   CacheStatus() { memset(m_cStructure, 0, sizeof(VFS_CACHE_STATUS_DATA)); }
-  CacheStatus(const CacheStatus& channel) : CStructHdl(channel) {}
+  CacheStatus(const CacheStatus& channel) = default;
   CacheStatus(const VFS_CACHE_STATUS_DATA* channel) : CStructHdl(channel) {}
   CacheStatus(VFS_CACHE_STATUS_DATA* channel) : CStructHdl(channel) {}
   /*! \endcond */

@@ -208,7 +208,7 @@ class ATTR_DLL_LOCAL InputstreamCapabilities
 public:
   /*! \cond PRIVATE */
   InputstreamCapabilities() = default;
-  InputstreamCapabilities(const InputstreamCapabilities& stream) : CStructHdl(stream) {}
+  InputstreamCapabilities(const InputstreamCapabilities& stream) = default;
   /*! \endcond */
 
   /// @defgroup cpp_kodi_addon_inputstream_Defs_Interface_InputstreamCapabilities_Help Value Help
@@ -265,7 +265,7 @@ class ATTR_DLL_LOCAL InputstreamMasteringMetadata
 public:
   /*! \cond PRIVATE */
   InputstreamMasteringMetadata() = default;
-  InputstreamMasteringMetadata(const InputstreamMasteringMetadata& stream) : CStructHdl(stream) {}
+  InputstreamMasteringMetadata(const InputstreamMasteringMetadata& stream) = default;
   InputstreamMasteringMetadata& operator=(const InputstreamMasteringMetadata&) = default;
 
   /*! \endcond */
@@ -430,10 +430,7 @@ class ATTR_DLL_LOCAL InputstreamContentlightMetadata
 public:
   /*! \cond PRIVATE */
   InputstreamContentlightMetadata() = default;
-  InputstreamContentlightMetadata(const InputstreamContentlightMetadata& stream)
-    : CStructHdl(stream)
-  {
-  }
+  InputstreamContentlightMetadata(const InputstreamContentlightMetadata& stream) = default;
   InputstreamContentlightMetadata& operator=(const InputstreamContentlightMetadata&) = default;
   /*! \endcond */
 
@@ -956,7 +953,7 @@ class ATTR_DLL_LOCAL InputstreamTimes : public CStructHdl<InputstreamTimes, INPU
 public:
   /*! \cond PRIVATE */
   InputstreamTimes() = default;
-  InputstreamTimes(const InputstreamTimes& stream) : CStructHdl(stream) {}
+  InputstreamTimes(const InputstreamTimes& stream) = default;
   /*! \endcond */
 
   /// @defgroup cpp_kodi_addon_inputstream_Defs_Interface_InputstreamTimes_Help Value Help

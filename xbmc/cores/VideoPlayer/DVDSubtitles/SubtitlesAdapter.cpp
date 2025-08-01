@@ -20,10 +20,6 @@ CSubtitlesAdapter::CSubtitlesAdapter() : m_libass(std::make_shared<CDVDSubtitles
   m_libass->Configure();
 }
 
-CSubtitlesAdapter::~CSubtitlesAdapter()
-{
-}
-
 bool CSubtitlesAdapter::Initialize()
 {
   m_libass->SetSubtitleType(ADAPTED);

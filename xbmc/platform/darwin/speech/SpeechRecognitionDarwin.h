@@ -18,7 +18,7 @@ class CSpeechRecognitionDarwin : public speech::ISpeechRecognition
 {
 public:
   CSpeechRecognitionDarwin();
-  ~CSpeechRecognitionDarwin() override;
+  ~CSpeechRecognitionDarwin() override = default;
 
   // ISpeechRecognition implementation
   void StartSpeechRecognition(

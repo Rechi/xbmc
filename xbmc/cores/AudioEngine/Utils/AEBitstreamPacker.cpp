@@ -28,9 +28,7 @@ CAEBitstreamPacker::CAEBitstreamPacker()
   Reset();
 }
 
-CAEBitstreamPacker::~CAEBitstreamPacker()
-{
-}
+CAEBitstreamPacker::~CAEBitstreamPacker() = default;
 
 void CAEBitstreamPacker::Pack(CAEStreamInfo &info, uint8_t* data, int size)
 {

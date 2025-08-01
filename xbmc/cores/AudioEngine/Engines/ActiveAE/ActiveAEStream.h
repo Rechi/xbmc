@@ -95,7 +95,7 @@ class CActiveAEStreamBuffers
 {
 public:
   CActiveAEStreamBuffers(const AEAudioFormat& inputFormat, const AEAudioFormat& outputFormat, AEQuality quality);
-  virtual ~CActiveAEStreamBuffers();
+  virtual ~CActiveAEStreamBuffers() = default;
   bool Create(
       unsigned int totaltime, bool remap, bool upmix, bool normalize = true, float sublevel = 0.0f);
   void SetExtraData(int profile, enum AVMatrixEncoding matrix_encoding, enum AVAudioServiceType audio_service_type);

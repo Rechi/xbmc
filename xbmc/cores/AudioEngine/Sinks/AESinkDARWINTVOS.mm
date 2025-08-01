@@ -612,10 +612,6 @@ static void EnumerateDevices(AEDeviceInfoList& list)
 /***************************************************************************************/
 AEDeviceInfoList CAESinkDARWINTVOS::m_devices;
 
-CAESinkDARWINTVOS::CAESinkDARWINTVOS()
-{
-}
-
 void CAESinkDARWINTVOS::Register()
 {
   AE::AESinkRegEntry reg;

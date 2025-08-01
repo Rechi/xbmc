@@ -41,10 +41,6 @@
 #endif
 #endif
 
-CTextureBundleXBT::CTextureBundleXBT()
-{
-}
-
 CTextureBundleXBT::CTextureBundleXBT(bool themeBundle) : m_themeBundle{themeBundle}
 {
 }

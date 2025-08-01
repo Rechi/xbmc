@@ -29,7 +29,7 @@ namespace XFILE
 class CTVOSFile : public IFile
 {
 public:
-  CTVOSFile() {}
+  CTVOSFile() = default;
   ~CTVOSFile();
 
   bool static WantsFile(const CURL& url);

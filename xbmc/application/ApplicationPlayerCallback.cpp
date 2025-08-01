@@ -41,10 +41,6 @@
 
 using namespace KODI;
 
-CApplicationPlayerCallback::CApplicationPlayerCallback()
-{
-}
-
 void CApplicationPlayerCallback::OnPlayBackEnded()
 {
   CLog::LogF(LOGDEBUG, "call");

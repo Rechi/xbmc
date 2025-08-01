@@ -16,8 +16,8 @@ class CCharArrayParser;
 class CWebVTTISOHandler : public CWebVTTHandler
 {
 public:
-  CWebVTTISOHandler(){};
-  ~CWebVTTISOHandler(){};
+  CWebVTTISOHandler() = default;
+  ~CWebVTTISOHandler() = default;
 
   /*!
   * \brief Decode a stream package of the WebVTT in MP4 encapsulated subtitles

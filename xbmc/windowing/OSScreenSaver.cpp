@@ -44,10 +44,6 @@ void COSScreenSaverManager::RemoveInhibitor()
   }
 }
 
-COSScreenSaverInhibitor::COSScreenSaverInhibitor() noexcept
-{
-}
-
 COSScreenSaverInhibitor::COSScreenSaverInhibitor(COSScreenSaverManager* manager)
 : m_active{true}, m_manager{manager}
 {

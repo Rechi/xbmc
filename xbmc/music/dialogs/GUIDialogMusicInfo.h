@@ -25,7 +25,7 @@ class CGUIDialogMusicInfo :
 {
 public:
   CGUIDialogMusicInfo();
-  ~CGUIDialogMusicInfo() override;
+  ~CGUIDialogMusicInfo() override = default;
   bool OnMessage(CGUIMessage& message) override;
   bool OnAction(const CAction &action) override;
   bool SetItem(CFileItem* item);
