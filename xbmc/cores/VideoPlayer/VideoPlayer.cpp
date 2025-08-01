@@ -1229,7 +1229,7 @@ bool CVideoPlayer::IsValidStream(const CCurrentStream& stream)
   if (source == STREAM_SOURCE_DEMUX_SUB)
   {
     CDemuxStream* st = m_pSubtitleDemuxer->GetStream(stream.demuxerId, stream.id);
-    if(st == NULL || st->disabled)
+    if (st == nullptr || st->disabled)
       return false;
     if(st->type != stream.type)
       return false;
@@ -1238,7 +1238,7 @@ bool CVideoPlayer::IsValidStream(const CCurrentStream& stream)
   if (source == STREAM_SOURCE_DEMUX)
   {
     CDemuxStream* st = m_pDemuxer->GetStream(stream.demuxerId, stream.id);
-    if(st == NULL || st->disabled)
+    if (st == nullptr || st->disabled)
       return false;
     if(st->type != stream.type)
       return false;
@@ -1256,7 +1256,7 @@ bool CVideoPlayer::IsValidStream(const CCurrentStream& stream)
   if (source == STREAM_SOURCE_VIDEOMUX)
   {
     CDemuxStream* st = m_pCCDemuxer->GetStream(stream.id);
-    if (st == NULL || st->disabled)
+    if (st == nullptr || st->disabled)
       return false;
     if (st->type != stream.type)
       return false;
@@ -1320,7 +1320,7 @@ bool CVideoPlayer::IsBetterStream(const CCurrentStream& current, CDemuxStream* s
 void CVideoPlayer::CheckBetterStream(CCurrentStream& current, CDemuxStream* stream)
 {
   IDVDStreamPlayer* player = GetStreamPlayer(current.player);
-  if (!IsValidStream(current) && (player == NULL || player->IsStalled()))
+  if (!IsValidStream(current) && (player == nullptr || player->IsStalled()))
     CloseStream(current, true);
 
   if (IsBetterStream(current, stream))
@@ -1596,7 +1596,7 @@ void CVideoPlayer::Process()
     }
 
     DemuxPacket* pPacket = NULL;
-    CDemuxStream *pStream = NULL;
+    CDemuxStream* pStream = nullptr;
     ReadPacket(pPacket, pStream);
     if (pPacket && !pStream)
     {
@@ -2634,7 +2634,7 @@ IDVDStreamPlayer* CVideoPlayer::GetStreamPlayer(unsigned int target)
     return m_VideoPlayerRadioRDS;
   if (target == VideoPlayer_ID3)
     return m_VideoPlayerAudioID3.get();
-  return NULL;
+  return nullptr;
 }
 
 void CVideoPlayer::SendPlayerMessage(std::shared_ptr<CDVDMsg> pMsg, unsigned int target)
@@ -3697,7 +3697,7 @@ bool CVideoPlayer::SupportsTempo() const
 
 bool CVideoPlayer::OpenStream(CCurrentStream& current, int64_t demuxerId, int iStream, int source, bool reset /*= true*/)
 {
-  CDemuxStream* stream = NULL;
+  CDemuxStream* stream = nullptr;
   CDVDStreamInfo hint;
 
   CLog::Log(LOGINFO, "Opening stream: {} source: {}", iStream, source);

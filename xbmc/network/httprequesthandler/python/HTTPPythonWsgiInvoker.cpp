@@ -88,16 +88,16 @@ const _inittab PythonModules[] =
 // clang-format on
 } // namespace
 
-CHTTPPythonWsgiInvoker::CHTTPPythonWsgiInvoker(ILanguageInvocationHandler* invocationHandler, HTTPPythonRequest* request)
-  : CHTTPPythonInvoker(invocationHandler, request),
-    m_wsgiResponse(NULL)
+CHTTPPythonWsgiInvoker::CHTTPPythonWsgiInvoker(ILanguageInvocationHandler* invocationHandler,
+                                               HTTPPythonRequest* request)
+  : CHTTPPythonInvoker(invocationHandler, request)
 {
 }
 
 CHTTPPythonWsgiInvoker::~CHTTPPythonWsgiInvoker()
 {
   delete m_wsgiResponse;
-  m_wsgiResponse = NULL;
+  m_wsgiResponse = nullptr;
 }
 
 void CHTTPPythonWsgiInvoker::GlobalInitializeModules()
@@ -108,7 +108,7 @@ void CHTTPPythonWsgiInvoker::GlobalInitializeModules()
 
 HTTPPythonRequest* CHTTPPythonWsgiInvoker::GetRequest()
 {
-  if (m_request == NULL || m_wsgiResponse == NULL)
+  if (m_request == NULL || m_wsgiResponse == nullptr)
     return NULL;
 
   if (m_internalError)
@@ -185,7 +185,7 @@ void CHTTPPythonWsgiInvoker::executeScript(FILE* fp, const std::string& script, 
 
   // prepare the WsgiResponse object
   m_wsgiResponse = new XBMCAddon::xbmcwsgi::WsgiResponse();
-  if (m_wsgiResponse == NULL)
+  if (m_wsgiResponse == nullptr)
   {
     logger->error("failed to create WsgiResponse object");
     goto cleanup;

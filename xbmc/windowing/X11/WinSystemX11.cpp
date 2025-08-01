@@ -139,7 +139,7 @@ bool CWinSystemX11::DestroyWindow()
 bool CWinSystemX11::ResizeWindow(int newWidth, int newHeight, int newLeft, int newTop)
 {
   m_userOutput = CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_VIDEOSCREEN_MONITOR);
-  XOutput *out = NULL;
+  XOutput* out = nullptr;
   if (m_userOutput.compare("Default") != 0)
   {
     out = g_xrandr.GetOutput(m_userOutput);
@@ -148,7 +148,7 @@ bool CWinSystemX11::ResizeWindow(int newWidth, int newHeight, int newLeft, int n
       XMode mode = g_xrandr.GetCurrentMode(m_userOutput);
       if (!mode.isCurrent)
       {
-        out = NULL;
+        out = nullptr;
       }
     }
   }
@@ -177,7 +177,7 @@ bool CWinSystemX11::ResizeWindow(int newWidth, int newHeight, int newLeft, int n
 void CWinSystemX11::FinishWindowResize(int newWidth, int newHeight)
 {
   m_userOutput = CServiceBroker::GetSettingsComponent()->GetSettings()->GetString(CSettings::SETTING_VIDEOSCREEN_MONITOR);
-  XOutput *out = NULL;
+  XOutput* out = nullptr;
   if (m_userOutput.compare("Default") != 0)
   {
     out = g_xrandr.GetOutput(m_userOutput);
@@ -186,7 +186,7 @@ void CWinSystemX11::FinishWindowResize(int newWidth, int newHeight)
       XMode mode = g_xrandr.GetCurrentMode(m_userOutput);
       if (!mode.isCurrent)
       {
-        out = NULL;
+        out = nullptr;
       }
     }
   }
@@ -316,7 +316,7 @@ void CWinSystemX11::UpdateResolutions()
 
   if(g_xrandr.Query(true, !switchOnOff))
   {
-    XOutput *out = NULL;
+    XOutput* out = nullptr;
     if (m_userOutput.compare("Default") != 0)
     {
       out = g_xrandr.GetOutput(m_userOutput);
@@ -325,7 +325,7 @@ void CWinSystemX11::UpdateResolutions()
         XMode mode = g_xrandr.GetCurrentMode(m_userOutput);
         if (!mode.isCurrent && !switchOnOff)
         {
-          out = NULL;
+          out = nullptr;
         }
       }
     }
@@ -375,7 +375,7 @@ void CWinSystemX11::UpdateResolutions()
   CLog::Log(LOGINFO, "Available videomodes (xrandr):");
 
   XOutput *out = g_xrandr.GetOutput(m_userOutput);
-  if (out != NULL)
+  if (out != nullptr)
   {
     CLog::Log(LOGINFO, "Output '{}' has {} modes", out->name, out->modes.size());
 

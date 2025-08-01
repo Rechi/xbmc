@@ -28,19 +28,19 @@ using namespace XFILE;
 
 CScraperParser::CScraperParser()
 {
-  m_pRootElement = NULL;
-  m_document = NULL;
+  m_pRootElement = nullptr;
+  m_document = nullptr;
   m_SearchStringEncoding = "UTF-8";
-  m_scraper = NULL;
+  m_scraper = nullptr;
   m_isNoop = true;
 }
 
 CScraperParser::CScraperParser(const CScraperParser& parser)
 {
-  m_pRootElement = NULL;
-  m_document = NULL;
+  m_pRootElement = nullptr;
+  m_document = nullptr;
   m_SearchStringEncoding = "UTF-8";
-  m_scraper = NULL;
+  m_scraper = nullptr;
   m_isNoop = true;
   *this = parser;
 }
@@ -57,7 +57,7 @@ CScraperParser &CScraperParser::operator=(const CScraperParser &parser)
       LoadFromXML();
     }
     else
-      m_scraper = NULL;
+      m_scraper = nullptr;
   }
   return *this;
 }
@@ -69,10 +69,10 @@ CScraperParser::~CScraperParser()
 
 void CScraperParser::Clear()
 {
-  m_pRootElement = NULL;
+  m_pRootElement = nullptr;
   delete m_document;
 
-  m_document = NULL;
+  m_document = nullptr;
   m_strFile.clear();
 }
 
@@ -91,7 +91,7 @@ bool CScraperParser::Load(const std::string& strXMLFile)
     return LoadFromXML();
 
   delete m_document;
-  m_document = NULL;
+  m_document = nullptr;
   return false;
 }
 
@@ -131,8 +131,8 @@ bool CScraperParser::LoadFromXML()
   }
 
   delete m_document;
-  m_document = NULL;
-  m_pRootElement = NULL;
+  m_document = nullptr;
+  m_pRootElement = nullptr;
   return false;
 }
 
@@ -359,7 +359,7 @@ TiXmlElement *FirstChildScraperElement(TiXmlElement *element)
     if (child->ValueStr() == "RegExp")
       return child;
   }
-  return NULL;
+  return nullptr;
 }
 
 TiXmlElement *NextSiblingScraperElement(TiXmlElement *element)
@@ -373,7 +373,7 @@ TiXmlElement *NextSiblingScraperElement(TiXmlElement *element)
     if (next->ValueStr() == "RegExp")
       return next;
   }
-  return NULL;
+  return nullptr;
 }
 
 void CScraperParser::ParseNext(TiXmlElement* element)
@@ -451,7 +451,7 @@ const std::string CScraperParser::Parse(const std::string& strTag,
                                        CScraper* scraper)
 {
   TiXmlElement* pChildElement = m_pRootElement->FirstChildElement(strTag.c_str());
-  if(pChildElement == NULL)
+  if (pChildElement == nullptr)
   {
     CLog::Log(LOGERROR, "{}: Could not find scraper function {}", __FUNCTION__, strTag);
     return "";

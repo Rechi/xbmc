@@ -1243,7 +1243,7 @@ CGUIControl* CGUIControlFactory::Create(int parentID,
   // Instantiate a new control using the properties gathered above
   //
 
-  CGUIControl* control = NULL;
+  CGUIControl* control = nullptr;
   switch (type)
   {
     case CGUIControl::GUICONTROL_GROUP:

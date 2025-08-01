@@ -20,7 +20,7 @@
 
 CDirtyRegionTracker::CDirtyRegionTracker()
 {
-  m_solver = NULL;
+  m_solver = nullptr;
 }
 
 CDirtyRegionTracker::~CDirtyRegionTracker()

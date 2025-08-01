@@ -275,7 +275,7 @@ XFILE::Pipe *PipesManager::CreatePipe(const std::string &name, int nMaxPipeSize)
 
   std::unique_lock lock(m_lock);
   if (m_pipes.contains(pName))
-    return NULL;
+    return nullptr;
 
   XFILE::Pipe *p = new XFILE::Pipe(pName, nMaxPipeSize);
   m_pipes[pName] = p;
@@ -286,7 +286,7 @@ XFILE::Pipe *PipesManager::OpenPipe(const std::string &name)
 {
   std::unique_lock lock(m_lock);
   if (!m_pipes.contains(name))
-    return NULL;
+    return nullptr;
   m_pipes[name]->AddRef();
   return m_pipes[name];
 }

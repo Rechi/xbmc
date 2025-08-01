@@ -47,7 +47,7 @@ public:
   static bool ShowAndGetFile(const std::string &directory, const std::string &mask, const std::string &heading, std::string &path, bool useThumbs = false, bool useFileDirectories = false, bool singleList = false);
   static bool ShowAndGetSource(std::string& path,
                                bool allowNetworkShares,
-                               std::vector<CMediaSource>* additionalShare = NULL,
+                               std::vector<CMediaSource>* additionalShare = nullptr,
                                const std::string& strType = "");
   static bool ShowAndGetFileList(const std::vector<CMediaSource>& shares,
                                  const std::string& mask,

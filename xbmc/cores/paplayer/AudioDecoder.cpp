@@ -27,7 +27,7 @@ using namespace KODI;
 
 CAudioDecoder::CAudioDecoder()
 {
-  m_codec = NULL;
+  m_codec = nullptr;
   m_rawBuffer = nullptr;
 
   m_eof = false;
@@ -57,7 +57,7 @@ void CAudioDecoder::Destroy()
 
   if ( m_codec )
     delete m_codec;
-  m_codec = NULL;
+  m_codec = nullptr;
 
   m_canPlay = false;
 }

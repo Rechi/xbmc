@@ -68,7 +68,7 @@ CActiveAEBufferPool::~CActiveAEBufferPool()
 
 CSampleBuffer* CActiveAEBufferPool::GetFreeBuffer()
 {
-  CSampleBuffer* buf = NULL;
+  CSampleBuffer* buf = nullptr;
 
   if (!m_freeSamples.empty())
   {
@@ -330,7 +330,7 @@ bool CActiveAEBufferPoolResample::ResampleBuffers(int64_t timestamp)
         else
           m_outputSamples.push_back(m_procSample);
 
-        m_procSample = NULL;
+        m_procSample = nullptr;
         if (m_changeResampler)
           ChangeResampler();
       }
@@ -338,7 +338,7 @@ bool CActiveAEBufferPoolResample::ResampleBuffers(int64_t timestamp)
       else if (!m_fillPackets || (m_procSample->pkt->nb_samples == m_procSample->pkt->max_nb_samples))
       {
         m_outputSamples.push_back(m_procSample);
-        m_procSample = NULL;
+        m_procSample = nullptr;
       }
 
       if (in)
@@ -400,7 +400,7 @@ void CActiveAEBufferPoolResample::Flush()
   if (m_procSample)
   {
     m_procSample->Return();
-    m_procSample = NULL;
+    m_procSample = nullptr;
   }
   while (!m_inputSamples.empty())
   {

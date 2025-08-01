@@ -77,7 +77,7 @@ protected:
     ConvolutionFilterShader(ESCALINGMETHOD method,
                             bool stretch,
                             bool gammaCorrection,
-                            GLSLOutput* output = NULL);
+                            GLSLOutput* output = nullptr);
     ~ConvolutionFilterShader() override;
     void OnCompiledAndLinked() override;
     bool OnEnabled() override;

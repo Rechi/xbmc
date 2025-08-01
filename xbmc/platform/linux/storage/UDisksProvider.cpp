@@ -235,7 +235,7 @@ void CUDisksProvider::Initialize()
   CLog::Log(LOGDEBUG, "UDisks: Querying available devices");
   std::vector<std::string> devices = EnumerateDisks();
   for (unsigned int i = 0; i < devices.size(); i++)
-    DeviceAdded(devices[i].c_str(), NULL);
+    DeviceAdded(devices[i].c_str(), nullptr);
 }
 
 bool CUDisksProvider::Eject(const std::string& mountpath)
@@ -300,8 +300,8 @@ void CUDisksProvider::DeviceAdded(const char *object, IStorageEventsCallback *ca
     delete m_AvailableDevices[object];
   }
 
-  CUDiskDevice *device = NULL;
-    device = new CUDiskDevice(object);
+  CUDiskDevice* device = nullptr;
+  device = new CUDiskDevice(object);
   m_AvailableDevices[object] = device;
 
   // optical drives should be always mounted by default unless explicitly disabled by the user
@@ -342,7 +342,7 @@ void CUDisksProvider::DeviceChanged(const char *object, IStorageEventsCallback *
   CLog::Log(LOGDEBUG, LOGDBUS, "UDisks: DeviceChanged ({})", object);
 
   CUDiskDevice *device = m_AvailableDevices[object];
-  if (device == NULL)
+  if (device == nullptr)
   {
     CLog::Log(LOGWARNING, "UDisks: Inconsistency found! DeviceChanged on an unindexed disk");
     DeviceAdded(object, callback);

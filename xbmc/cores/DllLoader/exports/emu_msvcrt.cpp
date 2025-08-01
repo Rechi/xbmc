@@ -567,7 +567,7 @@ extern "C"
   int dll_read(int fd, void* buffer, unsigned int uiSize)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
       errno = 0;
       const ssize_t ret = pFile->Read(buffer, uiSize);
@@ -598,7 +598,7 @@ extern "C"
   int dll_write(int fd, const void* buffer, unsigned int uiSize)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
       errno = 0;
       const ssize_t ret = pFile->Write(buffer, uiSize);
@@ -630,7 +630,7 @@ extern "C"
   int dll_fstat64(int fd, struct __stat64 *buf)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
-    if (pFile != NULL)
+    if (pFile != nullptr)
       return pFile->Stat(buf);
     else if (IS_STD_DESCRIPTOR(fd))
 #if defined(TARGET_WINDOWS)
@@ -645,7 +645,7 @@ extern "C"
   int dll_close(int fd)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
       g_emuFileWrapper.UnRegisterFileObjectByDescriptor(fd);
 
@@ -666,7 +666,7 @@ extern "C"
   __off64_t dll_lseeki64(int fd, __off64_t lPos, int iWhence)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
       lPos = pFile->Seek(lPos, iWhence);
       return lPos;
@@ -1062,7 +1062,7 @@ extern "C"
   char* dll_fgets(char* pszString, int num ,FILE * stream)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
       if (pFile->GetPosition() < pFile->GetLength())
       {
@@ -1081,7 +1081,7 @@ extern "C"
   int dll_feof(FILE * stream)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
       if (pFile->GetPosition() < pFile->GetLength()) return 0;
       else return 1;
@@ -1096,7 +1096,7 @@ extern "C"
       return 0;
 
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
       size_t read = 0;
       const size_t bufSize = size * count;
@@ -1290,7 +1290,7 @@ extern "C"
   off64_t dll_ftell64(FILE *stream)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
        return (off64_t)pFile->GetPosition();
     }
@@ -1301,7 +1301,7 @@ extern "C"
   long dll_tell(int fd)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
        return (long)pFile->GetPosition();
     }
@@ -1322,7 +1322,7 @@ extern "C"
   long long dll_telli64(int fd)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
        return static_cast<long long>(pFile->GetPosition());
     }
@@ -1366,7 +1366,7 @@ extern "C"
     else
     {
       CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
-      if (pFile != NULL)
+      if (pFile != nullptr)
       {
         size_t written = 0;
         const size_t bufSize = size * count;
@@ -1387,7 +1387,7 @@ extern "C"
   int dll_fflush(FILE* stream)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
       pFile->Flush();
       return 0;
@@ -1400,7 +1400,7 @@ extern "C"
   int dll_ferror(FILE* stream)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
       // unimplemented
       return 0;
@@ -1436,7 +1436,7 @@ extern "C"
     else
     {
       CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
-      if (pFile != NULL)
+      if (pFile != nullptr)
       {
         int len = strlen(tmp);
         // replace all '\n' occurrences with '\r\n'...
@@ -1505,7 +1505,7 @@ extern "C"
   int dll_fgetpos64(FILE *stream, fpos64_t *pos)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
 #if !defined(TARGET_POSIX) || defined(TARGET_DARWIN) || defined(TARGET_FREEBSD) || defined(TARGET_ANDROID)
       *pos = pFile->GetPosition();
@@ -1695,7 +1695,7 @@ extern "C"
   int dll_fstat(int fd, struct stat* buffer)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
       struct __stat64 tStat;
       if (pFile->Stat(&tStat) == 0)
@@ -1717,7 +1717,7 @@ extern "C"
   int dll_fstati64(int fd, struct _stati64 *buffer)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
       CLog::Log(LOGINFO, "Stating open file");
 
@@ -1964,7 +1964,7 @@ extern "C"
   int dll__commit(int fd)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
       pFile->Flush();
       return 0;

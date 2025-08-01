@@ -65,7 +65,7 @@ using namespace std::chrono_literals;
 #define AIRPLAY_STATUS_NO_RESPONSE_NEEDED  1000
 
 CCriticalSection CAirPlayServer::ServerInstanceLock;
-CAirPlayServer *CAirPlayServer::ServerInstance = NULL;
+CAirPlayServer* CAirPlayServer::ServerInstance = nullptr;
 int CAirPlayServer::m_isPlaying = 0;
 
 #define EVENT_NONE     -1
@@ -263,14 +263,14 @@ void CAirPlayServer::StopServer(bool bWait)
     if (bWait)
     {
       delete ServerInstance;
-      ServerInstance = NULL;
+      ServerInstance = nullptr;
     }
   }
 }
 
 bool CAirPlayServer::IsRunning()
 {
-  if (ServerInstance == NULL)
+  if (ServerInstance == nullptr)
     return false;
 
   return static_cast<CThread*>(ServerInstance)->IsRunning();
@@ -573,7 +573,7 @@ void CAirPlayServer::CTCPClient::Disconnect()
     close(m_socket);
     m_socket = INVALID_SOCKET;
     delete m_httpParser;
-    m_httpParser = NULL;
+    m_httpParser = nullptr;
   }
 }
 

@@ -247,7 +247,7 @@ public:
   virtual void ResetAnimations();
 
   // push information updates
-  virtual void UpdateInfo(const CGUIListItem* item = NULL) {}
+  virtual void UpdateInfo(const CGUIListItem* item = nullptr) {}
   virtual void SetPushUpdates(bool pushUpdates) { m_pushedUpdates = pushUpdates; }
 
   virtual bool IsGroup() const { return false; }

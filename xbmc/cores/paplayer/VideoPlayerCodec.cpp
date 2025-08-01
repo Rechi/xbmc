@@ -76,7 +76,7 @@ bool VideoPlayerCodec::Init(const CFileItem &file, unsigned int filecache)
   CFileItem fileitem(file);
   fileitem.SetMimeType(m_strContentType);
   fileitem.SetMimeTypeForInternetFile();
-  m_pInputStream = CDVDFactoryInputStream::CreateInputStream(NULL, fileitem);
+  m_pInputStream = CDVDFactoryInputStream::CreateInputStream(nullptr, fileitem);
   if (!m_pInputStream)
   {
     CLog::Log(LOGERROR, "{}: Error creating input stream for {}", __FUNCTION__, file.GetDynPath());
@@ -94,7 +94,7 @@ bool VideoPlayerCodec::Init(const CFileItem &file, unsigned int filecache)
     return false;
   }
 
-  m_pDemuxer = NULL;
+  m_pDemuxer = nullptr;
 
   try
   {
@@ -114,12 +114,12 @@ bool VideoPlayerCodec::Init(const CFileItem &file, unsigned int filecache)
     if (m_pDemuxer)
     {
       delete m_pDemuxer;
-      m_pDemuxer = NULL;
+      m_pDemuxer = nullptr;
     }
     return false;
   }
 
-  CDemuxStream* pStream = NULL;
+  CDemuxStream* pStream = nullptr;
   m_nAudioStream = -1;
   int64_t demuxerId = -1;
   for (auto stream : m_pDemuxer->GetStreams())
@@ -137,7 +137,7 @@ bool VideoPlayerCodec::Init(const CFileItem &file, unsigned int filecache)
   {
     CLog::Log(LOGERROR, "{}: Could not find audio stream", __FUNCTION__);
     delete m_pDemuxer;
-    m_pDemuxer = NULL;
+    m_pDemuxer = nullptr;
     if (m_pInputStream.use_count() > 1)
       throw std::runtime_error("m_pInputStream reference count is greater than 1");
     m_pInputStream.reset();
@@ -153,7 +153,7 @@ bool VideoPlayerCodec::Init(const CFileItem &file, unsigned int filecache)
   {
     CLog::Log(LOGERROR, "{}: Could not create audio codec", __FUNCTION__);
     delete m_pDemuxer;
-    m_pDemuxer = NULL;
+    m_pDemuxer = nullptr;
     if (m_pInputStream.use_count() > 1)
       throw std::runtime_error("m_pInputStream reference count is greater than 1");
     m_pInputStream.reset();
@@ -258,7 +258,7 @@ bool VideoPlayerCodec::Init(const CFileItem &file, unsigned int filecache)
     srcConfig.bits_per_sample = CAEUtil::DataFormatToUsedBits(m_srcFormat.m_dataFormat);
     srcConfig.dither_bits = CAEUtil::DataFormatToDitherBits(m_srcFormat.m_dataFormat);
 
-    m_pResampler->Init(dstConfig, srcConfig, false, false, M_SQRT1_2, NULL, AE_QUALITY_UNKNOWN,
+    m_pResampler->Init(dstConfig, srcConfig, false, false, M_SQRT1_2, nullptr, AE_QUALITY_UNKNOWN,
                        false, 0.0f);
 
     m_planes = AE_IS_PLANAR(m_srcFormat.m_dataFormat) ? m_channels : 1;
@@ -275,10 +275,10 @@ bool VideoPlayerCodec::Init(const CFileItem &file, unsigned int filecache)
 
 void VideoPlayerCodec::DeInit()
 {
-  if (m_pDemuxer != NULL)
+  if (m_pDemuxer != nullptr)
   {
     delete m_pDemuxer;
-    m_pDemuxer = NULL;
+    m_pDemuxer = nullptr;
   }
 
   if (m_pInputStream.use_count() > 1)

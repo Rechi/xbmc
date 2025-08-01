@@ -295,7 +295,7 @@ bool CFileOperations::FillFileItem(
     const std::string& media /* = "" */,
     const CVariant& parameterObject /* = CVariant(CVariant::VariantTypeArray) */)
 {
-  if (originalItem.get() == NULL)
+  if (originalItem.get() == nullptr)
     return false;
 
   // copy all the available details

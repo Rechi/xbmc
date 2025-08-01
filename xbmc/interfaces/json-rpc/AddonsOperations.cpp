@@ -133,7 +133,7 @@ JSONRPC_STATUS CAddonsOperations::GetAddonDetails(const std::string &method, ITr
   std::string id = parameterObject["addonid"].asString();
   AddonPtr addon;
   if (!CServiceBroker::GetAddonMgr().GetAddon(id, addon, OnlyEnabled::CHOICE_NO) ||
-      addon.get() == NULL || addon->Type() <= AddonType::UNKNOWN ||
+      addon.get() == nullptr || addon->Type() <= AddonType::UNKNOWN ||
       addon->Type() >= AddonType::MAX_TYPES)
     return InvalidParams;
 
@@ -178,7 +178,7 @@ JSONRPC_STATUS CAddonsOperations::ExecuteAddon(const std::string &method, ITrans
   std::string id = parameterObject["addonid"].asString();
   AddonPtr addon;
   if (!CServiceBroker::GetAddonMgr().GetAddon(id, addon, OnlyEnabled::CHOICE_YES) ||
-      addon.get() == NULL || addon->Type() < AddonType::VISUALIZATION ||
+      addon.get() == nullptr || addon->Type() < AddonType::VISUALIZATION ||
       addon->Type() >= AddonType::MAX_TYPES)
     return InvalidParams;
 
@@ -272,7 +272,7 @@ void CAddonsOperations::FillDetails(const std::shared_ptr<ADDON::IAddon>& addon,
                                     CVariant& result,
                                     bool append)
 {
-  if (addon.get() == NULL)
+  if (addon.get() == nullptr)
     return;
 
   CVariant addonInfo = Serialize(addon);

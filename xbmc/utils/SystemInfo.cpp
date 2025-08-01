@@ -494,7 +494,7 @@ CSysInfo::~CSysInfo() = default;
 
 bool CSysInfo::Load(const TiXmlNode *settings)
 {
-  if (settings == NULL)
+  if (settings == nullptr)
     return false;
 
   const TiXmlElement *pElement = settings->FirstChildElement("general");
@@ -506,15 +506,15 @@ bool CSysInfo::Load(const TiXmlNode *settings)
 
 bool CSysInfo::Save(TiXmlNode *settings) const
 {
-  if (settings == NULL)
+  if (settings == nullptr)
     return false;
 
   TiXmlNode *generalNode = settings->FirstChild("general");
-  if (generalNode == NULL)
+  if (generalNode == nullptr)
   {
     TiXmlElement generalNodeNew("general");
     generalNode = settings->InsertEndChild(generalNodeNew);
-    if (generalNode == NULL)
+    if (generalNode == nullptr)
       return false;
   }
   XMLUtils::SetInt(generalNode, "systemtotaluptime", m_iSystemTimeTotalUp);

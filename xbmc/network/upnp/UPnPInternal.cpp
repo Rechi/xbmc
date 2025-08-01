@@ -96,7 +96,7 @@ constexpr NPT_HttpFileRequestHandler_DefaultFileTypeMapEntry kodiPlatinumMimeTyp
 +---------------------------------------------------------------------*/
 EClientQuirks GetClientQuirks(const PLT_HttpRequestContext* context)
 {
-  if (context == NULL)
+  if (context == nullptr)
     return ECLIENTQUIRKS_NONE;
 
   unsigned int quirks = 0;
@@ -127,7 +127,7 @@ EClientQuirks GetClientQuirks(const PLT_HttpRequestContext* context)
 +---------------------------------------------------------------------*/
 EMediaControllerQuirks GetMediaControllerQuirks(const PLT_DeviceData* device)
 {
-  if (device == NULL)
+  if (device == nullptr)
     return EMEDIACONTROLLERQUIRKS_NONE;
 
   unsigned int quirks = 0;
@@ -484,7 +484,7 @@ PLT_MediaObject* BuildObject(CFileItem& item,
   static Logger logger = CServiceBroker::GetLogging().GetLogger("UPNP::BuildObject");
 
   PLT_MediaItemResource resource;
-  PLT_MediaObject* object = NULL;
+  PLT_MediaObject* object = nullptr;
   std::string thumb;
 
   logger->debug("Building didl for plain object '{}' (encoded value: '{}')", item.GetPath(),
@@ -937,7 +937,7 @@ PLT_MediaObject* BuildObject(CFileItem& item,
 
 failure:
   delete object;
-  return NULL;
+  return nullptr;
 }
 
 /*----------------------------------------------------------------------
@@ -1170,7 +1170,7 @@ std::shared_ptr<CFileItem> BuildObject(PLT_MediaObject* entry,
     if (ObjectClass.StartsWith("object.container.album.videoalbum"))
     {
       pItem->SetLabelPreformatted(false);
-      UPNP::PopulateTagFromObject(*pItem->GetVideoInfoTag(), *entry, NULL, upnp_service);
+      UPNP::PopulateTagFromObject(*pItem->GetVideoInfoTag(), *entry, nullptr, upnp_service);
     }
     else if (ObjectClass.StartsWith("object.container.album.photoalbum"))
     {
@@ -1179,7 +1179,7 @@ std::shared_ptr<CFileItem> BuildObject(PLT_MediaObject* entry,
     else if (ObjectClass.StartsWith("object.container.album"))
     {
       pItem->SetLabelPreformatted(false);
-      UPNP::PopulateTagFromObject(*pItem->GetMusicInfoTag(), *entry, NULL, upnp_service);
+      UPNP::PopulateTagFromObject(*pItem->GetMusicInfoTag(), *entry, nullptr, upnp_service);
     }
   }
   else
@@ -1207,7 +1207,7 @@ std::shared_ptr<CFileItem> BuildObject(PLT_MediaObject* entry,
     }
 
     // attempt to find a valid resource (may be multiple)
-    PLT_MediaItemResource resource, *res = NULL;
+    PLT_MediaItemResource resource, *res = nullptr;
     if (NPT_SUCCEEDED(
             NPT_ContainerFind(entry->m_Resources, CResourceFinder("http-get", content), resource)))
     {
@@ -1401,7 +1401,7 @@ bool GetResource(const PLT_MediaObject* entry, CFileItem& item)
 std::shared_ptr<CFileItem> GetFileItem(const NPT_String& uri, const NPT_String& meta)
 {
   PLT_MediaObjectListReference list;
-  PLT_MediaObject* object = NULL;
+  PLT_MediaObject* object = nullptr;
   CFileItemPtr item;
 
   if (NPT_SUCCEEDED(PLT_Didl::FromDidl(meta, list)))

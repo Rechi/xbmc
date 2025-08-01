@@ -67,7 +67,7 @@ using namespace std::chrono_literals;
 CPeripheralCecAdapter::CPeripheralCecAdapter(CPeripherals& manager,
                                              const PeripheralScanResult& scanResult,
                                              CPeripheralBus* bus)
-  : CPeripheralHID(manager, scanResult, bus), CThread("CECAdapter"), m_cecAdapter(NULL)
+  : CPeripheralHID(manager, scanResult, bus), CThread("CECAdapter")
 {
   ResetMembers();
   m_features.push_back(FEATURE_CEC);
@@ -88,7 +88,7 @@ CPeripheralCecAdapter::~CPeripheralCecAdapter()
   if (m_cecAdapter)
   {
     CECDestroy(m_cecAdapter);
-    m_cecAdapter = NULL;
+    m_cecAdapter = nullptr;
   }
 }
 
@@ -96,7 +96,7 @@ void CPeripheralCecAdapter::ResetMembers()
 {
   if (m_cecAdapter)
     CECDestroy(m_cecAdapter);
-  m_cecAdapter = NULL;
+  m_cecAdapter = nullptr;
   m_bStarted = false;
   m_bHasButton = false;
   m_bIsReady = false;
@@ -118,7 +118,7 @@ void CPeripheralCecAdapter::ResetMembers()
   m_bActiveSourceBeforeStandby = false;
   m_bOnPlayReceived = false;
   m_bPlaybackPaused = false;
-  m_queryThread = NULL;
+  m_queryThread = nullptr;
   m_bPowerOnScreensaver = false;
   m_bUseTVMenuLanguage = false;
   m_bSendInactiveSource = false;
@@ -268,7 +268,7 @@ bool CPeripheralCecAdapter::InitialiseFeature(const PeripheralFeature feature)
       m_bError = true;
       if (m_cecAdapter)
         CECDestroy(m_cecAdapter);
-      m_cecAdapter = NULL;
+      m_cecAdapter = nullptr;
 
       m_features.clear();
       return false;
@@ -1222,7 +1222,7 @@ void CPeripheralCecAdapter::CecSourceActivated(void* cbParam,
         bShowingSlideshow
             ? CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIWindowSlideShow>(
                   WINDOW_SLIDESHOW)
-            : NULL;
+            : nullptr;
 
     const auto& components = CServiceBroker::GetAppComponents();
     const auto appPlayer = components.GetComponent<CApplicationPlayer>();

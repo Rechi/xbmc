@@ -91,8 +91,8 @@ protected:
                             std::vector<StringSettingOption>& list,
                             std::string& current);
 
-  CDbUrl* m_dbUrl;
+  CDbUrl* m_dbUrl = nullptr;
   std::string m_mediaType;
-  KODI::PLAYLIST::CSmartPlaylist* m_filter;
+  KODI::PLAYLIST::CSmartPlaylist* m_filter = nullptr;
   std::map<std::string, Filter> m_filters;
 };

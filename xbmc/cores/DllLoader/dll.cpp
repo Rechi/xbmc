@@ -41,7 +41,7 @@ extern "C" HMODULE __stdcall dllLoadLibraryExtended(const char* lib_file, const 
 {
   char libname[MAX_PATH + 1] = {};
   char libpath[MAX_PATH + 1] = {};
-  LibraryLoader* dll = NULL;
+  LibraryLoader* dll = nullptr;
 
   /* extract name */
   const char* p = strrchr(lib_file, PATH_SEPARATOR_CHAR);

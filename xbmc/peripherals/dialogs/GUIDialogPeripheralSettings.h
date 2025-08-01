@@ -54,7 +54,7 @@ protected:
 
   // Dialog state
   CPeripherals* m_manager{nullptr};
-  CFileItem* m_item;
+  CFileItem* m_item = nullptr;
   bool m_initialising = false;
   std::map<std::string, std::shared_ptr<CSetting>> m_settingsMap;
 };

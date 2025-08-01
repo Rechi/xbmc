@@ -104,8 +104,8 @@ protected:
     XbmcThreads::CEventGroup group{&event, &m_StopEvent};
     const CEvent* result =
         duration < std::chrono::milliseconds::zero() ? group.wait() : group.wait(duration);
-    return  result == &event ? WAIT_SIGNALED :
-      (result == NULL ? WAIT_TIMEDOUT : WAIT_INTERRUPTED);
+    return result == &event ? WAIT_SIGNALED
+                            : (result == nullptr ? WAIT_TIMEDOUT : WAIT_INTERRUPTED);
   }
 
 private:

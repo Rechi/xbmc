@@ -77,10 +77,7 @@ namespace XBMCAddon
 
     CGUIWindow* ProxyExistingWindowInterceptor::get() { XBMC_TRACE; return cguiwindow; }
 
-    Window::Window(bool discrim):
-      window(NULL),
-      m_actionEvent(true),
-      canPulse(true), existingWindow(false)
+    Window::Window(bool discrim) : m_actionEvent(true), canPulse(true), existingWindow(false)
     {
       XBMC_TRACE;
     }
@@ -88,9 +85,7 @@ namespace XBMCAddon
     /**
      * This just creates a default window.
      */
-    Window::Window(int existingWindowId) :
-      window(NULL),
-      m_actionEvent(true)
+    Window::Window(int existingWindowId) : m_actionEvent(true)
     {
       XBMC_TRACE;
       SingleLockWithDelayGuard gslock(CServiceBroker::GetWinSystem()->GetGfxContext(),languageHook);
@@ -179,7 +174,7 @@ namespace XBMCAddon
         {
           AddonClass::Ref<Control> pControl = *it;
           // initialize control to zero
-          pControl->pGUIControl = NULL;
+          pControl->pGUIControl = nullptr;
           pControl->iControlId = 0;
           pControl->iParentId = 0;
           ++it;
@@ -223,7 +218,9 @@ namespace XBMCAddon
       if (CServiceBroker::GetGUI()->GetWindowManager().GetWindow(WINDOW_PYTHON_END))
         throw WindowException("maximum number of windows reached");
 
-      while(id < WINDOW_PYTHON_END && CServiceBroker::GetGUI()->GetWindowManager().GetWindow(id) != NULL) id++;
+      while (id < WINDOW_PYTHON_END &&
+             CServiceBroker::GetGUI()->GetWindowManager().GetWindow(id) != nullptr)
+        id++;
       return id;
     }
 
@@ -270,7 +267,7 @@ namespace XBMCAddon
       // allocate a new control with a new reference
       CLabelInfo li;
 
-      Control* pControl = NULL;
+      Control* pControl = nullptr;
 
       //! @todo Yuck! Should probably be done with a Factory pattern
       switch(pGUIControl->GetControlType())
@@ -385,8 +382,9 @@ namespace XBMCAddon
     {
       XBMC_TRACE;
       // DO NOT MAKE THIS A DELAYED CALL!!!!
-      bool ret = languageHook == NULL ? m_actionEvent.Wait(std::chrono::milliseconds(milliseconds))
-                                      : languageHook->WaitForEvent(m_actionEvent, milliseconds);
+      bool ret = languageHook == nullptr
+                     ? m_actionEvent.Wait(std::chrono::milliseconds(milliseconds))
+                     : languageHook->WaitForEvent(m_actionEvent, milliseconds);
       if (ret)
         m_actionEvent.Reset();
       return ret;
@@ -496,7 +494,7 @@ namespace XBMCAddon
     void Window::setFocus(Control* pControl)
     {
       XBMC_TRACE;
-      if(pControl == NULL)
+      if (pControl == nullptr)
         throw WindowException("Object should be of type Control");
 
       CGUIMessage msg = CGUIMessage(GUI_MSG_SETFOCUS,pControl->iParentId, pControl->iControlId);
@@ -519,7 +517,7 @@ namespace XBMCAddon
       if(iControlId == -1)
         throw WindowException("No control in this window has focus");
       // Since I'm already holding the lock there's no reason to give it to GetFocusedControlID
-      return GetControlById(iControlId,NULL);
+      return GetControlById(iControlId, nullptr);
     }
 
     long Window::getFocusId()
@@ -543,7 +541,7 @@ namespace XBMCAddon
     {
       XBMC_TRACE;
       // type checking, object should be of type Control
-      if(pControl == NULL)
+      if (pControl == nullptr)
         throw WindowException("Object should be of type Control");
 
       {
@@ -572,7 +570,7 @@ namespace XBMCAddon
       }
 
       // initialize control to zero
-      pControl->pGUIControl = NULL;
+      pControl->pGUIControl = nullptr;
       pControl->iControlId = 0;
       pControl->iParentId = 0;
     }
@@ -583,7 +581,7 @@ namespace XBMCAddon
       DelayedCallGuard dg(languageHook);
       int count = 1; int size = pControls.size();
       for (std::vector<Control*>::iterator iter = pControls.begin(); iter != pControls.end(); count++, ++iter)
-        doRemoveControl(*iter,NULL, count == size);
+        doRemoveControl(*iter, nullptr, count == size);
     }
 
     long Window::getHeight()
@@ -701,7 +699,7 @@ namespace XBMCAddon
     void Window::doAddControl(Control* pControl, CCriticalSection* gcontext, bool wait)
     {
       XBMC_TRACE;
-      if(pControl == NULL)
+      if (pControl == nullptr)
         throw WindowException("NULL Control passed to WindowBase::addControl");
 
       if(pControl->iControlId != 0)
@@ -746,7 +744,7 @@ namespace XBMCAddon
       SingleLockWithDelayGuard gslock(CServiceBroker::GetWinSystem()->GetGfxContext(),languageHook);
       int count = 1; int size = pControls.size();
       for (std::vector<Control*>::iterator iter = pControls.begin(); iter != pControls.end(); count++, ++iter)
-        doAddControl(*iter,NULL, count == size);
+        doAddControl(*iter, nullptr, count == size);
     }
 
     Control* Window::getControl(int iControlId)

@@ -47,7 +47,7 @@ public:
 
   float GetPercentage() const;
   std::string GetDescription() const override;
-  void UpdateInfo(const CGUIListItem *item = NULL) override;
+  void UpdateInfo(const CGUIListItem* item = nullptr) override;
   bool UpdateLayout();
 
 protected:

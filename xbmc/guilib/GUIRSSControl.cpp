@@ -37,7 +37,7 @@ CGUIRSSControl::CGUIRSSControl(int parentID,
     m_headlineColor(headlineColor),
     m_scrollInfo(0, 0, labelInfo.scrollSpeed, "")
 {
-  m_pReader = NULL;
+  m_pReader = nullptr;
   m_rtl = false;
   m_stopped = false;
   m_urlset = 1;
@@ -55,7 +55,7 @@ CGUIRSSControl::CGUIRSSControl(const CGUIRSSControl& from)
     m_vecIntervals(),
     m_scrollInfo(from.m_scrollInfo)
 {
-  m_pReader = NULL;
+  m_pReader = nullptr;
   m_rtl = from.m_rtl;
   m_stopped = from.m_stopped;
   m_urlset = 1;
@@ -66,8 +66,8 @@ CGUIRSSControl::~CGUIRSSControl()
 {
   std::unique_lock lock(m_criticalSection);
   if (m_pReader)
-    m_pReader->SetObserver(NULL);
-  m_pReader = NULL;
+    m_pReader->SetObserver(nullptr);
+  m_pReader = nullptr;
 }
 
 void CGUIRSSControl::OnFocus()
@@ -101,7 +101,7 @@ void CGUIRSSControl::Process(unsigned int currentTime, CDirtyRegionList &dirtyre
   {
     std::unique_lock lock(m_criticalSection);
     // Create RSS background/worker thread if needed
-    if (m_pReader == NULL)
+    if (m_pReader == nullptr)
     {
 
       RssUrls::const_iterator iter = CRssManager::GetInstance().GetUrls().find(m_urlset);
@@ -195,7 +195,7 @@ void CGUIRSSControl::OnFeedUpdate(const vecText &feed)
 
 void CGUIRSSControl::OnFeedRelease()
 {
-  m_pReader = NULL;
+  m_pReader = nullptr;
 }
 
 

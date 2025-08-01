@@ -65,7 +65,7 @@ namespace XBMCAddon
 #endif
 
   protected:
-    LanguageHook* languageHook;
+    LanguageHook* languageHook = nullptr;
 
     /**
      * This method is meant to be called from the destructor of the
@@ -154,7 +154,7 @@ namespace XBMCAddon
     {
       T * ac;
     public:
-      inline Ref() : ac(NULL) {}
+      inline Ref() : ac(nullptr) {}
       inline Ref(const T* _ac) : ac(const_cast<T*>(_ac)) { if (ac) ac->Acquire(); refcheck; }
 
       // copy semantics
@@ -191,9 +191,21 @@ namespace XBMCAddon
       inline T& getRef() const { refcheck; return *ac; }
 
       inline ~Ref() { refcheck; if (ac) ac->Release(); }
-      inline bool isNull() const { refcheck; return ac == NULL; }
-      inline bool isNotNull() const { refcheck; return ac != NULL; }
-      inline bool isSet() const { refcheck; return ac != NULL; }
+      inline bool isNull() const
+      {
+        refcheck;
+        return ac == nullptr;
+      }
+      inline bool isNotNull() const
+      {
+        refcheck;
+        return ac != nullptr;
+      }
+      inline bool isSet() const
+      {
+        refcheck;
+        return ac != nullptr;
+      }
       inline bool operator!() const { refcheck; return ac == NULL; }
       inline bool operator==(const AddonClass::Ref<T>& oref) const { refcheck; return ac == oref.ac; }
       inline bool operator<(const AddonClass::Ref<T>& oref) const { refcheck; return ac < oref.ac; } // std::set semantics

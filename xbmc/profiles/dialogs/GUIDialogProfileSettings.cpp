@@ -56,7 +56,7 @@ bool CGUIDialogProfileSettings::ShowForProfile(unsigned int iProfile, bool first
     return false;
 
   CGUIDialogProfileSettings *dialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogProfileSettings>(WINDOW_DIALOG_PROFILE_SETTINGS);
-  if (dialog == NULL)
+  if (dialog == nullptr)
     return false;
 
   dialog->m_needsSaving = false;
@@ -64,7 +64,7 @@ bool CGUIDialogProfileSettings::ShowForProfile(unsigned int iProfile, bool first
   dialog->m_showDetails = !firstLogin;
 
   const CProfile *profile = profileManager->GetProfile(iProfile);
-  if (profile == NULL)
+  if (profile == nullptr)
   {
     dialog->m_name.clear();
     dialog->m_dbMode = 2;
@@ -389,13 +389,13 @@ bool CGUIDialogProfileSettings::GetProfilePath(std::string &directory, bool isDe
 void CGUIDialogProfileSettings::UpdateProfileImage()
 {
   BaseSettingControlPtr settingControl = GetSettingControl(SETTING_PROFILE_IMAGE);
-  if (settingControl != nullptr && settingControl->GetControl() != NULL)
+  if (settingControl != nullptr && settingControl->GetControl() != nullptr)
     SET_CONTROL_LABEL2(settingControl->GetID(), URIUtils::GetFileName(m_thumb));
 }
 
 void CGUIDialogProfileSettings::updateProfileDirectory()
 {
   BaseSettingControlPtr settingControl = GetSettingControl(SETTING_PROFILE_DIRECTORY);
-  if (settingControl != nullptr && settingControl->GetControl() != NULL)
+  if (settingControl != nullptr && settingControl->GetControl() != nullptr)
     SET_CONTROL_LABEL2(settingControl->GetID(), m_directory);
 }

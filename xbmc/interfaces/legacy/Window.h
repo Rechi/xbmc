@@ -193,7 +193,7 @@ namespace XBMCAddon
 
     protected:
 #ifndef SWIG
-      InterceptorBase* window;
+      InterceptorBase* window = nullptr;
       int iWindowId = -1;
 
       std::vector<AddonClass::Ref<Control> > vecControls;
@@ -287,7 +287,7 @@ namespace XBMCAddon
       inline void interceptorClear()
       {
         std::unique_lock lock(*this);
-        window = NULL;
+        window = nullptr;
       }
 #endif
 

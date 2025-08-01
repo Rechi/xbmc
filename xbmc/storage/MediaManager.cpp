@@ -435,7 +435,7 @@ bool CMediaManager::IsAudio(const std::string& devicePath)
 #else
   //! @todo switch all ports to use auto sources
   MEDIA_DETECT::CCdInfo* pInfo = MEDIA_DETECT::CDetectDVDMedia::GetCdInfo();
-  if (pInfo != NULL && pInfo->IsAudio(1))
+  if (pInfo != nullptr && pInfo->IsAudio(1))
     return true;
 #endif
 #endif
@@ -572,7 +572,7 @@ std::string CMediaManager::GetDiskUniqueId(const std::string& devicePath)
   std::string mediaPath;
 
   CCdInfo* pInfo = CServiceBroker::GetMediaManager().GetCdInfo(devicePath);
-  if (pInfo == NULL)
+  if (pInfo == nullptr)
     return "";
 
   if (pInfo->IsAudio(1))

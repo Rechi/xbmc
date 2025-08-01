@@ -685,7 +685,7 @@ CCdInfo* CCdIoSupport::GetCdInfo(char* cDeviceFileName)
   if (cdio == NULL)
   {
     CLog::Log(LOGERROR, "{}: Error in automatically selecting driver with input", __FUNCTION__);
-    return NULL;
+    return nullptr;
   }
 
   bool bIsCDRom = true;
@@ -695,7 +695,7 @@ CCdInfo* CCdIoSupport::GetCdInfo(char* cDeviceFileName)
   {
 #if !defined(TARGET_DARWIN)
     ::cdio_destroy(cdio);
-    return NULL;
+    return nullptr;
 #else
     m_nFirstTrackNum = 1;
     bIsCDRom = false;
@@ -707,7 +707,7 @@ CCdInfo* CCdIoSupport::GetCdInfo(char* cDeviceFileName)
   {
 #if !defined(TARGET_DARWIN)
     ::cdio_destroy(cdio);
-    return NULL;
+    return nullptr;
 #else
     m_nNumTracks = 1;
     bIsCDRom = false;
@@ -735,7 +735,7 @@ CCdInfo* CCdIoSupport::GetCdInfo(char* cDeviceFileName)
       CLog::Log(LOGDEBUG, "cdio_track_msf for track {} failed, I give up.", i);
       delete info;
       ::cdio_destroy(cdio);
-      return NULL;
+      return nullptr;
     }
 
     trackinfo ti;

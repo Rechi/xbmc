@@ -356,7 +356,7 @@ bool CPythonInvoker::execute(const std::string& script, std::vector<std::wstring
     // if it failed with an exception we already logged the details
     if (!failed)
     {
-      PythonBindings::PythonToCppException* e = NULL;
+      PythonBindings::PythonToCppException* e = nullptr;
       if (PythonBindings::PythonToCppException::ParsePythonException(exceptionType, exceptionValue,
                                                                      exceptionTraceback))
         e = new PythonBindings::PythonToCppException(exceptionType, exceptionValue,
@@ -633,7 +633,7 @@ void CPythonInvoker::onInitialization()
 
 void CPythonInvoker::onPythonModuleInitialization(void* moduleDict)
 {
-  if (m_addon.get() == NULL || moduleDict == NULL)
+  if (m_addon.get() == nullptr || moduleDict == NULL)
     return;
 
   PyObject* moduleDictionary = (PyObject*)moduleDict;
@@ -668,7 +668,7 @@ void CPythonInvoker::onError(const std::string& exceptionType /* = "" */,
   CGUIDialogKaiToast* pDlgToast =
       CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogKaiToast>(
           WINDOW_DIALOG_KAI_TOAST);
-  if (pDlgToast != NULL)
+  if (pDlgToast != nullptr)
   {
     std::string message;
     if (m_addon && !m_addon->Name().empty())

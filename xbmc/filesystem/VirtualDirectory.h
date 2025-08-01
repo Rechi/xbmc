@@ -33,8 +33,8 @@ namespace XFILE
     inline unsigned int GetNumberOfSources() { return static_cast<uint32_t>(m_sources.size()); }
 
     bool IsSource(const std::string& strPath,
-                  std::vector<CMediaSource>* sources = NULL,
-                  std::string* name = NULL) const;
+                  std::vector<CMediaSource>* sources = nullptr,
+                  std::string* name = nullptr) const;
     bool IsInSource(const std::string& strPath) const;
 
     inline const CMediaSource& operator[](const int index) const { return m_sources[index]; }
