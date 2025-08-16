@@ -71,4 +71,3 @@ std::vector<CMediaSource>& CGUIViewStateWindowPrograms::GetSources()
   AddOrReplace(*programSources, CGUIViewState::GetSources());
   return *programSources;
 }
-

@@ -35,4 +35,3 @@ index 0a22f6f..f439fd4 100644
                *(gint *)change->arg_data = change->prev.integer;
 -- 
 2.50.1
-

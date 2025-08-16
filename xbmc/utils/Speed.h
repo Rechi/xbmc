@@ -113,4 +113,3 @@ protected:
   double m_value; // we store in m/s
   bool m_valid;
 };
-

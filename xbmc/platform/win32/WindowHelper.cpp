@@ -77,4 +77,3 @@ void CWHelper::SetHANDLE(HANDLE hProcess)
 {
   m_hProcess = hProcess;
 }
-

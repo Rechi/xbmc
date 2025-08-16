@@ -265,4 +265,3 @@ void CArtist::SetDateNew(const std::string& strDateNew)
 {
   dateNew.SetFromDBDateTime(strDateNew);
 }
-

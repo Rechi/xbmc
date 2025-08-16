@@ -26,5 +26,3 @@ float4 PS(PS_INPUT input) : SV_TARGET
 {
   return texMain.Sample(LinearSampler, input.tex);
 }
-
-

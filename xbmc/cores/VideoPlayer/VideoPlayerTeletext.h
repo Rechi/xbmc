@@ -56,4 +56,3 @@ private:
   std::shared_ptr<TextCacheStruct_t> m_TXTCache = std::make_shared<TextCacheStruct_t>();
   CDVDMessageQueue m_messageQueue;
 };
-

@@ -402,4 +402,3 @@ extern "C" FARPROC __stdcall dllWin32GetProcAddress(HMODULE hModule, LPCSTR func
   // Nope
   return GetProcAddress(hModule, function);
 }
-

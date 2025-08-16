@@ -13,4 +13,3 @@ In addition, other licenses may also apply. Please see
     LICENSES/README.md
 
 for more details.
-

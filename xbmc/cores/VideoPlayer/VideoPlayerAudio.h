@@ -121,4 +121,3 @@ protected:
   unsigned int m_disconAdjustTimeMs = 50; // maximum sync-off before adjusting
   int m_disconAdjustCounter = 0;
 };
-

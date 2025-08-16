@@ -133,4 +133,3 @@ void VAAPIRegisterRenderGLES(CVaapiProxy* winSystem, bool& general, bool& deepCo
 } // namespace KODI
 
 #endif
-

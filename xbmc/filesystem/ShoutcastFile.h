@@ -73,4 +73,3 @@ private:
   std::shared_ptr<MUSIC_INFO::CMusicInfoTag> m_masterTag;
 };
 }
-

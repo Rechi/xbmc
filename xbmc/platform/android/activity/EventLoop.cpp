@@ -164,4 +164,3 @@ int32_t CEventLoop::inputCallback(android_app* application, AInputEvent* event)
 
   return eventLoop.processInput(event);
 }
-

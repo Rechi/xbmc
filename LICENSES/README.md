@@ -73,4 +73,3 @@ Kodi currently contains files and code licensed under:
 * **[Unlicense](Unlicense)**: Unlicense (Public Domain)
 
 These licensing rules were adapted from the **[Linux kernel licensing rules](https://github.com/torvalds/linux/blob/master/Documentation/process/license-rules.rst)**.
-

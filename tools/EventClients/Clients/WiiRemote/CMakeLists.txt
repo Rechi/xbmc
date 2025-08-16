@@ -20,4 +20,3 @@ target_link_libraries(${APP_NAME_LC}-wiiremote
                               ${APP_NAME_LC}::CWiid)
 
 target_compile_options(${APP_NAME_LC}-wiiremote PRIVATE ${ARCH_DEFINES})
-

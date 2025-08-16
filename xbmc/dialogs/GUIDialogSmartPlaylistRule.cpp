@@ -579,4 +579,3 @@ bool CGUIDialogSmartPlaylistRule::EditRule(PLAYLIST::CSmartPlaylistRule& rule,
   rule = editor->m_rule;
   return !editor->m_cancelled;
 }
-

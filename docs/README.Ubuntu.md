@@ -213,4 +213,3 @@ Verify your nasm version by running `nasm -v`. The version displayed should be >
 See the general **[Linux build guide](README.Linux.md)** for reference.
 
 **[back to top](#table-of-contents)**
-

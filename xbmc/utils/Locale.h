@@ -170,4 +170,3 @@ private:
   std::string m_codeset;
   std::string m_modifier;
 };
-

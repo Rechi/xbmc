@@ -594,4 +594,3 @@ std::string CGUIImage::GetDescription(void) const
 {
   return GetFileName();
 }
-

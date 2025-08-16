@@ -22,4 +22,3 @@ index 28dcf462dd..ffa96e283d 100755
  enabled libdrm            && check_pkg_config libdrm libdrm xf86drm.h drmGetVersion
 -- 
 2.46.1
-

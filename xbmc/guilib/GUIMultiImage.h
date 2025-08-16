@@ -88,4 +88,3 @@ protected:
   DIRECTORY_STATUS m_directoryStatus;
   unsigned int m_jobID;
 };
-

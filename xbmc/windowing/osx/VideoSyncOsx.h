@@ -41,4 +41,3 @@ private:
   volatile bool m_displayReset = false;
   CEvent m_lostEvent;
 };
-

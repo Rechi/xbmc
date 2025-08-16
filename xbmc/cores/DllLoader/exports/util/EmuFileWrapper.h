@@ -70,4 +70,3 @@ private:
 };
 
 extern CEmuFileWrapper g_emuFileWrapper;
-

@@ -145,4 +145,3 @@ private:
         } // while (*pargs)
     } // ParseCmdLine()
 }; // class CmdLineArgs
-

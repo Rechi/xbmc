@@ -962,4 +962,3 @@ void CDisplaySettings::SettingOptionsCmsGammaModesFiller(const SettingConstPtr& 
   list.emplace_back(g_localizeStrings.Get(36584), CMS_TRC_OUTPUT_OFFSET);
   list.emplace_back(g_localizeStrings.Get(36585), CMS_TRC_ABSOLUTE);
 }
-

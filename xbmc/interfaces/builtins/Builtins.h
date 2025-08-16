@@ -58,4 +58,3 @@ private:
     m_command.insert(map.begin(), map.end());
   }
 };
-

@@ -343,4 +343,3 @@ private:
 
   static const CAdvancedSettings* m_advancedSettings;
 };
-

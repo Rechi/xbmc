@@ -765,4 +765,3 @@ void CVFSEntryIDirectoryWrapper::RequireAuthentication2(const CURL& url)
 }
 
 } /*namespace ADDON*/
-

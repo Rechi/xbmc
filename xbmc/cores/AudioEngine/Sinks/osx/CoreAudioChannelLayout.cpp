@@ -270,4 +270,3 @@ bool CCoreAudioChannelLayout::AllChannelUnknown()
 
   return true;
 }
-

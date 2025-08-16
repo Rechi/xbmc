@@ -79,4 +79,3 @@ private:
   CGUILabel m_label;
   bool m_active; ///< Whether the slider has been activated by a click.
 };
-

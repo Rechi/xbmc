@@ -106,4 +106,3 @@ void CLibInputTouch::ProcessTouchFrame(libinput_event_touch *e)
     SetEvent(slot, TouchInputUnchanged);
   }
 }
-

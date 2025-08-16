@@ -85,4 +85,3 @@ std::vector<CMediaSource>& CGUIViewStateWindowPictures::GetSources()
 
   return *pictureSources;
 }
-

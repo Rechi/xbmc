@@ -112,4 +112,3 @@ sudo dnf install distcc
 See the general **[Linux build guide](README.Linux.md)** for reference.
 
 **[back to top](#table-of-contents)**
-

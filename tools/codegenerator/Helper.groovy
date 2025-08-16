@@ -879,4 +879,3 @@ public class Helper
       return [attributes, nodes]
    }
 }
-

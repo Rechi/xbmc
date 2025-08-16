@@ -41,4 +41,3 @@ public:
   /* get the current playback volume of this sound */
   virtual float GetVolume() = 0;
 };
-

@@ -39,4 +39,3 @@ protected:
 private:
   std::string m_xmlFile;
 };
-

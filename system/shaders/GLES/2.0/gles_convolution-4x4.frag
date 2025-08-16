@@ -75,4 +75,3 @@ void main()
 
   gl_FragColor = rgb;
 }
-

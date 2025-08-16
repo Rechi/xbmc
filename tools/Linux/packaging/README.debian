@@ -28,4 +28,3 @@ There are two available build methods:
   PBUILDER_BASE="/home/$USER/xbmc-packaging/pbuilder" \
   DPUT_TARGET="local" \
   ./mk-debian-package.sh
-

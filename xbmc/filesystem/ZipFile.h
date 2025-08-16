@@ -58,4 +58,3 @@ namespace XFILE
     bool m_bCached;
   };
 }
-

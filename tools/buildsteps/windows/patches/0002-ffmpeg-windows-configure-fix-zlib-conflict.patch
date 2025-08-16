@@ -23,4 +23,3 @@ index c4fe14568a..9bebb75093 100755
  # Do not overwrite an unchanged config.h to avoid superfluous rebuilds.
 -- 
 2.46.1
-

@@ -26,4 +26,3 @@ public:
   bool ContainsFiles(const CURL& url) override { return true; }
 };
 }
-

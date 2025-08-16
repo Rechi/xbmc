@@ -154,4 +154,3 @@ namespace MUSIC_INFO
     bool          m_bIsOpen;
   };
 }
-

@@ -334,4 +334,3 @@ e.g. [LG]_webOS_TV_OLED65C24LA
 ```
 
 **[back to top](#table-of-contents)**
-

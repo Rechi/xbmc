@@ -28,4 +28,3 @@ bool CGUIDialogFullScreenInfo::OnAction(const CAction &action)
   }
   return CGUIDialog::OnAction(action);
 }
-

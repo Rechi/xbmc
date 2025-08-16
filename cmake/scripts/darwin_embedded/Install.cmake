@@ -131,4 +131,3 @@ add_custom_target(deb
     COMMAND sh ./mkdeb-darwin_embedded.sh ${CORE_BUILD_CONFIG}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tools/darwin/packaging/darwin_embedded)
 add_dependencies(deb ${APP_NAME_LC})
-

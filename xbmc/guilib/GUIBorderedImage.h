@@ -34,4 +34,3 @@ protected:
 private:
   CGUIBorderedImage(const CGUIBorderedImage& right);
 };
-

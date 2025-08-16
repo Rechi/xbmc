@@ -129,4 +129,3 @@ void CDVDVideoPPFFmpeg::Process(VideoPicture* pPicture)
   if (m_deinterlace)
     pPicture->iFlags &= ~DVP_FLAG_INTERLACED;
 }
-

@@ -198,4 +198,3 @@ private:
                         std::vector<KODI::UTILS::COLOR::Color>& colors,
                         vecText& parsedText);
 };
-

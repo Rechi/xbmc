@@ -306,4 +306,3 @@ void CGUIFixedListContainer::GetCursorRange(int &minCursor, int &maxCursor) cons
       minCursor++;
   }
 }
-

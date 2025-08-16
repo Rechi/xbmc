@@ -25,4 +25,3 @@ namespace XFILE
       CacheType GetCacheType(const CURL& url) const override { return CacheType::NEVER; }
   };
 }
-

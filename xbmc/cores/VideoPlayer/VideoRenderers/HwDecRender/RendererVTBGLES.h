@@ -47,4 +47,3 @@ protected:
   CRenderBuffer m_vtbBuffers[NUM_BUFFERS];
   CVEAGLContext m_glContext;
 };
-

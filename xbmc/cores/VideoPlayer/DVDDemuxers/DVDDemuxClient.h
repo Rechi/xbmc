@@ -63,4 +63,3 @@ protected:
 private:
   static inline bool CodecHasExtraData(AVCodecID id);
 };
-

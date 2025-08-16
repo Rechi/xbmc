@@ -36,4 +36,3 @@ protected:
   void SetText();
   void SetHeading();
 };
-

@@ -16,4 +16,3 @@ public:
   virtual ~IWinEvents() = default;
   virtual bool  MessagePump() = 0;
 };
-

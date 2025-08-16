@@ -24,4 +24,3 @@ index 7144b0b..e9112f9 100644
  find_package(Threads REQUIRED)
 -- 
 2.44.0
-

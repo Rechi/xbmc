@@ -77,4 +77,3 @@ private:
 
 using RepositoryPtr = std::shared_ptr<CRepository>;
 }
-

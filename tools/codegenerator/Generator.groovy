@@ -71,4 +71,3 @@ if (verbose) println output
 
 println 'writing'
 new File(newargs[2]).write output
-

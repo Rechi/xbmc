@@ -1261,4 +1261,3 @@ double CAESinkAUDIOTRACK::GetMovingAverageDelay(double newestdelay)
 
   return sum / size;
 }
-

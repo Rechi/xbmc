@@ -15,4 +15,3 @@ public:
   virtual void  DeInitialize(int iDevice)=0;
   virtual ~IAudioDeviceChangedCallback() {}
 };
-

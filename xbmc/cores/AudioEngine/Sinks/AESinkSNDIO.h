@@ -46,4 +46,3 @@ private:
   ssize_t m_played;
   ssize_t m_written;
 };
-

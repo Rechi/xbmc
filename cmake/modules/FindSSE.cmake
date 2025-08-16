@@ -183,4 +183,3 @@ unset(_AVX_OK CACHE)
 unset(_AVX2_TRUE)
 unset(_AVX2_OK)
 unset(_AVX2_OK CACHE)
-

@@ -75,4 +75,3 @@ protected:
 private:
   CGUIMoverControl(const CGUIMoverControl& control);
 };
-

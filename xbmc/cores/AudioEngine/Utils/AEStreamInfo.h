@@ -99,4 +99,3 @@ private:
 
   static unsigned int GetTrueHDChannels(const uint16_t chanmap);
 };
-

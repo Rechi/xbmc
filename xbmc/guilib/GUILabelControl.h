@@ -77,4 +77,3 @@ protected:
   unsigned int m_startSelection;
   unsigned int m_endSelection;
 };
-

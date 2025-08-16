@@ -169,4 +169,3 @@ SHORT Xbox360Controller::getThumb(int num)
 
   return 0;
 }
-

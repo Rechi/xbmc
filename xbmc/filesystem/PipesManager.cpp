@@ -311,4 +311,3 @@ bool         PipesManager::Exists(const std::string &name)
   std::unique_lock lock(m_lock);
   return (m_pipes.contains(name));
 }
-

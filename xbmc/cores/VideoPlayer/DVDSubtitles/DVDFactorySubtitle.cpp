@@ -86,4 +86,3 @@ CDVDSubtitleParser* CDVDFactorySubtitle::CreateParser(std::string& strFile)
 
   return nullptr;
 }
-

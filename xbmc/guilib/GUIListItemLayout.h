@@ -67,4 +67,3 @@ protected:
       XbmcThreads::EndTime<decltype(m_infoUpdateMillis)>::Max();
   XbmcThreads::EndTime<> m_infoUpdateTimeout;
 };
-

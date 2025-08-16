@@ -72,4 +72,3 @@ bool CDirectoryNodeMusicVideosOverview::GetContent(CFileItemList& items) const
 
   return true;
 }
-

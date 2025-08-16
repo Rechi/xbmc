@@ -135,4 +135,3 @@ namespace UPNP
   */
   NPT_String DecodeObjectId(const std::string& id);
 }
-

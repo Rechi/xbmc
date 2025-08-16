@@ -193,4 +193,3 @@ protected:
   /*! DVD state serializer handler */
   CDVDStateSerializer m_dvdStateSerializer;
 };
-

@@ -144,5 +144,3 @@ sudo make -C tools/depends/target/waylandpp PREFIX=/usr/local
 See the general **[Linux build guide](README.Linux.md)** for reference.
 
 **[back to top](#table-of-contents)**
-
-

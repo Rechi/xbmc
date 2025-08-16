@@ -28,4 +28,3 @@ protected:
   struct timeval m_tmLastCheck;
   double m_dLastUsage;
 };
-

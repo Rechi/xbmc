@@ -12,4 +12,3 @@
 
 DWORD GetLastError();
 void  SetLastError(DWORD dwErrCode);
-

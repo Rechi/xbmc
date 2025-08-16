@@ -40,4 +40,3 @@ private:
   CCriticalSection             m_lasteventCond;
   std::queue<XBMC_Event>       m_lastevent;
 };
-

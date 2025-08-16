@@ -46,4 +46,3 @@ private:
     } // namespace WINDOWS10
   } // namespace PLATFORM
 } // namespace KODI
-

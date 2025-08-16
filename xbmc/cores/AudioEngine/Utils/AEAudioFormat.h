@@ -66,4 +66,3 @@ struct AEAudioFormat
             m_streamInfo    ==  fmt.m_streamInfo;
   }
 };
-

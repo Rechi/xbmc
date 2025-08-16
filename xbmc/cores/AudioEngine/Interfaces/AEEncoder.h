@@ -92,4 +92,3 @@ public:
    */
   virtual double GetDelay(unsigned int bufferSize) = 0;
 };
-
