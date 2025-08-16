@@ -18,7 +18,7 @@ if(NOT TARGET ${APP_NAME_LC}::${CMAKE_FIND_PACKAGE_NAME})
     # strip and manually set the rest of the build flags
     string(REPLACE "/permissive-" "" ${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_CXX_FLAGS ${CMAKE_CXX_FLAGS} )
 
-    set(CMAKE_ARGS 
+    set(CMAKE_ARGS
     "-DCMAKE_CXX_FLAGS=${EFFECTS_CXX_FLAGS} $<$<CONFIG:Debug>:${CMAKE_CXX_FLAGS_DEBUG}> $<$<CONFIG:Release>:${CMAKE_CXX_FLAGS_RELEASE}>"
     "-DCMAKE_EXE_LINKER_FLAGS=${CMAKE_EXE_LINKER_FLAGS} $<$<CONFIG:Debug>:${CMAKE_EXE_LINKER_FLAGS_DEBUG}> $<$<CONFIG:Release>:${CMAKE_EXE_LINKER_FLAGS_RELEASE}>")
 
@@ -79,7 +79,7 @@ if(NOT TARGET ${APP_NAME_LC}::${CMAKE_FIND_PACKAGE_NAME})
                                     VERSION_VAR ${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_VERSION)
 
   if(Effects11_FOUND)
-    
+
     if(TARGET Microsoft::Effects11 AND NOT TARGET ${${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_BUILD_NAME})
       add_library(${APP_NAME_LC}::${CMAKE_FIND_PACKAGE_NAME} ALIAS Microsoft::Effects11)
     else()

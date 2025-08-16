@@ -1184,7 +1184,7 @@ public:
    * \param fallback optionally request fallback to the art of the parent/owner for each art type
      that is not defined for the asset
    * \param art collection of the retrieved art
-   * \return 
+   * \return
   */
   bool GetArtForAsset(int assetId, ArtFallbackOptions fallback, KODI::ART::Artwork& art);
   bool HasArtForItem(int mediaId, const MediaType &mediaType);

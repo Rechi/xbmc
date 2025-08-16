@@ -268,7 +268,7 @@ else()
 
       if(PKG_CONFIG_FOUND AND NOT WIN32)
         # We have to run the check against the single lib a second time, as when
-        # pkg_check_modules is run with a list, the only *_LDFLAGS set is a concatenated 
+        # pkg_check_modules is run with a list, the only *_LDFLAGS set is a concatenated
         # list of all checked modules. Ideally we want each target to only have the LDFLAGS
         # required for that specific module
         pkg_check_modules(PC_FFMPEG_${libname} ${libname}${_${name}_ver} ${SEARCH_QUIET})

@@ -39,7 +39,7 @@ static bool isConsoleAttached{false};
  * \brief Basic error reporting before the log subsystem is initialized
  *
  * The message is formatted using printf and output to debugger and cmd.exe, as applicable.
- * 
+ *
  * \param[in] format printf-style format string
  * \param[in] ... optional parameters for the format string.
  */

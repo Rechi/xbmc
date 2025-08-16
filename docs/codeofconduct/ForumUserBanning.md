@@ -1,6 +1,6 @@
 Originally posted by DarrenHill on the forum
 
-From discussions earlier on the slack team channel and following on from recent events, I was asked to propose a code of conduct for bans and user banning on the forum, to be followed by all with moderator powers. 
+From discussions earlier on the slack team channel and following on from recent events, I was asked to propose a code of conduct for bans and user banning on the forum, to be followed by all with moderator powers.
 
 1. When required and when the case is clear, spambots and spam accounts should be dealt with using the "Goodbye Spammer" moderator tool. However if the user/post is not 100% certainly spam, then a second opinion must be sought on the slack #moderator channel as once GBS is used, it cannot be undone.
 

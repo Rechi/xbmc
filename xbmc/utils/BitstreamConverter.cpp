@@ -107,7 +107,7 @@ enum {
  *  Copyright (C) 2005 Michal Benes <michal.benes@itonis.tv>
  *            (C) 2008 Wim Taymans <wim.taymans@gmail.com>
  *  gsth264parse.c
- *  
+ *
  *  SPDX-License-Identifier: LGPL-2.1-or-later
  *  See LICENSES/README.md for more information.
  */

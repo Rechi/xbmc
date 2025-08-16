@@ -8,13 +8,13 @@ It should work if you're using macOS. If that is the case, read **[macOS specifi
 ## Table of Contents
 1. **[Document conventions](#1-document-conventions)**
 2. **[Install the required packages](#2-install-the-required-packages)**
-3. **[Prerequisites](#3-prerequisites)**  
-  3.1. **[Extract Android SDK](#31-extract-android-sdk)**  
-  3.2. **[Configure Android SDK](#32-configure-android-sdk)**   
+3. **[Prerequisites](#3-prerequisites)**
+  3.1. **[Extract Android SDK](#31-extract-android-sdk)**
+  3.2. **[Configure Android SDK](#32-configure-android-sdk)**
   3.3. **[Create a key to sign debug APKs](#33-create-a-key-to-sign-debug-apks)**
 4. **[Get the source code](#4-get-the-source-code)**
-5. **[Build tools and dependencies](#5-build-tools-and-dependencies)**  
-  5.1. **[Advanced Configure Options](#51-advanced-configure-options)**  
+5. **[Build tools and dependencies](#5-build-tools-and-dependencies)**
+  5.1. **[Advanced Configure Options](#51-advanced-configure-options)**
 6. **[Build binary add-ons](#6-build-binary-add-ons)**
 7. **[Build Kodi](#7-build-kodi)**
 8. **[Package](#8-package)**
@@ -47,14 +47,14 @@ git clone -b Krypton https://github.com/xbmc/xbmc kodi
 ```
 
 Several different strategies are used to draw your attention to certain pieces of information. In order of how critical the information is, these items are marked as a note, tip, or warning. For example:
- 
-> [!NOTE]  
+
+> [!NOTE]
 > Linux is user friendly... It's just very particular about who its friends are.
 
 > [!TIP]
 > Algorithm is what developers call code they do not want to explain.
 
-> [!WARNING]  
+> [!WARNING]
 > Developers don't change light bulbs. It's a hardware problem.
 
 **[back to top](#table-of-contents)** | **[back to section top](#1-document-conventions)**
@@ -64,10 +64,10 @@ Install build dependencies needed to cross-compile Kodi for Android:
 ```
 sudo apt install autoconf bison build-essential curl default-jdk flex gawk git gperf lib32stdc++6 lib32z1 lib32z1-dev libcurl4-openssl-dev unzip zip zlib1g-dev
 ```
-> [!NOTE]  
+> [!NOTE]
 > If you're running a 32bit Debian/Ubuntu distribution,  remove `lib32stdc++6 lib32z1 lib32z1-dev` from the command.
 
-> [!NOTE]  
+> [!NOTE]
 > Gradle 8.0+ requires JDK 17+. Check java version by running `java --version`. If version is < 17, set `JAVA_HOME` environment variable to java 17+ home directory.
 
 **[back to top](#table-of-contents)**
@@ -89,7 +89,7 @@ Extract Android SDK Command line tools:
 unzip $HOME/Downloads/commandlinetools-linux-6200805_latest.zip -d $HOME/android-tools/android-sdk-linux/
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > Since we're using the latest SDK Command line tools available, filename can change over time. Adapt the `unzip` command accordingly.
 
 ### 3.2. Configure Android SDK
@@ -109,7 +109,7 @@ All packages must be signed. The following command will generate a self-signed d
 ```
 keytool -genkey -keystore ~/.android/debug.keystore -v -alias androiddebugkey -dname "CN=Android Debug,O=Android,C=US" -keypass android -storepass android -keyalg RSA -keysize 2048 -validity 10000
 ```
-  
+
 **[back to top](#table-of-contents)** | **[back to section top](#3-prerequisites)**
 
 ## 4. Get the source code
@@ -153,7 +153,7 @@ Or configure build for x86_64:
 ./configure --with-tarballs=$HOME/android-tools/xbmc-tarballs --host=x86_64-linux-android --with-sdk-path=$HOME/android-tools/android-sdk-linux --prefix=$HOME/android-tools/xbmc-depends
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > Android x86 and x86_64 are not maintained and are not 100% sure that everything works correctly!
 
 Build tools and dependencies:
@@ -164,7 +164,7 @@ make -j$(getconf _NPROCESSORS_ONLN)
 > [!TIP]
 > By adding `-j<number>` to the make command, you can choose how many concurrent jobs will be used and expedite the build process. It is recommended to use `-j$(getconf _NPROCESSORS_ONLN)` to compile on all available processor cores. The build machine can also be configured to do this automatically by adding `export MAKEFLAGS="-j$(getconf _NPROCESSORS_ONLN)"` to your shell config (e.g. `~/.bashrc`).
 
-> [!WARNING]  
+> [!WARNING]
 > Look for the `Dependencies built successfully.` success message. If in doubt run a single threaded `make` command until the message appears. If the single make fails, clean the specific library by issuing `make -C target/<name_of_failed_lib> distclean` and run `make`again.
 
 ### 5.1. Advanced Configure Options
@@ -372,7 +372,7 @@ Enable CheckJNI (**before** starting the Kodi):
 adb shell setprop debug.checkjni 1
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > These commands assume that current directory is `$HOME/kodi-build/tools/android/packaging` and that the proper SDK/NDK paths are set.
 
 GDB can be used to debug, though the support is rather primitive. Rather than using `gdb` directly, you will need to use `ndk-gdb` which wraps it. You can use the `-p/--project` switches or instead you will need to `cd` to `$HOME/kodi-build/tools/android/packaging/xbmc` and execute it from there.

@@ -126,7 +126,7 @@ void CLog::OnSettingChanged(const std::shared_ptr<const CSetting>& setting)
         CSettingUtils::GetList(std::static_pointer_cast<const CSettingList>(setting)));
 }
 
-void CLog::Initialize(const std::string& path) 
+void CLog::Initialize(const std::string& path)
 {
   if (m_fileSink != nullptr)
     return;

@@ -13,9 +13,9 @@ if(NOT TARGET ${APP_NAME_LC}::${CMAKE_FIND_PACKAGE_NAME})
   macro(buildmacroTinyXML2)
     set(${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_VERSION ${${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_VER})
     set(${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_DEBUG_POSTFIX d)
-  
+
     find_package(Patch MODULE REQUIRED ${SEARCH_QUIET})
-  
+
     if(UNIX)
       # ancient patch (Apple/freebsd) fails to patch tinyxml2 CMakeLists.txt file due to it being crlf encoded
       # Strip crlf before applying patches.
@@ -28,19 +28,19 @@ if(NOT TARGET ${APP_NAME_LC}::${CMAKE_FIND_PACKAGE_NAME})
     else()
       set(PATCH_COMMAND ${PATCH_EXECUTABLE} -p1 -i ${CMAKE_SOURCE_DIR}/tools/depends/target/${${CMAKE_FIND_PACKAGE_NAME}_MODULE_LC}/001-debug-pdb.patch)
     endif()
-  
+
     if(CMAKE_GENERATOR MATCHES "Visual Studio" OR CMAKE_GENERATOR STREQUAL Xcode)
       # Multiconfig generators fail due to file(GENERATE tinyxml.pc) command.
       # This patch makes it generate a distinct named pc file for each build type and rename
       # pc file on install
       list(APPEND PATCH_COMMAND COMMAND ${PATCH_EXECUTABLE} -p1 -i ${CMAKE_SOURCE_DIR}/tools/depends/target/${${CMAKE_FIND_PACKAGE_NAME}_MODULE_LC}/002-multiconfig-gen-pkgconfig.patch)
     endif()
-  
+
     set(CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/${CORE_BUILD_DIR}
                    -DCMAKE_CXX_EXTENSIONS=${CMAKE_CXX_EXTENSIONS}
                    -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
                    -Dtinyxml2_BUILD_TESTING=OFF)
-  
+
     BUILD_DEP_TARGET()
   endmacro()
 

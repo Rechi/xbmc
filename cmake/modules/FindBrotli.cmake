@@ -128,13 +128,13 @@ if(NOT TARGET LIBRARY::${CMAKE_FIND_PACKAGE_NAME})
       set_target_properties(LIBRARY::brotlicommon PROPERTIES
                                                   IMPORTED_LOCATION "${BROTLICOMMON_LIBRARY}"
                                                   INTERFACE_INCLUDE_DIRECTORIES "${${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_INCLUDE_DIR}")
-  
+
       add_library(LIBRARY::brotlidec UNKNOWN IMPORTED)
       set_target_properties(LIBRARY::brotlidec PROPERTIES
                                                IMPORTED_LOCATION "${BROTLIDEC_LIBRARY}"
                                                INTERFACE_LINK_LIBRARIES LIBRARY::brotlicommon
                                                INTERFACE_INCLUDE_DIRECTORIES "${${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_INCLUDE_DIR}")
-  
+
       add_library(LIBRARY::${CMAKE_FIND_PACKAGE_NAME} ALIAS LIBRARY::brotlidec)
 
       add_dependencies(LIBRARY::brotlidec ${${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_BUILD_NAME})

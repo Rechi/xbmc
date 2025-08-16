@@ -1,7 +1,7 @@
 # Set Option varname based on USE_INTERNAL_LIBS status
 #
 # Alternative to cmake_dependent_option
-# cmake_dependent_option is restrictive, in the fact that we cannot override the 
+# cmake_dependent_option is restrictive, in the fact that we cannot override the
 # set option value as a cache variable (-Dvar=foo)
 #
 # This allows us to have the same outcome as cmake_dependent_option whilst still allowing

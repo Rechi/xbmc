@@ -307,7 +307,7 @@ public:
 
   /*!
    \brief Checks whether any settings have been initialized.
-   
+
    \return True if at least one setting has been initialized, false otherwise*/
   bool HasSettings() const;
 

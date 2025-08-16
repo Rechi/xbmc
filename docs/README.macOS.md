@@ -7,15 +7,15 @@ This guide has been tested using Xcode 11.3.1 running on MacOS 10.14.4 (Mojave).
 1. **[Document conventions](#1-document-conventions)**
 2. **[Prerequisites](#2-prerequisites)**
 3. **[Get the source code](#3-get-the-source-code)**
-4. **[Configure and build tools and dependencies](#4-configure-and-build-tools-and-dependencies)**  
-  4.1. **[Advanced Configure Options](#41-advanced-configure-options)**  
+4. **[Configure and build tools and dependencies](#4-configure-and-build-tools-and-dependencies)**
+  4.1. **[Advanced Configure Options](#41-advanced-configure-options)**
 5. **[Build binary add-ons](#5-build-binary-add-ons)**
-6. **[Build Kodi](#6-build-kodi)**  
-  6.1. **[Build with Xcode](#61-build-with-xcode)**  
-  6.2. **[Build with xcodebuild](#62-build-with-xcodebuild)**  
+6. **[Build Kodi](#6-build-kodi)**
+  6.1. **[Build with Xcode](#61-build-with-xcode)**
+  6.2. **[Build with xcodebuild](#62-build-with-xcodebuild)**
   6.3. **[Build with make](#63-build-with-make)**
-7. **[Run Kodi](#7-run-kodi)**  
-  7.1. **[Built with Xcode or xcodebuild](#71-built-with-xcode-or-xcodebuild)**  
+7. **[Run Kodi](#7-run-kodi)**
+  7.1. **[Built with Xcode or xcodebuild](#71-built-with-xcode-or-xcodebuild)**
   7.2. **[Built with make](#72-built-with-make)**
 8. **[Package](#8-package)**
 9. **[Install](#9-install)**
@@ -46,14 +46,14 @@ git clone -b Krypton https://github.com/xbmc/xbmc kodi
 ```
 
 Several different strategies are used to draw your attention to certain pieces of information. In order of how critical the information is, these items are marked as a note, tip, or warning. For example:
- 
-> [!NOTE]  
+
+> [!NOTE]
 > Linux is user friendly... It's just very particular about who its friends are.
 
 > [!TIP]
 > Algorithm is what developers call code they do not want to explain.
 
-> [!WARNING]  
+> [!WARNING]
 > Developers don't change light bulbs. It's a hardware problem.
 
 **[back to top](#table-of-contents)** | **[back to section top](#1-document-conventions)**
@@ -68,7 +68,7 @@ Building for OSX/macOS should work with the following constellations of Xcode an
   * Xcode 13.x against MacOSX SDK 12.3 on 12.x (Monterey)(recommended)
 
 Team Kodi CI infrastructure is limited, and therefore we only have the single combination tested. Newer xcode/macos combinations generally should work, however the team does not actively test/use pre-release versions, so use with caution. Earlier versions may work, however we dont actively support them, so use with caution.
-> [!WARNING]  
+> [!WARNING]
 > Start Xcode after installation finishes. You need to accept the licenses and install missing components.
 
 **[back to top](#table-of-contents)**
@@ -92,7 +92,7 @@ Kodi can be built as either a 32bit or 64bit program. The dependencies are built
 > [!TIP]
 > Look for comments starting with `Or ...` and only execute the command(s) you need.
 
-> [!NOTE]  
+> [!NOTE]
 > `--with-platform` is mandatory for all Apple platforms
 
 Configure build (x86 intel):
@@ -117,10 +117,10 @@ make -j$(getconf _NPROCESSORS_ONLN)
 > [!TIP]
 > By adding `-j<number>` to the make command, you can choose how many concurrent jobs will be used and expedite the build process. It is recommended to use `-j$(getconf _NPROCESSORS_ONLN)` to compile on all available processor cores. The build machine can also be configured to do this automatically by adding `export MAKEFLAGS="-j$(getconf _NPROCESSORS_ONLN)"` to your shell config (e.g. `~/.bashrc`).
 
-> [!WARNING]  
+> [!WARNING]
 > Look for the `Dependencies built successfully.` success message. If in doubt run a single threaded `make` command until the message appears. If the single make fails, clean the specific library by issuing `make -C target/<name_of_failed_lib> distclean` and run `make`again.
 
-> [!NOTE]  
+> [!NOTE]
 > **Advanced developers** may want to specify an SDK version (if multiple versions are installed) in the configure line(s) shown above. The example below would use SDK 10.14:
 
 ```
@@ -262,7 +262,7 @@ Generate Xcode project (x86_64 intel):
 /Users/Shared/xbmc-depends/x86_64-darwin17.5.0-native/bin/cmake -G Xcode -DCMAKE_TOOLCHAIN_FILE=/Users/Shared/xbmc-depends/macosx10.14_x86_64-target-debug/share/Toolchain.cmake ../kodi
 ```
 
-> [!WARNING]  
+> [!WARNING]
 > The toolchain file location differs depending on SDK version. You have to replace `x86_64-darwin17.5.0-native` and `macosx10.14_x86_64-target-debug` in the paths above with the correct ones on your system.
 
 You can check `Users/Shared/xbmc-depends` directory content with:
@@ -272,7 +272,7 @@ ls -l /Users/Shared/xbmc-depends
 
 **Start Xcode, open the Kodi project file** (`kodi.xcodeproj`) located in `$HOME/kodi-build` and hit `Build`.
 
-> [!WARNING]  
+> [!WARNING]
 > If you have selected a specific SDK version in **[step 4](#4-configure-and-build-tools-and-dependencies)** then you might need to adapt the active target to use the same SDK version, otherwise build will fail. Be sure to select a device configuration. Building for simulator is **not** supported.
 
 ### 6.2. Build with xcodebuild

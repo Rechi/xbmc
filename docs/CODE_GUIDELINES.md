@@ -26,7 +26,7 @@
   * [6.2. Local functions](#62-local-functions)
 * [7. Headers](#7-headers)
   * [7.1. Header order](#71-header-order)
-  * [7.2. Use C++ wrappers for C headers](#72-use-c-wrappers-for-c-headers) 
+  * [7.2. Use C++ wrappers for C headers](#72-use-c-wrappers-for-c-headers)
 * [8. Naming](#8-naming)
   * [8.1. Namespaces](#81-namespaces)
   * [8.2. Constants](#82-constants)
@@ -323,7 +323,7 @@ CLog::Log("test: {}", x); // variable used just after its declaration
 
 ❌ Bad:
 ```cpp
-int x{3}; // variable not immediately used by the next block of code 
+int x{3}; // variable not immediately used by the next block of code
 [...many lines of code that do not use variable x...]
 CLog::Log("test: {}", x);
 ```
@@ -599,7 +599,7 @@ Prefix global variables with `g_`
 int g_globalVariableA;
 ```
 
-> [!WARNING]  
+> [!WARNING]
 > Avoid use of globals as far as reasonably possible. We generally do not want to introduce new global variables.
 
 **[back to top](#table-of-contents)**
@@ -903,7 +903,7 @@ namespace
 constexpr std::string_view CONSTANT_FOO{"foo-bar"};
 } // unnamed namespace
 
-void CClass::SetText(std::string_view value) 
+void CClass::SetText(std::string_view value)
 {
   CLog::LogF(LOGDEBUG, "My name is {}", value);
 }
@@ -916,7 +916,7 @@ SetText(CONSTANT_FOO.substr(0, 3)); // substr returns a modified view of the sam
 ```cpp
 namespace
 {
-constexpr std::string CONSTANT_FOO{"foo-bar"}; // using string_view will avoid a memory allocation 
+constexpr std::string CONSTANT_FOO{"foo-bar"}; // using string_view will avoid a memory allocation
 } // unnamed namespace
 
 void CClass::SetText(const std::string& value) // despite being declared as a reference, using string_view will result in a lower overhead in many cases (e.g., when passing a C string literal)

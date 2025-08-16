@@ -8,7 +8,7 @@ First, a few words of caution: Kodi's huge codebase spans over 15 years of devel
 Also, always keep in mind that for many of us English is not our native language. What might come across as discourteous is probably an unintended side effect of the language barrier. Usage of emoticons is highly encouraged. They are great to convey, er, emotions and state of mind.
 
 ## Getting Started
-Before you start coding we advise you to build Kodi's master branch. This will save you and us precious time by making sure a proper build environment is set up and all dependencies are met. For your convenience, **[build guides](README.md)** are available for most common platforms. A **[git guide](GIT-FU.md)** is also available, streamlined to Kodi's development workflow. Unless you're a *git ninja*, please read it carefully.  
+Before you start coding we advise you to build Kodi's master branch. This will save you and us precious time by making sure a proper build environment is set up and all dependencies are met. For your convenience, **[build guides](README.md)** are available for most common platforms. A **[git guide](GIT-FU.md)** is also available, streamlined to Kodi's development workflow. Unless you're a *git ninja*, please read it carefully.
 If you are a *git ninja*, we feel happy and sad for you at the same time. Your soul might be lost to the dark side already but worry not, we have cookies!
 
 ## Reviews

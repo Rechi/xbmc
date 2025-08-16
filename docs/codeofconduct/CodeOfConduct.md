@@ -81,7 +81,7 @@
     effort put in.
 
 1. There is an over-riding principle that accepted work, postings or commits
-   should not be reverted, edited or otherwise rejected without discussion 
+   should not be reverted, edited or otherwise rejected without discussion
    with the original author.
 
     Recognising that changes do sometimes need to be made (for example, code
@@ -89,9 +89,9 @@
     left and forgotten), a reasonable attempt - reflecting the spirit of the
     change/reversion - should be made to liaise with the original author prior
     to making any modifications. If this isn't practical, it is considered good
-    practice to appropriately peer review any potential changes prior to 
+    practice to appropriately peer review any potential changes prior to
     application to minimise risks of further breakage.
-    
+
 1. In case of dispute the working group or the board should be asked
     to mediate.
 
@@ -168,7 +168,7 @@
             include team membership, GitHub repo push access, forum
             moderator powers, wiki account access and social media
             account access.
-            
+
         For individuals that are not members of Team Kodi, there are no
         privileges that could be revoked. Appropriate measures therefore
         include warnings and revoking access to services such as the

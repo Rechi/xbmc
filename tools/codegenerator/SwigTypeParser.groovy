@@ -284,7 +284,7 @@ public class SwigTypeParser
          return "r." + ltype;
       }
    }
-   
+
    /**
    * This creates the C++ declaration for a valid ltype for the type string
    * given. For example, if the type is a "const char*" which is equivalent

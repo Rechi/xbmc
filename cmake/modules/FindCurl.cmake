@@ -101,7 +101,7 @@ if(NOT TARGET ${APP_NAME_LC}::${CMAKE_FIND_PACKAGE_NAME})
     # We explicitly skip a pkgconfig search for Darwin platforms, as system zlib can not
     # be found by pkg-config, and a search for Curl's Libs field is made during the
     # pkg_check_modules call
-    if(PKG_CONFIG_FOUND AND NOT ((WIN32 OR WINDOWSSTORE) OR 
+    if(PKG_CONFIG_FOUND AND NOT ((WIN32 OR WINDOWSSTORE) OR
                                  (CMAKE_SYSTEM_NAME MATCHES "Darwin")))
       pkg_check_modules(${${CMAKE_FIND_PACKAGE_NAME}_SEARCH_NAME} libcurl${PC_${CMAKE_FIND_PACKAGE_NAME}_FIND_SPEC} ${SEARCH_QUIET} IMPORTED_TARGET)
     endif()

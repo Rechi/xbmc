@@ -356,13 +356,13 @@ Function .onInit
       MessageBox MB_YESNO|MB_ICONEXCLAMATION|MB_DEFBUTTON2 'There is a specific ARM64 ${APP_NAME} version available for download. Please consider installing the ARM64 version instead.$\nFor details visit ${WEBSITE}.$\nProceed with x64 installation anyway?' /SD IDYES IDYES noprobx64arm
       Quit
       noprobx64arm:
-    ${Endif} 
+    ${Endif}
   !else ifdef arm64
     SetRegView 64
     ${IfNot} ${IsNativeARM64}
       MessageBox MB_OK|MB_ICONSTOP 'This is the ARM64 ${APP_NAME} installer.$\nPlease download the x86 or x64 version from ${WEBSITE}.$\n$\nClick Ok to quit Setup.'
       Quit
-    ${Endif}  
+    ${Endif}
   !else
     ; x86 will run in emulation on ARM64
     ${If} ${IsNativeARM64}
@@ -375,7 +375,7 @@ Function .onInit
         Quit
         noprobx86x64:
       ${Endif}
-    ${Endif}  
+    ${Endif}
   !endif
 
   ; Windows 8.1 is minimum requirement

@@ -43,7 +43,7 @@ const CGFloat timeFadeSecs                    = 2.0;
     //load the splash image
     std::string strUserSplash = CUtil::GetSplashPath();
     xbmcLogo = [UIImage imageWithContentsOfFile:[NSString stringWithUTF8String:strUserSplash.c_str()]];
-    
+
     //make a view with the image
     xbmcLogoView = [[UIImageView alloc] initWithImage:xbmcLogo];
     //center the image and add it to the view

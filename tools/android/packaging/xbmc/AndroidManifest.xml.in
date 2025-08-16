@@ -136,7 +136,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".XBMCSearchableActivity" 
+        <activity android:name=".XBMCSearchableActivity"
                   android:exported="true">
              <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />

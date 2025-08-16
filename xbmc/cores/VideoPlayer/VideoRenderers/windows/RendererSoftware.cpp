@@ -158,8 +158,8 @@ void CRendererSoftware::RenderImpl(CD3DTexture& target, CRect& sourceRect, CPoin
 
 void CRendererSoftware::FinalOutput(CD3DTexture& source, CD3DTexture& target, const CRect& src, const CPoint(&destPoints)[4])
 {
-  m_outputShader->Render(source, src, destPoints, target, 
-    DX::Windowing()->UseLimitedColor(), 
+  m_outputShader->Render(source, src, destPoints, target,
+    DX::Windowing()->UseLimitedColor(),
     m_videoSettings.m_Contrast * 0.01f,
     m_videoSettings.m_Brightness * 0.01f);
 }

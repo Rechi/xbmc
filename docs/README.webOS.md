@@ -8,22 +8,22 @@ This guide has been tested with an adapted buildroot configuration where the Lin
 2. **[Prerequisites](#2-prerequisites)**
 3. **[Configure the tool chain](#3-Configure-the-tool-chain)**
 4. **[Configure ares-cli tools](#4-Configure-ares-cli-tools)**
-5. **[Get the source code](#5-get-the-source-code)**  
-6. **[Configure and build tools and dependencies](#6-configure-and-build-tools-and-dependencies)**  
+5. **[Get the source code](#5-get-the-source-code)**
+6. **[Configure and build tools and dependencies](#6-configure-and-build-tools-and-dependencies)**
   6.1. **[Advanced Configure Options](#61-Advanced-Configure-Options)**
-7. **[Generate Kodi Build files](#7-Generate-Kodi-Build-files)**  
-  7.1. **[Generate Project Files](#71-Generate-Project-Files)**  
+7. **[Generate Kodi Build files](#7-Generate-Kodi-Build-files)**
+  7.1. **[Generate Project Files](#71-Generate-Project-Files)**
   7.2. **[Add Binary Addons to Project](#72-Add-Binary-Addons-to-Project)**
-8. **[Build](#8-build)**  
+8. **[Build](#8-build)**
   8.1. **[Build kodi binary](#81-Build-kodi-binary)**
-9. **[Packaging kodi to distribute as an IPK](#9-Packaging-kodi-to-distribute-as-an-IPK)**  
-  9.1. **[Create the IPK](#91-Create-the-IPK)**  
-10. **[Install](#10-Install)**  
-  10.1. **[Using make install](#101-Using-make-install)**  
+9. **[Packaging kodi to distribute as an IPK](#9-Packaging-kodi-to-distribute-as-an-IPK)**
+  9.1. **[Create the IPK](#91-Create-the-IPK)**
+10. **[Install](#10-Install)**
+  10.1. **[Using make install](#101-Using-make-install)**
   10.2. **[Using ares-cli to install](#102-Using-ares-cli-to-install)**
 11. **[Debugging ](#11-Debugging)**
-12. **[Uninstall](#12-Uninstall)**  
-  12.1. **[Using make to uninstall](#121-Using-make-to-uninstall)**  
+12. **[Uninstall](#12-Uninstall)**
+  12.1. **[Using make to uninstall](#121-Using-make-to-uninstall)**
   12.1. **[Using ares-cli to uninstall](#122-Using-ares-cli-to-uninstall)**
 
 ## 1. Document conventions
@@ -53,13 +53,13 @@ git clone -b Krypton https://github.com/xbmc/xbmc kodi
 
 Several different strategies are used to draw your attention to certain pieces of information. In order of how critical the information is, these items are marked as a note, tip, or warning. For example:
 
-> [!NOTE]  
+> [!NOTE]
 > Linux is user friendly... It's just very particular about who its friends are.
 
 > [!TIP]
 > Algorithm is what developers call code they do not want to explain.
 
-> [!WARNING]  
+> [!WARNING]
 > Developers don't change light bulbs. It's a hardware problem.
 
 **[back to top](#table-of-contents)** | **[back to section top](#1-document-conventions)**
@@ -111,8 +111,8 @@ git clone https://github.com/xbmc/xbmc kodi
 ## 6. Configure and build tools and dependencies
 Kodi should be built as a 32bit program for webOS. The dependencies are built in `$HOME/kodi/tools/depends` and installed into `/media/developer/apps/usr/palm/applications/org.xbmc.kodi/xbmc-deps`.
 
---prefix should be set to where xbmc-deps are going to be built  
---with-toolchain=/path/to/buildroot, --host=arm-linux or whatever your compiler is  
+--prefix should be set to where xbmc-deps are going to be built
+--with-toolchain=/path/to/buildroot, --host=arm-linux or whatever your compiler is
 
 Configure build:
 ```
@@ -131,10 +131,10 @@ make -j$(getconf _NPROCESSORS_ONLN)
 > [!TIP]
 > By adding `-j<number>` to the make command, you can choose how many concurrent jobs will be used and expedite the build process. It is recommended to use `-j$(getconf _NPROCESSORS_ONLN)` to compile on all available processor cores. The build machine can also be configured to do this automatically by adding `export MAKEFLAGS="-j$(getconf _NPROCESSORS_ONLN)"` to your shell config (e.g. `~/.bashrc`).
 
-> [!WARNING]  
+> [!WARNING]
 > Look for the `Dependencies built successfully.` success message. If in doubt run a single threaded `make` command until the message appears. If the single make fails, clean the specific library by issuing `make -C target/<name_of_failed_lib> distclean` and run `make`again.
 
-> [!NOTE]  
+> [!NOTE]
 > You may want to modify arch, float-abi or fpu to obtain the best performance out of the target CPU, however the defaults are recommended for now until you have a working build:
 
 ```
@@ -271,7 +271,7 @@ In '$HOME/kodi/build`
 make -j$(getconf _NPROCESSORS_ONLN)
 ```
 
-> [!WARNING]  
+> [!WARNING]
 > Building for simulator is NOT supported.
 
 **[back to top](#table-of-contents)** | **[back to section top](#6-Build)**

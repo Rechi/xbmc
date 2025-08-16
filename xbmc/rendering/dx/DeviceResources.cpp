@@ -308,7 +308,7 @@ bool DX::DeviceResources::SetFullScreen(bool fullscreen, RESOLUTION_INFO& res)
           m_swapChain->GetFullscreenState(&bFullScreen, nullptr);
         }
         bool resized = SUCCEEDED(m_swapChain->ResizeTarget(&currentMode));
-        if (resized) 
+        if (resized)
         {
           // some system doesn't inform windowing about desktop size changes
           // so we have to change output size before resizing buffers

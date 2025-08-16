@@ -5,7 +5,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  *  See LICENSES/README.md for more information.
  */
- 
+
 #version 150
 
 in vec2 m_attrpos;

@@ -90,7 +90,7 @@ private:
    * this value include, but are not limited to:
    * • A counter that is incremented on each 'cold' boot
    * • The boot time of the service, expressed as seconds elapsed since midnight
-   * January 1, 1970 
+   * January 1, 1970
    *
    * Our implementation will only set this on creation of the class
    * We aren't providing services to clients, so this should be ok.

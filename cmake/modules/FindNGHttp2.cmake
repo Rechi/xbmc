@@ -116,7 +116,7 @@ if(NOT TARGET LIBRARY::NGHttp2)
   if(NGHttp2_FOUND)
 
     if((TARGET nghttp2::nghttp2 OR TARGET nghttp2::nghttp2_static) AND NOT TARGET ${${${CMAKE_FIND_PACKAGE_NAME}_MODULE}_BUILD_NAME})
-      # We have a preference for the static lib when needed, however provide support 
+      # We have a preference for the static lib when needed, however provide support
       # for the shared lib as well
       if(TARGET nghttp2::nghttp2_static)
         set(_target nghttp2::nghttp2_static)

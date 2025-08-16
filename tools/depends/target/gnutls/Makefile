@@ -36,7 +36,7 @@ CONFIGURE=./configure --prefix=$(PREFIX) \
                       $(CONFIGURE_OPTIONS)
 
 # LLVM 15 has raised this to error by default. drop back to warning
-CFLAGS+= -Wno-error=implicit-int -Wno-error=implicit-function-declaration -Wno-error=int-conversion 
+CFLAGS+= -Wno-error=implicit-int -Wno-error=implicit-function-declaration -Wno-error=int-conversion
 export CFLAGS
 
 LIBDYLIB=$(PLATFORM)/lib/.libs/lib$(LIBNAME).a

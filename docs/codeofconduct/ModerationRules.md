@@ -5,7 +5,7 @@ Below are a set of basic rules for the forum moderation that we have come up wit
 In case a rule is missing that you think should be added, feel free to discuss.
 
 **Writing posts or replies**
-- Be civil, no matter how infuriating other persons are. 
+- Be civil, no matter how infuriating other persons are.
 - Unsure what to do? Ask a fellow moderator or the team in this forum!
 
 **Editing posts**

@@ -78,7 +78,7 @@ public:
 
   /*! \brief Updates the in-process list.
 
-   Inserts the image url into the currently processing list 
+   Inserts the image url into the currently processing list
    to avoid 2 jobs being processed at once
 
    \param image url of the image to start processing

@@ -781,7 +781,7 @@ bool DetailsFromFileItem<CAlbum>(const CFileItem& item, CAlbum& album)
   album.fRating = item.GetProperty("album.rating").asFloat();
   album.iUserrating = item.GetProperty("album.user_rating").asInteger32();
   album.iVotes = item.GetProperty("album.votes").asInteger32();
-  
+
   /* Scrapers fetch a list of possible art but do not set the current images used because art
      selection depends on other preferences so is handled by CMusicInfoScanner
      album.art = item.GetArt();

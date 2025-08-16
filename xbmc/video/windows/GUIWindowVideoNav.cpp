@@ -902,7 +902,7 @@ bool CGUIWindowVideoNav::OnContextButton(int itemNumber, CONTEXT_BUTTON button)
     item = m_vecItems->Get(itemNumber);
   if (CGUIDialogContextMenu::OnContextButton("video", item, button))
   {
-    if (button == CONTEXT_BUTTON_REMOVE_SOURCE && !item->IsLiveTV() 
+    if (button == CONTEXT_BUTTON_REMOVE_SOURCE && !item->IsLiveTV()
         &&!item->IsRSS() && !URIUtils::IsUPnP(item->GetPath()))
     {
       // if the source has been properly removed, remove the cached source list because the list has changed
